@@ -1,0 +1,124 @@
+//
+//  QQB.pch
+//  QinQingBao
+//
+//  Created by 董徐维 on 15/8/12.
+//  Copyright (c) 2015年 董徐维. All rights reserved.
+//
+
+#ifndef QinQingBao_QQB_pch
+#define QinQingBao_QQB_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+
+
+// 屏幕尺寸
+#define MTScreenW [UIScreen mainScreen].bounds.size.width
+
+#define MTScreenH [UIScreen mainScreen].bounds.size.height
+
+// 颜色
+#define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+// 全局背景色
+#define HMGlobalBg HMColor(235, 235, 235)
+
+// 表格选中背景色
+#define HMSelectBg HMColor(220, 220, 220)
+
+/**
+ *  附近100公里之内  默认
+ */
+#define Near_Distance @"35000"
+
+/**
+ *  GPS位置服务 上传时间间隔
+ */
+#define LOCATION_INTERVAL 300
+
+
+#define Near_Menu_Click @"nearMenuChange"
+
+
+/**
+ *  用户信息归档key
+ */
+#define User_Archiver_Key @"userInfor"
+/**
+ *  用户信息归档路径
+ */
+#define User_Archiver_Path @"userInforPath"
+
+/**
+ *  系统信息归档key
+ */
+#define MapVo_Archiver_Key @"mapvo"
+/**
+ *  系统信息归档路径
+ */
+#define MapVo_Archiver_Path @"mapvopath"
+
+
+/**
+ *   导航历史归档key
+ */
+#define MapNav_Archiver_Key @"mapnav"
+/**
+ *  导航历史归档路径
+ */
+#define MapNav_Archiver_Path @"mapnavpath"
+
+/** 通知 */
+
+#define MTHideHome @"MTHideHome"
+#define MTShowHome @"MTShowHome"
+
+
+#define MTAddFamily @"HMSortDidSelectNotification"
+#define MTSececteFamily @"HMSelectedSort"
+
+#define HMCityDidSelectNotification @"HMCityDidSelectNotification"
+#define HMSelectedCity @"HMSelectedCity"
+
+#define HMCategoryDidSelectNotification @"HMCategoryDidSelectNotification"
+#define HMSelectedCategory @"HMSelectedCategory"
+#define HMSelectedSubCategoryName @"HMSelectedSubCategoryName"
+
+#define HMRegionDidSelectNotification @"HMRegionDidSelectNotification"
+#define HMSelectedRegion @"HMSelectedRegion"
+#define HMSelectedSubRegionName @"HMSelectedSubRegionName"
+
+
+#define MTNotificationCenter [NSNotificationCenter defaultCenter]
+/**
+ *  建立监听
+ */
+#define MTAddObsver(methodName, noteName) [MTNotificationCenter addObserver:self selector:@selector(methodName) name:noteName object:nil];
+/**
+ *  发出监听
+ */
+#define MTDispatchObsver(noteName, object) [MTNotificationCenter postNotificationName:noteName object:object userInfo:nil];
+/**
+ *  移除监听
+ */
+#define MTRemoveObsver [MTNotificationCenter removeObserver:self];
+
+/**
+ *   网络请求的url
+ */
+
+#define URL_IP @"http://192.168.1.115:3000/"
+
+#define URL_Registerfamily(telnum, pwd)  [NSString stringWithFormat:@"%@registerfamily?rtelnum=%@&rpwd=%@",URL_IP,telnum,pwd];
+
+#define URL_Login(telnum, pwd)  [NSString stringWithFormat:@"%@loginfamily?loginnum=%@&pwd=%@",URL_IP,telnum,pwd];
+
+#define URL_UpdatePwd(oldpwd, nowpwd, rid, tb)  [NSString stringWithFormat:@"%@updatefamilypwd?oldpwd=%@&newpwd=%@&id=%@&tb=%@",URL_IP,oldpwd,nowpwd,rid,tb];
+
+
