@@ -1,5 +1,5 @@
 //
-//  HealthMonitorViewController.h
+//  HealthPageViewController.h
 //  QinQingBao
 //
 //  Created by 董徐维 on 15/8/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HealthMonitorViewController : UIViewController
+@interface HealthPageViewController : UITableViewController
+
+@property (nonatomic, assign) UINavigationController *nav;
 
 @end
