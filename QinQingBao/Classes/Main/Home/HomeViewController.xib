@@ -13,7 +13,26 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="0.40049670205364385" blue="0.44489384479162553" alpha="1" colorSpace="calibratedRGB"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFd-Yg-exP" userLabel="bgScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-xI-2bY" userLabel="imagePlayer">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                        </scrollView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="IJn-3g-Yv3"/>
+                        <constraint firstAttribute="height" constant="568" id="MHR-NC-erf"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="YFd-Yg-exP" secondAttribute="bottom" id="Tmu-Xz-f3c"/>
+                <constraint firstItem="YFd-Yg-exP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o0K-DQ-MeI"/>
+                <constraint firstItem="YFd-Yg-exP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rr7-vN-igW"/>
+                <constraint firstAttribute="trailing" secondItem="YFd-Yg-exP" secondAttribute="trailing" id="zAq-JJ-7t1"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
