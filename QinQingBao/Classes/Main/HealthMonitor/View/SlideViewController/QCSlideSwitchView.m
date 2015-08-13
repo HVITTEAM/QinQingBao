@@ -271,6 +271,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     //如果 当前显示的最后一个tab文字超出右边界
     float e = sender.frame.origin.x - _topScrollView.contentOffset.x;
     float f = self.bounds.size.width - (kWidthOfButtonMargin+sender.bounds.size.width);
+    
     if (sender.frame.origin.x - _topScrollView.contentOffset.x > self.bounds.size.width - (kWidthOfButtonMargin+sender.bounds.size.width)) {
         //向左滚动视图，显示完整tab文字
         [_topScrollView setContentOffset:CGPointMake(sender.frame.origin.x - (_topScrollView.bounds.size.width- (kWidthOfButtonMargin+sender.bounds.size.width)), 0)  animated:YES];

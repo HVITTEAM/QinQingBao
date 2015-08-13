@@ -12,7 +12,6 @@
 
 @interface HealthMonitorViewController : UIViewController<QCSlideSwitchViewDelegate>
 
-
 @property (nonatomic, retain) UIScrollView *scrollView;
 
 @property (nonatomic, strong) QCSlideSwitchView *slideSwitchView;

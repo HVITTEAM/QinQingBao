@@ -7,9 +7,7 @@
 //
 
 
-static float cellHeight = 80;
 static float cellWidth = 66;
-
 
 #import "HealthMonitorViewController.h"
 
@@ -23,6 +21,7 @@ static float cellWidth = 66;
     [super viewDidLoad];
     
     [self initNavigation];
+    
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     [self.scrollView setBackgroundColor:[UIColor whiteColor]];
     [self.scrollView setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
