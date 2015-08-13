@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01ECDF8A1B7C17C200665D87 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF881B7C17C200665D87 /* RegistViewController.m */; };
+		01ECDF8B1B7C17C200665D87 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF891B7C17C200665D87 /* RegistViewController.xib */; };
+		01ECDF8F1B7C188600665D87 /* HealthMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF8D1B7C188600665D87 /* HealthMonitorViewController.m */; };
+		01ECDF901B7C188600665D87 /* HealthMonitorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF8E1B7C188600665D87 /* HealthMonitorViewController.xib */; };
 		01F227DB1B7B3E1400ED4AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227DA1B7B3E1400ED4AFB /* main.m */; };
 		01F227E61B7B3E1400ED4AFB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F227E51B7B3E1400ED4AFB /* Images.xcassets */; };
 		01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F227E71B7B3E1400ED4AFB /* LaunchScreen.xib */; };
@@ -16,8 +20,6 @@
 		01F2281D1B7B430400ED4AFB /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F2281B1B7B430400ED4AFB /* HomeViewController.xib */; };
 		01F228211B7B443300ED4AFB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F2281F1B7B443300ED4AFB /* LoginViewController.m */; };
 		01F228221B7B443300ED4AFB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F228201B7B443300ED4AFB /* LoginViewController.xib */; };
-		01F228261B7B444C00ED4AFB /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228241B7B444C00ED4AFB /* RegistViewController.m */; };
-		01F228271B7B444C00ED4AFB /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F228251B7B444C00ED4AFB /* RegistViewController.xib */; };
 		01F2282D1B7B45B300ED4AFB /* PersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F2282B1B7B45B300ED4AFB /* PersonCenterViewController.m */; };
 		01F2282E1B7B45B300ED4AFB /* PersonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F2282C1B7B45B300ED4AFB /* PersonCenterViewController.xib */; };
 		01F228311B7B45DD00ED4AFB /* MTNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228301B7B45DD00ED4AFB /* MTNewfeatureViewController.m */; };
@@ -38,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01ECDF871B7C17C200665D87 /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
+		01ECDF881B7C17C200665D87 /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		01ECDF891B7C17C200665D87 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		01ECDF8C1B7C188600665D87 /* HealthMonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthMonitorViewController.h; sourceTree = "<group>"; };
+		01ECDF8D1B7C188600665D87 /* HealthMonitorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthMonitorViewController.m; sourceTree = "<group>"; };
+		01ECDF8E1B7C188600665D87 /* HealthMonitorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthMonitorViewController.xib; sourceTree = "<group>"; };
 		01F227D51B7B3E1400ED4AFB /* QinQingBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QinQingBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F227D91B7B3E1400ED4AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F227DA1B7B3E1400ED4AFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -55,9 +63,6 @@
 		01F2281E1B7B443300ED4AFB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		01F2281F1B7B443300ED4AFB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		01F228201B7B443300ED4AFB /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		01F228231B7B444C00ED4AFB /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
-		01F228241B7B444C00ED4AFB /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
-		01F228251B7B444C00ED4AFB /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
 		01F2282A1B7B45B300ED4AFB /* PersonCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonCenterViewController.h; sourceTree = "<group>"; };
 		01F2282B1B7B45B300ED4AFB /* PersonCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonCenterViewController.m; sourceTree = "<group>"; };
 		01F2282C1B7B45B300ED4AFB /* PersonCenterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonCenterViewController.xib; sourceTree = "<group>"; };
@@ -213,7 +218,6 @@
 				01F228111B7B428300ED4AFB /* Login */,
 				01F228151B7B428300ED4AFB /* Newfeature */,
 				01F228161B7B428300ED4AFB /* PersonCenter */,
-				01F228171B7B428300ED4AFB /* Regist */,
 				01F228181B7B428300ED4AFB /* Service */,
 			);
 			path = Main;
@@ -242,6 +246,9 @@
 		01F228121B7B428300ED4AFB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01ECDF871B7C17C200665D87 /* RegistViewController.h */,
+				01ECDF881B7C17C200665D87 /* RegistViewController.m */,
+				01ECDF891B7C17C200665D87 /* RegistViewController.xib */,
 				01F2281E1B7B443300ED4AFB /* LoginViewController.h */,
 				01F2281F1B7B443300ED4AFB /* LoginViewController.m */,
 				01F228201B7B443300ED4AFB /* LoginViewController.xib */,
@@ -282,16 +289,6 @@
 			path = PersonCenter;
 			sourceTree = "<group>";
 		};
-		01F228171B7B428300ED4AFB /* Regist */ = {
-			isa = PBXGroup;
-			children = (
-				01F228231B7B444C00ED4AFB /* RegistViewController.h */,
-				01F228241B7B444C00ED4AFB /* RegistViewController.m */,
-				01F228251B7B444C00ED4AFB /* RegistViewController.xib */,
-			);
-			path = Regist;
-			sourceTree = "<group>";
-		};
 		01F228181B7B428300ED4AFB /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +299,9 @@
 		01F228291B7B454E00ED4AFB /* HealthMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				01ECDF8C1B7C188600665D87 /* HealthMonitorViewController.h */,
+				01ECDF8D1B7C188600665D87 /* HealthMonitorViewController.m */,
+				01ECDF8E1B7C188600665D87 /* HealthMonitorViewController.xib */,
 			);
 			path = HealthMonitor;
 			sourceTree = "<group>";
@@ -387,9 +387,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				01F228221B7B443300ED4AFB /* LoginViewController.xib in Resources */,
+				01ECDF901B7C188600665D87 /* HealthMonitorViewController.xib in Resources */,
 				01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */,
-				01F228271B7B444C00ED4AFB /* RegistViewController.xib in Resources */,
 				01F227E61B7B3E1400ED4AFB /* Images.xcassets in Resources */,
+				01ECDF8B1B7C17C200665D87 /* RegistViewController.xib in Resources */,
 				01F2282E1B7B45B300ED4AFB /* PersonCenterViewController.xib in Resources */,
 				01F2281D1B7B430400ED4AFB /* HomeViewController.xib in Resources */,
 			);
@@ -410,7 +411,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				01F228211B7B443300ED4AFB /* LoginViewController.m in Sources */,
+				01ECDF8F1B7C188600665D87 /* HealthMonitorViewController.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
+				01ECDF8A1B7C17C200665D87 /* RegistViewController.m in Sources */,
 				01F2283D1B7B465800ED4AFB /* UIView+Extension.m in Sources */,
 				01F228311B7B45DD00ED4AFB /* MTNewfeatureViewController.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
@@ -418,7 +421,6 @@
 				01F2281C1B7B430400ED4AFB /* HomeViewController.m in Sources */,
 				01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */,
 				01F2282D1B7B45B300ED4AFB /* PersonCenterViewController.m in Sources */,
-				01F228261B7B444C00ED4AFB /* RegistViewController.m in Sources */,
 				01F2283C1B7B465800ED4AFB /* UINavigationBar+Awesome.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,6 +610,7 @@
 				01F227FA1B7B3E1400ED4AFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01F227FB1B7B3E1400ED4AFB /* Build configuration list for PBXNativeTarget "QinQingBaoTests" */ = {
 			isa = XCConfigurationList;
@@ -616,6 +619,7 @@
 				01F227FD1B7B3E1400ED4AFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
