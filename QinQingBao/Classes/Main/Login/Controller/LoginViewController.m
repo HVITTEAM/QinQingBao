@@ -75,6 +75,7 @@
 
 - (IBAction)loginNow:(id)sender {
     [self.view endEditing:YES];
+    [MTControllerChooseTool setRootViewController];
 }
 
 - (IBAction)regist:(id)sender {

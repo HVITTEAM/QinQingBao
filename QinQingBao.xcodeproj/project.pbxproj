@@ -27,6 +27,7 @@
 		01ECDFDD1B7C774700665D87 /* HealthMonitorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDFD41B7C774700665D87 /* HealthMonitorViewController.xib */; };
 		01ECDFDE1B7C774700665D87 /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFD91B7C774700665D87 /* QCSlideSwitchView.m */; };
 		01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFE11B7C7ADA00665D87 /* HealthPageViewController.m */; };
+		01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */; };
 		01F227DB1B7B3E1400ED4AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227DA1B7B3E1400ED4AFB /* main.m */; };
 		01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F227E71B7B3E1400ED4AFB /* LaunchScreen.xib */; };
 		01F227F51B7B3E1400ED4AFB /* QinQingBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227F41B7B3E1400ED4AFB /* QinQingBaoTests.m */; };
@@ -91,6 +92,8 @@
 		01ECDFD91B7C774700665D87 /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		01ECDFE01B7C7ADA00665D87 /* HealthPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthPageViewController.h; sourceTree = "<group>"; };
 		01ECDFE11B7C7ADA00665D87 /* HealthPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthPageViewController.m; sourceTree = "<group>"; };
+		01EFD0C11B7D865800A720E7 /* MTControllerChooseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTControllerChooseTool.h; sourceTree = "<group>"; };
+		01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTControllerChooseTool.m; sourceTree = "<group>"; };
 		01F227D51B7B3E1400ED4AFB /* QinQingBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QinQingBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F227D91B7B3E1400ED4AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F227DA1B7B3E1400ED4AFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -262,6 +265,29 @@
 			path = SlideViewController;
 			sourceTree = "<group>";
 		};
+		01EFD0BB1B7D832D00A720E7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		01EFD0BC1B7D84A700A720E7 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		01EFD0BD1B7D84A700A720E7 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				01EFD0C11B7D865800A720E7 /* MTControllerChooseTool.h */,
+				01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
 		01F227CC1B7B3E1400ED4AFB = {
 			isa = PBXGroup;
 			children = (
@@ -325,10 +351,10 @@
 		01F227FF1B7B3E9700ED4AFB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				01EFD0BC1B7D84A700A720E7 /* Libs */,
+				01EFD0BD1B7D84A700A720E7 /* Others */,
 				01F2280B1B7B410200ED4AFB /* Main */,
 				01F228021B7B3E9700ED4AFB /* Cateogrys */,
-				01F228031B7B3E9700ED4AFB /* Libs */,
-				01F228041B7B3E9700ED4AFB /* Others */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -348,20 +374,6 @@
 			path = Cateogrys;
 			sourceTree = "<group>";
 		};
-		01F228031B7B3E9700ED4AFB /* Libs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Libs;
-			sourceTree = "<group>";
-		};
-		01F228041B7B3E9700ED4AFB /* Others */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
 		01F228051B7B3E9700ED4AFB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,12 +391,12 @@
 		01F2280B1B7B410200ED4AFB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				01EFD0BB1B7D832D00A720E7 /* Service */,
 				01F228291B7B454E00ED4AFB /* HealthMonitor */,
 				01F228101B7B428300ED4AFB /* Home */,
 				01F228111B7B428300ED4AFB /* Login */,
 				01F228151B7B428300ED4AFB /* Newfeature */,
 				01F228161B7B428300ED4AFB /* PersonCenter */,
-				01F228181B7B428300ED4AFB /* Service */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -456,13 +468,6 @@
 				01ECDFA31B7C3EBF00665D87 /* View */,
 			);
 			path = PersonCenter;
-			sourceTree = "<group>";
-		};
-		01F228181B7B428300ED4AFB /* Service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		01F228291B7B454E00ED4AFB /* HealthMonitor */ = {
@@ -588,6 +593,7 @@
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
+				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,
 				01ECDFC61B7C402C00665D87 /* HMBadgeView.m in Sources */,
 				01ECDFDE1B7C774700665D87 /* QCSlideSwitchView.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
