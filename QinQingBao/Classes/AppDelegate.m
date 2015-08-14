@@ -57,10 +57,10 @@
     
       //将其设置为当前窗口的跟视图控制器
     
-//    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
-//    self.window.rootViewController = nav;
-    self.window.rootViewController = tabBarController;
+    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
+    self.window.rootViewController = nav;
+   // self.window.rootViewController = tabBarController;
     
     return YES;
 }
