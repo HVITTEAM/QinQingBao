@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeViewController.h"
-#import "HealthMonitorViewController.h"
-#import "ProfileViewController.h"
+
 #import "RootViewController.h"
 
 @interface AppDelegate ()
@@ -29,33 +27,6 @@
     [self.window makeKeyAndVisible];
     
     // 3.设置窗口的根控制器
-    HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
-    healthView.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
-                                                           image:[UIImage imageNamed:@"second_normal.png"]
-                                                   selectedImage:[UIImage imageNamed:@"second_selected.png"]];
-    UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
-    
-    HomeViewController *homeView = [[HomeViewController alloc] init];
-    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
-                                                        image:[UIImage imageNamed:@"first_normal.png"]
-                                                selectedImage:[UIImage imageNamed:@"first_selected.png"]];
-    UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
-    
-    ProfileViewController *sysview = [[ProfileViewController alloc] init];
-    sysview.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心"
-                                                       image:[UIImage imageNamed:@"third_selected.png"]
-                                               selectedImage:[UIImage imageNamed:@"third_normal.png"]];
-    UINavigationController *navsys = [[UINavigationController alloc] initWithRootViewController:sysview];
-    
-    //初始化对象
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-//    tabBarController.tabBar.barTintColor = HMColor(48, 37, 44);
-//    tabBarController.tabBar.tintColor = HMColor(18, 141, 216);
-    
-    //将2个uivc以数组的方式制定给bar对象
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navsys, nil];
-    
-      //将其设置为当前窗口的跟视图控制器
     
 //    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
 //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];

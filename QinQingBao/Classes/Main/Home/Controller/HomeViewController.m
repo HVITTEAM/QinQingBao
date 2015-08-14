@@ -75,8 +75,6 @@ static float cellWidth = 66;
     self.pageControl.currentPage = 0;
     [self.view addSubview:self.pageControl];
     
-    NSLog(@"%f",MTScreenW);
-    
     //解决初始化imageplayer可能发生偏移的问题
     self.imgPlayer.width = MTScreenW;
     
