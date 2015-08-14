@@ -6,9 +6,6 @@
 //  Copyright (c) 2015年 董徐维. All rights reserved.
 //
 
-#define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
-#define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
-
 #import "RegistViewController.h"
 
 @interface RegistViewController ()<UITextFieldDelegate>
@@ -38,9 +35,15 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     //注册键盘通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    self.editing = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -99,6 +102,7 @@
 
 
 #pragma UITextField delegate method
+
 /**
  *UITextField代理方法
  *
@@ -119,18 +123,20 @@
     self.currentText= nil;
 }
 
-
 #pragma about keyBoard method
+
 - (IBAction)sigleTapBackgrouned:(id)sender {
     [self.view endEditing:YES];
 }
+
+#pragma mark 解决键盘遮挡文本框
 
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
     CGRect keyboardFrame = [[dict objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.keyBoardH = keyboardFrame.size.height;
-    CGFloat keyBoardToTop = kScreenHeight - self.keyBoardH;
+    CGFloat keyBoardToTop = MTScreenH - self.keyBoardH;
     NSInteger animationCurve =[[dict objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat duration =  [[dict objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -140,17 +146,16 @@
     if (keyBoardToTop - currentTextToTop < 0) {
         [UIView animateWithDuration:duration delay:0 options:animationCurve animations:^{
             
-            self.view.bounds = CGRectMake(0, (keyBoardToTop-currentTextToTop), kScreenWidth, kScreenHeight);
+            self.view.bounds = CGRectMake(0, (keyBoardToTop-currentTextToTop), MTScreenW, MTScreenH);
             
         } completion:nil];
     }
-    
 }
 
 -(void)keyBoardWillHide:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.5 animations:^{
-        self.view.bounds = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        self.view.bounds = CGRectMake(0, 0, MTScreenW, MTScreenH);
     }];
     
 }

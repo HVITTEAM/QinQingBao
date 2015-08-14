@@ -21,7 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     //设置registBtn、loginBtn两个按钮圆角
     self.registBtn.layer.cornerRadius = 3.0f;
@@ -45,7 +44,6 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 }
-
 
 - (IBAction)regist:(id)sender {
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];

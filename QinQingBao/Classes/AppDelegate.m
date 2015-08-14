@@ -28,8 +28,6 @@
     
     // 3.设置窗口的根控制器
     
-//    [MTControllerChooseTool setRootViewController];
-    
     RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
     self.window.rootViewController = nav;

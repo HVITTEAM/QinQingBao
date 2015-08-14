@@ -6,10 +6,6 @@
 //  Copyright (c) 2015年 董徐维. All rights reserved.
 //
 
-
-#define kScreenHeight ([[UIScreen mainScreen] bounds].size.height)
-#define kScreenWidth ([[UIScreen mainScreen] bounds].size.width)
-
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 
@@ -26,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     self.loginBtn.layer.cornerRadius = 5.0f;
     self.loginBtn.layer.masksToBounds = YES;
@@ -35,7 +30,6 @@
     self.passwordText.delegate = self;
    
     self.navigationItem.title = @"登陆";
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -83,12 +77,10 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     [self.navigationController pushViewController:registVC animated:YES];
-    
 }
 
 - (IBAction)backPassword:(id)sender {
 }
-
 
 
 -(void)keyBoardWillShow:(NSNotification *)notification
@@ -96,7 +88,7 @@
     NSDictionary *dict = [notification userInfo];
     CGRect keyboardFrame = [[dict objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     self.keyBoardH = keyboardFrame.size.height;
-    CGFloat keyBoardToTop = kScreenHeight - self.keyBoardH;
+    CGFloat keyBoardToTop = MTScreenH - self.keyBoardH;
     NSInteger animationCurve =[[dict objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
     CGFloat duration =  [[dict objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     
@@ -106,17 +98,16 @@
     if (keyBoardToTop - currentTextBottomToTop < 0) {
         [UIView animateWithDuration:duration delay:0 options:animationCurve animations:^{
             
-            self.view.bounds = CGRectMake(0, -(keyBoardToTop-currentTextBottomToTop)+30, kScreenWidth, kScreenHeight);
+            self.view.bounds = CGRectMake(0, -(keyBoardToTop-currentTextBottomToTop)+30, MTScreenW, MTScreenH);
             
         } completion:nil];
     }
-    
 }
 
 -(void)keyBoardWillHide:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.5 animations:^{
-        self.view.bounds = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+        self.view.bounds = CGRectMake(0, 0, MTScreenW, MTScreenH);
     }];
     
 }
