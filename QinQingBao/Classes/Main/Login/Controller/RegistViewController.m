@@ -9,6 +9,14 @@
 #import "RegistViewController.h"
 
 @interface RegistViewController ()<UITextFieldDelegate>
+{
+    float timesec;
+    
+    NSString *btnTitle;
+    
+    NSTimer *timer;
+
+}
 
 - (IBAction)getVerificationCode:(id)sender;
 - (IBAction)agreement:(id)sender;
@@ -24,6 +32,7 @@
     // Do any additional setup after loading the view from its nib.
     
     //设置phoneNumText，VerNumText,passwordText代理
+    self.agreementBtn.selected = YES;
     self.phoneNumText.delegate = self;
     self.VerNumText.delegate = self;
     self.passwordText.delegate = self;
@@ -74,10 +83,43 @@
 /**
  *  获取验证码
  */
-- (IBAction)getVerificationCode:(id)sender {
+- (IBAction)getVerificationCode:(id)sender
+{
+    MTSMSHelper *helper = [[MTSMSHelper alloc] init];
+    [helper getCheckcode:self.phoneNumText.text];
+    helper.sureSendSMS = ^{
+        [self countdownHandler];
+    };
+}
+
+#pragma mark 倒计时模块
+
+/**
+ *  倒计时
+ */
+-(void)countdownHandler
+{
+    timesec = 60.0f;
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%u",arc4random()%100000] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alertView show];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+}
+
+-(void)timerFireMethod:(NSTimer *)theTimer
+{
+    if (timesec == 1) {
+        [theTimer invalidate];
+        timesec = 60;
+        [self.verBtn setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [self.verBtn setTitleColor:HMColor(69, 134, 229) forState:UIControlStateNormal];
+        [self.verBtn setEnabled:YES];
+    }else
+    {
+        timesec--;
+        NSString *title = [NSString stringWithFormat:@"%.f秒后重发",timesec];
+        [self.verBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [self.verBtn setEnabled:NO];
+        [self.verBtn setTitle:title forState:UIControlStateNormal];
+    }
 }
 
 /**

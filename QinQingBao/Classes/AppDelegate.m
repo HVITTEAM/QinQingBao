@@ -7,8 +7,14 @@
 //
 
 #import "AppDelegate.h"
-
+#import <SMS_SDK/SMS_SDK.h>
 #import "RootViewController.h"
+
+/**
+ *  SMS appkey
+ */
+#define appKey @"81de4ff2ac9e"
+#define appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
 
 @interface AppDelegate ()
 
@@ -19,6 +25,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [SMS_SDK registerApp:appKey withSecret:appSecret];
+
     // 1.创建窗口
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
@@ -27,11 +35,9 @@
     [self.window makeKeyAndVisible];
     
     // 3.设置窗口的根控制器
-    
     RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
     self.window.rootViewController = nav;
-    
     return YES;
 }
 
