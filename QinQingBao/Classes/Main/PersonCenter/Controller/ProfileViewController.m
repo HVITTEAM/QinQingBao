@@ -186,7 +186,7 @@
     [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+//    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
     logout.height = 50;
