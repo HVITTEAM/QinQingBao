@@ -10,6 +10,7 @@
 #import "HomeViewController.h"
 #import "HealthMonitorViewController.h"
 #import "ProfileViewController.h"
+#import "RootViewController.h"
 
 @interface AppDelegate ()
 
@@ -55,6 +56,10 @@
     tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navsys, nil];
     
       //将其设置为当前窗口的跟视图控制器
+    
+//    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
+//    self.window.rootViewController = nav;
     self.window.rootViewController = tabBarController;
     
     return YES;
