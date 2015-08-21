@@ -7,8 +7,6 @@
 //
 
 
-static float cellWidth = 66;
-
 #import "HealthMonitorViewController.h"
 
 @interface HealthMonitorViewController ()
@@ -22,121 +20,41 @@ static float cellWidth = 66;
     
     [self initNavigation];
     
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
     [self.scrollView setBackgroundColor:[UIColor whiteColor]];
-    [self.scrollView setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    [self.scrollView setContentSize:CGSizeMake(MTScreenW, MTScreenH)];
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.scrollView];
-    
-    [self initView];
-    
-    self.vc1 = [[HealthPageViewController alloc] init];
-    self.vc1.title = @"王大妈";
-    
-    self.vc2 = [[HealthPageViewController alloc] init];
-    self.vc2.title = @"王大妈";
-    
-    self.vc3 = [[HealthPageViewController alloc] init];
-    self.vc3.title = @"王大妈";
-    
-    self.vc4 = [[HealthPageViewController alloc] init];
-    self.vc4.title = @"王大妈";
-    
-    self.vc5 = [[HealthPageViewController alloc] init];
-    self.vc5.title = @"王大妈";
-    
-    self.vc6 = [[HealthPageViewController alloc] init];
-    self.vc6.title = @"王大妈";
-    
-    self.vc7 = [[HealthPageViewController alloc] init];
-    self.vc7.title = @"王大妈";
-    
-    self.vc8 = [[HealthPageViewController alloc] init];
-    self.vc8.title = @"王大妈";
-
-    
-    [self.slideSwitchView buildUI];
+    [self setupScrollView];
 }
 
 #pragma mark - 滑动tab视图代理方法
-
-- (NSUInteger)numberOfTab:(QCSlideSwitchView *)view
+#pragma mark pageControl
+/**
+ *  添加UISrollView
+ */
+- (void)setupScrollView
 {
-    return 8;
-}
-
-- (UIViewController *)slideSwitchView:(QCSlideSwitchView *)view viewOfTab:(NSUInteger)number
-{
-    if (number == 0) {
-        return self.vc1;
-    } else if (number == 1) {
-        return self.vc2;
-    } else if (number == 2) {
-        return self.vc3;
-    } else if (number == 3) {
-        return self.vc4;
-    } else if (number == 4) {
-        return self.vc5;
-    } else if (number == 5) {
-        return self.vc6;
-    } else if (number == 6) {
-        return self.vc7;
-    } else if (number == 7) {
-        return self.vc8;
-    } else {
-        return nil;
-    }
-}
-
-//- (void)slideSwitchView:(QCSlideSwitchView *)view panLeftEdge:(UIPanGestureRecognizer *)panParam
-//{
-//    QCViewController *drawerController = (QCViewController *)self.navigationController.mm_drawerController;
-//    [drawerController panGestureCallback:panParam];
-//}
-
-- (void)slideSwitchView:(QCSlideSwitchView *)view didselectTab:(NSUInteger)number
-{
-    HealthPageViewController *vc = nil;
-    if (number == 0) {
-        vc = self.vc1;
-    } else if (number == 1) {
-        vc = self.vc2;
-    } else if (number == 2) {
-        vc = self.vc3;
-    } else if (number == 3) {
-        vc = self.vc4;
-    } else if (number == 4) {
-        vc = self.vc5;
-    } else if (number == 5) {
-        vc = self.vc6;
-    }else if (number == 6) {
-         vc = self.vc7;
-    }else if (number == 7) {
-    vc = self.vc8;
-}
-
-    vc.nav = self.navigationController;
-//    [vc viewDidCurrentView];
-}
-
-
--(void)initView
-{
-    if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+    // 2.添加view
+    for (int i = 0; i< 4 ; i++)
+    {
+        HealthPageViewController *page = [[HealthPageViewController alloc] init];
+        page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTViewH - MTNavgationHeadH);
+        
+        [self addChildViewController:page];
+        [self.scrollView  addSubview:page.view];
     }
     
-    self.slideSwitchView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0,0, self.view.width, self.view.height  - cellWidth)];
-    self.slideSwitchView.slideSwitchViewDelegate = self;
-    [self.scrollView addSubview:self.slideSwitchView];
-    
-    self.slideSwitchView.tabItemNormalColor = [QCSlideSwitchView colorFromHexRGB:@"868686"];
-    self.slideSwitchView.tabItemSelectedColor = [QCSlideSwitchView colorFromHexRGB:@"1e90ff"];
-    self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
-                                        stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
+    // 3.设置其他属性
+    self.scrollView .contentSize = CGSizeMake(4 * self.scrollView.width, 0);
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.delegate = self;
+    self.scrollView.bounces = NO;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.directionalLockEnabled = YES;
 }
-
 
 /**
  *  初始化导航栏

@@ -12,7 +12,4 @@
 @interface SharedAppUtil : NSObject
 
 +(SharedAppUtil *)defaultCommonUtil;
-
-
-
 @end

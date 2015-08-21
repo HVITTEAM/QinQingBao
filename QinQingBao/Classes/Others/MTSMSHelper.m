@@ -120,7 +120,6 @@
         //        VerifyViewController* verify=[[VerifyViewController alloc] init];
         NSString* str2=[self.areaCode stringByReplacingOccurrencesOfString:@"+" withString:@""];
         //        [verify setPhone:self.telField.text AndAreaCode:str2];
-        
         [SMS_SDK getVerificationCodeBySMSWithPhone:self.telNum
                                               zone:str2
                                             result:^(SMS_SDKError *error)
