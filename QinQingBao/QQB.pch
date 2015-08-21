@@ -21,6 +21,13 @@
 
 
 // 屏幕尺寸
+
+#define MTNavgationHeadH 44
+
+#define MTViewW self.view.width
+
+#define MTViewH self.view.height
+
 #define MTScreenW [UIScreen mainScreen].bounds.size.width
 
 #define MTScreenH [UIScreen mainScreen].bounds.size.height
