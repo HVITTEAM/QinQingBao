@@ -7,6 +7,7 @@
 //  个人健康监测信息
 
 #import "HealthPageViewController.h"
+#import "HealthBloodPressureViewController.h"
 
 @interface HealthPageViewController ()
 
@@ -60,7 +61,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"click");
+    HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
+    [self.navigationController pushViewController:bloodPressureVC animated:YES];
 }
 
 @end
