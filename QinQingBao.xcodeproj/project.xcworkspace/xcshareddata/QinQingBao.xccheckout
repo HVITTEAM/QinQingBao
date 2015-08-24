@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>4512FA7903561D90FCE2D1E8090C0D7623B4504D</key>
-		<string>https://github.com/HVITTEAM/QinQingBao.git</string>
+		<string>https://github.com/MrTung/QinQingBao.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>QinQingBao.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/HVITTEAM/QinQingBao.git</string>
+	<string>https://github.com/MrTung/QinQingBao.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
