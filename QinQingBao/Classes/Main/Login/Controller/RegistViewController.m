@@ -165,14 +165,12 @@
     self.currentText= nil;
 }
 
-#pragma about keyBoard method
-
+#pragma mark about keyBoard method
 - (IBAction)sigleTapBackgrouned:(id)sender {
     [self.view endEditing:YES];
 }
 
 #pragma mark 解决键盘遮挡文本框
-
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];

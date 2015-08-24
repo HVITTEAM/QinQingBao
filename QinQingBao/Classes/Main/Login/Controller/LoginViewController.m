@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //设置登录按钮外观
     self.loginBtn.layer.cornerRadius = 5.0f;
     self.loginBtn.layer.masksToBounds = YES;
     
@@ -35,7 +35,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    //注册键盘通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -43,10 +43,11 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    //解除键盘通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma UITextField delegate method
+#pragma mark UITextField协议方法
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -63,15 +64,25 @@
     self.currentText = nil;
 }
 
+/**
+ *  单击背景取消键盘
+ */
 - (IBAction)sigleTapBackgrouned:(id)sender {
     [self.view endEditing:YES];
 }
 
+#pragma mark 登录、注册、取回密码
+/**
+ *  登录
+ */
 - (IBAction)loginNow:(id)sender {
     [self.view endEditing:YES];
     [MTControllerChooseTool setRootViewController];
 }
 
+/**
+ *  跳转到注册界面
+ */
 - (IBAction)regist:(id)sender {
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -79,10 +90,14 @@
     [self.navigationController pushViewController:registVC animated:YES];
 }
 
+/**
+ *  找回密码
+ */
 - (IBAction)backPassword:(id)sender {
+    NSLog(@"找回密码");
 }
 
-
+#pragma mark 解决键盘遮挡文本框
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
@@ -109,7 +124,6 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.view.bounds = CGRectMake(0, 0, MTScreenW, MTScreenH);
     }];
-    
 }
 
 

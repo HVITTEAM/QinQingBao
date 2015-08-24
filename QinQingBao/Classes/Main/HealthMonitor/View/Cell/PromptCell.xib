@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PromptCell" rowHeight="104" id="KGk-i7-Jjw" customClass="PromptCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="专家提示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEZ-8b-AQR">
+                        <rect key="frame" x="20" y="10" width="56" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-09-06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ce-FW-l4r">
+                        <rect key="frame" x="222" y="10" width="74.5" height="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="以清淡饮食为主，尽量不要多食肉食。2：注意劳逸结合，控制情绪，情绪不要波动太大。3：要严格服药控制血压。" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6f-o2-2HX">
+                        <rect key="frame" x="20" y="37" width="282" height="52.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="6ce-FW-l4r" secondAttribute="trailing" constant="15" id="CDx-Be-FJM"/>
+                    <constraint firstItem="DEZ-8b-AQR" firstAttribute="leading" secondItem="Q6f-o2-2HX" secondAttribute="leading" id="DAf-JE-RJE"/>
+                    <constraint firstItem="DEZ-8b-AQR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DcN-J0-sYC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Q6f-o2-2HX" secondAttribute="trailing" constant="10" id="K3h-nf-H8y"/>
+                    <constraint firstItem="Q6f-o2-2HX" firstAttribute="top" secondItem="DEZ-8b-AQR" secondAttribute="bottom" constant="10" id="Rdy-V4-gyJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Q6f-o2-2HX" secondAttribute="bottom" constant="10" id="Wan-xa-2gP"/>
+                    <constraint firstItem="DEZ-8b-AQR" firstAttribute="centerY" secondItem="6ce-FW-l4r" secondAttribute="centerY" id="kp6-Yj-yua"/>
+                    <constraint firstItem="DEZ-8b-AQR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="l24-zb-Ndr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLabel" destination="Q6f-o2-2HX" id="fuO-0z-D02"/>
+                <outlet property="timeLabel" destination="6ce-FW-l4r" id="JJR-Tl-HUT"/>
+                <outlet property="tittleLable" destination="DEZ-8b-AQR" id="EPV-XL-jcD"/>
+            </connections>
+            <point key="canvasLocation" x="252" y="333"/>
+        </tableViewCell>
+    </objects>
+</document>

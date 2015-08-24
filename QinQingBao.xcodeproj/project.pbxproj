@@ -47,6 +47,16 @@
 		01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228351B7B465800ED4AFB /* UIImage+Extension.m */; };
 		01F2283C1B7B465800ED4AFB /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228371B7B465800ED4AFB /* UINavigationBar+Awesome.m */; };
 		01F2283D1B7B465800ED4AFB /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228391B7B465800ED4AFB /* UIView+Extension.m */; };
+		D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA071B8709FD00E7CDDF /* UUChartLabel.m */; };
+		D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA091B8709FD00E7CDDF /* UUColor.m */; };
+		D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA0B1B8709FD00E7CDDF /* UULineChart.m */; };
+		D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA321B8713AD00E7CDDF /* PromptCell.m */; };
+		D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA331B8713AD00E7CDDF /* PromptCell.xib */; };
+		D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA3A1B8715E100E7CDDF /* ChartCell.m */; };
+		D279DA3F1B8717C200E7CDDF /* BloodCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA3D1B8717C200E7CDDF /* BloodCell.m */; };
+		D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA3E1B8717C200E7CDDF /* BloodCell.xib */; };
+		D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */; };
+		D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */; };
 		D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F744A31B7D7E7F006AC23D /* LoginViewController.m */; };
 		D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F744A41B7D7E7F006AC23D /* LoginViewController.xib */; };
 		D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F744A61B7D7E7F006AC23D /* RegistViewController.m */; };
@@ -139,6 +149,23 @@
 		01F228371B7B465800ED4AFB /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		01F228381B7B465800ED4AFB /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		01F228391B7B465800ED4AFB /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		D279DA061B8709FD00E7CDDF /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
+		D279DA071B8709FD00E7CDDF /* UUChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChartLabel.m; sourceTree = "<group>"; };
+		D279DA081B8709FD00E7CDDF /* UUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUColor.h; sourceTree = "<group>"; };
+		D279DA091B8709FD00E7CDDF /* UUColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUColor.m; sourceTree = "<group>"; };
+		D279DA0A1B8709FD00E7CDDF /* UULineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UULineChart.h; sourceTree = "<group>"; };
+		D279DA0B1B8709FD00E7CDDF /* UULineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UULineChart.m; sourceTree = "<group>"; };
+		D279DA311B8713AD00E7CDDF /* PromptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromptCell.h; sourceTree = "<group>"; };
+		D279DA321B8713AD00E7CDDF /* PromptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromptCell.m; sourceTree = "<group>"; };
+		D279DA331B8713AD00E7CDDF /* PromptCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptCell.xib; sourceTree = "<group>"; };
+		D279DA391B8715E100E7CDDF /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
+		D279DA3A1B8715E100E7CDDF /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
+		D279DA3C1B8717C200E7CDDF /* BloodCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloodCell.h; sourceTree = "<group>"; };
+		D279DA3D1B8717C200E7CDDF /* BloodCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodCell.m; sourceTree = "<group>"; };
+		D279DA3E1B8717C200E7CDDF /* BloodCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BloodCell.xib; sourceTree = "<group>"; };
+		D279DA411B8726BB00E7CDDF /* HealthBloodPressureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthBloodPressureViewController.h; sourceTree = "<group>"; };
+		D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBloodPressureViewController.m; sourceTree = "<group>"; };
+		D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthBloodPressureViewController.xib; sourceTree = "<group>"; };
 		D2F744A21B7D7E7F006AC23D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		D2F744A31B7D7E7F006AC23D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		D2F744A41B7D7E7F006AC23D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -286,6 +313,9 @@
 				01ECDFD41B7C774700665D87 /* HealthMonitorViewController.xib */,
 				01ECDFE01B7C7ADA00665D87 /* HealthPageViewController.h */,
 				01ECDFE11B7C7ADA00665D87 /* HealthPageViewController.m */,
+				D279DA411B8726BB00E7CDDF /* HealthBloodPressureViewController.h */,
+				D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */,
+				D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -300,6 +330,7 @@
 		01ECDFD61B7C774700665D87 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D279D9FD1B8709FD00E7CDDF /* UUChart */,
 				01ED08B81B84701200115E3A /* Cell */,
 				01ECDFD71B7C774700665D87 /* SlideViewController */,
 			);
@@ -321,6 +352,14 @@
 				01ED08B91B84706B00115E3A /* HeartCell.h */,
 				01ED08BA1B84706B00115E3A /* HeartCell.m */,
 				01ED08BB1B84706B00115E3A /* HeartCell.xib */,
+				D279DA311B8713AD00E7CDDF /* PromptCell.h */,
+				D279DA321B8713AD00E7CDDF /* PromptCell.m */,
+				D279DA331B8713AD00E7CDDF /* PromptCell.xib */,
+				D279DA391B8715E100E7CDDF /* ChartCell.h */,
+				D279DA3A1B8715E100E7CDDF /* ChartCell.m */,
+				D279DA3C1B8717C200E7CDDF /* BloodCell.h */,
+				D279DA3D1B8717C200E7CDDF /* BloodCell.m */,
+				D279DA3E1B8717C200E7CDDF /* BloodCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -539,6 +578,19 @@
 			path = HealthMonitor;
 			sourceTree = "<group>";
 		};
+		D279D9FD1B8709FD00E7CDDF /* UUChart */ = {
+			isa = PBXGroup;
+			children = (
+				D279DA061B8709FD00E7CDDF /* UUChartLabel.h */,
+				D279DA071B8709FD00E7CDDF /* UUChartLabel.m */,
+				D279DA081B8709FD00E7CDDF /* UUColor.h */,
+				D279DA091B8709FD00E7CDDF /* UUColor.m */,
+				D279DA0A1B8709FD00E7CDDF /* UULineChart.h */,
+				D279DA0B1B8709FD00E7CDDF /* UULineChart.m */,
+			);
+			path = UUChart;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -625,10 +677,13 @@
 				01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */,
 				D2F744B01B7D7E7F006AC23D /* RootViewController.xib in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
+				D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */,
 				01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */,
 				D2F744AE1B7D7E7F006AC23D /* RegistViewController.xib in Resources */,
 				01ED08BD1B84706B00115E3A /* HeartCell.xib in Resources */,
+				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
 				01ECDFDD1B7C774700665D87 /* HealthMonitorViewController.xib in Resources */,
+				D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */,
 				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 			);
@@ -651,23 +706,29 @@
 				01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */,
 				01ECDFC11B7C402100665D87 /* HMCommonTextfieldItem.m in Sources */,
 				01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */,
+				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
 				01ECDFC71B7C402C00665D87 /* HMCommonCell.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
+				D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
 				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,
 				01ECDFC61B7C402C00665D87 /* HMBadgeView.m in Sources */,
 				01ECDFDE1B7C774700665D87 /* QCSlideSwitchView.m in Sources */,
+				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
 				D2F744AF1B7D7E7F006AC23D /* RootViewController.m in Sources */,
 				01F2283D1B7B465800ED4AFB /* UIView+Extension.m in Sources */,
 				01F228311B7B45DD00ED4AFB /* MTNewfeatureViewController.m in Sources */,
+				D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */,
 				01ECDFBD1B7C402100665D87 /* HMCommonGroup.m in Sources */,
 				01ECDFDC1B7C774700665D87 /* HealthMonitorViewController.m in Sources */,
+				D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */,
 				01ECDFCD1B7C45B200665D87 /* ProfileViewController.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
+				D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
 				01F2283A1B7B465800ED4AFB /* UIBarButtonItem+Extension.m in Sources */,
@@ -676,6 +737,7 @@
 				01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */,
 				01F2283C1B7B465800ED4AFB /* UINavigationBar+Awesome.m in Sources */,
 				01ECDFBC1B7C402100665D87 /* HMCommonCenterItem.m in Sources */,
+				D279DA3F1B8717C200E7CDDF /* BloodCell.m in Sources */,
 				01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */,
 				01ECDFA81B7C3F9400665D87 /* HMCommonViewController.m in Sources */,
 				01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */,
@@ -812,7 +874,7 @@
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -829,7 +891,7 @@
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
