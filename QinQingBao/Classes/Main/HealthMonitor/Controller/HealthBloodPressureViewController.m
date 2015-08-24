@@ -10,6 +10,7 @@
 #import "BloodCell.h"
 #import "ChartCell.h"
 #import "PromptCell.h"
+#import "HealthTipCell.h"
 
 @interface HealthBloodPressureViewController ()
 
@@ -33,7 +34,7 @@
         self.tableView.tableFooterView = [[UIView alloc] init];
         //导航栏标题
         self.navigationItem.title = @"王大爷";
-        }
+    }
     return self;
 }
 
@@ -46,43 +47,39 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     //
     if (section==0 ||section==2) {
-            return 1;
+        return 1;
     }
     return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellID  = @"ChartCell";
+    static NSString *cellchart = @"cellchart";
+    static NSString *cellstring = @"cellstring";
+    static NSString *celldata = @"celldata";
     //分区为0时返回表格Cell
     if (indexPath.section == 0) {
-        cellID = @"ChartCell";
-        ChartCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        ChartCell  *cell = [tableView dequeueReusableCellWithIdentifier:cellchart];
         if (!cell) {
-            cell = [[ChartCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+            cell = [[ChartCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellchart];
         }
-      return cell;
+        return cell;
     }
-    
-    //分区为1时返回BloodCell，表示血压
-    if (indexPath.section == 1) {
-        cellID = @"BloodCell";
-        BloodCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    else if (indexPath.section == 1) {
+        BloodCell *cell = [tableView dequeueReusableCellWithIdentifier:celldata];
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"BloodCell" owner:nil options:nil] lastObject];
         }
         return cell;
     }
-    
-    //分区为2时返回PromptCell，表示专家提示
-    cellID = @"PromptCell";
-    PromptCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell= [[[NSBundle mainBundle]loadNibNamed:@"PromptCell" owner:nil options:nil] lastObject];
+    else
+    {
+        HealthTipCell *cell = [tableView dequeueReusableCellWithIdentifier:cellstring];
+        if (!cell) {
+            cell= [[[NSBundle mainBundle]loadNibNamed:@"HealthTipCell" owner:nil options:nil] lastObject];
+        }
+        return cell;
     }
-    cell.contentLabel.text = @"绿叶蔬菜：很多高血压朋友都有这样的体会，吃芹菜有很好的降血压食疗功效，因为无论是钾、钙、镁，都在绿叶蔬菜中，而芹菜的确是绿叶蔬菜降血压的典型代表。通常越是颜色深的绿色蔬菜，钾、钙、镁含量越高，同一株蔬菜，叶子的颜色比杆茎深，自然有效成分含量也更高，吃芹菜一定要连同叶子一起吃。";
-    return cell;
-
 }
 
 #pragma mark - Table view delegate
@@ -103,29 +100,26 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static PromptCell *promptCell = nil;
-    
     if (indexPath.section ==0 ) {
         return 180.0f;
     }else if (indexPath.section ==1){
         return 40.0f;
     }else if(indexPath.section ==2){
-        if (!promptCell) {
-            promptCell =[[[NSBundle mainBundle] loadNibNamed:@"PromptCell" owner:nil options:nil] lastObject];
-        }
-        promptCell.contentLabel.text = @"绿叶蔬菜：很多高血压朋友都有这样的体会，吃芹菜有很好的降血压食疗功效，因为无论是钾、钙、镁，都在绿叶蔬菜中，而芹菜的确是绿叶蔬菜降血压的典型代表。通常越是颜色深的绿色蔬菜，钾、钙、镁含量越高，同一株蔬菜，叶子的颜色比杆茎深，自然有效成分含量也更高，吃芹菜一定要连同叶子一起吃。";
-        
-        [promptCell setNeedsLayout];
-        [promptCell layoutIfNeeded];
-        [promptCell setNeedsUpdateConstraints];
-        [promptCell updateConstraintsIfNeeded];
-        
-        CGFloat height = [promptCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;
-    
-        NSLog(@"%f",height);
-        return 100.0f;
+        return [self getcell].height;
     }
     return 0;
 }
+
+
+/**获取单元格的高度*/
+-(UITableViewCell*)getcell
+{
+    static NSString *cellstring = @"cellstring";
+    HealthTipCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellstring];
+    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HealthTipCell" owner:nil options:nil];
+    cell = [nibs lastObject];
+    return cell;
+}
+
 
 @end

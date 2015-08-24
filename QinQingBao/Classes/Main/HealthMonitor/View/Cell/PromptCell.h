@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (nonatomic, assign) NSString * contentText;
+
 @end

@@ -38,6 +38,8 @@
 		01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED08BA1B84706B00115E3A /* HeartCell.m */; };
 		01ED08BD1B84706B00115E3A /* HeartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED08BB1B84706B00115E3A /* HeartCell.xib */; };
 		01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */; };
+		01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F186491B8AADF700DA284E /* HealthTipCell.m */; };
+		01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F1864A1B8AADF700DA284E /* HealthTipCell.xib */; };
 		01F227DB1B7B3E1400ED4AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227DA1B7B3E1400ED4AFB /* main.m */; };
 		01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F227E71B7B3E1400ED4AFB /* LaunchScreen.xib */; };
 		01F227F51B7B3E1400ED4AFB /* QinQingBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227F41B7B3E1400ED4AFB /* QinQingBaoTests.m */; };
@@ -129,6 +131,9 @@
 		01ED08BB1B84706B00115E3A /* HeartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeartCell.xib; sourceTree = "<group>"; };
 		01EFD0C11B7D865800A720E7 /* MTControllerChooseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTControllerChooseTool.h; sourceTree = "<group>"; };
 		01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTControllerChooseTool.m; sourceTree = "<group>"; };
+		01F186481B8AADF700DA284E /* HealthTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthTipCell.h; sourceTree = "<group>"; };
+		01F186491B8AADF700DA284E /* HealthTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthTipCell.m; sourceTree = "<group>"; };
+		01F1864A1B8AADF700DA284E /* HealthTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthTipCell.xib; sourceTree = "<group>"; };
 		01F227D51B7B3E1400ED4AFB /* QinQingBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QinQingBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F227D91B7B3E1400ED4AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F227DA1B7B3E1400ED4AFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -349,6 +354,9 @@
 		01ED08B81B84701200115E3A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				01F186481B8AADF700DA284E /* HealthTipCell.h */,
+				01F186491B8AADF700DA284E /* HealthTipCell.m */,
+				01F1864A1B8AADF700DA284E /* HealthTipCell.xib */,
 				01ED08B91B84706B00115E3A /* HeartCell.h */,
 				01ED08BA1B84706B00115E3A /* HeartCell.m */,
 				01ED08BB1B84706B00115E3A /* HeartCell.xib */,
@@ -686,6 +694,7 @@
 				D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */,
 				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
+				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */,
+				01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */,
 				01ECDFC11B7C402100665D87 /* HMCommonTextfieldItem.m in Sources */,
 				01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */,
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,

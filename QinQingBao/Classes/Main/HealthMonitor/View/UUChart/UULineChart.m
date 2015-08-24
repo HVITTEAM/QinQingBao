@@ -7,7 +7,6 @@
 //
 
 #import "UULineChart.h"
-#import "UUColor.h"
 #import "UUChartLabel.h"
 
 @implementation UULineChart
@@ -17,16 +16,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.clipsToBounds = YES;
-        //初始化yLabelArray数组和yView
-        self.yLabelArray = [[NSMutableArray alloc] init];
-        self.yView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, UUYLabelwidth-2, frame.size.height)];
-        self.yView.backgroundColor = [UIColor whiteColor];
-        [self addSubview:self.yView];
-        
-        self.delegate = self;
-        self.showsHorizontalScrollIndicator = NO;
-        
-        self.contentSize = CGSizeMake(500,150);
+        self.scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(30, 0, self.width, self.height)];
+        self.scrollview.showsHorizontalScrollIndicator = YES;
+        [self addSubview:self.scrollview];
+        self.scrollview.contentInset = UIEdgeInsetsMake(0, -30, 0, 60);
     }
     return self;
 }
@@ -37,12 +30,11 @@
     [self setYLabels:yValues];
 }
 
-
-
 -(void)setYLabels:(NSArray *)yLabels
 {
     NSInteger max = 0;
     NSInteger min = 1000000000;
+    
     for (NSArray * ary in yLabels) {
         for (NSString *valueString in ary) {
             NSInteger value = [valueString integerValue];
@@ -68,28 +60,25 @@
         _yValueMax = _chooseRange.max;
         _yValueMin = _chooseRange.min;
     }
-
+    
     float level = (_yValueMax-_yValueMin) /4.0;
     CGFloat chartCavanHeight = self.frame.size.height - UULabelHeight*3;
     CGFloat levelHeight = chartCavanHeight /4.0;
-
+    
     for (int i=0; i<5; i++) {
         UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(0.0,chartCavanHeight-i*levelHeight+5, UUYLabelwidth, UULabelHeight)];
-		label.text = [NSString stringWithFormat:@"%d",(int)(level * i+_yValueMin)];
-        
-        //把label添加到数组,并添加到yView上
-        [self.yLabelArray addObject:label];
-        [self.yView addSubview:label];
-		//[self addSubview:label];
+        label.text = [NSString stringWithFormat:@"%d",(int)(level * i+_yValueMin)];
+        label.font = [UIFont fontWithName:@"Helvetica-Bold" size:10.f];
+        [self addSubview:label];
     }
     
-    //设置标记范围
+    //画标记区域
     if ([super respondsToSelector:@selector(setMarkRange:)]) {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(UUYLabelwidth, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.frame.size.width-UUYLabelwidth, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
-        view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.1];
-        [self addSubview:view];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(UUYLabelwidth, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.scrollview.contentSize.width - chartMargin, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
+        view.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.1];
+        [self.scrollview addSubview:view];
     }
-
+    
     //画横线
     for (int i=0; i<5; i++) {
         if ([_ShowHorizonLine[i] integerValue]>0) {
@@ -97,41 +86,35 @@
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             UIBezierPath *path = [UIBezierPath bezierPath];
             [path moveToPoint:CGPointMake(UUYLabelwidth,UULabelHeight+i*levelHeight)];
-            //修改为按contentSize来计算
-            [path addLineToPoint:CGPointMake(self.contentSize.width,UULabelHeight+i*levelHeight)];
+            [path addLineToPoint:CGPointMake(self.scrollview.contentSize.width + UUYLabelwidth - chartMargin,UULabelHeight+i*levelHeight)];
             [path closePath];
             shapeLayer.path = path.CGPath;
             shapeLayer.strokeColor = [[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor];
             shapeLayer.fillColor = [[UIColor whiteColor] CGColor];
             shapeLayer.lineWidth = 1;
-            [self.layer addSublayer:shapeLayer];
+            [self.scrollview.layer addSublayer:shapeLayer];
         }
     }
-    
 }
 
 -(void)setXLabels:(NSArray *)xLabels
 {
     _xLabels = xLabels;
-    
     CGFloat num = 0;
-    if (xLabels.count>=20) {
-        num=20.0;
+    if (xLabels.count>=5) {
+        num=5;
     }else if (xLabels.count<=1){
         num=1.0;
     }else{
         num = xLabels.count;
     }
-    //修改为一页7个
-    _xLabelWidth = (self.frame.size.width - UUYLabelwidth)/7;
-    //设置contentSize尺寸
-    self.contentSize = CGSizeMake(xLabels.count * _xLabelWidth+UUYLabelwidth, self.frame.size.height);
+    _xLabelWidth = (self.width - UUYLabelwidth)/num;
     
     for (int i=0; i<xLabels.count; i++) {
         NSString *labelText = xLabels[i];
         UUChartLabel * label = [[UUChartLabel alloc] initWithFrame:CGRectMake(i * _xLabelWidth+UUYLabelwidth, self.frame.size.height - UULabelHeight, _xLabelWidth, UULabelHeight)];
         label.text = labelText;
-        [self addSubview:label];
+        [self.scrollview addSubview:label];
     }
     
     //画竖线
@@ -144,14 +127,22 @@
         shapeLayer.path = path.CGPath;
         shapeLayer.strokeColor = [[[UIColor blackColor] colorWithAlphaComponent:0.1] CGColor];
         shapeLayer.fillColor = [[UIColor whiteColor] CGColor];
-        shapeLayer.lineWidth = 1;
-        [self.layer addSublayer:shapeLayer];
+        [self.scrollview.layer addSublayer:shapeLayer];
+    }
+    
+    float max = (([xLabels count]-1)*_xLabelWidth + chartMargin)+_xLabelWidth;
+    if (self.scrollview.frame.size.width < max-10) {
+        self.scrollview.contentSize = CGSizeMake(max, self.frame.size.height);
+    }
+    else
+    {
+        self.scrollview.contentSize = CGSizeMake(self.width, self.frame.size.height);
     }
 }
 
 -(void)setColors:(NSArray *)colors
 {
-	_colors = colors;
+    _colors = colors;
 }
 - (void)setMarkRange:(CGRange)markRange
 {
@@ -199,7 +190,7 @@
         _chartLine.fillColor   = [[UIColor whiteColor] CGColor];
         _chartLine.lineWidth   = 2.0;
         _chartLine.strokeEnd   = 0.0;
-        [self.layer addSublayer:_chartLine];
+        [self.scrollview.layer addSublayer:_chartLine];
         
         UIBezierPath *progressline = [UIBezierPath bezierPath];
         CGFloat firstValue = [[childAry objectAtIndex:0] floatValue];
@@ -207,7 +198,7 @@
         CGFloat chartCavanHeight = self.frame.size.height - UULabelHeight*3;
         
         float grade = ((float)firstValue-_yValueMin) / ((float)_yValueMax-_yValueMin);
-       
+        
         //第一个点
         BOOL isShowMaxAndMinPoint = YES;
         if (self.ShowMaxMinArray) {
@@ -221,7 +212,7 @@
                  index:i
                 isShow:isShowMaxAndMinPoint
                  value:firstValue];
-
+        
         
         [progressline moveToPoint:CGPointMake(xPosition, chartCavanHeight - grade * chartCavanHeight+UULabelHeight)];
         [progressline setLineWidth:2.0];
@@ -250,7 +241,7 @@
                         isShow:isShowMaxAndMinPoint
                          value:[valueString floatValue]];
                 
-//                [progressline stroke];
+                //                [progressline stroke];
             }
             index += 1;
         }
@@ -273,7 +264,6 @@
     }
 }
 
-//point表示在什么位置添加点，index表示颜色数组中的哪种颜色，value这个点的值，isHollow用来确定要不要显示该点的值。NO表示显示，YES表示不显示
 - (void)addPoint:(CGPoint)point index:(NSInteger)index isShow:(BOOL)isHollow value:(CGFloat)value
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(5, 5, 8, 8)];
@@ -293,17 +283,11 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = view.backgroundColor;
         label.text = [NSString stringWithFormat:@"%d",(int)value];
-        [self addSubview:label];
+        [self.scrollview addSubview:label];
     }
-
-    [self addSubview:view];
+    
+    [self.scrollview addSubview:view];
 }
 
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    self.yView.x = scrollView.contentOffset.x;
-    [self bringSubviewToFront:self.yView];
-}
 
 @end

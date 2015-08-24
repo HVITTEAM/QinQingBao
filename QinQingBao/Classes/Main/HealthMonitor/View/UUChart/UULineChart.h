@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UUColor.h"
+#import "UIView+Extension.h"
 
 #define chartMargin     10
 #define xLabelMargin    15
@@ -17,7 +18,8 @@
 #define UUYLabelwidth     30
 #define UUTagLabelwidth     80
 
-@interface UULineChart : UIScrollView <UIScrollViewDelegate>
+@interface UULineChart : UIView
+
 @property (strong, nonatomic) NSArray * xLabels;
 
 @property (strong, nonatomic) NSArray * yLabels;
@@ -40,8 +42,7 @@
 @property (nonatomic, retain) NSMutableArray *ShowMaxMinArray;
 
 
-@property (nonatomic,strong)  UIView *yView;
-@property (nonatomic, retain) NSMutableArray *yLabelArray;
+@property (nonatomic, retain) UIScrollView *scrollview;
 
 -(void)strokeChart;
 
