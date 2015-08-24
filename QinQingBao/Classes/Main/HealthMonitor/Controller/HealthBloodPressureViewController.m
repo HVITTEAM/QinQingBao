@@ -113,7 +113,7 @@
         if (!promptCell) {
             promptCell =[[[NSBundle mainBundle] loadNibNamed:@"PromptCell" owner:nil options:nil] lastObject];
         }
-        promptCell.contentLabel.text = @"绿叶蔬菜：很多高血压朋友都有这样的体会，吃芹菜有很好的降血压食疗功效，因为无论是钾、钙、镁，都在绿叶蔬菜中，而芹菜的确是绿叶蔬菜降血压的典型代表。通常越是颜色深的绿色蔬菜，钾、钙、镁含量越高，同一株蔬菜，叶子的颜色比杆茎深，自然有效成分含量也更高，吃芹菜一定要连同叶子一起吃。";
+        promptCell.contentLabel.text = @"绿叶蔬菜：很多高血压朋友都有这\n样的体会，吃芹菜有很好的降血压食疗功效，因为无论是钾、\n钙、镁，都在绿叶蔬菜中，而芹菜的确是绿叶蔬菜降血压的典型代\n表。通常越是颜色深的绿色蔬菜，钾、钙、镁含量越\n高，同一株蔬菜，叶子的颜色比杆茎深，自然有效成分含量也更高，吃芹菜一\n定要连同叶子一起吃。";
         
         [promptCell setNeedsLayout];
         [promptCell layoutIfNeeded];
@@ -123,7 +123,7 @@
         CGFloat height = [promptCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height+1;
     
         NSLog(@"%f",height);
-        return 100.0f;
+        return height;
     }
     return 0;
 }

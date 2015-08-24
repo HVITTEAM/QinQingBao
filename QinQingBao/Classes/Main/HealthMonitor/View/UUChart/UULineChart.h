@@ -39,7 +39,7 @@
 @property (nonatomic, retain) NSMutableArray *ShowHorizonLine;
 @property (nonatomic, retain) NSMutableArray *ShowMaxMinArray;
 
-
+//新添加的属性yView用于显示y轴坐标，yLabelArray用于存放yLabel.
 @property (nonatomic,strong)  UIView *yView;
 @property (nonatomic, retain) NSMutableArray *yLabelArray;
 
