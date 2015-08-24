@@ -34,10 +34,10 @@
     //设置表格的曲线颜色
     scrollChart.colors = @[UUGreen,UURed,UUBrown];
     //设置表格数值标注范围
-    scrollChart.markRange =  CGRangeMake(60, 30);
+    scrollChart.markRange =  CGRangeMake(55, 27);
     //Y轴值范围
     scrollChart.chooseRange = CGRangeMake(110, 0);
-    scrollChart.showRange = YES;
+    scrollChart.showRange = NO;
     
     //模拟的两条曲线
     NSArray*arr1 = @[@"0",@"44",@"15",@"40",@"42",@"42",@"77",@"43",@"30",@"89",@"20",@"55",@"52",@"42"];
