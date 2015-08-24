@@ -20,7 +20,6 @@
     self.tipText.scrollEnabled = NO;
     self.tipText.backgroundColor = [UIColor clearColor];
     
-    
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 7;// 字体的行间距
     

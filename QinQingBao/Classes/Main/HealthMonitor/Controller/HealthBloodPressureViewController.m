@@ -18,9 +18,9 @@
 
 @implementation HealthBloodPressureViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
 }
 
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,16 +40,14 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //
-    if (section==0 ||section==2) {
+    if (section==0 ||section==2)
         return 1;
-    }
-    return 5;
+    else
+        return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,21 +103,9 @@
     }else if (indexPath.section ==1){
         return 40.0f;
     }else if(indexPath.section ==2){
-        return [self getcell].height;
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.height;
     }
     return 0;
 }
-
-
-/**获取单元格的高度*/
--(UITableViewCell*)getcell
-{
-    static NSString *cellstring = @"cellstring";
-    HealthTipCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellstring];
-    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HealthTipCell" owner:nil options:nil];
-    cell = [nibs lastObject];
-    return cell;
-}
-
-
 @end
