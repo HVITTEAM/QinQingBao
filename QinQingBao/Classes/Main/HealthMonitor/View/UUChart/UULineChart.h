@@ -18,7 +18,7 @@
 #define UUYLabelwidth     30
 #define UUTagLabelwidth     80
 
-@interface UULineChart : UIView
+@interface UULineChart : UIView<UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray * xLabels;
 

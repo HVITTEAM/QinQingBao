@@ -7,16 +7,16 @@
 //
 
 #import "ProfileViewController.h"
-#import "HMCommonGroup.h"
-#import "HMCommonArrowItem.h"
-#import "HMCommonCell.h"
 
 
+#import "AboutViewController.h"
+#import "FamilyViewController.h"
+#import "SettingViewController.h"
+#import "OrderTableViewController.h"
 
 #define imageHeight 120
 
 @interface ProfileViewController ()
-
 
 
 @end
@@ -186,7 +186,7 @@
     [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-//    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    //    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
     logout.height = 50;
@@ -204,7 +204,7 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的账号" icon:@"pc_accout.png"];
-//    newFriend.destVcClass = [MyAccountViewController class];
+    //    newFriend.destVcClass = [MyAccountViewController class];
     newFriend.operation = ^{
     };
     
@@ -221,7 +221,7 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
-//    newFriend.destVcClass = [OrderTableViewController class];
+        newFriend.destVcClass = [OrderTableViewController class];
     newFriend.operation = ^{
     };
     
@@ -236,7 +236,7 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *collect = [HMCommonArrowItem itemWithTitle:@"关于APP" icon:@"app.png"];
-//    collect.destVcClass = [AboutViewController class];
+    collect.destVcClass = [AboutViewController class];
     group.items = @[collect];
 }
 
@@ -248,7 +248,7 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的家属" icon:@"pc_family.png"];
-//    offline.destVcClass = [FamilyViewController class];
+    offline.destVcClass = [FamilyViewController class];
     group.items = @[offline];
 }
 
@@ -260,7 +260,7 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
-//    album.destVcClass = [SettingViewController class];
+    album.destVcClass = [SettingViewController class];
     group.items = @[album];
 }
 

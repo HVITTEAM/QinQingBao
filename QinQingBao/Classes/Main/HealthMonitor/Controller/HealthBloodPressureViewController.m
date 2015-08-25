@@ -21,21 +21,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initTableviewSkin];
 }
 
--(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+/** 屏蔽tableView的样式 */
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        //设置表视图属性
-        self.tableView.backgroundColor = HMGlobalBg;
-        self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        //去掉多余的分割线
-        self.tableView.tableFooterView = [[UIView alloc] init];
-        //导航栏标题
-        self.navigationItem.title = @"王大爷";
-    }
-    return self;
+    return [self initWithStyle:UITableViewStyleGrouped];
+}
+
+/**
+ *  设置tableView属性
+ */
+-(void)initTableviewSkin
+{
+    self.navigationItem.title = @"王大爷";
+    //设置表视图属性
+    self.tableView.backgroundColor = HMGlobalBg;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 15, 0);
 }
 
 #pragma mark - Table view data source
@@ -81,20 +85,16 @@
 }
 
 #pragma mark - Table view delegate
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.0f;
+    return 15;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [[UIView alloc] init];
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80.0f;
-}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
