@@ -18,6 +18,7 @@
         self.clipsToBounds = YES;
         self.scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(30, 0, self.width, self.height)];
         self.scrollview.showsHorizontalScrollIndicator = YES;
+        self.scrollview.delegate = self;
         [self addSubview:self.scrollview];
         self.scrollview.contentInset = UIEdgeInsetsMake(0, -30, 0, 60);
     }
@@ -76,6 +77,7 @@
     if ([super respondsToSelector:@selector(setMarkRange:)]) {
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(UUYLabelwidth, (1-(_markRange.max-_yValueMin)/(_yValueMax-_yValueMin))*chartCavanHeight+UULabelHeight, self.scrollview.contentSize.width - chartMargin, (_markRange.max-_markRange.min)/(_yValueMax-_yValueMin)*chartCavanHeight)];
         view.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.1];
+        view.tag = 100;
         [self.scrollview addSubview:view];
     }
     
@@ -139,6 +141,13 @@
         self.scrollview.contentSize = CGSizeMake(self.width, self.frame.size.height);
     }
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    UIView *v = [self.scrollview viewWithTag:100];
+    v.backgroundColor = [UIColor clearColor];
+}
+
 
 -(void)setColors:(NSArray *)colors
 {
