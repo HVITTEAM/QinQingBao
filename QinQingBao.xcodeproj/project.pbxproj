@@ -84,6 +84,9 @@
 		01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228351B7B465800ED4AFB /* UIImage+Extension.m */; };
 		01F2283C1B7B465800ED4AFB /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228371B7B465800ED4AFB /* UINavigationBar+Awesome.m */; };
 		01F2283D1B7B465800ED4AFB /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228391B7B465800ED4AFB /* UIView+Extension.m */; };
+		D23A12D41B8D682C000365AE /* PositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23A12D31B8D682C000365AE /* PositionCell.xib */; };
+		D23A12D81B8D683D000365AE /* CheckSelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23A12D61B8D683D000365AE /* CheckSelfViewController.m */; };
+		D23A12D91B8D683D000365AE /* CheckSelfViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23A12D71B8D683D000365AE /* CheckSelfViewController.xib */; };
 		D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA071B8709FD00E7CDDF /* UUChartLabel.m */; };
 		D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA091B8709FD00E7CDDF /* UUColor.m */; };
 		D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA0B1B8709FD00E7CDDF /* UULineChart.m */; };
@@ -263,6 +266,10 @@
 		01F228371B7B465800ED4AFB /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		01F228381B7B465800ED4AFB /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		01F228391B7B465800ED4AFB /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		D23A12D31B8D682C000365AE /* PositionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionCell.xib; sourceTree = "<group>"; };
+		D23A12D51B8D683D000365AE /* CheckSelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckSelfViewController.h; sourceTree = "<group>"; };
+		D23A12D61B8D683D000365AE /* CheckSelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckSelfViewController.m; sourceTree = "<group>"; };
+		D23A12D71B8D683D000365AE /* CheckSelfViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckSelfViewController.xib; sourceTree = "<group>"; };
 		D279DA061B8709FD00E7CDDF /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
 		D279DA071B8709FD00E7CDDF /* UUChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChartLabel.m; sourceTree = "<group>"; };
 		D279DA081B8709FD00E7CDDF /* UUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUColor.h; sourceTree = "<group>"; };
@@ -468,6 +475,9 @@
 				01ECDF921B7C347800665D87 /* HomeViewController.h */,
 				01ECDF931B7C347800665D87 /* HomeViewController.m */,
 				01ECDF941B7C347800665D87 /* HomeViewController.xib */,
+				D23A12D51B8D683D000365AE /* CheckSelfViewController.h */,
+				D23A12D61B8D683D000365AE /* CheckSelfViewController.m */,
+				D23A12D71B8D683D000365AE /* CheckSelfViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -491,6 +501,7 @@
 			isa = PBXGroup;
 			children = (
 				01ECDF981B7C347800665D87 /* SQCollectionCell.xib */,
+				D23A12D31B8D682C000365AE /* PositionCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -909,6 +920,7 @@
 				D2F744B01B7D7E7F006AC23D /* RootViewController.xib in Resources */,
 				0126ED201B8C4F1200EC85C1 /* CommonOrderCell.xib in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
+				D23A12D91B8D683D000365AE /* CheckSelfViewController.xib in Resources */,
 				D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */,
 				0126ED101B8C4EE400EC85C1 /* OrderFormDetailController.xib in Resources */,
 				01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */,
@@ -918,6 +930,7 @@
 				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
 				01ECDFDD1B7C774700665D87 /* HealthMonitorViewController.xib in Resources */,
 				D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */,
+				D23A12D41B8D682C000365AE /* PositionCell.xib in Resources */,
 				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
@@ -965,6 +978,7 @@
 				0126ECFA1B8C4E8100EC85C1 /* MASViewAttribute.m in Sources */,
 				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
+				D23A12D81B8D683D000365AE /* CheckSelfViewController.m in Sources */,
 				0126ED111B8C4EE400EC85C1 /* OrderTableViewController.m in Sources */,
 				0126ECF11B8C4E8100EC85C1 /* MJRefreshFooterView.m in Sources */,
 				D2F744AF1B7D7E7F006AC23D /* RootViewController.m in Sources */,

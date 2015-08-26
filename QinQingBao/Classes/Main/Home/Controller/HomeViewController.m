@@ -13,6 +13,7 @@ static float cellHeight = 80;
 static float cellWidth = 66;
 
 #import "HomeViewController.h"
+#import "CheckSelfViewController.h"
 
 @interface HomeViewController ()
 
@@ -47,6 +48,14 @@ static float cellWidth = 66;
     self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
     
+    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+    //设置导航栏颜色
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 /**
@@ -234,4 +243,14 @@ static float cellWidth = 66;
     return YES;
 }
 
+- (void)checkSelf:(id)sender
+{
+    CheckSelfViewController *checkVC = [[CheckSelfViewController alloc] initWithNibName:@"CheckSelfViewController" bundle:nil];
+    [self.navigationController pushViewController:checkVC animated:YES];
+
+}
+- (IBAction)hhhhhh:(id)sender
+{
+    
+}
 @end
