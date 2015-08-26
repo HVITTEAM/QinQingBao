@@ -40,10 +40,6 @@
 		0126ED111B8C4EE400EC85C1 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED081B8C4EE400EC85C1 /* OrderTableViewController.m */; };
 		0126ED121B8C4EE400EC85C1 /* QCListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED0A1B8C4EE400EC85C1 /* QCListViewController.m */; };
 		0126ED131B8C4EE400EC85C1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED0C1B8C4EE400EC85C1 /* SettingViewController.m */; };
-		0126ED1F1B8C4F1200EC85C1 /* CommonOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED161B8C4F1200EC85C1 /* CommonOrderCell.m */; };
-		0126ED201B8C4F1200EC85C1 /* CommonOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0126ED171B8C4F1200EC85C1 /* CommonOrderCell.xib */; };
-		0126ED211B8C4F1200EC85C1 /* HMBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED191B8C4F1200EC85C1 /* HMBadgeView.m */; };
-		0126ED221B8C4F1200EC85C1 /* HMCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED1B1B8C4F1200EC85C1 /* HMCommonCell.m */; };
 		0126ED231B8C4F1200EC85C1 /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED1E1B8C4F1200EC85C1 /* QCSlideSwitchView.m */; };
 		0126ED471B8C547000EC85C1 /* CommonRemoteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED461B8C547000EC85C1 /* CommonRemoteHelper.m */; };
 		0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED671B8C57A700EC85C1 /* AFHTTPRequestOperation.m */; };
@@ -96,6 +92,18 @@
 		01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED08BA1B84706B00115E3A /* HeartCell.m */; };
 		01ED08BD1B84706B00115E3A /* HeartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED08BB1B84706B00115E3A /* HeartCell.xib */; };
 		01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */; };
+		01F0D0091B8D478D00EF3238 /* MTSlipPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0081B8D478D00EF3238 /* MTSlipPageViewController.m */; };
+		01F0D00C1B8D4C0400EF3238 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D00B1B8D4C0400EF3238 /* AccountViewController.m */; };
+		01F0D0161B8D99B300EF3238 /* CommonOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D00F1B8D99B300EF3238 /* CommonOrderCell.m */; };
+		01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F0D0101B8D99B300EF3238 /* CommonOrderCell.xib */; };
+		01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0121B8D99B300EF3238 /* HMBadgeView.m */; };
+		01F0D0191B8D99B300EF3238 /* HMCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0141B8D99B300EF3238 /* HMCommonCell.m */; };
+		01F0D01C1B8D99FA00EF3238 /* CouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D01B1B8D99FA00EF3238 /* CouponsViewController.m */; };
+		01F0D01F1B8D9A6500EF3238 /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D01E1B8D9A6500EF3238 /* BankCardViewController.m */; };
+		01F0D0231B8DB5D000EF3238 /* CouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0211B8DB5D000EF3238 /* CouponsCell.m */; };
+		01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F0D0221B8DB5D000EF3238 /* CouponsCell.xib */; };
+		01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0261B8DB96B00EF3238 /* BankCardCell.m */; };
+		01F0D0291B8DB96B00EF3238 /* BankCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F0D0271B8DB96B00EF3238 /* BankCardCell.xib */; };
 		01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F186491B8AADF700DA284E /* HealthTipCell.m */; };
 		01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F1864A1B8AADF700DA284E /* HealthTipCell.xib */; };
 		01F227DB1B7B3E1400ED4AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227DA1B7B3E1400ED4AFB /* main.m */; };
@@ -207,13 +215,6 @@
 		0126ED0A1B8C4EE400EC85C1 /* QCListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCListViewController.m; sourceTree = "<group>"; };
 		0126ED0B1B8C4EE400EC85C1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		0126ED0C1B8C4EE400EC85C1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		0126ED151B8C4F1200EC85C1 /* CommonOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonOrderCell.h; sourceTree = "<group>"; };
-		0126ED161B8C4F1200EC85C1 /* CommonOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonOrderCell.m; sourceTree = "<group>"; };
-		0126ED171B8C4F1200EC85C1 /* CommonOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonOrderCell.xib; sourceTree = "<group>"; };
-		0126ED181B8C4F1200EC85C1 /* HMBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMBadgeView.h; sourceTree = "<group>"; };
-		0126ED191B8C4F1200EC85C1 /* HMBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMBadgeView.m; sourceTree = "<group>"; };
-		0126ED1A1B8C4F1200EC85C1 /* HMCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonCell.h; sourceTree = "<group>"; };
-		0126ED1B1B8C4F1200EC85C1 /* HMCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCommonCell.m; sourceTree = "<group>"; };
 		0126ED1D1B8C4F1200EC85C1 /* QCSlideSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSlideSwitchView.h; sourceTree = "<group>"; };
 		0126ED1E1B8C4F1200EC85C1 /* QCSlideSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCSlideSwitchView.m; sourceTree = "<group>"; };
 		0126ED451B8C547000EC85C1 /* CommonRemoteHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonRemoteHelper.h; sourceTree = "<group>"; };
@@ -304,6 +305,27 @@
 		01ED08BB1B84706B00115E3A /* HeartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeartCell.xib; sourceTree = "<group>"; };
 		01EFD0C11B7D865800A720E7 /* MTControllerChooseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTControllerChooseTool.h; sourceTree = "<group>"; };
 		01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTControllerChooseTool.m; sourceTree = "<group>"; };
+		01F0D0071B8D478D00EF3238 /* MTSlipPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSlipPageViewController.h; sourceTree = "<group>"; };
+		01F0D0081B8D478D00EF3238 /* MTSlipPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSlipPageViewController.m; sourceTree = "<group>"; };
+		01F0D00A1B8D4C0400EF3238 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		01F0D00B1B8D4C0400EF3238 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		01F0D00E1B8D99B300EF3238 /* CommonOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonOrderCell.h; sourceTree = "<group>"; };
+		01F0D00F1B8D99B300EF3238 /* CommonOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonOrderCell.m; sourceTree = "<group>"; };
+		01F0D0101B8D99B300EF3238 /* CommonOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonOrderCell.xib; sourceTree = "<group>"; };
+		01F0D0111B8D99B300EF3238 /* HMBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMBadgeView.h; sourceTree = "<group>"; };
+		01F0D0121B8D99B300EF3238 /* HMBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMBadgeView.m; sourceTree = "<group>"; };
+		01F0D0131B8D99B300EF3238 /* HMCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonCell.h; sourceTree = "<group>"; };
+		01F0D0141B8D99B300EF3238 /* HMCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCommonCell.m; sourceTree = "<group>"; };
+		01F0D01A1B8D99FA00EF3238 /* CouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsViewController.h; sourceTree = "<group>"; };
+		01F0D01B1B8D99FA00EF3238 /* CouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsViewController.m; sourceTree = "<group>"; };
+		01F0D01D1B8D9A6500EF3238 /* BankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
+		01F0D01E1B8D9A6500EF3238 /* BankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardViewController.m; sourceTree = "<group>"; };
+		01F0D0201B8DB5D000EF3238 /* CouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsCell.h; sourceTree = "<group>"; };
+		01F0D0211B8DB5D000EF3238 /* CouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsCell.m; sourceTree = "<group>"; };
+		01F0D0221B8DB5D000EF3238 /* CouponsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CouponsCell.xib; sourceTree = "<group>"; };
+		01F0D0251B8DB96B00EF3238 /* BankCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardCell.h; sourceTree = "<group>"; };
+		01F0D0261B8DB96B00EF3238 /* BankCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardCell.m; sourceTree = "<group>"; };
+		01F0D0271B8DB96B00EF3238 /* BankCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BankCardCell.xib; sourceTree = "<group>"; };
 		01F186481B8AADF700DA284E /* HealthTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthTipCell.h; sourceTree = "<group>"; };
 		01F186491B8AADF700DA284E /* HealthTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthTipCell.m; sourceTree = "<group>"; };
 		01F1864A1B8AADF700DA284E /* HealthTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthTipCell.xib; sourceTree = "<group>"; };
@@ -487,13 +509,9 @@
 		0126ED141B8C4F1200EC85C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0126ED151B8C4F1200EC85C1 /* CommonOrderCell.h */,
-				0126ED161B8C4F1200EC85C1 /* CommonOrderCell.m */,
-				0126ED171B8C4F1200EC85C1 /* CommonOrderCell.xib */,
-				0126ED181B8C4F1200EC85C1 /* HMBadgeView.h */,
-				0126ED191B8C4F1200EC85C1 /* HMBadgeView.m */,
-				0126ED1A1B8C4F1200EC85C1 /* HMCommonCell.h */,
-				0126ED1B1B8C4F1200EC85C1 /* HMCommonCell.m */,
+				01F0D00D1B8D99B300EF3238 /* Cell */,
+				01F0D0151B8D99B300EF3238 /* PageView */,
+				01F0D0061B8D474500EF3238 /* MTSlipPageViewController */,
 				0126ED1C1B8C4F1200EC85C1 /* SlideViewController */,
 			);
 			path = View;
@@ -661,6 +679,8 @@
 				01ECDFCC1B7C45B200665D87 /* ProfileViewController.m */,
 				01ECDFA61B7C3F9400665D87 /* HMCommonViewController.h */,
 				01ECDFA71B7C3F9400665D87 /* HMCommonViewController.m */,
+				01F0D00A1B8D4C0400EF3238 /* AccountViewController.h */,
+				01F0D00B1B8D4C0400EF3238 /* AccountViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -775,6 +795,46 @@
 				01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */,
 			);
 			path = Others;
+			sourceTree = "<group>";
+		};
+		01F0D0061B8D474500EF3238 /* MTSlipPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				01F0D0071B8D478D00EF3238 /* MTSlipPageViewController.h */,
+				01F0D0081B8D478D00EF3238 /* MTSlipPageViewController.m */,
+			);
+			path = MTSlipPageViewController;
+			sourceTree = "<group>";
+		};
+		01F0D00D1B8D99B300EF3238 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				01F0D00E1B8D99B300EF3238 /* CommonOrderCell.h */,
+				01F0D00F1B8D99B300EF3238 /* CommonOrderCell.m */,
+				01F0D0101B8D99B300EF3238 /* CommonOrderCell.xib */,
+				01F0D0111B8D99B300EF3238 /* HMBadgeView.h */,
+				01F0D0121B8D99B300EF3238 /* HMBadgeView.m */,
+				01F0D0131B8D99B300EF3238 /* HMCommonCell.h */,
+				01F0D0141B8D99B300EF3238 /* HMCommonCell.m */,
+				01F0D0201B8DB5D000EF3238 /* CouponsCell.h */,
+				01F0D0211B8DB5D000EF3238 /* CouponsCell.m */,
+				01F0D0221B8DB5D000EF3238 /* CouponsCell.xib */,
+				01F0D0251B8DB96B00EF3238 /* BankCardCell.h */,
+				01F0D0261B8DB96B00EF3238 /* BankCardCell.m */,
+				01F0D0271B8DB96B00EF3238 /* BankCardCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		01F0D0151B8D99B300EF3238 /* PageView */ = {
+			isa = PBXGroup;
+			children = (
+				01F0D01A1B8D99FA00EF3238 /* CouponsViewController.h */,
+				01F0D01B1B8D99FA00EF3238 /* CouponsViewController.m */,
+				01F0D01D1B8D9A6500EF3238 /* BankCardViewController.h */,
+				01F0D01E1B8D9A6500EF3238 /* BankCardViewController.m */,
+			);
+			path = PageView;
 			sourceTree = "<group>";
 		};
 		01F227CC1B7B3E1400ED4AFB = {
@@ -945,9 +1005,9 @@
 		01F228161B7B428300ED4AFB /* PersonCenter */ = {
 			isa = PBXGroup;
 			children = (
-				0126ED141B8C4F1200EC85C1 /* View */,
 				01ECDF9E1B7C3EBF00665D87 /* Controller */,
 				01ECDFA21B7C3EBF00665D87 /* Model */,
+				0126ED141B8C4F1200EC85C1 /* View */,
 			);
 			path = PersonCenter;
 			sourceTree = "<group>";
@@ -1058,10 +1118,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0126EDA71B8C6DDA00EC85C1 /* foregroundStar.png in Resources */,
+				01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */,
 				01ECDF9D1B7C367600665D87 /* Images.xcassets in Resources */,
 				01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */,
 				D2F744B01B7D7E7F006AC23D /* RootViewController.xib in Resources */,
-				0126ED201B8C4F1200EC85C1 /* CommonOrderCell.xib in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
 				D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */,
 				0126ED101B8C4EE400EC85C1 /* OrderFormDetailController.xib in Resources */,
@@ -1080,6 +1140,8 @@
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
 				0126ED8E1B8C6D4200EC85C1 /* ServiceListCell.xib in Resources */,
 				0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */,
+				01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */,
+				01F0D0291B8DB96B00EF3238 /* BankCardCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1097,9 +1159,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F0D0191B8D99B300EF3238 /* HMCommonCell.m in Sources */,
 				0126EDAC1B8C6E2600EC85C1 /* MTDateHelper.m in Sources */,
+				01F0D0091B8D478D00EF3238 /* MTSlipPageViewController.m in Sources */,
 				01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */,
 				01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */,
+				01F0D00C1B8D4C0400EF3238 /* AccountViewController.m in Sources */,
 				01ECDFC11B7C402100665D87 /* HMCommonTextfieldItem.m in Sources */,
 				0126ECFF1B8C4E8100EC85C1 /* TimeLineViewControl.m in Sources */,
 				01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */,
@@ -1110,15 +1175,18 @@
 				D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */,
 				0126ED0D1B8C4EE400EC85C1 /* AboutViewController.m in Sources */,
 				0126ED8D1B8C6D4200EC85C1 /* ServiceListCell.m in Sources */,
+				01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */,
 				0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				01F0D01C1B8D99FA00EF3238 /* CouponsViewController.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
 				0126ED801B8C57A700EC85C1 /* AFURLResponseSerialization.m in Sources */,
 				0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
+				01F0D01F1B8D9A6500EF3238 /* BankCardViewController.m in Sources */,
 				0126ED9A1B8C6DB600EC85C1 /* PlaceOrderController.m in Sources */,
-				0126ED221B8C4F1200EC85C1 /* HMCommonCell.m in Sources */,
 				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,
+				01F0D0161B8D99B300EF3238 /* CommonOrderCell.m in Sources */,
 				0126ECF81B8C4E8100EC85C1 /* MASConstraintMaker.m in Sources */,
 				0126ECFB1B8C4E8100EC85C1 /* MASViewConstraint.m in Sources */,
 				0126ECEC1B8C4E8100EC85C1 /* NSObject+MJIvar.m in Sources */,
@@ -1127,7 +1195,6 @@
 				0126ECE81B8C4E8100EC85C1 /* MJFoundation.m in Sources */,
 				0126ECEA1B8C4E8100EC85C1 /* MJType.m in Sources */,
 				0126EDA91B8C6DDA00EC85C1 /* TQStarRatingView.m in Sources */,
-				0126ED211B8C4F1200EC85C1 /* HMBadgeView.m in Sources */,
 				0126ED931B8C6D9200EC85C1 /* ServiceMenuModel.m in Sources */,
 				0126ECFA1B8C4E8100EC85C1 /* MASViewAttribute.m in Sources */,
 				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
@@ -1141,13 +1208,13 @@
 				D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */,
 				0126ED9C1B8C6DB600EC85C1 /* ServiceListViewController.m in Sources */,
 				0126ED0E1B8C4EE400EC85C1 /* FamilyViewController.m in Sources */,
-				0126ED1F1B8C4F1200EC85C1 /* CommonOrderCell.m in Sources */,
 				01ECDFBD1B7C402100665D87 /* HMCommonGroup.m in Sources */,
 				01ECDFDC1B7C774700665D87 /* HealthMonitorViewController.m in Sources */,
 				D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */,
 				01ECDFCD1B7C45B200665D87 /* ProfileViewController.m in Sources */,
 				0126ED7D1B8C57A700EC85C1 /* AFSecurityPolicy.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
+				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,
 				D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
@@ -1184,6 +1251,7 @@
 				01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */,
 				0126ECE91B8C4E8100EC85C1 /* MJIvar.m in Sources */,
 				0126ECED1B8C4E8100EC85C1 /* NSObject+MJKeyValue.m in Sources */,
+				01F0D0231B8DB5D000EF3238 /* CouponsCell.m in Sources */,
 				0126ECFE1B8C4E8100EC85C1 /* View+MASAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

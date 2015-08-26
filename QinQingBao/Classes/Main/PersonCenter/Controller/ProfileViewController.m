@@ -13,6 +13,7 @@
 #import "FamilyViewController.h"
 #import "SettingViewController.h"
 #import "OrderTableViewController.h"
+#import "AccountViewController.h"
 
 #define imageHeight 120
 
@@ -130,7 +131,7 @@
     _label.text = @"个人中心";
     _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
     //    [_zoomImageview addSubview:_label];
-  }
+}
 
 #pragma mark UIScrollViewDelegate
 
@@ -208,10 +209,9 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的账号" icon:@"pc_accout.png"];
-    //    newFriend.destVcClass = [MyAccountViewController class];
+    newFriend.destVcClass = [AccountViewController class];
     newFriend.operation = ^{
     };
-    
     group.items = @[newFriend];
 }
 
@@ -225,7 +225,7 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
-        newFriend.destVcClass = [OrderTableViewController class];
+    newFriend.destVcClass = [OrderTableViewController class];
     newFriend.operation = ^{
     };
     

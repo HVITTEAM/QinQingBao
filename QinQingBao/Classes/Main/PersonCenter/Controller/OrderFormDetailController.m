@@ -57,10 +57,5 @@
     
     self.myScrollview.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bgView2.frame));
 }
-#pragma mark - Table view data source
--(void)back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

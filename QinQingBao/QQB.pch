@@ -39,6 +39,9 @@
 
 #define MTScreenH [UIScreen mainScreen].bounds.size.height
 
+#define MTNavH self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height
+
+
 // 颜色
 #define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
