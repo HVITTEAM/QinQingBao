@@ -249,8 +249,5 @@ static float cellWidth = 66;
     [self.navigationController pushViewController:checkVC animated:YES];
 
 }
-- (IBAction)hhhhhh:(id)sender
-{
-    
-}
+
 @end

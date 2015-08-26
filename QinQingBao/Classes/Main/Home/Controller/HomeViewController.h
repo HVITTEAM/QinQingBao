@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *btn2;
 @property (strong, nonatomic) IBOutlet UIButton *btn3;
 
-- (IBAction)hhhhhh:(id)sender;
 
 /**图片数组*/
 @property (strong,nonatomic)NSMutableArray *slideImages;
