@@ -13,6 +13,7 @@ static float cellHeight = 80;
 static float cellWidth = 66;
 
 #import "HomeViewController.h"
+#import "CheckSelfViewController.h"
 
 @interface HomeViewController ()
 
@@ -48,7 +49,8 @@ static float cellWidth = 66;
     self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
     
-    //去掉下一级页面返回按钮上的文本
+    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
+    
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     //设置导航栏颜色
@@ -244,6 +246,13 @@ static float cellWidth = 66;
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+- (void)checkSelf:(id)sender
+{
+    CheckSelfViewController *checkVC = [[CheckSelfViewController alloc] initWithNibName:@"CheckSelfViewController" bundle:nil];
+    [self.navigationController pushViewController:checkVC animated:YES];
+
 }
 
 @end
