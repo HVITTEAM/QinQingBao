@@ -47,9 +47,13 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    self.navigationController.navigationBar.barTintColor = HMColor(29 , 164, 232);
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    //去掉下一级页面返回按钮上的文本
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem = item;
+    //设置导航栏颜色
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
 }
 
@@ -126,7 +130,7 @@
     _label.text = @"个人中心";
     _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
     //    [_zoomImageview addSubview:_label];
-}
+  }
 
 #pragma mark UIScrollViewDelegate
 

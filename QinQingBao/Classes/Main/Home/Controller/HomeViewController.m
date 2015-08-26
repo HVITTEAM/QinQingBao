@@ -30,6 +30,8 @@ static float cellWidth = 66;
     [self initCollectionView];
     
     [self initImagePlayer];
+    
+    [CommonRemoteHelper remoteNetworkWithPOST];
 }
 
 
@@ -40,7 +42,6 @@ static float cellWidth = 66;
 {
     
     self.bgScrollView.delegate = self;
-    
     self.bgScrollView.backgroundColor = HMGlobalBg;
     self.title = @"首页";
     self.btn1.layer.cornerRadius = 8;
@@ -235,6 +236,10 @@ static float cellWidth = 66;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"hello");
+    if (self.listView == nil)
+        self.listView = [[ServiceListViewController alloc] init];
+    [self.navigationController pushViewController:self.listView animated:YES];
+    self.listView.title = @"服务列表";
 }
 
 //返回这个UICollectionView是否可以被选择

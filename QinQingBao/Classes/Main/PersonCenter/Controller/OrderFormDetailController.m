@@ -31,9 +31,6 @@
 {
     self.title = @"订单详情";
     self.view.backgroundColor = HMGlobalBg;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"default_common_navibar_prev_normal.png"
-                                                                 highImageName:@"default_common_navibar_prev_highlighted.png"
-                                                                        target:self action:@selector(back)];
 }
 
 -(void)initView
@@ -57,7 +54,7 @@
     [self.bgView2 addSubview:timeline];
     
     self.bgView2.height = CGRectGetMaxY(timeline.frame) + 60;
-
+    
     self.myScrollview.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bgView2.frame));
 }
 #pragma mark - Table view data source

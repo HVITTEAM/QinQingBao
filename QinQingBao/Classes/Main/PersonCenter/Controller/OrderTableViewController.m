@@ -138,14 +138,6 @@ static float cellWidth = 66;
 {
     self.title =  self.viewOwer.length == 0 ?  @"我的订单" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"default_common_navibar_prev_normal.png"
-                                                                 highImageName:@"default_common_navibar_prev_highlighted.png"
-                                                                        target:self action:@selector(back)];
-    
-    self.navigationController.navigationBar.barTintColor = HMColor(29 , 164, 232);
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 #pragma mark - Table view data source
