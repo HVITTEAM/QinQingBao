@@ -7,6 +7,7 @@
 //  test
 
 #import <UIKit/UIKit.h>
+#import "ServiceListViewController.h"
 
 @interface HomeViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
@@ -22,5 +23,8 @@
 /**图片数组*/
 @property (strong,nonatomic)NSMutableArray *slideImages;
 @property (strong,nonatomic)UIPageControl *pageControl;
+
+@property (nonatomic, retain) ServiceListViewController *listView;
+
 
 @end
