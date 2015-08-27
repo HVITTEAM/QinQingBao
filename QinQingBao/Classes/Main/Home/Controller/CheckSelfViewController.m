@@ -128,7 +128,6 @@
         NSLog(@"跳转");
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
-    
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,7 +146,6 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
-
 }
 
 @end

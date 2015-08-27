@@ -43,6 +43,7 @@
     if (cell == nil) {
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"BankCardCell" owner:nil options:nil];
         cell = [nibs lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return  cell;
 }

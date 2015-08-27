@@ -67,7 +67,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     self.rootScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeightOfTopScrollView, MTScreenW, self.bounds.size.height - kHeightOfTopScrollView)];
     self.rootScrollView.delegate = self;
     self.rootScrollView.pagingEnabled = YES;
-    self.rootScrollView.userInteractionEnabled = NO;
+    self.rootScrollView.userInteractionEnabled = YES;
     self.rootScrollView.bounces = NO;
     self.rootScrollView.backgroundColor = HMGlobalBg;
     self.rootScrollView.showsHorizontalScrollIndicator = NO;
@@ -128,7 +128,6 @@ static const NSUInteger kTagOfRightSideButton = 999;
     //如果更换按钮
     if (sender.tag != self.selectedIndex)
     {
-        self.isUseButtonClick = YES;
         //取之前的按钮
         UIButton *lastButton = (UIButton *)[self.headScrollView viewWithTag:self.selectedIndex];
         lastButton.selected = NO;
@@ -142,12 +141,12 @@ static const NSUInteger kTagOfRightSideButton = 999;
             
         } completion:^(BOOL finished) {
             [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW, 0) animated:YES];
+            self.isUseButtonClick = YES;
         }];
     }
 }
 
 #pragma mark - UIScrollViewDelegate
-
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -158,8 +157,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     [self adjustScrollViewContentX:page];
 }
 
-//滚动视图释放滚动
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
     self.isUseButtonClick = NO;
 }
