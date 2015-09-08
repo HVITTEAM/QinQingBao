@@ -26,7 +26,7 @@
     
     [self initNavigation];
     
-    [self initView];
+//    [self initView];
     
     [self setupGroups];
 }
@@ -38,17 +38,14 @@
 {
     self.title = @"关于APP";
     self.view.backgroundColor = HMGlobalBg;
-    
-    //    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"default_common_navibar_prev_normal.png"
-    //                                                                 highImageName:@"default_common_navibar_prev_highlighted.png"
-    //                                                                        target:self action:@selector(back)];
-    //
 }
 
 -(void)initView
 {
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
     img.x = (MTScreenW - img.width)/2;
+    img.y = 25;
+
     UIView *view = [[UIView alloc] init];
     view.height = 150;
     [view addSubview:img];

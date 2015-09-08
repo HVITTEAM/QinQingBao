@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.backgroundColor = HMGlobalBg;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

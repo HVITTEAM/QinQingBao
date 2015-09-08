@@ -50,8 +50,18 @@
     //重置数据源
     [self setupGroup0];
     
+//    [self setPlaceHolderview];
+    
     //刷新表格
     [self.tableView reloadData];
+}
+
+
+-(void)setPlaceHolderview
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((self.view.width - 100)/2, (self.view.height - 100)/3, 100, 100)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
 }
 
 - (void)setupGroup0
@@ -72,7 +82,6 @@
     
     group.items = @[version,help,advice];
 }
-
 
 
 @end

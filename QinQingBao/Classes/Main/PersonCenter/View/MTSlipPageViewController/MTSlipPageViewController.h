@@ -12,7 +12,7 @@
 
 
 @property (nonatomic, strong)  UIScrollView *rootScrollView;
-@property (nonatomic, strong)  UIScrollView *headScrollView;
+@property (nonatomic, strong)  UIView *headScrollView;
 @property (nonatomic, strong)  UIImageView *shadowImageView;
 
 @property (nonatomic, strong) NSMutableArray *buttonArr;

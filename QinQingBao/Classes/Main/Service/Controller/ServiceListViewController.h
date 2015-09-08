@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "ServiceListCell.h"
 #import "PlaceOrderController.h"
+#import "OrderDetailViewController.h"
+
 
 
 @interface ServiceListViewController : UITableViewController
 
-@property (nonatomic ,retain) PlaceOrderController *palceView;
+@property (nonatomic ,retain) OrderDetailViewController *palceView;
 
 @end

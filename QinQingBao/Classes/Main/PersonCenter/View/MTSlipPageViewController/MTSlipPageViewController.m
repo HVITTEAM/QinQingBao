@@ -54,13 +54,8 @@ static const NSUInteger kTagOfRightSideButton = 999;
     self.selectedIndex = 100;
     
     //创建顶部可滑动的scrollView
-    self.headScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, kHeightOfTopScrollView)];
+    self.headScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, kHeightOfTopScrollView)];
     self.headScrollView.backgroundColor = [UIColor whiteColor];
-    self.headScrollView.pagingEnabled = NO;
-    self.headScrollView.userInteractionEnabled = YES;
-    self.headScrollView.showsHorizontalScrollIndicator = NO;
-    self.headScrollView.showsVerticalScrollIndicator = NO;
-    self.headScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self addSubview:self.headScrollView];
     
     //创建主滚动视图
@@ -73,7 +68,6 @@ static const NSUInteger kTagOfRightSideButton = 999;
     self.rootScrollView.showsHorizontalScrollIndicator = NO;
     self.rootScrollView.showsVerticalScrollIndicator = NO;
     _rootScrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-    //    [self.rootScrollView.panGestureRecognizer addTarget:self action:@selector(scrollHandlePan:)];
     [self addSubview:self.rootScrollView];
     
     [self creatTabButtons];
@@ -94,7 +88,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
         button.backgroundColor = [UIColor whiteColor];
-        [button setFrame:CGRectMake((MTScreenW/2) *i,-66,MTScreenW/2, kHeightOfTopScrollView - 5)];
+        [button setFrame:CGRectMake((MTScreenW/2) *i,0,MTScreenW/2, kHeightOfTopScrollView - 5)];
         [button setTitle:vc.title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -103,7 +97,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
         [self.headScrollView addSubview:button];
         if (i == 0) {
             button.selected = YES;
-            self.shadowImageView.frame = CGRectMake(0, -64, button.width,kHeightOfTopScrollView);
+            self.shadowImageView.frame = CGRectMake(0, 0, button.width,kHeightOfTopScrollView);
         }
         [self.buttonArr addObject:button];
     }
@@ -113,8 +107,8 @@ static const NSUInteger kTagOfRightSideButton = 999;
 {
     for (int i=0; i < self.viewArr.count; i++) {
         UIViewController *vc = (UIViewController *)self.viewArr[i];
-        vc.view.frame = CGRectMake(0 + self.rootScrollView.width*i, 0,
-                                   self.rootScrollView.width, self.rootScrollView.height);
+        vc.view.frame = CGRectMake(self.rootScrollView.width*i, 0,
+                                   self.rootScrollView.width, self.rootScrollView.height - 66 - kHeightOfTopScrollView);
         [self.rootScrollView addSubview:vc.view];
     }
     self.rootScrollView.contentSize = CGSizeMake(MTScreenW * [self.viewArr count], 0);
@@ -137,7 +131,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
         
         [UIView animateWithDuration:0.25 animations:^{
             
-            [self.shadowImageView setFrame:CGRectMake(sender.frame.origin.x, -64, sender.width, kHeightOfTopScrollView)];
+            [self.shadowImageView setFrame:CGRectMake(sender.frame.origin.x, 0, sender.width, kHeightOfTopScrollView)];
             
         } completion:^(BOOL finished) {
             [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW, 0) animated:YES];
@@ -182,7 +176,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     //背景图片动画
     [UIView animateWithDuration:0.25 animations:^{
         
-        [self.shadowImageView setFrame:CGRectMake(newButton.x, -64, newButton.width, kHeightOfTopScrollView)];
+        [self.shadowImageView setFrame:CGRectMake(newButton.x, 0, newButton.width, kHeightOfTopScrollView)];
         
     } completion:^(BOOL finished) {
     }];

@@ -29,19 +29,6 @@
 -(void)initNavigation
 {
     self.view.backgroundColor = [UIColor whiteColor];
-    
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"default_common_navibar_prev_normal.png"
-//                                                                 highImageName:@"default_common_navibar_prev_highlighted.png"
-//                                                                        target:self action:@selector(back)];
-    
-    //去掉下一级页面返回按钮上的文本
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
-    //设置导航栏颜色
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-
 }
 
 /**
@@ -86,7 +73,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.palceView ==  nil)
-        self.palceView = [[PlaceOrderController alloc] init];
+        self.palceView = [[OrderDetailViewController alloc] init];
     [self.navigationController pushViewController:self.palceView animated:YES];
 }
 

@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.41568630933761597" green="0.97647064924240112" blue="0.18823531270027161" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" red="0.14901961386203766" green="0.729411780834198" blue="0.20784315466880798" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="300" id="0mK-71-z3m"/>
                             <constraint firstAttribute="height" constant="60" id="RTE-Tq-WX4"/>

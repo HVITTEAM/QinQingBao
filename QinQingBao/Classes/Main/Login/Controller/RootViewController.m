@@ -51,8 +51,7 @@
  */
 - (IBAction)regist:(id)sender {
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.backBarButtonItem = item;
+
     [self.navigationController pushViewController:registVC animated:YES];
 }
 

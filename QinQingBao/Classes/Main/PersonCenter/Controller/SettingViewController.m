@@ -61,14 +61,14 @@
     [self.groups addObject:group];
     
     // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@"pc_accout.png"];
+    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"清除缓存" icon:@"pc_accout.png"];
     // newFriend.destVcClass = [MyAccountViewController class];
     version.operation = ^{
     };
     
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"老王" icon:@"app.png"];
+    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"用户反馈" icon:@"app.png"];
     
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"二大爷" icon:@"app.png"];
+    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"设置" icon:@"app.png"];
     
     group.items = @[version,help,advice];
 }
