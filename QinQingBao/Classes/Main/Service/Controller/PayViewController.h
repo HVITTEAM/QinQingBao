@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PayHeadCell.h"
+#import "PayButtonCell.h"
 
 @interface PayViewController : UITableViewController
 

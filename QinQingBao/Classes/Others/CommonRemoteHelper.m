@@ -28,7 +28,6 @@ static NSOperationQueue * _queue;
         NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
         success(dict,responseObject);
-        
     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failure(operation,error);
     }];
@@ -39,33 +38,25 @@ static NSOperationQueue * _queue;
     [_queue addOperation:operation];
 }
 
-+(void)remoteNetworkWithPOST
+//  = HTTP请求格式 =
+//  ------------------------------
+//  * 请求方法 (GET、POST等)       *
+//  * 请求头   (HttpHeaderFields) *
+//  * 请求正文 (数据)              *
+//  ------------------------------
++(void)RemoteNetworkWithPOST
 {
-    //  = HTTP请求格式 =
-    //  ------------------------------
-    //  * 请求方法 (GET、POST等)       *
-    //  * 请求头   (HttpHeaderFields) *
-    //  * 请求正文 (数据)              *
-    //  ------------------------------
-    
-    // http://api.openweathermap.org/data/2.5/forecast/daily?lat=39.907501&lon=116.397232&cnt=10
-    
-    // http://h.hiphotos.baidu.com/image/pic/item/8d5494eef01f3a298a1c0a799c25bc315d607cb5.jpg
-    
-    NSString *urlStr = @"http://api.openweathermap.org/data/2.5/forecast/daily";
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
     // 设置回复内容信息
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     
     // 请求的方法
-    [manager POST:urlStr
-       parameters:@{@"lat" : @"39.907501",
-                    @"lon" : @"116.397232",
-                    @"cnt" : @"10"} // 请求的正文
+    [manager POST:URL_Register
+       parameters:@{@"username" : @"test",
+                    @"password" : @"123456",
+                    @"password_confirm" : @"123456",
+                    @"client" : @"iOS"}
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
               // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
               NSLog(@"%@", operation.request.allHTTPHeaderFields);
               
@@ -79,6 +70,4 @@ static NSOperationQueue * _queue;
               NSLog(@"%@", error);
           }];
 }
-
-//http://blog.csdn.net/Swift_Zero/article/details/44649099?ref=myrecommend
 @end

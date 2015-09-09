@@ -53,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 3;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,7 +63,7 @@
     else if (indexPath.row == 1)
         return 160;
     else
-        return 44;
+        return 190;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -77,9 +77,9 @@
     {
         NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PlaceOrderView" owner:self options:nil];
         self.headView = [nib lastObject];
-        __weak OrderDetailViewController *weakself  = self;
+        __weak typeof(self) weakSelf = self;
         self.headView.submitClick = ^(UIButton *button){
-            [weakself submitClickHandler];
+            [weakSelf submitClickHandler];
         };
     }
     return self.headView;
@@ -87,10 +87,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *ListViewCellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ListViewCellId];
-    EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:ListViewCellId];
-    BusinessInfoCell *bucell = [tableView dequeueReusableCellWithIdentifier:ListViewCellId];
+    NSString *listViewCellstr = @"cell";
+    NSString *evaCellstr = @"evaCell";
+    NSString *bucellstr = @"buceCell";
+    NSString *serviceDetailstr = @"serviceDetailCell";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
+    EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:evaCellstr];
+    BusinessInfoCell *bucell = [tableView dequeueReusableCellWithIdentifier:bucellstr];
+    ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:serviceDetailstr];
     
     if (indexPath.row == 0)
     {
@@ -98,11 +103,14 @@
         {
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"EvaluationCell" owner:self options:nil];
             evacell = [nib lastObject];
+            evacell.queryClick  = ^(UIButton *btn){
+                [self queryAllevaluation];
+            };
             evacell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return  evacell;
     }
-    if (indexPath.row == 1)
+    else if (indexPath.row == 1)
     {
         if (bucell == nil)
         {
@@ -112,15 +120,34 @@
         }
         return  bucell;
     }
-    
+    else if (indexPath.row == 2)
+    {
+        if (serviceDetailcell == nil)
+        {
+            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ServiceDetailCell" owner:self options:nil];
+            serviceDetailcell = [nib lastObject];
+            serviceDetailcell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return  serviceDetailcell;
+    }
     else
     {
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ListViewCellId];
-            cell.textLabel.text = @"test";
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:listViewCellstr];
+            cell.textLabel.text = @"服务详情";
         }
         return  cell;
     }
+}
+
+/**
+ *  获取全部评价
+ */
+-(void)queryAllevaluation
+{
+    if (!self.queryAlleva)
+        self.queryAlleva = [[QueryAllEvaluationController alloc] init];
+    [self.navigationController pushViewController:self.queryAlleva animated:YES];
 }
 
 /**
@@ -132,6 +159,5 @@
         self.submitController = [[OrderSubmitController alloc] init];
     [self.navigationController pushViewController:self.submitController animated:YES];
 }
-
 
 @end

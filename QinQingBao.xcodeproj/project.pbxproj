@@ -56,7 +56,6 @@
 		0126ED8E1B8C6D4200EC85C1 /* ServiceListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0126ED8A1B8C6D4200EC85C1 /* ServiceListCell.xib */; };
 		0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0126ED8B1B8C6D4200EC85C1 /* SQCollectionCell.xib */; };
 		0126ED931B8C6D9200EC85C1 /* ServiceMenuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED921B8C6D9200EC85C1 /* ServiceMenuModel.m */; };
-		0126ED9A1B8C6DB600EC85C1 /* PlaceOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED951B8C6DB600EC85C1 /* PlaceOrderController.m */; };
 		0126ED9C1B8C6DB600EC85C1 /* ServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED991B8C6DB600EC85C1 /* ServiceListViewController.m */; };
 		0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0126ED9F1B8C6DDA00EC85C1 /* backgroundStar.png */; };
 		0126EDA61B8C6DDA00EC85C1 /* backgroundStar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0126EDA01B8C6DDA00EC85C1 /* backgroundStar@2x.png */; };
@@ -78,6 +77,13 @@
 		01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEB81B7DC74B0087F80E /* MTSMSHelper.m */; };
 		01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEBB1B7DC7C00087F80E /* ArchiverCacheHelper.m */; };
 		01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEBD1B7DC7C00087F80E /* SharedAppUtil.m */; };
+		01E4BE4B1B9FDF3500BF41EF /* PayHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE491B9FDF3500BF41EF /* PayHeadCell.m */; };
+		01E4BE4C1B9FDF3500BF41EF /* PayHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4BE4A1B9FDF3500BF41EF /* PayHeadCell.xib */; };
+		01E4BE501B9FEA2800BF41EF /* PayButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE4E1B9FEA2800BF41EF /* PayButtonCell.m */; };
+		01E4BE511B9FEA2800BF41EF /* PayButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4BE4F1B9FEA2800BF41EF /* PayButtonCell.xib */; };
+		01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE561BA0162900BF41EF /* QueryAllEvaluationController.m */; };
+		01E4BE5B1BA031E000BF41EF /* ServiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */; };
+		01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */; };
 		01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF931B7C347800665D87 /* HomeViewController.m */; };
 		01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF941B7C347800665D87 /* HomeViewController.xib */; };
 		01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF981B7C347800665D87 /* SQCollectionCell.xib */; };
@@ -263,8 +269,6 @@
 		0126ED8B1B8C6D4200EC85C1 /* SQCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SQCollectionCell.xib; sourceTree = "<group>"; };
 		0126ED901B8C6D8A00EC85C1 /* ServiceMenuModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServiceMenuModel.h; sourceTree = "<group>"; };
 		0126ED921B8C6D9200EC85C1 /* ServiceMenuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMenuModel.m; sourceTree = "<group>"; };
-		0126ED941B8C6DB600EC85C1 /* PlaceOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceOrderController.h; sourceTree = "<group>"; };
-		0126ED951B8C6DB600EC85C1 /* PlaceOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceOrderController.m; sourceTree = "<group>"; };
 		0126ED981B8C6DB600EC85C1 /* ServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListViewController.h; sourceTree = "<group>"; };
 		0126ED991B8C6DB600EC85C1 /* ServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListViewController.m; sourceTree = "<group>"; };
 		0126ED9F1B8C6DDA00EC85C1 /* backgroundStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundStar.png; sourceTree = "<group>"; };
@@ -297,6 +301,17 @@
 		01D9DEBB1B7DC7C00087F80E /* ArchiverCacheHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiverCacheHelper.m; sourceTree = "<group>"; };
 		01D9DEBC1B7DC7C00087F80E /* SharedAppUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedAppUtil.h; sourceTree = "<group>"; };
 		01D9DEBD1B7DC7C00087F80E /* SharedAppUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedAppUtil.m; sourceTree = "<group>"; };
+		01E4BE481B9FDF3500BF41EF /* PayHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayHeadCell.h; sourceTree = "<group>"; };
+		01E4BE491B9FDF3500BF41EF /* PayHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayHeadCell.m; sourceTree = "<group>"; };
+		01E4BE4A1B9FDF3500BF41EF /* PayHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayHeadCell.xib; sourceTree = "<group>"; };
+		01E4BE4D1B9FEA2800BF41EF /* PayButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayButtonCell.h; sourceTree = "<group>"; };
+		01E4BE4E1B9FEA2800BF41EF /* PayButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayButtonCell.m; sourceTree = "<group>"; };
+		01E4BE4F1B9FEA2800BF41EF /* PayButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayButtonCell.xib; sourceTree = "<group>"; };
+		01E4BE551BA0162900BF41EF /* QueryAllEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryAllEvaluationController.h; sourceTree = "<group>"; };
+		01E4BE561BA0162900BF41EF /* QueryAllEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryAllEvaluationController.m; sourceTree = "<group>"; };
+		01E4BE581BA031E000BF41EF /* ServiceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailCell.h; sourceTree = "<group>"; };
+		01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailCell.m; sourceTree = "<group>"; };
+		01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailCell.xib; sourceTree = "<group>"; };
 		01ECDF921B7C347800665D87 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		01ECDF931B7C347800665D87 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		01ECDF941B7C347800665D87 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -599,8 +614,6 @@
 		0126ED831B8C6D4200EC85C1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0126ED941B8C6DB600EC85C1 /* PlaceOrderController.h */,
-				0126ED951B8C6DB600EC85C1 /* PlaceOrderController.m */,
 				0126ED981B8C6DB600EC85C1 /* ServiceListViewController.h */,
 				0126ED991B8C6DB600EC85C1 /* ServiceListViewController.m */,
 				01FEE2B21B9BE213007C4641 /* OrderDetailViewController.h */,
@@ -609,6 +622,8 @@
 				01FD55AF1B9EB505000F96BB /* OrderSubmitController.m */,
 				0128A8C01B9ED064002B14E2 /* PayViewController.h */,
 				0128A8C11B9ED064002B14E2 /* PayViewController.m */,
+				01E4BE551BA0162900BF41EF /* QueryAllEvaluationController.h */,
+				01E4BE561BA0162900BF41EF /* QueryAllEvaluationController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -625,6 +640,7 @@
 		0126ED851B8C6D4200EC85C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01E4BE421B9FDD8B00BF41EF /* PayCells */,
 				0128A8BA1B9EC7AA002B14E2 /* SubmitCells */,
 				01FEE2BC1B9C0F90007C4641 /* OrderDetailCells */,
 				0126ED861B8C6D4200EC85C1 /* ServiceCell.h */,
@@ -686,6 +702,19 @@
 				01D9DEAD1B7DBF840087F80E /* SMS_SDK.framework */,
 			);
 			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
+		01E4BE421B9FDD8B00BF41EF /* PayCells */ = {
+			isa = PBXGroup;
+			children = (
+				01E4BE4D1B9FEA2800BF41EF /* PayButtonCell.h */,
+				01E4BE4E1B9FEA2800BF41EF /* PayButtonCell.m */,
+				01E4BE4F1B9FEA2800BF41EF /* PayButtonCell.xib */,
+				01E4BE481B9FDF3500BF41EF /* PayHeadCell.h */,
+				01E4BE491B9FDF3500BF41EF /* PayHeadCell.m */,
+				01E4BE4A1B9FDF3500BF41EF /* PayHeadCell.xib */,
+			);
+			path = PayCells;
 			sourceTree = "<group>";
 		};
 		01ECDF911B7C347800665D87 /* Controller */ = {
@@ -1105,6 +1134,9 @@
 				01FEE2C71B9C2551007C4641 /* BusinessInfoCell.h */,
 				01FEE2C81B9C2551007C4641 /* BusinessInfoCell.m */,
 				01FEE2C91B9C2551007C4641 /* BusinessInfoCell.xib */,
+				01E4BE581BA031E000BF41EF /* ServiceDetailCell.h */,
+				01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */,
+				01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */,
 			);
 			path = OrderDetailCells;
 			sourceTree = "<group>";
@@ -1206,6 +1238,7 @@
 			files = (
 				0126EDA71B8C6DDA00EC85C1 /* foregroundStar.png in Resources */,
 				01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */,
+				01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */,
 				01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */,
 				01ECDF9D1B7C367600665D87 /* Images.xcassets in Resources */,
 				01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */,
@@ -1225,10 +1258,12 @@
 				D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */,
 				01FEE2C61B9C0FD8007C4641 /* EvaluationCell.xib in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
+				01E4BE4C1B9FDF3500BF41EF /* PayHeadCell.xib in Resources */,
 				01FEE2C11B9C0F90007C4641 /* PlaceOrderView.xib in Resources */,
 				D23A12D41B8D682C000365AE /* PositionCell.xib in Resources */,
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
 				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
+				01E4BE511B9FEA2800BF41EF /* PayButtonCell.xib in Resources */,
 				0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
@@ -1273,6 +1308,7 @@
 				0126ED8D1B8C6D4200EC85C1 /* ServiceListCell.m in Sources */,
 				01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */,
 				0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
+				01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */,
 				01F0D01C1B8D99FA00EF3238 /* CouponsViewController.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
@@ -1281,7 +1317,7 @@
 				0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
 				01F0D01F1B8D9A6500EF3238 /* BankCardViewController.m in Sources */,
-				0126ED9A1B8C6DB600EC85C1 /* PlaceOrderController.m in Sources */,
+				01E4BE4B1B9FDF3500BF41EF /* PayHeadCell.m in Sources */,
 				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,
 				01F0D0161B8D99B300EF3238 /* CommonOrderCell.m in Sources */,
 				0126ECF81B8C4E8100EC85C1 /* MASConstraintMaker.m in Sources */,
@@ -1318,9 +1354,11 @@
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
 				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,
+				01E4BE5B1BA031E000BF41EF /* ServiceDetailCell.m in Sources */,
 				D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
+				01E4BE501B9FEA2800BF41EF /* PayButtonCell.m in Sources */,
 				0126ECF21B8C4E8100EC85C1 /* MJRefreshHeaderView.m in Sources */,
 				0126ED471B8C547000EC85C1 /* CommonRemoteHelper.m in Sources */,
 				01F2283A1B7B465800ED4AFB /* UIBarButtonItem+Extension.m in Sources */,

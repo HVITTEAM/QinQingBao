@@ -135,10 +135,10 @@
 /**
  *   网络请求的url
  */
-
 #define URL_IP @"http://192.168.1.115:3000/"
 
-#define URL_Registerfamily(telnum, pwd)  [NSString stringWithFormat:@"%@registerfamily?rtelnum=%@&rpwd=%@",URL_IP,telnum,pwd];
+/***用户注册url*/
+#define URL_Register  @"http://112.91.146.107/ylserver/shop/mobile/?access_token=token&act=member&op=register"
 
 #define URL_Login(telnum, pwd)  [NSString stringWithFormat:@"%@loginfamily?loginnum=%@&pwd=%@",URL_IP,telnum,pwd];
 

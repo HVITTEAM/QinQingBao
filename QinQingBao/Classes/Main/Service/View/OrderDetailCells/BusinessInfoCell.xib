@@ -30,7 +30,6 @@
                                 <rect key="frame" x="0.0" y="32" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="60r-T0-LW5"/>
                                     <constraint firstAttribute="height" constant="1" id="AWc-FD-cpx"/>
                                 </constraints>
                             </view>
@@ -68,7 +67,6 @@
                                 <rect key="frame" x="0.0" y="102" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="FBC-qd-RNR"/>
                                     <constraint firstAttribute="height" constant="1" id="Z6P-Ad-4OH"/>
                                 </constraints>
                             </view>
@@ -106,11 +104,9 @@
                             <constraint firstItem="df9-2a-MO5" firstAttribute="top" secondItem="eAe-Bm-NVh" secondAttribute="top" constant="5" id="dOs-qT-eW3"/>
                             <constraint firstItem="5Ku-iG-wsv" firstAttribute="top" secondItem="df9-2a-MO5" secondAttribute="bottom" constant="6" id="fRg-Mn-h9j"/>
                             <constraint firstItem="ZJR-CY-Bg2" firstAttribute="top" secondItem="tWn-fx-tZI" secondAttribute="bottom" constant="10" id="h4R-a3-oN9"/>
-                            <constraint firstAttribute="height" constant="140" id="j41-iA-aQm"/>
                             <constraint firstItem="tWn-fx-tZI" firstAttribute="leading" secondItem="eAe-Bm-NVh" secondAttribute="leading" constant="10" id="kLc-U4-mQb"/>
                             <constraint firstItem="XKF-Yf-mVh" firstAttribute="top" secondItem="ZJR-CY-Bg2" secondAttribute="bottom" constant="8" id="mub-dQ-w83"/>
                             <constraint firstAttribute="trailing" secondItem="XKF-Yf-mVh" secondAttribute="trailing" constant="8" id="puo-Hh-g9w"/>
-                            <constraint firstAttribute="width" constant="320" id="y7V-il-0Ck"/>
                         </constraints>
                     </view>
                 </subviews>

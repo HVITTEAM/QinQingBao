@@ -12,7 +12,9 @@
 #import "EvaluationCell.h"
 #import "BusinessInfoCell.h"
 #import "ServiceHeadView.h"
+#import "ServiceDetailCell.h"
 #import "OrderSubmitController.h"
+#import "QueryAllEvaluationController.h"
 
 
 
@@ -20,5 +22,6 @@
 
 @property (nonatomic, retain) PlaceOrderHeadView *headView;
 @property (nonatomic, retain) OrderSubmitController *submitController;
+@property (nonatomic, retain) QueryAllEvaluationController *queryAlleva;
 
 @end

@@ -33,7 +33,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"关于APP";
+    self.title = @"我的家属";
     self.view.backgroundColor = HMGlobalBg;
 }
 

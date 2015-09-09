@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -35,10 +35,6 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBT-D5-SMj" userLabel="btn1">
                                     <rect key="frame" x="18" y="35" width="80" height="80"/>
                                     <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="80" id="ay9-Fz-r7N"/>
-                                        <constraint firstAttribute="width" constant="80" id="lT0-7p-lzf"/>
-                                    </constraints>
                                     <state key="normal" title="症状自查">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -47,10 +43,6 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wR-g5-wcS" userLabel="btn2">
                                     <rect key="frame" x="120" y="35" width="80" height="80"/>
                                     <color key="backgroundColor" red="0.0" green="1" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="SSp-z8-DGK"/>
-                                        <constraint firstAttribute="height" constant="80" id="s0x-9h-5wp"/>
-                                    </constraints>
                                     <state key="normal" title="在线提问">
                                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,10 +51,6 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fv-rR-3bV" userLabel="btn3">
                                     <rect key="frame" x="222" y="35" width="80" height="80"/>
                                     <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="80" id="Gmj-d6-f0L"/>
-                                        <constraint firstAttribute="width" constant="80" id="P5i-9i-O27"/>
-                                    </constraints>
                                     <state key="normal" title="家庭医生">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,7 +71,6 @@
                                 <constraint firstItem="jBT-D5-SMj" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="dDP-aW-tuK"/>
                                 <constraint firstItem="8Fv-rR-3bV" firstAttribute="leading" secondItem="6wR-g5-wcS" secondAttribute="trailing" constant="22" id="euy-FA-uID"/>
                                 <constraint firstItem="8Fv-rR-3bV" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="i5W-4x-Xkl"/>
-                                <constraint firstAttribute="width" constant="320" id="jHp-BR-zlc"/>
                                 <constraint firstItem="6wR-g5-wcS" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="knc-mf-Wee"/>
                                 <constraint firstItem="6wR-g5-wcS" firstAttribute="width" secondItem="jBT-D5-SMj" secondAttribute="width" id="lXV-Gh-Rdd"/>
                                 <constraint firstItem="6wR-g5-wcS" firstAttribute="leading" secondItem="jBT-D5-SMj" secondAttribute="trailing" constant="22" id="zu8-5o-N2g"/>
@@ -93,7 +80,6 @@
                             <rect key="frame" x="0.0" y="330" width="320" height="180"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="320" id="R55-HD-GQ8"/>
                                 <constraint firstAttribute="height" constant="180" id="d3U-N7-tkj"/>
                             </constraints>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6sf-4n-Ody">
@@ -107,9 +93,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="7yY-xI-2bY" secondAttribute="width" id="ASP-xI-S8p"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" id="BW0-0m-x0x"/>
-                        <constraint firstAttribute="width" constant="320" id="IJn-3g-Yv3"/>
                         <constraint firstItem="ZOK-7g-4T1" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="20" id="Kgm-DA-7ZE"/>
-                        <constraint firstAttribute="height" constant="568" id="MHR-NC-erf"/>
                         <constraint firstItem="ZOK-7g-4T1" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="Nil-WC-NiM"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="NkX-di-EER"/>
                         <constraint firstAttribute="trailing" secondItem="7yY-xI-2bY" secondAttribute="trailing" id="P2v-MR-UVK"/>

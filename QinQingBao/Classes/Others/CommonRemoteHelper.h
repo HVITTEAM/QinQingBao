@@ -16,5 +16,5 @@
                           success:(void (^)(NSDictionary *dict, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-+ (void)remoteNetworkWithPOST;
++ (void)RemoteNetworkWithPOST;
 @end

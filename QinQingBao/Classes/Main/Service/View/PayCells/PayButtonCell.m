@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 董徐维. All rights reserved.
 //
 
-#import "OrderSubmitCell.h"
+#import "PayButtonCell.h"
 
-@implementation OrderSubmitCell
+@implementation PayButtonCell
 
 - (void)awakeFromNib
 {

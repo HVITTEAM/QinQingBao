@@ -31,7 +31,7 @@ static float cellWidth = 66;
     
     [self initImagePlayer];
     
-    [CommonRemoteHelper remoteNetworkWithPOST];
+    [CommonRemoteHelper RemoteNetworkWithPOST];
 }
 
 
@@ -48,9 +48,8 @@ static float cellWidth = 66;
     self.btn2.layer.cornerRadius = 8;
     self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
-    
     [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
- }
+}
 
 /**
  *  初始化突变轮播播放器
@@ -227,7 +226,6 @@ static float cellWidth = 66;
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"hello");
     if (self.listView == nil)
         self.listView = [[ServiceListViewController alloc] init];
     [self.navigationController pushViewController:self.listView animated:YES];

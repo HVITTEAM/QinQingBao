@@ -26,4 +26,8 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)queryAllEvaluationClickHandler:(id)sender
+{
+    self.queryClick(sender);
+}
 @end
