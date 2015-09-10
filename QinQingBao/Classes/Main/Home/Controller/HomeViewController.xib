@@ -7,9 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="bgScrollView" destination="YFd-Yg-exP" id="zHu-bQ-VaA"/>
-                <outlet property="btn1" destination="jBT-D5-SMj" id="cUi-ce-0Pe"/>
-                <outlet property="btn2" destination="6wR-g5-wcS" id="O0q-Z9-nip"/>
-                <outlet property="btn3" destination="8Fv-rR-3bV" id="OBk-Lq-mZD"/>
+                <outlet property="healthBtn" destination="jDg-8v-IDq" id="fIe-fn-Olx"/>
+                <outlet property="healthServiceBackgroundView" destination="vlY-uk-Vhe" id="J7L-6G-wAf"/>
                 <outlet property="imgPlayer" destination="7yY-xI-2bY" id="Bav-Md-hez"/>
                 <outlet property="serviceColectionview" destination="ZOK-7g-4T1" id="He4-4w-bm2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,54 +29,71 @@
                             </constraints>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlY-uk-Vhe" userLabel="ButtonTypeView">
-                            <rect key="frame" x="0.0" y="160" width="320" height="150"/>
+                            <rect key="frame" x="0.0" y="160" width="320" height="70"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBT-D5-SMj" userLabel="btn1">
-                                    <rect key="frame" x="18" y="35" width="80" height="80"/>
-                                    <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="症状自查">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-8v-IDq" userLabel="coverButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                    <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="healthClickHandler:" destination="-1" eventType="touchUpInside" id="l9k-uc-H7O"/>
+                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wR-g5-wcS" userLabel="btn2">
-                                    <rect key="frame" x="120" y="35" width="80" height="80"/>
-                                    <color key="backgroundColor" red="0.0" green="1" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="在线提问">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Fv-rR-3bV" userLabel="btn3">
-                                    <rect key="frame" x="222" y="35" width="80" height="80"/>
-                                    <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal" title="家庭医生">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="db2-F8-B6p">
+                                    <rect key="frame" x="292" y="30" width="12" height="12"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="12" id="7Ql-Wv-D00"/>
+                                        <constraint firstAttribute="height" constant="12" id="r8G-tS-FJf"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="EbO-X1-6I3">
+                                    <rect key="frame" x="20" y="15" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="KLb-2W-ggQ"/>
+                                        <constraint firstAttribute="height" constant="40" id="XXm-5U-QoL"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="健康服务" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTj-m4-kwF">
+                                    <rect key="frame" x="74" y="14" width="68" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="68" id="LIc-45-ilc"/>
+                                        <constraint firstAttribute="height" constant="21" id="Qvd-Fi-JdY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="症状自查、在线提问、签约医生" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YJ-uB-7yw">
+                                    <rect key="frame" x="74" y="35" width="183" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="Gvf-S2-SLq"/>
+                                        <constraint firstAttribute="width" constant="183" id="NeY-Zf-19j"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="8Fv-rR-3bV" secondAttribute="bottom" constant="35" id="0wm-DH-A2L"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="width" secondItem="8Fv-rR-3bV" secondAttribute="width" id="BZO-JD-Cre"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="height" secondItem="jBT-D5-SMj" secondAttribute="height" id="HW3-bQ-YQF"/>
-                                <constraint firstAttribute="trailing" secondItem="8Fv-rR-3bV" secondAttribute="trailing" constant="18" id="Jk8-gu-QfP"/>
-                                <constraint firstAttribute="bottom" secondItem="jBT-D5-SMj" secondAttribute="bottom" constant="35" id="RZ9-l4-rUg"/>
-                                <constraint firstItem="jBT-D5-SMj" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" constant="18" id="U1z-4b-cm1"/>
-                                <constraint firstAttribute="bottom" secondItem="6wR-g5-wcS" secondAttribute="bottom" constant="35" id="VdH-mn-o4t"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="height" secondItem="8Fv-rR-3bV" secondAttribute="height" id="b1C-Z7-zev"/>
-                                <constraint firstAttribute="height" constant="150" id="d4q-VE-JrQ"/>
-                                <constraint firstItem="jBT-D5-SMj" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="dDP-aW-tuK"/>
-                                <constraint firstItem="8Fv-rR-3bV" firstAttribute="leading" secondItem="6wR-g5-wcS" secondAttribute="trailing" constant="22" id="euy-FA-uID"/>
-                                <constraint firstItem="8Fv-rR-3bV" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="i5W-4x-Xkl"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="35" id="knc-mf-Wee"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="width" secondItem="jBT-D5-SMj" secondAttribute="width" id="lXV-Gh-Rdd"/>
-                                <constraint firstItem="6wR-g5-wcS" firstAttribute="leading" secondItem="jBT-D5-SMj" secondAttribute="trailing" constant="22" id="zu8-5o-N2g"/>
+                                <constraint firstItem="db2-F8-B6p" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="30" id="1gq-q7-3yQ"/>
+                                <constraint firstItem="jDg-8v-IDq" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" id="1xH-Tv-aQ5"/>
+                                <constraint firstAttribute="trailing" secondItem="db2-F8-B6p" secondAttribute="trailing" constant="16" id="3B3-AH-TJr"/>
+                                <constraint firstItem="4YJ-uB-7yw" firstAttribute="leading" secondItem="EbO-X1-6I3" secondAttribute="trailing" constant="14" id="3ST-Kq-Uqt"/>
+                                <constraint firstAttribute="bottom" secondItem="jDg-8v-IDq" secondAttribute="bottom" id="534-Wt-S2g"/>
+                                <constraint firstAttribute="trailing" secondItem="jDg-8v-IDq" secondAttribute="trailing" id="HtD-dY-n1J"/>
+                                <constraint firstItem="EbO-X1-6I3" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="15" id="Khj-zR-AdL"/>
+                                <constraint firstItem="EbO-X1-6I3" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" constant="20" id="Yzy-Qv-Ta3"/>
+                                <constraint firstAttribute="height" constant="70" id="d4q-VE-JrQ"/>
+                                <constraint firstItem="eTj-m4-kwF" firstAttribute="leading" secondItem="EbO-X1-6I3" secondAttribute="trailing" constant="14" id="h6E-BM-9nR"/>
+                                <constraint firstItem="eTj-m4-kwF" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="14" id="po1-0o-1Tf"/>
+                                <constraint firstItem="4YJ-uB-7yw" firstAttribute="top" secondItem="eTj-m4-kwF" secondAttribute="bottom" id="weF-bo-vtT"/>
+                                <constraint firstItem="jDg-8v-IDq" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" id="xGY-6Z-U8p"/>
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOK-7g-4T1">
-                            <rect key="frame" x="0.0" y="330" width="320" height="180"/>
+                            <rect key="frame" x="0.0" y="250" width="320" height="180"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="180" id="d3U-N7-tkj"/>
@@ -120,4 +136,8 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="1" width="60" height="60"/>
+        <image name="common_icon_arrow" width="12" height="12"/>
+    </resources>
 </document>

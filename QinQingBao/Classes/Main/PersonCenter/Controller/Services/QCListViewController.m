@@ -135,6 +135,9 @@
     if (cell == nil) {
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"CommonOrderCell" owner:nil options:nil];
         cell = [nibs lastObject];
+        cell.deleteClick = ^(UIButton *btn){
+            [self deleteOrderClickHandler];
+        };
         // 设置背景view
         //        cell.backgroundView = [[UIImageView alloc] init];
         //        cell.selectedBackgroundView = [[UIImageView alloc] init];
@@ -148,6 +151,16 @@
     if (self.detailForm == nil)
         self.detailForm = [[OrderFormDetailController alloc] init];
     [self.nav pushViewController:self.detailForm animated:YES];
+}
+
+-(void)deleteOrderClickHandler
+{
+    if (!self.evaluaView)
+        self.evaluaView  = [[EvaluationController alloc]init];
+    [self.nav pushViewController:self.evaluaView animated:YES];
+//    if (!self.cancelView)
+//        self.cancelView  = [[CancelOrderController alloc]init];
+//    [self.nav pushViewController:self.cancelView animated:YES];
 }
 
 -(NSString *)kilometre2meter:(float)meter

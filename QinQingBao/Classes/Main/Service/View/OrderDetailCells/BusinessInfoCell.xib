@@ -70,13 +70,6 @@
                                     <constraint firstAttribute="height" constant="1" id="Z6P-Ad-4OH"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="XKF-Yf-mVh">
-                                <rect key="frame" x="292" y="111" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="iGD-lj-tW1"/>
-                                    <constraint firstAttribute="height" constant="20" id="kCi-9d-hO8"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话 ：13898018210" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQf-pF-5fS">
                                 <rect key="frame" x="10" y="110" width="195" height="21"/>
                                 <constraints>
@@ -86,6 +79,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2AZ-Br-101">
+                                <rect key="frame" x="292" y="111" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Bom-OO-iyR"/>
+                                    <constraint firstAttribute="width" constant="20" id="rdH-kx-dGN"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="1">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="callClickHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dsX-R9-WrV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -98,15 +104,15 @@
                             <constraint firstItem="df9-2a-MO5" firstAttribute="leading" secondItem="eAe-Bm-NVh" secondAttribute="leading" constant="10" id="FSI-vk-wGG"/>
                             <constraint firstAttribute="trailing" secondItem="ZJR-CY-Bg2" secondAttribute="trailing" id="J2l-wf-a53"/>
                             <constraint firstItem="CQf-pF-5fS" firstAttribute="top" secondItem="ZJR-CY-Bg2" secondAttribute="bottom" constant="7" id="L3G-Fv-1wV"/>
+                            <constraint firstAttribute="trailing" secondItem="2AZ-Br-101" secondAttribute="trailing" constant="8" id="Zdb-TI-K3s"/>
                             <constraint firstItem="ZJR-CY-Bg2" firstAttribute="leading" secondItem="eAe-Bm-NVh" secondAttribute="leading" id="b2n-te-aXs"/>
                             <constraint firstAttribute="trailing" secondItem="5Ku-iG-wsv" secondAttribute="trailing" id="cdj-iL-DG9"/>
                             <constraint firstAttribute="trailing" secondItem="CDD-p7-aZZ" secondAttribute="trailing" id="d5B-vJ-PTw"/>
                             <constraint firstItem="df9-2a-MO5" firstAttribute="top" secondItem="eAe-Bm-NVh" secondAttribute="top" constant="5" id="dOs-qT-eW3"/>
                             <constraint firstItem="5Ku-iG-wsv" firstAttribute="top" secondItem="df9-2a-MO5" secondAttribute="bottom" constant="6" id="fRg-Mn-h9j"/>
                             <constraint firstItem="ZJR-CY-Bg2" firstAttribute="top" secondItem="tWn-fx-tZI" secondAttribute="bottom" constant="10" id="h4R-a3-oN9"/>
+                            <constraint firstItem="2AZ-Br-101" firstAttribute="top" secondItem="ZJR-CY-Bg2" secondAttribute="bottom" constant="8" id="iXy-5l-Een"/>
                             <constraint firstItem="tWn-fx-tZI" firstAttribute="leading" secondItem="eAe-Bm-NVh" secondAttribute="leading" constant="10" id="kLc-U4-mQb"/>
-                            <constraint firstItem="XKF-Yf-mVh" firstAttribute="top" secondItem="ZJR-CY-Bg2" secondAttribute="bottom" constant="8" id="mub-dQ-w83"/>
-                            <constraint firstAttribute="trailing" secondItem="XKF-Yf-mVh" secondAttribute="trailing" constant="8" id="puo-Hh-g9w"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -118,7 +124,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="callBtn" destination="XKF-Yf-mVh" id="73U-iV-F62"/>
+                <outlet property="callBtn" destination="2AZ-Br-101" id="TzJ-08-zqg"/>
             </connections>
         </tableViewCell>
     </objects>

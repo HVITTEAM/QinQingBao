@@ -33,4 +33,8 @@
 }
 
 
+- (IBAction)deleteBtnClickHandler:(id)sender
+{
+    self.deleteClick(sender);
+}
 @end

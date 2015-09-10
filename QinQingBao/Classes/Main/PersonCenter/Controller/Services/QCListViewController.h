@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "CommonOrderCell.h"
 #import "OrderFormDetailController.h"
+#import "CancelOrderController.h"
+#import "EvaluationController.h"
+
 
 @interface QCListViewController : UITableViewController
 
@@ -20,7 +23,8 @@
 @property (nonatomic, assign) UINavigationController *nav;
 
 @property (nonatomic, retain) OrderFormDetailController *detailForm;
-
+@property (nonatomic, retain) CancelOrderController *cancelView;
+@property (nonatomic, retain) EvaluationController *evaluaView;
 
 @end
 

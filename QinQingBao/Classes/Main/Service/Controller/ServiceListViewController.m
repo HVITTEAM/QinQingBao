@@ -37,6 +37,7 @@
 -(void)initTableviewSkin
 {
     self.tableView.backgroundColor = HMGlobalBg;
+    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Table view data source

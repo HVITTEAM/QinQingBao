@@ -12,5 +12,8 @@
 @property (strong, nonatomic) IBOutlet UIView *topSapce;
 @property (strong, nonatomic) IBOutlet UIView *bottomSpace;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
+- (IBAction)deleteBtnClickHandler:(id)sender;
+@property (nonatomic, copy) void (^deleteClick)(UIButton *btn);
+
 
 @end

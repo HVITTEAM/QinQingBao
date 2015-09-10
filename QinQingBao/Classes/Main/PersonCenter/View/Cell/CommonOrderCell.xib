@@ -48,6 +48,9 @@
                         <rect key="frame" x="241" y="94" width="75" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="删除订单"/>
+                        <connections>
+                            <action selector="deleteBtnClickHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wxW-ch-lPP"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tc9-PN-q6h">
                         <rect key="frame" x="256" y="4" width="45" height="30"/>

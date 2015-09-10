@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BusinessInfoCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIImageView *callBtn;
+@property (strong, nonatomic) IBOutlet UIButton *callBtn;
+- (IBAction)callClickHandler:(id)sender;
 
 @end

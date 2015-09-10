@@ -13,7 +13,6 @@ static float cellHeight = 80;
 static float cellWidth = 66;
 
 #import "HomeViewController.h"
-#import "CheckSelfViewController.h"
 
 @interface HomeViewController ()
 
@@ -44,11 +43,15 @@ static float cellWidth = 66;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     self.title = @"首页";
-    self.btn1.layer.cornerRadius = 8;
-    self.btn2.layer.cornerRadius = 8;
-    self.btn3.layer.cornerRadius = 8;
+    
+    [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
+    [self.healthBtn setBackgroundImage:[UIImage imageWithColor:HMGlobalBg] forState:UIControlStateHighlighted];
+    
+    //    self.btn1.layer.cornerRadius = 8;
+    //    self.btn2.layer.cornerRadius = 8;
+    //    self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
-    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
+    //    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /**
@@ -238,10 +241,11 @@ static float cellWidth = 66;
     return YES;
 }
 
-- (void)checkSelf:(id)sender
+- (IBAction)healthClickHandler:(id)sender
 {
-    CheckSelfViewController *checkVC = [[CheckSelfViewController alloc] initWithNibName:@"CheckSelfViewController" bundle:nil];
-    [self.navigationController pushViewController:checkVC animated:YES];
+    if (!self.healthVC)
+        self.healthVC = [[HealthServicesController alloc] init];
+    [self.navigationController pushViewController: self.healthVC animated:YES];
 }
 
 @end

@@ -35,10 +35,6 @@
 		0126ECFF1B8C4E8100EC85C1 /* TimeLineViewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECE51B8C4E8100EC85C1 /* TimeLineViewControl.m */; };
 		0126ED0D1B8C4EE400EC85C1 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED011B8C4EE400EC85C1 /* AboutViewController.m */; };
 		0126ED0E1B8C4EE400EC85C1 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED031B8C4EE400EC85C1 /* FamilyViewController.m */; };
-		0126ED0F1B8C4EE400EC85C1 /* OrderFormDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED051B8C4EE400EC85C1 /* OrderFormDetailController.m */; };
-		0126ED101B8C4EE400EC85C1 /* OrderFormDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0126ED061B8C4EE400EC85C1 /* OrderFormDetailController.xib */; };
-		0126ED111B8C4EE400EC85C1 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED081B8C4EE400EC85C1 /* OrderTableViewController.m */; };
-		0126ED121B8C4EE400EC85C1 /* QCListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED0A1B8C4EE400EC85C1 /* QCListViewController.m */; };
 		0126ED131B8C4EE400EC85C1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED0C1B8C4EE400EC85C1 /* SettingViewController.m */; };
 		0126ED231B8C4F1200EC85C1 /* QCSlideSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED1E1B8C4F1200EC85C1 /* QCSlideSwitchView.m */; };
 		0126ED471B8C547000EC85C1 /* CommonRemoteHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ED461B8C547000EC85C1 /* CommonRemoteHelper.m */; };
@@ -84,6 +80,15 @@
 		01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE561BA0162900BF41EF /* QueryAllEvaluationController.m */; };
 		01E4BE5B1BA031E000BF41EF /* ServiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */; };
 		01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */; };
+		01EB28661BA1192C00937412 /* OrderFormDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28601BA1192C00937412 /* OrderFormDetailController.m */; };
+		01EB28671BA1192C00937412 /* OrderFormDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB28611BA1192C00937412 /* OrderFormDetailController.xib */; };
+		01EB28681BA1192C00937412 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28631BA1192C00937412 /* OrderTableViewController.m */; };
+		01EB28691BA1192C00937412 /* QCListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28651BA1192C00937412 /* QCListViewController.m */; };
+		01EB286D1BA119CC00937412 /* CancelOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB286B1BA119CC00937412 /* CancelOrderController.m */; };
+		01EB286E1BA119CC00937412 /* CancelOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB286C1BA119CC00937412 /* CancelOrderController.xib */; };
+		01EB28721BA11CDB00937412 /* EvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28701BA11CDB00937412 /* EvaluationController.m */; };
+		01EB28731BA11CDB00937412 /* EvaluationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB28711BA11CDB00937412 /* EvaluationController.xib */; };
+		01EB28761BA16CB900937412 /* HealthServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28751BA16CB900937412 /* HealthServicesController.m */; };
 		01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF931B7C347800665D87 /* HomeViewController.m */; };
 		01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF941B7C347800665D87 /* HomeViewController.xib */; };
 		01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF981B7C347800665D87 /* SQCollectionCell.xib */; };
@@ -229,13 +234,6 @@
 		0126ED011B8C4EE400EC85C1 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		0126ED021B8C4EE400EC85C1 /* FamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyViewController.h; sourceTree = "<group>"; };
 		0126ED031B8C4EE400EC85C1 /* FamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyViewController.m; sourceTree = "<group>"; };
-		0126ED041B8C4EE400EC85C1 /* OrderFormDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFormDetailController.h; sourceTree = "<group>"; };
-		0126ED051B8C4EE400EC85C1 /* OrderFormDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFormDetailController.m; sourceTree = "<group>"; };
-		0126ED061B8C4EE400EC85C1 /* OrderFormDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderFormDetailController.xib; sourceTree = "<group>"; };
-		0126ED071B8C4EE400EC85C1 /* OrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewController.h; sourceTree = "<group>"; };
-		0126ED081B8C4EE400EC85C1 /* OrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewController.m; sourceTree = "<group>"; };
-		0126ED091B8C4EE400EC85C1 /* QCListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCListViewController.h; sourceTree = "<group>"; };
-		0126ED0A1B8C4EE400EC85C1 /* QCListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCListViewController.m; sourceTree = "<group>"; };
 		0126ED0B1B8C4EE400EC85C1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		0126ED0C1B8C4EE400EC85C1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		0126ED1D1B8C4F1200EC85C1 /* QCSlideSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCSlideSwitchView.h; sourceTree = "<group>"; };
@@ -312,6 +310,21 @@
 		01E4BE581BA031E000BF41EF /* ServiceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceDetailCell.h; sourceTree = "<group>"; };
 		01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceDetailCell.m; sourceTree = "<group>"; };
 		01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceDetailCell.xib; sourceTree = "<group>"; };
+		01EB285F1BA1192C00937412 /* OrderFormDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFormDetailController.h; sourceTree = "<group>"; };
+		01EB28601BA1192C00937412 /* OrderFormDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFormDetailController.m; sourceTree = "<group>"; };
+		01EB28611BA1192C00937412 /* OrderFormDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderFormDetailController.xib; sourceTree = "<group>"; };
+		01EB28621BA1192C00937412 /* OrderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTableViewController.h; sourceTree = "<group>"; };
+		01EB28631BA1192C00937412 /* OrderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTableViewController.m; sourceTree = "<group>"; };
+		01EB28641BA1192C00937412 /* QCListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCListViewController.h; sourceTree = "<group>"; };
+		01EB28651BA1192C00937412 /* QCListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCListViewController.m; sourceTree = "<group>"; };
+		01EB286A1BA119CC00937412 /* CancelOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelOrderController.h; sourceTree = "<group>"; };
+		01EB286B1BA119CC00937412 /* CancelOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelOrderController.m; sourceTree = "<group>"; };
+		01EB286C1BA119CC00937412 /* CancelOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CancelOrderController.xib; sourceTree = "<group>"; };
+		01EB286F1BA11CDB00937412 /* EvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationController.h; sourceTree = "<group>"; };
+		01EB28701BA11CDB00937412 /* EvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationController.m; sourceTree = "<group>"; };
+		01EB28711BA11CDB00937412 /* EvaluationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationController.xib; sourceTree = "<group>"; };
+		01EB28741BA16CB900937412 /* HealthServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthServicesController.h; sourceTree = "<group>"; };
+		01EB28751BA16CB900937412 /* HealthServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthServicesController.m; sourceTree = "<group>"; };
 		01ECDF921B7C347800665D87 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		01ECDF931B7C347800665D87 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		01ECDF941B7C347800665D87 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -717,6 +730,26 @@
 			path = PayCells;
 			sourceTree = "<group>";
 		};
+		01EB285E1BA1192C00937412 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				01EB285F1BA1192C00937412 /* OrderFormDetailController.h */,
+				01EB28601BA1192C00937412 /* OrderFormDetailController.m */,
+				01EB28611BA1192C00937412 /* OrderFormDetailController.xib */,
+				01EB28621BA1192C00937412 /* OrderTableViewController.h */,
+				01EB28631BA1192C00937412 /* OrderTableViewController.m */,
+				01EB28641BA1192C00937412 /* QCListViewController.h */,
+				01EB28651BA1192C00937412 /* QCListViewController.m */,
+				01EB286A1BA119CC00937412 /* CancelOrderController.h */,
+				01EB286B1BA119CC00937412 /* CancelOrderController.m */,
+				01EB286C1BA119CC00937412 /* CancelOrderController.xib */,
+				01EB286F1BA11CDB00937412 /* EvaluationController.h */,
+				01EB28701BA11CDB00937412 /* EvaluationController.m */,
+				01EB28711BA11CDB00937412 /* EvaluationController.xib */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		01ECDF911B7C347800665D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +759,8 @@
 				D23A12D51B8D683D000365AE /* CheckSelfViewController.h */,
 				D23A12D61B8D683D000365AE /* CheckSelfViewController.m */,
 				D23A12D71B8D683D000365AE /* CheckSelfViewController.xib */,
+				01EB28741BA16CB900937412 /* HealthServicesController.h */,
+				01EB28751BA16CB900937412 /* HealthServicesController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -757,17 +792,11 @@
 		01ECDF9E1B7C3EBF00665D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01EB285E1BA1192C00937412 /* Services */,
 				0126ED001B8C4EE400EC85C1 /* AboutViewController.h */,
 				0126ED011B8C4EE400EC85C1 /* AboutViewController.m */,
 				0126ED021B8C4EE400EC85C1 /* FamilyViewController.h */,
 				0126ED031B8C4EE400EC85C1 /* FamilyViewController.m */,
-				0126ED041B8C4EE400EC85C1 /* OrderFormDetailController.h */,
-				0126ED051B8C4EE400EC85C1 /* OrderFormDetailController.m */,
-				0126ED061B8C4EE400EC85C1 /* OrderFormDetailController.xib */,
-				0126ED071B8C4EE400EC85C1 /* OrderTableViewController.h */,
-				0126ED081B8C4EE400EC85C1 /* OrderTableViewController.m */,
-				0126ED091B8C4EE400EC85C1 /* QCListViewController.h */,
-				0126ED0A1B8C4EE400EC85C1 /* QCListViewController.m */,
 				0126ED0B1B8C4EE400EC85C1 /* SettingViewController.h */,
 				0126ED0C1B8C4EE400EC85C1 /* SettingViewController.m */,
 				01ECDFCB1B7C45B200665D87 /* ProfileViewController.h */,
@@ -1244,9 +1273,10 @@
 				01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */,
 				D2F744B01B7D7E7F006AC23D /* RootViewController.xib in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
+				01EB28731BA11CDB00937412 /* EvaluationController.xib in Resources */,
 				D23A12D91B8D683D000365AE /* CheckSelfViewController.xib in Resources */,
+				01EB28671BA1192C00937412 /* OrderFormDetailController.xib in Resources */,
 				D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */,
-				0126ED101B8C4EE400EC85C1 /* OrderFormDetailController.xib in Resources */,
 				01F227E91B7B3E1400ED4AFB /* LaunchScreen.xib in Resources */,
 				D2F744AE1B7D7E7F006AC23D /* RegistViewController.xib in Resources */,
 				01ED08BD1B84706B00115E3A /* HeartCell.xib in Resources */,
@@ -1264,6 +1294,7 @@
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
 				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
 				01E4BE511B9FEA2800BF41EF /* PayButtonCell.xib in Resources */,
+				01EB286E1BA119CC00937412 /* CancelOrderController.xib in Resources */,
 				0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
@@ -1289,7 +1320,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				01F0D0191B8D99B300EF3238 /* HMCommonCell.m in Sources */,
+				01EB28661BA1192C00937412 /* OrderFormDetailController.m in Sources */,
 				0126EDAC1B8C6E2600EC85C1 /* MTDateHelper.m in Sources */,
+				01EB28761BA16CB900937412 /* HealthServicesController.m in Sources */,
 				01F0D0091B8D478D00EF3238 /* MTSlipPageViewController.m in Sources */,
 				01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */,
 				01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */,
@@ -1300,8 +1333,10 @@
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
 				01FEE2B41B9BE213007C4641 /* OrderDetailViewController.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
+				01EB28681BA1192C00937412 /* OrderTableViewController.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
+				01EB286D1BA119CC00937412 /* CancelOrderController.m in Sources */,
 				D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */,
 				0126ED0D1B8C4EE400EC85C1 /* AboutViewController.m in Sources */,
 				0128A8C21B9ED064002B14E2 /* PayViewController.m in Sources */,
@@ -1333,12 +1368,12 @@
 				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
 				D23A12D81B8D683D000365AE /* CheckSelfViewController.m in Sources */,
-				0126ED111B8C4EE400EC85C1 /* OrderTableViewController.m in Sources */,
 				0126ECF11B8C4E8100EC85C1 /* MJRefreshFooterView.m in Sources */,
 				D2F744AF1B7D7E7F006AC23D /* RootViewController.m in Sources */,
 				01F2283D1B7B465800ED4AFB /* UIView+Extension.m in Sources */,
 				0126ECF01B8C4E8100EC85C1 /* MJRefreshConst.m in Sources */,
 				01F228311B7B45DD00ED4AFB /* MTNewfeatureViewController.m in Sources */,
+				01EB28721BA11CDB00937412 /* EvaluationController.m in Sources */,
 				D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */,
 				0126ED9C1B8C6DB600EC85C1 /* ServiceListViewController.m in Sources */,
 				0126ED0E1B8C4EE400EC85C1 /* FamilyViewController.m in Sources */,
@@ -1365,7 +1400,6 @@
 				01ECDFC01B7C402100665D87 /* HMCommonSwitchItem.m in Sources */,
 				0126ECF91B8C4E8100EC85C1 /* MASLayoutConstraint.m in Sources */,
 				0126ED7E1B8C57A700EC85C1 /* AFURLConnectionOperation.m in Sources */,
-				0126ED0F1B8C4EE400EC85C1 /* OrderFormDetailController.m in Sources */,
 				01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */,
 				0126ECF71B8C4E8100EC85C1 /* MASConstraint.m in Sources */,
 				0126ECF41B8C4E8100EC85C1 /* UIScrollView+MJRefresh.m in Sources */,
@@ -1385,7 +1419,6 @@
 				0126ECF61B8C4E8100EC85C1 /* MASCompositeConstraint.m in Sources */,
 				0126ED231B8C4F1200EC85C1 /* QCSlideSwitchView.m in Sources */,
 				0126ED8C1B8C6D4200EC85C1 /* ServiceCell.m in Sources */,
-				0126ED121B8C4EE400EC85C1 /* QCListViewController.m in Sources */,
 				0126ECF51B8C4E8100EC85C1 /* UIView+MJExtension.m in Sources */,
 				0128A8BE1B9EC7D3002B14E2 /* OrderSubmitCell.m in Sources */,
 				0126ED7A1B8C57A700EC85C1 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1394,6 +1427,7 @@
 				0126ECE91B8C4E8100EC85C1 /* MJIvar.m in Sources */,
 				0126ECED1B8C4E8100EC85C1 /* NSObject+MJKeyValue.m in Sources */,
 				01F0D0231B8DB5D000EF3238 /* CouponsCell.m in Sources */,
+				01EB28691BA1192C00937412 /* QCListViewController.m in Sources */,
 				0126ECFE1B8C4E8100EC85C1 /* View+MASAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
