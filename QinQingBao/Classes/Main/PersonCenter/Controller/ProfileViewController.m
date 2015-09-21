@@ -14,6 +14,8 @@
 #import "SettingViewController.h"
 #import "OrderTableViewController.h"
 #import "AccountViewController.h"
+#import "PersonalDataViewController.h"
+
 
 #define imageHeight 120
 
@@ -77,10 +79,6 @@
 {
     self.title = @"个人中心";
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    //  self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"default_common_navibar_prev_normal.png"
-    //                                                                 highImageName:@"default_common_navibar_prev_highlighted.png"
-    //                                                                        target:self action:@selector(back)];
     
     _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pc_bg.png"]];
     _zoomImageview.frame = CGRectMake(0, -imageHeight, self.view.width, imageHeight);
@@ -161,11 +159,12 @@
     
     //重置数据源
     [self setupGroup0];
-    [self setupGroup4];
+    [self setupGroup1];
     [self setupGroup2];
     [self setupGroup3];
-    [self setupGroup1];
-    //    [self setupFooter];
+    [self setupGroup4];
+    [self setupGroup5];
+    [self setupFooter];
     
     //刷新表格
     [self.tableView reloadData];
@@ -182,7 +181,7 @@
     [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    //    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
     logout.height = 50;
@@ -190,7 +189,24 @@
     self.tableView.tableFooterView = logout;
     
 }
+
 - (void)setupGroup0
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *myData;
+    
+    // 2.设置组的所有行数据
+    myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_accout.png"];
+    myData.destVcClass = [PersonalDataViewController class];
+    myData.operation = ^{
+    };
+    group.items = @[myData];
+}
+
+- (void)setupGroup1
 {
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -206,7 +222,7 @@
     group.items = @[newFriend];
 }
 
-- (void)setupGroup4
+- (void)setupGroup2
 {
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -223,7 +239,7 @@
     group.items = @[newFriend];
 }
 
-- (void)setupGroup1
+- (void)setupGroup3
 {
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -235,7 +251,7 @@
     group.items = @[collect];
 }
 
-- (void)setupGroup2
+- (void)setupGroup4
 {
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -247,7 +263,7 @@
     group.items = @[offline];
 }
 
-- (void)setupGroup3
+- (void)setupGroup5
 {
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -261,25 +277,48 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == self.groups.count -1)
-        return 0;
-    else
-        return 10;
+    return 8;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+# pragma  mark 退出当前账号
+
+-(void)loginOut
 {
-    UIView *v = [[UIView alloc] init];
-    v.backgroundColor = [UIColor clearColor];
-    return v;
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出登录"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:@"确定退出当前账号？"
+                                                    otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
 }
 
-
-# pragma  mark 返回上一界面
-
--(void)back
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(buttonIndex == 0)
+    {
+        //退出登录时候需要先清空系统缓存
+        
+        //        //退出登录时候需要先清空系统缓存
+        //        [SharedAppUtil defaultCommonUtil].userInfor = nil;
+        //        [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userInfor key:User_Archiver_Key filePath:User_Archiver_Path];
+        //
+        //        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.loginview];
+        //
+        //        [self presentViewController:nav animated:YES completion:nil];
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : @"dd",
+                                                                   @"client" : @"iOS",
+                                                                   @"key" : @"key"}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         [HUD removeFromSuperview];
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                         [MTControllerChooseTool setRootViewController];
+                                     }];
+        
+    }
 }
-
 @end

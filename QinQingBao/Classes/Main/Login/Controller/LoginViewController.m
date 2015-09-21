@@ -28,7 +28,7 @@
     
     self.accountText.delegate = self;
     self.passwordText.delegate = self;
-   
+    
     self.navigationItem.title = @"登陆";
 }
 
@@ -75,9 +75,29 @@
 /**
  *  登录
  */
-- (IBAction)loginNow:(id)sender {
-    [self.view endEditing:YES];
+- (IBAction)loginNow:(id)sender
+{
     [MTControllerChooseTool setRootViewController];
+    return;
+    if (![self checkForm])
+    {
+        [NoticeHelper AlertShow:@"请输入完整信息" view:self.view];
+    }
+    else
+    {
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
+                                                                  @"password" : self.passwordText.text,
+                                                                  @"client" : @"iOS"}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         [HUD removeFromSuperview];
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                         [MTControllerChooseTool setRootViewController];
+                                     }];
+    }
 }
 
 /**
@@ -85,7 +105,7 @@
  */
 - (IBAction)regist:(id)sender {
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];
-      [self.navigationController pushViewController:registVC animated:YES];
+    [self.navigationController pushViewController:registVC animated:YES];
 }
 
 /**
@@ -94,6 +114,42 @@
 - (IBAction)backPassword:(id)sender {
     NSLog(@"找回密码");
 }
+
+/**
+ * 检查表单是否填写正确
+ */
+-(BOOL)checkForm
+{
+    if (self.accountText.text.length == 0)
+        return NO;
+    else if (self.passwordText.text.length == 0)
+        return NO;
+    else
+        return YES;
+}
+
+#pragma UITextField delegate method
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.accountText)
+    {
+        NSUInteger lengthOfString = string.length;
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {//只允许数字输入
+            unichar character = [string characterAtIndex:loopIndex];
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57) return NO; // 57 unichar for 9
+        }
+    }
+    NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+    if (textField == self.accountText)
+    {
+        if (proposedNewLength > 11)
+            return NO;//限制长度
+    }
+    return YES;
+}
+
 
 #pragma mark 解决键盘遮挡文本框
 -(void)keyBoardWillShow:(NSNotification *)notification

@@ -31,6 +31,16 @@
 
 @implementation MTSMSHelper
 
++(MTSMSHelper *)sharedInstance
+{
+    static MTSMSHelper *smsHelper;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        smsHelper = [[MTSMSHelper alloc] init];
+    });
+    return smsHelper;
+}
+
 /**
  * 验证是否通过
  **/

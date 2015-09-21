@@ -19,6 +19,10 @@
 /** 点击确定发送的回调函数 */
 @property (nonatomic, copy) void (^sureSendSMS)();
 
+
+
++(MTSMSHelper *)sharedInstance;
+
 /**
  * 获取支持的地区列表
  **/

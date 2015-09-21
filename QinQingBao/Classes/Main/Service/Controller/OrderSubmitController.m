@@ -18,6 +18,10 @@
     NSString* timestr;
     NSString* minstr;
     
+    BOOL haveObj;
+    
+    //服务时间
+    NSString *selectedTimestr;
 }
 
 @end
@@ -33,6 +37,15 @@
     [self initTableviewSkin];
     
     [self initDatePickView];
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //注册键盘通知
+    [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:@"selected" object:nil];
 }
 
 /**
@@ -56,6 +69,18 @@
 -(void)initNavigation
 {
     self.title = @"提交订单";
+    haveObj = NO;
+    
+}
+
+/**
+ *  处理键盘遮挡文本
+ */
+-(void)selectedObjectHanlder:(NSNotification *)notification
+{
+    haveObj = YES;
+    //    [self.tableView reloadSections:<#(NSIndexSet *)#> withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView reloadData];
 }
 
 #pragma mark - datePicker data source
@@ -175,7 +200,7 @@ numberOfRowsInComponent:(NSInteger)component
     switch (section)
     {
         case 0:
-            return 2;
+            return haveObj ? 2 : 1;
             break;
         case 1:
             return 1;
@@ -206,7 +231,10 @@ numberOfRowsInComponent:(NSInteger)component
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    if (indexPath.section == 0 && indexPath.row == 1)
+        return 90;
+    else
+        return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -214,22 +242,38 @@ numberOfRowsInComponent:(NSInteger)component
     NSString *listViewCellId = @"cell";
     NSString *content = @"contentCell";
     NSString *submit = @"submitcell";
-    
+    NSString *custum = @"serviceCusCell";
     
     UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellId];
     OrderSubmitCell *submitcell = [tableView dequeueReusableCellWithIdentifier:submit];
+    ServiceCustomCell *serviceCuscell = [tableView dequeueReusableCellWithIdentifier:custum];
     
-    if (indexPath.section == 0 && indexPath.row == 0)
+    if (indexPath.section == 0)
     {
-        if (cell == nil)
+        if (indexPath.row == 0)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
-            cell.textLabel.text = @"服务对象";
-            cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            if (cell == nil)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+                cell.textLabel.text = @"服务对象";
+                cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            return  cell;
         }
-        return  cell;
+        else
+        {
+            if (serviceCuscell == nil)
+            {
+                //服务对象
+                NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ServiceCustomCell" owner:self options:nil];
+                serviceCuscell = [nib lastObject];
+                serviceCuscell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            return  serviceCuscell;
+        }
+        
     }
     else  if (indexPath.section == 2 && indexPath.row == 0)
     {
@@ -239,7 +283,9 @@ numberOfRowsInComponent:(NSInteger)component
             cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
+        cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
         cell.textLabel.text = @"预约时间";
+        cell.detailTextLabel.text =  selectedTimestr;
         return  cell;
     }
     else  if (indexPath.section == 3)
@@ -297,6 +343,7 @@ numberOfRowsInComponent:(NSInteger)component
         }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = @"服务详情";
+        cell.detailTextLabel.text = @"";
         return  cell;
     }
     else  if (indexPath.section == 4 && indexPath.row == 0)
@@ -332,6 +379,7 @@ numberOfRowsInComponent:(NSInteger)component
     {
         if (!self.familyView)
             self.familyView = [[FamilyViewController alloc] init];
+        self.familyView.isfromOrder = YES;
         [self.navigationController pushViewController:self.familyView animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row == 0)
@@ -378,9 +426,10 @@ numberOfRowsInComponent:(NSInteger)component
                               delegate:nil
                               cancelButtonTitle:@"确定"
                               otherButtonTitles:nil];
-        [alert show];
+//        [alert show];
         
-        //        [self.tableView reloadData];
+        selectedTimestr = [NSString stringWithFormat:@"%@%@%@", daystr , timestr,minstr];
+        [self.tableView reloadData];
     }];
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
     [alertVc.view addSubview:self.datePickView];

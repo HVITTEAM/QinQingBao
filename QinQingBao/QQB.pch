@@ -27,6 +27,9 @@
 #import "CommonRemoteHelper.h"
 #import "MTDateHelper.h"
 #import "UIViewController+AOP.h"
+#import "NoticeHelper.h"
+#import "MBProgressHUD.h"
+
 
 // 屏幕尺寸
 
@@ -138,10 +141,16 @@
 #define URL_IP @"http://192.168.1.115:3000/"
 
 /***用户注册url*/
-#define URL_Register  @"http://112.91.146.107/ylserver/shop/mobile/?access_token=token&act=member&op=register"
+#define URL_Register  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=register"
 
-#define URL_Login(telnum, pwd)  [NSString stringWithFormat:@"%@loginfamily?loginnum=%@&pwd=%@",URL_IP,telnum,pwd];
+/***用户登录url*/
+#define URL_Login  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=login"
 
-#define URL_UpdatePwd(oldpwd, nowpwd, rid, tb)  [NSString stringWithFormat:@"%@updatefamilypwd?oldpwd=%@&newpwd=%@&id=%@&tb=%@",URL_IP,oldpwd,nowpwd,rid,tb];
+/***用户登出url*/
+#define URL_Logout  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=logout"
+
+/***上传头像url*/
+#define URL_UploadAvatar  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+
 
 

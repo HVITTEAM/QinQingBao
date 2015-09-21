@@ -93,7 +93,6 @@
         destVc.title = item.title;
         [self.navigationController pushViewController:destVc animated:YES];
     }
-    
     // 3.判断有无想执行的操作
     if (item.operation) {
         item.operation();

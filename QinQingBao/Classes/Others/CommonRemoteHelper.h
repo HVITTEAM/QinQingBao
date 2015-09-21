@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+typedef NS_ENUM(NSInteger, CommonRemoteType) {
+    CommonRemoteTypePost,
+    CommonRemoteTypeGet,
+};
 
 @interface CommonRemoteHelper : NSObject
 
@@ -16,5 +20,8 @@
                           success:(void (^)(NSDictionary *dict, id responseObject))success
                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-+ (void)RemoteNetworkWithPOST;
++(void)RemoteWithUrl:(NSString *)url  parameters:(id)parameters  type:(CommonRemoteType)type
+             success:(void (^)(NSDictionary *dict, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

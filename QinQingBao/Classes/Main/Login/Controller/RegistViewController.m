@@ -15,7 +15,7 @@
     NSString *btnTitle;
     
     NSTimer *timer;
-
+    
 }
 
 - (IBAction)getVerificationCode:(id)sender;
@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     //设置phoneNumText，VerNumText,passwordText代理
     self.agreementBtn.selected = YES;
@@ -85,9 +84,8 @@
  */
 - (IBAction)getVerificationCode:(id)sender
 {
-    MTSMSHelper *helper = [[MTSMSHelper alloc] init];
-    [helper getCheckcode:self.phoneNumText.text];
-    helper.sureSendSMS = ^{
+    [[MTSMSHelper sharedInstance] getCheckcode:self.phoneNumText.text];
+    [MTSMSHelper sharedInstance].sureSendSMS = ^{
         [self countdownHandler];
     };
 }
@@ -126,7 +124,8 @@
  *  阅读并同意协议
  *
  */
-- (IBAction)agreement:(id)sender {
+- (IBAction)agreement:(id)sender
+{
     self.agreementBtn.selected = !self.agreementBtn.selected;
 }
 
@@ -134,14 +133,55 @@
  *  立即进行注册
  *
  */
-- (IBAction)registNow:(id)sender {
+- (IBAction)registNow:(id)sender
+{
     
-    [self.view endEditing:YES];
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"注册成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    [alertView show];
+    if (![self checkForm])
+    {
+        [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+        return;
+    }
+    else if ([[MTSMSHelper sharedInstance] checkCode:self.phoneNumText.text] == NO)
+    {
+        [NoticeHelper AlertShow:@"验证码填写错误！" view:self.view];
+        return;
+    }
+    else
+    {
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Register parameters: @{@"username" : self.phoneNumText.text,
+                                                                     @"password" : self.passwordText.text,
+                                                                     @"password_confirm" : self.passwordText.text,
+                                                                     @"client" : @"iOS"}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"注册成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                     }];
+    }
 }
 
+
+/**
+ * 检查表单是否填写正确
+ */
+-(BOOL)checkForm
+{
+    if (self.phoneNumText.text.length == 0)
+        return NO;
+    else if (self.VerNumText.text.length == 0)
+        return NO;
+    else if (self.passwordText.text.length == 0)
+        return NO;
+    else
+        return YES;
+}
 
 #pragma UITextField delegate method
 
@@ -164,6 +204,36 @@
 {
     self.currentText= nil;
 }
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.phoneNumText || textField == self.VerNumText) {
+        NSUInteger lengthOfString = string.length;
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {//只允许数字输入
+            unichar character = [string characterAtIndex:loopIndex];
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57) return NO; // 57 unichar for 9
+        }
+    }
+    NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+    if (textField == self.phoneNumText)
+    {
+        if (proposedNewLength > 11)
+            return NO;//限制长度
+    }
+    else  if (textField == self.VerNumText)
+    {
+        if (proposedNewLength > 4)
+            return NO;//限制长度
+    }
+    else  if (textField == self.passwordText)
+    {
+        if (proposedNewLength > 20)
+            return NO;//限制长度
+    }
+    return YES;
+}
+
 
 #pragma mark about keyBoard method
 - (IBAction)sigleTapBackgrouned:(id)sender {
@@ -197,7 +267,6 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.view.bounds = CGRectMake(0, 0, MTScreenW, MTScreenH);
     }];
-    
 }
 
 

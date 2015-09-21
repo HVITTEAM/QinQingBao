@@ -83,24 +83,25 @@
         self.rightText = [[UITextField alloc] init];
         self.rightText.textColor = [UIColor lightGrayColor];
         self.rightText.font = [UIFont systemFontOfSize:15];
+        self.rightText.secureTextEntry = self.item.secureTextEntry;
         self.item.rightText = _rightText;
     }
     return _rightText;
 }
 
-
 - (UIButton *)rightBtn
 {
-    if (_rightBtn == nil) {
-        self.rightBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.rightBtn.width = 100;     self.rightBtn.height = 30;
-        [self.rightBtn setTitle:@"确认客户号" forState:UIControlStateNormal];
-        self.rightBtn.layer.borderColor = [[UIColor grayColor] CGColor];
-        [self.rightBtn.layer setMasksToBounds:YES];
-        [self.rightBtn.layer setBorderWidth:1];//设置边界的宽度
-        [self.rightBtn.layer setCornerRadius:10.0];//设置矩形四个圆角半径
+    if (_item.btn == nil) {
+        _item.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _item.btn.width = 100;    _item.btn.height = 30;
+        [_item.btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
+        [_item.btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_item.btn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [_item.btn setTitle:_item.title forState:UIControlStateNormal];
+        [_item.btn.layer setBorderWidth:1];//设置边界的宽度
+        [_item.btn.layer setCornerRadius:10.0];//设置矩形四个圆角半径
     }
-    return _rightBtn;
+    return _item.btn;
 }
 
 - (HMBadgeView *)bageView

@@ -18,10 +18,13 @@
     [super viewDidLoad];
     
     self.title = @"健康服务";
-    
     [self initTableviewSkin];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 
 /**
  *  设置tableView属性
@@ -61,6 +64,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:listViewCellstr];
         cell.textLabel.text = @"症状自查";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return cell;
 }
@@ -70,7 +74,6 @@
     if (!self.checkVC)
         self.checkVC = [[CheckSelfViewController alloc] init];
     [self.navigationController pushViewController: self.checkVC animated:YES];
-
 }
 
 

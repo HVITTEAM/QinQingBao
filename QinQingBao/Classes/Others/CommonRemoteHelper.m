@@ -44,30 +44,63 @@ static NSOperationQueue * _queue;
 //  * 请求头   (HttpHeaderFields) *
 //  * 请求正文 (数据)              *
 //  ------------------------------
-+(void)RemoteNetworkWithPOST
++(void)RemoteWithUrl:(NSString *)url  parameters:(id)parameters  type:(CommonRemoteType)type
+             success:(void (^)(NSDictionary *dict, id responseObject))success
+             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 设置回复内容信息
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
     
-    // 请求的方法
-    [manager POST:URL_Register
-       parameters:@{@"username" : @"test",
-                    @"password" : @"123456",
-                    @"password_confirm" : @"123456",
-                    @"client" : @"iOS"}
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
-              NSLog(@"%@", operation.request.allHTTPHeaderFields);
-              
-              // 服务器给我们返回的包得头部信息
-              NSLog(@"%@", operation.response);
-              
-              // 返回的数据
-              NSLog(@"%@", responseObject);
-          }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              NSLog(@"%@", error);
-          }];
+    if (type == CommonRemoteTypePost)
+    {
+        // 请求的方法
+        [manager POST:url
+           parameters:parameters
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  NSString *html = operation.responseString;
+                  NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+                  NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+                  success(dict,responseObject);
+                  
+                  // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
+                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
+                  
+                  // 服务器给我们返回的包得头部信息
+                  NSLog(@"%@", operation.response);
+                  
+                  // 返回的数据
+                  NSLog(@"%@", responseObject);
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  failure(operation,error);
+              }];
+    }
+    else if (type == CommonRemoteTypeGet)
+    {
+        // 请求的方法
+        [manager GET:url
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 NSString *html = operation.responseString;
+                 NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+                 NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+                 success(dict,responseObject);
+                 
+                 // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
+                 NSLog(@"%@", operation.request.allHTTPHeaderFields);
+                 
+                 // 服务器给我们返回的包得头部信息
+                 NSLog(@"%@", operation.response);
+                 
+                 // 返回的数据
+                 NSLog(@"%@", responseObject);
+             }
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 failure(operation,error);
+             }];
+    }
 }
 @end

@@ -98,8 +98,8 @@
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="味道很好，速度很快，赞！" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="378-U2-6Js">
-                                <rect key="frame" x="54" y="68" width="225" height="53.5"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="378-U2-6Js">
+                                <rect key="frame" x="54" y="68" width="225" height="46.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                                 <color key="textColor" red="0.2784313725" green="0.31372549020000001" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -108,6 +108,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3mJ-6L-6Pg" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" constant="10" id="0JG-yL-eua"/>
+                            <constraint firstItem="kc3-EH-y39" firstAttribute="top" secondItem="378-U2-6Js" secondAttribute="bottom" constant="15.5" id="2Ds-yx-MKM"/>
                             <constraint firstAttribute="trailing" secondItem="3n5-ln-ykb" secondAttribute="trailing" constant="10" id="2GN-zb-bgg"/>
                             <constraint firstAttribute="bottom" secondItem="3n5-ln-ykb" secondAttribute="bottom" constant="9" id="5YZ-64-xFA"/>
                             <constraint firstItem="3n5-ln-ykb" firstAttribute="top" secondItem="kc3-EH-y39" secondAttribute="bottom" constant="7" id="9aG-uA-fhl"/>
@@ -126,12 +127,11 @@
                             <constraint firstAttribute="trailing" secondItem="aPg-Id-3bM" secondAttribute="trailing" constant="10" id="j4J-FR-465"/>
                             <constraint firstAttribute="trailing" secondItem="3mJ-6L-6Pg" secondAttribute="trailing" id="k21-Ri-qO6"/>
                             <constraint firstItem="eyy-Ij-mhP" firstAttribute="top" secondItem="WPt-e7-iBl" secondAttribute="bottom" constant="8" symbolic="YES" id="kCu-tw-iVf"/>
-                            <constraint firstItem="378-U2-6Js" firstAttribute="top" secondItem="9cz-cb-74C" secondAttribute="bottom" id="mLz-Zb-Fef"/>
+                            <constraint firstItem="378-U2-6Js" firstAttribute="top" secondItem="9cz-cb-74C" secondAttribute="bottom" constant="-1" id="mLz-Zb-Fef"/>
                             <constraint firstItem="kc3-EH-y39" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" id="osF-yC-Xo9"/>
                             <constraint firstItem="pJH-DH-JSm" firstAttribute="leading" secondItem="ZB2-3N-JG3" secondAttribute="trailing" constant="10" id="paC-iU-kbI"/>
                             <constraint firstItem="pJH-DH-JSm" firstAttribute="top" secondItem="Im5-oL-UAR" secondAttribute="top" constant="8" id="qak-7E-MqP"/>
                             <constraint firstAttribute="trailing" secondItem="WPt-e7-iBl" secondAttribute="trailing" id="tDS-az-JdP"/>
-                            <constraint firstItem="kc3-EH-y39" firstAttribute="top" secondItem="WPt-e7-iBl" secondAttribute="bottom" constant="94" id="tqB-aF-bWR"/>
                             <constraint firstItem="3mJ-6L-6Pg" firstAttribute="top" secondItem="kc3-EH-y39" secondAttribute="bottom" constant="7" id="zue-AR-3xI"/>
                         </constraints>
                     </view>

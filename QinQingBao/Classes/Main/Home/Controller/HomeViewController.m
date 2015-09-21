@@ -29,8 +29,6 @@ static float cellWidth = 66;
     [self initCollectionView];
     
     [self initImagePlayer];
-    
-    [CommonRemoteHelper RemoteNetworkWithPOST];
 }
 
 

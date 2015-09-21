@@ -12,6 +12,9 @@
 
 /** 文本输入框 */
 @property (strong, nonatomic) UITextField *rightText;
+
+@property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;       // default is NO
+
 /** 图标 */
 @property (nonatomic, copy) NSString *icon;
 /** 标题 */
@@ -33,6 +36,8 @@
 @property (nonatomic, copy) void (^switchChangeBlock)(UISwitch *switchBtn);
 
 @property (nonatomic, copy) void (^buttonClickBlock)(UIButton *btn);
+
+@property (nonatomic, retain) UIButton *btn;
 
 
 + (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon;

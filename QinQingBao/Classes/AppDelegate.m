@@ -26,7 +26,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [SMS_SDK registerApp:appKey withSecret:appSecret];
-
+    
     // 1.创建窗口
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
@@ -38,6 +38,9 @@
     RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
     self.window.rootViewController = nav;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    
     return YES;
 }
 

@@ -35,6 +35,8 @@
 {
     self.title = @"我的家属";
     self.view.backgroundColor = HMGlobalBg;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
 }
 
 
@@ -50,7 +52,7 @@
     //重置数据源
     [self setupGroup0];
     
-//    [self setPlaceHolderview];
+    //    [self setPlaceHolderview];
     
     //刷新表格
     [self.tableView reloadData];
@@ -72,8 +74,15 @@
     
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@"pc_accout.png"];
-    // newFriend.destVcClass = [MyAccountViewController class];
+    version.destVcClass = [FamilyInfoViewController class];
+    
+    __weak typeof(HMCommonArrowItem) *weakSelf = version;
     version.operation = ^{
+        if(self.isfromOrder)
+        {
+            [MTNotificationCenter postNotificationName:@"selected" object:weakSelf userInfo:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     };
     
     HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"老王" icon:@"app.png"];
@@ -82,6 +91,15 @@
     
     group.items = @[version,help,advice];
 }
+
+-(void)addHandler:(id)sender
+{
+    if (self.addView == nil) {
+        self.addView = [[AddMemberViewController alloc] init];
+    }
+    [self.navigationController pushViewController:self.addView animated:YES];
+}
+
 
 
 @end
