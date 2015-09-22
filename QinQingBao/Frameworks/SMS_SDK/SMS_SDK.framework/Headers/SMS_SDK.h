@@ -13,7 +13,7 @@
 #import <MessageUI/MessageUI.h>
 
 /**
- * @brief 核心类（Core class）v1.0.8
+ * @brief 核心类（Core class）v1.1.0
  */
 @interface SMS_SDK : NSObject <MFMessageComposeViewControllerDelegate>
 
@@ -59,6 +59,20 @@
  */
 + (void)getVerificationCodeBySMSWithPhone:(NSString *)phoneNumber
                                      zone:(NSString *)zone
+                                   result:(GetVerificationCodeResultHandler)result;
+
+/**
+ *  @brief 获取验证码(Get verification code by SMS)
+ *
+ *  @from  v1.1.0
+ *  @param phoneNumber       电话号码(The phone number)
+ *  @param zone              区域号，不要加"+"号(Area code)
+ *  @param customIdentifier  自定义短信模板标识 该标识需从官网http://wiki.mob.com/?p=2803上申请，审核通过后获得。(Custom model of SMS.  The identifier can get it  from http://wiki.mob.com/?p=2803  when the application had approved)
+ *  @param result            请求结果回调(Results of the request)
+ */
++ (void)getVerificationCodeBySMSWithPhone:(NSString *)phoneNumber
+                                     zone:(NSString *)zone
+                         customIdentifier:(NSString *)customIdentifier
                                    result:(GetVerificationCodeResultHandler)result;
 
 /**
@@ -137,5 +151,6 @@
 +(void)getVerifyCodeByPhoneNumber:(NSString*) phone
                           AndZone:(NSString*) zone
                            result:(GetVerifyCodeBlock)result __deprecated;
+
 
 @end

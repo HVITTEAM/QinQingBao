@@ -85,7 +85,7 @@
 
 -(void)doneClickHandler
 {
-    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

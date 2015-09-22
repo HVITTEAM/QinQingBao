@@ -84,8 +84,10 @@
  */
 - (IBAction)getVerificationCode:(id)sender
 {
+    [self.view endEditing:YES];
     [[MTSMSHelper sharedInstance] getCheckcode:self.phoneNumText.text];
     [MTSMSHelper sharedInstance].sureSendSMS = ^{
+        [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
         [self countdownHandler];
     };
 }
@@ -135,38 +137,48 @@
  */
 - (IBAction)registNow:(id)sender
 {
-    
     if (![self checkForm])
     {
         [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
         return;
     }
-    else if ([[MTSMSHelper sharedInstance] checkCode:self.phoneNumText.text] == NO)
-    {
-        [NoticeHelper AlertShow:@"验证码填写错误！" view:self.view];
-        return;
-    }
     else
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Register parameters: @{@"username" : self.phoneNumText.text,
+        
+        [CommonRemoteHelper RemoteWithUrl:URL_Register parameters: @{@"mobile" : self.phoneNumText.text,
                                                                      @"password" : self.passwordText.text,
                                                                      @"password_confirm" : self.passwordText.text,
-                                                                     @"client" : @"iOS"}
+                                                                     @"code" : self.VerNumText.text,
+                                                                     @"client" : @"ios"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                         
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"注册成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
                                          
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             [NoticeHelper AlertShow:@"注册成功！" view:self.view];
+                                             NSDictionary *di = [dict objectForKey:@"datas"];
+                                             UserModel *vo = [[UserModel alloc] init];
+                                             vo.member_id = (NSNumber*)[di objectForKey:@"member_id"];
+                                             vo.key = [NSString stringWithFormat:@"%@",[di objectForKey:@"key"]];
+                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
+                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
+                                             [MTControllerChooseTool setRootViewController];
+                                         }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
                                          [HUD removeFromSuperview];
+                                         [NoticeHelper AlertShow:@"注册失败!" view:self.view];
                                      }];
     }
 }
-
 
 /**
  * 检查表单是否填写正确

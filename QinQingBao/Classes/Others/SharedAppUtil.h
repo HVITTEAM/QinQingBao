@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "UserModel.h"
 
 @interface SharedAppUtil : NSObject
 
 +(SharedAppUtil *)defaultCommonUtil;
+
+@property (nonatomic, retain) UserModel *userVO;
+
 @end

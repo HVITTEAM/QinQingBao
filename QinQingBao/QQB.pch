@@ -29,6 +29,10 @@
 #import "UIViewController+AOP.h"
 #import "NoticeHelper.h"
 #import "MBProgressHUD.h"
+#import "SharedAppUtil.h"
+#import "ArchiverCacheHelper.h"
+
+
 
 
 // 屏幕尺寸

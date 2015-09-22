@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <SMS_SDK/SMS_SDK.h>
-#import "RootViewController.h"
+#import "UserModel.h"
 
 /**
  *  SMS appkey
@@ -34,13 +34,13 @@
     // 2.显示窗口(成为主窗口)
     [self.window makeKeyAndVisible];
     
-    // 3.设置窗口的根控制器
-    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
-    self.window.rootViewController = nav;
+    UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
+    if (vo)
+        [MTControllerChooseTool setRootViewController];
+    else
+        [MTControllerChooseTool setLoginViewController];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    
     return YES;
 }
 

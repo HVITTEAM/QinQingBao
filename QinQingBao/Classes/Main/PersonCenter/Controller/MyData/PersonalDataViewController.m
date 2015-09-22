@@ -46,6 +46,8 @@
                     @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : @"杭州市西湖区计量大厦1212号"},
                     nil];
     [self initTableviewSkin];
+    
+    [self getDataProvider];
 }
 
 /**
@@ -165,6 +167,11 @@
         //        else if(buttonIndex==2)
         //            [self selectExistingPictureOrVideo];
     }
+}
+
+-(void)getDataProvider
+{
+    [self.tableView reloadData];
 }
 
 @end

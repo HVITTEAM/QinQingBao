@@ -19,4 +19,9 @@
  *  设置根控制器
  */
 + (void)setRootViewController;
+
+/**
+ *  设置登陆控制器
+ */
++ (void)setLoginViewController;
 @end

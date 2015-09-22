@@ -14,8 +14,8 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 
 #import "VenderMannager.h"
-//#import "YSPlayerController.h"
-//#import "YSHTTPClient.h"
+#import "YSPlayerController.h"
+#import "YSHTTPClient.h"
 
 
 @implementation VenderMannager

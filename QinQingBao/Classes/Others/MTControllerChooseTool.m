@@ -11,6 +11,7 @@
 #import "HealthMonitorViewController.h"
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
+#import "RootViewController.h"
 
 @implementation MTControllerChooseTool
 
@@ -78,6 +79,17 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
     window.rootViewController = tabBarController;
+}
+
++ (void)setLoginViewController
+{
+    // 3.设置窗口的根控制器
+    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
+    // 切换控制器
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    //将其设置为当前窗口的跟视图控制器
+    window.rootViewController = nav;
 }
 
 

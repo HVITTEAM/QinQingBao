@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010414301BB1268D006EC41B /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0104142C1BB1268D006EC41B /* SMS_SDKLocalizable.strings */; settings = {ASSET_TAGS = (); }; };
+		010414311BB1268D006EC41B /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104142E1BB1268D006EC41B /* SMS_SDK.framework */; settings = {ASSET_TAGS = (); }; };
+		010414331BB126B9006EC41B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 010414321BB126B9006EC41B /* libz.tbd */; };
+		010414351BB126CE006EC41B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 010414341BB126CE006EC41B /* libicucore.tbd */; };
+		0104143C1BB136CD006EC41B /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104143B1BB136CD006EC41B /* libiconv.2.4.0.tbd */; };
+		0104143E1BB136F6006EC41B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104143D1BB136F6006EC41B /* libstdc++.6.0.9.tbd */; };
+		010414401BB13701006EC41B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0104143F1BB13701006EC41B /* OpenAL.framework */; };
+		010414621BB137DA006EC41B /* EzvizOpenSDKBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0104145F1BB137DA006EC41B /* EzvizOpenSDKBundle.bundle */; settings = {ASSET_TAGS = (); }; };
+		010414631BB137DA006EC41B /* libEzvizOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 010414601BB137DA006EC41B /* libEzvizOpenSDK.a */; settings = {ASSET_TAGS = (); }; };
+		010414641BB137DA006EC41B /* libzbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 010414611BB137DA006EC41B /* libzbar.a */; settings = {ASSET_TAGS = (); }; };
+		010414671BB15999006EC41B /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 010414661BB15999006EC41B /* UserModel.m */; settings = {ASSET_TAGS = (); }; };
 		0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECA91B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		0126ECE71B8C4E8100EC85C1 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECAC1B8C4E8100EC85C1 /* MJConst.m */; };
 		0126ECE81B8C4E8100EC85C1 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECAF1B8C4E8100EC85C1 /* MJFoundation.m */; };
@@ -72,21 +83,12 @@
 		0180A2C91BA8125100D26866 /* DetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0180A2C71BA8125100D26866 /* DetailInfoViewController.xib */; };
 		01BA2D5F1B9EC70C00A2C7BD /* ServiceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA2D5D1B9EC70C00A2C7BD /* ServiceHeadView.m */; };
 		01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BA2D5E1B9EC70C00A2C7BD /* ServiceHeadView.xib */; };
-		01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01D9DEAB1B7DBF840087F80E /* SMS_SDKLocalizable.strings */; };
-		01D9DEB01B7DBF840087F80E /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEAD1B7DBF840087F80E /* SMS_SDK.framework */; };
-		01D9DEB21B7DC3C70087F80E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB11B7DC3C70087F80E /* libicucore.dylib */; };
-		01D9DEB41B7DC3CE0087F80E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB31B7DC3CE0087F80E /* libz.dylib */; };
 		01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB51B7DC3D70087F80E /* MessageUI.framework */; };
 		01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEB81B7DC74B0087F80E /* MTSMSHelper.m */; };
 		01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEBB1B7DC7C00087F80E /* ArchiverCacheHelper.m */; };
 		01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEBD1B7DC7C00087F80E /* SharedAppUtil.m */; };
 		01DD67201BAFDA6D001D0883 /* UpdatePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DD671F1BAFDA6D001D0883 /* UpdatePwdViewController.m */; };
 		01DD67241BAFF20A001D0883 /* TextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DD67231BAFF20A001D0883 /* TextFieldViewController.m */; };
-		01E08DCA1BABFA1C00E00432 /* libEzvizOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E08DC91BABFA1C00E00432 /* libEzvizOpenSDK.a */; };
-		01E08DCC1BABFA3200E00432 /* EzvizOpenSDKBundle.bundle in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E08DCB1BABFA3200E00432 /* EzvizOpenSDKBundle.bundle */; };
-		01E08DD21BABFA6900E00432 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E08DD11BABFA6900E00432 /* OpenAL.framework */; };
-		01E08DD41BABFA8A00E00432 /* libiconv.2.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E08DD31BABFA8A00E00432 /* libiconv.2.4.0.dylib */; };
-		01E08DD61BABFA9600E00432 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01E08DD51BABFA9600E00432 /* libstdc++.6.0.9.dylib */; };
 		01E08DDA1BABFBC200E00432 /* VenderMannager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E08DD91BABFBC200E00432 /* VenderMannager.m */; };
 		01E4BE4B1B9FDF3500BF41EF /* PayHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4BE491B9FDF3500BF41EF /* PayHeadCell.m */; };
 		01E4BE4C1B9FDF3500BF41EF /* PayHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4BE4A1B9FDF3500BF41EF /* PayHeadCell.xib */; };
@@ -189,6 +191,40 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0104142D1BB1268D006EC41B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
+		0104142E1BB1268D006EC41B /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
+		0104142F1BB1268D006EC41B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
+		010414321BB126B9006EC41B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		010414341BB126CE006EC41B /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		0104143B1BB136CD006EC41B /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
+		0104143D1BB136F6006EC41B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		0104143F1BB13701006EC41B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		010414491BB137A4006EC41B /* BonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourBrowser.h; sourceTree = "<group>"; };
+		0104144A1BB137A4006EC41B /* EzvizBonjourManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzvizBonjourManager.h; sourceTree = "<group>"; };
+		0104144B1BB137A4006EC41B /* EzvizJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzvizJSON.h; sourceTree = "<group>"; };
+		0104144C1BB137A4006EC41B /* EzvizSimpleWifi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzvizSimpleWifi.h; sourceTree = "<group>"; };
+		0104144D1BB137A4006EC41B /* UIImageView+EzvizCapturePicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+EzvizCapturePicture.h"; sourceTree = "<group>"; };
+		0104144E1BB137A4006EC41B /* YSConstStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSConstStrings.h; sourceTree = "<group>"; };
+		0104144F1BB137A4006EC41B /* YSHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSHTTPClient.h; sourceTree = "<group>"; };
+		010414501BB137A4006EC41B /* YSMobilePages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSMobilePages.h; sourceTree = "<group>"; };
+		010414511BB137A4006EC41B /* YSPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSPlayerController.h; sourceTree = "<group>"; };
+		010414521BB137A4006EC41B /* YSUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSUtility.h; sourceTree = "<group>"; };
+		010414541BB137A4006EC41B /* zbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zbar.h; sourceTree = "<group>"; };
+		010414551BB137A4006EC41B /* ZBarCameraSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCameraSimulator.h; sourceTree = "<group>"; };
+		010414561BB137A4006EC41B /* ZBarCaptureReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarCaptureReader.h; sourceTree = "<group>"; };
+		010414571BB137A4006EC41B /* ZBarHelpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarHelpController.h; sourceTree = "<group>"; };
+		010414581BB137A4006EC41B /* ZBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImage.h; sourceTree = "<group>"; };
+		010414591BB137A4006EC41B /* ZBarImageScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarImageScanner.h; sourceTree = "<group>"; };
+		0104145A1BB137A4006EC41B /* ZBarReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderController.h; sourceTree = "<group>"; };
+		0104145B1BB137A4006EC41B /* ZBarReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderView.h; sourceTree = "<group>"; };
+		0104145C1BB137A4006EC41B /* ZBarReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarReaderViewController.h; sourceTree = "<group>"; };
+		0104145D1BB137A4006EC41B /* ZBarSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSDK.h; sourceTree = "<group>"; };
+		0104145E1BB137A4006EC41B /* ZBarSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarSymbol.h; sourceTree = "<group>"; };
+		0104145F1BB137DA006EC41B /* EzvizOpenSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EzvizOpenSDKBundle.bundle; sourceTree = "<group>"; };
+		010414601BB137DA006EC41B /* libEzvizOpenSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEzvizOpenSDK.a; sourceTree = "<group>"; };
+		010414611BB137DA006EC41B /* libzbar.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libzbar.a; sourceTree = "<group>"; };
+		010414651BB15999006EC41B /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserModel.h; path = QinQingBao/Classes/Main/PersonCenter/Controller/MyData/UserModel.h; sourceTree = SOURCE_ROOT; };
+		010414661BB15999006EC41B /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserModel.m; path = QinQingBao/Classes/Main/PersonCenter/Controller/MyData/UserModel.m; sourceTree = SOURCE_ROOT; };
 		0126ECA81B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		0126ECA91B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		0126ECAB1B8C4E8100EC85C1 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
@@ -317,11 +353,6 @@
 		01BA2D5C1B9EC70C00A2C7BD /* ServiceHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHeadView.h; sourceTree = "<group>"; };
 		01BA2D5D1B9EC70C00A2C7BD /* ServiceHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHeadView.m; sourceTree = "<group>"; };
 		01BA2D5E1B9EC70C00A2C7BD /* ServiceHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceHeadView.xib; sourceTree = "<group>"; };
-		01D9DEAC1B7DBF840087F80E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
-		01D9DEAD1B7DBF840087F80E /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
-		01D9DEAE1B7DBF840087F80E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
-		01D9DEB11B7DC3C70087F80E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		01D9DEB31B7DC3CE0087F80E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01D9DEB51B7DC3D70087F80E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		01D9DEB71B7DC74B0087F80E /* MTSMSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSMSHelper.h; sourceTree = "<group>"; };
 		01D9DEB81B7DC74B0087F80E /* MTSMSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSMSHelper.m; sourceTree = "<group>"; };
@@ -333,11 +364,6 @@
 		01DD671F1BAFDA6D001D0883 /* UpdatePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePwdViewController.m; sourceTree = "<group>"; };
 		01DD67221BAFF20A001D0883 /* TextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldViewController.h; sourceTree = "<group>"; };
 		01DD67231BAFF20A001D0883 /* TextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewController.m; sourceTree = "<group>"; };
-		01E08DC91BABFA1C00E00432 /* libEzvizOpenSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEzvizOpenSDK.a; path = "../../../../荧石SDK/demo/EzvizOpenSDKDemo/lib/libEzvizOpenSDK.a"; sourceTree = "<group>"; };
-		01E08DCB1BABFA3200E00432 /* EzvizOpenSDKBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = EzvizOpenSDKBundle.bundle; path = "../../../../荧石SDK/demo/EzvizOpenSDKDemo/lib/EzvizOpenSDKBundle.bundle"; sourceTree = "<group>"; };
-		01E08DD11BABFA6900E00432 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		01E08DD31BABFA8A00E00432 /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
-		01E08DD51BABFA9600E00432 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		01E08DD81BABFBC200E00432 /* VenderMannager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenderMannager.h; sourceTree = "<group>"; };
 		01E08DD91BABFBC200E00432 /* VenderMannager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenderMannager.m; sourceTree = "<group>"; };
 		01E4BE481B9FDF3500BF41EF /* PayHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayHeadCell.h; sourceTree = "<group>"; };
@@ -498,15 +524,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01E08DD61BABFA9600E00432 /* libstdc++.6.0.9.dylib in Frameworks */,
-				01E08DD41BABFA8A00E00432 /* libiconv.2.4.0.dylib in Frameworks */,
-				01E08DD21BABFA6900E00432 /* OpenAL.framework in Frameworks */,
-				01E08DCC1BABFA3200E00432 /* EzvizOpenSDKBundle.bundle in Frameworks */,
-				01E08DCA1BABFA1C00E00432 /* libEzvizOpenSDK.a in Frameworks */,
+				010414401BB13701006EC41B /* OpenAL.framework in Frameworks */,
+				0104143E1BB136F6006EC41B /* libstdc++.6.0.9.tbd in Frameworks */,
+				010414641BB137DA006EC41B /* libzbar.a in Frameworks */,
+				0104143C1BB136CD006EC41B /* libiconv.2.4.0.tbd in Frameworks */,
+				010414631BB137DA006EC41B /* libEzvizOpenSDK.a in Frameworks */,
+				010414351BB126CE006EC41B /* libicucore.tbd in Frameworks */,
+				010414331BB126B9006EC41B /* libz.tbd in Frameworks */,
+				010414311BB1268D006EC41B /* SMS_SDK.framework in Frameworks */,
 				01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */,
-				01D9DEB41B7DC3CE0087F80E /* libz.dylib in Frameworks */,
-				01D9DEB21B7DC3C70087F80E /* libicucore.dylib in Frameworks */,
-				01D9DEB01B7DBF840087F80E /* SMS_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +546,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0104142B1BB1268D006EC41B /* SMS_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				0104142C1BB1268D006EC41B /* SMS_SDKLocalizable.strings */,
+				0104142E1BB1268D006EC41B /* SMS_SDK.framework */,
+			);
+			path = SMS_SDK;
+			sourceTree = "<group>";
+		};
+		010414481BB137A4006EC41B /* EZVIZ */ = {
+			isa = PBXGroup;
+			children = (
+				0104145F1BB137DA006EC41B /* EzvizOpenSDKBundle.bundle */,
+				010414601BB137DA006EC41B /* libEzvizOpenSDK.a */,
+				010414611BB137DA006EC41B /* libzbar.a */,
+				010414491BB137A4006EC41B /* BonjourBrowser.h */,
+				0104144A1BB137A4006EC41B /* EzvizBonjourManager.h */,
+				0104144B1BB137A4006EC41B /* EzvizJSON.h */,
+				0104144C1BB137A4006EC41B /* EzvizSimpleWifi.h */,
+				0104144D1BB137A4006EC41B /* UIImageView+EzvizCapturePicture.h */,
+				0104144E1BB137A4006EC41B /* YSConstStrings.h */,
+				0104144F1BB137A4006EC41B /* YSHTTPClient.h */,
+				010414501BB137A4006EC41B /* YSMobilePages.h */,
+				010414511BB137A4006EC41B /* YSPlayerController.h */,
+				010414521BB137A4006EC41B /* YSUtility.h */,
+				010414531BB137A4006EC41B /* ZBarSDK */,
+			);
+			path = EZVIZ;
+			sourceTree = "<group>";
+		};
+		010414531BB137A4006EC41B /* ZBarSDK */ = {
+			isa = PBXGroup;
+			children = (
+				010414541BB137A4006EC41B /* zbar.h */,
+				010414551BB137A4006EC41B /* ZBarCameraSimulator.h */,
+				010414561BB137A4006EC41B /* ZBarCaptureReader.h */,
+				010414571BB137A4006EC41B /* ZBarHelpController.h */,
+				010414581BB137A4006EC41B /* ZBarImage.h */,
+				010414591BB137A4006EC41B /* ZBarImageScanner.h */,
+				0104145A1BB137A4006EC41B /* ZBarReaderController.h */,
+				0104145B1BB137A4006EC41B /* ZBarReaderView.h */,
+				0104145C1BB137A4006EC41B /* ZBarReaderViewController.h */,
+				0104145D1BB137A4006EC41B /* ZBarSDK.h */,
+				0104145E1BB137A4006EC41B /* ZBarSymbol.h */,
+			);
+			path = ZBarSDK;
+			sourceTree = "<group>";
+		};
 		0126ECA61B8C4E8100EC85C1 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,26 +865,16 @@
 		01D9DEA91B7DBF840087F80E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01E08DD51BABFA9600E00432 /* libstdc++.6.0.9.dylib */,
-				01E08DD31BABFA8A00E00432 /* libiconv.2.4.0.dylib */,
-				01E08DD11BABFA6900E00432 /* OpenAL.framework */,
-				01E08DCB1BABFA3200E00432 /* EzvizOpenSDKBundle.bundle */,
-				01E08DC91BABFA1C00E00432 /* libEzvizOpenSDK.a */,
+				010414481BB137A4006EC41B /* EZVIZ */,
+				0104143F1BB13701006EC41B /* OpenAL.framework */,
+				0104143D1BB136F6006EC41B /* libstdc++.6.0.9.tbd */,
+				0104143B1BB136CD006EC41B /* libiconv.2.4.0.tbd */,
+				010414341BB126CE006EC41B /* libicucore.tbd */,
+				010414321BB126B9006EC41B /* libz.tbd */,
+				0104142B1BB1268D006EC41B /* SMS_SDK */,
 				01D9DEB51B7DC3D70087F80E /* MessageUI.framework */,
-				01D9DEB31B7DC3CE0087F80E /* libz.dylib */,
-				01D9DEB11B7DC3C70087F80E /* libicucore.dylib */,
-				01D9DEAA1B7DBF840087F80E /* SMS_SDK */,
 			);
 			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		01D9DEAA1B7DBF840087F80E /* SMS_SDK */ = {
-			isa = PBXGroup;
-			children = (
-				01D9DEAB1B7DBF840087F80E /* SMS_SDKLocalizable.strings */,
-				01D9DEAD1B7DBF840087F80E /* SMS_SDK.framework */,
-			);
-			path = SMS_SDK;
 			sourceTree = "<group>";
 		};
 		01E4BE421B9FDD8B00BF41EF /* PayCells */ = {
@@ -1208,6 +1272,8 @@
 		01F228131B7B428300ED4AFB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				010414651BB15999006EC41B /* UserModel.h */,
+				010414661BB15999006EC41B /* UserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1393,10 +1459,10 @@
 				01FEE2C11B9C0F90007C4641 /* PlaceOrderView.xib in Resources */,
 				D23A12D41B8D682C000365AE /* PositionCell.xib in Resources */,
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
-				01D9DEAF1B7DBF840087F80E /* SMS_SDKLocalizable.strings in Resources */,
 				01E92D331BA65E0F0097F8EC /* ServiceCustomCell.xib in Resources */,
 				01E4BE511B9FEA2800BF41EF /* PayButtonCell.xib in Resources */,
 				01EB286E1BA119CC00937412 /* CancelOrderController.xib in Resources */,
+				010414301BB1268D006EC41B /* SMS_SDKLocalizable.strings in Resources */,
 				0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
@@ -1404,6 +1470,7 @@
 				0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */,
 				01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */,
 				01F0D0291B8DB96B00EF3238 /* BankCardCell.xib in Resources */,
+				010414621BB137DA006EC41B /* EzvizOpenSDKBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,6 +1535,7 @@
 				0126ECEB1B8C4E8100EC85C1 /* NSObject+MJCoding.m in Sources */,
 				0126ECFC1B8C4E8100EC85C1 /* NSArray+MASAdditions.m in Sources */,
 				0126ECE81B8C4E8100EC85C1 /* MJFoundation.m in Sources */,
+				010414671BB15999006EC41B /* UserModel.m in Sources */,
 				0126ECEA1B8C4E8100EC85C1 /* MJType.m in Sources */,
 				0126EDA91B8C6DDA00EC85C1 /* TQStarRatingView.m in Sources */,
 				0126ED931B8C6D9200EC85C1 /* ServiceMenuModel.m in Sources */,
@@ -1563,11 +1631,11 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		01D9DEAB1B7DBF840087F80E /* SMS_SDKLocalizable.strings */ = {
+		0104142C1BB1268D006EC41B /* SMS_SDKLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				01D9DEAC1B7DBF840087F80E /* en */,
-				01D9DEAE1B7DBF840087F80E /* zh-Hans */,
+				0104142D1BB1268D006EC41B /* en */,
+				0104142F1BB1268D006EC41B /* zh-Hans */,
 			);
 			name = SMS_SDKLocalizable.strings;
 			sourceTree = "<group>";
@@ -1668,17 +1736,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/SMS_SDK",
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dongxuwei/Desktop/荧石SDK/demo/EzvizOpenSDKDemo/lib",
+					"$(PROJECT_DIR)/QinQingBao/Frameworks/EZVIZ",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1690,17 +1760,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/SMS_SDK",
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/dongxuwei/Desktop/荧石SDK/demo/EzvizOpenSDKDemo/lib",
+					"$(PROJECT_DIR)/QinQingBao/Frameworks/EZVIZ",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

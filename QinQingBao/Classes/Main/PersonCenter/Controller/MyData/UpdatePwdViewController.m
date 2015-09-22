@@ -111,7 +111,8 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
-    
+    if(self.nowPwd.rightText.text != self.confirmPwd.rightText.text )
+        return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
 }
 
 @end
