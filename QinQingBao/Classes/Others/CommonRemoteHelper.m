@@ -7,6 +7,8 @@
 //
 
 #import "CommonRemoteHelper.h"
+#import "Networking.h"
+
 @interface CommonRemoteHelper()
 
 @end
@@ -102,5 +104,29 @@ static NSOperationQueue * _queue;
                  failure(operation,error);
              }];
     }
+}
+
++(void)UploadPicWithUrl:(NSString *)url  parameters:(id)parameters  type:(CommonRemoteType)type
+                dataObj:(NSData *)dataObj success:(void (^)(NSDictionary *dict, id responseObject))success
+                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    [Networking UploadDataWithUrlString:URL_UploadAvatar
+                             parameters:parameters
+                        timeoutInterval:nil
+                            requestType:HTTPRequestType
+                           responseType:JSONResponseType
+              constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                  // 构造数据的地方
+                  [formData appendPartWithFileData:dataObj name:@"pic" fileName:@"img.png" mimeType:@"image/png"];
+              }
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                    NSString *html = operation.responseString;
+                                    NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
+                                    NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+                                    success(dict,responseObject);
+                                }
+                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    failure(operation,error);
+                                }];
 }
 @end

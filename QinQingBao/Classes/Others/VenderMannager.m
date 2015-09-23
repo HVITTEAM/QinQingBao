@@ -17,7 +17,14 @@
 #import "YSPlayerController.h"
 #import "YSHTTPClient.h"
 
+#import <SMS_SDK/SMS_SDK.h>
 
+
+/**
+ *  SMS appkey
+ */
+#define sms_appKey @"81de4ff2ac9e"
+#define sms_appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
 @implementation VenderMannager
 
 + (void)load
@@ -25,6 +32,9 @@
     static dispatch_once_t onceToken;dispatch_once(&onceToken, ^{
         // TODO
         NSLog(@"第三方服务注册完毕");
+        
+        [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
+
 //        // 初始化SDK库, 设置SDK平台服务器地址
 //        NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];
 //        [dictServers setObject:@"https://auth.ys7.com" forKey:kAuthServer];

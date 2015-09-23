@@ -296,21 +296,26 @@
 {
     if(buttonIndex == 0)
     {
-        //退出登录时候需要先清空系统缓存
-        
-        //        //退出登录时候需要先清空系统缓存
-        //        [SharedAppUtil defaultCommonUtil].userInfor = nil;
-        //        [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userInfor key:User_Archiver_Key filePath:User_Archiver_Path];
-        //
-        //        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.loginview];
-        //
-        //        [self presentViewController:nav animated:YES completion:nil];
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : @"dd",
-                                                                   @"client" : @"iOS",
-                                                                   @"key" : @"key"}
+        
+        [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                   @"client" : @"ios",
+                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             [SharedAppUtil defaultCommonUtil].userVO = nil;
+                                             [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
+                                             [MTControllerChooseTool setLoginViewController];
+                                         }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

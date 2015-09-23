@@ -77,8 +77,6 @@
  */
 - (IBAction)loginNow:(id)sender
 {
-    [MTControllerChooseTool setRootViewController];
-    return;
     if (![self checkForm])
     {
         [NoticeHelper AlertShow:@"请输入完整信息" view:self.view];
@@ -88,14 +86,32 @@
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
                                                                   @"password" : self.passwordText.text,
-                                                                  @"client" : @"iOS"}
+                                                                  @"client" : @"ios"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                             NSDictionary *di = [dict objectForKey:@"datas"];
+                                             UserModel *vo = [[UserModel alloc] init];
+                                             vo.member_id = (NSNumber*)[di objectForKey:@"member_id"];
+                                             vo.key = [NSString stringWithFormat:@"%@",[di objectForKey:@"key"]];
+                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
+                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
+                                             [MTControllerChooseTool setRootViewController];
+                                         }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
-                                         [MTControllerChooseTool setRootViewController];
                                      }];
     }
 }

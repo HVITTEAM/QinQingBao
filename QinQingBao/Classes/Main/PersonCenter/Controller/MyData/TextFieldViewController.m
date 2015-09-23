@@ -14,6 +14,9 @@
 @end
 
 @implementation TextFieldViewController
+{
+    HMCommonTextfieldItem *textItem;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -76,16 +79,41 @@
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
-    HMCommonTextfieldItem *oldpwd = [HMCommonTextfieldItem itemWithTitle:[self.dict valueForKey:@"text"] icon:nil];
-    oldpwd.placeholder = [self.dict valueForKey:@"placeholder"];
-    group.items = @[oldpwd];
-    
+    textItem = [HMCommonTextfieldItem itemWithTitle:[self.dict valueForKey:@"text"] icon:nil];
+    textItem.placeholder = [self.dict valueForKey:@"placeholder"];
+    group.items = @[textItem];
     [self.tableView reloadData];
 }
 
 -(void)doneClickHandler
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? textItem.rightText.text : self.inforVO.member_areainfo;
+    NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:@{@"member_truename" : nameStr,
+                                                                     @"member_sex" : @1,
+                                                                     @"member_birthday" : self.inforVO.member_birthday,
+                                                                     @"member_areainfo" : addressStr,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios",}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"保存失败" message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+    
 }
 
 @end

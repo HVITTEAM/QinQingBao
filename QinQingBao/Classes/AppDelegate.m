@@ -7,14 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import <SMS_SDK/SMS_SDK.h>
 #import "UserModel.h"
-
-/**
- *  SMS appkey
- */
-#define appKey @"81de4ff2ac9e"
-#define appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
+#import "SDWebImageManager.h"
+#import "SDImageCache.h"
 
 @interface AppDelegate ()
 
@@ -25,8 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [SMS_SDK registerApp:appKey withSecret:appSecret];
-    
     // 1.创建窗口
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
@@ -36,10 +29,12 @@
     
     UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
     if (vo)
+    {
         [MTControllerChooseTool setRootViewController];
+        [SharedAppUtil defaultCommonUtil].userVO = vo;
+    }
     else
         [MTControllerChooseTool setLoginViewController];
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     return YES;
 }
@@ -64,6 +59,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    // 赶紧清除所有的内存缓存
+    [[SDImageCache sharedImageCache] clearMemory];
+    
+    // 赶紧停止正在进行的图片下载操作
+    [[SDWebImageManager sharedManager] cancelAll];
 }
 
 @end

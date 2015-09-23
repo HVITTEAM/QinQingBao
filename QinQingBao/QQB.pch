@@ -31,6 +31,7 @@
 #import "MBProgressHUD.h"
 #import "SharedAppUtil.h"
 #import "ArchiverCacheHelper.h"
+#import "UserInforModel.h"
 
 
 
@@ -155,6 +156,20 @@
 
 /***上传头像url*/
 #define URL_UploadAvatar  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+
+/***获取会员资料url*/
+#define URL_GetUserInfor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=info"
+
+/***设置会员资料url*/
+#define URL_EditUserInfor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=edit"
+
+/***上传头像url*/
+#define URL_UploadAvatar  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+
+/***头像url*/
+#define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",imgName];
+
+
 
 
 

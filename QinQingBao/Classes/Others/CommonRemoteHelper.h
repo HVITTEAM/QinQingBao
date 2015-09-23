@@ -24,4 +24,8 @@ typedef NS_ENUM(NSInteger, CommonRemoteType) {
              success:(void (^)(NSDictionary *dict, id responseObject))success
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
++(void)UploadPicWithUrl:(NSString *)url  parameters:(id)parameters  type:(CommonRemoteType)type
+                dataObj:(NSData *)dataObj success:(void (^)(NSDictionary *dict, id responseObject))success
+                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end
