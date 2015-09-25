@@ -51,6 +51,11 @@
     return 10;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [[UIView alloc] init];
@@ -60,13 +65,36 @@
 {
     NSString *listViewCellstr = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
-
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:listViewCellstr];
-        cell.textLabel.text = @"症状自查";
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:listViewCellstr];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.imageView.image = [UIImage imageNamed:@"1.png"];
+        cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+        cell.detailTextLabel.textColor = [UIColor grayColor];
     }
-    return cell;
+
+    switch (indexPath.section)
+    {
+        case 0:
+            cell.textLabel.text = @"症状自查";
+            cell.detailTextLabel.text = @"帮你判断身体的不适";
+            break;
+        case 1:
+            cell.textLabel.text = @"在线提问";
+            cell.detailTextLabel.text = @"描述症状,快速解答";
+            break;
+        case 2:
+            cell.textLabel.text = @"签约医生";
+            cell.detailTextLabel.text = @"指定社区医生提供健康服务";
+            break;
+        default:
+            break;
+    }
+
+return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

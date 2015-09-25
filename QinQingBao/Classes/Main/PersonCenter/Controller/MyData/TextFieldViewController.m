@@ -106,6 +106,7 @@
                                      else
                                      {
                                          [self.navigationController popViewControllerAnimated:YES];
+                                         self.refleshDta();
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

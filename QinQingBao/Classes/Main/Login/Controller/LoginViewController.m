@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "RegistViewController.h"
+#import "UpdatePwdViewController.h"
+
 
 @interface LoginViewController ()<UITextFieldDelegate>
 
@@ -19,6 +21,9 @@
 @end
 
 @implementation LoginViewController
+{
+    UpdatePwdViewController *updateView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,8 +132,11 @@
 /**
  *  找回密码
  */
-- (IBAction)backPassword:(id)sender {
-    NSLog(@"找回密码");
+- (IBAction)backPassword:(id)sender
+{
+    if (!updateView)
+        updateView = [[UpdatePwdViewController alloc]init];
+    [self.navigationController pushViewController:updateView animated:YES];
 }
 
 /**

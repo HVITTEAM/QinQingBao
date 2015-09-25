@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HeartCell.h"
+#import "BloodPressureCell.h"
+#import "LocationCell.h"
 
 @interface HealthPageViewController : UITableViewController
 

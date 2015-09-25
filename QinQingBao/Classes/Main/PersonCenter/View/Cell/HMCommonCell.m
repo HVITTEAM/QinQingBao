@@ -97,7 +97,7 @@
         [_item.btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
         [_item.btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [_item.btn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-        [_item.btn setTitle:_item.title forState:UIControlStateNormal];
+        [_item.btn setTitle:_item.btnTitle forState:UIControlStateNormal];
         [_item.btn.layer setBorderWidth:1];//设置边界的宽度
         [_item.btn.layer setCornerRadius:10.0];//设置矩形四个圆角半径
     }

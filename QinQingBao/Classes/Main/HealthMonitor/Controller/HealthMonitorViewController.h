@@ -15,6 +15,6 @@
 
 @property(nonatomic, retain) NSMutableArray *array;//创建一个数组属性 作为top菜单的数据源
 
-@property(nonatomic, retain) NSMutableArray *dataProvider;//创建一个数组属性
+@property(nonatomic, retain) NSArray *dataProvider;//创建一个数组属性
 
 @end

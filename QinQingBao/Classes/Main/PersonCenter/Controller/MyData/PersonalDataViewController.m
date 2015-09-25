@@ -9,11 +9,6 @@
 #import "PersonalDataViewController.h"
 #import "UpdatePwdViewController.h"
 #import "TextFieldViewController.h"
-#import "Networking.h"
-#import "UIImageView+WebCache.h"
-#import "SDWebImageManager.h"
-#import "SDImageCache.h"
-
 
 @interface PersonalDataViewController ()
 
@@ -33,8 +28,6 @@
 {
     [super viewDidLoad];
     
-    [self getDataProvider];
-    
     self.title = @"个人资料";
     
     if (!infoVO)
@@ -50,10 +43,16 @@
         
         [self.tableView reloadData];
     }
+    
+    [self getDataProvider];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    //    清除图片缓存
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+    
     [super viewWillAppear:animated];
     
     [self initTableviewSkin];
@@ -186,6 +185,10 @@
         self.textView = [[TextFieldViewController alloc] init];
         self.textView.dict = dict;
         self.textView.inforVO = infoVO;
+        __weak __typeof(self)weakSelf = self;
+        self.textView.refleshDta = ^{
+            [weakSelf getDataProvider];
+        };
         [self.navigationController pushViewController:self.textView animated:YES];
     }
 }
@@ -195,10 +198,6 @@
 {
     if (alertView.tag > 100)
     {
-        //清除图片缓存
-        [[SDImageCache sharedImageCache] clearDisk];
-        [[SDImageCache sharedImageCache] clearMemory];
-
         if(buttonIndex==1)
             [self shootPiicturePrVideo];
         else if(buttonIndex==2)
@@ -249,7 +248,9 @@
     {
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData *data = UIImageJPEGRepresentation(image, 0.000000001);
+        //        NSData *data = UIImageJPEGRepresentation(image, 0.000000001);
+        UIImage *slt = [image scaleImageToSize:CGSizeMake(70,70)];
+        NSData *data = UIImageJPEGRepresentation(slt, 1);
         [self upploadAvatar:data];
         //关闭相册界面
         [picker dismissViewControllerAnimated:NO completion:nil];
@@ -378,6 +379,7 @@
                                      }
                                      else
                                      {
+                                         NSLog(@"图片上传成功");
                                          [self getDataProvider];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

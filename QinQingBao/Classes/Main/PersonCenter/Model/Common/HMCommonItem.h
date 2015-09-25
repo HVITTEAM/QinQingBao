@@ -39,6 +39,10 @@
 
 @property (nonatomic, retain) UIButton *btn;
 
+/** 按钮标题 */
+@property (nonatomic, copy) NSString *btnTitle;
+
+
 
 + (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon;
 + (instancetype)itemWithTitle:(NSString *)title;

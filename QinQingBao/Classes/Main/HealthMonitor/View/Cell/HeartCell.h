@@ -12,4 +12,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *heartDataLabel;
 @property (strong, nonatomic) IBOutlet UIView *bgView;
 
+/** cell更新时间 */
+@property (strong, nonatomic) IBOutlet UILabel *time;
+/** cell对应的item数据 */
+@property (nonatomic, strong) HealthDataModel *item;
 @end

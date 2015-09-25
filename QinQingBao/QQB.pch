@@ -14,6 +14,7 @@
 
 #endif
 
+#import "HealthDataModel.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "UIView+Extension.h"
@@ -32,8 +33,10 @@
 #import "SharedAppUtil.h"
 #import "ArchiverCacheHelper.h"
 #import "UserInforModel.h"
-
-
+#import "UIImageView+WebCache.h"
+#import "SDWebImageManager.h"
+#import "SDImageCache.h"
+#import "Networking.h"
 
 
 // 屏幕尺寸
@@ -168,6 +171,13 @@
 
 /***头像url*/
 #define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",imgName];
+
+/***获取监控数据url*/
+#define URL_GetMonitor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=monitor&op=getMonitor"
+
+/***忘记密码url*/
+#define URL_Forgot  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=monitor&op=forgot"
+
 
 
 

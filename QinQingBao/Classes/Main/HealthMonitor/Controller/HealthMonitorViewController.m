@@ -8,12 +8,17 @@
 
 
 #import "HealthMonitorViewController.h"
+#import "AddMemberViewController.h"
 
 @interface HealthMonitorViewController ()
 
+@property (nonatomic, retain) AddMemberViewController *addView;
 @end
 
 @implementation HealthMonitorViewController
+{
+    UIPageControl *pageControl;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,7 +31,43 @@
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.scrollView];
+    
     [self setupScrollView];
+    
+    [self setupPageControl];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (pageControl)
+        pageControl.hidden = NO;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (pageControl)
+        pageControl.hidden = YES;
+}
+/**
+ *  添加pageControl
+ */
+- (void)setupPageControl
+{
+    if (!pageControl)
+        pageControl = [[UIPageControl alloc] init];
+    // 1.添加
+    pageControl.numberOfPages = 4;
+    pageControl.x = MTScreenW/2;
+    pageControl.centerY = 38;
+    
+    //    self.navigationItem.titleView.x = -20;
+    [self.navigationController.navigationBar addSubview:pageControl];
+    
+    // 2.设置圆点的颜色
+    pageControl.currentPageIndicatorTintColor = HMColor(253, 253, 253); // 当前页的小圆点颜色
+    pageControl.pageIndicatorTintColor = HMColor(189, 189, 189); // 非当前页的小圆点颜色
 }
 
 #pragma mark - 滑动tab视图代理方法
@@ -62,6 +103,26 @@
 -(void)initNavigation
 {
     self.title = @"健康监护";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat doublePage = scrollView.contentOffset.x / scrollView.width;
+    int intPage = (int)(doublePage + 0.5);
+    // 设置页码
+    pageControl.currentPage = intPage;
+    self.title = [NSString stringWithFormat:@"当前第%d页",intPage];
+}
+
+-(void)addHandler:(id)sender
+{
+    if (self.addView == nil) {
+        self.addView = [[AddMemberViewController alloc] init];
+    }
+    [self.navigationController pushViewController:self.addView animated:YES];
 }
 
 @end

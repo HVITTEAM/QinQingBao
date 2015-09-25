@@ -142,6 +142,15 @@
 		01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFE11B7C7ADA00665D87 /* HealthPageViewController.m */; };
 		01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED08BA1B84706B00115E3A /* HeartCell.m */; };
 		01ED08BD1B84706B00115E3A /* HeartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED08BB1B84706B00115E3A /* HeartCell.xib */; };
+		01ED2E4B1BB387DB007C428F /* HealthDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E4A1BB387DB007C428F /* HealthDataModel.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E4E1BB3893E007C428F /* HealthTotalDatas.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E4D1BB3893E007C428F /* HealthTotalDatas.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E521BB3A8A1007C428F /* BloodPressureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E501BB3A8A1007C428F /* BloodPressureCell.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E531BB3A8A1007C428F /* BloodPressureCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED2E511BB3A8A1007C428F /* BloodPressureCell.xib */; settings = {ASSET_TAGS = (); }; };
+		01ED2E571BB3ED83007C428F /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E551BB3ED83007C428F /* LocationCell.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E581BB3ED83007C428F /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED2E561BB3ED83007C428F /* LocationCell.xib */; settings = {ASSET_TAGS = (); }; };
+		01ED2E5E1BB3F1B3007C428F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E5B1BB3F1B3007C428F /* MapViewController.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E5F1BB3F1B3007C428F /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E5D1BB3F1B3007C428F /* MyAnnotation.m */; settings = {ASSET_TAGS = (); }; };
+		01ED2E611BB3F1D2007C428F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01ED2E601BB3F1D2007C428F /* MapKit.framework */; };
 		01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */; };
 		01F0D0091B8D478D00EF3238 /* MTSlipPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D0081B8D478D00EF3238 /* MTSlipPageViewController.m */; };
 		01F0D00C1B8D4C0400EF3238 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0D00B1B8D4C0400EF3238 /* AccountViewController.m */; };
@@ -478,6 +487,21 @@
 		01ED08B91B84706B00115E3A /* HeartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeartCell.h; sourceTree = "<group>"; };
 		01ED08BA1B84706B00115E3A /* HeartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeartCell.m; sourceTree = "<group>"; };
 		01ED08BB1B84706B00115E3A /* HeartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeartCell.xib; sourceTree = "<group>"; };
+		01ED2E491BB387DB007C428F /* HealthDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealthDataModel.h; path = QinQingBao/Classes/Main/PersonCenter/View/Cell/HealthDataModel.h; sourceTree = SOURCE_ROOT; };
+		01ED2E4A1BB387DB007C428F /* HealthDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthDataModel.m; path = QinQingBao/Classes/Main/PersonCenter/View/Cell/HealthDataModel.m; sourceTree = SOURCE_ROOT; };
+		01ED2E4C1BB3893E007C428F /* HealthTotalDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HealthTotalDatas.h; path = QinQingBao/Classes/Main/PersonCenter/View/Cell/HealthTotalDatas.h; sourceTree = SOURCE_ROOT; };
+		01ED2E4D1BB3893E007C428F /* HealthTotalDatas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HealthTotalDatas.m; path = QinQingBao/Classes/Main/PersonCenter/View/Cell/HealthTotalDatas.m; sourceTree = SOURCE_ROOT; };
+		01ED2E4F1BB3A8A1007C428F /* BloodPressureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BloodPressureCell.h; sourceTree = "<group>"; };
+		01ED2E501BB3A8A1007C428F /* BloodPressureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloodPressureCell.m; sourceTree = "<group>"; };
+		01ED2E511BB3A8A1007C428F /* BloodPressureCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BloodPressureCell.xib; sourceTree = "<group>"; };
+		01ED2E541BB3ED83007C428F /* LocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
+		01ED2E551BB3ED83007C428F /* LocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
+		01ED2E561BB3ED83007C428F /* LocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationCell.xib; sourceTree = "<group>"; };
+		01ED2E5A1BB3F1B3007C428F /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		01ED2E5B1BB3F1B3007C428F /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		01ED2E5C1BB3F1B3007C428F /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
+		01ED2E5D1BB3F1B3007C428F /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
+		01ED2E601BB3F1D2007C428F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01EFD0C11B7D865800A720E7 /* MTControllerChooseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTControllerChooseTool.h; sourceTree = "<group>"; };
 		01EFD0C21B7D865800A720E7 /* MTControllerChooseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTControllerChooseTool.m; sourceTree = "<group>"; };
 		01F0D0071B8D478D00EF3238 /* MTSlipPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSlipPageViewController.h; sourceTree = "<group>"; };
@@ -582,6 +606,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01ED2E611BB3F1D2007C428F /* MapKit.framework in Frameworks */,
 				010414401BB13701006EC41B /* OpenAL.framework in Frameworks */,
 				0104143E1BB136F6006EC41B /* libstdc++.6.0.9.tbd in Frameworks */,
 				010414641BB137DA006EC41B /* libzbar.a in Frameworks */,
@@ -925,6 +950,7 @@
 		01D9DEA91B7DBF840087F80E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01ED2E601BB3F1D2007C428F /* MapKit.framework */,
 				010414481BB137A4006EC41B /* EZVIZ */,
 				0104143F1BB13701006EC41B /* OpenAL.framework */,
 				0104143D1BB136F6006EC41B /* libstdc++.6.0.9.tbd */,
@@ -1103,6 +1129,7 @@
 		01ECDFD11B7C774700665D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01ED2E591BB3F1B3007C428F /* Map */,
 				01ECDFD21B7C774700665D87 /* HealthMonitorViewController.h */,
 				01ECDFD31B7C774700665D87 /* HealthMonitorViewController.m */,
 				01ECDFD41B7C774700665D87 /* HealthMonitorViewController.xib */,
@@ -1118,6 +1145,10 @@
 		01ECDFD51B7C774700665D87 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01ED2E491BB387DB007C428F /* HealthDataModel.h */,
+				01ED2E4A1BB387DB007C428F /* HealthDataModel.m */,
+				01ED2E4C1BB3893E007C428F /* HealthTotalDatas.h */,
+				01ED2E4D1BB3893E007C428F /* HealthTotalDatas.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1148,8 +1179,25 @@
 				D279DA3C1B8717C200E7CDDF /* BloodCell.h */,
 				D279DA3D1B8717C200E7CDDF /* BloodCell.m */,
 				D279DA3E1B8717C200E7CDDF /* BloodCell.xib */,
+				01ED2E4F1BB3A8A1007C428F /* BloodPressureCell.h */,
+				01ED2E501BB3A8A1007C428F /* BloodPressureCell.m */,
+				01ED2E511BB3A8A1007C428F /* BloodPressureCell.xib */,
+				01ED2E541BB3ED83007C428F /* LocationCell.h */,
+				01ED2E551BB3ED83007C428F /* LocationCell.m */,
+				01ED2E561BB3ED83007C428F /* LocationCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		01ED2E591BB3F1B3007C428F /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				01ED2E5A1BB3F1B3007C428F /* MapViewController.h */,
+				01ED2E5B1BB3F1B3007C428F /* MapViewController.m */,
+				01ED2E5C1BB3F1B3007C428F /* MyAnnotation.h */,
+				01ED2E5D1BB3F1B3007C428F /* MyAnnotation.m */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		01EFD0BB1B7D832D00A720E7 /* Service */ = {
@@ -1566,6 +1614,7 @@
 				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
 				01ECDFDD1B7C774700665D87 /* HealthMonitorViewController.xib in Resources */,
 				D279DA351B8713AD00E7CDDF /* PromptCell.xib in Resources */,
+				01ED2E531BB3A8A1007C428F /* BloodPressureCell.xib in Resources */,
 				01FEE2C61B9C0FD8007C4641 /* EvaluationCell.xib in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
 				01E4BE4C1B9FDF3500BF41EF /* PayHeadCell.xib in Resources */,
@@ -1579,6 +1628,7 @@
 				0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
+				01ED2E581BB3ED83007C428F /* LocationCell.xib in Resources */,
 				0126ED8E1B8C6D4200EC85C1 /* ServiceListCell.xib in Resources */,
 				0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */,
 				01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */,
@@ -1619,6 +1669,7 @@
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
 				01EA0D201BB2A0B700E9CC19 /* UIImage+MultiFormat.m in Sources */,
 				01EA0D1C1BB2A0B700E9CC19 /* SDWebImageManager.m in Sources */,
+				01ED2E571BB3ED83007C428F /* LocationCell.m in Sources */,
 				01FEE2B41B9BE213007C4641 /* OrderDetailViewController.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
 				01EB28681BA1192C00937412 /* OrderTableViewController.m in Sources */,
@@ -1636,6 +1687,7 @@
 				01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */,
 				0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */,
+				01ED2E5F1BB3F1B3007C428F /* MyAnnotation.m in Sources */,
 				01F0D01C1B8D99FA00EF3238 /* CouponsViewController.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
@@ -1652,6 +1704,7 @@
 				0126ECEC1B8C4E8100EC85C1 /* NSObject+MJIvar.m in Sources */,
 				0180A2B41BA7E9C400D26866 /* NoticeHelper.m in Sources */,
 				0126ECEB1B8C4E8100EC85C1 /* NSObject+MJCoding.m in Sources */,
+				01ED2E5E1BB3F1B3007C428F /* MapViewController.m in Sources */,
 				01EA0D1F1BB2A0B700E9CC19 /* UIImage+GIF.m in Sources */,
 				0126ECFC1B8C4E8100EC85C1 /* NSArray+MASAdditions.m in Sources */,
 				0126ECE81B8C4E8100EC85C1 /* MJFoundation.m in Sources */,
@@ -1660,6 +1713,7 @@
 				0126ECEA1B8C4E8100EC85C1 /* MJType.m in Sources */,
 				01EA0D191BB2A0B700E9CC19 /* SDWebImageDecoder.m in Sources */,
 				0126EDA91B8C6DDA00EC85C1 /* TQStarRatingView.m in Sources */,
+				01ED2E4B1BB387DB007C428F /* HealthDataModel.m in Sources */,
 				0126ED931B8C6D9200EC85C1 /* ServiceMenuModel.m in Sources */,
 				01EA0D151BB2A0B700E9CC19 /* MKAnnotationView+WebCache.m in Sources */,
 				01EA0D181BB2A0B700E9CC19 /* SDWebImageCompat.m in Sources */,
@@ -1692,8 +1746,10 @@
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
 				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,
+				01ED2E521BB3A8A1007C428F /* BloodPressureCell.m in Sources */,
 				01E4BE5B1BA031E000BF41EF /* ServiceDetailCell.m in Sources */,
 				D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */,
+				01ED2E4E1BB3893E007C428F /* HealthTotalDatas.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
 				01E4BE501B9FEA2800BF41EF /* PayButtonCell.m in Sources */,
@@ -1819,7 +1875,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1856,7 +1912,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1875,7 +1931,7 @@
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1899,7 +1955,7 @@
 				);
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

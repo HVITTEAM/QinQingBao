@@ -14,9 +14,11 @@
 
 @interface UpdatePwdViewController : HMCommonViewController
 
-@property (nonatomic,retain) HMCommonTextfieldItem *oldPwd;
+@property (nonatomic,retain) HMCommonButtonItem *tel;
 @property (nonatomic,retain) HMCommonTextfieldItem *nowPwd;
-@property (nonatomic,retain) HMCommonTextfieldItem *confirmPwd;
+@property (nonatomic,retain) HMCommonTextfieldItem *old;
+@property (nonatomic,retain) HMCommonTextfieldItem *code;
+
 
 
 @end

@@ -42,4 +42,35 @@
     
     return image;
 }
+
+-(UIImage *)scaleImageToSize:(CGSize)size
+{
+    CGFloat scaleW = size.width/self.size.width;
+    CGFloat scaleH = size.height/self.size.height;
+    
+    CGFloat finalScale;
+    if (scaleW > scaleH) {
+        finalScale = scaleW;
+    }else{
+        finalScale = scaleH;
+    }
+    
+    CGFloat finalW = self.size.width *finalScale;
+    CGFloat finalH = self.size.height *finalScale;
+    CGRect finalRect;
+    if (finalW > finalH) {
+        finalRect = CGRectMake((size.width - finalW)/2, 0, finalW, finalH);
+    }else{
+        finalRect = CGRectMake(0, (size.height - finalH)/2, finalW, finalH);
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0f);
+    [self drawInRect:finalRect];
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
+
 @end

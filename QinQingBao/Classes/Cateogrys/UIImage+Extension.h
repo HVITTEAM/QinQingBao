@@ -20,4 +20,9 @@
 
 + (UIImage *)imageWithColor:(UIColor *)color;
 
+/**
+ *  等比例创建缩略图
+*/
+-(UIImage *)scaleImageToSize:(CGSize)size;
+
 @end

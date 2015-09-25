@@ -25,6 +25,9 @@
 @end
 
 @implementation ProfileViewController
+{
+    NSURL *iconUrl;
+}
 
 - (void)viewDidLoad
 {
@@ -35,13 +38,20 @@
     [self initTableviewSkin];
 }
 
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     [self setupGroups];
     
+    //    清除图片缓存
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
+    
     self.navigationController.navigationBarHidden = YES;
+    
+    [self getUserIcon];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -81,6 +91,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pc_bg.png"]];
+    
+
+
     _zoomImageview.frame = CGRectMake(0, -imageHeight, self.view.width, imageHeight);
     //高度改变 宽度也跟着改变
     //    _zoomImageview.contentMode = UIViewContentModeScaleAspectFill;
@@ -98,19 +111,19 @@
     _backBtn.size = _backBtn.currentBackgroundImage.size;
     _backBtn.x = 10;
     _backBtn.y = 30;
-    //    [_zoomImageview addSubview:_backBtn];
-    [_backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
     _iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake((MTScreenW - 80)/2, 10, 80, 80)];
-    _iconImageview.image = [UIImage imageNamed:@"head.png"];
     _iconImageview.clipsToBounds = YES;
     _iconImageview.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
+    [_iconImageview setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    _iconImageview.layer.cornerRadius = _iconImageview.height/2;
+    _iconImageview.layer.masksToBounds = YES;
+
     [_zoomImageview addSubview:_iconImageview];
     
     _circleImageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, imageHeight - 30, 40, 40)];
     _circleImageview.backgroundColor = [UIColor redColor];
     _circleImageview.layer.cornerRadius = 7.5f;
-    _circleImageview.image = [UIImage imageNamed:@"avatar.png"];
     _circleImageview.clipsToBounds = YES;
     _circleImageview.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
     //    [_zoomImageview addSubview:_circleImageview];
@@ -296,7 +309,6 @@
 {
     if(buttonIndex == 0)
     {
-        
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
@@ -326,4 +338,36 @@
         
     }
 }
+
+#pragma mark -- 与后台数据交互模块
+/**
+ *  获取数据
+ */
+-(void)getUserIcon
+{
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil) {
+        return;
+    }
+    [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
+                                         iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",url]];
+                                         [_iconImageview setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
+}
+
 @end

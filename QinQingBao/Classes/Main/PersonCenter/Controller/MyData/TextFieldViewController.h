@@ -16,4 +16,7 @@
 /**用户资料数据*/
 @property (nonatomic, retain) UserInforModel *inforVO;
 
+@property (nonatomic, copy) void (^refleshDta)();
+
+
 @end

@@ -12,36 +12,44 @@
 
 - (void)awakeFromNib
 {
-    self.bgView.layer.cornerRadius = 3;
-    self.bgView.layer.borderColor = [[UIColor grayColor] CGColor];
-    self.bgView.layer.borderWidth = 0.33;
-    
-    NSString *string                            = @"心率 71 次/分钟";
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    
-    // 设置富文本样式
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor blackColor]
-                             range:NSMakeRange(0, 2)];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont fontWithName:@"Helvetica-Bold" size:16.f]
-                             range:NSMakeRange(0, 2)];
-    
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:HMColor(43, 139, 39)
-                             range:NSMakeRange(2, 3)];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont systemFontOfSize:22.f]
-                             range:NSMakeRange(2, 3)];
-    
-    self.heartDataLabel.attributedText = attributedString;
+//    self.bgView.layer.cornerRadius = 3;
+//    self.bgView.layer.borderColor = [[UIColor grayColor] CGColor];
+//    self.bgView.layer.borderWidth = 0.33;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setItem:(HealthDataModel *)item
+{
+    _item = item;
+    
+    NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.blood_sugar];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    // 设置富文本样式
+    // 设置富文本样式
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor redColor]
+                             range:NSMakeRange(0, 1)];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:22.f]
+                             range:NSMakeRange(0, 1)];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:12.f]
+                             range:NSMakeRange(1, 7)];
+    
+    self.heartDataLabel.attributedText = attributedString;
+    
+//    NSLog(@"%@",NSStringFromClass([item.uploadtime class]));
+//    NSLog(@"%@",item.uploadtime);
+    
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.uploadtime];
+        self.time.text = time;
 }
 
 @end
