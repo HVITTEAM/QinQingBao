@@ -18,6 +18,7 @@
 @implementation HealthMonitorViewController
 {
     UIPageControl *pageControl;
+    UILabel *titleLab;
 }
 
 - (void)viewDidLoad {
@@ -42,6 +43,8 @@
     [super viewWillAppear:animated];
     if (pageControl)
         pageControl.hidden = NO;
+    if (titleLab)
+        titleLab.hidden = NO;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -49,6 +52,8 @@
     [super viewWillDisappear:animated];
     if (pageControl)
         pageControl.hidden = YES;
+    if (titleLab)
+        titleLab.hidden = YES;
 }
 /**
  *  添加pageControl
@@ -61,6 +66,13 @@
     pageControl.numberOfPages = 4;
     pageControl.x = MTScreenW/2;
     pageControl.centerY = 38;
+    
+    if (!titleLab)
+        titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+    titleLab.textColor = [UIColor whiteColor];
+    titleLab.x = MTScreenW/2 - 40;
+
+    [self.navigationController.navigationBar addSubview:titleLab];
     
     //    self.navigationItem.titleView.x = -20;
     [self.navigationController.navigationBar addSubview:pageControl];
@@ -102,7 +114,6 @@
  */
 -(void)initNavigation
 {
-    self.title = @"健康监护";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
 }
 
@@ -114,7 +125,7 @@
     int intPage = (int)(doublePage + 0.5);
     // 设置页码
     pageControl.currentPage = intPage;
-    self.title = [NSString stringWithFormat:@"当前第%d页",intPage];
+    titleLab.text = [NSString stringWithFormat:@"当前第%d页",intPage];
 }
 
 -(void)addHandler:(id)sender

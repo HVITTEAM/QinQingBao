@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tC4-h9-MoJ">
@@ -25,18 +25,14 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.14901961386203766" green="0.729411780834198" blue="0.20784315466880798" alpha="1" colorSpace="deviceRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="300" id="0mK-71-z3m"/>
-                            <constraint firstAttribute="height" constant="60" id="RTE-Tq-WX4"/>
-                        </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="7Xx-Te-RbV"/>
-                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="CYJ-Jd-aKe"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="tC4-h9-MoJ" secondAttribute="trailing" constant="2" id="Fki-eP-7zF"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="tC4-h9-MoJ" secondAttribute="bottom" constant="1.5" id="RAy-vJ-ySN"/>
+                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="g3w-tU-CGZ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tC4-h9-MoJ" secondAttribute="bottom" constant="1.5" id="mjU-7t-BMe"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="tC4-h9-MoJ" secondAttribute="trailing" constant="2" id="yha-oz-WpL"/>
+                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="z9i-eO-Cv1"/>
                 </constraints>
             </tableViewCellContentView>
         </tableViewCell>

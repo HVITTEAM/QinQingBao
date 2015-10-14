@@ -39,6 +39,7 @@
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"ServiceHeadView" owner:nil options:nil];
     self.tableView.tableHeaderView = [nibs lastObject];
     self.tableView.tableHeaderView.backgroundColor = HMGlobalBg;
+
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;

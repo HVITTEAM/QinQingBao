@@ -13,8 +13,14 @@ static float cellHeight = 80;
 static float cellWidth = 66;
 
 #import "HomeViewController.h"
+#import "ServiceTypeDatas.h"
+#import "ServiceTypeModel.h"
+
 
 @interface HomeViewController ()
+{
+        NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -26,11 +32,18 @@ static float cellWidth = 66;
     
     [self initNavigation];
     
+    [self initImagePlayer];
+    
     [self initCollectionView];
     
-    [self initImagePlayer];
+    [self getTypeList];
 }
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 
 /**
  *  初始化导航栏
@@ -116,9 +129,31 @@ static float cellWidth = 66;
     [self.serviceColectionview registerNib:[UINib nibWithNibName:@"SQCollectionCell" bundle:nil] forCellWithReuseIdentifier:kcellIdentifier];
     self.serviceColectionview.delegate = self;
     self.serviceColectionview.dataSource = self;
-    [self.serviceColectionview reloadData];
 }
 
+-(void)getTypeList
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [HUD removeFromSuperview];
+                                     ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
+                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     if (result.datas.count == 0)
+                                     {
+                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                         return;
+                                     }
+                                     dataProvider = result.datas;
+                                     
+                                     [self.serviceColectionview reloadData];
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+}
 
 #pragma mark -- UIScrollView delegate
 
@@ -167,7 +202,7 @@ static float cellWidth = 66;
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return dataProvider.count;
 }
 
 //定义展示的Section的个数
@@ -184,9 +219,10 @@ static float cellWidth = 66;
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
-    NSString *imageName = [NSString stringWithFormat:@"%ld.png",(long)indexPath.row];
-    imageView.image = [UIImage imageNamed:imageName];
-    label.text = @"送药";
+    ServiceTypeModel *data = [dataProvider objectAtIndex:indexPath.row];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",data.url]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    label.text = data.tname;
     return cell;
 }
 
@@ -231,6 +267,24 @@ static float cellWidth = 66;
         self.listView = [[ServiceListViewController alloc] init];
     [self.navigationController pushViewController:self.listView animated:YES];
     self.listView.title = @"服务列表";
+    
+    ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : item.tid}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [HUD removeFromSuperview];
+                                     ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
+                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     if (result.datas.count == 0)
+                                     {
+                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                         return;
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
 }
 
 //返回这个UICollectionView是否可以被选择

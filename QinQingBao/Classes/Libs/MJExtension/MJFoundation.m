@@ -3,36 +3,46 @@
 //  MJExtensionExample
 //
 //  Created by MJ Lee on 14/7/16.
-//  Copyright (c) 2014年 itcast. All rights reserved.
+//  Copyright (c) 2014年 小码哥. All rights reserved.
 //
 
 #import "MJFoundation.h"
-#import "MJConst.h"
+#import "MJExtensionConst.h"
+#import <CoreData/CoreData.h>
 
-static NSSet *_foundationClasses;
+static NSSet *foundationClasses_;
 
 @implementation MJFoundation
 
-+ (void)load
++ (NSSet *)foundationClasses
 {
-    _foundationClasses = [NSSet setWithObjects:
-                          [NSObject class],
-                          [NSURL class],
-                          [NSDate class],
-                          [NSNumber class],
-                          [NSDecimalNumber class],
-                          [NSData class],
-                          [NSMutableData class],
-                          [NSArray class],
-                          [NSMutableArray class],
-                          [NSDictionary class],
-                          [NSMutableDictionary class],
-                          [NSString class],
-                          [NSMutableString class], nil];
+    if (foundationClasses_ == nil) {
+        // 集合中没有NSObject，因为几乎所有的类都是继承自NSObject，具体是不是NSObject需要特殊判断
+        foundationClasses_ = [NSSet setWithObjects:
+                              [NSURL class],
+                              [NSDate class],
+                              [NSValue class],
+                              [NSData class],
+                              [NSError class],
+                              [NSArray class],
+                              [NSDictionary class],
+                              [NSString class],
+                              [NSAttributedString class], nil];
+    }
+    return foundationClasses_;
 }
 
 + (BOOL)isClassFromFoundation:(Class)c
 {
-    return [_foundationClasses containsObject:c];
+    if (c == [NSObject class] || c == [NSManagedObject class]) return YES;
+    
+    __block BOOL result = NO;
+    [[self foundationClasses] enumerateObjectsUsingBlock:^(Class foundationClass, BOOL *stop) {
+        if ([c isSubclassOfClass:foundationClass]) {
+            result = YES;
+            *stop = YES;
+        }
+    }];
+    return result;
 }
 @end

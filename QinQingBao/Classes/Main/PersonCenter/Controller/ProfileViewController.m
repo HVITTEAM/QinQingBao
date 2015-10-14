@@ -16,6 +16,8 @@
 #import "AccountViewController.h"
 #import "PersonalDataViewController.h"
 
+#import "RootViewController.h"
+
 
 #define imageHeight 120
 
@@ -36,6 +38,10 @@
     [self initNavigation];
     
     [self initTableviewSkin];
+    
+    //    清除图片缓存
+    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearMemory];
 }
 
 
@@ -44,10 +50,6 @@
     [super viewWillAppear:animated];
     
     [self setupGroups];
-    
-    //    清除图片缓存
-    [[SDImageCache sharedImageCache] clearDisk];
-    [[SDImageCache sharedImageCache] clearMemory];
     
     self.navigationController.navigationBarHidden = YES;
     
@@ -92,8 +94,8 @@
     
     _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pc_bg.png"]];
     
-
-
+    
+    
     _zoomImageview.frame = CGRectMake(0, -imageHeight, self.view.width, imageHeight);
     //高度改变 宽度也跟着改变
     //    _zoomImageview.contentMode = UIViewContentModeScaleAspectFill;
@@ -115,10 +117,10 @@
     _iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake((MTScreenW - 80)/2, 10, 80, 80)];
     _iconImageview.clipsToBounds = YES;
     _iconImageview.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
-    [_iconImageview setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [_iconImageview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     _iconImageview.layer.cornerRadius = _iconImageview.height/2;
     _iconImageview.layer.masksToBounds = YES;
-
+    
     [_zoomImageview addSubview:_iconImageview];
     
     _circleImageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, imageHeight - 30, 40, 40)];
@@ -326,7 +328,10 @@
                                          {
                                              [SharedAppUtil defaultCommonUtil].userVO = nil;
                                              [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             [MTControllerChooseTool setLoginViewController];
+                                             RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+                                             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
+                                             [self presentViewController:nav animated:NO completion:nil];
+                                             //[MTControllerChooseTool setLoginViewController];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -360,9 +365,12 @@
                                      else
                                      {
                                          NSDictionary *di = [dict objectForKey:@"datas"];
-                                         NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
-                                         iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",url]];
-                                         [_iconImageview setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+                                         if ([di count] != 0)
+                                         {
+                                             NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
+                                             iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",url]];
+                                         }
+                                         [_iconImageview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

@@ -60,7 +60,6 @@ static NSOperationQueue * _queue;
         [manager POST:url
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
                   NSString *html = operation.responseString;
                   NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
                   NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];

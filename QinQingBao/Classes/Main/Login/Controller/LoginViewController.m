@@ -88,9 +88,10 @@
     }
     else
     {
+        [self.view endEditing:YES];
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
-                                                                  @"password" : self.passwordText.text,
+                                                                  @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                   @"client" : @"ios"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          

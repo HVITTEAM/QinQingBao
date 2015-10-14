@@ -74,7 +74,8 @@
     
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@"pc_accout.png"];
-    version.destVcClass = [FamilyInfoViewController class];
+    if(!self.isfromOrder)
+        version.destVcClass = [FamilyInfoViewController class];
     
     __weak typeof(HMCommonArrowItem) *weakSelf = version;
     version.operation = ^{

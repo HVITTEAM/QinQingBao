@@ -60,7 +60,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"修改密码";
+    self.title = @"找回密码";
 }
 
 #pragma mark 倒计时模块
@@ -170,11 +170,14 @@
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Forgot parameters: @{@"mobile" : self.tel.rightText.text,
                                                                @"code" : self.code.rightText.text,
-                                                               @"password" : self.old.rightText.text,
-                                                               @"password_confirm" : self.nowPwd.rightText.text}
+                                                               @"password" : [SecurityUtil encryptMD5String:self.old.rightText.text],
+                                                               @"password_confirm" : [SecurityUtil encryptMD5String:self.nowPwd.rightText.text]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
+                                     
+                                     if (dict == nil)
+                                         return [NoticeHelper AlertShow:@"未知错误！" view:self.view];
                                      
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误

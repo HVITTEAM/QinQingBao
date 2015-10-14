@@ -87,15 +87,26 @@
 
 -(void)doneClickHandler
 {
+    
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? textItem.rightText.text : self.inforVO.member_areainfo;
     NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
+    
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:@"ios" forKey:@"client"];
+    if (self.inforVO.member_sex != nil)
+        [dict setObject:self.inforVO.member_sex forKey:@"member_sex"];
+    if (nameStr)
+        [dict setObject:nameStr forKey:@"member_truename"];
+    if (self.inforVO.member_birthday != nil)
+        [dict setObject:self.inforVO.member_birthday forKey:@"member_birthday"];
+    if (addressStr)
+        [dict setObject:addressStr forKey:@"member_areainfo"];
+    if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
+        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+
+   
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:@{@"member_truename" : nameStr,
-                                                                     @"member_sex" : @1,
-                                                                     @"member_birthday" : self.inforVO.member_birthday,
-                                                                     @"member_areainfo" : addressStr,
-                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                     @"client" : @"ios",}
+    [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误

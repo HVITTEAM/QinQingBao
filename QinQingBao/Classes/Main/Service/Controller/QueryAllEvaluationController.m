@@ -7,8 +7,14 @@
 //
 
 #import "QueryAllEvaluationController.h"
+#import "ServiceTypeDatas.h"
+#import "ServiceTypeModel.h"
+
 
 @interface QueryAllEvaluationController ()
+{
+    NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -17,36 +23,48 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"所有评价";
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
+                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     if (result.datas.count == 0)
+                                     {
+                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                         return;
+                                     }
+                                     dataProvider = result.datas;
+                                     [self.tableView reloadData];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return dataProvider.count;
 }
 
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
- 
- // Configure the cell...
- 
- return cell;
- }
- */
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *listViewCellstr = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:listViewCellstr];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
+    cell.textLabel.text = item.tname;
+    return cell;
+}
+
 
 /*
  // Override to support conditional editing of the table view.

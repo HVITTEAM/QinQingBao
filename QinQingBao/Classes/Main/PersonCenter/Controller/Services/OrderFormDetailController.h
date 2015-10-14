@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIView *space4;
 @property (strong, nonatomic) IBOutlet UIView *space5;
 @property (strong, nonatomic) IBOutlet UIView *space6;
+@property (strong, nonatomic) IBOutlet UIView *space7;
+@property (strong, nonatomic) IBOutlet UIView *space8;
+@property (strong, nonatomic) IBOutlet UIView *space9;
 
 
 @end

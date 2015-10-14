@@ -10,6 +10,9 @@
 #import "HealthBloodPressureViewController.h"
 #import "HealthTotalDatas.h"
 #import "MapViewController.h"
+#import "VideoListViewController.h"
+#import "VideoCell.h"
+
 
 @interface HealthPageViewController ()
 
@@ -21,7 +24,7 @@
 {
     NSMutableArray *dataProvider;
     
-    NSString *updateTime;
+    VideoListViewController *videoList;
 }
 
 
@@ -36,9 +39,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.backgroundColor = HMGlobalBg;
-    self.tableView.tableFooterView = [[UIView alloc] init];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self initTableViewSkin];
     
     [self setupRefresh];
     
@@ -48,6 +50,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+-(void)initTableViewSkin
+{
+    self.tableView.backgroundColor = HMGlobalBg;
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark 集成刷新控件
@@ -85,27 +94,26 @@
     
 }
 
-
 -(void)getDataProvider
 {
     dataProvider = [[NSMutableArray alloc] init];
-    
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
                                                                    @"count" : @"3"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     [HUD removeFromSuperview];
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     if (result.datas.count == 0)
+                                     {
+                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                         [self.tableView headerEndRefreshing];
+                                         return;
+                                     }
                                      dataProvider = result.datas;
-                                     updateTime = ((HealthDataModel *)result.datas[0]).uploadtime;
                                      [self.tableView reloadData];
-                                     [self.tableView headerEndRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
                                      [self.tableView headerEndRefreshing];
                                  }];
 }
@@ -132,11 +140,14 @@
     static NSString *sugarCellIdentifier = @"sugarCell";
     static NSString *bloodPressureIdentifier = @"bloodPressureCell";
     static NSString *locationIdentifier = @"locationCell";
+    static NSString *videoIdentifier = @"videoCell";
     
     HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:sugarCellIdentifier];
     BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:bloodPressureIdentifier];
     LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:locationIdentifier];
-
+    VideoCell *videoCell = [tableView dequeueReusableCellWithIdentifier:videoIdentifier];
+    
+    
     if (indexPath.row == 0)
     {
         if (!sugarCell)
@@ -149,7 +160,6 @@
         }
         if(dataProvider && dataProvider.count > 0)
         {
-            ((HealthDataModel *)dataProvider[0]).collectiontime = updateTime;
             sugarCell.item = dataProvider[0];
         }
         return sugarCell;
@@ -165,12 +175,11 @@
         }
         if(dataProvider && dataProvider.count > 0)
         {
-            ((HealthDataModel *)dataProvider[0]).collectiontime = updateTime;
             bloodPressureCell.item = dataProvider[0];
         }
         return bloodPressureCell;
     }
-    else
+    else if(indexPath.row == 2)
     {
         if (!locationCell)
         {
@@ -181,10 +190,20 @@
         }
         if(dataProvider && dataProvider.count > 0)
         {
-            ((HealthDataModel *)dataProvider[0]).collectiontime = updateTime;
             locationCell.item = dataProvider[0];
         }
         return locationCell;
+    }
+    else
+    {
+        if (!videoCell)
+        {
+            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"VideoCell" owner:nil options:nil];
+            videoCell = (VideoCell*)[nibs lastObject];
+            videoCell.backgroundColor = [UIColor clearColor];
+            videoCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return videoCell;
     }
 }
 
@@ -193,6 +212,11 @@
     if (indexPath.row == 2)
     {
         [self showPosition];
+        return;
+    }
+    else if (indexPath.row == 3)
+    {
+        [self showVideo];
         return;
     }
     HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
@@ -205,6 +229,22 @@
 - (void)showPosition
 {
     [self presentViewController:self.map animated:YES completion:nil];
+}
+
+/**
+ * 显示视频设备
+ */
+-(void)showVideo
+{
+    //    if([EzvizDemoGlobalKit sharedKit].token)
+    //    {
+    //        [[YSDemoDataModel sharedInstance] saveUserAccessToken:[EzvizDemoGlobalKit sharedKit].token];
+    //        [[YSHTTPClient sharedInstance] setClientAccessToken:[EzvizDemoGlobalKit sharedKit].token];
+    //    }
+    
+    if (!videoList)
+        videoList = [[VideoListViewController alloc] init];
+    [self.navigationController pushViewController:videoList animated:YES];
 }
 
 

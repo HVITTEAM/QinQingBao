@@ -66,7 +66,7 @@
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
-    
+#warning nil会有警告信息log出来
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:nil];
     version.destVcClass = [DetailInfoViewController class];

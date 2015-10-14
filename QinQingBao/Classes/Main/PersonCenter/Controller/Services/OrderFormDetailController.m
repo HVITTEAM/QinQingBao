@@ -45,6 +45,10 @@
     self.space4.backgroundColor = HMColor(234, 234, 234);
     self.space5.backgroundColor = HMColor(234, 234, 234);
     self.space6.backgroundColor = HMColor(234, 234, 234);
+    self.space7.backgroundColor = HMColor(234, 234, 234);
+    self.space8.backgroundColor = HMColor(234, 234, 234);
+    self.space9.backgroundColor = HMColor(234, 234, 234);
+
     
     NSArray *descriptions = @[@"2015-06-18 18:19:30 正在处理",@"2015-06-18 18:01:10 已分派",@"2015-06-18 16:19:30 订单确认",@"2015-06-18 15:11:10 下单成功"];
     TimeLineViewControl *timeline = [[TimeLineViewControl alloc] initWithTimeArray:nil

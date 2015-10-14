@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TQStarRatingView.h"
 
 @interface EvaluationCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet TQStarRatingView *Evaview;
 @property (strong, nonatomic) IBOutlet UIButton *queryEva;
 @property (strong, nonatomic) IBOutlet UIImageView *HeadImage;
 - (IBAction)queryAllEvaluationClickHandler:(id)sender;

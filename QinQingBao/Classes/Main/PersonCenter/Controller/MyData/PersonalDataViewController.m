@@ -7,12 +7,12 @@
 //
 
 #import "PersonalDataViewController.h"
-#import "UpdatePwdViewController.h"
+#import "ChangePwdViewController.h"
 #import "TextFieldViewController.h"
 
 @interface PersonalDataViewController ()
 
-@property (nonatomic, retain) UpdatePwdViewController *updateView;
+@property (nonatomic, retain) ChangePwdViewController *updateView;
 @property (nonatomic, retain) TextFieldViewController *textView;
 
 @end
@@ -121,7 +121,7 @@
         {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",iconUrl]];
             UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+            [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
             imageView.width = imageView.height = 50;
             imageView.layer.cornerRadius = imageView.height/2;
             imageView.layer.masksToBounds = YES;
@@ -153,7 +153,7 @@
     if (indexPath.section == 1)
     {
         if (!self.updateView)
-            self.updateView = [[UpdatePwdViewController alloc]init];
+            self.updateView = [[ChangePwdViewController alloc]init];
         [self.navigationController pushViewController:self.updateView animated:YES];
     }
     else if(indexPath.row == 0)
@@ -208,12 +208,19 @@
     {
         if (buttonIndex == 0)
             return;
-        NSDictionary *dict = @{@"member_truename" : infoVO.member_truename,
-                               @"member_sex" : [NSNumber numberWithInteger:buttonIndex],
-                               @"member_birthday" : infoVO.member_birthday,
-                               @"member_areainfo" : infoVO.member_areainfo,
-                               @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                               @"client" : @"ios",};
+        
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:@"ios" forKey:@"client"];
+        [dict setObject:[NSNumber numberWithInteger:buttonIndex] forKey:@"member_sex"];
+        if (infoVO.member_truename != nil)
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        if (infoVO.member_birthday != nil)
+            [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
+        if (infoVO.member_areainfo != nil)
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+        
         [self updataUserInfor:dict];
     }
 }
@@ -310,8 +317,13 @@
                                      else
                                      {
                                          NSDictionary *di = [dict objectForKey:@"datas"];
-                                         infoVO = [UserInforModel objectWithKeyValues:di];
-                                         iconUrl = [di objectForKey:@"member_avatar"];
+                                         if ([di count] != 0)
+                                         {
+                                             infoVO = [UserInforModel objectWithKeyValues:di];
+                                             iconUrl = [di objectForKey:@"member_avatar"];
+                                         }
+                                         else
+                                             [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
                                          [self setDataProvider];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -359,7 +371,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
-    
 }
 
 /**
@@ -403,12 +414,18 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString * curentDatest = [formatter stringFromDate:date];
         
-        NSDictionary *dict = @{@"member_truename" : infoVO.member_truename,
-                               @"member_sex" : infoVO.member_sex,
-                               @"member_birthday" :curentDatest,
-                               @"member_areainfo" : infoVO.member_areainfo,
-                               @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                               @"client" : @"ios",};
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:curentDatest forKey:@"member_birthday"];
+        [dict setObject:@"ios" forKey:@"client"];
+        if (infoVO.member_sex != nil)
+            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+        if (infoVO.member_truename != nil)
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        if (infoVO.member_areainfo != nil)
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+
         [self updataUserInfor:dict];
     }];
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
@@ -441,12 +458,18 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
         NSString * curentDatest=[formatter stringFromDate:date];
         
-        NSDictionary *dict = @{@"member_truename" : infoVO.member_truename,
-                               @"member_sex" : infoVO.member_sex,
-                               @"member_birthday" :curentDatest,
-                               @"member_areainfo" : infoVO.member_areainfo,
-                               @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                               @"client" : @"ios",};
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        
+        [dict setObject:curentDatest forKey:@"member_birthday"];
+        [dict setObject:@"ios" forKey:@"client"];
+        if (infoVO.member_sex != nil)
+            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+        if (infoVO.member_truename != nil)
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        if (infoVO.member_areainfo != nil)
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         [self updataUserInfor:dict];
         
     }

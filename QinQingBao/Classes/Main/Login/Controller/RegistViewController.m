@@ -147,8 +147,8 @@
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
         [CommonRemoteHelper RemoteWithUrl:URL_Register parameters: @{@"mobile" : self.phoneNumText.text,
-                                                                     @"password" : self.passwordText.text,
-                                                                     @"password_confirm" : self.passwordText.text,
+                                                                     @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
+                                                                     @"password_confirm" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                      @"code" : self.VerNumText.text,
                                                                      @"client" : @"ios"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {

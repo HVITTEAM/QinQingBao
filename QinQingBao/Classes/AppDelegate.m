@@ -11,6 +11,8 @@
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
 
+#import "YSPlayerController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -34,6 +36,16 @@
     else
         [MTControllerChooseTool setLoginViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    
+    // 初始化荧石SDK库, 设置SDK平台服务器地址
+    NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];
+    [dictServers setObject:@"https://auth.ys7.com" forKey:kAuthServer];
+    [dictServers setObject:@"https://open.ys7.com" forKey:kApiServer];
+    [YSPlayerController loadSDKWithPlatfromServers:dictServers];
+    
+    [[YSHTTPClient sharedInstance] setClientAppKey:AppKey];
+
+
     return YES;
 }
 

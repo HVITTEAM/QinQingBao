@@ -37,6 +37,23 @@
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
 #import "Networking.h"
+#import "SecurityUtil.h"
+
+#import "TSPopoverController.h"
+#import "TSActionSheet.h"
+
+/**
+ *  SDK 正式地址 appKey, 需要开发者申请好appkey方可访问
+ */
+#define AppAPIUrl     @"https://open.ys7.com"
+#define AppAuthUrl    @"https://auth.ys7.com"
+#define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
+
+//Demo 转场集合类
+#import "EzvizDemoGlobalKit.h"
+//#import "UIViewController+EzvizTransition.h"
+#import "YSConstStrings.h"
+#import "YSHTTPClient.h"
 
 
 // 屏幕尺寸
@@ -62,7 +79,6 @@
 
 // 表格选中背景色
 #define HMSelectBg HMColor(220, 220, 220)
-
 
 
 
@@ -107,6 +123,16 @@
  *  导航历史归档路径
  */
 #define MapNav_Archiver_Path @"mapnavpath"
+
+/**
+ *  截屏信息归档key
+ */
+#define Capture_Archiver_Key @"capture"
+/**
+ *  截屏信息归档路径
+ */
+#define Capture_Archiver_Path @"capturePath"
+
 
 /** 通知 */
 
@@ -177,6 +203,30 @@
 
 /***忘记密码url*/
 #define URL_Forgot  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=monitor&op=forgot"
+
+/***修改密码url*/
+#define URL_ChangePWD @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=changepassword"
+
+/***获取生活分类url*/
+#define URL_Typelist @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_typelist"
+
+
+#define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
+blue:((float)(rgbValue & 0xFF)) / 255.0 \
+alpha:alp]
+
+
+float gfScreenWidth = 320.0f;
+float gfScreenHeight = 480.0f;
+float gfStatusBarSpace = 20;
+float gfFrameHeight = 460.0f;
+
+
+#define HTTP_REQUEST_OK_CODE          200
+
+#define IS_IOS7_OR_LATER                            ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
 
 
 
