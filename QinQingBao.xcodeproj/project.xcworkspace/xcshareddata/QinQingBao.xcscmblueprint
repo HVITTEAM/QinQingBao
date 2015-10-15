@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4512FA7903561D90FCE2D1E8090C0D7623B4504D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "8fb29d72-f352-44e4-b356-548a4d6ac5c3++6670" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "8fb29d72-f352-44e4-b356-548a4d6ac5c3++6670" : 0,
+    "4512FA7903561D90FCE2D1E8090C0D7623B4504D" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CA966611-A196-4D7B-9BD1-51A0BA621A30",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "8fb29d72-f352-44e4-b356-548a4d6ac5c3++6670" : "QQB\/QinQingBao\/Classes\/Libs\/Security\/",
+    "4512FA7903561D90FCE2D1E8090C0D7623B4504D" : "QQB"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "QinQingBao",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "QinQingBao.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/HVITTEAM\/QinQingBao",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4512FA7903561D90FCE2D1E8090C0D7623B4504D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/10.20.0.15\/project\/cn\/ChiefSign",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8fb29d72-f352-44e4-b356-548a4d6ac5c3++6670"
+    }
+  ]
+}
