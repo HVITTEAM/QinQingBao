@@ -38,6 +38,8 @@ typedef enum _PLAYBTN_STATE
 
 @property (nonatomic, retain) DefinitionTypeView *definitionTypeview;
 @property (nonatomic, retain) TSPopoverController *popoverController;
+
+
 @end
 
 
@@ -84,13 +86,13 @@ typedef enum _PLAYBTN_STATE
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 -(void)dealloc
 {
@@ -100,7 +102,6 @@ typedef enum _PLAYBTN_STATE
         _timer = nil;
     }
 }
-
 
 #pragma mark -
 #pragma mark ui
@@ -155,13 +156,13 @@ typedef enum _PLAYBTN_STATE
     _zoomSizeLab.font = [UIFont systemFontOfSize:24.0f];
     _zoomSizeLab.hidden = YES;
     [self addSubview:_zoomSizeLab];
-        
+    
     // 停止、流量栏
     _stopBarView = [[UIView alloc] initWithFrame:CGRectMake(0, rcView.size.height - 40, rcView.size.width, 40)];
     _stopBarView.backgroundColor = [UIColor clearColor];
     _stopBarView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [self addSubview:_stopBarView];
-    _stopBarView.hidden = YES;  
+    _stopBarView.hidden = YES;
     
     UIView * barBgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _stopBarView.frame.size.width, _stopBarView.frame.size.height)];
     barBgView.backgroundColor = [UIColor blackColor];
@@ -170,9 +171,9 @@ typedef enum _PLAYBTN_STATE
     [_stopBarView addSubview:barBgView];
     
     //停止
-    UIButton * stopBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 40)];
-    [stopBtn setBackgroundImage:[UIImage imageNamed:@"play_play.png"] forState:UIControlStateSelected];
-    [stopBtn setBackgroundImage:[UIImage imageNamed:@"play_stop.png"] forState:UIControlStateNormal];
+    UIButton * stopBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 8, 25, 25)];
+    [stopBtn setBackgroundImage:[UIImage imageNamed:@"full_play.png"] forState:UIControlStateSelected];
+    [stopBtn setBackgroundImage:[UIImage imageNamed:@"full_pause.png"] forState:UIControlStateNormal];
     [stopBtn addTarget:self action:@selector(onClickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_stopBarView addSubview:stopBtn];
     
@@ -190,19 +191,40 @@ typedef enum _PLAYBTN_STATE
     [_stopBarView addSubview:definitionBtn];
     
     //声音
-    UIButton * voiceBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 0, 50, 40)];
-    [voiceBtn setBackgroundImage:[UIImage imageNamed:@"play_play.png"] forState:UIControlStateSelected];
-    [voiceBtn setBackgroundImage:[UIImage imageNamed:@"play_stop.png"] forState:UIControlStateNormal];
+    UIButton * voiceBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 8, 25, 25)];
+    [voiceBtn setBackgroundImage:[UIImage imageNamed:@"sound_on.png"] forState:UIControlStateSelected];
+    [voiceBtn setBackgroundImage:[UIImage imageNamed:@"sound_off.png"] forState:UIControlStateNormal];
     [voiceBtn addTarget:self action:@selector(voiceStopBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_stopBarView addSubview:voiceBtn];
-
-
-//    _fluxLab = [[UILabel alloc] initWithFrame:CGRectMake(_stopBarView.frame.size.width - 90, 0, 90, _stopBarView.frame.size.height)];
-//    _fluxLab.text = @"0K/s  0MB";
-//    _fluxLab.textColor = [UIColor whiteColor];
-//    _fluxLab.backgroundColor = [UIColor clearColor];
-//    _fluxLab.font = [UIFont systemFontOfSize:12.0f];
-//    [_stopBarView addSubview:_fluxLab];
+    
+    //全屏
+    UIButton * fullScreenBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 50, 8, 25, 25)];
+    [fullScreenBtn setBackgroundImage:[UIImage imageNamed:@"amplify_screen_normal.png"] forState:UIControlStateSelected];
+    [fullScreenBtn setBackgroundImage:[UIImage imageNamed:@"amplify_screen_normal.png"] forState:UIControlStateNormal];
+    [fullScreenBtn addTarget:self action:@selector(fullScreenpBtn:) forControlEvents:UIControlEventTouchUpInside];
+    fullScreenBtn.translatesAutoresizingMaskIntoConstraints = NO;
+    [_stopBarView addSubview:fullScreenBtn];
+    self.fullScreenBtn = fullScreenBtn;
+    
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0];
+    
+    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0];
+    
+    NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:48];
+    
+     NSLayoutConstraint *constraint3 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:40];
+    
+    [_stopBarView addConstraint:constraint2];
+    [_stopBarView addConstraint:constraint3];
+    [_stopBarView addConstraint:constraint1];
+    [_stopBarView addConstraint:constraint];
+    
+    //    _fluxLab = [[UILabel alloc] initWithFrame:CGRectMake(_stopBarView.frame.size.width - 90, 0, 90, _stopBarView.frame.size.height)];
+    //    _fluxLab.text = @"0K/s  0MB";
+    //    _fluxLab.textColor = [UIColor whiteColor];
+    //    _fluxLab.backgroundColor = [UIColor clearColor];
+    //    _fluxLab.font = [UIFont systemFontOfSize:12.0f];
+    //    [_stopBarView addSubview:_fluxLab];
     
     // 录像视图
     _recordView = [[UIView alloc] initWithFrame:CGRectMake(rcView.size.width - 15 - 70, 15, 70, 25)];
@@ -262,6 +284,8 @@ typedef enum _PLAYBTN_STATE
     {
         _playBtn.frame = CGRectMake((self.frame.size.width-100)/2, self.frame.size.height/2-90, 100, 100);
     }
+    
+    
 }
 
 #pragma mark -
@@ -311,7 +335,7 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)startPlay
 {
-//    [_admWaitView show];
+    //    [_admWaitView show];
     _stopBarView.hidden = YES;
     [self showPlayBtn:0];
     _tipsView.hidden = YES;
@@ -322,7 +346,7 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)playSuccess
 {
-//    [_admWaitView hide];
+    //    [_admWaitView hide];
     _stopBarView.hidden = YES;
     [self showPlayBtn:0];
     _tipsView.hidden = YES;
@@ -342,8 +366,8 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)stopPlay
 {
-//    [_admWaitView hide];
-//    _stopBarView.hidden = YES;
+    //    [_admWaitView hide];
+    //    _stopBarView.hidden = YES;
     [self showPlayBtn:1];
     _tipsView.hidden = YES;
     _zoomSizeLab.hidden = YES;
@@ -359,7 +383,7 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)playFailed:(int)errorCode
 {
-//    [_admWaitView hide];
+    //    [_admWaitView hide];
     _stopBarView.hidden = YES;
     [self showPlayBtn:2];
     _tipsView.hidden = NO;
@@ -370,7 +394,7 @@ typedef enum _PLAYBTN_STATE
     
     // 提示错误
     [self ShowTips:strError];
-
+    
 }
 
 /**
@@ -378,12 +402,12 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)ShowReConnectTips
 {
-//    [_admWaitView hide];
+    //    [_admWaitView hide];
     _stopBarView.hidden = YES;
     
     // 隐藏播放按钮
     [self showPlayBtn:0];
-
+    
     [self ShowTips:NSLocalizedString(@"网络不稳定, 重新连接", nil)];
 }
 
@@ -393,7 +417,7 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)ShowOfflineTips
 {
-//    [_admWaitView hide];
+    //    [_admWaitView hide];
     _stopBarView.hidden = YES;
     
     // 隐藏播放按钮
@@ -407,7 +431,7 @@ typedef enum _PLAYBTN_STATE
  */
 - (void)showNoPermissionTips
 {
-//    [_admWaitView hide];
+    //    [_admWaitView hide];
     _stopBarView.hidden = YES;
     
     // 隐藏播放按钮
@@ -462,7 +486,7 @@ typedef enum _PLAYBTN_STATE
     self.thumbnailBtn.frame = CGRectMake(0, self.frame.size.height - THUMBNAIL_IMAGE_HEIGHT, THUMBNAIL_IMAGE_WIDTH, THUMBNAIL_IMAGE_HEIGHT);
     
     [UIView commitAnimations];
-
+    
 }
 
 /**
@@ -523,7 +547,7 @@ typedef enum _PLAYBTN_STATE
     }
     
     _timer = nil;
-
+    
 }
 
 /**
@@ -556,7 +580,7 @@ typedef enum _PLAYBTN_STATE
 }
 
 
-#pragma mark - 
+#pragma mark -
 #pragma mark inner methods
 
 #pragma clang diagnostic push
@@ -606,6 +630,13 @@ typedef enum _PLAYBTN_STATE
 }
 
 #pragma clang diagnostic pop
+
+-(void)fullScreenpBtn:(UIButton*)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    btn.selected = !btn.selected;
+    self.changeFullClick(btn.selected);
+}
 
 -(void)voiceStopBtn:(UIButton*)sender
 {
@@ -728,7 +759,7 @@ typedef enum _PLAYBTN_STATE
 }
 
 #pragma mark -
-#pragma mark scrollView delegate  
+#pragma mark scrollView delegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
@@ -766,7 +797,7 @@ typedef enum _PLAYBTN_STATE
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     CGPoint point = [touch locationInView:self];
-
+    
     if (CGRectContainsPoint(_playBtn.frame, point) && _playBtn.hidden == NO)
     {
         return NO;

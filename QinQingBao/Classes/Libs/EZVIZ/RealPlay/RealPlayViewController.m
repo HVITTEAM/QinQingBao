@@ -122,7 +122,7 @@ extern long g_lRealTotleFlux;
 @property (nonatomic, copy) NSString *safeKey;
 @property (nonatomic, copy) NSString *recordPicPath;
 
-//视频路径 by dxw
+//视频保存路径 by dxw
 @property (nonatomic, copy) NSString *recordPath;
 
 @property (nonatomic, strong) NSArray *videoLevels;
@@ -223,7 +223,6 @@ extern long g_lRealTotleFlux;
         [self closeIntercomView];
     }
     
-    
     [_realCtrl stopRecord];
     
     // 如果视频开启中，停止播放
@@ -290,6 +289,19 @@ extern long g_lRealTotleFlux;
  }
  */
 
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if (!_realView.fullScreenBtn)
+        return;
+    NSLog(@"%f和%f",self.view.width,self.view.height);
+    
+}
+
+//视图旋转方向发生改变时会自动调用
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    
+}
 
 #pragma mark -
 #pragma mark ui methods
@@ -323,7 +335,9 @@ extern long g_lRealTotleFlux;
     self.title = _cameraInfo.cameraName;
     
     int nHeight = (int)(sizeWidth / _fVideoRate);
-    _realView = [[RealView alloc] initWithFrame:CGRectMake(0, [self navBarHeight], sizeWidth, (CGFloat)nHeight)];
+    _realView = [[RealView alloc] initWithFrame:CGRectMake(0, [self navBarHeight], sizeWidth ,(float)nHeight)];
+    
+    
     [_realView addTarget:self action:@selector(onClickPlayBtn:) forEventEX:REALVIEW_EVENT_PLAYBTNTOUCHUPINSIDE];
     [_realView addTarget:self action:@selector(onClickStopBtn:) forEventEX:REALVIEW_EVENT_STOPBTNTOUCHUPINSIDE];
     [_realView addTarget:self action:@selector(oneTapView:) forEventEX:REALVIEW_EVENT_ONETAPVIEW];
@@ -335,9 +349,22 @@ extern long g_lRealTotleFlux;
     _realView.changeVideoQualityClick = ^(NSInteger type){
         [realCtrlSelf changeRealPlayVideoLevelWithCameraId:cameraSelf.cameraId videoLevel:type];
     };
-    
     _realView.changeVoiceClick= ^(BOOL ison){
         [realCtrlSelf setAudioOpen:ison];
+    };
+    
+    __weak __typeof(self)weakSelf = self;
+    __weak __typeof(RealView)*weakrealView = _realView;
+    _realView.changeFullClick= ^(BOOL isfull){
+        weakSelf.navigationController.navigationBarHidden = isfull;
+        if (isfull)
+            [YSCommonMethods forbitRotatePortraitOrientation:UIInterfaceOrientationLandscapeLeft];
+        else
+            [YSCommonMethods forbitRotatePortraitOrientation];
+        weakrealView.y = isfull ? 0 : [weakSelf navBarHeight];
+        weakrealView.height = isfull ? weakSelf.view.height : (float)nHeight;
+        weakrealView.width= weakSelf.view.width;
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = isfull;
     };
     
     [self.view addSubview:_realView];
@@ -355,7 +382,7 @@ extern long g_lRealTotleFlux;
     _toolbarBgView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [_ctrlView addSubview:_toolbarBgView];
     
-    _toolbarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1000, PLAYBTN_HEIGHT)];
+    _toolbarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, sizeWidth, PLAYBTN_HEIGHT)];
     _toolbarView.backgroundColor = [UIColor clearColor];
     [_toolbarBgView addSubview:_toolbarView];
     
@@ -461,10 +488,9 @@ extern long g_lRealTotleFlux;
  */
 - (void)moveCtrl
 {
-    
     // 竖屏下按钮控制
-    int nBtnSpace = (sizeWidth - PLAYBTN_HEIGHT*3.5)/3.7;
-    int nLeft = nBtnSpace * 0.7;
+    int nBtnSpace = (sizeWidth - PLAYBTN_HEIGHT*3)/4;
+    int nLeft = nBtnSpace;
     int nBtnCount = 3;
     
     if (_isIntercomAvailable)
@@ -478,9 +504,6 @@ extern long g_lRealTotleFlux;
     {
         _intercomBtn.hidden = YES;
     }
-    
-    
-    
     _captureBtn.frame = CGRectMake(nLeft, 0, PLAYBTN_HEIGHT, PLAYBTN_HEIGHT);
     nLeft += PLAYBTN_HEIGHT + nBtnSpace;
     

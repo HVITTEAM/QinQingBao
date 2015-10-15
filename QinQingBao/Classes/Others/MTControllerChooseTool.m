@@ -79,6 +79,8 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
     window.rootViewController = tabBarController;
+    
+    [SharedAppUtil defaultCommonUtil].tabBarController = tabBarController;
 }
 
 + (void)setLoginViewController

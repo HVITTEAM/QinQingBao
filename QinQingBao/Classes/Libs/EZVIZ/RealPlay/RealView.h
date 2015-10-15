@@ -51,6 +51,11 @@ typedef enum _REALVIEW_EVENT
 
 @property (nonatomic, copy) void (^changeVoiceClick)(BOOL ison);
 
+@property (nonatomic, copy) void (^changeFullClick)(BOOL ison);
+
+@property (nonatomic, retain) UIButton *fullScreenBtn;
+
+
 
 
 

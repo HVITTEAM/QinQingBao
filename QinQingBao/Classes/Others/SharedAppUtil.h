@@ -16,4 +16,5 @@
 
 @property (nonatomic, retain) UserModel *userVO;
 
+@property (nonatomic, retain) UITabBarController *tabBarController;
 @end
