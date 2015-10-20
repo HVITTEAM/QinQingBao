@@ -107,11 +107,11 @@
                                      if (result.datas.count == 0)
                                      {
                                          [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-                                         [self.tableView headerEndRefreshing];
                                          return;
                                      }
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
+                                     [self.tableView headerEndRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView headerEndRefreshing];

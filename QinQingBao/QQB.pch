@@ -42,6 +42,10 @@
 #import "TSPopoverController.h"
 #import "TSActionSheet.h"
 
+
+#import "UINavigationController+FDFullscreenPopGesture.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 /**
  *  SDK 正式地址 appKey, 需要开发者申请好appkey方可访问
  */
@@ -204,12 +208,20 @@
 /***忘记密码url*/
 #define URL_Forgot  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=monitor&op=forgot"
 
-/***修改密码url*/
+/***忘记密码url*/
 #define URL_ChangePWD @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=changepassword"
 
 /***获取生活分类url*/
 #define URL_Typelist @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_typelist"
 
+/***获取服务商的具体服务url*/
+#define URL_Iteminfo @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_iteminfo"
+
+/***获取地区信息url*/
+#define URL_Get_address @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_address_data"
+
+/***推送信息url*/
+#define URL_Push @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo"
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

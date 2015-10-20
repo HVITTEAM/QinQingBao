@@ -24,4 +24,13 @@
     [self.starView setScore:0.3 withAnimation:YES];
     [self.starView setUserInteractionEnabled:NO];
 }
+
+- (void)setitemWithData:(ServiceModel *)item
+{
+    self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
+    self.serviceTitleLab.text = item.icontent;
+    self.serviceDetailLab.text = item.servicetime;
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",item.item_url]];
+    [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+}
 @end

@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
  
     self.backgroundColor = HMGlobalBg;
+    self.bgView.layer.cornerRadius = 4;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

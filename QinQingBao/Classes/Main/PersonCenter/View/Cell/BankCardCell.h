@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BankCardCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UIView *bgView;
 
 @end

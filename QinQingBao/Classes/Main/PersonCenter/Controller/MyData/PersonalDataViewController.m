@@ -12,9 +12,6 @@
 
 @interface PersonalDataViewController ()
 
-@property (nonatomic, retain) ChangePwdViewController *updateView;
-@property (nonatomic, retain) TextFieldViewController *textView;
-
 @end
 
 @implementation PersonalDataViewController
@@ -152,9 +149,8 @@
 {
     if (indexPath.section == 1)
     {
-        if (!self.updateView)
-            self.updateView = [[ChangePwdViewController alloc]init];
-        [self.navigationController pushViewController:self.updateView animated:YES];
+        ChangePwdViewController *updateView = [[ChangePwdViewController alloc]init];
+        [self.navigationController pushViewController:updateView animated:YES];
     }
     else if(indexPath.row == 0)
     {
@@ -182,14 +178,14 @@
     else
     {
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
-        self.textView = [[TextFieldViewController alloc] init];
-        self.textView.dict = dict;
-        self.textView.inforVO = infoVO;
+        TextFieldViewController *textView = [[TextFieldViewController alloc] init];
+        textView.dict = dict;
+        textView.inforVO = infoVO;
         __weak __typeof(self)weakSelf = self;
-        self.textView.refleshDta = ^{
+        textView.refleshDta = ^{
             [weakSelf getDataProvider];
         };
-        [self.navigationController pushViewController:self.textView animated:YES];
+        [self.navigationController pushViewController:textView animated:YES];
     }
 }
 
@@ -425,7 +421,7 @@
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-
+        
         [self updataUserInfor:dict];
     }];
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];

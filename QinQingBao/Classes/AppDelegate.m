@@ -10,7 +10,7 @@
 #import "UserModel.h"
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
-
+#import "APService.h"
 #import "YSPlayerController.h"
 
 @interface AppDelegate ()
@@ -44,40 +44,97 @@
     [YSPlayerController loadSDKWithPlatfromServers:dictServers];
     
     [[YSHTTPClient sharedInstance] setClientAppKey:AppKey];
-
-
+    
+    
+    //注册用户的apns服务
+    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                   UIRemoteNotificationTypeSound |
+                                                   UIRemoteNotificationTypeAlert)
+                                       categories:nil];
+    [APService setupWithOption:launchOptions];
+    
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // 赶紧清除所有的内存缓存
-    [[SDImageCache sharedImageCache] clearMemory];
+    [APService registerDeviceToken:deviceToken];
     
-    // 赶紧停止正在进行的图片下载操作
-    [[SDWebImageManager sharedManager] cancelAll];
+    //格式化deviceToken
+    NSString *deviceTokenStr = [[NSString stringWithFormat:@"%@",deviceToken] substringWithRange:NSMakeRange(1,[NSString stringWithFormat:@"%@",deviceToken].length - 2)];
+    NSLog(@"My token is: %@",deviceToken);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    // Required
+    [APService handleRemoteNotification:userInfo];
+}
+
+/**
+ *  接收到推送消息
+ *
+ *  @param application       application description
+ *  @param userInfo          userInfo description
+ *  @param completionHandler completionHandler description
+ */
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    if (application.applicationState == UIApplicationStateActive)//当用户正在运行app的时候
+    {
+        NSLog ( @ "Receive remote notification : %@",userInfo );
+        NSDictionary *alertStr = [userInfo objectForKey:@"aps"];
+        NSString *pushStr = [alertStr objectForKey:@"alert"];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:pushStr delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"查看", nil];
+        [alert show];
+    }
+    else
+    {
+        //消除BadgeNumber
+        [APService setBadge:0];
+        application.applicationIconBadgeNumber = 0;
+        
+        // IOS 7 Support Required
+        [APService handleRemoteNotification:userInfo];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+}
+
+/**
+ *  在点击设备的home键的时候调用的方法
+ *
+ *  @param application
+ */
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    
+}
+
+/**
+ *  在点击设备的home键返回桌面后，再次打开应用进入app的时候调用的方法
+ *
+ *  @param application application description
+ */
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //消除BadgeNumber
+    [APService setBadge:0];
+    application.applicationIconBadgeNumber = 0;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    //跳转支付宝钱包进行支付，处理支付结果
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+    }];
+    
+    return YES;
 }
 
 @end

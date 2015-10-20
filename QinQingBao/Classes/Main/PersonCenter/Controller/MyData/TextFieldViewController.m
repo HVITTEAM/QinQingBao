@@ -39,6 +39,16 @@
     [super viewDidLoad];
     
     [self initTableviewSkin];
+    
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : @0,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+    
 }
 
 /**
@@ -103,8 +113,8 @@
         [dict setObject:addressStr forKey:@"member_areainfo"];
     if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
         [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-
-   
+    
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {

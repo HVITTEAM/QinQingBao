@@ -206,18 +206,18 @@ typedef enum _PLAYBTN_STATE
     [_stopBarView addSubview:fullScreenBtn];
     self.fullScreenBtn = fullScreenBtn;
     
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0];
-    
-    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0];
-    
-    NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:48];
-    
-     NSLayoutConstraint *constraint3 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:40];
-    
-    [_stopBarView addConstraint:constraint2];
-    [_stopBarView addConstraint:constraint3];
-    [_stopBarView addConstraint:constraint1];
-    [_stopBarView addConstraint:constraint];
+//    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeRight multiplier:1.0f constant:0];
+//    
+//    NSLayoutConstraint *constraint1 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_stopBarView attribute:NSLayoutAttributeBottom multiplier:1.0f constant:0];
+//    
+//    NSLayoutConstraint *constraint2 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:48];
+//    
+//     NSLayoutConstraint *constraint3 = [NSLayoutConstraint constraintWithItem:fullScreenBtn attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:40];
+//    
+//    [_stopBarView addConstraint:constraint2];
+//    [_stopBarView addConstraint:constraint3];
+//    [_stopBarView addConstraint:constraint1];
+//    [_stopBarView addConstraint:constraint];
     
     //    _fluxLab = [[UILabel alloc] initWithFrame:CGRectMake(_stopBarView.frame.size.width - 90, 0, 90, _stopBarView.frame.size.height)];
     //    _fluxLab.text = @"0K/s  0MB";
@@ -636,6 +636,8 @@ typedef enum _PLAYBTN_STATE
     UIButton *btn = (UIButton *)sender;
     btn.selected = !btn.selected;
     self.changeFullClick(btn.selected);
+
+    sender.x = sender.selected ? MTScreenH - 50 :MTScreenW - 50 ;
 }
 
 -(void)voiceStopBtn:(UIButton*)sender

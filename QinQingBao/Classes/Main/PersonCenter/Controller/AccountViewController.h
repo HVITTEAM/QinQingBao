@@ -14,9 +14,4 @@
 #import "BankCardViewController.h"
 
 @interface AccountViewController : UIViewController
-
-
-
-@property (nonatomic, strong) CouponsViewController *vc1;
-@property (nonatomic, strong) BankCardViewController *vc2;
 @end

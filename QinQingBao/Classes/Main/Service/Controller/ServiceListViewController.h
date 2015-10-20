@@ -14,6 +14,6 @@
 
 @interface ServiceListViewController : UITableViewController
 
-@property (nonatomic ,retain) OrderDetailViewController *palceView;
+@property (nonatomic, strong) NSMutableArray *dataProvider;
 
 @end

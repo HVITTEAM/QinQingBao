@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,46 +14,86 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" id="umK-8E-sXu">
-                        <rect key="frame" x="15" y="10" width="90" height="80"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" translatesAutoresizingMaskIntoConstraints="NO" id="umK-8E-sXu">
+                        <rect key="frame" x="10" y="8" width="85" height="85"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="85" id="18I-N5-egH"/>
+                            <constraint firstAttribute="width" constant="85" id="DnG-jf-q9a"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="千粥汇营养粥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fzq-3C-RaB">
-                        <rect key="frame" x="108" y="8" width="212" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="千粥汇营养粥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzq-3C-RaB">
+                        <rect key="frame" x="105" y="8" width="210" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="210" id="36g-hf-JZp"/>
+                            <constraint firstAttribute="height" constant="20" id="7He-qe-H2f"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营养粥： 花生 链子 白木耳 大米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hyC-US-vvZ">
-                        <rect key="frame" x="108" y="30" width="212" height="21"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营养粥： 花生 链子 白木耳 大米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyC-US-vvZ">
+                        <rect key="frame" x="105" y="30" width="212" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="212" id="B6l-Nx-gLL"/>
+                            <constraint firstAttribute="height" constant="21" id="Dtq-k6-5PJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k1P-We-Djh">
-                        <rect key="frame" x="270" y="70" width="41" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1P-We-Djh">
+                        <rect key="frame" x="210" y="70" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="03o-tN-s8R"/>
+                            <constraint firstAttribute="height" constant="21" id="nJD-aQ-JR9"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月售 100单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ySb-tj-24U">
-                        <rect key="frame" x="194" y="70" width="81" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月售 100单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySb-tj-24U">
+                        <rect key="frame" x="210" y="70" width="70" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Mxb-Dn-TGu"/>
+                            <constraint firstAttribute="width" constant="70" id="xp8-2t-qwf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" id="FE2-1T-Otm" customClass="TQStarRatingView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="TQStarRatingView">
                         <rect key="frame" x="108" y="70" width="100" height="20"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="3JA-Yg-yb0"/>
+                            <constraint firstAttribute="height" constant="20" id="Hpo-w7-gvQ"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="ySb-tj-24U" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" constant="19" id="2Ca-fs-ycl"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="k1P-We-Djh" secondAttribute="trailing" constant="2" id="5aM-Iy-COM"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ySb-tj-24U" secondAttribute="bottom" constant="0.5" id="AL1-GF-OKQ"/>
+                    <constraint firstItem="fzq-3C-RaB" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="10" id="JHd-7k-3iF"/>
+                    <constraint firstItem="umK-8E-sXu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Pio-iY-61i"/>
+                    <constraint firstItem="FE2-1T-Otm" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="13" id="TMD-G0-E5h"/>
+                    <constraint firstItem="hyC-US-vvZ" firstAttribute="top" secondItem="fzq-3C-RaB" secondAttribute="bottom" constant="2" id="bNs-SA-0WN"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="k1P-We-Djh" secondAttribute="bottom" constant="0.5" id="eXx-CD-ZOP"/>
+                    <constraint firstItem="FE2-1T-Otm" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" constant="19" id="pCs-Kj-lXu"/>
+                    <constraint firstItem="fzq-3C-RaB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="puS-sW-wEf"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="FE2-1T-Otm" secondAttribute="bottom" constant="1.5" id="q7n-Az-CE7"/>
+                    <constraint firstItem="ySb-tj-24U" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="115" id="qay-OK-A7A"/>
+                    <constraint firstItem="umK-8E-sXu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="qcQ-Hn-E8e"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="umK-8E-sXu" secondAttribute="bottom" constant="-1.5" id="sLK-6Z-cGi"/>
+                    <constraint firstItem="k1P-We-Djh" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" constant="19" id="tbn-NX-a83"/>
+                    <constraint firstItem="hyC-US-vvZ" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="10" id="vj9-hA-PS7"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="iconImg" destination="umK-8E-sXu" id="n8l-yW-LMY"/>
+                <outlet property="priceLab" destination="k1P-We-Djh" id="AzN-xW-Pda"/>
+                <outlet property="serviceDetailLab" destination="hyC-US-vvZ" id="vDw-Jq-nEI"/>
+                <outlet property="serviceTitleLab" destination="fzq-3C-RaB" id="Nn1-YL-dli"/>
                 <outlet property="starView" destination="FE2-1T-Otm" id="wHv-ZG-o7U"/>
             </connections>
             <point key="canvasLocation" x="431" y="306"/>
@@ -61,9 +102,4 @@
     <resources>
         <image name="head" width="150" height="150"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

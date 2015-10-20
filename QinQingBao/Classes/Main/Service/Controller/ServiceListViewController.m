@@ -31,13 +31,21 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
+-(void)setDataProvider:(NSMutableArray *)dataProvider
+{
+    _dataProvider = dataProvider;
+    if (_dataProvider.count == 0)
+        [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+    [self.tableView reloadData];
+}
+
 /**
  *  设置tableView属性
  */
 -(void)initTableviewSkin
 {
     self.tableView.backgroundColor = HMGlobalBg;
-    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 #pragma mark - Table view data source
@@ -48,7 +56,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataProvider.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -63,8 +71,9 @@
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"ServiceListCell" owner:nil options:nil];
         cell = [nibs lastObject];
         // 设置背景view
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
+    [cell setitemWithData:self.dataProvider[indexPath.row]];
     return  cell;
 }
 
@@ -73,9 +82,8 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.palceView ==  nil)
-        self.palceView = [[OrderDetailViewController alloc] init];
-    [self.navigationController pushViewController:self.palceView animated:YES];
+    OrderDetailViewController *palceView = [[OrderDetailViewController alloc] init];
+    [self.navigationController pushViewController:palceView animated:YES];
 }
 
 # pragma  mark 返回上一界面

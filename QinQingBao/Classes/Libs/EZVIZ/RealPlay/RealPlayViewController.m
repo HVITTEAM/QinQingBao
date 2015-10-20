@@ -160,6 +160,8 @@ extern long g_lRealTotleFlux;
 {
     [super viewDidLoad];
     
+    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = NO;
+    
     sizeWidth = [UIScreen mainScreen].bounds.size.width;
     
     imageArr = [ArchiverCacheHelper getLocaldataBykey:Capture_Archiver_Key filePath:Capture_Archiver_Path];
@@ -240,6 +242,8 @@ extern long g_lRealTotleFlux;
     {
         _bStopForDisappear = NO;
     }
+    
+    self.navigationController.fd_fullscreenPopGestureRecognizer.enabled = YES;
 }
 
 - (void)appWillResignActive
@@ -294,7 +298,6 @@ extern long g_lRealTotleFlux;
     if (!_realView.fullScreenBtn)
         return;
     NSLog(@"%f和%f",self.view.width,self.view.height);
-    
 }
 
 //视图旋转方向发生改变时会自动调用
@@ -357,14 +360,65 @@ extern long g_lRealTotleFlux;
     __weak __typeof(RealView)*weakrealView = _realView;
     _realView.changeFullClick= ^(BOOL isfull){
         weakSelf.navigationController.navigationBarHidden = isfull;
+        _bStatusBarHide = isfull;
+        
         if (isfull)
-            [YSCommonMethods forbitRotatePortraitOrientation:UIInterfaceOrientationLandscapeLeft];
+        {
+            CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
+            //            [YSCommonMethods forbitRotatePortraitOrientation:UIInterfaceOrientationLandscapeLeft];
+            
+            /* Begin the animation */
+            [UIView beginAnimations:@"clockwiseAnimation" context:NULL];
+            /* Make the animation 5 seconds long */
+            [UIView setAnimationDuration:duration];
+            //            [UIView setAnimationDelegate:self];
+            //停止动画时候调用clockwiseRotationStopped方法
+            //            [UIView setAnimationDidStopSelector:@selector(clockwiseRotationStopped:finished:context:)];
+            //顺时针旋转90度
+            weakrealView.transform = CGAffineTransformMakeRotation((90.0f * M_PI) / 180.0f);
+            /* Commit the animation */
+            [UIView commitAnimations];
+        }
         else
-            [YSCommonMethods forbitRotatePortraitOrientation];
+        {
+            //            [YSCommonMethods forbitRotatePortraitOrientation];
+            
+            CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
+            //            [YSCommonMethods forbitRotatePortraitOrientation:UIInterfaceOrientationLandscapeLeft];
+            
+            /* Begin the animation */
+            [UIView beginAnimations:@"clockwiseAnimation" context:NULL];
+            /* Make the animation 5 seconds long */
+            [UIView setAnimationDuration:duration];
+            //            [UIView setAnimationDelegate:self];
+            //停止动画时候调用clockwiseRotationStopped方法
+            //            [UIView setAnimationDidStopSelector:@selector(clockwiseRotationStopped:finished:context:)];
+            //顺时针旋转90度
+            weakrealView.transform = CGAffineTransformMakeRotation((0 * M_PI) / 180.0f);
+            /* Commit the animation */
+            [UIView commitAnimations];
+            
+        }
+        weakrealView.x = 0;
         weakrealView.y = isfull ? 0 : [weakSelf navBarHeight];
         weakrealView.height = isfull ? weakSelf.view.height : (float)nHeight;
         weakrealView.width= weakSelf.view.width;
         [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = isfull;
+        
+        if (IS_IOS7_OR_LATER)
+        {
+            if ([weakSelf respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)])
+            {
+                [weakSelf prefersStatusBarHidden];
+                
+                [weakSelf performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+            }
+        }
+        else
+        {
+            [[UIApplication sharedApplication] setStatusBarHidden:_bStatusBarHide];
+        }
+        
     };
     
     [self.view addSubview:_realView];
@@ -933,10 +987,7 @@ extern long g_lRealTotleFlux;
             BOOL result = [UIImagePNGRepresentation(img)writeToFile: filePath    atomically:YES];  // 写入本地沙盒
             if (result)
             {
-                
                 UIImageWriteToSavedPhotosAlbum(img, self, nil, nil);
-                
-                
                 NSDictionary *dict =  @{@"time" : imgname,
                                         @"path" : filePath};
                 [imageArr addObject:dict];

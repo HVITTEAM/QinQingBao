@@ -25,8 +25,6 @@
 @property (strong,nonatomic)NSMutableArray *slideImages;
 @property (strong,nonatomic)UIPageControl *pageControl;
 
-@property (nonatomic, retain) ServiceListViewController *listView;
-@property (nonatomic, retain)  HealthServicesController *healthVC;
 
 
 

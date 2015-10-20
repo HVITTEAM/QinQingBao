@@ -93,10 +93,10 @@
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOK-7g-4T1">
-                            <rect key="frame" x="0.0" y="260" width="320" height="180"/>
+                            <rect key="frame" x="0.0" y="260" width="320" height="190"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="180" id="d3U-N7-tkj"/>
+                                <constraint firstAttribute="height" constant="190" id="d3U-N7-tkj"/>
                             </constraints>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6sf-4n-Ody">
                                 <size key="itemSize" width="50" height="50"/>

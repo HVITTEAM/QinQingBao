@@ -11,6 +11,10 @@
 
 
 @interface AccountViewController ()
+{
+     CouponsViewController *vc1;
+     BankCardViewController *vc2;
+}
 
 @end
 
@@ -22,14 +26,14 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.vc1 = [[CouponsViewController alloc] init];
-    self.vc1.title = @"优惠券";
+    vc1 = [[CouponsViewController alloc] init];
+    vc1.title = @"优惠券";
     
-    self.vc2 = [[BankCardViewController alloc] init];
-    self.vc2.title = @"银行卡";
+    vc2 = [[BankCardViewController alloc] init];
+    vc2.title = @"银行卡";
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.width, self.view.height)];
-    view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2, nil];
+    view.viewArr = [NSMutableArray arrayWithObjects:vc1,vc2, nil];
     [self.view addSubview:view];
     
 //    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

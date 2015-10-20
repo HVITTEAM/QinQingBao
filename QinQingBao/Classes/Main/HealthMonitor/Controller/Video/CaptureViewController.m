@@ -62,7 +62,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     NSDictionary *dict = arr[indexPath.row];
-    cell.imageView.image = [UIImage imageWithContentsOfFile:[dict objectForKey:@"path"]];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:
+                          [NSString stringWithFormat:@"%@.jpg",[dict objectForKey:@"time"]]];
+    cell.imageView.image = [UIImage imageWithContentsOfFile:filePath];
     cell.textLabel.text = [dict objectForKey:@"time"];
     return cell;
 }
