@@ -104,6 +104,10 @@
 		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; settings = {ASSET_TAGS = (); }; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; settings = {ASSET_TAGS = (); }; };
 		0193B0DD1BD6194700F07FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193B0DC1BD6194700F07FBA /* UINavigationBar+Awesome.m */; settings = {ASSET_TAGS = (); }; };
+		019723391BD7303800D58F8B /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723321BD7303800D58F8B /* RSKImageCropViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0197233A1BD7303800D58F8B /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723341BD7303800D58F8B /* RSKImageScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		0197233B1BD7303800D58F8B /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723361BD7303800D58F8B /* RSKTouchView.m */; settings = {ASSET_TAGS = (); }; };
+		0197233C1BD7303800D58F8B /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723381BD7303800D58F8B /* UIImage+FixOrientation.m */; settings = {ASSET_TAGS = (); }; };
 		01BA2D5F1B9EC70C00A2C7BD /* ServiceHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01BA2D5D1B9EC70C00A2C7BD /* ServiceHeadView.m */; };
 		01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01BA2D5E1B9EC70C00A2C7BD /* ServiceHeadView.xib */; };
 		01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB51B7DC3D70087F80E /* MessageUI.framework */; };
@@ -694,6 +698,15 @@
 		0193B0D51BD5D02F00F07FBA /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		0193B0DB1BD6194700F07FBA /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		0193B0DC1BD6194700F07FBA /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
+		019723301BD7303800D58F8B /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropper.h; sourceTree = "<group>"; };
+		019723311BD7303800D58F8B /* RSKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropViewController.h; sourceTree = "<group>"; };
+		019723321BD7303800D58F8B /* RSKImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageCropViewController.m; sourceTree = "<group>"; };
+		019723331BD7303800D58F8B /* RSKImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageScrollView.h; sourceTree = "<group>"; };
+		019723341BD7303800D58F8B /* RSKImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageScrollView.m; sourceTree = "<group>"; };
+		019723351BD7303800D58F8B /* RSKTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKTouchView.h; sourceTree = "<group>"; };
+		019723361BD7303800D58F8B /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
+		019723371BD7303800D58F8B /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		019723381BD7303800D58F8B /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		01BA2D5C1B9EC70C00A2C7BD /* ServiceHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHeadView.h; sourceTree = "<group>"; };
 		01BA2D5D1B9EC70C00A2C7BD /* ServiceHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHeadView.m; sourceTree = "<group>"; };
 		01BA2D5E1B9EC70C00A2C7BD /* ServiceHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceHeadView.xib; sourceTree = "<group>"; };
@@ -1385,6 +1398,7 @@
 		0126ECA61B8C4E8100EC85C1 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				0197232F1BD7303800D58F8B /* RSKImageCropper */,
 				0193B0D01BD5CDCF00F07FBA /* JPushSdk */,
 				01F0DAF71BCE3D84004FD908 /* SDWebImage */,
 				01F0DAA11BCE3350004FD908 /* MWPhotoBrowser */,
@@ -1646,6 +1660,22 @@
 				0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */,
 			);
 			path = JPushSdk;
+			sourceTree = "<group>";
+		};
+		0197232F1BD7303800D58F8B /* RSKImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				019723301BD7303800D58F8B /* RSKImageCropper.h */,
+				019723311BD7303800D58F8B /* RSKImageCropViewController.h */,
+				019723321BD7303800D58F8B /* RSKImageCropViewController.m */,
+				019723331BD7303800D58F8B /* RSKImageScrollView.h */,
+				019723341BD7303800D58F8B /* RSKImageScrollView.m */,
+				019723351BD7303800D58F8B /* RSKTouchView.h */,
+				019723361BD7303800D58F8B /* RSKTouchView.m */,
+				019723371BD7303800D58F8B /* UIImage+FixOrientation.h */,
+				019723381BD7303800D58F8B /* UIImage+FixOrientation.m */,
+			);
+			path = RSKImageCropper;
 			sourceTree = "<group>";
 		};
 		01D9DEA91B7DBF840087F80E /* Frameworks */ = {
@@ -2957,6 +2987,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0197233A1BD7303800D58F8B /* RSKImageScrollView.m in Sources */,
 				01F33D8F1BB2873F00787620 /* DownloadTask.m in Sources */,
 				01F0DADD1BCE3350004FD908 /* MWGridCell.m in Sources */,
 				01E6906E1BCCB32D00A17543 /* NSData+AES.m in Sources */,
@@ -2993,6 +3024,7 @@
 				01F0DB271BCE3D84004FD908 /* UIButton+WebCache.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
 				01024CC81BD0D10E00E8CAEC /* ServicesDatas.m in Sources */,
+				0197233B1BD7303800D58F8B /* RSKTouchView.m in Sources */,
 				01E690701BCCB32D00A17543 /* SecurityUtil.m in Sources */,
 				01E68F221BCC9B9F00A17543 /* HealthTotalDatas.m in Sources */,
 				01F0DB1D1BCE3D84004FD908 /* README.md in Sources */,
@@ -3018,6 +3050,7 @@
 				0126ED8D1B8C6D4200EC85C1 /* ServiceListCell.m in Sources */,
 				01F0DAE41BCE3350004FD908 /* DACircularProgressView.m in Sources */,
 				01024CC21BD0A75D00E8CAEC /* NSDataEx.m in Sources */,
+				019723391BD7303800D58F8B /* RSKImageCropViewController.m in Sources */,
 				01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */,
 				0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */,
@@ -3126,6 +3159,7 @@
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
 				01E4BE501B9FEA2800BF41EF /* PayButtonCell.m in Sources */,
 				0126ECF21B8C4E8100EC85C1 /* MJRefreshHeaderView.m in Sources */,
+				0197233C1BD7303800D58F8B /* UIImage+FixOrientation.m in Sources */,
 				0126ED471B8C547000EC85C1 /* CommonRemoteHelper.m in Sources */,
 				0180A2C11BA80C0700D26866 /* FamilyInfoViewController.m in Sources */,
 				01DD67241BAFF20A001D0883 /* TextFieldViewController.m in Sources */,

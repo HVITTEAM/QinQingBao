@@ -9,8 +9,10 @@
 #import "PersonalDataViewController.h"
 #import "ChangePwdViewController.h"
 #import "TextFieldViewController.h"
+#import "RSKImageCropper.h"
 
-@interface PersonalDataViewController ()
+
+@interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate>
 
 @end
 
@@ -252,9 +254,12 @@
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
         //        NSData *data = UIImageJPEGRepresentation(image, 0.000000001);
-        UIImage *slt = [image scaleImageToSize:CGSizeMake(70,70)];
-        NSData *data = UIImageJPEGRepresentation(slt, 1);
-        [self upploadAvatar:data];
+        //        UIImage *slt = [image scaleImageToSize:CGSizeMake(70,70)];
+        //        NSData *data = UIImageJPEGRepresentation(slt, 1);
+        RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
+        imageCropVC.title = @"裁剪照片";
+        imageCropVC.delegate = self;
+        [self.navigationController pushViewController:imageCropVC animated:YES];
         //关闭相册界面
         [picker dismissViewControllerAnimated:NO completion:nil];
     }
@@ -469,6 +474,23 @@
         [self updataUserInfor:dict];
         
     }
+}
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
+{
+    UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
+    NSData *data = UIImageJPEGRepresentation(slt, 1);
+    [self upploadAvatar:data];
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
