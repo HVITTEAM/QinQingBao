@@ -165,9 +165,7 @@
                                          {
                                              [NoticeHelper AlertShow:@"注册成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
-                                             UserModel *vo = [[UserModel alloc] init];
-                                             vo.member_id = (NSNumber*)[di objectForKey:@"member_id"];
-                                             vo.key = [NSString stringWithFormat:@"%@",[di objectForKey:@"key"]];
+                                             UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
                                              [MTControllerChooseTool setRootViewController];

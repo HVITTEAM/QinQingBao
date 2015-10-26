@@ -15,9 +15,8 @@ static float cellWidth = 66;
 #import "HomeViewController.h"
 #import "ServiceTypeDatas.h"
 #import "ServiceTypeModel.h"
+#import "AllServiceTypeController.h"
 
-#import "ServiceModel.h"
-#import "ServicesDatas.h"
 
 @interface HomeViewController ()
 {
@@ -204,7 +203,7 @@ static float cellWidth = 66;
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return dataProvider.count;
+    return dataProvider.count > 8 ? 8 :dataProvider.count;
 }
 
 //定义展示的Section的个数
@@ -223,6 +222,16 @@ static float cellWidth = 66;
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     ServiceTypeModel *data = [dataProvider objectAtIndex:indexPath.row];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",data.url]];
+    
+    if (dataProvider.count > 8)
+    {
+        if (indexPath.row == 7)
+        {
+            [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+            label.text = @"全部分类";
+            return cell;
+        }
+    }
     [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     label.text = data.tname;
     return cell;
@@ -266,23 +275,16 @@ static float cellWidth = 66;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
-                                                                  @"p" : @1,
-                                                                  @"tid" : item.tid}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     [HUD removeFromSuperview];
-                                     ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
-                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
-                                     ServiceListViewController *listView = [[ServiceListViewController alloc] init];
-                                     listView.title = item.tname;
-                                     listView.dataProvider = result.datas;
-                                     [self.navigationController pushViewController:listView animated:YES];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                 }];
+    if (dataProvider.count > 8 && indexPath.row == 7)
+    {
+        AllServiceTypeController *alllist = [[AllServiceTypeController alloc] init];
+        alllist.dataProvider = dataProvider;
+        [self.navigationController pushViewController:alllist animated:YES];
+        return;
+    }
+    ServiceListViewController *listView = [[ServiceListViewController alloc] init];
+    listView.item = item;
+    [self.navigationController pushViewController:listView animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择

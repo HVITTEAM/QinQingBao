@@ -38,6 +38,8 @@
 #import "SDImageCache.h"
 #import "Networking.h"
 #import "SecurityUtil.h"
+#import "UITableViewController+Placeholder.h"
+
 
 #import "TSPopoverController.h"
 #import "TSActionSheet.h"
@@ -222,6 +224,9 @@
 
 /***推送信息url*/
 #define URL_Push @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+
+/***获取亲属关系信息url*/
+#define URL_Relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_relation_byoldid"
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

@@ -54,7 +54,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -64,7 +64,10 @@
             return 1;
             break;
         case 1:
-            return 4;
+            return 1;
+            break;
+        case 2:
+            return 3;
             break;
         default:
             return 1;
@@ -95,8 +98,11 @@
     NSString *head = @"headCell";
     NSString *content = @"contentCell";
     NSString *pay = @"payBtnCell";
+    NSString *payType = @"payTypeCell";
+    
     PayButtonCell *payBtncell = [tableView dequeueReusableCellWithIdentifier:pay];
     UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
+    UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:payType];
     UITableViewCell *headcell = [tableView dequeueReusableCellWithIdentifier:head];
     
     if (indexPath.section == 0)
@@ -110,7 +116,7 @@
         }
         return  headcell;
     }
-    else  if (indexPath.section == 2)
+    else  if (indexPath.section == 3)
     {
         if (payBtncell == nil)
         {
@@ -126,7 +132,7 @@
         return  payBtncell;
     }
     
-    else
+    else if (indexPath.section == 1)
     {
         if (contentcell == nil)
         {
@@ -143,14 +149,38 @@
                                      range:NSMakeRange(5, 3)];
             contentcell.textLabel.attributedText = attributedString;
         }
-        else if(indexPath.row == 1)
-            contentcell.textLabel.text = @"货到付款";
-        else if(indexPath.row == 2)
-            contentcell.textLabel.text = @"微信支付";
-        else if(indexPath.row == 3)
-            contentcell.textLabel.text = @"支付宝支付";
+        
         return contentcell;
     }
+    else
+    {
+        if (payTypecell == nil)
+        {
+            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:payType];
+            payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            payTypecell.imageView.image = [UIImage imageNamed:@"app.png"];
+        }
+        if(indexPath.row == 0)
+            payTypecell.textLabel.text = @"货到付款";
+        else if(indexPath.row == 1)
+            payTypecell.textLabel.text = @"微信支付";
+        else if(indexPath.row == 2)
+            payTypecell.textLabel.text = @"支付宝支付";
+        return payTypecell;
+    }
+}
+
+//选中Cell响应事件
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section != 2)
+        return;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell.accessoryType == UITableViewCellAccessoryNone)
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType = UITableViewCellAccessoryNone;
 }
 
 /*
@@ -168,9 +198,9 @@
     /*============================================================================*/
     /*=======================需要填写商户app申请的===================================*/
     /*============================================================================*/
-    NSString *partner = @"2088101568353491";
-    NSString *seller = @"2088101568353491";
-    NSString *privateKey = @"2088101568353491";
+    NSString *partner = @"2088121051826945";
+    NSString *seller = @"ofc.er@hvit.com.cn";
+    NSString *privateKey = @"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKdIyxd3pZwIRBOXBkmkZRsTO9VTlsTlh3+cCxYKWgJc9FsKnOcLQxweSB8NVgwlgilc7LfIFKperP+P+U3KHv/NFlmoz5jJ1OTR9oQF+FoMVYqF9C9C8v3NNGxGnHQwak6d67wxYxntUXQjKFUZWlCnFNXR99D34rseGW6ro74xAgMBAAECgYAewAvNKYpAz2gsLbPTL6wCORvjj/UEBqlMtNN43rhC/PFSFvZWpkRU0+AwDRSHMRHnJpTBB798veCRLdcHDKN71/aPuCoESU4UONwVpHE3cpdDVQ0ATIDDMf5lww6WI29xEbuOcKSQMXJPhyBNCT6hYVbORwr7dQMts2P3xA8JHQJBANqJ6XfDbPfx0Io2xI2zfYhXAOIUf6YQ/ACVcoyAHFsi8vCg7pEbfHf5K9nlAqPBTqJpZLQ8w2N12KctPWQ61hcCQQDD9bJeyIs0an6zvEt0TFgBCTpkTsC6zTsYQj7HuYE05FJofgiXRQaq3PfzlhEKOl4uOx84sQibfPSvXrS7RQL3AkA8Issd66bmq6IJBn0byRJ4HAjgLWfa2L2fo4A77VzgL0POt1ouj/O2R9irQvtw+FadFodhmX7itaECj85e8FnNAkACcWCs39EkcSNtOC60n3MFaEkLERRD/+T5s3G26bAbqbEBTnjq8dhYbvLEXZ2OxBWCfAgym7pgvdkLCqI0J3MXAkAhw0vU9MIi9GWz3PoQzXsJyUHE03+zOjlm4ZLWvBNi3YQuXOZ7VXVcf0yT2VPw8N0vvHiAil6go+E3zS+VehRU";
     /*============================================================================*/
     /*============================================================================*/
     /*============================================================================*/
@@ -196,11 +226,11 @@
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = @"002"; //订单ID（由商家自行制定）
-    order.productName = @"test"; //商品标题
-    order.productDescription = @"test"; //商品描述
-    order.amount = [NSString stringWithFormat:@"%.2d",100]; //商品价格
-    order.notifyURL =  @"http://www.xxx.com"; //回调URL
+    order.tradeNO = @"0011"; //订单ID（由商家自行制定）
+    order.productName = @"商品标题"; //商品标题
+    order.productDescription = @"商品描述"; //商品描述
+    order.amount = @"0.01"; //商品价格
+    order.notifyURL =  @"http://www.hvit.com.cn"; //回调URL
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";
@@ -232,51 +262,7 @@
         }];
         
     }
-
+    
 }
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

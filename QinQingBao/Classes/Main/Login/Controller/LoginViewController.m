@@ -89,10 +89,12 @@
     else
     {
         [self.view endEditing:YES];
+        
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
                                                                   @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
-                                                                  @"client" : @"ios"}
+                                                                  @"client" : @"ios",
+                                                                  @"imei":[SharedAppUtil defaultCommonUtil].deviceToken}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -106,9 +108,7 @@
                                          {
                                              [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
-                                             UserModel *vo = [[UserModel alloc] init];
-                                             vo.member_id = (NSNumber*)[di objectForKey:@"member_id"];
-                                             vo.key = [NSString stringWithFormat:@"%@",[di objectForKey:@"key"]];
+                                             UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
                                              [MTControllerChooseTool setRootViewController];

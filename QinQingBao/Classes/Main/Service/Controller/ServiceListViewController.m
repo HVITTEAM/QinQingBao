@@ -9,6 +9,9 @@
 #import "ServiceListViewController.h"
 
 @interface ServiceListViewController ()
+{
+    NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -21,6 +24,12 @@
     [self initNavigation];
     
     [self initTableviewSkin];
+    
+    [self setupRefresh];
+    
+    [self.tableView headerBeginRefreshing];
+    
+    self.title = self.item.tname;
 }
 
 /**
@@ -29,14 +38,6 @@
 -(void)initNavigation
 {
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
--(void)setDataProvider:(NSMutableArray *)dataProvider
-{
-    _dataProvider = dataProvider;
-    if (_dataProvider.count == 0)
-        [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-    [self.tableView reloadData];
 }
 
 /**
@@ -48,6 +49,64 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
+#pragma mark 集成刷新控件
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    //    [self.tableView headerBeginRefreshing];
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    //    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @"正在帮你刷新中";
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在帮你加载中";
+}
+
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+    [self getDataProvider];
+}
+
+- (void)footerRereshing
+{
+    
+}
+
+-(void)getDataProvider
+{
+    dataProvider = [[NSMutableArray alloc] init];
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
+                                                                  @"p" : @1,
+                                                                  @"tid" : self.item.tid}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
+                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     dataProvider = result.datas;
+                                     [self.tableView reloadData];
+                                     if (result.datas.count == 0)
+                                         [self initWithPlaceString:@"现在还没数据呐"];
+                                     else
+                                         [self removePlace];
+                                     [self.tableView headerEndRefreshing];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -56,7 +115,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataProvider.count;
+    return dataProvider.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,7 +132,7 @@
         // 设置背景view
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
-    [cell setitemWithData:self.dataProvider[indexPath.row]];
+    [cell setitemWithData:dataProvider[indexPath.row]];
     return  cell;
 }
 

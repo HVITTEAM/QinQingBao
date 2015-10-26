@@ -9,6 +9,9 @@
 #import "MapViewController.h"
 
 @interface MapViewController ()
+{
+    CLGeocoder *geocoder;
+}
 
 @end
 
@@ -27,6 +30,8 @@
     
     [self initMapview];
     
+    geocoder = [[CLGeocoder alloc] init];
+    
     CLLocationCoordinate2D cords = CLLocationCoordinate2DMake(30.3, 120.2);
     float zoomLevel = 1;//缩放区域
     MKCoordinateRegion region = MKCoordinateRegionMake(cords, MKCoordinateSpanMake(zoomLevel, zoomLevel));
@@ -40,7 +45,7 @@
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
-
+    
     if ([[UIDevice currentDevice].systemVersion doubleValue]>=8.0) {
         [self.locationManager requestWhenInUseAuthorization];
     }
@@ -55,7 +60,7 @@
     self.map.rotateEnabled = NO;
     //锁定2D视图
     self.map.rotateEnabled = NO;
-
+    
     _map.showsUserLocation = YES;
     //显示用户位置（蓝色发光圆圈），还有None和FollowWithHeading两种，当有这个属性的时候，iOS8第一次打开地图，会自动定位并显示这个位置。iOS7模拟器上不会。
     self.map.userTrackingMode = MKUserTrackingModeFollow;
@@ -95,11 +100,36 @@
     //    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
     
     //这个方法可以设置地图精度以及显示用户所在位置的地图
-//    MKCoordinateSpan span=MKCoordinateSpanMake(0.1, 0.1);
-//    MKCoordinateRegion region=MKCoordinateRegionMake(userLocation.location.coordinate, span);
-//    [mapView setRegion:region animated:YES];
+    //    MKCoordinateSpan span=MKCoordinateSpanMake(0.1, 0.1);
+    //    MKCoordinateRegion region=MKCoordinateRegionMake(userLocation.location.coordinate, span);
+    //    [mapView setRegion:region animated:YES];
     
-//    [self.locationManager stopUpdatingLocation];
+    //    [self.locationManager stopUpdatingLocation];
+    
+    [geocoder reverseGeocodeLocation:userLocation.location completionHandler:
+     ^(NSArray *placemarks, NSError *error){
+         if (error||placemarks.count==0) {
+             NSLog(@"你输入的地址没找到，可能在月球上");
+         }else//编码成功
+         {
+             //显示最前面的地标信息
+             CLPlacemark *firstPlacemark=[placemarks firstObject];
+             
+             NSArray* addrArray = [firstPlacemark.addressDictionary
+                                   objectForKey:@"FormattedAddressLines"];
+
+             NSString *str1 = firstPlacemark.thoroughfare;
+             NSString *str2 = firstPlacemark.subThoroughfare;
+             NSString *str3 = firstPlacemark.locality;
+             NSString *str4 = firstPlacemark.subLocality;
+             NSString *str5 = firstPlacemark.administrativeArea;
+             NSString *str6 = firstPlacemark.subAdministrativeArea;
+             NSString *str7 = firstPlacemark.country;
+             NSString *str = firstPlacemark.name;
+             NSString *locationStr = [NSString stringWithFormat:@"%@%@%@%@%@附近",firstPlacemark.locality,firstPlacemark.subLocality,firstPlacemark.thoroughfare,firstPlacemark.subThoroughfare,firstPlacemark.name];
+             NSLog(locationStr);
+         }     }];
+    
 }
 
 - (IBAction)backToUserLocation:(id)sender

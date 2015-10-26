@@ -7,8 +7,14 @@
 //
 
 #import "FamilyViewController.h"
+#import "FamilyTotal.h"
+#import "FamilyModel.h"
+
 
 @interface FamilyViewController ()
+{
+    NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -26,6 +32,8 @@
     [self initNavigation];
     
     [self setupGroups];
+    
+    [self getDataProvider];
 }
 
 /**
@@ -37,6 +45,39 @@
     self.view.backgroundColor = HMGlobalBg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
+}
+
+/**
+ *  获取数据
+ */
+-(void)getDataProvider
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                 @"client" : @"ios",
+                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
+                                         dataProvider = result.datas;
+                                         [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+    
 }
 
 
@@ -73,7 +114,7 @@
     [self.groups addObject:group];
     
     // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@"pc_accout.png"];
+    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@""];
     if(!self.isfromOrder)
         version.destVcClass = [FamilyInfoViewController class];
     
@@ -86,9 +127,9 @@
         }
     };
     
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"老王" icon:@"app.png"];
+    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"老王" icon:@""];
     
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"二大爷" icon:@"app.png"];
+    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"二大爷" icon:@""];
     
     group.items = @[version,help,advice];
 }

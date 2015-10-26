@@ -107,7 +107,6 @@
                                      if (result.datas.count == 0)
                                      {
                                          [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-                                         return;
                                      }
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
@@ -132,11 +131,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    if(arc4random_uniform(100)>90)
+//        exit(0);
     return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    [NSThread sleepForTimeInterval:0.2f];
     static NSString *sugarCellIdentifier = @"sugarCell";
     static NSString *bloodPressureIdentifier = @"bloodPressureCell";
     static NSString *locationIdentifier = @"locationCell";
@@ -146,7 +148,6 @@
     BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:bloodPressureIdentifier];
     LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:locationIdentifier];
     VideoCell *videoCell = [tableView dequeueReusableCellWithIdentifier:videoIdentifier];
-    
     
     if (indexPath.row == 0)
     {

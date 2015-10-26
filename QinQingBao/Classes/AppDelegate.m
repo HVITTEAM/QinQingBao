@@ -64,6 +64,8 @@
     //格式化deviceToken
     NSString *deviceTokenStr = [[NSString stringWithFormat:@"%@",deviceToken] substringWithRange:NSMakeRange(1,[NSString stringWithFormat:@"%@",deviceToken].length - 2)];
     NSLog(@"My token is: %@",deviceToken);
+    
+    [SharedAppUtil defaultCommonUtil].deviceToken = deviceTokenStr;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -132,6 +134,8 @@
     //跳转支付宝钱包进行支付，处理支付结果
     [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
         NSLog(@"result = %@",resultDic);
+        NSLog(@"支付成功!");
+
     }];
     
     return YES;

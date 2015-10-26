@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "ServiceListCell.h"
 #import "OrderDetailViewController.h"
+#import "ServiceTypeModel.h"
+#import "ServicesDatas.h"
 
 
 
 @interface ServiceListViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *dataProvider;
+@property (nonatomic, retain) ServiceTypeModel *item;
 
 @end

@@ -12,4 +12,7 @@
 
 @property (nonatomic, assign) NSNumber *member_id;
 @property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) NSString *old_id;
+
+
 @end
