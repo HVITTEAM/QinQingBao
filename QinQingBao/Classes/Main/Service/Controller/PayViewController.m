@@ -158,14 +158,22 @@
         {
             payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:payType];
             payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            payTypecell.imageView.image = [UIImage imageNamed:@"app.png"];
         }
         if(indexPath.row == 0)
+        {
+            payTypecell.imageView.image = [UIImage imageNamed:@"unionpay.png"];
             payTypecell.textLabel.text = @"货到付款";
+        }
         else if(indexPath.row == 1)
+        {
+            payTypecell.imageView.image = [UIImage imageNamed:@"weichat.png"];
             payTypecell.textLabel.text = @"微信支付";
+        }
         else if(indexPath.row == 2)
+        {
+            payTypecell.imageView.image = [UIImage imageNamed:@"alipay.png"];
             payTypecell.textLabel.text = @"支付宝支付";
+        }
         return payTypecell;
     }
 }
@@ -219,6 +227,13 @@
         return;
     }
     
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+
     /*
      *生成订单信息及签名
      */
@@ -226,7 +241,7 @@
     Order *order = [[Order alloc] init];
     order.partner = partner;
     order.seller = seller;
-    order.tradeNO = @"0011"; //订单ID（由商家自行制定）
+    order.tradeNO = [NSString stringWithFormat:@"%@%u",currentDateStr,arc4random()%1000 + 9000]; //订单ID（由商家自行制定）
     order.productName = @"商品标题"; //商品标题
     order.productDescription = @"商品描述"; //商品描述
     order.amount = @"0.01"; //商品价格
@@ -260,9 +275,7 @@
             //【callback 处理支付结果】
             NSLog(@"reslut = %@",resultDic);
         }];
-        
     }
-    
 }
 
 @end

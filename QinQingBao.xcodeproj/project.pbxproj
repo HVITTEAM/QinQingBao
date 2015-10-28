@@ -99,6 +99,15 @@
 		01438E791BDDB65900F92681 /* UITableViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E781BDDB65900F92681 /* UITableViewController+Placeholder.m */; };
 		01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */; };
 		016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E745C1BAFD053009075E5 /* PersonalDataViewController.m */; };
+		0171A5641BE09D1200B0C4D6 /* FamilyInforTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5631BE09D1200B0C4D6 /* FamilyInforTotal.m */; };
+		0171A5671BE09D3400B0C4D6 /* FamilyInforModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5661BE09D3400B0C4D6 /* FamilyInforModel.m */; };
+		0171A56A1BE09F8C00B0C4D6 /* HypertensioninfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5691BE09F8C00B0C4D6 /* HypertensioninfoModel.m */; };
+		0171A56D1BE0A67000B0C4D6 /* HeredityinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A56C1BE0A67000B0C4D6 /* HeredityinfoModel.m */; };
+		0171A5701BE0A79E00B0C4D6 /* HabitinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A56F1BE0A79E00B0C4D6 /* HabitinfoModel.m */; };
+		0171A5731BE0A90700B0C4D6 /* DiseaseinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5721BE0A90700B0C4D6 /* DiseaseinfoModel.m */; };
+		0171A5761BE0A94A00B0C4D6 /* HealthyinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5751BE0A94A00B0C4D6 /* HealthyinfoModel.m */; };
+		0171A5801BE0B65A00B0C4D6 /* HealthArchivesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A57F1BE0B65A00B0C4D6 /* HealthArchivesController.m */; };
+		0171A5831BE0B9B800B0C4D6 /* HabitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171A5821BE0B9B800B0C4D6 /* HabitViewController.m */; };
 		0180A2B41BA7E9C400D26866 /* NoticeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2B31BA7E9C400D26866 /* NoticeHelper.m */; };
 		0180A2B81BA7E9F000D26866 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2B71BA7E9F000D26866 /* MBProgressHUD.m */; };
 		0180A2BE1BA80BE000D26866 /* FamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2BD1BA80BE000D26866 /* FamilyViewController.m */; };
@@ -693,6 +702,24 @@
 		01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllServiceTypeController.m; sourceTree = "<group>"; };
 		016E745B1BAFD053009075E5 /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
 		016E745C1BAFD053009075E5 /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
+		0171A5621BE09D1200B0C4D6 /* FamilyInforTotal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyInforTotal.h; sourceTree = "<group>"; };
+		0171A5631BE09D1200B0C4D6 /* FamilyInforTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyInforTotal.m; sourceTree = "<group>"; };
+		0171A5651BE09D3400B0C4D6 /* FamilyInforModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FamilyInforModel.h; sourceTree = "<group>"; };
+		0171A5661BE09D3400B0C4D6 /* FamilyInforModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FamilyInforModel.m; sourceTree = "<group>"; };
+		0171A5681BE09F8C00B0C4D6 /* HypertensioninfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HypertensioninfoModel.h; sourceTree = "<group>"; };
+		0171A5691BE09F8C00B0C4D6 /* HypertensioninfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HypertensioninfoModel.m; sourceTree = "<group>"; };
+		0171A56B1BE0A67000B0C4D6 /* HeredityinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeredityinfoModel.h; sourceTree = "<group>"; };
+		0171A56C1BE0A67000B0C4D6 /* HeredityinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeredityinfoModel.m; sourceTree = "<group>"; };
+		0171A56E1BE0A79E00B0C4D6 /* HabitinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HabitinfoModel.h; sourceTree = "<group>"; };
+		0171A56F1BE0A79E00B0C4D6 /* HabitinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HabitinfoModel.m; sourceTree = "<group>"; };
+		0171A5711BE0A90700B0C4D6 /* DiseaseinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiseaseinfoModel.h; sourceTree = "<group>"; };
+		0171A5721BE0A90700B0C4D6 /* DiseaseinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseinfoModel.m; sourceTree = "<group>"; };
+		0171A5741BE0A94A00B0C4D6 /* HealthyinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthyinfoModel.h; sourceTree = "<group>"; };
+		0171A5751BE0A94A00B0C4D6 /* HealthyinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthyinfoModel.m; sourceTree = "<group>"; };
+		0171A57E1BE0B65A00B0C4D6 /* HealthArchivesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthArchivesController.h; sourceTree = "<group>"; };
+		0171A57F1BE0B65A00B0C4D6 /* HealthArchivesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthArchivesController.m; sourceTree = "<group>"; };
+		0171A5811BE0B9B800B0C4D6 /* HabitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HabitViewController.h; sourceTree = "<group>"; };
+		0171A5821BE0B9B800B0C4D6 /* HabitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HabitViewController.m; sourceTree = "<group>"; };
 		0180A2B21BA7E9C400D26866 /* NoticeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeHelper.h; sourceTree = "<group>"; };
 		0180A2B31BA7E9C400D26866 /* NoticeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeHelper.m; sourceTree = "<group>"; };
 		0180A2B61BA7E9F000D26866 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -1630,10 +1657,24 @@
 		0131BC4C1BD88E4300CFD601 /* Family */ = {
 			isa = PBXGroup;
 			children = (
+				0171A5621BE09D1200B0C4D6 /* FamilyInforTotal.h */,
+				0171A5631BE09D1200B0C4D6 /* FamilyInforTotal.m */,
 				0131BC4E1BD88E6B00CFD601 /* FamilyTotal.h */,
 				0131BC4F1BD88E6B00CFD601 /* FamilyTotal.m */,
 				0131BC511BD88E8200CFD601 /* FamilyModel.h */,
 				0131BC521BD88E8200CFD601 /* FamilyModel.m */,
+				0171A5651BE09D3400B0C4D6 /* FamilyInforModel.h */,
+				0171A5661BE09D3400B0C4D6 /* FamilyInforModel.m */,
+				0171A5681BE09F8C00B0C4D6 /* HypertensioninfoModel.h */,
+				0171A5691BE09F8C00B0C4D6 /* HypertensioninfoModel.m */,
+				0171A56B1BE0A67000B0C4D6 /* HeredityinfoModel.h */,
+				0171A56C1BE0A67000B0C4D6 /* HeredityinfoModel.m */,
+				0171A56E1BE0A79E00B0C4D6 /* HabitinfoModel.h */,
+				0171A56F1BE0A79E00B0C4D6 /* HabitinfoModel.m */,
+				0171A5711BE0A90700B0C4D6 /* DiseaseinfoModel.h */,
+				0171A5721BE0A90700B0C4D6 /* DiseaseinfoModel.m */,
+				0171A5741BE0A94A00B0C4D6 /* HealthyinfoModel.h */,
+				0171A5751BE0A94A00B0C4D6 /* HealthyinfoModel.m */,
 			);
 			path = Family;
 			sourceTree = "<group>";
@@ -1653,6 +1694,17 @@
 			path = MyData;
 			sourceTree = "<group>";
 		};
+		0171A57D1BE0B62D00B0C4D6 /* HealthArchives */ = {
+			isa = PBXGroup;
+			children = (
+				0171A57E1BE0B65A00B0C4D6 /* HealthArchivesController.h */,
+				0171A57F1BE0B65A00B0C4D6 /* HealthArchivesController.m */,
+				0171A5811BE0B9B800B0C4D6 /* HabitViewController.h */,
+				0171A5821BE0B9B800B0C4D6 /* HabitViewController.m */,
+			);
+			path = HealthArchives;
+			sourceTree = "<group>";
+		};
 		0180A2B51BA7E9F000D26866 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -1665,6 +1717,7 @@
 		0180A2BB1BA80BE000D26866 /* FamilyInfo */ = {
 			isa = PBXGroup;
 			children = (
+				0171A57D1BE0B62D00B0C4D6 /* HealthArchives */,
 				0180A2C21BA810C700D26866 /* AddMemberViewController.h */,
 				0180A2C31BA810C700D26866 /* AddMemberViewController.m */,
 				0180A2BC1BA80BE000D26866 /* FamilyViewController.h */,
@@ -3050,6 +3103,7 @@
 				01FEE2B41B9BE213007C4641 /* OrderDetailViewController.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
 				01EB28681BA1192C00937412 /* OrderTableViewController.m in Sources */,
+				0171A5761BE0A94A00B0C4D6 /* HealthyinfoModel.m in Sources */,
 				01E94CD51BC75DB900B956A2 /* YSDemoDataModel.m in Sources */,
 				01F0DB271BCE3D84004FD908 /* UIButton+WebCache.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
@@ -3101,6 +3155,7 @@
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01E690841BCCF6AA00A17543 /* TSPopoverPopoverView.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
+				0171A5831BE0B9B800B0C4D6 /* HabitViewController.m in Sources */,
 				01FEE2C01B9C0F90007C4641 /* PlaceOrderHeadView.m in Sources */,
 				0126ED801B8C57A700EC85C1 /* AFURLResponseSerialization.m in Sources */,
 				01F0DAEC1BCE3350004FD908 /* PSTCollectionViewLayout.m in Sources */,
@@ -3158,6 +3213,7 @@
 				01FBF0E71BCBAD4100CA285C /* NSString+MJExtension.m in Sources */,
 				01F0DAE21BCE3350004FD908 /* MWTapDetectingView.m in Sources */,
 				0126ED9C1B8C6DB600EC85C1 /* ServiceListViewController.m in Sources */,
+				0171A56A1BE09F8C00B0C4D6 /* HypertensioninfoModel.m in Sources */,
 				01F0DAEA1BCE3350004FD908 /* PSTCollectionViewFlowLayout.m in Sources */,
 				01F0DB1E1BCE3D84004FD908 /* MKAnnotationView+WebCache.m in Sources */,
 				01ECDFBD1B7C402100665D87 /* HMCommonGroup.m in Sources */,
@@ -3169,6 +3225,7 @@
 				01FEE2CA1B9C2551007C4641 /* BusinessInfoCell.m in Sources */,
 				01ECDFCD1B7C45B200665D87 /* ProfileViewController.m in Sources */,
 				01FBF0E11BCBAD4100CA285C /* MJPropertyKey.m in Sources */,
+				0171A5801BE0B65A00B0C4D6 /* HealthArchivesController.m in Sources */,
 				01F0DAEE1BCE3350004FD908 /* PSTGridLayoutInfo.m in Sources */,
 				01FBF0E51BCBAD4100CA285C /* NSObject+MJKeyValue.m in Sources */,
 				0126ED7D1B8C57A700EC85C1 /* AFSecurityPolicy.m in Sources */,
@@ -3201,6 +3258,7 @@
 				0126ECF91B8C4E8100EC85C1 /* MASLayoutConstraint.m in Sources */,
 				01E6900F1BCCA8E800A17543 /* RealView.m in Sources */,
 				0126ED7E1B8C57A700EC85C1 /* AFURLConnectionOperation.m in Sources */,
+				0171A5731BE0A90700B0C4D6 /* DiseaseinfoModel.m in Sources */,
 				01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */,
 				01F0DB2C1BCE3D84004FD908 /* UIImageView+WebCache.m in Sources */,
 				0126ECF71B8C4E8100EC85C1 /* MASConstraint.m in Sources */,
@@ -3220,7 +3278,9 @@
 				0126ECEF1B8C4E8100EC85C1 /* MJRefreshBaseView.m in Sources */,
 				0126ED7C1B8C57A700EC85C1 /* AFNetworkReachabilityManager.m in Sources */,
 				0126ED7F1B8C57A700EC85C1 /* AFURLRequestSerialization.m in Sources */,
+				0171A5671BE09D3400B0C4D6 /* FamilyInforModel.m in Sources */,
 				0126ED131B8C4EE400EC85C1 /* SettingViewController.m in Sources */,
+				0171A5701BE0A79E00B0C4D6 /* HabitinfoModel.m in Sources */,
 				01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */,
 				0126ECFD1B8C4E8100EC85C1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				01E690831BCCF6AA00A17543 /* TSPopoverController.m in Sources */,
@@ -3230,6 +3290,7 @@
 				01F0DB2D1BCE3D84004FD908 /* UIView+WebCacheOperation.m in Sources */,
 				0126ED8C1B8C6D4200EC85C1 /* ServiceCell.m in Sources */,
 				0126ECF51B8C4E8100EC85C1 /* UIView+MJExtension.m in Sources */,
+				0171A5641BE09D1200B0C4D6 /* FamilyInforTotal.m in Sources */,
 				0128A8BE1B9EC7D3002B14E2 /* OrderSubmitCell.m in Sources */,
 				0126ED7A1B8C57A700EC85C1 /* AFHTTPRequestOperationManager.m in Sources */,
 				0180A2C41BA810C700D26866 /* AddMemberViewController.m in Sources */,
@@ -3238,6 +3299,7 @@
 				01E08DDA1BABFBC200E00432 /* VenderMannager.m in Sources */,
 				01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */,
 				01F0DAE51BCE3350004FD908 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
+				0171A56D1BE0A67000B0C4D6 /* HeredityinfoModel.m in Sources */,
 				01FBF0DE1BCBAD4100CA285C /* MJExtensionConst.m in Sources */,
 				01024CC31BD0A75D00E8CAEC /* openssl_wrapper.m in Sources */,
 				01FBF0DD1BCBAD4100CA285C /* MJDictionaryCache.m in Sources */,

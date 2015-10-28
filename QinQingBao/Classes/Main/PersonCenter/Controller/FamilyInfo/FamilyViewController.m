@@ -69,7 +69,7 @@
                                      {
                                          FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
                                          dataProvider = result.datas;
-                                         [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                         [self setupGroups];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -113,25 +113,29 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"老张" icon:@""];
-    if(!self.isfromOrder)
-        version.destVcClass = [FamilyInfoViewController class];
-    
-    __weak typeof(HMCommonArrowItem) *weakSelf = version;
-    version.operation = ^{
-        if(self.isfromOrder)
-        {
-            [MTNotificationCenter postNotificationName:@"selected" object:weakSelf userInfo:nil];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    };
-    
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"老王" icon:@""];
-    
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"二大爷" icon:@""];
-    
-    group.items = @[version,help,advice];
+    NSMutableArray *itemArr = [[NSMutableArray alloc] init];
+    for (FamilyModel *data in dataProvider)
+    {
+        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.oldname icon:@""];
+        item.subtitle = data.relation;
+        __weak typeof(HMCommonArrowItem) *weakSelf = item;
+        item.operation = ^{
+            if(self.isfromOrder)
+            {
+                [MTNotificationCenter postNotificationName:@"selected" object:weakSelf userInfo:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else
+            {
+                FamilyInfoViewController *detail = [[FamilyInfoViewController alloc] init];
+                detail.selecteItem = data;
+                [self.navigationController pushViewController:detail animated:YES];
+            }
+        };
+        
+        [itemArr addObject:item];
+    }
+    group.items = [itemArr copy];
 }
 
 -(void)addHandler:(id)sender

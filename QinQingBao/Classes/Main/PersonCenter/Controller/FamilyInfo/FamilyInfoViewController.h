@@ -8,8 +8,10 @@
 
 #import "HMCommonViewController.h"
 #import "DetailInfoViewController.h"
+#import "FamilyModel.h"
+#import "FamilyInforTotal.h"
 
 @interface FamilyInfoViewController : HMCommonViewController<UIActionSheetDelegate>
 
-
+@property (nonatomic, retain) FamilyModel *selecteItem;
 @end

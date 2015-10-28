@@ -28,8 +28,8 @@
 - (void)setitemWithData:(ServiceModel *)item
 {
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
-    self.serviceTitleLab.text = item.icontent;
-    self.serviceDetailLab.text = item.servicetime;
+    self.serviceTitleLab.text = item.orgname;
+    self.serviceDetailLab.text = item.icontent;
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",item.item_url]];
     [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
 }

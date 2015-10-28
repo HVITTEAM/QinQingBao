@@ -18,6 +18,7 @@
     NSString* timestr;
     NSString* minstr;
     
+    //是否选择了服务对象
     BOOL haveObj;
     
     //服务时间
@@ -44,7 +45,6 @@
 {
     [super viewDidAppear:animated];
     
-    //注册键盘通知
     [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:@"selected" object:nil];
 }
 
@@ -74,12 +74,11 @@
 }
 
 /**
- *  处理键盘遮挡文本
+ *
  */
 -(void)selectedObjectHanlder:(NSNotification *)notification
 {
     haveObj = YES;
-    //    [self.tableView reloadSections:<#(NSIndexSet *)#> withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView reloadData];
 }
 
@@ -377,10 +376,9 @@ numberOfRowsInComponent:(NSInteger)component
 {
     if (indexPath.section == 0 && indexPath.row == 0)
     {
-        if (!self.familyView)
-            self.familyView = [[FamilyViewController alloc] init];
-        self.familyView.isfromOrder = YES;
-        [self.navigationController pushViewController:self.familyView animated:YES];
+        FamilyViewController *familyView = [[FamilyViewController alloc] init];
+        familyView.isfromOrder = YES;
+        [self.navigationController pushViewController:familyView animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row == 0)
     {
@@ -390,9 +388,8 @@ numberOfRowsInComponent:(NSInteger)component
 
 -(void)submitClickHandler
 {
-    if (!self.payView)
-        self.payView = [[PayViewController alloc] init];
-    [self.navigationController pushViewController:self.payView animated:YES];
+    PayViewController *payView = [[PayViewController alloc] init];
+    [self.navigationController pushViewController:payView animated:YES];
 }
 
 -(void)showDatePicker
@@ -426,7 +423,7 @@ numberOfRowsInComponent:(NSInteger)component
                               delegate:nil
                               cancelButtonTitle:@"确定"
                               otherButtonTitles:nil];
-//        [alert show];
+        //        [alert show];
         
         selectedTimestr = [NSString stringWithFormat:@"%@%@%@", daystr , timestr,minstr];
         [self.tableView reloadData];

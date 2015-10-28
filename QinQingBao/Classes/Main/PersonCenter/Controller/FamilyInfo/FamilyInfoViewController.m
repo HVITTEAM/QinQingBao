@@ -7,6 +7,11 @@
 //
 
 #import "FamilyInfoViewController.h"
+#import "HypertensioninfoModel.h"
+#import "HealthArchivesController.h"
+#import "FamilyInforTotal.h"
+#import "FamilyInforModel.h"
+
 
 @interface FamilyInfoViewController ()
 
@@ -45,20 +50,44 @@
     //重置数据源
     [self setupGroup0];
     
-    //    [self setPlaceHolderview];
-    
     [self setupFooter];
     
     //刷新表格
     [self.tableView reloadData];
 }
 
-
--(void)setPlaceHolderview
+/**
+ *  获取数据
+ */
+-(void)getDataProvider
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake((self.view.width - 100)/2, (self.view.height - 100)/3, 100, 100)];
-    view.backgroundColor = [UIColor redColor];
-    [self.view addSubview:view];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Healthy parameters: @{@"oldid" : self.selecteItem.oid,
+                                                                @"client" : @"ios",
+                                                                @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         FamilyInforTotal *result = [FamilyInforTotal objectWithKeyValues:dict];
+                                         HealthArchivesController *viewC = [[HealthArchivesController alloc] init];
+                                         viewC.familyInfoTotal = result.datas;
+                                         [self.navigationController pushViewController:viewC animated:YES];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+    
 }
 
 - (void)setupGroup0
@@ -68,14 +97,23 @@
     [self.groups addObject:group];
 #warning nil会有警告信息log出来
     // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:nil];
+    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:@""];
+    version.isSubtitle = YES;
     version.destVcClass = [DetailInfoViewController class];
     version.operation = ^{
     };
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"健康联系人" icon:nil];
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:nil];
-    HMCommonArrowItem *service = [HMCommonArrowItem itemWithTitle:@"服务套餐" icon:nil];
-    HMCommonArrowItem *doctor = [HMCommonArrowItem itemWithTitle:@"医嘱信息" icon:nil];
+    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"健康联系人" icon:@""];
+    help.isSubtitle = YES;
+    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
+    advice.isSubtitle = YES;
+    advice.operation = ^{
+        [self getDataProvider];
+    };
+    
+    HMCommonArrowItem *service = [HMCommonArrowItem itemWithTitle:@"服务套餐" icon:@""];
+    service.isSubtitle = YES;
+    HMCommonArrowItem *doctor = [HMCommonArrowItem itemWithTitle:@"医嘱信息" icon:@""];
+    doctor.isSubtitle = YES;
     group.items = @[version,help,advice,service,doctor];
 }
 

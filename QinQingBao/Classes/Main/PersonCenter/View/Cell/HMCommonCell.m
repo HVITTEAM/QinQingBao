@@ -152,7 +152,8 @@
     //    } else {
     //        self.textLabel.x = 10;
     // 调整子标题的x
-    self.detailTextLabel.x = CGRectGetMaxX(self.textLabel.frame) + 5;
+    if (self.item.isSubtitle)
+        self.detailTextLabel.x = CGRectGetMaxX(self.textLabel.frame) + 5;
     //    }
 }
 #pragma mark - setter

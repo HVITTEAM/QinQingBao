@@ -14,13 +14,7 @@
 
 @interface OrderSubmitController : UITableViewController<UIActionSheetDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (nonatomic, retain) PayViewController *payView;
-
-@property (nonatomic, retain) FamilyViewController *familyView;
-
-
 @property (nonatomic,retain) UIDatePicker* datePicker;
-
 
 @property (nonatomic,retain) UIPickerView* datePickView;
 @end

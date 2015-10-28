@@ -67,34 +67,6 @@
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    if ([self.title isEqualToString:@"全部专题"])
-    {
-        [self getNearbyType:@"0" distence:Near_Distance];
-    }
-    else if ([self.title isEqualToString:@"避灾场所"])
-    {
-        [self getNearbyType:@"1" distence:Near_Distance];
-    }
-    else if ([self.title isEqualToString:@"物资仓库"])
-    {
-        [self getNearbyType:@"2" distence:Near_Distance];
-    }
-    else if ([self.title isEqualToString:@"救灾人员定位"])
-    {
-        [self getNearbyType:@"4" distence:Near_Distance];
-    }
-    else if ([self.title isEqualToString:@"视频探头"])
-    {
-        [self getNearbyType:@"0" distence:Near_Distance];
-    }
-    else if ([self.title isEqualToString:@"减灾示范社区"])
-    {
-        [self getNearbyType:@"3" distence:Near_Distance];
-    }
-}
-
--(void)getNearbyType:(NSString *)type distence:(NSString *)distence
-{
     
 }
 
