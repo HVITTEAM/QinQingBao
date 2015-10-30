@@ -57,7 +57,7 @@
     /**运动频次 0不运动 1经常 2偶尔 3少许**/
     /**睡眠质量 0不好 1好 2一般 **/
     /**睡眠时长 **/
-
+    
     HMCommonItem *item0 = [HMCommonItem itemWithTitle:@"血型" icon:nil];
     item0.subtitle = [self getBlood:self.habitVO.blood];
     HMCommonItem *item1 = [HMCommonItem itemWithTitle:@"吸烟年限" icon:nil];
@@ -75,7 +75,7 @@
     HMCommonItem *item9 = [HMCommonItem itemWithTitle:@"睡眠质量" icon:nil];
     item9.subtitle = [self getSleepquality:self.habitVO.sleepquality];
     HMCommonItem *item10 = [HMCommonItem itemWithTitle:@"睡眠时长" icon:nil];
-    item10.subtitle = [self getSleepduration:self.habitVO.sleepduration];
+    item10.subtitle = [self.habitVO.sleepduration isEqualToString:@""] ? @"无" : [NSString stringWithFormat:@"%@小时",self.habitVO.sleepduration];
     group.items = @[item0,item1,item2,item3,item4,item7,item8,item9,item10];
 }
 
@@ -89,8 +89,10 @@
         return @"B型";
     else if ([value isEqualToString:@"3"])
         return @"AB型";
-    else
+    else if ([value isEqualToString:@"4"])
         return @"RH型";
+    else
+        return @"无";
 }
 
 -(NSString *)getSmokeyears:(NSString *)value
@@ -103,106 +105,92 @@
         return @"两年";
     else if ([value isEqualToString:@"3"])
         return @"三年";
-    else
+    else if ([value isEqualToString:@"4"])
         return @"四年以上";
+    else
+        return @"无";
 }
 
 -(NSString *)getSmokefrequency:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不吸";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"偶尔";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"少许";
     else
-        return @"RH型";
+        return @"无";
 }
 
 -(NSString *)getDrinkfrequency:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不饮";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"偶尔";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"少许";
     else
-        return @"RH型";
+        return @"无";
 }
 
 -(NSString *)getDrinktype:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不饮";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"红酒";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"白酒";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"黄酒";
     else
-        return @"RH型";
+        return @"无";
 }
 
 -(NSString *)getSportduration:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不运动";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"偶尔";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"少许";
     else
-        return @"RH型";
+        return @"无";
 }
 
 -(NSString *)getSportfrequency:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不运动";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"偶尔";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"少许";
     else
-        return @"RH型";
+        return @"无";
 }
 
 -(NSString *)getSleepquality:(NSString *)value
 {
     if ([value isEqualToString:@"0"])
-        return @"O型";
+        return @"不好";
     else if ([value isEqualToString:@"1"])
-        return @"A型";
+        return @"好";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
-    else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"一般";
     else
-        return @"RH型";
-}
-
--(NSString *)getSleepduration:(NSString *)value
-{
-    if ([value isEqualToString:@"0"])
-        return @"O型";
-    else if ([value isEqualToString:@"1"])
-        return @"A型";
-    else if ([value isEqualToString:@"2"])
-        return @"B型";
-    else if ([value isEqualToString:@"3"])
-        return @"AB型";
-    else
-        return @"RH型";
+        return @"无";
 }
 
 @end

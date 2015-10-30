@@ -8,7 +8,7 @@
 
 
 static NSString *kcellIdentifier = @"collectionCellID";
-static float pageControlY = 170;
+static float pageControlY = 200;
 static float cellHeight = 80;
 static float cellWidth = 66;
 
@@ -39,7 +39,6 @@ static float cellWidth = 66;
     
     [self getTypeList];
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -79,10 +78,10 @@ static float cellWidth = 66;
     
     // 初始化 数组 并添加四张图片
     self.slideImages = [[NSMutableArray alloc] init];
-    [self.slideImages addObject:@"1-1.jpg"];
-    [self.slideImages addObject:@"1-2.jpg"];
-    [self.slideImages addObject:@"1-3.jpg"];
-    [self.slideImages addObject:@"1-4.jpg"];
+    [self.slideImages addObject:@"1-1.png"];
+    [self.slideImages addObject:@"1-2.png"];
+    [self.slideImages addObject:@"1-3.png"];
+//    [self.slideImages addObject:@"1-4.jpg"];
     
     // 初始化 pagecontrol
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, pageControlY, 100, 18)]; // 初始化mypagecontrol
@@ -100,6 +99,7 @@ static float cellWidth = 66;
     {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.slideImages objectAtIndex:i]]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
+        imageView.backgroundColor = [UIColor whiteColor];
         [self.imgPlayer addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+320。。。
     }
     

@@ -38,6 +38,8 @@
 #import "SDImageCache.h"
 #import "Networking.h"
 #import "SecurityUtil.h"
+#import "UIView+Toast.h"
+#import "SVProgressHUD.h"
 #import "UITableViewController+Placeholder.h"
 
 
@@ -219,6 +221,9 @@
 /***获取服务商的具体服务url*/
 #define URL_Iteminfo @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_iteminfo"
 
+/***根据iid获取该服务的详细资料url*/
+#define URL_Iteminfo_data_byiid @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_iteminfo_data_byiid"
+
 /***获取地区信息url*/
 #define URL_Get_address @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_address_data"
 
@@ -230,6 +235,12 @@
 
 /***获取老人健康信息url*/
 #define URL_Healthy @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_healthy_data"
+
+/***解除亲属关系绑定url*/
+#define URL_Del_relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_del_relation_byreid"
+
+/***获取该用户可用的优惠卷url*/
+#define URL_Youhuicard @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

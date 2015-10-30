@@ -131,14 +131,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if(arc4random_uniform(100)>90)
-//        exit(0);
+    //    if(arc4random_uniform(100)>90)
+    //        exit(0);
     return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [NSThread sleepForTimeInterval:0.2f];
+    //    [NSThread sleepForTimeInterval:0.2f];
     static NSString *sugarCellIdentifier = @"sugarCell";
     static NSString *bloodPressureIdentifier = @"bloodPressureCell";
     static NSString *locationIdentifier = @"locationCell";

@@ -16,6 +16,8 @@
 #import "OrderSubmitController.h"
 #import "QueryAllEvaluationController.h"
 
+#import "ServiceModel.h"
+
 
 
 @interface OrderDetailViewController : UITableViewController
@@ -24,4 +26,5 @@
 @property (nonatomic, retain) OrderSubmitController *submitController;
 @property (nonatomic, retain) QueryAllEvaluationController *queryAlleva;
 
+@property (nonatomic, retain) ServiceModel *selectedItem;
 @end

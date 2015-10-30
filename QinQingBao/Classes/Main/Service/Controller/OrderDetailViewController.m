@@ -7,8 +7,13 @@
 //
 
 #import "OrderDetailViewController.h"
+#import "ServiceItemTotal.h"
+
 
 @interface OrderDetailViewController ()
+{
+    NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -39,10 +44,37 @@
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"ServiceHeadView" owner:nil options:nil];
     self.tableView.tableHeaderView = [nibs lastObject];
     self.tableView.tableHeaderView.backgroundColor = HMGlobalBg;
-
+    
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+}
+
+
+-(void)setSelectedItem:(ServiceModel *)selectedItem
+{
+    _selectedItem = selectedItem;
+    [self getDataProvider];
+}
+-(void)getDataProvider
+{
+    dataProvider = [[NSMutableArray alloc] init];
+    [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo_data_byiid parameters:  @{@"iid" : self.selectedItem.iid,
+                                                                             @"client" : @"ios",
+                                                                             @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     ServiceItemTotal *result = [ServiceItemTotal objectWithKeyValues:dict];
+                                     dataProvider = result.datas;
+                                     [self.tableView reloadData];
+                                     if (result.datas.count == 0)
+                                         [self initWithPlaceString:@"现在还没数据呐"];
+                                     else
+                                         [self removePlace];
+                                     [self.tableView headerEndRefreshing];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
 }
 
 #pragma mark - Table view data source
@@ -92,7 +124,7 @@
     NSString *evaCellstr = @"evaCell";
     NSString *bucellstr = @"buceCell";
     NSString *serviceDetailstr = @"serviceDetailCell";
-
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
     EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:evaCellstr];
     BusinessInfoCell *bucell = [tableView dequeueReusableCellWithIdentifier:bucellstr];

@@ -13,12 +13,14 @@
 
 +(void)AlertShow:(NSString *)msg view:(UIView *)view
 {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.labelText = msg;
-    hud.margin = 10.f;
-    hud.removeFromSuperViewOnHide = YES;
-    [hud hide:YES afterDelay:1.33];
+//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+//    hud.mode = MBProgressHUDModeText;
+//    hud.labelText = msg;
+//    hud.margin = 10.f;
+//    hud.removeFromSuperViewOnHide = YES;
+//    [hud hide:YES afterDelay:1.33];
+    
+    [view makeToast:msg duration:2.0 position:CSToastPositionTop];
 }
 
 + (NSString *)intervalSinceNow: (NSString *) theDate

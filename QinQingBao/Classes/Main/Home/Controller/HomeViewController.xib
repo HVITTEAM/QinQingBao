@@ -23,13 +23,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-xI-2bY" userLabel="ImagePlayer">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="140" id="D5n-u0-wUd"/>
+                                <constraint firstAttribute="height" constant="180" id="D5n-u0-wUd"/>
                             </constraints>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlY-uk-Vhe" userLabel="ButtonTypeView">
-                            <rect key="frame" x="0.0" y="160" width="320" height="80"/>
+                            <rect key="frame" x="0.0" y="200" width="320" height="80"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-8v-IDq" userLabel="coverButton">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -93,7 +93,7 @@
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOK-7g-4T1">
-                            <rect key="frame" x="0.0" y="260" width="320" height="190"/>
+                            <rect key="frame" x="0.0" y="300" width="320" height="190"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="190" id="d3U-N7-tkj"/>

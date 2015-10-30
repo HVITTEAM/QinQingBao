@@ -33,7 +33,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"张大爷";
+    self.title = self.selecteItem.oldname;
     self.view.backgroundColor = HMGlobalBg;
 }
 
@@ -79,6 +79,7 @@
                                          FamilyInforTotal *result = [FamilyInforTotal objectWithKeyValues:dict];
                                          HealthArchivesController *viewC = [[HealthArchivesController alloc] init];
                                          viewC.familyInfoTotal = result.datas;
+                                         viewC.title = [NSString stringWithFormat:@"%@的健康档案",self.selecteItem.oldname];
                                          [self.navigationController pushViewController:viewC animated:YES];
                                      }
                                      [HUD removeFromSuperview];
@@ -153,15 +154,32 @@
 {
     if(buttonIndex == 0)
     {
-        //退出登录时候需要先清空系统缓存
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Del_relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                         @"rid" : self.selecteItem.rid,
+                                                                         @"client" : @"ios",
+                                                                         @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解除绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         [HUD removeFromSuperview];
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                     }];
         
-        //        //退出登录时候需要先清空系统缓存
-        //        [SharedAppUtil defaultCommonUtil].userInfor = nil;
-        //        [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userInfor key:User_Archiver_Key filePath:User_Archiver_Path];
-        //
-        //        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.loginview];
-        //
-        //        [self presentViewController:nav animated:YES completion:nil];
     }
 }
 

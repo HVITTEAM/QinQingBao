@@ -11,7 +11,10 @@ static float cellWidth = 66;
 #import "HealthArchivesController.h"
 
 #import "HabitViewController.h"
-
+#import "HeredityinfoController.h"
+#import "DiseaseinfoController.h"
+#import "HealthyinfoController.h"
+#import "HypertensioninfoController.h"
 
 @interface HealthArchivesController ()
 {
@@ -20,10 +23,10 @@ static float cellWidth = 66;
 }
 
 @property (nonatomic, strong) HabitViewController *vc1;
-@property (nonatomic, strong) QCListViewController *vc2;
-@property (nonatomic, strong) QCListViewController *vc3;
-@property (nonatomic, strong) QCListViewController *vc4;
-@property (nonatomic, strong) QCListViewController *vc5;
+@property (nonatomic, strong) HeredityinfoController *vc2;
+@property (nonatomic, strong) DiseaseinfoController *vc3;
+@property (nonatomic, strong) HypertensioninfoController *vc4;
+@property (nonatomic, strong) HealthyinfoController *vc5;
 @end
 
 @implementation HealthArchivesController
@@ -52,16 +55,21 @@ static float cellWidth = 66;
     self.vc1.habitVO = self.familyInfoTotal.habitinfo;
     self.vc1.title = @"生活习惯";
 
-    self.vc2 = [[QCListViewController alloc] init];
+    self.vc2 = [[HeredityinfoController alloc] init];
+    self.vc2.heredityVO = self.familyInfoTotal.heredityinfo;
     self.vc2.title = @"家族遗传史";
     
-    self.vc3 = [[QCListViewController alloc] init];
+    self.vc3 = [[DiseaseinfoController alloc] init];
+    self.vc3.dataProvider = self.familyInfoTotal.diseaseinfo;
+
     self.vc3.title = @"疾病史";
     
-    self.vc4 = [[QCListViewController alloc] init];
+    self.vc4 = [[HypertensioninfoController alloc] init];
+    self.vc4.hyoertensionVO = self.familyInfoTotal.hypertensioninfo;
     self.vc4.title = @"高血压专项";
     
-    self.vc5 = [[QCListViewController alloc] init];
+    self.vc5 = [[HealthyinfoController alloc] init];
+    self.vc5.dataProvider = self.familyInfoTotal.healthyinfo;
     self.vc5.title = @"健康信息";
     
     [self.slideSwitchView buildUI];
@@ -103,20 +111,28 @@ static float cellWidth = 66;
 {
     QCListViewController *vc = nil;
     HabitViewController *vc0 = nil;
+    HeredityinfoController *vc1 = nil;
+    DiseaseinfoController *vc2 = nil;
+    HypertensioninfoController *vc3 = nil;
+    HealthyinfoController *vc4 = nil;
 
     if (number == 0) {
         vc0 = self.vc1;
     } else if (number == 1) {
-        vc = self.vc2;
+        vc1 = self.vc2;
     } else if (number == 2) {
-        vc = self.vc3;
+        vc2 = self.vc3;
     } else if (number == 3) {
-        vc = self.vc4;
+        vc3 = self.vc4;
     } else if (number == 4) {
-        vc = self.vc5;
+        vc4 = self.vc5;
     }
     vc.nav = self.navigationController;
     vc0.nav = self.navigationController;
+    vc1.nav = self.navigationController;
+    vc2.nav = self.navigationController;
+    vc3.nav = self.navigationController;
+    vc4.nav = self.navigationController;
     [vc viewDidCurrentView];
 }
 
@@ -145,7 +161,6 @@ static float cellWidth = 66;
  */
 -(void)initNavigation
 {
-    self.title = @"健康档案";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

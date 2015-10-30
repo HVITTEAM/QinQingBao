@@ -142,6 +142,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderDetailViewController *palceView = [[OrderDetailViewController alloc] init];
+    palceView.selectedItem = dataProvider[indexPath.row];
     [self.navigationController pushViewController:palceView animated:YES];
 }
 

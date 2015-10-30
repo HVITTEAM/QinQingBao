@@ -28,6 +28,6 @@
 /**风险等级**/
 @property (nonatomic, copy) NSString *risk_Level;
 /**（服药情况） 是一个数组**/
-@property (nonatomic, retain) NSString *medicineinfo;
+@property (nonatomic, retain) NSMutableArray *medicineinfo;
 
 @end
