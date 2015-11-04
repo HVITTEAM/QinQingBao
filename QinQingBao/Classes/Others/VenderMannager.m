@@ -24,7 +24,7 @@
     static dispatch_once_t onceToken;dispatch_once(&onceToken, ^{
         NSLog(@"第三方服务开始注册");
         
-        [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
+//        [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
         
         NSLog(@"第三方服务注册完成");
     });

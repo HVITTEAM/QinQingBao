@@ -8,7 +8,9 @@
 
 
 static NSString *kcellIdentifier = @"collectionCellID";
-static float pageControlY = 200;
+
+#define pageControlY  180
+
 static float cellHeight = 80;
 static float cellWidth = 66;
 
@@ -38,6 +40,7 @@ static float cellWidth = 66;
     [self initCollectionView];
     
     [self getTypeList];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,6 +57,7 @@ static float cellWidth = 66;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     self.title = @"首页";
+    self.bgScrollView.height = pageControlY;
     
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:HMGlobalBg] forState:UIControlStateHighlighted];
@@ -75,7 +79,6 @@ static float cellWidth = 66;
     self.imgPlayer.delegate = self;
     self.imgPlayer.userInteractionEnabled = YES;
     self.imgPlayer.showsHorizontalScrollIndicator = NO;
-    
     // 初始化 数组 并添加四张图片
     self.slideImages = [[NSMutableArray alloc] init];
     [self.slideImages addObject:@"1-1.png"];

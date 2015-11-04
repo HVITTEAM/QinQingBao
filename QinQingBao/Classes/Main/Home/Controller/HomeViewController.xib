@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
@@ -23,13 +24,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-xI-2bY" userLabel="ImagePlayer">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="180" id="D5n-u0-wUd"/>
+                                <constraint firstAttribute="height" constant="150" id="D5n-u0-wUd"/>
                             </constraints>
                         </scrollView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlY-uk-Vhe" userLabel="ButtonTypeView">
-                            <rect key="frame" x="0.0" y="200" width="320" height="80"/>
+                            <rect key="frame" x="0.0" y="160" width="320" height="80"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-8v-IDq" userLabel="coverButton">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
@@ -70,7 +71,7 @@
                                         <constraint firstAttribute="height" constant="21" id="Gvf-S2-SLq"/>
                                         <constraint firstAttribute="width" constant="183" id="NeY-Zf-19j"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -93,7 +94,7 @@
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOK-7g-4T1">
-                            <rect key="frame" x="0.0" y="300" width="320" height="190"/>
+                            <rect key="frame" x="0.0" y="250" width="320" height="190"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="190" id="d3U-N7-tkj"/>
@@ -109,11 +110,11 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="7yY-xI-2bY" secondAttribute="width" id="ASP-xI-S8p"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" id="BW0-0m-x0x"/>
-                        <constraint firstItem="ZOK-7g-4T1" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="20" id="Kgm-DA-7ZE"/>
+                        <constraint firstItem="ZOK-7g-4T1" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="10" id="Kgm-DA-7ZE"/>
                         <constraint firstItem="ZOK-7g-4T1" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="Nil-WC-NiM"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="NkX-di-EER"/>
                         <constraint firstAttribute="trailing" secondItem="7yY-xI-2bY" secondAttribute="trailing" id="P2v-MR-UVK"/>
-                        <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" constant="20" id="cKl-zo-DPT"/>
+                        <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" constant="10" id="cKl-zo-DPT"/>
                         <constraint firstAttribute="bottom" secondItem="7yY-xI-2bY" secondAttribute="bottom" constant="398" id="gHk-aF-9aP"/>
                         <constraint firstAttribute="trailing" secondItem="ZOK-7g-4T1" secondAttribute="trailing" id="hfy-Vc-6zg"/>
                         <constraint firstItem="7yY-xI-2bY" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="kh2-xb-ST1"/>

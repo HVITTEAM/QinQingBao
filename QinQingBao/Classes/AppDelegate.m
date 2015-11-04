@@ -12,6 +12,14 @@
 #import "SDImageCache.h"
 #import "APService.h"
 #import "YSPlayerController.h"
+#import <SMS_SDK/SMS_SDK.h>
+
+
+/**
+ *  SMS appkey
+ */
+#define sms_appKey @"81de4ff2ac9e"
+#define sms_appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
 
 @interface AppDelegate ()
 
@@ -28,13 +36,15 @@
     [self.window makeKeyAndVisible];
     
     UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
-    if (vo)
+    if (vo == nil)
     {
-        [MTControllerChooseTool setRootViewController];
-        [SharedAppUtil defaultCommonUtil].userVO = vo;
+        [MTControllerChooseTool setLoginViewController];
     }
     else
-        [MTControllerChooseTool setLoginViewController];
+    {
+        [SharedAppUtil defaultCommonUtil].userVO = vo;
+        [MTControllerChooseTool setRootViewController];
+    }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
     // 初始化荧石SDK库, 设置SDK平台服务器地址
@@ -45,6 +55,7 @@
     
     [[YSHTTPClient sharedInstance] setClientAppKey:AppKey];
     
+    [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
     
     //注册用户的apns服务
     [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
@@ -52,7 +63,6 @@
                                                    UIRemoteNotificationTypeAlert)
                                        categories:nil];
     [APService setupWithOption:launchOptions];
-    
     
     return YES;
 }
@@ -67,6 +77,13 @@
     
     [SharedAppUtil defaultCommonUtil].deviceToken = deviceTokenStr;
 }
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"完蛋了"
+                                                    message:@"deviceToken获取失败！"
+                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
@@ -135,7 +152,7 @@
     [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
         NSLog(@"result = %@",resultDic);
         NSLog(@"支付成功!");
-
+        
     }];
     
     return YES;
