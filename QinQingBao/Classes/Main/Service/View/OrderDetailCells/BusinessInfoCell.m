@@ -16,13 +16,21 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
 - (IBAction)callClickHandler:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:@"telprompt://10010"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgphone]];
     [[UIApplication sharedApplication] openURL:url];
+}
+
+-(void)setItemInfo:(ServiceItemModel *)itemInfo
+{
+    _itemInfo = itemInfo;
+    self.nameLab.text = itemInfo.orgname;
+    self.addressLab.text = itemInfo.orgaddress;
+    self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgphone];
 }
 @end

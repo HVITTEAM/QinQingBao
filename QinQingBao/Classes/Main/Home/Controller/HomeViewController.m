@@ -81,7 +81,7 @@ static float cellWidth = 66;
     [self.slideImages addObject:@"1-1.png"];
     [self.slideImages addObject:@"1-2.png"];
     [self.slideImages addObject:@"1-3.png"];
-//    [self.slideImages addObject:@"1-4.jpg"];
+    //    [self.slideImages addObject:@"1-4.jpg"];
     
     // 初始化 pagecontrol
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, pageControlY, 100, 18)]; // 初始化mypagecontrol
@@ -135,7 +135,11 @@ static float cellWidth = 66;
 -(void)getTypeList
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1}
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @7,
+                                                                 @"client" : @"ios",
+                                                                 @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                 @"p" : @1,
+                                                                 @"page" : @100}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];

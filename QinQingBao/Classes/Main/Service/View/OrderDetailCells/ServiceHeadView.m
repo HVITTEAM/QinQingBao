@@ -13,8 +13,17 @@
 
  - (void)drawRect:(CGRect)rect
 {
-    self.bgview.height = 80;
+    self.bgview.height = 90;
 }
 
+-(void)setItemInfo:(ServiceItemModel *)itemInfo
+{
+    _itemInfo = itemInfo;
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",itemInfo.item_url]];
+    [self.icon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    self.title.text = itemInfo.tname;
+    self.content.text = itemInfo.icontent;
+    self.sum.text = [NSString stringWithFormat:@"成交%@单",itemInfo.sumsell];
+}
 
 @end

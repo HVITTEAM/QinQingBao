@@ -242,6 +242,20 @@
 /***获取该用户可用的优惠卷url*/
 #define URL_Youhuicard @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
 
+/***确认下单综合接口url*/
+#define URL_Get_data_create_order @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_data_create_order"
+
+/***提交订单接口url*/
+#define URL_Create_order @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=creat_order"
+
+/***获得用户订单信息url*/
+#define URL_Workinfo_data @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+
+/***修改工单url*/
+#define URL_Ck_workinfo_status @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status"
+
+
+
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
 blue:((float)(rgbValue & 0xFF)) / 255.0 \

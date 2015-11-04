@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceItemModel.h"
 
 @interface BusinessInfoCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIButton *callBtn;
+@property (strong, nonatomic) IBOutlet UILabel *nameLab;
+@property (strong, nonatomic) IBOutlet UILabel *addressLab;
+@property (strong, nonatomic) IBOutlet UILabel *telLab;
 - (IBAction)callClickHandler:(id)sender;
-
+@property (nonatomic, retain) ServiceItemModel *itemInfo;
 @end

@@ -21,4 +21,10 @@
 {
     self.submitClick(sender);
 }
+
+-(void)setPrice:(NSString *)price
+{
+    _price = price;
+    self.priceLab.text = [NSString stringWithFormat:@"%@元",price];
+}
 @end

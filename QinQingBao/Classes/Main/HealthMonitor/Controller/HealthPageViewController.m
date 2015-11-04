@@ -91,7 +91,8 @@
 
 - (void)footerRereshing
 {
-    
+    [self getDataProvider];
+
 }
 
 -(void)getDataProvider

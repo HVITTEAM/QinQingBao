@@ -13,6 +13,8 @@
 @interface OrderDetailViewController ()
 {
     NSMutableArray *dataProvider;
+    /*当前服务的详细数据*/
+    ServiceItemModel *itemInfo;
 }
 
 @end
@@ -56,24 +58,23 @@
     _selectedItem = selectedItem;
     [self getDataProvider];
 }
+
 -(void)getDataProvider
 {
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dataProvider = [[NSMutableArray alloc] init];
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo_data_byiid parameters:  @{@"iid" : self.selectedItem.iid,
                                                                              @"client" : @"ios",
                                                                              @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     ServiceItemTotal *result = [ServiceItemTotal objectWithKeyValues:dict];
-                                     dataProvider = result.datas;
+                                     itemInfo = [ServiceItemModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                     [(ServiceHeadView *)self.tableView.tableHeaderView setItemInfo:itemInfo];
                                      [self.tableView reloadData];
-                                     if (result.datas.count == 0)
-                                         [self initWithPlaceString:@"现在还没数据呐"];
-                                     else
-                                         [self removePlace];
-                                     [self.tableView headerEndRefreshing];
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     [HUD removeFromSuperview];
                                  }];
 }
 
@@ -115,6 +116,7 @@
             [weakSelf submitClickHandler];
         };
     }
+    self.headView.price = itemInfo.price;
     return self.headView;
 }
 
@@ -151,6 +153,7 @@
             bucell = [nib lastObject];
             bucell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        [bucell setItemInfo:itemInfo];
         return  bucell;
     }
     else if (indexPath.row == 2)
@@ -178,9 +181,8 @@
  */
 -(void)queryAllevaluation
 {
-    if (!self.queryAlleva)
-        self.queryAlleva = [[QueryAllEvaluationController alloc] init];
-    [self.navigationController pushViewController:self.queryAlleva animated:YES];
+    QueryAllEvaluationController *queryAlleva = [[QueryAllEvaluationController alloc] init];
+    [self.navigationController pushViewController:queryAlleva animated:YES];
 }
 
 /**
@@ -188,9 +190,8 @@
  */
 -(void)submitClickHandler
 {
-    if(!self.submitController)
-        self.submitController = [[OrderSubmitController alloc] init];
-    [self.navigationController pushViewController:self.submitController animated:YES];
+    OrderSubmitController *submitController = [[OrderSubmitController alloc] init];
+    [self.navigationController pushViewController:submitController animated:YES];
 }
 
 @end

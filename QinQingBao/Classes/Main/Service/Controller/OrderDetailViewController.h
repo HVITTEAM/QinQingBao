@@ -23,8 +23,5 @@
 @interface OrderDetailViewController : UITableViewController
 
 @property (nonatomic, retain) PlaceOrderHeadView *headView;
-@property (nonatomic, retain) OrderSubmitController *submitController;
-@property (nonatomic, retain) QueryAllEvaluationController *queryAlleva;
-
 @property (nonatomic, retain) ServiceModel *selectedItem;
 @end

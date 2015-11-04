@@ -10,6 +10,9 @@
 
 @interface PlaceOrderHeadView : UIView
 @property (strong, nonatomic) IBOutlet UIButton *orderRightnow;
+@property (strong, nonatomic) IBOutlet UILabel *priceLab;
 - (IBAction)orderRightnowClickHandler:(id)sender;
 @property (nonatomic, copy) void (^submitClick)(UIButton *btn);
+
+@property (nonatomic, copy) NSString *price;
 @end

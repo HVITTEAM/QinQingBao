@@ -32,4 +32,10 @@
 {
     self.queryClick(sender);
 }
+
+
+-(void)setItemInfo:(ServiceItemModel *)itemInfo
+{
+    _itemInfo = itemInfo;
+}
 @end

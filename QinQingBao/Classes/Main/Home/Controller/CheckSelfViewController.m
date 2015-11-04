@@ -62,7 +62,6 @@
     self.symptomPositions = @[@"全身症状",@"皮肤症状",@"头部",@"咽颈部",@"胸部",@"腹部",@"生殖部位",@"骨盆",@"四肢",@"腰背部",@"臀部及肛门"];
     
     //初始化具体症状数组
-    self.symptoms = [[NSMutableArray alloc]init];
     for (int i=0; i<15; i++) {
         NSString *symString = [[NSString alloc] initWithFormat:@"全身症状%d",i];
         [self.symptoms addObject:symString];

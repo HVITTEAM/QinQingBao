@@ -8,7 +8,8 @@
 
 #import "QueryAllEvaluationController.h"
 #import "ServiceTypeDatas.h"
-#import "ServiceTypeModel.h"
+#import "EvaluationItemCell.h"
+#import "EvaluationHeadView.h"
 
 
 @interface QueryAllEvaluationController ()
@@ -20,10 +21,63 @@
 
 @implementation QueryAllEvaluationController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    self.title = @"所有评价";
     
+    [self setupRefresh];
+    [self initTableviewSkin];
+    
+    [self getDataProvider];
+}
+
+-(void)initTableviewSkin
+{
+    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
+    self.tableView.tableHeaderView = [nibs lastObject];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.tableView.tableHeaderView.backgroundColor = [UIColor redColor];
+    self.title = @"所有评价";
+}
+
+#pragma mark 集成刷新控件
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
+    //    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    //    [self.tableView headerBeginRefreshing];
+    
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @"正在帮你刷新中";
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"正在帮你加载中";
+}
+
+#pragma mark 开始进入刷新状态
+- (void)headerRereshing
+{
+    //    [self getDataProvider];
+}
+
+- (void)footerRereshing
+{
+    [self getDataProvider];
+}
+
+-(void)getDataProvider
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
@@ -35,10 +89,29 @@
                                      }
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
+                                     [HUD removeFromSuperview];
+                                     [self.tableView footerEndRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
                                  }];
+    
 }
+
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return 50;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//
+//    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
+////    self.tableView.tableHeaderView = [nibs lastObject];
+//
+//    return [nibs lastObject];
+//}
 
 #pragma mark - Table view data source
 
@@ -57,57 +130,17 @@
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:listViewCellstr];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"EvaluationItemCell" owner:self options:nil];
+        cell = [nib lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
-    cell.textLabel.text = item.tname;
     return cell;
 }
 
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
+}
 
 @end
