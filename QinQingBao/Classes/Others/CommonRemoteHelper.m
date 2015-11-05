@@ -80,6 +80,9 @@ static NSOperationQueue * _queue;
                   //                  NSLog(@"%@", responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSString *errorStr = [error.userInfo objectForKey:@"NSLocalizedDescription"];
+                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:errorStr delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                  [alertView show];
                   failure(operation,error);
               }];
     }

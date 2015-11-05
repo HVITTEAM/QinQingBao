@@ -53,7 +53,7 @@
 }
 
 
--(void)setSelectedItem:(ServiceModel *)selectedItem
+-(void)setSelectedItem:(ServiceItemModel *)selectedItem
 {
     _selectedItem = selectedItem;
     [self getDataProvider];

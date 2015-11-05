@@ -92,7 +92,7 @@
 - (void)footerRereshing
 {
     [self getDataProvider];
-
+    
 }
 
 -(void)getDataProvider
@@ -144,11 +144,14 @@
     static NSString *bloodPressureIdentifier = @"bloodPressureCell";
     static NSString *locationIdentifier = @"locationCell";
     static NSString *videoIdentifier = @"videoCell";
+    static NSString *heartIdentifier = @"heartCell";
+    
     
     HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:sugarCellIdentifier];
     BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:bloodPressureIdentifier];
     LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:locationIdentifier];
     VideoCell *videoCell = [tableView dequeueReusableCellWithIdentifier:videoIdentifier];
+    HeartbeatCell *heartCell = [tableView dequeueReusableCellWithIdentifier:heartIdentifier];
     
     if (indexPath.row == 0)
     {
@@ -181,7 +184,7 @@
         }
         return bloodPressureCell;
     }
-    else if(indexPath.row == 2)
+    else if(indexPath.row == 4)
     {
         if (!locationCell)
         {
@@ -195,6 +198,17 @@
             locationCell.item = dataProvider[0];
         }
         return locationCell;
+    }
+    else if(indexPath.row == 3)
+    {
+        if (!heartCell)
+        {
+            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HeartbeatCell" owner:nil options:nil];
+            heartCell = (HeartbeatCell*)[nibs lastObject];
+            heartCell.backgroundColor = [UIColor clearColor];
+            heartCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return heartCell;
     }
     else
     {
@@ -211,12 +225,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 2)
+    if (indexPath.row == 4)
     {
         [self showPosition];
         return;
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == 2)
     {
         [self showVideo];
         return;

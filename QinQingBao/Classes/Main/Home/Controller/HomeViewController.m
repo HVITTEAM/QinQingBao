@@ -138,7 +138,7 @@ static float cellWidth = 66;
 -(void)getTypeList
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @7,
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1,
                                                                  @"client" : @"ios",
                                                                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                  @"p" : @1,
@@ -153,9 +153,7 @@ static float cellWidth = 66;
                                          return;
                                      }
                                      dataProvider = result.datas;
-                                     
                                      [self.serviceColectionview reloadData];
-                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];

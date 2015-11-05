@@ -12,7 +12,9 @@
 
 - (void)initWithPlaceString:(NSString *)placeStr
 {
+    [self removePlace];
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_logo.png"]];
+    img.tag = 101;
     img.x = (MTScreenW - 60)/2;
     img.y = MTScreenH/2 - 180;
     img.width = img.height = 60;
@@ -33,6 +35,8 @@
 -(void)removePlace
 {
     UILabel *lable = [self.tableView viewWithTag:100];
+    UIImageView *img = [self.tableView viewWithTag:101];
+    [img removeFromSuperview];
     [lable removeFromSuperview];
 }
 @end

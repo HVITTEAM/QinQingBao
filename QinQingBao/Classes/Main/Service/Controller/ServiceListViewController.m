@@ -8,18 +8,19 @@
 
 #import "ServiceListViewController.h"
 #import "DOPDropDownMenu.h"
-
+#import "ServiceTypeDatas.h"
 
 @interface ServiceListViewController ()<DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
 {
     NSMutableArray *dataProvider;
+    //当前选中的服务分类 默认为第一条
+    ServiceTypeModel *selectedItem;
 }
 @property (nonatomic, strong) NSArray *classifys;
-@property (nonatomic, strong) NSArray *cates;
-@property (nonatomic, strong) NSArray *movices;
-@property (nonatomic, strong) NSArray *hostels;
+//@property (nonatomic, strong) NSArray *cates;
+//@property (nonatomic, strong) NSArray *movices;
+//@property (nonatomic, strong) NSArray *hostels;
 @property (nonatomic, strong) NSArray *areas;
-
 @property (nonatomic, strong) NSArray *sorts;
 @end
 
@@ -35,11 +36,11 @@
     
     [self setupRefresh];
     
-    [self.tableView headerBeginRefreshing];
+    //    [self.tableView headerBeginRefreshing];
     
     self.title = self.item.tname;
     
-    [self initTopMenu];
+    [self getServiceType];
 }
 
 /**
@@ -48,12 +49,12 @@
 -(void)initTopMenu
 {
     // 数据
-    self.classifys = @[@"服务类型",@"今日新单",@"电影",@"酒店"];
-    self.cates = @[@"自助餐",@"快餐",@"火锅",@"日韩料理",@"西餐",@"烧烤小吃"];
-    self.movices = @[@"内地剧",@"港台剧",@"英美剧"];
-    self.hostels = @[@"经济酒店",@"商务酒店",@"连锁酒店",@"度假酒店",@"公寓酒店"];
-    self.areas = @[@"评分",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
-    self.sorts = @[@"距离",@"离我最近",@"好评优先",@"人气优先",@"最新发布"];
+    //    self.classifys = @[@"全部分类",@"服装加工",@"服装洗涤",@"搬家公司"];
+    //    self.cates = @[@"分类1",@"分类2",@"分类3",@"分类4",@"分类5",@"分类6"];
+    //    self.movices = @[@"服装洗涤1",@"服装洗涤2",@"服装洗涤3"];
+    //    self.hostels = @[@"搬家公司1",@"搬家公司2",@"搬家公司3",@"搬家公司4",@"搬家公司5"];
+    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
+    self.sorts = @[@"离我最近",@"好评优先",@"人气优先",@"最新发布"];
     
     // 添加下拉菜单
     DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:44];
@@ -61,6 +62,8 @@
     menu.delegate = self;
     menu.dataSource = self;
     self.tableView.tableHeaderView = menu;
+    selectedItem = self.classifys[0];
+    [self.tableView headerBeginRefreshing];
 }
 
 /**
@@ -104,6 +107,21 @@
     self.tableView.footerRefreshingText = @"正在帮你加载中";
 }
 
+-(void)getServiceType
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : self.item.tid,
+                                                                 @"client" : @"ios",
+                                                                 @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                 @"p" : @1,
+                                                                 @"page" : @100}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
+                                     self.classifys = [result.datas copy];
+                                     [self initTopMenu];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 }];
+}
+
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
@@ -118,10 +136,9 @@
 -(void)getDataProvider
 {
     dataProvider = [[NSMutableArray alloc] init];
-    
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
                                                                   @"p" : @1,
-                                                                  @"tid" : self.item.tid}
+                                                                  @"tid" : selectedItem.tid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
@@ -138,7 +155,6 @@
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      [self.tableView headerEndRefreshing];
                                      [self.tableView footerEndRefreshing];
-
                                  }];
 }
 
@@ -183,6 +199,11 @@
 
 
 #pragma mark DOPDropDownMenuDataSource,DOPDropDownMenuDelegate
+-(void)menuforwardAction:(BOOL)forward
+{
+    self.tableView.scrollEnabled = !forward;
+}
+
 - (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
 {
     return 3;
@@ -202,7 +223,8 @@
 - (NSString *)menu:(DOPDropDownMenu *)menu titleForRowAtIndexPath:(DOPIndexPath *)indexPath
 {
     if (indexPath.column == 0) {
-        return self.classifys[indexPath.row];
+        ServiceTypeModel *model = (ServiceTypeModel *)self.classifys[indexPath.row];
+        return model.tname;
     } else if (indexPath.column == 1){
         return self.areas[indexPath.row];
     } else {
@@ -212,29 +234,29 @@
 
 - (NSInteger)menu:(DOPDropDownMenu *)menu numberOfItemsInRow:(NSInteger)row column:(NSInteger)column
 {
-    if (column == 0) {
-        if (row == 0) {
-            return self.cates.count;
-        } else if (row == 2){
-            return self.movices.count;
-        } else if (row == 3){
-            return self.hostels.count;
-        }
-    }
+    //    if (column == 0) {
+    //        if (row == 0) {
+    //            return self.cates.count;
+    //        } else if (row == 2){
+    //            return self.movices.count;
+    //        } else if (row == 3){
+    //            return self.hostels.count;
+    //        }
+    //    }
     return 0;
 }
 
 - (NSString *)menu:(DOPDropDownMenu *)menu titleForItemsInRowAtIndexPath:(DOPIndexPath *)indexPath
 {
-    if (indexPath.column == 0) {
-        if (indexPath.row == 0) {
-            return self.cates[indexPath.item];
-        } else if (indexPath.row == 2){
-            return self.movices[indexPath.item];
-        } else if (indexPath.row == 3){
-            return self.hostels[indexPath.item];
-        }
-    }
+    //    if (indexPath.column == 0) {
+    //        if (indexPath.row == 0) {
+    //            return self.cates[indexPath.item];
+    //        } else if (indexPath.row == 2){
+    //            return self.movices[indexPath.item];
+    //        } else if (indexPath.row == 3){
+    //            return self.hostels[indexPath.item];
+    //        }
+    //    }
     return nil;
 }
 
@@ -244,6 +266,8 @@
         NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
     }else {
         NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
+        selectedItem = self.classifys[indexPath.row];
+        [self.tableView headerBeginRefreshing];
     }
 }
 

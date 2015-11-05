@@ -20,7 +20,7 @@
 //    hud.removeFromSuperViewOnHide = YES;
 //    [hud hide:YES afterDelay:1.33];
     
-    [view makeToast:msg duration:2.0 position:CSToastPositionTop];
+    [view makeToast:msg duration:1.3 position:CSToastPositionTop];
 }
 
 + (NSString *)intervalSinceNow: (NSString *) theDate

@@ -55,7 +55,7 @@
 {
     _map = [[MKMapView alloc] initWithFrame:[self.view bounds]];
     
-    self.map.showsCompass= YES; //指南针
+//    self.map.showsCompass= YES; //指南针
     //锁定视图旋转
     self.map.rotateEnabled = NO;
     //锁定2D视图

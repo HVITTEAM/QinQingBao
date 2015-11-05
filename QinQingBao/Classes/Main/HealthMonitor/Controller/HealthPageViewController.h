@@ -10,6 +10,8 @@
 #import "HeartCell.h"
 #import "BloodPressureCell.h"
 #import "LocationCell.h"
+#import "HeartbeatCell.h"
+
 
 @interface HealthPageViewController : UITableViewController
 

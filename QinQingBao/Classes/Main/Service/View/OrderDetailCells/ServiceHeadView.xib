@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
@@ -13,15 +14,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hM1-hh-uB4" userLabel="bgview">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scrat_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-a9-rU7" userLabel="icon">
-                            <rect key="frame" x="10" y="15" width="70" height="70"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-a9-rU7" userLabel="icon">
+                            <rect key="frame" x="10" y="11" width="70" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="if7-Wf-IgU"/>
                                 <constraint firstAttribute="height" constant="70" id="p4R-af-fWq"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="千粥汇营养粥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWN-7f-L6B">
-                            <rect key="frame" x="88" y="15" width="212" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载中...." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWN-7f-L6B">
+                            <rect key="frame" x="88" y="13" width="212" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="kr2-Mp-ReL"/>
                                 <constraint firstAttribute="width" constant="212" id="mug-Hn-fS8"/>
@@ -31,7 +32,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月售 100单" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5t-x0-YKp">
-                            <rect key="frame" x="88" y="63" width="81" height="21"/>
+                            <rect key="frame" x="88" y="61" width="81" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="5pP-wQ-6xM"/>
                                 <constraint firstAttribute="width" constant="81" id="RFn-Dx-0PE"/>
@@ -40,8 +41,8 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营养粥： 花生 链子 白木耳 大米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mf-s7-FcC">
-                            <rect key="frame" x="88" y="38" width="212" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载中...." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mf-s7-FcC">
+                            <rect key="frame" x="88" y="36" width="212" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="212" id="8SR-cZ-e7G"/>
                                 <constraint firstAttribute="height" constant="21" id="FVc-0l-jZ1"/>
@@ -54,12 +55,12 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="1mf-s7-FcC" firstAttribute="top" secondItem="ZWN-7f-L6B" secondAttribute="bottom" constant="2" id="5qS-zc-Rix"/>
-                        <constraint firstItem="Rhr-a9-rU7" firstAttribute="top" secondItem="hM1-hh-uB4" secondAttribute="top" constant="15" id="HoC-Z5-84k"/>
+                        <constraint firstItem="Rhr-a9-rU7" firstAttribute="top" secondItem="hM1-hh-uB4" secondAttribute="top" constant="11" id="HoC-Z5-84k"/>
                         <constraint firstItem="1mf-s7-FcC" firstAttribute="leading" secondItem="Rhr-a9-rU7" secondAttribute="trailing" constant="8" id="Yee-tm-kGb"/>
                         <constraint firstItem="A5t-x0-YKp" firstAttribute="leading" secondItem="Rhr-a9-rU7" secondAttribute="trailing" constant="8" id="d6p-3H-Crt"/>
                         <constraint firstItem="A5t-x0-YKp" firstAttribute="top" secondItem="1mf-s7-FcC" secondAttribute="bottom" constant="4" id="diC-Da-sX3"/>
                         <constraint firstItem="ZWN-7f-L6B" firstAttribute="leading" secondItem="Rhr-a9-rU7" secondAttribute="trailing" constant="8" id="hPF-XN-ZaH"/>
-                        <constraint firstItem="ZWN-7f-L6B" firstAttribute="top" secondItem="hM1-hh-uB4" secondAttribute="top" constant="15" id="kCF-Av-5Hz"/>
+                        <constraint firstItem="ZWN-7f-L6B" firstAttribute="top" secondItem="hM1-hh-uB4" secondAttribute="top" constant="13" id="kCF-Av-5Hz"/>
                         <constraint firstItem="Rhr-a9-rU7" firstAttribute="leading" secondItem="hM1-hh-uB4" secondAttribute="leading" constant="10" id="zrs-jz-OaO"/>
                     </constraints>
                 </view>
@@ -82,6 +83,6 @@
         </view>
     </objects>
     <resources>
-        <image name="scrat_avatar" width="179" height="194"/>
+        <image name="placeholderImage" width="130" height="130"/>
     </resources>
 </document>

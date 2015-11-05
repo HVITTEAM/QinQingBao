@@ -16,8 +16,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *serviceTitleLab;
 @property (strong, nonatomic) IBOutlet UILabel *serviceDetailLab;
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
+@property (strong, nonatomic) IBOutlet UILabel *sunSellLab;
 
-- (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(NSInteger)rows;
+//- (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(NSInteger)rows;
 
 - (void)setitemWithData:(ServiceModel *)item;
 

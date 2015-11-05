@@ -26,7 +26,6 @@
     [super viewDidLoad];
     
     [self setupRefresh];
-    [self initTableviewSkin];
     
     [self getDataProvider];
 }
@@ -90,6 +89,7 @@
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
                                      [HUD removeFromSuperview];
+                                     [self initTableviewSkin];
                                      [self.tableView footerEndRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

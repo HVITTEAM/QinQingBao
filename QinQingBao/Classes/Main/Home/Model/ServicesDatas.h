@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ServiceModel.h"
+#import "ServiceItemModel.h"
+//#import "ServiceModel.h"
+
 @interface ServicesDatas : NSObject
 
 /**

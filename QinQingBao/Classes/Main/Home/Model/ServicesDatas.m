@@ -14,7 +14,7 @@
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"datas" : [ServiceModel class],
+             @"datas" : [ServiceItemModel class],
              };
 }
 @end

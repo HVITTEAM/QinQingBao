@@ -16,12 +16,12 @@
 #import "OrderSubmitController.h"
 #import "QueryAllEvaluationController.h"
 
-#import "ServiceModel.h"
+#import "ServiceItemModel.h"
 
 
 
 @interface OrderDetailViewController : UITableViewController
 
 @property (nonatomic, retain) PlaceOrderHeadView *headView;
-@property (nonatomic, retain) ServiceModel *selectedItem;
+@property (nonatomic, retain) ServiceItemModel *selectedItem;
 @end

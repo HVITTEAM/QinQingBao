@@ -7,6 +7,7 @@
 //
 
 #import "ServiceListCell.h"
+#import "ServiceItemModel.h"
 
 @implementation ServiceListCell
 
@@ -25,8 +26,9 @@
     [self.starView setUserInteractionEnabled:NO];
 }
 
-- (void)setitemWithData:(ServiceModel *)item
+- (void)setitemWithData:(ServiceItemModel *)item
 {
+    self.sunSellLab.text = [NSString stringWithFormat:@"售出%@单",item.sumsell];
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
     self.serviceTitleLab.text = item.orgname;
     self.serviceDetailLab.text = item.icontent;

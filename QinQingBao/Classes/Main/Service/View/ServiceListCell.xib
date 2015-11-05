@@ -23,9 +23,8 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="千粥汇营养粥" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzq-3C-RaB">
-                        <rect key="frame" x="70" y="8" width="210" height="20"/>
+                        <rect key="frame" x="70" y="8" width="90" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="210" id="98J-nv-IzQ"/>
                             <constraint firstAttribute="height" constant="20" id="UVX-Hu-qx2"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="15"/>
@@ -92,6 +91,7 @@
                 <outlet property="serviceDetailLab" destination="hyC-US-vvZ" id="vDw-Jq-nEI"/>
                 <outlet property="serviceTitleLab" destination="fzq-3C-RaB" id="Nn1-YL-dli"/>
                 <outlet property="starView" destination="FE2-1T-Otm" id="wHv-ZG-o7U"/>
+                <outlet property="sunSellLab" destination="ySb-tj-24U" id="aY9-hi-QZO"/>
             </connections>
             <point key="canvasLocation" x="431" y="306"/>
         </tableViewCell>
