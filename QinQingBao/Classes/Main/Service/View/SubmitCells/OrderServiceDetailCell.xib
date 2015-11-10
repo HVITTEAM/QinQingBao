@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="OrderServiceDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VmX-hA-33H">
+                        <rect key="frame" x="10" y="5" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="TNf-uW-VdN"/>
+                            <constraint firstAttribute="height" constant="60" id="oQD-j8-oMc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服装加工" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="04M-yk-3p3">
+                        <rect key="frame" x="80" y="8" width="180" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="J7P-8W-T9N"/>
+                            <constraint firstAttribute="width" constant="180" id="n1t-13-Lid"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服装加工详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLc-mq-XbT">
+                        <rect key="frame" x="80" y="37" width="180" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Ndr-Jp-8AR"/>
+                            <constraint firstAttribute="width" constant="180" id="aVn-Vq-op3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥50.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDf-SC-Ksy">
+                        <rect key="frame" x="250" y="8" width="62" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="0QE-DJ-Z5Z"/>
+                            <constraint firstAttribute="width" constant="62" id="XQc-XW-euY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QLc-mq-XbT" firstAttribute="top" secondItem="MDf-SC-Ksy" secondAttribute="bottom" constant="8" id="8og-q5-eN0"/>
+                    <constraint firstItem="04M-yk-3p3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="IYU-dh-UcZ"/>
+                    <constraint firstItem="MDf-SC-Ksy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="JeD-5V-onV"/>
+                    <constraint firstItem="VmX-hA-33H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="N7o-pJ-nVj"/>
+                    <constraint firstItem="VmX-hA-33H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="SFa-WT-Qo9"/>
+                    <constraint firstItem="QLc-mq-XbT" firstAttribute="leading" secondItem="VmX-hA-33H" secondAttribute="trailing" constant="10" id="a2j-Vq-vVX"/>
+                    <constraint firstItem="04M-yk-3p3" firstAttribute="leading" secondItem="VmX-hA-33H" secondAttribute="trailing" constant="10" id="dZO-oE-8fO"/>
+                    <constraint firstAttribute="trailing" secondItem="MDf-SC-Ksy" secondAttribute="trailing" constant="8" id="euo-HO-edT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="serviceDesc" destination="QLc-mq-XbT" id="fGQ-bZ-2QY"/>
+                <outlet property="serviceIcon" destination="VmX-hA-33H" id="dRq-QO-57O"/>
+                <outlet property="servicePrice" destination="MDf-SC-Ksy" id="TkY-tm-YCY"/>
+                <outlet property="serviceTitle" destination="04M-yk-3p3" id="sz4-gl-wQU"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

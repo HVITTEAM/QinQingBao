@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface BloodCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *bloodLab;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
+@property (strong, nonatomic) IBOutlet UILabel *decLab;
+
+@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, assign) ChartType type;
 
 @end

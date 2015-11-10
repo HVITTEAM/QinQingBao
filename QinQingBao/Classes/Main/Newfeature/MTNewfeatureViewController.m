@@ -8,7 +8,7 @@
 // 是否为4inch
 #define FourInch ([UIScreen mainScreen].bounds.size.height == 568.0)
 
-#define HMNewfeatureImageCount 4
+#define HMNewfeatureImageCount 3
 
 #import "MTNewfeatureViewController.h"
 #import "HomeViewController.h"
@@ -28,7 +28,7 @@
     [self setupScrollView];
     
     // 2.添加pageControl
-    [self setupPageControl];
+//    [self setupPageControl];
 }
 
 /**
@@ -183,7 +183,7 @@
     startButton.centerY = self.view.height * 0.8;
     
     // 4.设置文字
-    [startButton setTitle:@"开始使用" forState:UIControlStateNormal];
+    [startButton setTitle:@"立即体验" forState:UIControlStateNormal];
     [startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [startButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -193,16 +193,16 @@
  */
 - (void)start
 {
-    [UIApplication sharedApplication].statusBarHidden = NO;
-    // 显示主控制器（MainViewController）
-    HomeViewController *vc = [[HomeViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    // 切换控制器
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    
-    window.rootViewController = nav;
-    
-//    [self presentViewController:nav animated:YES completion:nil];
+    UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
+    if (vo == nil)
+    {
+        [MTControllerChooseTool setLoginViewController];
+    }
+    else
+    {
+        [SharedAppUtil defaultCommonUtil].userVO = vo;
+        [MTControllerChooseTool setRootViewController];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate

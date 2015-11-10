@@ -13,6 +13,10 @@
 
 
 @interface PayViewController ()
+{
+    //选择的支付方式
+    NSInteger selectedIndex;
+}
 
 @end
 
@@ -24,6 +28,8 @@
     [self initNavigation];
     
     [self initTableviewSkin];
+    
+    selectedIndex = 2;
 }
 
 /**
@@ -33,7 +39,6 @@
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    //        self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor =  HMGlobalBg;
 }
 
@@ -109,7 +114,6 @@
     {
         if (headcell == nil)
         {
-            //提交订单
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PayHeadCell" owner:self options:nil];
             headcell = [nib lastObject];
             headcell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -120,7 +124,6 @@
     {
         if (payBtncell == nil)
         {
-            //提交订单
             NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PayButtonCell" owner:self options:nil];
             payBtncell = [nib lastObject];
             payBtncell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -138,6 +141,7 @@
         {
             contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:content];
             contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            contentcell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         if (indexPath.row == 0)
         {
@@ -174,6 +178,11 @@
             payTypecell.imageView.image = [UIImage imageNamed:@"alipay.png"];
             payTypecell.textLabel.text = @"支付宝支付";
         }
+        if (selectedIndex == indexPath.row)
+            payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else
+            payTypecell.accessoryType = UITableViewCellAccessoryNone;
+        
         return payTypecell;
     }
 }
@@ -184,11 +193,14 @@
     if (indexPath.section != 2)
         return;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell.accessoryType == UITableViewCellAccessoryNone)
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    else
-        cell.accessoryType = UITableViewCellAccessoryNone;
+    //    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    selectedIndex = indexPath.row;
+    [self.tableView reloadData];
+    //    if (cell.accessoryType == UITableViewCellAccessoryNone)
+    //        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    //    else
+    //        cell.accessoryType = UITableViewCellAccessoryNone;
 }
 
 /*
@@ -233,7 +245,7 @@
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
     //用[NSDate date]可以获取系统当前时间
     NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
-
+    
     /*
      *生成订单信息及签名
      */

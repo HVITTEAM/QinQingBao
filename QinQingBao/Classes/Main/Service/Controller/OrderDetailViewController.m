@@ -141,6 +141,7 @@
             evacell.queryClick  = ^(UIButton *btn){
                 [self queryAllevaluation];
             };
+            [evacell setItemInfo:itemInfo];
             evacell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return  evacell;
@@ -182,6 +183,7 @@
 -(void)queryAllevaluation
 {
     QueryAllEvaluationController *queryAlleva = [[QueryAllEvaluationController alloc] init];
+    queryAlleva.itemInfo = self.selectedItem;
     [self.navigationController pushViewController:queryAlleva animated:YES];
 }
 
@@ -191,6 +193,7 @@
 -(void)submitClickHandler
 {
     OrderSubmitController *submitController = [[OrderSubmitController alloc] init];
+    submitController.serviceFetailItem = self.selectedItem;
     [self.navigationController pushViewController:submitController animated:YES];
 }
 

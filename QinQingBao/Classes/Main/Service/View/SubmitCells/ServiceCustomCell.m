@@ -16,8 +16,19 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
+
+-(void)setdataWithItem:(FamilyModel *)item
+{
+    NSString *str = [NoticeHelper intervalSinceNowByyear:@"2008-01-01"];
+    self.nameLab.text = item.oldname;
+    self.phoneLab.text = item.oldphone;
+    self.addressLab.text = item.totalname;
+    self.sexLab.text = [item.member_sex isEqualToString:@"1"] ? @"男" : @"女";
+    self.ageLab.text = str;
+}
+
 
 @end

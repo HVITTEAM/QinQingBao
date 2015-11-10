@@ -9,10 +9,12 @@
 #import "OrderTableViewController.h"
 
 //static float topHeight = 190;
-static float cellHeight = 80;
 static float cellWidth = 66;
 
 @interface OrderTableViewController ()
+{
+    NSMutableArray *dataProvider;
+}
 
 @end
 
@@ -57,6 +59,33 @@ static float cellWidth = 66;
     self.vc6.title = @"待评价";
     
     [self.slideSwitchView buildUI];
+    
+    [self getDataProvider];
+}
+
+
+-(void)getDataProvider
+{
+    dataProvider = [[NSMutableArray alloc] init];
+    
+//    [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_data parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+//                                                                   @"client" : @"ios",
+//                                                                   @"count" : @"50",
+//                                                                   @"oldid" : self.familyVO.oid}
+//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+//                                     HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
+//                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+//                                     if (result.datas.count == 0)
+//                                     {
+//                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+//                                     }
+//                                     dataProvider = result.datas;
+//                                     [self.tableView reloadData];
+//                                     [self.tableView headerEndRefreshing];
+//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                     NSLog(@"发生错误！%@",error);
+//                                     [self.tableView headerEndRefreshing];
+//                                 }];
 }
 
 #pragma mark - 滑动tab视图代理方法

@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *queryEva;
 @property (strong, nonatomic) IBOutlet UIImageView *HeadImage;
 - (IBAction)queryAllEvaluationClickHandler:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *evanumLab;
 @property (nonatomic, copy) void (^queryClick)(UIButton *btn);
 
 @property (nonatomic, retain) ServiceItemModel *itemInfo;

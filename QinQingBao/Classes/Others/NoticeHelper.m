@@ -7,6 +7,7 @@
 //
 
 #import "NoticeHelper.h"
+#import <math.h>
 
 @implementation NoticeHelper
 
@@ -60,6 +61,32 @@
     }
     return timeString;
 }
+
++ (NSString *)intervalSinceNowByyear: (NSString *) theDate
+{
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd"];
+    NSDate *d=[date dateFromString:theDate];
+    
+    NSTimeInterval late=[d timeIntervalSince1970]*1;
+    
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval now=[dat timeIntervalSince1970]*1;
+    NSString *timeString=@"";
+    
+    NSTimeInterval cha=now-late;
+    
+    if (cha/86400>1)
+    {
+        timeString = [NSString stringWithFormat:@"%f", cha/86400];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        float f = [timeString floatValue] / 365;
+        float value = ceilf(f);
+        timeString = [NSString stringWithFormat:@"%.00f",value];
+    }
+    return timeString;
+}
+
 
 +(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days
 {

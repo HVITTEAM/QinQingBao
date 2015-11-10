@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HeartbeatCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *heartBeatLab;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
+
+@property (nonatomic, strong) HealthDataModel *item;
 
 @end

@@ -46,7 +46,7 @@
                             <constraint firstAttribute="height" constant="21" id="yxu-Ih-hXh"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="测试数据年a" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fP4-TK-kAH">
@@ -78,6 +78,7 @@
                 <outlet property="contentLab" destination="fP4-TK-kAH" id="saG-xB-0SR"/>
                 <outlet property="evaView" destination="b5c-WX-axw" id="LfJ-0X-Hcw"/>
                 <outlet property="headIcon" destination="8z7-kB-SsA" id="S8P-vo-5Bx"/>
+                <outlet property="nameLab" destination="dBU-bi-lyj" id="2X4-GO-YBk"/>
             </connections>
         </tableViewCell>
     </objects>

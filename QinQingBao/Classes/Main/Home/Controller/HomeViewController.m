@@ -20,6 +20,7 @@ static float cellWidth = 66;
 #import "AllServiceTypeController.h"
 
 
+
 @interface HomeViewController ()
 {
     NSMutableArray *dataProvider;

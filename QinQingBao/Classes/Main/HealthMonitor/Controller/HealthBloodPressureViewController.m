@@ -36,10 +36,14 @@
  */
 -(void)initTableviewSkin
 {
-    self.navigationItem.title = @"王大爷";
     //设置表视图属性
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 15, 0);
+}
+
+-(void)setDataProvider:(NSMutableArray *)dataProvider
+{
+    _dataProvider = dataProvider;
 }
 
 #pragma mark - Table view data source
@@ -51,7 +55,7 @@
     if (section==0 ||section==2)
         return 1;
     else
-        return 5;
+        return self.dataProvider.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,6 +69,8 @@
         if (!cell) {
             cell = [[ChartCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellchart];
         }
+        cell.type = self.type;
+        [cell setDataProvider:self.dataProvider];
         return cell;
     }
     else if (indexPath.section == 1) {
@@ -72,6 +78,8 @@
         if (!cell) {
             cell= [[[NSBundle mainBundle]loadNibNamed:@"BloodCell" owner:nil options:nil] lastObject];
         }
+        cell.type = self.type;
+        [cell setItem:self.dataProvider[indexPath.row]];
         return cell;
     }
     else

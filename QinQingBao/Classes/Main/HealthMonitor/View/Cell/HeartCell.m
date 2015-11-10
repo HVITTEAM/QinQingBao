@@ -26,29 +26,29 @@
 {
     _item = item;
     
-    NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.blood_sugar];
+    NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodglucose];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     
     // 设置富文本样式
     // 设置富文本样式
     [attributedString addAttribute:NSForegroundColorAttributeName
                              value:[UIColor redColor]
-                             range:NSMakeRange(0, 1)];
+                             range:NSMakeRange(0, 3)];
     
     [attributedString addAttribute:NSFontAttributeName
                              value:[UIFont systemFontOfSize:22.f]
-                             range:NSMakeRange(0, 1)];
+                             range:NSMakeRange(0, 3)];
     
     [attributedString addAttribute:NSFontAttributeName
                              value:[UIFont systemFontOfSize:12.f]
-                             range:NSMakeRange(1, 7)];
+                             range:NSMakeRange(3, 7)];
     
     self.heartDataLabel.attributedText = attributedString;
     
 //    NSLog(@"%@",NSStringFromClass([item.uploadtime class]));
 //    NSLog(@"%@",item.uploadtime);
     
-        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.uploadtime];
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.boolg_time];
         self.time.text = time;
 }
 

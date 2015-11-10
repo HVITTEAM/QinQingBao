@@ -15,5 +15,7 @@
 @property (nonatomic) MKMapView *map;
 @property (nonatomic) CLLocationManager *locationManager;
 
+@property (nonatomic, strong) HealthDataModel *item;
+
 
 @end

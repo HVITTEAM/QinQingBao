@@ -254,6 +254,12 @@
 /***修改工单url*/
 #define URL_Ck_workinfo_status @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status"
 
+/***获取评价url*/
+#define URL_Get_dis_cont @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_dis_cont"
+
+/***获取用户订单url*/
+#define URL_Get_workinfo_data @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
@@ -266,6 +272,12 @@ float gfScreenWidth = 320.0f;
 float gfScreenHeight = 480.0f;
 float gfStatusBarSpace = 20;
 float gfFrameHeight = 460.0f;
+
+typedef NS_ENUM(NSInteger, ChartType) {
+    ChartTypeSugar,
+    ChartTypeBlood,
+    ChartTypeHeart,
+};
 
 
 #define HTTP_REQUEST_OK_CODE          200

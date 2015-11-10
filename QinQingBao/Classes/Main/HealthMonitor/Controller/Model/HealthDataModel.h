@@ -40,24 +40,24 @@
 
 @interface HealthDataModel : NSObject
 
-@property (nonatomic, copy) NSString *mid;
-@property (nonatomic, copy) NSString *oid;
-@property (nonatomic, copy) NSString *deviceid;
-@property (nonatomic, copy) NSString *type;
-@property (nonatomic, copy) NSString *pulse;
-@property (nonatomic, copy) NSString *pulse_status;
-@property (nonatomic, copy) NSString *blood_pressure_shrink;
-@property (nonatomic, copy) NSString *blood_pressure_diastolic;
-@property (nonatomic, copy) NSString *blood_pressure_status;
-@property (nonatomic, copy) NSString *blood_sugar;
-@property (nonatomic, copy) NSString *blood_sugar_status;
-@property (nonatomic, copy) NSString *blood_oxygen;
-@property (nonatomic, copy) NSString *blood_oxygen_status;
-@property (nonatomic, copy) NSString *position_monitoring_lat;
-@property (nonatomic, copy) NSString *position_monitoring_lon;
-@property (nonatomic, copy) NSString *position_monitoring_status;
-@property (nonatomic, copy) NSString *collectiontime;
-@property (nonatomic, copy) NSString *uploadtime;
+@property (nonatomic, copy) NSString *ect_time;
+@property (nonatomic, copy) NSString *heartrate;
+@property (nonatomic, copy) NSString *heart_time;
+@property (nonatomic, copy) NSString *longitude;
+@property (nonatomic, copy) NSString *bloodp_time;
+@property (nonatomic, copy) NSString *gps_time;
+@property (nonatomic, copy) NSString *latitude;
+@property (nonatomic, copy) NSString *boolg_time;
+@property (nonatomic, copy) NSString *heartrate_report;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *systolic;
+@property (nonatomic, copy) NSString *isastolic;
+@property (nonatomic, copy) NSString *bloodglucose;
+@property (nonatomic, copy) NSString *heartrate_min;
+@property (nonatomic, copy) NSString *heartrate_avg;
+@property (nonatomic, copy) NSString *heartrate_max;
+//@property (nonatomic, copy) NSString *collectiontime;
+//@property (nonatomic, copy) NSString *uploadtime;
 
 
 

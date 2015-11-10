@@ -7,6 +7,8 @@
 //
 
 #import "OrderSubmitController.h"
+#import "FamilyModel.h"
+#import "OrderServiceDetailCell.h"
 
 @interface OrderSubmitController ()
 {
@@ -23,6 +25,7 @@
     
     //服务时间
     NSString *selectedTimestr;
+    FamilyModel *famVO;
 }
 
 @end
@@ -70,7 +73,6 @@
 {
     self.title = @"提交订单";
     haveObj = NO;
-    
 }
 
 /**
@@ -79,6 +81,7 @@
 -(void)selectedObjectHanlder:(NSNotification *)notification
 {
     haveObj = YES;
+    famVO  = notification.object;
     [self.tableView reloadData];
 }
 
@@ -202,7 +205,7 @@ numberOfRowsInComponent:(NSInteger)component
             return haveObj ? 2 : 1;
             break;
         case 1:
-            return 1;
+            return 2;
             break;
         case 2:
             return 1;
@@ -232,6 +235,8 @@ numberOfRowsInComponent:(NSInteger)component
 {
     if (indexPath.section == 0 && indexPath.row == 1)
         return 90;
+    else if (indexPath.section == 1 && indexPath.row == 1)
+        return 70;
     else
         return 44;
 }
@@ -242,11 +247,14 @@ numberOfRowsInComponent:(NSInteger)component
     NSString *content = @"contentCell";
     NSString *submit = @"submitcell";
     NSString *custum = @"serviceCusCell";
+    NSString *detail = @"serviceDetailCell";
+    
     
     UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellId];
     OrderSubmitCell *submitcell = [tableView dequeueReusableCellWithIdentifier:submit];
     ServiceCustomCell *serviceCuscell = [tableView dequeueReusableCellWithIdentifier:custum];
+    OrderServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:detail];
     
     if (indexPath.section == 0)
     {
@@ -270,6 +278,8 @@ numberOfRowsInComponent:(NSInteger)component
                 serviceCuscell = [nib lastObject];
                 serviceCuscell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            
+            [(ServiceCustomCell *)serviceCuscell setdataWithItem:famVO];
             return  serviceCuscell;
         }
         
@@ -333,17 +343,32 @@ numberOfRowsInComponent:(NSInteger)component
                 return nil;
         }
     }
-    else  if (indexPath.section == 1 && indexPath.row == 0)
+    else  if (indexPath.section == 1)
     {
-        if (cell == nil)
+        if (indexPath.row == 0)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
-            cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            if (cell == nil)
+            {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+                cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            }
+            cell.accessoryType = UITableViewCellSelectionStyleNone;
+            cell.textLabel.text = @"服务详情";
+            cell.detailTextLabel.text = @"";
+            return  cell;
         }
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.textLabel.text = @"服务详情";
-        cell.detailTextLabel.text = @"";
-        return  cell;
+        else
+        {
+            if (serviceDetailcell == nil)
+            {
+                //提交订单
+                NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"OrderServiceDetailCell" owner:self options:nil];
+                serviceDetailcell = [nib lastObject];
+                serviceDetailcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            [serviceDetailcell setdataWithItem:self.serviceFetailItem];
+            return  serviceDetailcell;
+        }
     }
     else  if (indexPath.section == 4 && indexPath.row == 0)
     {
@@ -388,6 +413,27 @@ numberOfRowsInComponent:(NSInteger)component
 
 -(void)submitClickHandler
 {
+    [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : @"",
+                                                                     @"iid" : self.serviceFetailItem,
+                                                                     @"oldid" : @"50",
+                                                                     @"wtime" : @"ios",
+                                                                     @"wname" : @"50",
+                                                                     @"wprice" : @"ios",
+                                                                     @"dvcode" : @"50",
+                                                                     @"wtelnum" : @"ios",
+                                                                     @"waddress" : @"50",
+                                                                     @"client" : @"ios",
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"wlevel" : @"1",
+                                                                     @"wremark" : @"",
+                                                                     @"voucher_id" : @"",
+                                                                     @"pay_type" : @"50"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+    
     PayViewController *payView = [[PayViewController alloc] init];
     [self.navigationController pushViewController:payView animated:YES];
 }
@@ -410,19 +456,17 @@ numberOfRowsInComponent:(NSInteger)component
     self.datePicker = [[UIDatePicker alloc]init];
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
-        NSDate* date=[self.datePicker date];
-        NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        NSString * curentDatest=[formatter stringFromDate:date];
-        
-        
-        UIAlertView* alert = [[UIAlertView alloc]
-                              initWithTitle:@"提示"
-                              message:[NSString stringWithFormat:@"你选中的%@%@%@"
-                                       , daystr , timestr,minstr]
-                              delegate:nil
-                              cancelButtonTitle:@"确定"
-                              otherButtonTitles:nil];
+        //        NSDate* date=[self.datePicker date];
+        //        NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
+        //        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        //        NSString * curentDatest=[formatter stringFromDate:date];
+        //        UIAlertView* alert = [[UIAlertView alloc]
+        //                              initWithTitle:@"提示"
+        //                              message:[NSString stringWithFormat:@"你选中的%@%@%@"
+        //                                       , daystr , timestr,minstr]
+        //                              delegate:nil
+        //                              cancelButtonTitle:@"确定"
+        //                              otherButtonTitles:nil];
         //        [alert show];
         
         selectedTimestr = [NSString stringWithFormat:@"%@%@%@", daystr , timestr,minstr];

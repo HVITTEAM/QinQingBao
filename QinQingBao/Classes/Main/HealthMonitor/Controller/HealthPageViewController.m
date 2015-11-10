@@ -16,8 +16,6 @@
 
 @interface HealthPageViewController ()
 
-@property (nonatomic, retain) MapViewController *map;
-
 @end
 
 @implementation HealthPageViewController
@@ -25,15 +23,6 @@
     NSMutableArray *dataProvider;
     
     VideoListViewController *videoList;
-}
-
-
-- (MapViewController *)map
-{
-    if (_map == nil) {
-        self.map = [[MapViewController alloc] init];
-    }
-    return _map;
 }
 
 - (void)viewDidLoad
@@ -57,6 +46,7 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.contentInset = UIEdgeInsetsMake(66, 0, 0, 0);
 }
 
 #pragma mark 集成刷新控件
@@ -101,7 +91,8 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"count" : @"3"}
+                                                                   @"count" : @"50",
+                                                                   @"oldid" : self.familyVO.oid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
@@ -208,6 +199,10 @@
             heartCell.backgroundColor = [UIColor clearColor];
             heartCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        if(dataProvider && dataProvider.count > 0)
+        {
+            heartCell.item = dataProvider[0];
+        }
         return heartCell;
     }
     else
@@ -225,6 +220,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
     if (indexPath.row == 4)
     {
         [self showPosition];
@@ -235,7 +231,22 @@
         [self showVideo];
         return;
     }
-    HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
+    else if (indexPath.row == 0)
+    {
+        bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.oldname];
+        bloodPressureVC.type = ChartTypeSugar;
+    }
+    else if (indexPath.row == 1)
+    {
+        bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.oldname];
+        bloodPressureVC.type = ChartTypeBlood;
+    }
+    else if (indexPath.row == 3)
+    {
+        bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.oldname];
+        bloodPressureVC.type = ChartTypeHeart;
+    }
+    bloodPressureVC.dataProvider = dataProvider;
     [self.navigationController pushViewController:bloodPressureVC animated:YES];
 }
 
@@ -244,7 +255,9 @@
  */
 - (void)showPosition
 {
-    [self presentViewController:self.map animated:YES completion:nil];
+    MapViewController *map = [[MapViewController alloc] init];
+    map.item = dataProvider[0];
+    [self presentViewController:map animated:YES completion:nil];
 }
 
 /**

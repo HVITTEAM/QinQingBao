@@ -9,33 +9,39 @@
 
 #import "HealthMonitorViewController.h"
 #import "AddMemberViewController.h"
+#import "FamilyTotal.h"
 
 @interface HealthMonitorViewController ()
 
-@property (nonatomic, retain) AddMemberViewController *addView;
+@property (nonatomic, retain) UIScrollView *scrollView;
+
 @end
 
 @implementation HealthMonitorViewController
 {
     UIPageControl *pageControl;
     UILabel *titleLab;
+    
+    NSMutableArray *dataProvider;
+    
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [self initNavigation];
+    
+    [self getDataProvider];
     
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
     [self.scrollView setBackgroundColor:[UIColor whiteColor]];
     [self.scrollView setContentSize:CGSizeMake(MTScreenW, MTScreenH)];
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.backgroundColor = HMGlobalBg;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:self.scrollView];
-    
-    [self setupScrollView];
-    
-    [self setupPageControl];
+    dataProvider = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -63,23 +69,57 @@
     if (!pageControl)
         pageControl = [[UIPageControl alloc] init];
     // 1.添加
-    pageControl.numberOfPages = 4;
+    pageControl.numberOfPages = dataProvider.count;
     pageControl.x = MTScreenW/2;
     pageControl.centerY = 38;
     
     if (!titleLab)
-        titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+        titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
     titleLab.textColor = [UIColor whiteColor];
-    titleLab.x = MTScreenW/2 - 40;
-
+    titleLab.x = MTScreenW/2 - 65;
+    
     [self.navigationController.navigationBar addSubview:titleLab];
     
-    //    self.navigationItem.titleView.x = -20;
     [self.navigationController.navigationBar addSubview:pageControl];
     
     // 2.设置圆点的颜色
     pageControl.currentPageIndicatorTintColor = HMColor(253, 253, 253); // 当前页的小圆点颜色
     pageControl.pageIndicatorTintColor = HMColor(189, 189, 189); // 非当前页的小圆点颜色
+    
+    if (dataProvider.count == 0)
+        return;
+    FamilyModel *item = dataProvider[0];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.oldname];
+}
+
+-(void)getDataProvider
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                 @"client" : @"ios",
+                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
+                                         dataProvider = result.datas;
+                                         [self setupScrollView];
+                                         [self setupPageControl];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
 }
 
 #pragma mark - 滑动tab视图代理方法
@@ -90,11 +130,11 @@
 - (void)setupScrollView
 {
     // 2.添加view
-    for (int i = 0; i< 4 ; i++)
+    for (int i = 0; i< dataProvider.count ; i++)
     {
         HealthPageViewController *page = [[HealthPageViewController alloc] init];
         page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTViewH - MTNavgationHeadH);
-        
+        page.familyVO = dataProvider[i];
         [self addChildViewController:page];
         [self.scrollView  addSubview:page.view];
     }
@@ -125,15 +165,14 @@
     int intPage = (int)(doublePage + 0.5);
     // 设置页码
     pageControl.currentPage = intPage;
-    titleLab.text = [NSString stringWithFormat:@"当前第%d页",intPage];
+    FamilyModel *item = dataProvider[intPage];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.oldname];
 }
 
 -(void)addHandler:(id)sender
 {
-    if (self.addView == nil) {
-        self.addView = [[AddMemberViewController alloc] init];
-    }
-    [self.navigationController pushViewController:self.addView animated:YES];
+    AddMemberViewController *addView = [[AddMemberViewController alloc] init];
+    [self.navigationController pushViewController:addView animated:YES];
 }
 
 @end

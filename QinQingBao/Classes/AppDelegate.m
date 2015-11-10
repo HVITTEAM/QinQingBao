@@ -35,16 +35,7 @@
     // 2.显示窗口(成为主窗口)
     [self.window makeKeyAndVisible];
     
-    UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
-    if (vo == nil)
-    {
-        [MTControllerChooseTool setLoginViewController];
-    }
-    else
-    {
-        [SharedAppUtil defaultCommonUtil].userVO = vo;
-        [MTControllerChooseTool setRootViewController];
-    }
+    [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
     // 初始化荧石SDK库, 设置SDK平台服务器地址

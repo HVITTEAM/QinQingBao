@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FamilyModel.h"
 
 @interface ServiceCustomCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *nameLab;
+@property (strong, nonatomic) IBOutlet UILabel *phoneLab;
+@property (strong, nonatomic) IBOutlet UILabel *sexLab;
+@property (strong, nonatomic) IBOutlet UILabel *ageLab;
+@property (strong, nonatomic) IBOutlet UILabel *addressLab;
 
+-(void)setdataWithItem:(FamilyModel *)item;
 @end

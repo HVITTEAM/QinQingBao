@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
@@ -27,8 +26,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="89" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-Gb-hnh">
-                    <rect key="frame" x="132" y="11" width="100" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffR-Gb-hnh">
+                    <rect key="frame" x="124" y="11" width="100" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19.5" id="QDk-n5-O9g"/>
                         <constraint firstAttribute="width" constant="100" id="nX6-Ra-Svg"/>
@@ -60,9 +59,9 @@
                 <constraint firstItem="5pY-DN-8zo" firstAttribute="top" secondItem="ffR-Gb-hnh" secondAttribute="bottom" constant="8" id="1l4-b2-Krh"/>
                 <constraint firstItem="5pY-DN-8zo" firstAttribute="leading" secondItem="BcQ-h2-hQI" secondAttribute="trailing" constant="12" id="2Ic-Yv-HsB"/>
                 <constraint firstAttribute="trailing" secondItem="5BP-1I-emb" secondAttribute="trailing" id="Es1-t1-8dx"/>
-                <constraint firstItem="ffR-Gb-hnh" firstAttribute="leading" secondItem="ved-yG-7VA" secondAttribute="trailing" constant="22" id="Ewc-vS-WA6"/>
+                <constraint firstItem="ffR-Gb-hnh" firstAttribute="leading" secondItem="ved-yG-7VA" secondAttribute="trailing" constant="14" id="Ewc-vS-WA6"/>
                 <constraint firstItem="ved-yG-7VA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="70" id="Hcn-gr-WA7"/>
-                <constraint firstItem="ffR-Gb-hnh" firstAttribute="leading" secondItem="ved-yG-7VA" secondAttribute="trailing" constant="22" id="Ofl-Bp-lvi"/>
+                <constraint firstItem="ffR-Gb-hnh" firstAttribute="leading" secondItem="ved-yG-7VA" secondAttribute="trailing" constant="14" id="Ofl-Bp-lvi"/>
                 <constraint firstItem="5pY-DN-8zo" firstAttribute="top" secondItem="ved-yG-7VA" secondAttribute="bottom" constant="9" id="R09-Bl-Hv5"/>
                 <constraint firstAttribute="bottom" secondItem="5BP-1I-emb" secondAttribute="bottom" constant="5" id="Xvz-5j-9Ws"/>
                 <constraint firstItem="ved-yG-7VA" firstAttribute="leading" secondItem="BcQ-h2-hQI" secondAttribute="trailing" constant="10" id="fTQ-oh-qp1"/>
@@ -73,6 +72,10 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="heartBeatLab" destination="ffR-Gb-hnh" id="09B-p1-MpT"/>
+                <outlet property="timeLab" destination="5pY-DN-8zo" id="LWR-7L-qaA"/>
+            </connections>
         </view>
     </objects>
     <resources>

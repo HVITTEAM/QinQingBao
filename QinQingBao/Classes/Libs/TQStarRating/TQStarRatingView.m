@@ -194,7 +194,7 @@
         p.x = self.frame.size.width;
     }
     
-    float d = (point.x/20)*2;
+//    float d = (point.x/20)*2;
 //    NSLog(@"%f比例是%f,星级是%f",point.x,d,round(d));
     
     NSString * str = [NSString stringWithFormat:@"%0.2f",p.x / self.frame.size.width];

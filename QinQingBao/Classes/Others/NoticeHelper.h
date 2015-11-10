@@ -22,7 +22,9 @@
 ///**
 // * 获取和当前时间的时间差
 // */
-//+ (NSString *)intervalSinceNow: (NSString *) theDate;
++ (NSString *)intervalSinceNow: (NSString *) theDate;
+
++ (NSString *)intervalSinceNowByyear: (NSString *) theDate;
 
 
 /**

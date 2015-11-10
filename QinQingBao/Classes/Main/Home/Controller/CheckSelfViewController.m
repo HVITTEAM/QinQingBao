@@ -61,6 +61,7 @@
     //初始化症状位置数组
     self.symptomPositions = @[@"全身症状",@"皮肤症状",@"头部",@"咽颈部",@"胸部",@"腹部",@"生殖部位",@"骨盆",@"四肢",@"腰背部",@"臀部及肛门"];
     
+    self.symptoms = [[NSMutableArray alloc] init];
     //初始化具体症状数组
     for (int i=0; i<15; i++) {
         NSString *symString = [[NSString alloc] initWithFormat:@"全身症状%d",i];
@@ -121,7 +122,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.positionTableView == tableView) {
+    if (self.positionTableView == tableView)
+    {
         [self.symptomTableView reloadData];
     }else{
         NSLog(@"跳转");

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -12,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户姓名:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2I-ND-MH2">
@@ -88,7 +89,6 @@
                         <rect key="frame" x="90" y="66" width="168" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Rfy-aG-lNS"/>
-                            <constraint firstAttribute="width" constant="168" id="t6J-xf-5qc"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -145,6 +145,13 @@
                     <constraint firstItem="A9B-vk-ewJ" firstAttribute="leading" secondItem="5lD-MB-nY8" secondAttribute="trailing" constant="6" id="xMp-k0-J3W"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLab" destination="7AB-QV-CSF" id="pQ2-oL-mJR"/>
+                <outlet property="ageLab" destination="A9B-vk-ewJ" id="ajB-g9-8iy"/>
+                <outlet property="nameLab" destination="7PO-YW-sTC" id="Bia-is-luz"/>
+                <outlet property="phoneLab" destination="FqQ-3m-xcn" id="1Te-FK-NXu"/>
+                <outlet property="sexLab" destination="wke-4Q-ELD" id="Fgx-Np-6p2"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

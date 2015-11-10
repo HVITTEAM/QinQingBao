@@ -10,6 +10,7 @@
 #import "ServiceTypeDatas.h"
 #import "EvaluationItemCell.h"
 #import "EvaluationHeadView.h"
+#import "EvaluationTotal.h"
 
 
 @interface QueryAllEvaluationController ()
@@ -35,8 +36,9 @@
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
     self.tableView.tableHeaderView = [nibs lastObject];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.tableView.tableHeaderView.backgroundColor = [UIColor redColor];
     self.title = @"所有评价";
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.backgroundColor = HMGlobalBg;
 }
 
 #pragma mark 集成刷新控件
@@ -77,9 +79,13 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1}
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.itemInfo.iid,
+                                                                     @"page" : @10,
+                                                                     @"p" : @1,
+                                                                     @"client" : @"ios",
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
+                                     EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      if (result.datas.count == 0)
                                      {
@@ -126,7 +132,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *listViewCellstr = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
+    EvaluationItemCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
     
     if (cell == nil)
     {
@@ -134,6 +140,7 @@
         cell = [nib lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    [cell setitemWithData:dataProvider[indexPath.row]];
     return cell;
 }
 

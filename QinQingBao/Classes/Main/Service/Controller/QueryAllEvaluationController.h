@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceItemModel.h"
 
 @interface QueryAllEvaluationController : UITableViewController
 
+@property (nonatomic, retain) ServiceItemModel *itemInfo;
 @end

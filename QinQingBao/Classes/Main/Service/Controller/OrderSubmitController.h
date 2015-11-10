@@ -11,10 +11,14 @@
 #import "PayViewController.h"
 #import "FamilyViewController.h"
 #import "ServiceCustomCell.h"
+#import "ServiceItemModel.h"
 
 @interface OrderSubmitController : UITableViewController<UIActionSheetDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic,retain) UIDatePicker* datePicker;
 
 @property (nonatomic,retain) UIPickerView* datePickView;
+
+/*服务详情**/
+@property (nonatomic, retain) ServiceItemModel *serviceFetailItem;
 @end

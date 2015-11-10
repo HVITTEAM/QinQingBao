@@ -32,14 +32,14 @@
     
     geocoder = [[CLGeocoder alloc] init];
     
-    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake(30.3, 120.2);
+    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake([self.item.latitude floatValue], [self.item.longitude floatValue]);
     float zoomLevel = 1;//缩放区域
     MKCoordinateRegion region = MKCoordinateRegionMake(cords, MKCoordinateSpanMake(zoomLevel, zoomLevel));
     [_map setRegion:[_map regionThatFits:region] animated:YES];
     
     MyAnnotation *annotation = [[MyAnnotation alloc] initWithCoordinate:cords];
     annotation.title = @"位置";
-    annotation.subtitle = @"杭州";
+    annotation.subtitle = self.item.address;
     [_map addAnnotation:annotation];
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -113,21 +113,21 @@
          }else//编码成功
          {
              //显示最前面的地标信息
-             CLPlacemark *firstPlacemark=[placemarks firstObject];
+//             CLPlacemark *firstPlacemark=[placemarks firstObject];
              
-             NSArray* addrArray = [firstPlacemark.addressDictionary
-                                   objectForKey:@"FormattedAddressLines"];
-
-             NSString *str1 = firstPlacemark.thoroughfare;
-             NSString *str2 = firstPlacemark.subThoroughfare;
-             NSString *str3 = firstPlacemark.locality;
-             NSString *str4 = firstPlacemark.subLocality;
-             NSString *str5 = firstPlacemark.administrativeArea;
-             NSString *str6 = firstPlacemark.subAdministrativeArea;
-             NSString *str7 = firstPlacemark.country;
-             NSString *str = firstPlacemark.name;
-             NSString *locationStr = [NSString stringWithFormat:@"%@%@%@%@%@附近",firstPlacemark.locality,firstPlacemark.subLocality,firstPlacemark.thoroughfare,firstPlacemark.subThoroughfare,firstPlacemark.name];
-             NSLog(locationStr);
+//             NSArray* addrArray = [firstPlacemark.addressDictionary
+//                                   objectForKey:@"FormattedAddressLines"];
+//
+//             NSString *str1 = firstPlacemark.thoroughfare;
+//             NSString *str2 = firstPlacemark.subThoroughfare;
+//             NSString *str3 = firstPlacemark.locality;
+//             NSString *str4 = firstPlacemark.subLocality;
+//             NSString *str5 = firstPlacemark.administrativeArea;
+//             NSString *str6 = firstPlacemark.subAdministrativeArea;
+//             NSString *str7 = firstPlacemark.country;
+//             NSString *str = firstPlacemark.name;
+//             NSString *locationStr = [NSString stringWithFormat:@"%@%@%@%@%@附近",firstPlacemark.locality,firstPlacemark.subLocality,firstPlacemark.thoroughfare,firstPlacemark.subThoroughfare,firstPlacemark.name];
+//             NSLog(locationStr);
          }     }];
     
 }

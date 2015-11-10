@@ -283,9 +283,9 @@
     view.layer.borderColor = [[_colors objectAtIndex:index] CGColor]?[[_colors objectAtIndex:index] CGColor]:UUGreen.CGColor;
     
     //显示每个节点的数据 原意是只显示最小或者最大的数据
-    if (isHollow) {
-        view.backgroundColor = [UIColor whiteColor];
-    }else{
+//    if (isHollow) {
+//        view.backgroundColor = [UIColor whiteColor];
+//    }else{
         view.backgroundColor = [_colors objectAtIndex:index]?[_colors objectAtIndex:index]:UUGreen;
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(point.x-UUTagLabelwidth/2.0, point.y-UULabelHeight*2, UUTagLabelwidth, UULabelHeight)];
         label.font = [UIFont systemFontOfSize:10];
@@ -293,7 +293,7 @@
         label.textColor = view.backgroundColor;
         label.text = [NSString stringWithFormat:@"%d",(int)value];
         [self.scrollview addSubview:label];
-    }
+//    }
     
     [self.scrollview addSubview:view];
 }

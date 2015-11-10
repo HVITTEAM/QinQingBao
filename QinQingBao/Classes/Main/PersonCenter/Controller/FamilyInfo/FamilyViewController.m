@@ -118,7 +118,7 @@
     {
         HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.oldname icon:@""];
         item.subtitle = data.relation;
-        __weak typeof(HMCommonArrowItem) *weakSelf = item;
+        __weak typeof(FamilyModel) *weakSelf = data;
         item.operation = ^{
             if(self.isfromOrder)
             {

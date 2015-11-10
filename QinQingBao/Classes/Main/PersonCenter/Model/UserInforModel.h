@@ -83,5 +83,7 @@
 @property (nonatomic, copy) NSString *member_quicklink;
 @property (nonatomic, copy) NSString *member_exppoints;
 @property (nonatomic, copy) NSString *inviter_id;
+@property (nonatomic, copy) NSString *imei_watch;
+
 
 @end

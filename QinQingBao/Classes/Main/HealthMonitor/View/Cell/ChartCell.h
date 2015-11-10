@@ -10,4 +10,8 @@
 
 @interface ChartCell : UITableViewCell
 
+@property (nonatomic, retain) NSMutableArray *dataProvider;
+
+@property (nonatomic, assign) ChartType type;
+
 @end

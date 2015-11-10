@@ -19,9 +19,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //添加表格
-        [self addScrollChart];
     }
     return self;
+}
+
+-(void)setDataProvider:(NSMutableArray *)dataProvider
+{
+    _dataProvider = dataProvider;
+    
+    [self addScrollChart];
 }
 
 
@@ -34,16 +40,40 @@
     //设置表格的曲线颜色
     scrollChart.colors = @[UUGreen,UURed,UUBrown];
     //设置表格数值标注范围
-    scrollChart.markRange =  CGRangeMake(55, 27);
+//    scrollChart.markRange =  CGRangeMake(55, 27);
     //Y轴值范围
     scrollChart.chooseRange = CGRangeMake(110, 0);
     scrollChart.showRange = NO;
     
-    //模拟的两条曲线
-    NSArray*arr1 = @[@"20",@"44",@"15",@"40",@"42",@"42",@"77",@"43",@"30",@"89",@"20",@"55",@"52",@"42",@"47",@"70"];
-    NSArray*arr2 = @[@"30",@"89",@"20",@"15",@"18",@"25",@"55",@"52",@"42",@"77",@"43",@"89",@"20",@"55",@"42",@"77"];
-    [scrollChart setYValues:@[arr1,arr2]];
+    NSMutableArray *YTitles = [NSMutableArray array];
     
+    NSMutableArray *YTitles1 = [NSMutableArray array];
+
+
+    switch (self.type) {
+        case ChartTypeBlood:
+            for (HealthDataModel *item in self.dataProvider) {
+                [YTitles addObject:item.systolic];
+                [YTitles1 addObject:item.isastolic];
+            }
+            break;
+        case ChartTypeSugar:
+            for (HealthDataModel *item in self.dataProvider) {
+                [YTitles addObject:item.bloodglucose];
+            }
+            break;
+        case ChartTypeHeart:
+            for (HealthDataModel *item in self.dataProvider) {
+                [YTitles addObject:item.heartrate_avg];
+            }
+            break;
+        default:
+            break;
+    }
+    
+    NSArray*arr1 = @[@"20",@"44",@"15",@"40",@"42"];
+    [scrollChart setYValues:@[YTitles]];
+
     //设置表格各条曲线是否显示最大最小值,1表示对应的曲线要显示最大最小值
     NSMutableArray *showMaxMinArray = [[NSMutableArray alloc]init];
     for (int i=0; i<scrollChart.yValues.count; i++) {
@@ -60,13 +90,14 @@
     
     //设置X轴的显示标识
     NSMutableArray *xTitles = [NSMutableArray array];
-    for (int i=0; i<16; i++) {
-        NSString *str = [NSString stringWithFormat:@"R-%d",i];
-        [xTitles addObject:str];
+    
+    for (HealthDataModel *item in self.dataProvider) {
+        [xTitles addObject:[item.bloodp_time substringToIndex:10]];
     }
+    
     [scrollChart setXLabels:xTitles];
     
-    [scrollChart setYValues:@[arr1,arr2]];
+    [scrollChart setYValues:@[YTitles]];
     
     //绘制表格
     [scrollChart strokeChart];

@@ -147,6 +147,7 @@
             <connections>
                 <outlet property="Evaview" destination="ZB2-3N-JG3" id="cwx-yN-OZx"/>
                 <outlet property="HeadImage" destination="eyy-Ij-mhP" id="ncS-wB-zXd"/>
+                <outlet property="evanumLab" destination="pJH-DH-JSm" id="Alc-JI-ymB"/>
                 <outlet property="queryEva" destination="3mJ-6L-6Pg" id="qXx-H9-EHX"/>
             </connections>
         </tableViewCell>

@@ -29,15 +29,19 @@
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     if ([currentVersion isEqualToString:lastVersion]) {
-        // 当前版本号 == 上次使用的版本：显示HMTabBarViewController
+        
         [UIApplication sharedApplication].statusBarHidden = NO;
         
-        //        ViewController *vc = [[ViewController alloc] init];
-        // 显示主控制器（MainViewController）
-        //        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        // 切换控制器
-        //        UIWindow *window = [UIApplication sharedApplication].keyWindow;
-        //        window.rootViewController = nav;
+        UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
+        if (vo == nil)
+        {
+            [MTControllerChooseTool setLoginViewController];
+        }
+        else
+        {
+            [SharedAppUtil defaultCommonUtil].userVO = vo;
+            [MTControllerChooseTool setRootViewController];
+        }
         
     } else { // 当前版本号 != 上次使用的版本：显示版本新特性
         window.rootViewController = [[MTNewfeatureViewController alloc] init];

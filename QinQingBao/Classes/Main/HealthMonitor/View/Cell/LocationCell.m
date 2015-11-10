@@ -24,7 +24,8 @@
 {
     _item = item;
     
-    NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.uploadtime];
+    self.locationLab.text = item.address;
+    NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.gps_time];
     self.timaLab.text = time;
 }
 
