@@ -20,8 +20,8 @@
 @interface FamilyModel : NSObject
 
 
-@property (nonatomic, assign) NSString *rid;
-@property (nonatomic, assign) NSString *oid;
+@property (nonatomic, copy) NSString *rid;
+@property (nonatomic, copy) NSString *oid;
 @property (nonatomic, copy) NSString *oldname;
 @property (nonatomic, copy) NSString *relation;
 @property (nonatomic, copy) NSString *oldphone;

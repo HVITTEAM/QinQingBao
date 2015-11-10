@@ -29,7 +29,7 @@
                                  NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:15],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
-    self.contentLab.attributedText = [[NSAttributedString alloc] initWithString:item.dis_con attributes:attributes];
+    self.contentLab.attributedText = [[NSAttributedString alloc] initWithString:[item.dis_con isEqualToString:@""] ? @"默认好评" : item.dis_con attributes:attributes];
     self.contentLab.autoresizesSubviews = YES;
     self.contentLab.autoresizingMask =(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     

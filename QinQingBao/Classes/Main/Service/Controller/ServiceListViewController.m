@@ -266,8 +266,12 @@
         NSLog(@"点击了 %ld - %ld - %ld 项目",indexPath.column,indexPath.row,indexPath.item);
     }else {
         NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
-        selectedItem = self.classifys[indexPath.row];
-        [self.tableView headerBeginRefreshing];
+        if (indexPath.column == 0) {
+            selectedItem = self.classifys[indexPath.row];
+            [self.tableView headerBeginRefreshing];
+        }
+        else
+            [NoticeHelper AlertShow:@"sorry" view:self.view];
     }
 }
 

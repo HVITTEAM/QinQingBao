@@ -37,6 +37,7 @@
     
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     // 初始化荧石SDK库, 设置SDK平台服务器地址
     NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];

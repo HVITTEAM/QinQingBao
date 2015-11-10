@@ -26,6 +26,8 @@
 {
     [super viewDidLoad];
     
+    [self initTableviewSkin];
+    
     [self setupRefresh];
     
     [self getDataProvider];
@@ -34,7 +36,7 @@
 -(void)initTableviewSkin
 {
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
-    self.tableView.tableHeaderView = [nibs lastObject];
+//    self.tableView.tableHeaderView = [nibs lastObject];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"所有评价";
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -95,7 +97,6 @@
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
                                      [HUD removeFromSuperview];
-                                     [self initTableviewSkin];
                                      [self.tableView footerEndRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

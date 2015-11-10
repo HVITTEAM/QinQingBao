@@ -133,14 +133,14 @@
     for (int i = 0; i< dataProvider.count ; i++)
     {
         HealthPageViewController *page = [[HealthPageViewController alloc] init];
-        page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTViewH - MTNavgationHeadH);
+        page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTScreenH);
         page.familyVO = dataProvider[i];
         [self addChildViewController:page];
         [self.scrollView  addSubview:page.view];
     }
     
     // 3.设置其他属性
-    self.scrollView .contentSize = CGSizeMake(4 * self.scrollView.width, 0);
+    self.scrollView .contentSize = CGSizeMake(dataProvider.count * self.scrollView.width, 0);
     self.scrollView.scrollEnabled = YES;
     self.scrollView.delegate = self;
     self.scrollView.bounces = NO;
