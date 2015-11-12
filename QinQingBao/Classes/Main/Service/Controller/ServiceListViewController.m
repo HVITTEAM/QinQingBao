@@ -16,6 +16,11 @@
     //当前选中的服务分类 默认为第一条
     ServiceTypeModel *selectedItem;
 }
+
+/**
+ *  排序方式
+ */
+@property (nonatomic,retain) NSString *condition;
 @property (nonatomic, strong) NSArray *classifys;
 //@property (nonatomic, strong) NSArray *cates;
 //@property (nonatomic, strong) NSArray *movices;
@@ -36,11 +41,11 @@
     
     [self setupRefresh];
     
-    //    [self.tableView headerBeginRefreshing];
-    
     self.title = self.item.tname;
     
     [self getServiceType];
+    
+    self.condition = @"3";
 }
 
 /**
@@ -54,7 +59,7 @@
     //    self.movices = @[@"服装洗涤1",@"服装洗涤2",@"服装洗涤3"];
     //    self.hostels = @[@"搬家公司1",@"搬家公司2",@"搬家公司3",@"搬家公司4",@"搬家公司5"];
     self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
-    self.sorts = @[@"离我最近",@"好评优先",@"人气优先",@"最新发布"];
+    self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     // 添加下拉菜单
     DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:44];
@@ -107,6 +112,9 @@
     self.tableView.footerRefreshingText = @"正在帮你加载中";
 }
 
+/**
+ *  获取菜头部的查询条件 服务类别
+ */
 -(void)getServiceType
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : self.item.tid,
@@ -125,20 +133,30 @@
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    [self getDataProvider];
+    [self getDataProviderWithConditon:self.condition];
 }
 
 - (void)footerRereshing
 {
-    [self getDataProvider];
+    [self getDataProviderWithConditon:self.condition];
 }
 
--(void)getDataProvider
+/**
+ *  获取数据源
+ *
+ *  @param condition 排序条件 1分数最高 2距离最近 不传或为空 返回默认排序
+ */
+-(void)getDataProviderWithConditon:(NSString *)condition
 {
     dataProvider = [[NSMutableArray alloc] init];
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
                                                                   @"p" : @1,
-                                                                  @"tid" : selectedItem.tid}
+                                                                  @"tid" : selectedItem.tid,
+                                                                  @"client" : @"ios",
+                                                                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                  @"condition" : condition,
+                                                                  @"lat" : [SharedAppUtil defaultCommonUtil].lat,
+                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
@@ -268,6 +286,10 @@
         NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
         if (indexPath.column == 0) {
             selectedItem = self.classifys[indexPath.row];
+            [self.tableView headerBeginRefreshing];
+        }
+        else if (indexPath.column == 2) {
+            self.condition = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
             [self.tableView headerBeginRefreshing];
         }
         else

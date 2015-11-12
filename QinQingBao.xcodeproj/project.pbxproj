@@ -45,6 +45,8 @@
 		010530021BCF8C7500120D4A /* sound_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 01052FFE1BCF8C7500120D4A /* sound_off.png */; };
 		010530031BCF8C7500120D4A /* sound_on_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 01052FFF1BCF8C7500120D4A /* sound_on_sel.png */; };
 		010530041BCF8C7500120D4A /* sound_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 010530001BCF8C7500120D4A /* sound_on.png */; };
+		011BFC7A1BF3316E009354CE /* CCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BFC771BF3316E009354CE /* CCLocationManager.m */; };
+		011BFC7B1BF3316E009354CE /* CLLocation+MTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BFC791BF3316E009354CE /* CLLocation+MTLocation.m */; };
 		0126ECE61B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECA91B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		0126ECEE1B8C4E8100EC85C1 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0126ECBB1B8C4E8100EC85C1 /* MJRefresh.bundle */; };
 		0126ECEF1B8C4E8100EC85C1 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0126ECBE1B8C4E8100EC85C1 /* MJRefreshBaseView.m */; };
@@ -117,7 +119,6 @@
 		0180A2C11BA80C0700D26866 /* FamilyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C01BA80C0700D26866 /* FamilyInfoViewController.m */; };
 		0180A2C41BA810C700D26866 /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C31BA810C700D26866 /* AddMemberViewController.m */; };
 		0180A2C81BA8125100D26866 /* DetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C61BA8125100D26866 /* DetailInfoViewController.m */; };
-		0180A2C91BA8125100D26866 /* DetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0180A2C71BA8125100D26866 /* DetailInfoViewController.xib */; };
 		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
 		0193B0DD1BD6194700F07FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193B0DC1BD6194700F07FBA /* UINavigationBar+Awesome.m */; };
@@ -634,6 +635,10 @@
 		01052FFE1BCF8C7500120D4A /* sound_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound_off.png; sourceTree = "<group>"; };
 		01052FFF1BCF8C7500120D4A /* sound_on_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound_on_sel.png; sourceTree = "<group>"; };
 		010530001BCF8C7500120D4A /* sound_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound_on.png; sourceTree = "<group>"; };
+		011BFC761BF3316E009354CE /* CCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLocationManager.h; sourceTree = "<group>"; };
+		011BFC771BF3316E009354CE /* CCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCLocationManager.m; sourceTree = "<group>"; };
+		011BFC781BF3316E009354CE /* CLLocation+MTLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+MTLocation.h"; sourceTree = "<group>"; };
+		011BFC791BF3316E009354CE /* CLLocation+MTLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+MTLocation.m"; sourceTree = "<group>"; };
 		0126ECA81B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
 		0126ECA91B8C4E8100EC85C1 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
 		0126ECBB1B8C4E8100EC85C1 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
@@ -771,7 +776,6 @@
 		0180A2C31BA810C700D26866 /* AddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberViewController.m; sourceTree = "<group>"; };
 		0180A2C51BA8125100D26866 /* DetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInfoViewController.h; sourceTree = "<group>"; };
 		0180A2C61BA8125100D26866 /* DetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfoViewController.m; sourceTree = "<group>"; };
-		0180A2C71BA8125100D26866 /* DetailInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailInfoViewController.xib; sourceTree = "<group>"; };
 		0193B0D11BD5CDCF00F07FBA /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		0193B0D51BD5D02F00F07FBA /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -1536,6 +1540,17 @@
 			path = ZBarSDK;
 			sourceTree = "<group>";
 		};
+		011BFC751BF3316E009354CE /* CCLocation */ = {
+			isa = PBXGroup;
+			children = (
+				011BFC761BF3316E009354CE /* CCLocationManager.h */,
+				011BFC771BF3316E009354CE /* CCLocationManager.m */,
+				011BFC781BF3316E009354CE /* CLLocation+MTLocation.h */,
+				011BFC791BF3316E009354CE /* CLLocation+MTLocation.m */,
+			);
+			path = CCLocation;
+			sourceTree = "<group>";
+		};
 		0126ECA61B8C4E8100EC85C1 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1839,7 +1854,6 @@
 				0180A2C01BA80C0700D26866 /* FamilyInfoViewController.m */,
 				0180A2C51BA8125100D26866 /* DetailInfoViewController.h */,
 				0180A2C61BA8125100D26866 /* DetailInfoViewController.m */,
-				0180A2C71BA8125100D26866 /* DetailInfoViewController.xib */,
 			);
 			path = FamilyInfo;
 			sourceTree = "<group>";
@@ -2528,6 +2542,7 @@
 		01ED2E591BB3F1B3007C428F /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				011BFC751BF3316E009354CE /* CCLocation */,
 				01ED2E5A1BB3F1B3007C428F /* MapViewController.h */,
 				01ED2E5B1BB3F1B3007C428F /* MapViewController.m */,
 				01ED2E5C1BB3F1B3007C428F /* MyAnnotation.h */,
@@ -3141,7 +3156,6 @@
 				01E690611BCCAB5900A17543 /* YSCheckSMSCodeViewController.xib in Resources */,
 				01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */,
 				01E68FA31BCCA68900A17543 /* palyback_time_bg.png in Resources */,
-				0180A2C91BA8125100D26866 /* DetailInfoViewController.xib in Resources */,
 				01E68FB91BCCA68900A17543 /* number_bg.png in Resources */,
 				01E68FE31BCCA68900A17543 /* video_disable.png in Resources */,
 				01E68FB11BCCA68900A17543 /* full_previously_sel.png in Resources */,
@@ -3348,6 +3362,7 @@
 				0126ECFF1B8C4E8100EC85C1 /* TimeLineViewControl.m in Sources */,
 				01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */,
 				01F0DB231BCE3D84004FD908 /* SDWebImageDownloader.m in Sources */,
+				011BFC7B1BF3316E009354CE /* CLLocation+MTLocation.m in Sources */,
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
 				01ED2E571BB3ED83007C428F /* LocationCell.m in Sources */,
 				01FEE2B41B9BE213007C4641 /* OrderDetailViewController.m in Sources */,
@@ -3582,6 +3597,7 @@
 				01F0D0231B8DB5D000EF3238 /* CouponsCell.m in Sources */,
 				01EB28691BA1192C00937412 /* QCListViewController.m in Sources */,
 				0126ECFE1B8C4E8100EC85C1 /* View+MASAdditions.m in Sources */,
+				011BFC7A1BF3316E009354CE /* CCLocationManager.m in Sources */,
 				01DB10FC1BF02C1600DA0CC5 /* EvaluationModel.m in Sources */,
 				01E9E1831BE3085F001D0D65 /* ServiceItemModel.m in Sources */,
 				01024CC01BD0A75D00E8CAEC /* DataVerifier.m in Sources */,

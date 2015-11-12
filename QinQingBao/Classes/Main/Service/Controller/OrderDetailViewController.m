@@ -8,10 +8,14 @@
 
 #import "OrderDetailViewController.h"
 #import "ServiceItemTotal.h"
+#import "EvaluationTotal.h"
 
 
 @interface OrderDetailViewController ()
 {
+    /*所有的评价数据*/
+    NSMutableArray *evaArr;
+
     NSMutableArray *dataProvider;
     /*当前服务的详细数据*/
     ServiceItemModel *itemInfo;
@@ -56,7 +60,30 @@
 -(void)setSelectedItem:(ServiceItemModel *)selectedItem
 {
     _selectedItem = selectedItem;
+    
     [self getDataProvider];
+    
+    [self getAlleva];
+}
+
+/**
+ *  获取服务评价
+ */
+-(void)getAlleva
+{
+    evaArr = [[NSMutableArray alloc] init];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.selectedItem.iid,
+                                                                     @"page" : @10,
+                                                                     @"p" : @1,
+                                                                     @"client" : @"ios",
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
+                                     evaArr = result.datas;
+                                     [self.tableView reloadData];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
 }
 
 -(void)getDataProvider
@@ -142,6 +169,8 @@
                 [self queryAllevaluation];
             };
             [evacell setItemInfo:itemInfo];
+            if (evaArr.count != 0)
+                [evacell setEvaItem:evaArr[0]];
             evacell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return  evacell;
@@ -155,6 +184,7 @@
             bucell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         [bucell setItemInfo:itemInfo];
+        
         return  bucell;
     }
     else if (indexPath.row == 2)

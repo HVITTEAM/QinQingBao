@@ -21,7 +21,7 @@
 //    hud.removeFromSuperViewOnHide = YES;
 //    [hud hide:YES afterDelay:1.33];
     
-    [view makeToast:msg duration:1.3 position:CSToastPositionTop];
+    [view makeToast:msg duration:1.3 position:CSToastPositionCenter];
 }
 
 + (NSString *)intervalSinceNow: (NSString *) theDate

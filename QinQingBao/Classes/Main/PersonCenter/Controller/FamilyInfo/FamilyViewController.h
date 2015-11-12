@@ -17,7 +17,6 @@
 /**是否来自于订单提交**/
 @property (nonatomic, assign) BOOL isfromOrder;
 
-@property (nonatomic, retain) AddMemberViewController *addView;
 
 
 @end

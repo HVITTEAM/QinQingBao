@@ -239,6 +239,9 @@
 /***解除亲属关系绑定url*/
 #define URL_Del_relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_del_relation_byreid"
 
+/***亲属 - 关系绑定url*/
+#define URL_Bang_relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=bang_relation"
+
 /***获取该用户可用的优惠卷url*/
 #define URL_Youhuicard @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
 

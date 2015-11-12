@@ -81,8 +81,8 @@
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
-    HMCommonButtonItem *numfield = [HMCommonButtonItem itemWithTitle:@"确认客户号" icon:nil];
-    numfield.placeholder = @"请输入9位个人客户号";
+    HMCommonTextfieldItem *numfield = [HMCommonTextfieldItem itemWithTitle:@"亲属昵称" icon:nil];
+    numfield.placeholder = @"如:爷爷、奶奶、二大爷等";
     self.numfield = numfield;
     
     numfield.buttonClickBlock = ^(UIButton *btn){
@@ -96,7 +96,7 @@
     };
     
     HMCommonTextfieldItem *telfield = [HMCommonTextfieldItem itemWithTitle:@"手机号码" icon:nil];
-    telfield.placeholder = @"紧急联系人电话号码";
+    telfield.placeholder = @"请输入该亲属电话号码";
     self.telfield = telfield;
     self.telfield.rightText.userInteractionEnabled = NO;
     telfield.operation = ^{
@@ -104,7 +104,8 @@
     };
     
     // 2.设置组的所有行数据
-    HMCommonButtonItem *codefield = [HMCommonButtonItem itemWithTitle:@"获取验证码" icon:nil];
+    HMCommonButtonItem *codefield = [HMCommonButtonItem itemWithTitle:@"验证码" icon:nil];
+    codefield.btnTitle = @"获取验证码";
     codefield.placeholder = @"请输入验证码";
     self.codefield = codefield;
     
@@ -136,19 +137,22 @@
     self.tableView.tableFooterView = logout;
 }
 
-# pragma  mark
 
--(void)sureHandler:(id)sender
-{
-    
-}
-
+/**
+ *  发送短信
+ */
 -(void)sendMsg
 {
+    [self.view endEditing:YES];
     if (self.telfield.rightText.text.length != 11)
         [NoticeHelper AlertShow:@"请输入正确的手机号码" view:self.view];
     else
-        [self countdownHandler];
+    {
+        [[MTSMSHelper sharedInstance] getCheckcode:self.telfield.rightText.text];
+        [MTSMSHelper sharedInstance].sureSendSMS = ^{
+            [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
+            [self countdownHandler];
+        };    }
 }
 
 -(void)countdownHandler
@@ -173,5 +177,54 @@
         [getCodeBtn setEnabled:NO];
         [getCodeBtn setTitle:title forState:UIControlStateDisabled];
     }
+}
+
+
+# pragma  mark
+
+/**
+ *  确认绑定
+ *
+ *  @param sender <#sender description#>
+ */
+-(void)sureHandler:(id)sender
+{
+    [self.view endEditing:YES];
+    if (self.numfield.rightText.text.length == 0)
+    {
+        [NoticeHelper AlertShow:@"请输入家属昵称" view:self.view];
+        return;
+    }
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Bang_relation parameters: @{@"mobile" : self.telfield.rightText.text,
+                                                                      @"code" : self.codefield.rightText.text,
+                                                                      @"oldid":[SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                      @"rname" : self.numfield.rightText.text,
+                                                                      @"client":@"ios",
+                                                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
+                                         self.backHandlerClick();
+                                         [self.navigationController popViewControllerAnimated:YES];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+    
 }
 @end

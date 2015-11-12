@@ -35,10 +35,9 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="杭州爱家家政" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCZ-Yu-PwR">
-                                <rect key="frame" x="10" y="41" width="190" height="21"/>
+                                <rect key="frame" x="10" y="41" width="84" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7Mf-zq-WJd"/>
-                                    <constraint firstAttribute="width" constant="190" id="web-NP-NdM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -72,9 +71,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话 ：13898018210" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQf-pF-5fS">
-                                <rect key="frame" x="10" y="110" width="195" height="21"/>
+                                <rect key="frame" x="10" y="110" width="162.5" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="EtH-qD-dh0"/>
                                     <constraint firstAttribute="height" constant="21" id="JCA-r3-lXN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>

@@ -100,8 +100,11 @@
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:@""];
     version.isSubtitle = YES;
-    version.destVcClass = [DetailInfoViewController class];
+//    version.destVcClass = [DetailInfoViewController class];
     version.operation = ^{
+        DetailInfoViewController *view = [[DetailInfoViewController alloc] init];
+        view.itemInfo = self.selecteItem;
+        [self.navigationController pushViewController:view animated:YES];
     };
     HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"健康联系人" icon:@""];
     help.isSubtitle = YES;
@@ -172,6 +175,9 @@
                                          {
                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解除绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                              [alertView show];
+                                             [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
+                                             self.backHandlerClick();
+                                             [self.navigationController popViewControllerAnimated:YES];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

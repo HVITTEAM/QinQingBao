@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HMCommonViewController.h"
+#import "FamilyModel.h"
 
-@interface DetailInfoViewController : UIViewController
+@interface DetailInfoViewController : HMCommonViewController
 
+@property (nonatomic, retain) FamilyModel *itemInfo;
 @end

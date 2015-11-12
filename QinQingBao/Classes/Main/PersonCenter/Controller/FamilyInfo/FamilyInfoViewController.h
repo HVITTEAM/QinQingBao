@@ -14,4 +14,7 @@
 @interface FamilyInfoViewController : HMCommonViewController<UIActionSheetDelegate>
 
 @property (nonatomic, retain) FamilyModel *selecteItem;
+
+@property (nonatomic, copy) void (^backHandlerClick)(void);
+
 @end

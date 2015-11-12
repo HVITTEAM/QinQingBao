@@ -44,4 +44,16 @@
     [self.Evaview setScore:score/5 withAnimation:YES];
     [self.queryEva setTitle:[NSString stringWithFormat:@"查看全部%@条评价",itemInfo.sumdis] forState:UIControlStateNormal];
 }
+
+-(void)setEvaItem:(EvaluationModel *)evaItem
+{
+    _evaItem = evaItem;
+    if (!evaItem)
+        return;
+    self.nameLab.text  = evaItem.oldname;
+    self.timeLab.text  = evaItem.wpjtime;
+    self.contentLab.text  = evaItem.dis_con;
+    self.contentLab.text  = @"味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞";
+//    self.height = CGRectGetMaxY(self.queryEva.frame);
+}
 @end

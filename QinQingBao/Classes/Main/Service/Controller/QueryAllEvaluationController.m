@@ -92,6 +92,7 @@
                                      if (result.datas.count == 0)
                                      {
                                          [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                         [HUD removeFromSuperview];
                                          return;
                                      }
                                      dataProvider = result.datas;

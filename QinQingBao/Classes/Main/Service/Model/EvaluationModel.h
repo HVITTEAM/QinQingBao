@@ -16,7 +16,6 @@
 //"wgrade": "4"             分数
 @interface EvaluationModel : NSObject
 
-
 /**工单id**/
 @property (nonatomic, copy) NSString *wid;
 /**评论人姓名 **/

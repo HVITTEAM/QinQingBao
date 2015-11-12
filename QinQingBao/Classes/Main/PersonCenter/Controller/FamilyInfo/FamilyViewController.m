@@ -11,7 +11,7 @@
 #import "FamilyModel.h"
 
 
-@interface FamilyViewController ()
+@interface FamilyViewController ()<UINavigationControllerDelegate>
 {
     NSMutableArray *dataProvider;
 }
@@ -34,6 +34,8 @@
     [self setupGroups];
     
     [self getDataProvider];
+    
+    self.navigationController.delegate= self;
 }
 
 /**
@@ -128,6 +130,9 @@
             else
             {
                 FamilyInfoViewController *detail = [[FamilyInfoViewController alloc] init];
+                detail.backHandlerClick =  ^{
+                    [self getDataProvider];
+                };
                 detail.selecteItem = data;
                 [self.navigationController pushViewController:detail animated:YES];
             }
@@ -140,10 +145,11 @@
 
 -(void)addHandler:(id)sender
 {
-    if (self.addView == nil) {
-        self.addView = [[AddMemberViewController alloc] init];
-    }
-    [self.navigationController pushViewController:self.addView animated:YES];
+    AddMemberViewController *addView = [[AddMemberViewController alloc] init];
+    addView.backHandlerClick =  ^{
+        [self getDataProvider];
+    };
+    [self.navigationController pushViewController:addView animated:YES];
 }
 
 

@@ -18,6 +18,7 @@ static float cellWidth = 66;
 #import "ServiceTypeDatas.h"
 #import "ServiceTypeModel.h"
 #import "AllServiceTypeController.h"
+#import "CCLocationManager.h"
 
 
 
@@ -42,11 +43,24 @@ static float cellWidth = 66;
     
     [self getTypeList];
     
+    [self getLocation];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+/**
+ *  获取当前位置
+ */
+-(void)getLocation
+{
+    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
+        [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];
+        [SharedAppUtil defaultCommonUtil].lon = [NSString stringWithFormat:@"%f",locationCorrrdinate.longitude];
+    }];
 }
 
 /**

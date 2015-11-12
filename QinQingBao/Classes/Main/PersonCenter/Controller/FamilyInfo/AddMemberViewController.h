@@ -18,9 +18,10 @@
 @interface AddMemberViewController : HMCommonViewController
 
 
-@property (nonatomic,retain) HMCommonButtonItem *numfield;
+@property (nonatomic,retain) HMCommonTextfieldItem *numfield;
 @property (nonatomic,retain) HMCommonTextfieldItem *telfield;
 @property (nonatomic,retain) HMCommonButtonItem *codefield;
 
+@property (nonatomic, copy) void (^backHandlerClick)(void);
 
 @end

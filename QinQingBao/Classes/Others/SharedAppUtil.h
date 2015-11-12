@@ -20,5 +20,16 @@
 
 @property (nonatomic, copy) NSString *deviceToken;
 
+@property (nonatomic, copy) NSString *lon;
+
+@property (nonatomic, copy) NSString *lat;
+
+/**
+ *  判断是否需要刷新健康数据  当做出了绑定或者解绑操作之后需要更新健康数据
+ */
+@property (nonatomic, assign) BOOL needRefleshMonitor;
+
+
+
 @end
 

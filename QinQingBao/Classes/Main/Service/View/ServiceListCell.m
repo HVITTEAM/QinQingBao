@@ -28,7 +28,10 @@
 
 - (void)setitemWithData:(ServiceItemModel *)item
 {
-    self.sunSellLab.text = [NSString stringWithFormat:@"售出%@单",item.sumsell];
+    if (!item.sumsell)
+        self.sunSellLab.text = @"售出0单";
+    else
+        self.sunSellLab.text = [NSString stringWithFormat:@"售出%@单",item.sumsell];
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
     self.serviceTitleLab.text = item.orgname;
     self.serviceDetailLab.text = item.icontent;

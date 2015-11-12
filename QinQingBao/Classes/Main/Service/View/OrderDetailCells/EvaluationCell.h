@@ -9,16 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "TQStarRatingView.h"
 #import "ServiceItemModel.h"
+#import "EvaluationModel.h"
 
 
 @interface EvaluationCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet TQStarRatingView *Evaview;
 @property (strong, nonatomic) IBOutlet UIButton *queryEva;
 @property (strong, nonatomic) IBOutlet UIImageView *HeadImage;
+@property (strong, nonatomic) IBOutlet UILabel *nameLab;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
+@property (strong, nonatomic) IBOutlet UILabel *contentLab;
+
 - (IBAction)queryAllEvaluationClickHandler:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *evanumLab;
 @property (nonatomic, copy) void (^queryClick)(UIButton *btn);
-
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
+@property (nonatomic, retain) EvaluationModel *evaItem;
+
 
 @end

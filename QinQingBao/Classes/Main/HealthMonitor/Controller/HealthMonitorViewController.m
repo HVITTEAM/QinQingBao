@@ -21,9 +21,7 @@
 {
     UIPageControl *pageControl;
     UILabel *titleLab;
-    
     NSMutableArray *dataProvider;
-    
 }
 
 - (void)viewDidLoad
@@ -41,7 +39,6 @@
     self.scrollView.backgroundColor = HMGlobalBg;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:self.scrollView];
-    dataProvider = [[NSMutableArray alloc] init];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -51,6 +48,9 @@
         pageControl.hidden = NO;
     if (titleLab)
         titleLab.hidden = NO;
+    
+    if([SharedAppUtil defaultCommonUtil].needRefleshMonitor == YES)
+        [self getDataProvider];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -94,7 +94,9 @@
 
 -(void)getDataProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
+    dataProvider = [[NSMutableArray alloc] init];
+    [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
     [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                                                                  @"client" : @"ios",
                                                                  @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
@@ -114,10 +116,10 @@
                                          [self setupScrollView];
                                          [self setupPageControl];
                                      }
-                                     [HUD removeFromSuperview];
+                                     [SVProgressHUD dismiss];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
+                                     [SVProgressHUD dismiss];
                                      [self.view endEditing:YES];
                                  }];
 }
