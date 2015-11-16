@@ -21,8 +21,6 @@
 @implementation HealthPageViewController
 {
     NSMutableArray *dataProvider;
-    
-    VideoListViewController *videoList;
 }
 
 - (void)viewDidLoad
@@ -46,7 +44,7 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.tableView.contentInset = UIEdgeInsetsMake(66, 0, 0, 0);
+    //    self.tableView.contentInset = UIEdgeInsetsMake(66, 0, 0, 0);
 }
 
 #pragma mark 集成刷新控件
@@ -271,8 +269,7 @@
     //        [[YSHTTPClient sharedInstance] setClientAccessToken:[EzvizDemoGlobalKit sharedKit].token];
     //    }
     
-    if (!videoList)
-        videoList = [[VideoListViewController alloc] init];
+    VideoListViewController *videoList = [[VideoListViewController alloc] init];
     [self.navigationController pushViewController:videoList animated:YES];
 }
 

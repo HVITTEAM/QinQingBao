@@ -41,6 +41,7 @@
 #import "UIView+Toast.h"
 #import "SVProgressHUD.h"
 #import "UITableViewController+Placeholder.h"
+#import "Star.h"
 
 
 #import "TSPopoverController.h"

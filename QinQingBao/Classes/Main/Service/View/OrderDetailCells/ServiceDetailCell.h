@@ -10,4 +10,6 @@
 
 @interface ServiceDetailCell : UITableViewCell
 
+
++(ServiceDetailCell *)serviceCell;
 @end

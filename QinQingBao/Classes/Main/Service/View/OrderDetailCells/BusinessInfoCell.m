@@ -10,6 +10,13 @@
 
 @implementation BusinessInfoCell
 
++(BusinessInfoCell *) businessCell
+{
+    BusinessInfoCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"BusinessInfoCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     self.contentView.backgroundColor = HMGlobalBg;
 }

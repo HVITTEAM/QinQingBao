@@ -26,5 +26,5 @@
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
 @property (nonatomic, retain) EvaluationModel *evaItem;
 
-
++ (EvaluationCell*) evaluationCell;
 @end

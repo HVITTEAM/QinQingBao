@@ -10,6 +10,13 @@
 
 @implementation ServiceDetailCell
 
++(ServiceDetailCell *)serviceCell
+{
+    ServiceDetailCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"ServiceDetailCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

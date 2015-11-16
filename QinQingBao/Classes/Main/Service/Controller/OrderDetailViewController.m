@@ -9,13 +9,14 @@
 #import "OrderDetailViewController.h"
 #import "ServiceItemTotal.h"
 #import "EvaluationTotal.h"
+#import "EvaluationNoneCell.h"
 
 
 @interface OrderDetailViewController ()
 {
     /*所有的评价数据*/
     NSMutableArray *evaArr;
-
+    
     NSMutableArray *dataProvider;
     /*当前服务的详细数据*/
     ServiceItemModel *itemInfo;
@@ -120,7 +121,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-        return 180;
+        return evaArr.count != 0 ? 180 : 40;
     else if (indexPath.row == 1)
         return 160;
     else
@@ -149,62 +150,72 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *listViewCellstr = @"cell";
-    NSString *evaCellstr = @"evaCell";
-    NSString *bucellstr = @"buceCell";
-    NSString *serviceDetailstr = @"serviceDetailCell";
+    UITableViewCell* cell = nil;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
-    EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:evaCellstr];
-    BusinessInfoCell *bucell = [tableView dequeueReusableCellWithIdentifier:bucellstr];
-    ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:serviceDetailstr];
-    
-    if (indexPath.row == 0)
-    {
-        if (evacell == nil)
+    switch (indexPath.row) {
+        case 0:
         {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"EvaluationCell" owner:self options:nil];
-            evacell = [nib lastObject];
-            evacell.queryClick  = ^(UIButton *btn){
-                [self queryAllevaluation];
-            };
-            [evacell setItemInfo:itemInfo];
             if (evaArr.count != 0)
+            {
+                EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
+                
+                if(evacell == nil)
+                    evacell = [EvaluationCell evaluationCell];
+                
+                [evacell setItemInfo:itemInfo];
                 [evacell setEvaItem:evaArr[0]];
-            evacell.selectionStyle = UITableViewCellSelectionStyleNone;
+                evacell.queryClick  = ^(UIButton *btn){
+                    [self queryAllevaluation];
+                };
+                cell = evacell;
+            }
+            else
+            {
+                EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
+                if(evanoneCell == nil)
+                    evanoneCell = [EvaluationNoneCell evanoneCell];
+                 cell = evanoneCell;
+            }
         }
-        return  evacell;
-    }
-    else if (indexPath.row == 1)
-    {
-        if (bucell == nil)
+            break;
+        case 1:
         {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"BusinessInfoCell" owner:self options:nil];
-            bucell = [nib lastObject];
-            bucell.selectionStyle = UITableViewCellSelectionStyleNone;
+            BusinessInfoCell *bucell = [tableView dequeueReusableCellWithIdentifier:@"MTbusinessInfoCell"];
+            
+            if(bucell == nil)
+                bucell = [BusinessInfoCell businessCell];
+            
+            [bucell setItemInfo:itemInfo];
+            
+             cell = bucell;
         }
-        [bucell setItemInfo:itemInfo];
-        
-        return  bucell;
-    }
-    else if (indexPath.row == 2)
-    {
-        if (serviceDetailcell == nil)
+            break;
+        case 2:
         {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ServiceDetailCell" owner:self options:nil];
-            serviceDetailcell = [nib lastObject];
-            serviceDetailcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceDetailsCell"];
+            
+            if(serviceDetailcell == nil)
+                serviceDetailcell = [ServiceDetailCell serviceCell];
+            
+             cell = serviceDetailcell;
         }
-        return  serviceDetailcell;
-    }
-    else
-    {
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:listViewCellstr];
-            cell.textLabel.text = @"服务详情";
+            break;
+        case 3:
+        {
+            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
+            
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
+            
+            commoncell.textLabel.text = @"服务详情";
+            
+            cell = commoncell;
         }
-        return  cell;
+            break;
+        default:
+            break;
     }
+    return cell;
 }
 
 /**

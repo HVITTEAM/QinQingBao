@@ -10,6 +10,13 @@
 
 @implementation EvaluationCell
 
++ (EvaluationCell*) evaluationCell
+{
+    EvaluationCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"EvaluationCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     
     self.contentView.backgroundColor = HMGlobalBg;
@@ -54,6 +61,6 @@
     self.timeLab.text  = evaItem.wpjtime;
     self.contentLab.text  = evaItem.dis_con;
     self.contentLab.text  = @"味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞";
-//    self.height = CGRectGetMaxY(self.queryEva.frame);
+    self.height = 40;
 }
 @end

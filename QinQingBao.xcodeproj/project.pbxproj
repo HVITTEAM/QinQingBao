@@ -119,6 +119,9 @@
 		0180A2C11BA80C0700D26866 /* FamilyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C01BA80C0700D26866 /* FamilyInfoViewController.m */; };
 		0180A2C41BA810C700D26866 /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C31BA810C700D26866 /* AddMemberViewController.m */; };
 		0180A2C81BA8125100D26866 /* DetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0180A2C61BA8125100D26866 /* DetailInfoViewController.m */; };
+		0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */; };
+		0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */; };
+		0190ED371BF970E000992EE4 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED361BF970E000992EE4 /* Star.m */; };
 		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
 		0193B0DD1BD6194700F07FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193B0DC1BD6194700F07FBA /* UINavigationBar+Awesome.m */; };
@@ -776,6 +779,11 @@
 		0180A2C31BA810C700D26866 /* AddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberViewController.m; sourceTree = "<group>"; };
 		0180A2C51BA8125100D26866 /* DetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInfoViewController.h; sourceTree = "<group>"; };
 		0180A2C61BA8125100D26866 /* DetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailInfoViewController.m; sourceTree = "<group>"; };
+		0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationNoneCell.h; sourceTree = "<group>"; };
+		0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationNoneCell.m; sourceTree = "<group>"; };
+		0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationNoneCell.xib; sourceTree = "<group>"; };
+		0190ED351BF970E000992EE4 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
+		0190ED361BF970E000992EE4 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		0193B0D11BD5CDCF00F07FBA /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		0193B0D51BD5D02F00F07FBA /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -1750,6 +1758,8 @@
 		0126ED9D1B8C6DDA00EC85C1 /* TQStarRating */ = {
 			isa = PBXGroup;
 			children = (
+				0190ED351BF970E000992EE4 /* Star.h */,
+				0190ED361BF970E000992EE4 /* Star.m */,
 				0126ED9E1B8C6DDA00EC85C1 /* Image */,
 				0126EDA31B8C6DDA00EC85C1 /* TQStarRatingView.h */,
 				0126EDA41B8C6DDA00EC85C1 /* TQStarRatingView.m */,
@@ -3029,6 +3039,9 @@
 				01E4BE581BA031E000BF41EF /* ServiceDetailCell.h */,
 				01E4BE591BA031E000BF41EF /* ServiceDetailCell.m */,
 				01E4BE5A1BA031E000BF41EF /* ServiceDetailCell.xib */,
+				0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */,
+				0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */,
+				0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */,
 			);
 			path = OrderDetailCells;
 			sourceTree = "<group>";
@@ -3192,6 +3205,7 @@
 				010530031BCF8C7500120D4A /* sound_on_sel.png in Resources */,
 				01EB28731BA11CDB00937412 /* EvaluationController.xib in Resources */,
 				D23A12D91B8D683D000365AE /* CheckSelfViewController.xib in Resources */,
+				0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */,
 				01EB28671BA1192C00937412 /* OrderFormDetailController.xib in Resources */,
 				01E68FB21BCCA68900A17543 /* full_stop.png in Resources */,
 				01E68FC81BCCA68900A17543 /* ptz_bg.png in Resources */,
@@ -3422,6 +3436,7 @@
 				01E6905C1BCCAABE00A17543 /* VideoGoDef.m in Sources */,
 				01F0DA9F1BCE1DC9004FD908 /* CaptureViewController.m in Sources */,
 				01F0DAE81BCE3350004FD908 /* PSTCollectionViewController.m in Sources */,
+				0190ED371BF970E000992EE4 /* Star.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01E690841BCCF6AA00A17543 /* TSPopoverPopoverView.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
@@ -3568,6 +3583,7 @@
 				0126ED7F1B8C57A700EC85C1 /* AFURLRequestSerialization.m in Sources */,
 				0126ED131B8C4EE400EC85C1 /* SettingViewController.m in Sources */,
 				01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */,
+				0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */,
 				0126ECFD1B8C4E8100EC85C1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				01E9E1871BE30A27001D0D65 /* ServiceItemTotal.m in Sources */,
 				01E690831BCCF6AA00A17543 /* TSPopoverController.m in Sources */,
