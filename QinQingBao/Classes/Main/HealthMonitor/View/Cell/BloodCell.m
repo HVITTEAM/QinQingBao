@@ -27,7 +27,7 @@
     
     switch (self.type) {
         case ChartTypeBlood:
-            self.bloodLab.text = [NSString stringWithFormat:@"%@/%@",item.systolic,item.isastolic];
+            self.bloodLab.text = [NSString stringWithFormat:@"%@/%@",item.systolic,item.diastolic];
             self.timeLab.text = item.bloodp_time;
             self.decLab.text = @"mmol/L";
             break;
@@ -37,7 +37,7 @@
             self.decLab.text = @"mmHg";
             break;
         case ChartTypeHeart:
-            self.bloodLab.text = [NSString stringWithFormat:@"%@/%@",item.heartrate_max,item.heartrate_min  ];
+            self.bloodLab.text = [NSString stringWithFormat:@"%@",item.heartrate_avg];
             self.timeLab.text = item.heart_time;
             self.decLab.text = @"次/分钟";
             break;

@@ -11,4 +11,5 @@
 @interface VideoCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
++(VideoCell *)videoCell;
 @end

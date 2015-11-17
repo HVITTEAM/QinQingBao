@@ -10,6 +10,15 @@
 
 @implementation LocationCell
 
+
++(LocationCell *)locationCell
+{
+    LocationCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"LocationCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

@@ -10,6 +10,16 @@
 
 @implementation VideoCell
 
+
++(VideoCell *)videoCell
+{
+    VideoCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"VideoCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

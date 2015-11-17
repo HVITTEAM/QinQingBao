@@ -10,13 +10,14 @@
 
 @implementation HeartbeatCell
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect {
- // Drawing code
- }
- */
++(HeartbeatCell *)heartbeatCell
+{
+    HeartbeatCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"HeartbeatCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+
+    return cell;
+}
 
 
 - (void)setItem:(HealthDataModel *)item

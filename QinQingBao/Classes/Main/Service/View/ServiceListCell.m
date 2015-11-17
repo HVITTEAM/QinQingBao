@@ -33,9 +33,13 @@
     else
         self.sunSellLab.text = [NSString stringWithFormat:@"售出%@单",item.sumsell];
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
-    self.serviceTitleLab.text = item.orgname;
-    self.serviceDetailLab.text = item.icontent;
+    self.serviceTitleLab.text = item.icontent;
+    self.serviceDetailLab.text = item.orgname;
+    
+    //    if (item.distance)
+    self.distanceLab.text = [NoticeHelper kilometre2meter:[item.distance floatValue]];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",item.item_url]];
     [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
 }
+
 @end

@@ -80,7 +80,8 @@
     
     [self.navigationController.navigationBar addSubview:titleLab];
     
-    [self.navigationController.navigationBar addSubview:pageControl];
+    if (dataProvider.count > 1)
+        [self.navigationController.navigationBar addSubview:pageControl];
     
     // 2.设置圆点的颜色
     pageControl.currentPageIndicatorTintColor = HMColor(253, 253, 253); // 当前页的小圆点颜色

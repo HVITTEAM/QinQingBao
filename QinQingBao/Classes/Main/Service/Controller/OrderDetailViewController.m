@@ -10,6 +10,7 @@
 #import "ServiceItemTotal.h"
 #import "EvaluationTotal.h"
 #import "EvaluationNoneCell.h"
+#import "RemarkDetailCell.h"
 
 
 @interface OrderDetailViewController ()
@@ -89,21 +90,24 @@
 
 -(void)getDataProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    dataProvider = [[NSMutableArray alloc] init];
-    [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo_data_byiid parameters:  @{@"iid" : self.selectedItem.iid,
-                                                                             @"client" : @"ios",
-                                                                             @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     itemInfo = [ServiceItemModel objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                     [(ServiceHeadView *)self.tableView.tableHeaderView setItemInfo:itemInfo];
-                                     [self.tableView reloadData];
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                     [HUD removeFromSuperview];
-                                 }];
+    itemInfo = self.selectedItem;
+    [(ServiceHeadView *)self.tableView.tableHeaderView setItemInfo:itemInfo];
+    [self.tableView reloadData];
+    //    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    dataProvider = [[NSMutableArray alloc] init];
+    //    [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo_data_byiid parameters:  @{@"iid" : self.selectedItem.iid,
+    //                                                                             @"client" : @"ios",
+    //                                                                             @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+    //                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    //                                     itemInfo = [ServiceItemModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+    //                                     [(ServiceHeadView *)self.tableView.tableHeaderView setItemInfo:itemInfo];
+    //                                     [self.tableView reloadData];
+    //                                     [HUD removeFromSuperview];
+    //                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                                     NSLog(@"发生错误！%@",error);
+    //                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+    //                                     [HUD removeFromSuperview];
+    //                                 }];
 }
 
 #pragma mark - Table view data source
@@ -115,17 +119,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 4;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGFloat height = 0;
     if (indexPath.row == 0)
-        return evaArr.count != 0 ? 180 : 40;
+        height =  evaArr.count != 0 ? 180 : 40;
     else if (indexPath.row == 1)
-        return 160;
-    else
-        return 190;
+        height = 160;
+    else if (indexPath.row == 2)
+        height = 80;
+    else if (indexPath.row == 3)
+        height = 160;
+    return height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -152,7 +160,8 @@
 {
     UITableViewCell* cell = nil;
     
-    switch (indexPath.row) {
+    switch (indexPath.row)
+    {
         case 0:
         {
             if (evaArr.count != 0)
@@ -174,7 +183,7 @@
                 EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
                 if(evanoneCell == nil)
                     evanoneCell = [EvaluationNoneCell evanoneCell];
-                 cell = evanoneCell;
+                cell = evanoneCell;
             }
         }
             break;
@@ -187,20 +196,34 @@
             
             [bucell setItemInfo:itemInfo];
             
-             cell = bucell;
+            cell = bucell;
         }
             break;
         case 2:
+        {
+            RemarkDetailCell *remarkDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTRemarkDetailCell"];
+            
+            if(remarkDetailCell == nil)
+                remarkDetailCell = [RemarkDetailCell remarkDetailCell];
+            
+            [remarkDetailCell setItemInfo:itemInfo];
+            
+            cell = remarkDetailCell;
+        }
+            break;
+        case 3:
         {
             ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceDetailsCell"];
             
             if(serviceDetailcell == nil)
                 serviceDetailcell = [ServiceDetailCell serviceCell];
             
-             cell = serviceDetailcell;
+            [serviceDetailcell setItemInfo:itemInfo];
+
+            cell = serviceDetailcell;
         }
             break;
-        case 3:
+        case 4:
         {
             UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
             

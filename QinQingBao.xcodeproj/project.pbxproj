@@ -122,6 +122,7 @@
 		0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */; };
 		0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */; };
 		0190ED371BF970E000992EE4 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED361BF970E000992EE4 /* Star.m */; };
+		0190ED431BF9DB8F00992EE4 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED421BF9DB8F00992EE4 /* WebViewController.m */; };
 		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
 		0193B0DD1BD6194700F07FBA /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 0193B0DC1BD6194700F07FBA /* UINavigationBar+Awesome.m */; };
@@ -336,6 +337,8 @@
 		01EB28721BA11CDB00937412 /* EvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28701BA11CDB00937412 /* EvaluationController.m */; };
 		01EB28731BA11CDB00937412 /* EvaluationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB28711BA11CDB00937412 /* EvaluationController.xib */; };
 		01EB28761BA16CB900937412 /* HealthServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28751BA16CB900937412 /* HealthServicesController.m */; };
+		01EB636D1BFAEE3000BE9788 /* RemarkDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB636B1BFAEE3000BE9788 /* RemarkDetailCell.m */; };
+		01EB636E1BFAEE3000BE9788 /* RemarkDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB636C1BFAEE3000BE9788 /* RemarkDetailCell.xib */; };
 		01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF931B7C347800665D87 /* HomeViewController.m */; };
 		01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF941B7C347800665D87 /* HomeViewController.xib */; };
 		01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF981B7C347800665D87 /* SQCollectionCell.xib */; };
@@ -784,6 +787,8 @@
 		0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationNoneCell.xib; sourceTree = "<group>"; };
 		0190ED351BF970E000992EE4 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		0190ED361BF970E000992EE4 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
+		0190ED411BF9DB8F00992EE4 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		0190ED421BF9DB8F00992EE4 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		0193B0D11BD5CDCF00F07FBA /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		0193B0D51BD5D02F00F07FBA /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -1091,6 +1096,9 @@
 		01EB28711BA11CDB00937412 /* EvaluationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationController.xib; sourceTree = "<group>"; };
 		01EB28741BA16CB900937412 /* HealthServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthServicesController.h; sourceTree = "<group>"; };
 		01EB28751BA16CB900937412 /* HealthServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthServicesController.m; sourceTree = "<group>"; };
+		01EB636A1BFAEE3000BE9788 /* RemarkDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemarkDetailCell.h; sourceTree = "<group>"; };
+		01EB636B1BFAEE3000BE9788 /* RemarkDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemarkDetailCell.m; sourceTree = "<group>"; };
+		01EB636C1BFAEE3000BE9788 /* RemarkDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemarkDetailCell.xib; sourceTree = "<group>"; };
 		01ECDF921B7C347800665D87 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		01ECDF931B7C347800665D87 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		01ECDF941B7C347800665D87 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -2415,6 +2423,8 @@
 				D23A12D71B8D683D000365AE /* CheckSelfViewController.xib */,
 				01EB28741BA16CB900937412 /* HealthServicesController.h */,
 				01EB28751BA16CB900937412 /* HealthServicesController.m */,
+				0190ED411BF9DB8F00992EE4 /* WebViewController.h */,
+				0190ED421BF9DB8F00992EE4 /* WebViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3042,6 +3052,9 @@
 				0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */,
 				0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */,
 				0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */,
+				01EB636A1BFAEE3000BE9788 /* RemarkDetailCell.h */,
+				01EB636B1BFAEE3000BE9788 /* RemarkDetailCell.m */,
+				01EB636C1BFAEE3000BE9788 /* RemarkDetailCell.xib */,
 			);
 			path = OrderDetailCells;
 			sourceTree = "<group>";
@@ -3275,6 +3288,7 @@
 				01E4BE4C1B9FDF3500BF41EF /* PayHeadCell.xib in Resources */,
 				01E68FD81BCCA68900A17543 /* setup.png in Resources */,
 				01E68FA21BCCA68900A17543 /* full_pause_sel.png in Resources */,
+				01EB636E1BFAEE3000BE9788 /* RemarkDetailCell.xib in Resources */,
 				01FEE2C11B9C0F90007C4641 /* PlaceOrderView.xib in Resources */,
 				01E68FD11BCCA68900A17543 /* ptz_left_sel.png in Resources */,
 				01F0DB1C1BCE3D84004FD908 /* LICENSE in Resources */,
@@ -3389,6 +3403,7 @@
 				01DB10F81BF02BFE00DA0CC5 /* EvaluationTotal.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
 				01024CC81BD0D10E00E8CAEC /* ServicesDatas.m in Sources */,
+				01EB636D1BFAEE3000BE9788 /* RemarkDetailCell.m in Sources */,
 				0197233B1BD7303800D58F8B /* RSKTouchView.m in Sources */,
 				01E690701BCCB32D00A17543 /* SecurityUtil.m in Sources */,
 				01E68F221BCC9B9F00A17543 /* HealthTotalDatas.m in Sources */,
@@ -3598,6 +3613,7 @@
 				0126ECF51B8C4E8100EC85C1 /* UIView+MJExtension.m in Sources */,
 				0128A8BE1B9EC7D3002B14E2 /* OrderSubmitCell.m in Sources */,
 				0126ED7A1B8C57A700EC85C1 /* AFHTTPRequestOperationManager.m in Sources */,
+				0190ED431BF9DB8F00992EE4 /* WebViewController.m in Sources */,
 				0180A2C41BA810C700D26866 /* AddMemberViewController.m in Sources */,
 				01ECDFA81B7C3F9400665D87 /* HMCommonViewController.m in Sources */,
 				01E690851BCCF6AA00A17543 /* TSPopoverTouchView.m in Sources */,
@@ -3755,7 +3771,7 @@
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/QinQingBao/Frameworks/Alipay\"";
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3791,7 +3807,7 @@
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/QinQingBao/Frameworks/Alipay\"";
 				INFOPLIST_FILE = QinQingBao/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

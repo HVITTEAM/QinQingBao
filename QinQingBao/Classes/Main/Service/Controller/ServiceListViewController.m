@@ -45,7 +45,7 @@
     
     [self getServiceType];
     
-    self.condition = @"3";
+    self.condition = @"";
 }
 
 /**
@@ -117,6 +117,7 @@
  */
 -(void)getServiceType
 {
+    [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
     [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : self.item.tid,
                                                                  @"client" : @"ios",
                                                                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
@@ -126,7 +127,9 @@
                                      ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
                                      self.classifys = [result.datas copy];
                                      [self initTopMenu];
+                                     [SVProgressHUD dismiss];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [SVProgressHUD dismiss];
                                  }];
 }
 
@@ -149,6 +152,7 @@
 -(void)getDataProviderWithConditon:(NSString *)condition
 {
     dataProvider = [[NSMutableArray alloc] init];
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
                                                                   @"p" : @1,
                                                                   @"tid" : selectedItem.tid,

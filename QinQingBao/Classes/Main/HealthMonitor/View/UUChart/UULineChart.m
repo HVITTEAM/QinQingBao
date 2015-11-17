@@ -84,7 +84,7 @@
     //画横线
     for (int i=0; i<5; i++) {
         if ([_ShowHorizonLine[i] integerValue]>0) {
-            
+        
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             UIBezierPath *path = [UIBezierPath bezierPath];
             [path moveToPoint:CGPointMake(UUYLabelwidth,UULabelHeight+i*levelHeight)];
@@ -291,7 +291,7 @@
         label.font = [UIFont systemFontOfSize:10];
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = view.backgroundColor;
-        label.text = [NSString stringWithFormat:@"%d",(int)value];
+        label.text = [NSString stringWithFormat:@"%.01f",value];
         [self.scrollview addSubview:label];
 //    }
     

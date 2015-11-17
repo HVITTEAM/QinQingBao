@@ -38,6 +38,14 @@
  */
 +(NSString *)getErrorMsgWtihCode:(NSInteger)code;
 
+/**
+ *  千米转换成米
+ *
+ *  @param meter <#meter description#>
+ *
+ *  @return <#return value description#>
+ */
++ (NSString *)kilometre2meter:(float)meter;
 
 /**
  * 根据运行时特性获取当前网络类型

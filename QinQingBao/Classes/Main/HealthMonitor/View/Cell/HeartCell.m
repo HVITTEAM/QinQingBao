@@ -10,6 +10,15 @@
 
 @implementation HeartCell
 
+
++(HeartCell *)heartCell
+{
+    HeartCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"HeartCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+    return cell;
+}
+
 - (void)awakeFromNib
 {
 //    self.bgView.layer.cornerRadius = 3;

@@ -51,7 +51,7 @@
 @property (nonatomic, copy) NSString *heartrate_report;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *systolic;
-@property (nonatomic, copy) NSString *isastolic;
+@property (nonatomic, copy) NSString *diastolic;
 @property (nonatomic, copy) NSString *bloodglucose;
 @property (nonatomic, copy) NSString *heartrate_min;
 @property (nonatomic, copy) NSString *heartrate_avg;

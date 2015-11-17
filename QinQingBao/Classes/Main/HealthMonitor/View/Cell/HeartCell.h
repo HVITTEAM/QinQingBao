@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *time;
 /** cell对应的item数据 */
 @property (nonatomic, strong) HealthDataModel *item;
+
++(HeartCell *)heartCell;
 @end

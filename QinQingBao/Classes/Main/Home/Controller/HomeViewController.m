@@ -19,6 +19,7 @@ static float cellWidth = 66;
 #import "ServiceTypeModel.h"
 #import "AllServiceTypeController.h"
 #import "CCLocationManager.h"
+#import "WebViewController.h"
 
 
 
@@ -118,6 +119,9 @@ static float cellWidth = 66;
         UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.slideImages objectAtIndex:i]]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
+        imageView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+        [imageView addGestureRecognizer:singleTap];
         [self.imgPlayer addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+320。。。
     }
     
@@ -134,6 +138,13 @@ static float cellWidth = 66;
     [self.imgPlayer setContentSize:CGSizeMake(MTScreenW * ([self.slideImages count] + 2), self.imgPlayer.height)];
     [self.imgPlayer setContentOffset:CGPointMake(0, 0)];
     [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW, 0, MTScreenW, self.imgPlayer.height) animated:NO];
+}
+
+-(void)onClickImage
+{
+    WebViewController *listView = [[WebViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:listView];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 /**

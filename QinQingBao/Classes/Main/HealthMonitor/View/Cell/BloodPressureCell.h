@@ -16,4 +16,5 @@
 
 @property (nonatomic, strong) HealthDataModel *item;
 
++(BloodPressureCell *)bloodPressureCell;
 @end

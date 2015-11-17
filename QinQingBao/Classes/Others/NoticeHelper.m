@@ -117,6 +117,18 @@
     return type;
 }
 
++ (NSString *)kilometre2meter:(float)meter
+{
+    if (meter < 1000)
+        return [NSString stringWithFormat:@"%.02f米",meter];
+    else
+    {
+        float km = meter/1000;
+        return [NSString stringWithFormat:@"%.02f千米",km];
+    }
+}
+
+
 +(NSString *)getErrorMsgWtihCode:(NSInteger)code
 {
     switch (code)

@@ -10,6 +10,16 @@
 
 @implementation BloodPressureCell
 
+
++(BloodPressureCell *)bloodPressureCell
+{
+    BloodPressureCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"BloodPressureCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
+
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }
@@ -49,15 +59,15 @@
     
     [attributedString1 addAttribute:NSForegroundColorAttributeName
                               value:HMColor(43, 139, 39)
-                              range:NSMakeRange(0, 2)];
+                              range:NSMakeRange(0, 3)];
     
     [attributedString1 addAttribute:NSFontAttributeName
                               value:[UIFont systemFontOfSize:22.f]
-                              range:NSMakeRange(0, 2)];
+                              range:NSMakeRange(0, 3)];
     
     [attributedString1 addAttribute:NSFontAttributeName
                               value:[UIFont systemFontOfSize:12.f]
-                              range:NSMakeRange(2, 5)];
+                              range:NSMakeRange(3, 5)];
     
     self.lowLab.attributedText = attributedString1;
     NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.heart_time];

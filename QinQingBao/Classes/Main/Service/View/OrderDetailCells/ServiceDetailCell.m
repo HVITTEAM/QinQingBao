@@ -17,14 +17,19 @@
     return cell;
 }
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    self.contentView.backgroundColor = HMGlobalBg;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+-(void)setItemInfo:(ServiceItemModel *)itemInfo
+{
+    _itemInfo = itemInfo;
+    self.timeLab.text = itemInfo.servicetime;
 }
 
 @end

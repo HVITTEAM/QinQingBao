@@ -89,7 +89,7 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"count" : @"50",
+                                                                   @"count" : @"5",
                                                                    @"oldid" : self.familyVO.oid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
@@ -123,97 +123,91 @@
 {
     //    if(arc4random_uniform(100)>90)
     //        exit(0);
+    //    [NSThread sleepForTimeInterval:0.2f];
     return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    [NSThread sleepForTimeInterval:0.2f];
-    static NSString *sugarCellIdentifier = @"sugarCell";
-    static NSString *bloodPressureIdentifier = @"bloodPressureCell";
-    static NSString *locationIdentifier = @"locationCell";
-    static NSString *videoIdentifier = @"videoCell";
-    static NSString *heartIdentifier = @"heartCell";
     
+    UITableViewCell* cell = nil;
     
-    HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:sugarCellIdentifier];
-    BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:bloodPressureIdentifier];
-    LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:locationIdentifier];
-    VideoCell *videoCell = [tableView dequeueReusableCellWithIdentifier:videoIdentifier];
-    HeartbeatCell *heartCell = [tableView dequeueReusableCellWithIdentifier:heartIdentifier];
-    
-    if (indexPath.row == 0)
-    {
-        if (!sugarCell)
+    switch (indexPath.row) {
+        case 0:
         {
-            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HeartCell" owner:nil options:nil];
-            sugarCell = (HeartCell*)[nibs lastObject];
-            sugarCell.backgroundColor = [UIColor clearColor];
-            //        cell.selectedBackgroundView = [[UIImageView alloc] init];
-            sugarCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:@"MTSugarCell"];
+            
+            if(sugarCell == nil)
+                sugarCell = [HeartCell heartCell];
+            
+            if(dataProvider && dataProvider.count > 0)
+            {
+                sugarCell.item = dataProvider[0];
+            }
+            
+            cell = sugarCell;
         }
-        if(dataProvider && dataProvider.count > 0)
+            break;
+        case 1:
         {
-            sugarCell.item = dataProvider[0];
+            BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:@"MTBloodPressureCell"];
+            
+            if(bloodPressureCell == nil)
+                bloodPressureCell = [BloodPressureCell bloodPressureCell];
+            
+            if(dataProvider && dataProvider.count > 0)
+            {
+                bloodPressureCell.item = dataProvider[0];
+            }
+            
+            cell = bloodPressureCell;
+            
         }
-        return sugarCell;
+            break;
+        case 2:
+        {
+            VideoCell *videoCell = [tableView dequeueReusableCellWithIdentifier:@"MTVideoCell"];
+            
+            if (videoCell == nil)
+                videoCell = [VideoCell videoCell];
+            
+            cell = videoCell;
+        }
+            break;
+        case 3:
+        {
+            HeartbeatCell *heartCell = [tableView dequeueReusableCellWithIdentifier:@"MTHeartBeatCell"];
+            
+            if(heartCell == nil)
+                heartCell = [HeartbeatCell heartbeatCell];
+            
+            if(dataProvider && dataProvider.count > 0)
+            {
+                heartCell.item = dataProvider[0];
+            }
+            
+            cell = heartCell;
+        }
+            break;
+        case 4:
+        {
+            LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:@"MTLocationCell"];
+            
+            if(locationCell == nil)
+                locationCell = [LocationCell locationCell];
+            
+            if(dataProvider && dataProvider.count > 0)
+            {
+                locationCell.item = dataProvider[0];
+            }
+            
+            cell = locationCell;
+        }
+            break;
+        default:
+            break;
     }
-    else if(indexPath.row == 1)
-    {
-        if (!bloodPressureCell)
-        {
-            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"BloodPressureCell" owner:nil options:nil];
-            bloodPressureCell = (BloodPressureCell*)[nibs lastObject];
-            bloodPressureCell.backgroundColor = [UIColor clearColor];
-            bloodPressureCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        if(dataProvider && dataProvider.count > 0)
-        {
-            bloodPressureCell.item = dataProvider[0];
-        }
-        return bloodPressureCell;
-    }
-    else if(indexPath.row == 4)
-    {
-        if (!locationCell)
-        {
-            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"LocationCell" owner:nil options:nil];
-            locationCell = (LocationCell*)[nibs lastObject];
-            locationCell.backgroundColor = [UIColor clearColor];
-            locationCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        if(dataProvider && dataProvider.count > 0)
-        {
-            locationCell.item = dataProvider[0];
-        }
-        return locationCell;
-    }
-    else if(indexPath.row == 3)
-    {
-        if (!heartCell)
-        {
-            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HeartbeatCell" owner:nil options:nil];
-            heartCell = (HeartbeatCell*)[nibs lastObject];
-            heartCell.backgroundColor = [UIColor clearColor];
-            heartCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        if(dataProvider && dataProvider.count > 0)
-        {
-            heartCell.item = dataProvider[0];
-        }
-        return heartCell;
-    }
-    else
-    {
-        if (!videoCell)
-        {
-            NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"VideoCell" owner:nil options:nil];
-            videoCell = (VideoCell*)[nibs lastObject];
-            videoCell.backgroundColor = [UIColor clearColor];
-            videoCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return videoCell;
-    }
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -263,12 +257,6 @@
  */
 -(void)showVideo
 {
-    //    if([EzvizDemoGlobalKit sharedKit].token)
-    //    {
-    //        [[YSDemoDataModel sharedInstance] saveUserAccessToken:[EzvizDemoGlobalKit sharedKit].token];
-    //        [[YSHTTPClient sharedInstance] setClientAccessToken:[EzvizDemoGlobalKit sharedKit].token];
-    //    }
-    
     VideoListViewController *videoList = [[VideoListViewController alloc] init];
     [self.navigationController pushViewController:videoList animated:YES];
 }

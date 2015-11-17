@@ -14,4 +14,5 @@
 
 @property (nonatomic, strong) HealthDataModel *item;
 
++(LocationCell *)locationCell;
 @end

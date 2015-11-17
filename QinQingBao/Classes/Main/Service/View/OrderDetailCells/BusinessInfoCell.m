@@ -36,6 +36,7 @@
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
 {
     _itemInfo = itemInfo;
+    self.distanceLab.text = [NoticeHelper kilometre2meter:[itemInfo.distance floatValue]];
     self.nameLab.text = itemInfo.orgname;
     self.addressLab.text = itemInfo.orgaddress;
     self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgphone];

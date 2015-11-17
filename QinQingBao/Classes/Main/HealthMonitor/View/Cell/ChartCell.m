@@ -40,7 +40,7 @@
     //设置表格的曲线颜色
     scrollChart.colors = @[UUGreen,UURed,UUBrown];
     //设置表格数值标注范围
-//    scrollChart.markRange =  CGRangeMake(55, 27);
+    //    scrollChart.markRange =  CGRangeMake(55, 27);
     //Y轴值范围
     scrollChart.chooseRange = CGRangeMake(110, 0);
     scrollChart.showRange = NO;
@@ -48,20 +48,22 @@
     NSMutableArray *YTitles = [NSMutableArray array];
     
     NSMutableArray *YTitles1 = [NSMutableArray array];
-
-
+    
+    
     switch (self.type) {
         case ChartTypeBlood:
             for (HealthDataModel *item in self.dataProvider) {
                 [YTitles addObject:item.systolic];
-                [YTitles1 addObject:item.isastolic];
+                [YTitles1 addObject:item.diastolic];
             }
             break;
+            
         case ChartTypeSugar:
             for (HealthDataModel *item in self.dataProvider) {
                 [YTitles addObject:item.bloodglucose];
             }
             break;
+            
         case ChartTypeHeart:
             for (HealthDataModel *item in self.dataProvider) {
                 [YTitles addObject:item.heartrate_avg];
@@ -70,10 +72,9 @@
         default:
             break;
     }
-    
     NSArray*arr1 = @[@"20",@"44",@"15",@"40",@"42"];
     [scrollChart setYValues:@[YTitles]];
-
+    
     //设置表格各条曲线是否显示最大最小值,1表示对应的曲线要显示最大最小值
     NSMutableArray *showMaxMinArray = [[NSMutableArray alloc]init];
     for (int i=0; i<scrollChart.yValues.count; i++) {

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
 @property (strong, nonatomic) IBOutlet UILabel *addressLab;
 @property (strong, nonatomic) IBOutlet UILabel *telLab;
+@property (strong, nonatomic) IBOutlet UILabel *distanceLab;
 - (IBAction)callClickHandler:(id)sender;
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
 
