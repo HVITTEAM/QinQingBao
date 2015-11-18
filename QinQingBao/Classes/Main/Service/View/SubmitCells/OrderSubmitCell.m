@@ -10,6 +10,14 @@
 
 @implementation OrderSubmitCell
 
+
++(OrderSubmitCell *) orderSubmitCell
+{
+    OrderSubmitCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderSubmitCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib
 {
     self.submitBtn.layer.cornerRadius = 5;

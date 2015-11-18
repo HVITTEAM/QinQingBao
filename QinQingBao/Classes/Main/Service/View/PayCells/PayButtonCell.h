@@ -12,4 +12,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *submitBtn;
 @property (nonatomic, copy) void (^payClick)(UIButton *btn);
 - (IBAction)submitClickHandler:(id)sender;
++ (PayButtonCell*) payButtonCell;
 @end

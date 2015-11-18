@@ -10,6 +10,14 @@
 
 @implementation PayButtonCell
 
+
++ (PayButtonCell*) payButtonCell
+{
+    PayButtonCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"PayButtonCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib
 {
     self.submitBtn.layer.cornerRadius = 5;

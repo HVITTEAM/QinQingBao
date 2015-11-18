@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *addressLab;
 
 -(void)setdataWithItem:(FamilyModel *)item;
+
++ (ServiceCustomCell*) serviceCustomCell;
 @end

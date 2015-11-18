@@ -10,6 +10,14 @@
 
 @implementation OrderServiceDetailCell
 
+
++(OrderServiceDetailCell *) orderServiceDetailCell
+{
+    OrderServiceDetailCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderServiceDetailCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

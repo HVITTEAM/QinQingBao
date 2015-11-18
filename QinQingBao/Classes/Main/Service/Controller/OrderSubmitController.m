@@ -243,18 +243,13 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *listViewCellId = @"cell";
+    
+    NSString *conmoncell = @"MTCommoncell";
     NSString *content = @"contentCell";
-    NSString *submit = @"submitcell";
-    NSString *custum = @"serviceCusCell";
-    NSString *detail = @"serviceDetailCell";
     
     
     UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellId];
-    OrderSubmitCell *submitcell = [tableView dequeueReusableCellWithIdentifier:submit];
-    ServiceCustomCell *serviceCuscell = [tableView dequeueReusableCellWithIdentifier:custum];
-    OrderServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:detail];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:conmoncell];
     
     if (indexPath.section == 0)
     {
@@ -262,7 +257,7 @@ numberOfRowsInComponent:(NSInteger)component
         {
             if (cell == nil)
             {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
                 cell.textLabel.text = @"服务对象";
                 cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -271,16 +266,14 @@ numberOfRowsInComponent:(NSInteger)component
         }
         else
         {
-            if (serviceCuscell == nil)
-            {
-                //服务对象
-                NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"ServiceCustomCell" owner:self options:nil];
-                serviceCuscell = [nib lastObject];
-                serviceCuscell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
+            ServiceCustomCell *serviceCuscell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceCustomcell"];
             
-            [(ServiceCustomCell *)serviceCuscell setdataWithItem:famVO];
-            return  serviceCuscell;
+            if(serviceCuscell == nil)
+                serviceCuscell = [ServiceCustomCell serviceCustomCell];
+            
+            [serviceCuscell setdataWithItem:famVO];
+            
+            return serviceCuscell;
         }
         
     }
@@ -288,7 +281,7 @@ numberOfRowsInComponent:(NSInteger)component
     {
         if (cell == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
             cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
@@ -301,7 +294,7 @@ numberOfRowsInComponent:(NSInteger)component
     {
         if (cell == nil)
         {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
             cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
         }
         if (contentcell == nil)
@@ -315,29 +308,27 @@ numberOfRowsInComponent:(NSInteger)component
             case 0:
             {
                 cell.textLabel.text = @"结算信息";
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return  cell;
-                break;
             }
             case 1:
             {
                 contentcell.textLabel.text = @"商品总价";
-                contentcell.detailTextLabel.text = @"￥200.00";
+                contentcell.detailTextLabel.text = @"200元";
                 return  contentcell;
-                break;
             }
             case 2:
             {
                 contentcell.textLabel.text = @"购物券";
-                contentcell.detailTextLabel.text = @"￥-20.00";
+                contentcell.detailTextLabel.text = @"20元";
+                contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return  contentcell;
-                break;
             }
             case 3:
             {
                 contentcell.textLabel.text = @"还需支付";
-                contentcell.detailTextLabel.text = @"￥180.00";
+                contentcell.detailTextLabel.text = @"180元";
                 return  contentcell;
-                break;
             }
             default:
                 return nil;
@@ -349,7 +340,7 @@ numberOfRowsInComponent:(NSInteger)component
         {
             if (cell == nil)
             {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:listViewCellId];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
                 cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
             }
             cell.accessoryType = UITableViewCellSelectionStyleNone;
@@ -359,31 +350,29 @@ numberOfRowsInComponent:(NSInteger)component
         }
         else
         {
-            if (serviceDetailcell == nil)
-            {
-                //提交订单
-                NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"OrderServiceDetailCell" owner:self options:nil];
-                serviceDetailcell = [nib lastObject];
-                serviceDetailcell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            [serviceDetailcell setdataWithItem:self.serviceFetailItem];
-            return  serviceDetailcell;
+            OrderServiceDetailCell *orderServiceDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderServiceDetailCell"];
+            
+            if(orderServiceDetailCell == nil)
+                orderServiceDetailCell = [OrderServiceDetailCell orderServiceDetailCell];
+            
+            [orderServiceDetailCell setdataWithItem:self.serviceFetailItem];
+            
+            return orderServiceDetailCell;
         }
     }
     else  if (indexPath.section == 4 && indexPath.row == 0)
     {
-        if (submitcell == nil)
-        {
-            //提交订单
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"OrderSubmitCell" owner:self options:nil];
-            submitcell = [nib lastObject];
-            submitcell.selectionStyle = UITableViewCellSelectionStyleNone;
-            __weak typeof(self) weakSelf = self;
-            submitcell.payClick = ^(UIButton *button){
-                [weakSelf submitClickHandler];
-            };
-        }
-        return  submitcell;
+        
+        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
+        
+        if(orderSubmitCell == nil)
+            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
+        
+        __weak typeof(self) weakSelf = self;
+        orderSubmitCell.payClick = ^(UIButton *button){
+            [weakSelf submitClickHandler];
+        };
+        return orderSubmitCell;
     }
     else
     {

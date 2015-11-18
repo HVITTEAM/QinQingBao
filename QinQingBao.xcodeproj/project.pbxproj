@@ -4113,6 +4113,7 @@
 				013F3E701BFB0CDB00FF39E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		013F3E771BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppTests" */ = {
 			isa = XCConfigurationList;
@@ -4121,6 +4122,7 @@
 				013F3E721BFB0CDB00FF39E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		013F3E781BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppUITests" */ = {
 			isa = XCConfigurationList;
@@ -4129,6 +4131,7 @@
 				013F3E741BFB0CDB00FF39E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01F227D01B7B3E1400ED4AFB /* Build configuration list for PBXProject "QinQingBao" */ = {
 			isa = XCConfigurationList;

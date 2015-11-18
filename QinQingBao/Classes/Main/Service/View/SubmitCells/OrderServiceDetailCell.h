@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *servicePrice;
 
 -(void)setdataWithItem:(ServiceItemModel *)item;
+
++(OrderServiceDetailCell *) orderServiceDetailCell;
 @end

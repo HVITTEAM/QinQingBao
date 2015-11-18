@@ -11,15 +11,39 @@
 
 @implementation NoticeHelper
 
++ (void)alert
+{
+    //创建提示框窗口
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"System Info" message:@"adasd" preferredStyle:UIAlertControllerStyleAlert];
+    //实例化取消按钮
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        //点击取消按钮后控制台打印语句。
+        NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+    }];
+    //实例化确定按钮
+    UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
+    }];
+    //向弹出框中添加按钮和文本框
+    [alertController addAction:cancelAction];
+    [alertController addAction:otherAction];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+        // 可以在这里对textfield进行定制，例如改变背景色等
+//        textField.text = contact.phoneNumber;
+    }];
+    //将提示框弹出
+//    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 +(void)AlertShow:(NSString *)msg view:(UIView *)view
 {
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-//    hud.mode = MBProgressHUDModeText;
-//    hud.labelText = msg;
-//    hud.margin = 10.f;
-//    hud.removeFromSuperViewOnHide = YES;
-//    [hud hide:YES afterDelay:1.33];
+    //    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    //    hud.mode = MBProgressHUDModeText;
+    //    hud.labelText = msg;
+    //    hud.margin = 10.f;
+    //    hud.removeFromSuperViewOnHide = YES;
+    //    [hud hide:YES afterDelay:1.33];
     
     [view makeToast:msg duration:1.3 position:CSToastPositionCenter];
 }

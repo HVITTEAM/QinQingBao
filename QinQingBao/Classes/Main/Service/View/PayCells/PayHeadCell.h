@@ -10,4 +10,5 @@
 
 @interface PayHeadCell : UITableViewCell
 
++ (PayHeadCell*) payHeadCell;
 @end

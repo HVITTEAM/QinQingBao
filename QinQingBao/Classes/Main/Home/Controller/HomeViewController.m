@@ -82,6 +82,8 @@ static float cellWidth = 66;
     //    self.btn2.layer.cornerRadius = 8;
     //    self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
+    float f = CGRectGetMaxY(self.serviceColectionview.frame);
+    NSLog(@"屏幕高度%f",f);
     //    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
 }
 

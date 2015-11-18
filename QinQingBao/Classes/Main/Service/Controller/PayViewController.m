@@ -92,7 +92,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section ==0 )
+    if (indexPath.section == 0 )
         return 80;
     else
         return 40;
@@ -100,46 +100,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *head = @"headCell";
-    NSString *content = @"contentCell";
-    NSString *pay = @"payBtnCell";
-    NSString *payType = @"payTypeCell";
     
-    PayButtonCell *payBtncell = [tableView dequeueReusableCellWithIdentifier:pay];
-    UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
-    UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:payType];
-    UITableViewCell *headcell = [tableView dequeueReusableCellWithIdentifier:head];
-    
+    UITableViewCell *cell;
     if (indexPath.section == 0)
     {
+        PayHeadCell *headcell = [tableView dequeueReusableCellWithIdentifier:@"MTPayHeadCell"];
+        
         if (headcell == nil)
-        {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PayHeadCell" owner:self options:nil];
-            headcell = [nib lastObject];
-            headcell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return  headcell;
+            headcell = [PayHeadCell payHeadCell];
+        cell = headcell;
     }
     else  if (indexPath.section == 3)
     {
+        
+        PayButtonCell *payBtncell = [tableView dequeueReusableCellWithIdentifier:@"MTPayBtncell"];
+        
         if (payBtncell == nil)
-        {
-            NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"PayButtonCell" owner:self options:nil];
-            payBtncell = [nib lastObject];
-            payBtncell.selectionStyle = UITableViewCellSelectionStyleNone;
-            __weak typeof(self) weakSelf = self;
-            payBtncell.payClick = ^(UIButton *button){
-                [weakSelf payClickHandler];
-            };
-        }
-        return  payBtncell;
+            payBtncell = [PayButtonCell payButtonCell];
+        
+        __weak typeof(self) weakSelf = self;
+        payBtncell.payClick = ^(UIButton *button){
+            [weakSelf payClickHandler];
+        };
+        cell =  payBtncell;
     }
     
     else if (indexPath.section == 1)
     {
+        UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:@"MTContentcell"];
         if (contentcell == nil)
         {
-            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:content];
+            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTContentcell"];
             contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
             contentcell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
@@ -153,16 +144,19 @@
                                      range:NSMakeRange(5, 3)];
             contentcell.textLabel.attributedText = attributedString;
         }
-        
-        return contentcell;
+        cell = contentcell;
     }
     else
     {
+        
+        UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPayTypecell"];
         if (payTypecell == nil)
         {
-            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:payType];
+            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTPayTypecell"];
             payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            payTypecell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        
         if(indexPath.row == 0)
         {
             payTypecell.imageView.image = [UIImage imageNamed:@"unionpay.png"];
@@ -183,8 +177,9 @@
         else
             payTypecell.accessoryType = UITableViewCellAccessoryNone;
         
-        return payTypecell;
+        cell = payTypecell;
     }
+    return cell;
 }
 
 //选中Cell响应事件
@@ -193,14 +188,10 @@
     if (indexPath.section != 2)
         return;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
-    //    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     selectedIndex = indexPath.row;
+    
     [self.tableView reloadData];
-    //    if (cell.accessoryType == UITableViewCellAccessoryNone)
-    //        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    //    else
-    //        cell.accessoryType = UITableViewCellAccessoryNone;
 }
 
 /*

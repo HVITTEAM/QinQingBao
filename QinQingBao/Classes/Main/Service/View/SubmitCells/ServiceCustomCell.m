@@ -10,6 +10,13 @@
 
 @implementation ServiceCustomCell
 
++ (ServiceCustomCell*) serviceCustomCell
+{
+    ServiceCustomCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"ServiceCustomCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }

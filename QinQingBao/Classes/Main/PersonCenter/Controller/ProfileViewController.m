@@ -19,7 +19,7 @@
 #import "RootViewController.h"
 
 
-#define imageHeight 120
+#define imageHeight 140
 
 @interface ProfileViewController ()
 
@@ -65,11 +65,11 @@
 
 #pragma mark 初始化界面
 
-/** 屏蔽tableView的样式 */
-- (id)init
-{
-    return [self initWithStyle:UITableViewStylePlain];
-}
+///** 屏蔽tableView的样式 */
+//- (id)init
+//{
+//    return [self initWithStyle:UITableViewStylePlain];
+//}
 
 /**
  *  设置tableView属性
@@ -81,7 +81,7 @@
     self.tableView.sectionFooterHeight = HMStatusCellMargin;
     self.tableView.sectionHeaderHeight = 0;
     //上左下右的值
-    self.tableView.contentInset = UIEdgeInsetsMake(imageHeight, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
 }
 
 /**
@@ -92,49 +92,24 @@
     self.title = @"个人中心";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pc_bg.png"]];
-    
-    
-    
-    _zoomImageview.frame = CGRectMake(0, -imageHeight, self.view.width, imageHeight);
+    _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headbg.png"]];
+    _zoomImageview.frame = CGRectMake(0, 0, self.view.width, imageHeight - 20);
     //高度改变 宽度也跟着改变
     //    _zoomImageview.contentMode = UIViewContentModeScaleAspectFill;
-    [self.tableView addSubview:_zoomImageview];
+    self.tableView.tableHeaderView = _zoomImageview;
     
     [_zoomImageview setUserInteractionEnabled:YES];//使添加其上的button有点击事件
     
     //设置autoresizesSubviews让子类自动布局
     _zoomImageview.autoresizesSubviews = YES;
     
-    _backBtn = [[UIButton alloc] init];
-    [_backBtn setBackgroundImage:[UIImage imageNamed:@"default_common_navibar_prev_normal.png"] forState:UIControlStateNormal];
-    [_backBtn setBackgroundImage:[UIImage imageNamed:@"default_common_navibar_prev_highlighted.png"] forState:UIControlStateHighlighted];
-    // 设置按钮的尺寸为背景图片的尺寸
-    _backBtn.size = _backBtn.currentBackgroundImage.size;
-    _backBtn.x = 10;
-    _backBtn.y = 30;
-    
-    _iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake((MTScreenW - 80)/2, 10, 80, 80)];
+    _iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake((MTScreenW - 80)/2, 30, 80, 80)];
     _iconImageview.clipsToBounds = YES;
     _iconImageview.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
     [_iconImageview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     _iconImageview.layer.cornerRadius = _iconImageview.height/2;
     _iconImageview.layer.masksToBounds = YES;
-    
     [_zoomImageview addSubview:_iconImageview];
-    
-    _circleImageview = [[UIImageView alloc]initWithFrame:CGRectMake(10, imageHeight - 30, 40, 40)];
-    _circleImageview.backgroundColor = [UIColor redColor];
-    _circleImageview.layer.cornerRadius = 7.5f;
-    _circleImageview.clipsToBounds = YES;
-    _circleImageview.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
-    //    [_zoomImageview addSubview:_circleImageview];
-    
-    _label = [[UILabel alloc]initWithFrame:CGRectMake(60, imageHeight - 20, 280, 20)];
-    _label.textColor = [UIColor whiteColor];
-    _label.text = @"个人中心";
-    _label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;//自动布局，自适应顶部
-    //    [_zoomImageview addSubview:_label];
 }
 
 #pragma mark UIScrollViewDelegate
@@ -200,9 +175,7 @@
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
     logout.height = 50;
-    
     self.tableView.tableFooterView = logout;
-    
 }
 
 - (void)setupGroup0
@@ -288,11 +261,6 @@
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
     album.destVcClass = [SettingViewController class];
     group.items = @[album];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 8;
 }
 
 # pragma  mark 退出当前账号

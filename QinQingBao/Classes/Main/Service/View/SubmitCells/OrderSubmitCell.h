@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface OrderSubmitCell : UITableViewCell
+
 @property (strong, nonatomic) IBOutlet UIButton *submitBtn;
+
 @property (nonatomic, copy) void (^payClick)(UIButton *btn);
+
 - (IBAction)submitClickHandler:(id)sender;
+
++(OrderSubmitCell *) orderSubmitCell;
 @end

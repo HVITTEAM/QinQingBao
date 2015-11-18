@@ -129,7 +129,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // 设置标题的字体
-        self.textLabel.font = [UIFont boldSystemFontOfSize:15];
+        self.textLabel.font = [UIFont boldSystemFontOfSize:14];
         self.detailTextLabel.font = [UIFont systemFontOfSize:11];
         
         // 去除cell的默认背景色

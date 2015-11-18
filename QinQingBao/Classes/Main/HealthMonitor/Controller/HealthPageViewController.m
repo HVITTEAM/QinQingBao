@@ -14,7 +14,7 @@
 #import "VideoCell.h"
 
 
-@interface HealthPageViewController ()
+@interface HealthPageViewController ()<UIScrollViewDelegate>
 
 @end
 
@@ -111,7 +111,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,15 +124,28 @@
     //    if(arc4random_uniform(100)>90)
     //        exit(0);
     //    [NSThread sleepForTimeInterval:0.2f];
-    return 5;
+    return 1;
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *vi = [[UIView alloc] init];
+    vi.backgroundColor = [UIColor clearColor];
+    return vi;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     UITableViewCell* cell = nil;
     
-    switch (indexPath.row) {
+    switch (indexPath.section) {
         case 0:
         {
             HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:@"MTSugarCell"];
@@ -144,7 +157,7 @@
             {
                 sugarCell.item = dataProvider[0];
             }
-            
+
             cell = sugarCell;
         }
             break;
@@ -159,7 +172,7 @@
             {
                 bloodPressureCell.item = dataProvider[0];
             }
-            
+
             cell = bloodPressureCell;
             
         }
@@ -207,6 +220,8 @@
         default:
             break;
     }
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+
     return cell;
 }
 

@@ -10,6 +10,14 @@
 
 @implementation PayHeadCell
 
+
++ (PayHeadCell*) payHeadCell
+{
+    PayHeadCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"PayHeadCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib {
     // Initialization code
 }
