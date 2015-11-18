@@ -1,31 +1,28 @@
-//
-//  MJRefreshConst.m
-//  MJRefresh
-//
-//  Created by mj on 14-1-3.
-//  Copyright (c) 2014年 itcast. All rights reserved.
-//
+//  代码地址: https://github.com/CoderMJLee/MJRefresh
+//  代码地址: http://code4app.com/ios/%E5%BF%AB%E9%80%9F%E9%9B%86%E6%88%90%E4%B8%8B%E6%8B%89%E4%B8%8A%E6%8B%89%E5%88%B7%E6%96%B0/52326ce26803fabc46000000
+#import <UIKit/UIKit.h>
 
-// 版权属于原作者
-// http://code4app.com (cn) http://code4app.net (en)
-// 发布代码于最专业的源码分享网站: Code4App.com
-
-#import "MJRefreshConst.h"
-
-const CGFloat MJRefreshViewHeight = 64.0;
+const CGFloat MJRefreshHeaderHeight = 54.0;
+const CGFloat MJRefreshFooterHeight = 44.0;
 const CGFloat MJRefreshFastAnimationDuration = 0.25;
 const CGFloat MJRefreshSlowAnimationDuration = 0.4;
 
-NSString *const MJRefreshBundleName = @"MJRefresh.bundle";
+NSString *const MJRefreshKeyPathContentOffset = @"contentOffset";
+NSString *const MJRefreshKeyPathContentInset = @"contentInset";
+NSString *const MJRefreshKeyPathContentSize = @"contentSize";
+NSString *const MJRefreshKeyPathPanState = @"state";
 
-NSString *const MJRefreshFooterPullToRefresh = @"上拉加载更多数据";
-NSString *const MJRefreshFooterReleaseToRefresh = @"松开立即加载更多数据";
-NSString *const MJRefreshFooterRefreshing = @"正在帮你加载数据...";
+NSString *const MJRefreshHeaderLastUpdatedTimeKey = @"MJRefreshHeaderLastUpdatedTimeKey";
 
-NSString *const MJRefreshHeaderPullToRefresh = @"下拉可以刷新";
-NSString *const MJRefreshHeaderReleaseToRefresh = @"松开立即刷新";
-NSString *const MJRefreshHeaderRefreshing = @"正在帮你刷新...";
-NSString *const MJRefreshHeaderTimeKey = @"MJRefreshHeaderView";
+NSString *const MJRefreshHeaderIdleText = @"下拉可以刷新";
+NSString *const MJRefreshHeaderPullingText = @"松开立即刷新";
+NSString *const MJRefreshHeaderRefreshingText = @"正在刷新数据中...";
 
-NSString *const MJRefreshContentOffset = @"contentOffset";
-NSString *const MJRefreshContentSize = @"contentSize";
+NSString *const MJRefreshAutoFooterIdleText = @"点击或上拉加载更多";
+NSString *const MJRefreshAutoFooterRefreshingText = @"正在加载更多的数据...";
+NSString *const MJRefreshAutoFooterNoMoreDataText = @"已经全部加载完毕";
+
+NSString *const MJRefreshBackFooterIdleText = @"上拉可以加载更多";
+NSString *const MJRefreshBackFooterPullingText = @"松开立即加载更多";
+NSString *const MJRefreshBackFooterRefreshingText = @"正在加载更多的数据...";
+NSString *const MJRefreshBackFooterNoMoreDataText = @"已经全部加载完毕";

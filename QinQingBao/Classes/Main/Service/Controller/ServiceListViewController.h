@@ -14,7 +14,7 @@
 
 
 
-@interface ServiceListViewController : UITableViewController
+@interface ServiceListViewController : UIViewController
 
 @property (nonatomic, retain) ServiceTypeModel *item;
 

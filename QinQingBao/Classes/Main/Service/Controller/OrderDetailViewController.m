@@ -126,7 +126,7 @@
 {
     CGFloat height = 0;
     if (indexPath.row == 0)
-        height =  evaArr.count != 0 ? 180 : 40;
+        height =  evaArr.count != 0 ? 180 : 50;
     else if (indexPath.row == 1)
         height = 160;
     else if (indexPath.row == 2)
@@ -238,6 +238,8 @@
         default:
             break;
     }
+//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+
     return cell;
 }
 

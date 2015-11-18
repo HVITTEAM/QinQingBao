@@ -25,6 +25,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    self.backgroundColor = HMGlobalBg;
     self.evaView.show_star = 10;
     self.evaView.font_size = 20;
     

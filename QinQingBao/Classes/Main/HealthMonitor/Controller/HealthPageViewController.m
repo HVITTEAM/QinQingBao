@@ -31,7 +31,7 @@
     
     [self setupRefresh];
     
-    [self.tableView headerBeginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -54,21 +54,14 @@
  */
 - (void)setupRefresh
 {
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //    [self.tableView headerBeginRefreshing];
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    //    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
-    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
-    self.tableView.headerRefreshingText = @"正在帮你刷新中";
-    
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"正在帮你加载中";
+    // 下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 结束刷新
+            [self headerRereshing];
+        });
+    }];
 }
 
 #pragma mark 开始进入刷新状态
@@ -100,10 +93,10 @@
                                      }
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
-                                     [self.tableView headerEndRefreshing];
+                                     [self.tableView.header endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [self.tableView headerEndRefreshing];
+                                     [self.tableView.header endRefreshing];
                                  }];
 }
 
@@ -134,9 +127,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *vi = [[UIView alloc] init];
-    vi.backgroundColor = [UIColor clearColor];
-    return vi;
+    return [[UIView alloc] init];
 }
 
 
@@ -157,7 +148,7 @@
             {
                 sugarCell.item = dataProvider[0];
             }
-
+            
             cell = sugarCell;
         }
             break;
@@ -172,7 +163,7 @@
             {
                 bloodPressureCell.item = dataProvider[0];
             }
-
+            
             cell = bloodPressureCell;
             
         }
@@ -221,7 +212,7 @@
             break;
     }
     cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
-
+    
     return cell;
 }
 

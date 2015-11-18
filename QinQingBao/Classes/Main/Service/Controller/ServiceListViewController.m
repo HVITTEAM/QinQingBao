@@ -9,13 +9,17 @@
 #import "ServiceListViewController.h"
 #import "DOPDropDownMenu.h"
 #import "ServiceTypeDatas.h"
+#import "MJChiBaoZiHeader.h"
 
-@interface ServiceListViewController ()<DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
+@interface ServiceListViewController ()<UITableViewDataSource,UITableViewDelegate,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
 {
     NSMutableArray *dataProvider;
     //当前选中的服务分类 默认为第一条
     ServiceTypeModel *selectedItem;
 }
+
+@property (nonatomic, strong) UITableView *tableView;
+
 
 /**
  *  排序方式
@@ -62,13 +66,12 @@
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     // 添加下拉菜单
-    DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 0) andHeight:44];
-    
+    DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 66) andHeight:44];
     menu.delegate = self;
     menu.dataSource = self;
-    self.tableView.tableHeaderView = menu;
+    [self.view addSubview:menu];
     selectedItem = self.classifys[0];
-    [self.tableView headerBeginRefreshing];
+    [self.tableView.header beginRefreshing];
 }
 
 /**
@@ -80,10 +83,14 @@
 }
 
 /**
- *  设置tableView属性
+ *  初始化tableView
  */
 -(void)initTableviewSkin
 {
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, MTScreenW, MTScreenH - 44)];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
@@ -95,21 +102,30 @@
  */
 - (void)setupRefresh
 {
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //    [self.tableView headerBeginRefreshing];
     
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    MJChiBaoZiHeader *head = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+    self.tableView.header = head;
+    head.lastUpdatedTimeLabel.hidden = YES;
+    head.stateLabel.hidden = YES;
     
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
-    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
-    self.tableView.headerRefreshingText = @"正在帮你刷新中";
+    //    // 下拉刷新
+    //    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    //        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //            // 结束刷新
+    //            [self headerRereshing];
+    //        });
+    //    }];
     
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"正在帮你加载中";
+    // 上拉刷新
+    //    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    //        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //            // 结束刷新
+    //            [self footerRereshing];
+    //        });
+    //    }];
 }
 
 /**
@@ -166,17 +182,17 @@
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
-                                     if (result.datas.count == 0)
-                                         [self initWithPlaceString:@"现在还没数据呐"];
-                                     else
-                                         [self removePlace];
-                                     [self.tableView headerEndRefreshing];
-                                     [self.tableView footerEndRefreshing];
+                                     //                                     if (result.datas.count == 0)
+                                     //                                         [self.tableView initWithPlaceString:@"现在还没数据呐"];
+                                     //                                     else
+                                     //                                         [self.tableView removePlace];
+                                     [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                     [self.tableView headerEndRefreshing];
-                                     [self.tableView footerEndRefreshing];
+                                     [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
                                  }];
 }
 
@@ -290,11 +306,11 @@
         NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
         if (indexPath.column == 0) {
             selectedItem = self.classifys[indexPath.row];
-            [self.tableView headerBeginRefreshing];
+            [self.tableView.header beginRefreshing];
         }
         else if (indexPath.column == 2) {
             self.condition = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
-            [self.tableView headerBeginRefreshing];
+            [self.tableView.header beginRefreshing];
         }
         else
             [NoticeHelper AlertShow:@"sorry" view:self.view];

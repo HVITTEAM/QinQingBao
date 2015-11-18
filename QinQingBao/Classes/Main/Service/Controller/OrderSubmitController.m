@@ -194,7 +194,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -211,9 +211,12 @@ numberOfRowsInComponent:(NSInteger)component
             return 1;
             break;
         case 3:
-            return 4;
+            return 2;
             break;
         case 4:
+            return 4;
+            break;
+        case 5:
             return 1;
             break;
         default:
@@ -261,6 +264,7 @@ numberOfRowsInComponent:(NSInteger)component
                 cell.textLabel.text = @"服务对象";
                 cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
             }
             return  cell;
         }
@@ -288,9 +292,20 @@ numberOfRowsInComponent:(NSInteger)component
         cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
         cell.textLabel.text = @"预约时间";
         cell.detailTextLabel.text =  selectedTimestr;
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+        
         return  cell;
     }
     else  if (indexPath.section == 3)
+    {
+        UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPaytypeCell"];
+        if (payTypecell == nil)
+            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTPaytypeCell"];
+        payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+        payTypecell.textLabel.text = indexPath.row == 0 ? @"在线支付": @"货到付款";
+        return  payTypecell;
+    }
+    else  if (indexPath.section == 4)
     {
         if (cell == nil)
         {
@@ -360,7 +375,7 @@ numberOfRowsInComponent:(NSInteger)component
             return orderServiceDetailCell;
         }
     }
-    else  if (indexPath.section == 4 && indexPath.row == 0)
+    else  if (indexPath.section == 5 && indexPath.row == 0)
     {
         
         OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];

@@ -54,14 +54,15 @@
  */
 - (void)setupRefresh
 {
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    //    [self.tableView headerBeginRefreshing];
-    
+    // 下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 结束刷新
+            [self headerRereshing];
+        });
+    }];
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    //     2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    //    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
 }
 
 #pragma mark 开始进入刷新状态
@@ -91,7 +92,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    [self.tableView reloadSections:<#(NSIndexSet *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
+    //    [self.tableView reloadSections:<#(NSIndexSet *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
     return 1;
 }
 
@@ -130,9 +131,9 @@
     if (!self.evaluaView)
         self.evaluaView  = [[EvaluationController alloc]init];
     [self.nav pushViewController:self.evaluaView animated:YES];
-//    if (!self.cancelView)
-//        self.cancelView  = [[CancelOrderController alloc]init];
-//    [self.nav pushViewController:self.cancelView animated:YES];
+    //    if (!self.cancelView)
+    //        self.cancelView  = [[CancelOrderController alloc]init];
+    //    [self.nav pushViewController:self.cancelView animated:YES];
 }
 
 -(NSString *)kilometre2meter:(float)meter
