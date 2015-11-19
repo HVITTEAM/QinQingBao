@@ -20,6 +20,7 @@ static float cellWidth = 66;
 #import "AllServiceTypeController.h"
 #import "CCLocationManager.h"
 #import "WebViewController.h"
+#import "AnimationViewController.h"
 
 
 
@@ -50,6 +51,9 @@ static float cellWidth = 66;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
 }
 
 /**
@@ -144,6 +148,7 @@ static float cellWidth = 66;
 
 -(void)onClickImage
 {
+    AnimationViewController *lis = [[AnimationViewController alloc] init];
     WebViewController *listView = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:listView];
     [self presentViewController:nav animated:YES completion:nil];

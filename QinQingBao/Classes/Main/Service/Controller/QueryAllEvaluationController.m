@@ -116,26 +116,25 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return dataProvider.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *listViewCellstr = @"cell";
-    EvaluationItemCell *cell = [tableView dequeueReusableCellWithIdentifier:listViewCellstr];
+    EvaluationItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaluationItemCell"];
     
     if (cell == nil)
-    {
-        NSArray *nib = [[NSBundle mainBundle]loadNibNamed:@"EvaluationItemCell" owner:self options:nil];
-        cell = [nib lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+        cell = [EvaluationItemCell evaluationItemCell];
+    
     [cell setitemWithData:dataProvider[indexPath.row]];
+    
     return cell;
 }
 

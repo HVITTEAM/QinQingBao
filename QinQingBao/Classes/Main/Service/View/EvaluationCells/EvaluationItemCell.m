@@ -12,6 +12,14 @@
 #define bottom 20
 @implementation EvaluationItemCell
 
+
++ (EvaluationItemCell*) evaluationItemCell
+{
+    EvaluationItemCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"EvaluationItemCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib
 {
     self.contentLab.editable = NO;
@@ -29,7 +37,7 @@
                                  NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:15],
                                  NSParagraphStyleAttributeName:paragraphStyle
                                  };
-    self.contentLab.attributedText = [[NSAttributedString alloc] initWithString:[item.dis_con isEqualToString:@""] ? @"默认好评" : item.dis_con attributes:attributes];
+    self.contentLab.attributedText = [[NSAttributedString alloc] initWithString:item.dis_con == nil ? @"默认好评" : item.dis_con attributes:attributes];
     self.contentLab.autoresizesSubviews = YES;
     self.contentLab.autoresizingMask =(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
@@ -42,7 +50,7 @@
     self.evaView.userInteractionEnabled = NO;
     
     float score = [item.wgrade floatValue];
-    [self.evaView setScore:score/5 withAnimation:YES];
+    [self.evaView setScore:score/5 withAnimation:NO];
     
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
     self.nameLab.text = item.oldname;

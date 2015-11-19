@@ -219,30 +219,41 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
-    if (indexPath.row == 4)
+    
+    switch (indexPath.section)
     {
-        [self showPosition];
-        return;
-    }
-    else if (indexPath.row == 2)
-    {
-        [self showVideo];
-        return;
-    }
-    else if (indexPath.row == 0)
-    {
-        bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.oldname];
-        bloodPressureVC.type = ChartTypeSugar;
-    }
-    else if (indexPath.row == 1)
-    {
-        bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.oldname];
-        bloodPressureVC.type = ChartTypeBlood;
-    }
-    else if (indexPath.row == 3)
-    {
-        bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.oldname];
-        bloodPressureVC.type = ChartTypeHeart;
+        case 0:
+        {
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.oldname];
+            bloodPressureVC.type = ChartTypeSugar;
+        }
+            break;
+        case 1:
+        {
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.oldname];
+            bloodPressureVC.type = ChartTypeBlood;
+        }
+            break;
+        case 2:
+        {
+            [self showVideo];
+            return;
+        }
+            break;
+        case 3:
+        {
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.oldname];
+            bloodPressureVC.type = ChartTypeHeart;
+        }
+            break;
+        case 4:
+        {
+            [self showPosition];
+            return;
+        }
+            break;
+        default:
+            break;
     }
     bloodPressureVC.dataProvider = dataProvider;
     [self.navigationController pushViewController:bloodPressureVC animated:YES];

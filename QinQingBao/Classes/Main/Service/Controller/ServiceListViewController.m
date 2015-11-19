@@ -35,6 +35,14 @@
 
 @implementation ServiceListViewController
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,7 +74,7 @@
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     // 添加下拉菜单
-    DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 66) andHeight:44];
+    DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 62) andHeight:44];
     menu.delegate = self;
     menu.dataSource = self;
     [self.view addSubview:menu];
@@ -87,7 +95,7 @@
  */
 -(void)initTableviewSkin
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, MTScreenW, MTScreenH - 44)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 42, MTScreenW, MTScreenH - 44)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
@@ -232,6 +240,7 @@
 {
     OrderDetailViewController *palceView = [[OrderDetailViewController alloc] init];
     palceView.selectedItem = dataProvider[indexPath.row];
+    palceView.serviceTypeItem = selectedItem;
     [self.navigationController pushViewController:palceView animated:YES];
 }
 

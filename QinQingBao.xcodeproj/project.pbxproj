@@ -113,6 +113,10 @@
 		013F3F1A1BFC53A000FF39E5 /* MJDIYAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F121BFC53A000FF39E5 /* MJDIYAutoFooter.m */; };
 		013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F141BFC53A000FF39E5 /* MJDIYBackFooter.m */; };
 		013F3F1C1BFC53A000FF39E5 /* MJDIYHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F161BFC53A000FF39E5 /* MJDIYHeader.m */; };
+		013F3F221BFC6A8500FF39E5 /* AnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F211BFC6A8500FF39E5 /* AnimationViewController.m */; };
+		013F3F281BFC6E0A00FF39E5 /* MTReflesh.png in Resources */ = {isa = PBXBuildFile; fileRef = 013F3F271BFC6E0A00FF39E5 /* MTReflesh.png */; };
+		013F3F2E1BFC752800FF39E5 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F2B1BFC752800FF39E5 /* NJKWebViewProgress.m */; };
+		013F3F2F1BFC752800FF39E5 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F2D1BFC752800FF39E5 /* NJKWebViewProgressView.m */; };
 		01438E791BDDB65900F92681 /* UITableViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E781BDDB65900F92681 /* UITableViewController+Placeholder.m */; };
 		01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */; };
 		0157E2391BE87B0E004C0908 /* EvaluationHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */; };
@@ -809,6 +813,13 @@
 		013F3F141BFC53A000FF39E5 /* MJDIYBackFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYBackFooter.m; sourceTree = "<group>"; };
 		013F3F151BFC53A000FF39E5 /* MJDIYHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDIYHeader.h; sourceTree = "<group>"; };
 		013F3F161BFC53A000FF39E5 /* MJDIYHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYHeader.m; sourceTree = "<group>"; };
+		013F3F201BFC6A8500FF39E5 /* AnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationViewController.h; sourceTree = "<group>"; };
+		013F3F211BFC6A8500FF39E5 /* AnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationViewController.m; sourceTree = "<group>"; };
+		013F3F271BFC6E0A00FF39E5 /* MTReflesh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTReflesh.png; sourceTree = "<group>"; };
+		013F3F2A1BFC752800FF39E5 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		013F3F2B1BFC752800FF39E5 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		013F3F2C1BFC752800FF39E5 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
+		013F3F2D1BFC752800FF39E5 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
 		01438E771BDDB65900F92681 /* UITableViewController+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewController+Placeholder.h"; sourceTree = "<group>"; };
 		01438E781BDDB65900F92681 /* UITableViewController+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewController+Placeholder.m"; sourceTree = "<group>"; };
 		01438E7B1BDDD80A00F92681 /* AllServiceTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllServiceTypeController.h; sourceTree = "<group>"; };
@@ -1659,6 +1670,7 @@
 		0126ECA61B8C4E8100EC85C1 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				013F3F291BFC752800FF39E5 /* NJKWebViewProgress */,
 				013F3ECA1BFC487900FF39E5 /* MJRefresh */,
 				01E6D4E41BE1F49B00824F51 /* SVProgressHUD */,
 				01E6D4ED1BE1F49B00824F51 /* Toast */,
@@ -1979,6 +1991,25 @@
 				013F3F161BFC53A000FF39E5 /* MJDIYHeader.m */,
 			);
 			path = DIY;
+			sourceTree = "<group>";
+		};
+		013F3F261BFC6E0A00FF39E5 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				013F3F271BFC6E0A00FF39E5 /* MTReflesh.png */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		013F3F291BFC752800FF39E5 /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				013F3F2A1BFC752800FF39E5 /* NJKWebViewProgress.h */,
+				013F3F2B1BFC752800FF39E5 /* NJKWebViewProgress.m */,
+				013F3F2C1BFC752800FF39E5 /* NJKWebViewProgressView.h */,
+				013F3F2D1BFC752800FF39E5 /* NJKWebViewProgressView.m */,
+			);
+			path = NJKWebViewProgress;
 			sourceTree = "<group>";
 		};
 		0157E23C1BE888BF004C0908 /* DOPDropDownMenu */ = {
@@ -2604,6 +2635,8 @@
 				01EB28751BA16CB900937412 /* HealthServicesController.m */,
 				0190ED411BF9DB8F00992EE4 /* WebViewController.h */,
 				0190ED421BF9DB8F00992EE4 /* WebViewController.m */,
+				013F3F201BFC6A8500FF39E5 /* AnimationViewController.h */,
+				013F3F211BFC6A8500FF39E5 /* AnimationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2989,7 +3022,6 @@
 			children = (
 				01D9DEA91B7DBF840087F80E /* Frameworks */,
 				01F227FF1B7B3E9700ED4AFB /* Classes */,
-				01F228061B7B3E9700ED4AFB /* Images */,
 				01F227D81B7B3E1400ED4AFB /* Supporting Files */,
 			);
 			path = QinQingBao;
@@ -3028,6 +3060,7 @@
 		01F227FF1B7B3E9700ED4AFB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				013F3F261BFC6E0A00FF39E5 /* Image */,
 				0126ECA61B8C4E8100EC85C1 /* Libs */,
 				01EFD0BD1B7D84A700A720E7 /* Others */,
 				01F2280B1B7B410200ED4AFB /* Main */,
@@ -3053,13 +3086,6 @@
 				01438E781BDDB65900F92681 /* UITableViewController+Placeholder.m */,
 			);
 			path = Cateogrys;
-			sourceTree = "<group>";
-		};
-		01F228061B7B3E9700ED4AFB /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		01F2280B1B7B410200ED4AFB /* Main */ = {
@@ -3464,6 +3490,7 @@
 				01E68FA91BCCA68900A17543 /* flunet.png in Resources */,
 				01ECDF9D1B7C367600665D87 /* Images.xcassets in Resources */,
 				01E68FCF1BCCA68900A17543 /* ptz_flip_sel.png in Resources */,
+				013F3F281BFC6E0A00FF39E5 /* MTReflesh.png in Resources */,
 				01E68FD91BCCA68900A17543 /* setup_sel.png in Resources */,
 				01E68FC51BCCA68900A17543 /* playback_button.png in Resources */,
 				01E68FAD1BCCA68900A17543 /* full_multiple_bg.png in Resources */,
@@ -3657,6 +3684,7 @@
 				01F0D0191B8D99B300EF3238 /* HMCommonCell.m in Sources */,
 				01E6D4BC1BE1EA0200824F51 /* CouponsModel.m in Sources */,
 				013F3F021BFC487900FF39E5 /* MJRefreshGifHeader.m in Sources */,
+				013F3F221BFC6A8500FF39E5 /* AnimationViewController.m in Sources */,
 				01EB28661BA1192C00937412 /* OrderFormDetailController.m in Sources */,
 				01FBF0E01BCBAD4100CA285C /* MJProperty.m in Sources */,
 				0126EDAC1B8C6E2600EC85C1 /* MTDateHelper.m in Sources */,
@@ -3728,6 +3756,7 @@
 				01E690861BCCF6AA00A17543 /* UIBarButtonItem+WEPopover.m in Sources */,
 				01E6D4E31BE1EC8800824F51 /* MedicineinfoModel.m in Sources */,
 				01F0DB241BCE3D84004FD908 /* SDWebImageDownloaderOperation.m in Sources */,
+				013F3F2F1BFC752800FF39E5 /* NJKWebViewProgressView.m in Sources */,
 				0128A8C21B9ED064002B14E2 /* PayViewController.m in Sources */,
 				01F0DB291BCE3D84004FD908 /* UIImage+MultiFormat.m in Sources */,
 				01024CC11BD0A75D00E8CAEC /* MD5DataSigner.m in Sources */,
@@ -3842,6 +3871,7 @@
 				01FBF0E51BCBAD4100CA285C /* NSObject+MJKeyValue.m in Sources */,
 				0126ED7D1B8C57A700EC85C1 /* AFSecurityPolicy.m in Sources */,
 				01FEE2C51B9C0FD8007C4641 /* EvaluationCell.m in Sources */,
+				013F3F2E1BFC752800FF39E5 /* NJKWebViewProgress.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
 				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,

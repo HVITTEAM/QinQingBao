@@ -19,4 +19,5 @@
 
 - (void)setitemWithData:(EvaluationModel *)item;
 
++ (EvaluationItemCell*) evaluationItemCell;
 @end

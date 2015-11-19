@@ -108,6 +108,9 @@
         
         if (headcell == nil)
             headcell = [PayHeadCell payHeadCell];
+        
+        headcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+
         cell = headcell;
     }
     else  if (indexPath.section == 3)
@@ -143,6 +146,9 @@
                                      value:[UIColor redColor]
                                      range:NSMakeRange(5, 3)];
             contentcell.textLabel.attributedText = attributedString;
+            
+            contentcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+
         }
         cell = contentcell;
     }
@@ -171,6 +177,7 @@
         {
             payTypecell.imageView.image = [UIImage imageNamed:@"alipay.png"];
             payTypecell.textLabel.text = @"支付宝支付";
+            payTypecell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
         }
         if (selectedIndex == indexPath.row)
             payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -275,6 +282,21 @@
         
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             
+            if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"6001"])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果"
+                                                                message:[resultDic objectForKey:@"memo"]
+                                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+            else if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"])
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"支付结果"
+                                                                message:@"支付成功"
+                                                               delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alert show];
+            }
+
             //【callback 处理支付结果】
             NSLog(@"reslut = %@",resultDic);
         }];

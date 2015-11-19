@@ -259,7 +259,8 @@
 -(void)submitClickHandler
 {
     OrderSubmitController *submitController = [[OrderSubmitController alloc] init];
-    submitController.serviceFetailItem = self.selectedItem;
+    submitController.serviceDetailItem = self.selectedItem;
+    submitController.serviceTypeItem = self.serviceTypeItem;
     [self.navigationController pushViewController:submitController animated:YES];
 }
 

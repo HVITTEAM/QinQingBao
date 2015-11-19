@@ -17,6 +17,7 @@
 #import "QueryAllEvaluationController.h"
 
 #import "ServiceItemModel.h"
+#import "ServiceTypeModel.h"
 
 
 
@@ -24,4 +25,6 @@
 
 @property (nonatomic, retain) PlaceOrderHeadView *headView;
 @property (nonatomic, retain) ServiceItemModel *selectedItem;
+//服务类别
+@property (nonatomic, retain) ServiceTypeModel *serviceTypeItem;
 @end

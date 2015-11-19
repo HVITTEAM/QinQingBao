@@ -23,9 +23,13 @@
     //是否选择了服务对象
     BOOL haveObj;
     
+    NSInteger selectedIndex;
+    
     //服务时间
     NSString *selectedTimestr;
     FamilyModel *famVO;
+    
+    OrderSubmitCell *orderSubmitCell;
 }
 
 @end
@@ -41,6 +45,8 @@
     [self initTableviewSkin];
     
     [self initDatePickView];
+    
+    selectedIndex = 0;
     
 }
 
@@ -58,12 +64,27 @@
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    //    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+    
+    orderSubmitCell = [OrderSubmitCell orderSubmitCell];
+    __weak typeof(self) weakSelf = self;
+    orderSubmitCell.payClick = ^(UIButton *button){
+        [weakSelf submitClickHandler];
+    };
+    orderSubmitCell.width = MTScreenW;
+//    orderSubmitCell.y = MTScreenH - 104;
+    [self.tableView addSubview:orderSubmitCell];
 }
 
 -(void)sendMsg
 {
     
+}
+
+#pragma mark -- UIScrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+   orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height + 4 + sender.contentOffset.y;
 }
 
 /**
@@ -194,7 +215,7 @@ numberOfRowsInComponent:(NSInteger)component
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 6;
+    return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -214,9 +235,6 @@ numberOfRowsInComponent:(NSInteger)component
             return 2;
             break;
         case 4:
-            return 4;
-            break;
-        case 5:
             return 1;
             break;
         default:
@@ -264,7 +282,6 @@ numberOfRowsInComponent:(NSInteger)component
                 cell.textLabel.text = @"服务对象";
                 cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
             }
             return  cell;
         }
@@ -286,7 +303,7 @@ numberOfRowsInComponent:(NSInteger)component
         if (cell == nil)
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
-            cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
@@ -301,54 +318,30 @@ numberOfRowsInComponent:(NSInteger)component
         UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPaytypeCell"];
         if (payTypecell == nil)
             payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTPaytypeCell"];
-        payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+        payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         payTypecell.textLabel.text = indexPath.row == 0 ? @"在线支付": @"货到付款";
+        
+        if (selectedIndex == indexPath.row)
+            payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
+        else
+            payTypecell.accessoryType = UITableViewCellAccessoryNone;
+
         return  payTypecell;
     }
     else  if (indexPath.section == 4)
     {
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
-            cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-        }
-        if (contentcell == nil)
-        {
-            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:content];
-            contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
-            contentcell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
-        }
-        switch (indexPath.row)
-        {
-            case 0:
-            {
-                cell.textLabel.text = @"结算信息";
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                return  cell;
-            }
-            case 1:
-            {
-                contentcell.textLabel.text = @"商品总价";
-                contentcell.detailTextLabel.text = @"200元";
-                return  contentcell;
-            }
-            case 2:
-            {
-                contentcell.textLabel.text = @"购物券";
-                contentcell.detailTextLabel.text = @"20元";
-                contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-                return  contentcell;
-            }
-            case 3:
-            {
-                contentcell.textLabel.text = @"还需支付";
-                contentcell.detailTextLabel.text = @"180元";
-                return  contentcell;
-            }
-            default:
-                return nil;
-        }
+        UITableViewCell *vouchercell = [tableView dequeueReusableCellWithIdentifier:@"MTVoucherCell"];
+        if (vouchercell == nil)
+            vouchercell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTVoucherCell"];
+        vouchercell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+        vouchercell.textLabel.text = @"优惠券";
+        vouchercell.detailTextLabel.text = @"3元";
+        vouchercell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        vouchercell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+        vouchercell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background_highlighted"]];
+        return  vouchercell;
     }
+    
     else  if (indexPath.section == 1)
     {
         if (indexPath.row == 0)
@@ -359,6 +352,7 @@ numberOfRowsInComponent:(NSInteger)component
                 cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
             }
             cell.accessoryType = UITableViewCellSelectionStyleNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.text = @"服务详情";
             cell.detailTextLabel.text = @"";
             return  cell;
@@ -370,14 +364,13 @@ numberOfRowsInComponent:(NSInteger)component
             if(orderServiceDetailCell == nil)
                 orderServiceDetailCell = [OrderServiceDetailCell orderServiceDetailCell];
             
-            [orderServiceDetailCell setdataWithItem:self.serviceFetailItem];
+            [orderServiceDetailCell setdataWithItem:self.serviceDetailItem];
             
             return orderServiceDetailCell;
         }
     }
-    else  if (indexPath.section == 5 && indexPath.row == 0)
+    else
     {
-        
         OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
         
         if(orderSubmitCell == nil)
@@ -388,16 +381,6 @@ numberOfRowsInComponent:(NSInteger)component
             [weakSelf submitClickHandler];
         };
         return orderSubmitCell;
-    }
-    else
-    {
-        if (contentcell == nil)
-        {
-            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:content];
-            contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
-        }
-        contentcell.textLabel.text = @"张三";
-        return contentcell;
     }
 }
 
@@ -413,12 +396,20 @@ numberOfRowsInComponent:(NSInteger)component
     {
         [self showDatePicker];
     }
+    else if (indexPath.section == 3)
+    {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
+        
+        selectedIndex = indexPath.row;
+        
+        [self.tableView reloadData];
+    }
 }
 
 -(void)submitClickHandler
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : @"",
-                                                                     @"iid" : self.serviceFetailItem,
+    [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
+                                                                     @"iid" : self.serviceDetailItem,
                                                                      @"oldid" : @"50",
                                                                      @"wtime" : @"ios",
                                                                      @"wname" : @"50",
@@ -429,9 +420,9 @@ numberOfRowsInComponent:(NSInteger)component
                                                                      @"client" : @"ios",
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"wlevel" : @"1",
-                                                                     @"wremark" : @"",
+                                                                     @"wremark" : @"用户留言",
                                                                      @"voucher_id" : @"",
-                                                                     @"pay_type" : @"50"}
+                                                                     @"pay_type" : @"1"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
