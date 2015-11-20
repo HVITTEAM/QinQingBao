@@ -116,13 +116,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    CGFloat y = scrollView.contentOffset.y;//根据实际选择加不加上NavigationBarHight（44、64 或者没有导航条）
-    if (y < -imageHeight) {
-        CGRect frame = _zoomImageview.frame;
-        frame.origin.y = y;
-        frame.size.height =  -y;//contentMode = UIViewContentModeScaleAspectFill时，高度改变宽度也跟着改变
-        _zoomImageview.frame = frame;
-    }
+//    CGFloat y = scrollView.contentOffset.y;//根据实际选择加不加上NavigationBarHight（44、64 或者没有导航条）
+//    if (y < -imageHeight) {
+//        CGRect frame = _zoomImageview.frame;
+//        frame.origin.y = y;
+//        frame.size.height =  -y;//contentMode = UIViewContentModeScaleAspectFill时，高度改变宽度也跟着改变
+//        _zoomImageview.frame = frame;
+//    }
 }
 
 

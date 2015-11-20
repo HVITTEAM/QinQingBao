@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceItemModel.h"
 
 @interface OrderSubmitCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *totalPriceLabe;
+@property (strong, nonatomic) IBOutlet UILabel *cutLab;
 
 @property (strong, nonatomic) IBOutlet UIButton *submitBtn;
 
@@ -17,4 +20,9 @@
 - (IBAction)submitClickHandler:(id)sender;
 
 +(OrderSubmitCell *) orderSubmitCell;
+
+@property (nonatomic, retain) ServiceItemModel *serviceDetailItem;
+
+
+
 @end

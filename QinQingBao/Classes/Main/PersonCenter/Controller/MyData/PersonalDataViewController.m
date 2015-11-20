@@ -9,6 +9,7 @@
 #import "PersonalDataViewController.h"
 #import "ChangePwdViewController.h"
 #import "TextFieldViewController.h"
+#import "UpdateAddressController.h"
 #import "RSKImageCropper.h"
 
 
@@ -166,6 +167,10 @@
         alertSex.tag = 99;
         [alertSex show];
     }
+    else if(indexPath.row == 3)
+    {
+        return;
+    }
     else if(indexPath.row == 4)
     {
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -173,10 +178,20 @@
         else
             [self setDatePickerIos7];
     }
-    else if(indexPath.row == 3)
+    else if(indexPath.row == 5)
     {
-        return;
+        
+        NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
+        UpdateAddressController *textView = [[UpdateAddressController alloc] init];
+        textView.dict = dict;
+        textView.inforVO = infoVO;
+        __weak __typeof(self)weakSelf = self;
+        textView.refleshDta = ^{
+            [weakSelf getDataProvider];
+        };
+        [self.navigationController pushViewController:textView animated:YES];
     }
+   
     else
     {
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];

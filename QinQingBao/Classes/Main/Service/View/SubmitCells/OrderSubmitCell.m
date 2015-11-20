@@ -15,25 +15,23 @@
 {
     OrderSubmitCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"OrderSubmitCell" owner:self options:nil] objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_background"]];
     return cell;
 }
 
 - (void)awakeFromNib
 {
-    self.submitBtn.layer.cornerRadius = 5;
-    
-    self.contentView.backgroundColor = HMGlobalBg;
-    //
-    //    // 1.取出背景view
-    //    UIImageView *bgView = (UIImageView *)self.backgroundView;
-    //    UIImageView *selectedBgView = (UIImageView *)self.selectedBackgroundView;
-    //
-    //        bgView.image = [UIImage resizedImage:@"common_card_background"];
-    //        selectedBgView.image = [UIImage resizedImage:@"common_card_background_highlighted"];
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+-(void)setServiceDetailItem:(ServiceItemModel *)serviceDetailItem
+{
+    _serviceDetailItem = serviceDetailItem;
+    self.totalPriceLabe.text = [NSString stringWithFormat:@"¥%@",serviceDetailItem.price];
 }
 
 - (IBAction)submitClickHandler:(id)sender

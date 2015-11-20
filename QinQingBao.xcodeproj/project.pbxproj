@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0100C5181BFEB8C3005128EA /* UseCouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100C5171BFEB8C3005128EA /* UseCouponsViewController.m */; };
+		0100C51D1BFEC574005128EA /* CommonCouponsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100C51B1BFEC574005128EA /* CommonCouponsCell.m */; };
+		0100C51E1BFEC574005128EA /* CommonCouponsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0100C51C1BFEC574005128EA /* CommonCouponsCell.xib */; };
+		0100C5511BFEE6AA005128EA /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0100C54A1BFEE6AA005128EA /* area.plist */; };
+		0100C5521BFEE6AA005128EA /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0100C54B1BFEE6AA005128EA /* city.plist */; };
+		0100C5581BFEE7F6005128EA /* UpdateAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100C5571BFEE7F6005128EA /* UpdateAddressController.m */; };
 		01024BE61BD0A22500E8CAEC /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01024BE41BD0A22500E8CAEC /* AlipaySDK.bundle */; };
 		01024BE71BD0A22500E8CAEC /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01024BE51BD0A22500E8CAEC /* AlipaySDK.framework */; };
 		01024BEA1BD0A27E00E8CAEC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01024BE91BD0A27E00E8CAEC /* SystemConfiguration.framework */; };
@@ -497,20 +503,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		013F3E5E1BFB0CDB00FF39E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01F227CD1B7B3E1400ED4AFB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 013F3E441BFB0CDB00FF39E5;
-			remoteInfo = TeatApp;
-		};
-		013F3E691BFB0CDB00FF39E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 01F227CD1B7B3E1400ED4AFB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 013F3E441BFB0CDB00FF39E5;
-			remoteInfo = TeatApp;
-		};
 		01F0DAF41BCE3350004FD908 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 01F0DAD91BCE3350004FD908 /* MWPhotoBrowser.xcodeproj */;
@@ -528,6 +520,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0100C5161BFEB8C3005128EA /* UseCouponsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseCouponsViewController.h; sourceTree = "<group>"; };
+		0100C5171BFEB8C3005128EA /* UseCouponsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseCouponsViewController.m; sourceTree = "<group>"; };
+		0100C51A1BFEC574005128EA /* CommonCouponsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCouponsCell.h; sourceTree = "<group>"; };
+		0100C51B1BFEC574005128EA /* CommonCouponsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonCouponsCell.m; sourceTree = "<group>"; };
+		0100C51C1BFEC574005128EA /* CommonCouponsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCouponsCell.xib; sourceTree = "<group>"; };
+		0100C54A1BFEE6AA005128EA /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
+		0100C54B1BFEE6AA005128EA /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		0100C5561BFEE7F6005128EA /* UpdateAddressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAddressController.h; sourceTree = "<group>"; };
+		0100C5571BFEE7F6005128EA /* UpdateAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAddressController.m; sourceTree = "<group>"; };
 		01024BE41BD0A22500E8CAEC /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		01024BE51BD0A22500E8CAEC /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		01024BE91BD0A27E00E8CAEC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -760,9 +761,6 @@
 		0128A8C61B9ED597002B14E2 /* UIViewController+AOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AOP.h"; sourceTree = "<group>"; };
 		0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AOP.m"; sourceTree = "<group>"; };
 		0131BC551BD8B1C600CFD601 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		013F3E451BFB0CDB00FF39E5 /* TeatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		013F3E5D1BFB0CDB00FF39E5 /* TeatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		013F3E681BFB0CDB00FF39E5 /* TeatAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeatAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		013F3ECC1BFC487900FF39E5 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		013F3ECD1BFC487900FF39E5 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		013F3ECE1BFC487900FF39E5 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -1434,27 +1432,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		013F3E421BFB0CDB00FF39E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E5A1BFB0CDB00FF39E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E651BFB0CDB00FF39E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		01F227D21B7B3E1400ED4AFB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1491,6 +1468,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0100C5491BFEE6AA005128EA /* AreaPicker */ = {
+			isa = PBXGroup;
+			children = (
+				0100C54A1BFEE6AA005128EA /* area.plist */,
+				0100C54B1BFEE6AA005128EA /* city.plist */,
+			);
+			path = AreaPicker;
+			sourceTree = "<group>";
+		};
 		01024BE31BD0A22500E8CAEC /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
@@ -1670,6 +1656,7 @@
 		0126ECA61B8C4E8100EC85C1 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				0100C5491BFEE6AA005128EA /* AreaPicker */,
 				013F3F291BFC752800FF39E5 /* NJKWebViewProgress */,
 				013F3ECA1BFC487900FF39E5 /* MJRefresh */,
 				01E6D4E41BE1F49B00824F51 /* SVProgressHUD */,
@@ -1801,6 +1788,8 @@
 				01E4BE561BA0162900BF41EF /* QueryAllEvaluationController.m */,
 				01438E7B1BDDD80A00F92681 /* AllServiceTypeController.h */,
 				01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */,
+				0100C5161BFEB8C3005128EA /* UseCouponsViewController.h */,
+				0100C5171BFEB8C3005128EA /* UseCouponsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1877,6 +1866,9 @@
 				01E92D2F1BA65E0F0097F8EC /* ServiceCustomCell.h */,
 				01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */,
 				01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */,
+				0100C51A1BFEC574005128EA /* CommonCouponsCell.h */,
+				0100C51B1BFEC574005128EA /* CommonCouponsCell.m */,
+				0100C51C1BFEC574005128EA /* CommonCouponsCell.xib */,
 			);
 			path = SubmitCells;
 			sourceTree = "<group>";
@@ -2035,6 +2027,8 @@
 				01DD67231BAFF20A001D0883 /* TextFieldViewController.m */,
 				01FBF0BC1BCB891E00CA285C /* ChangePwdViewController.h */,
 				01FBF0BD1BCB891E00CA285C /* ChangePwdViewController.m */,
+				0100C5561BFEE7F6005128EA /* UpdateAddressController.h */,
+				0100C5571BFEE7F6005128EA /* UpdateAddressController.m */,
 			);
 			path = MyData;
 			sourceTree = "<group>";
@@ -3010,9 +3004,6 @@
 			children = (
 				01F227D51B7B3E1400ED4AFB /* QinQingBao.app */,
 				01F227EE1B7B3E1400ED4AFB /* QinQingBaoTests.xctest */,
-				013F3E451BFB0CDB00FF39E5 /* TeatApp.app */,
-				013F3E5D1BFB0CDB00FF39E5 /* TeatAppTests.xctest */,
-				013F3E681BFB0CDB00FF39E5 /* TeatAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3283,59 +3274,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		013F3E441BFB0CDB00FF39E5 /* TeatApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 013F3E761BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatApp" */;
-			buildPhases = (
-				013F3E411BFB0CDB00FF39E5 /* Sources */,
-				013F3E421BFB0CDB00FF39E5 /* Frameworks */,
-				013F3E431BFB0CDB00FF39E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TeatApp;
-			productName = TeatApp;
-			productReference = 013F3E451BFB0CDB00FF39E5 /* TeatApp.app */;
-			productType = "com.apple.product-type.application";
-		};
-		013F3E5C1BFB0CDB00FF39E5 /* TeatAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 013F3E771BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppTests" */;
-			buildPhases = (
-				013F3E591BFB0CDB00FF39E5 /* Sources */,
-				013F3E5A1BFB0CDB00FF39E5 /* Frameworks */,
-				013F3E5B1BFB0CDB00FF39E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				013F3E5F1BFB0CDB00FF39E5 /* PBXTargetDependency */,
-			);
-			name = TeatAppTests;
-			productName = TeatAppTests;
-			productReference = 013F3E5D1BFB0CDB00FF39E5 /* TeatAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		013F3E671BFB0CDB00FF39E5 /* TeatAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 013F3E781BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppUITests" */;
-			buildPhases = (
-				013F3E641BFB0CDB00FF39E5 /* Sources */,
-				013F3E651BFB0CDB00FF39E5 /* Frameworks */,
-				013F3E661BFB0CDB00FF39E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				013F3E6A1BFB0CDB00FF39E5 /* PBXTargetDependency */,
-			);
-			name = TeatAppUITests;
-			productName = TeatAppUITests;
-			productReference = 013F3E681BFB0CDB00FF39E5 /* TeatAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		01F227D41B7B3E1400ED4AFB /* QinQingBao */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01F227F81B7B3E1400ED4AFB /* Build configuration list for PBXNativeTarget "QinQingBao" */;
@@ -3380,17 +3318,6 @@
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "董徐维";
 				TargetAttributes = {
-					013F3E441BFB0CDB00FF39E5 = {
-						CreatedOnToolsVersion = 7.1;
-					};
-					013F3E5C1BFB0CDB00FF39E5 = {
-						CreatedOnToolsVersion = 7.1;
-						TestTargetID = 013F3E441BFB0CDB00FF39E5;
-					};
-					013F3E671BFB0CDB00FF39E5 = {
-						CreatedOnToolsVersion = 7.1;
-						TestTargetID = 013F3E441BFB0CDB00FF39E5;
-					};
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 42PUMHHWSN;
@@ -3423,9 +3350,6 @@
 			targets = (
 				01F227D41B7B3E1400ED4AFB /* QinQingBao */,
 				01F227ED1B7B3E1400ED4AFB /* QinQingBaoTests */,
-				013F3E441BFB0CDB00FF39E5 /* TeatApp */,
-				013F3E5C1BFB0CDB00FF39E5 /* TeatAppTests */,
-				013F3E671BFB0CDB00FF39E5 /* TeatAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -3441,27 +3365,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		013F3E431BFB0CDB00FF39E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E5B1BFB0CDB00FF39E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E661BFB0CDB00FF39E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		01F227D31B7B3E1400ED4AFB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3480,6 +3383,7 @@
 				01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */,
 				01E68FA31BCCA68900A17543 /* palyback_time_bg.png in Resources */,
 				01E68FB91BCCA68900A17543 /* number_bg.png in Resources */,
+				0100C51E1BFEC574005128EA /* CommonCouponsCell.xib in Resources */,
 				01E68FE31BCCA68900A17543 /* video_disable.png in Resources */,
 				01E68FB11BCCA68900A17543 /* full_previously_sel.png in Resources */,
 				01E68FB71BCCA68900A17543 /* hd_disable.png in Resources */,
@@ -3574,6 +3478,7 @@
 				017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */,
 				0157E2431BE888BF004C0908 /* icon_chose_arrow_nor@2x.png in Resources */,
 				01E68FF51BCCA68900A17543 /* circle1.png in Resources */,
+				0100C5521BFEE6AA005128EA /* city.plist in Resources */,
 				01E68FED1BCCA68900A17543 /* public_long_btn.png in Resources */,
 				01E68FC11BCCA68900A17543 /* play_sel.png in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
@@ -3616,6 +3521,7 @@
 				01E68FBB1BCCA68900A17543 /* play_close.png in Resources */,
 				010414301BB1268D006EC41B /* SMS_SDKLocalizable.strings in Resources */,
 				0126ED8F1B8C6D4200EC85C1 /* SQCollectionCell.xib in Resources */,
+				0100C5511BFEE6AA005128EA /* area.plist in Resources */,
 				01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */,
 				01E68FF61BCCA68900A17543 /* circle2.png in Resources */,
 				01E68FBD1BCCA68900A17543 /* play_full_play.png in Resources */,
@@ -3652,27 +3558,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		013F3E411BFB0CDB00FF39E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E591BFB0CDB00FF39E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		013F3E641BFB0CDB00FF39E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		01F227D11B7B3E1400ED4AFB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3795,8 +3680,10 @@
 				01E6D4841BE1C02A00824F51 /* HypertensioninfoController.m in Sources */,
 				01F0DAEC1BCE3350004FD908 /* PSTCollectionViewLayout.m in Sources */,
 				01024CC51BD0A75D00E8CAEC /* RSADataVerifier.m in Sources */,
+				0100C51D1BFEC574005128EA /* CommonCouponsCell.m in Sources */,
 				01024CCB1BD0D12100E8CAEC /* ServiceModel.m in Sources */,
 				0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */,
+				0100C5181BFEB8C3005128EA /* UseCouponsViewController.m in Sources */,
 				013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */,
 				01E5B65D1BB4FB0600F97498 /* VideoCell.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
@@ -3885,6 +3772,7 @@
 				01E6D4F51BE1F49B00824F51 /* README.md in Sources */,
 				01FBF0DF1BCBAD4100CA285C /* MJFoundation.m in Sources */,
 				01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */,
+				0100C5581BFEE7F6005128EA /* UpdateAddressController.m in Sources */,
 				01F0DAF11BCE3350004FD908 /* PSTGridLayoutSection.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,
@@ -3985,16 +3873,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		013F3E5F1BFB0CDB00FF39E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 013F3E441BFB0CDB00FF39E5 /* TeatApp */;
-			targetProxy = 013F3E5E1BFB0CDB00FF39E5 /* PBXContainerItemProxy */;
-		};
-		013F3E6A1BFB0CDB00FF39E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 013F3E441BFB0CDB00FF39E5 /* TeatApp */;
-			targetProxy = 013F3E691BFB0CDB00FF39E5 /* PBXContainerItemProxy */;
-		};
 		01F227F01B7B3E1400ED4AFB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 01F227D41B7B3E1400ED4AFB /* QinQingBao */;
@@ -4023,88 +3901,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		013F3E6F1BFB0CDB00FF39E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = TeatApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		013F3E701BFB0CDB00FF39E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = TeatApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		013F3E711BFB0CDB00FF39E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = TeatAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeatApp.app/TeatApp";
-			};
-			name = Debug;
-		};
-		013F3E721BFB0CDB00FF39E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = TeatAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeatApp.app/TeatApp";
-			};
-			name = Release;
-		};
-		013F3E731BFB0CDB00FF39E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = TeatAppUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = TeatApp;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		013F3E741BFB0CDB00FF39E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = TeatAppUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hvit.TeatAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = TeatApp;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 		01F227F61B7B3E1400ED4AFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4294,33 +4090,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		013F3E761BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				013F3E6F1BFB0CDB00FF39E5 /* Debug */,
-				013F3E701BFB0CDB00FF39E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		013F3E771BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				013F3E711BFB0CDB00FF39E5 /* Debug */,
-				013F3E721BFB0CDB00FF39E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		013F3E781BFB0CDB00FF39E5 /* Build configuration list for PBXNativeTarget "TeatAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				013F3E731BFB0CDB00FF39E5 /* Debug */,
-				013F3E741BFB0CDB00FF39E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		01F227D01B7B3E1400ED4AFB /* Build configuration list for PBXProject "QinQingBao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

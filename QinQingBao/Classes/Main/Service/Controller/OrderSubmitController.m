@@ -9,6 +9,7 @@
 #import "OrderSubmitController.h"
 #import "FamilyModel.h"
 #import "OrderServiceDetailCell.h"
+#import "UseCouponsViewController.h"
 
 @interface OrderSubmitController ()
 {
@@ -70,8 +71,8 @@
     orderSubmitCell.payClick = ^(UIButton *button){
         [weakSelf submitClickHandler];
     };
+    orderSubmitCell.serviceDetailItem = self.serviceDetailItem;
     orderSubmitCell.width = MTScreenW;
-//    orderSubmitCell.y = MTScreenH - 104;
     [self.tableView addSubview:orderSubmitCell];
 }
 
@@ -84,7 +85,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
-   orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height + 4 + sender.contentOffset.y;
+   orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height - 10 + sender.contentOffset.y;
 }
 
 /**
@@ -280,7 +281,7 @@ numberOfRowsInComponent:(NSInteger)component
             {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
                 cell.textLabel.text = @"服务对象";
-                cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+                cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             return  cell;
@@ -403,6 +404,12 @@ numberOfRowsInComponent:(NSInteger)component
         selectedIndex = indexPath.row;
         
         [self.tableView reloadData];
+    }
+    else if (indexPath.section == 4)
+    {
+        //优惠券
+        UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
+        [self.navigationController pushViewController:coupons animated:YES];
     }
 }
 

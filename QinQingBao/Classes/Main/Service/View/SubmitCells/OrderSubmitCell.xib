@@ -7,15 +7,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="OrderSubmitCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5X-aN-3cB">
-                        <rect key="frame" x="20" y="0.0" width="280" height="40"/>
+                        <rect key="frame" x="230" y="0.0" width="90" height="59"/>
                         <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="R2r-yp-A3G"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                         <state key="normal" title="提交订单">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -25,20 +28,42 @@
                             <color key="titleColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
-                            <action selector="submitClickHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="x9S-K1-ebp"/>
+                            <action selector="submitClickHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="csy-K3-m8S"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥38" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgl-dm-pM7">
+                        <rect key="frame" x="8" y="19" width="42" height="21"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                        <color key="textColor" red="0.094117647058823528" green="0.67450980392156867" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（已优惠9元）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dc-TS-YAs">
+                        <rect key="frame" x="67" y="19" width="113" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="113" id="qbb-a7-9Rd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="b5X-aN-3cB" secondAttribute="trailing" constant="20" id="5yz-7O-j71"/>
-                    <constraint firstItem="b5X-aN-3cB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9Fe-Qs-j2s"/>
-                    <constraint firstAttribute="bottom" secondItem="b5X-aN-3cB" secondAttribute="bottom" constant="-0.5" id="hD6-CA-fXh"/>
-                    <constraint firstItem="b5X-aN-3cB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="u0N-PC-wIp"/>
+                    <constraint firstItem="0Dc-TS-YAs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="8ct-EC-rKS"/>
+                    <constraint firstItem="Dgl-dm-pM7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="9cR-NN-rR0"/>
+                    <constraint firstAttribute="bottom" secondItem="0Dc-TS-YAs" secondAttribute="bottom" constant="19.5" id="FgS-ce-mtt"/>
+                    <constraint firstItem="Dgl-dm-pM7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NbH-Ua-5PL"/>
+                    <constraint firstAttribute="bottom" secondItem="b5X-aN-3cB" secondAttribute="bottom" constant="0.5" id="Qte-u8-alD"/>
+                    <constraint firstAttribute="bottom" secondItem="Dgl-dm-pM7" secondAttribute="bottom" constant="19.5" id="bLG-ee-3Ew"/>
+                    <constraint firstItem="0Dc-TS-YAs" firstAttribute="leading" secondItem="Dgl-dm-pM7" secondAttribute="trailing" constant="17" id="egQ-UG-8q4"/>
+                    <constraint firstItem="b5X-aN-3cB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iGT-6k-rEa"/>
+                    <constraint firstAttribute="trailing" secondItem="b5X-aN-3cB" secondAttribute="trailing" id="peB-QF-Dh8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="submitBtn" destination="b5X-aN-3cB" id="r5z-rL-pbz"/>
+                <outlet property="cutLab" destination="0Dc-TS-YAs" id="C8g-B9-7j5"/>
+                <outlet property="submitBtn" destination="b5X-aN-3cB" id="acD-HO-jkf"/>
+                <outlet property="totalPriceLabe" destination="Dgl-dm-pM7" id="HH7-o5-x7i"/>
             </connections>
         </tableViewCell>
     </objects>
