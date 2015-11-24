@@ -28,10 +28,28 @@
     [super setSelected:selected animated:animated];
 }
 
+/**
+ *  设置服务价格
+ *
+ *  @param serviceDetailItem <#serviceDetailItem description#>
+ */
 -(void)setServiceDetailItem:(ServiceItemModel *)serviceDetailItem
 {
     _serviceDetailItem = serviceDetailItem;
     self.totalPriceLabe.text = [NSString stringWithFormat:@"¥%@",serviceDetailItem.price];
+}
+
+/**
+ *  设置优惠券信息
+ *
+ *  @param couponsModel <#couponsModel description#>
+ */
+-(void)setCouponsModel:(CouponsModel *)couponsModel
+{
+    _couponsModel = couponsModel;
+    self.cutLab.text = [NSString stringWithFormat:@"(已优惠%@元)",couponsModel.voucher_price];
+    float price = [self.serviceDetailItem.price floatValue] - [couponsModel.voucher_price floatValue];
+    self.totalPriceLabe.text = [NSString stringWithFormat:@"￥%.02f",price];
 }
 
 - (IBAction)submitClickHandler:(id)sender

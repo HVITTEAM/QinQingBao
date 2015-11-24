@@ -68,8 +68,16 @@ static NSOperationQueue * _queue;
                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"返回值为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                       [alertView show];
                   }
+                  else if([[dict objectForKey:@"code"] isKindOfClass:[NSString class]])
+                  {
+                      //如果返回的是NSString 说明有错误
+                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                      [alertView show];
+                  }
                   else
-                      success(dict,responseObject);
+                  {
+                      
+                  }
                   // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
                   //                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
                   

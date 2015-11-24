@@ -295,6 +295,8 @@
                                                                 message:@"支付成功"
                                                                delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                 [alert show];
+                UIViewController *vc = self.navigationController.viewControllers[2];
+                [self.navigationController popToViewController:vc animated:YES];
             }
 
             //【callback 处理支付结果】

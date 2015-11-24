@@ -10,6 +10,8 @@
 #import "FamilyModel.h"
 #import "OrderServiceDetailCell.h"
 #import "UseCouponsViewController.h"
+#import "CouponsModel.h"
+
 
 @interface OrderSubmitController ()
 {
@@ -31,6 +33,10 @@
     FamilyModel *famVO;
     
     OrderSubmitCell *orderSubmitCell;
+    
+    //优惠券
+    CouponsModel *couponsItem;
+
 }
 
 @end
@@ -85,7 +91,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
-   orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height - 10 + sender.contentOffset.y;
+    orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height - 10 + sender.contentOffset.y;
 }
 
 /**
@@ -267,10 +273,7 @@ numberOfRowsInComponent:(NSInteger)component
 {
     
     NSString *conmoncell = @"MTCommoncell";
-    NSString *content = @"contentCell";
     
-    
-    UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:conmoncell];
     
     if (indexPath.section == 0)
@@ -310,8 +313,6 @@ numberOfRowsInComponent:(NSInteger)component
         cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
         cell.textLabel.text = @"预约时间";
         cell.detailTextLabel.text =  selectedTimestr;
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
-        
         return  cell;
     }
     else  if (indexPath.section == 3)
@@ -326,7 +327,7 @@ numberOfRowsInComponent:(NSInteger)component
             payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
         else
             payTypecell.accessoryType = UITableViewCellAccessoryNone;
-
+        
         return  payTypecell;
     }
     else  if (indexPath.section == 4)
@@ -336,14 +337,14 @@ numberOfRowsInComponent:(NSInteger)component
             vouchercell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTVoucherCell"];
         vouchercell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         vouchercell.textLabel.text = @"优惠券";
-        vouchercell.detailTextLabel.text = @"3元";
+        if (couponsItem)
+            vouchercell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",couponsItem.voucher_price];
         vouchercell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         vouchercell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
         vouchercell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background_highlighted"]];
         return  vouchercell;
     }
-    
-    else  if (indexPath.section == 1)
+    else
     {
         if (indexPath.row == 0)
         {
@@ -370,19 +371,19 @@ numberOfRowsInComponent:(NSInteger)component
             return orderServiceDetailCell;
         }
     }
-    else
-    {
-        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
-        
-        if(orderSubmitCell == nil)
-            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
-        
-        __weak typeof(self) weakSelf = self;
-        orderSubmitCell.payClick = ^(UIButton *button){
-            [weakSelf submitClickHandler];
-        };
-        return orderSubmitCell;
-    }
+//    else
+//    {
+//        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
+//        
+//        if(orderSubmitCell == nil)
+//            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
+//        
+//        __weak typeof(self) weakSelf = self;
+//        orderSubmitCell.payClick = ^(UIButton *button){
+//            [weakSelf submitClickHandler];
+//        };
+//        return orderSubmitCell;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -409,15 +410,25 @@ numberOfRowsInComponent:(NSInteger)component
     {
         //优惠券
         UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
+        coupons.selectedClick = ^(CouponsModel *item)
+        {
+            NSLog(@"选择优惠券");
+            couponsItem = item;
+            [orderSubmitCell setCouponsModel:item];
+            [self.tableView reloadData];
+        };
         [self.navigationController pushViewController:coupons animated:YES];
     }
 }
 
+/**
+ *  提交订单、前往支付
+ */
 -(void)submitClickHandler
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
                                                                      @"iid" : self.serviceDetailItem,
-                                                                     @"oldid" : @"50",
+                                                                     @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"wtime" : @"ios",
                                                                      @"wname" : @"50",
                                                                      @"wprice" : @"ios",
@@ -429,7 +440,9 @@ numberOfRowsInComponent:(NSInteger)component
                                                                      @"wlevel" : @"1",
                                                                      @"wremark" : @"用户留言",
                                                                      @"voucher_id" : @"",
-                                                                     @"pay_type" : @"1"}
+                                                                     @"pay_type" : @"1",
+                                                                     @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
+                                                                     @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

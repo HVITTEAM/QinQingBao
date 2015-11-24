@@ -41,10 +41,12 @@
     [self initTableviewSkin];
     
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : @0,
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : @330102003050,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                     @"client" : @"ios"}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                                                     @"client" : @"ios",
+                                                                    @"all": @"1"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict,  id responseObject) {
+                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];

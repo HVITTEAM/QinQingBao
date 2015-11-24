@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonCouponsCell.h"
+#import "CouponsModel.h"
 
 @interface UseCouponsViewController : UITableViewController
+
+
+@property (nonatomic, copy) void (^selectedClick)(CouponsModel *item);
 
 @end

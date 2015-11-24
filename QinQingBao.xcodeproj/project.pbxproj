@@ -364,6 +364,9 @@
 		01EB28721BA11CDB00937412 /* EvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28701BA11CDB00937412 /* EvaluationController.m */; };
 		01EB28731BA11CDB00937412 /* EvaluationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB28711BA11CDB00937412 /* EvaluationController.xib */; };
 		01EB28761BA16CB900937412 /* HealthServicesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28751BA16CB900937412 /* HealthServicesController.m */; };
+		01EB31BF1C040347002D8229 /* CitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB31BE1C040347002D8229 /* CitiesViewController.m */; };
+		01EB31C11C0403A6002D8229 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EB31C01C0403A6002D8229 /* cities.plist */; };
+		01EB31C31C040A72002D8229 /* cityGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01EB31C21C040A72002D8229 /* cityGroups.plist */; };
 		01EB636D1BFAEE3000BE9788 /* RemarkDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB636B1BFAEE3000BE9788 /* RemarkDetailCell.m */; };
 		01EB636E1BFAEE3000BE9788 /* RemarkDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB636C1BFAEE3000BE9788 /* RemarkDetailCell.xib */; };
 		01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF931B7C347800665D87 /* HomeViewController.m */; };
@@ -1173,6 +1176,10 @@
 		01EB28711BA11CDB00937412 /* EvaluationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationController.xib; sourceTree = "<group>"; };
 		01EB28741BA16CB900937412 /* HealthServicesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthServicesController.h; sourceTree = "<group>"; };
 		01EB28751BA16CB900937412 /* HealthServicesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthServicesController.m; sourceTree = "<group>"; };
+		01EB31BD1C040347002D8229 /* CitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesViewController.h; sourceTree = "<group>"; };
+		01EB31BE1C040347002D8229 /* CitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesViewController.m; sourceTree = "<group>"; };
+		01EB31C01C0403A6002D8229 /* cities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
+		01EB31C21C040A72002D8229 /* cityGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cityGroups.plist; sourceTree = "<group>"; };
 		01EB636A1BFAEE3000BE9788 /* RemarkDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemarkDetailCell.h; sourceTree = "<group>"; };
 		01EB636B1BFAEE3000BE9788 /* RemarkDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemarkDetailCell.m; sourceTree = "<group>"; };
 		01EB636C1BFAEE3000BE9788 /* RemarkDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemarkDetailCell.xib; sourceTree = "<group>"; };
@@ -2616,9 +2623,21 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		01EB31A31C03FF81002D8229 /* City */ = {
+			isa = PBXGroup;
+			children = (
+				01EB31C21C040A72002D8229 /* cityGroups.plist */,
+				01EB31C01C0403A6002D8229 /* cities.plist */,
+				01EB31BD1C040347002D8229 /* CitiesViewController.h */,
+				01EB31BE1C040347002D8229 /* CitiesViewController.m */,
+			);
+			path = City;
+			sourceTree = "<group>";
+		};
 		01ECDF911B7C347800665D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01EB31A31C03FF81002D8229 /* City */,
 				01ECDF921B7C347800665D87 /* HomeViewController.h */,
 				01ECDF931B7C347800665D87 /* HomeViewController.m */,
 				01ECDF941B7C347800665D87 /* HomeViewController.xib */,
@@ -3380,6 +3399,7 @@
 				0157E2451BE888BF004C0908 /* icon_chose_bottom@2x.png in Resources */,
 				01E690611BCCAB5900A17543 /* YSCheckSMSCodeViewController.xib in Resources */,
 				013F3F051BFC487900FF39E5 /* MJRefresh.bundle in Resources */,
+				01EB31C31C040A72002D8229 /* cityGroups.plist in Resources */,
 				01F0D0171B8D99B300EF3238 /* CommonOrderCell.xib in Resources */,
 				01E68FA31BCCA68900A17543 /* palyback_time_bg.png in Resources */,
 				01E68FB91BCCA68900A17543 /* number_bg.png in Resources */,
@@ -3477,6 +3497,7 @@
 				01E68FB81BCCA68900A17543 /* hd_sel.png in Resources */,
 				017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */,
 				0157E2431BE888BF004C0908 /* icon_chose_arrow_nor@2x.png in Resources */,
+				01EB31C11C0403A6002D8229 /* cities.plist in Resources */,
 				01E68FF51BCCA68900A17543 /* circle1.png in Resources */,
 				0100C5521BFEE6AA005128EA /* city.plist in Resources */,
 				01E68FED1BCCA68900A17543 /* public_long_btn.png in Resources */,
@@ -3775,6 +3796,7 @@
 				0100C5581BFEE7F6005128EA /* UpdateAddressController.m in Sources */,
 				01F0DAF11BCE3350004FD908 /* PSTGridLayoutSection.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
+				01EB31BF1C040347002D8229 /* CitiesViewController.m in Sources */,
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,
 				01F0DAE31BCE3350004FD908 /* MWZoomingScrollView.m in Sources */,
 				01E6D48B1BE1E74C00824F51 /* AccountViewController.m in Sources */,

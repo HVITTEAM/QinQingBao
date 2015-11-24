@@ -9,7 +9,7 @@
 
 static NSString *kcellIdentifier = @"collectionCellID";
 
-#define pageControlY  180
+#define pageControlY  175
 
 static float cellHeight = 80;
 static float cellWidth = 66;
@@ -21,7 +21,7 @@ static float cellWidth = 66;
 #import "CCLocationManager.h"
 #import "WebViewController.h"
 #import "AnimationViewController.h"
-
+#import "CitiesViewController.h"
 
 
 @interface HomeViewController ()
@@ -53,8 +53,10 @@ static float cellWidth = 66;
     [super viewWillAppear:animated];
     
     if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
+    {
         [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
-}
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
+    }}
 
 /**
  *  获取当前位置
@@ -73,10 +75,9 @@ static float cellWidth = 66;
  */
 -(void)initNavigation
 {
-    
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
-    self.title = @"首页";
+    self.title = @"亲情宝";
     self.bgScrollView.height = pageControlY;
     
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
@@ -89,6 +90,8 @@ static float cellWidth = 66;
     float f = CGRectGetMaxY(self.serviceColectionview.frame);
     NSLog(@"屏幕高度%f",f);
     //    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStyleDone target:self action:@selector(cityChange)];
 }
 
 /**
@@ -110,8 +113,8 @@ static float cellWidth = 66;
     
     // 初始化 pagecontrol
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, pageControlY, 100, 18)]; // 初始化mypagecontrol
-    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor redColor]];
-    [self.pageControl setPageIndicatorTintColor:[UIColor blackColor]];
+    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor orangeColor]];
+    [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
     self.pageControl.numberOfPages = [self.slideImages count];
     self.pageControl.currentPage = 0;
     [self.view addSubview:self.pageControl];
@@ -151,6 +154,14 @@ static float cellWidth = 66;
     AnimationViewController *lis = [[AnimationViewController alloc] init];
     WebViewController *listView = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:listView];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+-(void)cityChange
+{
+    // 2.弹出城市列表
+    CitiesViewController *citiesVc = [[CitiesViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citiesVc];
     [self presentViewController:nav animated:YES completion:nil];
 }
 

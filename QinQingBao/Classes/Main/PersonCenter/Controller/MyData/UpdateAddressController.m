@@ -105,7 +105,7 @@
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
-    textItem = [HMCommonTextfieldItem itemWithTitle:[self.dict valueForKey:@"text"] icon:nil];
+    textItem = [HMCommonTextfieldItem itemWithTitle:@"详细地址" icon:nil];
     textItem.placeholder = [self.dict valueForKey:@"placeholder"];
     group.items = @[textItem];
     

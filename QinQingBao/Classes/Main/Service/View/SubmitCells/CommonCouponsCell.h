@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CouponsModel.h"
 
 @interface CommonCouponsCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIView *bgview;
 @property (strong, nonatomic) IBOutlet UIView *bottomview;
++ (CommonCouponsCell*) commonCouponsCell;
 
+@property (nonatomic, retain) CouponsModel *couponsItem;
 @end

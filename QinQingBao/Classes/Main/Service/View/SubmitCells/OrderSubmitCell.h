@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceItemModel.h"
+#import "CouponsModel.h"
 
 @interface OrderSubmitCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *totalPriceLabe;
@@ -22,6 +23,9 @@
 +(OrderSubmitCell *) orderSubmitCell;
 
 @property (nonatomic, retain) ServiceItemModel *serviceDetailItem;
+
+@property (nonatomic, retain) CouponsModel *couponsModel;
+
 
 
 

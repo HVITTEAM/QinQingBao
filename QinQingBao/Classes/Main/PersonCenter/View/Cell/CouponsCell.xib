@@ -15,27 +15,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tC4-h9-MoJ">
-                        <rect key="frame" x="10" y="10" width="302" height="110"/>
+                        <rect key="frame" x="35" y="10" width="277" height="110"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金龙鱼 1.8L" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ep-Fk-QCZ">
-                                <rect key="frame" x="18" y="8" width="90" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ep-Fk-QCZ">
+                                <rect key="frame" x="18" y="8" width="90" height="47"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="e4H-3z-fFW"/>
+                                    <constraint firstAttribute="height" constant="47" id="e4H-3z-fFW"/>
                                     <constraint firstAttribute="width" constant="90" id="i8K-5d-7S4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期至2015-12-10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45c-Yu-GSR">
-                                <rect key="frame" x="18" y="30" width="124" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期至2015-12-10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45c-Yu-GSR">
+                                <rect key="frame" x="145" y="87" width="124" height="15"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="F5c-Ev-IgK"/>
                                     <constraint firstAttribute="height" constant="15" id="Jm7-XJ-HtF"/>
                                     <constraint firstAttribute="width" constant="124" id="bde-SW-D1j"/>
+                                    <constraint firstAttribute="height" constant="15" id="ucw-GJ-ugs"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Jm7-XJ-HtF"/>
+                                        <exclude reference="bde-SW-D1j"/>
+                                    </mask>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提供方：浙江海予" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEw-Ol-TZn">
                                 <rect key="frame" x="18" y="84" width="136" height="21"/>
@@ -47,29 +55,81 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代金券" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgg-gw-944">
+                                <rect key="frame" x="209" y="10" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="pxw-0o-gCb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满10元使用" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9m-ab-mXS">
+                                <rect key="frame" x="207.5" y="45" width="61.5" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="xbL-vI-LTK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.9137254901960784" green="0.37647058823529411" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="45c-Yu-GSR" secondAttribute="trailing" constant="8" id="0Gn-nY-5LB"/>
                             <constraint firstAttribute="bottom" secondItem="dEw-Ol-TZn" secondAttribute="bottom" constant="5" id="2Ml-QH-Rdl"/>
+                            <constraint firstAttribute="trailing" secondItem="Jgg-gw-944" secondAttribute="trailing" constant="8" id="5QC-Ov-Pei"/>
+                            <constraint firstItem="y9m-ab-mXS" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="45" id="B51-Ep-hdu"/>
+                            <constraint firstAttribute="bottom" secondItem="45c-Yu-GSR" secondAttribute="bottom" constant="8" id="Fsb-BB-gHP"/>
                             <constraint firstItem="45c-Yu-GSR" firstAttribute="top" secondItem="5ep-Fk-QCZ" secondAttribute="bottom" constant="1" id="Rjc-B3-7pK"/>
                             <constraint firstItem="dEw-Ol-TZn" firstAttribute="leading" secondItem="tC4-h9-MoJ" secondAttribute="leading" constant="18" id="S79-jS-zsg"/>
-                            <constraint firstItem="45c-Yu-GSR" firstAttribute="leading" secondItem="tC4-h9-MoJ" secondAttribute="leading" constant="18" id="Sjb-hK-amG"/>
+                            <constraint firstAttribute="trailing" secondItem="y9m-ab-mXS" secondAttribute="trailing" constant="8" id="ahe-Gp-u1c"/>
                             <constraint firstItem="5ep-Fk-QCZ" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="8" id="d0u-GV-Jg3"/>
+                            <constraint firstItem="Jgg-gw-944" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="10" id="dAK-IT-AgP"/>
                             <constraint firstItem="5ep-Fk-QCZ" firstAttribute="leading" secondItem="tC4-h9-MoJ" secondAttribute="leading" constant="18" id="fMM-lw-IHO"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Rjc-B3-7pK"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYg-Td-BI6">
+                        <rect key="frame" x="6" y="55" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="B69-CM-veK"/>
+                            <constraint firstAttribute="height" constant="20" id="T3h-ZT-iNl"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="coupons_normal"/>
+                        <state key="selected" backgroundImage="coupons_selected"/>
+                        <connections>
+                            <action selector="clickHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2SL-Pe-bgD"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstItem="YYg-Td-BI6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="55" id="3YQ-th-fqK"/>
+                    <constraint firstItem="YYg-Td-BI6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="CQG-Uy-dWJ"/>
                     <constraint firstItem="tC4-h9-MoJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="g3w-tU-CGZ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="tC4-h9-MoJ" secondAttribute="bottom" constant="2" id="mjU-7t-BMe"/>
                     <constraint firstAttribute="trailingMargin" secondItem="tC4-h9-MoJ" secondAttribute="trailing" id="yha-oz-WpL"/>
-                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="z9i-eO-Cv1"/>
+                    <constraint firstItem="tC4-h9-MoJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="27" id="z9i-eO-Cv1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bgView" destination="tC4-h9-MoJ" id="OYz-7i-LSQ"/>
+                <outlet property="endtimeLab" destination="45c-Yu-GSR" id="WbQ-Rr-Sd7"/>
+                <outlet property="left" destination="z9i-eO-Cv1" id="jdQ-cw-p5M"/>
+                <outlet property="limitLab" destination="y9m-ab-mXS" id="Vgs-Ln-0RO"/>
+                <outlet property="priceLab" destination="5ep-Fk-QCZ" id="MI9-yz-G6e"/>
+                <outlet property="selectBtn" destination="YYg-Td-BI6" id="uaE-2e-QZV"/>
+                <outlet property="titleLab" destination="Jgg-gw-944" id="pMZ-Xq-lfV"/>
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="coupons_normal" width="19" height="19"/>
+        <image name="coupons_selected" width="19" height="19"/>
+    </resources>
 </document>
