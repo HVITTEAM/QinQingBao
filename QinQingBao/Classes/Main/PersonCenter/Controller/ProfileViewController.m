@@ -89,7 +89,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"个人中心";
+    self.title = @"我的";
     self.view.backgroundColor = [UIColor whiteColor];
     
     _zoomImageview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headbg.png"]];

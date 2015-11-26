@@ -33,6 +33,7 @@ static const NSUInteger kTagOfRightSideButton = 999;
     _topScrollView.showsHorizontalScrollIndicator = NO;
     _topScrollView.showsVerticalScrollIndicator = NO;
     _topScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  
     [self addSubview:_topScrollView];
     _userSelectedChannelID = 100;
     

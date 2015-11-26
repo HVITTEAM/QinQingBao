@@ -40,7 +40,7 @@
 #import "SecurityUtil.h"
 #import "UIView+Toast.h"
 #import "SVProgressHUD.h"
-#import "UITableViewController+Placeholder.h"
+#import "UITableView+Placeholder.h"
 #import "Star.h"
 
 
@@ -263,6 +263,13 @@
 
 /***获取用户订单url*/
 #define URL_Get_workinfo_data @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+
+/***获取用户或服务商的工作单信息url  旧的*/
+#define URL_Get_workinfo @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+
+/***获取用户或服务商的工作单信息url  新的*/
+#define URL_Get_workinfo_bystatus @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_by_oid_status"
+
 
 
 

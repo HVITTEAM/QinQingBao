@@ -11,6 +11,7 @@
 #import "OrderServiceDetailCell.h"
 #import "UseCouponsViewController.h"
 #import "CouponsModel.h"
+#import "OrderItem.h"
 
 
 @interface OrderSubmitController ()
@@ -36,7 +37,7 @@
     
     //优惠券
     CouponsModel *couponsItem;
-
+    
 }
 
 @end
@@ -371,19 +372,19 @@ numberOfRowsInComponent:(NSInteger)component
             return orderServiceDetailCell;
         }
     }
-//    else
-//    {
-//        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
-//        
-//        if(orderSubmitCell == nil)
-//            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
-//        
-//        __weak typeof(self) weakSelf = self;
-//        orderSubmitCell.payClick = ^(UIButton *button){
-//            [weakSelf submitClickHandler];
-//        };
-//        return orderSubmitCell;
-//    }
+    //    else
+    //    {
+    //        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
+    //
+    //        if(orderSubmitCell == nil)
+    //            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
+    //
+    //        __weak typeof(self) weakSelf = self;
+    //        orderSubmitCell.payClick = ^(UIButton *button){
+    //            [weakSelf submitClickHandler];
+    //        };
+    //        return orderSubmitCell;
+    //    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -426,31 +427,42 @@ numberOfRowsInComponent:(NSInteger)component
  */
 -(void)submitClickHandler
 {
+    if (selectedTimestr.length == 0)
+        return [NoticeHelper AlertShow:@"请选择预约时间" view:self.view];
+    else if (famVO == nil)
+        return [NoticeHelper AlertShow:@"请选择服务对象" view:self.view];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
-                                                                     @"iid" : self.serviceDetailItem,
-                                                                     @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                     @"wtime" : @"ios",
-                                                                     @"wname" : @"50",
-                                                                     @"wprice" : @"ios",
-                                                                     @"dvcode" : @"50",
-                                                                     @"wtelnum" : @"ios",
-                                                                     @"waddress" : @"50",
+                                                                     @"iid" : self.serviceDetailItem.iid,
+                                                                     @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                     @"wtime" : selectedTimestr,
+                                                                     @"wname" : famVO.oldname,
+                                                                     @"wprice" : self.serviceDetailItem.price,
+                                                                     @"dvcode" : famVO.totalname,
+                                                                     @"wtelnum" : famVO.oldphone,
+                                                                     @"waddress" : famVO.totalname,
                                                                      @"client" : @"ios",
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"wlevel" : @"1",
                                                                      @"wremark" : @"用户留言",
-                                                                     @"voucher_id" : @"",
+                                                                     @"voucher_id" : couponsItem ? couponsItem.voucher_id : @"",
                                                                      @"pay_type" : @"1",
                                                                      @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
                                                                      @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
+                                     OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                     if (item.wcode.length != 0)
+                                     {
+                                         PayViewController *payView = [[PayViewController alloc] init];
+                                         [self.navigationController pushViewController:payView animated:YES];
+                                     }
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"下单失败!" view:self.view];
+                                     [HUD removeFromSuperview];
                                  }];
     
-    PayViewController *payView = [[PayViewController alloc] init];
-    [self.navigationController pushViewController:payView animated:YES];
 }
 
 -(void)showDatePicker

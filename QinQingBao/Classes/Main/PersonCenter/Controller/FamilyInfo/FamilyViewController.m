@@ -79,7 +79,6 @@
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
                                  }];
-    
 }
 
 

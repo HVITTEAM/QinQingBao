@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MTSwitchViewDelegate <NSObject>
+
+/*!
+ * @method 点击tab
+ * @abstract
+ * @discussion
+ * @param tab索引
+ * @result
+ */
+- (void)switchView:(UIViewController *)view didselectTab:(NSUInteger)number;
+@end
+
+
 @interface MTSlipPageViewController : UIView<UIScrollViewDelegate>
 
 
@@ -23,5 +36,8 @@
 
 /**是否是点击了headBtn**/
 @property (nonatomic, assign) BOOL isUseButtonClick;
+
+@property (nonatomic, assign) id<MTSwitchViewDelegate> delegate;
+
 
 @end

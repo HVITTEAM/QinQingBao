@@ -7,7 +7,7 @@
 //
 
 static const CGFloat kHeightOfTopScrollView = 44.0f;
-static const CGFloat kFontSizeOfTabButton = 17.0f;
+static const CGFloat kFontSizeOfTabButton = 14.0f;
 
 #import "MTSlipPageViewController.h"
 
@@ -82,20 +82,29 @@ static const CGFloat kFontSizeOfTabButton = 17.0f;
     
     for (int i = 0; i < self.viewArr.count; i++)
     {
+        
+        UIImageView *bgview = [[UIImageView alloc] init];
+        [bgview setImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+        
         UIViewController *vc = (UIViewController *)self.viewArr[i];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
         button.backgroundColor = [UIColor whiteColor];
-        [button setFrame:CGRectMake((MTScreenW/2) *i,0,MTScreenW/2, kHeightOfTopScrollView - 5)];
+        [button setFrame:CGRectMake((MTScreenW/self.viewArr.count) *i,0,MTScreenW/self.viewArr.count, kHeightOfTopScrollView - 5)];
+        [bgview setFrame:CGRectMake(button.x, 0, button.width, kHeightOfTopScrollView)];
         [button setTitle:vc.title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [button setTitleColor:HMColor(12, 146, 241) forState:UIControlStateSelected];
         [button addTarget:self action:@selector(selectNameButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self.headScrollView addSubview:bgview];
         [self.headScrollView addSubview:button];
+        
         if (i == 0) {
             button.selected = YES;
             self.shadowImageView.frame = CGRectMake(0, 0, button.width,kHeightOfTopScrollView);
+            
+            [self.delegate switchView:self.viewArr[0] didselectTab:0];
         }
         [self.buttonArr addObject:button];
     }
@@ -134,6 +143,7 @@ static const CGFloat kFontSizeOfTabButton = 17.0f;
         } completion:^(BOOL finished) {
             [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW, 0) animated:YES];
             self.isUseButtonClick = YES;
+            [self.delegate switchView:self.viewArr[self.selectedIndex - 100] didselectTab:self.selectedIndex - 100];
         }];
     }
 }
@@ -145,7 +155,7 @@ static const CGFloat kFontSizeOfTabButton = 17.0f;
     if (self.isUseButtonClick)
         return;
     CGFloat pageWidth = scrollView.frame.size.width;
-    int page = floor(scrollView.contentOffset.x - pageWidth / 2) / pageWidth +1;//计算当前页码
+    int page = floor(scrollView.contentOffset.x - pageWidth / self.viewArr.count) / pageWidth +1;//计算当前页码
     [self adjustScrollViewContentX:page];
 }
 
@@ -166,18 +176,25 @@ static const CGFloat kFontSizeOfTabButton = 17.0f;
     //取之前的按钮
     UIButton *lastButton = (UIButton *)[self.headScrollView viewWithTag:self.selectedIndex];
     lastButton.selected = NO;
-    //赋值按钮ID
-    self.selectedIndex = index + 100;
-    UIButton *newButton = (UIButton *)[self.headScrollView viewWithTag:self.selectedIndex];
-    newButton.selected = YES;
-    
-    //背景图片动画
-    [UIView animateWithDuration:0.25 animations:^{
+    if (self.selectedIndex != index + 100)
+    {
+        [self.delegate switchView:self.viewArr[index] didselectTab:index];
+
+        //新页面
+        //赋值按钮ID
+        self.selectedIndex = index + 100;
+        UIButton *newButton = (UIButton *)[self.headScrollView viewWithTag:self.selectedIndex];
+        newButton.selected = YES;
         
-        [self.shadowImageView setFrame:CGRectMake(newButton.x, 0, newButton.width, kHeightOfTopScrollView)];
-        
-    } completion:^(BOOL finished) {
-    }];
+        //背景图片动画
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            [self.shadowImageView setFrame:CGRectMake(newButton.x, 0, newButton.width, kHeightOfTopScrollView)];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 @end

@@ -98,6 +98,7 @@
     [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
     dataProvider = [[NSMutableArray alloc] init];
     [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                                                                  @"client" : @"ios",
                                                                  @"key":[SharedAppUtil defaultCommonUtil].userVO.key}

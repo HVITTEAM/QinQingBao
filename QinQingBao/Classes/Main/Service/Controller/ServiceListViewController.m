@@ -192,10 +192,10 @@
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
-                                     //                                     if (result.datas.count == 0)
-                                     //                                         [self.tableView initWithPlaceString:@"现在还没数据呐"];
-                                     //                                     else
-                                     //                                         [self.tableView removePlace];
+                                     if (result.datas.count == 0)
+                                         [self.tableView initWithPlaceString:@"现在还没数据呐"];
+                                     else
+                                         [self.tableView removePlace];
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

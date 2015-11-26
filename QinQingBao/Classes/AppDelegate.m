@@ -35,6 +35,9 @@
     // 2.显示窗口(成为主窗口)
     [self.window makeKeyAndVisible];
     
+    NSUUID *str = [[UIDevice currentDevice] identifierForVendor];
+    NSLog(@"设备ID:%@ jieshu",str);
+    
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];

@@ -12,6 +12,8 @@
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
 #import "RootViewController.h"
+#import "MallViewController.h"
+
 
 @implementation MTControllerChooseTool
 
@@ -54,11 +56,6 @@
 
 + (void)setRootViewController
 {
-    HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
-    healthView.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
-                                                           image:[UIImage imageNamed:@"second_normal.png"]
-                                                   selectedImage:[UIImage imageNamed:@"second_selected.png"]];
-    UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
     
     HomeViewController *homeView = [[HomeViewController alloc] init];
     homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
@@ -66,19 +63,32 @@
                                                 selectedImage:[UIImage imageNamed:@"first_selected.png"]];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
     
+    HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
+    healthView.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
+                                                           image:[UIImage imageNamed:@"second_normal.png"]
+                                                   selectedImage:[UIImage imageNamed:@"second_selected.png"]];
+    UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
+    
+    MallViewController *mallView = [[MallViewController alloc] init];
+    mallView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"商城"
+                                                        image:[UIImage imageNamed:@"shop_normal"]
+                                                selectedImage:[UIImage imageNamed:@"shop_selected"]];
+    UINavigationController *navMall = [[UINavigationController alloc] initWithRootViewController:mallView];
+    
     ProfileViewController *sysview = [[ProfileViewController alloc] init];
-    sysview.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心"
-                                                       image:[UIImage imageNamed:@"third_selected.png"]
-                                               selectedImage:[UIImage imageNamed:@"third_normal.png"]];
+    sysview.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
+                                                       image:[UIImage imageNamed:@"third_normal.png"]
+                                               selectedImage:[UIImage imageNamed:@"third_selected.png"]];
     UINavigationController *navsys = [[UINavigationController alloc] initWithRootViewController:sysview];
     
     //初始化对象
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    //    tabBarController.tabBar.barTintColor = HMColor(48, 37, 44);
-    //    tabBarController.tabBar.tintColor = HMColor(18, 141, 216);
+    tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+    //        tabBarController.tabBar.tintColor = HMColor(18, 141, 216);
     
     //将2个uivc以数组的方式制定给bar对象
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navsys, nil];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
+    tabBarController.tabBar.selectedImageTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器

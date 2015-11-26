@@ -10,6 +10,14 @@
 
 @implementation CommonOrderCell
 
+
++(CommonOrderCell *) commonOrderCell
+{
+    CommonOrderCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"CommonOrderCell" owner:self options:nil] objectAtIndex:0];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
 - (void)awakeFromNib
 {
     
@@ -32,6 +40,54 @@
     self.deleteBtn.layer.cornerRadius = 8;
 }
 
+-(void)setItem:(OrderModel *)item
+{
+    _item = item;
+    self.titleLab.text = item.icontent;
+    self.statusLab.text = [self getStatusByStatus:[item.status intValue]];
+    self.namaLab.text = [NSString stringWithFormat:@"服务对象: %@",item.wname];
+}
+
+-(NSString *)getStatusByStatus:(int)status
+{
+    NSString *str;
+    switch (status) {
+        case 0:
+            str = @"已受理";
+            break;
+        case 1:
+            str = @"已受理";
+            break;
+        case 2:
+            str = @"已受理";
+            break;
+        case 3:
+            str = @"已受理";
+            break;
+        case 4:
+            str = @"已受理";
+            break;
+        case 5:
+            str = @"已受理";
+            break;
+        case 6:
+            str = @"已受理";
+            break;
+        case 7:
+            str = @"已受理";
+            break;
+        case 8:
+            str = @"已受理";
+            break;
+        case 9:
+            str = @"已受理";
+            break;
+        default:
+            break;
+    }
+
+    return str;
+}
 
 - (IBAction)deleteBtnClickHandler:(id)sender
 {

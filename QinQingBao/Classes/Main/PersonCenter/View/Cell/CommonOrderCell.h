@@ -7,13 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
 
 @interface CommonOrderCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIView *topSapce;
 @property (strong, nonatomic) IBOutlet UIView *bottomSpace;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
+@property (strong, nonatomic) IBOutlet UILabel *namaLab;
+
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
+@property (strong, nonatomic) IBOutlet UILabel *statusLab;
+
+
 - (IBAction)deleteBtnClickHandler:(id)sender;
 @property (nonatomic, copy) void (^deleteClick)(UIButton *btn);
 
++(CommonOrderCell *) commonOrderCell;
+
+@property (nonatomic, retain) OrderModel *item;
 
 @end

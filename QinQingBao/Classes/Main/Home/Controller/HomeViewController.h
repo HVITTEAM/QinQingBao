@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *serviceColectionview;
 @property (strong, nonatomic) IBOutlet UIView *healthServiceBackgroundView;
 @property (strong, nonatomic) IBOutlet UIButton *healthBtn;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgWidth;
 
 - (IBAction)healthClickHandler:(id)sender;
 

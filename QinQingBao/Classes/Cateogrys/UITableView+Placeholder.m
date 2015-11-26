@@ -1,14 +1,14 @@
 //
-//  UITableViewController+Placeholder.m
+//  UITableView+Placeholder.m
 //  QinQingBao
 //
 //  Created by 董徐维 on 15/10/26.
 //  Copyright © 2015年 董徐维. All rights reserved.
 //
 
-#import "UITableViewController+Placeholder.h"
+#import "UITableView+Placeholder.h"
 
-@implementation UITableViewController (Placeholder)
+@implementation UITableView (Placeholder)
 
 - (void)initWithPlaceString:(NSString *)placeStr
 {
@@ -18,7 +18,7 @@
     img.x = (MTScreenW - 60)/2;
     img.y = MTScreenH/2 - 180;
     img.width = img.height = 60;
-    [self.tableView addSubview:img];
+    [self addSubview:img];
     
     UILabel *la = [[UILabel alloc] init];
     la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
@@ -29,13 +29,13 @@
     la.text = placeStr;
     la.x = (MTScreenW - la.width)/2;
     la.y = MTScreenH/2 - 106;
-    [self.tableView addSubview:la];
+    [self addSubview:la];
 }
 
 -(void)removePlace
 {
-    UILabel *lable = [self.tableView viewWithTag:100];
-    UIImageView *img = [self.tableView viewWithTag:101];
+    UILabel *lable = [self viewWithTag:100];
+    UIImageView *img = [self viewWithTag:101];
     [img removeFromSuperview];
     [lable removeFromSuperview];
 }

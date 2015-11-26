@@ -1,5 +1,5 @@
 //
-//  UITableViewController+Placeholder.h
+//  UITableView+Placeholder.h
 //  QinQingBao
 //
 //  Created by 董徐维 on 15/10/26.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITableViewController (Placeholder)
+@interface UITableView (Placeholder)
 - (void)initWithPlaceString:(NSString *)placeStr;
 - (void)removePlace;
 

@@ -61,8 +61,6 @@
 		4C6F96EB14AF70BD00F8389A /* MWTapDetectingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96DF14AF70BD00F8389A /* MWTapDetectingView.m */; };
 		4C6F96EC14AF70BD00F8389A /* MWZoomingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F96E014AF70BD00F8389A /* MWZoomingScrollView.h */; };
 		4C6F96ED14AF70BD00F8389A /* MWZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96E114AF70BD00F8389A /* MWZoomingScrollView.m */; };
-		4C6F96F614AF710800F8389A /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F96F414AF710800F8389A /* MBProgressHUD.h */; };
-		4C6F96F714AF710800F8389A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F96F514AF710800F8389A /* MBProgressHUD.m */; };
 		4C6F97C714AF74E200F8389A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6F97C614AF74E200F8389A /* MessageUI.framework */; };
 		4CB08BA314B1F38700730E9F /* MWPhotoProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB08BA214B1F38700730E9F /* MWPhotoProtocol.h */; };
 /* End PBXBuildFile section */
@@ -125,8 +123,6 @@
 		4C6F96E014AF70BD00F8389A /* MWZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWZoomingScrollView.h; path = Classes/MWZoomingScrollView.h; sourceTree = SOURCE_ROOT; };
 		4C6F96E114AF70BD00F8389A /* MWZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MWZoomingScrollView.m; path = Classes/MWZoomingScrollView.m; sourceTree = SOURCE_ROOT; };
 		4C6F96EF14AF70DC00F8389A /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MWPhotoBrowser.bundle; sourceTree = SOURCE_ROOT; };
-		4C6F96F414AF710800F8389A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Libraries/MBProgressHUD/MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
-		4C6F96F514AF710800F8389A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = Libraries/MBProgressHUD/MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		4C6F97C614AF74E200F8389A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4CB08BA214B1F38700730E9F /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MWPhotoProtocol.h; path = Classes/MWPhotoProtocol.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -268,18 +264,8 @@
 			children = (
 				0E3D589B180474330000E3A0 /* PSTCollectionView (1.2) */,
 				0E8515BE17FC77D200FE1EF3 /* DACircularProgress (675f395) */,
-				4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.8) */,
 			);
 			name = Libraries;
-			sourceTree = "<group>";
-		};
-		4C6F96F214AF70FA00F8389A /* MBProgressHUD (0.8) */ = {
-			isa = PBXGroup;
-			children = (
-				4C6F96F414AF710800F8389A /* MBProgressHUD.h */,
-				4C6F96F514AF710800F8389A /* MBProgressHUD.m */,
-			);
-			name = "MBProgressHUD (0.8)";
 			sourceTree = "<group>";
 		};
 		4C6F97E114AF7CCE00F8389A /* Supporting Files */ = {
@@ -319,7 +305,6 @@
 				0E3D58CE180474330000E3A0 /* PSTGridLayoutItem.h in Headers */,
 				4C6F96EC14AF70BD00F8389A /* MWZoomingScrollView.h in Headers */,
 				0E3D58D618047B600000E3A0 /* MWGridCell.h in Headers */,
-				4C6F96F614AF710800F8389A /* MBProgressHUD.h in Headers */,
 				0E3D58BC180474330000E3A0 /* PSTCollectionViewCell.h in Headers */,
 				0E3D58CA180474330000E3A0 /* PSTCollectionViewUpdateItem.h in Headers */,
 				4CB08BA314B1F38700730E9F /* MWPhotoProtocol.h in Headers */,
@@ -398,7 +383,6 @@
 				0E3D58C2180474330000E3A0 /* PSTCollectionViewData.m in Sources */,
 				4C6F96ED14AF70BD00F8389A /* MWZoomingScrollView.m in Sources */,
 				0E3D58CB180474330000E3A0 /* PSTCollectionViewUpdateItem.m in Sources */,
-				4C6F96F714AF710800F8389A /* MBProgressHUD.m in Sources */,
 				0E3D58C4180474330000E3A0 /* PSTCollectionViewFlowLayout.m in Sources */,
 				0E3D58BD180474330000E3A0 /* PSTCollectionViewCell.m in Sources */,
 				0E8515C217FC77D200FE1EF3 /* DACircularProgressView.m in Sources */,

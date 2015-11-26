@@ -18,11 +18,8 @@
 
 - (void)viewDidCurrentView;
 
-@property (nonatomic,retain) NSMutableArray *dataProvider;
-
 @property (nonatomic, assign) UINavigationController *nav;
 
-@property (nonatomic, retain) OrderFormDetailController *detailForm;
 @property (nonatomic, retain) CancelOrderController *cancelView;
 @property (nonatomic, retain) EvaluationController *evaluaView;
 

@@ -56,7 +56,8 @@ static float cellWidth = 66;
     {
         [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
         [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
-    }}
+    }
+}
 
 /**
  *  获取当前位置
@@ -75,9 +76,10 @@ static float cellWidth = 66;
  */
 -(void)initNavigation
 {
+    self.imgWidth.constant = MTScreenW/2;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
-    self.title = @"亲情宝";
+    self.title = @"首页";
     self.bgScrollView.height = pageControlY;
     
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];

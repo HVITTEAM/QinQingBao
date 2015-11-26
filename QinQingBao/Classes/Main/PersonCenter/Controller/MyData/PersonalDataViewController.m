@@ -191,7 +191,7 @@
         };
         [self.navigationController pushViewController:textView animated:YES];
     }
-   
+    
     else
     {
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
