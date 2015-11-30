@@ -52,6 +52,7 @@
 
 @property (nonatomic, retain) NSString *orgname;
 @property (nonatomic, retain) NSString *icontent;
+@property (nonatomic, retain) NSString *price;
 @property (nonatomic, retain) NSString *wid;
 @property (nonatomic, retain) NSString *wcode;
 @property (nonatomic, retain) NSString *sluid;
@@ -83,6 +84,8 @@
 @property (nonatomic, retain) NSString *wlevel;
 @property (nonatomic, retain) NSString *whftime;
 @property (nonatomic, retain) NSString *wqxtime;
+@property (nonatomic, retain) NSString *wjudtime;
+
 @property (nonatomic, retain) NSString *wqxyj;
 @property (nonatomic, retain) NSString *wqxyy;
 @property (nonatomic, retain) NSString *wprice;
@@ -92,6 +95,8 @@
 @property (nonatomic, retain) NSString *dis_con;
 @property (nonatomic, retain) NSString *pay_staus;
 @property (nonatomic, retain) NSString *pay_type;
+@property (nonatomic, retain) NSString *totalname;
+
 
 
 @end

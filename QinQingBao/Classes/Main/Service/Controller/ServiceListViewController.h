@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceListCell.h"
-#import "OrderDetailViewController.h"
+#import "ServiceDetailViewController.h"
 #import "ServiceTypeModel.h"
 #import "ServicesDatas.h"
 

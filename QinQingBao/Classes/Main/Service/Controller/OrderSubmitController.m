@@ -454,6 +454,8 @@ numberOfRowsInComponent:(NSInteger)component
                                      if (item.wcode.length != 0)
                                      {
                                          PayViewController *payView = [[PayViewController alloc] init];
+                                         payView.serviceDetailItem = self.serviceDetailItem;
+                                         payView.orderItem = item;
                                          [self.navigationController pushViewController:payView animated:YES];
                                      }
                                      [HUD removeFromSuperview];

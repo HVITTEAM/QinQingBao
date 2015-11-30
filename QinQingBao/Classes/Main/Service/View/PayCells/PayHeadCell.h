@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ServiceItemModel.h"
+#import "OrderItem.h"
 
 @interface PayHeadCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
+@property (strong, nonatomic) IBOutlet UILabel *priceLab;
 
 + (PayHeadCell*) payHeadCell;
+
+@property (nonatomic, retain) ServiceItemModel *item;
+@property (nonatomic, retain) OrderItem *orderItem;
+
 @end

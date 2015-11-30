@@ -240,7 +240,7 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderDetailViewController *palceView = [[OrderDetailViewController alloc] init];
+    ServiceDetailViewController *palceView = [[ServiceDetailViewController alloc] init];
     palceView.selectedItem = dataProvider[indexPath.row];
     palceView.serviceTypeItem = selectedItem;
     [self.navigationController pushViewController:palceView animated:YES];

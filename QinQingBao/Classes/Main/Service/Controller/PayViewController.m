@@ -109,6 +109,9 @@
         if (headcell == nil)
             headcell = [PayHeadCell payHeadCell];
         
+        [headcell setItem:self.serviceDetailItem];
+        [headcell setOrderItem:self.orderItem];
+        
         headcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
 
         cell = headcell;
@@ -139,12 +142,12 @@
         }
         if (indexPath.row == 0)
         {
-            NSString *string = @"还需支付:70元";
+            NSString *string = [NSString stringWithFormat: @"还需支付:%@元",self.orderItem.wprice];
             NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
             // 设置富文本样式
             [attributedString addAttribute:NSForegroundColorAttributeName
                                      value:[UIColor redColor]
-                                     range:NSMakeRange(5, 3)];
+                                     range:NSMakeRange(5, self.orderItem.wprice.length)];
             contentcell.textLabel.attributedText = attributedString;
             
             contentcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
@@ -254,7 +257,7 @@
     order.tradeNO = [NSString stringWithFormat:@"%@%u",currentDateStr,arc4random()%1000 + 9000]; //订单ID（由商家自行制定）
     order.productName = @"商品标题"; //商品标题
     order.productDescription = @"商品描述"; //商品描述
-    order.amount = @"0.01"; //商品价格
+    order.amount = self.orderItem.wprice; //商品价格
     order.notifyURL =  @"http://www.hvit.com.cn"; //回调URL
     
     order.service = @"mobile.securitypay.pay";

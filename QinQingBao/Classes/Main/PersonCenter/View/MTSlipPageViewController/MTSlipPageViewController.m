@@ -78,7 +78,6 @@ static const CGFloat kFontSizeOfTabButton = 14.0f;
     self.shadowImageView = [[UIImageView alloc] init];
     [self.shadowImageView setImage:[[UIImage imageNamed:@"red_line_and_shadow.png"]
                                     stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f]];
-    [self.headScrollView addSubview:_shadowImageView];
     
     for (int i = 0; i < self.viewArr.count; i++)
     {
@@ -108,6 +107,8 @@ static const CGFloat kFontSizeOfTabButton = 14.0f;
         }
         [self.buttonArr addObject:button];
     }
+    [self.headScrollView addSubview:_shadowImageView];
+
 }
 
 -(void)creatView

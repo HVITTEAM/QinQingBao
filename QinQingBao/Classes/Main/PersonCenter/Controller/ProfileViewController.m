@@ -61,6 +61,10 @@
     [super viewWillDisappear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+
+//    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
+//    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
+
 }
 
 #pragma mark 初始化界面

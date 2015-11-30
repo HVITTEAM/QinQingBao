@@ -9,6 +9,7 @@
 #import "QCListViewController.h"
 #import "OrderModel.h"
 #import "OrderTotals.h"
+#import "OrderDetailController.h"
 
 @interface QCListViewController ()
 {
@@ -52,43 +53,30 @@
     self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, 0, 0);
 }
 
-#pragma mark 集成刷新控件
-
-/**
- *  集成刷新控件
- */
-//- (void)setupRefresh
-//{
-//    // 下拉刷新
-//    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            // 结束刷新
-//            [self headerRereshing];
-//        });
-//    }];
-//    self.tableView.tableFooterView = [[UIView alloc] init];
-//    if ([self.title isEqualToString:@"全部"]) {
-//        [self.tableView.header beginRefreshing];
-//    }
-//}
 
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
+    
+    //    [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+    //                                                                              @"client" : @"ios",
+    //                                                                              @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+    //                                                                              @"status" : @"0",
+    //                                                                              @"pay_staus" : @"0"}
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios",
                                                                      @"p" : @"1",
                                                                      @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
-                                                                     @"page" : @"10"}
+                                                                     @"page" : @"20",
+                                                                     @"status" : @"2"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      if (result.datas.count == 0)
                                      {
                                          [self.tableView initWithPlaceString:@"暂无数据"];
-//                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
                                      }
                                      dataProvider  = result.datas;
                                      [self.tableView reloadData];
@@ -127,7 +115,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 130;
+    return 160;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,7 +125,7 @@
         cell = [CommonOrderCell commonOrderCell];
     
     cell.deleteClick = ^(UIButton *btn){
-        [self deleteOrderClickHandler];
+        [self deleteOrderClickHandler:indexPath];
     };
     
     [cell setItem:dataProvider[indexPath.section]];
@@ -147,18 +135,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderFormDetailController *detailForm = [[OrderFormDetailController alloc] init];
+    OrderDetailController *detailForm = [[OrderDetailController alloc] init];
+    detailForm.orderItem = dataProvider[indexPath.section];
     [self.nav pushViewController:detailForm animated:YES];
 }
 
--(void)deleteOrderClickHandler
+-(void)deleteOrderClickHandler:(NSIndexPath *)indexPath
 {
-    if (!self.evaluaView)
-        self.evaluaView  = [[EvaluationController alloc]init];
-    [self.nav pushViewController:self.evaluaView animated:YES];
-    //    if (!self.cancelView)
-    //        self.cancelView  = [[CancelOrderController alloc]init];
-    //    [self.nav pushViewController:self.cancelView animated:YES];
+    EvaluationController *evaluaView = [[EvaluationController alloc]init];
+    evaluaView.orderItem = dataProvider[indexPath.section];
+    [self.nav pushViewController:evaluaView animated:YES];
+    
+    //    CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
+    //    cancelView.orderItem = dataProvider[indexPath.section];
+    //    [self.nav pushViewController:cancelView animated:YES];
 }
 
 -(NSString *)kilometre2meter:(float)meter

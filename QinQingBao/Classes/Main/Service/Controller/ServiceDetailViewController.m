@@ -6,14 +6,14 @@
 //  Copyright (c) 2015年 董徐维. All rights reserved.
 //
 
-#import "OrderDetailViewController.h"
+#import "ServiceDetailViewController.h"
 #import "ServiceItemTotal.h"
 #import "EvaluationTotal.h"
 #import "EvaluationNoneCell.h"
 #import "RemarkDetailCell.h"
 
 
-@interface OrderDetailViewController ()
+@interface ServiceDetailViewController ()
 {
     /*所有的评价数据*/
     NSMutableArray *evaArr;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation OrderDetailViewController
+@implementation ServiceDetailViewController
 
 - (void)viewDidLoad
 {

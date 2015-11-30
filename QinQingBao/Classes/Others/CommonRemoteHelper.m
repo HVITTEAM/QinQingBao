@@ -66,7 +66,8 @@ static NSOperationQueue * _queue;
                   if (dict == nil)
                   {
                       UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"返回值为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                      [alertView show];
+//                      [alertView show];
+                      success(dict,responseObject);
                   }
                   else
                   {

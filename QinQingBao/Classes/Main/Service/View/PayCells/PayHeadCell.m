@@ -18,6 +18,18 @@
     return cell;
 }
 
+
+-(void)setItem:(ServiceItemModel *)item
+{
+    _item = item;
+    self.titleLab.text = item.icontent;
+}
+
+-(void)setOrderItem:(OrderItem *)orderItem
+{
+    _orderItem = orderItem;
+    self.priceLab.text = self.orderItem.wprice;
+}
 - (void)awakeFromNib {
     // Initialization code
 }

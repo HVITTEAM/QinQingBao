@@ -2,8 +2,8 @@
 //  CCLocationManager.m
 //  MMLocationManager
 //
-//  Created by WangZeKeJi on 14-12-10.
-//  Copyright (c) 2014年 Chen Yaoqiang. All rights reserved.
+//  Created by 董徐维  on 14-15-10.
+//  Copyright (c) 2015年 董徐维 . All rights reserved.
 //
 
 #import "CCLocationManager.h"
@@ -109,8 +109,6 @@
 
          
      }];
-    
-    
 
     
     _lastCoordinate = CLLocationCoordinate2DMake(marsLoction.coordinate.latitude ,marsLoction.coordinate.longitude);
@@ -133,7 +131,8 @@
         _manager=[[CLLocationManager alloc]init];
         _manager.delegate=self;
         _manager.desiredAccuracy = kCLLocationAccuracyBest;
-//        [_manager requestAlwaysAuthorization];
+        if ([[UIDevice currentDevice].systemVersion doubleValue]>=8.0)
+            [_manager requestWhenInUseAuthorization];
         _manager.distanceFilter=100;
         [_manager startUpdatingLocation];
     }

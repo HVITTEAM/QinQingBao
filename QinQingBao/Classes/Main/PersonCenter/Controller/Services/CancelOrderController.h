@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderItem.h"
 
 @interface CancelOrderController : UIViewController
 @property (strong, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (strong, nonatomic) IBOutlet UITextView *cancelReasonText;
 - (IBAction)cancelBtnClickHandler:(id)sender;
+@property (nonatomic, retain) OrderItem *orderItem;
+
 @end

@@ -265,6 +265,8 @@
 - (void)showPosition
 {
     MapViewController *map = [[MapViewController alloc] init];
+    if (dataProvider.count == 0)
+        return [NoticeHelper AlertShow:@"暂无数据" view:self.view];
     map.item = dataProvider[0];
     [self presentViewController:map animated:YES completion:nil];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderItem.h"
 
 @interface EvaluationController : UIViewController
 @property (strong, nonatomic) IBOutlet UITextView *evaContentText;
@@ -17,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *star5;
 @property (strong, nonatomic) IBOutlet UILabel *starLabel;
 - (IBAction)starClickeHandler:(id)sender;
+- (IBAction)subBtnClickHandler:(id)sender;
 
+@property (nonatomic, retain) OrderItem *orderItem;
 @end

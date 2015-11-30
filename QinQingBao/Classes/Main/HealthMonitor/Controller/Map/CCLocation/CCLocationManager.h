@@ -2,8 +2,8 @@
 //  CCLocationManager.h
 //  MMLocationManager
 //
-//  Created by WangZeKeJi on 14-12-10.
-//  Copyright (c) 2014年 Chen Yaoqiang. All rights reserved.
+//  Created by 董徐维 on 15-11-10.
+//  Copyright (c) 2015年 董徐维 . All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

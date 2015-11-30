@@ -93,7 +93,8 @@ static float cellWidth = 66;
     NSLog(@"屏幕高度%f",f);
     //    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStyleDone target:self action:@selector(cityChange)];
+   
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CCLocationManager shareLocation].lastCity style:UIBarButtonItemStyleDone target:self action:@selector(cityChange)];
 }
 
 /**

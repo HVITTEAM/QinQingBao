@@ -9,6 +9,9 @@
 #import "EvaluationController.h"
 
 @interface EvaluationController ()
+{
+    float maxStar;
+}
 
 @end
 
@@ -24,7 +27,7 @@
 
 - (IBAction)starClickeHandler:(id)sender
 {
-    float maxStar;
+    
     UIButton *btn = sender;
     btn.selected =  !btn.selected;
     if (btn.selected)
@@ -57,5 +60,33 @@
         self.starLabel.text = @"很好";
     else  if (maxStar == 5)
         self.starLabel.text = @"非常好";
+}
+
+- (IBAction)subBtnClickHandler:(id)sender
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Save_dis_cont parameters:  @{@"wid" : self.orderItem.wid,
+                                                                       @"cont" : @"ios",
+                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                       @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                       @"client" : @"ios",
+                                                                       @"grade" : [NSString stringWithFormat:@"%.0f",maxStar]
+                                                                       }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"操作成功!" view:self.view];
+                                         [self.navigationController popToRootViewControllerAnimated:YES];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+    
 }
 @end

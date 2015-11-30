@@ -21,7 +21,7 @@
 
 
 
-@interface OrderDetailViewController : UITableViewController
+@interface ServiceDetailViewController : UITableViewController
 
 @property (nonatomic, retain) PlaceOrderHeadView *headView;
 @property (nonatomic, retain) ServiceItemModel *selectedItem;

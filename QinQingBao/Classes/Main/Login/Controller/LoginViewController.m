@@ -94,6 +94,7 @@
         [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
                                                                   @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                   @"client" : @"ios",
+                                                                  @"role" : @"0",
                                                                   @"imei":[SharedAppUtil defaultCommonUtil].deviceToken}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          

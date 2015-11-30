@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet UILabel *statusLab;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
+@property (strong, nonatomic) IBOutlet UILabel *addressLab;
 
 
 - (IBAction)deleteBtnClickHandler:(id)sender;

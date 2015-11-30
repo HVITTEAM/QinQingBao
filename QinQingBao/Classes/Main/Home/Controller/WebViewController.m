@@ -59,7 +59,7 @@
 
 -(void)loadGoogle
 {
-    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.baidu.com/"]];
+    NSURLRequest *req = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"http://mb.liepin.com/microsite/?ecompId=8037540&from=timeline&isappinstalled=0"]];
     [web loadRequest:req];
 }
 

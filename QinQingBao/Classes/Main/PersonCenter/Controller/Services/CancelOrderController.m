@@ -22,21 +22,30 @@
     self.cancelReasonText.layer.cornerRadius = 3;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (IBAction)cancelBtnClickHandler:(id)sender {
+- (IBAction)cancelBtnClickHandler:(id)sender
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Del_workinfo_by_wid parameters:  @{@"wid" : self.orderItem.wid,
+                                                                             @"cont" : self.cancelReasonText.text,
+                                                                             @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                             @"client" : @"ios",
+                                                                             }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"操作成功!" view:self.view];
+                                         [self.navigationController popToRootViewControllerAnimated:YES];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+    
 }
 @end

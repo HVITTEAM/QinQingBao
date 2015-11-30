@@ -20,8 +20,5 @@
 
 @property (nonatomic, assign) UINavigationController *nav;
 
-@property (nonatomic, retain) CancelOrderController *cancelView;
-@property (nonatomic, retain) EvaluationController *evaluaView;
-
 @end
 

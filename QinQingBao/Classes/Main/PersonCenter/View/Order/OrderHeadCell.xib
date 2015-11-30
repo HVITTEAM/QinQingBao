@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="OrderHeadCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="y9J-0m-i6z">
+                        <rect key="frame" x="10" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="JEV-8r-J8W"/>
+                            <constraint firstAttribute="height" constant="60" id="u02-1M-dnd"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旅行社" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-3T-e9a" userLabel="titleLab">
+                        <rect key="frame" x="83" y="10" width="48" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="uq1-hw-Bqr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旅行社" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qke-Ne-M9D" userLabel="contentLab">
+                        <rect key="frame" x="83" y="51" width="36" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Tbe-Lf-Qra"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.01元" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfJ-7z-2fk" userLabel="priceLab">
+                        <rect key="frame" x="265" y="8" width="43.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="2Ae-xX-Pof"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="y9J-0m-i6z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="H8i-l5-QQU"/>
+                    <constraint firstItem="oEg-3T-e9a" firstAttribute="leading" secondItem="y9J-0m-i6z" secondAttribute="trailing" constant="13" id="KcB-AM-080"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="MfJ-7z-2fk" secondAttribute="trailing" constant="3" id="P1b-It-r01"/>
+                    <constraint firstItem="y9J-0m-i6z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="PSU-8j-DbT"/>
+                    <constraint firstItem="qke-Ne-M9D" firstAttribute="leading" secondItem="y9J-0m-i6z" secondAttribute="trailing" constant="13" id="XpW-J7-YPy"/>
+                    <constraint firstItem="MfJ-7z-2fk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="iqr-WP-oPE"/>
+                    <constraint firstItem="oEg-3T-e9a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="xRD-xn-mx5"/>
+                    <constraint firstItem="qke-Ne-M9D" firstAttribute="top" secondItem="oEg-3T-e9a" secondAttribute="bottom" constant="20" id="znR-rn-BlE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLab" destination="qke-Ne-M9D" id="1Mm-FS-mg6"/>
+                <outlet property="headImg" destination="y9J-0m-i6z" id="8QU-et-tok"/>
+                <outlet property="priceLab" destination="MfJ-7z-2fk" id="l5C-RW-Dry"/>
+                <outlet property="titleLab" destination="oEg-3T-e9a" id="WLT-pO-gHW"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholderImage" width="130" height="130"/>
+    </resources>
+</document>
