@@ -14,6 +14,8 @@
 @interface FamilyViewController ()<UINavigationControllerDelegate>
 {
     NSMutableArray *dataProvider;
+    UserInforModel *infoVO;
+    FamilyModel *familyVO;
 }
 
 @end
@@ -33,6 +35,9 @@
     
     [self setupGroups];
     
+    if (self.isfromOrder)
+        [self getUserData];
+    
     [self getDataProvider];
     
     self.navigationController.delegate= self;
@@ -50,7 +55,7 @@
 }
 
 /**
- *  获取数据
+ *  获取绑定的家属数据
  */
 -(void)getDataProvider
 {
@@ -64,8 +69,10 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         //                                         [alertView show];
+                                         
+                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
                                      }
                                      else
                                      {
@@ -77,6 +84,48 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+}
+
+
+/**
+ *  获取当前登录账户的个人资料
+ */
+-(void)getUserData
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         if ([di count] != 0)
+                                         {
+                                             infoVO = [UserInforModel objectWithKeyValues:di];
+                                             
+                                             familyVO = [[FamilyModel alloc] init];
+                                             //                                             familyVO.rid = infoVO.member_truename;
+                                             familyVO.oid = infoVO.member_id;
+                                             familyVO.oldname = infoVO.member_truename;
+                                             familyVO.oldphone = infoVO.member_mobile;
+                                             familyVO.member_sex = infoVO.member_sex;
+                                             familyVO.member_birthday = infoVO.member_birthday;
+                                             familyVO.totalname = infoVO.member_areainfo;
+                                             
+                                             [self setupGroups];
+                                         }
+                                         else
+                                             [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
 }
@@ -94,7 +143,7 @@
     //重置数据源
     [self setupGroup0];
     
-    //    [self setPlaceHolderview];
+    [self setupGroup1];
     
     //刷新表格
     [self.tableView reloadData];
@@ -140,6 +189,29 @@
         [itemArr addObject:item];
     }
     group.items = [itemArr copy];
+}
+
+/**
+ *  添加自己的VO
+ *
+ *  @param vo 自己
+ */
+- (void)setupGroup1
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:familyVO.oldname icon:@""];
+    item.subtitle = @"自己";
+    item.operation = ^{
+        if(self.isfromOrder)
+        {
+            [MTNotificationCenter postNotificationName:@"selected" object:familyVO userInfo:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    };
+    group.items = @[item];
 }
 
 -(void)addHandler:(id)sender

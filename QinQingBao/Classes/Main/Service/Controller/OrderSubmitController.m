@@ -54,7 +54,7 @@
     
     [self initDatePickView];
     
-    selectedIndex = 0;
+    selectedIndex = 1;
     
 }
 
@@ -401,11 +401,14 @@ numberOfRowsInComponent:(NSInteger)component
     }
     else if (indexPath.section == 3)
     {
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
-        
-        selectedIndex = indexPath.row;
-        
-        [self.tableView reloadData];
+        if (indexPath.row == 0) {
+            [NoticeHelper AlertShow:@"暂不支持在线支付" view:self.view];
+        }
+//        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
+//        
+//        selectedIndex = indexPath.row;
+//        
+//        [self.tableView reloadData];
     }
     else if (indexPath.section == 4)
     {

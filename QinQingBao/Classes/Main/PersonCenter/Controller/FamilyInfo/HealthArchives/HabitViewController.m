@@ -81,15 +81,15 @@
 
 -(NSString *)getBlood:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"O型";
-    else if ([value isEqualToString:@"1"])
-        return @"A型";
     else if ([value isEqualToString:@"2"])
-        return @"B型";
+        return @"A型";
     else if ([value isEqualToString:@"3"])
-        return @"AB型";
+        return @"B型";
     else if ([value isEqualToString:@"4"])
+        return @"AB型";
+    else if ([value isEqualToString:@"5"])
         return @"RH型";
     else
         return @"无";
@@ -97,15 +97,15 @@
 
 -(NSString *)getSmokeyears:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不吸";
-    else if ([value isEqualToString:@"1"])
-        return @"一年";
     else if ([value isEqualToString:@"2"])
-        return @"两年";
+        return @"一年";
     else if ([value isEqualToString:@"3"])
-        return @"三年";
+        return @"两年";
     else if ([value isEqualToString:@"4"])
+        return @"三年";
+    else if ([value isEqualToString:@"5"])
         return @"四年以上";
     else
         return @"无";
@@ -113,13 +113,13 @@
 
 -(NSString *)getSmokefrequency:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不吸";
-    else if ([value isEqualToString:@"1"])
-        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"偶尔";
+        return @"经常";
     else if ([value isEqualToString:@"3"])
+        return @"偶尔";
+    else if ([value isEqualToString:@"4"])
         return @"少许";
     else
         return @"无";
@@ -127,13 +127,13 @@
 
 -(NSString *)getDrinkfrequency:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不饮";
-    else if ([value isEqualToString:@"1"])
-        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"偶尔";
+        return @"经常";
     else if ([value isEqualToString:@"3"])
+        return @"偶尔";
+    else if ([value isEqualToString:@"4"])
         return @"少许";
     else
         return @"无";
@@ -141,13 +141,13 @@
 
 -(NSString *)getDrinktype:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不饮";
-    else if ([value isEqualToString:@"1"])
-        return @"红酒";
     else if ([value isEqualToString:@"2"])
-        return @"白酒";
+        return @"红酒";
     else if ([value isEqualToString:@"3"])
+        return @"白酒";
+    else if ([value isEqualToString:@"4"])
         return @"黄酒";
     else
         return @"无";
@@ -155,13 +155,13 @@
 
 -(NSString *)getSportduration:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不运动";
-    else if ([value isEqualToString:@"1"])
-        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"偶尔";
+        return @"经常";
     else if ([value isEqualToString:@"3"])
+        return @"偶尔";
+    else if ([value isEqualToString:@"4"])
         return @"少许";
     else
         return @"无";
@@ -169,13 +169,13 @@
 
 -(NSString *)getSportfrequency:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不运动";
-    else if ([value isEqualToString:@"1"])
-        return @"经常";
     else if ([value isEqualToString:@"2"])
-        return @"偶尔";
+        return @"经常";
     else if ([value isEqualToString:@"3"])
+        return @"偶尔";
+    else if ([value isEqualToString:@"4"])
         return @"少许";
     else
         return @"无";
@@ -183,11 +183,11 @@
 
 -(NSString *)getSleepquality:(NSString *)value
 {
-    if ([value isEqualToString:@"0"])
+    if ([value isEqualToString:@"1"])
         return @"不好";
-    else if ([value isEqualToString:@"1"])
-        return @"好";
     else if ([value isEqualToString:@"2"])
+        return @"好";
+    else if ([value isEqualToString:@"3"])
         return @"一般";
     else
         return @"无";

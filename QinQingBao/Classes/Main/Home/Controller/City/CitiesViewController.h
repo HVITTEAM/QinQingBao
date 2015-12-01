@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MTCityChangeDelegate <NSObject>
+
+-(void)selectedChange:(NSString *)city;
+
+@end
+
 @interface CitiesViewController : UITableViewController
 
 @property (nonatomic, retain) UINavigationController *nav;
+
+@property (nonatomic, assign) id<MTCityChangeDelegate> delegate;
+
 @end

@@ -357,6 +357,9 @@
 		01E82E7A1C0C13A00090360C /* HotCitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E82E781C0C13A00090360C /* HotCitiesCell.xib */; };
 		01E82E7F1C0C15380090360C /* HotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E82E7D1C0C15380090360C /* HotCollectionViewCell.m */; };
 		01E82E801C0C15380090360C /* HotCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E82E7E1C0C15380090360C /* HotCollectionViewCell.xib */; };
+		01E905F71C0D299F00B53AC1 /* UIViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */; };
+		01E905FC1C0D6E9A00B53AC1 /* GPSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */; };
+		01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */; };
 		01E92D321BA65E0F0097F8EC /* ServiceCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */; };
 		01E92D331BA65E0F0097F8EC /* ServiceCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */; };
 		01E94C8D1BC75C4000B956A2 /* EzvizDemoGlobalKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94C141BC75C4000B956A2 /* EzvizDemoGlobalKit.m */; };
@@ -1176,6 +1179,11 @@
 		01E82E7C1C0C15380090360C /* HotCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCollectionViewCell.h; sourceTree = "<group>"; };
 		01E82E7D1C0C15380090360C /* HotCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCollectionViewCell.m; sourceTree = "<group>"; };
 		01E82E7E1C0C15380090360C /* HotCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotCollectionViewCell.xib; sourceTree = "<group>"; };
+		01E905F51C0D299F00B53AC1 /* UIViewController+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Placeholder.h"; sourceTree = "<group>"; };
+		01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Placeholder.m"; sourceTree = "<group>"; };
+		01E905F91C0D6E9A00B53AC1 /* GPSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSCell.h; sourceTree = "<group>"; };
+		01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSCell.m; sourceTree = "<group>"; };
+		01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GPSCell.xib; sourceTree = "<group>"; };
 		01E92D2F1BA65E0F0097F8EC /* ServiceCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCustomCell.h; sourceTree = "<group>"; };
 		01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCustomCell.m; sourceTree = "<group>"; };
 		01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCustomCell.xib; sourceTree = "<group>"; };
@@ -2698,6 +2706,9 @@
 				01E82E7C1C0C15380090360C /* HotCollectionViewCell.h */,
 				01E82E7D1C0C15380090360C /* HotCollectionViewCell.m */,
 				01E82E7E1C0C15380090360C /* HotCollectionViewCell.xib */,
+				01E905F91C0D6E9A00B53AC1 /* GPSCell.h */,
+				01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */,
+				01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */,
 			);
 			path = City;
 			sourceTree = "<group>";
@@ -3166,6 +3177,8 @@
 				0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */,
 				01438E771BDDB65900F92681 /* UITableView+Placeholder.h */,
 				01438E781BDDB65900F92681 /* UITableView+Placeholder.m */,
+				01E905F51C0D299F00B53AC1 /* UIViewController+Placeholder.h */,
+				01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */,
 			);
 			path = Cateogrys;
 			sourceTree = "<group>";
@@ -3483,6 +3496,7 @@
 				01E68FE71BCCA68900A17543 /* playback_fullscreen_playbar.png in Resources */,
 				01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */,
 				01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */,
+				01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */,
 				01E690011BCCA68900A17543 /* connect_reset.png in Resources */,
 				01E68FA91BCCA68900A17543 /* flunet.png in Resources */,
 				01ECDF9D1B7C367600665D87 /* Images.xcassets in Resources */,
@@ -3764,6 +3778,7 @@
 				013F3F091BFC487900FF39E5 /* UIView+MJExtension.m in Sources */,
 				01E94C8D1BC75C4000B956A2 /* EzvizDemoGlobalKit.m in Sources */,
 				01E690101BCCA8E800A17543 /* TipsView.m in Sources */,
+				01E905F71C0D299F00B53AC1 /* UIViewController+Placeholder.m in Sources */,
 				01E6D4FA1BE1F49B00824F51 /* readme.markdown in Sources */,
 				01E690561BCCAA8000A17543 /* IntercomVolumnView.m in Sources */,
 				01E6905C1BCCAABE00A17543 /* VideoGoDef.m in Sources */,
@@ -3793,6 +3808,7 @@
 				01F0DAE71BCE3350004FD908 /* PSTCollectionViewCell.m in Sources */,
 				01FBF0E41BCBAD4100CA285C /* NSObject+MJCoding.m in Sources */,
 				01E4BE4B1B9FDF3500BF41EF /* PayHeadCell.m in Sources */,
+				01E905FC1C0D6E9A00B53AC1 /* GPSCell.m in Sources */,
 				01E8133D1C059A2C00585691 /* OrderTotals.m in Sources */,
 				01E690551BCCAA8000A17543 /* IntercomView.m in Sources */,
 				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,

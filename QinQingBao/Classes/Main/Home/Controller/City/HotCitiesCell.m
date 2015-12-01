@@ -35,10 +35,10 @@
  */
 -(void)initCollectionView
 {
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = HMColor(241, 241, 241);
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
     self.collectView.collectionViewLayout = flowLayout;
-    self.collectView.backgroundColor = HMGlobalBg;
+    self.collectView.backgroundColor = HMColor(241, 241, 241);
     self.collectView.scrollEnabled = NO;
     [self.collectView registerNib:[UINib nibWithNibName:@"HotCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"MTCommonCell"];
     self.collectView.delegate = self;

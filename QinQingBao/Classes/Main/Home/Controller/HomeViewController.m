@@ -24,9 +24,10 @@ static float cellWidth = 66;
 #import "CitiesViewController.h"
 
 
-@interface HomeViewController ()
+@interface HomeViewController ()<MTCityChangeDelegate>
 {
     NSMutableArray *dataProvider;
+    UIButton * button_back;
 }
 
 @end
@@ -85,16 +86,26 @@ static float cellWidth = 66;
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:HMGlobalBg] forState:UIControlStateHighlighted];
     
-    //    self.btn1.layer.cornerRadius = 8;
-    //    self.btn2.layer.cornerRadius = 8;
-    //    self.btn3.layer.cornerRadius = 8;
     self.bgScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.serviceColectionview.frame));
     float f = CGRectGetMaxY(self.serviceColectionview.frame);
     NSLog(@"屏幕高度%f",f);
-    //    [self.btn1 addTarget:self action:@selector(checkSelf:) forControlEvents:UIControlEventTouchUpInside];
     
-   
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:[CCLocationManager shareLocation].lastCity style:UIBarButtonItemStyleDone target:self action:@selector(cityChange)];
+    button_back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 40)];
+    [button_back setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
+    //给button添加image
+    [button_back setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];
+    //设置image在button上的位置（上top，左left，下bottom，右right）这里可以写负值，对上写－5，那么image就象上移动5个像素
+    button_back.imageEdgeInsets = UIEdgeInsetsMake(15,60,12,10);
+    [button_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button_back.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+    button_back.titleLabel.textAlignment = NSTextAlignmentLeft;
+    button_back.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
+    [button_back addTarget:self action:@selector(cityChange) forControlEvents:UIControlEventTouchUpInside];
+//    button_back.backgroundColor = [UIColor redColor];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button_back];
+    [backButton setStyle:UIBarButtonItemStyleDone];
+    [self.navigationItem setLeftBarButtonItem:backButton];
 }
 
 /**
@@ -164,8 +175,14 @@ static float cellWidth = 66;
 {
     // 2.弹出城市列表
     CitiesViewController *citiesVc = [[CitiesViewController alloc] init];
+    citiesVc.delegate  = self;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citiesVc];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+-(void)selectedChange:(NSString *)city
+{
+//    [button_back setTitle:city forState:UIControlStateNormal];
 }
 
 /**
@@ -346,6 +363,12 @@ static float cellWidth = 66;
 }
 
 - (IBAction)healthClickHandler:(id)sender
+{
+    HealthServicesController *healthVC = [[HealthServicesController alloc] init];
+    [self.navigationController pushViewController: healthVC animated:YES];
+}
+
+- (IBAction)questionClickHander:(id)sender
 {
     HealthServicesController *healthVC = [[HealthServicesController alloc] init];
     [self.navigationController pushViewController: healthVC animated:YES];

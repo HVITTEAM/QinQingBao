@@ -12,6 +12,7 @@
                 <outlet property="healthServiceBackgroundView" destination="vlY-uk-Vhe" id="J7L-6G-wAf"/>
                 <outlet property="imgPlayer" destination="7yY-xI-2bY" id="Bav-Md-hez"/>
                 <outlet property="imgWidth" destination="WzQ-JP-oAF" id="45l-tB-iSc"/>
+                <outlet property="questionBtn" destination="n1a-tg-Htp" id="Wcr-Yh-OLN"/>
                 <outlet property="serviceColectionview" destination="ZOK-7g-4T1" id="He4-4w-bm2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,13 +34,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vlY-uk-Vhe" userLabel="ButtonTypeView">
                             <rect key="frame" x="0.0" y="150" width="320" height="200"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-8v-IDq" userLabel="coverButton">
-                                    <rect key="frame" x="0.0" y="120" width="120" height="80"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-8v-IDq" userLabel="checkSelfButton">
+                                    <rect key="frame" x="0.0" y="120" width="160" height="80"/>
                                     <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="healthClickHandler:" destination="-1" eventType="touchUpInside" id="l9k-uc-H7O"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1a-tg-Htp" userLabel="questionOnline">
+                                    <rect key="frame" x="160" y="120" width="160" height="80"/>
+                                    <connections>
+                                        <action selector="questionClickHander:" destination="-1" eventType="touchUpInside" id="kEd-jI-58d"/>
                                     </connections>
                                 </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wenyi" translatesAutoresizingMaskIntoConstraints="NO" id="qzL-9M-1O5">
@@ -220,10 +227,13 @@
                                 <constraint firstItem="4YJ-uB-7yw" firstAttribute="leading" secondItem="EbO-X1-6I3" secondAttribute="trailing" constant="14" id="3ST-Kq-Uqt"/>
                                 <constraint firstItem="SSm-tL-HXq" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" id="3Zw-TZ-7mo"/>
                                 <constraint firstAttribute="bottom" secondItem="jDg-8v-IDq" secondAttribute="bottom" id="534-Wt-S2g"/>
+                                <constraint firstItem="jDg-8v-IDq" firstAttribute="top" secondItem="SSm-tL-HXq" secondAttribute="bottom" id="6Cl-QY-T86"/>
                                 <constraint firstAttribute="trailing" secondItem="xeo-ao-neZ" secondAttribute="trailing" id="7ML-Fe-CdO"/>
                                 <constraint firstItem="JgC-CK-J9q" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="30" id="833-Ty-Q2m"/>
                                 <constraint firstItem="uUB-0l-L9A" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="120" id="8Ie-Ml-Yus"/>
+                                <constraint firstItem="xeo-ao-neZ" firstAttribute="top" secondItem="jDg-8v-IDq" secondAttribute="top" id="9IY-m9-X7H"/>
                                 <constraint firstItem="dWX-dc-us6" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" id="Bbb-Sg-tgD"/>
+                                <constraint firstItem="n1a-tg-Htp" firstAttribute="top" secondItem="nXD-yH-cvl" secondAttribute="bottom" constant="44" id="C4X-yJ-p2U"/>
                                 <constraint firstItem="eTj-m4-kwF" firstAttribute="leading" secondItem="uUB-0l-L9A" secondAttribute="trailing" constant="16" id="E4t-k4-kse"/>
                                 <constraint firstAttribute="bottom" secondItem="dWX-dc-us6" secondAttribute="bottom" id="Fnp-db-eb9"/>
                                 <constraint firstItem="obk-hs-Ll6" firstAttribute="leading" secondItem="uUB-0l-L9A" secondAttribute="trailing" constant="16" id="G7M-T5-7fb"/>
@@ -235,15 +245,19 @@
                                 <constraint firstItem="nXD-yH-cvl" firstAttribute="leading" secondItem="SSm-tL-HXq" secondAttribute="trailing" id="LDk-wJ-Bds"/>
                                 <constraint firstItem="qzL-9M-1O5" firstAttribute="top" secondItem="xeo-ao-neZ" secondAttribute="bottom" constant="12" id="MuU-VZ-hDc"/>
                                 <constraint firstItem="nXD-yH-cvl" firstAttribute="top" secondItem="JgC-CK-J9q" secondAttribute="bottom" constant="8" id="OYs-tq-UAQ"/>
+                                <constraint firstAttribute="bottom" secondItem="n1a-tg-Htp" secondAttribute="bottom" id="Qrh-H6-nsj"/>
                                 <constraint firstItem="qzL-9M-1O5" firstAttribute="leading" secondItem="eTj-m4-kwF" secondAttribute="trailing" constant="25" id="RQO-oH-nWR"/>
                                 <constraint firstItem="nXD-yH-cvl" firstAttribute="top" secondItem="JgC-CK-J9q" secondAttribute="bottom" constant="-5" id="VWf-3B-qTv"/>
                                 <constraint firstItem="EbO-X1-6I3" firstAttribute="top" secondItem="xeo-ao-neZ" secondAttribute="bottom" constant="12" id="WAM-My-zjA"/>
+                                <constraint firstAttribute="trailing" secondItem="n1a-tg-Htp" secondAttribute="trailing" id="Ysm-PD-ATC"/>
                                 <constraint firstItem="EbO-X1-6I3" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" constant="20" id="Yzy-Qv-Ta3"/>
                                 <constraint firstItem="EbO-X1-6I3" firstAttribute="leading" secondItem="4YJ-uB-7yw" secondAttribute="trailing" constant="6" id="Z4Q-iE-sWN"/>
+                                <constraint firstItem="jDg-8v-IDq" firstAttribute="leading" secondItem="vlY-uk-Vhe" secondAttribute="leading" id="Zgm-nG-hWe"/>
                                 <constraint firstAttribute="height" constant="200" id="d4q-VE-JrQ"/>
                                 <constraint firstItem="EbO-X1-6I3" firstAttribute="leading" secondItem="66h-3c-ULe" secondAttribute="trailing" constant="34" id="eeM-I3-EXz"/>
                                 <constraint firstItem="eTj-m4-kwF" firstAttribute="leading" secondItem="EbO-X1-6I3" secondAttribute="trailing" constant="14" id="h6E-BM-9nR"/>
                                 <constraint firstItem="eTj-m4-kwF" firstAttribute="top" secondItem="xeo-ao-neZ" secondAttribute="bottom" constant="16" id="hXu-GT-uGq"/>
+                                <constraint firstAttribute="bottom" secondItem="jDg-8v-IDq" secondAttribute="bottom" id="hff-3r-7EG"/>
                                 <constraint firstItem="JgC-CK-J9q" firstAttribute="leading" secondItem="SSm-tL-HXq" secondAttribute="trailing" id="hpr-eF-Hze"/>
                                 <constraint firstItem="obk-hs-Ll6" firstAttribute="top" secondItem="eTj-m4-kwF" secondAttribute="bottom" constant="1" id="lu9-Ty-cWn"/>
                                 <constraint firstItem="JgC-CK-J9q" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="11" id="o7e-aa-Nyb"/>
@@ -252,12 +266,20 @@
                                 <constraint firstItem="4YJ-uB-7yw" firstAttribute="top" secondItem="66h-3c-ULe" secondAttribute="bottom" constant="1" id="rhc-DJ-ppR"/>
                                 <constraint firstItem="66h-3c-ULe" firstAttribute="top" secondItem="xeo-ao-neZ" secondAttribute="bottom" constant="12" id="sRs-pV-QF7"/>
                                 <constraint firstAttribute="trailing" secondItem="JgC-CK-J9q" secondAttribute="trailing" constant="73" id="sku-bK-lcH"/>
+                                <constraint firstItem="uUB-0l-L9A" firstAttribute="leading" secondItem="jDg-8v-IDq" secondAttribute="trailing" id="u3F-Zs-XWc"/>
                                 <constraint firstItem="xeo-ao-neZ" firstAttribute="top" secondItem="jDg-8v-IDq" secondAttribute="top" id="vny-n8-9ha"/>
                                 <constraint firstItem="4YJ-uB-7yw" firstAttribute="top" secondItem="eTj-m4-kwF" secondAttribute="bottom" id="weF-bo-vtT"/>
+                                <constraint firstItem="n1a-tg-Htp" firstAttribute="leading" secondItem="jDg-8v-IDq" secondAttribute="trailing" id="xAa-hq-MGd"/>
                                 <constraint firstItem="jDg-8v-IDq" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="top" constant="120" id="xGY-6Z-U8p"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
+                                    <exclude reference="0hK-mc-KAj"/>
+                                    <exclude reference="1xH-Tv-aQ5"/>
+                                    <exclude reference="534-Wt-S2g"/>
+                                    <exclude reference="HtD-dY-n1J"/>
+                                    <exclude reference="xGY-6Z-U8p"/>
+                                    <exclude reference="vny-n8-9ha"/>
                                     <exclude reference="3ST-Kq-Uqt"/>
                                     <exclude reference="weF-bo-vtT"/>
                                     <exclude reference="o7e-aa-Nyb"/>

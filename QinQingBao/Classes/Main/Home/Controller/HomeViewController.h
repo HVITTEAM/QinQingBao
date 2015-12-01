@@ -18,9 +18,11 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *serviceColectionview;
 @property (strong, nonatomic) IBOutlet UIView *healthServiceBackgroundView;
 @property (strong, nonatomic) IBOutlet UIButton *healthBtn;
+@property (strong, nonatomic) IBOutlet UIButton *questionBtn;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgWidth;
 
 - (IBAction)healthClickHandler:(id)sender;
+- (IBAction)questionClickHander:(id)sender;
 
 /**图片数组*/
 @property (strong,nonatomic)NSMutableArray *slideImages;

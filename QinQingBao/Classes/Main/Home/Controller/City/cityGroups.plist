@@ -5,6 +5,14 @@
 	<dict>
 		<key>cities</key>
 		<array>
+			<string>杭州</string>
+		</array>
+		<key>title</key>
+		<string>定</string>
+	</dict>
+	<dict>
+		<key>cities</key>
+		<array>
 			<string>北京</string>
 			<string>成都</string>
 			<string>广州</string>
@@ -18,7 +26,7 @@
 			<string>重庆</string>
 		</array>
 		<key>title</key>
-		<string>热门</string>
+		<string>热</string>
 	</dict>
 	<dict>
 		<key>cities</key>

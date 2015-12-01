@@ -93,6 +93,9 @@
     titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.oldname];
 }
 
+/**
+ *  获取绑定的家属
+ */
 -(void)getDataProvider
 {
     [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
@@ -108,8 +111,9 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         //                                         [alertView show];
+                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
                                      }
                                      else
                                      {
