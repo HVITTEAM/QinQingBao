@@ -69,7 +69,7 @@
     btn.backgroundColor = [UIColor whiteColor];
     btn.layer.borderWidth = 0.5;
     btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
-    
+    [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
@@ -110,13 +110,18 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+  
 }
 
 //返回这个UICollectionView是否可以被选择
 -(BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
+}
+
+-(void)btnClickHandler:(UIButton *)btn
+{
+    self.selectedHandler(btn);
 }
 
 

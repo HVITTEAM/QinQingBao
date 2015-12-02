@@ -33,7 +33,7 @@
                         <constraint firstAttribute="height" constant="19.5" id="QDk-n5-O9g"/>
                         <constraint firstAttribute="width" constant="100" id="nX6-Ra-Svg"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -47,7 +47,7 @@
                     <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-h2-hQI">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_escort" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-h2-hQI">
                     <rect key="frame" x="10" y="10" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="V5i-Gf-zy5"/>
@@ -80,6 +80,6 @@
         </view>
     </objects>
     <resources>
-        <image name="1" width="60" height="60"/>
+        <image name="ic_escort" width="44" height="44"/>
     </resources>
 </document>

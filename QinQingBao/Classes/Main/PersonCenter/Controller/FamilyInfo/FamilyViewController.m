@@ -143,7 +143,8 @@
     //重置数据源
     [self setupGroup0];
     
-    [self setupGroup1];
+    if (self.isfromOrder)
+        [self setupGroup1];
     
     //刷新表格
     [self.tableView reloadData];

@@ -72,7 +72,6 @@
         default:
             break;
     }
-    NSArray*arr1 = @[@"20",@"44",@"15",@"40",@"42"];
     [scrollChart setYValues:@[YTitles]];
     
     //设置表格各条曲线是否显示最大最小值,1表示对应的曲线要显示最大最小值
@@ -93,7 +92,24 @@
     NSMutableArray *xTitles = [NSMutableArray array];
     
     for (HealthDataModel *item in self.dataProvider) {
-        [xTitles addObject:[item.bloodp_time substringToIndex:10]];
+        
+        switch (self.type)
+        {
+            case ChartTypeBlood:
+                [xTitles addObject:[item.bloodp_time substringToIndex:10]];
+                break;
+                
+            case ChartTypeSugar:
+                [xTitles addObject:[item.boolg_time substringToIndex:10]];
+                break;
+                
+            case ChartTypeHeart:
+                [xTitles addObject:[item.heart_time substringToIndex:10]];
+                break;
+            default:
+                break;
+        }
+        
     }
     
     [scrollChart setXLabels:xTitles];

@@ -58,7 +58,7 @@
 {
     
     HomeViewController *homeView = [[HomeViewController alloc] init];
-    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
+    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"亲情宝"
                                                         image:[UIImage imageNamed:@"first_normal.png"]
                                                 selectedImage:[UIImage imageNamed:@"first_selected.png"]];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];

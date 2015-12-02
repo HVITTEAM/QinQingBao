@@ -24,7 +24,7 @@
     la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
     la.textColor = [UIColor grayColor];
     la.tag = 100;
-    CGSize size = [placeStr sizeWithFont:la.font];
+    CGSize size = [placeStr sizeWithAttributes:@{NSFontAttributeName:la.font}];
     la.size = size;
     la.text = placeStr;
     la.x = (MTScreenW - la.width)/2;

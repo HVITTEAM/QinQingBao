@@ -46,7 +46,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="Trk-du-1U2">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_video_center" translatesAutoresizingMaskIntoConstraints="NO" id="Trk-du-1U2">
                         <rect key="frame" x="10" y="10" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="QGc-Qy-pLw"/>
@@ -83,6 +83,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="1" width="60" height="60"/>
+        <image name="ic_video_center" width="45" height="45"/>
     </resources>
 </document>

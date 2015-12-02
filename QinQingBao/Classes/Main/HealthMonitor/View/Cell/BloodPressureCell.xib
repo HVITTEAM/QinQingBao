@@ -52,8 +52,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="--- mmHg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byo-ea-jho">
-                                <rect key="frame" x="232.5" y="5" width="79" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--- mmHg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byo-ea-jho">
+                                <rect key="frame" x="235" y="5" width="78.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="lRp-Ky-nil"/>
                                 </constraints>
@@ -74,7 +74,7 @@
                             <constraint firstItem="l63-fs-Pp5" firstAttribute="leading" secondItem="bTD-ng-qep" secondAttribute="trailing" id="x1Y-zc-2M6"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="n0F-fR-tbp">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_blood_pressure" translatesAutoresizingMaskIntoConstraints="NO" id="n0F-fR-tbp">
                         <rect key="frame" x="10" y="10" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="dKI-cm-JYq"/>
@@ -99,6 +99,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="1" width="60" height="60"/>
+        <image name="ic_blood_pressure" width="60" height="60"/>
     </resources>
 </document>

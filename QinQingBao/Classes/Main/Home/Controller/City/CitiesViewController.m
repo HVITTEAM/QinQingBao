@@ -138,7 +138,7 @@
             btn.backgroundColor = [UIColor whiteColor];
             btn.layer.borderWidth = 0.5;
             btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
-
+            [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
             cell = gpscell;
         }
             break;
@@ -149,6 +149,13 @@
                 hotcell = [HotCitiesCell hotCitiesCell];
             NSArray * arr = [dataProvider[indexPath.section] objectForKey:@"cities"];
             hotcell.dataProvider = [arr mutableCopy];
+            hotcell.selectedHandler = ^(UIButton *btn) {
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [self.delegate selectedChange:btn.titleLabel.text];
+                }];
+            };
+
             cell = hotcell;
         }
             break;
@@ -180,12 +187,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-        NSString *str = [dataProvider[indexPath.section] objectForKey:@"cities"];
+        NSArray *arr = [dataProvider[indexPath.section] objectForKey:@"cities"];
+        NSString *str = arr[indexPath.row];
         [self.delegate selectedChange:str];
     }];
 }
+
+-(void)btnClickHandler:(UIButton *)btn
+{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate selectedChange:btn.titleLabel.text];
+    }];
+}
+
 
 @end

@@ -15,7 +15,7 @@
     HeartbeatCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"HeartbeatCell" owner:self options:nil] objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
-
+    
     return cell;
 }
 
@@ -24,27 +24,32 @@
 {
     _item = item;
     
+    if (item.heartrate_avg)
+    {
         NSString *string                            = [NSString stringWithFormat:@"%@ 次/分钟",item.heartrate_avg];
-//    NSString *string                            = @"84 次/分钟";
-    
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    
-    // 设置富文本样式
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor redColor]
-                             range:NSMakeRange(0, 2)];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont systemFontOfSize:22.f]
-                             range:NSMakeRange(0, 2)];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont systemFontOfSize:12.f]
-                             range:NSMakeRange(2, 5)];
-    
-    self.heartBeatLab.attributedText = attributedString;
-    NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.ect_time];
-    self.timeLab.text = time;
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        
+        // 设置富文本样式
+        [attributedString addAttribute:NSForegroundColorAttributeName
+                                 value:[UIColor redColor]
+                                 range:NSMakeRange(0, 2)];
+        
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont systemFontOfSize:22.f]
+                                 range:NSMakeRange(0, 2)];
+        
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont systemFontOfSize:12.f]
+                                 range:NSMakeRange(2, 5)];
+        
+        self.heartBeatLab.attributedText = attributedString;
+    }
+    if (item.ect_time)
+    {
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.ect_time];
+        self.timeLab.text = time;
+    }
 }
 
 @end

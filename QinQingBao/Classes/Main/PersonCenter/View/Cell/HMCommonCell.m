@@ -229,7 +229,7 @@
         // 设置文字
         self.rightLabel.text = labelItem.text;
         // 根据文字计算尺寸
-        self.rightLabel.size = [labelItem.text sizeWithFont:self.rightLabel.font];
+        self.rightLabel.size = [labelItem.text sizeWithAttributes:@{NSFontAttributeName:self.rightLabel.font}];
         self.accessoryView = self.rightLabel;
     } else { // 取消右边的内容
         self.accessoryView = nil;

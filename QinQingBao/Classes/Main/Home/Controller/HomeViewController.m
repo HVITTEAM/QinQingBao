@@ -23,7 +23,6 @@ static float cellWidth = 66;
 #import "AnimationViewController.h"
 #import "CitiesViewController.h"
 
-
 @interface HomeViewController ()<MTCityChangeDelegate>
 {
     NSMutableArray *dataProvider;
@@ -80,7 +79,11 @@ static float cellWidth = 66;
     self.imgWidth.constant = MTScreenW/2;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
-    self.title = @"首页";
+    
+    self.title = @"亲情宝";
+    [self.navigationController.navigationBar setTitleTextAttributes:@{
+                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
+                                                                      NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.bgScrollView.height = pageControlY;
     
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
@@ -90,19 +93,23 @@ static float cellWidth = 66;
     float f = CGRectGetMaxY(self.serviceColectionview.frame);
     NSLog(@"屏幕高度%f",f);
     
-    button_back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 40)];
+    button_back = [[UIButton alloc] init];
+    button_back.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     [button_back setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
     //给button添加image
     [button_back setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];
     //设置image在button上的位置（上top，左left，下bottom，右right）这里可以写负值，对上写－5，那么image就象上移动5个像素
-    button_back.imageEdgeInsets = UIEdgeInsetsMake(15,60,12,10);
-    [button_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button_back.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-    button_back.titleLabel.textAlignment = NSTextAlignmentLeft;
+    
+    //按钮文字
     button_back.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
+    button_back.titleEdgeInsets = UIEdgeInsetsMake(0, -14, 0, 0);
+    [button_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
+    button_back.frame = CGRectMake(0, 0,size.width + 30, 40);
+    button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
+    
     [button_back addTarget:self action:@selector(cityChange) forControlEvents:UIControlEventTouchUpInside];
-//    button_back.backgroundColor = [UIColor redColor];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button_back];
     [backButton setStyle:UIBarButtonItemStyleDone];
     [self.navigationItem setLeftBarButtonItem:backButton];
@@ -182,7 +189,11 @@ static float cellWidth = 66;
 
 -(void)selectedChange:(NSString *)city
 {
-//    [button_back setTitle:city forState:UIControlStateNormal];
+    [button_back setTitle:city forState:UIControlStateNormal];
+    CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
+    button_back.frame = CGRectMake(0, 0,size.width + 30, 40);
+    button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
+    
 }
 
 /**

@@ -35,7 +35,7 @@
 
 -(void)initTableviewSkin
 {
-    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
+//    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
     //    self.tableView.tableHeaderView = [nibs lastObject];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"所有评价";

@@ -14,4 +14,7 @@
 @property (nonatomic, retain) NSMutableArray *dataProvider;
 
 + (HotCitiesCell*) hotCitiesCell;
+
+@property (nonatomic, copy) void (^selectedHandler)(UIButton *btn);
+
 @end

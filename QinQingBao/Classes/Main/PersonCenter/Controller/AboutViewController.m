@@ -54,7 +54,7 @@
     lab.text = @"v1.0.0";
     lab.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
     lab.textColor = [UIColor grayColor];
-    CGSize size = [lab.text sizeWithFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
+    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:13]}];
     lab.width = size.width;
     lab.height = size.height;
     lab.x = img.x + img.width/2 - lab.width/2;
