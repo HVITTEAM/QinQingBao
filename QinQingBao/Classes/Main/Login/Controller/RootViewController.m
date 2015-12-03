@@ -35,7 +35,7 @@
     self.navigationController.navigationBarHidden = NO;
     
     //设置导航栏颜色
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = MTNavgationBackgroundColor;
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }

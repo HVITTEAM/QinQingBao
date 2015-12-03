@@ -118,6 +118,7 @@
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
+    tableView.sectionIndexColor = MTNavgationBackgroundColor;
     return [dataProvider valueForKeyPath:@"title"];
 }
 
@@ -171,16 +172,6 @@
             cell = commoncell;
         }
             break;
-    }
-  
-    
-    for(UIView *view in [cell subviews])
-    {
-        if([[[view class] description] isEqualToString:@"UITableViewIndex"])
-        {
-            [view setBackgroundColor:[UIColor redColor]];
-//            [view setFont:[UIFont systemFontOfSize:14]];
-        }
     }
     return cell;
 }

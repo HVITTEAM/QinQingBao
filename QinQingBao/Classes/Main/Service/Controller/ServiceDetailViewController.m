@@ -132,7 +132,10 @@
     else if (indexPath.row == 2)
         height = 80;
     else if (indexPath.row == 3)
-        height = 160;
+    {
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.height;
+    }
     return height;
 }
 
@@ -218,9 +221,12 @@
             if(serviceDetailcell == nil)
                 serviceDetailcell = [ServiceDetailCell serviceCell];
             
+//            serviceDetailcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background.png"]];
+
             [serviceDetailcell setItemInfo:itemInfo];
 
             cell = serviceDetailcell;
+
         }
             break;
         case 4:
@@ -231,14 +237,15 @@
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
             
             commoncell.textLabel.text = @"服务详情";
-            
+
             cell = commoncell;
+            
         }
             break;
         default:
             break;
     }
-//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+
 
     return cell;
 }

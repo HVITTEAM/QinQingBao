@@ -273,22 +273,22 @@ numberOfRowsInComponent:(NSInteger)component
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSString *conmoncell = @"MTCommoncell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:conmoncell];
+    UITableViewCell *cell;
     
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
         {
-            if (cell == nil)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
-                cell.textLabel.text = @"服务对象";
-                cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            return  cell;
+            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommoncell"];
+            
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
+            
+            commoncell.textLabel.text = @"服务对象";
+            commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+            commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell = commoncell;
         }
         else
         {
@@ -299,22 +299,23 @@ numberOfRowsInComponent:(NSInteger)component
             
             [serviceCuscell setdataWithItem:famVO];
             
-            return serviceCuscell;
+            cell = serviceCuscell;
         }
         
     }
     else  if (indexPath.section == 2 && indexPath.row == 0)
     {
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
-            cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
-        cell.textLabel.text = @"预约时间";
-        cell.detailTextLabel.text =  selectedTimestr;
-        return  cell;
+        UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommoncell"];
+        
+        if (commoncell == nil)
+            commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
+        
+        commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
+        commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        commoncell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+        commoncell.textLabel.text = @"预约时间";
+        commoncell.detailTextLabel.text =  selectedTimestr;
+        cell = commoncell;
     }
     else  if (indexPath.section == 3)
     {
@@ -329,7 +330,7 @@ numberOfRowsInComponent:(NSInteger)component
         else
             payTypecell.accessoryType = UITableViewCellAccessoryNone;
         
-        return  payTypecell;
+        cell =  payTypecell;
     }
     else  if (indexPath.section == 4)
     {
@@ -340,25 +341,29 @@ numberOfRowsInComponent:(NSInteger)component
         vouchercell.textLabel.text = @"优惠券";
         if (couponsItem)
             vouchercell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",couponsItem.voucher_price];
+        else
+        {
+            vouchercell.detailTextLabel.text = @"使用抵用券";
+            vouchercell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+            vouchercell.detailTextLabel.textColor = MTNavgationBackgroundColor;
+        }
         vouchercell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        vouchercell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
-        vouchercell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background_highlighted"]];
-        return  vouchercell;
+        cell =  vouchercell;
     }
     else
     {
         if (indexPath.row == 0)
         {
-            if (cell == nil)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:conmoncell];
-                cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            }
-            cell.accessoryType = UITableViewCellSelectionStyleNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text = @"服务详情";
-            cell.detailTextLabel.text = @"";
-            return  cell;
+            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommoncell"];
+            
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
+            
+            commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+            commoncell.accessoryType = UITableViewCellSelectionStyleNone;
+            commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
+            commoncell.textLabel.text = @"服务详情";
+            cell = commoncell;
         }
         else
         {
@@ -369,22 +374,21 @@ numberOfRowsInComponent:(NSInteger)component
             
             [orderServiceDetailCell setdataWithItem:self.serviceDetailItem];
             
-            return orderServiceDetailCell;
+            cell = orderServiceDetailCell;
         }
     }
-    //    else
-    //    {
-    //        OrderSubmitCell *orderSubmitCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderSubmitCell"];
-    //
-    //        if(orderSubmitCell == nil)
-    //            orderSubmitCell = [OrderSubmitCell orderSubmitCell];
-    //
-    //        __weak typeof(self) weakSelf = self;
-    //        orderSubmitCell.payClick = ^(UIButton *button){
-    //            [weakSelf submitClickHandler];
-    //        };
-    //        return orderSubmitCell;
-    //    }
+    
+    //设置背景图片
+    if ([tableView numberOfRowsInSection:indexPath.section] == 1)
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background.png"]];
+    else if (indexPath.row == 0)
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_top.png"]];
+    else
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_bottom.png"]];
+    
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background_highlighted"]];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -404,11 +408,11 @@ numberOfRowsInComponent:(NSInteger)component
         if (indexPath.row == 0) {
             [NoticeHelper AlertShow:@"暂不支持在线支付" view:self.view];
         }
-//        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
-//        
-//        selectedIndex = indexPath.row;
-//        
-//        [self.tableView reloadData];
+        //        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
+        //
+        //        selectedIndex = indexPath.row;
+        //
+        //        [self.tableView reloadData];
     }
     else if (indexPath.section == 4)
     {

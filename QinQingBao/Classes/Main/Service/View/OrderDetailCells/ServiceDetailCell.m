@@ -29,7 +29,25 @@
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
 {
     _itemInfo = itemInfo;
-    self.timeLab.text = itemInfo.servicetime;
+    
+    NSString *str = [itemInfo.servicetime stringByReplacingOccurrencesOfString:@"#" withString:@"\n"];
+    
+    UILabel *lab = [[UILabel alloc] init];
+    
+    lab.numberOfLines = 0;
+    
+    lab.font = [UIFont systemFontOfSize:12];
+    
+    lab.text = str;
+    
+    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
+    
+    lab.frame = CGRectMake(10, 70, MTScreenW, size.height);
+    
+    [self addSubview:lab];
+    
+    self.height = CGRectGetMaxY(lab.frame) + 10;
+    
 }
 
 @end

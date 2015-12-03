@@ -88,7 +88,7 @@
     
     //将2个uivc以数组的方式制定给bar对象
     tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
-    tabBarController.tabBar.selectedImageTintColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0];
+    tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器

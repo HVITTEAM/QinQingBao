@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
@@ -46,6 +47,13 @@
                         <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANc-du-E4U" userLabel="topline">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                        <color key="backgroundColor" white="0.8436424885321101" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="hqB-CD-hSx"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
@@ -54,10 +62,13 @@
                     <constraint firstAttribute="bottom" secondItem="0Dc-TS-YAs" secondAttribute="bottom" constant="19.5" id="FgS-ce-mtt"/>
                     <constraint firstItem="Dgl-dm-pM7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NbH-Ua-5PL"/>
                     <constraint firstAttribute="bottom" secondItem="b5X-aN-3cB" secondAttribute="bottom" constant="0.5" id="Qte-u8-alD"/>
+                    <constraint firstItem="ANc-du-E4U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="S8H-w2-aBb"/>
                     <constraint firstAttribute="bottom" secondItem="Dgl-dm-pM7" secondAttribute="bottom" constant="19.5" id="bLG-ee-3Ew"/>
                     <constraint firstItem="0Dc-TS-YAs" firstAttribute="leading" secondItem="Dgl-dm-pM7" secondAttribute="trailing" constant="17" id="egQ-UG-8q4"/>
                     <constraint firstItem="b5X-aN-3cB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iGT-6k-rEa"/>
+                    <constraint firstItem="ANc-du-E4U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oD7-y5-Rhx"/>
                     <constraint firstAttribute="trailing" secondItem="b5X-aN-3cB" secondAttribute="trailing" id="peB-QF-Dh8"/>
+                    <constraint firstAttribute="trailing" secondItem="ANc-du-E4U" secondAttribute="trailing" id="uC2-pb-3OT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

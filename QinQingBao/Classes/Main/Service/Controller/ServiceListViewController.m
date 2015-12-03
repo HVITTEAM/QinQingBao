@@ -229,7 +229,7 @@
         NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"ServiceListCell" owner:nil options:nil];
         cell = [nibs lastObject];
         // 设置背景view
-        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell setitemWithData:dataProvider[indexPath.row]];
     return  cell;

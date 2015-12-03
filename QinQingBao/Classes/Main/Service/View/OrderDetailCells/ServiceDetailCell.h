@@ -12,7 +12,6 @@
 @interface ServiceDetailCell : UITableViewCell
 
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
-@property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
 +(ServiceDetailCell *)serviceCell;
 @end

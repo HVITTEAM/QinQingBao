@@ -28,7 +28,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skS-Xy-VLr" userLabel="topLine">
-                                <rect key="frame" x="0.0" y="28" width="320" height="1"/>
+                                <rect key="frame" x="10" y="28" width="310" height="1"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="0EW-Z2-PYS"/>
@@ -51,7 +51,7 @@
                             <constraint firstItem="9c5-u2-W4x" firstAttribute="top" secondItem="gM1-px-gqB" secondAttribute="top" constant="30" id="EC4-0L-URG"/>
                             <constraint firstAttribute="trailing" secondItem="9c5-u2-W4x" secondAttribute="trailing" constant="10" id="MUd-Cq-l51"/>
                             <constraint firstItem="76o-ip-dh1" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="10" id="Nj7-sN-asf"/>
-                            <constraint firstItem="skS-Xy-VLr" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" id="Phb-yG-XkB"/>
+                            <constraint firstItem="skS-Xy-VLr" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="10" id="Phb-yG-XkB"/>
                             <constraint firstItem="skS-Xy-VLr" firstAttribute="top" secondItem="76o-ip-dh1" secondAttribute="bottom" constant="2" id="mng-xf-zAR"/>
                             <constraint firstItem="9c5-u2-W4x" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="8" id="uJg-AN-hlY"/>
                         </constraints>
