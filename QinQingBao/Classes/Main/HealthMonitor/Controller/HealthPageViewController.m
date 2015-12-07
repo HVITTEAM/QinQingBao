@@ -226,12 +226,15 @@
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.oldname];
             bloodPressureVC.type = ChartTypeSugar;
+            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
+            
         }
             break;
         case 1:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.oldname];
             bloodPressureVC.type = ChartTypeBlood;
+            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
             break;
         case 2:

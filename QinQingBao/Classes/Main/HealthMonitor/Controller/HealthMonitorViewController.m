@@ -51,6 +51,12 @@
     
     if([SharedAppUtil defaultCommonUtil].needRefleshMonitor == YES)
         [self getDataProvider];
+    
+    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
+    {
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated

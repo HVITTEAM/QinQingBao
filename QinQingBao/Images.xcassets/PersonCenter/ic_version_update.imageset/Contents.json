@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "default_common_navibar_prev_highlighted.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "default_common_navibar_prev_highlighted@2x.png",
+      "filename" : "ic_version_update@2x.png",
       "scale" : "2x"
     },
     {

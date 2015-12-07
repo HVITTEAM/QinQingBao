@@ -72,7 +72,8 @@
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+
     orderSubmitCell = [OrderSubmitCell orderSubmitCell];
     __weak typeof(self) weakSelf = self;
     orderSubmitCell.payClick = ^(UIButton *button){
@@ -457,6 +458,14 @@ numberOfRowsInComponent:(NSInteger)component
                                                                      @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
                                                                      @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         
+                                     }
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {

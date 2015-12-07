@@ -20,6 +20,9 @@
     img.width = img.height = 60;
     [self addSubview:img];
     
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [img addGestureRecognizer:singleTap];
+    
     UILabel *la = [[UILabel alloc] init];
     la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
     la.textColor = [UIColor grayColor];
@@ -38,5 +41,10 @@
     UIImageView *img = [self viewWithTag:101];
     [img removeFromSuperview];
     [lable removeFromSuperview];
+}
+
+-(void)onClickImage
+{
+    self.refleshHandler();
 }
 @end

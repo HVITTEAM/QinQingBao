@@ -77,16 +77,20 @@
             break;
         case 6:
             str = @"已评价";
+            self.deleteBtn.hidden = YES;
+
             break;
         case 7:
             str = @"已评价";
+            self.deleteBtn.hidden = YES;
             break;
         case 8:
             str = @"取消受理中";
-            self.deleteBtn.titleLabel.text = @"联系商家";
+            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
             break;
         case 9:
             str = @"已取消";
+            self.deleteBtn.hidden = YES;
             break;
         case 10:
             str = @"已拒单";

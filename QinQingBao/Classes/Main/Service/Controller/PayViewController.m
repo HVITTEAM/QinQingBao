@@ -12,7 +12,7 @@
 
 
 
-@interface PayViewController ()
+@interface PayViewController ()<UIAlertViewDelegate>
 {
     //选择的支付方式
     NSInteger selectedIndex;
@@ -53,7 +53,31 @@
 -(void)initNavigation
 {
     self.title = @"订单支付";
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"back_icon.png"
+                                                                 highImageName:@"back_icon.png"
+                                                                        target:self action:@selector(back)];
 }
+
+-(void)back
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"是否确定取消付款?"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"取消"
+                                              otherButtonTitles:@"去意已决", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+        [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Table view data source
 
@@ -113,7 +137,7 @@
         [headcell setOrderItem:self.orderItem];
         
         headcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
-
+        
         cell = headcell;
     }
     else  if (indexPath.section == 3)
@@ -151,7 +175,7 @@
             contentcell.textLabel.attributedText = attributedString;
             
             contentcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
-
+            
         }
         cell = contentcell;
     }
@@ -301,11 +325,17 @@
                 UIViewController *vc = self.navigationController.viewControllers[2];
                 [self.navigationController popToViewController:vc animated:YES];
             }
-
+            
             //【callback 处理支付结果】
             NSLog(@"reslut = %@",resultDic);
         }];
     }
 }
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    
+}
+
 
 @end

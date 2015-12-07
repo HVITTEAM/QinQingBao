@@ -44,7 +44,11 @@
     self.vc5 = [[QCListViewController alloc] init];
     self.vc5.title = @"取消/售后";
     
-    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.width, self.view.height)];
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
+    //    //如果不设置成0  会依然占用位置
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
+    
+    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.width, MTScreenH + 49)];
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4,self.vc5, nil];
     [self.view addSubview:view];

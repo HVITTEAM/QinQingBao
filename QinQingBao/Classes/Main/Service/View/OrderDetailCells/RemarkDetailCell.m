@@ -31,6 +31,15 @@
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
 {
     _itemInfo = itemInfo;
+    
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.lineSpacing = 5;// 字体的行间距
+//    NSDictionary *attributes = @{
+//                                 NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:12],
+//                                 NSParagraphStyleAttributeName:paragraphStyle
+//                                 };
+//    self.remarkLab.attributedText = [[NSAttributedString alloc] initWithString:itemInfo.remakr attributes:attributes];
+    
     self.remarkLab.text = itemInfo.remakr;
 }
 

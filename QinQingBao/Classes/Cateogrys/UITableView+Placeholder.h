@@ -11,5 +11,6 @@
 @interface UITableView (Placeholder)
 - (void)initWithPlaceString:(NSString *)placeStr;
 - (void)removePlace;
+@property (nonatomic, copy) void (^refleshHandler)(void);
 
 @end

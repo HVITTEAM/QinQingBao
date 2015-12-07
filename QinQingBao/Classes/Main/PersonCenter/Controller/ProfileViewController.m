@@ -51,9 +51,15 @@
     
     [self setupGroups];
     
-    self.navigationController.navigationBarHidden = YES;
-    
     [self getUserIcon];
+    
+    self.navigationController.navigationBarHidden = YES;
+
+    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
+    {
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
+        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -61,10 +67,6 @@
     [super viewWillDisappear:animated];
     
     self.navigationController.navigationBarHidden = NO;
-
-//    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-//    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
-
 }
 
 #pragma mark 初始化界面

@@ -172,7 +172,7 @@ static float cellWidth = 66;
 
 -(void)onClickImage
 {
-    AnimationViewController *lis = [[AnimationViewController alloc] init];
+//    AnimationViewController *lis = [[AnimationViewController alloc] init];
     WebViewController *listView = [[WebViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:listView];
     [self presentViewController:nav animated:YES completion:nil];
@@ -375,12 +375,14 @@ static float cellWidth = 66;
 
 - (IBAction)healthClickHandler:(id)sender
 {
+    return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
     HealthServicesController *healthVC = [[HealthServicesController alloc] init];
     [self.navigationController pushViewController: healthVC animated:YES];
 }
 
 - (IBAction)questionClickHander:(id)sender
 {
+    return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
     HealthServicesController *healthVC = [[HealthServicesController alloc] init];
     [self.navigationController pushViewController: healthVC animated:YES];
 }

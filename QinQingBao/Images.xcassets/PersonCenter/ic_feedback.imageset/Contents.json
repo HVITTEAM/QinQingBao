@@ -6,8 +6,8 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "back_icon@2x.png"
+      "filename" : "ic_feedback@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

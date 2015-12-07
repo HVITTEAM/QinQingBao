@@ -20,7 +20,6 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-
 /**
  *  排序方式
  */
@@ -231,7 +230,8 @@
         // 设置背景view
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell setitemWithData:dataProvider[indexPath.row]];
+    if (dataProvider)
+        [cell setitemWithData:dataProvider[indexPath.row]];
     return  cell;
 }
 

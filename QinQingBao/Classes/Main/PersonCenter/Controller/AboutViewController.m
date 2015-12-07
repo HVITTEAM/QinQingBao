@@ -18,6 +18,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
+    //如果不设置成0  会依然占用位置
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 
 - (void)viewDidLoad
@@ -26,7 +30,9 @@
     
     [self initNavigation];
     
-//    [self initView];
+    [self initView];
+    
+    [self setupFooter];
     
     [self setupGroups];
 }
@@ -42,25 +48,31 @@
 
 -(void)initView
 {
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    img.x = (MTScreenW - img.width)/2;
-    img.y = 25;
-
+    UILabel *lab0 = [[UILabel alloc] init];
+    lab0.text = @"亲情宝";
+    lab0.font = [UIFont fontWithName:@"Helvetica-Bold" size:45];
+    lab0.textColor = MTNavgationBackgroundColor;
+    CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
+    lab0.width = size0.width;
+    lab0.height = size0.height;
+    lab0.x = self.view.width/2 - lab0.width/2;
+    lab0.y = self.navigationController.navigationBar.height;
+ 
     UIView *view = [[UIView alloc] init];
     view.height = 150;
-    [view addSubview:img];
     
     UILabel *lab = [[UILabel alloc] init];
-    lab.text = @"v1.0.0";
-    lab.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
-    lab.textColor = [UIColor grayColor];
-    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:13]}];
+    lab.text = @"智慧养老服务中心";
+    lab.font = [UIFont fontWithName:@"Helvetica" size:13];
+    lab.textColor = [UIColor orangeColor];
+    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
     lab.width = size.width;
     lab.height = size.height;
-    lab.x = img.x + img.width/2 - lab.width/2;
-    lab.y = CGRectGetMaxY(img.frame);
+    lab.x = lab0.x + lab0.width/2 - lab.width/2;
+    lab.y = CGRectGetMaxY(lab0.frame) + 10;
     [view addSubview:lab];
-    
+    [view addSubview:lab0];
+
     self.tableView.tableHeaderView = view;
 }
 
@@ -82,22 +94,50 @@
 
 - (void)setupFooter
 {
-    // 1.创建按钮
-    UIButton *logout = [[UIButton alloc] init];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 100, MTScreenW, 50)];
     
-    // 2.设置属性
-    logout.titleLabel.font = [UIFont systemFontOfSize:16];
-    [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
-    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    //    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *lab = [[UILabel alloc] init];
     
-    // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
-    logout.height = 50;
+    // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
     
-    self.tableView.tableFooterView = logout;
+    NSString *string                            = @"服务热线: 0571-8739224";
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     
+    // 设置富文本样式
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor grayColor]
+                             range:NSMakeRange(0, 5)];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont fontWithName:@"Helvetica" size:13]
+                             range:NSMakeRange(0, string.length)];
+    
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor redColor]
+                             range:NSMakeRange(6, string.length - 6)];
+    
+
+    
+    lab.attributedText = attributedString;
+    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
+    lab.width = size.width;
+    lab.height = size.height;
+    lab.x = self.view.width/2 - lab.width/2;
+    lab.y = 0;
+    [view addSubview:lab];
+    
+    UILabel *lab0 = [[UILabel alloc] init];
+    lab0.text = @"注册、登录、绑定等问题，欢迎致电咨询";
+    lab0.font = [UIFont fontWithName:@"Helvetica" size:13];
+    lab0.textColor = [UIColor grayColor];
+    CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
+    lab0.width = size0.width;
+    lab0.height = size0.height;
+    lab0.x = self.view.width/2 - lab0.width/2;
+    lab0.y = CGRectGetMaxY(lab.frame) + 10;
+    [view addSubview:lab0];
+    
+    [self.tableView addSubview:view];
 }
 - (void)setupGroup0
 {
@@ -106,14 +146,22 @@
     [self.groups addObject:group];
 
     // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"版本更新" icon:@"pc_accout.png"];
+    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"版本更新" icon:@"ic_version_update.png"];
+    version.subtitle = @"v1.0";
     // newFriend.destVcClass = [MyAccountViewController class];
     version.operation = ^{
+        [NoticeHelper AlertShow:@"当前已是最新版本" view:self.view];
     };
     
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"使用帮助" icon:@"app.png"];
+    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"使用帮助" icon:@"ic_use_help.png"];
+    help.operation = ^{
+        [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
+    };
     
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:@"app.png"];
+    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:@"ic_feedback.png"];
+    advice.operation = ^{
+        [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
+    };
 
     group.items = @[version,help,advice];
 }

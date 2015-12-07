@@ -48,32 +48,32 @@
     //                   "phone" : "13588996397"
     //                }
     //    }
-//    [CommonRemoteHelper RemoteWithUrl:@"https://open.ys7.com/api/method/token/getAccessToken"
-//                           parameters: @{@"id" : @"123456",
-//                                         @"system" : @{@"key":AppKey,
-//                                                       @"sign":@"8845c7ad6066c9cf1df170afd7dd5f06",
-//                                                       @"time":  @"1415843917",
-//                                                       @"ver":  @"1.0" },
-//                                         @"method":@"token/getAccessToken",
-//                                         @"params":@{
-//                                                 @"phone" : @"13539917404"
-//                                                 }
-//                                         }
-//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-//                                     id codeNum = [dict objectForKey:@"code"];
-//                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-//                                     {
-//                                         
-//                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                                         [alertView show];
-//                                     }
-//                                     else
-//                                     {
-//                                         
-//                                     }
-//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                     NSLog(@"发生错误！%@",error);
-//                                 }];
+    //    [CommonRemoteHelper RemoteWithUrl:@"https://open.ys7.com/api/method/token/getAccessToken"
+    //                           parameters: @{@"id" : @"123456",
+    //                                         @"system" : @{@"key":AppKey,
+    //                                                       @"sign":@"8845c7ad6066c9cf1df170afd7dd5f06",
+    //                                                       @"time":  @"1415843917",
+    //                                                       @"ver":  @"1.0" },
+    //                                         @"method":@"token/getAccessToken",
+    //                                         @"params":@{
+    //                                                 @"phone" : @"13539917404"
+    //                                                 }
+    //                                         }
+    //                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    //                                     id codeNum = [dict objectForKey:@"code"];
+    //                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+    //                                     {
+    //
+    //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+    //                                         [alertView show];
+    //                                     }
+    //                                     else
+    //                                     {
+    //
+    //                                     }
+    //                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                                     NSLog(@"发生错误！%@",error);
+    //                                 }];
     
 }
 
@@ -84,6 +84,9 @@
     self.title = @"设备列表";
     
     [self initTableViewSkin];
+    
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
+    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 -(void)initTableViewSkin
 {

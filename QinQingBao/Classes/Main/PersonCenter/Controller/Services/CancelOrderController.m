@@ -25,8 +25,13 @@
 
 - (IBAction)cancelBtnClickHandler:(id)sender
 {
+    [self.view endEditing:YES];
+    
+    if (self.cancelReasonText.text.length == 0)
+        return  [NoticeHelper AlertShow:@"请输入取消理由" view:self.view];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Del_workinfo_by_wid parameters:  @{@"wid" : self.orderItem.wid,
-                                                                             @"cont" : self.cancelReasonText.text,
+                                                                             @"remark" : self.cancelReasonText.text,
                                                                              @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                              @"client" : @"ios",
                                                                              }
@@ -40,11 +45,13 @@
                                      else
                                      {
                                          [NoticeHelper AlertShow:@"操作成功!" view:self.view];
-                                         [self.navigationController popToRootViewControllerAnimated:YES];
+                                         [self.navigationController popViewControllerAnimated:YES];
                                      }
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     [HUD removeFromSuperview];
                                  }];
     
 }

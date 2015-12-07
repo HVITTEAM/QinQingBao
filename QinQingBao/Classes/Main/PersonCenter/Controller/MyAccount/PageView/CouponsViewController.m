@@ -33,7 +33,7 @@
 -(void)initTableSkin
 {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = HMGlobalBg;
 }
 
 -(void)getDataProvider
