@@ -32,7 +32,7 @@
 @property (nonatomic, copy) NSString *oldlon;
 @property (nonatomic, copy) NSString *oldlat;
 @property (nonatomic, copy) NSString *totalname;
-
+@property (nonatomic, copy) NSString *member_areainfo;
 
 
 

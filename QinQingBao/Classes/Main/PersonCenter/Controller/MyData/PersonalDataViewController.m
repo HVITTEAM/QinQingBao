@@ -56,10 +56,6 @@
     [super viewWillAppear:animated];
     
     [self initTableviewSkin];
-    
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    //如果不设置成0  会依然占用位置
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 
 /**
@@ -69,8 +65,29 @@
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    [self setupFooter];
 }
 
+- (void)setupFooter
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 100, MTScreenW, 50)];
+    
+    UILabel *lab = [[UILabel alloc] init];
+    lab.textAlignment = NSTextAlignmentCenter;
+    lab.font = [UIFont systemFontOfSize:13];
+    lab.textColor = [UIColor orangeColor];
+    lab.numberOfLines = 0;
+    lab.text = @"请填写个人真实信息，方便我们与您家人进\n行信息确认，确保信息的安全性!";
+    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
+    lab.width = size.width;
+    lab.height = size.height;
+    lab.x = self.view.width/2 - lab.width/2;
+    lab.y = 0;
+    [view addSubview:lab];
+        
+    [self.tableView addSubview:view];
+}
 
 #pragma mark - Table view data source
 
@@ -235,6 +252,8 @@
             [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
         if (infoVO.member_areainfo != nil)
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if (infoVO.member_areaid != nil)
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
@@ -364,7 +383,7 @@
                     @{@"title" : @"",@"placeholder" : @"",@"text" : @"性别",@"value" : infoVO.member_sex.length > 0 ? sexStr : @"未填写"},
                     @{@"title" : @"修改电话",@"placeholder" : @"请输入电话号码", @"text" : @"电话",@"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
                     @{@"title" : @"修改生日",@"placeholder" : @"请输入出生日期",@"text" : @"生日",@"value" : infoVO.member_birthday.length > 0 ? infoVO.member_birthday : @"未填写"},
-                    @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : infoVO.member_areainfo.length > 0 ? infoVO.member_areainfo : @"未填写"},
+                    @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"},
                     nil];
     [self.tableView reloadData];
 }
@@ -443,6 +462,8 @@
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if (infoVO.member_areaid != nil)
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
@@ -488,6 +509,8 @@
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        if (infoVO.member_areaid != nil)
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         [self updataUserInfor:dict];
@@ -499,7 +522,6 @@
 
 - (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
 {
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -508,7 +530,6 @@
     UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
     NSData *data = UIImageJPEGRepresentation(slt, 1);
     [self upploadAvatar:data];
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
     [self.navigationController popViewControllerAnimated:YES];
 }
 

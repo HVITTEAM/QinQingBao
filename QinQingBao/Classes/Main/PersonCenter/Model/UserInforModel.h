@@ -84,6 +84,8 @@
 @property (nonatomic, copy) NSString *member_exppoints;
 @property (nonatomic, copy) NSString *inviter_id;
 @property (nonatomic, copy) NSString *imei_watch;
+@property (nonatomic, copy) NSString *totalname;
+
 
 
 @end

@@ -8,7 +8,7 @@
 
 #import "UpdatePwdViewController.h"
 
-@interface UpdatePwdViewController ()
+@interface UpdatePwdViewController ()<UIAlertViewDelegate>
 {
     float timesec;
     
@@ -113,16 +113,35 @@
     // 2.设置组的所有行数据
     HMCommonButtonItem *tel = [HMCommonButtonItem itemWithTitle:@"电话号码" icon:nil];
     tel.btnTitle = @"获取验证码";
-    tel.buttonClickBlock = ^(UIButton *btn){
+    tel.buttonClickBlock = ^(UIButton *btn)
+    {
         if (self.tel.rightText.text.length != 11)
             return [NoticeHelper AlertShow:@"请输入正确的电话号码" view:self.view];
         
         [self.view endEditing:YES];
-        [[MTSMSHelper sharedInstance] getCheckcode:self.tel.rightText.text];
-        [MTSMSHelper sharedInstance].sureSendSMS = ^{
-            [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
-            [self countdownHandler];
-        };
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_GetForgotCode parameters: @{@"mobile" : self.tel.rightText.text}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                         if (dict == nil)
+                                             return [NoticeHelper AlertShow:@"未知错误！" view:self.view];
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
+                                             [self countdownHandler];
+                                         }
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                     }];
+        
     };
     tel.placeholder = @"请输入电话号码";
     self.tel = tel;
@@ -165,7 +184,7 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
-    if(self.nowPwd.rightText.text != self.old.rightText.text )
+    if(![self.nowPwd.rightText.text isEqualToString:self.old.rightText.text] )
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Forgot parameters: @{@"mobile" : self.tel.rightText.text,
@@ -187,8 +206,10 @@
                                      }
                                      else
                                      {
-                                         [NoticeHelper AlertShow:@"修改成功！" view:self.view];
-                                         [self.navigationController popViewControllerAnimated:YES];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"操作成功，返回登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         alertView.delegate = self;
+                                         [alertView show];
+                                         //                                         [NoticeHelper AlertShow:@"修改成功！" view:self.view];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -196,6 +217,11 @@
                                      [NoticeHelper AlertShow:@"注册失败!" view:self.view];
                                  }];
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

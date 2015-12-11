@@ -30,19 +30,24 @@
 {
     _itemInfo = itemInfo;
     
-    NSString *str = [itemInfo.servicetime stringByReplacingOccurrencesOfString:@"#" withString:@"\n"];
+    self.titleLab.font = [UIFont systemFontOfSize:16];
     
     UILabel *lab = [[UILabel alloc] init];
     
     lab.numberOfLines = 0;
     
-    lab.font = [UIFont systemFontOfSize:12];
+    lab.font = [UIFont systemFontOfSize:13];
     
-    lab.text = str;
+    lab.textColor = [UIColor darkGrayColor];
+
+    lab.text = itemInfo.icontent;
     
-    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
+    CGRect tmpRect = [lab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:[NSDictionary dictionaryWithObjectsAndKeys:lab.font,NSFontAttributeName, nil]
+                                            context:nil];
     
-    lab.frame = CGRectMake(10, 70, MTScreenW, size.height);
+    lab.frame = CGRectMake(10, 50, tmpRect.size.width, tmpRect.size.height);
     
     [self addSubview:lab];
     

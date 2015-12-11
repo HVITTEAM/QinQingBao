@@ -8,64 +8,63 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RemarkDetailCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gM1-px-gqB" userLabel="bgview">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iw0-4d-ogz" userLabel="bottomline">
+                                <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                                <color key="backgroundColor" white="0.88060254199999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="4r9-YZ-3s8"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消费提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76o-ip-dh1">
-                                <rect key="frame" x="10" y="5" width="62" height="21"/>
+                                <rect key="frame" x="10" y="5" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fPs-SN-Czi"/>
-                                    <constraint firstAttribute="width" constant="62" id="zCv-Bi-LRO"/>
+                                    <constraint firstAttribute="width" constant="100" id="zCv-Bi-LRO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skS-Xy-VLr" userLabel="topLine">
-                                <rect key="frame" x="10" y="28" width="310" height="1"/>
+                                <rect key="frame" x="10" y="28" width="310" height="0.5"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="0EW-Z2-PYS"/>
+                                    <constraint firstAttribute="height" constant="0.5" id="Kxm-ix-2KZ"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="消费提醒业务模块" translatesAutoresizingMaskIntoConstraints="NO" id="9c5-u2-W4x">
-                                <rect key="frame" x="8" y="30" width="302" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="M3N-jt-ioY"/>
-                                </constraints>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="76o-ip-dh1" firstAttribute="top" secondItem="gM1-px-gqB" secondAttribute="top" constant="5" id="3Ph-Mn-84q"/>
                             <constraint firstAttribute="trailing" secondItem="skS-Xy-VLr" secondAttribute="trailing" id="5Rb-Dq-W4m"/>
-                            <constraint firstItem="9c5-u2-W4x" firstAttribute="top" secondItem="gM1-px-gqB" secondAttribute="top" constant="30" id="EC4-0L-URG"/>
-                            <constraint firstAttribute="trailing" secondItem="9c5-u2-W4x" secondAttribute="trailing" constant="10" id="MUd-Cq-l51"/>
+                            <constraint firstItem="Iw0-4d-ogz" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" id="B0h-HA-3bt"/>
+                            <constraint firstAttribute="bottom" secondItem="Iw0-4d-ogz" secondAttribute="bottom" id="FK9-Dx-h2t"/>
                             <constraint firstItem="76o-ip-dh1" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="10" id="Nj7-sN-asf"/>
                             <constraint firstItem="skS-Xy-VLr" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="10" id="Phb-yG-XkB"/>
+                            <constraint firstAttribute="trailing" secondItem="Iw0-4d-ogz" secondAttribute="trailing" id="d2Q-DH-DN3"/>
                             <constraint firstItem="skS-Xy-VLr" firstAttribute="top" secondItem="76o-ip-dh1" secondAttribute="bottom" constant="2" id="mng-xf-zAR"/>
-                            <constraint firstItem="9c5-u2-W4x" firstAttribute="leading" secondItem="gM1-px-gqB" secondAttribute="leading" constant="8" id="uJg-AN-hlY"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="gM1-px-gqB" secondAttribute="trailing" id="7Ge-UH-7o8"/>
-                    <constraint firstAttribute="bottom" secondItem="gM1-px-gqB" secondAttribute="bottom" constant="-18.5" id="FJ2-iI-kCE"/>
+                    <constraint firstAttribute="bottom" secondItem="gM1-px-gqB" secondAttribute="bottom" id="FJ2-iI-kCE"/>
                     <constraint firstItem="gM1-px-gqB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FNE-Gf-PbB"/>
                     <constraint firstItem="gM1-px-gqB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="je1-TQ-vCT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="remarkLab" destination="9c5-u2-W4x" id="WZa-wi-4Ol"/>
+                <outlet property="titleLab" destination="76o-ip-dh1" id="2q3-qD-Tqj"/>
+                <outlet property="topLine" destination="skS-Xy-VLr" id="rLK-9d-iAZ"/>
             </connections>
         </tableViewCell>
     </objects>

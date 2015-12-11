@@ -17,11 +17,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    //如果不设置成0  会依然占用位置
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
-}
+    }
 
 - (void)viewDidLoad
 {

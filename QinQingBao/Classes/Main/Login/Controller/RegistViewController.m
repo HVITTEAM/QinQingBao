@@ -7,6 +7,8 @@
 //
 
 #import "RegistViewController.h"
+#import "AgreementViewController.h"
+
 
 @interface RegistViewController ()<UITextFieldDelegate>
 {
@@ -129,6 +131,8 @@
 - (IBAction)agreement:(id)sender
 {
     self.agreementBtn.selected = !self.agreementBtn.selected;
+    AgreementViewController *vc = [[AgreementViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /**
@@ -165,12 +169,12 @@
                                          {
                                              [NoticeHelper AlertShow:@"注册成功！" view:self.view];
                                              
-                                             //                                             [self.navigationController popToRootViewControllerAnimated:YES];
-                                             NSDictionary *di = [dict objectForKey:@"datas"];
-                                             UserModel *vo = [UserModel objectWithKeyValues:di];
-                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
-                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             [MTControllerChooseTool setRootViewController];
+                                             [self.navigationController popToRootViewControllerAnimated:YES];
+                                             //                                             NSDictionary *di = [dict objectForKey:@"datas"];
+                                             //                                             UserModel *vo = [UserModel objectWithKeyValues:di];
+                                             //                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
+                                             //                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
+                                             //                                             [MTControllerChooseTool setRootViewController];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

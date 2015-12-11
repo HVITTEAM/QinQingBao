@@ -279,7 +279,7 @@
     order.partner = partner;
     order.seller = seller;
     order.tradeNO = [NSString stringWithFormat:@"%@%u",currentDateStr,arc4random()%1000 + 9000]; //订单ID（由商家自行制定）
-    order.productName = @"商品标题"; //商品标题
+    order.productName = self.serviceDetailItem.icontent; //商品标题
     order.productDescription = @"商品描述"; //商品描述
     order.amount = self.orderItem.wprice; //商品价格
     order.notifyURL =  @"http://www.hvit.com.cn"; //回调URL

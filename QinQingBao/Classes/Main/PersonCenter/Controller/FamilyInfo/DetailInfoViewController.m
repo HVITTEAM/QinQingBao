@@ -71,7 +71,7 @@
     item2.subtitle = self.itemInfo.oldphone;
     
     HMCommonItem *item3 = [HMCommonItem itemWithTitle:@"常住地址" icon:@""];
-    item3.subtitle = self.itemInfo.totalname;
+    item3.subtitle = [NSString stringWithFormat:@"%@%@",self.itemInfo.totalname,self.itemInfo.member_areainfo];
     
     group.items = @[item0,item1,item2,item3];
 }

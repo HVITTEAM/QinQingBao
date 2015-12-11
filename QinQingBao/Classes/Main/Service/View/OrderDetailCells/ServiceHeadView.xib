@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ServiceHeadView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hM1-hh-uB4" userLabel="bgview">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-a9-rU7" userLabel="icon">
                             <rect key="frame" x="10" y="11" width="70" height="70"/>
@@ -66,7 +66,7 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="hM1-hh-uB4" secondAttribute="bottom" constant="20" id="SQY-Kl-vL7"/>
+                <constraint firstAttribute="bottom" secondItem="hM1-hh-uB4" secondAttribute="bottom" id="SQY-Kl-vL7"/>
                 <constraint firstItem="hM1-hh-uB4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="feJ-SY-zeH"/>
                 <constraint firstItem="hM1-hh-uB4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="o0i-FI-myj"/>
                 <constraint firstAttribute="trailing" secondItem="hM1-hh-uB4" secondAttribute="trailing" id="un6-9E-cMx"/>
@@ -77,6 +77,7 @@
                 <outlet property="bgview" destination="hM1-hh-uB4" id="7MZ-Ih-kPI"/>
                 <outlet property="content" destination="1mf-s7-FcC" id="Yek-l3-26B"/>
                 <outlet property="icon" destination="Rhr-a9-rU7" id="8VJ-ef-isX"/>
+                <outlet property="sum" destination="A5t-x0-YKp" id="Ud6-qd-5NH"/>
                 <outlet property="title" destination="ZWN-7f-L6B" id="Xgm-GG-Jyg"/>
             </connections>
             <point key="canvasLocation" x="251" y="30"/>

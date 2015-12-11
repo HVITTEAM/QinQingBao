@@ -34,6 +34,7 @@
     _item = item;
     
     self.locationLab.text = item.address;
+    self.locationLab.textColor = MTNavgationBackgroundColor;
     NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.gps_time];
     self.timaLab.text = time;
 }

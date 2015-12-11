@@ -469,10 +469,17 @@ numberOfRowsInComponent:(NSInteger)component
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-                                         PayViewController *payView = [[PayViewController alloc] init];
-                                         payView.serviceDetailItem = self.serviceDetailItem;
-                                         payView.orderItem = item;
-                                         [self.navigationController pushViewController:payView animated:YES];
+//                                         PayViewController *payView = [[PayViewController alloc] init];
+//                                         payView.serviceDetailItem = self.serviceDetailItem;
+//                                         payView.orderItem = item;
+//                                         [self.navigationController pushViewController:payView animated:YES];
+                                         
+                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下单结果"
+                                                                                         message:@"下单成功"
+                                                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                                         [alert show];
+                                         [self.navigationController popToRootViewControllerAnimated:YES];
+
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

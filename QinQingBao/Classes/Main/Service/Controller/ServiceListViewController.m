@@ -28,7 +28,7 @@
 //@property (nonatomic, strong) NSArray *cates;
 //@property (nonatomic, strong) NSArray *movices;
 //@property (nonatomic, strong) NSArray *hostels;
-@property (nonatomic, strong) NSArray *areas;
+//@property (nonatomic, strong) NSArray *areas;
 @property (nonatomic, strong) NSArray *sorts;
 @end
 
@@ -39,9 +39,6 @@
 {
     [super viewWillAppear:animated];
     
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    //如果不设置成0  会依然占用位置
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 
 - (void)viewDidLoad
@@ -71,7 +68,7 @@
     //    self.cates = @[@"分类1",@"分类2",@"分类3",@"分类4",@"分类5",@"分类6"];
     //    self.movices = @[@"服装洗涤1",@"服装洗涤2",@"服装洗涤3"];
     //    self.hostels = @[@"搬家公司1",@"搬家公司2",@"搬家公司3",@"搬家公司4",@"搬家公司5"];
-    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
+//    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     // 添加下拉菜单
@@ -255,15 +252,15 @@
 
 - (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)menu:(DOPDropDownMenu *)menu numberOfRowsInColumn:(NSInteger)column
 {
     if (column == 0) {
         return self.classifys.count;
-    }else if (column == 1){
-        return self.areas.count;
+//    }else if (column == 1){
+//        return self.areas.count;
     }else {
         return self.sorts.count;
     }
@@ -274,8 +271,8 @@
     if (indexPath.column == 0) {
         ServiceTypeModel *model = (ServiceTypeModel *)self.classifys[indexPath.row];
         return model.tname;
-    } else if (indexPath.column == 1){
-        return self.areas[indexPath.row];
+//    } else if (indexPath.column == 1){
+//        return self.areas[indexPath.row];
     } else {
         return self.sorts[indexPath.row];
     }

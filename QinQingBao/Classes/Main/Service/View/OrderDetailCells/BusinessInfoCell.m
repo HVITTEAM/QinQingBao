@@ -36,9 +36,16 @@
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
 {
     _itemInfo = itemInfo;
+    self.titleLab.font = [UIFont systemFontOfSize:16];
+    self.distanceLab.textColor = [UIColor darkGrayColor];
+    self.nameLab.textColor = [UIColor darkGrayColor];
+    self.addressLab.textColor = [UIColor darkGrayColor];
+    self.telLab.textColor = [UIColor darkGrayColor];
+
     self.distanceLab.text = [NoticeHelper kilometre2meter:[itemInfo.distance floatValue]];
+    self.distanceLab.textColor = MTNavgationBackgroundColor;
     self.nameLab.text = itemInfo.orgname;
-    self.addressLab.text = itemInfo.orgaddress;
+    self.addressLab.text = [NSString stringWithFormat:@"%@%@",itemInfo.totalname,itemInfo.orgaddress];
     self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgphone];
 }
 @end

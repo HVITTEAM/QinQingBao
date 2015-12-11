@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *distanceLab;
 - (IBAction)callClickHandler:(id)sender;
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
 
 +(BusinessInfoCell *) businessCell;
 @end

@@ -202,6 +202,7 @@
         [self.contentView addSubview:self.rightText];
         HMCommonTextfieldItem *hitem = (HMCommonTextfieldItem *)item;
         self.rightText.placeholder = hitem.placeholder;
+        _item.rightText = self.rightText;
         self.rightText.x = 110;
         self.rightText.y = (self.height - 21)/ 2;
         self.rightText.width = MTScreenW - 120;

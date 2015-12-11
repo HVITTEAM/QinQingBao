@@ -403,7 +403,6 @@ extern long g_lRealTotleFlux;
         weakrealView.y = isfull ? 0 : [weakSelf navBarHeight];
         weakrealView.height = isfull ? weakSelf.view.height : (float)nHeight;
         weakrealView.width= weakSelf.view.width;
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = isfull;
         
         if (IS_IOS7_OR_LATER)
         {

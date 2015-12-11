@@ -16,11 +16,18 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+
 - (void)awakeFromNib
 {
     self.contentView.backgroundColor = HMGlobalBg;
-    self.remarkLab.enabled = NO;
-    self.remarkLab.userInteractionEnabled = NO;
+    self.topLine.backgroundColor = HMColor(223, 223, 223);
+    self.topLine.height = 0.50f;
+    
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -32,15 +39,28 @@
 {
     _itemInfo = itemInfo;
     
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    paragraphStyle.lineSpacing = 5;// 字体的行间距
-//    NSDictionary *attributes = @{
-//                                 NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:12],
-//                                 NSParagraphStyleAttributeName:paragraphStyle
-//                                 };
-//    self.remarkLab.attributedText = [[NSAttributedString alloc] initWithString:itemInfo.remakr attributes:attributes];
+    self.titleLab.font = [UIFont systemFontOfSize:16];
     
-    self.remarkLab.text = itemInfo.remakr;
+    UILabel *remarkLab = [[UILabel alloc] init];
+    
+    remarkLab.numberOfLines = 0;
+    
+    remarkLab.font = [UIFont systemFontOfSize:13];
+    
+    remarkLab.text = itemInfo.remakr;
+    
+    remarkLab.textColor = [UIColor darkGrayColor];
+
+    CGRect tmpRect = [remarkLab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                               attributes:[NSDictionary dictionaryWithObjectsAndKeys:remarkLab.font,NSFontAttributeName, nil]
+                                                  context:nil];
+
+    remarkLab.frame = CGRectMake(10, 35, tmpRect.size.width, tmpRect.size.height);
+    
+    [self addSubview:remarkLab];
+    
+    self.height = CGRectGetMaxY(remarkLab.frame) + 10;
 }
 
 @end

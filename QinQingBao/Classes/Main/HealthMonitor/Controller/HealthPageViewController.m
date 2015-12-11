@@ -37,6 +37,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
 }
 
 -(void)initTableViewSkin
@@ -56,24 +58,8 @@
 {
     // 下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 结束刷新
-            [self headerRereshing];
-        });
+        [self getDataProvider];
     }];
-}
-
-#pragma mark 开始进入刷新状态
-- (void)headerRereshing
-{
-    [self getDataProvider];
-}
-
-- (void)footerRereshing
-{
-    [self getDataProvider];
-    
 }
 
 -(void)getDataProvider
@@ -82,7 +68,7 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"count" : @"5",
+                                                                   @"count" : @"10",
                                                                    @"oldid" : self.familyVO.oid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
@@ -165,7 +151,6 @@
             }
             
             cell = bloodPressureCell;
-            
         }
             break;
         case 2:
@@ -224,7 +209,7 @@
     {
         case 0:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.oldname];
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeSugar;
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
             
@@ -232,7 +217,7 @@
             break;
         case 1:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.oldname];
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeBlood;
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
@@ -245,7 +230,7 @@
             break;
         case 3:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.oldname];
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeHeart;
         }
             break;
@@ -259,7 +244,7 @@
             break;
     }
     bloodPressureVC.dataProvider = dataProvider;
-    [self.navigationController pushViewController:bloodPressureVC animated:YES];
+    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:bloodPressureVC animated:YES];
 }
 
 /**
@@ -280,7 +265,7 @@
 -(void)showVideo
 {
     VideoListViewController *videoList = [[VideoListViewController alloc] init];
-    [self.navigationController pushViewController:videoList animated:YES];
+    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:videoList animated:YES];
 }
 
 

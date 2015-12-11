@@ -20,5 +20,11 @@
 
 @property (nonatomic, assign) UINavigationController *nav;
 
+/**
+ *  没有数据可以刷新的事件
+ */
+@property (nonatomic, copy) void (^noneResultHandler)();
+
+
 @end
 

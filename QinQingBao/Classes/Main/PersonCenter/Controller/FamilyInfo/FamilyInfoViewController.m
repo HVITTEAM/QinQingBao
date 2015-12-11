@@ -176,7 +176,8 @@
                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解除绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                              [alertView show];
                                              [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-                                             self.backHandlerClick();
+                                             if (self.backHandlerClick)
+                                                 self.backHandlerClick();
                                              [self.navigationController popViewControllerAnimated:YES];
                                          }
                                          [HUD removeFromSuperview];

@@ -96,6 +96,8 @@
 @property (nonatomic, retain) NSString *pay_staus;
 @property (nonatomic, retain) NSString *pay_type;
 @property (nonatomic, retain) NSString *totalname;
+@property (nonatomic, retain) NSString *tname;
+
 
 
 

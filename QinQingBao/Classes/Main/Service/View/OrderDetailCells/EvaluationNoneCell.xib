@@ -17,6 +17,13 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6c-tn-k41">
                         <rect key="frame" x="0.0" y="8" width="320" height="46.5"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSa-Gh-lwh" userLabel="bottomline">
+                                <rect key="frame" x="0.0" y="46" width="320" height="0.5"/>
+                                <color key="backgroundColor" white="0.88060254199999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="caP-C3-JXL"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ulb-F3-E0a" customClass="Star">
                                 <rect key="frame" x="10" y="8" width="100" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -40,8 +47,11 @@
                         <constraints>
                             <constraint firstItem="f5W-P2-yHQ" firstAttribute="leading" secondItem="ulb-F3-E0a" secondAttribute="trailing" constant="10" id="512-SB-dNG"/>
                             <constraint firstItem="ulb-F3-E0a" firstAttribute="leading" secondItem="e6c-tn-k41" secondAttribute="leading" constant="10" id="6ZX-ox-pjg"/>
+                            <constraint firstItem="BSa-Gh-lwh" firstAttribute="leading" secondItem="e6c-tn-k41" secondAttribute="leading" id="D3H-fk-GCJ"/>
                             <constraint firstItem="f5W-P2-yHQ" firstAttribute="top" secondItem="e6c-tn-k41" secondAttribute="top" constant="11" id="JWD-HG-jTg"/>
                             <constraint firstItem="ulb-F3-E0a" firstAttribute="top" secondItem="e6c-tn-k41" secondAttribute="top" constant="8" id="d1z-Gf-2Qc"/>
+                            <constraint firstAttribute="trailing" secondItem="BSa-Gh-lwh" secondAttribute="trailing" id="f70-0m-LtG"/>
+                            <constraint firstAttribute="bottom" secondItem="BSa-Gh-lwh" secondAttribute="bottom" id="y1U-Ir-rme"/>
                         </constraints>
                     </view>
                 </subviews>

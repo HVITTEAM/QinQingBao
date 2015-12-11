@@ -89,12 +89,15 @@
     //将2个uivc以数组的方式制定给bar对象
     tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
     tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    
+    [SharedAppUtil defaultCommonUtil].mainNav = nav;
+    
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
-    window.rootViewController = tabBarController;
-    
-    [SharedAppUtil defaultCommonUtil].tabBarController = tabBarController;
+    window.rootViewController = nav;
 }
 
 + (void)setLoginViewController

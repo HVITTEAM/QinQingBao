@@ -95,7 +95,7 @@
                                                                   @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                   @"client" : @"ios",
                                                                   @"role" : @"0",
-                                                                  @"imei":[SharedAppUtil defaultCommonUtil].deviceToken}
+                                                                  @"imei":[SharedAppUtil defaultCommonUtil].deviceToken == nil ? @"" : [SharedAppUtil defaultCommonUtil].deviceToken}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];

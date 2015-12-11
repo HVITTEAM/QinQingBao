@@ -44,10 +44,6 @@
     self.vc5 = [[QCListViewController alloc] init];
     self.vc5.title = @"取消/售后";
     
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    //    //如果不设置成0  会依然占用位置
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
-    
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.width, MTScreenH + 49)];
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4,self.vc5, nil];
@@ -78,6 +74,10 @@
         vc = self.vc5;
     }
     vc.nav = self.navigationController;
+    vc.noneResultHandler = ^(void)
+    {
+        [self showNonedataTooltip];
+    };
     [vc viewDidCurrentView];
 }
 
@@ -88,6 +88,53 @@
 {
     self.title =  self.viewOwer.length == 0 ?  @"我的订单" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+/**
+ *  提示用户
+ *
+ */
+- (void)showNonedataTooltip
+{
+    // 1.创建一个UILabel
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"没有新的订单数据啦";
+    // 3.设置背景
+    label.backgroundColor = [UIColor orangeColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor whiteColor];
+    
+    // 4.设置frame
+    label.width = self.view.width;
+    label.height = 35;
+    label.font = [UIFont systemFontOfSize:13];
+    label.x = 0;
+    label.y = MTScreenH;
+    
+    // 5.添加到导航控制器的view
+//    [self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
+    
+    [self.view addSubview:label];
+    
+    // 6.动画
+    CGFloat duration = 0.75;
+    [UIView animateWithDuration:duration animations:^{
+        // 往下移动一个label的高度
+        label.transform = CGAffineTransformMakeTranslation(0, -label.height);
+    } completion:^(BOOL finished) { // 向下移动完毕
+        
+        // 延迟delay秒后，再执行动画
+        CGFloat delay = 1.0;
+        
+        [UIView animateWithDuration:duration delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            // 恢复到原来的位置
+            label.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            
+            // 删除控件
+            [label removeFromSuperview];
+        }];
+    }];
 }
 
 #pragma mark - Table view data source

@@ -91,7 +91,8 @@
                   @"client" : @"ios",
                   @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"page" : @"10"};
+                  @"page" : @"10",
+                  @"get_type" : @"0"};
     }
     else if ([self.title isEqualToString:@"待付款"])
     {
@@ -100,7 +101,8 @@
                   @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"pay_staus" : @"0",
-                  @"page" : @"10"};
+                  @"page" : @"10",
+                  @"get_type" : @"0"};
     }
     else if ([self.title isEqualToString:@"受理中"])
     {
@@ -108,17 +110,19 @@
                   @"client" : @"ios",
                   @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"1",
-                  @"page" : @"10"};
+                  @"status" : @"2,5,8,12,15,22,25",
+                  @"page" : @"10",
+                  @"get_type" : @"1"};
     }
-    else if ([self.title isEqualToString:@"受评价"])
+    else if ([self.title isEqualToString:@"待评价"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
                   @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"5",
-                  @"page" : @"10"};
+                  @"status" : @"32",
+                  @"page" : @"10",
+                  @"get_type" : @"1"};
     }
     else if ([self.title isEqualToString:@"取消/售后"])
     {
@@ -126,8 +130,9 @@
                   @"client" : @"ios",
                   @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"9",
-                  @"page" : @"10"};
+                  @"status" : @"[50,59]",
+                  @"page" : @"10",
+                  @"get_type" : @"2"};
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -139,9 +144,10 @@
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {
-                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
+//                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
                                          NSLog(@"没有更多的数据了");
                                          currentPageIdx --;
+                                         self.noneResultHandler();
                                      }
                                      [dataProvider addObjectsFromArray:[result.datas copy]];
                                      [self.tableView reloadData];
@@ -153,7 +159,6 @@
                                      [HUD removeFromSuperview];
                                  }];
 }
-
 
 #pragma mark - 表格视图数据源代理方法
 

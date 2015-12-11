@@ -109,7 +109,6 @@ static const CGFloat kLandscapeCancelAndChooseButtonsVerticalMargin = 12.0f;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
 //    [[UIApplication sharedApplication] setStatusBarHidden:self.originalStatusBarHidden];
 //    [self.navigationController setNavigationBarHidden:self.originalNavigationControllerNavigationBarHidden animated:animated];
 //    self.navigationController.view.backgroundColor = self.originalNavigationControllerViewBackgroundColor;
@@ -118,7 +117,6 @@ static const CGFloat kLandscapeCancelAndChooseButtonsVerticalMargin = 12.0f;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
 }
 
 - (void)viewWillLayoutSubviews

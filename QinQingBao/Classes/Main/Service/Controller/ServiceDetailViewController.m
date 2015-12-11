@@ -11,7 +11,7 @@
 #import "EvaluationTotal.h"
 #import "EvaluationNoneCell.h"
 #import "RemarkDetailCell.h"
-
+#import "ServiceTimeCell.h"
 
 @interface ServiceDetailViewController ()
 {
@@ -56,6 +56,8 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
+
 }
 
 
@@ -119,19 +121,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
+    CGFloat height = 50;
     if (indexPath.row == 0)
         height =  evaArr.count != 0 ? 180 : 50;
     else if (indexPath.row == 1)
         height = 160;
-    else if (indexPath.row == 2)
-        height = 80;
-    else if (indexPath.row == 3)
+    else
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
@@ -221,15 +221,25 @@
             if(serviceDetailcell == nil)
                 serviceDetailcell = [ServiceDetailCell serviceCell];
             
-//            serviceDetailcell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background.png"]];
-
             [serviceDetailcell setItemInfo:itemInfo];
-
+            
             cell = serviceDetailcell;
-
+            
         }
             break;
         case 4:
+        {
+            ServiceTimeCell *serviceTimeCell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceTimeCell"];
+            
+            if(serviceTimeCell == nil)
+                serviceTimeCell = [ServiceTimeCell timeCell];
+            
+            [serviceTimeCell setItemInfo:itemInfo];
+            
+            cell = serviceTimeCell;
+        }
+            break;
+        case 5:
         {
             UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
             
@@ -237,7 +247,6 @@
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
             
             commoncell.textLabel.text = @"服务详情";
-
             cell = commoncell;
             
         }
@@ -245,8 +254,8 @@
         default:
             break;
     }
-
-
+    
+    //            cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_background"]];
     return cell;
 }
 

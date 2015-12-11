@@ -23,6 +23,13 @@
     [self initTableviewskin];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
+}
+
 /**
  *  初始化导航栏
  */

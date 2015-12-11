@@ -76,5 +76,7 @@
 @property (nonatomic, copy) NSString *distance;
 /**消费提醒**/
 @property (nonatomic, copy) NSString *remakr;
+/**地址**/
+@property (nonatomic, copy) NSString *totalname;
 
 @end

@@ -32,7 +32,7 @@
     NSString *str = [NoticeHelper intervalSinceNowByyear:@"2008-01-01"];
     self.nameLab.text = item.oldname;
     self.phoneLab.text = item.oldphone;
-    self.addressLab.text = item.totalname;
+    self.addressLab.text = [NSString stringWithFormat:@"%@%@",item.totalname,item.member_areainfo];
     self.sexLab.text = [item.member_sex isEqualToString:@"1"] ? @"男" : @"女";
     self.ageLab.text = str;
 }

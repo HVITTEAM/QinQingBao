@@ -25,10 +25,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    //如果不设置成0  会依然占用位置
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 
 - (void)viewDidLoad
@@ -121,7 +117,8 @@
                                              familyVO.oldphone = infoVO.member_mobile;
                                              familyVO.member_sex = infoVO.member_sex;
                                              familyVO.member_birthday = infoVO.member_birthday;
-                                             familyVO.totalname = infoVO.member_areainfo;
+                                             familyVO.totalname = infoVO.totalname;
+                                             familyVO.member_areainfo = infoVO.member_areainfo;
                                              
                                              [self setupGroups];
                                          }

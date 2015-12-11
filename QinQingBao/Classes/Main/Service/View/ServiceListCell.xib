@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -69,8 +69,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="TQStarRatingView">
-                        <rect key="frame" x="70" y="70" width="100" height="20"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="Star">
+                        <rect key="frame" x="70" y="65" width="100" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="Mye-rV-z93"/>
@@ -97,7 +97,7 @@
                     <constraint firstItem="ySb-tj-24U" firstAttribute="leading" secondItem="FE2-1T-Otm" secondAttribute="trailing" constant="1" id="Nr8-Fa-Ah6"/>
                     <constraint firstAttribute="trailing" secondItem="k1P-We-Djh" secondAttribute="trailing" constant="10" id="Phe-rP-b1W"/>
                     <constraint firstItem="fzq-3C-RaB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="RpY-Zc-zgj"/>
-                    <constraint firstItem="FE2-1T-Otm" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" constant="19" id="WeO-5A-vE7"/>
+                    <constraint firstItem="FE2-1T-Otm" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" constant="14" id="WeO-5A-vE7"/>
                     <constraint firstItem="FE2-1T-Otm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="Xci-oQ-BWA"/>
                     <constraint firstAttribute="trailing" secondItem="lug-CT-MEQ" secondAttribute="trailing" constant="10" id="Xzh-Vm-yj0"/>
                     <constraint firstItem="k1P-We-Djh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="aTD-4s-7BM"/>

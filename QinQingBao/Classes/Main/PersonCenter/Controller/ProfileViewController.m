@@ -55,17 +55,13 @@
     
     self.navigationController.navigationBarHidden = YES;
 
-    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
-    {
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
-    }
+    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -193,9 +189,11 @@
     HMCommonArrowItem *myData;
     
     // 2.设置组的所有行数据
-    myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_accout.png"];
-    myData.destVcClass = [PersonalDataViewController class];
+    myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
+//    myData.destVcClass = [PersonalDataViewController class];
     myData.operation = ^{
+        PersonalDataViewController *destVC = [[PersonalDataViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
     };
     group.items = @[myData];
 }
@@ -210,8 +208,10 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的账号" icon:@"pc_accout.png"];
-    newFriend.destVcClass = [AccountViewController class];
+//    newFriend.destVcClass = [AccountViewController class];
     newFriend.operation = ^{
+        AccountViewController *destVC = [[AccountViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
     };
     group.items = @[newFriend];
 }
@@ -226,8 +226,11 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
-    newFriend.destVcClass = [OrderTableViewController class];
+//    newFriend.destVcClass = [OrderTableViewController class];
     newFriend.operation = ^{
+        OrderTableViewController *destVC = [[OrderTableViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+
     };
     
     group.items = @[newFriend];
@@ -241,7 +244,12 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *collect = [HMCommonArrowItem itemWithTitle:@"关于APP" icon:@"app.png"];
-    collect.destVcClass = [AboutViewController class];
+//    collect.destVcClass = [AboutViewController class];
+    collect.operation = ^{
+        AboutViewController *destVC = [[AboutViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+        
+    };
     group.items = @[collect];
 }
 
@@ -253,7 +261,11 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的家属" icon:@"pc_family.png"];
-    offline.destVcClass = [FamilyViewController class];
+//    offline.destVcClass = [FamilyViewController class];
+    offline.operation = ^{
+        FamilyViewController *destVC = [[FamilyViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+    };
     group.items = @[offline];
 }
 
@@ -265,7 +277,11 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
-    album.destVcClass = [SettingViewController class];
+//    album.destVcClass = [SettingViewController class];
+    album.operation = ^{
+        SettingViewController *destVC = [[SettingViewController alloc] init];
+        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+    };
     group.items = @[album];
 }
 

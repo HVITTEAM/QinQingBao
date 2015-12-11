@@ -51,12 +51,6 @@
     
     if([SharedAppUtil defaultCommonUtil].needRefleshMonitor == YES)
         [self getDataProvider];
-    
-    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
-    {
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
-    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -96,7 +90,7 @@
     if (dataProvider.count == 0)
         return;
     FamilyModel *item = dataProvider[0];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.oldname];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.relation];
 }
 
 /**
@@ -104,6 +98,13 @@
  */
 -(void)getDataProvider
 {
+    if ([SharedAppUtil defaultCommonUtil].userVO.old_id == nil)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"暂无数据" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertView show];;
+        return;
+    }
+    
     [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
     dataProvider = [[NSMutableArray alloc] init];
     [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
@@ -119,21 +120,39 @@
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
                                          //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          //                                         [alertView show];
-                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
+//                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
                                      }
                                      else
                                      {
                                          FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
                                          dataProvider = result.datas;
-                                         [self setupScrollView];
-                                         [self setupPageControl];
                                      }
+                                     [self addSelfToFamily];
                                      [SVProgressHUD dismiss];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [SVProgressHUD dismiss];
                                      [self.view endEditing:YES];
+                                     [self addSelfToFamily];
                                  }];
+}
+
+/**
+ *  将自己添加到自己的家属列表里
+ */
+-(void)addSelfToFamily
+{
+    FamilyModel *fvo = [[FamilyModel alloc] init];
+    fvo.oid = [SharedAppUtil defaultCommonUtil].userVO.old_id;
+//    fvo.oldname = @"自己";
+    fvo.relation = @"自己";
+
+    if (!dataProvider)
+        dataProvider = [[NSMutableArray alloc] init];
+    [dataProvider addObject:fvo];
+    
+    [self setupScrollView];
+    [self setupPageControl];
 }
 
 #pragma mark - 滑动tab视图代理方法
@@ -180,7 +199,7 @@
     // 设置页码
     pageControl.currentPage = intPage;
     FamilyModel *item = dataProvider[intPage];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.oldname];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.relation];
 }
 
 -(void)addHandler:(id)sender

@@ -15,43 +15,56 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AV-fG-QUt" userLabel="bgview">
-                        <rect key="frame" x="0.0" y="30" width="320" height="90"/>
+                        <rect key="frame" x="0.0" y="10" width="320" height="110"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXZ-4I-N6p" userLabel="bottomline">
+                                <rect key="frame" x="0.0" y="110" width="320" height="0.5"/>
+                                <color key="backgroundColor" white="0.88060254199999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="0.5" id="7Na-fr-nDk"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务详情" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITW-H7-ZQ2">
-                                <rect key="frame" x="10" y="5" width="62" height="21"/>
+                                <rect key="frame" x="10" y="5" width="100" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="GdZ-Rt-vAr"/>
-                                    <constraint firstAttribute="width" constant="62" id="WPE-jC-z9g"/>
+                                    <constraint firstAttribute="width" constant="100" id="WPE-jC-z9g" userLabel="width = 80"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ear-Fs-IeD" userLabel="line">
-                                <rect key="frame" x="10" y="30" width="310" height="1"/>
+                                <rect key="frame" x="10" y="30" width="310" height="0.5"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="6c0-6S-I4Q"/>
+                                    <constraint firstAttribute="height" constant="0.5" id="luX-uP-gUn"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ear-Fs-IeD" secondAttribute="trailing" id="9fz-CA-Ub0"/>
+                            <constraint firstAttribute="trailing" secondItem="yXZ-4I-N6p" secondAttribute="trailing" id="PVW-aR-Ezy"/>
+                            <constraint firstItem="yXZ-4I-N6p" firstAttribute="leading" secondItem="8AV-fG-QUt" secondAttribute="leading" id="aCS-g0-ibm"/>
                             <constraint firstItem="ITW-H7-ZQ2" firstAttribute="top" secondItem="8AV-fG-QUt" secondAttribute="top" constant="5" id="e1b-2G-yv5"/>
                             <constraint firstItem="ear-Fs-IeD" firstAttribute="top" secondItem="ITW-H7-ZQ2" secondAttribute="bottom" constant="4" id="h8L-vh-h19"/>
                             <constraint firstItem="ear-Fs-IeD" firstAttribute="leading" secondItem="8AV-fG-QUt" secondAttribute="leading" constant="10" id="ktG-X9-Tf9"/>
                             <constraint firstItem="ITW-H7-ZQ2" firstAttribute="leading" secondItem="8AV-fG-QUt" secondAttribute="leading" constant="10" id="mg2-jC-idh"/>
+                            <constraint firstAttribute="bottom" secondItem="yXZ-4I-N6p" secondAttribute="bottom" constant="-0.5" id="nGu-pY-pMb"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8AV-fG-QUt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="8If-95-sQ0"/>
+                    <constraint firstItem="8AV-fG-QUt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="8If-95-sQ0"/>
                     <constraint firstAttribute="trailing" secondItem="8AV-fG-QUt" secondAttribute="trailing" id="DYv-2F-zQF"/>
                     <constraint firstAttribute="bottom" secondItem="8AV-fG-QUt" secondAttribute="bottom" constant="-0.5" id="SSQ-xz-Nk8"/>
                     <constraint firstItem="8AV-fG-QUt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="dRi-gl-w9F"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLab" destination="ITW-H7-ZQ2" id="Xn2-2Z-3nZ"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

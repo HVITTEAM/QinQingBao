@@ -37,6 +37,7 @@
     
     if (item.bloodglucose)
     {
+        NSInteger strlength = item.bloodglucose.length;
         NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodglucose];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
@@ -44,15 +45,15 @@
         // 设置富文本样式
         [attributedString addAttribute:NSForegroundColorAttributeName
                                  value:[UIColor redColor]
-                                 range:NSMakeRange(0, 3)];
+                                 range:NSMakeRange(0, strlength)];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:22.f]
-                                 range:NSMakeRange(0, 3)];
+                                 range:NSMakeRange(0, strlength)];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:12.f]
-                                 range:NSMakeRange(3, 7)];
+                                 range:NSMakeRange(3, string.length - strlength)];
         
         self.heartDataLabel.attributedText = attributedString;
     }

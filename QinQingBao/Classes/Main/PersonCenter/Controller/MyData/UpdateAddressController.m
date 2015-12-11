@@ -8,12 +8,22 @@
 
 #import "UpdateAddressController.h"
 #import "HMCommonTextfieldItem.h"
+#import "DataCitiesViewController.h"
+#import "StreetViewController.h"
+#import "CityModel.h"
 
 @interface UpdateAddressController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
 {
-    HMCommonTextfieldItem *textItem0;
-    HMCommonTextfieldItem *textItem;
+    HMCommonArrowItem *textItem0;
+    HMCommonArrowItem *textItem;
+    HMCommonTextfieldItem *textItem1;
     
+    
+    CityModel *selectedCity;
+    NSString *selectedCityStr;
+    CityModel *selectedStreet;
+    NSString *selectedStreetStr;
+
     NSArray *provinces;
     NSArray *cities;
     NSArray *state;
@@ -33,8 +43,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self.groups removeAllObjects];
     
     [self initNavigation];
     
@@ -81,6 +89,8 @@
  */
 - (void)setupGroups
 {
+    [self.groups removeAllObjects];
+
     [self setupGroup];
 }
 
@@ -91,29 +101,68 @@
     [self.groups addObject:group0];
     
     // 1.设置组的所有行数据
-    textItem0= [HMCommonTextfieldItem itemWithTitle:@"地区" icon:nil];
-    textItem0.placeholder = @"请选择地区";
+    textItem0= [HMCommonArrowItem itemWithTitle:@"城市" icon:nil];
+    textItem0.subtitle = selectedCityStr;
+    NSLog(@"dadda%@",selectedCity.dvname);
     __weak __typeof(self)weakSelf = self;
-    
     textItem0.operation = ^{
-        [weakSelf show];
+        DataCitiesViewController *VC = [[DataCitiesViewController alloc] init];
+        VC.selectedHandler = ^(CityModel *VO, NSString *str)
+        {
+            selectedCityStr = str;
+            selectedCity = VO;
+            [weakSelf setupGroups];
+            [weakSelf.tableView reloadData];
+        };
+        [weakSelf.navigationController pushViewController:VC animated:YES];
     };
     group0.items = @[textItem0];
     
     // 2.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
-    
     // 2.设置组的所有行数据
-    textItem = [HMCommonTextfieldItem itemWithTitle:@"详细地址" icon:nil];
-    textItem.placeholder = [self.dict valueForKey:@"placeholder"];
+    textItem = [HMCommonArrowItem itemWithTitle:@"街道社区" icon:nil];
+    textItem.subtitle = selectedStreetStr;
+    __weak __typeof(CityModel)*cityVO = selectedCity;
+    textItem.operation = ^{
+        if (!cityVO)
+            return [NoticeHelper AlertShow:@"请选择城市" view:weakSelf.view];
+        StreetViewController *VC = [[StreetViewController alloc] init];
+        VC.dvcode_id = cityVO.dvcode;
+        VC.selectedHandler = ^(CityModel *VO, NSString *str)
+        {
+            selectedStreetStr = str;
+            selectedStreet = VO;
+            [weakSelf setupGroups];
+            [weakSelf.tableView reloadData];
+        };
+        [weakSelf.navigationController pushViewController:VC animated:YES];
+    };
+
     group.items = @[textItem];
     
+    // 3.创建组
+    HMCommonGroup *group1 = [HMCommonGroup group];
+    [self.groups addObject:group1];
+    // 3.设置组的所有行数据
+    textItem1 = [HMCommonTextfieldItem itemWithTitle:@"门牌号" icon:nil];
+    textItem1.placeholder = [self.dict valueForKey:@"placeholder"];
+    group1.items = @[textItem1];
 }
 
+/**
+ *  确认修改
+ */
 -(void)doneClickHandler
 {
-    NSString * str = [NSString stringWithFormat:@"%@%@",selectedAddress,textItem.rightText.text];
+    NSString * str = textItem1.rightText.text;
+
+    if (!selectedStreet || !str)
+        return [NoticeHelper AlertShow:@"请填写详细信息" view:self.view];
+    
+    [self.view endEditing:YES];
+    
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? str : self.inforVO.member_areainfo;
     NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
     
@@ -127,6 +176,8 @@
         [dict setObject:self.inforVO.member_birthday forKey:@"member_birthday"];
     if (addressStr)
         [dict setObject:addressStr forKey:@"member_areainfo"];
+    if (selectedStreet)
+        [dict setObject:selectedStreet.dvcode forKey:@"member_areaid"];
     if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
         [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     
@@ -169,7 +220,7 @@
     
     UIAlertController* alertVc=[UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n"
                                                                    message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-  
+    
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         
         textItem0.rightText.text = selectedAddress;
@@ -182,16 +233,16 @@
     [self presentViewController:alertVc animated:YES completion:nil];
     
     
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
-//                                                             delegate:self
-//                                                    cancelButtonTitle:@"取消"
-//                                               destructiveButtonTitle:nil
-//                                                    otherButtonTitles:@"确定",nil];
-//    actionSheet.userInteractionEnabled = YES;
-//    actionSheet.backgroundColor = [UIColor clearColor];
-  
-//    [actionSheet addSubview:areaPicker];
-//    [actionSheet showInView:self.view];
+    //    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
+    //                                                             delegate:self
+    //                                                    cancelButtonTitle:@"取消"
+    //                                               destructiveButtonTitle:nil
+    //                                                    otherButtonTitles:@"确定",nil];
+    //    actionSheet.userInteractionEnabled = YES;
+    //    actionSheet.backgroundColor = [UIColor clearColor];
+    
+    //    [actionSheet addSubview:areaPicker];
+    //    [actionSheet showInView:self.view];
 }
 
 #pragma mark - HZAreaPicker delegate
@@ -277,7 +328,7 @@
             }
             break;
     }
-   selectedAddress = [NSString stringWithFormat:@"%@%@%@",state,city,district];
+    selectedAddress = [NSString stringWithFormat:@"%@%@%@",state,city,district];
 }
 
 @end

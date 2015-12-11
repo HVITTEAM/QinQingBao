@@ -78,6 +78,7 @@
 //    self.errorBlock = [errorBlock copy];
 //    [self startLocation];
 //}
+
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {

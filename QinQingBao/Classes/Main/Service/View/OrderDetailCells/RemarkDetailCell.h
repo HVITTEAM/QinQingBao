@@ -10,10 +10,10 @@
 #import "ServiceItemModel.h"
 
 @interface RemarkDetailCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *remarkLab;
-
 
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
+@property (strong, nonatomic) IBOutlet UIView *topLine;
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
 
 + (RemarkDetailCell*) remarkDetailCell;
 @end

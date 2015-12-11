@@ -100,7 +100,7 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
-    if(self.nowpwd.rightText.text != self.cknowPwd.rightText.text )
+    if(![self.nowpwd.rightText.text isEqualToString:self.cknowPwd.rightText.text] )
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     

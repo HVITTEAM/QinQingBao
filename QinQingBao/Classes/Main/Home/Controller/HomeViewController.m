@@ -18,10 +18,11 @@ static float cellWidth = 66;
 #import "ServiceTypeDatas.h"
 #import "ServiceTypeModel.h"
 #import "AllServiceTypeController.h"
-#import "CCLocationManager.h"
 #import "WebViewController.h"
-#import "AnimationViewController.h"
 #import "CitiesViewController.h"
+#import "AdvertisementViewController.h"
+#import "CCLocationManager.h"
+
 
 @interface HomeViewController ()<MTCityChangeDelegate>
 {
@@ -44,31 +45,13 @@ static float cellWidth = 66;
     [self initCollectionView];
     
     [self getTypeList];
-    
-    [self getLocation];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    if ([SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden)
-    {
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = NO;
-        [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 49;
-    }
-}
-
-/**
- *  获取当前位置
- */
--(void)getLocation
-{
-    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
-        NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
-        [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];
-        [SharedAppUtil defaultCommonUtil].lon = [NSString stringWithFormat:@"%f",locationCorrrdinate.longitude];
-    }];
+    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
 }
 
 /**
@@ -85,7 +68,6 @@ static float cellWidth = 66;
                                                                       NSFontAttributeName:[UIFont systemFontOfSize:17],
                                                                       NSForegroundColorAttributeName:[UIColor whiteColor]}];
     self.bgScrollView.height = pageControlY;
-    
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:HMGlobalBg] forState:UIControlStateHighlighted];
     
@@ -112,7 +94,7 @@ static float cellWidth = 66;
     [button_back addTarget:self action:@selector(cityChange) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button_back];
     [backButton setStyle:UIBarButtonItemStyleDone];
-    [self.navigationItem setLeftBarButtonItem:backButton];
+//    [self.navigationItem setLeftBarButtonItem:backButton];
 }
 
 /**
@@ -150,7 +132,8 @@ static float cellWidth = 66;
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.userInteractionEnabled=YES;
-        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+        imageView.tag = i;
+        UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
         [imageView addGestureRecognizer:singleTap];
         [self.imgPlayer addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+320。。。
     }
@@ -170,11 +153,20 @@ static float cellWidth = 66;
     [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW, 0, MTScreenW, self.imgPlayer.height) animated:NO];
 }
 
--(void)onClickImage
+/**
+ *  轮播广告点击事件
+ *
+ *  @param tap <#tap description#>
+ *  @param idx <#idx description#>
+ */
+-(void)onClickImage:(UITapGestureRecognizer *)tap
 {
-//    AnimationViewController *lis = [[AnimationViewController alloc] init];
-    WebViewController *listView = [[WebViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:listView];
+    //    WebViewController *listView = [[WebViewController alloc] init];
+    if (tap.view.tag <= 0)
+        return;
+    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
+    adver.type = tap.view.tag;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
     [self presentViewController:nav animated:YES completion:nil];
 }
 
@@ -359,12 +351,11 @@ static float cellWidth = 66;
     {
         AllServiceTypeController *alllist = [[AllServiceTypeController alloc] init];
         alllist.dataProvider = dataProvider;
-        [self.navigationController pushViewController:alllist animated:YES];
-        return;
+        return [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:alllist animated:YES];
     }
     ServiceListViewController *listView = [[ServiceListViewController alloc] init];
     listView.item = item;
-    [self.navigationController pushViewController:listView animated:YES];
+    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:listView animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择

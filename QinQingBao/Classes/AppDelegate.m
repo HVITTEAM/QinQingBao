@@ -13,6 +13,7 @@
 #import "APService.h"
 #import "YSPlayerController.h"
 #import <SMS_SDK/SMS_SDK.h>
+#import "CCLocationManager.h"
 
 
 /**
@@ -38,6 +39,8 @@
     NSUUID *str = [[UIDevice currentDevice] identifierForVendor];
     NSLog(@"设备ID:%@ jieshu",str);
     
+    [self getLocation];
+
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
@@ -75,14 +78,13 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"完蛋了"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
                                                     message:@"deviceToken获取失败！"
                                                    delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    // Required
     [APService handleRemoteNotification:userInfo];
 }
 
@@ -153,4 +155,15 @@
     return YES;
 }
 
+/**
+ *  获取当前位置
+ */
+-(void)getLocation
+{
+    [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+        NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
+        [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];
+        [SharedAppUtil defaultCommonUtil].lon = [NSString stringWithFormat:@"%f",locationCorrrdinate.longitude];
+    }];
+}
 @end

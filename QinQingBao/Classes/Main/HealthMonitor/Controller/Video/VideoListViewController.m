@@ -85,8 +85,6 @@
     
     [self initTableViewSkin];
     
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.hidden = YES;
-    [SharedAppUtil defaultCommonUtil].tabBarController.tabBar.height = 0;
 }
 -(void)initTableViewSkin
 {
