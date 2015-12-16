@@ -7,6 +7,8 @@
 //
 
 #import "AddMemberViewController.h"
+#import "AddMemberViewController1.h"
+
 
 @interface AddMemberViewController ()
 {
@@ -21,6 +23,7 @@
 @end
 
 @implementation AddMemberViewController
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -120,23 +123,43 @@
 
 - (void)setupFooter
 {
+    UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 80)];
+    
     // 1.创建按钮
-    UIButton *logout = [[UIButton alloc] init];
+    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
     
     // 2.设置属性
-    logout.titleLabel.font = [UIFont systemFontOfSize:16];
-    [logout setTitle:@"确定" forState:UIControlStateNormal];
-    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    [logout addTarget:self action:@selector(sureHandler:) forControlEvents:UIControlEventTouchUpInside];
+    okBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [okBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [okBtn setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
+    [okBtn setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
+    [okBtn setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [okBtn addTarget:self action:@selector(sureHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
-    logout.height = 50;
+    [footview addSubview:okBtn];
     
-    self.tableView.tableFooterView = logout;
+    UIButton *changeType = [[UIButton alloc] initWithFrame:CGRectMake(200, CGRectGetMaxY(okBtn.frame) + 10, 120, 20)];
+    changeType.titleLabel.font = [UIFont systemFontOfSize:13];
+    [changeType setTitle:@"通过身份证号码绑定" forState:UIControlStateNormal];
+    [changeType setTitleColor:MTNavgationBackgroundColor forState:UIControlStateNormal];
+    [changeType addTarget:self action:@selector(changeType) forControlEvents:UIControlEventTouchUpInside];
+
+      CGSize size = [changeType.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:changeType.titleLabel.font}];
+    
+    changeType.width = size.width;
+    changeType.x = MTScreenW - size.width - 10;
+    [footview addSubview:changeType];
+    
+    self.tableView.tableFooterView = footview;
 }
 
+-(void)changeType
+{
+    AddMemberViewController1 *vc = [[AddMemberViewController1 alloc] init];
+    vc.backHandlerClick =  self.backHandlerClick;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 /**
  *  发送短信
@@ -198,7 +221,7 @@
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Bang_relation parameters: @{@"mobile" : self.telfield.rightText.text,
                                                                       @"code" : self.codefield.rightText.text,
-                                                                      @"oldid":[SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                      @"member_id":[SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                       @"rname" : self.numfield.rightText.text,
                                                                       @"client":@"ios",
                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
@@ -216,8 +239,9 @@
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-                                         self.backHandlerClick();
-                                         [self.navigationController popViewControllerAnimated:YES];
+//                                         self.backHandlerClick();
+                                         UIViewController *vc = self.navigationController.viewControllers[1];
+                                         [self.navigationController popToRootViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

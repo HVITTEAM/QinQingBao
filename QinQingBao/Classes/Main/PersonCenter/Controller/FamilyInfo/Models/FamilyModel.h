@@ -20,20 +20,14 @@
 @interface FamilyModel : NSObject
 
 
-@property (nonatomic, copy) NSString *rid;
-@property (nonatomic, copy) NSString *oid;
-@property (nonatomic, copy) NSString *oldname;
-@property (nonatomic, copy) NSString *relation;
-@property (nonatomic, copy) NSString *oldphone;
+@property (nonatomic, copy) NSString *member_truename;
+@property (nonatomic, copy) NSString *member_id;
 @property (nonatomic, copy) NSString *member_areaid;
+@property (nonatomic, copy) NSString *totalname;
 @property (nonatomic, copy) NSString *member_sex;
 @property (nonatomic, copy) NSString *member_birthday;
-@property (nonatomic, copy) NSString *imei_watch;
-@property (nonatomic, copy) NSString *oldlon;
-@property (nonatomic, copy) NSString *oldlat;
-@property (nonatomic, copy) NSString *totalname;
 @property (nonatomic, copy) NSString *member_areainfo;
-
-
+@property (nonatomic, copy) NSString *relation;
+@property (nonatomic, copy) NSString *member_mobile;
 
 @end

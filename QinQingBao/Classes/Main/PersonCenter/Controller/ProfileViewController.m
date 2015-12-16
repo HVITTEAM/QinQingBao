@@ -54,14 +54,12 @@
     [self getUserIcon];
     
     self.navigationController.navigationBarHidden = YES;
-
-    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-
+    
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -118,13 +116,13 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-//    CGFloat y = scrollView.contentOffset.y;//根据实际选择加不加上NavigationBarHight（44、64 或者没有导航条）
-//    if (y < -imageHeight) {
-//        CGRect frame = _zoomImageview.frame;
-//        frame.origin.y = y;
-//        frame.size.height =  -y;//contentMode = UIViewContentModeScaleAspectFill时，高度改变宽度也跟着改变
-//        _zoomImageview.frame = frame;
-//    }
+    //    CGFloat y = scrollView.contentOffset.y;//根据实际选择加不加上NavigationBarHight（44、64 或者没有导航条）
+    //    if (y < -imageHeight) {
+    //        CGRect frame = _zoomImageview.frame;
+    //        frame.origin.y = y;
+    //        frame.size.height =  -y;//contentMode = UIViewContentModeScaleAspectFill时，高度改变宽度也跟着改变
+    //        _zoomImageview.frame = frame;
+    //    }
 }
 
 
@@ -190,10 +188,11 @@
     
     // 2.设置组的所有行数据
     myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
-//    myData.destVcClass = [PersonalDataViewController class];
+    //        myData.destVcClass = [PersonalDataViewController class];
     myData.operation = ^{
         PersonalDataViewController *destVC = [[PersonalDataViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+        destVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:destVC animated:YES];
     };
     group.items = @[myData];
 }
@@ -208,11 +207,11 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的账号" icon:@"pc_accout.png"];
-//    newFriend.destVcClass = [AccountViewController class];
-    newFriend.operation = ^{
-        AccountViewController *destVC = [[AccountViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
-    };
+    newFriend.destVcClass = [AccountViewController class];
+    //    newFriend.operation = ^{
+    //        AccountViewController *destVC = [[AccountViewController alloc] init];
+    //        [self.navigationController pushViewController:destVC animated:YES];
+    //    };
     group.items = @[newFriend];
 }
 
@@ -226,12 +225,12 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
-//    newFriend.destVcClass = [OrderTableViewController class];
-    newFriend.operation = ^{
-        OrderTableViewController *destVC = [[OrderTableViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
-
-    };
+    newFriend.destVcClass = [OrderTableViewController class];
+    //    newFriend.operation = ^{
+    //        OrderTableViewController *destVC = [[OrderTableViewController alloc] init];
+    //        [self.navigationController pushViewController:destVC animated:YES];
+    //
+    //    };
     
     group.items = @[newFriend];
 }
@@ -244,10 +243,11 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *collect = [HMCommonArrowItem itemWithTitle:@"关于APP" icon:@"app.png"];
-//    collect.destVcClass = [AboutViewController class];
+    //    collect.destVcClass = [AboutViewController class];
     collect.operation = ^{
         AboutViewController *destVC = [[AboutViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+        destVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:destVC animated:YES];
         
     };
     group.items = @[collect];
@@ -260,11 +260,12 @@
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
-    HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的家属" icon:@"pc_family.png"];
-//    offline.destVcClass = [FamilyViewController class];
+    HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的亲友" icon:@"pc_family.png"];
+    //    offline.destVcClass = [FamilyViewController class];
     offline.operation = ^{
         FamilyViewController *destVC = [[FamilyViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+        destVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:destVC animated:YES];
     };
     group.items = @[offline];
 }
@@ -277,10 +278,11 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
-//    album.destVcClass = [SettingViewController class];
+    //        album.destVcClass = [SettingViewController class];
     album.operation = ^{
         SettingViewController *destVC = [[SettingViewController alloc] init];
-        [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:destVC animated:YES];
+        destVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:destVC animated:YES];
     };
     group.items = @[album];
 }
@@ -289,10 +291,10 @@
 
 -(void)loginOut
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"退出登录"
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定退出当前账号？"
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
-                                               destructiveButtonTitle:@"确定退出当前账号？"
+                                               destructiveButtonTitle:@"确定"
                                                     otherButtonTitles:nil];
     [actionSheet showInView:self.view];
 }
@@ -358,7 +360,8 @@
                                          if ([di count] != 0)
                                          {
                                              NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
-                                             iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",url]];
+                                             iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,url]];
+                                             
                                          }
                                          [_iconImageview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                      }

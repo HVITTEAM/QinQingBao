@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *accountText;
 @property (weak, nonatomic) IBOutlet UITextField *passwordText;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (strong, nonatomic) IBOutlet UIView *mainBgview;
+- (IBAction)backHanlder:(id)sender;
 
 //容纳文本输入框的UIView
 @property (strong, nonatomic) IBOutlet UIView *txtview;

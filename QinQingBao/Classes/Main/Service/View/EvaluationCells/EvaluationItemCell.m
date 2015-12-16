@@ -53,7 +53,7 @@
     [self.evaView setScore:score/5 withAnimation:NO];
     
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
-    self.nameLab.text = item.oldname;
+    self.nameLab.text = item.member_name;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

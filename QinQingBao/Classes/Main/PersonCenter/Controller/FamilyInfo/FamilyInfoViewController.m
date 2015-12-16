@@ -33,7 +33,7 @@
  */
 -(void)initNavigation
 {
-    self.title = self.selecteItem.oldname;
+    self.title = self.selecteItem.member_truename;
     self.view.backgroundColor = HMGlobalBg;
 }
 
@@ -62,7 +62,7 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Healthy parameters: @{@"oldid" : self.selecteItem.oid,
+    [CommonRemoteHelper RemoteWithUrl:URL_Healthy parameters: @{@"member_id" : self.selecteItem.member_id,
                                                                 @"client" : @"ios",
                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -79,7 +79,7 @@
                                          FamilyInforTotal *result = [FamilyInforTotal objectWithKeyValues:dict];
                                          HealthArchivesController *viewC = [[HealthArchivesController alloc] init];
                                          viewC.familyInfoTotal = result.datas;
-                                         viewC.title = [NSString stringWithFormat:@"%@的健康档案",self.selecteItem.oldname];
+                                         viewC.title = [NSString stringWithFormat:@"%@的健康档案",self.selecteItem.member_truename];
                                          [self.navigationController pushViewController:viewC animated:YES];
                                      }
                                      [HUD removeFromSuperview];
@@ -107,16 +107,26 @@
         [self.navigationController pushViewController:view animated:YES];
     };
     HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"健康联系人" icon:@""];
+    help.operation = ^{
+        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
+    };
     help.isSubtitle = YES;
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
     advice.isSubtitle = YES;
     advice.operation = ^{
         [self getDataProvider];
     };
-    
+
     HMCommonArrowItem *service = [HMCommonArrowItem itemWithTitle:@"服务套餐" icon:@""];
+    service.operation = ^{
+        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
+    };
+
     service.isSubtitle = YES;
     HMCommonArrowItem *doctor = [HMCommonArrowItem itemWithTitle:@"医嘱信息" icon:@""];
+    doctor.operation = ^{
+        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
+    };
     doctor.isSubtitle = YES;
     group.items = @[version,help,advice,service,doctor];
 }
@@ -124,26 +134,26 @@
 - (void)setupFooter
 {
     // 1.创建按钮
-    UIButton *logout = [[UIButton alloc] init];
+    UIButton *cancel = [[UIButton alloc] init];
     
     // 2.设置属性
-    logout.titleLabel.font = [UIFont systemFontOfSize:16];
-    [logout setTitle:@"解除绑定" forState:UIControlStateNormal];
-    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    cancel.titleLabel.font = [UIFont systemFontOfSize:16];
+    [cancel setTitle:@"解除绑定" forState:UIControlStateNormal];
+    [cancel setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
+    [cancel setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
+    [cancel setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [cancel addTarget:self action:@selector(cancelHandler) forControlEvents:UIControlEventTouchUpInside];
     
     // 3.设置尺寸(tableFooterView和tableHeaderView的宽度跟tableView的宽度一样)
-    logout.height = 50;
+    cancel.height = 50;
     
-    self.tableView.tableFooterView = logout;
+    self.tableView.tableFooterView = cancel;
     
 }
 
 # pragma  mark 解除绑定
 
--(void)loginOut
+-(void)cancelHandler
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"解除绑定"
                                                              delegate:self
@@ -158,8 +168,7 @@
     if(buttonIndex == 0)
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Del_relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
-                                                                         @"rid" : self.selecteItem.rid,
+        [CommonRemoteHelper RemoteWithUrl:URL_Del_relation parameters: @{@"member_id" : self.selecteItem.member_id,
                                                                          @"client" : @"ios",
                                                                          @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {

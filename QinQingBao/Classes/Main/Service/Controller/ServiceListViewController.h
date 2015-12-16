@@ -18,4 +18,7 @@
 
 @property (nonatomic, retain) ServiceTypeModel *item;
 
+//第二级服务分类
+@property (nonatomic, retain) ServiceTypeModel *selected2edItem;
+
 @end

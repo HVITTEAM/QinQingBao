@@ -22,7 +22,7 @@
 
 @implementation LoginViewController
 {
-    UpdatePwdViewController *updateView;
+    
 }
 
 - (void)viewDidLoad {
@@ -31,10 +31,10 @@
     self.loginBtn.layer.cornerRadius = 5.0f;
     self.loginBtn.layer.masksToBounds = YES;
     
+    self.mainBgview.backgroundColor = MTNavgationBackgroundColor;
+    
     self.accountText.delegate = self;
     self.passwordText.delegate = self;
-    
-    self.navigationItem.title = @"登陆";
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -43,7 +43,30 @@
     //注册键盘通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+//    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
+//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBarHidden = YES;
+
+    //取消导航栏下方黑线
+    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
+        NSArray *list=self.navigationController.navigationBar.subviews;
+        for (id obj in list) {
+            if ([obj isKindOfClass:[UIImageView class]]) {
+                UIImageView *imageView=(UIImageView *)obj;
+                NSArray *list2=imageView.subviews;
+                for (id obj2 in list2) {
+                    if ([obj2 isKindOfClass:[UIImageView class]]) {
+                        UIImageView *imageView2=(UIImageView *)obj2;
+                        imageView2.hidden=YES;
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -126,7 +149,8 @@
 /**
  *  跳转到注册界面
  */
-- (IBAction)regist:(id)sender {
+- (IBAction)regist:(id)sender
+{
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];
     [self.navigationController pushViewController:registVC animated:YES];
 }
@@ -136,8 +160,7 @@
  */
 - (IBAction)backPassword:(id)sender
 {
-    if (!updateView)
-        updateView = [[UpdatePwdViewController alloc]init];
+    UpdatePwdViewController *updateView = [[UpdatePwdViewController alloc]init];
     [self.navigationController pushViewController:updateView animated:YES];
 }
 
@@ -209,4 +232,7 @@
 
 
 
+- (IBAction)backHanlder:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

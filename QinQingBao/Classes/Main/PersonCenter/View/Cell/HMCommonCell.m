@@ -93,7 +93,7 @@
 {
     if (_item.btn == nil) {
         _item.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _item.btn.width = 100;    _item.btn.height = 30;
+        _item.btn.width = 80;    _item.btn.height = 30;
         [_item.btn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
         [_item.btn setTitleColor:MTNavgationBackgroundColor forState:UIControlStateNormal];
         [_item.btn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];

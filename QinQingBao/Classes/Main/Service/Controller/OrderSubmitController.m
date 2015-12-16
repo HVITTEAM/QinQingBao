@@ -73,7 +73,7 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
-
+    
     orderSubmitCell = [OrderSubmitCell orderSubmitCell];
     __weak typeof(self) weakSelf = self;
     orderSubmitCell.payClick = ^(UIButton *button){
@@ -124,6 +124,8 @@
 {
     NSDate* date=[NSDate date];
     
+    //今天
+    NSString * now = [MTDateHelper getDaySinceday:date days:0];
     //明天
     NSString * tomorrow = [MTDateHelper getDaySinceday:date days:1];
     
@@ -138,8 +140,7 @@
     
     self.datePickView = [[UIPickerView alloc] init];
     
-    day = [NSArray arrayWithObjects:@"今天",
-           @"明天", @"后天",tomorrow,aftertomorrow,aftertomorrow1,aftertomorrow2, nil];
+    day = [NSArray arrayWithObjects:now,tomorrow,aftertomorrow,aftertomorrow1,aftertomorrow2, nil];
     time = [NSArray arrayWithObjects:@"9点" , @"10点"
             , @"11点",@"12点", @"13点", @"14点",
             @"15点", @"16点" , @"17点",@"18点", nil];
@@ -442,19 +443,19 @@ numberOfRowsInComponent:(NSInteger)component
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
                                                                      @"iid" : self.serviceDetailItem.iid,
-                                                                     @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                     @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"wtime" : selectedTimestr,
-                                                                     @"wname" : famVO.oldname,
+                                                                     @"wname" : famVO.member_truename,
                                                                      @"wprice" : self.serviceDetailItem.price,
-                                                                     @"dvcode" : famVO.totalname,
-                                                                     @"wtelnum" : famVO.oldphone,
-                                                                     @"waddress" : famVO.totalname,
+                                                                     @"dvcode" : famVO.member_areaid,
+                                                                     @"wtelnum" : famVO.member_mobile,
+                                                                     @"waddress" : famVO.member_areainfo,
                                                                      @"client" : @"ios",
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"wlevel" : @"1",
                                                                      @"wremark" : @"用户留言",
                                                                      @"voucher_id" : couponsItem ? couponsItem.voucher_id : @"",
-                                                                     @"pay_type" : @"1",
+                                                                     @"pay_type" : @"3",
                                                                      @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
                                                                      @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -469,17 +470,16 @@ numberOfRowsInComponent:(NSInteger)component
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-//                                         PayViewController *payView = [[PayViewController alloc] init];
-//                                         payView.serviceDetailItem = self.serviceDetailItem;
-//                                         payView.orderItem = item;
-//                                         [self.navigationController pushViewController:payView animated:YES];
+                                         //                                         PayViewController *payView = [[PayViewController alloc] init];
+                                         //                                         payView.serviceDetailItem = self.serviceDetailItem;
+                                         //                                         payView.orderItem = item;
+                                         //                                         [self.navigationController pushViewController:payView animated:YES];
                                          
                                          UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下单结果"
                                                                                          message:@"下单成功"
                                                                                         delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
                                          [alert show];
-                                         [self.navigationController popToRootViewControllerAnimated:YES];
-
+                                         [self.navigationController popViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -487,7 +487,6 @@ numberOfRowsInComponent:(NSInteger)component
                                      [NoticeHelper AlertShow:@"下单失败!" view:self.view];
                                      [HUD removeFromSuperview];
                                  }];
-    
 }
 
 -(void)showDatePicker
@@ -533,7 +532,6 @@ numberOfRowsInComponent:(NSInteger)component
 
 -(void)setDatePickerIos7
 {
-    
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
                                   initWithTitle: @"\n\n\n\n\n\n\n\n\n\n\n"
                                   delegate:self
@@ -543,8 +541,14 @@ numberOfRowsInComponent:(NSInteger)component
     
     self.datePicker = [[UIDatePicker alloc] init];
     
-    [actionSheet addSubview:self.datePicker];
+    NSDate* minDate = [NSDate date];
     
+    self.datePicker.minimumDate = minDate;
+    //7天
+    self.datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:3600 *24 *7];
+
+    self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    [actionSheet addSubview:self.datePicker];
     [actionSheet showInView:self.view];
 }
 
@@ -556,6 +560,8 @@ numberOfRowsInComponent:(NSInteger)component
         NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
         NSString * curentDatest=[formatter stringFromDate:date];
+        selectedTimestr = curentDatest;
+        [self.tableView reloadData];
     }
 }
 

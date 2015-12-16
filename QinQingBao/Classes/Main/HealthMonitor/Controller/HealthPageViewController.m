@@ -37,8 +37,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
 }
 
 -(void)initTableViewSkin
@@ -69,7 +67,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
                                                                    @"count" : @"10",
-                                                                   @"oldid" : self.familyVO.oid}
+                                                                   @"member_id" : self.familyVO.member_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
@@ -244,7 +242,7 @@
             break;
     }
     bloodPressureVC.dataProvider = dataProvider;
-    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:bloodPressureVC animated:YES];
+    [self.navigationController pushViewController:bloodPressureVC animated:YES];
 }
 
 /**
@@ -265,7 +263,8 @@
 -(void)showVideo
 {
     VideoListViewController *videoList = [[VideoListViewController alloc] init];
-    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:videoList animated:YES];
+    videoList.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:videoList animated:YES];
 }
 
 

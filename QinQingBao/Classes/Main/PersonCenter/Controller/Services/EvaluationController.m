@@ -67,7 +67,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Save_dis_cont parameters:  @{@"wid" : self.orderItem.wid,
                                                                        @"cont" : @"ios",
                                                                        @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                       @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                                                                       @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                        @"client" : @"ios",
                                                                        @"grade" : [NSString stringWithFormat:@"%.0f",maxStar]
                                                                        }

@@ -61,14 +61,14 @@
     
     // 设置组的所有行数据
     HMCommonItem *item0 = [HMCommonItem itemWithTitle:@"姓名" icon:@""];
-    item0.subtitle = self.itemInfo.oldname;
+    item0.subtitle = self.itemInfo.member_truename;
     
     HMCommonItem *item1 = [HMCommonItem itemWithTitle:@"年龄" icon:@""];
     NSString *str = [NoticeHelper intervalSinceNowByyear:self.itemInfo.member_birthday];
     item1.subtitle = str;
     
     HMCommonItem *item2 = [HMCommonItem itemWithTitle:@"联系电话" icon:@""];
-    item2.subtitle = self.itemInfo.oldphone;
+    item2.subtitle = self.itemInfo.member_mobile;
     
     HMCommonItem *item3 = [HMCommonItem itemWithTitle:@"常住地址" icon:@""];
     item3.subtitle = [NSString stringWithFormat:@"%@%@",self.itemInfo.totalname,self.itemInfo.member_areainfo];

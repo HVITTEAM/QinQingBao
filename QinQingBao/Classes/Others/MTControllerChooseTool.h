@@ -10,6 +10,8 @@
 
 @interface MTControllerChooseTool : NSObject
 
+@property(nonatomic, strong) UITabBarController *rootTabbarCtr;
+
 /**
  *  选择根控制器
  */

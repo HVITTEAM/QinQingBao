@@ -14,6 +14,13 @@
 
 @implementation AboutViewController
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -162,15 +169,5 @@
 
     group.items = @[version,help,advice];
 }
-
-
-
-# pragma  mark 返回上一界面
-
-- (void)back
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 @end

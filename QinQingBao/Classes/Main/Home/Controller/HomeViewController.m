@@ -22,6 +22,8 @@ static float cellWidth = 66;
 #import "CitiesViewController.h"
 #import "AdvertisementViewController.h"
 #import "CCLocationManager.h"
+#import "CheckSelfViewController.h"
+#import "AllServiceViewController.h"
 
 
 @interface HomeViewController ()<MTCityChangeDelegate>
@@ -51,7 +53,7 @@ static float cellWidth = 66;
 {
     [super viewWillAppear:animated];
     
-    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
+    //    self.navigationController.navigationBarHidden = YES;
 }
 
 /**
@@ -63,10 +65,10 @@ static float cellWidth = 66;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     
-    self.title = @"亲情宝";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{
-                                                                      NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                                                      NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
+    [self setTitle:@"亲情宝"];
+    [[self tabBarItem] setTitle:@"首页"];
+    
     self.bgScrollView.height = pageControlY;
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:HMGlobalBg] forState:UIControlStateHighlighted];
@@ -94,7 +96,7 @@ static float cellWidth = 66;
     [button_back addTarget:self action:@selector(cityChange) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button_back];
     [backButton setStyle:UIBarButtonItemStyleDone];
-//    [self.navigationItem setLeftBarButtonItem:backButton];
+    //    [self.navigationItem setLeftBarButtonItem:backButton];
 }
 
 /**
@@ -112,6 +114,9 @@ static float cellWidth = 66;
     [self.slideImages addObject:@"1-1.png"];
     [self.slideImages addObject:@"1-2.png"];
     [self.slideImages addObject:@"1-3.png"];
+    [self.slideImages addObject:@"1-4.jpg"];
+    [self.slideImages addObject:@"1-5.jpg"];
+    
     //    [self.slideImages addObject:@"1-4.jpg"];
     
     // 初始化 pagecontrol
@@ -349,13 +354,13 @@ static float cellWidth = 66;
     ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
     if (dataProvider.count > 8 && indexPath.row == 7)
     {
-        AllServiceTypeController *alllist = [[AllServiceTypeController alloc] init];
+        AllServiceViewController *alllist = [[AllServiceViewController alloc] init];
         alllist.dataProvider = dataProvider;
-        return [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:alllist animated:YES];
+        return [self.navigationController pushViewController:alllist animated:YES];
     }
     ServiceListViewController *listView = [[ServiceListViewController alloc] init];
     listView.item = item;
-    [[SharedAppUtil defaultCommonUtil].mainNav pushViewController:listView animated:YES];
+    [self.navigationController pushViewController:listView animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择
@@ -367,7 +372,7 @@ static float cellWidth = 66;
 - (IBAction)healthClickHandler:(id)sender
 {
     return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
-    HealthServicesController *healthVC = [[HealthServicesController alloc] init];
+    CheckSelfViewController *healthVC = [[CheckSelfViewController alloc] init];
     [self.navigationController pushViewController: healthVC animated:YES];
 }
 
@@ -376,6 +381,14 @@ static float cellWidth = 66;
     return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
     HealthServicesController *healthVC = [[HealthServicesController alloc] init];
     [self.navigationController pushViewController: healthVC animated:YES];
+}
+
+- (IBAction)massageClickHandler:(id)sender
+{
+    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
+    adver.type = 5;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

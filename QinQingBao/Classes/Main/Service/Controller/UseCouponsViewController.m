@@ -47,7 +47,8 @@
 -(void)sureClickHandler
 {
     [self.navigationController popViewControllerAnimated:YES];
-    self.selectedClick(selectedModel);
+    if (selectedModel)
+        self.selectedClick(selectedModel);
 }
 
 -(void)initTableSkin
@@ -136,7 +137,5 @@
         selectedModel = nil;
     lastSelectedIndex = indexPath;
 }
-
-
 
 @end

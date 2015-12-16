@@ -16,6 +16,7 @@
     NSMutableArray *dataProvider;
     //当前选中的服务分类 默认为第一条
     ServiceTypeModel *selectedItem;
+    DOPDropDownMenu *menu;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -34,11 +35,17 @@
 
 @implementation ServiceListViewController
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 }
 
 - (void)viewDidLoad
@@ -50,8 +57,10 @@
     [self initTableviewSkin];
     
     [self setupRefresh];
-    
-    self.title = self.item.tname;
+    if (self.selected2edItem)
+        self.title = self.selected2edItem.tname;
+    else
+        self.title = self.item.tname;
     
     [self getServiceType];
     
@@ -68,16 +77,23 @@
     //    self.cates = @[@"分类1",@"分类2",@"分类3",@"分类4",@"分类5",@"分类6"];
     //    self.movices = @[@"服装洗涤1",@"服装洗涤2",@"服装洗涤3"];
     //    self.hostels = @[@"搬家公司1",@"搬家公司2",@"搬家公司3",@"搬家公司4",@"搬家公司5"];
-//    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
+    //    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
     
     // 添加下拉菜单
-    DOPDropDownMenu *menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 62) andHeight:44];
+    menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 62) andHeight:44];
     menu.delegate = self;
     menu.dataSource = self;
-    [self.view addSubview:menu];
-    selectedItem = self.classifys[0];
+    if (!self.selected2edItem)
+        [self.view addSubview:menu];
+    if (!selectedItem)
+        selectedItem = self.classifys[0];
+    
+    
     [self.tableView.header beginRefreshing];
+    //
+    //    DOPIndexPath *index = [[DOPIndexPath alloc] initWithColumn:0 row:2];
+    //    [menu selectDefalutIndexPath:index];
 }
 
 /**
@@ -93,12 +109,19 @@
  */
 -(void)initTableviewSkin
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 42, MTScreenW, MTScreenH - 44)];
+    self.tableView = [[UITableView alloc] initWithFrame:
+                      CGRectMake(0, self.selected2edItem ? 0 : 42, MTScreenW, self.selected2edItem ? MTScreenH : MTScreenH - 44)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     [self.view addSubview:self.tableView];
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
+}
+
+-(void)setSelected2edItem:(ServiceTypeModel *)selected2edItem
+{
+    _selected2edItem = selected2edItem;
+    selectedItem = selected2edItem;
 }
 
 #pragma mark 集成刷新控件
@@ -259,8 +282,8 @@
 {
     if (column == 0) {
         return self.classifys.count;
-//    }else if (column == 1){
-//        return self.areas.count;
+        //    }else if (column == 1){
+        //        return self.areas.count;
     }else {
         return self.sorts.count;
     }
@@ -271,8 +294,8 @@
     if (indexPath.column == 0) {
         ServiceTypeModel *model = (ServiceTypeModel *)self.classifys[indexPath.row];
         return model.tname;
-//    } else if (indexPath.column == 1){
-//        return self.areas[indexPath.row];
+        //    } else if (indexPath.column == 1){
+        //        return self.areas[indexPath.row];
     } else {
         return self.sorts[indexPath.row];
     }
@@ -316,20 +339,13 @@
             selectedItem = self.classifys[indexPath.row];
             [self.tableView.header beginRefreshing];
         }
-        else if (indexPath.column == 2) {
+        else if (indexPath.column == 1) {
             self.condition = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
             [self.tableView.header beginRefreshing];
         }
-        else
-            [NoticeHelper AlertShow:@"sorry" view:self.view];
+        else if (indexPath.column == 2)
+            [NoticeHelper AlertShow:@"暂无此功能" view:self.view];
     }
-}
-
-# pragma  mark 返回上一界面
-
-- (void)back
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

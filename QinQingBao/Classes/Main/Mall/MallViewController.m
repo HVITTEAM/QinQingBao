@@ -27,7 +27,7 @@
 {
     [super viewWillAppear:animated];
     
-    [SharedAppUtil defaultCommonUtil].mainNav.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 /**

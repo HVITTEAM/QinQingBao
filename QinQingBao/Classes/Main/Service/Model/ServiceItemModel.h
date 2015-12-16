@@ -72,11 +72,16 @@
 @property (nonatomic, copy) NSString *sumdis;
 /**服务商电话**/
 @property (nonatomic, copy) NSString *orgphone;
+/**自己电话**/
+@property (nonatomic, copy) NSString *orgtelnum;
+
 /**服务商距离**/
 @property (nonatomic, copy) NSString *distance;
 /**消费提醒**/
 @property (nonatomic, copy) NSString *remakr;
 /**地址**/
 @property (nonatomic, copy) NSString *totalname;
+
+
 
 @end

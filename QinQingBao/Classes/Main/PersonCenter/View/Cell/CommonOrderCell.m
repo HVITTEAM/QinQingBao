@@ -44,7 +44,7 @@
 {
     _item = item;
     self.timeLab.text = [NSString stringWithFormat:@"下单时间: %@",item.wctime];
-    self.addressLab.text = [NSString stringWithFormat:@"客户地址: %@",item.waddress];
+    self.addressLab.text = [NSString stringWithFormat:@"客户地址: %@%@",item.totalname,item.waddress];
     self.titleLab.text = item.tname;
     self.statusLab.text = [self getStatusByStatus:[item.status intValue]];
     self.namaLab.text = [NSString stringWithFormat:@"服务对象: %@",item.wname];
@@ -53,59 +53,70 @@
 -(NSString *)getStatusByStatus:(int)status
 {
     NSString *str;
-    switch (status) {
-        case 0:
-            str = @"等待接单";
-            break;
-        case 1:
-            str = @"等待接单";
-            break;
-        case 2:
-            str = @"等待接单";
-            break;
-        case 3:
-            str = @"已接单";
-            self.statusLab.textColor = [UIColor greenColor];
-            self.deleteBtn.titleLabel.text = @"联系商家";
-            break;
-        case 4:
-            str = @"已接单";
-            self.statusLab.textColor = [UIColor greenColor];
-            self.deleteBtn.titleLabel.text = @"联系商家";
-            break;
-        case 5:
-            str = @"服务结束";
-            self.statusLab.textColor = [UIColor greenColor];
-            self.deleteBtn.titleLabel.text = @"评价";
-            break;
-        case 6:
-            str = @"已评价";
-            self.statusLab.textColor = [UIColor greenColor];
-            self.deleteBtn.hidden = YES;
-
-            break;
-        case 7:
-            str = @"已评价";
-            self.statusLab.textColor = [UIColor greenColor];
-            self.deleteBtn.hidden = YES;
-            break;
-        case 8:
-            str = @"取消受理中";
-            self.statusLab.textColor = [UIColor redColor];
-            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
-            break;
-        case 9:
-            str = @"已取消";
-            self.deleteBtn.hidden = YES;
-            break;
-        case 10:
-            str = @"已拒单";
-            self.deleteBtn.titleLabel.text = @"联系商家";
-            break;
-        default:
-            break;
+    if (status <= 8)
+    {
+        str = @"等待接单";
+        self.statusLab.textColor = [UIColor orangeColor];
+        self.deleteBtn.titleLabel.text = @"取消订单";
     }
-
+    else if (status <20)
+    {
+        str = @"已接单";
+        self.statusLab.textColor = [UIColor orangeColor];
+        self.deleteBtn.titleLabel.text = @"联系商家";
+    }
+    else if (status >20 && status < 29)
+    {
+        self.statusLab.hidden = YES;
+        self.deleteBtn.hidden = YES;
+    }
+    else if ( status >30 && status < 39)
+    {
+        str = @"服务结束";
+        self.statusLab.textColor = [UIColor orangeColor];
+        self.deleteBtn.titleLabel.text = @"评价";
+    }
+    else if ( status >40 && status < 49)
+    {
+        str = @"未评价";
+        self.statusLab.textColor = [UIColor orangeColor];
+        self.deleteBtn.titleLabel.text = @"联系商家";
+    }
+    else if ( status >50 && status < 59)
+    {
+        str = @"已取消";
+        self.statusLab.textColor = MTNavgationBackgroundColor;
+        self.deleteBtn.hidden = YES;
+        
+    }
+    else if ( status >60 && status < 69)
+    {
+        str = @"已拒单";
+        self.statusLab.textColor = MTNavgationBackgroundColor;
+        self.deleteBtn.hidden = YES;
+    }
+    else if ( status >80 && status < 89)
+    {
+        str = @"完成";
+        self.statusLab.textColor = MTNavgationBackgroundColor;
+        self.deleteBtn.hidden = YES;
+    }
+    else if ( status >100 && status < 109)
+    {
+        str = @"投诉中";
+        self.statusLab.textColor = [UIColor orangeColor];
+        if (status == 102)
+            self.deleteBtn.hidden = YES;
+        else if (status == 109)
+            self.deleteBtn.hidden = NO;
+    }
+    else if ( status >110 && status < 119)
+    {
+        str = @"退货中";
+        self.statusLab.textColor = [UIColor orangeColor];
+        self.deleteBtn.hidden = YES;
+    }
+    
     return str;
 }
 

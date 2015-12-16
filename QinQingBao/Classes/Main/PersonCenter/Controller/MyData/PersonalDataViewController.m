@@ -24,6 +24,14 @@
     NSString *iconUrl;
 }
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -138,9 +146,9 @@
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
         contentcell.textLabel.text = [dict objectForKey:@"text"];
         contentcell.detailTextLabel.text = [dict objectForKey:@"value"];
-        if(indexPath.row == 0)
+        if(indexPath.row == 0)http:
         {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",iconUrl]];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
             UIImageView *imageView = [[UIImageView alloc] init];
             [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
             imageView.width = imageView.height = 50;
@@ -529,6 +537,7 @@
 {
     UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
     NSData *data = UIImageJPEGRepresentation(slt, 1);
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self upploadAvatar:data];
     [self.navigationController popViewControllerAnimated:YES];
 }

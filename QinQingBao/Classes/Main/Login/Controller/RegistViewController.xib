@@ -114,13 +114,13 @@
                                     <rect key="frame" x="64" y="145" width="192" height="29"/>
                                     <state key="normal">
                                         <attributedString key="attributedTitle">
-                                            <fragment content="我已阅读并同意《">
+                                            <fragment content="我已阅读并同意">
                                                 <attributes>
                                                     <font key="NSFont" size="12" name="STHeitiSC-Light"/>
                                                     <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                 </attributes>
                                             </fragment>
-                                            <fragment content="亲情宝服务条款》">
+                                            <fragment content="《亲情宝服务条款》">
                                                 <attributes>
                                                     <color key="NSColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <font key="NSFont" size="12" name="STHeitiSC-Light"/>

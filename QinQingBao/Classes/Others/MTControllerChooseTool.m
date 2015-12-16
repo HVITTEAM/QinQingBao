@@ -58,7 +58,7 @@
 {
     
     HomeViewController *homeView = [[HomeViewController alloc] init];
-    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"亲情宝"
+    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
                                                         image:[UIImage imageNamed:@"first_normal.png"]
                                                 selectedImage:[UIImage imageNamed:@"first_selected.png"]];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
@@ -90,14 +90,14 @@
     tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
     tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
     
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBarController];
     
-    [SharedAppUtil defaultCommonUtil].mainNav = nav;
+//    [SharedAppUtil defaultCommonUtil].mainNav = nav;
     
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
-    window.rootViewController = nav;
+    window.rootViewController = tabBarController;
 }
 
 + (void)setLoginViewController

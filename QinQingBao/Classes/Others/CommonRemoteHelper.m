@@ -53,7 +53,7 @@ static NSOperationQueue * _queue;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 设置回复内容信息
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-    
+    manager.requestSerializer.timeoutInterval = 20;
     if (type == CommonRemoteTypePost)
     {
         // 请求的方法

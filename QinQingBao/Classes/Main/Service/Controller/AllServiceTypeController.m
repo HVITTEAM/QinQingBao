@@ -37,7 +37,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"全部分类";
+    self.title = @"更多服务";
     self.view.backgroundColor = HMGlobalBg;
     
     self.tableView.contentInset = UIEdgeInsetsMake(- 35, 0, 0, 0);

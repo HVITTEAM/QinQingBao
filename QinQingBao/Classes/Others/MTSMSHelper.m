@@ -111,7 +111,7 @@
         }
     }
     
-    NSString* str=[NSString stringWithFormat:@"%@:%@ %@",NSLocalizedString(@"我们将发送验证码到这个号码:", nil),self.areaCode,telNumber];
+    NSString* str=[NSString stringWithFormat:@"%@:%@ %@",NSLocalizedString(@"我们将发送验证码到这个号码", nil),self.areaCode,telNumber];
     _str=[NSString stringWithFormat:@"%@",telNumber];
     UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"确认手机号码", nil)
                                                   message:str delegate:self

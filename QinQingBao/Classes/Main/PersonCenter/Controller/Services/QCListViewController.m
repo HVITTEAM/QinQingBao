@@ -11,7 +11,7 @@
 #import "OrderTotals.h"
 #import "OrderDetailController.h"
 
-@interface QCListViewController ()
+@interface QCListViewController ()<UIActionSheetDelegate>
 {
     NSMutableArray *dataProvider;
     NSInteger currentPageIdx;
@@ -89,49 +89,49 @@
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
-                  @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"page" : @"10",
+                  @"page" : @"100",
                   @"get_type" : @"0"};
     }
     else if ([self.title isEqualToString:@"待付款"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
-                  @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"pay_staus" : @"0",
-                  @"page" : @"10",
+                  @"page" : @"100",
                   @"get_type" : @"0"};
     }
     else if ([self.title isEqualToString:@"受理中"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
-                  @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"2,5,8,12,15,22,25",
-                  @"page" : @"10",
-                  @"get_type" : @"1"};
+                  @"status" : @"0,9",
+                  @"page" : @"100",
+                  @"get_type" : @"2"};
     }
     else if ([self.title isEqualToString:@"待评价"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
-                  @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"32",
-                  @"page" : @"10",
-                  @"get_type" : @"1"};
+                  @"status" : @"30,39",
+                  @"page" : @"100",
+                  @"get_type" : @"2"};
     }
     else if ([self.title isEqualToString:@"取消/售后"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
-                  @"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"[50,59]",
-                  @"page" : @"10",
+                  @"status" : @"50,59",
+                  @"page" : @"100",
                   @"get_type" : @"2"};
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
@@ -150,6 +150,7 @@
                                          self.noneResultHandler();
                                      }
                                      [dataProvider addObjectsFromArray:[result.datas copy]];
+                                     [self.tableView removePlace];
                                      [self.tableView reloadData];
                                      [self.tableView.footer endRefreshing];
                                      [HUD removeFromSuperview];
@@ -229,5 +230,40 @@
         [[UIApplication sharedApplication] openURL:url];;
     }
 }
+
+//- (void)callHandler:
+//{
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"取消"
+//                                               destructiveButtonTitle:nil
+//                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
+//                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
+//    [actionSheet showInView:self];
+//    
+//}
+//
+//
+//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    NSURL *url;
+//    switch (buttonIndex)
+//    {
+//        case 0:
+//            url = [NSURL URLWithString:@"telprompt://96345"];
+//            break;
+//        case 1:
+//            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgtelnum]];
+//            break;
+//        case 2:
+//            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgphone]];
+//            break;
+//        default:
+//            break;
+//    }
+//    [[UIApplication sharedApplication] openURL:url];
+//    
+//}
+
 
 @end

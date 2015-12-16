@@ -98,18 +98,11 @@
  */
 -(void)getDataProvider
 {
-    if ([SharedAppUtil defaultCommonUtil].userVO.old_id == nil)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"暂无数据" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alertView show];;
-        return;
-    }
-    
     [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
     dataProvider = [[NSMutableArray alloc] init];
-    [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                  @"client" : @"ios",
                                                                  @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -128,10 +121,10 @@
                                          dataProvider = result.datas;
                                      }
                                      [self addSelfToFamily];
-                                     [SVProgressHUD dismiss];
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [SVProgressHUD dismiss];
+                                     [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
                                      [self addSelfToFamily];
                                  }];
@@ -143,7 +136,7 @@
 -(void)addSelfToFamily
 {
     FamilyModel *fvo = [[FamilyModel alloc] init];
-    fvo.oid = [SharedAppUtil defaultCommonUtil].userVO.old_id;
+    fvo.member_id = [SharedAppUtil defaultCommonUtil].userVO.member_id;
 //    fvo.oldname = @"自己";
     fvo.relation = @"自己";
 
@@ -205,6 +198,7 @@
 -(void)addHandler:(id)sender
 {
     AddMemberViewController *addView = [[AddMemberViewController alloc] init];
+    addView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:addView animated:YES];
 }
 

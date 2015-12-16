@@ -49,7 +49,7 @@
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 已评价",item.wpjtime] atIndex:0];
     }
-    if (item.wqxtime && [item.status isEqualToString:@"8"])// 工单取消申请时间
+    if (item.wqxtime && [item.status floatValue] > 50 && [item.status floatValue] < 59)// 工单取消申请时间
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 取消订单",item.wqxtime] atIndex:0];
     }

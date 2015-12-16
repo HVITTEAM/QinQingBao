@@ -183,104 +183,108 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-//http://ibama.hvit.com.cn/shop/mobile/
 //http://61.143.60.87/ylserver/shop/mobile/
+//http://ibama.hvit.com.cn/shop/mobile/
+
+
+/***用户头像url*/
+#define URL_Icon  @"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/"
 
 /***用户注册url*/
-#define URL_Register  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=register"
+#define URL_Register  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=register"
 
 /***用户登录url*/
-#define URL_Login  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=login"
+#define URL_Login  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=login"
 
 /***用户登出url*/
-#define URL_Logout  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=logout"
+#define URL_Logout  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=logout"
 
 /***上传头像url*/
-#define URL_UploadAvatar  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+#define URL_UploadAvatar  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
 
 /***获取会员资料url*/
-#define URL_GetUserInfor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=info"
+#define URL_GetUserInfor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=info"
 
 /***设置会员资料url*/
-#define URL_EditUserInfor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=edit"
+#define URL_EditUserInfor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=edit"
 
 /***上传头像url*/
-#define URL_UploadAvatar  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+#define URL_UploadAvatar  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
 
 /***头像url*/
 #define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",imgName];
 
 /***获取监控数据url*/
-#define URL_GetMonitor  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=monitor&op=getMonitor"
+#define URL_GetMonitor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=monitor&op=getMonitor"
 
 /***忘记密码url*/
-#define URL_Forgot  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=forgot"
+#define URL_Forgot  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=forgot"
 
 /***获取忘记密码验证码url*/
-#define URL_GetForgotCode  @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=getForgotCode"
+#define URL_GetForgotCode  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=getForgotCode"
 
 /***修改密码url*/
-#define URL_ChangePWD @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=member&op=changepassword"
+#define URL_ChangePWD @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=changepassword"
 
 /***获取生活分类url*/
-#define URL_Typelist @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_typelist"
+#define URL_Typelist @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_typelist"
 
 /***获取服务商的具体服务url*/
-#define URL_Iteminfo @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_iteminfo"
+#define URL_Iteminfo @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_iteminfo"
 
 /***根据iid获取该服务的详细资料url*/
-#define URL_Iteminfo_data_byiid @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_iteminfo_data_byiid"
+#define URL_Iteminfo_data_byiid @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_iteminfo_data_byiid"
 
 /***获取地区信息url*/
-#define URL_Get_address @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_address_data"
+#define URL_Get_address @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_address_data"
 
 /***推送信息url*/
-#define URL_Push @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+#define URL_Push @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo"
 
 /***获取亲属关系信息url*/
-#define URL_Relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_relation_byoldid"
+#define URL_Relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=get_relation"
 
 /***获取老人健康信息url*/
-#define URL_Healthy @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_healthy_data"
+#define URL_Healthy @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=healthy&op=get_healthy_data"
 
 /***解除亲属关系绑定url*/
-#define URL_Del_relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_del_relation_byreid"
+#define URL_Del_relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=del_relation_byreid"
 
 /***亲属 - 关系绑定url*/
-#define URL_Bang_relation @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=bang_relation"
+#define URL_Bang_relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=bang_relation"
 
 /***获取该用户可用的优惠卷url*/
-#define URL_Youhuicard @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
+#define URL_Youhuicard @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
 
 /***确认下单综合接口url*/
-#define URL_Get_data_create_order @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_data_create_order"
+#define URL_Get_data_create_order @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_data_create_order"
 
 /***提交订单接口url*/
-#define URL_Create_order @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=creat_order"
+#define URL_Create_order @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=creat_order"
 
 /***获得用户订单信息url*/
-#define URL_Workinfo_data @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+#define URL_Workinfo_data @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_data"
 
 /***修改工单url*/
-#define URL_Ck_workinfo_status @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status"
+#define URL_Ck_workinfo_status @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status"
 
 /***获取评价url*/
-#define URL_Get_dis_cont @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_dis_cont"
+#define URL_Get_dis_cont @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&workinfo=get_dis_cont"
 
 /***提交评价url*/
-#define URL_Save_dis_cont @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=save_dis_cont"
+#define URL_Save_dis_cont @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=save_dis_cont"
 
 /***获取用户订单url*/
-#define URL_Get_workinfo_data @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+#define URL_Get_workinfo_data @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
 
 /***获取用户订单url*/
-#define URL_Del_workinfo_by_wid @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=del_workinfo_by_wid"
+#define URL_Del_workinfo_by_wid @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=del_workinfo_by_wid"
 
 /***获取用户或服务商的工作单信息url  旧的*/
-#define URL_Get_workinfo @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+#define URL_Get_workinfo @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo"
 
 /***获取用户或服务商的工作单信息url  新的*/
-#define URL_Get_workinfo_bystatus @"http://ibama.hvit.com.cn/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_by_oid_status"
+#define URL_Get_workinfo_bystatus @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_by_status"
 
 
 

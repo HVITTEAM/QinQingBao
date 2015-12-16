@@ -158,7 +158,6 @@
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
-                                         
                                          id codeNum = [dict objectForKey:@"code"];
                                          if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                          {
@@ -169,12 +168,12 @@
                                          {
                                              [NoticeHelper AlertShow:@"注册成功！" view:self.view];
                                              
-                                             [self.navigationController popToRootViewControllerAnimated:YES];
-                                             //                                             NSDictionary *di = [dict objectForKey:@"datas"];
-                                             //                                             UserModel *vo = [UserModel objectWithKeyValues:di];
-                                             //                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
-                                             //                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             //                                             [MTControllerChooseTool setRootViewController];
+                                             // [self.navigationController popToRootViewControllerAnimated:YES];
+                                             NSDictionary *di = [dict objectForKey:@"datas"];
+                                             UserModel *vo = [UserModel objectWithKeyValues:di];
+                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
+                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
+                                             [MTControllerChooseTool setRootViewController];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

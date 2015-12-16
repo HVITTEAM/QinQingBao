@@ -37,7 +37,26 @@
 
 -(void)initNavgation
 {
-    self.title = self.type == 1 ? @"看护宝" :@"腕表";
+    
+    switch (self.type) {
+        case 1:
+            self.title = @"看护宝";
+            break;
+        case 2:
+            self.title = @"腕表";
+            break;
+        case 3:
+            self.title = @"心脏健康管家";
+            break;
+        case 4:
+            self.title = @"血压仪";
+            break;
+        case 5:
+            self.title = @"推拿理疗";
+            break;
+        default:
+            break;
+    }
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -49,6 +68,32 @@
 -(void)initData
 {
     UIImageView *lastimg;
+    
+    if (self.type > 2)
+    {
+        UIImage *img;
+        if (self.type == 3)
+            img = [UIImage imageNamed:@"heartmanager.jpg"];
+        else if (self.type == 4)
+            img = [UIImage imageNamed:@"bloodp.jpg"];
+        else if (self.type == 5)
+            img = [UIImage imageNamed:@"massage.jpg"];
+        CGSize size = img.size;
+        //缩放比例
+        float scalePro = MTScreenW / size.width;
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+        imageView.x = 0;
+        imageView.y = CGRectGetMaxY(lastimg.frame);
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.width = MTScreenW;
+        imageView.height = size.height * scalePro;
+        
+        [bgScrollview addSubview:imageView];
+        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
+        lastimg = imageView;
+        
+        return;
+    }
     int max = self.type == 1 ? 6 : 8;
     for (int i = 0; i < max; i++)
     {
@@ -57,7 +102,7 @@
             img = [UIImage imageNamed:[NSString stringWithFormat:@"care_%d.jpg",i]];
         else
             img = [UIImage imageNamed:[NSString stringWithFormat:@"watch%d.jpg",i]];
-
+        
         CGSize size = img.size;
         //缩放比例
         float scalePro = MTScreenW / size.width;
@@ -68,12 +113,12 @@
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.width = MTScreenW;
         imageView.height = size.height * scalePro;
-
+        
         [bgScrollview addSubview:imageView];
         bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
         lastimg = imageView;
-        
-    }}
+    }
+}
 
 -(void)back
 {

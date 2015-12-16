@@ -24,6 +24,16 @@
 
 @implementation VideoListViewController
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    self.title = @"设备列表";
+    
+    [self initTableViewSkin];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -77,15 +87,7 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.title = @"设备列表";
-    
-    [self initTableViewSkin];
-    
-}
+
 -(void)initTableViewSkin
 {
     self.tableView.backgroundColor = HMGlobalBg;

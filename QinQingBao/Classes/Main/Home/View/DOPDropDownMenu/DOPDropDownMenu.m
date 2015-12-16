@@ -126,18 +126,18 @@ struct {
     return [self.dataSource menu:self titleForRowAtIndexPath:indexPath];
 }
 
-- (void)selectDefalutIndexPath
+- (void)selectDefalutIndexPath:(DOPIndexPath *)indexPath
 {
     if (_dataSource && _delegate
         && [_delegate respondsToSelector:@selector(menu:didSelectRowAtIndexPath:)]) {
         
         if (!_isClickHaveItemValid &&_dataSourceFlags.numberOfItemsInRow
-            && [_dataSource menu:self numberOfItemsInRow:0 column:0] > 0) {
+            && [_dataSource menu:self numberOfItemsInRow:indexPath.row column:indexPath.column] > 0) {
             
-            [_delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:0 row:0 item:0]];
+            [_delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:indexPath.column row:indexPath.row item:0]];
         } else if (_dataSourceFlags.numberOfRowsInColumn
-                   && [_dataSource menu:self numberOfRowsInColumn:0] > 0){
-            [_delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:0 row:0]];
+                   && [_dataSource menu:self numberOfRowsInColumn:indexPath.column] > 0){
+            [_delegate menu:self didSelectRowAtIndexPath:[DOPIndexPath indexPathWithCol:indexPath.column row:indexPath.row]];
         }
     }
 }
@@ -608,7 +608,6 @@ struct {
 #pragma mark - tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
     if (_leftTableView == tableView) {
         BOOL haveItem = [self confiMenuWithSelectRow:indexPath.row];
         BOOL isClickHaveItemValid = self.isClickHaveItemValid ? YES : haveItem;
@@ -666,9 +665,5 @@ struct {
     }];
 
 }
-
-
-
-
 
 @end

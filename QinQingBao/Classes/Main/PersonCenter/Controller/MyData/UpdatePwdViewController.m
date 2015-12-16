@@ -117,6 +117,10 @@
     {
         if (self.tel.rightText.text.length != 11)
             return [NoticeHelper AlertShow:@"请输入正确的电话号码" view:self.view];
+       else if (self.nowPwd.rightText.text.length == 0 ||
+                self.old.rightText.text.length == 0 ||
+                self.code.rightText.text.length == 0)
+            return [NoticeHelper AlertShow:@"请输入完整的信息" view:self.view];
         
         [self.view endEditing:YES];
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

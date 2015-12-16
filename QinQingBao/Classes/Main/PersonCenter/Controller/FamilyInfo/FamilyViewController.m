@@ -22,6 +22,15 @@
 
 @implementation FamilyViewController
 
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -32,8 +41,6 @@
     [super viewDidLoad];
     
     [self initNavigation];
-    
-    [self setupGroups];
     
     if (self.isfromOrder)
         [self getUserData];
@@ -59,8 +66,10 @@
  */
 -(void)getDataProvider
 {
+    [self setupGroups];
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"oldid" : [SharedAppUtil defaultCommonUtil].userVO.old_id,
+    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                  @"client" : @"ios",
                                                                  @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -72,13 +81,17 @@
                                          //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          //                                         [alertView show];
                                          
-                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
+                                         if(!self.isfromOrder)
+                                             [self initWithPlaceString:@"您还没有绑定的家属呐"];
+                                         [dataProvider removeAllObjects];
+                                         [self setupGroups];
                                      }
                                      else
                                      {
                                          FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
                                          dataProvider = result.datas;
                                          [self setupGroups];
+                                         [self removePlace];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -87,7 +100,6 @@
                                      [self.view endEditing:YES];
                                  }];
 }
-
 
 /**
  *  获取当前登录账户的个人资料
@@ -111,14 +123,15 @@
                                              infoVO = [UserInforModel objectWithKeyValues:di];
                                              
                                              familyVO = [[FamilyModel alloc] init];
-                                             //                                             familyVO.rid = infoVO.member_truename;
-                                             familyVO.oid = infoVO.member_id;
-                                             familyVO.oldname = infoVO.member_truename;
-                                             familyVO.oldphone = infoVO.member_mobile;
+                                             familyVO.member_id = infoVO.member_id;
+                                             familyVO.member_truename = infoVO.member_truename;
+                                             familyVO.member_mobile = infoVO.member_mobile;
                                              familyVO.member_sex = infoVO.member_sex;
                                              familyVO.member_birthday = infoVO.member_birthday;
                                              familyVO.totalname = infoVO.totalname;
                                              familyVO.member_areainfo = infoVO.member_areainfo;
+                                             familyVO.member_birthday = infoVO.member_birthday;
+                                             familyVO.member_areaid = infoVO.member_areaid;
                                              
                                              [self setupGroups];
                                          }
@@ -168,7 +181,7 @@
     NSMutableArray *itemArr = [[NSMutableArray alloc] init];
     for (FamilyModel *data in dataProvider)
     {
-        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.oldname icon:@""];
+        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.member_truename icon:@""];
         item.subtitle = data.relation;
         __weak typeof(FamilyModel) *weakSelf = data;
         item.operation = ^{
@@ -204,7 +217,7 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:familyVO.oldname icon:@""];
+    HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:familyVO.member_truename icon:@""];
     item.subtitle = @"自己";
     item.operation = ^{
         if(self.isfromOrder)

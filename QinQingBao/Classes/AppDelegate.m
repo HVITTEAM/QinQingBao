@@ -78,10 +78,13 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-                                                    message:@"deviceToken获取失败！"
-                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alert show];}
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
+//                                                    message:@"deviceToken获取失败！"
+//                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//    [alert show];
+    
+    NSLog(@"--------------deviceToken获取失败--------------------");
+}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ServiceItemModel.h"
 
-@interface BusinessInfoCell : UITableViewCell
+@interface BusinessInfoCell : UITableViewCell<UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *callBtn;
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
 @property (strong, nonatomic) IBOutlet UILabel *addressLab;

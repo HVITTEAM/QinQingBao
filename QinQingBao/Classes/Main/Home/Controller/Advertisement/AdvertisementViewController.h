@@ -11,7 +11,7 @@
 @interface AdvertisementViewController : UIViewController
 
 /**
- *  广告类型 1 看护宝 2 腕表
+ *  广告类型 1 看护宝 2 腕表 3 心脏健康管家 4血压仪 5 推拿
  */
 @property (nonatomic, assign) NSInteger type;
 @end

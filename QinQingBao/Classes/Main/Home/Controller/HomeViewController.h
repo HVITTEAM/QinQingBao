@@ -23,6 +23,7 @@
 
 - (IBAction)healthClickHandler:(id)sender;
 - (IBAction)questionClickHander:(id)sender;
+- (IBAction)massageClickHandler:(id)sender;
 
 /**图片数组*/
 @property (strong,nonatomic)NSMutableArray *slideImages;

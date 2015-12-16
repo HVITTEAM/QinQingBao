@@ -54,7 +54,7 @@
     _evaItem = evaItem;
     if (!evaItem)
         return;
-    self.nameLab.text  = evaItem.oldname;
+    self.nameLab.text  = evaItem.member_name;
     self.timeLab.text  = evaItem.wpjtime;
     self.contentLab.text  = evaItem.dis_con;
     self.contentLab.text  = @"味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞";

@@ -10,7 +10,7 @@
 
 @interface UserModel : NSObject
 
-@property (nonatomic, copy) NSNumber *member_id;
+@property (nonatomic, copy) NSString *member_id;
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *old_id;
 @property (nonatomic, copy) NSString *imei_watch;
