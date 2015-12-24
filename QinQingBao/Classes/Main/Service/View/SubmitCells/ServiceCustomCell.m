@@ -29,11 +29,14 @@
 
 -(void)setdataWithItem:(FamilyModel *)item
 {
-    NSString *str = [NoticeHelper intervalSinceNowByyear:@"2008-01-01"];
+    NSString *str = [NoticeHelper intervalSinceNowByyear:item.member_birthday];
     self.nameLab.text = item.member_truename;
     self.phoneLab.text = item.member_mobile;
-    self.addressLab.text = [NSString stringWithFormat:@"%@%@",item.totalname,item.member_areainfo];
-    self.sexLab.text = [item.member_sex isEqualToString:@"1"] ? @"男" : @"女";
+    if (!item.totalname || !item.member_areainfo)
+        self.addressLab.text = @"";
+    else
+        self.addressLab.text = [NSString stringWithFormat:@"%@%@",item.totalname,item.member_areainfo];
+    self.sexLab.text = [item.member_sex isEqualToString:@"1"] ? @"男" : [item.member_sex isEqualToString:@"3"] ? @"保密" : @"女";
     self.ageLab.text = str;
 }
 

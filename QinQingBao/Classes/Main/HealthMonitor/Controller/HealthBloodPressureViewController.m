@@ -7,6 +7,7 @@
 //
 
 #import "HealthBloodPressureViewController.h"
+#import "MoreChartDataViewController.h"
 #import "BloodCell.h"
 #import "ChartCell.h"
 #import "PromptCell.h"
@@ -68,7 +69,7 @@
     if (section==0 ||section==2)
         return 1;
     else
-        return self.dataProvider.count;
+        return self.dataProvider.count > 5 ? 6 : self.dataProvider.count + 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,13 +88,30 @@
         return cell;
     }
     else if (indexPath.section == 1) {
-        BloodCell *cell = [tableView dequeueReusableCellWithIdentifier:celldata];
-        if (!cell) {
-            cell= [[[NSBundle mainBundle]loadNibNamed:@"BloodCell" owner:nil options:nil] lastObject];
+        
+        if (indexPath.row == 0 )
+        {
+            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
+            
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
+            commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            commoncell.textLabel.font = [UIFont systemFontOfSize:14];
+            commoncell.textLabel.textColor = [UIColor orangeColor];
+            commoncell.textLabel.text = @"更多数据";
+            
+            return commoncell;
         }
-        cell.type = self.type;
-        [cell setItem:self.dataProvider[indexPath.row]];
-        return cell;
+        else
+        {
+            BloodCell *cell = [tableView dequeueReusableCellWithIdentifier:celldata];
+            if (!cell) {
+                cell= [[[NSBundle mainBundle]loadNibNamed:@"BloodCell" owner:nil options:nil] lastObject];
+            }
+            cell.type = self.type;
+            [cell setItem:self.dataProvider[indexPath.row - 1]];
+            return cell;
+        }
     }
     else
     {
@@ -110,6 +128,36 @@
 {
     return 15;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row == 0)
+    {
+        MoreChartDataViewController *moreData = [[MoreChartDataViewController alloc] init];
+        moreData.dataProvider = self.dataProvider;
+        [self.navigationController pushViewController:moreData animated:YES];
+    }
+}
+
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    switch (section)
+//    {
+//        case 0:
+//            return  @"统计图";
+//            break;
+//        case 1:
+//            return  @"详细数据";
+//
+//            break;
+//        case 2:
+//            return  @"温馨提示";
+//            break;
+//        default:
+//             return  @"";
+//            break;
+//    }
+//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

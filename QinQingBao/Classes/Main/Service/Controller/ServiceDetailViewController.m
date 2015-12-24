@@ -79,8 +79,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.selectedItem.iid,
                                                                      @"page" : @10,
                                                                      @"p" : @1,
-                                                                     @"client" : @"ios",
-                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                     @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
                                      evaArr = result.datas;
@@ -90,6 +89,9 @@
                                  }];
 }
 
+/**
+ *  获取服务详情数据
+ */
 -(void)getDataProvider
 {
     itemInfo = self.selectedItem;
@@ -130,7 +132,7 @@
     if (indexPath.row == 0)
         height =  evaArr.count != 0 ? 180 : 50;
     else if (indexPath.row == 1)
-        height = 160;
+        height = 125;
     else
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -274,6 +276,14 @@
  */
 -(void)submitClickHandler
 {
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+    {
+        LoginViewController *login = [[LoginViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+        [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
+        login.backHiden = NO;
+        return;
+    }
     OrderSubmitController *submitController = [[OrderSubmitController alloc] init];
     submitController.serviceDetailItem = self.selectedItem;
     submitController.serviceTypeItem = self.serviceTypeItem;

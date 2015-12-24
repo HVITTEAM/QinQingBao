@@ -210,7 +210,6 @@
         self.rightText.clearButtonMode = UITextFieldViewModeAlways;
         self.rightText.adjustsFontSizeToFitWidth = YES;
     } else if ([item isKindOfClass:[HMCommonButtonItem class]]) {
-        
         [self.contentView addSubview:self.rightText];
         HMCommonTextfieldItem *hitem = (HMCommonTextfieldItem *)item;
         self.rightText.placeholder = hitem.placeholder;

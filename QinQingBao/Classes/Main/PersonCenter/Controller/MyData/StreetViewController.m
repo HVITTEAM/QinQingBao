@@ -39,15 +39,16 @@
 
 -(void)getDataProvider
 {
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : self.dvcode_id ,
                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                     @"client" : @"ios",
-                                                                    @"all" : @0,}
+                                                                    @"all" : @0}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                         [NoticeHelper AlertShow:[dict objectForKey:@"errorMsg"] view:self.view];
                                      }
                                      else
                                      {
@@ -55,9 +56,11 @@
                                          dataProvider = result.datas;
                                          [self.tableView reloadData];
                                      }
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
+                                     [HUD removeFromSuperview];
                                  }];
 }
 
@@ -90,19 +93,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.title isEqualToString:@"选择社区"])
+    if ([self.title isEqualToString:@"选择街道"])
     {
-        StreetViewController *VC = [[StreetViewController alloc] init];
-        CityModel *vo = dataProvider[indexPath.row];
-        self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
-        VC.selectedHandler = self.selectedHandler;
-        VC.dvcode_id = vo.dvcode;
-        VC.detailStr = self.detailStr;
-        VC.viewTitle = @"选择街道";
-        [self.navigationController pushViewController:VC animated:YES];
-    }
-    else if ([self.title isEqualToString:@"选择街道"])
-    {
+//        StreetViewController *VC = [[StreetViewController alloc] init];
+//        CityModel *vo = dataProvider[indexPath.row];
+//        self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
+//        VC.selectedHandler = self.selectedHandler;
+//        VC.dvcode_id = vo.dvcode;
+//        VC.detailStr = self.detailStr;
+//        VC.viewTitle = @"选择社区";
+//        [self.navigationController pushViewController:VC animated:YES];
+//    }
+//    else if ([self.title isEqualToString:@"选择社区"])
+//    {
         CityModel *vo = dataProvider[indexPath.row];
         self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
         self.selectedHandler(vo,self.detailStr);
@@ -115,7 +118,7 @@
         VC.selectedHandler = self.selectedHandler;
         VC.dvcode_id = vo.dvcode;
         VC.detailStr = vo.dvname;
-        VC.viewTitle = @"选择社区";
+        VC.viewTitle = @"选择街道";
         [self.navigationController pushViewController:VC animated:YES];
     }
 }

@@ -15,4 +15,6 @@
 - (IBAction)cancelBtnClickHandler:(id)sender;
 @property (nonatomic, retain) OrderItem *orderItem;
 
+@property (nonatomic, copy) void (^doneHandlerClick)();
+
 @end

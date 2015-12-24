@@ -33,7 +33,7 @@
 -(void)setItem:(ServiceItemModel *)item
 {
     _item = item;
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",item.item_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.item_url]];
     [self.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     self.titleLab.text = item.tname;
     self.contentLab.text = item.icontent;

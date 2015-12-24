@@ -25,9 +25,9 @@
         self.sunSellLab.text = @"售出0单";
     else
         self.sunSellLab.text = [NSString stringWithFormat:@"售出%@单",item.sumsell];
-    self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.price];
-    self.serviceTitleLab.text = item.icontent;
-    self.serviceDetailLab.text = item.orgname;
+    self.priceLab.text = [item.price isEqualToString:@"0"] || [item.price isEqualToString:@"0.00"] ? @"面议" : [NSString stringWithFormat:@"￥%@",item.price];
+    self.serviceTitleLab.text = item.orgname;
+    self.serviceDetailLab.text = item.tname;
     float score = [item.sumgrad floatValue]/[item.sumdis floatValue];
     
     self.starView.show_star = 10;
@@ -45,7 +45,7 @@
     //    if (item.distance)
     self.distanceLab.text = [NoticeHelper kilometre2meter:[item.distance floatValue]];
     self.distanceLab.textColor = MTNavgationBackgroundColor;
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",item.item_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.item_url]];
     [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
 }
 

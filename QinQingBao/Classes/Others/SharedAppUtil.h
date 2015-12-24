@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) UserModel *userVO;
 
-//@property (nonatomic, retain) UINavigationController *mainNav;
+@property (nonatomic, retain) UITabBarController *tabBar;
 
 @property (nonatomic, copy) NSString *deviceToken;
 

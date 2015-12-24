@@ -47,7 +47,7 @@
     [super viewWillAppear:animated];
     
     //注册键盘通知
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -124,13 +124,19 @@
     }
 }
 
+
+
+- (IBAction)agreeChange:(id)sender
+{
+    self.agreementBtn.selected = !self.agreementBtn.selected;
+}
+
 /**
  *  阅读并同意协议
  *
  */
 - (IBAction)agreement:(id)sender
 {
-    self.agreementBtn.selected = !self.agreementBtn.selected;
     AgreementViewController *vc = [[AgreementViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -144,6 +150,11 @@
     if (![self checkForm])
     {
         [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+        return;
+    }
+    else if (!self.agreementBtn.selected)
+    {
+        [NoticeHelper AlertShow:@"请阅读并同意亲情宝服务条款！" view:self.view];
         return;
     }
     else
@@ -283,6 +294,5 @@
         self.view.bounds = CGRectMake(0, 0, MTScreenW, MTScreenH);
     }];
 }
-
 
 @end

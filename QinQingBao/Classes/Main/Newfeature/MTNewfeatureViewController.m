@@ -193,16 +193,17 @@
  */
 - (void)start
 {
-    UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
-    if (vo == nil)
-    {
-        [MTControllerChooseTool setLoginViewController];
-    }
-    else
-    {
-        [SharedAppUtil defaultCommonUtil].userVO = vo;
-        [MTControllerChooseTool setRootViewController];
-    }
+//    UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
+//    if (vo == nil)
+//    {
+//        [MTControllerChooseTool setLoginViewController];
+//    }
+//    else
+//    {
+//        [SharedAppUtil defaultCommonUtil].userVO = vo;
+//        [MTControllerChooseTool setRootViewController];
+//    }
+    [MTControllerChooseTool setRootViewController];
 }
 
 #pragma mark - UIScrollViewDelegate

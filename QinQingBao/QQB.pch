@@ -43,7 +43,7 @@
 #import "UITableView+Placeholder.h"
 #import "UIViewController+Placeholder.h"
 #import "Star.h"
-
+#import "LoginViewController.h"
 
 #import "TSPopoverController.h"
 #import "TSActionSheet.h"
@@ -149,12 +149,9 @@
 
 /** 通知 */
 
-#define MTHideHome @"MTHideHome"
-#define MTShowHome @"MTShowHome"
+#define MTLoginTimeout @"MTLoginTimeout"
 
-
-#define MTAddFamily @"HMSortDidSelectNotification"
-#define MTSececteFamily @"HMSelectedSort"
+#define MTSececteFamily @"HMSelectedFamily"
 
 #define HMCityDidSelectNotification @"HMCityDidSelectNotification"
 #define HMSelectedCity @"HMSelectedCity"
@@ -182,110 +179,114 @@
  */
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
+#define URL_Local @"http://61.143.60.87/ylserver"
 
-//http://61.143.60.87/ylserver/shop/mobile/
-//http://ibama.hvit.com.cn/shop/mobile/
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
+/***注册服务条款url*/
+#define URL_Agreement [NSString stringWithFormat:@"%@/admin/manager/index.php/family/family_detail",URL_Local]
+
+/***轮播广告url*/
+#define URL_Advertisementpic [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=baseconf&op=get_pic_cofn",URL_Local]
 
 /***用户头像url*/
-#define URL_Icon  @"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/"
+#define URL_Icon  [NSString stringWithFormat:@"%@/shop/data/upload/shop/avatar/",URL_Local]
+
+/***图片url*/
+#define URL_Img  [NSString stringWithFormat:@"%@/public/",URL_Local]
 
 /***用户注册url*/
-#define URL_Register  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=register"
+#define URL_Register [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=register",URL_Local]
 
 /***用户登录url*/
-#define URL_Login  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=login"
+#define URL_Login  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=login",URL_Local]
 
 /***用户登出url*/
-#define URL_Logout  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=logout"
+#define URL_Logout  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=logout",URL_Local]
 
 /***上传头像url*/
-#define URL_UploadAvatar  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+#define URL_UploadAvatar [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=uploadAvatar",URL_Local]
 
 /***获取会员资料url*/
-#define URL_GetUserInfor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=info"
+#define URL_GetUserInfor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=info",URL_Local]
 
 /***设置会员资料url*/
-#define URL_EditUserInfor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=edit"
-
-/***上传头像url*/
-#define URL_UploadAvatar  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=uploadAvatar"
+#define URL_EditUserInfor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=edit",URL_Local]
 
 /***头像url*/
-#define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://ibama.hvit.com.cn/shop/data/upload/shop/avatar/%@",imgName];
+#define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://61.143.60.87/ylserver/shop/data/upload/shop/avatar/%@",imgName];
 
 /***获取监控数据url*/
-#define URL_GetMonitor  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=monitor&op=getMonitor"
+#define URL_GetMonitor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=monitor&op=getMonitor",URL_Local]
 
 /***忘记密码url*/
-#define URL_Forgot  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=forgot"
+#define URL_Forgot  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=forgot",URL_Local]
 
 /***获取忘记密码验证码url*/
-#define URL_GetForgotCode  @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=getForgotCode"
+#define URL_GetForgotCode  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=getForgotCode",URL_Local]
 
 /***修改密码url*/
-#define URL_ChangePWD @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=member&op=changepassword"
+#define URL_ChangePWD [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=changepassword",URL_Local]
 
 /***获取生活分类url*/
-#define URL_Typelist @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_typelist"
+#define URL_Typelist [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_typelist",URL_Local]
 
 /***获取服务商的具体服务url*/
-#define URL_Iteminfo @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_iteminfo"
+#define URL_Iteminfo [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_iteminfo",URL_Local]
 
 /***根据iid获取该服务的详细资料url*/
-#define URL_Iteminfo_data_byiid @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_iteminfo_data_byiid"
+#define URL_Iteminfo_data_byiid [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_iteminfo_data_byiid",URL_Local]
 
 /***获取地区信息url*/
-#define URL_Get_address @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_address_data"
+#define URL_Get_address [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_address_data",URL_Local]
 
 /***推送信息url*/
-#define URL_Push @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+#define URL_Push [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_workinfo",URL_Local]
 
 /***获取亲属关系信息url*/
-#define URL_Relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=get_relation"
+#define URL_Relation [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=relation&op=get_relation",URL_Local]
 
 /***获取老人健康信息url*/
-#define URL_Healthy @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=healthy&op=get_healthy_data"
+#define URL_Healthy [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=healthy&op=get_healthy_data",URL_Local]
 
 /***解除亲属关系绑定url*/
-#define URL_Del_relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=del_relation_byreid"
+#define URL_Del_relation [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=relation&op=del_relation_byreid",URL_Local]
 
 /***亲属 - 关系绑定url*/
-#define URL_Bang_relation @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=relation&op=bang_relation"
+#define URL_Bang_relation [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=relation&op=bang_relation",URL_Local]
 
 /***获取该用户可用的优惠卷url*/
-#define URL_Youhuicard @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_youhuicard"
+#define URL_Youhuicard [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_youhuicard",URL_Local]
 
 /***确认下单综合接口url*/
-#define URL_Get_data_create_order @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_data_create_order"
+#define URL_Get_data_create_order [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_data_create_order",URL_Local]
 
 /***提交订单接口url*/
-#define URL_Create_order @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=creat_order"
+#define URL_Create_order [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=creat_order",URL_Local]
 
 /***获得用户订单信息url*/
-#define URL_Workinfo_data @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_data"
+#define URL_Workinfo_data [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_data",URL_Local]
 
 /***修改工单url*/
-#define URL_Ck_workinfo_status @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status"
+#define URL_Ck_workinfo_status [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status",URL_Local]
 
 /***获取评价url*/
-#define URL_Get_dis_cont @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&workinfo=get_dis_cont"
+#define URL_Get_dis_cont [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&workinfo=get_dis_cont",URL_Local]
 
 /***提交评价url*/
-#define URL_Save_dis_cont @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=save_dis_cont"
+#define URL_Save_dis_cont [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=save_dis_cont",URL_Local]
 
 /***获取用户订单url*/
-#define URL_Get_workinfo_data @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo_data"
+#define URL_Get_workinfo_data [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_workinfo_data",URL_Local]
 
 /***获取用户订单url*/
-#define URL_Del_workinfo_by_wid @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=del_workinfo_by_wid"
+#define URL_Del_workinfo_by_wid [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=del_workinfo_by_wid",URL_Local]
 
 /***获取用户或服务商的工作单信息url  旧的*/
-#define URL_Get_workinfo @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=org&op=get_workinfo"
+#define URL_Get_workinfo [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_workinfo",URL_Local]
 
 /***获取用户或服务商的工作单信息url  新的*/
-#define URL_Get_workinfo_bystatus @"http://61.143.60.87/ylserver/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_by_status"
-
+#define URL_Get_workinfo_bystatus [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_by_status",URL_Local]
 
 
 
@@ -306,14 +307,6 @@ typedef NS_ENUM(NSInteger, ChartType) {
     ChartTypeHeart,
 };
 
-
 #define HTTP_REQUEST_OK_CODE          200
 
 #define IS_IOS7_OR_LATER                            ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
-
-
-
-
-
-
-

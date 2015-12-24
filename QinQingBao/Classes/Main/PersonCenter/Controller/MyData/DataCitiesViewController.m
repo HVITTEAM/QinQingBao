@@ -42,10 +42,11 @@
 
 -(void)getDataProvider
 {
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : self.dvcode_id ,
                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                     @"client" : @"ios",
-                                                                    @"all" : @0,}
+                                                                    @"all" : @0}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -58,9 +59,11 @@
                                          dataProvider = result.datas;
                                          [self.tableView reloadData];
                                      }
+                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
+                                     [HUD removeFromSuperview];
                                  }];
 }
 

@@ -10,4 +10,5 @@
 
 @interface AgreementViewController : UIViewController
 
+@property (nonatomic, retain) UIWebView *webv;
 @end

@@ -36,7 +36,7 @@
 -(void)setServiceDetailItem:(ServiceItemModel *)serviceDetailItem
 {
     _serviceDetailItem = serviceDetailItem;
-    self.totalPriceLabe.text = [NSString stringWithFormat:@"¥%@",serviceDetailItem.price];
+    self.totalPriceLabe.text = [serviceDetailItem.price isEqualToString:@"0"] || [serviceDetailItem.price isEqualToString:@"0.00"]? @"面议" : [NSString stringWithFormat:@"¥%@",serviceDetailItem.price];
 }
 
 /**

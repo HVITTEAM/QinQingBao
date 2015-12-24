@@ -17,6 +17,9 @@
     //当前选中的服务分类 默认为第一条
     ServiceTypeModel *selectedItem;
     DOPDropDownMenu *menu;
+    
+    //页面当前是否是刷新状态
+    BOOL isflesh;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -165,12 +168,14 @@
     [SVProgressHUD showWithStatus:@"正在加载..." maskType:SVProgressHUDMaskTypeBlack];
     [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : self.item.tid,
                                                                  @"client" : @"ios",
-                                                                 @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                  @"p" : @1,
                                                                  @"page" : @100}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServiceTypeDatas *result = [ServiceTypeDatas objectWithKeyValues:dict];
-                                     self.classifys = [result.datas copy];
+                                     if (!result.datas)
+                                         self.classifys = [[NSMutableArray alloc] initWithObjects:self.item, nil];
+                                     else
+                                         self.classifys = [result.datas copy];
                                      [self initTopMenu];
                                      [SVProgressHUD dismiss];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -181,12 +186,14 @@
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    [self getDataProviderWithConditon:self.condition];
+    if (!isflesh)
+        [self getDataProviderWithConditon:self.condition];
 }
 
 - (void)footerRereshing
 {
-    [self getDataProviderWithConditon:self.condition];
+    if (!isflesh)
+        [self getDataProviderWithConditon:self.condition];
 }
 
 /**
@@ -197,17 +204,17 @@
 -(void)getDataProviderWithConditon:(NSString *)condition
 {
     dataProvider = [[NSMutableArray alloc] init];
-    
+    isflesh = YES;
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
                                                                   @"p" : @1,
                                                                   @"tid" : selectedItem.tid,
                                                                   @"client" : @"ios",
-                                                                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                   @"condition" : condition,
-                                                                  @"lat" : [SharedAppUtil defaultCommonUtil].lat,
-                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon}
+                                                                  @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
+                                     isflesh = NO;
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      dataProvider = result.datas;
                                      [self.tableView reloadData];
@@ -222,6 +229,7 @@
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
+                                     isflesh = NO;
                                  }];
 }
 
@@ -250,7 +258,7 @@
         // 设置背景view
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    if (dataProvider)
+    if (dataProvider && dataProvider.count > 0 )
         [cell setitemWithData:dataProvider[indexPath.row]];
     return  cell;
 }

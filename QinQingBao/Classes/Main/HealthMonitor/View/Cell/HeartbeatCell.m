@@ -30,24 +30,25 @@
         
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
+        float length = item.heartrate_avg.length;
         // 设置富文本样式
         [attributedString addAttribute:NSForegroundColorAttributeName
                                  value:[UIColor redColor]
-                                 range:NSMakeRange(0, 2)];
+                                 range:NSMakeRange(0, length)];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:22.f]
-                                 range:NSMakeRange(0, 2)];
+                                 range:NSMakeRange(0, length)];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:12.f]
-                                 range:NSMakeRange(2, 5)];
+                                 range:NSMakeRange(length, string.length - length)];
         
         self.heartBeatLab.attributedText = attributedString;
     }
-    if (item.ect_time)
+    if (item.heart_time)
     {
-        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.ect_time];
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.heart_time];
         self.timeLab.text = time;
     }
 }

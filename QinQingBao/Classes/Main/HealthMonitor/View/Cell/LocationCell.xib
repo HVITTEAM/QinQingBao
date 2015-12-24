@@ -19,20 +19,14 @@
                         <rect key="frame" x="0.0" y="5" width="320" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ayd-a3-wbs">
-                                <rect key="frame" x="126" y="0.0" width="180" height="35"/>
+                                <rect key="frame" x="126" y="0.0" width="200" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="8yN-Am-RFA"/>
-                                    <constraint firstAttribute="height" constant="20" id="Q4b-aM-rb7"/>
-                                    <constraint firstAttribute="width" constant="180" id="fYD-eI-bxm"/>
+                                    <constraint firstAttribute="width" constant="200" id="fYD-eI-bxm" userLabel="width = 200"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Q4b-aM-rb7"/>
-                                    </mask>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

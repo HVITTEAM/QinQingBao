@@ -63,10 +63,16 @@ static NSOperationQueue * _queue;
                   NSString *html = operation.responseString;
                   NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
                   NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
+                  id codeNum = [dict objectForKey:@"code"];
                   if (dict == nil)
                   {
-                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"返回值为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                      [alertView show];
+                      NSLog(@"返回值为空......");
+                      success(dict,responseObject);
+                  }
+                  else if ([codeNum isKindOfClass:[NSString class]] && [codeNum isEqualToString: @"14001"])
+                  {
+                      NSLog(@"登陆信息过期,请重新登录");
+                      [MTNotificationCenter postNotificationName:MTLoginTimeout object:nil userInfo:nil];
                       success(dict,responseObject);
                   }
                   else
@@ -74,18 +80,16 @@ static NSOperationQueue * _queue;
                       success(dict,responseObject);
                   }
                   // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
-                  //                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
+                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
                   
                   // 服务器给我们返回的包得头部信息
-                  //                  NSLog(@"%@", operation.response);
+                  NSLog(@"%@", operation.response);
                   
                   // 返回的数据
-                  //                  NSLog(@"%@", responseObject);
+                  NSLog(@"%@", responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSString *errorStr = [error.userInfo objectForKey:@"NSLocalizedDescription"];
-                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:errorStr delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                  [alertView show];
                   NSLog(@"出错了......");
                   failure(operation,error);
               }];
@@ -96,12 +100,10 @@ static NSOperationQueue * _queue;
         [manager GET:url
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
                  NSString *html = operation.responseString;
                  NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
                  NSDictionary *dict=[NSJSONSerialization  JSONObjectWithData:data options:0 error:nil];
                  success(dict,responseObject);
-                 
                  // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
                  

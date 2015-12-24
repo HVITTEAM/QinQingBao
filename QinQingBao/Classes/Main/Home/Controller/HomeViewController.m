@@ -9,7 +9,7 @@
 
 static NSString *kcellIdentifier = @"collectionCellID";
 
-#define pageControlY  175
+#define pageControlY  135
 
 static float cellHeight = 80;
 static float cellWidth = 66;
@@ -24,11 +24,18 @@ static float cellWidth = 66;
 #import "CCLocationManager.h"
 #import "CheckSelfViewController.h"
 #import "AllServiceViewController.h"
-
+#import "HomePicTotal.h"
+#import "HomePicModel.h"
 
 @interface HomeViewController ()<MTCityChangeDelegate>
 {
     NSMutableArray *dataProvider;
+    /**轮播图片数组*/
+    NSMutableArray *slideImages;
+    /**广告图片数组*/
+    NSMutableArray *advArr;
+
+    UIPageControl *pageControl;
     UIButton * button_back;
 }
 
@@ -40,9 +47,9 @@ static float cellWidth = 66;
 {
     [super viewDidLoad];
     
-    [self initNavigation];
+    [self getAdvertisementpic];
     
-    [self initImagePlayer];
+    [self initNavigation];
     
     [self initCollectionView];
     
@@ -52,8 +59,6 @@ static float cellWidth = 66;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    //    self.navigationController.navigationBarHidden = YES;
 }
 
 /**
@@ -65,7 +70,7 @@ static float cellWidth = 66;
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     
-
+    
     [self setTitle:@"亲情宝"];
     [[self tabBarItem] setTitle:@"首页"];
     
@@ -110,30 +115,33 @@ static float cellWidth = 66;
     self.imgPlayer.userInteractionEnabled = YES;
     self.imgPlayer.showsHorizontalScrollIndicator = NO;
     // 初始化 数组 并添加四张图片
-    self.slideImages = [[NSMutableArray alloc] init];
-    [self.slideImages addObject:@"1-1.png"];
-    [self.slideImages addObject:@"1-2.png"];
-    [self.slideImages addObject:@"1-3.png"];
-    [self.slideImages addObject:@"1-4.jpg"];
-    [self.slideImages addObject:@"1-5.jpg"];
+    //    slideImages = [[NSMutableArray alloc] init];
+    //    [slideImages addObject:@"1-1.png"];
+    //    [slideImages addObject:@"1-2.png"];
+    //    [slideImages addObject:@"1-3.png"];
+    //    [slideImages addObject:@"1-4.jpg"];
+    //    [slideImages addObject:@"1-5.jpg"];
     
     //    [self.slideImages addObject:@"1-4.jpg"];
     
     // 初始化 pagecontrol
-    self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(110, pageControlY, 100, 18)]; // 初始化mypagecontrol
-    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor orangeColor]];
-    [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
-    self.pageControl.numberOfPages = [self.slideImages count];
-    self.pageControl.currentPage = 0;
-    [self.view addSubview:self.pageControl];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((MTScreenW - 100)/2, pageControlY, 100, 18)]; // 初始化mypagecontrol
+    [pageControl setCurrentPageIndicatorTintColor:[UIColor orangeColor]];
+    [pageControl setPageIndicatorTintColor:[UIColor grayColor]];
+    pageControl.numberOfPages = [slideImages count];
+    pageControl.currentPage = 0;
+    [self.bgScrollView addSubview:pageControl];
     
     //解决初始化imageplayer可能发生偏移的问题
     self.imgPlayer.width = MTScreenW;
     
     // 创建四个图片 imageview
-    for (int i = 0; i < self.slideImages.count; i++)
+    for (int i = 0; i < slideImages.count; i++)
     {
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.slideImages objectAtIndex:i]]];
+        HomePicModel *item = slideImages[i];
+        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.url]];
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.userInteractionEnabled=YES;
@@ -142,18 +150,23 @@ static float cellWidth = 66;
         [imageView addGestureRecognizer:singleTap];
         [self.imgPlayer addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+320。。。
     }
-    
     // 取数组最后一张图片 放在第0页
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.slideImages objectAtIndex:([self.slideImages count]-1)]]];
+    HomePicModel *item = slideImages[slideImages.count - 1];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.url]];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imgPlayer.height); // 添加最后1页在首页 循环
     [self.imgPlayer addSubview:imageView];
     
     // 取数组第一张图片 放在最后1页
-    imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[self.slideImages objectAtIndex:0]]];
-    imageView.frame = CGRectMake((MTScreenW * ([self.slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
+    HomePicModel *item0 = slideImages[0];
+    imageView = [[UIImageView alloc] init];
+    NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item0.url]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    imageView.frame = CGRectMake((MTScreenW * ([slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
     
-    [self.imgPlayer setContentSize:CGSizeMake(MTScreenW * ([self.slideImages count] + 2), self.imgPlayer.height)];
+    [self.imgPlayer setContentSize:CGSizeMake(MTScreenW * ([slideImages count] + 2), self.imgPlayer.height)];
     [self.imgPlayer setContentOffset:CGPointMake(0, 0)];
     [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW, 0, MTScreenW, self.imgPlayer.height) animated:NO];
 }
@@ -171,6 +184,7 @@ static float cellWidth = 66;
         return;
     AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
     adver.type = tap.view.tag;
+    adver.dataProvider = advArr[tap.view.tag -1];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -207,12 +221,49 @@ static float cellWidth = 66;
     self.serviceColectionview.dataSource = self;
 }
 
+/**
+ * 获取轮播图片
+ **/
+-(void)getAdvertisementpic
+{
+    advArr = [[NSMutableArray alloc] init];
+    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     NSDictionary *dict1 =  [dict objectForKey:@"datas"];
+                                     
+                                     NSDictionary *dictPic =  [dict1 objectForKey:@"pic_conf"];
+                                     
+                                     for (NSString *key in dictPic)
+                                     {
+                                         NSArray *picItem = dictPic[key];
+                                         NSMutableArray *arr = [[NSMutableArray alloc] init];
+                                         for (NSDictionary *item in picItem)
+                                         {
+                                             HomePicModel *vo = [HomePicModel objectWithKeyValues:item];
+                                             [arr addObject:vo];
+                                             NSLog(@"key: %@ value: %@", key, dictPic[key]);
+                                         }
+                                         [advArr addObject:arr];
+                                     }
+
+                                     HomePicTotal *result = [HomePicTotal objectWithKeyValues:dict1];
+                                     
+                                     slideImages = result.pic;
+                                     
+                                     [self initImagePlayer];
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+}
+
 -(void)getTypeList
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Typelist parameters: @{@"tid" : @1,
                                                                  @"client" : @"ios",
-                                                                 @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                  @"p" : @1,
                                                                  @"page" : @100}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -239,14 +290,14 @@ static float cellWidth = 66;
 {
     if (sender == self.bgScrollView)
     {
-        self.pageControl.y = pageControlY - sender.contentOffset.y - self.navigationController.navigationBar.height;
+//        pageControl.y = pageControlY - sender.contentOffset.y - self.navigationController.navigationBar.height - 10;
     }
     else
     {
         CGFloat pagewidth = self.imgPlayer.frame.size.width;
-        int page = floor((self.imgPlayer.contentOffset.x - pagewidth/([self.slideImages count]+2))/pagewidth)+1;
+        int page = floor((self.imgPlayer.contentOffset.x - pagewidth/([slideImages count]+2))/pagewidth)+1;
         page --;  // 默认从第二页开始
-        self.pageControl.currentPage = page;
+        pageControl.currentPage = page;
     }
 }
 
@@ -256,12 +307,12 @@ static float cellWidth = 66;
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat pagewidth = self.imgPlayer.frame.size.width;
-    int currentPage = floor((self.imgPlayer.contentOffset.x - pagewidth/ ([self.slideImages count]+2)) / pagewidth) + 1;
+    int currentPage = floor((self.imgPlayer.contentOffset.x - pagewidth/ ([slideImages count]+2)) / pagewidth) + 1;
     if (currentPage==0)
     {
-        [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW * [self.slideImages count],0,MTScreenW,self.imgPlayer.height) animated:NO]; // 序号0 最后1页
+        [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW * [slideImages count],0,MTScreenW,self.imgPlayer.height) animated:NO]; // 序号0 最后1页
     }
-    else if (currentPage==([self.slideImages count]+1))
+    else if (currentPage==([slideImages count]+1))
     {
         [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW,0,MTScreenW,self.imgPlayer.height) animated:NO]; // 最后+1,循环第1页
     }
@@ -272,7 +323,7 @@ static float cellWidth = 66;
  */
 - (void)turnPage
 {
-    NSInteger page = self.pageControl.currentPage; // 获取当前的page
+    NSInteger page = pageControl.currentPage; // 获取当前的page
     [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW * (page+1) , 0 ,MTScreenW, self.imgPlayer.height) animated:NO]; // 触摸pagecontroller那个点点 往后翻一页 +1
 }
 
@@ -298,13 +349,13 @@ static float cellWidth = 66;
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     ServiceTypeModel *data = [dataProvider objectAtIndex:indexPath.row];
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",data.url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,data.url]];
     
     if (dataProvider.count > 8)
     {
         if (indexPath.row == 7)
         {
-            [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+            imageView.image = [UIImage imageWithName:@"more.png"];
             label.text = @"全部分类";
             return cell;
         }
@@ -347,7 +398,7 @@ static float cellWidth = 66;
     return UIEdgeInsetsMake(10, 10, 5, 10);//分别为上、左、下、右
 }
 
-#pragma mark --UICollectionViewDelegate
+#pragma mark --UICollectionViewDelegate，
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

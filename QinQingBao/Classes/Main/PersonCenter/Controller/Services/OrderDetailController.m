@@ -12,7 +12,7 @@
 #import "TimeLineCell.h"
 
 
-@interface OrderDetailController ()
+@interface OrderDetailController ()<UIActionSheetDelegate>
 {
     ServiceItemModel *serviceItem;
 }
@@ -53,8 +53,7 @@
 -(void)getServiceDetail
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo_data_byiid parameters:  @{@"iid" : self.orderItem.iid,
-                                                                             @"client" : @"ios",
-                                                                             @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                             @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      serviceItem = [ServiceItemModel objectWithKeyValues:[dict valueForKey:@"datas"]];
                                      [self.tableView reloadData];
@@ -110,7 +109,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -123,7 +122,7 @@
         case 1:
             return 2;
             break;
-        case 2:
+        case 3:
             return 10;
             break;
         default:
@@ -183,6 +182,24 @@
             if (commonCell == nil)
                 commonCell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommonCell"];
             commonCell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+            commonCell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"phone.png"]];
+            if (indexPath.row == 0)
+            {
+                commonCell.textLabel.text = @"客服电话:";
+                commonCell.detailTextLabel.text = @"0573-96345";
+                commonCell.textLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:16];
+                return commonCell;
+            }
+            cell = commonCell;
+        }
+            break;
+        case 3:
+        {
+            UITableViewCell *commonCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
+            
+            if (commonCell == nil)
+                commonCell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommonCell"];
+            commonCell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
             
             if (indexPath.row == 0)
             {
@@ -212,13 +229,13 @@
             }
             else if (indexPath.row == 5)
             {
-                commonCell.textLabel.text = @"联系方式";
+                commonCell.textLabel.text = @"联系电话";
                 commonCell.detailTextLabel.text = self.orderItem.wtelnum;
             }
             else if (indexPath.row == 6)
             {
                 commonCell.textLabel.text = @"服务地址";
-                commonCell.detailTextLabel.text = self.orderItem.waddress;
+                commonCell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@",self.orderItem.totalname,self.orderItem.waddress];
             }
             else if (indexPath.row == 7)
             {
@@ -242,6 +259,46 @@
         }
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2)
+        [self call];
+}
+
+- (void)call
+{
+    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@"-"]; //从字符A中分隔成2个元素的数组
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"客服电话:0573-96345",[NSString stringWithFormat:@"商家电话:%@",array[0]],nil];
+    [actionSheet showInView:self.view];
+    
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@"-"]; //从字符A中分隔成2个元素的数组
+    
+    NSURL *url  = [NSURL URLWithString:@"telprompt://0573-96345"];
+    switch (buttonIndex)
+    {
+        case 0:
+            url = [NSURL URLWithString:@"telprompt://0573-96345"];
+            break;
+        case 1:
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",array[0]]];
+            break;
+        default:
+            return;
+            break;
+    }
+    [[UIApplication sharedApplication] openURL:url];
+    
 }
 
 

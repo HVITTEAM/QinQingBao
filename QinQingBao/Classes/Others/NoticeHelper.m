@@ -108,6 +108,10 @@
         float value = ceilf(f);
         timeString = [NSString stringWithFormat:@"%.00f",value];
     }
+    else
+    {
+        timeString = @"0";
+    }
     return timeString;
 }
 

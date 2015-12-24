@@ -187,7 +187,7 @@
         item.operation = ^{
             if(self.isfromOrder)
             {
-                [MTNotificationCenter postNotificationName:@"selected" object:weakSelf userInfo:nil];
+                [MTNotificationCenter postNotificationName:MTSececteFamily object:weakSelf userInfo:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
             else
@@ -222,7 +222,7 @@
     item.operation = ^{
         if(self.isfromOrder)
         {
-            [MTNotificationCenter postNotificationName:@"selected" object:familyVO userInfo:nil];
+            [MTNotificationCenter postNotificationName:MTSececteFamily object:familyVO userInfo:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
     };

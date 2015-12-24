@@ -20,6 +20,7 @@
     self.cancelReasonText.layer.borderColor = [HMGlobalBg CGColor];
     self.cancelReasonText.layer.borderWidth = 1;
     self.cancelReasonText.layer.cornerRadius = 3;
+    self.cancelBtn.layer.cornerRadius = 8;
 }
 
 
@@ -45,6 +46,8 @@
                                      else
                                      {
                                          [NoticeHelper AlertShow:@"操作成功!" view:self.view];
+                                         if(self.doneHandlerClick)
+                                             self.doneHandlerClick();
                                          [self.navigationController popViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];

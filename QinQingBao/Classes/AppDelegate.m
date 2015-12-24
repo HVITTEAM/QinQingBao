@@ -37,10 +37,13 @@
     [self.window makeKeyAndVisible];
     
     NSUUID *str = [[UIDevice currentDevice] identifierForVendor];
-    NSLog(@"设备ID:%@ jieshu",str);
+    NSLog(@"设备ID:%@",str);
     
     [self getLocation];
-
+    
+    //注册登陆信息超时监听
+    [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
+    
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
@@ -65,6 +68,13 @@
     return YES;
 }
 
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    [application registerForRemoteNotifications];
+}
+#endif
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [APService registerDeviceToken:deviceToken];
@@ -78,10 +88,10 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-//                                                    message:@"deviceToken获取失败！"
-//                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-//    [alert show];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
+                                                    message:@"deviceToken获取失败！"
+                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+    [alert show];
     
     NSLog(@"--------------deviceToken获取失败--------------------");
 }
@@ -156,6 +166,22 @@
     }];
     
     return YES;
+}
+
+/**
+ * 登陆信息超时处理事件
+ */
+-(void)loginTimeoutHanlder:(NSNotification *)notification
+{
+    [SharedAppUtil defaultCommonUtil].userVO = nil;
+    [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
+    [MTControllerChooseTool setRootViewController];
+
+    [SharedAppUtil defaultCommonUtil].tabBar.selectedIndex = 0;
+    LoginViewController *login = [[LoginViewController alloc] init];
+    login.backHiden = NO;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
 }
 
 /**

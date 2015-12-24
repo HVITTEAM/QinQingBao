@@ -36,12 +36,12 @@
 {
     _itemInfo = itemInfo;
     
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",itemInfo.item_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,itemInfo.item_url]];
     [self.icon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     
-    self.title.text = itemInfo.tname;
+    self.title.text = itemInfo.orgname;
     
-    self.content.text = itemInfo.icontent;
+    self.content.text = itemInfo.tname;
     
     if (!itemInfo.sumsell)
         self.sum.text = @"成交0单";

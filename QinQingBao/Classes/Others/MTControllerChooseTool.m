@@ -13,6 +13,7 @@
 #import "ProfileViewController.h"
 #import "RootViewController.h"
 #import "MallViewController.h"
+#import "LoginViewController.h"
 
 
 @implementation MTControllerChooseTool
@@ -35,15 +36,8 @@
         [UIApplication sharedApplication].statusBarHidden = NO;
         
         UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
-        if (vo == nil)
-        {
-            [MTControllerChooseTool setLoginViewController];
-        }
-        else
-        {
-            [SharedAppUtil defaultCommonUtil].userVO = vo;
-            [MTControllerChooseTool setRootViewController];
-        }
+        [SharedAppUtil defaultCommonUtil].userVO = vo;
+        [MTControllerChooseTool setRootViewController];
         
     } else { // 当前版本号 != 上次使用的版本：显示版本新特性
         window.rootViewController = [[MTNewfeatureViewController alloc] init];
@@ -56,6 +50,24 @@
 
 + (void)setRootViewController
 {
+    //登陆界面
+    LoginViewController *login = [[LoginViewController alloc] init];
+    login.backHiden = YES;
+    UINavigationController *navLoginNav = [[UINavigationController alloc] initWithRootViewController:login];
+    navLoginNav.navigationItem.leftBarButtonItem = nil;
+    login.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
+                                                     image:[UIImage imageNamed:@"third_normal.png"]
+                                             selectedImage:[UIImage imageNamed:@"third_selected.png"]];
+    
+    LoginViewController *healthLogin = [[LoginViewController alloc] init];
+    healthLogin.backHiden = YES;
+    UINavigationController *healthLoginNav = [[UINavigationController alloc] initWithRootViewController:healthLogin];
+    healthLoginNav.navigationItem.leftBarButtonItem = nil;
+    healthLogin.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
+                                                            image:[UIImage imageNamed:@"second_normal.png"]
+                                                    selectedImage:[UIImage imageNamed:@"second_selected.png"]];
+    
+    
     
     HomeViewController *homeView = [[HomeViewController alloc] init];
     homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
@@ -81,29 +93,31 @@
                                                selectedImage:[UIImage imageNamed:@"third_selected.png"]];
     UINavigationController *navsys = [[UINavigationController alloc] initWithRootViewController:sysview];
     
-    //初始化对象
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.tabBar.barTintColor = [UIColor whiteColor];
-    //        tabBarController.tabBar.tintColor = HMColor(18, 141, 216);
+    if (![SharedAppUtil defaultCommonUtil].tabBar)
+    {
+        //初始化对象
+        UITabBarController *tabBarController = [[UITabBarController alloc] init];
+        tabBarController.tabBar.barTintColor = [UIColor whiteColor];
+        tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
+        [SharedAppUtil defaultCommonUtil].tabBar = tabBarController;
+    }
     
     //将2个uivc以数组的方式制定给bar对象
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
-    tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
-    
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-    
-//    [SharedAppUtil defaultCommonUtil].mainNav = nav;
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,healthLoginNav,navMall,navLoginNav, nil];
+    else
+        [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
     
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
-    window.rootViewController = tabBarController;
+    window.rootViewController = [SharedAppUtil defaultCommonUtil].tabBar;
 }
 
 + (void)setLoginViewController
 {
     // 3.设置窗口的根控制器
-    RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
+    LoginViewController *rootView = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;

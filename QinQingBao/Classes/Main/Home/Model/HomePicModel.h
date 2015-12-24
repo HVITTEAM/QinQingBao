@@ -1,0 +1,14 @@
+//
+//  HomePicModel.h
+//  QinQingBao
+//
+//  Created by 董徐维 on 15/12/23.
+//  Copyright © 2015年 董徐维. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface HomePicModel : NSObject
+@property (nonatomic, copy) NSString *url;
+@property (nonatomic, copy) NSString *bc_id;
+@end

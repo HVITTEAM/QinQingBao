@@ -25,7 +25,8 @@
     
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     //设置登录按钮外观
     self.loginBtn.layer.cornerRadius = 5.0f;
@@ -35,6 +36,8 @@
     
     self.accountText.delegate = self;
     self.passwordText.delegate = self;
+    
+    self.backBtn.hidden = self.backHiden;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -44,10 +47,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-//    self.navigationController.navigationBar.barTintColor = [UIColor clearColor];
-//    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBarHidden = YES;
-
+    
     //取消导航栏下方黑线
     if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
         NSArray *list=self.navigationController.navigationBar.subviews;
@@ -73,6 +74,11 @@
     [super viewWillDisappear:animated];
     //解除键盘通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)setBackHiden:(BOOL)backHiden
+{
+    _backHiden = backHiden;
 }
 
 #pragma mark UITextField协议方法
@@ -136,6 +142,8 @@
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
                                              [MTControllerChooseTool setRootViewController];
+                                             if (!self.backHiden)
+                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -230,9 +238,8 @@
 }
 
 
-
-
-- (IBAction)backHanlder:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)backHanlder:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

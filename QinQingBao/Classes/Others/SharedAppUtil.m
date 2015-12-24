@@ -21,4 +21,18 @@ static SharedAppUtil *util = nil;
     return util;
 }
 
+-(void)setLat:(NSString *)lat
+{
+    if (lat.length == 0 )
+        _lat = @"";
+    _lat = lat;
+}
+
+-(void)setLon:(NSString *)lon
+{
+    if (lon.length == 0 )
+        lon = @"";
+    _lon = lon;
+}
+
 @end

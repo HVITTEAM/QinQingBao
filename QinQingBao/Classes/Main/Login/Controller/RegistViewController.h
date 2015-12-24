@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *agreementBtn;
 @property (weak, nonatomic) IBOutlet UIButton *registNowBtn;
 
+- (IBAction)agreeChange:(id)sender;
 //容纳文本输入框的UIView
 @property (strong, nonatomic) IBOutlet UIView *txtview;
 //当前正在使用的文本输入框

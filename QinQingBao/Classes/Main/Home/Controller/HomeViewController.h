@@ -25,9 +25,7 @@
 - (IBAction)questionClickHander:(id)sender;
 - (IBAction)massageClickHandler:(id)sender;
 
-/**图片数组*/
-@property (strong,nonatomic)NSMutableArray *slideImages;
-@property (strong,nonatomic)UIPageControl *pageControl;
+
 
 
 

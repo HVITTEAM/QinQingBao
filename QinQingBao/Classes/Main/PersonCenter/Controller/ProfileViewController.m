@@ -16,7 +16,7 @@
 #import "AccountViewController.h"
 #import "PersonalDataViewController.h"
 
-#import "RootViewController.h"
+#import "LoginViewController.h"
 
 
 #define imageHeight 140
@@ -82,6 +82,9 @@
     self.tableView.sectionHeaderHeight = 0;
     //上左下右的值
     self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    
+    //添加监听者
+    [self.tableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
 }
 
 /**
@@ -111,6 +114,19 @@
     _iconImageview.layer.masksToBounds = YES;
     [_zoomImageview addSubview:_iconImageview];
 }
+
+
+/**
+ *  监听属性值发生改变时回调
+ */
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    //    CGFloat offset = self.tableView.contentOffset.y;
+    //    CGFloat delta = offset / 64.f + 1.f;
+    //    delta = MAX(0, delta);
+    //    [self alphaNavController].barAlpha = MIN(1, delta);
+}
+
 
 #pragma mark UIScrollViewDelegate
 
@@ -309,7 +325,7 @@
                                                                    @"client" : @"ios",
                                                                    @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                         
+                                         [HUD removeFromSuperview];
                                          id codeNum = [dict objectForKey:@"code"];
                                          if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                          {
@@ -320,19 +336,17 @@
                                          {
                                              [SharedAppUtil defaultCommonUtil].userVO = nil;
                                              [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             RootViewController *rootView = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-                                             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:rootView];
-                                             [self presentViewController:nav animated:NO completion:nil];
-                                             //[MTControllerChooseTool setLoginViewController];
+                                             
+                                             [SharedAppUtil defaultCommonUtil].tabBar.selectedIndex = 0;
+                                             
+                                             [MTControllerChooseTool setRootViewController];
                                          }
-                                         [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
                                          [MTControllerChooseTool setRootViewController];
                                      }];
-        
     }
 }
 
@@ -352,7 +366,8 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
                                      }
                                      else
                                      {

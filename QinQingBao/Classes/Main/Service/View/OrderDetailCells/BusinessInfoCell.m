@@ -29,12 +29,17 @@
 
 - (IBAction)callClickHandler:(id)sender
 {
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"取消"
+//                                               destructiveButtonTitle:nil
+//                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
+//                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
-                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
+                                                    otherButtonTitles:@"客服电话:0573-96345",nil];
     [actionSheet showInView:self];
     
 }
@@ -42,23 +47,10 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSURL *url;
-    switch (buttonIndex)
-    {
-        case 0:
-            url = [NSURL URLWithString:@"telprompt://96345"];
-            break;
-        case 1:
-            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgtelnum]];
-            break;
-        case 2:
-            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgphone]];
-            break;
-        default:
-            break;
-    }
+    NSURL *url  = [NSURL URLWithString:@"telprompt://0573-96345"];
+    if (buttonIndex == 1)
+        return;
     [[UIApplication sharedApplication] openURL:url];
-    
 }
 
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
@@ -69,11 +61,11 @@
     self.nameLab.textColor = [UIColor darkGrayColor];
     self.addressLab.textColor = [UIColor darkGrayColor];
     self.telLab.textColor = [UIColor darkGrayColor];
-    
-    self.distanceLab.text = [NoticeHelper kilometre2meter:[itemInfo.distance floatValue]];
+    self.distanceLab.text = [NSString stringWithFormat:@"距我 %@",[NoticeHelper kilometre2meter:[itemInfo.distance floatValue]]];
     self.distanceLab.textColor = MTNavgationBackgroundColor;
-    self.nameLab.text = itemInfo.orgname;
-    self.addressLab.text = [NSString stringWithFormat:@"%@%@",itemInfo.totalname,itemInfo.orgaddress];
-    self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgtelnum ?  itemInfo.orgtelnum : itemInfo.orgphone];
+//    self.nameLab.text = itemInfo.icontent;
+    self.nameLab.hidden = YES;
+    self.addressLab.text = [NSString stringWithFormat:@"地址: %@%@",itemInfo.totalname,itemInfo.orgaddress];
+//    self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgtelnum ?  itemInfo.orgtelnum : itemInfo.orgphone];
 }
 @end

@@ -30,11 +30,11 @@
 
 -(void)setdataWithItem:(ServiceItemModel *)itemInfo
 {
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://ibama.hvit.com.cn/public/%@",itemInfo.item_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,itemInfo.item_url]];
     [self.serviceIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-    self.serviceTitle.text = itemInfo.tname;
-    self.serviceDesc.text = itemInfo.icontent;
-    self.servicePrice.text = [NSString stringWithFormat:@"￥%.01f",[itemInfo.price floatValue]];
+    self.serviceTitle.text = itemInfo.orgname;
+    self.serviceDesc.text = itemInfo.tname;
+    self.servicePrice.text = [itemInfo.price isEqualToString:@"0"] || [itemInfo.price isEqualToString:@"0.00"] ? @"面议" : [NSString stringWithFormat:@"￥%.01f",[itemInfo.price floatValue]];
 }
 
 

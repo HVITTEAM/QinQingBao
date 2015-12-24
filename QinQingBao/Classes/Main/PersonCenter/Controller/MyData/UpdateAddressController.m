@@ -23,7 +23,7 @@
     NSString *selectedCityStr;
     CityModel *selectedStreet;
     NSString *selectedStreetStr;
-
+    
     NSArray *provinces;
     NSArray *cities;
     NSArray *state;
@@ -59,6 +59,13 @@
     [super viewDidLoad];
     
     [self initTableviewSkin];
+    
+    if (self.inforVO.totalname)
+    {
+        NSArray *array = [self.inforVO.totalname componentsSeparatedByString:@"市"]; //从字符A中分隔成2个元素的数组
+        selectedCityStr = [NSString stringWithFormat:@"浙江省%@市",array[0]];
+        selectedStreetStr = [NSString stringWithFormat:@"%@",array[1]];
+    }
 }
 
 /**
@@ -90,7 +97,7 @@
 - (void)setupGroups
 {
     [self.groups removeAllObjects];
-
+    
     [self setupGroup];
 }
 
@@ -139,7 +146,7 @@
         };
         [weakSelf.navigationController pushViewController:VC animated:YES];
     };
-
+    
     group.items = @[textItem];
     
     // 3.创建组
@@ -147,8 +154,12 @@
     [self.groups addObject:group1];
     // 3.设置组的所有行数据
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"门牌号" icon:nil];
+    textItem1.rightText.text = self.inforVO.member_areainfo;
     textItem1.placeholder = [self.dict valueForKey:@"placeholder"];
     group1.items = @[textItem1];
+    
+    //刷新表格
+    [self.tableView reloadData];
 }
 
 /**
@@ -157,7 +168,7 @@
 -(void)doneClickHandler
 {
     NSString * str = textItem1.rightText.text;
-
+    
     if (!selectedStreet || !str)
         return [NoticeHelper AlertShow:@"请填写详细信息" view:self.view];
     
@@ -194,7 +205,8 @@
                                      else
                                      {
                                          [self.navigationController popViewControllerAnimated:YES];
-                                         self.refleshDta();
+                                         if (self.refleshDta)
+                                             self.refleshDta();
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -208,7 +220,6 @@
 
 -(void)show
 {
-    
     // 加载plist文件，初始化三个NSArray对象，然后做一些非法的事情，你懂的
     provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"area.plist" ofType:nil]];
     cities = [[provinces objectAtIndex:0] objectForKey:@"cities"];

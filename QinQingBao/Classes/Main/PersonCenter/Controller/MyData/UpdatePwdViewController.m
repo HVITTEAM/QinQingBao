@@ -117,12 +117,7 @@
     {
         if (self.tel.rightText.text.length != 11)
             return [NoticeHelper AlertShow:@"请输入正确的电话号码" view:self.view];
-       else if (self.nowPwd.rightText.text.length == 0 ||
-                self.old.rightText.text.length == 0 ||
-                self.code.rightText.text.length == 0)
-            return [NoticeHelper AlertShow:@"请输入完整的信息" view:self.view];
         
-        [self.view endEditing:YES];
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_GetForgotCode parameters: @{@"mobile" : self.tel.rightText.text}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -188,17 +183,18 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
+    if (self.nowPwd.rightText.text.length == 0 || self.old.rightText.text.length == 0 ||self.code.rightText.text.length == 0)
+        return [NoticeHelper AlertShow:@"请输入完整的信息" view:self.view];
     if(![self.nowPwd.rightText.text isEqualToString:self.old.rightText.text] )
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.view endEditing:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Forgot parameters: @{@"mobile" : self.tel.rightText.text,
                                                                @"code" : self.code.rightText.text,
                                                                @"password" : [SecurityUtil encryptMD5String:self.old.rightText.text],
                                                                @"password_confirm" : [SecurityUtil encryptMD5String:self.nowPwd.rightText.text]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
-                                     [self.view endEditing:YES];
-                                     
                                      if (dict == nil)
                                          return [NoticeHelper AlertShow:@"未知错误！" view:self.view];
                                      

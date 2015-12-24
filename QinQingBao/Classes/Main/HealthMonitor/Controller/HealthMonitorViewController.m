@@ -10,6 +10,7 @@
 #import "HealthMonitorViewController.h"
 #import "AddMemberViewController.h"
 #import "FamilyTotal.h"
+#import "LoginViewController.h"
 
 @interface HealthMonitorViewController ()
 
@@ -44,6 +45,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     if (pageControl)
         pageControl.hidden = NO;
     if (titleLab)
@@ -113,7 +115,7 @@
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
                                          //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          //                                         [alertView show];
-//                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
+                                         //                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
                                      }
                                      else
                                      {
@@ -137,9 +139,9 @@
 {
     FamilyModel *fvo = [[FamilyModel alloc] init];
     fvo.member_id = [SharedAppUtil defaultCommonUtil].userVO.member_id;
-//    fvo.oldname = @"自己";
+    //    fvo.oldname = @"自己";
     fvo.relation = @"自己";
-
+    
     if (!dataProvider)
         dataProvider = [[NSMutableArray alloc] init];
     [dataProvider addObject:fvo];

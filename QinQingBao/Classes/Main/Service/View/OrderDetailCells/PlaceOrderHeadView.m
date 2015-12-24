@@ -25,6 +25,6 @@
 -(void)setPrice:(NSString *)price
 {
     _price = price;
-    self.priceLab.text = [NSString stringWithFormat:@"%@元",price];
+    self.priceLab.text = [price isEqualToString:@"0"] || [price isEqualToString:@"0.00"]? @"面议" : [NSString stringWithFormat:@"%@元",price];
 }
 @end

@@ -66,7 +66,7 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"count" : @"10",
+                                                                   @"count" : @"50",
                                                                    @"member_id" : self.familyVO.member_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];

@@ -7,6 +7,7 @@
 //
 
 #import "AdvertisementViewController.h"
+#import "HomePicModel.h"
 
 @interface AdvertisementViewController ()
 {
@@ -67,57 +68,76 @@
 
 -(void)initData
 {
-    UIImageView *lastimg;
+    HomePicModel *item = self.dataProvider[0];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.url]];
+    UIImageView *imageView = [[UIImageView alloc] init];
     
-    if (self.type > 2)
-    {
-        UIImage *img;
-        if (self.type == 3)
-            img = [UIImage imageNamed:@"heartmanager.jpg"];
-        else if (self.type == 4)
-            img = [UIImage imageNamed:@"bloodp.jpg"];
-        else if (self.type == 5)
-            img = [UIImage imageNamed:@"massage.jpg"];
-        CGSize size = img.size;
-        //缩放比例
-        float scalePro = MTScreenW / size.width;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
-        imageView.x = 0;
-        imageView.y = CGRectGetMaxY(lastimg.frame);
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.width = MTScreenW;
-        imageView.height = size.height * scalePro;
-        
-        [bgScrollview addSubview:imageView];
-        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
-        lastimg = imageView;
-        
-        return;
-    }
-    int max = self.type == 1 ? 6 : 8;
-    for (int i = 0; i < max; i++)
-    {
-        UIImage *img;
-        if (self.type == 1 )
-            img = [UIImage imageNamed:[NSString stringWithFormat:@"care_%d.jpg",i]];
-        else
-            img = [UIImage imageNamed:[NSString stringWithFormat:@"watch%d.jpg",i]];
-        
-        CGSize size = img.size;
-        //缩放比例
-        float scalePro = MTScreenW / size.width;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
-        imageView.tag = i;
-        imageView.x = 0;
-        imageView.y = CGRectGetMaxY(lastimg.frame);
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.width = MTScreenW;
-        imageView.height = size.height * scalePro;
-        
-        [bgScrollview addSubview:imageView];
-        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
-        lastimg = imageView;
-    }
+    [imageView sd_setImageWithURL:iconUrl];
+    NSLog(@"%@",iconUrl);
+
+//    CGSize size = imageView.image.size;
+    //缩放比例
+//    float scalePro = MTScreenW / size.width;
+    imageView.x = 0;
+    imageView.y = 0;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.height = 1750;
+    imageView.width = MTScreenW;
+    [bgScrollview addSubview:imageView];
+    bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
+    return;
+    
+//    UIImageView *lastimg;
+//    
+//    if (self.type > 2)
+//    {
+//        UIImage *img;
+//        if (self.type == 3)
+//            img = [UIImage imageNamed:@"heartmanager.jpg"];
+//        else if (self.type == 4)
+//            img = [UIImage imageNamed:@"bloodp.jpg"];
+//        else if (self.type == 5)
+//            img = [UIImage imageNamed:@"massage.jpg"];
+//        CGSize size = img.size;
+//        //缩放比例
+//        float scalePro = MTScreenW / size.width;
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+//        imageView.x = 0;
+//        imageView.y = CGRectGetMaxY(lastimg.frame);
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        imageView.width = MTScreenW;
+//        imageView.height = size.height * scalePro;
+//        
+//        [bgScrollview addSubview:imageView];
+//        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
+//        lastimg = imageView;
+//        
+//        return;
+//    }
+//    int max = self.type == 1 ? 6 : 8;
+//    for (int i = 0; i < max; i++)
+//    {
+//        UIImage *img;
+//        if (self.type == 1 )
+//            img = [UIImage imageNamed:[NSString stringWithFormat:@"care_%d.jpg",i]];
+//        else
+//            img = [UIImage imageNamed:[NSString stringWithFormat:@"watch%d.jpg",i]];
+//        
+//        CGSize size = img.size;
+//        //缩放比例
+//        float scalePro = MTScreenW / size.width;
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
+//        imageView.tag = i;
+//        imageView.x = 0;
+//        imageView.y = CGRectGetMaxY(lastimg.frame);
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        imageView.width = MTScreenW;
+//        imageView.height = size.height * scalePro;
+//        
+//        [bgScrollview addSubview:imageView];
+//        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
+//        lastimg = imageView;
+//    }
 }
 
 -(void)back

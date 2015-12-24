@@ -42,7 +42,7 @@
     //设置表格数值标注范围
     //    scrollChart.markRange =  CGRangeMake(55, 27);
     //Y轴值范围
-    scrollChart.chooseRange = CGRangeMake(110, 0);
+    scrollChart.chooseRange = CGRangeMake(130, 0);
     scrollChart.showRange = NO;
     
     NSMutableArray *YTitles = [NSMutableArray array];
@@ -91,25 +91,25 @@
     //设置X轴的显示标识
     NSMutableArray *xTitles = [NSMutableArray array];
     
+    NSRange range = NSMakeRange(11, 8);
     for (HealthDataModel *item in self.dataProvider) {
         
         switch (self.type)
         {
             case ChartTypeBlood:
-                [xTitles addObject:[item.bloodp_time substringToIndex:10]];
+                [xTitles addObject:[item.bloodp_time substringWithRange:range]];
                 break;
                 
             case ChartTypeSugar:
-                [xTitles addObject:[item.boolg_time substringToIndex:10]];
+                [xTitles addObject:[item.boolg_time substringWithRange:range]];
                 break;
                 
             case ChartTypeHeart:
-                [xTitles addObject:[item.heart_time substringToIndex:10]];
+                [xTitles addObject:[item.heart_time substringWithRange:range]];
                 break;
             default:
                 break;
         }
-        
     }
     
     [scrollChart setXLabels:xTitles];

@@ -33,7 +33,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
 }
 
 
@@ -62,7 +61,7 @@
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, -25, 0);
- 
+    
 }
 
 #pragma mark 集成刷新控件
@@ -138,19 +137,19 @@
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     [self.tableView removePlace];
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
                                          [self.tableView initWithPlaceString:@"暂无数据"];
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {
-//                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
+                                         //                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
                                          NSLog(@"没有更多的数据了");
                                          currentPageIdx --;
                                          self.noneResultHandler();
                                      }
                                      [dataProvider addObjectsFromArray:[result.datas copy]];
-                                     [self.tableView removePlace];
                                      [self.tableView reloadData];
                                      [self.tableView.footer endRefreshing];
                                      [HUD removeFromSuperview];
@@ -206,7 +205,7 @@
 }
 
 /**
- *  //取消工单
+ *  取消工单
  *
  *  @param indexPath <#indexPath description#>
  */
@@ -216,6 +215,9 @@
     {
         CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
         cancelView.orderItem = dataProvider[indexPath.section];
+        cancelView.doneHandlerClick = ^(void){
+            [self viewDidCurrentView];
+        };
         [self.nav pushViewController:cancelView animated:YES];
     }
     else if ([btn.titleLabel.text isEqualToString:@"评价"])
@@ -226,8 +228,26 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
     {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%d",96345]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%d",0573-96345]];
         [[UIApplication sharedApplication] openURL:url];;
+    }
+}
+
+
+/**
+ *  回调方法
+ *
+ *  @param indexPath indexPath description
+ */
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    //KVO
+    [self setValue:@"0" forKey:@"needFlesh"];
+    [self addObserver:self forKeyPath:@"needFlesh" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    
+    if([keyPath isEqualToString:@"needFlesh"])
+    {
+        [self dataRereshing];
     }
 }
 
@@ -240,7 +260,7 @@
 //                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
 //                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
 //    [actionSheet showInView:self];
-//    
+//
 //}
 //
 //

@@ -12,12 +12,13 @@
 #import "UseCouponsViewController.h"
 #import "CouponsModel.h"
 #import "OrderItem.h"
+#import "OrderResultViewController.h"
 
 
 @interface OrderSubmitController ()
 {
-    NSArray* day;
-    NSArray* time;
+    NSMutableArray* day;
+    NSMutableArray* time;
     NSArray* min;
     
     NSString* daystr;
@@ -62,7 +63,7 @@
 {
     [super viewDidAppear:animated];
     
-    [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:@"selected" object:nil];
+    [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:MTSececteFamily object:nil];
 }
 
 /**
@@ -140,12 +141,15 @@
     
     self.datePickView = [[UIPickerView alloc] init];
     
-    day = [NSArray arrayWithObjects:now,tomorrow,aftertomorrow,aftertomorrow1,aftertomorrow2, nil];
-    time = [NSArray arrayWithObjects:@"9点" , @"10点"
-            , @"11点",@"12点", @"13点", @"14点",
-            @"15点", @"16点" , @"17点",@"18点", nil];
+    day = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:now,tomorrow,aftertomorrow,aftertomorrow1,aftertomorrow2, nil]];
+    
+    time = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:@"09" , @"10"
+                                                  , @"11",@"12", @"13", @"14",
+                                                  @"15", @"16" , @"17",@"18", nil]];
     
     min = [NSArray arrayWithObjects:@"0分" , @"30分", nil];
+    
+    [self checkTime];
     
     self.datePickView.dataSource = self;
     self.datePickView.delegate = self;
@@ -155,6 +159,36 @@
     minstr = [min objectAtIndex:0];
 }
 
+/**
+ * 过滤时间 显示合适的预约时间
+ **/
+-(void)checkTime
+{
+    NSDate *  senddate=[NSDate date];
+    
+    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+    
+    [dateformatter setDateFormat:@"HH"];
+    
+    NSString *  locationString=[dateformatter stringFromDate:senddate];
+    
+    NSLog(@"locationString:%@",locationString);
+    
+    //如果时间超过了下午6点 就显示第二天 不显示今天的
+    if([locationString floatValue] > 18)
+        [day removeObjectAtIndex:0];
+    
+    for (int i = 0; i < time.count; i++)
+    {
+        if ([time[0] floatValue] <= [locationString floatValue])
+        {
+            [time removeObjectAtIndex:0];
+        }
+    }
+}
+
+
+#pragma mark - UIPickerViewDataSource
 
 // UIPickerViewDataSource中定义的方法，该方法返回值决定该控件包含多少列
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView
@@ -181,7 +215,7 @@ numberOfRowsInComponent:(NSInteger)component
     if (component == 0)
         return [day objectAtIndex:row];
     else  if (component == 1)
-        return [time objectAtIndex:row];
+        return [NSString stringWithFormat:@"%@时",[time objectAtIndex:row]];
     else
         return [min objectAtIndex:row];
 }
@@ -440,6 +474,14 @@ numberOfRowsInComponent:(NSInteger)component
         return [NoticeHelper AlertShow:@"请选择预约时间" view:self.view];
     else if (famVO == nil)
         return [NoticeHelper AlertShow:@"请选择服务对象" view:self.view];
+    else if (!famVO.member_truename)
+        return [NoticeHelper AlertShow:@"服务对象的真实姓名不能为空" view:self.view];
+    else if (!famVO.member_areaid)
+        return [NoticeHelper AlertShow:@"服务地址不能为空" view:self.view];
+    else if (!famVO.member_mobile)
+        return [NoticeHelper AlertShow:@"联系号码不能为空" view:self.view];
+    else if (!famVO.member_areainfo)
+        return [NoticeHelper AlertShow:@"服务地址不能为空" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
                                                                      @"iid" : self.serviceDetailItem.iid,
@@ -475,11 +517,15 @@ numberOfRowsInComponent:(NSInteger)component
                                          //                                         payView.orderItem = item;
                                          //                                         [self.navigationController pushViewController:payView animated:YES];
                                          
-                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下单结果"
-                                                                                         message:@"下单成功"
-                                                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                                         [alert show];
-                                         [self.navigationController popViewControllerAnimated:YES];
+                                         //                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下单结果"
+                                         //                                                                                         message:@"下单成功"
+                                         //                                                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                                         //                                         [alert show];
+                                         //                                         [self.navigationController popViewControllerAnimated:YES];
+                                         
+                                         OrderResultViewController *vc = [[OrderResultViewController alloc] init];
+                                         vc.orderItem = item;
+                                         [self.navigationController pushViewController:vc animated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -546,7 +592,7 @@ numberOfRowsInComponent:(NSInteger)component
     self.datePicker.minimumDate = minDate;
     //7天
     self.datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:3600 *24 *7];
-
+    
     self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     [actionSheet addSubview:self.datePicker];
     [actionSheet showInView:self.view];

@@ -19,7 +19,7 @@
 //"orgaddress": "详细地址",   服务商地址详细
 //"reservation": "0",         预定时间
 //"status": "1",              服务的状态
-//"item_url": "images\/items\/default.png",  服务额图片
+//"item_url": "images\/items\/default.png",  服务的图片
 //"orgname": "商2测试服务商2测试服务商2",      服务商的名字
 //"orglon": "120.94847400",    服务商的经纬度
 //"orglat": "30.52847700",
@@ -74,7 +74,6 @@
 @property (nonatomic, copy) NSString *orgphone;
 /**自己电话**/
 @property (nonatomic, copy) NSString *orgtelnum;
-
 /**服务商距离**/
 @property (nonatomic, copy) NSString *distance;
 /**消费提醒**/
