@@ -23,6 +23,10 @@
     self.cancelBtn.layer.cornerRadius = 8;
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
 - (IBAction)cancelBtnClickHandler:(id)sender
 {

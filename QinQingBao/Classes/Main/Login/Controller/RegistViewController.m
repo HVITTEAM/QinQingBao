@@ -184,7 +184,8 @@
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             [MTControllerChooseTool setRootViewController];
+                                             [MTControllerChooseTool setMainViewcontroller];
+                                             [self.navigationController.viewControllers[0] dismissViewControllerAnimated:YES completion:nil];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

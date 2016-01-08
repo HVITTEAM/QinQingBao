@@ -123,10 +123,32 @@
 
 - (void)setupFooter
 {
-    UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 80)];
+    UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 110)];
+    
+    UILabel *lab0 = [[UILabel alloc] init];
+    lab0.text = @"说明：验证码发送至被监护老人手机号，有效期为3分钟";
+    lab0.font = [UIFont fontWithName:@"Helvetica" size:12];
+    lab0.textColor = [UIColor grayColor];
+    CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
+    if (size0.width > MTScreenW *0.8)
+    {
+        lab0.width = MTScreenW *0.8;
+        lab0.height = size0.height *2;
+        lab0.numberOfLines = 0 ;
+        footview.height = footview.height + size0.height + 10;
+    }
+    else
+    {
+        lab0.width = size0.width;
+        lab0.height = size0.height;
+    }
+    
+    lab0.x = self.view.width/2 - lab0.width/2;
+    lab0.y = 0;
+    [footview addSubview:lab0];
     
     // 1.创建按钮
-    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
+    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lab0.frame) + 10, MTScreenW, 50)];
     
     // 2.设置属性
     okBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -144,8 +166,8 @@
     [changeType setTitle:@"通过身份证号码绑定" forState:UIControlStateNormal];
     [changeType setTitleColor:MTNavgationBackgroundColor forState:UIControlStateNormal];
     [changeType addTarget:self action:@selector(changeType) forControlEvents:UIControlEventTouchUpInside];
-
-      CGSize size = [changeType.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:changeType.titleLabel.font}];
+    
+    CGSize size = [changeType.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:changeType.titleLabel.font}];
     
     changeType.width = size.width;
     changeType.x = MTScreenW - size.width - 10;
@@ -239,9 +261,9 @@
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-//                                         self.backHandlerClick();
-                                         UIViewController *vc = self.navigationController.viewControllers[1];
-                                         [self.navigationController popToRootViewControllerAnimated:YES];
+                                         if(self.backHandlerClick)
+                                             self.backHandlerClick();
+                                         [self.navigationController popViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

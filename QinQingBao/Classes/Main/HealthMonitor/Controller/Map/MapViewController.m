@@ -32,14 +32,14 @@
     
     geocoder = [[CLGeocoder alloc] init];
     
-    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake([self.item.latitude floatValue], [self.item.longitude floatValue]);
-    float zoomLevel = 1;//缩放区域
+    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake([self.latitude floatValue], [self.longitude floatValue]);
+    float zoomLevel = 0.01;//缩放区域
     MKCoordinateRegion region = MKCoordinateRegionMake(cords, MKCoordinateSpanMake(zoomLevel, zoomLevel));
     [_map setRegion:[_map regionThatFits:region] animated:YES];
     
     MyAnnotation *annotation = [[MyAnnotation alloc] initWithCoordinate:cords];
     annotation.title = @"位置";
-    annotation.subtitle = self.item.address;
+    annotation.subtitle = self.address;
     [_map addAnnotation:annotation];
     
     self.locationManager = [[CLLocationManager alloc] init];

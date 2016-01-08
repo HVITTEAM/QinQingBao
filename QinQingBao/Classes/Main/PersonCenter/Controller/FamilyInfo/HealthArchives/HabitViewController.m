@@ -75,7 +75,7 @@
     HMCommonItem *item9 = [HMCommonItem itemWithTitle:@"睡眠质量" icon:nil];
     item9.subtitle = [self getSleepquality:self.habitVO.sleepquality];
     HMCommonItem *item10 = [HMCommonItem itemWithTitle:@"睡眠时长" icon:nil];
-    item10.subtitle = [self.habitVO.sleepduration isEqualToString:@""] ? @"无" : [NSString stringWithFormat:@"%@小时",self.habitVO.sleepduration];
+    item10.subtitle = [self getSleepduration:self.habitVO.sleepduration];
     group.items = @[item0,item1,item2,item3,item4,item7,item8,item9,item10];
 }
 
@@ -98,15 +98,15 @@
 -(NSString *)getSmokeyears:(NSString *)value
 {
     if ([value isEqualToString:@"1"])
-        return @"不吸";
+        return @"不吸烟";
     else if ([value isEqualToString:@"2"])
-        return @"一年";
+        return @"1-3年";
     else if ([value isEqualToString:@"3"])
-        return @"两年";
+        return @"3-5年";
     else if ([value isEqualToString:@"4"])
-        return @"三年";
+        return @"5-10年";
     else if ([value isEqualToString:@"5"])
-        return @"四年以上";
+        return @"10年以上";
     else
         return @"无";
 }
@@ -114,13 +114,13 @@
 -(NSString *)getSmokefrequency:(NSString *)value
 {
     if ([value isEqualToString:@"1"])
-        return @"不吸";
+        return @"1-5根/天";
     else if ([value isEqualToString:@"2"])
-        return @"经常";
+        return @"5-10根/天";
     else if ([value isEqualToString:@"3"])
-        return @"偶尔";
+        return @"10-20根/天";
     else if ([value isEqualToString:@"4"])
-        return @"少许";
+        return @"20根以上";
     else
         return @"无";
 }
@@ -128,13 +128,15 @@
 -(NSString *)getDrinkfrequency:(NSString *)value
 {
     if ([value isEqualToString:@"1"])
-        return @"不饮";
+        return @"不饮酒";
     else if ([value isEqualToString:@"2"])
-        return @"经常";
+        return @"1-50ml/天";
     else if ([value isEqualToString:@"3"])
-        return @"偶尔";
+        return @"50-100ml/天";
     else if ([value isEqualToString:@"4"])
-        return @"少许";
+        return @"100-300ml/天";
+    else if ([value isEqualToString:@"5"])
+        return @"300ml以上";
     else
         return @"无";
 }
@@ -142,13 +144,13 @@
 -(NSString *)getDrinktype:(NSString *)value
 {
     if ([value isEqualToString:@"1"])
-        return @"不饮";
+        return @"白酒";
     else if ([value isEqualToString:@"2"])
         return @"红酒";
     else if ([value isEqualToString:@"3"])
-        return @"白酒";
-    else if ([value isEqualToString:@"4"])
         return @"黄酒";
+    else if ([value isEqualToString:@"4"])
+        return @"啤酒";
     else
         return @"无";
 }
@@ -156,13 +158,15 @@
 -(NSString *)getSportduration:(NSString *)value
 {
     if ([value isEqualToString:@"1"])
-        return @"不运动";
+        return @"15分钟以下";
     else if ([value isEqualToString:@"2"])
-        return @"经常";
+        return @"15-30分钟";
     else if ([value isEqualToString:@"3"])
-        return @"偶尔";
+        return @"30-60分钟";
     else if ([value isEqualToString:@"4"])
-        return @"少许";
+        return @"60-90分钟";
+    else if ([value isEqualToString:@"5"])
+        return @"90分钟以上";
     else
         return @"无";
 }
@@ -172,11 +176,17 @@
     if ([value isEqualToString:@"1"])
         return @"不运动";
     else if ([value isEqualToString:@"2"])
-        return @"经常";
+        return @"1次/周";
     else if ([value isEqualToString:@"3"])
-        return @"偶尔";
+        return @"2次/周";
     else if ([value isEqualToString:@"4"])
-        return @"少许";
+        return @"3次/周";
+    else if ([value isEqualToString:@"5"])
+        return @"4次/周";
+    else if ([value isEqualToString:@"6"])
+        return @"5次/周";
+    else if ([value isEqualToString:@"7"])
+        return @"6次/周";
     else
         return @"无";
 }
@@ -191,6 +201,20 @@
         return @"一般";
     else
         return @"无";
+}
+
+-(NSString *)getSleepduration:(NSString *)value
+{
+    if ([value isEqualToString:@"1"])
+       return @"1-3小时";
+    else if ([value isEqualToString:@"2"])
+       return @"3-6小时";
+    else if ([value isEqualToString:@"3"])
+       return @"6-8小时";
+    else if ([value isEqualToString:@"4"])
+       return @"8小时以上";
+    else
+      return @"无";
 }
 
 @end

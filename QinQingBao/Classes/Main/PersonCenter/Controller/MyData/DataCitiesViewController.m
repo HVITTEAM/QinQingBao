@@ -13,6 +13,7 @@
 @interface DataCitiesViewController ()
 {
     NSMutableArray *dataProvider;
+    bool isReadPushBack;
 }
 
 @end
@@ -30,6 +31,16 @@
         self.dvcode_id = @"0";
     
     [self getDataProvider];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (isReadPushBack)
+    {
+         [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
+    }
 }
 
 -(void)initNavgation
@@ -101,15 +112,20 @@
         CityModel *vo = dataProvider[indexPath.row];
         self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
         self.selectedHandler(vo, self.detailStr);
-        [self.navigationController popToViewController:self.navigationController.viewControllers[2] animated:YES];
+        isReadPushBack = YES;
+        
+        [self viewDidAppear:YES];
     }
-    DataCitiesViewController *VC = [[DataCitiesViewController alloc] init];
-    CityModel *vo = dataProvider[indexPath.row];
-    VC.selectedHandler = self.selectedHandler;
-    VC.dvcode_id = vo.dvcode;
-    VC.detailStr = vo.dvname;
-    VC.viewTitle = @"选择城市";
-    [self.navigationController pushViewController:VC animated:YES];
+    else
+    {
+        DataCitiesViewController *VC = [[DataCitiesViewController alloc] init];
+        CityModel *vo = dataProvider[indexPath.row];
+        VC.selectedHandler = self.selectedHandler;
+        VC.dvcode_id = vo.dvcode;
+        VC.detailStr = vo.dvname;
+        VC.viewTitle = @"选择城市";
+        [self.navigationController pushViewController:VC animated:YES];
+    }
 }
 
 @end

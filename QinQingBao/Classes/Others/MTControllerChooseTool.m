@@ -12,9 +12,7 @@
 #import "HomeViewController.h"
 #import "ProfileViewController.h"
 #import "RootViewController.h"
-#import "MallViewController.h"
 #import "LoginViewController.h"
-
 
 @implementation MTControllerChooseTool
 
@@ -36,6 +34,9 @@
         [UIApplication sharedApplication].statusBarHidden = NO;
         
         UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
+        
+        CityModel *cityVO =  [ArchiverCacheHelper getLocaldataBykey:User_LocationCity_Key filePath:User_LocationCity_Path];
+        [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
         [SharedAppUtil defaultCommonUtil].userVO = vo;
         [MTControllerChooseTool setRootViewController];
         
@@ -50,47 +51,32 @@
 
 + (void)setRootViewController
 {
+    // 切换控制器
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
     //登陆界面
     LoginViewController *login = [[LoginViewController alloc] init];
     login.backHiden = YES;
     UINavigationController *navLoginNav = [[UINavigationController alloc] initWithRootViewController:login];
     navLoginNav.navigationItem.leftBarButtonItem = nil;
-    login.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
-                                                     image:[UIImage imageNamed:@"third_normal.png"]
-                                             selectedImage:[UIImage imageNamed:@"third_selected.png"]];
     
     LoginViewController *healthLogin = [[LoginViewController alloc] init];
     healthLogin.backHiden = YES;
     UINavigationController *healthLoginNav = [[UINavigationController alloc] initWithRootViewController:healthLogin];
     healthLoginNav.navigationItem.leftBarButtonItem = nil;
-    healthLogin.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
-                                                            image:[UIImage imageNamed:@"second_normal.png"]
-                                                    selectedImage:[UIImage imageNamed:@"second_selected.png"]];
-    
     
     
     HomeViewController *homeView = [[HomeViewController alloc] init];
-    homeView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"首页"
-                                                        image:[UIImage imageNamed:@"first_normal.png"]
-                                                selectedImage:[UIImage imageNamed:@"first_selected.png"]];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
     
     HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
-    healthView.tabBarItem  = [[UITabBarItem alloc] initWithTitle:@"监护"
-                                                           image:[UIImage imageNamed:@"second_normal.png"]
-                                                   selectedImage:[UIImage imageNamed:@"second_selected.png"]];
     UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
     
-    MallViewController *mallView = [[MallViewController alloc] init];
-    mallView.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"商城"
-                                                        image:[UIImage imageNamed:@"shop_normal"]
-                                                selectedImage:[UIImage imageNamed:@"shop_selected"]];
+    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+    mallView.url =  [[self alloc] getMallurl];
     UINavigationController *navMall = [[UINavigationController alloc] initWithRootViewController:mallView];
     
     ProfileViewController *sysview = [[ProfileViewController alloc] init];
-    sysview.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
-                                                       image:[UIImage imageNamed:@"third_normal.png"]
-                                               selectedImage:[UIImage imageNamed:@"third_selected.png"]];
     UINavigationController *navsys = [[UINavigationController alloc] initWithRootViewController:sysview];
     
     if (![SharedAppUtil defaultCommonUtil].tabBar)
@@ -108,10 +94,61 @@
     else
         [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
     
-    // 切换控制器
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    NSArray *barItems = [SharedAppUtil defaultCommonUtil].tabBar.tabBar.items;
+    
+    ((UITabBarItem *)barItems[0]).title = @"首页";
+    ((UITabBarItem *)barItems[0]).image = [[UIImage imageNamed:@"first_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ((UITabBarItem *)barItems[0]).selectedImage = [[UIImage imageNamed:@"first_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    ((UITabBarItem *)barItems[1]).title = @"监护";
+    ((UITabBarItem *)barItems[1]).image = [[UIImage imageNamed:@"second_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ((UITabBarItem *)barItems[1]).selectedImage = [[UIImage imageNamed:@"second_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    ((UITabBarItem *)barItems[2]).title = @"商城";
+    ((UITabBarItem *)barItems[2]).image = [[UIImage imageNamed:@"shop_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ((UITabBarItem *)barItems[2]).selectedImage = [[UIImage imageNamed:@"shop_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    ((UITabBarItem *)barItems[3]).title = @"我的";
+    ((UITabBarItem *)barItems[3]).image = [[UIImage imageNamed:@"third_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    ((UITabBarItem *)barItems[3]).selectedImage = [[UIImage imageNamed:@"third_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
     //将其设置为当前窗口的跟视图控制器
     window.rootViewController = [SharedAppUtil defaultCommonUtil].tabBar;
+}
+
++(void)setMainViewcontroller
+{
+    HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
+    UINavigationController *nav = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[1];
+    nav.navigationBarHidden = NO;
+    [nav setViewControllers:@[healthView] animated:YES];
+    
+    ProfileViewController *sysview = [[ProfileViewController alloc] init];
+    UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
+    [nav1 setViewControllers:@[sysview] animated:YES];
+    
+    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+    mallView.url =  [[self alloc] getMallurl];
+    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
+    [nav2 setViewControllers:@[mallView] animated:YES];
+}
+
++(void)setloginOutViewController
+{
+    LoginViewController *login = [[LoginViewController alloc] init];
+    login.backHiden = YES;
+    UINavigationController *nav = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
+    [nav setViewControllers:@[login] animated:YES];
+    
+    LoginViewController *healthLogin = [[LoginViewController alloc] init];
+    healthLogin.backHiden = YES;
+    UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[1];
+    [nav1 setViewControllers:@[healthLogin] animated:YES];
+    
+    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+    mallView.url =  [[self alloc] getMallurl];
+    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
+    [nav2 setViewControllers:@[mallView] animated:YES];
 }
 
 + (void)setLoginViewController
@@ -123,6 +160,13 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     //将其设置为当前窗口的跟视图控制器
     window.rootViewController = nav;
+}
+
+-(NSString *)getMallurl
+{
+    NSString *username = ([SharedAppUtil defaultCommonUtil].userVO && [SharedAppUtil defaultCommonUtil].userVO.member_id)? [SharedAppUtil defaultCommonUtil].userVO.member_id : @"";
+    NSString *key = ([SharedAppUtil defaultCommonUtil].userVO && [SharedAppUtil defaultCommonUtil].userVO.key)? [SharedAppUtil defaultCommonUtil].userVO.key : @"";
+    return URL_Mall(username, key);
 }
 
 

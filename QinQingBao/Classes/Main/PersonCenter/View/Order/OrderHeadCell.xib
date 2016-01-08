@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -23,9 +23,10 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旅行社" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEg-3T-e9a" userLabel="titleLab">
-                        <rect key="frame" x="83" y="10" width="48" height="21"/>
+                        <rect key="frame" x="83" y="8" width="48" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="uq1-hw-Bqr"/>
+                            <constraint firstAttribute="width" constant="48" id="zHB-2X-euJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -57,8 +58,8 @@
                     <constraint firstItem="y9J-0m-i6z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="PSU-8j-DbT"/>
                     <constraint firstItem="qke-Ne-M9D" firstAttribute="leading" secondItem="y9J-0m-i6z" secondAttribute="trailing" constant="13" id="XpW-J7-YPy"/>
                     <constraint firstItem="MfJ-7z-2fk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="iqr-WP-oPE"/>
-                    <constraint firstItem="oEg-3T-e9a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="xRD-xn-mx5"/>
-                    <constraint firstItem="qke-Ne-M9D" firstAttribute="top" secondItem="oEg-3T-e9a" secondAttribute="bottom" constant="20" id="znR-rn-BlE"/>
+                    <constraint firstItem="oEg-3T-e9a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xRD-xn-mx5"/>
+                    <constraint firstItem="qke-Ne-M9D" firstAttribute="top" secondItem="oEg-3T-e9a" secondAttribute="bottom" constant="22" id="znR-rn-BlE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -66,10 +67,11 @@
                 <outlet property="headImg" destination="y9J-0m-i6z" id="8QU-et-tok"/>
                 <outlet property="priceLab" destination="MfJ-7z-2fk" id="l5C-RW-Dry"/>
                 <outlet property="titleLab" destination="oEg-3T-e9a" id="WLT-pO-gHW"/>
+                <outlet property="titleLabWidth" destination="zHB-2X-euJ" id="ZI2-Gh-TPq"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholderImage" width="130" height="130"/>
+        <image name="placeholderImage" width="128" height="128"/>
     </resources>
 </document>

@@ -49,17 +49,17 @@
     [self.groups addObject:group];
     
     HMCommonItem *item0 = [HMCommonItem itemWithTitle:@"高血压" icon:nil];
-    item0.subtitle = [self.heredityVO.hypertension isEqualToString:@"1"] ? @"是" : @"否";
+    item0.subtitle = [self.heredityVO.hypertension isEqualToString:@"1"] ? @"有" : @"无";
     HMCommonItem *item1 = [HMCommonItem itemWithTitle:@"高血脂" icon:nil];
-    item1.subtitle = [self.heredityVO.hyperlipemiars isEqualToString:@"1"] ? @"是" : @"否";
+    item1.subtitle = [self.heredityVO.hyperlipemiars isEqualToString:@"1"] ? @"有" : @"无";
     HMCommonItem *item2 = [HMCommonItem itemWithTitle:@"糖尿病" icon:nil];
-    item2.subtitle = [self.heredityVO.diabetes isEqualToString:@"1"] ? @"是" : @"否";
+    item2.subtitle = [self.heredityVO.diabetes isEqualToString:@"1"] ? @"有" : @"无";
     HMCommonItem *item3 = [HMCommonItem itemWithTitle:@"冠心病" icon:nil];
-    item3.subtitle = [self.heredityVO.coronary isEqualToString:@"1"] ? @"是" : @"否";
+    item3.subtitle = [self.heredityVO.coronary isEqualToString:@"1"] ? @"有" : @"无";
     HMCommonItem *item4 = [HMCommonItem itemWithTitle:@"脑血管意外" icon:nil];
-    item4.subtitle = [self.heredityVO.cerebrovascular isEqualToString:@"1"] ? @"是" : @"否";
+    item4.subtitle = [self.heredityVO.cerebrovascular isEqualToString:@"1"] ? @"有" : @"无";
     HMCommonItem *item7 = [HMCommonItem itemWithTitle:@"精神分裂症" icon:nil];
-    item7.subtitle = [self.heredityVO.schizophrenia isEqualToString:@"1"] ? @"是" : @"否";
+    item7.subtitle = [self.heredityVO.schizophrenia isEqualToString:@"1"] ? @"有" : @"无";
     group.items = @[item0,item1,item2,item3,item4,item7];
 }
 

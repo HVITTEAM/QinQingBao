@@ -9,8 +9,6 @@
 
 static NSString *kcellIdentifier = @"collectionCellID";
 
-#define pageControlY  135
-
 static float cellHeight = 80;
 static float cellWidth = 66;
 
@@ -26,6 +24,7 @@ static float cellWidth = 66;
 #import "AllServiceViewController.h"
 #import "HomePicTotal.h"
 #import "HomePicModel.h"
+#import "MTNetReloader.h"
 
 @interface HomeViewController ()<MTCityChangeDelegate>
 {
@@ -34,9 +33,13 @@ static float cellWidth = 66;
     NSMutableArray *slideImages;
     /**广告图片数组*/
     NSMutableArray *advArr;
-
+    
     UIPageControl *pageControl;
     UIButton * button_back;
+    
+    NSTimer *timer;
+    
+    float pageControlY;
 }
 
 @end
@@ -54,11 +57,62 @@ static float cellWidth = 66;
     [self initCollectionView];
     
     [self getTypeList];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self initView];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [timer invalidate];
+}
+
+/**
+ *  根据手机的设备  改变视图
+ */
+-(void)initView
+{
+    switch ([UIDevice iPhonesModel])
+    {
+        case iPhone4:
+            pageControlY = MTScreenH *0.23 - 15;
+            self.imagePlayerHeight.constant = MTScreenH *0.23;
+            break;
+        case iPhone5:
+            [self autoLayoutView];
+            break;
+        case iPhone6:
+            [self autoLayoutView];
+            break;
+        case iPhone6Plus:
+            [self autoLayoutView];
+            break;
+        default:
+            NSLog(@"UnKnown");
+            break;
+    }
+}
+
+/**
+ * 自动布局
+ **/
+-(void)autoLayoutView
+{
+    pageControlY = MTScreenH *0.2 - 15;
+    self.imagePlayerHeight.constant = MTScreenH *0.2;
+    self.buttonTypeHeight.constant = MTScreenH *0.30;
+    self.tuinaBtnHeight.constant = self.buttonTypeHeight.constant/2;
+    self.vlineTop.constant = self.VlineHeight.constant =  self.tuinaBtnHeight.constant;
+    self.checkTop.constant = (self.buttonTypeHeight.constant/2 - self.checkSelfImg.height)/2;
+    self.serviceCollectHeight.constant = MTScreenH - self.imagePlayerHeight.constant - self.buttonTypeHeight.constant - CGRectGetMaxY(self.navigationController.navigationBar.frame) - [SharedAppUtil defaultCommonUtil].tabBar.tabBar.height;
+    
 }
 
 /**
@@ -67,12 +121,15 @@ static float cellWidth = 66;
 -(void)initNavigation
 {
     self.imgWidth.constant = MTScreenW/2;
+    
+    float padding = (MTScreenW/2 - CGRectGetMaxX(self.checkSelfImg.frame))/2;
+    self.rightPadding.constant = self.leftPadding.constant = self.leftPadding1.constant = padding;
+    
     self.bgScrollView.delegate = self;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     
-    
-    [self setTitle:@"亲情宝"];
-    [[self tabBarItem] setTitle:@"首页"];
+    self.tabBarItem.title = @"首页";
+    self.navigationItem.title = @"亲情宝";
     
     self.bgScrollView.height = pageControlY;
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
@@ -84,7 +141,12 @@ static float cellWidth = 66;
     
     button_back = [[UIButton alloc] init];
     button_back.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
-    [button_back setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
+    if ([SharedAppUtil defaultCommonUtil].cityVO)
+        [button_back setTitle:[SharedAppUtil defaultCommonUtil].cityVO.dvname forState:UIControlStateNormal];
+    
+    [self initLocation];
+    
+    
     //给button添加image
     [button_back setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];
     //设置image在button上的位置（上top，左left，下bottom，右right）这里可以写负值，对上写－5，那么image就象上移动5个像素
@@ -101,7 +163,7 @@ static float cellWidth = 66;
     [button_back addTarget:self action:@selector(cityChange) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button_back];
     [backButton setStyle:UIBarButtonItemStyleDone];
-    //    [self.navigationItem setLeftBarButtonItem:backButton];
+    [self.navigationItem setLeftBarButtonItem:backButton];
 }
 
 /**
@@ -114,15 +176,6 @@ static float cellWidth = 66;
     self.imgPlayer.delegate = self;
     self.imgPlayer.userInteractionEnabled = YES;
     self.imgPlayer.showsHorizontalScrollIndicator = NO;
-    // 初始化 数组 并添加四张图片
-    //    slideImages = [[NSMutableArray alloc] init];
-    //    [slideImages addObject:@"1-1.png"];
-    //    [slideImages addObject:@"1-2.png"];
-    //    [slideImages addObject:@"1-3.png"];
-    //    [slideImages addObject:@"1-4.jpg"];
-    //    [slideImages addObject:@"1-5.jpg"];
-    
-    //    [self.slideImages addObject:@"1-4.jpg"];
     
     // 初始化 pagecontrol
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake((MTScreenW - 100)/2, pageControlY, 100, 18)]; // 初始化mypagecontrol
@@ -135,40 +188,85 @@ static float cellWidth = 66;
     //解决初始化imageplayer可能发生偏移的问题
     self.imgPlayer.width = MTScreenW;
     
-    // 创建四个图片 imageview
+    // 创建图片 imageview
     for (int i = 0; i < slideImages.count; i++)
     {
         HomePicModel *item = slideImages[i];
-        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.url]];
+        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
-        imageView.userInteractionEnabled=YES;
         imageView.tag = i;
+        imageView.userInteractionEnabled=YES;
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
         [imageView addGestureRecognizer:singleTap];
-        [self.imgPlayer addSubview:imageView]; // 首页是第0页,默认从第1页开始的。所以+320。。。
+        [self.imgPlayer addSubview:imageView];
     }
     // 取数组最后一张图片 放在第0页
     HomePicModel *item = slideImages[slideImages.count - 1];
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imgPlayer.height); // 添加最后1页在首页 循环
     [self.imgPlayer addSubview:imageView];
     
     // 取数组第一张图片 放在最后1页
     HomePicModel *item0 = slideImages[0];
     imageView = [[UIImageView alloc] init];
-    NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item0.url]];
-    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item0.bc_value]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"noneImage"]];
     imageView.frame = CGRectMake((MTScreenW * ([slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
     
     [self.imgPlayer setContentSize:CGSizeMake(MTScreenW * ([slideImages count] + 2), self.imgPlayer.height)];
     [self.imgPlayer setContentOffset:CGPointMake(0, 0)];
     [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW, 0, MTScreenW, self.imgPlayer.height) animated:NO];
+    
+    [self initTimer];
+}
+
+
+#pragma mark   初始化地图定位功能
+
+/**
+ *  初始化地图定位功能
+ */
+-(void)initLocation
+{
+    [[CCLocationManager shareLocation] getLocationError:^(NSString *addressString) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
+                                                        message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
+                                                       delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+        
+        [SharedAppUtil defaultCommonUtil].lat = @"0";
+        [SharedAppUtil defaultCommonUtil].lon = @"0";
+        
+        return [self getLocationCity:addressString];
+    }];
+    
+    //获取定位城市和地区block
+    [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
+        if (addressString) {
+            [self getLocationCity:addressString];
+        }
+    }];
+    
+}
+
+#pragma mark Timer
+/**
+ *  初始化定时器
+ **/
+-(void)initTimer
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+}
+
+-(void)timerFireMethod:(NSTimer *)theTimer
+{
+    [self turn2Page:pageControl.currentPage + 1];
 }
 
 /**
@@ -180,13 +278,51 @@ static float cellWidth = 66;
 -(void)onClickImage:(UITapGestureRecognizer *)tap
 {
     //    WebViewController *listView = [[WebViewController alloc] init];
-    if (tap.view.tag <= 0)
+    HomePicModel *item = advArr[tap.view.tag];
+    if (tap.view.tag <= 0 || item.bc_article_url.length == 0)
         return;
     AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
     adver.type = tap.view.tag;
-    adver.dataProvider = advArr[tap.view.tag -1];
+    adver.selectedItem = item;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark 获取定位城市的dvname
+
+-(void)getLocationCity:(NSString *)cityStr
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Dingwei_conf parameters:@{@"dvname" : cityStr}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         CityModel *cityVO = [CityModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         [self selectedChange:cityVO.dvname];
+                                         [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
+                                         [ArchiverCacheHelper saveObjectToLoacl:cityVO key:User_LocationCity_Key filePath:User_LocationCity_Path];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
+    
+}
+
+
+#pragma mark MTCityChangeDelegate
+-(void)selectedChange:(NSString *)city
+{
+    [button_back setTitle:city forState:UIControlStateNormal];
+    CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
+    button_back.width = size.width + 30;
+    button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
 }
 
 -(void)cityChange
@@ -194,17 +330,9 @@ static float cellWidth = 66;
     // 2.弹出城市列表
     CitiesViewController *citiesVc = [[CitiesViewController alloc] init];
     citiesVc.delegate  = self;
+    citiesVc.selectedCity =  button_back.titleLabel.text;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citiesVc];
     [self presentViewController:nav animated:YES completion:nil];
-}
-
--(void)selectedChange:(NSString *)city
-{
-    [button_back setTitle:city forState:UIControlStateNormal];
-    CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
-    button_back.frame = CGRectMake(0, 0,size.width + 30, 40);
-    button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
-    
 }
 
 /**
@@ -232,29 +360,22 @@ static float cellWidth = 66;
                                      
                                      NSDictionary *dict1 =  [dict objectForKey:@"datas"];
                                      
-                                     NSDictionary *dictPic =  [dict1 objectForKey:@"pic_conf"];
+                                     NSArray *picItem = [dict1 objectForKey:@"data"];
                                      
-                                     for (NSString *key in dictPic)
+                                     advArr = [[NSMutableArray alloc] init];
+                                     for (NSDictionary *item in picItem)
                                      {
-                                         NSArray *picItem = dictPic[key];
-                                         NSMutableArray *arr = [[NSMutableArray alloc] init];
-                                         for (NSDictionary *item in picItem)
-                                         {
-                                             HomePicModel *vo = [HomePicModel objectWithKeyValues:item];
-                                             [arr addObject:vo];
-                                             NSLog(@"key: %@ value: %@", key, dictPic[key]);
-                                         }
-                                         [advArr addObject:arr];
+                                         HomePicModel *vo = [HomePicModel objectWithKeyValues:item];
+                                         [advArr addObject:vo];
                                      }
-
-                                     HomePicTotal *result = [HomePicTotal objectWithKeyValues:dict1];
                                      
-                                     slideImages = result.pic;
-                                     
-                                     [self initImagePlayer];
+                                     slideImages = advArr;
+                                     if(slideImages.count > 0)
+                                         [self initImagePlayer];
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [self showPlaceHolderView];
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                  }];
 }
@@ -280,8 +401,24 @@ static float cellWidth = 66;
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
+                                     [self showPlaceHolderView];
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                  }];
+}
+
+/**
+ * 显示异常界面
+ **/
+-(void)showPlaceHolderView
+{
+    __block MTNetReloader *netReloader = [[MTNetReloader alloc] initWithFrame:self.view.frame
+                                                                  reloadBlock:^{
+                                                                      NSLog(@"Reload") ;
+                                                                      [netReloader dismiss] ;
+                                                                      [self getAdvertisementpic];
+                                                                      [self getTypeList];
+                                                                  }] ;
+    [netReloader showInView:self.view] ;
 }
 
 #pragma mark -- UIScrollView delegate
@@ -290,7 +427,7 @@ static float cellWidth = 66;
 {
     if (sender == self.bgScrollView)
     {
-//        pageControl.y = pageControlY - sender.contentOffset.y - self.navigationController.navigationBar.height - 10;
+        //        pageControl.y = pageControlY - sender.contentOffset.y - self.navigationController.navigationBar.height - 10;
     }
     else
     {
@@ -299,6 +436,14 @@ static float cellWidth = 66;
         page --;  // 默认从第二页开始
         pageControl.currentPage = page;
     }
+}
+
+/**
+ * 手动时暂停
+ **/
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    [timer invalidate];
 }
 
 /**
@@ -316,28 +461,33 @@ static float cellWidth = 66;
     {
         [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW,0,MTScreenW,self.imgPlayer.height) animated:NO]; // 最后+1,循环第1页
     }
+    
+    [self initTimer];
 }
 
 /**
  * pagecontrol 选择器的方法
  */
-- (void)turnPage
+- (void)turn2Page:(NSInteger)idx
 {
-    NSInteger page = pageControl.currentPage; // 获取当前的page
-    [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW * (page+1) , 0 ,MTScreenW, self.imgPlayer.height) animated:NO]; // 触摸pagecontroller那个点点 往后翻一页 +1
+    if (idx == slideImages.count)
+        idx = 0;
+    pageControl.currentPage = idx;
+    [self.imgPlayer scrollRectToVisible:CGRectMake(MTScreenW * (idx+1) , 0 ,MTScreenW, self.imgPlayer.height) animated:YES];
 }
 
 #pragma mark -- UICollectionViewDataSource
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return dataProvider.count > 8 ? 8 :dataProvider.count;
+    return 4;
 }
+
 
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 2;
 }
 
 //每个UICollectionView展示的内容
@@ -348,7 +498,8 @@ static float cellWidth = 66;
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
-    ServiceTypeModel *data = [dataProvider objectAtIndex:indexPath.row];
+    NSInteger index = indexPath.section *4 + indexPath.row;
+    ServiceTypeModel *data = [dataProvider objectAtIndex:index];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,data.url]];
     
     if (dataProvider.count > 8)
@@ -374,36 +525,41 @@ static float cellWidth = 66;
 }
 
 /**
- *  设置横向间距
+ *  设置横向间距 设置最小列间距
  */
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    if (self.view.width == 414)//如果是plus
-        return 30;
-    else
-        return (self.view.width - cellWidth*4)/8;
+    return (self.view.width - cellWidth*4)/5;
 }
 
 /**
- *  设置竖向间距
+ *  设置竖向间距 设置最小行间距
  */
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 10;
-}
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+//{
+//    return 0;
+//}
 
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 10, 5, 10);//分别为上、左、下、右
+    float VSpace = (self.serviceCollectHeight.constant - cellHeight*2)/4;
+    float HSpace = (self.view.width - cellWidth*4)/8;
+    
+    if (section == 0)
+        return UIEdgeInsetsMake(VSpace, HSpace, VSpace, HSpace);//分别为上、左、下、右
+    else
+        return UIEdgeInsetsMake(0, HSpace, VSpace, HSpace);//分别为上、左、下、右
+    
 }
 
 #pragma mark --UICollectionViewDelegate，
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ServiceTypeModel *item = [dataProvider objectAtIndex:indexPath.row];
-    if (dataProvider.count > 8 && indexPath.row == 7)
+    NSInteger index = indexPath.section *4 + indexPath.row;
+    ServiceTypeModel *item = [dataProvider objectAtIndex:index];
+    if (dataProvider.count >= 8 && index == 7)
     {
         AllServiceViewController *alllist = [[AllServiceViewController alloc] init];
         alllist.dataProvider = dataProvider;

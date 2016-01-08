@@ -80,7 +80,10 @@
 @property (nonatomic, copy) NSString *remakr;
 /**地址**/
 @property (nonatomic, copy) NSString *totalname;
-
+/**参考价格**/
+@property (nonatomic, copy) NSString *guide_price;
+/**店铺说明**/
+@property (nonatomic, copy) NSString *store_description;
 
 
 @end

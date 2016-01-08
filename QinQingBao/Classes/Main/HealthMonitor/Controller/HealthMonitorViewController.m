@@ -34,12 +34,11 @@
     [self getDataProvider];
     
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
-    [self.scrollView setBackgroundColor:[UIColor whiteColor]];
     [self.scrollView setContentSize:CGSizeMake(MTScreenW, MTScreenH)];
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.backgroundColor = HMGlobalBg;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:self.scrollView];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -63,6 +62,7 @@
     if (titleLab)
         titleLab.hidden = YES;
 }
+
 /**
  *  添加pageControl
  */
@@ -100,6 +100,8 @@
  */
 -(void)getDataProvider
 {
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return;
     [SharedAppUtil defaultCommonUtil].needRefleshMonitor = NO;
     dataProvider = [[NSMutableArray alloc] init];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -161,7 +163,7 @@
     for (int i = 0; i< dataProvider.count ; i++)
     {
         HealthPageViewController *page = [[HealthPageViewController alloc] init];
-        page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTScreenH);
+        page.view.frame = CGRectMake(MTScreenW *i, 0, MTScreenW, MTScreenH - 114);
         page.familyVO = dataProvider[i];
         [self addChildViewController:page];
         [self.scrollView  addSubview:page.view];
@@ -201,6 +203,7 @@
 {
     AddMemberViewController *addView = [[AddMemberViewController alloc] init];
     addView.hidesBottomBarWhenPushed = YES;
+    addView.fromHealth = YES;
     [self.navigationController pushViewController:addView animated:YES];
 }
 

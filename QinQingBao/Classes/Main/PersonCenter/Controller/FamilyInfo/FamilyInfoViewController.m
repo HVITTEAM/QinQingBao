@@ -172,7 +172,7 @@
                                                                          @"client" : @"ios",
                                                                          @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                         
+                                         [HUD removeFromSuperview];
                                          id codeNum = [dict objectForKey:@"code"];
                                          if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                          {
@@ -189,7 +189,6 @@
                                                  self.backHandlerClick();
                                              [self.navigationController popViewControllerAnimated:YES];
                                          }
-                                         [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
                                          [HUD removeFromSuperview];

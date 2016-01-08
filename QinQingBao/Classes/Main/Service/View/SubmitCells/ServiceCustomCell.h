@@ -14,9 +14,14 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneLab;
 @property (strong, nonatomic) IBOutlet UILabel *sexLab;
 @property (strong, nonatomic) IBOutlet UILabel *ageLab;
-@property (strong, nonatomic) IBOutlet UILabel *addressLab;
+@property (strong, nonatomic) IBOutlet UITextView *addressLab;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *addressWidth;
+- (IBAction)changeAddressHandler:(id)sender;
 
 -(void)setdataWithItem:(FamilyModel *)item;
 
 + (ServiceCustomCell*) serviceCustomCell;
+
+@property (nonatomic, copy) void (^changeAddressClick)(UIButton *btn);
+
 @end

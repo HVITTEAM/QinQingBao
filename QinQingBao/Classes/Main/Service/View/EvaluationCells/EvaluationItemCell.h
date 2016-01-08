@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *headIcon;
 @property (strong, nonatomic) IBOutlet TQStarRatingView *evaView;
 @property (strong, nonatomic) IBOutlet UITextView *contentLab;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
 
 - (void)setitemWithData:(EvaluationModel *)item;

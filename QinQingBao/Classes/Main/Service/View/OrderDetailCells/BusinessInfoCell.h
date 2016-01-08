@@ -10,14 +10,17 @@
 #import "ServiceItemModel.h"
 
 @interface BusinessInfoCell : UITableViewCell<UIActionSheetDelegate>
-@property (strong, nonatomic) IBOutlet UIButton *callBtn;
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
 @property (strong, nonatomic) IBOutlet UILabel *addressLab;
-@property (strong, nonatomic) IBOutlet UILabel *telLab;
 @property (strong, nonatomic) IBOutlet UILabel *distanceLab;
-- (IBAction)callClickHandler:(id)sender;
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *addressLabHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *bgviewHeight;
+- (IBAction)chatButtonHandler:(id)sender;
+- (IBAction)mapButtonHandler:(id)sender;
 
 +(BusinessInfoCell *) businessCell;
+
+@property (nonatomic, retain) UIViewController *parentViewcontroller;
 @end

@@ -10,11 +10,15 @@
 #import "CLLocation+MTLocation.h"
 @interface CCLocationManager (){
     CLLocationManager *_manager;
-
+    
 }
 @property (nonatomic, strong) LocationBlock locationBlock;
 @property (nonatomic, strong) NSStringBlock cityBlock;
 @property (nonatomic, strong) NSStringBlock addressBlock;
+@property (nonatomic, strong) NSStringBlock cityAndAreaBlock;
+@property (nonatomic, strong) NSStringBlock getLocationErrorBlock;
+
+
 @property (nonatomic, strong) LocationErrorBlock errorBlock;
 
 @end
@@ -72,22 +76,32 @@
     [self startLocation];
 }
 
-//- (void) getCity:(NSStringBlock)cityBlock error:(LocationErrorBlock) errorBlock
-//{
-//    self.cityBlock = [cityBlock copy];
-//    self.errorBlock = [errorBlock copy];
-//    [self startLocation];
-//}
+- (void)getCityAndArea:(NSStringBlock)cityAndAreaBlock
+{
+    self.cityAndAreaBlock = [cityAndAreaBlock copy];
+    [self startLocation];
+}
+
+- (void)getLocationError:(NSStringBlock)locationErrorBlock
+{
+    self.getLocationErrorBlock = [locationErrorBlock copy];
+}
+
+
+- (void) getCity:(NSStringBlock)cityBlock error:(LocationErrorBlock) errorBlock
+{
+    self.cityBlock = [cityBlock copy];
+    self.errorBlock = [errorBlock copy];
+    [self startLocation];
+}
 
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    
     NSUserDefaults *standard = [NSUserDefaults standardUserDefaults];
     CLLocation * location = [[CLLocation alloc]initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     CLLocation * marsLoction =   [location locationMarsFromEarth];
-
-
+    
     CLGeocoder *geocoder=[[CLGeocoder alloc]init];
     [geocoder reverseGeocodeLocation:marsLoction completionHandler:^(NSArray *placemarks,NSError *error)
      {
@@ -98,6 +112,10 @@
              NSLog(@"______%@",_lastCity);
              _lastAddress = placemark.name;
              NSLog(@"______%@",_lastAddress);
+             if (_cityAndAreaBlock) {
+                 _cityAndAreaBlock([NSString stringWithFormat:@"%@%@",placemark.locality,placemark.subLocality]);
+                 _cityAndAreaBlock = nil;
+             }
          }
          if (_cityBlock) {
              _cityBlock(_lastCity);
@@ -107,21 +125,20 @@
              _addressBlock(_lastAddress);
              _addressBlock = nil;
          }
-
          
      }];
-
+    
     
     _lastCoordinate = CLLocationCoordinate2DMake(marsLoction.coordinate.latitude ,marsLoction.coordinate.longitude);
     if (_locationBlock) {
         _locationBlock(_lastCoordinate);
         _locationBlock = nil;
     }
-
+    
     NSLog(@"%f--%f",marsLoction.coordinate.latitude,marsLoction.coordinate.longitude);
     [standard setObject:@(marsLoction.coordinate.latitude) forKey:CCLastLatitude];
     [standard setObject:@(marsLoction.coordinate.longitude) forKey:CCLastLongitude];
-
+    
     [manager stopUpdatingLocation];
 }
 
@@ -139,14 +156,17 @@
     }
     else
     {
-        UIAlertView *alvertView=[[UIAlertView alloc]initWithTitle:@"提示" message:@"需要开启定位服务,请到设置->隐私,打开定位服务" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-        [alvertView show];
+        if (_getLocationErrorBlock)
+        {
+            _getLocationErrorBlock(@"需要开启定位服务,请到设置->隐私,打开定位服务");
+            _getLocationErrorBlock = nil;
+        }
     }
 }
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error{
     [self stopLocation];
-
+    
 }
 -(void)stopLocation
 {

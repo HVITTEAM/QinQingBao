@@ -174,8 +174,10 @@
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"绑定成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                          [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-                                         self.backHandlerClick();
-                                         [self.navigationController popViewControllerAnimated:YES];
+                                         if (self.backHandlerClick)
+                                             self.backHandlerClick();
+                                         UIViewController *vc = self.navigationController.viewControllers[self.navigationController.viewControllers.count-3];
+                                         [self.navigationController popToViewController:vc animated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -183,7 +185,6 @@
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
                                  }];
-    
 }
 
 @end

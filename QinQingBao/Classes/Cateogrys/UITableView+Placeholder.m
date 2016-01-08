@@ -13,7 +13,7 @@
 - (void)initWithPlaceString:(NSString *)placeStr
 {
     [self removePlace];
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ic_logo.png"]];
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholderImage.png"]];
     img.tag = 101;
     img.x = (MTScreenW - 60)/2;
     img.y = MTScreenH/2 - 180;
@@ -42,6 +42,7 @@
     [img removeFromSuperview];
     [lable removeFromSuperview];
 }
+
 
 -(void)onClickImage
 {

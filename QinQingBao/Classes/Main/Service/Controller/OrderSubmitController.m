@@ -13,9 +13,9 @@
 #import "CouponsModel.h"
 #import "OrderItem.h"
 #import "OrderResultViewController.h"
+#import "UpdateAddressController.h"
 
-
-@interface OrderSubmitController ()
+@interface OrderSubmitController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray* day;
     NSMutableArray* time;
@@ -38,8 +38,8 @@
     
     //优惠券
     CouponsModel *couponsItem;
-    
 }
+@property(nonatomic,strong)UITableView *tableView;
 
 @end
 
@@ -51,11 +51,18 @@
     
     [self initNavigation];
     
-    [self initTableviewSkin];
-    
     [self initDatePickView];
     
     selectedIndex = 1;
+    
+    [self.view addSubview:self.tableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self initTableviewSkin];
     
 }
 
@@ -66,6 +73,18 @@
     [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:MTSececteFamily object:nil];
 }
 
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50)];
+        _tableView.delegate = self;
+        _tableView.userInteractionEnabled=YES;
+        _tableView.dataSource = self;
+        _tableView.scrollsToTop=YES;
+    }
+    return _tableView;
+}
+
 /**
  *  设置tableView属性
  */
@@ -73,29 +92,18 @@
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
     
-    orderSubmitCell = [OrderSubmitCell orderSubmitCell];
+    if (!orderSubmitCell)
+        orderSubmitCell = [OrderSubmitCell orderSubmitCell];
     __weak typeof(self) weakSelf = self;
     orderSubmitCell.payClick = ^(UIButton *button){
         [weakSelf submitClickHandler];
     };
     orderSubmitCell.serviceDetailItem = self.serviceDetailItem;
-    orderSubmitCell.width = MTScreenW;
-    [self.tableView addSubview:orderSubmitCell];
+    orderSubmitCell.frame = CGRectMake(0, MTScreenH - 50, MTScreenW, 50);
+    [self.view addSubview:orderSubmitCell];
 }
 
--(void)sendMsg
-{
-    
-}
-
-#pragma mark -- UIScrollView delegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)sender
-{
-    orderSubmitCell.y = MTScreenH - self.navigationController.navigationBar.height - 10 + sender.contentOffset.y;
-}
 
 /**
  *  初始化导航栏
@@ -178,13 +186,13 @@
     if([locationString floatValue] > 18)
         [day removeObjectAtIndex:0];
     
-    for (int i = 0; i < time.count; i++)
-    {
-        if ([time[0] floatValue] <= [locationString floatValue])
-        {
-            [time removeObjectAtIndex:0];
-        }
-    }
+    //    for (int i = 0; i < time.count; i++)
+    //    {
+    //        if ([time[0] floatValue] <= [locationString floatValue])
+    //        {
+    //            [time removeObjectAtIndex:0];
+    //        }
+    //    }
 }
 
 
@@ -299,7 +307,7 @@ numberOfRowsInComponent:(NSInteger)component
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 1)
-        return 90;
+        return 100;
     else if (indexPath.section == 1 && indexPath.row == 1)
         return 70;
     else
@@ -323,7 +331,7 @@ numberOfRowsInComponent:(NSInteger)component
             commoncell.textLabel.text = @"服务对象";
             commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
             commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
+            commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell = commoncell;
         }
         else
@@ -333,6 +341,11 @@ numberOfRowsInComponent:(NSInteger)component
             if(serviceCuscell == nil)
                 serviceCuscell = [ServiceCustomCell serviceCustomCell];
             
+            __weak __typeof(self)weakSelf = self;
+            serviceCuscell.changeAddressClick = ^(UIButton *btn){
+                NSLog(@"切换地址");
+                [weakSelf changeAddressHandler];
+            };
             [serviceCuscell setdataWithItem:famVO];
             
             cell = serviceCuscell;
@@ -463,6 +476,22 @@ numberOfRowsInComponent:(NSInteger)component
         };
         [self.navigationController pushViewController:coupons animated:YES];
     }
+}
+
+/**
+ *  修改临时地址
+ */
+-(void)changeAddressHandler
+{
+    UpdateAddressController *addressView = [[UpdateAddressController alloc] init];
+    addressView.title = @"修改地址";
+    addressView.changeDataBlock = ^(NSDictionary *dict, NSString *addressStr){
+        famVO.member_areaid = [dict objectForKey:@"member_areaid"];
+        famVO.totalname = addressStr;
+        famVO.member_areainfo = [dict objectForKey:@"member_areainfo"];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    };
+    [self.navigationController pushViewController:addressView animated:YES];
 }
 
 /**

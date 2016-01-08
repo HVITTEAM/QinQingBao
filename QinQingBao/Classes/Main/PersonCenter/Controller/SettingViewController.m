@@ -14,13 +14,15 @@
 
 @implementation SettingViewController
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.hidesBottomBarWhenPushed = YES;
-    }
+-(instancetype)init
+{
+    self = [super init];
+     if (self){
+         self.hidesBottomBarWhenPushed = YES;
+     }
     return self;
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

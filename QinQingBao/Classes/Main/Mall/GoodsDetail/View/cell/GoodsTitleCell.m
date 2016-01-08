@@ -1,0 +1,67 @@
+//
+//  GoodsTitleCell.m
+//  QinQingBao
+//
+//  Created by 董徐维 on 16/1/8.
+//  Copyright © 2016年 董徐维. All rights reserved.
+//
+
+#import "GoodsTitleCell.h"
+
+@implementation GoodsTitleCell
+
+
++(GoodsTitleCell *)goodsTitleCell
+{
+    GoodsTitleCell * cell = [[self alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor whiteColor];
+    return cell;
+}
+
+- (void)awakeFromNib
+{
+    
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+}
+
+#pragma mark - setter
+- (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(int)rows
+{
+    // 1.取出背景view
+    UIImageView *bgView = (UIImageView *)self.backgroundView;
+    UIImageView *selectedBgView = (UIImageView *)self.selectedBackgroundView;
+    
+    // 2.设置背景图片
+    if (rows == 1) {
+        bgView.image = [UIImage resizedImage:@"common_card_background"];
+        selectedBgView.image = [UIImage resizedImage:@"common_card_background_highlighted"];
+    } else if (indexPath.row == 0) { // 首行
+        bgView.image = [UIImage resizedImage:@"common_card_top_background"];
+        selectedBgView.image = [UIImage resizedImage:@"common_card_top_background_highlighted"];
+    } else if (indexPath.row == rows - 1) { // 末行
+        bgView.image = [UIImage resizedImage:@"common_card_bottom_background"];
+        selectedBgView.image = [UIImage resizedImage:@"common_card_bottom_background_highlighted"];
+    } else { // 中间
+        bgView.image = [UIImage resizedImage:@"common_card_middle_background"];
+        selectedBgView.image = [UIImage resizedImage:@"common_card_middle_background_highlighted"];
+    }
+}
+
+- (void)setItem
+{
+    self.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
+    self.textLabel.text = @"咕咕 iPhone6数据线 iPhone5 5s 6s Plus安卓通用二合一充电器线";
+    self.textLabel.numberOfLines = 0;
+    self.textLabel.font = [UIFont systemFontOfSize:16];
+    CGRect tmpRect = [self.textLabel.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.textLabel.font,NSFontAttributeName, nil] context:nil];
+    self.textLabel.height = tmpRect.size.height;
+    self.height = CGRectGetMaxY(self.textLabel.frame) + 5;
+}
+
+
+@end

@@ -20,4 +20,5 @@
 
 @property (nonatomic, assign) id<MTCityChangeDelegate> delegate;
 
+@property (nonatomic, retain) NSString *selectedCity;
 @end

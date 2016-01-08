@@ -54,6 +54,8 @@
                                      {
                                          CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
                                          dataProvider = result.datas;
+                                         if([self.title isEqualToString:@"选择区划"])
+                                             [dataProvider removeObjectAtIndex:0];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];
@@ -95,21 +97,21 @@
 {
     if ([self.title isEqualToString:@"选择街道"])
     {
-//        StreetViewController *VC = [[StreetViewController alloc] init];
-//        CityModel *vo = dataProvider[indexPath.row];
-//        self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
-//        VC.selectedHandler = self.selectedHandler;
-//        VC.dvcode_id = vo.dvcode;
-//        VC.detailStr = self.detailStr;
-//        VC.viewTitle = @"选择社区";
-//        [self.navigationController pushViewController:VC animated:YES];
-//    }
-//    else if ([self.title isEqualToString:@"选择社区"])
-//    {
+        //        StreetViewController *VC = [[StreetViewController alloc] init];
+        //        CityModel *vo = dataProvider[indexPath.row];
+        //        self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
+        //        VC.selectedHandler = self.selectedHandler;
+        //        VC.dvcode_id = vo.dvcode;
+        //        VC.detailStr = self.detailStr;
+        //        VC.viewTitle = @"选择社区";
+        //        [self.navigationController pushViewController:VC animated:YES];
+        //    }
+        //    else if ([self.title isEqualToString:@"选择社区"])
+        //    {
         CityModel *vo = dataProvider[indexPath.row];
         self.detailStr = [NSString stringWithFormat:@"%@%@",self.detailStr,vo.dvname];
         self.selectedHandler(vo,self.detailStr);
-        [self.navigationController popToViewController:self.navigationController.viewControllers[2] animated:YES];
+        [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
     }
     else
     {

@@ -26,4 +26,14 @@
  *  设置登陆控制器
  */
 + (void)setLoginViewController;
+
+/**
+ *  设置注销控制器
+ */
++ (void)setloginOutViewController;
+
+/**
+ *  登陆之后更新控制器
+ */
++ (void)setMainViewcontroller;
 @end

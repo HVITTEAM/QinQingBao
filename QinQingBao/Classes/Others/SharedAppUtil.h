@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "UserModel.h"
+#import "CityModel.h"
 
 @interface SharedAppUtil : NSObject
 
 +(SharedAppUtil *)defaultCommonUtil;
 
 @property (nonatomic, retain) UserModel *userVO;
+
+@property (nonatomic, retain) CityModel *cityVO;
 
 @property (nonatomic, retain) UITabBarController *tabBar;
 

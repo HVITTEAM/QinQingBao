@@ -22,9 +22,10 @@
 
 @implementation FamilyViewController
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
         self.hidesBottomBarWhenPushed = YES;
     }
     return self;
@@ -55,7 +56,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"我的家属";
+    self.title = @"我的亲友";
     self.view.backgroundColor = HMGlobalBg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
@@ -82,7 +83,7 @@
                                          //                                         [alertView show];
                                          
                                          if(!self.isfromOrder)
-                                             [self initWithPlaceString:@"您还没有绑定的家属呐"];
+                                             [self initWithPlaceString:@"暂无数据!"];
                                          [dataProvider removeAllObjects];
                                          [self setupGroups];
                                      }

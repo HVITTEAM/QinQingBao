@@ -79,6 +79,8 @@
 -(void)setBackHiden:(BOOL)backHiden
 {
     _backHiden = backHiden;
+    if (self.backBtn)
+        self.backBtn.hidden = self.backHiden;
 }
 
 #pragma mark UITextField协议方法
@@ -141,9 +143,10 @@
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             [MTControllerChooseTool setRootViewController];
+                                             //backHide如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
                                              if (!self.backHiden)
                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                             [MTControllerChooseTool setMainViewcontroller];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

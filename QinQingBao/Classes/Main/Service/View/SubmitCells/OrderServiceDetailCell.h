@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *serviceTitle;
 @property (strong, nonatomic) IBOutlet UILabel *serviceDesc;
 @property (strong, nonatomic) IBOutlet UILabel *servicePrice;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *detailLabWidth;
 
 -(void)setdataWithItem:(ServiceItemModel *)item;
 

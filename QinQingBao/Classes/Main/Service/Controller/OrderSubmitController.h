@@ -14,7 +14,7 @@
 #import "ServiceItemModel.h"
 #import "ServiceTypeModel.h"
 
-@interface OrderSubmitController : UITableViewController<UIActionSheetDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
+@interface OrderSubmitController : UIViewController<UIActionSheetDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic,retain) UIDatePicker* datePicker;
 

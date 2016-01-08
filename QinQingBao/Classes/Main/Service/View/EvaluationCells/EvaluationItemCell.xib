@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -40,16 +40,6 @@
                             <constraint firstAttribute="width" constant="90" id="uTy-Gd-XcK"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-10-10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3N9-Al-i6g">
-                        <rect key="frame" x="149" y="17" width="89" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="89" id="POF-gR-xZL"/>
-                            <constraint firstAttribute="height" constant="21" id="yxu-Ih-hXh"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="测试数据年a" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fP4-TK-kAH">
                         <rect key="frame" x="9" y="39" width="302" height="38"/>
                         <constraints>
@@ -59,9 +49,20 @@
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-10-10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3N9-Al-i6g">
+                        <rect key="frame" x="243.5" y="18" width="67.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Ln7-37-SCO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="fP4-TK-kAH" firstAttribute="top" secondItem="3N9-Al-i6g" secondAttribute="bottom" id="0F4-Ll-Ab2"/>
                     <constraint firstAttribute="bottomMargin" secondItem="fP4-TK-kAH" secondAttribute="bottom" constant="-5.5" id="0Q1-n2-xVv"/>
+                    <constraint firstAttribute="trailing" secondItem="3N9-Al-i6g" secondAttribute="trailing" constant="9" id="2s4-ks-QN4"/>
                     <constraint firstAttribute="trailing" secondItem="fP4-TK-kAH" secondAttribute="trailing" constant="9" id="6t5-QY-FOZ"/>
                     <constraint firstItem="fP4-TK-kAH" firstAttribute="top" secondItem="b5c-WX-axw" secondAttribute="bottom" id="AqO-MC-KEH"/>
                     <constraint firstItem="b5c-WX-axw" firstAttribute="leading" secondItem="8z7-kB-SsA" secondAttribute="trailing" constant="10" id="GdG-0t-hpu"/>
@@ -73,17 +74,25 @@
                     <constraint firstItem="fP4-TK-kAH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="kTg-5F-TYt"/>
                     <constraint firstItem="3N9-Al-i6g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="tAI-pu-S6I"/>
                     <constraint firstItem="3N9-Al-i6g" firstAttribute="leading" secondItem="b5c-WX-axw" secondAttribute="trailing" constant="10" id="vtc-Am-twj"/>
+                    <constraint firstItem="3N9-Al-i6g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="yYH-jO-XnK"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="tAI-pu-S6I"/>
+                        <exclude reference="vtc-Am-twj"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentLab" destination="fP4-TK-kAH" id="saG-xB-0SR"/>
                 <outlet property="evaView" destination="b5c-WX-axw" id="LfJ-0X-Hcw"/>
                 <outlet property="headIcon" destination="8z7-kB-SsA" id="S8P-vo-5Bx"/>
                 <outlet property="nameLab" destination="dBU-bi-lyj" id="2X4-GO-YBk"/>
+                <outlet property="timeLab" destination="3N9-Al-i6g" id="Rpj-tM-Ga3"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholderImage" width="130" height="130"/>
+        <image name="placeholderImage" width="128" height="128"/>
     </resources>
 </document>

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HomePicModel.h"
+#import "NJKWebViewProgress.h"
 
-@interface AdvertisementViewController : UIViewController
+@interface AdvertisementViewController : UIViewController<NJKWebViewProgressDelegate,UIWebViewDelegate>
 
 /**
  *  广告类型 1 看护宝 2 腕表 3 心脏健康管家 4血压仪 5 推拿
@@ -18,5 +20,5 @@
 /**
  *  数据源
  */
-@property (nonatomic, retain) NSMutableArray *dataProvider;
+@property (nonatomic, retain) HomePicModel *selectedItem;
 @end

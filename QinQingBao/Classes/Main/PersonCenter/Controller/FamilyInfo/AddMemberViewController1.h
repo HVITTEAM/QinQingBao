@@ -18,4 +18,5 @@
 @property (nonatomic,retain) HMCommonTextfieldItem *telfield;
 
 @property (nonatomic, copy) void (^backHandlerClick)(void);
+
 @end

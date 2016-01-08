@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
 @property (strong, nonatomic) IBOutlet UILabel *sunSellLab;
 @property (strong, nonatomic) IBOutlet UILabel *distanceLab;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *priceLabWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *titleLabWidth;
 
 //- (void)setIndexPath:(NSIndexPath *)indexPath rowsInSection:(NSInteger)rows;
 

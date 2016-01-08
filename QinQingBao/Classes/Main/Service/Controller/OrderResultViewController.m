@@ -21,17 +21,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"提交结果";
-    self.backBtn.layer.cornerRadius = 8;
+    self.backBtn.layer.cornerRadius = 4;
     
     self.orderNum.text = [NSString stringWithFormat:@"订单编号: %@",self.orderItem.wcode];
     self.orderPrice.text = [NSString stringWithFormat:@"订单金额: %@ 元",self.orderItem.wprice];
-
+    
 }
 
 -(void)setOrderItem:(OrderItem *)orderItem
 {
     _orderItem = orderItem;
-   }
+}
 
 - (IBAction)backHandler:(id)sender
 {

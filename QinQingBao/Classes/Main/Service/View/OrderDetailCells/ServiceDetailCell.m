@@ -39,8 +39,8 @@
     lab.font = [UIFont systemFontOfSize:13];
     
     lab.textColor = [UIColor darkGrayColor];
-
-    lab.text = itemInfo.icontent;
+    
+    lab.text = [NSString stringWithFormat:@"%@%@",[itemInfo.icontent stringByReplacingOccurrencesOfString:@" " withString:@""],[itemInfo.guide_price stringByReplacingOccurrencesOfString:@" " withString:@""]];
     
     CGRect tmpRect = [lab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000)
                                             options:NSStringDrawingUsesLineFragmentOrigin

@@ -22,27 +22,6 @@
 @interface HMCommonCell()
 
 /**
- *  输入框
- */
-@property (strong, nonatomic) UIButton *rightBtn;
-
-/**
- *  输入框
- */
-@property (strong, nonatomic) UITextField *rightText;
-/**
- *  箭头
- */
-@property (strong, nonatomic) UIImageView *rightArrow;
-/**
- *  开关
- */
-@property (strong, nonatomic) UISwitch *rightSwitch;
-/**
- *  标签
- */
-@property (strong, nonatomic) UILabel *rightLabel;
-/**
  *  提醒数字
  */
 @property (strong, nonatomic) HMBadgeView *bageView;

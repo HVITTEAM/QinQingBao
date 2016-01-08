@@ -10,7 +10,6 @@
 
 @implementation UserModel
 
-
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:_member_id forKey:@"_member_id"];

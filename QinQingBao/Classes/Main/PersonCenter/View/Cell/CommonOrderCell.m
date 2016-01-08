@@ -57,13 +57,14 @@
     {
         str = @"等待接单";
         self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.titleLabel.text = @"取消订单";
+        [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
     }
     else if (status <20)
     {
         str = @"已接单";
         self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.titleLabel.text = @"联系商家";
+        [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+        
     }
     else if (status >20 && status < 29)
     {
@@ -74,13 +75,22 @@
     {
         str = @"服务结束";
         self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.titleLabel.text = @"评价";
+        [self.deleteBtn setTitle:@"评价订单" forState:UIControlStateNormal];
+        
     }
     else if ( status >40 && status < 49)
     {
-        str = @"未评价";
+        if (!self.item.wgrade )
+        {
+            str = @"未评价";
+            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+        }
+        else
+        {
+            str = @"已评价";
+            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+        }
         self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.titleLabel.text = @"联系商家";
     }
     else if ( status >50 && status < 59)
     {
@@ -122,6 +132,9 @@
 
 - (IBAction)deleteBtnClickHandler:(id)sender
 {
+    UIButton *btn = (UIButton *)sender;
+    NSString *str = btn.titleLabel.text;
+    
     self.deleteClick(sender);
 }
 @end

@@ -80,13 +80,13 @@ static NSOperationQueue * _queue;
                       success(dict,responseObject);
                   }
                   // 请求头部信息(我们执行网络请求的时候给服务器发送的包头信息)
-                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
+//                  NSLog(@"%@", operation.request.allHTTPHeaderFields);
                   
                   // 服务器给我们返回的包得头部信息
-                  NSLog(@"%@", operation.response);
+//                  NSLog(@"%@", operation.response);
                   
                   // 返回的数据
-                  NSLog(@"%@", responseObject);
+//                  NSLog(@"%@", responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSString *errorStr = [error.userInfo objectForKey:@"NSLocalizedDescription"];

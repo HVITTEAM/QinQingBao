@@ -24,13 +24,15 @@
     NSString *iconUrl;
 }
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
         self.hidesBottomBarWhenPushed = YES;
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -93,7 +95,7 @@
     lab.x = self.view.width/2 - lab.width/2;
     lab.y = 0;
     [view addSubview:lab];
-        
+    
     [self.tableView addSubview:view];
 }
 
@@ -106,9 +108,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return 6;
+    return 6;
     else
-        return 1;
+    return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -119,9 +121,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0)
-        return 60;
+    return 60;
     else
-        return 44;
+    return 44;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -157,9 +159,9 @@
             contentcell.accessoryView = imageView;
         }
         else if(indexPath.row == 3 || indexPath.row == 4)
-            contentcell.accessoryType = UITableViewCellAccessoryNone;
+        contentcell.accessoryType = UITableViewCellAccessoryNone;
         else
-            contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }
     else
@@ -203,9 +205,9 @@
     else if(indexPath.row == 4)
     {
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-            [self setDatePickerIos8];
+        [self setDatePickerIos8];
         else
-            [self setDatePickerIos7];
+        [self setDatePickerIos7];
     }
     else if(indexPath.row == 5)
     {
@@ -241,29 +243,29 @@
     if (alertView.tag > 100)
     {
         if(buttonIndex==1)
-            [self shootPiicturePrVideo];
+        [self shootPiicturePrVideo];
         else if(buttonIndex==2)
-            [self selectExistingPictureOrVideo];
+        [self selectExistingPictureOrVideo];
         
     }
     else
     {
         if (buttonIndex == 0)
-            return;
+        return;
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:@"ios" forKey:@"client"];
         [dict setObject:[NSNumber numberWithInteger:buttonIndex] forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_birthday != nil)
-            [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
+        [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
         if (infoVO.member_areainfo != nil)
-            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
         [self updataUserInfor:dict];
     }
@@ -361,7 +363,7 @@
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
-//                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                         //                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      }
                                      else
                                      {
@@ -372,7 +374,7 @@
                                              iconUrl = [di objectForKey:@"member_avatar"];
                                          }
                                          else
-                                             [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
+                                         [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
                                          [self setDataProvider];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -467,15 +469,15 @@
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
         if (infoVO.member_sex != nil)
-            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+        [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
-            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
         [self updataUserInfor:dict];
     }];
@@ -496,6 +498,7 @@
                                   otherButtonTitles:nil];
     
     self.datePicker = [[UIDatePicker alloc] init];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
     [actionSheet addSubview:self.datePicker];
     [actionSheet showInView:self.view];
 }
@@ -514,15 +517,15 @@
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
         if (infoVO.member_sex != nil)
-            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+        [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
-            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         [self updataUserInfor:dict];
         
     }

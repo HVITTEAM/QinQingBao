@@ -23,8 +23,11 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
+}
+
+- (IBAction)changeAddressHandler:(id)sender
+{
+    self.changeAddressClick((UIButton *)sender);
 }
 
 -(void)setdataWithItem:(FamilyModel *)item
@@ -32,6 +35,8 @@
     NSString *str = [NoticeHelper intervalSinceNowByyear:item.member_birthday];
     self.nameLab.text = item.member_truename;
     self.phoneLab.text = item.member_mobile;
+    self.addressLab.editable = NO;
+    self.addressWidth.constant = MTScreenW - 90 - 50;
     if (!item.totalname || !item.member_areainfo)
         self.addressLab.text = @"";
     else

@@ -15,8 +15,11 @@
 #import "OrderTableViewController.h"
 #import "AccountViewController.h"
 #import "PersonalDataViewController.h"
-
 #import "LoginViewController.h"
+#import "GoodsHeadViewController.h"
+#import "ClassificationViewController.h"
+#import "GoodsTableViewController.h"
+#import "ConfirmViewController.h"
 
 
 #define imageHeight 140
@@ -29,6 +32,8 @@
 @implementation ProfileViewController
 {
     NSURL *iconUrl;
+    NSString *username;
+    NSString *key;
 }
 
 - (void)viewDidLoad
@@ -39,17 +44,19 @@
     
     [self initTableviewSkin];
     
+    [self setupGroups];
+    
     //    清除图片缓存
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] clearMemory];
+    
+    username = [SharedAppUtil defaultCommonUtil].userVO.member_id;
+    key = [SharedAppUtil defaultCommonUtil].userVO.key;
 }
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self setupGroups];
     
     [self getUserIcon];
     
@@ -61,6 +68,13 @@
     [super viewWillDisappear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+}
+
+-(void)checkLogin
+{
+    LoginViewController *login = [[LoginViewController alloc] init];
+    login.backHiden = YES;
+    [self.navigationController pushViewController:login animated:NO];
 }
 
 #pragma mark 初始化界面
@@ -167,9 +181,14 @@
     [self setupGroup0];
     [self setupGroup1];
     [self setupGroup2];
-    [self setupGroup3];
+    [self setupGroup6];
     [self setupGroup4];
+    [self setupGroup3];
     [self setupGroup5];
+    [self setupGroup7];
+    [self setupGroup8];
+    [self setupGroup9];
+    [self setupGroup10];
     [self setupFooter];
     
     //刷新表格
@@ -201,15 +220,9 @@
     [self.groups addObject:group];
     
     HMCommonArrowItem *myData;
-    
     // 2.设置组的所有行数据
     myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
-    //        myData.destVcClass = [PersonalDataViewController class];
-    myData.operation = ^{
-        PersonalDataViewController *destVC = [[PersonalDataViewController alloc] init];
-        destVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-    };
+    myData.destVcClass = [PersonalDataViewController class];
     group.items = @[myData];
 }
 
@@ -222,12 +235,15 @@
     HMCommonArrowItem *newFriend;
     
     // 2.设置组的所有行数据
-    newFriend = [HMCommonArrowItem itemWithTitle:@"我的账号" icon:@"pc_accout.png"];
-    newFriend.destVcClass = [AccountViewController class];
-    //    newFriend.operation = ^{
-    //        AccountViewController *destVC = [[AccountViewController alloc] init];
-    //        [self.navigationController pushViewController:destVC animated:YES];
-    //    };
+    newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
+    newFriend.operation = ^{
+        MTProgressWebViewController *destVC = [[MTProgressWebViewController alloc] init];
+        destVC.title = @"我的优惠券";
+        destVC.url = URL_YHQ(username, key);
+        destVC.hidesBottomBarWhenPushed = YES;
+        
+        [self.navigationController pushViewController:destVC animated:YES];
+    };
     group.items = @[newFriend];
 }
 
@@ -238,17 +254,28 @@
     [self.groups addObject:group];
     
     HMCommonArrowItem *newFriend;
-    
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
     newFriend.destVcClass = [OrderTableViewController class];
-    //    newFriend.operation = ^{
-    //        OrderTableViewController *destVC = [[OrderTableViewController alloc] init];
-    //        [self.navigationController pushViewController:destVC animated:YES];
-    //
-    //    };
-    
     group.items = @[newFriend];
+}
+
+- (void)setupGroup6
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    // 2.设置组的所有行数据
+    HMCommonArrowItem *goods = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"shop_selected.png"];
+    goods.operation = ^{
+        MTProgressWebViewController *destVC = [[MTProgressWebViewController alloc] init];
+        destVC.title = @"我的商品";
+        destVC.url = URL_Goods(username, key);
+        destVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:destVC animated:YES];
+    };
+    group.items = @[goods];
 }
 
 - (void)setupGroup3
@@ -259,13 +286,7 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *collect = [HMCommonArrowItem itemWithTitle:@"关于APP" icon:@"app.png"];
-    //    collect.destVcClass = [AboutViewController class];
-    collect.operation = ^{
-        AboutViewController *destVC = [[AboutViewController alloc] init];
-        destVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-        
-    };
+    collect.destVcClass = [AboutViewController class];
     group.items = @[collect];
 }
 
@@ -277,12 +298,7 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的亲友" icon:@"pc_family.png"];
-    //    offline.destVcClass = [FamilyViewController class];
-    offline.operation = ^{
-        FamilyViewController *destVC = [[FamilyViewController alloc] init];
-        destVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-    };
+    offline.destVcClass = [FamilyViewController class];
     group.items = @[offline];
 }
 
@@ -294,14 +310,73 @@
     
     // 2.设置组的所有行数据
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
-    //        album.destVcClass = [SettingViewController class];
-    album.operation = ^{
-        SettingViewController *destVC = [[SettingViewController alloc] init];
-        destVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-    };
+    album.destVcClass = [SettingViewController class];
+    
     group.items = @[album];
 }
+
+- (void)setupGroup7
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *car;
+    // 2.设置组的所有行数据
+    car = [HMCommonArrowItem itemWithTitle:@"我的购物车" icon:@"pc_service.png"];
+    //    car.destVcClass = [MTShoppingCarController class];
+    
+    car.destVcClass = [GoodsHeadViewController class];
+    
+    group.items = @[car];
+}
+
+- (void)setupGroup8
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *car;
+    // 2.设置组的所有行数据
+    car = [HMCommonArrowItem itemWithTitle:@"商品分类" icon:@"pc_service.png"];
+    
+    car.destVcClass = [ClassificationViewController class];
+    
+    group.items = @[car];
+}
+
+- (void)setupGroup9
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *car;
+    // 2.设置组的所有行数据
+    car = [HMCommonArrowItem itemWithTitle:@"商品列表" icon:@"pc_service.png"];
+    
+    car.destVcClass = [GoodsTableViewController class];
+    
+    group.items = @[car];
+}
+
+- (void)setupGroup10
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *car;
+    // 2.设置组的所有行数据
+    car = [HMCommonArrowItem itemWithTitle:@"确认下单" icon:@"pc_service.png"];
+    
+    car.destVcClass = [ConfirmViewController class];
+    
+    group.items = @[car];
+}
+
+
 
 # pragma  mark 退出当前账号
 
@@ -337,9 +412,9 @@
                                              [SharedAppUtil defaultCommonUtil].userVO = nil;
                                              [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
                                              
-                                             [SharedAppUtil defaultCommonUtil].tabBar.selectedIndex = 0;
+                                             [MTControllerChooseTool setloginOutViewController];
                                              
-                                             [MTControllerChooseTool setRootViewController];
+                                             [self clearCookies];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
@@ -350,15 +425,27 @@
     }
 }
 
+/**
+ * 清空手机端访问网页的cookie
+ **/
+-(void)clearCookies
+{
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+    {
+        [storage deleteCookie:cookie];
+    }
+}
+
 #pragma mark -- 与后台数据交互模块
 /**
  *  获取数据
  */
 -(void)getUserIcon
 {
-    if ([SharedAppUtil defaultCommonUtil].userVO == nil) {
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         return;
-    }
     [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios"}
@@ -376,7 +463,6 @@
                                          {
                                              NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
                                              iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,url]];
-                                             
                                          }
                                          [_iconImageview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                      }

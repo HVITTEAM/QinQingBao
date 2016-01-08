@@ -16,5 +16,9 @@
 /**用户资料数据*/
 @property (nonatomic, retain) UserInforModel *inforVO;
 
+/**个人中心回调block*/
 @property (nonatomic, copy) void (^refleshDta)();
+
+/**下单修改地址回调block*/
+@property (nonatomic, copy) void (^changeDataBlock)(NSDictionary *addressDict, NSString *addressStr);
 @end

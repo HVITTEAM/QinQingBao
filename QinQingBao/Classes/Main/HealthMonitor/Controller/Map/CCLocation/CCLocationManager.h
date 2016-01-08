@@ -60,6 +60,21 @@ typedef void(^NSStringBlock)(NSString *addressString);
  */
 - (void) getCity:(NSStringBlock)cityBlock;
 
+/**
+ *  获取城市和区划
+ *
+ *  @param cityBlock cityBlock description
+ */
+- (void) getCityAndArea:(NSStringBlock)cityAndAreaBlock;
+
+/**
+ *  定位被关闭block
+ *
+ *  @param cityBlock cityBlock description
+ */
+- (void)getLocationError:(NSStringBlock)locationErrorBlock;
+
+
 ///**
 // *  获取城市和定位失败
 // *

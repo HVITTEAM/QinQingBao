@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
                             <constraint firstAttribute="height" constant="21" id="lxd-Ag-hgt"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系方式:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JQg-NF-g7P">
@@ -33,7 +33,7 @@
                             <constraint firstAttribute="height" constant="21" id="uWt-8h-9XK"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户地址:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAm-6r-9Wk">
@@ -43,7 +43,7 @@
                             <constraint firstAttribute="height" constant="21" id="sPP-5m-Yji"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PaX-xL-6PA">
@@ -53,7 +53,7 @@
                             <constraint firstAttribute="height" constant="21" id="nV5-5r-heJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="年龄:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lD-MB-nY8">
@@ -62,7 +62,7 @@
                             <constraint firstAttribute="width" constant="38" id="FKY-dt-P2h"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张大爷" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PO-YW-sTC">
@@ -72,7 +72,7 @@
                             <constraint firstAttribute="height" constant="21" id="seB-9i-rUN"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13333333333" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqQ-3m-xcn">
@@ -82,16 +82,7 @@
                             <constraint firstAttribute="width" constant="97" id="thG-A1-EMX"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浙江省杭州市西湖区古荡村" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AB-QV-CSF">
-                        <rect key="frame" x="90" y="66" width="168" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Rfy-aG-lNS"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="男" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wke-4Q-ELD">
@@ -101,7 +92,7 @@
                             <constraint firstAttribute="height" constant="21" id="fxB-D2-vQP"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="88" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9B-vk-ewJ">
@@ -111,21 +102,46 @@
                             <constraint firstAttribute="height" constant="21" id="zC3-go-WrT"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="KRQ-Xa-V5q">
+                        <rect key="frame" x="90" y="60" width="180" height="28"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="Fv6-GS-zhr"/>
+                            <constraint firstAttribute="width" constant="180" id="WnB-8n-vee"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWj-3K-2yz">
+                        <rect key="frame" x="282" y="64" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="3fK-EJ-aCH"/>
+                            <constraint firstAttribute="height" constant="24" id="wvB-Om-2u4"/>
+                        </constraints>
+                        <state key="normal" image="btn_round_next"/>
+                        <connections>
+                            <action selector="changeAddressHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bDG-lt-M9j"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="leading" secondItem="FqQ-3m-xcn" secondAttribute="trailing" constant="43" id="1DG-nT-dgZ"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="baseline" secondItem="A9B-vk-ewJ" secondAttribute="baseline" id="3tp-8F-gu4"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="top" secondItem="PaX-xL-6PA" secondAttribute="bottom" constant="8" symbolic="YES" id="54t-KL-iTm"/>
                     <constraint firstItem="O2I-ND-MH2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="5jQ-8s-Qie"/>
+                    <constraint firstItem="BWj-3K-2yz" firstAttribute="top" secondItem="wke-4Q-ELD" secondAttribute="bottom" constant="35" id="6DD-C4-jea"/>
                     <constraint firstItem="wke-4Q-ELD" firstAttribute="leading" secondItem="PaX-xL-6PA" secondAttribute="trailing" constant="6" id="FOk-w7-WZ7"/>
                     <constraint firstItem="PaX-xL-6PA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Fx8-FT-sop"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="firstBaseline" secondItem="A9B-vk-ewJ" secondAttribute="firstBaseline" id="LDC-ik-EfS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="BWj-3K-2yz" secondAttribute="trailing" constant="6" id="NVu-sW-DjX"/>
                     <constraint firstItem="FqQ-3m-xcn" firstAttribute="leading" secondItem="JQg-NF-g7P" secondAttribute="trailing" constant="15" id="PAf-AS-HjF"/>
                     <constraint firstItem="JQg-NF-g7P" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="QJy-Ih-zB3"/>
+                    <constraint firstItem="KRQ-Xa-V5q" firstAttribute="top" secondItem="A9B-vk-ewJ" secondAttribute="bottom" constant="2" id="RPP-fj-4PR"/>
                     <constraint firstItem="QAm-6r-9Wk" firstAttribute="top" secondItem="JQg-NF-g7P" secondAttribute="bottom" constant="8" id="Shv-Ph-W1R"/>
+                    <constraint firstItem="KRQ-Xa-V5q" firstAttribute="leading" secondItem="QAm-6r-9Wk" secondAttribute="trailing" constant="15" id="TUf-Jt-GES"/>
                     <constraint firstItem="JQg-NF-g7P" firstAttribute="top" secondItem="O2I-ND-MH2" secondAttribute="bottom" constant="8" id="UOk-8t-b3E"/>
                     <constraint firstItem="7PO-YW-sTC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="VBy-yq-QGF"/>
                     <constraint firstItem="QAm-6r-9Wk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="Ylg-nb-CsQ"/>
@@ -134,10 +150,8 @@
                     <constraint firstItem="A9B-vk-ewJ" firstAttribute="leading" secondItem="5lD-MB-nY8" secondAttribute="trailing" constant="6" id="eAm-T6-QpW"/>
                     <constraint firstItem="A9B-vk-ewJ" firstAttribute="top" secondItem="wke-4Q-ELD" secondAttribute="bottom" constant="8" id="fE7-3g-OvE"/>
                     <constraint firstItem="7PO-YW-sTC" firstAttribute="leading" secondItem="O2I-ND-MH2" secondAttribute="trailing" constant="15" id="grR-ru-CtD"/>
-                    <constraint firstItem="7AB-QV-CSF" firstAttribute="top" secondItem="5lD-MB-nY8" secondAttribute="bottom" constant="8" id="hV3-ty-olM"/>
                     <constraint firstItem="wke-4Q-ELD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="htK-Y2-TXA"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="trailing" secondItem="PaX-xL-6PA" secondAttribute="trailing" id="l3v-bv-cAZ"/>
-                    <constraint firstItem="7AB-QV-CSF" firstAttribute="leading" secondItem="QAm-6r-9Wk" secondAttribute="trailing" constant="15" id="lGS-43-lso"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="leading" secondItem="PaX-xL-6PA" secondAttribute="leading" id="nXg-Wb-1z0"/>
                     <constraint firstItem="PaX-xL-6PA" firstAttribute="leading" secondItem="7PO-YW-sTC" secondAttribute="trailing" constant="43" id="rnq-eM-xyT"/>
                     <constraint firstItem="5lD-MB-nY8" firstAttribute="firstBaseline" secondItem="FqQ-3m-xcn" secondAttribute="firstBaseline" id="s2h-YN-vn9"/>
@@ -146,7 +160,8 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addressLab" destination="7AB-QV-CSF" id="pQ2-oL-mJR"/>
+                <outlet property="addressLab" destination="KRQ-Xa-V5q" id="lKu-M2-hOV"/>
+                <outlet property="addressWidth" destination="WnB-8n-vee" id="QGd-Og-3KL"/>
                 <outlet property="ageLab" destination="A9B-vk-ewJ" id="ajB-g9-8iy"/>
                 <outlet property="nameLab" destination="7PO-YW-sTC" id="Bia-is-luz"/>
                 <outlet property="phoneLab" destination="FqQ-3m-xcn" id="1Te-FK-NXu"/>
@@ -154,4 +169,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="btn_round_next" width="34" height="35"/>
+    </resources>
 </document>

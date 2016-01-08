@@ -69,7 +69,8 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+//                                         [alertView show];
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
                                      else
                                      {

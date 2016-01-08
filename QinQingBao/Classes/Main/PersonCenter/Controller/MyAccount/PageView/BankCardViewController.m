@@ -20,7 +20,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = HMGlobalBg;
     
-    [self.tableView initWithPlaceString:@"暂未开通银行卡支付功能"];
+    [self.tableView initWithPlaceString:@"暂无数据!"];
 }
 
 #pragma mark - Table view data source

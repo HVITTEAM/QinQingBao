@@ -17,7 +17,7 @@
     //当前选中的服务分类 默认为第一条
     ServiceTypeModel *selectedItem;
     DOPDropDownMenu *menu;
-    
+    NSInteger currentPageIdx;
     //页面当前是否是刷新状态
     BOOL isflesh;
 }
@@ -49,6 +49,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    //ios7可能会将导航栏下方为原点
+    self.edgesForExtendedLayout = UIRectEdgeAll;
 }
 
 - (void)viewDidLoad
@@ -59,7 +61,6 @@
     
     [self initTableviewSkin];
     
-    [self setupRefresh];
     if (self.selected2edItem)
         self.title = self.selected2edItem.tname;
     else
@@ -75,6 +76,8 @@
  */
 -(void)initTopMenu
 {
+    [self setupRefresh];
+    
     // 数据
     //    self.classifys = @[@"全部分类",@"服装加工",@"服装洗涤",@"搬家公司"];
     //    self.cates = @[@"分类1",@"分类2",@"分类3",@"分类4",@"分类5",@"分类6"];
@@ -82,7 +85,6 @@
     //    self.hostels = @[@"搬家公司1",@"搬家公司2",@"搬家公司3",@"搬家公司4",@"搬家公司5"];
     //    self.areas = @[@"地区",@"西湖区",@"上城区",@"下城区",@"滨江区",@"余杭区"];
     self.sorts = @[@"智能排序",@"好评优先",@"离我最近"];
-    
     // 添加下拉菜单
     menu = [[DOPDropDownMenu alloc] initWithOrigin:CGPointMake(0, 62) andHeight:44];
     menu.delegate = self;
@@ -134,30 +136,24 @@
  */
 - (void)setupRefresh
 {
-    
+    currentPageIdx = 1;
+    dataProvider = [[NSMutableArray alloc] init];
     // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
-    MJChiBaoZiHeader *head = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
-    self.tableView.header = head;
-    head.lastUpdatedTimeLabel.hidden = YES;
-    head.stateLabel.hidden = YES;
+    //    MJChiBaoZiHeader *head = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+    //    self.tableView.header = head;
+    //    head.lastUpdatedTimeLabel.hidden = YES;
+    //    head.stateLabel.hidden = YES;
     
-    //    // 下拉刷新
-    //    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-    //        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //            // 结束刷新
-    //            [self headerRereshing];
-    //        });
-    //    }];
+    // 下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        dataProvider = [[NSMutableArray alloc] init];
+        [self headerRereshing];
+    }];
     
-    // 上拉刷新
-    //    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-    //        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-    //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //            // 结束刷新
-    //            [self footerRereshing];
-    //        });
-    //    }];
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        currentPageIdx ++ ;
+        [self footerRereshing];
+    }];
 }
 
 /**
@@ -203,25 +199,38 @@
  */
 -(void)getDataProviderWithConditon:(NSString *)condition
 {
-    dataProvider = [[NSMutableArray alloc] init];
     isflesh = YES;
     [CommonRemoteHelper RemoteWithUrl:URL_Iteminfo parameters:  @{@"page" : @10,
-                                                                  @"p" : @1,
+                                                                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                                                                   @"tid" : selectedItem.tid,
                                                                   @"client" : @"ios",
                                                                   @"condition" : condition,
                                                                   @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
-                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon : @""}
+                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon : @"",
+                                                                  @"dvcode" : [SharedAppUtil defaultCommonUtil].cityVO ? [SharedAppUtil defaultCommonUtil].cityVO.dvcode : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      ServicesDatas *result = [ServicesDatas objectWithKeyValues:dict];
                                      isflesh = NO;
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
-                                     dataProvider = result.datas;
-                                     [self.tableView reloadData];
-                                     if (result.datas.count == 0)
-                                         [self.tableView initWithPlaceString:@"现在还没数据呐"];
-                                     else
+                                     
+                                     if (result.datas.count == 0 && currentPageIdx == 1)
+                                     {
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                     }
+                                     else if (result.datas.count == 0 && currentPageIdx > 1)
+                                     {
                                          [self.tableView removePlace];
+                                         NSLog(@"没有更多的数据了");
+                                         currentPageIdx --;
+                                         [self.view showNonedataTooltip];
+                                     }
+                                     else
+                                     {
+                                         [self.tableView removePlace];
+                                     }
+                                     [dataProvider addObjectsFromArray:[result.datas copy]];
+                                     
+                                     [self.tableView reloadData];
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -246,7 +255,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 85;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

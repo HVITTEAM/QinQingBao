@@ -12,6 +12,7 @@
 #import "MapViewController.h"
 #import "VideoListViewController.h"
 #import "VideoCell.h"
+#import "HeartImageCell.h"
 
 
 @interface HealthPageViewController ()<UIScrollViewDelegate>
@@ -44,7 +45,6 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    //    self.tableView.contentInset = UIEdgeInsetsMake(66, 0, 0, 0);
 }
 
 #pragma mark 集成刷新控件
@@ -88,7 +88,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,7 +121,7 @@
     UITableViewCell* cell = nil;
     
     switch (indexPath.section) {
-        case 0:
+        case 4:
         {
             HeartCell *sugarCell = [tableView dequeueReusableCellWithIdentifier:@"MTSugarCell"];
             
@@ -136,7 +136,7 @@
             cell = sugarCell;
         }
             break;
-        case 1:
+        case 3:
         {
             BloodPressureCell *bloodPressureCell = [tableView dequeueReusableCellWithIdentifier:@"MTBloodPressureCell"];
             
@@ -161,7 +161,7 @@
             cell = videoCell;
         }
             break;
-        case 3:
+        case 0:
         {
             HeartbeatCell *heartCell = [tableView dequeueReusableCellWithIdentifier:@"MTHeartBeatCell"];
             
@@ -176,7 +176,7 @@
             cell = heartCell;
         }
             break;
-        case 4:
+        case 1:
         {
             LocationCell *locationCell = [tableView dequeueReusableCellWithIdentifier:@"MTLocationCell"];
             
@@ -187,10 +187,25 @@
             {
                 locationCell.item = dataProvider[0];
             }
-            
             cell = locationCell;
         }
+            
             break;
+        case 5:
+        {
+            HeartImageCell *heartImageCell = [tableView dequeueReusableCellWithIdentifier:@"MTHeartImageCell"];
+            
+            if(heartImageCell == nil)
+                heartImageCell = [HeartImageCell heartImageCell];
+            
+            if(dataProvider && dataProvider.count > 0)
+            {
+                heartImageCell.item = dataProvider[0];
+            }
+            cell = heartImageCell;
+        }
+            break;
+            
         default:
             break;
     }
@@ -205,19 +220,29 @@
     
     switch (indexPath.section)
     {
-        case 0:
+        case 3:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeSugar;
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
-            
         }
             break;
-        case 1:
+        case 4:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeBlood;
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
+        }
+        case 5:
+        {
+            if (dataProvider.count>0)
+            {
+                HealthDataModel *item = dataProvider[0];
+                NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.ect_img]];
+                SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:@[iconUrl] currentIndex:0 placeholderImageNmae:@"placeholderImage"];
+                return [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+            }
+            return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
         }
             break;
         case 2:
@@ -226,13 +251,13 @@
             return;
         }
             break;
-        case 3:
+        case 0:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeHeart;
         }
             break;
-        case 4:
+        case 1:
         {
             [self showPosition];
             return;
@@ -253,7 +278,10 @@
     MapViewController *map = [[MapViewController alloc] init];
     if (dataProvider.count == 0)
         return [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-    map.item = dataProvider[0];
+    HealthDataModel *item = (HealthDataModel *)dataProvider[0];
+    map.address = item.address;
+    map.latitude = item.latitude;
+    map.longitude = item.longitude;
     [self presentViewController:map animated:YES completion:nil];
 }
 

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 @property (strong, nonatomic) IBOutlet UILabel *contentLab;
+//评价内容的高度
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *contentLabWidth;
 
 - (IBAction)queryAllEvaluationClickHandler:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *evanumLab;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -33,7 +33,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥38" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgl-dm-pM7">
-                        <rect key="frame" x="8" y="19" width="42" height="21"/>
+                        <rect key="frame" x="8" y="9" width="42" height="40"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
                         <color key="textColor" red="0.094117647058823528" green="0.67450980392156867" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -58,12 +58,12 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="0Dc-TS-YAs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="8ct-EC-rKS"/>
-                    <constraint firstItem="Dgl-dm-pM7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="9cR-NN-rR0"/>
+                    <constraint firstItem="Dgl-dm-pM7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="9cR-NN-rR0"/>
                     <constraint firstAttribute="bottom" secondItem="0Dc-TS-YAs" secondAttribute="bottom" constant="19.5" id="FgS-ce-mtt"/>
                     <constraint firstItem="Dgl-dm-pM7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NbH-Ua-5PL"/>
                     <constraint firstAttribute="bottom" secondItem="b5X-aN-3cB" secondAttribute="bottom" constant="0.5" id="Qte-u8-alD"/>
                     <constraint firstItem="ANc-du-E4U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="S8H-w2-aBb"/>
-                    <constraint firstAttribute="bottom" secondItem="Dgl-dm-pM7" secondAttribute="bottom" constant="19.5" id="bLG-ee-3Ew"/>
+                    <constraint firstAttribute="bottom" secondItem="Dgl-dm-pM7" secondAttribute="bottom" constant="10.5" id="bLG-ee-3Ew"/>
                     <constraint firstItem="0Dc-TS-YAs" firstAttribute="leading" secondItem="Dgl-dm-pM7" secondAttribute="trailing" constant="17" id="egQ-UG-8q4"/>
                     <constraint firstItem="b5X-aN-3cB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iGT-6k-rEa"/>
                     <constraint firstItem="ANc-du-E4U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oD7-y5-Rhx"/>

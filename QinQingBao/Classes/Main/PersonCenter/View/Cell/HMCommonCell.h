@@ -14,4 +14,28 @@
 
 /** cell对应的item数据 */
 @property (nonatomic, strong) HMCommonItem *item;
+
+/**
+ *  输入框
+ */
+@property (strong, nonatomic) UIButton *rightBtn;
+
+/**
+ *  输入框
+ */
+@property (strong, nonatomic) UITextField *rightText;
+/**
+ *  箭头
+ */
+@property (strong, nonatomic) UIImageView *rightArrow;
+/**
+ *  开关
+ */
+@property (strong, nonatomic) UISwitch *rightSwitch;
+/**
+ *  标签
+ */
+@property (strong, nonatomic) UILabel *rightLabel;
+
+
 @end

@@ -35,9 +35,11 @@
     _item = item;
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.item_url]];
     [self.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-    self.titleLab.text = item.tname;
-    self.contentLab.text = item.icontent;
-    self.priceLab.text = [NSString stringWithFormat:@"%@元",item.price];
+    self.titleLab.text = item.orgname;
+    self.contentLab.text = item.tname;
+    self.priceLab.text = [item.price isEqualToString:@"0"] || [item.price isEqualToString:@"0.00"] ? @"面议" : [NSString stringWithFormat:@"￥%@",item.price];
     
+    //设置title宽度
+    self.titleLabWidth.constant = CGRectGetMinX(self.priceLab.frame) - self.titleLab.x;
 }
 @end

@@ -24,4 +24,7 @@
 
 @property (nonatomic, copy) void (^backHandlerClick)(void);
 
+//是否来自于健康模块 默认为no
+@property (nonatomic, assign) BOOL fromHealth;
+
 @end

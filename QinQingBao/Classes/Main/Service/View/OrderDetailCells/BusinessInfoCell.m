@@ -7,8 +7,23 @@
 //
 
 #import "BusinessInfoCell.h"
+#import "MapViewController.h"
 
 @implementation BusinessInfoCell
+
+- (IBAction)chatButtonHandler:(id)sender
+{
+    NSLog(@"chat");
+}
+
+- (IBAction)mapButtonHandler:(id)sender
+{
+    MapViewController *map = [[MapViewController alloc] init];
+    map.address = [NSString stringWithFormat:@"%@%@",_itemInfo.totalname,_itemInfo.orgaddress];;
+    map.latitude = _itemInfo.orglat;
+    map.longitude = _itemInfo.orglon;
+    [self.parentViewcontroller presentViewController:map animated:YES completion:nil];
+}
 
 +(BusinessInfoCell *) businessCell
 {
@@ -21,20 +36,8 @@
     self.contentView.backgroundColor = HMGlobalBg;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
 - (IBAction)callClickHandler:(id)sender
 {
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
-//                                                             delegate:self
-//                                                    cancelButtonTitle:@"取消"
-//                                               destructiveButtonTitle:nil
-//                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
-//                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
@@ -60,12 +63,14 @@
     self.distanceLab.textColor = [UIColor darkGrayColor];
     self.nameLab.textColor = [UIColor darkGrayColor];
     self.addressLab.textColor = [UIColor darkGrayColor];
-    self.telLab.textColor = [UIColor darkGrayColor];
     self.distanceLab.text = [NSString stringWithFormat:@"距我 %@",[NoticeHelper kilometre2meter:[itemInfo.distance floatValue]]];
     self.distanceLab.textColor = MTNavgationBackgroundColor;
-//    self.nameLab.text = itemInfo.icontent;
     self.nameLab.hidden = YES;
     self.addressLab.text = [NSString stringWithFormat:@"地址: %@%@",itemInfo.totalname,itemInfo.orgaddress];
-//    self.telLab.text = [NSString stringWithFormat:@"联系电话:  %@",itemInfo.orgtelnum ?  itemInfo.orgtelnum : itemInfo.orgphone];
+    self.addressLab.numberOfLines = 0;
+    CGRect size = [self.addressLab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.addressLab.font,NSFontAttributeName, nil] context:nil];
+    self.addressLabHeight.constant = size.size.height+5;
+    self.bgviewHeight.constant = self.addressLab.y + size.size.height + 53;
+    self.height = self.bgviewHeight.constant + 5;
 }
 @end

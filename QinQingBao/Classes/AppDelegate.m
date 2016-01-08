@@ -153,16 +153,13 @@
     application.applicationIconBadgeNumber = 0;
 }
 
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
     //跳转支付宝钱包进行支付，处理支付结果
     [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
         NSLog(@"result = %@",resultDic);
         NSLog(@"支付成功!");
-        
     }];
     
     return YES;
@@ -176,7 +173,7 @@
     [SharedAppUtil defaultCommonUtil].userVO = nil;
     [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
     [MTControllerChooseTool setRootViewController];
-
+    
     [SharedAppUtil defaultCommonUtil].tabBar.selectedIndex = 0;
     LoginViewController *login = [[LoginViewController alloc] init];
     login.backHiden = NO;

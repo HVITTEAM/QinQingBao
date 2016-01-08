@@ -12,9 +12,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAc-8R-h4Z">
-                    <rect key="frame" x="15" y="15" width="100" height="20"/>
+                    <rect key="frame" x="15" y="15" width="48" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="9ds-E2-BMw"/>
                         <constraint firstAttribute="height" constant="20" id="coS-hV-bur"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
@@ -29,7 +28,7 @@
                         <constraint firstAttribute="height" constant="30" id="E0c-VQ-Aql"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                    <state key="normal" title="立即下单">
+                    <state key="normal" title="预约下单">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

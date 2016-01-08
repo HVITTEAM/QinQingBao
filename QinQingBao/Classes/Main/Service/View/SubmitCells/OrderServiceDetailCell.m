@@ -35,6 +35,9 @@
     self.serviceTitle.text = itemInfo.orgname;
     self.serviceDesc.text = itemInfo.tname;
     self.servicePrice.text = [itemInfo.price isEqualToString:@"0"] || [itemInfo.price isEqualToString:@"0.00"] ? @"面议" : [NSString stringWithFormat:@"￥%.01f",[itemInfo.price floatValue]];
+    
+    CGSize size = [self.serviceTitle.text sizeWithAttributes:@{NSFontAttributeName:self.serviceTitle.font}];
+    self.detailLabWidth.constant = size.width;
 }
 
 

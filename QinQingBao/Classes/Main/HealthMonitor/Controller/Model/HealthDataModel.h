@@ -56,6 +56,7 @@
 @property (nonatomic, copy) NSString *heartrate_min;
 @property (nonatomic, copy) NSString *heartrate_avg;
 @property (nonatomic, copy) NSString *heartrate_max;
+@property (nonatomic, copy) NSString *ect_img;
 //@property (nonatomic, copy) NSString *collectiontime;
 //@property (nonatomic, copy) NSString *uploadtime;
 

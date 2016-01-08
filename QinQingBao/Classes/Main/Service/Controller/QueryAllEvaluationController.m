@@ -16,6 +16,8 @@
 @interface QueryAllEvaluationController ()
 {
     NSMutableArray *dataProvider;
+    NSInteger currentPageIdx;
+
 }
 
 @end
@@ -50,20 +52,25 @@
  */
 - (void)setupRefresh
 {
+    currentPageIdx = 1;
+    dataProvider = [[NSMutableArray alloc] init];
     // 下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 模拟延迟加载数据，因此2秒后才调用（真实开发中，可以移除这段gcd代码）
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 结束刷新
-            [self footerRereshing];
-        });
+        dataProvider = [[NSMutableArray alloc] init];
+        [self headerRereshing];
     }];
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        currentPageIdx ++ ;
+        [self footerRereshing];
+    }];
+
 }
 
 #pragma mark 开始进入刷新状态
 - (void)headerRereshing
 {
-    //    [self getDataProvider];
+    [self getDataProvider];
 }
 
 - (void)footerRereshing
@@ -73,28 +80,34 @@
 
 -(void)getDataProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.itemInfo.iid,
                                                                      @"page" : @10,
-                                                                     @"p" : @1,
-                                                                     @"client" : @"ios",
-                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                     @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                                                                     @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
-                                     if (result.datas.count == 0)
+                                     
+                                     if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
-                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-                                         [HUD removeFromSuperview];
-                                         return;
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
-                                     dataProvider = result.datas;
+                                     else if (result.datas.count == 0 && currentPageIdx > 1)
+                                     {
+                                         [self.tableView removePlace];
+                                         currentPageIdx --;
+                                     }
+                                     else
+                                     {
+                                         [self.tableView removePlace];
+                                     }
+                                     [dataProvider addObjectsFromArray:[result.datas copy]];
                                      [self.tableView reloadData];
-                                     [HUD removeFromSuperview];
                                      [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
+
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
                                  }];
     
 }

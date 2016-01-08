@@ -15,7 +15,11 @@
 @property (nonatomic) MKMapView *map;
 @property (nonatomic) CLLocationManager *locationManager;
 
-@property (nonatomic, strong) HealthDataModel *item;
+
+@property (nonatomic, retain) NSString *latitude;
+@property (nonatomic, retain) NSString *longitude;
+@property (nonatomic, retain) NSString *address;
+
 
 
 @end

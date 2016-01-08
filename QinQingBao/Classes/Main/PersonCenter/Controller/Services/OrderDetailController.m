@@ -10,6 +10,7 @@
 #import "ServiceItemModel.h"
 #import "OrderHeadCell.h"
 #import "TimeLineCell.h"
+#import "EvaDetailCell.h"
 
 
 @interface OrderDetailController ()<UIActionSheetDelegate>
@@ -27,6 +28,8 @@
     
     [self initTableviewSkin];
     
+    [self getServiceDetail];
+    
     self.title = @"订单详情";
 }
 
@@ -34,7 +37,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self getServiceDetail];
 }
 
 /**
@@ -90,6 +92,23 @@
                 return cell.height;
             }
         }
+        case 4:
+        {
+            if ( indexPath.row == 0)
+                return 44;
+            else
+            {
+                if (!self.orderItem.wpjtime)
+                {
+                    return 44;
+                }
+                else
+                {
+                    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+                    return cell.height;
+                }
+            }
+        }
             break;
         default:
             return 44;
@@ -109,7 +128,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -123,7 +142,10 @@
             return 2;
             break;
         case 3:
-            return 10;
+            return 9;
+            break;
+        case 4:
+            return 2;
             break;
         default:
             return 1;
@@ -257,6 +279,46 @@
             commonCell.detailTextLabel.font = [UIFont systemFontOfSize:12];
             cell = commonCell;
         }
+            break;
+        case 4:
+        {
+            if (indexPath.row == 0)
+            {
+                UITableViewCell *evaCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
+                
+                if (evaCell == nil)
+                    evaCell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTEvaCell"];
+                evaCell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+                evaCell.textLabel.text = @"评价详情:";
+                evaCell.textLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:16];
+                
+                cell = evaCell;
+            }
+            else
+            {
+                if (!self.orderItem.wpjtime)
+                {
+                    UITableViewCell *evaDetail = [tableView dequeueReusableCellWithIdentifier:@"MTEvadetailCell"];
+                    if (evaDetail == nil)
+                        evaDetail =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTEvadetailCell"];
+                    evaDetail.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background.png"]];
+                    evaDetail.textLabel.text = @"未评价";
+                    evaDetail.textLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:14];
+                    cell = evaDetail;
+                }
+                else
+                {
+                    EvaDetailCell *evaDetail = [tableView dequeueReusableCellWithIdentifier:@"MTEvaDetailCell"];
+                    
+                    if (evaDetail == nil)
+                        evaDetail =  [EvaDetailCell evaDetailCell];
+                    
+                    [evaDetail setItem:self.orderItem];
+                    cell = evaDetail;
+                }
+            }
+        }
+            break;
     }
     return cell;
 }
@@ -269,7 +331,7 @@
 
 - (void)call
 {
-    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@"-"]; //从字符A中分隔成2个元素的数组
+    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@";"]; //从字符A中分隔成2个元素的数组
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
                                                              delegate:self
                                                     cancelButtonTitle:@"取消"
@@ -282,7 +344,7 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@"-"]; //从字符A中分隔成2个元素的数组
+    NSArray *array = [serviceItem.orgtelnum componentsSeparatedByString:@";"]; //从字符A中分隔成2个元素的数组
     
     NSURL *url  = [NSURL URLWithString:@"telprompt://0573-96345"];
     switch (buttonIndex)

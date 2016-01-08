@@ -25,6 +25,12 @@
     self.evaContentText.layer.cornerRadius = 3;
 }
 
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 - (IBAction)starClickeHandler:(id)sender
 {
     
@@ -65,7 +71,7 @@
 - (IBAction)subBtnClickHandler:(id)sender
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Save_dis_cont parameters:  @{@"wid" : self.orderItem.wid,
-                                                                       @"cont" : @"ios",
+                                                                       @"cont" : self.evaContentText.text,
                                                                        @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                        @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                        @"client" : @"ios",

@@ -84,9 +84,9 @@
     HMCommonItem *item4 = [HMCommonItem itemWithTitle:@"最高舒张压" icon:nil];
     item4.subtitle = self.hyoertensionVO.diastolic;
     HMCommonItem *item5 = [HMCommonItem itemWithTitle:@"高血压等级" icon:nil];
-    item5.subtitle = self.hyoertensionVO.hypertension_rating;
+    item5.subtitle = [self getHypertension_rating:self.hyoertensionVO.hypertension_rating];
     HMCommonItem *item6 = [HMCommonItem itemWithTitle:@"风险等级" icon:nil];
-    item6.subtitle = self.hyoertensionVO.risk_Level;
+    item6.subtitle = [self getRisk_Level:self.hyoertensionVO.risk_Level];
     group.items = @[item0,item1,item2,item3,item4,item5,item6];
     [self.groups addObject:group];
     
@@ -103,6 +103,36 @@
         group.items = @[item0,item1,item2];
         [self.groups addObject:group];
     }
+}
+
+-(NSString *)getHypertension_rating:(NSString *)value
+{
+    if ([value isEqualToString:@"1"])
+    return @"不详";
+    else if ([value isEqualToString:@"2"])
+    return @"一级高血压";
+    else if ([value isEqualToString:@"3"])
+    return @"二级高血压";
+    else if ([value isEqualToString:@"4"])
+    return @"三级高血压";
+    else
+    return @"无";
+}
+
+-(NSString *)getRisk_Level:(NSString *)value
+{
+    if ([value isEqualToString:@"1"])
+    return @"不详";
+    else if ([value isEqualToString:@"2"])
+    return @"低危";
+    else if ([value isEqualToString:@"3"])
+    return @"中危";
+    else if ([value isEqualToString:@"3"])
+    return @"高危";
+    else if ([value isEqualToString:@"3"])
+    return @"超高危";
+    else
+    return @"无";
 }
 
 

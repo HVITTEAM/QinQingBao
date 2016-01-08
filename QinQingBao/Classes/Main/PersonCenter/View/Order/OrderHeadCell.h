@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet UILabel *contentLab;
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *titleLabWidth;
 
 @property (nonatomic, retain) ServiceItemModel *item;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -18,14 +18,14 @@
                         <rect key="frame" x="0.0" y="8" width="320" height="162"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LHu-0u-2kb" userLabel="bottomline">
-                                <rect key="frame" x="0.0" y="161.5" width="320" height="0.5"/>
+                                <rect key="frame" x="0.0" y="162" width="320" height="1"/>
                                 <color key="backgroundColor" white="0.88060254199999999" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="yNT-gD-r6u"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZB2-3N-JG3" customClass="TQStarRatingView">
-                                <rect key="frame" x="10" y="10" width="80" height="32.5"/>
+                                <rect key="frame" x="10" y="10" width="80" height="33"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="IpZ-Yy-3XC"/>
@@ -33,7 +33,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WPt-e7-iBl" userLabel="topLine">
-                                <rect key="frame" x="0.0" y="38" width="320" height="0.5"/>
+                                <rect key="frame" x="0.0" y="38" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="AHE-dI-rFg"/>
@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kc3-EH-y39" userLabel="bottomLine">
-                                <rect key="frame" x="0.0" y="126" width="320" height="0.5"/>
+                                <rect key="frame" x="0.0" y="126" width="320" height="1"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="oAK-mr-OsE"/>
@@ -97,6 +97,15 @@
                                     <constraint firstAttribute="width" constant="36" id="tpA-Ea-bqp"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="378-U2-6Js">
+                                <rect key="frame" x="54" y="75" width="256" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="VFd-St-E9l" userLabel="Content Lab Height"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-09-12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-Id-3bM">
                                 <rect key="frame" x="241" y="51" width="63" height="21"/>
                                 <constraints>
@@ -104,12 +113,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="378-U2-6Js">
-                                <rect key="frame" x="54" y="75" width="256" height="43"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -127,8 +130,10 @@
                             <constraint firstAttribute="trailing" secondItem="378-U2-6Js" secondAttribute="trailing" constant="10" id="PMA-ok-vcL"/>
                             <constraint firstItem="ZB2-3N-JG3" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" constant="10" id="PUD-hL-VW3"/>
                             <constraint firstItem="WPt-e7-iBl" firstAttribute="top" secondItem="ZB2-3N-JG3" secondAttribute="bottom" constant="-4.5" id="Tck-v3-7CK"/>
+                            <constraint firstItem="kc3-EH-y39" firstAttribute="top" secondItem="378-U2-6Js" secondAttribute="bottom" constant="8" symbolic="YES" id="TuW-Gc-DFK"/>
                             <constraint firstItem="ZB2-3N-JG3" firstAttribute="top" secondItem="Im5-oL-UAR" secondAttribute="top" constant="10" id="Wcy-dO-2fs"/>
-                            <constraint firstAttribute="bottom" secondItem="LHu-0u-2kb" secondAttribute="bottom" id="bvB-4T-yUJ"/>
+                            <constraint firstAttribute="bottom" secondItem="LHu-0u-2kb" secondAttribute="bottom" constant="-1" id="bvB-4T-yUJ"/>
+                            <constraint firstAttribute="trailing" secondItem="aPg-Id-3bM" secondAttribute="trailing" constant="16" id="cFt-34-KXt"/>
                             <constraint firstItem="LHu-0u-2kb" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" id="fzp-Ed-hKb"/>
                             <constraint firstItem="WPt-e7-iBl" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" id="gLc-4Q-WRL"/>
                             <constraint firstItem="3mJ-6L-6Pg" firstAttribute="leading" secondItem="Im5-oL-UAR" secondAttribute="leading" constant="10" id="nhv-hi-AQr"/>
@@ -143,6 +148,12 @@
                             <constraint firstAttribute="trailing" secondItem="WPt-e7-iBl" secondAttribute="trailing" id="z3N-Gh-1fg"/>
                             <constraint firstItem="aPg-Id-3bM" firstAttribute="leading" secondItem="eyy-Ij-mhP" secondAttribute="trailing" constant="197" id="zkh-Nl-K4T"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="srf-0m-fB5"/>
+                                <exclude reference="zkh-Nl-K4T"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -157,6 +168,7 @@
                 <outlet property="Evaview" destination="ZB2-3N-JG3" id="cwx-yN-OZx"/>
                 <outlet property="HeadImage" destination="eyy-Ij-mhP" id="ncS-wB-zXd"/>
                 <outlet property="contentLab" destination="378-U2-6Js" id="OzJ-Dc-zet"/>
+                <outlet property="contentLabWidth" destination="VFd-St-E9l" id="uJJ-iX-lQf"/>
                 <outlet property="evanumLab" destination="pJH-DH-JSm" id="Alc-JI-ymB"/>
                 <outlet property="nameLab" destination="9cz-cb-74C" id="hN1-Gi-3Dx"/>
                 <outlet property="queryEva" destination="3mJ-6L-6Pg" id="qXx-H9-EHX"/>
@@ -166,6 +178,6 @@
     </objects>
     <resources>
         <image name="btn_round_next" width="34" height="35"/>
-        <image name="placeholderImage" width="130" height="130"/>
+        <image name="placeholderImage" width="128" height="128"/>
     </resources>
 </document>

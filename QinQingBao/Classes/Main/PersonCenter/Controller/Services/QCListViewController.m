@@ -140,7 +140,7 @@
                                      [self.tableView removePlace];
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据"];
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {
@@ -220,7 +220,7 @@
         };
         [self.nav pushViewController:cancelView animated:YES];
     }
-    else if ([btn.titleLabel.text isEqualToString:@"评价"])
+    else if ([btn.titleLabel.text isEqualToString:@"评价订单"])
     {
         EvaluationController *evaluaView = [[EvaluationController alloc]init];
         evaluaView.orderItem = dataProvider[indexPath.section];
@@ -228,7 +228,7 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
     {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%d",0573-96345]];
+        NSURL *url = [NSURL URLWithString:@"telprompt://0573-96345"];
         [[UIApplication sharedApplication] openURL:url];;
     }
 }

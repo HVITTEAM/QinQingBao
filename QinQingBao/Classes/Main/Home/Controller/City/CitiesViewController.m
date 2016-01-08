@@ -10,7 +10,8 @@
 #import "HotCitiesCell.h"
 #import "GPSCell.h"
 #import "CCLocationManager.h"
-
+#import "CitiesTotal.h"
+#import "CityModel.h"
 
 @interface CitiesViewController ()
 {
@@ -32,19 +33,19 @@
 
 -(void)initNavgation
 {
-    self.title = [NSString stringWithFormat:@"当前城市--%@",[CCLocationManager shareLocation].lastCity];
+    self.title = [NSString stringWithFormat:@"当前城市--%@",self.selectedCity];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-
+    
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor grayColor];
-
+    
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"btn_dismissItem.png"
                                                                  highImageName:@"btn_dismissItem_highlighted.png"
                                                                         target:self action:@selector(back)];
-
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -54,7 +55,26 @@
 
 -(void)getDataProvider
 {
-    dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"cityGroups.plist" ofType:nil]];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_conf_address parameters: @{}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     }
+                                     else
+                                     {
+                                         CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
+                                         dataProvider = result.datas;
+                                         [self.tableView reloadData];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
 }
 
 -(void)back
@@ -65,23 +85,16 @@
 
 #pragma mark - Table view data source
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1 )
-        return 170;
-    else
-        return 44;
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return dataProvider.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *arr = [dataProvider[section] objectForKey:@"cities"];
-    return section ==1 ? 1 : arr.count;
+//    return section == 1? 1 : dataProvider.count;
+    return dataProvider.count;
 }
 
 #pragma mark - 代理方法
@@ -91,17 +104,14 @@
     view.backgroundColor = HMColor(230, 230, 230);
     UILabel *lab = [[UILabel alloc] init];
     switch (section) {
-        case 0:
-             lab.text = @"定位城市";
-            break;
         case 1:
-             lab.text = @"热门城市";
+            lab.text = @"定位城市";
             break;
-        case 2:
-             lab.text = [dataProvider[section] objectForKey:@"title"];
+        case 0:
+            lab.text = @"开通城市";
             break;
         default:
-            lab.text = [dataProvider[section] objectForKey:@"title"];
+            
             break;
     }
     lab.frame = CGRectMake(20, 5, 100, 20);
@@ -116,61 +126,49 @@
     return 30;
 }
 
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
-{
-    tableView.sectionIndexColor = MTNavgationBackgroundColor;
-    return [dataProvider valueForKeyPath:@"title"];
-}
+//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+//{
+//    tableView.sectionIndexColor = MTNavgationBackgroundColor;
+//    return [dataProvider valueForKeyPath:@"title"];
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
     switch (indexPath.section)
     {
+//        case 0:
+//        {
+//            GPSCell *gpscell =  [tableView dequeueReusableCellWithIdentifier:@"MTGPSCell"];
+//            if (gpscell == nil)
+//                gpscell = [GPSCell GPSCell];
+//            
+//            //赋值
+//            UIButton *btn = (UIButton *)[gpscell viewWithTag:1];
+//            [btn setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
+//            btn.backgroundColor = [UIColor whiteColor];
+//            btn.layer.borderWidth = 0.5;
+//            btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
+//            [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
+//            cell = gpscell;
+//        }
+//            break;
         case 0:
-        {
-            GPSCell *gpscell =  [tableView dequeueReusableCellWithIdentifier:@"MTGPSCell"];
-            if (gpscell == nil)
-                gpscell = [GPSCell GPSCell];
-
-            //赋值
-            UIButton *btn = (UIButton *)[gpscell viewWithTag:1];
-            [btn setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
-            btn.backgroundColor = [UIColor whiteColor];
-            btn.layer.borderWidth = 0.5;
-            btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
-            [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
-            cell = gpscell;
-        }
-            break;
-        case 1:
-        {
-            HotCitiesCell *hotcell =  [tableView dequeueReusableCellWithIdentifier:@"MTHotCitiesCell"];
-            if (hotcell == nil)
-                hotcell = [HotCitiesCell hotCitiesCell];
-            NSArray * arr = [dataProvider[indexPath.section] objectForKey:@"cities"];
-            hotcell.dataProvider = [arr mutableCopy];
-            hotcell.selectedHandler = ^(UIButton *btn) {
-                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-                [self dismissViewControllerAnimated:YES completion:^{
-                    [self.delegate selectedChange:btn.titleLabel.text];
-                }];
-            };
-
-            cell = hotcell;
-        }
-            break;
-        default:
         {
             UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"CommonCityCell"];
             if (commoncell == nil)
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCityCell"];
-            NSArray *arr = [dataProvider[indexPath.section] objectForKey:@"cities"];
             
-            commoncell.textLabel.text = arr[indexPath.row];
+            CityModel *vo = dataProvider[indexPath.row];
+            
+            if ([vo.dvname isEqualToString:self.selectedCity])
+                commoncell.accessoryType = UITableViewCellAccessoryCheckmark;
+            commoncell.textLabel.text = vo.dvname;
             commoncell.textLabel.font = [UIFont systemFontOfSize:14];
             cell = commoncell;
         }
+            break;
+        default:
             break;
     }
     return cell;
@@ -178,11 +176,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-        NSArray *arr = [dataProvider[indexPath.section] objectForKey:@"cities"];
-        NSString *str = arr[indexPath.row];
-        [self.delegate selectedChange:str];
+        CityModel *vo = dataProvider[indexPath.row];
+        [SharedAppUtil defaultCommonUtil].cityVO = vo;
+        [self.delegate selectedChange:vo.dvname];
     }];
 }
 

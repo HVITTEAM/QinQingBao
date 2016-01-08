@@ -13,6 +13,7 @@
 #import "HMCommonArrowItem.h"
 #import "HMCommonSwitchItem.h"
 #import "HMCommonLabelItem.h"
+#import "HMCommonTextfieldItem.h"
 
 @interface HMCommonViewController ()
 @property (nonatomic, strong) NSMutableArray *groups;
@@ -63,6 +64,9 @@
     HMCommonCell *cell = [HMCommonCell cellWithTableView:tableView];
     HMCommonGroup *group = self.groups[indexPath.section];
     cell.item = group.items[indexPath.row];
+    if ([cell.item isKindOfClass:[HMCommonTextfieldItem class]]) {
+        cell.item.rightText = cell.rightText;
+    }
     // 设置cell所处的行号 和 所处组的总行数
     [cell setIndexPath:indexPath rowsInSection:group.items.count];
     return cell;

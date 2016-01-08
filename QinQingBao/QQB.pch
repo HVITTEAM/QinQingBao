@@ -42,12 +42,16 @@
 #import "SVProgressHUD.h"
 #import "UITableView+Placeholder.h"
 #import "UIViewController+Placeholder.h"
+#import "UIView+Placeholder.h"
+#import "UIDevice+IPhoneModel.h"
+#import "UIScrollView+Drag.h"
+#import "UIColor+RGB.h"
 #import "Star.h"
 #import "LoginViewController.h"
-
+#import "MTProgressWebViewController.h"
 #import "TSPopoverController.h"
 #import "TSActionSheet.h"
-
+#import "SWYPhotoBrowserViewController.h"
 
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -119,6 +123,16 @@
 #define User_Archiver_Path @"userInforPath"
 
 /**
+ *  定位城市信息归档key
+ */
+#define User_LocationCity_Key @"locationCitykey"
+/**
+ *  定位城市归档路径
+ */
+#define User_LocationCity_Path @"locationCityPath"
+
+
+/**
  *  系统信息归档key
  */
 #define MapVo_Archiver_Key @"mapvo"
@@ -179,9 +193,21 @@
  */
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
+
 #define URL_Local @"http://61.143.60.87/ylserver"
 
+//#define URL_Local @"http://172.16.13.53/ylserver"
+
 //#define URL_Local @"http://ibama.hvit.com.cn"
+
+/***商品url*/
+#define URL_Goods(username,key) [NSString stringWithFormat:@"%@/shop/wap/tmpl/waitting.php?username=%@&key=%@&urlType=1",URL_Local,username,key];
+
+/***优惠券url*/
+#define URL_YHQ(username,key) [NSString stringWithFormat:@"%@/shop/wap/tmpl/waitting.php?username=%@&key=%@&urlType=2",URL_Local,username,key];
+
+/***商城url*/
+#define URL_Mall(username,key) [NSString stringWithFormat:@"%@/shop/wap/tmpl/waitting.php?username=%@&key=%@&urlType=0",URL_Local,username,key];
 
 /***注册服务条款url*/
 #define URL_Agreement [NSString stringWithFormat:@"%@/admin/manager/index.php/family/family_detail",URL_Local]
@@ -194,6 +220,12 @@
 
 /***图片url*/
 #define URL_Img  [NSString stringWithFormat:@"%@/public/",URL_Local]
+
+/***轮播图片url*/
+#define URL_AdvanceImg  [NSString stringWithFormat:@"%@/public/",URL_Local]
+
+/***图片web url*/
+#define URL_WebImg  [NSString stringWithFormat:@"%@/admin/manager/index.php/",URL_Local]
 
 /***用户注册url*/
 #define URL_Register [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=register",URL_Local]
@@ -271,7 +303,7 @@
 #define URL_Ck_workinfo_status [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status",URL_Local]
 
 /***获取评价url*/
-#define URL_Get_dis_cont [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&workinfo=get_dis_cont",URL_Local]
+#define URL_Get_dis_cont [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_dis_cont",URL_Local]
 
 /***提交评价url*/
 #define URL_Save_dis_cont [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=save_dis_cont",URL_Local]
@@ -287,6 +319,12 @@
 
 /***获取用户或服务商的工作单信息url  新的*/
 #define URL_Get_workinfo_bystatus [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_by_status",URL_Local]
+
+/***系统配置的城市Url*/
+#define URL_Get_conf_address [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_conf_address",URL_Local]
+
+/***定位返回服务城市Url*/
+#define URL_Dingwei_conf [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_dingwei_conf",URL_Local]
 
 
 
@@ -307,6 +345,19 @@ typedef NS_ENUM(NSInteger, ChartType) {
     ChartTypeHeart,
 };
 
+//typedef NS_ENUM(NSInteger, iPhoneModel){//0~3
+//    iPhone4,//320*480
+//    iPhone5,//320*568
+//    iPhone6,//375*667
+//    iPhone6Plus,//414*736
+//    UnKnown
+//};
+
 #define HTTP_REQUEST_OK_CODE          200
 
 #define IS_IOS7_OR_LATER                            ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
+//iPhone4(s)：分辨率960*640，高宽比1.5
+//iPhone5(s)：分辨率1136*640，高宽比1.775
+//iPhone6：分辨率1334*750，高宽比1.779
+//iPhone6+：分辨率1920*1080，高宽比1.778

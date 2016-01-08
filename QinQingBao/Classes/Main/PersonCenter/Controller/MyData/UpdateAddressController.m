@@ -11,6 +11,7 @@
 #import "DataCitiesViewController.h"
 #import "StreetViewController.h"
 #import "CityModel.h"
+#import "CitiesTotal.h"
 
 @interface UpdateAddressController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
 {
@@ -18,6 +19,7 @@
     HMCommonArrowItem *textItem;
     HMCommonTextfieldItem *textItem1;
     
+    NSMutableArray *addressArr;
     
     CityModel *selectedCity;
     NSString *selectedCityStr;
@@ -30,6 +32,7 @@
     NSArray *areas;
     NSString *city;
     NSString *district;
+    
     
     NSString *selectedAddress;
     UIPickerView *areaPicker;
@@ -60,12 +63,50 @@
     
     [self initTableviewSkin];
     
+    [self getAddress];
+    
     if (self.inforVO.totalname)
     {
         NSArray *array = [self.inforVO.totalname componentsSeparatedByString:@"市"]; //从字符A中分隔成2个元素的数组
         selectedCityStr = [NSString stringWithFormat:@"浙江省%@市",array[0]];
         selectedStreetStr = [NSString stringWithFormat:@"%@",array[1]];
     }
+}
+
+-(void)getAddress
+{
+    if (! self.inforVO.member_areaid)
+        return;
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters:@{@"dvcode_id" : self.inforVO.member_areaid,
+                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                   @"client" : @"ios",
+                                                                   @"all" : @5}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         NSLog(@"获取地址失败");
+                                     }
+                                     else
+                                     {
+                                         addressArr = [dict objectForKey:@"datas"][0];
+                                         [self initAddressVO];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
+    
+}
+
+-(void)initAddressVO
+{
+    selectedCity = [CityModel objectWithKeyValues:addressArr[1]];
+    
+    CityModel *vo = [[CityModel alloc] init];
+    vo.dvcode = self.inforVO.member_areaid;
+    vo.dvname = selectedStreetStr;
+    selectedStreet = vo;
 }
 
 /**
@@ -85,9 +126,16 @@
  */
 -(void)initNavigation
 {
-    self.title = [self.dict valueForKey:@"title"];
+    if (self.dict)
+        self.title = [self.dict valueForKey:@"title"];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doneClickHandler)];
+    
+    //适配ios7.0的导航栏
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0 && !self.changeDataBlock)
+    {
+        self.navigationController.navigationBar.translucent = NO;
+    }
 }
 
 # pragma  mark 设置数据源
@@ -112,13 +160,17 @@
     textItem0.subtitle = selectedCityStr;
     NSLog(@"dadda%@",selectedCity.dvname);
     __weak __typeof(self)weakSelf = self;
+    __weak __typeof(HMCommonArrowItem)*item = textItem;
+    
     textItem0.operation = ^{
         DataCitiesViewController *VC = [[DataCitiesViewController alloc] init];
         VC.selectedHandler = ^(CityModel *VO, NSString *str)
         {
             selectedCityStr = str;
             selectedCity = VO;
+            selectedStreet = nil;
             [weakSelf setupGroups];
+            selectedStreetStr = nil;
             [weakSelf.tableView reloadData];
         };
         [weakSelf.navigationController pushViewController:VC animated:YES];
@@ -131,12 +183,12 @@
     // 2.设置组的所有行数据
     textItem = [HMCommonArrowItem itemWithTitle:@"街道社区" icon:nil];
     textItem.subtitle = selectedStreetStr;
-    __weak __typeof(CityModel)*cityVO = selectedCity;
+    //    __weak __typeof(CityModel)*cityVO = selectedCity;
     textItem.operation = ^{
-        if (!cityVO)
+        if (!selectedCity)
             return [NoticeHelper AlertShow:@"请选择城市" view:weakSelf.view];
         StreetViewController *VC = [[StreetViewController alloc] init];
-        VC.dvcode_id = cityVO.dvcode;
+        VC.dvcode_id = selectedCity.dvcode;
         VC.selectedHandler = ^(CityModel *VO, NSString *str)
         {
             selectedStreetStr = str;
@@ -154,9 +206,12 @@
     [self.groups addObject:group1];
     // 3.设置组的所有行数据
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"门牌号" icon:nil];
-    textItem1.rightText.text = self.inforVO.member_areainfo;
     textItem1.placeholder = [self.dict valueForKey:@"placeholder"];
     group1.items = @[textItem1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        textItem1.rightText.text = self.inforVO.member_areainfo;
+    });
+    
     
     //刷新表格
     [self.tableView reloadData];
@@ -192,6 +247,11 @@
     if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
         [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     
+    if (self.changeDataBlock)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+        return self.changeDataBlock(dict,[NSString stringWithFormat:@"%@%@",selectedCityStr,selectedStreetStr]);
+    }
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:dict
@@ -220,7 +280,7 @@
 
 -(void)show
 {
-    // 加载plist文件，初始化三个NSArray对象，然后做一些非法的事情，你懂的
+    // 加载plist文件，初始化三个NSArray对象
     provinces = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"area.plist" ofType:nil]];
     cities = [[provinces objectAtIndex:0] objectForKey:@"cities"];
     state = [[provinces objectAtIndex:0] objectForKey:@"state"];

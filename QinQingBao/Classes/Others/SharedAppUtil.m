@@ -35,4 +35,12 @@ static SharedAppUtil *util = nil;
     _lon = lon;
 }
 
+//-(UITabBarController*)tabBar
+//{
+//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+//    if ( window.rootViewController && [window.rootViewController isKindOfClass:[UITabBarController class]])
+//        return nil;
+//    else
+//        return (UITabBarController *)window.rootViewController;
+//}
 @end

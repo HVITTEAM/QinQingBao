@@ -40,7 +40,6 @@
     
     [self initTableviewSkin];
     
-    
     [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters: @{@"dvcode_id" : @330102003050,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios",
@@ -94,7 +93,13 @@
     textItem = [HMCommonTextfieldItem itemWithTitle:[self.dict valueForKey:@"text"] icon:nil];
     textItem.placeholder = [self.dict valueForKey:@"placeholder"];
     group.items = @[textItem];
+    NSLog(@"%@",self.inforVO.member_name);
     [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        textItem.rightText.text = self.inforVO.member_truename;
+        //NSData 转NSString
+        NSLog(@"%@",[NSString stringWithFormat:@"%@",self.inforVO.member_truename]);
+    });
 }
 
 -(void)doneClickHandler

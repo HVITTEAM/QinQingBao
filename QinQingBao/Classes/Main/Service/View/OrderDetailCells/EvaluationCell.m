@@ -54,10 +54,19 @@
     _evaItem = evaItem;
     if (!evaItem)
         return;
-    self.nameLab.text  = evaItem.member_name;
+    self.nameLab.text  = @"匿名";
     self.timeLab.text  = evaItem.wpjtime;
     self.contentLab.text  = evaItem.dis_con;
-    self.contentLab.text  = @"味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞！味道很好，速度很快，赞";
-    self.height = 40;
+    
+    CGRect tmpRect = [self.contentLab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.contentLab.font,NSFontAttributeName, nil]
+                                            context:nil];
+
+    self.contentLabWidth.constant = tmpRect.size.height;
+
+    //60是下方的高度
+    self.height = CGRectGetMaxY(self.contentLab.frame) + 60;
+    
 }
 @end

@@ -14,7 +14,7 @@
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"pic" : [HomePicModel class],
+             @"data" : [HomePicModel class],
              };
 }
 @end

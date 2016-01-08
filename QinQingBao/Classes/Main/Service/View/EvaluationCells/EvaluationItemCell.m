@@ -52,8 +52,9 @@
     float score = [item.wgrade floatValue];
     [self.evaView setScore:score/5 withAnimation:NO];
     
+    self.timeLab.text = item.wpjtime;
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
-    self.nameLab.text = item.member_name;
+    self.nameLab.text = @"匿名";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

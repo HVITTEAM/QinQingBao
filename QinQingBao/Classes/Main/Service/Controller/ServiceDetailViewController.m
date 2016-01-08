@@ -12,6 +12,7 @@
 #import "EvaluationNoneCell.h"
 #import "RemarkDetailCell.h"
 #import "ServiceTimeCell.h"
+#import "ServicePhoneCell.h"
 
 @interface ServiceDetailViewController ()
 {
@@ -57,7 +58,6 @@
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
-
 }
 
 
@@ -128,17 +128,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 50;
-    if (indexPath.row == 0)
-        height =  evaArr.count != 0 ? 180 : 50;
-    else if (indexPath.row == 1)
-        height = 125;
-    else
-    {
-        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.height;
-    }
-    return height;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -198,28 +189,28 @@
             
             if(bucell == nil)
                 bucell = [BusinessInfoCell businessCell];
+            bucell.parentViewcontroller = self;
             
             [bucell setItemInfo:itemInfo];
             
             cell = bucell;
         }
             break;
+            //        case 2:
+            //        {
+            //            RemarkDetailCell *remarkDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTRemarkDetailCell"];
+            //
+            //            if(remarkDetailCell == nil)
+            //                remarkDetailCell = [RemarkDetailCell remarkDetailCell];
+            //
+            //            [remarkDetailCell setItemInfo:itemInfo];
+            //
+            //            cell = remarkDetailCell;
+            //        }
+            //            break;
         case 2:
         {
-            RemarkDetailCell *remarkDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTRemarkDetailCell"];
-            
-            if(remarkDetailCell == nil)
-                remarkDetailCell = [RemarkDetailCell remarkDetailCell];
-            
-            [remarkDetailCell setItemInfo:itemInfo];
-            
-            cell = remarkDetailCell;
-        }
-            break;
-        case 3:
-        {
             ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceDetailsCell"];
-            
             if(serviceDetailcell == nil)
                 serviceDetailcell = [ServiceDetailCell serviceCell];
             
@@ -229,7 +220,7 @@
             
         }
             break;
-        case 4:
+        case 3:
         {
             ServiceTimeCell *serviceTimeCell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceTimeCell"];
             
@@ -239,6 +230,15 @@
             [serviceTimeCell setItemInfo:itemInfo];
             
             cell = serviceTimeCell;
+        }
+            break;
+        case 4:
+        {
+            ServicePhoneCell *servicePhoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTServicePhoneCell"];
+            
+            if(servicePhoneCell == nil)
+                servicePhoneCell = [ServicePhoneCell servicePhoneCell];
+            cell = servicePhoneCell;
         }
             break;
         case 5:

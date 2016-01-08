@@ -12,5 +12,5 @@
 /**
  *  指令调度模型数据数组
  */
-@property (strong, nonatomic) NSMutableArray *pic;
+@property (strong, nonatomic) NSMutableArray *data;
 @end
