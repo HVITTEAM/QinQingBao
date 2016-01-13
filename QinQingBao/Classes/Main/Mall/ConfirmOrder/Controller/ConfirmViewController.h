@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ConfirmViewController : UIViewController
+//需要下单的商品数组
+@property (nonatomic, retain) NSMutableArray *goodsArr;
+
+@property (nonatomic, assign) BOOL fromCart;
 
 @end

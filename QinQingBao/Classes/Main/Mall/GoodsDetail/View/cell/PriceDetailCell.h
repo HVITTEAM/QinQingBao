@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoodsInfoModel.h"
+
 
 @interface PriceDetailCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *oldPriceLeftpadding;
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
 @property (strong, nonatomic) IBOutlet UILabel *oldPriceLab;
 @property (strong, nonatomic) IBOutlet UILabel *desLab;
@@ -17,5 +20,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *stockLab;
 
 +(PriceDetailCell *)priceDetailCell;
--(void)setItem;
+- (void)setItem:(GoodsInfoModel *)goodsInfo;
+
 @end

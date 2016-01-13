@@ -7,7 +7,7 @@
 //
 
 #import "GoodsCell.h"
-#import "ServiceItemModel.h"
+#import "GoodsInfoModel.h"
 
 @implementation GoodsCell
 
@@ -27,11 +27,13 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)setitemWithData:(ServiceItemModel *)item
+- (void)setitemWithData:(GoodsInfoModel *)item
 {
-    self.serviceTitleLab.text = @"Haier/海尔 BCD-249WDEGU1 249升 三门电冰箱 无霜智能 三温三控";
-    self.serviceDetailLab.text = @"￥99.00";
-    float score = [item.sumgrad floatValue]/[item.sumdis floatValue];
+    self.evaLab.textColor = [UIColor colorWithRGB:@"666666"];
+    self.serviceTitleLab.text = item.goods_name;
+    self.serviceDetailLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
+    self.serviceDetailLab.textColor = [UIColor colorWithRGB:@"dd2726"];
+    float score = [item.evaluation_good_star floatValue];
     
     self.starView.show_star = 10;
     self.starView.font_size = 18;
@@ -43,9 +45,9 @@
         self.starView.show_star = score *20;
     else
         self.starView.show_star = 0;
-    self.distanceLab.text = @"销量100件";
-    self.distanceLab.textColor = MTNavgationBackgroundColor;
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.item_url]];
+    self.distanceLab.text = [NSString stringWithFormat:@"销量%@件",item.goods_salenum];
+    self.distanceLab.textColor = [UIColor colorWithRGB:@"666666"];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",item.goods_image_url]];
     [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
 }
 

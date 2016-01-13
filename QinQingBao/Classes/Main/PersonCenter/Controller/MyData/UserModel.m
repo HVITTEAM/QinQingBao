@@ -35,9 +35,8 @@
     vo.member_id = [self.member_id copyWithZone:zone];
     vo.key = [self.key copyWithZone:zone];
     vo.old_id = [self.old_id copyWithZone:zone];
-
+    
     return vo;
 }
-
 
 @end

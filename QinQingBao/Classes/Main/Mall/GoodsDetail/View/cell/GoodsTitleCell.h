@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoodsInfoModel.h"
 
 @interface GoodsTitleCell : UITableViewCell
 
@@ -14,5 +15,5 @@
 
 +(GoodsTitleCell *)goodsTitleCell;
 
-- (void)setItem;
+- (void)setItem:(GoodsInfoModel *)goodsInfo;
 @end

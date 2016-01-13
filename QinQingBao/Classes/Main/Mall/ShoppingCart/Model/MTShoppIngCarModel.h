@@ -15,17 +15,15 @@
 
 @interface MTShoppIngCarModel : NSObject
 
-
-
-
-
+/**购物车id**/
 @property(nonatomic,copy)NSString *item_id;
+@property(nonatomic,copy)NSString *goods_id;
 @property(nonatomic,copy)NSString *count;
 @property(nonatomic,copy)NSString *item_size;
 @property(nonatomic,strong)MTCommodityModel *item_info;
 @property(nonatomic,assign)BOOL isSelect;
 
-
+@property(nonatomic,assign)BOOL isEdit;
 
 @property(nonatomic,assign)NSInteger type;
 

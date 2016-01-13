@@ -7,6 +7,7 @@
 //
 
 #import "GoodsTitleCell.h"
+#import "GoodsInfoModel.h"
 
 @implementation GoodsTitleCell
 
@@ -52,15 +53,27 @@
     }
 }
 
-- (void)setItem
+- (void)setItem:(GoodsInfoModel *)goodsInfo
 {
+    
+    UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5)];
+    line.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];
+    [self addSubview:line];
+    
     self.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
-    self.textLabel.text = @"咕咕 iPhone6数据线 iPhone5 5s 6s Plus安卓通用二合一充电器线";
+    self.textLabel.text = goodsInfo.goods_name;
     self.textLabel.numberOfLines = 0;
     self.textLabel.font = [UIFont systemFontOfSize:16];
+    self.textLabel.y = 5;
     CGRect tmpRect = [self.textLabel.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.textLabel.font,NSFontAttributeName, nil] context:nil];
     self.textLabel.height = tmpRect.size.height;
-    self.height = CGRectGetMaxY(self.textLabel.frame) + 5;
+   
+    self.height = CGRectGetMaxY(self.textLabel.frame) + 10;
+    
+//    UIImageView *rightView = [[UIImageView alloc]initWithFrame:CGRectMake(MTScreenW - 34, self.height/2 - 12, 24, 24)];
+//    rightView.image = [UIImage imageNamed:@"common_icon_arrow"];
+//    [self addSubview:line];
+    
 }
 
 

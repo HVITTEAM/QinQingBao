@@ -68,7 +68,7 @@
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
     NSDateFormatter *dateday = [[NSDateFormatter alloc] init];
-    [dateday setDateFormat:@"MM月dd日"];
+    [dateday setDateFormat:@"MM-dd"];
     return [dateday stringFromDate:beginningOfWeek];
 }
 

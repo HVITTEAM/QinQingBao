@@ -276,14 +276,8 @@
  */
 -(void)submitClickHandler
 {
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-    {
-        LoginViewController *login = [[LoginViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-        [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
-        login.backHiden = NO;
-        return;
-    }
+    if (![SharedAppUtil defaultCommonUtil].userVO )
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     OrderSubmitController *submitController = [[OrderSubmitController alloc] init];
     submitController.serviceDetailItem = self.selectedItem;
     submitController.serviceTypeItem = self.serviceTypeItem;

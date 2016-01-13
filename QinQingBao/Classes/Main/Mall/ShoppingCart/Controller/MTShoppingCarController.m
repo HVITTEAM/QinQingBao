@@ -8,8 +8,24 @@
 
 #import "MTShoppingCarController.h"
 #import "MTHeardView.h"
+#import "RecommendView.h"
+#import "GoodsHeadViewController.h"
+#import "ShopCarModelTotal.h"
+#import "ConfirmViewController.h"
+#import "ShopCarModel.h"
+
 
 @interface MTShoppingCarController () <UITableViewDataSource,UITableViewDelegate,MTShoppingCarCellDelegate,MTShoppingCartEndViewDelegate>
+{
+    //要删除的物品
+    MTShoppIngCarModel *selectedItem;
+    
+    //编辑过的改变值得商品
+    NSMutableArray *editModel;
+    
+    //暂时做
+    MBProgressHUD *HUD;
+}
 
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -34,10 +50,16 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor=[UIColor whiteColor];
+    
+    self.view.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
     self.title=@"购物车";
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.endView];
@@ -45,31 +67,52 @@
     //获取数据
     _vm = [[MTShopViewModel alloc]init];
     
-    __weak typeof (MTShoppingCarController) *waks = self;
-    __weak typeof (NSMutableArray)* carDataArrList =self.carDataArrList;
-    __weak typeof (UITableView ) *tableView = self.tableView;
-    
-    //设置价格改变block
-    [_vm getShopData:^(NSArray *commonArry, NSArray *kuajingArry) {
-        [carDataArrList addObject:commonArry];
-        [carDataArrList addObject:kuajingArry];
-        [tableView reloadData];
-        [waks numPrice];
-    } priceBlock:^{
-        [waks numPrice];
-    }];
+//    [self refleshData];
     
     [self finshBarView];
     [self loadNotificationCell];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edits:)];
-    
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self refleshData];
+}
+
+//刷新购物车数据
+-(void)refleshData
+{
+    [self.carDataArrList removeAllObjects];
+    __weak typeof (MTShoppingCarController) *waks = self;
+    __weak typeof (NSMutableArray)* carDataArrList =self.carDataArrList;
+    __weak typeof (UITableView ) *tableView = self.tableView;
+    HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //设置价格改变block
+    [_vm getShopData:^(NSArray *commonArry)
+    {
+        
+        if (commonArry.count == 0)
+        {
+            [self.tableView initWithPlaceString:@"您的购物车没有商品"];
+            self.navigationItem.rightBarButtonItem  = nil;
+        }
+        else
+        {
+            [carDataArrList addObject:commonArry];
+            [self.tableView removePlace];
+        }
+        [tableView reloadData];
+        [waks numPrice];
+        [HUD removeFromSuperview];
+    } priceBlock:^{
+        [waks numPrice];
+    }];
+}
 
 -(void)finshBarView
 {
-    
     _toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, MTScreenH, MTScreenW, 44)];
     // _toolbar.frame = CGRectMake(0, 0, MTScreenW, 44);
     [_toolbar setBarStyle:UIBarStyleDefault];
@@ -124,17 +167,20 @@
     float num = 0.00;
     for (int i=0; i<self.carDataArrList.count; i++) {
         NSArray *list = [self.carDataArrList objectAtIndex:i];
-        for (int j = 0; j<list.count-1; j++) {
-            MTShoppIngCarModel *model = [list objectAtIndex:j];
-            NSInteger count = [model.count integerValue];
-            float sale = [model.item_info.sale_price floatValue];
-            if (model.isSelect && ![model.item_info.sale_state isEqualToString:@"3"] )
-            {
-                num = count*sale+ num;
-                goodsCount ++;
+        if (list.count != 0)
+        {
+            for (int j = 0; j<list.count-1; j++) {
+                MTShoppIngCarModel *model = [list objectAtIndex:j];
+                NSInteger count = [model.count integerValue];
+                float sale = [model.item_info.sale_price floatValue];
+                if (model.isSelect && ![model.item_info.sale_state isEqualToString:@"3"] )
+                {
+                    num = count*sale+ num;
+                    goodsCount ++;
+                }
+                if (!model.isSelect)
+                    isAllSelected = NO;
             }
-            if (!model.isSelect)
-                isAllSelected = NO;
         }
     }
     
@@ -144,7 +190,7 @@
     [attributedString addAttribute:NSForegroundColorAttributeName
                              value:[UIColor colorWithRGB:@"333333"]
                              range:NSMakeRange(0, 3)];
-
+    
     _endView.Lab.attributedText = attributedString;
     
     _endView.pushBt.enabled = num > 0;
@@ -165,8 +211,6 @@
         _endView = [[MTShoppingCartEndView alloc]initWithFrame:CGRectMake(0, MTScreenH-[MTShoppingCartEndView getViewHeight], MTScreenW, [MTShoppingCartEndView getViewHeight])];
         _endView.delegate=self;
         _endView.isEdit = _isEdit;
-        
-        
     }
     return _endView;
 }
@@ -245,39 +289,65 @@
     }
     else if (bt.tag==18)
     {
-        //结算
-        NSLog(@"结算去支付");
+        NSLog(@"结算去确认订单");
+        
+        //选择的商品
+        NSMutableArray *selectedGoods = [[NSMutableArray alloc] init];
+        
+        for (int i=0; i < self.carDataArrList.count; i++) {
+            NSArray *list = [self.carDataArrList objectAtIndex:i];
+            for (int j = 0; j <list.count-1; j++)
+            {
+                MTShoppIngCarModel *model = [list objectAtIndex:j];
+                if (model.isSelect && ![model.item_info.sale_state isEqualToString:@"3"] )
+                {
+                    [selectedGoods addObject:model];
+                }
+            }
+        }
+        
+        ConfirmViewController *vc = [[ConfirmViewController alloc] init];
+        vc.goodsArr = selectedGoods;
+        vc.fromCart = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 - (void)edits:(UIBarButtonItem *)item
 {
     self.isEdit = !self.isEdit;
+    [self endViewHidden];
     if (self.isEdit) {
-        item.title = @"取消";
+        item.title = @"完成";
         for (int i=0; i<_carDataArrList.count; i++) {
             NSArray *list = [_carDataArrList objectAtIndex:i];
             for (int j = 0; j<list.count-1; j++) {
                 MTShoppIngCarModel *model = [list objectAtIndex:j];
-                if ([model.item_info.sale_state isEqualToString:@"3"]) {
-                    model.isSelect=NO;
+                if ([model.item_info.sale_state isEqualToString:@"3"])
+                {
+                    model.isSelect = NO;
                 }
                 else
                 {
-                    model.isSelect=YES;
+                    //                    model.isSelect=YES;
+                    model.isEdit = YES;
                 }
             }
         }
     }
     else{
+        
+        //        [self editQuality];
+        
         item.title = @"编辑";
         for (int i=0; i<_carDataArrList.count; i++) {
             NSArray *list = [_carDataArrList objectAtIndex:i];
             for (int j = 0; j<list.count-1; j++) {
                 MTShoppIngCarModel *model = [list objectAtIndex:j];
-                model.isSelect = YES;
+                model.isEdit = NO;
+                //                model.isSelect = YES;
             }
         }
-        
     }
     
     _endView.isEdit = self.isEdit;
@@ -303,19 +373,19 @@
         _tableView.scrollsToTop=YES;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
+        
+        RecommendView *footView = [[RecommendView alloc] init];
+        footView.frame = CGRectMake(0, 0, MTScreenW, 350);
+        footView.backgroundColor = [UIColor whiteColor];
+        //        _tableView.tableFooterView = footView;
     }
     return _tableView;
 }
 
 - (void)endViewHidden
 {
-    if (_carDataArrList.count==0) {
-        self.endView.hidden=YES;
-    }
-    else
-    {
-        self.endView.hidden=NO;
-    }
+    self.endView.hidden = _carDataArrList.count == 0;
+    self.endView.hidden = self.editing;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -387,7 +457,20 @@
     return cell;
 }
 
-#pragma mark MTShoppingCarCellDelegate 左边勾选操作代理
+#pragma mark MTShoppingCarCellDelegate
+
+//显示商品详情
+-(void)itemClick:(MTShoppIngCarModel *)models row:(NSInteger )row
+{
+    GoodsHeadViewController *gvc = [[GoodsHeadViewController alloc] init];
+    gvc.goodsID = models.goods_id;
+    [self.navigationController pushViewController:gvc animated:YES];
+}
+
+-(void)priceChangeClick:(MTShoppIngCarModel *)models row:(NSInteger )row
+{
+    
+}
 
 - (void)singleClick:(MTShoppIngCarModel *)models row:(NSInteger)row
 {
@@ -419,28 +502,63 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        
         NSMutableArray *list = [_carDataArrList objectAtIndex:indexPath.section];
+        MTShoppIngCarModel *model = [list objectAtIndex:indexPath.row];
+        //        model.isSelect=NO;
+        //        [list removeObjectAtIndex:indexPath.row];
+        //        if (list.count==1) {
+        //            [_carDataArrList removeObjectAtIndex:indexPath.section];
+        //        }
+        //        [_tableView reloadData];
+        selectedItem = model;
         
-        
-        
-        MTShoppIngCarModel *model = [ list objectAtIndex:indexPath.row];
-        model.isSelect=NO;
-        [list removeObjectAtIndex:indexPath.row];
-        
-        if (list.count==1) {
-            
-            
-            [_carDataArrList removeObjectAtIndex:indexPath.section];
-            
-        }
-        
-        [_tableView reloadData];
-        
+        [self sureDelate];
+    }
+}
+
+# pragma  mark 确认删除
+-(void)sureDelate
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定删除当前宝贝？"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:@"确定"
+                                                    otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        [self deleteGoods:selectedItem];
     }
 }
 
 
+-(void)deleteGoods:(MTShoppIngCarModel *)item
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Cart_Delate parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                    @"cart_id" : item.item_id,
+                                                                    @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         //                                         [NoticeHelper AlertShow:@"删除成功!" view:self.view];
+                                         [self.carDataArrList removeAllObjects];
+                                         [self refleshData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [NoticeHelper AlertShow:@"服务器连接失败!" view:self.view];
+                                 }];
+}
 
 -(void)dealloc
 {
@@ -449,10 +567,10 @@
     _tableView.delegate=nil;
     self.vm = nil;
     self.endView = nil;
-    self.carDataArrList = nil;
+    if (self.carDataArrList)
+        self.carDataArrList = nil;
     NSLog(@"Controller释放了。。。。。");
 }
-
 
 - (void)keyboardWillShow:(NSNotification *)notif {
     if (self.view.hidden == YES) {

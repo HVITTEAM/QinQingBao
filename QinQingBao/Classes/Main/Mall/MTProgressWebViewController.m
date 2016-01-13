@@ -8,9 +8,12 @@
 
 #import "MTProgressWebViewController.h"
 #import "WebViewJavascriptBridge.h"
+#import "MTShoppingCarController.h"
+#import "ClassificationViewController.h"
+#import "SearchViewController.h"
 
 
-@interface MTProgressWebViewController ()
+@interface MTProgressWebViewController ()<UISearchBarDelegate>
 {
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
@@ -23,23 +26,15 @@
 
 @implementation MTProgressWebViewController
 
-//-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-////        self.hidesBottomBarWhenPushed = YES;
-//    }
-//    return self;
-//}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    //[UIApplication sharedApplication].
-    
     [self initData];
+    
+    [self initNavigation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -48,16 +43,54 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     
-    [self.navigationController.navigationBar addSubview:_progressView];
+    //    [self.navigationController.navigationBar addSubview:_progressView];
     
     [self addEventListener];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 }
+
+/**
+ *  初始化导航栏
+ */
+-(void)initNavigation
+{
+    //    self.title = @"商品详情";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"购物车" style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopCar)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分类" style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopClass)];
+    
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 20, 150, 37)];
+    searchBar.placeholder = @"江山臭豆腐";
+    [searchBar setBarStyle:UIBarStyleDefault];
+    searchBar.translucent = true;
+    //    searchBar.tintColor=[UIColor blueColor];
+    searchBar.delegate = self;
+    self.navigationItem.titleView = searchBar;
+    UITapGestureRecognizer *searchTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickHandler:)];
+    [searchBar addGestureRecognizer:searchTap];
+}
+
+-(void)ClickHandler:(UITapGestureRecognizer *)tap
+{
+    NSLog(@"dian");
+}
+
+-(void)gotoShopClass
+{
+    ClassificationViewController *shopCar = [[ClassificationViewController alloc] init];
+    [self.navigationController pushViewController:shopCar animated:YES];
+}
+
+-(void)gotoShopCar
+{
+    MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
+    [self.navigationController pushViewController:shopCar animated:YES];
+}
+
 
 /**
  * 添加js交互监听
@@ -69,6 +102,7 @@
     
     if (!_bridge) {
         _bridge = [WebViewJavascriptBridge bridgeForWebView:webView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+            
             NSString *str = [NSString stringWithFormat:@"%@",data];
             if ([str isEqualToString:@"0"]) {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -76,19 +110,36 @@
             else if ([str isEqualToString:@"1"]) {
                 LoginViewController *login = [[LoginViewController alloc] init];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-                [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
+                [self presentViewController:nav animated:YES completion:nil];
                 login.backHiden = NO;
+            }
+            else if ([str isEqualToString:@"6"]) {
+                ClassificationViewController *class = [[ClassificationViewController alloc] init];
+                [self.navigationController pushViewController:class animated:YES];
+            }
+            else if ([str isEqualToString:@"2"]) {
+                if (![SharedAppUtil defaultCommonUtil].userVO )
+                    return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+                MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
+                [self.navigationController pushViewController:shopCar animated:YES];
             }
         }];
     }
 }
 
+-(void)handler
+{
+    MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
+    UINavigationController *navShop = [[UINavigationController alloc] initWithRootViewController:shopCar];
+    [self.navigationController pushViewController:navShop animated:YES];
+}
+
 //-(void)viewWillDisappear:(BOOL)animated
 //{
 //    [super viewWillDisappear:animated];
-//    
+//
 //    [_progressView removeFromSuperview];
-//    
+//
 //    [self clearCookies];
 //}
 

@@ -10,4 +10,6 @@
 
 @interface GoodsHeadViewController : UIViewController
 
+@property (nonatomic,strong) NSString *goodsID;
+
 @end

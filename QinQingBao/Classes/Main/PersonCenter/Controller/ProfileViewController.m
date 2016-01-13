@@ -20,7 +20,9 @@
 #import "ClassificationViewController.h"
 #import "GoodsTableViewController.h"
 #import "ConfirmViewController.h"
-
+#import "MTCouponsViewController.h"
+#import "AddressTableViewController.h"
+#import "GoodsViewController.h"
 
 #define imageHeight 140
 
@@ -185,10 +187,11 @@
     [self setupGroup4];
     [self setupGroup3];
     [self setupGroup5];
-    [self setupGroup7];
-    [self setupGroup8];
-    [self setupGroup9];
+//    [self setupGroup7];
+//    [self setupGroup8];
+//    [self setupGroup9];
     [self setupGroup10];
+//    [self setupGroup11];
     [self setupFooter];
     
     //刷新表格
@@ -236,15 +239,11 @@
     
     // 2.设置组的所有行数据
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
-    newFriend.operation = ^{
-        MTProgressWebViewController *destVC = [[MTProgressWebViewController alloc] init];
-        destVC.title = @"我的优惠券";
-        destVC.url = URL_YHQ(username, key);
-        destVC.hidesBottomBarWhenPushed = YES;
-        
-        [self.navigationController pushViewController:destVC animated:YES];
-    };
+    
+    newFriend.destVcClass = [MTCouponsViewController class];
+    
     group.items = @[newFriend];
+
 }
 
 - (void)setupGroup2
@@ -324,8 +323,6 @@
     HMCommonArrowItem *car;
     // 2.设置组的所有行数据
     car = [HMCommonArrowItem itemWithTitle:@"我的购物车" icon:@"pc_service.png"];
-    //    car.destVcClass = [MTShoppingCarController class];
-    
     car.destVcClass = [GoodsHeadViewController class];
     
     group.items = @[car];
@@ -369,14 +366,28 @@
     
     HMCommonArrowItem *car;
     // 2.设置组的所有行数据
-    car = [HMCommonArrowItem itemWithTitle:@"确认下单" icon:@"pc_service.png"];
+    car = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"pc_service.png"];
     
-    car.destVcClass = [ConfirmViewController class];
+    car.destVcClass = [GoodsViewController class];
     
     group.items = @[car];
 }
 
+-(void)setupGroup11
+{
+    // 1.创建组
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    HMCommonArrowItem *newFriend;
+    
+    // 2.设置组的所有行数据
+    newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
+    
+    newFriend.destVcClass = [MTCouponsViewController class];
 
+    group.items = @[newFriend];
+}
 
 # pragma  mark 退出当前账号
 

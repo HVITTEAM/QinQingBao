@@ -41,7 +41,7 @@ static CGFloat CHAT_WIDTH;
     line.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];
     [self addSubview:line];
     
-    UIImageView *chatImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"star_icon"]];
+    UIImageView *chatImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"chatshop.png"]];
     chatImg.frame = CGRectMake(CHAT_WIDTH/2 - 10, 5, 20, 20);
     [self addSubview:chatImg];
     
@@ -64,7 +64,7 @@ static CGFloat CHAT_WIDTH;
     _Lab2.font=[UIFont systemFontOfSize:12];
     [self addSubview:_Lab2];
     
-    UIImageView *chatImg1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"star_icon"]];
+    UIImageView *chatImg1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"collectshop"]];
     chatImg1.frame = CGRectMake(CHAT_WIDTH + CHAT_WIDTH /2- 10, 5, 20, 20);
     [self addSubview:chatImg1];
     
@@ -75,7 +75,7 @@ static CGFloat CHAT_WIDTH;
     [_buyBt setTitle:@"立即购买" forState:UIControlStateNormal];
     [_buyBt.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     
-    [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+    [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
     [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
     
     [[_buyBt layer]setCornerRadius:3.0];
@@ -90,7 +90,7 @@ static CGFloat CHAT_WIDTH;
     [_add2Car setTitle:@"加入购物车" forState:UIControlStateNormal];
     [_add2Car.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     
-    [_add2Car setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
+    [_add2Car setBackgroundImage:[UIImage imageWithColor:MTNavgationBackgroundColor] forState:UIControlStateNormal];
     [_add2Car setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
     
     [[_add2Car layer]setCornerRadius:3.0];

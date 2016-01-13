@@ -10,8 +10,6 @@
 #import "Order.h"
 #import "DataSigner.h"
 
-
-
 @interface PayViewController ()<UIAlertViewDelegate>
 {
     //选择的支付方式
@@ -124,7 +122,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     UITableViewCell *cell;
     if (indexPath.section == 0)
     {
@@ -142,7 +139,6 @@
     }
     else  if (indexPath.section == 3)
     {
-        
         PayButtonCell *payBtncell = [tableView dequeueReusableCellWithIdentifier:@"MTPayBtncell"];
         
         if (payBtncell == nil)
@@ -154,7 +150,6 @@
         };
         cell =  payBtncell;
     }
-    
     else if (indexPath.section == 1)
     {
         UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:@"MTContentcell"];
@@ -181,7 +176,6 @@
     }
     else
     {
-        
         UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPayTypecell"];
         if (payTypecell == nil)
         {

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="52" id="KGk-i7-Jjw" customClass="PersonInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="287" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="third_selected" translatesAutoresizingMaskIntoConstraints="NO" id="AKj-Uo-Tph">
+                        <rect key="frame" x="10" y="10" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="FlR-mr-kc2"/>
+                            <constraint firstAttribute="height" constant="15" id="YE8-sq-6Q8"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张某某" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEK-WZ-30A">
+                        <rect key="frame" x="30" y="7" width="45" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="t8L-Rr-XQO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="KNb-h0-48J">
+                        <rect key="frame" x="105" y="10" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="ViG-4x-JLI"/>
+                            <constraint firstAttribute="height" constant="15" id="zrw-RZ-Yd3"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13800138000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ay-NK-I8l">
+                        <rect key="frame" x="125" y="7" width="97" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="UXl-nd-d6p"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="广东省珠海市香洲区金鼎下册杀马特理发店" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jt-VF-Z5g">
+                        <rect key="frame" x="77" y="30" width="215" height="31"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址 : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuu-yj-ON9">
+                        <rect key="frame" x="10" y="33" width="65" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="UkH-Hd-7nO"/>
+                            <constraint firstAttribute="width" constant="65" id="zPA-7w-drB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OEK-WZ-30A" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="4GT-5o-pjf"/>
+                    <constraint firstItem="KNb-h0-48J" firstAttribute="leading" secondItem="OEK-WZ-30A" secondAttribute="trailing" constant="30" id="Guu-gz-N0W"/>
+                    <constraint firstItem="4Ay-NK-I8l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="Og5-RR-8bf"/>
+                    <constraint firstItem="OEK-WZ-30A" firstAttribute="leading" secondItem="AKj-Uo-Tph" secondAttribute="trailing" constant="5" id="XI0-MZ-K88"/>
+                    <constraint firstItem="4Ay-NK-I8l" firstAttribute="leading" secondItem="KNb-h0-48J" secondAttribute="trailing" constant="5" id="a0N-bu-MBT"/>
+                    <constraint firstItem="cuu-yj-ON9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="avc-MP-URc"/>
+                    <constraint firstItem="KNb-h0-48J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="awg-kb-Iml"/>
+                    <constraint firstItem="cuu-yj-ON9" firstAttribute="top" secondItem="OEK-WZ-30A" secondAttribute="bottom" constant="5" id="o8I-8R-tuA"/>
+                    <constraint firstItem="AKj-Uo-Tph" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qxJ-E7-Ppg"/>
+                    <constraint firstItem="AKj-Uo-Tph" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ryU-E4-ufj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="address" destination="2Jt-VF-Z5g" id="MZ1-R9-lKY"/>
+                <outlet property="name" destination="OEK-WZ-30A" id="Sq3-j3-bUG"/>
+                <outlet property="phone" destination="4Ay-NK-I8l" id="wjH-nV-qj3"/>
+            </connections>
+            <point key="canvasLocation" x="-95" y="301"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="phone" width="23" height="22"/>
+        <image name="third_selected" width="24" height="24"/>
+    </resources>
+</document>

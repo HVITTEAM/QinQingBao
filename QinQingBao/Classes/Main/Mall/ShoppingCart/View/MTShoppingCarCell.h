@@ -34,4 +34,10 @@
 
 -(void)singleClick:(MTShoppIngCarModel *)models row:(NSInteger )row;
 
+-(void)priceChangeClick:(MTShoppIngCarModel *)models row:(NSInteger )row;
+
+-(void)itemClick:(MTShoppIngCarModel *)models row:(NSInteger )row;
+
+
+
 @end

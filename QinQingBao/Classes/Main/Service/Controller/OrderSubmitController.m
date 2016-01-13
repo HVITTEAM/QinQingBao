@@ -155,7 +155,7 @@
                                                   , @"11",@"12", @"13", @"14",
                                                   @"15", @"16" , @"17",@"18", nil]];
     
-    min = [NSArray arrayWithObjects:@"0分" , @"30分", nil];
+    min = [NSArray arrayWithObjects:@"00" , @"30", nil];
     
     [self checkTime];
     
@@ -225,7 +225,7 @@ numberOfRowsInComponent:(NSInteger)component
     else  if (component == 1)
         return [NSString stringWithFormat:@"%@时",[time objectAtIndex:row]];
     else
-        return [min objectAtIndex:row];
+        return [NSString stringWithFormat:@"%@分",[min objectAtIndex:row]];
 }
 
 // 当用户选中UIPickerViewDataSource中指定列、指定列表项时激发该方法
@@ -392,7 +392,7 @@ numberOfRowsInComponent:(NSInteger)component
             vouchercell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",couponsItem.voucher_price];
         else
         {
-            vouchercell.detailTextLabel.text = @"使用抵用券";
+            vouchercell.detailTextLabel.text = @"暂未开通";
             vouchercell.detailTextLabel.font = [UIFont systemFontOfSize:14];
             vouchercell.detailTextLabel.textColor = MTNavgationBackgroundColor;
         }
@@ -466,15 +466,15 @@ numberOfRowsInComponent:(NSInteger)component
     else if (indexPath.section == 4)
     {
         //优惠券
-        UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
-        coupons.selectedClick = ^(CouponsModel *item)
-        {
-            NSLog(@"选择优惠券");
-            couponsItem = item;
-            [orderSubmitCell setCouponsModel:item];
-            [self.tableView reloadData];
-        };
-        [self.navigationController pushViewController:coupons animated:YES];
+//        UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
+//        coupons.selectedClick = ^(CouponsModel *item)
+//        {
+//            NSLog(@"选择优惠券");
+//            couponsItem = item;
+//            [orderSubmitCell setCouponsModel:item];
+//            [self.tableView reloadData];
+//        };
+//        [self.navigationController pushViewController:coupons animated:YES];
     }
 }
 
@@ -582,20 +582,14 @@ numberOfRowsInComponent:(NSInteger)component
     self.datePicker = [[UIDatePicker alloc]init];
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
-        //        NSDate* date=[self.datePicker date];
-        //        NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
-        //        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        //        NSString * curentDatest=[formatter stringFromDate:date];
-        //        UIAlertView* alert = [[UIAlertView alloc]
-        //                              initWithTitle:@"提示"
-        //                              message:[NSString stringWithFormat:@"你选中的%@%@%@"
-        //                                       , daystr , timestr,minstr]
-        //                              delegate:nil
-        //                              cancelButtonTitle:@"确定"
-        //                              otherButtonTitles:nil];
-        //        [alert show];
         
-        selectedTimestr = [NSString stringWithFormat:@"%@%@%@", daystr , timestr,minstr];
+        //拼接下单预约时间的字符串
+        NSDate *  timeDate=[NSDate date];
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"yyyy"];
+        NSString *  yearString=[dateformatter stringFromDate:timeDate];
+        selectedTimestr = [NSString stringWithFormat:@"%@-%@ %@:%@:00",yearString, daystr , timestr,minstr];
+        
         [self.tableView reloadData];
     }];
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];

@@ -13,5 +13,5 @@
 /**
  *
  */
-@property (strong, nonatomic) NSMutableArray *datas;
+@property (strong, nonatomic) NSMutableArray *voucher_list;
 @end

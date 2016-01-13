@@ -24,7 +24,7 @@
 
 - (void)awakeFromNib
 {
-    self.backgroundColor = HMGlobalBg;
+    self.backgroundColor = [UIColor clearColor];
     self.bgView.layer.cornerRadius = 4;
     self.selectBtn.userInteractionEnabled = NO;
 }
@@ -48,9 +48,32 @@
                              value:[UIFont systemFontOfSize:16.f]
                              range:NSMakeRange(0, 1)];
     self.priceLab.attributedText = attributedString;
-    self.titleLab.text = couponsModel.voucher_title;
+      self.titleLab.text = couponsModel.voucher_title;
+    self.titleLab.textColor = [UIColor colorWithRGB:@"333333"];
     self.endtimeLab.text = [NSString stringWithFormat:@"有效期至:%@",couponsModel.voucher_end_date];
+    self.endtimeLab.textColor = [UIColor colorWithRGB:@"666666"];
     self.limitLab.text = [NSString stringWithFormat:@"满%@元使用",couponsModel.voucher_limit];
+    self.limitLab.textColor = [UIColor colorWithRGB:@"666666"];
+    self.owerLab.textColor = [UIColor colorWithRGB:@"666666"];
+    
+    if ([couponsModel.voucher_price floatValue] <= 10)
+    {
+        self.priceLab.textColor = HMColor(37, 154, 218);
+        self.sublab.textColor = HMColor(37, 154, 218);
+        self.bgImgView.image = [UIImage imageNamed:@"coupons_3.png"];
+    }
+    else if([couponsModel.voucher_price floatValue] <= 30)
+    {
+        self.priceLab.textColor = HMColor(243, 127, 24);
+        self.sublab.textColor = HMColor(243, 127, 24);
+        self.bgImgView.image = [UIImage imageNamed:@"coupons_1.png"];
+    }
+    else
+    {
+        self.priceLab.textColor = HMColor(229, 78, 61);
+        self.sublab.textColor = HMColor(229, 78, 61);
+        self.bgImgView.image = [UIImage imageNamed:@"coupons_2.png"];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

@@ -65,7 +65,6 @@
     UINavigationController *healthLoginNav = [[UINavigationController alloc] initWithRootViewController:healthLogin];
     healthLoginNav.navigationItem.leftBarButtonItem = nil;
     
-    
     HomeViewController *homeView = [[HomeViewController alloc] init];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
     
@@ -127,10 +126,10 @@
     UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     [nav1 setViewControllers:@[sysview] animated:YES];
     
-    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-    mallView.url =  [[self alloc] getMallurl];
-    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
-    [nav2 setViewControllers:@[mallView] animated:YES];
+//    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+//    mallView.url =  [[self alloc] getMallurl];
+//    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
+//    [nav2 setViewControllers:@[mallView] animated:YES];
 }
 
 +(void)setloginOutViewController

@@ -41,4 +41,11 @@
 @property (nonatomic, copy) NSString *voucher_owner_name;
 /**使用该代金券的订单编号**/
 @property (nonatomic, copy) NSString *voucher_order_id;
+
+@property (nonatomic, copy) NSString *store_name;
+@property (nonatomic, copy) NSString *store_id;
+@property (nonatomic, copy) NSString *store_domain;
+@property (nonatomic, copy) NSString *voucher_t_customimg;
+@property (nonatomic, copy) NSString *voucher_state_text;
+
 @end

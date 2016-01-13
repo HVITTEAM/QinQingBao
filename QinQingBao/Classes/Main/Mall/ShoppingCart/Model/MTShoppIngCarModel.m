@@ -10,8 +10,6 @@
 
 @implementation MTShoppIngCarModel
 
-
-
 - (void)setVm:(MTShopViewModel *)vm
 {
     _vm = vm;
@@ -19,10 +17,8 @@
 }
 -(void)dealloc
 {
-
-    
-    [self removeObserver:_vm forKeyPath:@"isSelect"];
-
+    if (_vm)
+        [self removeObserver:_vm forKeyPath:@"isSelect"];
 }
 
 @end

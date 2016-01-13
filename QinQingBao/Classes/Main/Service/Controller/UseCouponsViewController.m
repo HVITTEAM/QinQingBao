@@ -27,6 +27,12 @@
 
 @implementation UseCouponsViewController
 
+
+- (void)viewDidCurrentView
+{
+    NSLog(@"加载为当前视图 = %@",self.title);
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,20 +68,19 @@
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Youhuicard parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                   @"client" : @"ios",
-                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                   @"voucher_state" : @"1",
+                                                                   @"page" : @1000,
+                                                                   @"curpage" : @1}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                                         [alertView show];
                                          [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
                                      else
                                      {
-                                         CouponsTotal *result = [CouponsTotal objectWithKeyValues:dict];
-                                         dataProvider = result.datas;
+                                         CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         dataProvider = result.voucher_list;
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];
@@ -90,7 +95,12 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    return 0;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -105,7 +115,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 130;
+    return 150;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -14,7 +14,7 @@
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"datas" : [CouponsModel class],
+             @"voucher_list" : [CouponsModel class],
              };
 }
 @end

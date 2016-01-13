@@ -73,7 +73,7 @@
                                         <constraint firstAttribute="height" constant="20" id="0vY-DB-Kn3"/>
                                         <constraint firstAttribute="width" constant="20" id="2Ky-gk-FlA"/>
                                     </constraints>
-                                    <state key="normal" image="back_icon" backgroundImage="572CA9D2-9E48-4D32-A12D-A0728C1A5E1A"/>
+                                    <state key="normal" image="back_icon" backgroundImage="63D349A1-F56B-476E-8B54-C169C44A3BC5"/>
                                     <connections>
                                         <action selector="backHanlder:" destination="-1" eventType="touchUpInside" id="gnh-WJ-PKI"/>
                                     </connections>
@@ -212,7 +212,7 @@
         </view>
     </objects>
     <resources>
-        <image name="572CA9D2-9E48-4D32-A12D-A0728C1A5E1A" width="20" height="20">
+        <image name="63D349A1-F56B-476E-8B54-C169C44A3BC5" width="20" height="20">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -55,6 +55,7 @@
 
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "MTPayHelper.h"
 
 /**
  *  SDK 正式地址 appKey, 需要开发者申请好appkey方可访问
@@ -165,6 +166,8 @@
 
 #define MTLoginTimeout @"MTLoginTimeout"
 
+#define MTNeedLogin @"MTNeedLogin"
+
 #define MTSececteFamily @"HMSelectedFamily"
 
 #define HMCityDidSelectNotification @"HMCityDidSelectNotification"
@@ -178,6 +181,11 @@
 #define HMSelectedRegion @"HMSelectedRegion"
 #define HMSelectedSubRegionName @"HMSelectedSubRegionName"
 
+#define MTInvoiceNotification @"MTInvoiceNotification"
+
+//#define MTNoGoodsInCarNotification @"MTNoGoodsInCarNotification"
+
+//#define HMSelectedCity @"HMSelectedCity"
 
 #define MTNotificationCenter [NSNotificationCenter defaultCenter]
 /**
@@ -287,8 +295,6 @@
 /***亲属 - 关系绑定url*/
 #define URL_Bang_relation [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=relation&op=bang_relation",URL_Local]
 
-/***获取该用户可用的优惠卷url*/
-#define URL_Youhuicard [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_youhuicard",URL_Local]
 
 /***确认下单综合接口url*/
 #define URL_Get_data_create_order [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_data_create_order",URL_Local]
@@ -327,6 +333,71 @@
 #define URL_Dingwei_conf [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_dingwei_conf",URL_Local]
 
 
+#pragma mark 商城api
+
+/***商城分类Url*/
+#define URL_Goods_class [NSString stringWithFormat:@"%@/shop/mobile/index.php?act=goods_class&access_token=token&op=api_class",URL_Local]
+
+/***获取单个商品Url*/
+#define URL_Goods_details [NSString stringWithFormat:@"%@/shop/mobile/index.php?act=goods&op=api_goods_detail&access_token=token",URL_Local]
+
+/***获取商品详情Url*/
+#define URL_Goods_body [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=goods&op=api_goods_body",URL_Local]
+
+/***获取商品分类Url*/
+#define URL_Goods_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=goods&op=api_goods_list",URL_Local]
+
+/***购物车内容Url*/
+#define URL_Cart_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_cart&op=api_cart_list",URL_Local]
+
+/***购物车删除Url*/
+#define URL_Cart_Delate [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_cart&op=api_cart_del",URL_Local]
+
+/***购物车修改Url*/
+#define URL_Cart_Edit [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_cart&op=api_cart_edit_quantity",URL_Local]
+
+/***购物车增加Url*/
+#define URL_Cart_add [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_cart&op=api_cart_add",URL_Local]
+
+/***提交订单Url*/
+#define URL_Cart_Submit [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_buy&op=api_buy_step2",URL_Local]
+
+/*** 支付付款 订单状态修改Url*/
+#define URL_Alipay [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=payment&op=api_alipay",URL_Local]
+
+/***获取用户地址列表Url*/
+#define URL_Address_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_address&op=api_address_list",URL_Local]
+
+/***删除用户地址Url*/
+#define URL_Address_del [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_address&op=address_del",URL_Local]
+
+/***修改用户地址Url*/
+#define URL_Address_edit [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_address&op=api_address_edit",URL_Local]
+
+/***新增用户地址Url*/
+#define URL_Address_Add [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_address&op=api_address_add",URL_Local]
+
+/***获取城市级联信息Url*/
+#define URL_Area_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_address&op=area_list",URL_Local]
+
+/***获取该用户可用的优惠卷url*/
+#define URL_Youhuicard [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=voucher&op=voucher_list",URL_Local]
+
+//---------------------订单---------------------
+
+/***订单数据获取url*/
+#define URL_Order_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_order_list",URL_Local]
+
+/***订单取消url*/
+#define URL_Order_cancel [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_order_cancel",URL_Local]
+
+/***订单确认收货url*/
+#define URL_Order_receive [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_order_receive",URL_Local]
+
+/***查看物流信息url*/
+#define URL_Search_deliver [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_search_deliver",URL_Local]
+
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
@@ -343,6 +414,16 @@ typedef NS_ENUM(NSInteger, ChartType) {
     ChartTypeSugar,
     ChartTypeBlood,
     ChartTypeHeart,
+};
+
+typedef NS_ENUM(NSInteger, InvoiceType) {
+    InvoiceTypePersonal,
+    InvoiceTypeCompany,
+};
+
+typedef NS_ENUM(NSInteger, OrderType) {
+    OrderTypeAdd2cart,
+    OrderTypeBuyRightnow,
 };
 
 //typedef NS_ENUM(NSInteger, iPhoneModel){//0~3

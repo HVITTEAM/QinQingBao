@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="umK-8E-sXu">
@@ -35,23 +35,49 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="nbW-Cp-MBK"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="Star">
-                        <rect key="frame" x="88" y="53" width="100" height="20"/>
+                        <rect key="frame" x="124" y="52" width="100" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="0an-Ev-gEj"/>
                             <constraint firstAttribute="height" constant="20" id="9dz-4J-8vc"/>
+                            <constraint firstAttribute="width" constant="100" id="FhW-XW-Kqj"/>
+                            <constraint firstAttribute="height" constant="20" id="raw-ly-gn6"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0an-Ev-gEj"/>
+                                <exclude reference="9dz-4J-8vc"/>
+                            </mask>
+                        </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lug-CT-MEQ" userLabel="sellNumLab">
-                        <rect key="frame" x="210" y="53" width="100" height="21"/>
+                        <rect key="frame" x="210" y="32" width="100" height="21"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="100" id="CHb-wM-l0Q"/>
+                            <constraint firstAttribute="height" constant="21" id="K9a-LV-voG"/>
                             <constraint firstAttribute="height" constant="21" id="fO5-pt-hn9"/>
                             <constraint firstAttribute="width" constant="100" id="yi2-Bk-gec"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fO5-pt-hn9"/>
+                                <exclude reference="yi2-Bk-gec"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="评价:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BR-GT-hFA">
+                        <rect key="frame" x="88" y="53" width="36" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="9sI-bA-FMX"/>
+                            <constraint firstAttribute="width" constant="36" id="CtE-hc-uOQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,22 +85,37 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="9BR-GT-hFA" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" id="8M8-ap-8BN"/>
                     <constraint firstItem="lug-CT-MEQ" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" id="I0k-vb-K5M"/>
                     <constraint firstItem="FE2-1T-Otm" firstAttribute="top" secondItem="hyC-US-vvZ" secondAttribute="bottom" id="ICx-uh-vRT"/>
                     <constraint firstItem="FE2-1T-Otm" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="8" id="IJB-1M-xLJ"/>
+                    <constraint firstItem="9BR-GT-hFA" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="8" id="Jph-X6-v8D"/>
                     <constraint firstItem="fzq-3C-RaB" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="8" id="SJ4-Kp-RLf"/>
+                    <constraint firstAttribute="trailing" secondItem="lug-CT-MEQ" secondAttribute="trailing" constant="10" id="V49-HG-KJo"/>
                     <constraint firstAttribute="trailing" secondItem="fzq-3C-RaB" secondAttribute="trailing" constant="10" id="XM7-1O-jSG"/>
+                    <constraint firstItem="FE2-1T-Otm" firstAttribute="top" secondItem="lug-CT-MEQ" secondAttribute="bottom" constant="-1" id="YTG-Xe-6VZ"/>
                     <constraint firstItem="umK-8E-sXu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="ZdI-nf-j7N"/>
+                    <constraint firstItem="lug-CT-MEQ" firstAttribute="top" secondItem="fzq-3C-RaB" secondAttribute="bottom" constant="4" id="e5N-ov-yvn"/>
                     <constraint firstItem="umK-8E-sXu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ePx-g0-XZH"/>
                     <constraint firstItem="hyC-US-vvZ" firstAttribute="leading" secondItem="umK-8E-sXu" secondAttribute="trailing" constant="8" id="hGJ-NL-K9q"/>
                     <constraint firstItem="hyC-US-vvZ" firstAttribute="top" secondItem="fzq-3C-RaB" secondAttribute="bottom" constant="4" id="hGw-JI-B36"/>
+                    <constraint firstItem="FE2-1T-Otm" firstAttribute="leading" secondItem="9BR-GT-hFA" secondAttribute="trailing" id="hNs-bF-2Ud"/>
                     <constraint firstAttribute="trailing" secondItem="hyC-US-vvZ" secondAttribute="trailing" constant="10" id="r5e-im-Oa5"/>
                     <constraint firstItem="fzq-3C-RaB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="spO-Ph-Ky5"/>
                     <constraint firstAttribute="trailing" secondItem="lug-CT-MEQ" secondAttribute="trailing" constant="10" id="vP2-08-tbR"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="ICx-uh-vRT"/>
+                        <exclude reference="IJB-1M-xLJ"/>
+                        <exclude reference="I0k-vb-K5M"/>
+                        <exclude reference="vP2-08-tbR"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="distanceLab" destination="lug-CT-MEQ" id="T05-c9-EpK"/>
+                <outlet property="evaLab" destination="9BR-GT-hFA" id="zZE-FK-Nt5"/>
                 <outlet property="iconImg" destination="umK-8E-sXu" id="n8l-yW-LMY"/>
                 <outlet property="serviceDetailLab" destination="hyC-US-vvZ" id="vDw-Jq-nEI"/>
                 <outlet property="serviceTitleLab" destination="fzq-3C-RaB" id="Nn1-YL-dli"/>

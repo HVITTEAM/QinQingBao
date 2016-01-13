@@ -15,7 +15,10 @@ typedef void(^NumPriceBlock)();
 
 @property(nonatomic,copy)NumPriceBlock priceBlock;
 
-- (void)getShopData:(void (^)(NSArray * commonArry, NSArray * kuajingArry))shopDataBlock  priceBlock:(void (^)()) priceBlock;
+@property (strong, nonatomic) NSMutableArray *cart_list;
+
+
+- (void)getShopData:(void (^)(NSArray * commonArry))shopDataBlock  priceBlock:(void (^)()) priceBlock;
 
 - (void)getNumPrices:(void (^)()) priceBlock;
 

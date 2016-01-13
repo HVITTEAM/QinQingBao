@@ -15,7 +15,4 @@
 @property (nonatomic, copy) NSString *old_id;
 @property (nonatomic, copy) NSString *imei_watch;
 
-
-
-
 @end

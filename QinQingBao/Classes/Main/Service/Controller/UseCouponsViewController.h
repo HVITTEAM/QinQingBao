@@ -15,4 +15,7 @@
 
 @property (nonatomic, copy) void (^selectedClick)(CouponsModel *item);
 
+@property (nonatomic, assign) UINavigationController *nav;
+- (void)viewDidCurrentView;
+
 @end

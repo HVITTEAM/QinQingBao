@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol MTGoodsDetailEndViewDelegate;
+@protocol MTConfirmOrderEndViewDelegate;
 
 @interface ConfirmOrderEndView : UIView
 
-@property(weak,nonatomic)id<MTGoodsDetailEndViewDelegate> delegate;
+@property(weak,nonatomic)id<MTConfirmOrderEndViewDelegate>delegate;
 
 @property(nonatomic,strong)UILabel *Lab;
 @property(nonatomic,strong)UILabel *Lab2;
@@ -20,12 +20,15 @@
 @property(nonatomic,strong)UIButton *add2Car;
 @property(nonatomic,strong)UIButton *selectedAllbt;
 
+/**
+ * 设置总数和总价
+ **/
+-(void)setGoodsCount:(NSString *)count totalPrice:(NSString *)totalPrice;
+
 @end
 
-@protocol MTGoodsDetailEndViewDelegate <NSObject>
+@protocol MTConfirmOrderEndViewDelegate<NSObject>
 
--(void)buyRightnowClick:(UIButton *)btn;
-
--(void)add2CarClick:(UIButton *)btn;
+-(void)submitClick:(UIButton *)btn;
 
 @end

@@ -14,9 +14,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        
-        
         self.choosedCount = chooseCount;
         self.totalCount = totalCount;
         [self setUpViews];

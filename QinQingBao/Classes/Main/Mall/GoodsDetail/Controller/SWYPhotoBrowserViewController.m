@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.currentImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.currentScrollView addSubview:self.currentImageView];
     [self.bkScrollView addSubview:self.currentScrollView];
-    self.currentImageView.backgroundColor = [UIColor redColor];
+    self.currentImageView.backgroundColor = [UIColor clearColor];
     
     self.rightScrollView = [[UIScrollView alloc] init];
     self.rightScrollView.delegate = self;

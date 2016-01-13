@@ -235,14 +235,24 @@
         }
         case 5:
         {
-            if (dataProvider.count>0)
+            if (dataProvider.count > 0)
             {
                 HealthDataModel *item = dataProvider[0];
-                NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.ect_img]];
-                SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:@[iconUrl] currentIndex:0 placeholderImageNmae:@"placeholderImage"];
-                return [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+                if (item.ect_img.length > 0 && item.ect_time.length > 0)
+                {
+                    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.ect_img]];
+                    SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:@[iconUrl] currentIndex:0 placeholderImageNmae:@"placeholderImage"];
+                    return [self.navigationController presentViewController:photoBrowser animated:YES completion:^{
+                        [HUD removeFromSuperview];
+                    }];
+                }
+                 return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
             }
-            return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            else
+            {
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            }
         }
             break;
         case 2:

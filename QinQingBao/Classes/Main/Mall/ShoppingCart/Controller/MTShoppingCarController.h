@@ -11,6 +11,6 @@
 #import "MTShopViewModel.h"
 #import "MTShoppingCarCell.h"
 #import "MTShoppingCartEndView.h"
-@interface MTShoppingCarController : UIViewController
+@interface MTShoppingCarController : UIViewController<UIActionSheetDelegate>
 
 @end

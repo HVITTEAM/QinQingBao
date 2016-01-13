@@ -10,11 +10,20 @@
 #import "OrderTotals.h"
 #import "OrderDetailController.h"
 #import "GoodsCell.h"
+#import "GoodsHeadViewController.h"
+#import "GoodsInfoModel.h"
+#import "GoodsInfoTotal.h"
 
-@interface GoodsListViewController ()<UIActionSheetDelegate>
+@interface GoodsListViewController ()
 {
-    NSMutableArray *dataProvider;
+    /**商品信息model*/
+    NSMutableArray *goodsDataProvider;
+    
+    //当前第一页
     NSInteger currentPageIdx;
+    
+    //总共多少页
+    NSInteger totalPage;
 }
 
 @end
@@ -39,7 +48,7 @@
 {
     NSLog(@"加载为当前视图 = %@",self.title);
     currentPageIdx = 1;
-    dataProvider = [[NSMutableArray alloc] init];
+    goodsDataProvider = [[NSMutableArray alloc] init];
     [self dataRereshing];
 }
 
@@ -78,82 +87,65 @@
 #pragma mark 开始进入刷新状态
 - (void)dataRereshing
 {
-    return;
+    if (totalPage && currentPageIdx > totalPage)
+    {
+        [self.tableView.footer endRefreshing];
+        self.noneResultHandler();
+        currentPageIdx --;
+        return;
+    }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *dict = [[NSDictionary alloc] init];
     
-    if ([self.title isEqualToString:@"全部订单"])
+    NSString *invokeType;
+    if ([self.title isEqualToString:@"销量"])
     {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"page" : @"100",
-                  @"get_type" : @"0"};
+        invokeType =  @"1";
     }
-    else if ([self.title isEqualToString:@"待付款"])
+    else if ([self.title isEqualToString:@"综合"])
     {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"pay_staus" : @"0",
-                  @"page" : @"100",
-                  @"get_type" : @"0"};
+        invokeType =  @"2";
+
     }
-    else if ([self.title isEqualToString:@"受理中"])
+    else if ([self.title isEqualToString:@"价格"])
     {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"0,9",
-                  @"page" : @"100",
-                  @"get_type" : @"2"};
+        invokeType =  @"3";
+
     }
-    else if ([self.title isEqualToString:@"待评价"])
+    else if ([self.title isEqualToString:@"新品"])
     {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"30,39",
-                  @"page" : @"100",
-                  @"get_type" : @"2"};
+        invokeType =  @"4";
     }
-    else if ([self.title isEqualToString:@"取消/售后"])
-    {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"50,59",
-                  @"page" : @"100",
-                  @"get_type" : @"2"};
-    }
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
+    [CommonRemoteHelper RemoteWithUrl:URL_Goods_list parameters: @{@"gc_id" : @"",
+                                                                   @"keyword" : @"",
+                                                                   @"key" : invokeType,
+                                                                   @"order" : @2,
+                                                                   @"page" : @10,
+                                                                   @"curpage" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
-                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
-                                     [self.tableView removePlace];
-                                     if (result.datas.count == 0 && currentPageIdx == 1)
+                                     [HUD removeFromSuperview];
+
+                                     NSDictionary *dict1 =  [dict objectForKey:@"datas"];
+                                     GoodsInfoTotal *result = [GoodsInfoTotal objectWithKeyValues:dict1];
+                                     NSString *str = [dict objectForKey:@"page_total"];
+                                     totalPage = [str integerValue];
+                                     if (result.goods_list.count == 0 && currentPageIdx == 1)
                                      {
                                          [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
-                                     else if (result.datas.count == 0 && currentPageIdx > 1)
+                                     else if (result.goods_list.count == 0 && currentPageIdx > 1)
                                      {
-                                         //                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
+                                         [self.tableView removePlace];
                                          NSLog(@"没有更多的数据了");
                                          currentPageIdx --;
-                                         self.noneResultHandler();
                                      }
-                                     [dataProvider addObjectsFromArray:[result.datas copy]];
+                                     else
+                                     {
+                                         [self.tableView removePlace];
+                                     }
+                                     [goodsDataProvider addObjectsFromArray:[result.goods_list copy]];
                                      [self.tableView reloadData];
                                      [self.tableView.footer endRefreshing];
-                                     [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [self.tableView.footer endRefreshing];
                                      [HUD removeFromSuperview];
                                  }];
 }
@@ -168,7 +160,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return goodsDataProvider.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,14 +174,17 @@
     if(goodscell == nil)
         goodscell = [GoodsCell goodsCell];
     
-    [goodscell setitemWithData:nil];
+    [goodscell setitemWithData:goodsDataProvider[indexPath.row]];
     
     return  goodscell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    GoodsHeadViewController *goodsvc = [[GoodsHeadViewController alloc] init];
+    GoodsInfoModel *item = goodsDataProvider[indexPath.row];
+    goodsvc.goodsID =  item.goods_id;
+    [self.nav pushViewController:goodsvc animated:YES];
 }
 
 /**

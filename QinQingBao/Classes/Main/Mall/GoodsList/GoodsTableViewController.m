@@ -49,7 +49,7 @@
     self.vc3.title = @"销量";
     
     self.vc4 = [[GoodsListViewController alloc] init];
-    self.vc4.title = @"人气";
+    self.vc4.title = @"新品";
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
     view.delegate = self;

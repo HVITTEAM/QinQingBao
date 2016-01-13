@@ -20,6 +20,21 @@
 
 @implementation CouponsViewController
 
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
+- (void)viewDidCurrentView
+{
+    NSLog(@"加载为当前视图 = %@",self.title);
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,6 +45,11 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
 -(void)initTableSkin
 {
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -38,10 +58,27 @@
 
 -(void)getDataProvider
 {
+    dataProvider = [[NSMutableArray alloc] init];
+
+    NSDictionary *dict = [[NSDictionary alloc] init];
+    
+    if ([self.title isEqualToString:@"全部"])
+    {
+        dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                  @"page" : @100,
+                  @"curpage" : @1};
+    }
+    else if ([self.title isEqualToString:@"已使用"])
+    {
+        dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                  @"voucher_state" : @"2",
+                  @"page" : @100,
+                  @"curpage" : @1};
+    }
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Youhuicard parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                   @"client" : @"ios",
-                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Youhuicard parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -50,8 +87,8 @@
                                      }
                                      else
                                      {
-                                         CouponsTotal *result = [CouponsTotal objectWithKeyValues:dict];
-                                         dataProvider = result.datas;
+                                         CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         dataProvider = result.voucher_list;
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];
@@ -75,7 +112,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 130;
+    return 150;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -84,7 +121,7 @@
     
     if (cell == nil)
         cell = [CouponsCell couponsCell];
-        
+    
     [cell setCouponsModel:dataProvider[indexPath.section]];
     
     cell.left.constant = 0;

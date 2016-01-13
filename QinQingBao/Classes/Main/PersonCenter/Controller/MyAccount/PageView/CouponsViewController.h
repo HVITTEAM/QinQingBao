@@ -11,4 +11,7 @@
 
 @interface CouponsViewController : UITableViewController
 
+@property (nonatomic, assign) UINavigationController *nav;
+- (void)viewDidCurrentView;
+
 @end

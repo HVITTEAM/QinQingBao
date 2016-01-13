@@ -44,6 +44,9 @@
     //注册登陆信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
     
+    //注册登陆信息超时监听
+    [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
+    
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
@@ -181,6 +184,17 @@
     [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
 }
 
+
+/**
+ * 需要验证身份才能进行下一步操作
+ */
+-(void)needLoginoutHanlder:(NSNotification *)notification
+{
+    LoginViewController *login = [[LoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
+    login.backHiden = NO;
+}
 /**
  *  获取当前位置
  */

@@ -15,8 +15,8 @@
     [self removePlace];
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholderImage.png"]];
     img.tag = 101;
-    img.x = (MTScreenW - 60)/2;
-    img.y = MTScreenH/2 - 180;
+    img.x = (self.width - 60)/2;
+    img.y = self.height/2 - 180;
     img.width = img.height = 60;
     [self addSubview:img];
     
@@ -30,8 +30,8 @@
     CGSize size = [placeStr sizeWithAttributes:@{NSFontAttributeName:la.font}];
     la.size = size;
     la.text = placeStr;
-    la.x = (MTScreenW - la.width)/2;
-    la.y = MTScreenH/2 - 106;
+    la.x = (self.width - la.width)/2;
+    la.y = self.height/2 - 106;
     [self addSubview:la];
 }
 

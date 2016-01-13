@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *serviceTitleLab;
 @property (strong, nonatomic) IBOutlet UILabel *serviceDetailLab;
 @property (strong, nonatomic) IBOutlet UILabel *distanceLab;
+@property (strong, nonatomic) IBOutlet UILabel *evaLab;
 
 - (void)setitemWithData:(ServiceModel *)item;
 

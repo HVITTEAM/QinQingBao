@@ -12,17 +12,18 @@ static CGFloat CELL_HEIGHT = 100;
 
 @interface MTShoppingCarCell () <UITextFieldDelegate>
 
-
 @property(nonatomic,strong)UIButton *selectBt;
 @property(nonatomic,strong)UIImageView *shoppingImgView;
 @property(nonatomic,strong)UIImageView *spuImgView;
 @property(nonatomic,strong)UILabel *title ;
 @property(nonatomic,strong)MTChangeCountView *changeView;
 @property(nonatomic,strong)UILabel *priceLab;
+
+@property(nonatomic,strong)UILabel *countLab;
+
 @property(nonatomic,strong)UILabel *sizeLab;
 
 @property(nonatomic,assign)CGRect tableVieFrame;
-
 
 @property(nonatomic,strong)UILabel *soldoutLab;
 
@@ -54,8 +55,6 @@ static CGFloat CELL_HEIGHT = 100;
 }
 - (void)initCellView
 {
-    
-    
     UIImage *btimg = [UIImage imageNamed:@"ic_cb_normal.png"];
     UIImage *selectImg = [UIImage imageNamed:@"ic_cb_checked"];
     
@@ -65,9 +64,10 @@ static CGFloat CELL_HEIGHT = 100;
     [_selectBt setImage:selectImg forState:UIControlStateSelected];
     [self.contentView addSubview:_selectBt];
     
-    
-    
     _shoppingImgView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_selectBt.frame)+7, 12, 70, 70)];
+    _shoppingImgView.userInteractionEnabled  = YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
+    [_shoppingImgView addGestureRecognizer:singleTap];
     [self.contentView addSubview:_shoppingImgView];
     
     _spuImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
@@ -76,12 +76,13 @@ static CGFloat CELL_HEIGHT = 100;
     
     _title = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_shoppingImgView.frame)+10, 10, MTScreenW-CGRectGetMaxX(_shoppingImgView.frame)-15, 21)];
     _title.font=[UIFont systemFontOfSize:15];
+    _title.numberOfLines = 0;
     _title.textColor=[UIColor colorWithRGB:@"666666"];
     
     [self.contentView addSubview:_title];
     
     
-    _sizeLab = [[UILabel alloc] initWithFrame:CGRectMake(_title.frame.origin.x, CGRectGetMaxY(_title.frame), 200, 17)];
+    _sizeLab = [[UILabel alloc] initWithFrame:CGRectMake(_title.frame.origin.x, CGRectGetMaxY(_title.frame) + 5, 200, 17)];
     _sizeLab.font=[UIFont systemFontOfSize:12];
     _sizeLab.textColor=[UIColor colorWithRGB:@"666666"];
     [self.contentView addSubview:_sizeLab];
@@ -95,11 +96,16 @@ static CGFloat CELL_HEIGHT = 100;
     _soldoutLab.textColor=[UIColor colorWithRGB:@"666666"];
     [self.contentView addSubview:_soldoutLab];
     
-    
     _priceLab = [[UILabel alloc]initWithFrame:CGRectMake(MTScreenW-18-100, CGRectGetMaxY(_sizeLab.frame)+5+5, 100, 17)];
     _priceLab.textAlignment=NSTextAlignmentRight;
     _priceLab.textColor=[UIColor colorWithRGB:@"FF0000"];
     [self.contentView addSubview:_priceLab];
+    
+    _countLab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_shoppingImgView.frame)+10, CGRectGetMaxY(_sizeLab.frame)+5+5, 100, 17)];
+    _countLab.textAlignment=NSTextAlignmentLeft;
+    _countLab.font=[UIFont systemFontOfSize:14];
+    _countLab.textColor=[UIColor colorWithRGB:@"666666"];
+    [self.contentView addSubview:_countLab];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -148,7 +154,14 @@ static CGFloat CELL_HEIGHT = 100;
     return[scan scanInt:&val] && [scan isAtEnd];
 }
 
-
+/**
+ *  轮播广告点击事件
+ *
+ */
+-(void)onClickImage:(UITapGestureRecognizer *)tap
+{
+    [self.delegate itemClick:_model row:self.row];
+}
 
 
 - (void)setModel:(MTShoppIngCarModel *)model
@@ -185,8 +198,8 @@ static CGFloat CELL_HEIGHT = 100;
         _spuImgView.image = level;
     }
     
-    if (![model.item_size isEqualToString:@"SINGLE"])
-        _sizeLab.text = [NSString stringWithFormat:@"规格:%@",model.item_size];
+//    if (![model.item_size isEqualToString:@"SINGLE"])
+        _sizeLab.text = [NSString stringWithFormat:@"规格:%@",@"标配"];
     
     NSInteger strlength = model.item_info.sale_price.length;
     NSString *string                            = [NSString stringWithFormat:@"￥%@",model.item_info.sale_price];
@@ -206,11 +219,12 @@ static CGFloat CELL_HEIGHT = 100;
                              value:[UIFont systemFontOfSize:10.f]
                              range:NSMakeRange(strlength - 2, 3)];
     _priceLab.attributedText = attributedString;
-//    _priceLab.text=[NSString stringWithFormat:@"￥%@",model.item_info.sale_price];
+    //    _priceLab.text=[NSString stringWithFormat:@"￥%@",model.item_info.sale_price];
     //    }
     
     _title.text= model.item_info.full_name;
     
+    _countLab.text = [NSString stringWithFormat:@"x %@",model.count];
     
     if ([model.item_info.sale_state isEqualToString:@"3"]) {
         _soldoutLab.hidden=NO;
@@ -221,28 +235,26 @@ static CGFloat CELL_HEIGHT = 100;
             _selectBt.enabled=YES;
         }
     }
-    else{
+    else
+    {
         _selectBt.enabled=YES;
-        _changeView = [[MTChangeCountView alloc] initWithFrame:CGRectMake(_title.frame.origin.x, CGRectGetMaxY(_sizeLab.frame)+5, 160, 35) chooseCount:self.choosedCount totalCount: [model.item_info.stock_quantity integerValue]];
+        _changeView = [[MTChangeCountView alloc] initWithFrame:CGRectMake(_title.frame.origin.x, CGRectGetMaxY(_sizeLab.frame), 160, 35) chooseCount:self.choosedCount totalCount: [model.item_info.stock_quantity integerValue]];
         
         [_changeView.subButton addTarget:self action:@selector(subButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         _changeView.numberFD.delegate = self;
         
         [_changeView.addButton addTarget:self action:@selector(addButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.contentView addSubview:_changeView];
     }
+    
+    _countLab.hidden = _model.isEdit;
+    _changeView.hidden = !model.isEdit;
     
 }
 //加
 - (void)addButtonPressed:(id)sender
 {
-    
-    if (self.choosedCount<99) {
-        [self addCar];
-    }
-    
     ++self.choosedCount ;
     if (self.choosedCount>0) {
         _changeView.subButton.enabled=YES;
@@ -269,11 +281,17 @@ static CGFloat CELL_HEIGHT = 100;
     _model.count = _changeView.numberFD.text;
     
     _model.isSelect=_selectBt.selected;
+    
+    if (self.choosedCount<99) {
+        [self addCar];
+    }
+    
+    [self editQuality];
 }
 
 -(void)addCar
 {
-    
+    [self.delegate priceChangeClick:_model row:self.row];
 }
 
 -(void)clickSelect:(UIButton *)bt
@@ -295,15 +313,14 @@ static CGFloat CELL_HEIGHT = 100;
 //减
 - (void)subButtonPressed:(id)sender
 {
-    
     if (self.choosedCount >1) {
         [self deleteCar];
     }
     
     -- self.choosedCount ;
     
-    if (self.choosedCount==0) {
-        self.choosedCount= 1;
+    if (self.choosedCount == 0) {
+        self.choosedCount = 1;
         _changeView.subButton.enabled=NO;
     }
     else
@@ -317,14 +334,39 @@ static CGFloat CELL_HEIGHT = 100;
     
     _model.isSelect=_selectBt.selected;
     
+    [self.delegate priceChangeClick:_model row:self.row];
     
-    
+    [self editQuality];
 }
+
+
+-(void)editQuality
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Cart_Edit parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                  @"cart_id" : _model.item_id,
+                                                                  @"client" : @"ios",
+                                                                  @"quantity" : _model.count}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"出错了....");
+//                                     [NoticeHelper AlertShow:@"添加失败!" view:self.view];
+                                 }];
+}
+
 
 -(void)deleteCar
 {
-    
-    
 }
 
 - (void)dealloc

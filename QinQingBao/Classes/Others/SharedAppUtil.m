@@ -9,7 +9,6 @@
 #import "SharedAppUtil.h"
 
 @implementation SharedAppUtil
-static SharedAppUtil *util = nil;
 
 +(SharedAppUtil *)defaultCommonUtil
 {
@@ -33,6 +32,11 @@ static SharedAppUtil *util = nil;
     if (lon.length == 0 )
         lon = @"";
     _lon = lon;
+}
+
+-(UserModel *)userVO
+{
+    return _userVO;
 }
 
 //-(UITabBarController*)tabBar

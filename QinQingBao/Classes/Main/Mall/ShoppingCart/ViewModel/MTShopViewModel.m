@@ -9,9 +9,14 @@
 #import "MTShopViewModel.h"
 #import "MTShoppIngCarModel.h"
 #import "MJExtension.h"
-@implementation MTShopViewModel
+#import "MTCommodityModel.h"
 
-//
+
+#import "ShopCarModelTotal.h"
+
+#import "ShopCarModel.h"
+
+@implementation MTShopViewModel
 
 
 - (void)getNumPrices:(void (^)()) priceBlock
@@ -19,8 +24,61 @@
     _priceBlock = priceBlock;
 }
 
-- (void)getShopData:(void (^)(NSArray * commonArry, NSArray * kuajingArry))shopDataBlock  priceBlock:(void (^)()) priceBlock
+- (void)getShopData:(void (^)(NSArray * commonArry))shopDataBlock  priceBlock:(void (^)()) priceBlock
 {
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return [MTNotificationCenter postNotificationName:MTLoginTimeout object:nil userInfo:nil];
+    [CommonRemoteHelper RemoteWithUrl:URL_Cart_list parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                  @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     
+                                     ShopCarModelTotal *result = [ShopCarModelTotal objectWithKeyValues:dict1];
+                                     
+                                     self.cart_list = result.cart_list;
+                                     //                                     self.carDataArrList = result.cart_list;
+                                     //                                     [self.tableView reloadData];
+                                     //                                     if (result.cart_list.count == 0)
+                                     //                                     {
+                                     //                                         [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+                                     //                                     }
+                                     
+//                                     if (self.cart_list.count == 0)
+//                                         [[NSNotificationCenter defaultCenter] postNotificationName:MTNoGoodsInCarNotification object:nil];
+                                     
+                                     NSMutableArray *commonMuList = [NSMutableArray array];
+                                     
+                                     for (ShopCarModel  *item in self.cart_list)
+                                     {
+                                         MTCommodityModel *item_info =  [[MTCommodityModel alloc] init];
+                                         item_info.full_name = item.goods_name;
+                                         item_info.icon = item.goods_image_url;
+                                         item_info.sale_price = item.goods_price;
+                                         item_info.item_state = @"1";
+                                         item_info.stock_quantity = @"99";
+                                         
+                                         MTShoppIngCarModel *goodsModel = [[MTShoppIngCarModel alloc] init];
+                                         goodsModel.item_info = item_info;
+                                         goodsModel.count = item.goods_num;
+                                         goodsModel.item_id = item.cart_id;
+                                         goodsModel.goods_id = item.goods_id;
+                                         goodsModel.item_size = @"SINGLE";
+                                         goodsModel.type = 1;
+                                         goodsModel.vm = self;
+                                         goodsModel.isSelect=NO;
+                                         [commonMuList addObject:goodsModel];
+                                     }
+                                     
+                                     if (commonMuList.count>0)
+                                         [commonMuList addObject:[self verificationSelect:commonMuList type:@"1"]];
+                                     _priceBlock = priceBlock;
+                                     shopDataBlock(commonMuList);
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"出错了....");
+                                 }];
+    
+    return;
+    
     //访问网络 获取数据 block回调失败或者成功 都可以在这处理
     
     //本demo 直接读 本地数据了
@@ -30,14 +88,10 @@
     
     NSArray *commonList = [strategyDic objectForKey:@"common"];
     
-    NSArray *kuajingList = [strategyDic objectForKey:@"kuajing"];
-    
     NSMutableArray *commonMuList = [NSMutableArray array];
     
-    NSMutableArray *kuajingMuList = [NSMutableArray array];
     
-    
-    for (int i = 0; i<commonList.count; i++) {
+    for (int i = 0; i< commonList.count; i++) {
         MTShoppIngCarModel *model = [MTShoppIngCarModel objectWithKeyValues:[commonList objectAtIndex:i]];
         model.vm =self;
         model.type=1;
@@ -45,24 +99,14 @@
         [commonMuList addObject:model];
         
     }
-    for (int i = 0; i<kuajingList.count; i++) {
-        MTShoppIngCarModel *model = [MTShoppIngCarModel objectWithKeyValues:[kuajingList objectAtIndex:i]];
-        model.vm =self;
-        model.type=2;
-        model.isSelect=YES;
-        [kuajingMuList addObject:model];
-    }
     if (commonMuList.count>0) {
         
         [commonMuList addObject:[self verificationSelect:commonMuList type:@"1"]];
         
     }
-    if (kuajingMuList.count>0) {
-        
-        [kuajingMuList addObject:[self verificationSelect:kuajingMuList type:@"2"]];
-    }
+    
     _priceBlock = priceBlock;
-    shopDataBlock(commonMuList,kuajingMuList);
+    shopDataBlock(commonMuList);
 }
 - (NSDictionary *)verificationSelect:(NSMutableArray *)arr type:(NSString *)type
 {
@@ -87,7 +131,7 @@
     for (int i =0; i<carDataArrList.count; i++) {
         NSArray *dataList = [carDataArrList objectAtIndex:i];
         NSMutableDictionary *dic = [dataList lastObject];
-         [dic setObject:@"YES" forKey:@"checked"];
+        [dic setObject:@"YES" forKey:@"checked"];
         for (int j=0; j<dataList.count-1; j++) {
             MTShoppIngCarModel *model = (MTShoppIngCarModel *)[dataList objectAtIndex:j];
             if (model.type==1 ) {
@@ -159,7 +203,7 @@
     NSLog(@"开始计算价钱");
     if ([keyPath isEqualToString:@"isSelect"]) {
         if (_priceBlock!=nil) {
-             _priceBlock();
+            _priceBlock();
         }
     }
 }

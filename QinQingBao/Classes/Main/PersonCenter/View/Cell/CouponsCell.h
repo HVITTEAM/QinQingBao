@@ -15,8 +15,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet UILabel *limitLab;
 
+@property (strong, nonatomic) IBOutlet UILabel *owerLab;
+@property (strong, nonatomic) IBOutlet UILabel *sublab;
 
 @property (strong, nonatomic) IBOutlet UIView *bgView;
+@property (strong, nonatomic) IBOutlet UIImageView *bgImgView;
 - (IBAction)clickHandler:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *selectBtn;
 
