@@ -26,6 +26,7 @@
 
 #import "GoodsSelectedViewController.h"
 #import "ConfirmViewController.h"
+#import "MallEvaCell.h"
 
 
 static CGFloat ENDVIEW_HEIGHT = 50;
@@ -53,6 +54,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     /**推荐商品view*/
     RecommendView *footView;
+    
+    BOOL imagePlayer;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -204,7 +207,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                      
                                      //设置商品轮播图
                                      if(slideImages.count > 0)
+                                     {
+                                         if (imagePlayer)
+                                             return ;
                                          [self initImagePlayer];
+                                     }
                                      
                                      //设置推荐商品
                                      CommendList *commendTotal = [CommendList objectWithKeyValues:[dict objectForKey:@"datas"]];
@@ -224,6 +231,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 -(void)initImagePlayer
 {
+    imagePlayer = YES;
     self.imgPlayer.bounces = YES;
     self.imgPlayer.pagingEnabled = YES;
     self.imgPlayer.delegate = self;
@@ -286,7 +294,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
  */
 -(void)onClickImage:(UITapGestureRecognizer *)tap
 {
-    //    HomePicModel *item = advArr[tap.view.tag];
+    if (imgArr.count == 0)
+        return;
     SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:imgArr currentIndex:tap.view.tag];
     [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
 }
@@ -328,12 +337,12 @@ static CGFloat IMAGEVIEW_HEIGHT;
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 1 ? 1 : 2;
+    return section == 0 ? 2 : 1;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -372,6 +381,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     PriceDetailCell *priceDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTPriceDetailCell"];
     
+    MallEvaCell *mallEvaCell = [tableView dequeueReusableCellWithIdentifier:@"MTMallEvaCell"];
+    
+    
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
@@ -407,26 +419,34 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else
     {
-        if (evaArr.count != 0)
+        if(mallEvaCell == nil)
+            mallEvaCell = [MallEvaCell mallEvaCell];
+        mallEvaCell.checkClick = ^(UIButton *btn)
         {
-            EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
-            
-            if(evacell == nil)
-                evacell = [EvaluationCell evaluationCell];
-            //            [evacell setItemInfo:itemInfo];
-            [evacell setEvaItem:evaArr[0]];
-            evacell.queryClick  = ^(UIButton *btn){
-                //                [self queryAllevaluation];
-            };
-            cell = evacell;
-        }
-        else
-        {
-            EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
-            if(evanoneCell == nil)
-                evanoneCell = [EvaluationNoneCell evanoneCell];
-            cell = evanoneCell;
-        }
+            [NoticeHelper AlertShow:@"没有更多的数据了！" view:self.view.window.rootViewController.view];
+        };
+        cell = mallEvaCell;
+        
+        //        if (evaArr.count != 0)
+        //        {
+        //            EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
+        //
+        //            if(evacell == nil)
+        //                evacell = [EvaluationCell evaluationCell];
+        //            //            [evacell setItemInfo:itemInfo];
+        //            [evacell setEvaItem:evaArr[0]];
+        //            evacell.queryClick  = ^(UIButton *btn){
+        //                //                [self queryAllevaluation];
+        //            };
+        //            cell = evacell;
+        //        }
+        //        else
+        //        {
+        //            EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
+        //            if(evanoneCell == nil)
+        //                evanoneCell = [EvaluationNoneCell evanoneCell];
+        //            cell = evanoneCell;
+        //        }
         
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

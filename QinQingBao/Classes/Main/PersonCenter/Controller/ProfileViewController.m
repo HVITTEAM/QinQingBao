@@ -183,14 +183,14 @@
     [self setupGroup0];
     [self setupGroup1];
     [self setupGroup2];
-    [self setupGroup6];
+    [self setupGroup10];
     [self setupGroup4];
     [self setupGroup3];
     [self setupGroup5];
 //    [self setupGroup7];
 //    [self setupGroup8];
 //    [self setupGroup9];
-    [self setupGroup10];
+//    [self setupGroup6];
 //    [self setupGroup11];
     [self setupFooter];
     

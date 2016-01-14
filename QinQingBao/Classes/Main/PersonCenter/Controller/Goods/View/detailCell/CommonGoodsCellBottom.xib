@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CommonGoodsCellBottom">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2pM-As-xW1">
+                        <rect key="frame" x="140" y="39.5" width="80" height="30"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="fKd-zI-MOA"/>
+                            <constraint firstAttribute="height" constant="30" id="zuk-vL-V0f"/>
+                        </constraints>
+                        <state key="normal" title="查看物流"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sP9-dY-PDU" userLabel="bottomline">
+                        <rect key="frame" x="0.0" y="34" width="320" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="sEF-hV-nxs"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qy-BV-3ly">
+                        <rect key="frame" x="230" y="39.5" width="80" height="30"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="1Wq-60-T8C"/>
+                            <constraint firstAttribute="width" constant="80" id="jcH-jb-Z5f"/>
+                        </constraints>
+                        <state key="normal" title="评价"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdK-S4-eL3">
+                        <rect key="frame" x="50" y="39.5" width="80" height="30"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="GnT-Um-w4L"/>
+                            <constraint firstAttribute="width" constant="80" id="cGD-E6-d1T"/>
+                        </constraints>
+                        <state key="normal" title="删除订单"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共一件商品 合计 ￥99.00 （含运费￥0.00）" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEW-lJ-n3K">
+                        <rect key="frame" x="10" y="7" width="300" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Rfb-l0-NZu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5Qy-BV-3ly" firstAttribute="leading" secondItem="2pM-As-xW1" secondAttribute="trailing" constant="10" id="3wb-OX-sGO"/>
+                    <constraint firstItem="LEW-lJ-n3K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="7NM-wy-6mu"/>
+                    <constraint firstItem="sP9-dY-PDU" firstAttribute="top" secondItem="LEW-lJ-n3K" secondAttribute="bottom" constant="6" id="8z1-9e-bSF"/>
+                    <constraint firstItem="JdK-S4-eL3" firstAttribute="top" secondItem="sP9-dY-PDU" secondAttribute="bottom" constant="5" id="9NS-7f-UUF"/>
+                    <constraint firstAttribute="trailing" secondItem="LEW-lJ-n3K" secondAttribute="trailing" constant="10" id="Feh-kt-Hv0"/>
+                    <constraint firstItem="2pM-As-xW1" firstAttribute="top" secondItem="sP9-dY-PDU" secondAttribute="bottom" constant="5" id="aAn-Ps-4Hp"/>
+                    <constraint firstItem="5Qy-BV-3ly" firstAttribute="top" secondItem="sP9-dY-PDU" secondAttribute="bottom" constant="5" id="dxS-YA-r1e"/>
+                    <constraint firstItem="LEW-lJ-n3K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="e4s-cW-zzQ"/>
+                    <constraint firstItem="2pM-As-xW1" firstAttribute="leading" secondItem="JdK-S4-eL3" secondAttribute="trailing" constant="10" id="jUv-iw-mdn"/>
+                    <constraint firstAttribute="trailing" secondItem="sP9-dY-PDU" secondAttribute="trailing" id="nHY-0p-BRG"/>
+                    <constraint firstItem="sP9-dY-PDU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="nql-Jg-LvM"/>
+                    <constraint firstAttribute="trailing" secondItem="5Qy-BV-3ly" secondAttribute="trailing" constant="10" id="qBn-eZ-Zb5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bottomLine" destination="sP9-dY-PDU" id="SgK-Kl-VZe"/>
+                <outlet property="delateBtn" destination="JdK-S4-eL3" id="BE7-Wr-46V"/>
+                <outlet property="deliverBtn" destination="2pM-As-xW1" id="Lxg-zG-U1E"/>
+                <outlet property="desLab" destination="LEW-lJ-n3K" id="iiV-lK-ZHa"/>
+                <outlet property="evaBtn" destination="5Qy-BV-3ly" id="QxS-22-QaS"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -42,6 +42,9 @@ static CGFloat CHAT_WIDTH;
     [self addSubview:line];
     
     UIImageView *chatImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"chatshop.png"]];
+    chatImg.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onChatImage:)];
+    [chatImg addGestureRecognizer:singleTap];
     chatImg.frame = CGRectMake(CHAT_WIDTH/2 - 10, 5, 20, 20);
     [self addSubview:chatImg];
     
@@ -65,6 +68,9 @@ static CGFloat CHAT_WIDTH;
     [self addSubview:_Lab2];
     
     UIImageView *chatImg1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"collectshop"]];
+    chatImg1.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap1 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onChatImage:)];
+    [chatImg1 addGestureRecognizer:singleTap1];
     chatImg1.frame = CGRectMake(CHAT_WIDTH + CHAT_WIDTH /2- 10, 5, 20, 20);
     [self addSubview:chatImg1];
     
@@ -97,7 +103,13 @@ static CGFloat CHAT_WIDTH;
     [_add2Car addTarget:self action:@selector(add2CarClick:) forControlEvents:UIControlEventTouchUpInside];
     [_add2Car setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:_add2Car];
+    
+}
 
+
+-(void)onChatImage:(UITapGestureRecognizer *)tap
+{
+    [NoticeHelper AlertShow:@"尚未开通,敬请期待!" view:self.window.rootViewController.view];
 }
 
 -(void)buyRightnowClick:(UIButton *)btn

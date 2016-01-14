@@ -54,7 +54,9 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
     if (selectedModel)
+    {
         self.selectedClick(selectedModel);
+    }
 }
 
 -(void)initTableSkin
@@ -135,13 +137,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CouponsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.couponsModel.voucher_limit floatValue] > [self.totalPrice floatValue])
+        return [NoticeHelper AlertShow:@"订单总额没有达到使用该优惠券的最低额度！" view:self.view];
     if (lastSelectedIndex && lastSelectedIndex != indexPath)
     {
         CouponsCell *cell = [tableView cellForRowAtIndexPath:lastSelectedIndex];
         [cell setBtnSelected:NO];
     }
-    CouponsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setBtnSelected:!cell.selectBtn.selected];
+       [cell setBtnSelected:!cell.selectBtn.selected];
     if (cell.selectBtn.selected)
         selectedModel = cell.couponsModel;
     else

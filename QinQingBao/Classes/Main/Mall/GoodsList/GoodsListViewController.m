@@ -115,8 +115,8 @@
     {
         invokeType =  @"4";
     }
-    [CommonRemoteHelper RemoteWithUrl:URL_Goods_list parameters: @{@"gc_id" : @"",
-                                                                   @"keyword" : @"",
+    [CommonRemoteHelper RemoteWithUrl:URL_Goods_list parameters: @{@"gc_id" : self.gc_id.length>0 ? self.gc_id : @"0",
+                                                                   @"keyword" : self.keyWords.length>0 ? self.keyWords : @"0",
                                                                    @"key" : invokeType,
                                                                    @"order" : @2,
                                                                    @"page" : @10,

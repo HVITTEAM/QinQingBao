@@ -24,6 +24,9 @@
  */
 @property (nonatomic, copy) void (^noneResultHandler)();
 
+@property (nonatomic, copy) NSString *gc_id;
+@property (nonatomic, copy) NSString *keyWords;
+
 
 @end
 

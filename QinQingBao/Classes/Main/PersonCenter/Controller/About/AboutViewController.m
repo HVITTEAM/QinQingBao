@@ -107,7 +107,7 @@
     
     // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
     
-    NSString *string                            = @"服务热线: 0571-8739224";
+    NSString *string                            = @"服务热线: 4001512626";
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     
     // 设置富文本样式

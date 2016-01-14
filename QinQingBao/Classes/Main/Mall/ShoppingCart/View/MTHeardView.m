@@ -44,13 +44,17 @@
     [bt setImage:selectImg forState:UIControlStateSelected];
     [self addSubview:bt];
     
-    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(bt.frame)+15, 0, 150,40)];
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hyxxshop.png"]];
+    img.frame = CGRectMake(CGRectGetMaxX(bt.frame) + 10 , 22, 18, 18);
+    [self addSubview:img];
+    
+    UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(img.frame)+10, 0, 150,40)];
     lab.textColor=[UIColor colorWithRGB:@"666666"];
     lab.font=[UIFont systemFontOfSize:14];
-    
-    
     NSArray *list  = [self.carDataArrList objectAtIndex:_section];
     
+ 
+
 //    if (list.count<=1) {
 //        self.hidden= YES;
 //    }

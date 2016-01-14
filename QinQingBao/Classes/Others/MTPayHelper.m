@@ -59,7 +59,7 @@
     order.productName = productName; //商品标题
     order.productDescription = productDescription; //商品描述
     order.amount = amount; //商品价格
-    order.notifyURL =  @"http://61.143.60.87/ylserver/shop/mobile/api/payment/alipay/call_back_url.php?access_token=token"; //回调URL
+    order.notifyURL =  URL_Pay; //回调URL
     
     order.service = @"mobile.securitypay.pay";
     order.paymentType = @"1";

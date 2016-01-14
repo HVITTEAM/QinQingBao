@@ -24,4 +24,7 @@
 @property (nonatomic, strong) GoodsListViewController *vc3;
 @property (nonatomic, strong) GoodsListViewController *vc4;
 
+@property (nonatomic, copy) NSString *gc_id;
+@property (nonatomic, copy) NSString *keyWords;
+
 @end

@@ -118,7 +118,7 @@
         [self sendMsg];
     };
     
-    group.items = @[numfield,telfield,codefield];
+    group.items = @[numfield,telfield];
 }
 
 - (void)setupFooter
@@ -145,10 +145,10 @@
     
     lab0.x = self.view.width/2 - lab0.width/2;
     lab0.y = 0;
-    [footview addSubview:lab0];
+//    [footview addSubview:lab0];
     
     // 1.创建按钮
-    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lab0.frame) + 10, MTScreenW, 50)];
+    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
     
     // 2.设置属性
     okBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -242,7 +242,7 @@
     }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Bang_relation parameters: @{@"mobile" : self.telfield.rightText.text,
-                                                                      @"code" : self.codefield.rightText.text,
+//                                                                      @"code" : self.codefield.rightText.text,
                                                                       @"member_id":[SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                       @"rname" : self.numfield.rightText.text,
                                                                       @"client":@"ios",

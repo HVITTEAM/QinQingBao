@@ -17,5 +17,7 @@
 
 @property (nonatomic, assign) UINavigationController *nav;
 - (void)viewDidCurrentView;
+//订单总金额
+@property (nonatomic, retain) NSString *totalPrice;
 
 @end

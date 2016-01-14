@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MallEvaCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="139.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品评价（1）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7Q-NS-BJg">
+                        <rect key="frame" x="10" y="10" width="300" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Kfs-DW-vdp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="Whl-Jo-VAA">
+                        <rect key="frame" x="10" y="39" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="FO4-tT-PP5"/>
+                            <constraint firstAttribute="height" constant="25" id="b4n-QG-DN6"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ix1-rH-cs8">
+                        <rect key="frame" x="49" y="41" width="263" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="RiR-ab-zn5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="物流慢了些，其他都还好。。。。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svs-pi-FuS">
+                        <rect key="frame" x="10" y="72" width="300" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Z7Q-Qd-sWp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKR-5J-zXL">
+                        <rect key="frame" x="110" y="99" width="100" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="AFZ-jM-J5q"/>
+                            <constraint firstAttribute="width" constant="100" id="dl0-gu-WaA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="查看全部评价"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="u7Q-NS-BJg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2tf-Il-NDn"/>
+                    <constraint firstItem="Svs-pi-FuS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="3ma-SI-Awh"/>
+                    <constraint firstAttribute="trailing" secondItem="Svs-pi-FuS" secondAttribute="trailing" constant="10" id="A35-ST-gJp"/>
+                    <constraint firstAttribute="trailing" secondItem="Ix1-rH-cs8" secondAttribute="trailing" constant="8" id="F74-n6-bg1"/>
+                    <constraint firstItem="u7Q-NS-BJg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FcC-lw-wLk"/>
+                    <constraint firstItem="Ix1-rH-cs8" firstAttribute="top" secondItem="u7Q-NS-BJg" secondAttribute="bottom" constant="10" id="KsI-8z-Yfw"/>
+                    <constraint firstItem="SKR-5J-zXL" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Nk0-Ym-zIi"/>
+                    <constraint firstItem="SKR-5J-zXL" firstAttribute="top" secondItem="Svs-pi-FuS" secondAttribute="bottom" constant="6" id="O9r-Rh-msi"/>
+                    <constraint firstItem="Ix1-rH-cs8" firstAttribute="leading" secondItem="Whl-Jo-VAA" secondAttribute="trailing" constant="14" id="PG1-aD-WPy"/>
+                    <constraint firstAttribute="trailing" secondItem="u7Q-NS-BJg" secondAttribute="trailing" constant="10" id="UPp-yD-HLR"/>
+                    <constraint firstItem="Whl-Jo-VAA" firstAttribute="top" secondItem="u7Q-NS-BJg" secondAttribute="bottom" constant="8" id="VkL-si-Q5u"/>
+                    <constraint firstItem="Whl-Jo-VAA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Vrd-M2-mM6"/>
+                    <constraint firstItem="Svs-pi-FuS" firstAttribute="top" secondItem="Whl-Jo-VAA" secondAttribute="bottom" constant="8" id="dbO-Y1-L1P"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="button" destination="SKR-5J-zXL" id="Nzz-Lo-PFW"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholderImage" width="128" height="128"/>
+    </resources>
+</document>

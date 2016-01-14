@@ -489,7 +489,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                 NSLog(@"选中了。。。。。");
                 model = item;
                 selectedAddress = YES;
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -508,6 +508,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     {
         UseCouponsViewController *vc = [[UseCouponsViewController alloc] init];
         vc.title = @"选择优惠券";
+        vc.totalPrice = totalPrice;
         vc.selectedClick = ^(CouponsModel *item)
         {
             NSLog(@"选择优惠券");

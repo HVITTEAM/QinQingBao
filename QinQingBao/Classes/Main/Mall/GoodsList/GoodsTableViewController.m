@@ -40,6 +40,7 @@
     [super viewDidLoad];
     
     self.vc1 = [[GoodsListViewController alloc] init];
+    
     self.vc1.title = @"综合";
     
     self.vc2 = [[GoodsListViewController alloc] init];
@@ -50,6 +51,22 @@
     
     self.vc4 = [[GoodsListViewController alloc] init];
     self.vc4.title = @"新品";
+    
+    if (self.gc_id.length > 0)
+    {
+        self.vc1.gc_id = self.gc_id;
+        self.vc2.gc_id = self.gc_id;
+        self.vc3.gc_id = self.gc_id;
+        self.vc4.gc_id = self.gc_id;
+    }
+    else if (self.keyWords.length > 0)
+    {
+        self.vc1.keyWords = self.keyWords;
+        self.vc2.keyWords = self.keyWords;
+        self.vc3.keyWords = self.keyWords;
+        self.vc4.keyWords = self.keyWords;
+    }
+
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
     view.delegate = self;
@@ -92,7 +109,7 @@
  */
 -(void)initNavigation
 {
-    self.title =  self.viewOwer.length == 0 ?  @"我的服务" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
+    self.title =  self.viewOwer.length == 0 ?  @"服务列表" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

@@ -12,6 +12,8 @@
 #import "ClassificationViewController.h"
 #import "SearchViewController.h"
 
+#import "GoodsTableViewController.h"
+#import "GoodsHeadViewController.h"
 
 @interface MTProgressWebViewController ()<UISearchBarDelegate>
 {
@@ -123,6 +125,36 @@
                 MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
                 [self.navigationController pushViewController:shopCar animated:YES];
             }
+            else if (str.length > 2)
+            {
+                NSArray *arr = [str componentsSeparatedByString:@"-"];
+                switch ([arr[0] integerValue]) {
+                    case 7:
+                    {
+                        GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
+                        vc.gc_id = arr[1];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case 8:
+                    {
+                        GoodsHeadViewController *vc = [[GoodsHeadViewController alloc] init];
+                        vc.goodsID = arr[1];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case 5:
+                    {
+                        GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
+                        vc.keyWords = arr[1];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
         }];
     }
 }

@@ -202,11 +202,14 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-#define URL_Local @"http://61.143.60.87/ylserver"
+//#define URL_Local @"http://61.143.60.87/ylserver"
 
-//#define URL_Local @"http://172.16.13.53/ylserver"
+#define URL_Local @"http://172.16.13.53/ylserver"
 
 //#define URL_Local @"http://ibama.hvit.com.cn"
+
+/***商品url*/
+#define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/alipay/call_back_url.php",URL_Local];
 
 /***商品url*/
 #define URL_Goods(username,key) [NSString stringWithFormat:@"%@/shop/wap/tmpl/waitting.php?username=%@&key=%@&urlType=1",URL_Local,username,key];
@@ -332,7 +335,7 @@
 /***定位返回服务城市Url*/
 #define URL_Dingwei_conf [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_dingwei_conf",URL_Local]
 
-
+//---------------------商城api---------------------
 #pragma mark 商城api
 
 /***商城分类Url*/
@@ -384,6 +387,8 @@
 #define URL_Youhuicard [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=voucher&op=voucher_list",URL_Local]
 
 //---------------------订单---------------------
+
+#pragma mark 订单api
 
 /***订单数据获取url*/
 #define URL_Order_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_order_list",URL_Local]

@@ -60,19 +60,18 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
-    self.title=@"购物车";
+    self.title = @"购物车";
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.endView];
     
     //获取数据
     _vm = [[MTShopViewModel alloc]init];
     
-//    [self refleshData];
+    //    [self refleshData];
     
     [self finshBarView];
     [self loadNotificationCell];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edits:)];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -91,24 +90,25 @@
     HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     //设置价格改变block
     [_vm getShopData:^(NSArray *commonArry)
-    {
-        
-        if (commonArry.count == 0)
-        {
-            [self.tableView initWithPlaceString:@"您的购物车没有商品"];
-            self.navigationItem.rightBarButtonItem  = nil;
-        }
-        else
-        {
-            [carDataArrList addObject:commonArry];
-            [self.tableView removePlace];
-        }
-        [tableView reloadData];
-        [waks numPrice];
-        [HUD removeFromSuperview];
-    } priceBlock:^{
-        [waks numPrice];
-    }];
+     {
+         if (commonArry.count == 0)
+         {
+             self.endView.hidden = YES;
+             [self.tableView initWithPlaceString:@"您的购物车没有商品"];
+         }
+         else
+         {
+             [carDataArrList addObject:commonArry];
+             [self.tableView removePlace];
+             self.endView.hidden = NO;
+             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edits:)];
+         }
+         [tableView reloadData];
+         [waks numPrice];
+         [HUD removeFromSuperview];
+     } priceBlock:^{
+         [waks numPrice];
+     }];
 }
 
 -(void)finshBarView
@@ -315,8 +315,8 @@
 
 - (void)edits:(UIBarButtonItem *)item
 {
+    self.endView.hidden = !self.endView.hidden;
     self.isEdit = !self.isEdit;
-    [self endViewHidden];
     if (self.isEdit) {
         item.title = @"完成";
         for (int i=0; i<_carDataArrList.count; i++) {
@@ -384,8 +384,12 @@
 
 - (void)endViewHidden
 {
+    if (self.isEdit)
+    {
+        self.endView.hidden = YES;
+        return ;
+    }
     self.endView.hidden = _carDataArrList.count == 0;
-    self.endView.hidden = self.editing;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

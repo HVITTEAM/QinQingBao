@@ -74,7 +74,7 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代金券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEO-ej-sSq">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代金券" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEO-ej-sSq">
                                 <rect key="frame" x="23" y="15" width="51" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Hno-sR-oDF"/>
@@ -84,14 +84,6 @@
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGu-im-dcP">
-                                <rect key="frame" x="150" y="50" width="120" height="0.5"/>
-                                <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="6F5-6c-d9c"/>
-                                    <constraint firstAttribute="height" constant="0.5" id="mOW-1G-ymX"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="45c-Yu-GSR" secondAttribute="trailing" constant="8" id="0Gn-nY-5LB"/>
@@ -101,10 +93,8 @@
                             <constraint firstItem="oEO-ej-sSq" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="15" id="DAc-h4-zwp"/>
                             <constraint firstAttribute="bottom" secondItem="45c-Yu-GSR" secondAttribute="bottom" constant="12" id="Fsb-BB-gHP"/>
                             <constraint firstItem="oEO-ej-sSq" firstAttribute="leading" secondItem="tC4-h9-MoJ" secondAttribute="leading" constant="23" id="GwA-LX-pZO"/>
-                            <constraint firstItem="IGu-im-dcP" firstAttribute="top" secondItem="Jgg-gw-944" secondAttribute="bottom" id="Hfn-LG-9ad"/>
                             <constraint firstItem="45c-Yu-GSR" firstAttribute="top" secondItem="5ep-Fk-QCZ" secondAttribute="bottom" constant="1" id="Rjc-B3-7pK"/>
                             <constraint firstItem="dEw-Ol-TZn" firstAttribute="leading" secondItem="tC4-h9-MoJ" secondAttribute="leading" constant="18" id="S79-jS-zsg"/>
-                            <constraint firstAttribute="trailing" secondItem="IGu-im-dcP" secondAttribute="trailing" constant="7" id="Yaj-hY-voR"/>
                             <constraint firstAttribute="trailing" secondItem="y9m-ab-mXS" secondAttribute="trailing" constant="20" id="ahe-Gp-u1c"/>
                             <constraint firstItem="5ep-Fk-QCZ" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="42" id="d0u-GV-Jg3"/>
                             <constraint firstItem="Jgg-gw-944" firstAttribute="top" secondItem="tC4-h9-MoJ" secondAttribute="top" constant="10" id="dAK-IT-AgP"/>
