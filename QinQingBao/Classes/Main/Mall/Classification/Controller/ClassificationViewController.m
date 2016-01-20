@@ -96,7 +96,7 @@
  */
 -(void)initNavigation
 {
-    self.navigationItem.title = @"商品分类";
+    self.title = @"商品分类";
 }
 
 /**
@@ -218,7 +218,8 @@
         if(goodscell == nil)
             goodscell = [GoodsCell goodsCell];
         
-        [goodscell setitemWithData:goodsDataProvider[indexPath.row]];
+        if (goodsDataProvider.count > 0)
+            [goodscell setitemWithData:goodsDataProvider[indexPath.row]];
         
         cell = goodscell;
     }

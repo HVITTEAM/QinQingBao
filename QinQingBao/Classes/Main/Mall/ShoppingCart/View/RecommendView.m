@@ -8,8 +8,8 @@
 
 #import "RecommendView.h"
 
-static float cellHeight = 150;
-static float cellWidth = 110;
+static float cellHeight = 180;
+//static float cellWidth = 110;
 @implementation RecommendView
 
 - (void)drawRect:(CGRect)rect
@@ -44,7 +44,7 @@ static float cellWidth = 110;
 -(void)initCollectionView
 {
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
-    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, MTScreenW - 20, 300) collectionViewLayout:flowLayout];
+    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, MTScreenW - 20, self.height - 50) collectionViewLayout:flowLayout];
     self.colectView.backgroundColor = [UIColor whiteColor];
     self.colectView.collectionViewLayout = flowLayout;
     self.colectView.scrollEnabled = NO;
@@ -58,14 +58,14 @@ static float cellWidth = 110;
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _dataProvider.count/2;
+    return _dataProvider.count/3;
 }
 
 
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 //每个UICollectionView展示的内容
@@ -74,7 +74,7 @@ static float cellWidth = 110;
     //重用cell
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTCollectionCell" forIndexPath:indexPath];
     
-    NSInteger index = indexPath.section *3 + indexPath.row;
+    NSInteger index = indexPath.section *2 + indexPath.row;
     CommendModel *item = [self.dataProvider objectAtIndex:index];
     
     //赋值
@@ -96,7 +96,7 @@ static float cellWidth = 110;
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(cellWidth, cellHeight);
+    return CGSizeMake(MTScreenW/2 - 30, cellHeight);
 }
 
 /**
@@ -126,7 +126,7 @@ static float cellWidth = 110;
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger index = indexPath.section *3 + indexPath.row;
+    NSInteger index = indexPath.section *2 + indexPath.row;
     CommendModel *item = [self.dataProvider objectAtIndex:index];
     self.clickClick(item);
 }

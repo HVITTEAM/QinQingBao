@@ -13,6 +13,9 @@
 #import "CommonGoodsDetailHeadCell.h"
 #import "CommonGoodsDetailMiddleCell.h"
 
+#import "GoodsMiddleTopCell.h"
+#import "GoodsMiddleBottomCell.h"
+
 static CGFloat ENDVIEW_HEIGHT = 50;
 
 
@@ -49,7 +52,9 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     [self.view addSubview:self.tableView];
     
     _endView = [[CommonGoodsDetailEndView alloc]initWithFrame:CGRectMake(0, MTScreenH - ENDVIEW_HEIGHT, MTScreenW,ENDVIEW_HEIGHT)];
-    //    _endView.delegate = self;
+    _endView.goodsitemInfo = self.item.order_list[0];
+    _endView.goodsModel = self.item;
+    _endView.nav = self.navigationController;
     [self.view addSubview:_endView];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -65,6 +70,11 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     return _tableView;
 }
 
+-(void)setItem:(CommonGoodsModel *)item
+{
+    _item = item;
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -73,6 +83,11 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //获取这个订单有多少个商品
+    CommonOrderModel *itemInfo = self.item.order_list[0];
+    NSMutableArray *arr = itemInfo.extend_order_goods;
+    if (section == 1)
+        return arr.count + 2;
     return 1;
 }
 
@@ -108,32 +123,62 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     
     CommonGoodsDetailHeadCell *headCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsDetailHeadCell"];
     
+    CommonGoodsDetailBottomCell *bottomCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsDetailBottomCell"];
+    
+    GoodsMiddleTopCell *middleTopCell = [tableView dequeueReusableCellWithIdentifier:@"MTGoodsMiddleTopCell"];
+    
     CommonGoodsDetailMiddleCell *middleCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsDetailMiddleCell"];
     
-    CommonGoodsDetailBottomCell *bottomCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsDetailBottomCell"];
+    GoodsMiddleBottomCell *middleBottomCell = [tableView dequeueReusableCellWithIdentifier:@"MTGoodsMiddleBottomCell"];
+    
+    
+    //获取这个订单有多少个商品
+    CommonOrderModel *itemInfo = self.item.order_list[0];
+    NSMutableArray *arr = itemInfo.extend_order_goods;
     
     if (indexPath.section == 0)
     {
         if(headCell == nil)
             headCell = [CommonGoodsDetailHeadCell commonGoodsDetailHeadCell];
-        
-        //            [goodsTitleCell setItem:goodsInfo];
         cell = headCell;
     }
     else if (indexPath.section == 1)
     {
-        if(middleCell == nil)
-            middleCell = [CommonGoodsDetailMiddleCell commonGoodsDetailMiddleCell];
+        if (indexPath.row == 0)
+        {
+            if(middleTopCell == nil)
+                middleTopCell = [GoodsMiddleTopCell goodsMiddleTopCell];
+            [middleTopCell setitemWithData:self.item];
+            cell = middleTopCell;
+        }
+        else if (indexPath.row == arr.count + 1)
+        {
+            if(middleBottomCell == nil)
+                middleBottomCell = [GoodsMiddleBottomCell goodsMiddleBottomCell];
+            //            middleBottomCell.buttonClick = ^(UIButton *btn)
+            //            {
+            //                [self buttonClickHandler:btn item:item indexPath:indexPath];
+            //            };
+            [middleBottomCell setitemWithData:self.item];
+            cell = middleBottomCell;
+        }
+        else
+        {
+            if(middleCell == nil)
+                middleCell = [CommonGoodsDetailMiddleCell commonGoodsDetailMiddleCell];
+            
+            [middleCell setitemWithData:arr[indexPath.row -1]];
+            
+            cell = middleCell;
+        }
         
-        //            [goodsTitleCell setItem:goodsInfo];
-        cell = middleCell;
     }
     else
     {
         if(bottomCell == nil)
             bottomCell = [CommonGoodsDetailBottomCell commonGoodsDetailBottomCell];
         
-        //            [goodsTitleCell setItem:goodsInfo];
+        [bottomCell setitemWithData:self.item];
         cell = bottomCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

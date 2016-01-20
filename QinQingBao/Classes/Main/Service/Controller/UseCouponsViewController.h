@@ -20,4 +20,7 @@
 //订单总金额
 @property (nonatomic, retain) NSString *totalPrice;
 
+//当前选择的优惠券
+@property (nonatomic, retain) CouponsModel *selectedModel;
+
 @end

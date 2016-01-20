@@ -13,6 +13,7 @@
 @interface ConfirmOrderEndView : UIView
 
 @property(weak,nonatomic)id<MTConfirmOrderEndViewDelegate>delegate;
+@property(nonatomic,strong)UILabel *freightLab;
 
 @property(nonatomic,strong)UILabel *Lab;
 @property(nonatomic,strong)UILabel *Lab2;

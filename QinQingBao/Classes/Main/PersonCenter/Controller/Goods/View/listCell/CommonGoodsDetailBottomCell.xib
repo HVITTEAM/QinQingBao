@@ -162,6 +162,14 @@
                     <constraint firstItem="4qq-Qt-yLE" firstAttribute="top" secondItem="BGa-fQ-6Df" secondAttribute="bottom" constant="5" id="xKL-OU-m2s"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="alisnLab" destination="LR0-V6-fdP" id="k7Q-lg-flc"/>
+                <outlet property="createLab" destination="BGa-fQ-6Df" id="vHK-v2-N3K"/>
+                <outlet property="dealLab" destination="PoP-D4-j8q" id="VWi-pg-igc"/>
+                <outlet property="deliverLab" destination="A8L-xg-YnZ" id="Wu0-zs-zQ2"/>
+                <outlet property="paysnLab" destination="By6-eh-TRh" id="63p-ID-deY"/>
+                <outlet property="paytimeLab" destination="4qq-Qt-yLE" id="3af-Ff-Ys9"/>
+            </connections>
             <point key="canvasLocation" x="139" y="303"/>
         </tableViewCell>
     </objects>

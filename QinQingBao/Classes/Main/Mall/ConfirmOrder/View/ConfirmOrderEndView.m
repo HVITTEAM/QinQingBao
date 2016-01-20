@@ -57,7 +57,7 @@ static CGFloat CHAT_WIDTH;
     [_buyBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self addSubview:_buyBt];
     
-    _Lab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(_buyBt.frame) - CHAT_WIDTH, 0,CHAT_WIDTH, self.height)];
+    _Lab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(_buyBt.frame) - CHAT_WIDTH, 3,CHAT_WIDTH, 25)];
     _Lab.textAlignment = NSTextAlignmentCenter;
     _Lab.textColor=[UIColor colorWithRGB:@"333333"];
     //    _Lab.text=[NSString stringWithFormat:@"共3件,总金额￥647.00"];
@@ -78,6 +78,14 @@ static CGFloat CHAT_WIDTH;
     
     _Lab.font=[UIFont systemFontOfSize:14];
     [self addSubview:_Lab];
+    
+    _freightLab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMinX(_buyBt.frame) - CHAT_WIDTH, 23, 150, 25)];
+    _freightLab.textColor=[UIColor colorWithRGB:@"666666"];
+    _freightLab.text=[NSString stringWithFormat:@"不含运费"];
+    _freightLab.font=[UIFont systemFontOfSize:12];
+    _freightLab.textAlignment = NSTextAlignmentRight;
+    [self addSubview:_freightLab];
+
 }
 
 -(void)setGoodsCount:(NSString *)count totalPrice:(NSString *)totalPrice

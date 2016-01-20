@@ -21,5 +21,5 @@
 
 @property (nonatomic, strong) CouponsViewController *vc1;
 @property (nonatomic, strong) CouponsViewController *vc2;
-@property (nonatomic, strong) UseCouponsViewController *vc3;
+@property (nonatomic, strong) CouponsViewController *vc3;
 @end

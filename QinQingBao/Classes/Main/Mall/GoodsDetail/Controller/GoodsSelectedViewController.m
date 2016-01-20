@@ -10,8 +10,7 @@
 #import "MTChangeCountView.h"
 
 static CGFloat BUTTONHEIGHT = 50;
-static CGFloat VIEWHEIGHT;
-static CGFloat PADDINGBOTTON = 120;
+static CGFloat PADDINGBOTTON = 70;
 
 
 @interface GoodsSelectedViewController ()<UITextFieldDelegate>
@@ -26,49 +25,34 @@ static CGFloat PADDINGBOTTON = 120;
 {
     [super viewDidLoad];
     
-    self.choosedCount = 1;
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.height = MTScreenH *0.32;
     
-    VIEWHEIGHT = MTScreenH *0.4;
+    self.choosedCount = 1;
     
     [self initView];
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesture:)];
-    
-    [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)tapGesture:(UITapGestureRecognizer *)gesture
-{
-    //    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 - (void)initView
 {
-    //    UIView *backGroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-    //    backGroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
-    //    backGroundView.opaque = NO;
-    //    [UIView animateWithDuration:0.2 animations:^{
-    //        backGroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.3];
-    //    }];
     
-    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - VIEWHEIGHT, MTScreenW, VIEWHEIGHT)];
-    bgview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:bgview];
-    
-    UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, VIEWHEIGHT - BUTTONHEIGHT, MTScreenW, BUTTONHEIGHT)];
+    UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.height - BUTTONHEIGHT, MTScreenW, BUTTONHEIGHT)];
     [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
     [sureBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     sureBtn.backgroundColor = [UIColor colorWithRGB:@"dd2726"];
     [sureBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(sureClick:) forControlEvents:UIControlEventTouchUpInside];
     [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [bgview addSubview:sureBtn];
+    [self.view addSubview:sureBtn];
     
     UILabel *numLab = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(sureBtn.frame) - PADDINGBOTTON, 100, 30)];
     numLab.text = @"购买数量:";
     numLab.textColor = [UIColor colorWithRGB:@"333333"];
     numLab.font = [UIFont systemFontOfSize:16];
-    [bgview addSubview:numLab];
+    [self.view addSubview:numLab];
     
     _changeView = [[MTChangeCountView alloc] initWithFrame:CGRectMake(MTScreenW - 120, CGRectGetMinY(sureBtn.frame) - PADDINGBOTTON, 160, 35) chooseCount:1 totalCount: 20];
     
@@ -78,46 +62,38 @@ static CGFloat PADDINGBOTTON = 120;
     
     [_changeView.addButton addTarget:self action:@selector(addButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    [bgview addSubview:_changeView];
+    [self.view addSubview:_changeView];
     
     UILabel *typeLab = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(numLab.frame) - 80, 100, 30)];
     typeLab.text = @"规格:";
     typeLab.textColor = [UIColor colorWithRGB:@"333333"];
     typeLab.font = [UIFont systemFontOfSize:16];
-    [bgview addSubview:typeLab];
+    [self.view addSubview:typeLab];
     
     UIButton *typevalue = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetMinY(numLab.frame) - 50, 40, 23)];
     [typevalue setTitle:@"标配" forState:UIControlStateNormal];
     [typevalue.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:14]];
     [typevalue setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [typevalue setBackgroundColor:[UIColor redColor]];
-    //    [typevalue setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    //    [typevalue setBackgroundImage:[UIImage imageWithColor:[UIColor grayColor]] forState:UIControlStateSelected];
     typevalue.layer.cornerRadius = 10;
-    [bgview addSubview:typevalue];
+    [self.view addSubview:typevalue];
     
     UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(typevalue.frame) + 10, MTScreenW, 0.5)];
     line.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];
-    [bgview addSubview:line];
+    [self.view addSubview:line];
     
     UIImageView *line1 = [[UIImageView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(numLab.frame) + 10, MTScreenW, 0.5)];
     line1.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];
-    [bgview addSubview:line1];
+    [self.view addSubview:line1];
     
-    //    [UIView beginAnimations:nil context:nil];
-    //    [UIView animateWithDuration:0.3 animations:^{
-    //        bgview.y = MTScreenH *0.4;
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
     
     UIImage *btimg = [UIImage imageNamed:@"btn_dismissItem_highlighted"];
     UIImage *selectImg = [UIImage imageNamed:@"btn_dismissItem"];
-    UIButton *dismissBtn = [[UIButton alloc]initWithFrame:CGRectMake(MTScreenW - 30, 5, 15, 15)];
+    UIButton *dismissBtn = [[UIButton alloc]initWithFrame:CGRectMake(MTScreenW - 30, 20, 15, 15)];
     [dismissBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [dismissBtn setImage:btimg forState:UIControlStateNormal];
     [dismissBtn setImage:selectImg forState:UIControlStateSelected];
-    [bgview addSubview:dismissBtn];
+    [self.view addSubview:dismissBtn];
 }
 
 //减
@@ -219,15 +195,13 @@ static CGFloat PADDINGBOTTON = 120;
     else
     {
         self.orderClick(_changeView.numberFD.text);
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 -(void)back
 {
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.parentVC dismissSemiModalView];
 }
 
 

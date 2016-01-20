@@ -59,7 +59,6 @@
     
 }
 
-
 - (IBAction)clickProvince:(id)sender
 {
     [self getProviceData:@"0"];

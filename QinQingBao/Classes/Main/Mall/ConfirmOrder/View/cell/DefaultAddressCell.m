@@ -77,16 +77,19 @@
     
     [self addSubview: self.locationImg];
     
-    self.nameLab.frame = CGRectMake(CGRectGetMaxX(self.locationImg.frame) + 10, 10, 100, 21);
+    self.nameLab.frame = CGRectMake(CGRectGetMaxX(self.locationImg.frame) + 10, 10, 120, 21);
     self.nameLab.text = [NSString stringWithFormat:@"收货人:%@",item.true_name];
     [self.contentView addSubview:self.nameLab];
     
     self.telLab.text = item.mob_phone;
     self.telLab.frame = CGRectMake(CGRectGetMaxX(self.nameLab.frame), 10, 150, 21);
     [self.contentView addSubview:self.telLab];
-
     
-    NSArray *arr = [item.area_info componentsSeparatedByString:@"-"];
+    NSArray *arr;
+    if([item.area_info rangeOfString:@"-"].location !=NSNotFound)
+        arr = [item.area_info componentsSeparatedByString:@"-"];
+    else
+        arr = [item.area_info componentsSeparatedByString:@" "];
     
     self.addressLab.text = [NSString stringWithFormat:@"%@%@%@%@",arr[0],arr[1],arr[2],item.address];
     

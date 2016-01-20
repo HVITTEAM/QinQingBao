@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoreModel.h"
 
 @interface ConfirmViewController : UIViewController
 //需要下单的商品数组
@@ -14,5 +15,5 @@
 
 @property (nonatomic, assign) BOOL fromCart;
 
-
+@property (nonatomic, retain) StoreModel *storeModel;
 @end

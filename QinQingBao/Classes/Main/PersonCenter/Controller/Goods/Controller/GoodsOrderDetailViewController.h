@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommonGoodsModel.h"
+
 
 @interface GoodsOrderDetailViewController : UIViewController
 
+@property (nonatomic, retain) CommonGoodsModel *item;
 @end

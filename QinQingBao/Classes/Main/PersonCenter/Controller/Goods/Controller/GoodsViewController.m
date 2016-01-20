@@ -10,6 +10,7 @@
 #import "CommonGoodsTotal.h"
 #import "GoodsOrderDetailViewController.h"
 
+#import "CommonEvaluateGoodsViewController.h"
 
 #import "CommonGoodsCellHead.h"
 #import "CommonGoodsCellBottom.h"
@@ -97,7 +98,9 @@
         currentPageIdx --;
         return;
     }
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *HUD;
+    if (currentPageIdx == 1)
+        HUD   = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Order_list parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
                                                                    @"page" : @10,
@@ -218,7 +221,7 @@
         if(goodscell == nil)
             goodscell = [CommonGoodsCellMiddle commonGoodsCellMiddle];
         
-        [goodscell setitemWithData:dataProvideer[indexPath.section]];
+        [goodscell setitemWithData:arr[indexPath.row - 1]];
         
         cell = goodscell;
     }
@@ -228,8 +231,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     GoodsOrderDetailViewController *detailVC = [[GoodsOrderDetailViewController alloc] init];
+    [detailVC setItem:dataProvideer[indexPath.section]];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+#pragma mark  订单操作模块
 
 /**操作按钮对应点击事件**/
 -(void)buttonClickHandler:(UIButton *)btn item:(CommonGoodsModel*)item indexPath:(NSIndexPath *)indexPath
@@ -245,26 +251,32 @@
     else if ([btn.titleLabel.text isEqualToString:@"删除订单"])
     {
         [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
-        //TODO
     }
     else if ([btn.titleLabel.text isEqualToString:@"确认收货"])
     {
         [self recive:item indexPath:indexPath];
-        
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"提醒发货"])
+    {
+        [NoticeHelper AlertShow:@"提醒成功!" view:self.view.window.rootViewController.view];
     }
     else if ([btn.titleLabel.text isEqualToString:@"查看物流"])
     {
-        //TODO
+        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"评价"])
+    {
+//        [self showEvaViewControler];
         [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
 }
 
-#pragma mark  订单操作模块
 
 //取消订单
 -(void)canceOrder:(CommonGoodsModel*)item indexPath:(NSIndexPath *)indexPath
 {
     selectedCanceOrder = item;
+    selectedIndexPath = indexPath;
     UIAlertView *canceAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认取消订单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
     [canceAlertView show];
 }
@@ -395,8 +407,15 @@
                                          NSLog(@"发生错误！%@",error);
                                          [HUD removeFromSuperview];
                                      }];
-
+        
     }
+}
+
+#pragma mark 评价
+-(void)showEvaViewControler
+{
+    CommonEvaluateGoodsViewController *vc = [[CommonEvaluateGoodsViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

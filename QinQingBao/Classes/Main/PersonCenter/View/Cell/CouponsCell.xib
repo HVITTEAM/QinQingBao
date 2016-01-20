@@ -32,9 +32,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有效期至2015-12-10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45c-Yu-GSR">
-                                <rect key="frame" x="145" y="103" width="124" height="15"/>
+                                <rect key="frame" x="119" y="103" width="150" height="15"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="124" id="F5c-Ev-IgK"/>
+                                    <constraint firstAttribute="width" constant="150" id="F5c-Ev-IgK"/>
                                     <constraint firstAttribute="height" constant="15" id="Jm7-XJ-HtF"/>
                                     <constraint firstAttribute="width" constant="124" id="bde-SW-D1j"/>
                                     <constraint firstAttribute="height" constant="15" id="ucw-GJ-ugs"/>

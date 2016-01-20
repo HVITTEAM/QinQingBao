@@ -24,6 +24,8 @@
 @property(nonatomic,copy)NSString *shop_item_state;
 @property(nonatomic,copy)NSString *shop_item_sale_state;
 @property(nonatomic,copy)NSString *full_name;
+
+@property(nonatomic,copy)NSString *store_id;
 @property(nonatomic,copy)NSString *miya_point;
 @property(nonatomic,copy)NSString *relate_flag;
 @property(nonatomic,copy)NSString *unit;

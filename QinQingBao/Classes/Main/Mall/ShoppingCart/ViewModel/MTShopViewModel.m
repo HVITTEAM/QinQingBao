@@ -56,7 +56,7 @@
                                          item_info.sale_price = item.goods_price;
                                          item_info.item_state = @"1";
                                          item_info.stock_quantity = @"99";
-                                         
+                                         item_info.store_id = item.store_id;
                                          MTShoppIngCarModel *goodsModel = [[MTShoppIngCarModel alloc] init];
                                          goodsModel.item_info = item_info;
                                          goodsModel.count = item.goods_num;

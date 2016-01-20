@@ -110,7 +110,7 @@
             if (accessToken)
             {
                 NSLog(@"Client access token is: %@", accessToken);
-                [EzvizDemoGlobalKit sharedKit].token = accessToken;
+//                [EzvizDemoGlobalKit sharedKit].token = accessToken;
                 [[YSDemoDataModel sharedInstance] saveUserAccessToken:accessToken];
                 [[YSHTTPClient sharedInstance] setClientAccessToken:accessToken];
                 [self searchCameras];

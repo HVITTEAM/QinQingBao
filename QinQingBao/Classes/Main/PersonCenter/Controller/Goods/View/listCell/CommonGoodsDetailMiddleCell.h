@@ -7,12 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommonGoodsModel.h"
 #import "ExtendOrderGoodsModel.h"
 
 @interface CommonGoodsDetailMiddleCell : UITableViewCell
 +(CommonGoodsDetailMiddleCell *) commonGoodsDetailMiddleCell;
 
--(void)setitemWithData:(CommonGoodsModel *)item;
+-(void)setitemWithData:(ExtendOrderGoodsModel *)item;
 
+@property (strong, nonatomic) IBOutlet UIButton *button;
+
+@property (strong, nonatomic) IBOutlet UIView *topLine;
+
+@property (strong, nonatomic) IBOutlet UIImageView *goodsIconImg;
+
+@property (strong, nonatomic) IBOutlet UILabel *goodsTitleLab;
+
+@property (strong, nonatomic) IBOutlet UILabel *priceLab;
+
+@property (strong, nonatomic) IBOutlet UILabel *countLab;
 @end

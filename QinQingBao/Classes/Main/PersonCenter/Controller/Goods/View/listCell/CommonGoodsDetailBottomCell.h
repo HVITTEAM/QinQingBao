@@ -15,5 +15,11 @@
 +(CommonGoodsDetailBottomCell *) commonGoodsDetailBottomCell;
 
 -(void)setitemWithData:(CommonGoodsModel *)item;
+@property (strong, nonatomic) IBOutlet UILabel *paysnLab;
+@property (strong, nonatomic) IBOutlet UILabel *alisnLab;
+@property (strong, nonatomic) IBOutlet UILabel *createLab;
+@property (strong, nonatomic) IBOutlet UILabel *paytimeLab;
+@property (strong, nonatomic) IBOutlet UILabel *deliverLab;
+@property (strong, nonatomic) IBOutlet UILabel *dealLab;
 
 @end

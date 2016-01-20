@@ -43,7 +43,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     //    [self.navigationController.navigationBar addSubview:_progressView];
     

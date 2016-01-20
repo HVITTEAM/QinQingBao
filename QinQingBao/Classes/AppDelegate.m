@@ -15,7 +15,7 @@
 #import <SMS_SDK/SMS_SDK.h>
 #import "CCLocationManager.h"
 
-
+#import <Bugtags/Bugtags.h>
 /**
  *  SMS appkey
  */
@@ -68,6 +68,8 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
+    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
+    
     return YES;
 }
 
@@ -94,7 +96,7 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
                                                     message:@"deviceToken获取失败！"
                                                    delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    [alert show];
+    //    [alert show];
     
     NSLog(@"--------------deviceToken获取失败--------------------");
 }

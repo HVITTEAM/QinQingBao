@@ -62,14 +62,14 @@
     
     [self getUserIcon];
     
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 -(void)checkLogin
@@ -100,7 +100,7 @@
     self.tableView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     
     //添加监听者
-    [self.tableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+//    [self.tableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
 }
 
 /**
@@ -187,11 +187,11 @@
     [self setupGroup4];
     [self setupGroup3];
     [self setupGroup5];
-//    [self setupGroup7];
-//    [self setupGroup8];
-//    [self setupGroup9];
-//    [self setupGroup6];
-//    [self setupGroup11];
+    //    [self setupGroup7];
+    //    [self setupGroup8];
+    //    [self setupGroup9];
+    //    [self setupGroup6];
+    //    [self setupGroup11];
     [self setupFooter];
     
     //刷新表格
@@ -243,7 +243,7 @@
     newFriend.destVcClass = [MTCouponsViewController class];
     
     group.items = @[newFriend];
-
+    
 }
 
 - (void)setupGroup2
@@ -385,7 +385,7 @@
     newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
     
     newFriend.destVcClass = [MTCouponsViewController class];
-
+    
     group.items = @[newFriend];
 }
 

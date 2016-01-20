@@ -50,7 +50,8 @@
     self.priceLab.attributedText = attributedString;
       self.titleLab.text = couponsModel.voucher_title;
     self.titleLab.textColor = [UIColor colorWithRGB:@"333333"];
-    self.endtimeLab.text = [NSString stringWithFormat:@"有效期至:%@",couponsModel.voucher_end_date];
+    
+    self.endtimeLab.text = [NSString stringWithFormat:@"有效期至:%@", [MTDateHelper getDaySince1970:couponsModel.voucher_end_date dateformat:nil]];
     self.endtimeLab.textColor = [UIColor colorWithRGB:@"666666"];
     self.limitLab.text = [NSString stringWithFormat:@"满%@元使用",couponsModel.voucher_limit];
     self.limitLab.textColor = [UIColor colorWithRGB:@"666666"];

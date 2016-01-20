@@ -20,7 +20,7 @@
     //上一个选择的cell
     NSIndexPath *lastSelectedIndex;
     
-    CouponsModel *selectedModel;
+    CouponsModel *selectedCouModel;
 }
 
 @end
@@ -50,13 +50,17 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStyleDone target:self action:@selector(sureClickHandler)];
 }
 
+-(void)setSelectedModel:(CouponsModel *)selectedModel
+{
+    _selectedModel = selectedModel;
+    [self.tableView reloadData];
+}
+
 -(void)sureClickHandler
 {
     [self.navigationController popViewControllerAnimated:YES];
-    if (selectedModel)
-    {
-        self.selectedClick(selectedModel);
-    }
+    //    if (selectedCouModel)
+    self.selectedClick(selectedCouModel);
 }
 
 -(void)initTableSkin
@@ -77,12 +81,13 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
                                      else
                                      {
                                          CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          dataProvider = result.voucher_list;
+                                         if (dataProvider.count == 0)
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];
@@ -127,10 +132,15 @@
     if (cell == nil)
         cell = [CouponsCell couponsCell];
     
+    CouponsModel *item = dataProvider[indexPath.section];
+    
+    if ([item.voucher_id isEqualToString:self.selectedModel.voucher_id])
+        lastSelectedIndex = indexPath;
+    
     if (lastSelectedIndex == indexPath)
         [cell setBtnSelected:YES];
     
-    [cell setCouponsModel:dataProvider[indexPath.section]];
+    [cell setCouponsModel:item];
     
     return  cell;
 }
@@ -145,11 +155,11 @@
         CouponsCell *cell = [tableView cellForRowAtIndexPath:lastSelectedIndex];
         [cell setBtnSelected:NO];
     }
-       [cell setBtnSelected:!cell.selectBtn.selected];
+    [cell setBtnSelected:!cell.selectBtn.selected];
     if (cell.selectBtn.selected)
-        selectedModel = cell.couponsModel;
+        selectedCouModel = cell.couponsModel;
     else
-        selectedModel = nil;
+        selectedCouModel = nil;
     lastSelectedIndex = indexPath;
 }
 

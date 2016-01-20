@@ -46,10 +46,10 @@
     self.vc2 = [[CouponsViewController alloc] init];
     self.vc2.title = @"已使用";
     
-    self.vc3 = [[UseCouponsViewController alloc] init];
+    self.vc3 = [[CouponsViewController alloc] init];
     self.vc3.title = @"未使用";
     
-       MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
+    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3, nil];
     [self.view addSubview:view];
@@ -67,7 +67,7 @@
 -(void)switchView:(UIViewController *)view didselectTab:(NSUInteger)number
 {
     CouponsViewController *vc = nil;
-    UseCouponsViewController *usevc;
+    CouponsViewController *usevc;
     if (number == 0)
     {
         vc = self.vc1;
@@ -94,7 +94,7 @@
  */
 -(void)initNavigation
 {
-    self.title =  self.viewOwer.length == 0 ?  @"我的服务" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
+    self.title =   @"优惠券";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

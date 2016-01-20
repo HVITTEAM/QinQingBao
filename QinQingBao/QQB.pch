@@ -52,10 +52,12 @@
 #import "TSPopoverController.h"
 #import "TSActionSheet.h"
 #import "SWYPhotoBrowserViewController.h"
+#import "UIViewController+KNSemiModal.h"
 
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "MTPayHelper.h"
+#import "MTDateHelper.h"
 
 /**
  *  SDK 正式地址 appKey, 需要开发者申请好appkey方可访问
@@ -204,12 +206,12 @@
 
 //#define URL_Local @"http://61.143.60.87/ylserver"
 
-#define URL_Local @"http://172.16.13.53/ylserver"
+//#define URL_Local @"http://172.16.13.53/ylserver"
 
-//#define URL_Local @"http://ibama.hvit.com.cn"
+#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
-#define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/alipay/call_back_url.php",URL_Local];
+#define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
 
 /***商品url*/
 #define URL_Goods(username,key) [NSString stringWithFormat:@"%@/shop/wap/tmpl/waitting.php?username=%@&key=%@&urlType=1",URL_Local,username,key];
@@ -257,7 +259,7 @@
 #define URL_EditUserInfor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=edit",URL_Local]
 
 /***头像url*/
-#define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"http://61.143.60.87/ylserver/shop/data/upload/shop/avatar/%@",imgName];
+#define URL_ImgeUrl(imgName) [NSString stringWithFormat:@"%@/shop/data/upload/shop/avatar/%@",URL_Local,imgName];
 
 /***获取监控数据url*/
 #define URL_GetMonitor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=monitor&op=getMonitor",URL_Local]
@@ -401,6 +403,16 @@
 
 /***查看物流信息url*/
 #define URL_Search_deliver [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_search_deliver",URL_Local]
+
+//---------------------评价---------------------
+
+#pragma mark 商城评价api
+
+/***评论获取url*/
+#define URL_Shop_dis [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=dis_evaluate&op=get_api_shop_dis",URL_Local]
+
+/***订单评论 增加url*/
+#define URL_Dis_add [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=dis_evaluate&op=api_dis_add",URL_Local]
 
 
 

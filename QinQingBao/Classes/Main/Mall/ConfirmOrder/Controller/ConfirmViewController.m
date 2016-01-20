@@ -17,9 +17,12 @@
 #import "AddressTableViewController.h"
 #import "AddaddressInfoViewController.h"
 #import "MTShoppIngCarModel.h"
+#import "OrderResultModel.h"
 
 #import "AddressListTotal.h"
 #import "MallAddressModel.h"
+
+#import "OrderSubmitSuccessViewController.h"
 
 static CGFloat ENDVIEW_HEIGHT = 50;
 
@@ -129,10 +132,10 @@ static CGFloat ENDVIEW_HEIGHT = 50;
         float num = 0.00;
         for (int j = 0; j < _goodsArr.count ; j++)
         {
-            MTShoppIngCarModel *model = [_goodsArr objectAtIndex:j];
-            NSInteger count = [model.count integerValue];
-            float sale = [model.item_info.sale_price floatValue];
-            if (model.isSelect && ![model.item_info.sale_state isEqualToString:@"3"] )
+            MTShoppIngCarModel *shopmodel = [_goodsArr objectAtIndex:j];
+            NSInteger count = [shopmodel.count integerValue];
+            float sale = [shopmodel.item_info.sale_price floatValue];
+            if (shopmodel.isSelect && ![shopmodel.item_info.sale_state isEqualToString:@"3"] )
             {
                 num = count*sale+ num;
             }
@@ -149,10 +152,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 -(void)initTableSkin
 {
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-    //    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    //    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     
     self.tableView.backgroundColor = HMGlobalBg;
     
@@ -355,8 +354,8 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                   @"city_id" : model.city_id,
                   @"area_id" : model.area_id,
                   @"pay_name" : @"online",
-                  @"voucher" : couponsItem ? couponsItem.voucher_id : @0,
-                  @"rcb_pay" : @0,
+#warning 暂时解决  storeid为14
+                  @"voucher" : couponsItem ? [NSString stringWithFormat:@"%@|%@|%@",couponsItem.voucher_t_id,@"14",couponsItem.voucher_price] : @0,                  @"rcb_pay" : @0,
                   @"pd_pay" : @0,
                   @"ifcart" : self.fromCart ? @"1" : @"0"};
     }
@@ -369,7 +368,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                   @"city_id" : model.city_id,
                   @"area_id" : model.area_id,
                   @"pay_name" : @"online",
-                  @"voucher" : couponsItem ? couponsItem.voucher_id : @0,
+                  @"voucher" : couponsItem ? [NSString stringWithFormat:@"%@|%@|%@",couponsItem.voucher_t_id,@"14",couponsItem.voucher_price] : @0,
                   @"rcb_pay" : @0,
                   @"pd_pay" : @0,
                   @"ifcart" : self.fromCart ? @"1" : @"0",
@@ -389,10 +388,11 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                      }
                                      else
                                      {
-                                         [NoticeHelper AlertShow:@"订单提交成功!" view:self.view];
-                                         NSDictionary *dict1 = [dict objectForKey:@"datas"];
-                                         NSString *pan_sn = [dict1 objectForKey:@"pay_sn"];
-                                         [self payOrder:pan_sn];
+                                         
+                                         NSArray *arr = [dict objectForKey:@"datas"];
+                                         OrderResultModel *result = [OrderResultModel objectWithKeyValues:arr[0]];
+                                         
+                                         [self orderSubmitSuccess:result];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"出错了....");
@@ -401,73 +401,22 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                  }];
 }
 
-/**支付**/
--(void)payOrder:(NSString *)pay_sn
+//订单提交成功
+-(void)orderSubmitSuccess:(OrderResultModel *)item
 {
-    [MTPayHelper payWithAliPayWitTradeNO:pay_sn productName:@"百货" amount:totalPrice productDescription:@"海予孝心商城" success:^(NSDictionary *dict,NSString *signedString) {
-        NSLog(@"支付成功");
-        
-        NSString *out_trade_no;
-        NSString *sign;
-        
-        NSString *html = [dict objectForKey:@"result"];
-        NSArray *resultStringArray =[html componentsSeparatedByString:NSLocalizedString(@"&", nil)];
-        for (NSString *str in resultStringArray)
-        {
-            NSString *newstring = nil;
-            newstring = [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-            NSArray *strArray = [newstring componentsSeparatedByString:NSLocalizedString(@"=", nil)];
-            for (int i = 0 ; i < [strArray count] ; i++)
-            {
-                NSString *st = [strArray objectAtIndex:i];
-                if ([st isEqualToString:@"out_trade_no"])
-                {
-                    NSLog(@"%@",[strArray objectAtIndex:1]);
-                    out_trade_no = [strArray objectAtIndex:1];
-                }
-                else if ([st isEqualToString:@"sign"])
-                {
-                    NSLog(@"%@",[strArray objectAtIndex:1]);
-                    sign = [strArray objectAtIndex:1];
-                    [self api_alipay:out_trade_no pay_sn:pay_sn signedString:sign];
-                }
-            }
-        }
-        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSDictionary *dict) {
-        NSLog(@"支付失败");
-        //用户中途取消
-        if ([[dict objectForKey:@"resultStatus"] isEqualToString:@"6001"])
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+    OrderSubmitSuccessViewController *buyView = [[OrderSubmitSuccessViewController alloc] init];
+    buyView.orderModel = item;
+    buyView.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:buyView animated:YES completion:^{
+        buyView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
     }];
+    
+    buyView.cancelClick = ^(void)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    };
 }
 
-/**订单 - 支付付款 订单状态修改**/
--(void)api_alipay:(NSString *)out_trade_no pay_sn:(NSString *)pay_sn signedString:(NSString *)signedString
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Alipay parameters: @{@"out_trade_no" : pay_sn,
-                                                               @"request_token" : @"requestToken",
-                                                               @"result" : @"success",
-                                                               @"trade_no" : out_trade_no,
-                                                               @"sign" : signedString,
-                                                               @"sign_type" : @"MD5"}
-                                 type:CommonRemoteTypeGet success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         NSLog(@"支付结果验证成功");
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"出错了....");
-                                 }];
-}
 
 #pragma mark - 监听
 
@@ -489,7 +438,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                 NSLog(@"选中了。。。。。");
                 model = item;
                 selectedAddress = YES;
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationRight];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -509,13 +458,14 @@ static CGFloat ENDVIEW_HEIGHT = 50;
         UseCouponsViewController *vc = [[UseCouponsViewController alloc] init];
         vc.title = @"选择优惠券";
         vc.totalPrice = totalPrice;
+        if(couponsItem)
+            vc.selectedModel = couponsItem;
         vc.selectedClick = ^(CouponsModel *item)
         {
             NSLog(@"选择优惠券");
             couponsItem = item;
-            //                    [orderSubmitCell setCouponsModel:item];
             [self setEndviewValue];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationLeft];
         };
         [self.navigationController pushViewController:vc animated:YES];
     }

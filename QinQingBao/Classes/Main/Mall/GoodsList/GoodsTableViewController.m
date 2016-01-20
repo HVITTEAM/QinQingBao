@@ -109,7 +109,7 @@
  */
 -(void)initNavigation
 {
-    self.title =  self.viewOwer.length == 0 ?  @"服务列表" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
+    self.title =  self.viewOwer.length == 0 ?  @"商品列表" : [NSString stringWithFormat:@"%@的订单",self.viewOwer];
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

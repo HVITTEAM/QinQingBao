@@ -15,9 +15,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张某某" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEh-mH-RB6">
-                        <rect key="frame" x="10" y="7" width="62" height="21"/>
+                        <rect key="frame" x="10" y="7" width="100" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="62" id="YZp-Lm-Nk3"/>
+                            <constraint firstAttribute="width" constant="100" id="YZp-Lm-Nk3"/>
                             <constraint firstAttribute="height" constant="21" id="k5z-06-Wb7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13800138000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voQ-KZ-vOB">
-                        <rect key="frame" x="80" y="7" width="100" height="21"/>
+                        <rect key="frame" x="118" y="7" width="100" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="rYw-jV-sMC"/>
                             <constraint firstAttribute="height" constant="21" id="yUG-If-NgI"/>

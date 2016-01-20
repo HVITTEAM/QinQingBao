@@ -86,6 +86,7 @@ static float cellWidth = 66;
             self.imagePlayerHeight.constant = MTScreenH *0.23;
             break;
         case iPhone5:
+            self.bgScrollView.scrollEnabled = NO;
             [self autoLayoutView];
             break;
         case iPhone6:

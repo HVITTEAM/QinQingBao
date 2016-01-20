@@ -53,7 +53,16 @@
     switch (self.type) {
         case ChartTypeBlood:
             for (HealthDataModel *item in self.dataProvider) {
+                
+                if (!item.systolic)
+                    item.systolic = @"0";
+                
+                if (!item.diastolic)
+                    item.diastolic = @"0";
                 [YTitles addObject:item.systolic];
+                
+                scrollChart.chooseRange = CGRangeMake(200, 0);
+                
                 [YTitles1 addObject:item.diastolic];
             }
             break;
@@ -97,7 +106,11 @@
         switch (self.type)
         {
             case ChartTypeBlood:
+            {
+                if (!item.bloodp_time)
+                    item.bloodp_time = item.heart_time;
                 [xTitles addObject:[item.bloodp_time substringWithRange:range]];
+            }
                 break;
                 
             case ChartTypeSugar:

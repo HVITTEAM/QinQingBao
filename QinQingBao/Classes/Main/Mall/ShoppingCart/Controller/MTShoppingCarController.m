@@ -67,9 +67,8 @@
     //获取数据
     _vm = [[MTShopViewModel alloc]init];
     
-    //    [self refleshData];
-    
     [self finshBarView];
+    
     [self loadNotificationCell];
     
 }
@@ -263,6 +262,8 @@
     }
     [_tableView reloadData];
 }
+
+#pragma mark 结算
 
 /**
  * 结算按钮触发事件
@@ -508,12 +509,6 @@
     {
         NSMutableArray *list = [_carDataArrList objectAtIndex:indexPath.section];
         MTShoppIngCarModel *model = [list objectAtIndex:indexPath.row];
-        //        model.isSelect=NO;
-        //        [list removeObjectAtIndex:indexPath.row];
-        //        if (list.count==1) {
-        //            [_carDataArrList removeObjectAtIndex:indexPath.section];
-        //        }
-        //        [_tableView reloadData];
         selectedItem = model;
         
         [self sureDelate];

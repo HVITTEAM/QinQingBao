@@ -52,9 +52,7 @@
 - (void)addAddress
 {
     AddaddressInfoViewController *addAddress = [AddaddressInfoViewController new];
-    
     addAddress.title = @"新增收货地址";
-    
     [self.navigationController pushViewController:addAddress animated:YES];
 }
 

@@ -24,16 +24,16 @@
     self.topLine.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
 }
 
--(void)setitemWithData:(CommonGoodsModel *)item
+-(void)setitemWithData:(ExtendOrderGoodsModel *)item
 {
-    CommonOrderModel *itemInfo = item.order_list[0];
-    ExtendOrderGoodsModel *goodsItem = itemInfo.extend_order_goods[0];
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",goodsItem.goods_image_url]];
+//    CommonOrderModel *itemInfo = item.order_list[0];
+//    ExtendOrderGoodsModel *goodsItem = itemInfo.extend_order_goods[0];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",item.goods_image_url]];
     [self.goodsIconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
     
-    self.goodsTitleLab.text = goodsItem.goods_name;
-    self.priceLab.text = [NSString stringWithFormat:@"￥%@",goodsItem.goods_price];
-    self.countLab.text = goodsItem.goods_num;
+    self.goodsTitleLab.text = item.goods_name;
+    self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
+    self.countLab.text = item.goods_num;
 }
 
 @end

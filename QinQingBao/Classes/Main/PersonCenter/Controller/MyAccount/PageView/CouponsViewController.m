@@ -75,6 +75,14 @@
                   @"page" : @100,
                   @"curpage" : @1};
     }
+    else if ([self.title isEqualToString:@"未使用"])
+    {
+        dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                  @"voucher_state" : @"1",
+                  @"page" : @100,
+                  @"curpage" : @1};
+    }
+    
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
@@ -83,12 +91,13 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                      }
                                      else
                                      {
                                          CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          dataProvider = result.voucher_list;
+                                         if (dataProvider.count == 0)
+                                             [self.tableView initWithPlaceString:@"暂无数据!"];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];

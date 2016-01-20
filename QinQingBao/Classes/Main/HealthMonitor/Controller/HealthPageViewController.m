@@ -63,7 +63,11 @@
 -(void)getDataProvider
 {
     dataProvider = [[NSMutableArray alloc] init];
-    
+    if (self.familyVO.member_id == nil)
+    {
+        [self.tableView.header endRefreshing];
+        return [NoticeHelper AlertShow:@"数据异常!" view:self.view];
+    }
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
                                                                    @"count" : @"50",
@@ -220,19 +224,20 @@
     
     switch (indexPath.section)
     {
-        case 3:
+        case 4:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeSugar;
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
             break;
-        case 4:
+        case 3:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeBlood;
-            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
+            //            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
+            break;
         case 5:
         {
             if (dataProvider.count > 0)
@@ -247,7 +252,7 @@
                         [HUD removeFromSuperview];
                     }];
                 }
-                 return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
             }
             else
             {

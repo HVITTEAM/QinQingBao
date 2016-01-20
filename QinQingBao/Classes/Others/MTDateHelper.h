@@ -31,6 +31,11 @@
 +(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days;
 
 /**
+ * 时间戳转换成时间
+ */
++(NSString *)getDaySince1970:(NSString *)timeStr dateformat:(NSString *)dateformat;
+
+/**
  * 根据运行时特性获取当前网络类型
  * 0 - 无网络 ; 1 - 2G ; 2 - 3G ; 3 - 4G ; 5 - WIFI
  */

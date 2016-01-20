@@ -13,12 +13,12 @@
 
 +(void)AlertShow:(NSString *)msg view:(UIView *)view
 {
-//    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-//    hud.mode = MBProgressHUDModeText;
-//    hud.labelText = msg;
-//    hud.margin = 10.f;
-//    hud.removeFromSuperViewOnHide = YES;
-//    [hud hide:YES afterDelay:1.33];
+    //    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    //    hud.mode = MBProgressHUDModeText;
+    //    hud.labelText = msg;
+    //    hud.margin = 10.f;
+    //    hud.removeFromSuperViewOnHide = YES;
+    //    [hud hide:YES afterDelay:1.33];
 }
 
 
@@ -71,6 +71,20 @@
     [dateday setDateFormat:@"MM-dd"];
     return [dateday stringFromDate:beginningOfWeek];
 }
+
++(NSString *)getDaySince1970:(NSString *)timeStr dateformat:(NSString *)dateformat
+{
+    if ([timeStr doubleValue] < 1 )
+        return @"";
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timeStr doubleValue]];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    if (dateformat)
+        [formatter setDateFormat:dateformat];
+    else
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+    return [formatter stringFromDate:confromTimesp];
+}
+
 
 +(int)getApplicationNettype
 {

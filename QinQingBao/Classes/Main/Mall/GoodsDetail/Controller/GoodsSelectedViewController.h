@@ -19,4 +19,5 @@
 
 @property (nonatomic,strong) NSString *goodsID;
 
+@property (nonatomic, strong) UIViewController *parentVC;
 @end

@@ -33,6 +33,7 @@
     self.serviceDetailLab.text = [NSString stringWithFormat:@"单价:%@",goodsItem.item_info.sale_price];
     self.distanceLab.text = [NSString stringWithFormat:@"数量:%@",goodsItem.count];
     NSURL *iconUrl = [NSURL URLWithString:goodsItem.item_info.icon];
+    NSLog(@"sdsadddddddddd%@",goodsItem.item_info.icon);
     [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     
     self.height = 85;

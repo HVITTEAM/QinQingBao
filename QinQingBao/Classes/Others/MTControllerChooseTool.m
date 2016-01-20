@@ -126,10 +126,10 @@
     UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     [nav1 setViewControllers:@[sysview] animated:YES];
     
-//    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-//    mallView.url =  [[self alloc] getMallurl];
-//    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
-//    [nav2 setViewControllers:@[mallView] animated:YES];
+    //    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+    //    mallView.url =  [[self alloc] getMallurl];
+    //    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
+    //    [nav2 setViewControllers:@[mallView] animated:YES];
 }
 
 +(void)setloginOutViewController
@@ -143,11 +143,6 @@
     healthLogin.backHiden = YES;
     UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[1];
     [nav1 setViewControllers:@[healthLogin] animated:YES];
-    
-    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-    mallView.url =  [[self alloc] getMallurl];
-    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
-    [nav2 setViewControllers:@[mallView] animated:YES];
 }
 
 + (void)setLoginViewController

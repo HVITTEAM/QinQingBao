@@ -309,7 +309,7 @@
                             </variation>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOK-7g-4T1">
-                            <rect key="frame" x="0.0" y="360" width="320" height="193"/>
+                            <rect key="frame" x="0.0" y="357" width="320" height="193"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="193" id="d3U-N7-tkj"/>
@@ -322,7 +322,7 @@
                             </collectionViewFlowLayout>
                         </collectionView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Maq-Jw-Jl3" userLabel="topline">
-                            <rect key="frame" x="0.0" y="360" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="357" width="320" height="1"/>
                             <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="WDX-fR-N9j"/>
@@ -332,14 +332,14 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="7yY-xI-2bY" secondAttribute="width" id="ASP-xI-S8p"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" id="BW0-0m-x0x"/>
-                        <constraint firstItem="ZOK-7g-4T1" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="10" id="Kgm-DA-7ZE"/>
+                        <constraint firstItem="ZOK-7g-4T1" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="7" id="Kgm-DA-7ZE"/>
                         <constraint firstItem="Maq-Jw-Jl3" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="M8j-oE-5oT"/>
                         <constraint firstItem="ZOK-7g-4T1" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="Nil-WC-NiM"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="NkX-di-EER"/>
                         <constraint firstAttribute="trailing" secondItem="7yY-xI-2bY" secondAttribute="trailing" id="P2v-MR-UVK"/>
                         <constraint firstItem="vlY-uk-Vhe" firstAttribute="top" secondItem="7yY-xI-2bY" secondAttribute="bottom" id="cKl-zo-DPT"/>
                         <constraint firstAttribute="trailing" secondItem="Maq-Jw-Jl3" secondAttribute="trailing" id="cTm-Si-VEQ"/>
-                        <constraint firstItem="Maq-Jw-Jl3" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="10" id="fwA-P5-Ote"/>
+                        <constraint firstItem="Maq-Jw-Jl3" firstAttribute="top" secondItem="vlY-uk-Vhe" secondAttribute="bottom" constant="7" id="fwA-P5-Ote"/>
                         <constraint firstAttribute="bottom" secondItem="7yY-xI-2bY" secondAttribute="bottom" constant="398" id="gHk-aF-9aP"/>
                         <constraint firstAttribute="trailing" secondItem="ZOK-7g-4T1" secondAttribute="trailing" id="hfy-Vc-6zg"/>
                         <constraint firstItem="7yY-xI-2bY" firstAttribute="leading" secondItem="YFd-Yg-exP" secondAttribute="leading" id="kh2-xb-ST1"/>
