@@ -10,4 +10,11 @@
 
 @implementation AreaModel
 
+-(AreaModel *)initWithName:(NSString *)name areaid:(NSString *)areaid
+{
+    AreaModel *model = [[AreaModel alloc] init];
+    model.area_id = areaid;
+    model.area_name = name;
+    return model;
+}
 @end

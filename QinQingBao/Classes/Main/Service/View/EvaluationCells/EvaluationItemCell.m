@@ -57,6 +57,34 @@
     self.nameLab.text = @"匿名";
 }
 
+- (void)setitemWithShopData:(GevalModel *)item
+{
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 7;// 字体的行间距
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:15],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    self.contentLab.attributedText = [[NSAttributedString alloc] initWithString:item.geval_content == nil ? @"默认好评" : item.geval_content attributes:attributes];
+    self.contentLab.autoresizesSubviews = YES;
+    self.contentLab.autoresizingMask =(UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    
+    CGFloat maxW = MTScreenW - 20;
+    CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
+    CGSize textSize = [self.contentLab.attributedText boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    //    self.contentLab.height =textSize.height;
+    
+    self.height = textSize.height + textPadding + bottom;
+    self.evaView.userInteractionEnabled = NO;
+    
+    float score = [item.geval_scores floatValue];
+    [self.evaView setScore:score/5 withAnimation:NO];
+    
+    self.timeLab.text = [MTDateHelper getDaySince1970:item.geval_addtime dateformat:@"yyyy-MM-dd HH:MM:ss"];
+    self.headIcon.layer.cornerRadius = self.headIcon.width/2;
+    self.nameLab.text = item.geval_frommembername;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }

@@ -40,14 +40,24 @@
         self.checkClick(sender);
 }
 
-- (void)awakeFromNib {
-    // Initialization code
+-(void)setGevalModel:(GevalModel *)gevalModel
+{
+    _gevalModel = gevalModel;
+    self.contentLab.text = gevalModel.geval_content;
+    self.nameLab.text = gevalModel.geval_frommembername;
+    self.timeLab.text = [MTDateHelper getDaySince1970:gevalModel.geval_addtime dateformat:@"yyyy-MM-dd HH:MM:ss"];
+    
+    NSString *str = URL_ImgeUrl(gevalModel.geval_image);
+    NSURL *iconUrl = [NSURL URLWithString:str];
+    [self.iconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)setTotalCount:(NSInteger)totalCount
+{
+    _totalCount = totalCount;
+    self.totalCountLab.text = [NSString stringWithFormat:@"商品评价（%ld）",(long)totalCount];
 }
+
 
 @end

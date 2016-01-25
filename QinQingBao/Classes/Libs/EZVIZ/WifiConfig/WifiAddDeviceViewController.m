@@ -18,7 +18,7 @@
 #import "EzvizSimpleWifi.h"
 #import "BonjourBrowser.h"
 
-#import "CMyCameraListViewController.h"
+#import "VideoListViewController.h"
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
@@ -91,6 +91,9 @@ alpha:alp]
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"正在添加设备...";
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
     sizeWidth = [UIScreen mainScreen].bounds.size.width;
@@ -130,23 +133,6 @@ alpha:alp]
     YSMobilePages *mobilePage = [[YSMobilePages alloc] init];
     self.mp = mobilePage;
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void)dealloc
 {
@@ -193,7 +179,7 @@ alpha:alp]
     [self.view addSubview:_titleView];
     
     float circleTop = _titleView.frame.origin.y + _titleView.frame.size.height + 75;
-    if (gfScreenHeight < 560)
+    if (480 < 560)
     {
         circleTop = _titleView.frame.origin.y + _titleView.frame.size.height + 16;
     }
@@ -319,7 +305,7 @@ alpha:alp]
     UIView * lineView = [btn superview];
     
     [UIView animateWithDuration:0.5 animations:^{
-        lineView.frame = CGRectMake(0, gfScreenHeight, sizeWidth, gfScreenHeight);
+        lineView.frame = CGRectMake(0, 480, sizeWidth, 480);
     } completion:^(BOOL finished) {
         [lineView removeFromSuperview];
     }];
@@ -336,7 +322,7 @@ alpha:alp]
     UIView * lineView = [[btn superview] superview];
     
     [UIView animateWithDuration:0.5 animations:^{
-        lineView.frame = CGRectMake(0, gfScreenHeight, sizeWidth, gfScreenHeight);
+        lineView.frame = CGRectMake(0, 480, sizeWidth, 480);
     } completion:^(BOOL finished) {
         [lineView removeFromSuperview];
     }];
@@ -385,7 +371,7 @@ alpha:alp]
 - (void)go2ListVC{
     for ( UIViewController *vc in self.navigationController.viewControllers)
     {
-        if ([vc isKindOfClass:[CMyCameraListViewController class]])
+        if ([vc isKindOfClass:[VideoListViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             break;

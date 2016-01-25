@@ -12,7 +12,7 @@
 
 #import "YSDemoDataModel.h"
 #import "CAttention.h"
-#import "CMyCameraListViewController.h"
+#import "VideoListViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "WifiInfoViewController.h"
 
@@ -182,7 +182,7 @@
         completion:^(NSString *deviceNo) {
             for ( UIViewController *vc in handleVC.navigationController.viewControllers)
             {
-                if ([vc isKindOfClass:[CMyCameraListViewController class]])
+                if ([vc isKindOfClass:[VideoListViewController class]])
                 {
                     [handleVC.navigationController popToViewController:vc animated:YES];
                     break;
@@ -200,7 +200,7 @@
 #else
     float statusbarHeight = 0.0;
 #endif
-    _qrLoadView.frame = CGRectMake(0, 44 + statusbarHeight, gfScreenWidth, gfFrameHeight-44);
+    _qrLoadView.frame = CGRectMake(0, 44 + statusbarHeight, 320, 460-44);
     
     // ios7 系统和以下系统二维码扫描使用不同方案
     if (IS_IOS7_OR_LATER)
@@ -230,7 +230,7 @@
         _captionSession = [[AVCaptureSession alloc] init];
         [_captionSession addInput:input];
         AVCaptureMetadataOutput * captureMetadataOutput = [[AVCaptureMetadataOutput alloc] init];
-//        captureMetadataOutput.rectOfInterest = CGRectMake((gfScreenHeight==480?44:90)/_apiQrView.bounds.size.height, 50/_apiQrView.bounds.size.width, 220/_apiQrView.bounds.size.height, 220/_apiQrView.bounds.size.width);
+//        captureMetadataOutput.rectOfInterest = CGRectMake((480==480?44:90)/_apiQrView.bounds.size.height, 50/_apiQrView.bounds.size.width, 220/_apiQrView.bounds.size.height, 220/_apiQrView.bounds.size.width);
         [_captionSession addOutput:captureMetadataOutput];
         [captureMetadataOutput setMetadataObjectsDelegate:self queue:dispatch_queue_create("MyQueue", nil)];
         [captureMetadataOutput setMetadataObjectTypes:[NSArray arrayWithObject:AVMetadataObjectTypeQRCode]];
@@ -253,7 +253,7 @@
         m_qrView.torchMode = AVCaptureTorchModeOff;
         
         // WTF!  有效区域的算法都奇葩！ y/size.height, x/size.width, height/size.height, width/size.height
-        m_qrView.scanCrop = CGRectMake((gfScreenHeight==480?44:90)/m_qrView.bounds.size.height,
+        m_qrView.scanCrop = CGRectMake((480==480?44:90)/m_qrView.bounds.size.height,
                                        50/m_qrView.bounds.size.width,
                                        220/m_qrView.bounds.size.height,
                                        220/m_qrView.bounds.size.width);
@@ -268,7 +268,7 @@
     
     self.m_remindLbl.textColor = UIColorFromRGB(0xcccac7, 1.0f);
     
-    if (gfFrameHeight >= 548)
+    if (460 >= 548)
     {
         //4寸屏幕下移m_remindLbl位置
         CGRect rectLbl = self.m_remindLbl.frame;
@@ -283,7 +283,7 @@
         m_inputBtn.hidden     = YES; //隐藏手动输入按钮
     }
     
-    if (gfScreenHeight == 480)
+    if (480 == 480)
     {
         bgImg = [UIImage imageNamed:NSLocalizedString(@"qrScan_bg_iphone4@2x.png", nil)];
     }

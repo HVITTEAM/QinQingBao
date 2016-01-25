@@ -61,6 +61,8 @@
         //市场价
         self.oldPriceLab.attributedText = attri;
     }
+    if ([goodsInfo.goods_marketprice isEqualToString:goodsInfo.goods_price])
+        self.oldPriceLab.hidden = YES;
     
     //快递
     self.expressLab.text                       = [NSString stringWithFormat:@"快递: %@",goodsInfo.goods_freight];

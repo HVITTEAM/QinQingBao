@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TQStarRatingView.h"
 #import "EvaluationModel.h"
+#import "GevalModel.h"
 
 @interface EvaluationItemCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
@@ -19,6 +20,8 @@
 
 
 - (void)setitemWithData:(EvaluationModel *)item;
+
+- (void)setitemWithShopData:(GevalModel *)item;
 
 + (EvaluationItemCell*) evaluationItemCell;
 @end

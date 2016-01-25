@@ -155,7 +155,7 @@
     
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"版本更新" icon:@"ic_version_update.png"];
-    version.subtitle = @"v1.1.0.1";
+    version.subtitle = @"v1.0.1.2";
     // newFriend.destVcClass = [MyAccountViewController class];
     version.operation = ^{
         [NoticeHelper AlertShow:@"当前已是最新版本" view:self.view];
@@ -165,10 +165,7 @@
     help.destVcClass = [AboutusViewController class];
     
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:@"ic_feedback.png"];
-//    help.destVcClass = [FeedbackViewController class];
-    advice.operation = ^{
-        [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
-    };
+    advice.destVcClass = [FeedbackViewController class];
     
     group.items = @[version,help,advice];
 }

@@ -280,10 +280,10 @@ const struct KNSemiModalOptionKeys KNSemiModalOptionKeys = {
         
         view.tag = kSemiModalModalViewTag;
         [target addSubview:view];
-        view.layer.shadowColor = [[UIColor blackColor] CGColor];
-        view.layer.shadowOffset = CGSizeMake(0, -2);
-        view.layer.shadowRadius = 5.0;
-        view.layer.shadowOpacity = [[self ym_optionOrDefaultForKey:KNSemiModalOptionKeys.shadowOpacity] floatValue];
+//        view.layer.shadowColor = [[UIColor blackColor] CGColor];
+//        view.layer.shadowOffset = CGSizeMake(0, -2);
+//        view.layer.shadowRadius = 5.0;
+//        view.layer.shadowOpacity = [[self ym_optionOrDefaultForKey:KNSemiModalOptionKeys.shadowOpacity] floatValue];
         view.layer.shouldRasterize = YES;
         view.layer.rasterizationScale = [[UIScreen mainScreen] scale];
         

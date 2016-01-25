@@ -75,18 +75,39 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图文详情" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmH-aH-L2n">
+                        <rect key="frame" x="219" y="12" width="68" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="47J-aN-7Ty"/>
+                            <constraint firstAttribute="width" constant="68" id="Iuu-Vj-oYG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="LIu-9Z-0aZ">
+                        <rect key="frame" x="292" y="15" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="9Gt-eq-HaA"/>
+                            <constraint firstAttribute="height" constant="15" id="Y4U-Ok-Cht"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="1Iv-Et-Cea" secondAttribute="bottom" constant="0.5" id="9W6-J3-4Li"/>
+                    <constraint firstItem="LIu-9Z-0aZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="GEz-AE-NRz"/>
+                    <constraint firstItem="LIu-9Z-0aZ" firstAttribute="leading" secondItem="rmH-aH-L2n" secondAttribute="trailing" constant="5" id="HiU-sM-ryz"/>
                     <constraint firstItem="I6F-r4-AAK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XmG-la-nhf"/>
                     <constraint firstItem="Owx-fU-Ge4" firstAttribute="leading" secondItem="yp6-A9-s2v" secondAttribute="trailing" constant="10" id="Ydc-Dh-mDD"/>
                     <constraint firstAttribute="bottom" secondItem="HAh-Oa-rcg" secondAttribute="bottom" constant="8.5" id="d4V-CI-oxv"/>
                     <constraint firstAttribute="trailing" secondItem="4Qp-0l-f9X" secondAttribute="trailing" constant="10" id="dyf-aF-OE9"/>
+                    <constraint firstAttribute="trailing" secondItem="LIu-9Z-0aZ" secondAttribute="trailing" constant="13" id="f3A-gJ-RdD"/>
                     <constraint firstItem="1Iv-Et-Cea" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="hXW-3P-jXt"/>
                     <constraint firstItem="HAh-Oa-rcg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ieL-L7-N0L"/>
                     <constraint firstItem="I6F-r4-AAK" firstAttribute="top" secondItem="Owx-fU-Ge4" secondAttribute="bottom" id="kce-DR-twM"/>
                     <constraint firstItem="yp6-A9-s2v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="nfW-9Q-h64"/>
                     <constraint firstAttribute="bottom" secondItem="4Qp-0l-f9X" secondAttribute="bottom" constant="8.5" id="pR5-Kh-wEs"/>
+                    <constraint firstItem="rmH-aH-L2n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="q1Y-7E-RLL"/>
                     <constraint firstItem="yp6-A9-s2v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="tlc-VP-I2T"/>
                     <constraint firstItem="Owx-fU-Ge4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="wEL-mF-8fk"/>
                 </constraints>
@@ -102,4 +123,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="common_icon_arrow" width="12" height="12"/>
+    </resources>
 </document>

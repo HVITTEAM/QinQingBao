@@ -62,7 +62,7 @@
 
     NSDictionary *dict = [[NSDictionary alloc] init];
     
-    if ([self.title isEqualToString:@"全部"])
+    if ([self.title isEqualToString:@"未使用"])
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"page" : @100,
@@ -75,12 +75,12 @@
                   @"page" : @100,
                   @"curpage" : @1};
     }
-    else if ([self.title isEqualToString:@"未使用"])
+    else if ([self.title isEqualToString:@"已过去"])
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"voucher_state" : @"1",
                   @"page" : @100,
-                  @"curpage" : @1};
+                  @"curpage" : @3};
     }
     
     
@@ -131,7 +131,7 @@
     if (cell == nil)
         cell = [CouponsCell couponsCell];
     
-    [cell setCouponsModel:dataProvider[indexPath.section]];
+    [cell setCouponsModel:dataProvider[indexPath.row]];
     
     cell.left.constant = 0;
     cell.selectBtn.hidden = YES;

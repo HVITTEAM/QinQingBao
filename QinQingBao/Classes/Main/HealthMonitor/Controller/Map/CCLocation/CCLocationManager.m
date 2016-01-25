@@ -100,7 +100,8 @@
 {
     NSUserDefaults *standard = [NSUserDefaults standardUserDefaults];
     CLLocation * location = [[CLLocation alloc]initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
-    CLLocation * marsLoction =   [location locationMarsFromEarth];
+    //    CLLocation * marsLoction =   [location locationMarsFromEarth];
+    CLLocation * marsLoction =   location;
     
     CLGeocoder *geocoder=[[CLGeocoder alloc]init];
     [geocoder reverseGeocodeLocation:marsLoction completionHandler:^(NSArray *placemarks,NSError *error)
@@ -114,6 +115,7 @@
              NSLog(@"______%@",_lastAddress);
              if (_cityAndAreaBlock) {
                  _cityAndAreaBlock([NSString stringWithFormat:@"%@%@",placemark.locality,placemark.subLocality]);
+//                 _cityAndAreaBlock(placemark.subLocality);
                  _cityAndAreaBlock = nil;
              }
          }
@@ -149,8 +151,7 @@
         _manager=[[CLLocationManager alloc]init];
         _manager.delegate=self;
         _manager.desiredAccuracy = kCLLocationAccuracyBest;
-        if ([[UIDevice currentDevice].systemVersion doubleValue]>=8.0)
-            [_manager requestWhenInUseAuthorization];
+        [_manager requestWhenInUseAuthorization];
         _manager.distanceFilter=100;
         [_manager startUpdatingLocation];
     }

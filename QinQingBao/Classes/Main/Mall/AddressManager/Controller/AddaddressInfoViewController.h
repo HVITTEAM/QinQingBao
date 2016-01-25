@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *regionImageView; //区域辅助视图
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField; //地址详细
 @property (weak, nonatomic) IBOutlet UITextField *telephoneTextField; //电话
+@property (strong, nonatomic) IBOutlet UIView *bgview;
 
 @property (nonatomic, retain) MallAddressModel *item;
 @end

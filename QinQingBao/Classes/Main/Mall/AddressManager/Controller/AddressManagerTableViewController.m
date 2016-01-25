@@ -18,6 +18,9 @@
     //选中要删除的item
     MallAddressModel *selectedDelateItem;
     
+    NSIndexPath *selectedIndexPath;
+
+    
     NSMutableArray *dataProvider;
 }
 
@@ -103,7 +106,7 @@
     
     cell.clickDelete = ^(MallAddressModel *item)
     {
-        [self deleteAddress:item];
+        [self deleteAddress:item indexPath:indexPath];
     };
     
     cell.clickEdit = ^(MallAddressModel *item)
@@ -126,9 +129,10 @@
 
 #pragma mark --- cell block
 
-- (void)deleteAddress:(MallAddressModel *)item
+- (void)deleteAddress:(MallAddressModel *)item indexPath:(NSIndexPath *)indexPath
 {
     selectedDelateItem = item;
+    selectedIndexPath = indexPath;
     [self sureDelate];
 }
 
@@ -211,7 +215,12 @@
                                          }
                                          else
                                          {
-                                             [self getDataProvider];
+                                             [dataProvider removeObject:selectedDelateItem];
+                                             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                             
+                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                 [self getDataProvider];
+                                             });
                                              [HUD removeFromSuperview];
                                          }
                                      }

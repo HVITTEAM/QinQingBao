@@ -61,8 +61,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self getDataProvider];
 }
 
 -(void)initTableViewSkin
@@ -70,8 +68,16 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.contentInset = UIEdgeInsetsMake(5, 0, 0, 0);
 }
 
+- (void)viewDidCurrentView
+{
+    NSLog(@"加载为当前视图 = %@",self.title);
+    currentPageIdx = 1;
+    dataProvideer = [[NSMutableArray alloc] init];
+    [self getDataProvider];
+}
 
 #pragma mark 集成刷新控件
 
@@ -98,14 +104,65 @@
         currentPageIdx --;
         return;
     }
-    MBProgressHUD *HUD;
-    if (currentPageIdx == 1)
-        HUD   = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Order_list parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                   @"client" : @"ios",
-                                                                   @"page" : @10,
-                                                                   @"curpage" : @1,
-                                                                   @"getpayment" : @"true"}
+    NSDictionary *dict = [[NSDictionary alloc] init];
+    
+    if ([self.title isEqualToString:@"全部"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"page" : @10,
+                  @"curpage" : @1,
+                  @"getpayment" : @"true"};
+    }
+    else if ([self.title isEqualToString:@"待付款"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"page" : @10,
+                  @"curpage" : @1,
+                  @"getpayment" : @"true",
+                  @"order_state" : @"10"};
+    }
+    else if ([self.title isEqualToString:@"待发货"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"page" : @10,
+                  @"curpage" : @1,
+                  @"getpayment" : @"true",
+                  @"order_state" : @"20"};
+    }
+    else if ([self.title isEqualToString:@"待收货"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"page" : @10,
+                  @"curpage" : @1,
+                  @"getpayment" : @"true",
+                  @"order_state" : @"30"};
+    }
+    else if ([self.title isEqualToString:@"待评价"])
+    {
+        dict = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                 @"client" : @"ios",
+                 @"page" : @10,
+                 @"curpage" : @1,
+                 @"getpayment" : @"true",
+                 @"order_state" : @"40",
+                 @"evaluation_state" : @"0"};
+    }
+    else if ([self.title isEqualToString:@"售后/取消"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"page" : @10,
+                  @"curpage" : @1,
+                  @"getpayment" : @"true",
+                  @"order_state" : @"0"};
+    }
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Order_list parameters:dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      [HUD removeFromSuperview];
@@ -232,7 +289,7 @@
 {
     GoodsOrderDetailViewController *detailVC = [[GoodsOrderDetailViewController alloc] init];
     [detailVC setItem:dataProvideer[indexPath.section]];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    [self.nav pushViewController:detailVC animated:YES];
 }
 
 #pragma mark  订单操作模块
@@ -250,7 +307,7 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"删除订单"])
     {
-        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
+        [self deleteOrder:item indexPath:indexPath];
     }
     else if ([btn.titleLabel.text isEqualToString:@"确认收货"])
     {
@@ -266,11 +323,20 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"评价"])
     {
-//        [self showEvaViewControler];
-        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
+        [self showEvaViewControler:indexPath];
+        //        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
 }
 
+//删除订单
+-(void)deleteOrder:(CommonGoodsModel*)item indexPath:(NSIndexPath *)indexPath
+{
+    selectedCanceOrder = item;
+    selectedIndexPath = indexPath;
+    UIAlertView *deleteAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认删除订单？删除后将无法恢复订单。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
+    deleteAlertView.tag = 200;
+    [deleteAlertView show];
+}
 
 //取消订单
 -(void)canceOrder:(CommonGoodsModel*)item indexPath:(NSIndexPath *)indexPath
@@ -278,6 +344,7 @@
     selectedCanceOrder = item;
     selectedIndexPath = indexPath;
     UIAlertView *canceAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认取消订单？" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
+    canceAlertView.tag = 100;
     [canceAlertView show];
 }
 
@@ -301,8 +368,18 @@
                                      else
                                      {
                                          orderModel.order_state = @"40";
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationRight];
-                                     }
+                                         if (![self.title isEqualToString:@"全部"])
+                                         {
+                                             [dataProvideer removeObject:dataProvideer[selectedIndexPath.section]];
+                                             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                 [self.tableView reloadData];
+                                             });
+                                         }
+                                         else{
+                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                         }
+                                                                             }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
@@ -382,40 +459,87 @@
 #pragma mark UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 0)
+    if (alertView.tag == 100)
     {
-        CommonOrderModel *orderModel = selectedCanceOrder.order_list[0];
-        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Order_cancel parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                         @"client" : @"ios",
-                                                                         @"order_id" : orderModel.order_id}
-                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                         
-                                         [HUD removeFromSuperview];
-                                         id codeNum = [dict objectForKey:@"code"];
-                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                         else
-                                         {
-                                             orderModel.order_state = @"0";
-                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
-                                         }
-                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         NSLog(@"发生错误！%@",error);
-                                         [HUD removeFromSuperview];
-                                     }];
-        
+        if(buttonIndex == 0)
+        {
+            CommonOrderModel *orderModel = selectedCanceOrder.order_list[0];
+            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
+            [CommonRemoteHelper RemoteWithUrl:URL_Order_cancel parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                             @"client" : @"ios",
+                                                                             @"order_id" : orderModel.order_id}
+                                         type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                             
+                                             [HUD removeFromSuperview];
+                                             id codeNum = [dict objectForKey:@"code"];
+                                             if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                             {
+                                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                                 [alertView show];
+                                             }
+                                             else
+                                             {
+                                                 orderModel.order_state = @"0";
+                                                 if (![self.title isEqualToString:@"全部"])
+                                                 {
+                                                     [dataProvideer removeObject:dataProvideer[selectedIndexPath.section]];
+                                                     [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                         [self.tableView reloadData];
+                                                     });
+                                                 }
+                                                 else{
+                                                     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                                 }
+                                             }
+                                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             NSLog(@"发生错误！%@",error);
+                                             [HUD removeFromSuperview];
+                                         }];
+            
+        }
+    }
+    else if (alertView.tag == 200)
+    {
+        if(buttonIndex == 0)
+        {
+            CommonOrderModel *orderModel = selectedCanceOrder.order_list[0];
+            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
+            [CommonRemoteHelper RemoteWithUrl:URL_Del_order parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                          @"client" : @"ios",
+                                                                          @"order_id" : orderModel.order_id}
+                                         type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                             
+                                             [HUD removeFromSuperview];
+                                             id codeNum = [dict objectForKey:@"code"];
+                                             if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                             {
+                                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                                 [alertView show];
+                                             }
+                                             else
+                                             {
+                                                 [dataProvideer removeObject:dataProvideer[selectedIndexPath.section]];
+                                                 [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                                 
+                                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                     [self.tableView reloadData];
+                                                 });
+                                             }
+                                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             NSLog(@"发生错误！%@",error);
+                                             [HUD removeFromSuperview];
+                                         }];
+        }
     }
 }
 
 #pragma mark 评价
--(void)showEvaViewControler
+-(void)showEvaViewControler:(NSIndexPath *)indexPath
 {
     CommonEvaluateGoodsViewController *vc = [[CommonEvaluateGoodsViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [vc setItem:dataProvideer[indexPath.section]];
+    [self.nav pushViewController:vc animated:YES];
 }
 
 

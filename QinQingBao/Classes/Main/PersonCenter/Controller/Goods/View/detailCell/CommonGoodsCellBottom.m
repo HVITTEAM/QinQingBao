@@ -126,11 +126,17 @@
         [_evaBtn setTitle:@"确认收货" forState:UIControlStateNormal];
         [_deliverBtn setTitle:@"查看物流" forState:UIControlStateNormal];
     }
-    else if ([goodsitemInfo.order_state isEqualToString:@"40"])//交易完成
+    else if ([goodsitemInfo.order_state isEqualToString:@"40"] && [goodsitemInfo.evaluation_state isEqualToString:@"0"])//交易完成
     {
         [_delateBtn setTitle:@"删除订单" forState:UIControlStateNormal];
         [_evaBtn setTitle:@"查看物流" forState:UIControlStateNormal];
         [_deliverBtn setTitle:@"评价" forState:UIControlStateNormal];
+    }
+    else if ([goodsitemInfo.order_state isEqualToString:@"40"] && [goodsitemInfo.evaluation_state isEqualToString:@"1"])//交易完成
+    {
+        _delateBtn.hidden = YES;
+        [_evaBtn setTitle:@"删除订单" forState:UIControlStateNormal];
+        [_deliverBtn setTitle:@"查看物流" forState:UIControlStateNormal];
     }
 }
 

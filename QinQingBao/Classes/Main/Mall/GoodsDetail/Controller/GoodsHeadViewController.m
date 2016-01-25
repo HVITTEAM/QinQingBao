@@ -19,6 +19,8 @@
 #import "GoodsDetailViewController.h"
 #import "QueryAllEvaluationController.h"
 #import "RecommendView.h"
+#import "GevalModelTotal.h"
+#import "ShowAllEvaViewController.h"
 
 #import "GoodsInfoModel.h"
 #import "CommendModel.h"
@@ -87,13 +89,25 @@ static CGFloat IMAGEVIEW_HEIGHT;
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.alpha = 0;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.alpha = 1;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self initNavigation];
-    
     [self initTableSkin];
+    
+    [self initNavigation];
 }
 
 -(void)setGoodsID:(NSString *)goodsID
@@ -114,17 +128,17 @@ static CGFloat IMAGEVIEW_HEIGHT;
  */
 -(void)initNavigation
 {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.title = @"商品详情";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopcar.png"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopCar)];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"购物车" style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopCar)];
 }
+
 
 -(void)gotoShopCar
 {
+    //    NSURL *url = [[NSURL alloc]initWithString:@"weixin://qr/zzf254iyti8yx5hu"];
+    //    [[UIApplication sharedApplication ] openURL:url];
     
-//    NSURL *url = [[NSURL alloc]initWithString:@"weixin://qr/zzf254iyti8yx5hu"];
-//    
-//    [[UIApplication sharedApplication ] openURL:url];
     if (![SharedAppUtil defaultCommonUtil].userVO )
         return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
@@ -159,7 +173,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     };
     self.tableView.tableFooterView = footView;
     
-    //    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.tableView.tableHeaderView = self.imgPlayer;
     
@@ -210,7 +224,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                      [self.tableView reloadData];
                                      
                                      
-                                    storeModel = [StoreModel objectWithKeyValues:[dict1 objectForKey:@"store_info"]];
+                                     storeModel = [StoreModel objectWithKeyValues:[dict1 objectForKey:@"store_info"]];
                                      
                                      advArr.array = [dict1 objectForKey:@"goods_image"];
                                      slideImages = advArr;
@@ -325,6 +339,27 @@ static CGFloat IMAGEVIEW_HEIGHT;
         page --;  // 默认从第二页开始
         _pageControl.currentPage = page;
     }
+    
+    CGFloat scrollOffset = self.tableView.contentOffset.y;
+    
+    self.navigationController.navigationBar.alpha = scrollOffset/64;
+    //    if(scrollOffset > 64 && self.navigationController.navigationBar.alpha == 0.0)
+    //    {
+    //        self.navigationController.navigationBar.alpha = 0;
+    //        self.navigationController.navigationBar.hidden = NO;
+    //        [UIView animateWithDuration:0.3 animations:^
+    //         {
+    //             self.navigationController.navigationBar.alpha = 1;
+    //         }];
+    //    }
+    //    else if(scrollOffset < 64 && self.navigationController.navigationBar.alpha == 1.0)
+    //    {
+    //        [UIView animateWithDuration:0.3 animations:^{
+    //            self.navigationController.navigationBar.alpha = 0;
+    //        } completion: ^(BOOL finished) {
+    //            self.navigationController.navigationBar.hidden = YES;
+    //        }];
+    //    }
 }
 
 /**
@@ -347,7 +382,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -404,7 +439,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
             [goodsTitleCell setIndexPath:indexPath rowsInSection:1];
             [goodsTitleCell setItem:goodsInfo];
             cell = goodsTitleCell;
-            goodsTitleCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else
         {
@@ -427,37 +461,49 @@ static CGFloat IMAGEVIEW_HEIGHT;
         commoncell.detailTextLabel.text = @"标配";
         cell = commoncell;
     }
+    else if (indexPath.section == 2)
+    {
+        if (commoncell == nil)
+            commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommonCell"];
+        commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        commoncell.textLabel.text = @"客服电话";
+        commoncell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
+        commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+        commoncell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+        commoncell.detailTextLabel.text = @"400-151-2626";
+        cell = commoncell;
+    }
     else
     {
-        if(mallEvaCell == nil)
-            mallEvaCell = [MallEvaCell mallEvaCell];
-        mallEvaCell.checkClick = ^(UIButton *btn)
+        
+        if (!evaArr || evaArr.count ==0)
         {
-            [NoticeHelper AlertShow:@"没有更多的数据了！" view:self.view.window.rootViewController.view];
-        };
-        cell = mallEvaCell;
-        
-        //        if (evaArr.count != 0)
-        //        {
-        //            EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
-        //
-        //            if(evacell == nil)
-        //                evacell = [EvaluationCell evaluationCell];
-        //            //            [evacell setItemInfo:itemInfo];
-        //            [evacell setEvaItem:evaArr[0]];
-        //            evacell.queryClick  = ^(UIButton *btn){
-        //                //                [self queryAllevaluation];
-        //            };
-        //            cell = evacell;
-        //        }
-        //        else
-        //        {
-        //            EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
-        //            if(evanoneCell == nil)
-        //                evanoneCell = [EvaluationNoneCell evanoneCell];
-        //            cell = evanoneCell;
-        //        }
-        
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommonCell"];
+            commoncell.textLabel.text = @"商品评价";
+            commoncell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
+            commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+            commoncell.detailTextLabel.font = [UIFont systemFontOfSize:14];
+            commoncell.detailTextLabel.text = @"暂无评论";
+            cell = commoncell;
+        }
+        else if (evaArr.count > 0)
+        {
+            if(mallEvaCell == nil)
+                mallEvaCell = [MallEvaCell mallEvaCell];
+            
+            [mallEvaCell setGevalModel:evaArr[0]];
+            [mallEvaCell setTotalCount:evaArr.count];
+            
+            mallEvaCell.checkClick = ^(UIButton *btn)
+            {
+                if (evaArr.count > 1)
+                    [self showAlleva];
+                else
+                    [NoticeHelper AlertShow:@"没有更多的数据了！" view:self.view.window.rootViewController.view];
+            };
+            cell = mallEvaCell;
+        }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -479,9 +525,12 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else if (indexPath.section == 2)
     {
+        NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
+        
+        [[UIApplication sharedApplication] openURL:url];
         
     }
-    else
+    else if(evaArr && evaArr.count > 0)
     {
         QueryAllEvaluationController *allevaluation = [[QueryAllEvaluationController alloc] init];
         [self.navigationController pushViewController:allevaluation animated:YES];
@@ -552,7 +601,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                                           }];
     buyView.type = OrderTypeAdd2cart;
     buyView.goodsID = self.goodsID;
-  
+    
     buyView.submitClick = ^(BOOL isSuccess)
     {
         if (isSuccess)
@@ -574,11 +623,18 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                                                  @"page" : @1000,
                                                                  @"curpage" : @1}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
-                                     evaArr = result.datas;
+                                     GevalModelTotal *result = [GevalModelTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                     evaArr = result.message;
                                      [self.tableView reloadData];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];
+}
+
+-(void)showAlleva
+{
+    ShowAllEvaViewController *vc = [[ShowAllEvaViewController alloc] init];
+    vc.goodsID = self.goodsID;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

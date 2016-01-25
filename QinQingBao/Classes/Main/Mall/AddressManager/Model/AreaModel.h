@@ -11,4 +11,6 @@
 @interface AreaModel : NSObject
 @property(nonatomic,copy)NSString *area_id;
 @property(nonatomic,copy)NSString *area_name;
+
+-(AreaModel *)initWithName:(NSString *)name areaid:(NSString *)areaid;
 @end

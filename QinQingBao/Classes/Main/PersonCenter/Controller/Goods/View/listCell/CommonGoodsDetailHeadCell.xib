@@ -8,14 +8,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CommonGoodsDetailHeadCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="138"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="137.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ3-DD-Jzw">
-                        <rect key="frame" x="0.0" y="80" width="320" height="0.5"/>
+                        <rect key="frame" x="0.0" y="72" width="320" height="0.5"/>
                         <color key="backgroundColor" red="0.80000001192092896" green="0.80000001192092896" blue="0.80000001192092896" alpha="0.82000000000000006" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="8hT-O7-qfM"/>
@@ -29,9 +29,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货人:苏景辉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqO-4n-A1n">
-                        <rect key="frame" x="40" y="8" width="107" height="21"/>
+                        <rect key="frame" x="40" y="8" width="150" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="107" id="09d-Hh-lgg"/>
+                            <constraint firstAttribute="width" constant="150" id="09d-Hh-lgg"/>
                             <constraint firstAttribute="height" constant="21" id="eyV-ug-lbo"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -39,7 +39,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收货地址:广东省某某市某某市某某市某某市某某市某某市某某市" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqe-MO-Tkx">
-                        <rect key="frame" x="40" y="37" width="270" height="40"/>
+                        <rect key="frame" x="40" y="29" width="270" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="iDk-jI-WuA"/>
                         </constraints>
@@ -58,7 +58,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGy-JU-lY9">
-                        <rect key="frame" x="8" y="88" width="68" height="21"/>
+                        <rect key="frame" x="8" y="80" width="68" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="JWa-w9-yT0"/>
                             <constraint firstAttribute="width" constant="68" id="Ty5-rT-2VJ"/>
@@ -68,7 +68,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发票抬头 浙江海予" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQW-ML-4o5">
-                        <rect key="frame" x="8" y="115" width="304" height="21"/>
+                        <rect key="frame" x="8" y="107" width="304" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="wKd-h5-6JZ"/>
                         </constraints>
@@ -79,7 +79,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="lQW-ML-4o5" firstAttribute="top" secondItem="BGy-JU-lY9" secondAttribute="bottom" constant="6" id="12W-Gf-ayb"/>
-                    <constraint firstItem="gqe-MO-Tkx" firstAttribute="top" secondItem="Gfg-uq-kLU" secondAttribute="bottom" constant="8" id="59r-Gm-Rzv"/>
+                    <constraint firstItem="gqe-MO-Tkx" firstAttribute="top" secondItem="Gfg-uq-kLU" secondAttribute="bottom" id="59r-Gm-Rzv"/>
                     <constraint firstItem="gqe-MO-Tkx" firstAttribute="leading" secondItem="gym-mV-QIQ" secondAttribute="trailing" constant="10" id="6Bl-P4-Wnj"/>
                     <constraint firstItem="lQW-ML-4o5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="6uJ-pT-Nyk"/>
                     <constraint firstItem="gym-mV-QIQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="7xB-VD-laf"/>

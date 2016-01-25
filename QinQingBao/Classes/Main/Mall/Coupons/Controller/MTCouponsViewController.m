@@ -11,9 +11,6 @@
 
 
 @interface MTCouponsViewController ()<MTSwitchViewDelegate>
-{
-    NSMutableArray *dataProvider;
-}
 
 @end
 
@@ -41,13 +38,13 @@
     [super viewDidLoad];
     
     self.vc1 = [[CouponsViewController alloc] init];
-    self.vc1.title = @"全部";
+    self.vc1.title = @"未使用";
     
     self.vc2 = [[CouponsViewController alloc] init];
     self.vc2.title = @"已使用";
     
     self.vc3 = [[CouponsViewController alloc] init];
-    self.vc3.title = @"未使用";
+    self.vc3.title = @"已过期";
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
     view.delegate = self;

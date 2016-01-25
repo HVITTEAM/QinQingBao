@@ -93,12 +93,12 @@
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _titleView = [[TipsPublicView alloc] initWithFrame:CGRectMake(0, gfStatusBarSpace, sizeWidth, 44) withTitle:NSLocalizedString(@"复位设备", nil)];
+    _titleView = [[TipsPublicView alloc] initWithFrame:CGRectMake(0, 20, sizeWidth, 44) withTitle:NSLocalizedString(@"复位设备", nil)];
     [_titleView addBackBtnTouchEvent:self action:@selector(onClickBackBtn)];
     [_titleView showMenuBtn];
     [self.view addSubview:_titleView];
     
-    _tipsImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (gfScreenHeight - 140)/2 - 52, sizeWidth, 140)];
+    _tipsImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (480 - 140)/2 - 52, sizeWidth, 140)];
     _tipsImgView.image = [UIImage imageNamed:@"connect_reset.png"];
     _tipsImgView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:_tipsImgView];
@@ -114,7 +114,7 @@
     _tipsLab.text = NSLocalizedString(@"连接电源的状态下，长按设备上的reset键10秒后松开", nil);
     [self.view addSubview:_tipsLab];
     
-    _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, gfScreenHeight - 44 - (40 - gfStatusBarSpace), sizeWidth - 40, 44)];
+    _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 480 - 44 - (40 - 20), sizeWidth - 40, 44)];
     [_nextBtn setBackgroundImage:[UIImage imageNamed:@"public_long_btn.png"] forState:UIControlStateNormal];
     [_nextBtn setBackgroundImage:[UIImage imageNamed:@"public_long_btn_sel.png"] forState:UIControlStateHighlighted];
     [_nextBtn setTitle:NSLocalizedString(@"重置好了", nil) forState:UIControlStateNormal];

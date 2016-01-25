@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="EvaFootView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="109.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="描述相符：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKU-H6-BMG">
+                        <rect key="frame" x="10" y="10" width="75" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="MTK-hq-87h"/>
+                            <constraint firstAttribute="height" constant="21" id="exc-sM-VF6"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bR4-2i-vPo" userLabel="View1">
+                        <rect key="frame" x="100" y="10" width="230" height="20"/>
+                        <subviews>
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbq-mu-oYP">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star1ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dCa-QI-Otk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKx-Z6-su5">
+                                <rect key="frame" x="28" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star1ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9jS-29-FaU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pph-Jz-DKv">
+                                <rect key="frame" x="53" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star1ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Eix-WI-sgw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfQ-vm-ME1">
+                                <rect key="frame" x="78" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star1ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="MkJ-oy-uc2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIC-sn-gCi">
+                                <rect key="frame" x="104" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star1ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="EcP-8O-vWj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="230" id="9qg-5J-H5N"/>
+                            <constraint firstAttribute="height" constant="20" id="xS7-vn-CbD"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务态度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KD3-OX-vp8">
+                        <rect key="frame" x="10" y="40" width="75" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="Kdk-7V-GxY"/>
+                            <constraint firstAttribute="height" constant="21" id="gmD-En-73I"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sip-J6-ydD" userLabel="View2">
+                        <rect key="frame" x="100" y="40" width="232" height="20"/>
+                        <subviews>
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kI5-16-9wl">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star2ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dqL-8G-ov5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnR-AI-pvr">
+                                <rect key="frame" x="28" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star2ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KaM-4n-03i"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4w-ZD-Y9r">
+                                <rect key="frame" x="53" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star2ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="efa-xr-C6B"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-Y0-hwS">
+                                <rect key="frame" x="78" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star2ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fMK-yl-2mR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4PO-kJ-bik">
+                                <rect key="frame" x="104" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star2ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qhe-L8-KQn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="232" id="4UR-dP-KoL"/>
+                            <constraint firstAttribute="height" constant="20" id="v8k-Uj-ccZ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货速度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPd-fT-ycQ">
+                        <rect key="frame" x="10" y="70" width="75" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="C7v-tE-bPv"/>
+                            <constraint firstAttribute="width" constant="75" id="jsM-5X-4FY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ocx-EX-jcH" userLabel="View3">
+                        <rect key="frame" x="100" y="70" width="232" height="20"/>
+                        <subviews>
+                            <button opaque="NO" tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9R-DK-ytg">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star3ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YV8-ZT-reU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="101" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qEe-iV-hMC">
+                                <rect key="frame" x="28" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star3ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Vq7-is-i7H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="102" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbL-g4-nBw">
+                                <rect key="frame" x="53" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star3ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IV7-yJ-DGv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="103" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4w-lx-aH1">
+                                <rect key="frame" x="78" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star3ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="s7G-Zp-RH5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="104" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptx-4g-ieJ">
+                                <rect key="frame" x="104" y="0.0" width="20" height="20"/>
+                                <state key="normal" backgroundImage="foregroundStar.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" backgroundImage="backgroundStar.png"/>
+                                <connections>
+                                    <action selector="star3ClickeHandler:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2W4-De-O5e"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="36r-Cn-clp"/>
+                            <constraint firstAttribute="width" constant="232" id="JDH-Ob-19I"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ocx-EX-jcH" firstAttribute="top" secondItem="KD3-OX-vp8" secondAttribute="bottom" constant="9" id="CQh-AO-EEy"/>
+                    <constraint firstItem="KD3-OX-vp8" firstAttribute="top" secondItem="MKU-H6-BMG" secondAttribute="bottom" constant="9" id="Cj2-rB-Vtf"/>
+                    <constraint firstItem="MKU-H6-BMG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FE9-aC-t2w"/>
+                    <constraint firstItem="Sip-J6-ydD" firstAttribute="top" secondItem="MKU-H6-BMG" secondAttribute="bottom" constant="9" id="KLW-a9-Y9X"/>
+                    <constraint firstItem="bR4-2i-vPo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="NHK-Ng-vW3"/>
+                    <constraint firstItem="hPd-fT-ycQ" firstAttribute="top" secondItem="KD3-OX-vp8" secondAttribute="bottom" constant="9" id="NhM-Mb-9s8"/>
+                    <constraint firstItem="hPd-fT-ycQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="OND-3R-daH"/>
+                    <constraint firstItem="KD3-OX-vp8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PZ9-7t-9Hp"/>
+                    <constraint firstItem="Sip-J6-ydD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="100" id="WiB-Bi-IoY"/>
+                    <constraint firstItem="bR4-2i-vPo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="100" id="gMc-5M-jbs"/>
+                    <constraint firstItem="MKU-H6-BMG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="i1D-cd-gVX"/>
+                    <constraint firstItem="Ocx-EX-jcH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="100" id="qXC-Rq-d7s"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="view1" destination="bR4-2i-vPo" id="Dzc-Kp-imD"/>
+                <outlet property="view2" destination="Sip-J6-ydD" id="WPJ-F1-EuT"/>
+                <outlet property="view3" destination="Ocx-EX-jcH" id="rY6-jo-5uK"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="backgroundStar.png" width="25" height="25"/>
+        <image name="foregroundStar.png" width="25" height="25"/>
+    </resources>
+</document>

@@ -144,7 +144,6 @@ static float cellWidth = 66;
     button_back.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     if ([SharedAppUtil defaultCommonUtil].cityVO)
         [button_back setTitle:[SharedAppUtil defaultCommonUtil].cityVO.dvname forState:UIControlStateNormal];
-    
     [self initLocation];
     
     
@@ -235,6 +234,18 @@ static float cellWidth = 66;
  */
 -(void)initLocation
 {
+    //获取定位城市和地区block
+    [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
+        if (addressString) {
+            [self getLocationCity:addressString];
+            
+//            [button_back setTitle:addressString forState:UIControlStateNormal];
+//            CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
+//            button_back.width = size.width + 30;
+//            button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
+        }
+    }];
+    
     [[CCLocationManager shareLocation] getLocationError:^(NSString *addressString) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
                                                         message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
@@ -246,13 +257,7 @@ static float cellWidth = 66;
         
         return [self getLocationCity:addressString];
     }];
-    
-    //获取定位城市和地区block
-    [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
-        if (addressString) {
-            [self getLocationCity:addressString];
-        }
-    }];
+
     
 }
 
@@ -579,9 +584,8 @@ static float cellWidth = 66;
 
 - (IBAction)healthClickHandler:(id)sender
 {
-    return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
     CheckSelfViewController *healthVC = [[CheckSelfViewController alloc] init];
-    [self.navigationController pushViewController: healthVC animated:YES];
+    [self.navigationController pushViewController:healthVC animated:YES];
 }
 
 - (IBAction)questionClickHander:(id)sender

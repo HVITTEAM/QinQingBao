@@ -20,7 +20,7 @@
                             <constraint firstAttribute="height" constant="21" id="Kfs-DW-vdp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="Whl-Jo-VAA">
@@ -36,7 +36,7 @@
                             <constraint firstAttribute="height" constant="21" id="RiR-ab-zn5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="物流慢了些，其他都还好。。。。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svs-pi-FuS">
@@ -45,7 +45,7 @@
                             <constraint firstAttribute="height" constant="21" id="Z7Q-Qd-sWp"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKR-5J-zXL">
@@ -57,10 +57,21 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="查看全部评价"/>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-1-1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3t-P0-lw1">
+                        <rect key="frame" x="160" y="41" width="150" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="0ZN-n3-vCW"/>
+                            <constraint firstAttribute="width" constant="150" id="iVU-Sr-u93"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="u7Q-NS-BJg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2tf-Il-NDn"/>
                     <constraint firstItem="Svs-pi-FuS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="3ma-SI-Awh"/>
+                    <constraint firstItem="e3t-P0-lw1" firstAttribute="top" secondItem="u7Q-NS-BJg" secondAttribute="bottom" constant="10" id="6tb-gr-zmB"/>
                     <constraint firstAttribute="trailing" secondItem="Svs-pi-FuS" secondAttribute="trailing" constant="10" id="A35-ST-gJp"/>
                     <constraint firstAttribute="trailing" secondItem="Ix1-rH-cs8" secondAttribute="trailing" constant="8" id="F74-n6-bg1"/>
                     <constraint firstItem="u7Q-NS-BJg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FcC-lw-wLk"/>
@@ -72,10 +83,16 @@
                     <constraint firstItem="Whl-Jo-VAA" firstAttribute="top" secondItem="u7Q-NS-BJg" secondAttribute="bottom" constant="8" id="VkL-si-Q5u"/>
                     <constraint firstItem="Whl-Jo-VAA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Vrd-M2-mM6"/>
                     <constraint firstItem="Svs-pi-FuS" firstAttribute="top" secondItem="Whl-Jo-VAA" secondAttribute="bottom" constant="8" id="dbO-Y1-L1P"/>
+                    <constraint firstAttribute="trailing" secondItem="e3t-P0-lw1" secondAttribute="trailing" constant="10" id="rEg-LQ-5NE"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="button" destination="SKR-5J-zXL" id="Nzz-Lo-PFW"/>
+                <outlet property="contentLab" destination="Svs-pi-FuS" id="H3i-Ez-hht"/>
+                <outlet property="iconImg" destination="Whl-Jo-VAA" id="OFe-lh-f2W"/>
+                <outlet property="nameLab" destination="Ix1-rH-cs8" id="fsX-cI-eh7"/>
+                <outlet property="timeLab" destination="e3t-P0-lw1" id="USO-fN-kxD"/>
+                <outlet property="totalCountLab" destination="u7Q-NS-BJg" id="PhP-RY-9hM"/>
             </connections>
         </tableViewCell>
     </objects>

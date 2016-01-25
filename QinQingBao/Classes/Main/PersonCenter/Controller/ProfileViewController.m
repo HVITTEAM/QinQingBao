@@ -23,6 +23,7 @@
 #import "MTCouponsViewController.h"
 #import "AddressTableViewController.h"
 #import "GoodsViewController.h"
+#import "GoodsTypeViewController.h"
 
 #define imageHeight 140
 
@@ -368,7 +369,7 @@
     // 2.设置组的所有行数据
     car = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"pc_service.png"];
     
-    car.destVcClass = [GoodsViewController class];
+    car.destVcClass = [GoodsTypeViewController class];
     
     group.items = @[car];
 }

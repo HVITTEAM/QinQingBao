@@ -15,6 +15,7 @@
 #import "WifiAddDeviceViewController.h"
 #import "ResetDeviceTipsViewController.h"
 
+#import "UIViewController+EzvizTransition.h"
 
 
 @interface WifiInfoViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
@@ -73,6 +74,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"配置wifi";
+
     // Do any additional setup after loading the view from its nib.
     
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
@@ -106,7 +110,7 @@
         _titleView.tipsLab.text = NSLocalizedString(@"配置Wi-Fi", nil);
     }
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.origin.y+_titleView.frame.size.height, sizeWidth, gfScreenHeight-64) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.origin.y+_titleView.frame.size.height, sizeWidth, 480-64) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -199,11 +203,6 @@
             
             self.alertView = alertView;
         }
-    }
-    if([self.strSsid isEqualToString:@"ys7-yd-2217-dj"]){
-        self.keyField.text = @"DeJohn2015";
-    }else{
-        self.keyField.text = @"hik12345+";
     }
 }
 

@@ -12,10 +12,12 @@
 #import "CCLocationManager.h"
 #import "CitiesTotal.h"
 #import "CityModel.h"
+#import "SectionHeadView.h"
 
 @interface CitiesViewController ()
 {
     NSArray *dataProvider;
+    NSMutableArray *expandedSectionArr;
 }
 
 @end
@@ -33,6 +35,8 @@
 
 -(void)initNavgation
 {
+    expandedSectionArr = [[NSMutableArray alloc] init];
+    
     self.title = [NSString stringWithFormat:@"当前城市--%@",self.selectedCity];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
@@ -46,6 +50,7 @@
                                                                  highImageName:@"btn_dismissItem_highlighted.png"
                                                                         target:self action:@selector(back)];
     
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -55,26 +60,28 @@
 
 -(void)getDataProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_conf_address parameters: @{}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                     }
-                                     else
-                                     {
-                                         CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
-                                         dataProvider = result.datas;
-                                         [self.tableView reloadData];
-                                     }
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                 }];
+    dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
+    
+    //    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //    [CommonRemoteHelper RemoteWithUrl:URL_Get_conf_address parameters: @{}
+    //                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    //                                     id codeNum = [dict objectForKey:@"code"];
+    //                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+    //                                     {
+    //                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+    //                                     }
+    //                                     else
+    //                                     {
+    //                                         CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
+    //                                         dataProvider = result.datas;
+    //                                         [self.tableView reloadData];
+    //                                     }
+    //                                     [HUD removeFromSuperview];
+    //                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    //                                     NSLog(@"发生错误！%@",error);
+    //                                     [HUD removeFromSuperview];
+    //                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+    //                                 }];
 }
 
 -(void)back
@@ -88,42 +95,65 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return dataProvider.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return section == 1? 1 : dataProvider.count;
-    return dataProvider.count;
+    NSArray *arr;
+    if (section == 0)
+        return 1;
+    else
+        if ([expandedSectionArr indexOfObject:[NSString stringWithFormat:@"%ld",(long)section]] != NSNotFound)
+        {
+            arr  = [dataProvider[section -1] objectForKey:@"regions"];
+            return arr.count;
+        }
+        else
+            return 0;
 }
 
 #pragma mark - 代理方法
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    SectionHeadView *sectionView = [[SectionHeadView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50) expanded:YES];
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 20)];
     view.backgroundColor = HMColor(230, 230, 230);
     UILabel *lab = [[UILabel alloc] init];
-    switch (section) {
-        case 1:
-            lab.text = @"定位城市";
-            break;
-        case 0:
-            lab.text = @"开通城市";
-            break;
-        default:
-            
-            break;
-    }
     lab.frame = CGRectMake(20, 5, 100, 20);
     lab.font = [UIFont systemFontOfSize:16];
     lab.textColor = [UIColor grayColor];
     [view addSubview:lab];
-    return view;
+    
+    if (section == 0)
+    {
+        lab.text = @"定位城市";
+        return view;
+    }
+    else
+    {
+        NSString *title = [dataProvider[section -1] objectForKey:@"name"];
+        [sectionView setTitle:title indexSection:section];
+        sectionView.expandedClick = ^(NSInteger section)
+        {
+            if ([expandedSectionArr indexOfObject:[NSString stringWithFormat:@"%ld",(long)section]] == NSNotFound)
+                [expandedSectionArr addObject:[NSString stringWithFormat:@"%ld",(long)section]];
+            else
+                [expandedSectionArr removeObject:[NSString stringWithFormat:@"%ld",(long)section]];
+            
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+        };
+        return sectionView;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30;
+    if (section == 0)
+        return 30;
+    else
+        return 50;
 }
 
 //- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
@@ -135,41 +165,39 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    switch (indexPath.section)
+    if (indexPath.section == 0)
     {
-//        case 0:
-//        {
-//            GPSCell *gpscell =  [tableView dequeueReusableCellWithIdentifier:@"MTGPSCell"];
-//            if (gpscell == nil)
-//                gpscell = [GPSCell GPSCell];
-//            
-//            //赋值
-//            UIButton *btn = (UIButton *)[gpscell viewWithTag:1];
-//            [btn setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
-//            btn.backgroundColor = [UIColor whiteColor];
-//            btn.layer.borderWidth = 0.5;
-//            btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
-//            [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
-//            cell = gpscell;
-//        }
-//            break;
-        case 0:
+        GPSCell *gpscell =  [tableView dequeueReusableCellWithIdentifier:@"MTGPSCell"];
+        if (gpscell == nil)
+            gpscell = [GPSCell GPSCell];
+        
+        //赋值
+        UIButton *btn = (UIButton *)[gpscell viewWithTag:1];
+        [btn setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
+        btn.backgroundColor = [UIColor whiteColor];
+        btn.layer.borderWidth = 0.5;
+        btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
+        [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
+        cell = gpscell;
+    }
+    else
+    {
+        UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"CommonCityCell"];
+        if (commoncell == nil)
         {
-            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"CommonCityCell"];
-            if (commoncell == nil)
-                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCityCell"];
-            
-            CityModel *vo = dataProvider[indexPath.row];
-            
-            if ([vo.dvname isEqualToString:self.selectedCity])
-                commoncell.accessoryType = UITableViewCellAccessoryCheckmark;
-            commoncell.textLabel.text = vo.dvname;
-            commoncell.textLabel.font = [UIFont systemFontOfSize:14];
-            cell = commoncell;
+            commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommonCityCell"];
         }
-            break;
-        default:
-            break;
+        NSArray *arr = [dataProvider[indexPath.section -1] objectForKey:@"regions"];
+        
+        //        CityModel *vo = dataProvider[indexPath.row];
+        //
+        //        if ([vo.dvname isEqualToString:self.selectedCity])
+        //            commoncell.accessoryType = UITableViewCellAccessoryCheckmark;
+        commoncell.textLabel.text = [arr[indexPath.row] objectForKey:@"name"];
+        commoncell.textLabel.font = [UIFont systemFontOfSize:14];
+        commoncell.backgroundColor = HMGlobalBg;
+        cell = commoncell;
+        
     }
     return cell;
 }
@@ -181,7 +209,14 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-        CityModel *vo = dataProvider[indexPath.row];
+        
+        NSArray *arr = [dataProvider[indexPath.section -1] objectForKey:@"regions"];
+        NSDictionary *dict1 = arr[indexPath.row];
+        
+        CityModel *vo = [[CityModel alloc] init];
+        vo.dvname = [dict1 objectForKey:@"name"];
+        vo.dvcode = [dict1 objectForKey:@"dvcode"];
+        
         [SharedAppUtil defaultCommonUtil].cityVO = vo;
         [self.delegate selectedChange:vo.dvname];
     }];
@@ -194,6 +229,5 @@
         [self.delegate selectedChange:btn.titleLabel.text];
     }];
 }
-
 
 @end

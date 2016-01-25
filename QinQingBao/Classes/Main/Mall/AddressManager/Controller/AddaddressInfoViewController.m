@@ -10,7 +10,7 @@
 #import "AreaModelTotal.h"
 #import "AreaModel.h"
 
-@interface AddaddressInfoViewController ()<UIActionSheetDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
+@interface AddaddressInfoViewController ()<UIActionSheetDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
 {
     NSMutableArray *areaList;
     
@@ -22,46 +22,127 @@
     
     NSInteger PickType;
 }
+
+//省 数组
+@property (strong, nonatomic) NSArray *provinceArr;
+//城市 数组
+@property (strong, nonatomic) NSArray *cityArr;
+//区县 数组
+@property (strong, nonatomic) NSArray *areaArr;
 @end
 
 @implementation AddaddressInfoViewController
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 3;
 }
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [areaList count];
+    switch (component)
+    {
+        case 0:
+            return self.provinceArr.count;
+            break;
+        case 1:
+            return self.cityArr.count;
+            break;
+        case 2:
+            return self.areaArr.count;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 -(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    AreaModel *item = areaList[row];
-    return item.area_name;
+    switch (component) {
+        case 0:
+            return [self.provinceArr objectAtIndex:row];
+            break;
+        case 1:
+            return [[self.cityArr objectAtIndex:row] objectForKey:@"name"];
+            break;
+        case 2:
+            return [[self.areaArr objectAtIndex:row] objectForKey:@"name"];
+            break;
+        default:
+            return  @"";
+            break;
+    }
+    
+    //    switch (PickType)
+    //    {
+    //        case 0:
+    //            selectedProvinceItem  = areaList[0];
+    //            break;
+    //        case  1:
+    //            selectedCityItem  = areaList[0];
+    //            break;
+    //        case  2:
+    //            selectedRegionItem  = areaList[0];
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //
+    //    AreaModel *item = areaList[row];
+    //    return item.area_name;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    switch (PickType) {
+    switch (component)
+    {
         case 0:
-            selectedProvinceItem  = areaList[row];
+        {
+            selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
+            
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] ];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
             break;
-        case  1:
-            selectedCityItem  = areaList[row];
+        }
+        case 1:
+        {
+            self.areaArr = [[self.cityArr objectAtIndex:row] objectForKey:@"regions"];
+            [pickView reloadComponent:2];
+            [pickView selectRow:0 inComponent:2 animated:YES];
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"areaid"] ];
+            self.areaArr = self.cityArr[row][@"regions"];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
             break;
-        case  2:
-            selectedRegionItem  = areaList[row];
+        }
+        case 2:
+        {
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"]];
             break;
+        }
         default:
             break;
     }
     
+    //    switch (PickType) {
+    //        case 0:
+    //            selectedProvinceItem  = areaList[row];
+    //            break;
+    //        case  1:
+    //            selectedCityItem  = areaList[row];
+    //            break;
+    //        case  2:
+    //            selectedRegionItem  = areaList[row];
+    //            break;
+    //        default:
+    //            break;
+    //    }
 }
 
 - (IBAction)clickProvince:(id)sender
 {
-    [self getProviceData:@"0"];
+    //    [self getProviceData:@"0"];
+    [self showDatePicker];
     PickType = 0;
 }
 
@@ -109,15 +190,20 @@
     if (self.item)
     {
         NSArray *arr = [self.item.area_info componentsSeparatedByString:@"-"];
-        self.provinceTextField.text  = arr[0];
-        self.cityTextField.text  = arr[1];
-        self.regionTextField.text  = arr[2];
-        self.nameTextField.text = self.item.true_name;
-        self.phoneTextField.text = self.item.mob_phone;
-        self.telephoneTextField.text = self.item.tel_phone;
-        self.addressTextField.text = self.item.address;
+        //        self.provinceTextField.text  = arr[0];
+        //        self.cityTextField.text  = arr[1];
+        //        self.regionTextField.text  = arr[2];
+        //        self.nameTextField.text = self.item.true_name;
+        //        self.phoneTextField.text = self.item.mob_phone;
+        //        self.telephoneTextField.text = self.item.tel_phone;
+        //        self.addressTextField.text = self.item.address;
+        
+        self.provinceTextField.text  = self.item.area_info;
+        
+        selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
+        selectedCityItem  = [[AreaModel alloc] initWithName:arr[1] areaid:self.item.city_id];
+        selectedRegionItem  = [[AreaModel alloc] initWithName:arr[2] areaid:self.item.area_id];
     }
-    
 }
 
 -(void)initNavgation
@@ -135,15 +221,15 @@
     }else if (_phoneTextField.text.length != 11) {
         return [NoticeHelper AlertShow:@"手机号码格式不正确" view:self.view];
     }
-//    if ([_telephoneTextField.text isEqualToString:@""]) {
-//        return [NoticeHelper AlertShow:@"请填写电话号码" view:self.view];
-//    }
+    //    if ([_telephoneTextField.text isEqualToString:@""]) {
+    //        return [NoticeHelper AlertShow:@"请填写电话号码" view:self.view];
+    //    }
     if ([_provinceTextField.text isEqualToString:@""])
-        return [NoticeHelper AlertShow:@"请填写省份信息" view:self.view];
-    if ([_cityTextField.text isEqualToString:@""])
-        return [NoticeHelper AlertShow:@"请填写城市信息" view:self.view];
-    if ([_regionTextField.text isEqualToString:@""])
-        return [NoticeHelper AlertShow:@"请填写区县信息" view:self.view];
+        return [NoticeHelper AlertShow:@"请填写区域信息" view:self.view];
+    //    if ([_cityTextField.text isEqualToString:@""])
+    //        return [NoticeHelper AlertShow:@"请填写城市信息" view:self.view];
+    //    if ([_regionTextField.text isEqualToString:@""])
+    //        return [NoticeHelper AlertShow:@"请填写区县信息" view:self.view];
     if ([_addressTextField.text isEqualToString:@""])
         return [NoticeHelper AlertShow:@"请填写详细地址信息" view:self.view];
     
@@ -155,7 +241,7 @@
                                                                          @"client" : @"ios",
                                                                          @"address_id" : self.item.address_id,
                                                                          @"true_name" : _nameTextField.text,
-                                                                         @"area_info" : [NSString stringWithFormat:@"%@-%@-%@",self.provinceTextField.text,self.cityTextField.text,self.regionTextField.text],
+                                                                         @"area_info" : self.provinceTextField.text,
                                                                          @"address" : _addressTextField.text,
                                                                          @"tel_phone" : _telephoneTextField.text,
                                                                          @"mob_phone" : _phoneTextField.text,
@@ -187,7 +273,7 @@
         [CommonRemoteHelper RemoteWithUrl:URL_Address_Add parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                         @"client" : @"ios",
                                                                         @"true_name" : _nameTextField.text,
-                                                                        @"area_info" : [NSString stringWithFormat:@"%@-%@-%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name],
+                                                                        @"area_info" : self.provinceTextField.text,
                                                                         @"address" : _addressTextField.text,
                                                                         @"tel_phone" : _telephoneTextField.text,
                                                                         @"mob_phone" : _phoneTextField.text,
@@ -222,6 +308,13 @@
     pickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 10, MTScreenW - 30, 200)];
     pickView.dataSource = self;
     pickView.delegate = self;
+    
+    self.provinceArr = @[@"浙江省"];
+    self.cityArr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
+    self.areaArr = self.cityArr[0][@"regions"];
+    selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
+    selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] ];
+    selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
 }
 
 //获取城市级联信息
@@ -246,15 +339,11 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"出错了....");
                                  }];
-    
 }
 
 -(void)showDatePicker
 {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        [self setDatePickerIos8];
-    else
-        [self setDatePickerIos7];
+    [self setDatePickerIos8];
 }
 
 
@@ -267,38 +356,13 @@
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         
-        switch (PickType) {
-            case 0:
-                self.provinceTextField.text  = selectedProvinceItem.area_name;
-                break;
-            case  1:
-                self.cityTextField.text  =selectedCityItem.area_name;
-                break;
-            case  2:
-                self.regionTextField.text  = selectedRegionItem.area_name;
-                break;
-            default:
-                break;
-        }
+        self.provinceTextField.text  = [NSString stringWithFormat:@"%@-%@-%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name];
     }];
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
     [alertVc.view addSubview:pickView];
     [alertVc addAction:ok];
     [alertVc addAction:no];
     [self presentViewController:alertVc animated:YES completion:nil];
-}
-
--(void)setDatePickerIos7
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: @"\n\n\n\n\n\n\n\n\n\n\n"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:@"确认"
-                                  otherButtonTitles:nil];
-    
-    [actionSheet addSubview:pickView];
-    [actionSheet showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -316,8 +380,46 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    NSTimeInterval animationDuration=0.30f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    //上移30个单位，按实际情况设置
+    
+    if (CGRectGetMaxY(textField.frame) > MTScreenH - 216)
+    {
+        CGRect rect = CGRectMake(0.0f,MTScreenH - 216 - CGRectGetMaxY(textField.frame),MTScreenW,MTScreenH);
+        self.view.frame = rect;
+        [UIView commitAnimations];
+    }
+    
     if (textField == self.regionTextField || textField == self.provinceTextField || textField == self.cityTextField)
         return NO;
+    return YES;
+}
+
+//输入框编辑完成以后，将视图恢复到原始状态
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSTimeInterval animationDuration = 0.25f;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    //上移30个单位，按实际情况设置
+    CGRect rect = CGRectMake(0.0f,0,MTScreenW,MTScreenH);
+    self.view.frame = rect;
+    [UIView commitAnimations];
+}
+
+//要实现的Delegate方法,键盘next下跳
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField.returnKeyType == UIReturnKeyDone)
+    {
+        [self.view endEditing:YES];
+    }
+    if(textField.returnKeyType==UIReturnKeyNext)
+    {
+        
+    }
     return YES;
 }
 

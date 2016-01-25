@@ -7,6 +7,8 @@
 //
 
 #import "MapViewController.h"
+#import "CLLocation+MTLocation.h"
+#import "WGS84TOGCJ02.h"
 
 @interface MapViewController ()
 {
@@ -32,7 +34,19 @@
     
     geocoder = [[CLGeocoder alloc] init];
     
-    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake([self.latitude floatValue], [self.longitude floatValue]);
+    CLLocation * location = [[CLLocation alloc]initWithLatitude:[self.latitude floatValue] longitude:[self.longitude floatValue]];
+    CLLocation * marsLoction =  [location locationMarsFromBaidu];
+    NSLog(@"%f,%f",marsLoction.coordinate.latitude,marsLoction.coordinate.longitude);
+    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake(marsLoction.coordinate.latitude, marsLoction.coordinate.longitude);
+
+    
+//    CLLocationCoordinate2D cords;
+//    if (![WGS84TOGCJ02 isLocationOutOfChina:[location coordinate]]) {
+//        //转换后的coord
+//        cords = [WGS84TOGCJ02 transformFromWGSToGCJ:[location coordinate]];
+//    }
+//    CLLocationCoordinate2D cords = CLLocationCoordinate2DMake([self.latitude floatValue], [self.longitude floatValue]);
+    
     float zoomLevel = 0.01;//缩放区域
     MKCoordinateRegion region = MKCoordinateRegionMake(cords, MKCoordinateSpanMake(zoomLevel, zoomLevel));
     [_map setRegion:[_map regionThatFits:region] animated:YES];
@@ -55,7 +69,7 @@
 {
     _map = [[MKMapView alloc] initWithFrame:[self.view bounds]];
     
-//    self.map.showsCompass= YES; //指南针
+    //    self.map.showsCompass= YES; //指南针
     //锁定视图旋转
     self.map.rotateEnabled = NO;
     //锁定2D视图
@@ -113,21 +127,21 @@
          }else//编码成功
          {
              //显示最前面的地标信息
-//             CLPlacemark *firstPlacemark=[placemarks firstObject];
+             //             CLPlacemark *firstPlacemark=[placemarks firstObject];
              
-//             NSArray* addrArray = [firstPlacemark.addressDictionary
-//                                   objectForKey:@"FormattedAddressLines"];
-//
-//             NSString *str1 = firstPlacemark.thoroughfare;
-//             NSString *str2 = firstPlacemark.subThoroughfare;
-//             NSString *str3 = firstPlacemark.locality;
-//             NSString *str4 = firstPlacemark.subLocality;
-//             NSString *str5 = firstPlacemark.administrativeArea;
-//             NSString *str6 = firstPlacemark.subAdministrativeArea;
-//             NSString *str7 = firstPlacemark.country;
-//             NSString *str = firstPlacemark.name;
-//             NSString *locationStr = [NSString stringWithFormat:@"%@%@%@%@%@附近",firstPlacemark.locality,firstPlacemark.subLocality,firstPlacemark.thoroughfare,firstPlacemark.subThoroughfare,firstPlacemark.name];
-//             NSLog(locationStr);
+             //             NSArray* addrArray = [firstPlacemark.addressDictionary
+             //                                   objectForKey:@"FormattedAddressLines"];
+             //
+             //             NSString *str1 = firstPlacemark.thoroughfare;
+             //             NSString *str2 = firstPlacemark.subThoroughfare;
+             //             NSString *str3 = firstPlacemark.locality;
+             //             NSString *str4 = firstPlacemark.subLocality;
+             //             NSString *str5 = firstPlacemark.administrativeArea;
+             //             NSString *str6 = firstPlacemark.subAdministrativeArea;
+             //             NSString *str7 = firstPlacemark.country;
+             //             NSString *str = firstPlacemark.name;
+             //             NSString *locationStr = [NSString stringWithFormat:@"%@%@%@%@%@附近",firstPlacemark.locality,firstPlacemark.subLocality,firstPlacemark.thoroughfare,firstPlacemark.subThoroughfare,firstPlacemark.name];
+             //             NSLog(locationStr);
          }     }];
     
 }

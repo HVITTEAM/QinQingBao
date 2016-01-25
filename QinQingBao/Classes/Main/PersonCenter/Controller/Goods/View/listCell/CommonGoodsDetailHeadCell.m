@@ -27,9 +27,14 @@
     
 }
 
--(void)setitemWithData:(CommonGoodsModel *)item
+-(void)setitemWithData:(ReciverinfoModel *)item
 {
+    self.telLab.text = item.phone;
+    self.addressLab.text = [NSString stringWithFormat:@"收货地址:%@",item.address];
+    self.nameTitle.text = [NSString stringWithFormat:@"收货人:%@",item.reciver_name];
     
+    if (!item.inv_title_select)
+        self.invoiceLab.text = @"无发票";
 }
 
 @end

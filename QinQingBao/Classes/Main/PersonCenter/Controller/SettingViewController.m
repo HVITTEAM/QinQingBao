@@ -77,17 +77,12 @@
         [NoticeHelper AlertShow:@"释放成功" view:self.view];
     };
     
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"用户反馈" icon:@"app.png"];
-    help.operation = ^{
-        [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
-    };
-    
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"设置" icon:@"app.png"];
     advice.operation = ^{
         [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
     };
     
-    group.items = @[version,help,advice];
+    group.items = @[version,advice];
 }
 
 

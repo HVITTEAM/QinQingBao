@@ -60,7 +60,6 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 5, 0);
 }
 
-
 -(void)setSelectedItem:(ServiceItemModel *)selectedItem
 {
     _selectedItem = selectedItem;

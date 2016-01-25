@@ -225,6 +225,9 @@
 /***注册服务条款url*/
 #define URL_Agreement [NSString stringWithFormat:@"%@/admin/manager/index.php/family/family_detail",URL_Local]
 
+/***意见反馈url*/
+#define URL_Feedback [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=feedback&op=add_new_feedback",URL_Local]
+
 /***轮播广告url*/
 #define URL_Advertisementpic [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=baseconf&op=get_pic_cofn",URL_Local]
 
@@ -299,7 +302,6 @@
 
 /***亲属 - 关系绑定url*/
 #define URL_Bang_relation [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=relation&op=bang_relation",URL_Local]
-
 
 /***确认下单综合接口url*/
 #define URL_Get_data_create_order [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_data_create_order",URL_Local]
@@ -404,6 +406,12 @@
 /***查看物流信息url*/
 #define URL_Search_deliver [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_search_deliver",URL_Local]
 
+/***订单删除url*/
+#define URL_Del_order [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_del_order",URL_Local]
+
+/***订单详情url*/
+#define URL_Show_order [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_order&op=api_show_order",URL_Local]
+
 //---------------------评价---------------------
 
 #pragma mark 商城评价api
@@ -415,6 +423,16 @@
 #define URL_Dis_add [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=dis_evaluate&op=api_dis_add",URL_Local]
 
 
+//---------------------症状自查---------------------
+/***获取身体部位url*/
+#define URL_symptom_body_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_body_list",URL_Local]
+
+/***获取症状名字url*/
+#define URL_symptom_name_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_name_list",URL_Local]
+
+/***获取症状详细信息url*/
+#define URL_symptom_info [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_info",URL_Local]
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
@@ -422,10 +440,10 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 \
 alpha:alp]
 
 
-float gfScreenWidth = 320.0f;
-float gfScreenHeight = 480.0f;
-float gfStatusBarSpace = 20;
-float gfFrameHeight = 460.0f;
+//float gfScreenWidth = 320.0f;
+//float gfScreenHeight = 480.0f;
+//float gfStatusBarSpace = 20;
+//float gfFrameHeight = 460.0f;
 
 typedef NS_ENUM(NSInteger, ChartType) {
     ChartTypeSugar,

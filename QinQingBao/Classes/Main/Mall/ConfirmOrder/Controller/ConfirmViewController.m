@@ -354,7 +354,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                   @"city_id" : model.city_id,
                   @"area_id" : model.area_id,
                   @"pay_name" : @"online",
-#warning 暂时解决  storeid为14
+#warning   storeid写死为14 因为我们的商城店铺就只有一个
                   @"voucher" : couponsItem ? [NSString stringWithFormat:@"%@|%@|%@",couponsItem.voucher_t_id,@"14",couponsItem.voucher_price] : @0,                  @"rcb_pay" : @0,
                   @"pd_pay" : @0,
                   @"ifcart" : self.fromCart ? @"1" : @"0"};

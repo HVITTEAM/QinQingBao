@@ -60,10 +60,9 @@
                 if (!item.diastolic)
                     item.diastolic = @"0";
                 [YTitles addObject:item.systolic];
+                [YTitles1 addObject:item.diastolic];
                 
                 scrollChart.chooseRange = CGRangeMake(200, 0);
-                
-                [YTitles1 addObject:item.diastolic];
             }
             break;
             
@@ -81,7 +80,7 @@
         default:
             break;
     }
-    [scrollChart setYValues:@[YTitles]];
+    [scrollChart setYValues:@[YTitles,YTitles1]];
     
     //设置表格各条曲线是否显示最大最小值,1表示对应的曲线要显示最大最小值
     NSMutableArray *showMaxMinArray = [[NSMutableArray alloc]init];
@@ -127,7 +126,7 @@
     
     [scrollChart setXLabels:xTitles];
     
-    [scrollChart setYValues:@[YTitles]];
+    [scrollChart setYValues:@[YTitles,YTitles1]];
     
     //绘制表格
     [scrollChart strokeChart];

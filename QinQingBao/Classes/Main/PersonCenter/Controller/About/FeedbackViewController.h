@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FeedbackViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITextView *contentText;
+@property (strong, nonatomic) IBOutlet UIButton *suBtn;
 
 @end

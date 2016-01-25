@@ -13,6 +13,7 @@
 #import "MyCameraListCell.h"
 #import "RealPlayViewController.h"
 
+#import "CSNAddByQRcodeViewController.h"
 @interface VideoListViewController ()<MyCameraListCellDelegate>
 {
     YSMobilePages *mp;
@@ -44,6 +45,7 @@
     
     [self login];
     
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addDevice)];
     
     
     //    {"id": "123456",
@@ -119,6 +121,10 @@
     }
 }
 
+- (void)addDevice {
+    CSNAddByQRcodeViewController * snScanViewController = [[CSNAddByQRcodeViewController alloc] initWithNibName:@"CSNAddByQRcodeViewController" bundle:nil];
+    [self.navigationController pushViewController:snScanViewController animated:YES];
+}
 /**
  *  查询摄像头列表
  *

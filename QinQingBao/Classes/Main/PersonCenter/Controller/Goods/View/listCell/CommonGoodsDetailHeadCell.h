@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonGoodsModel.h"
 #import "ExtendOrderGoodsModel.h"
+#import "ReciverinfoModel.h"
 
 @interface CommonGoodsDetailHeadCell : UITableViewCell
 
@@ -19,5 +20,5 @@
 @property (strong, nonatomic) IBOutlet UIView *line;
 @property (strong, nonatomic) IBOutlet UILabel *invoiceLab;
 
--(void)setitemWithData:(CommonGoodsModel *)item;
+-(void)setitemWithData:(ReciverinfoModel *)item;
 @end
