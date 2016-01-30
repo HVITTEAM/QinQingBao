@@ -68,12 +68,16 @@
             
         case ChartTypeSugar:
             for (HealthDataModel *item in self.dataProvider) {
+                if (!item.bloodglucose)
+                    item.bloodglucose = @"0";
                 [YTitles addObject:item.bloodglucose];
             }
             break;
             
         case ChartTypeHeart:
             for (HealthDataModel *item in self.dataProvider) {
+                if (!item.heartrate_avg)
+                    item.heartrate_avg = @"0";
                 [YTitles addObject:item.heartrate_avg];
             }
             break;

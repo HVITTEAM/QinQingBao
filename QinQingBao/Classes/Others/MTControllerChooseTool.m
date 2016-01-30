@@ -13,6 +13,7 @@
 #import "ProfileViewController.h"
 #import "RootViewController.h"
 #import "LoginViewController.h"
+#import "MallRootViewControlelr.h"
 
 @implementation MTControllerChooseTool
 
@@ -71,10 +72,12 @@
     HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
     UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
     
-    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-    mallView.url =  [[self alloc] getMallurl];
-    UINavigationController *navMall = [[UINavigationController alloc] initWithRootViewController:mallView];
+//    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
+//    mallView.url =  [[self alloc] getMallurl];
     
+    MallRootViewControlelr *mallView = [[MallRootViewControlelr alloc] init];
+    
+    UINavigationController *navMall = [[UINavigationController alloc] initWithRootViewController:mallView];
     ProfileViewController *sysview = [[ProfileViewController alloc] init];
     UINavigationController *navsys = [[UINavigationController alloc] initWithRootViewController:sysview];
     

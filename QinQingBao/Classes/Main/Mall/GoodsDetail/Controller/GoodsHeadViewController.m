@@ -92,13 +92,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.alpha = 0;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.alpha = 1;
 }
 
 - (void)viewDidLoad
@@ -162,7 +160,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     self.imgPlayer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, IMAGEVIEW_HEIGHT)];
     
     footView = [[RecommendView alloc] init];
-    footView.frame = CGRectMake(0, 0, MTScreenW, 590);
+    footView.frame = CGRectMake(0, 0, MTScreenW, (MTScreenW/2 + 60)*3 + 60);
     footView.backgroundColor = [UIColor whiteColor];
     __weak __typeof(self)weakSelf = self;
     footView.clickClick = ^(CommendModel *item)
@@ -173,7 +171,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     };
     self.tableView.tableFooterView = footView;
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.tableView.tableHeaderView = self.imgPlayer;
     
@@ -340,9 +338,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
         _pageControl.currentPage = page;
     }
     
-    CGFloat scrollOffset = self.tableView.contentOffset.y;
-    
-    self.navigationController.navigationBar.alpha = scrollOffset/64;
+//    CGFloat scrollOffset = self.tableView.contentOffset.y;
+//    
+//    self.navigationController.navigationBar.alpha = scrollOffset/64;
     //    if(scrollOffset > 64 && self.navigationController.navigationBar.alpha == 0.0)
     //    {
     //        self.navigationController.navigationBar.alpha = 0;

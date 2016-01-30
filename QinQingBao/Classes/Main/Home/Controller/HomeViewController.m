@@ -285,7 +285,7 @@ static float cellWidth = 66;
 {
     //    WebViewController *listView = [[WebViewController alloc] init];
     HomePicModel *item = advArr[tap.view.tag];
-    if (tap.view.tag <= 0 || item.bc_article_url.length == 0)
+    if (item.bc_article_url.length == 0)
         return;
     AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
     adver.type = tap.view.tag;

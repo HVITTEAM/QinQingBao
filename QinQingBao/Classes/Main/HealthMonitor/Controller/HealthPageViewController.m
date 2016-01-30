@@ -235,7 +235,6 @@
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeBlood;
-            //            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
             break;
         case 5:
@@ -268,8 +267,21 @@
             break;
         case 0:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
-            bloodPressureVC.type = ChartTypeHeart;
+            if (dataProvider.count > 0)
+            {
+                HealthDataModel *item = dataProvider[0];
+                if (item.heartrate_avg.length > 0 && item.heart_time.length > 0)
+                {
+                    bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
+                    bloodPressureVC.type = ChartTypeHeart;
+                }
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            }
+            else
+            {
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            }
+
         }
             break;
         case 1:

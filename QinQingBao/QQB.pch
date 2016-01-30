@@ -146,13 +146,13 @@
 
 
 /**
- *   导航历史归档key
+ *   搜索历史归档key
  */
-#define MapNav_Archiver_Key @"mapnav"
+#define Search_Archiver_Key @"search"
 /**
- *  导航历史归档路径
+ *  搜索历史归档路径
  */
-#define MapNav_Archiver_Path @"mapnavpath"
+#define Search_Archiver_Path @"searchpath"
 
 /**
  *  截屏信息归档key
@@ -204,11 +204,11 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-//#define URL_Local @"http://61.143.60.87/ylserver"
+#define URL_Local @"http://61.143.60.87/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-#define URL_Local @"http://ibama.hvit.com.cn"
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
@@ -433,6 +433,25 @@
 /***获取症状详细信息url*/
 #define URL_symptom_info [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_info",URL_Local]
 
+//---------------------商城首页---------------------
+/***首页 - 获取轮播图url*/
+#define URL_Shopcofn [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=baseconf&op=get_pic_shopcofn",URL_Local]
+
+/***获取分类url*/
+#define URL_Goodclass [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=baseconf&op=get_goodclass_shopcofn",URL_Local]
+
+/***首页 - 专题 数据获取url*/
+#define URL_Apiget_seecial [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_seecial",URL_Local]
+
+/***商品推荐数据获取url*/
+#define URL_Apiget_goods [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_goods",URL_Local]
+
+//----------------------------//
+/***获取专题列表Url*/
+#define URL_Special_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_seecial",@"http://61.143.60.87/ylserver"]
+
+/***获取抢购数据Url*/
+#define URL_groupbuy_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_groupbuy",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

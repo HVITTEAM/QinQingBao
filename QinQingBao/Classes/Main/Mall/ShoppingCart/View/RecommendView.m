@@ -8,14 +8,14 @@
 
 #import "RecommendView.h"
 
-static float cellHeight = 180;
+static float cellHeight = 250;
 //static float cellWidth = 110;
 @implementation RecommendView
 
 - (void)drawRect:(CGRect)rect
 {
     [self initView];
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = HMGlobalBg;
 }
 
 -(void)setDataProvider:(NSMutableArray *)dataProvider
@@ -44,8 +44,8 @@ static float cellHeight = 180;
 -(void)initCollectionView
 {
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
-    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 40, MTScreenW - 20, self.height - 50) collectionViewLayout:flowLayout];
-    self.colectView.backgroundColor = [UIColor whiteColor];
+    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, MTScreenW, self.height - 40) collectionViewLayout:flowLayout];
+    self.colectView.backgroundColor = HMGlobalBg;
     self.colectView.collectionViewLayout = flowLayout;
     self.colectView.scrollEnabled = NO;
     [self.colectView registerNib:[UINib nibWithNibName:@"RecommenCell" bundle:nil] forCellWithReuseIdentifier:@"MTCollectionCell"];
@@ -84,10 +84,10 @@ static float cellHeight = 180;
     
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",item.goods_image_url]];
     [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    cell.backgroundColor = [UIColor whiteColor];
     
     titlelab.text = item.goods_name;
     pricelab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
-    
     return cell;
 }
 
@@ -96,7 +96,7 @@ static float cellHeight = 180;
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(MTScreenW/2 - 30, cellHeight);
+    return CGSizeMake(MTScreenW/2 - 5,  MTScreenW/2 + 60);
 }
 
 /**
@@ -110,15 +110,15 @@ static float cellHeight = 180;
 /**
  *  设置竖向间距 设置最小行间距
  */
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-//{
-//    return 0;
-//}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5;
+}
 
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 0, 0, 0);//分别为上、左、下、右
+    return UIEdgeInsetsMake(0, 0, 5, 0);//分别为上、左、下、右
     
 }
 

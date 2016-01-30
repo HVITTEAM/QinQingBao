@@ -68,7 +68,7 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
-//    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
+    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
     
     return YES;
 }
