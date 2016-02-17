@@ -29,8 +29,8 @@ static float cellWidth = 66;
 }
 
 /**
-*  初始化服务类别列表
-*/
+ *  初始化服务类别列表
+ */
 -(void)initCollectionView
 {
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
@@ -127,7 +127,11 @@ static float cellWidth = 66;
 {
     NSInteger index = indexPath.section *4 + indexPath.row;
     ConfModel *data = [dataProvider objectAtIndex:index];
-    if (!data.flag || [data.flag isEqualToString:@"0"])
+    if ([data.gc_name isEqualToString:@"敬请期待"])
+    {
+        [NoticeHelper AlertShow:@"敬请期待" view:self.collectView];
+    }
+    else if (!data.flag || [data.flag isEqualToString:@"0"])
     {
         GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
         vc.gc_id = data.gc_id;
@@ -136,6 +140,8 @@ static float cellWidth = 66;
     else
     {
         HealthHouseViewController *vc = [[HealthHouseViewController alloc] init];
+        vc.title = data.gc_name;
+        vc.gc_id = data.gc_id;
         [self.nav pushViewController:vc animated:YES];
     }
 }

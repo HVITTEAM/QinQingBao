@@ -1,19 +1,46 @@
 //
-//  RecommendView.m
+//  HotGoodsViewController.m
 //  QinQingBao
 //
-//  Created by 董徐维 on 16/1/9.
+//  Created by 董徐维 on 16/2/1.
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "HotGoodsView.h"
+#import "HotGoodsViewController.h"
+#import "GoodsHeadViewController.h"
+#import "SpecialList.h"
+#import "SpecialDataTotal.h"
+#import "SpecialData.h"
+@interface HotGoodsViewController ()
 
-@implementation HotGoodsView
+@end
 
-- (void)drawRect:(CGRect)rect
+@implementation HotGoodsViewController
+
+
+-(instancetype)init
 {
+    self = [super init];
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    self.title = @"热销商品";
     [self initView];
-    self.backgroundColor = HMGlobalBg;
+    
+    [super viewDidLoad];
+    
+    if (self.special_id)
+        [self getGoodsList];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear: animated];
 }
 
 -(void)setDataProvider:(NSMutableArray *)dataProvider
@@ -30,28 +57,46 @@
 -(void)initCollectionView
 {
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
-    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, self.height) collectionViewLayout:flowLayout];
+    self.colectView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) collectionViewLayout:flowLayout];
     self.colectView.backgroundColor = HMGlobalBg;
     self.colectView.collectionViewLayout = flowLayout;
-    self.colectView.scrollEnabled = NO;
     [self.colectView registerNib:[UINib nibWithNibName:@"HotGoodsCell" bundle:nil] forCellWithReuseIdentifier:@"MTHotGoodsCell"];
     self.colectView.delegate = self;
     self.colectView.dataSource = self;
-    [self addSubview:self.colectView];
+    [self.view addSubview:self.colectView];
+}
+
+/**
+ * 获取专题商品
+ **/
+-(void)getGoodsList
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Apiget_seecial parameters:@{@"special_id" : self.special_id}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     NSDictionary *dict1 =  [dict objectForKey:@"datas"];
+                                     SpecialDataTotal *result = [SpecialDataTotal objectWithKeyValues:dict1];
+                                     SpecialData *item = result.data[0];
+                                     SpecialDataItem *items = item.item_data;
+                                     self.dataProvider = items.item;
+                                     [self.colectView reloadData];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                 }];
 }
 
 #pragma mark -- UICollectionViewDataSource
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _dataProvider.count/3;
+    return 2;
 }
-
 
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    NSString *str = [NSString stringWithFormat:@"%lu",_dataProvider.count/2];
+    return ceilf([str floatValue]);
 }
 
 //每个UICollectionView展示的内容
@@ -68,7 +113,7 @@
     UILabel *titlelab = (UILabel *)[cell viewWithTag:2];
     UILabel *pricelab = (UILabel *)[cell viewWithTag:3];
     UILabel *oldpricelab = (UILabel *)[cell viewWithTag:4];
-
+    
     
     NSString *markpriceStr                            = [NSString stringWithFormat:@"￥%@  ",item.goods_marketprice];
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:markpriceStr];
@@ -81,11 +126,9 @@
     [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     cell.backgroundColor = [UIColor whiteColor];
     titlelab.text = item.goods_name;
-    pricelab.text = [NSString stringWithFormat:@"  ￥%@",item.goods_promotion_price];
-    
-    if ([item.goods_marketprice isEqualToString:item.goods_promotion_price])
+    if ([item.goods_price isEqualToString:item.goods_marketprice])
         oldpricelab.hidden = YES;
-    
+    pricelab.text = [NSString stringWithFormat:@"  ￥%@",item.goods_price];
     return cell;
 }
 
@@ -126,7 +169,10 @@
 {
     NSInteger index = indexPath.section *2 + indexPath.row;
     RecommendGoodsModel *item = [self.dataProvider objectAtIndex:index];
-    self.clickClick(item);
+    
+    GoodsHeadViewController *gvc = [[GoodsHeadViewController alloc] init];
+    gvc.goodsID = item.goods_id;
+    [self.navigationController pushViewController:gvc animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择
@@ -134,5 +180,6 @@
 {
     return YES;
 }
+
 
 @end

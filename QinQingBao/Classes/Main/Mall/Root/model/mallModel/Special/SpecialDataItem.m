@@ -7,14 +7,14 @@
 //
 
 #import "SpecialDataItem.h"
-#import "CommodityModel.h"
+#import "RecommendGoodsModel.h"
 
 @implementation SpecialDataItem
 
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"item" : [CommodityModel class]
+             @"item" : [RecommendGoodsModel class]
              };
 }
 

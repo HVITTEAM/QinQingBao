@@ -9,9 +9,12 @@
 #import "DiscountViewController.h"
 #import "DiscountHeadCell.h"
 #import "DiscountCountDownCell.h"
+#import "GoodsHeadViewController.h"
 
 #import "GroupbuyTotal.h"
 #import "GroupbuyMode.h"
+
+#import "MTShoppingCarController.h"
 
 //////////////////////////////////////////////////////////
 
@@ -27,15 +30,24 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
 
 @property(strong,nonatomic)GroupbuyTotal *groupbuyTotal;         //抢购数据
 
-@property(copy,nonatomic)NSString *imageUrl;
-
 @property(strong,nonatomic)NSTimer *timer;               //定时器
 
 @property(assign,nonatomic)NSUInteger remainTime;    //剩余时间
 
+@property(strong,nonatomic)NSDate *endDate;           //到计时结束时间
+
 @end
 
 @implementation DiscountViewController
+
+-(instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+{
+    self = [super initWithCollectionViewLayout:layout];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 #pragma mark -- 生命周期方法 --
 
@@ -45,9 +57,9 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     
     [self initCollectionView];
     
-    [self loadFirstPageGroupbuyData];
+    [self initNavBar];
     
-    self.remainTime = 10;
+    [self loadFirstPageGroupbuyData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -74,6 +86,14 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
 }
 
 #pragma mark -- 初始化子视图方法 --
+/**
+ *  初始化导航栏
+ */
+-(void)initNavBar
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mallcar.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightItemTaped:)];
+}
+
 /**
  *  初始化CollectionView
  */
@@ -121,6 +141,11 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     if (indexPath.section == 0) {
         //头部图片 cell
         DiscountHeadCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:discountHeadCellId forIndexPath:indexPath];
+        NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,self.groupbuyTotal.lunbourl,self.groupbuyTotal.lunbo];
+        NSURL *url = [[NSURL alloc] initWithString:urlStr];
+        [cell.imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        }];
+        
         return cell;
     }else if (indexPath.section == 1){
         //到计时 cell
@@ -130,6 +155,7 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     //产品 cell
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotGoodsCellId
                                                                 forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
     GroupbuyMode *model = self.goodsDataArray[indexPath.row];
     
     //根据tag获取 cell 中的视图
@@ -140,13 +166,20 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     
     //赋值
     nameLb.text = model.goods_name;
-    newpriceLb.text = model.goods_price;
-    oldpriceLb.text = model.groupbuy_price;
+    newpriceLb.text = [NSString stringWithFormat:@"  ￥%@",model.groupbuy_price];
+    
+    NSString *oldpriceStr = [NSString stringWithFormat:@"￥%@",model.goods_price];
+    NSDictionary *attributeDict = @{
+                                    NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)
+                                    };
+    NSAttributedString *attributedstr = [[NSAttributedString alloc] initWithString:oldpriceStr
+                                                                        attributes:attributeDict];
+    oldpriceLb.attributedText = attributedstr;
     
     //下载商品图片
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@",URL_Local,self.imageUrl,model.store_id,model.groupbuy_image1];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@/%@",URL_Local,self.groupbuyTotal.url,model.store_id,model.groupbuy_image1];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
-    [goodsImgview sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [goodsImgview sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
     return cell;
@@ -157,7 +190,7 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
 {
     if (indexPath.section == 0) {
         //头部图片 cell大小
-        return CGSizeMake(MTScreenW, MTScreenH * 0.25);
+        return CGSizeMake(MTScreenW, MTScreenW * 0.5);
         
     }else if (indexPath.section == 1){
         //到计时 cell 大小
@@ -177,6 +210,31 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     return UIEdgeInsetsMake(0, 0, 0, 0);;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        //跳转到商品详情
+        GoodsHeadViewController *gvc = [[GoodsHeadViewController alloc] init];
+        GroupbuyMode *model = self.goodsDataArray[indexPath.row];
+        gvc.goodsID = model.goods_id;
+        [self.navigationController pushViewController:gvc animated:YES];
+    }
+}
+
+#pragma mark -- 事件方法 --
+/**
+ *  导航栏右边按钮被点
+ */
+-(void)rightItemTaped:(UIBarButtonItem *)item
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO )
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
+    [self.navigationController pushViewController:shopCar animated:YES];
+
+//    [NoticeHelper AlertShow:@"导航栏右边按钮被点击" view:self.collectionView];
+}
+
 #pragma mark -- 内部方法 --
 #pragma mark 到计时相关方法
 /**
@@ -188,9 +246,11 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
         [self stopCountDown];
     }
     
-    if (self.remainTime == 0) {
+    if (!self.endDate) {
         return;
     }
+    NSDate *currentDate = [NSDate date];
+    self.remainTime = [self.endDate timeIntervalSinceDate:currentDate];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshCountDownTime) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:UITrackingRunLoopMode];
@@ -240,9 +300,9 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     [MBProgressHUD showHUDAddedTo:self.collectionView animated:YES];
     
     NSDictionary *params = @{
-                             @"g_status":@(0),
-                             @"curpage":@(1),
-                             @"page":@(10)
+                             @"g_status":@0,
+                             @"curpage":@1,
+                             @"page":@10
                              };
     
     [CommonRemoteHelper RemoteWithUrl:URL_groupbuy_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -253,9 +313,12 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
             [NoticeHelper AlertShow:@"抱歉,无法获取到抢购数据" view:self.view];
             return;
         }
-        //转换成专题产品模型
+        //转换成模型
         self.groupbuyTotal = [GroupbuyTotal objectWithKeyValues:dict[@"datas"]];
         self.goodsDataArray = self.groupbuyTotal.data;
+        GroupbuyMode *model = self.groupbuyTotal.data[0];
+        self.endDate = [NSDate dateWithTimeIntervalSinceNow:[model.count_down integerValue]];
+        [self startCountDown];
         [self.collectionView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

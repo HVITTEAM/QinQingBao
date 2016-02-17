@@ -60,6 +60,7 @@
     }];
 }
 
+//获取所有的数据
 -(void)getDataProvider
 {
     dataProvider = [[NSMutableArray alloc] init];
@@ -70,7 +71,7 @@
     }
     [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"count" : @"50",
+                                                                   @"count" : @"1",
                                                                    @"member_id" : self.familyVO.member_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
@@ -221,6 +222,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HealthBloodPressureViewController *bloodPressureVC = [[HealthBloodPressureViewController alloc] initWithNibName:@"HealthBloodPressureViewController" bundle:nil];
+    //点击的分类1心率 2位置 3血压 4心电图 5体检 6血糖 7血痒 8看护宝
+    NSString *vctype;
     
     switch (indexPath.section)
     {
@@ -228,12 +231,14 @@
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.relation];
             bloodPressureVC.type = ChartTypeSugar;
+            vctype = @"6";
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
             break;
         case 3:
         {
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
+            vctype = @"3";
             bloodPressureVC.type = ChartTypeBlood;
         }
             break;
@@ -269,19 +274,14 @@
         {
             if (dataProvider.count > 0)
             {
-                HealthDataModel *item = dataProvider[0];
-                if (item.heartrate_avg.length > 0 && item.heart_time.length > 0)
-                {
-                    bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
-                    bloodPressureVC.type = ChartTypeHeart;
-                }
-                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+                bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
+                bloodPressureVC.type = ChartTypeHeart;
+                vctype = @"1";
             }
             else
             {
                 return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
             }
-
         }
             break;
         case 1:
@@ -293,8 +293,28 @@
         default:
             break;
     }
-    bloodPressureVC.dataProvider = dataProvider;
-    [self.navigationController pushViewController:bloodPressureVC animated:YES];
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor_one parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                       @"client" : @"ios",
+                                                                       @"count" : @"50",
+                                                                       @"member_id" : self.familyVO.member_id,
+                                                                       @"type" : vctype,}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
+                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     if (result.datas.count == 0)
+                                     {
+                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
+                                     }
+                                     bloodPressureVC.dataProvider = result.datas;
+                                     
+                                     [self.navigationController pushViewController:bloodPressureVC animated:YES];
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.tableView.header endRefreshing];
+                                 }];
+    
 }
 
 /**

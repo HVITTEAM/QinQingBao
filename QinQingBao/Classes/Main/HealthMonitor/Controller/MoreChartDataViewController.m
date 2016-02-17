@@ -30,6 +30,7 @@
     self.title = @"更多数据";
     //设置表视图属性
     self.tableView.backgroundColor = HMGlobalBg;
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 -(void)setDataProvider:(NSMutableArray *)dataProvider
@@ -55,7 +56,7 @@
     BloodCell *cell = [tableView dequeueReusableCellWithIdentifier:celldata];
     if (!cell)
         cell= [[[NSBundle mainBundle]loadNibNamed:@"BloodCell" owner:nil options:nil] lastObject];
-    cell.type = ChartTypeHeart;
+    cell.type = self.type;
     [cell setItem:self.dataProvider[indexPath.row]];
     return cell;
 }

@@ -13,13 +13,12 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="173" height="50"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="25b1OOOPIC19.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="46X-FG-Ao1">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="46X-FG-Ao1">
                         <rect key="frame" x="0.0" y="0.0" width="173" height="50"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.73586554280000005" green="0.4431372549" blue="0.74889494239999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="46X-FG-Ao1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3Z3-IB-zSu"/>
                 <constraint firstAttribute="bottom" secondItem="46X-FG-Ao1" secondAttribute="bottom" id="7as-nr-JFV"/>
@@ -27,10 +26,10 @@
                 <constraint firstAttribute="trailing" secondItem="46X-FG-Ao1" secondAttribute="trailing" id="Tcf-Fz-ltd"/>
             </constraints>
             <size key="customSize" width="173" height="50"/>
+            <connections>
+                <outlet property="imgView" destination="46X-FG-Ao1" id="rfY-OG-oZ2"/>
+            </connections>
             <point key="canvasLocation" x="225.5" y="264"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="25b1OOOPIC19.jpg" width="650" height="444"/>
-    </resources>
 </document>

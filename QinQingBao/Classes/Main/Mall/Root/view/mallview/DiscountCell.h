@@ -13,7 +13,7 @@
 
 @interface DiscountCell : UITableViewCell
 
-@property(copy,nonatomic)NSString *intermediateImageUrl;   
+@property(copy,nonatomic)NSString *intermediateImageUrl;        //图片URL 路径的中间部分
 
 @property(strong,nonatomic)NSMutableArray *goodsDatas;             //商品数据数组
 

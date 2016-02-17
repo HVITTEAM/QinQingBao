@@ -22,6 +22,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *secondLb;
 
+@property (weak, nonatomic) IBOutlet UILabel *msgLb;
+
 @end
 
 @implementation DiscountCountDownCell

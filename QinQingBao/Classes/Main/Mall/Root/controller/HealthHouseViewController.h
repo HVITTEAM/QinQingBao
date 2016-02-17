@@ -10,4 +10,5 @@
 
 @interface HealthHouseViewController : UITableViewController
 
+@property (nonatomic, retain) NSString *gc_id;
 @end

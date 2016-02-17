@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DiscountHeadCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @end

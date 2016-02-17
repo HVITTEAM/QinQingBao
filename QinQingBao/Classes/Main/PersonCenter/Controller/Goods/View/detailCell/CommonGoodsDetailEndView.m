@@ -88,12 +88,19 @@ static CGFloat BUTTON_WIDTH = 80;
     else if ([_goodsitemInfo.order_state isEqualToString:@"30"])//已发货
     {
         [_buyBt setTitle:@"确认收货" forState:UIControlStateNormal];
+        if (_goodsitemInfo.shipping_code == nil || _goodsitemInfo.shipping_code.length == 0)
+            _add2Car.hidden = YES;
         [_add2Car setTitle:@"查看物流" forState:UIControlStateNormal];
     }
-    else if ([_goodsitemInfo.order_state isEqualToString:@"40"])//交易完成
+    else if ([_goodsitemInfo.order_state isEqualToString:@"40"] && [_goodsitemInfo.evaluation_state isEqualToString:@"0"])//交易完成
     {
         [_add2Car setTitle:@"删除订单" forState:UIControlStateNormal];
         [_buyBt setTitle:@"评价" forState:UIControlStateNormal];
+    }
+    else if ([_goodsitemInfo.order_state isEqualToString:@"40"] && [_goodsitemInfo.evaluation_state isEqualToString:@"1"])//交易完成
+    {
+        _add2Car.hidden = YES;
+        [_buyBt setTitle:@"删除订单" forState:UIControlStateNormal];
     }
 }
 

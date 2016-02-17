@@ -56,7 +56,7 @@
     UITextField *text = [[UITextField alloc] init];
     text.layer.cornerRadius = 3;
     text.returnKeyType = UIReturnKeySearch;
-    text.textColor = [UIColor colorWithRGB:@"333333"];
+    text.textColor = [UIColor colorWithRGB:@"979797"];
     text.font = [UIFont systemFontOfSize:14];
     text.tintColor = [UIColor darkGrayColor];
     text.alpha = 0.9;
@@ -80,7 +80,7 @@
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 100, 20)];
     lab.text = @"搜索历史";
     lab.font = [UIFont systemFontOfSize:13];
-    lab.textColor = [UIColor colorWithRGB:@"333333"];
+    lab.textColor = [UIColor colorWithRGB:@"979797"];
     [self.view addSubview:lab];
     
     [self.collectView registerNib:[UINib nibWithNibName:@"HistoryViewCell" bundle:nil] forCellWithReuseIdentifier:@"HistoryViewCell"];
@@ -93,7 +93,7 @@
         nonelab.textAlignment = NSTextAlignmentCenter;
         nonelab.text = @"暂无搜索历史";
         nonelab.font = [UIFont systemFontOfSize:13];
-        nonelab.textColor = [UIColor colorWithRGB:@"333333"];
+        nonelab.textColor = [UIColor colorWithRGB:@"979797"];
         [self.view addSubview:nonelab];
         self.collectView.hidden = YES;
     }
@@ -129,7 +129,7 @@
     nonelab.textAlignment = NSTextAlignmentCenter;
     nonelab.text = @"暂无搜索历史";
     nonelab.font = [UIFont systemFontOfSize:13];
-    nonelab.textColor = [UIColor colorWithRGB:@"333333"];
+    nonelab.textColor = [UIColor colorWithRGB:@"979797"];
     nonelab.hidden = NO;
     [self.view addSubview:nonelab];
 }

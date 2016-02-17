@@ -32,7 +32,7 @@
  */
 -(void)setOldprice:(NSString *)oldprice
 {
-    NSString *price = [NSString stringWithFormat:@"￥:%@",oldprice];
+    NSString *price = [NSString stringWithFormat:@"￥%@",oldprice];
     NSDictionary *attribtDic = @{
                                    NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)
                                  };
@@ -47,7 +47,7 @@
  */
 -(void)setNewprice:(NSString *)newprice
 {
-    self.newpriceLb.text = [NSString stringWithFormat:@"￥:%@",newprice];
+    self.newpriceLb.text = [NSString stringWithFormat:@"￥%@",newprice];
 }
 
 /**

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class GroupbuyTotal;
 
 @interface DiscountViewController : UICollectionViewController
+
+//@property(strong,nonatomic)GroupbuyTotal *groupbuyTotal;
 
 @end

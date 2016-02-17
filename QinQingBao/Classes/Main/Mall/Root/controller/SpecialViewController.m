@@ -9,14 +9,16 @@
 static NSString *hotGoodsCellId = @"MTHotGoodsCell";
 
 #import "SpecialViewController.h"
-#import "CommodityModel.h"
+#import "RecommendGoodsModel.h"
 #import "SpecialDataTotal.h"
 #import "SpecialData.h"
 #import "SpecialDataItem.h"
+#import "MTShoppingCarController.h"
+#import "GoodsHeadViewController.h"
 
 @interface SpecialViewController ()<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 
-@property(strong,nonatomic)NSMutableArray *goodsDataArray;              //商品数组，内部元素为CommodityModel对象
+@property(strong,nonatomic)NSMutableArray *goodsDataArray;              //商品数组
 
 @property(strong,nonatomic)SpecialDataTotal *specialTotal;              //具体某个专题的所有信息
 
@@ -24,11 +26,22 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
 
 @implementation SpecialViewController
 
+-(instancetype)initWithCollectionViewLayout:(UICollectionViewLayout *)layout
+{
+    self = [super initWithCollectionViewLayout:layout];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initCollectionView];
+    
+    [self initNavBar];
     
     [self loadSpecialGoodsDataWithspecialId:self.specialId];
 }
@@ -43,6 +56,14 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
 }
 
 #pragma mark -- 初始化子视图方法 --
+/**
+ *  初始化导航栏
+ */
+-(void)initNavBar
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mallcar.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightItemTaped:)];
+}
+
 /**
  *  初始化CollectionView
  */
@@ -74,7 +95,8 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotGoodsCellId
                                                                            forIndexPath:indexPath];
-    CommodityModel *model = self.goodsDataArray[indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
+    RecommendGoodsModel *model = self.goodsDataArray[indexPath.row];
     
     //根据tag获取 cell 中的视图
     UIImageView *goodsImgview = [cell viewWithTag:1];
@@ -84,13 +106,20 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
     
     //赋值
     nameLb.text = model.goods_name;
-    newpriceLb.text = model.goods_promotion_price;
-    oldpriceLb.text = model.goods_marketprice;;
+    newpriceLb.text =  [NSString stringWithFormat:@"  ￥%@",model.goods_promotion_price];
+    
+    
+    NSString *markpriceStr                            = [NSString stringWithFormat:@"￥%@  ",model.goods_marketprice];
+    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:markpriceStr];
+    [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid |NSUnderlineStyleSingle) range:NSMakeRange(0, markpriceStr.length-1)];
+    [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, markpriceStr.length-1)];
+    //市场价
+    oldpriceLb.attributedText = attri;
     
     //下载商品图片
-    NSString *urlStr = [NSString stringWithFormat:@"%@%@%@/%@",URL_Local,self.specialTotal.url,model.store_id,model.goods_image];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@/%@",URL_Local,self.specialTotal.url,model.store_id,model.goods_image];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
-    [goodsImgview sd_setImageWithURL:url placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [goodsImgview sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     return cell;
 }
@@ -109,6 +138,32 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
     return UIEdgeInsetsMake(0, 0, 0, 0);;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //跳转到商品详情
+    RecommendGoodsModel *model = self.goodsDataArray[indexPath.row];
+    GoodsHeadViewController *gvc = [[GoodsHeadViewController alloc] init];
+    gvc.goodsID = model.goods_id;
+    [self.navigationController pushViewController:gvc animated:YES];
+}
+
+#pragma mark -- 事件方法 --
+
+
+/**
+ *  导航栏右边按钮被点
+ */
+-(void)rightItemTaped:(UIBarButtonItem *)item
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO )
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
+    [self.navigationController pushViewController:shopCar animated:YES];
+
+//    [NoticeHelper AlertShow:@"导航栏右边按钮被点击" view:self.collectionView];
+}
+
+
 #pragma mark -- 内部方法 --
 /**
  *  下载具体的专题数据
@@ -122,8 +177,6 @@ static NSString *hotGoodsCellId = @"MTHotGoodsCell";
                              };
     
     [CommonRemoteHelper RemoteWithUrl:URL_Special_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        NSLog(@"%@",dict);
         
         [MBProgressHUD hideHUDForView:self.collectionView animated:YES];
         

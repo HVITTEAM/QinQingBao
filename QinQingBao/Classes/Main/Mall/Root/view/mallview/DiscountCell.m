@@ -9,11 +9,11 @@
 #define kHeadAreaHeight 44
 #define kMarginToBottom 10
 
-static NSString *commodityCellId = @"commodityCell";
-
 #import "DiscountCell.h"
 #import "CommodityCell.h"
 #import "GroupbuyMode.h"
+
+static NSString *commodityCellId = @"commodityCell";
 
 @interface DiscountCell ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -127,7 +127,7 @@ static NSString *commodityCellId = @"commodityCell";
     cell.oldprice = model.goods_price;
     cell.newprice = model.groupbuy_price;
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@/%@%@/%@",URL_Local,self.intermediateImageUrl,model.store_id,model.groupbuy_image1];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@/%@",URL_Local,self.intermediateImageUrl,model.store_id,model.groupbuy_image1];
     NSURL *url = [[NSURL alloc] initWithString:urlStr];
     
     [cell.commodityImgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

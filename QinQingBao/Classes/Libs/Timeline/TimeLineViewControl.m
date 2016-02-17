@@ -231,6 +231,7 @@ const float VIEW_WIDTH = 225.0;
         i++;
     }
     
+    self.totalHeight = totlaHeight;
     [self startAnimatingLayers:circleLayers forStatus:currentStatus];
 }
 

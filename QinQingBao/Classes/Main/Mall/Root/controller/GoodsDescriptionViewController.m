@@ -7,7 +7,6 @@
 //
 
 #import "GoodsDescriptionViewController.h"
-#import "PictureCell.h"
 
 @interface GoodsDescriptionViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
@@ -21,10 +20,23 @@
 
 @implementation GoodsDescriptionViewController
 
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    
     [self initsubViews];
+    
+    [self initNavBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +56,14 @@
 
 #pragma mark -- 初始化子视图方法 --
 /**
+*  初始化导航栏
+*/
+-(void)initNavBar
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"mallcar.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rightItemTaped:)];
+}
+
+/**
  *  设置子视图属性
  */
 -(void)initsubViews
@@ -53,6 +73,8 @@
     
     self.pictureTableView.dataSource = self;
     self.pictureTableView.delegate = self;
+    
+    self.pictureTableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 }
 
 #pragma mark -- 协议方法 --
@@ -65,18 +87,21 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *pictureCellId = @"pictureCell";
-    PictureCell *cell = [tableView dequeueReusableCellWithIdentifier:pictureCellId];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"PictureCell" owner:nil options:nil] lastObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    UITableViewCell *goodsDescCell = [tableView dequeueReusableCellWithIdentifier:@"goodsDescCellId"];
+    if (!goodsDescCell)
+    {
+        goodsDescCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"goodsDescCellId"];
+        goodsDescCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //设置背景 View
+        UIImageView *backgroudImageView = [[UIImageView alloc] init];
+        goodsDescCell.backgroundView = backgroudImageView;
     }
-    
+
     //从缓存中获取图片，如果没有找到，看tableView是否在减速状态，减速状态不下载图片,其它状态正常下载图片
     NSString *urlStr = self.imageUrlArray[indexPath.row];
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:urlStr];
     if (!image) {
-        image = [UIImage imageNamed:@"ic_logo"];
+        image = [UIImage imageNamed:@"placeholderImage"];
         if (!self.isdrag && tableView.decelerating) {   //减速状态不下载
         }else{
             //下载图片
@@ -84,9 +109,10 @@
         }
     }
     
-    cell.imageViewOfCell.image = image;
+    UIImageView *cellImageView = (UIImageView *)goodsDescCell.backgroundView;
+    cellImageView.image = image;
     
-    return cell;
+    return goodsDescCell;
 }
 
 #pragma mark  UITableViewDelegate
@@ -101,7 +127,7 @@
     NSString *urlStr = self.imageUrlArray[indexPath.row];
     UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:urlStr];
     if (!image) {
-        image = [UIImage imageNamed:@"ic_logo"];
+        image = [UIImage imageNamed:@"placeholderImage"];
     }
     
     //根据图片计算cell 高度
@@ -116,7 +142,7 @@
     //使用图片浏览器查看图片
     SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc]
                                                    initPhotoBrowserWithImageURls:self.imageUrlArray
-                                                   currentIndex:indexPath.row placeholderImageNmae:nil];
+                                                   currentIndex:indexPath.row placeholderImageNmae:@"placeholderImage"];
     
     [self presentViewController:photoBrowser animated:YES completion:nil];
 }
@@ -138,9 +164,20 @@
 }
 
 #pragma mark -- 事件方法 --
+/**
+ *  进入商品详情
+ */
 - (IBAction)enterGoodsDetail:(id)sender
 {
     [NoticeHelper AlertShow:@"你已经进入商品详情了" view:self.view];
+}
+
+/**
+ *  导航栏右边按钮被点
+ */
+-(void)rightItemTaped:(UIBarButtonItem *)item
+{
+    [NoticeHelper AlertShow:@"导航栏右边按钮被点击" view:self.pictureTableView];
 }
 
 #pragma mark -- 内部方法 --

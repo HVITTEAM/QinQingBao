@@ -25,12 +25,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
 #import "SearchViewController.h"
 
 #import "DiscountCell.h"
-#import "PictureCell.h"
+#import "SpecialCell.h"
 
 #import "SpecialList.h"
 #import "SpecialModel.h"
 
-#import "CommodityModel.h"
 #import "SpecialDataTotal.h"
 #import "SpecialData.h"
 #import "SpecialDataItem.h"
@@ -42,7 +41,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
 #import "SpecialViewController.h"
 #import "GoodsDescriptionViewController.h"
 
-@interface MallRootViewControlelr ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,NavigationBarDelegate,UITextFieldDelegate,DiscountCellDelegate>
+#import "GoodsTableViewController.h"
+#import "HotGoodsViewController.h"
+
+
+@interface MallRootViewControlelr ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,NavigationBarDelegate,UITextFieldDelegate,DiscountCellDelegate,SpecialCellDelegate>
 {
     /**轮播图片数组*/
     NSMutableArray *slideImages;
@@ -70,6 +73,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 @property(assign,nonatomic)NSUInteger remainTime;    //剩余时间
 
+@property(strong,nonatomic)NSDate *endDate;           //到计时结束时间
+
 @property (nonatomic, retain) UIScrollView *imgPlayer;
 
 
@@ -90,8 +95,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     [self loadGroupbuyData];
     
-    self.remainTime = 1000;
-    
     [self initTableViewSkin];
     
     [self getConfImages];
@@ -109,11 +112,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     UITextField *text = [[UITextField alloc] init];
     text.delegate = self;
-    text.layer.cornerRadius = 1;
-    text.textColor = [UIColor colorWithRGB:@"333333"];
+    text.layer.cornerRadius = 3;
+    text.textColor = [UIColor colorWithRGB:@"979797"];
     text.font = [UIFont systemFontOfSize:14];
     text.alpha = 0.9;
-    text.text= @"  春运启程,把爱装回家";
+    text.text= @"  铁皮枫斗";
     text.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:text];
     
@@ -251,20 +254,19 @@ static CGFloat IMAGEVIEW_HEIGHT;
 }
 
 #pragma mark 网络相关方法
+
+#pragma mark 网络相关方法
 /**
  *  下载专题数据
  */
 -(void)loadSpecialDatas
 {
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    
     [CommonRemoteHelper RemoteWithUrl:URL_Special_list parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
         NSLog(@"%@",dict);
         
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-        
         if ([dict[@"code"]integerValue] != 0) {
-            [NoticeHelper AlertShow:@"抱歉,无法获取到专题数据" view:self.view];
+            [NoticeHelper AlertShow:@"抱歉,专题数据" view:self.view];
             return;
         }
         
@@ -272,7 +274,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
         [NoticeHelper AlertShow:@"抱歉,无法获取到专题数据" view:self.view];
     }];
 }
@@ -282,17 +283,15 @@ static CGFloat IMAGEVIEW_HEIGHT;
  */
 -(void)loadGroupbuyData
 {
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    
     NSDictionary *params = @{
-                             @"g_status":@(0),
-                             @"curpage":@(1),
-                             @"page":@(10)
+                             @"g_status":@1,
+                             @"curpage":@1,
+                             @"page":@10
                              };
     
     [CommonRemoteHelper RemoteWithUrl:URL_groupbuy_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+        NSLog(@"%@",dict);
         
         if ([dict[@"code"]integerValue] != 0) {
             [NoticeHelper AlertShow:@"抱歉,无法获取到抢购数据" view:self.view];
@@ -300,11 +299,12 @@ static CGFloat IMAGEVIEW_HEIGHT;
         }
         //转换成专题产品模型
         self.groupbuyTotal = [GroupbuyTotal objectWithKeyValues:dict[@"datas"]];
-        
+        GroupbuyMode *model = self.groupbuyTotal.data[0];
+        self.endDate = [NSDate dateWithTimeIntervalSinceNow:[model.count_down integerValue]];
+        [self startCountDown];
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
         [NoticeHelper AlertShow:@"抱歉,无法获取到抢购数据" view:self.view];
     }];
 }
@@ -332,9 +332,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         ConfModel *model = slideImages[i];
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,model.image]];
         UIImageView *imageView = [[UIImageView alloc] init];
-        
         [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
-        
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.tag = i;
@@ -375,10 +373,32 @@ static CGFloat IMAGEVIEW_HEIGHT;
  */
 -(void)onClickImage:(UITapGestureRecognizer *)tap
 {
-    //    if (imgArr.count == 0)
-    //        return;
-    //    SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:imgArr currentIndex:tap.view.tag];
-    //    [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+    if (slideImages.count == 0)
+        return;
+    ConfModel *model = slideImages[tap.view.tag];
+    if (model.type.length == 0)
+        return;
+    if ([model.type isEqualToString:@"url"]) {
+        MTProgressWebViewController *vc = [[MTProgressWebViewController alloc] init];
+        vc.url = model.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([model.type isEqualToString:@"special"]) {
+        HotGoodsViewController *vc = [[HotGoodsViewController alloc] init];
+        vc.title = model.gc_name;
+        vc.special_id = model.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([model.type isEqualToString:@"goods"]) {
+        GoodsHeadViewController *vc = [[GoodsHeadViewController alloc] init];
+        vc.goodsID = model.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([model.type isEqualToString:@"keyword"]) {
+        GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
+        vc.keyWords = model.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark -- UIScrollView delegate
@@ -455,7 +475,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0)
-        return  195;
+        return  165;
     if (indexPath.section == 2) {
         return MTViewH * 0.15;
     }else if (indexPath.section == 1){
@@ -467,7 +487,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         //商品的间隔
         CGFloat goodsSpace = 10;
         
-        CGFloat bottomSpace = 10;
+        CGFloat bottomSpace = 00;
         
         CGFloat cellHeight = floor((MTScreenW - 2 * goodsSpace)/2.5) + textHeight + topHeight + bottomSpace;
         
@@ -489,20 +509,13 @@ static CGFloat IMAGEVIEW_HEIGHT;
         cell = goodsTypeCell;
     }
     else if (indexPath.section == 2) {
+        SpecialCell *specialCell = [[SpecialCell alloc] initSpecialCellWithTableView:tableView indexpath:indexPath];
+        specialCell.intermediateImageUrl = self.specialList.url;
+        specialCell.specialArray = self.specialList.data;
+        specialCell.delegate = self;
         
-        PictureCell *specialCell = [tableView dequeueReusableCellWithIdentifier:@"pictureCell"];
-        if (!specialCell)
-        {
-            specialCell = [[[NSBundle mainBundle] loadNibNamed:@"PictureCell" owner:nil options:nil] lastObject];
-            specialCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        SpecialModel * model = self.specialList.data[0];
-        NSString *urlStr = [NSString stringWithFormat:@"%@%@%@", URL_Local,self.specialList.url,model.image];
-        NSURL *url = [[NSURL alloc] initWithString:urlStr];
-        [specialCell.imageViewOfCell sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        }];
-        cell =  specialCell;
+        cell = specialCell;
+
     }
     else if (indexPath.section == 1)
     {
@@ -532,7 +545,16 @@ static CGFloat IMAGEVIEW_HEIGHT;
     return cell;
 }
 
-#pragma mark DiscountCellDelegate协议方法
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 3)
+    {
+        HotGoodsViewController *vc = [[HotGoodsViewController alloc] init];
+        vc.dataProvider = commendGoodsArr;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 /**
  *  到计时旁边的更多按钮被点击时回调
  */
@@ -540,14 +562,48 @@ static CGFloat IMAGEVIEW_HEIGHT;
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     DiscountViewController *specialVC = [[DiscountViewController alloc] initWithCollectionViewLayout:flowLayout];
+    specialVC.title = @"钜惠专区";
     [self.navigationController pushViewController:specialVC animated:YES];
 }
 
+/**
+ *  点击钜惠专区商品时回调
+ */
 -(void)discountCell:(DiscountCell *)cell goodsModel:(GroupbuyMode *)groupbuyMode
 {
-    [NoticeHelper AlertShow:@"点击了抢购商品" view:self.tableView];
+    //跳转到商品详情
+    GoodsHeadViewController *gvc = [[GoodsHeadViewController alloc] init];
+    gvc.goodsID = groupbuyMode.goods_id;
+    [self.navigationController pushViewController:gvc animated:YES];
 }
 
+#pragma mark SpecialCellDelegate协议方法
+/**
+ *  点击专题图片时回调
+ */
+-(void)specialCell:(SpecialCell *)cell specialTappedOfModel:(SpecialModel *)specialmodel
+{
+    if (specialmodel.type.length == 0)
+        return;
+    if ([specialmodel.type isEqualToString:@"url"]) {
+        MTProgressWebViewController *vc = [[MTProgressWebViewController alloc] init];
+        vc.url = specialmodel.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if ([specialmodel.type isEqualToString:@"special"]) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        SpecialViewController *specialVC = [[SpecialViewController alloc] initWithCollectionViewLayout:flowLayout];
+        specialVC.title = specialmodel.title;
+        specialVC.specialId = [specialmodel.data integerValue];
+        [self.navigationController pushViewController:specialVC animated:YES];    }
+    else if ([specialmodel.type isEqualToString:@"goods"]) {
+        GoodsHeadViewController *vc = [[GoodsHeadViewController alloc] init];
+        vc.goodsID = specialmodel.data;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark 到计时相关方法
 #pragma mark 到计时相关方法
 /**
  *  开始到计时
@@ -558,9 +614,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
         [self stopCountDown];
     }
     
-    if (self.remainTime == 0) {
+    if (!self.endDate) {
         return;
     }
+    NSDate *currentDate = [NSDate date];
+    self.remainTime = [self.endDate timeIntervalSinceDate:currentDate];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(refreshCountDownTime) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:UITrackingRunLoopMode];

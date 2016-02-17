@@ -56,11 +56,17 @@
 -(void)initView
 {
     UILabel *lab0 = [[UILabel alloc] init];
-    lab0.text = @"亲情宝";
+    
+    // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
+    
+    NSString *string                            = @"亲情宝";
+    
+    lab0.text = string;
     lab0.font = [UIFont fontWithName:@"Helvetica-Bold" size:45];
     lab0.textColor = MTNavgationBackgroundColor;
+    lab0.textAlignment = NSTextAlignmentCenter;
     CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
-    lab0.width = size0.width;
+    lab0.width = self.view.width;
     lab0.height = size0.height;
     lab0.x = self.view.width/2 - lab0.width/2;
     lab0.y = self.navigationController.navigationBar.height;
@@ -69,9 +75,24 @@
     view.height = 150;
     
     UILabel *lab = [[UILabel alloc] init];
-    lab.text = @"智慧养老服务中心";
+    
+    NSString *string1                            = @"智慧养老服务中心(v1.1.1.6)";
+
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string1];
+    
+    // 设置富文本样式
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor orangeColor]
+                             range:NSMakeRange(0, 8)];
+    
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor lightGrayColor]
+                             range:NSMakeRange(8, string1.length - 8)];
+   
+    
+    lab.attributedText = attributedString;
     lab.font = [UIFont fontWithName:@"Helvetica" size:13];
-    lab.textColor = [UIColor orangeColor];
+//    lab.textColor = [UIColor orangeColor];
     CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
     lab.width = size.width;
     lab.height = size.height;
@@ -154,12 +175,8 @@
     [self.groups addObject:group];
     
     // 设置组的所有行数据
-    HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"版本更新" icon:@"ic_version_update.png"];
-    version.subtitle = @"v1.0.1.2";
-    // newFriend.destVcClass = [MyAccountViewController class];
-    version.operation = ^{
-        [NoticeHelper AlertShow:@"当前已是最新版本" view:self.view];
-    };
+    HMCommonItem*version = [HMCommonItem itemWithTitle:@"当前版本" icon:@"ic_version_update.png"];
+    version.subtitle = @"v1.1.1.5";
     
     HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"关于我们" icon:@"ic_use_help.png"];
     help.destVcClass = [AboutusViewController class];
@@ -167,7 +184,7 @@
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:@"ic_feedback.png"];
     advice.destVcClass = [FeedbackViewController class];
     
-    group.items = @[version,help,advice];
+    group.items = @[help,advice];
 }
 
 @end

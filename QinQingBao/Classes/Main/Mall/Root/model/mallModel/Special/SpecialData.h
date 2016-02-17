@@ -29,5 +29,3 @@
 @property(strong,nonatomic)SpecialDataItem *item_data;
 
 @end
-
-

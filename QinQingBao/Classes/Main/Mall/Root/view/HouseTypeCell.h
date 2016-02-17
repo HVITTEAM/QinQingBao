@@ -10,10 +10,14 @@
 
 @interface HouseTypeCell : UITableViewCell<UICollectionViewDataSource,UICollectionViewDelegate>
 
-+ (HouseTypeCell*) houseTypeCell;
++ (HouseTypeCell*) houseTypeCelWithId:(NSString *)gc_id;
 
 @property (nonatomic, retain) UINavigationController *nav;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectView;
+
+@property (nonatomic, retain) NSString *gc_id;
+
+@property (nonatomic, copy) void (^buttonClick)(NSString *gc_id);
 
 @end

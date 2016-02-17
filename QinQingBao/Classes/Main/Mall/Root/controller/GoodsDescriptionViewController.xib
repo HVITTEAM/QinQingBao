@@ -30,7 +30,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_right_icon" translatesAutoresizingMaskIntoConstraints="NO" id="pDC-qd-Nde">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="pDC-qd-Nde">
                             <rect key="frame" x="48" y="27" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="15" id="IwC-xx-gc3"/>
@@ -38,7 +38,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.37647058823529411" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="FpT-j0-VH8" firstAttribute="centerY" secondItem="e5m-MS-d9o" secondAttribute="centerY" id="9n3-S3-ff8"/>
                         <constraint firstAttribute="width" constant="70" id="Aek-ew-aWt"/>
@@ -65,6 +65,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow_right_icon" width="7" height="13"/>
+        <image name="arrow" width="10" height="13"/>
     </resources>
 </document>

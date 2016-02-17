@@ -11,7 +11,6 @@ static float cellWidth = 66;
 
 #import "HouseTypeCell.h"
 #import "ConfModelTotal.h"
-#import "GoodsTableViewController.h"
 #import "GoodsClassModelTotal.h"
 #import "GoodsClassModel.h"
 
@@ -21,17 +20,18 @@ static float cellWidth = 66;
     ConfModelTotal *result;
 }
 
-+ (HouseTypeCell*) houseTypeCell
++ (HouseTypeCell*) houseTypeCelWithId:(NSString *)gc_id
 {
     HouseTypeCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"HouseTypeCell" owner:self options:nil] objectAtIndex:0];
+    cell.gc_id = gc_id;
     [cell initCollectionView];
     [cell getTypeList];
     return cell;
 }
 
 /**
-*  初始化服务类别列表
-*/
+ *  初始化服务类别列表
+ */
 -(void)initCollectionView
 {
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
@@ -45,7 +45,7 @@ static float cellWidth = 66;
 
 -(void)getTypeList
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Goods_class parameters: nil
+    [CommonRemoteHelper RemoteWithUrl:URL_Goods_class parameters: @{@"gc_id" : self.gc_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      GoodsClassModelTotal *result = [GoodsClassModelTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      dataProvider = result.class_list;
@@ -56,7 +56,7 @@ static float cellWidth = 66;
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self];
                                  }];
-
+    
 }
 
 #pragma mark -- UICollectionViewDataSource
@@ -83,8 +83,8 @@ static float cellWidth = 66;
     NSInteger index = indexPath.section *4 + indexPath.row;
     if (index < dataProvider.count) {
         GoodsClassModel *data = [dataProvider objectAtIndex:index];
-        //    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,data.gc_thumb]];
-        NSURL *iconUrl = [NSURL URLWithString:data.image];
+        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,data.url,data.gc_thumb]];
+        //        NSURL *iconUrl = [NSURL URLWithString:data.image];
         [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         label.text = data.gc_name;
     }
@@ -132,11 +132,15 @@ static float cellWidth = 66;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger index = indexPath.section *4 + indexPath.row;
-//    GoodsClassModel *data = [dataProvider objectAtIndex:index];
-//    GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
-//    vc.gc_id = data.gc_id;
-//    if (!data.flag || [data.flag isEqualToString:@"0"])
-//        [self.nav pushViewController:vc animated:YES];
+    GoodsClassModel *data = [dataProvider objectAtIndex:index];
+    
+    if ([data.gc_name isEqualToString:@"敬请关注"])
+    {
+        return [NoticeHelper AlertShow:@"敬请关注" view:self.collectView];
+    }
+    
+    if (self.buttonClick)
+        self.buttonClick(data.gc_id);
 }
 
 //返回这个UICollectionView是否可以被选择

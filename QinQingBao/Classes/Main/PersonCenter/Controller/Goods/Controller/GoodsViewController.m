@@ -15,6 +15,7 @@
 #import "CommonGoodsCellHead.h"
 #import "CommonGoodsCellBottom.h"
 
+#import "DeliverViewController.h"
 
 #import "CommonGoodsCellMiddle.h"
 
@@ -319,13 +320,22 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"查看物流"])
     {
-        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
+        [self showDeliver:item];
+//        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
     else if ([btn.titleLabel.text isEqualToString:@"评价"])
     {
         [self showEvaViewControler:indexPath];
         //        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
+}
+
+//查看物流
+-(void)showDeliver:(CommonGoodsModel*)item
+{
+    DeliverViewController *vc = [[DeliverViewController alloc] init];
+    [vc setItem:item];
+    [self.nav pushViewController:vc animated:YES];
 }
 
 //删除订单

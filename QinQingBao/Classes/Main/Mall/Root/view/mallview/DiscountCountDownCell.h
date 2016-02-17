@@ -16,5 +16,7 @@
 
 @property (copy, nonatomic)NSString *seconds;
 
+@property (copy, nonatomic)NSString *messages;
+
 
 @end

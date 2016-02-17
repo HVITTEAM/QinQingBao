@@ -53,6 +53,7 @@
     //设置表视图属性
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 15, 0);
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 -(void)setDataProvider:(NSMutableArray *)dataProvider
@@ -62,7 +63,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -134,6 +135,14 @@
     if (indexPath.section == 1 && indexPath.row == 0)
     {
         MoreChartDataViewController *moreData = [[MoreChartDataViewController alloc] init];
+        if ([self.title rangeOfString:@"心率"].location != NSNotFound)
+        {
+            moreData.type = ChartTypeHeart;
+        }
+        else if ([self.title rangeOfString:@"血压"].location != NSNotFound)
+        {
+            moreData.type = ChartTypeBlood;
+        }
         moreData.dataProvider = self.dataProvider;
         [self.navigationController pushViewController:moreData animated:YES];
     }

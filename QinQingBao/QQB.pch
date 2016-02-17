@@ -267,6 +267,9 @@
 /***获取监控数据url*/
 #define URL_GetMonitor  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=monitor&op=getMonitor",URL_Local]
 
+/***获取监控数据(单组)url*/
+#define URL_GetMonitor_one  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=monitor&op=monitor_one",URL_Local]
+
 /***忘记密码url*/
 #define URL_Forgot  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=forgot",URL_Local]
 
@@ -448,7 +451,7 @@
 
 //----------------------------//
 /***获取专题列表Url*/
-#define URL_Special_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_seecial",@"http://61.143.60.87/ylserver"]
+#define URL_Special_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_seecial",URL_Local]
 
 /***获取抢购数据Url*/
 #define URL_groupbuy_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_groupbuy",URL_Local]
