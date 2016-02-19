@@ -44,7 +44,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
 #import "GoodsTableViewController.h"
 #import "HotGoodsViewController.h"
 
-
 @interface MallRootViewControlelr ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,NavigationBarDelegate,UITextFieldDelegate,DiscountCellDelegate,SpecialCellDelegate>
 {
     /**轮播图片数组*/
@@ -91,7 +90,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 {
     [super viewDidLoad];
     
-    [self loadSpecialDatas ];
+    [self loadSpecialDatas];
     
     [self loadGroupbuyData];
     
@@ -283,11 +282,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
  */
 -(void)loadGroupbuyData
 {
-    NSDictionary *params = @{
-                             @"g_status":@1,
+    NSDictionary *params = @{@"g_status":@1,
                              @"curpage":@1,
-                             @"page":@10
-                             };
+                             @"page":@10};
     
     [CommonRemoteHelper RemoteWithUrl:URL_groupbuy_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
@@ -310,7 +307,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 }
 
 /**
- *  初始化突变轮播播放器
+ *  初始化图片轮播播放器
  */
 -(void)initImagePlayer
 {

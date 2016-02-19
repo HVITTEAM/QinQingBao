@@ -29,11 +29,11 @@
     [alertController addAction:otherAction];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
      {
-        // 可以在这里对textfield进行定制，例如改变背景色等
-//        textField.text = contact.phoneNumber;
-    }];
+         // 可以在这里对textfield进行定制，例如改变背景色等
+         //        textField.text = contact.phoneNumber;
+     }];
     //将提示框弹出
-//    [self presentViewController:alertController animated:YES completion:nil];
+    //    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 +(void)AlertShow:(NSString *)msg view:(UIView *)view
@@ -44,7 +44,8 @@
     //    hud.margin = 10.f;
     //    hud.removeFromSuperViewOnHide = YES;
     //    [hud hide:YES afterDelay:1.33];
-    
+    //    if (view == nil)
+    view = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     [view makeToast:msg duration:1.3 position:CSToastPositionCenter];
 }
 

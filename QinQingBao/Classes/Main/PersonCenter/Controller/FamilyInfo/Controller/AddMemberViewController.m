@@ -9,6 +9,7 @@
 #import "AddMemberViewController.h"
 #import "AddMemberViewController1.h"
 
+#import "BasicInfoViewController.h"
 
 @interface AddMemberViewController ()
 {
@@ -98,8 +99,8 @@
         NSLog(@"----点击了n---%@",self.numfield.rightText.text);
     };
     
-    HMCommonTextfieldItem *telfield = [HMCommonTextfieldItem itemWithTitle:@"手机号码" icon:nil];
-    telfield.placeholder = @"请输入该亲属电话号码";
+    HMCommonTextfieldItem *telfield = [HMCommonTextfieldItem itemWithTitle:@"识别码" icon:nil];
+    telfield.placeholder = @"已注册的手机号码/身份证号码";
     self.telfield = telfield;
     self.telfield.rightText.userInteractionEnabled = NO;
     telfield.operation = ^{
@@ -145,7 +146,7 @@
     
     lab0.x = self.view.width/2 - lab0.width/2;
     lab0.y = 0;
-//    [footview addSubview:lab0];
+    //    [footview addSubview:lab0];
     
     // 1.创建按钮
     UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
@@ -163,7 +164,7 @@
     
     UIButton *changeType = [[UIButton alloc] initWithFrame:CGRectMake(200, CGRectGetMaxY(okBtn.frame) + 10, 120, 20)];
     changeType.titleLabel.font = [UIFont systemFontOfSize:13];
-    [changeType setTitle:@"通过身份证号码绑定" forState:UIControlStateNormal];
+    [changeType setTitle:@"亲友尚无账号？请先注册" forState:UIControlStateNormal];
     [changeType setTitleColor:MTNavgationBackgroundColor forState:UIControlStateNormal];
     [changeType addTarget:self action:@selector(changeType) forControlEvents:UIControlEventTouchUpInside];
     
@@ -178,8 +179,11 @@
 
 -(void)changeType
 {
-    AddMemberViewController1 *vc = [[AddMemberViewController1 alloc] init];
-    vc.backHandlerClick =  self.backHandlerClick;
+    //    AddMemberViewController1 *vc = [[AddMemberViewController1 alloc] init];
+    //    vc.backHandlerClick =  self.backHandlerClick;
+    //    [self.navigationController pushViewController:vc animated:YES];
+    
+    BasicInfoViewController *vc = [[BasicInfoViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -242,7 +246,6 @@
     }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Bang_relation parameters: @{@"mobile" : self.telfield.rightText.text,
-//                                                                      @"code" : self.codefield.rightText.text,
                                                                       @"member_id":[SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                       @"rname" : self.numfield.rightText.text,
                                                                       @"client":@"ios",

@@ -242,11 +242,14 @@
         [dict setObject:self.inforVO.member_birthday forKey:@"member_birthday"];
     if (addressStr)
         [dict setObject:addressStr forKey:@"member_areainfo"];
+    if ([self.title isEqualToString:@"居住地址"])
+        [dict setObject:str forKey:@"member_areainfo"];
+    if ([self.title isEqualToString:@"居住地址"])
+        [dict setObject:selectedStreet.dvcode forKey:@"member_areaid"];
     if (selectedStreet)
         [dict setObject:selectedStreet.dvcode forKey:@"member_areaid"];
     if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
         [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-    
     if (self.changeDataBlock)
     {
         [self.navigationController popViewControllerAnimated:YES];
