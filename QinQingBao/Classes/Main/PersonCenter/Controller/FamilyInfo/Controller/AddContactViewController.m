@@ -31,6 +31,13 @@
     [self setupGroups];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
+}
+
 -(void)initTableSkin
 {
     self.title = @"紧急联系人";
@@ -61,7 +68,6 @@
     
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
-    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
     self.item2.subtitle = selectedRealationStr.length == 0  ? @"请选择" : selectedRealationStr;

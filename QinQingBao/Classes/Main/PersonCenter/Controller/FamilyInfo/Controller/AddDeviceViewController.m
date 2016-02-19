@@ -35,9 +35,11 @@
     [self setupGroups];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     
-    [super viewWillDisappear:animated];
+    [super viewWillAppear:animated];
+    
+    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -164,9 +166,9 @@
 
 -(void)next:(UIButton *)sender
 {
-//    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
-//    [self.navigationController pushViewController:VC animated:YES];
-//    return;
+    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+    return;
     [self.view endEditing:YES];
     if (selectedDevicename.length == 0)
     {

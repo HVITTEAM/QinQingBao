@@ -47,6 +47,14 @@
     [self setupGroups];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.itemTel.rightText.keyboardType = UIKeyboardTypeNumberPad;
+    self.itemId.rightText.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+}
+
 -(void)initTableSkin
 {
     self.title = @"基本信息登记";
@@ -87,7 +95,6 @@
     
     self.itemTel = [HMCommonTextfieldItem itemWithTitle:@"手机号码" icon:nil];
     self.itemTel.placeholder = @"请输入手机号码";
-    self.itemTel.rightText.keyboardType = UIKeyboardTypeNumberPad;
     self.itemTel.operation = ^{
         NSLog(@"----点击了n---");
     };
@@ -193,9 +200,9 @@
 
 -(void)next:(UIButton *)sender
 {
-//    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-//    [self.navigationController pushViewController:view animated:YES];
-//    return;
+    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
+    return;
     
     [self.view endEditing:YES];
     
@@ -207,10 +214,6 @@
     {
         return [NoticeHelper AlertShow:@"请输入家属真实姓名" view:nil];
     }
-//    else if (selectedSexStr.length == 0)
-//    {
-//        return [NoticeHelper AlertShow:@"请选择性别" view:nil];
-//    }
     else if (self.itemTel.rightText.text.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入家属手机号码" view:nil];
@@ -219,14 +222,6 @@
     {
         return [NoticeHelper AlertShow:@"请输入正确的手机号码格式" view:nil];
     }
-//    else if (self.itemId.rightText.text.length == 0)
-//    {
-//        return [NoticeHelper AlertShow:@"请输入家属身份证号码" view:nil];
-//    }
-//    else if (selectedAddressStr.length == 0)
-//    {
-//        return [NoticeHelper AlertShow:@"请选择居住地址" view:nil];
-//    }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Add_mobile_user parameters: @{@"username" : self.itemNick.rightText.text,
                                                                         @"truename":self.itemName.rightText.text,

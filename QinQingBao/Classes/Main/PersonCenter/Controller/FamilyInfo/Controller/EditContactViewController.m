@@ -31,6 +31,15 @@
     [self setupGroups];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.item0.rightText.text = self.item.rname;
+    self.item1.rightText.text = self.item.rtelnum;
+    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
+}
+
 -(void)initTableSkin
 {
     self.title = @"编辑联系人";
@@ -60,13 +69,9 @@
     self.item0 = [HMCommonTextfieldItem itemWithTitle:@"联系人姓名" icon:nil];
     
     self.item0.placeholder = @"请填写真实姓名";
-    UITextField *dd = self.item0.rightText;
-    self.item0.rightText.text = self.item.rname;
 
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
-    self.item1.rightText.text = self.item.rtelnum;
-    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
     self.item2.subtitle = selectedRealationStr.length == 0  ? self.item.relation : selectedRealationStr;
@@ -101,10 +106,7 @@
     [okBtn setTitle:@"完成" forState:UIControlStateNormal];
     okBtn.backgroundColor = MTNavgationBackgroundColor;
     [okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [okBtn setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-//    [okBtn setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
     [okBtn addTarget:self action:@selector(next:) forControlEvents:UIControlEventTouchUpInside];
-    
     [footview addSubview:okBtn];
     
     self.tableView.tableFooterView = footview;
