@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface RelationModel : NSObject
+//编辑紧急联系人的时候需要用到
+@property (nonatomic, assign) NSInteger index;
 @property (nonatomic, copy) NSString *rela_id;
 @property (nonatomic, copy) NSString *rela_mem_id;
 @property (nonatomic, copy) NSString *oid;
