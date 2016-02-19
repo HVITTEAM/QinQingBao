@@ -456,6 +456,26 @@
 /***获取抢购数据Url*/
 #define URL_groupbuy_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_groupbuy",URL_Local]
 
+//------------------绑定设备-------------------
+/***接口新增加用户Url*/
+#define URL_Add_mobile_user [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=add_mobile_user",URL_Local]
+
+/***设备类型 获取Url*/
+#define URL_Get_device_type [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=get_device_xml",URL_Local]
+
+/***绑定新设备Url*/
+#define URL_Add_device [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=add_device",URL_Local]
+
+/***解绑设备Url*/
+#define URL_Del_device [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=del_device",URL_Local]
+
+/***紧急联系人获取Url*/
+#define URL_Get_relationfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=relativinfo&op=get_relationfo",URL_Local]
+
+/***手表sos紧急联系人 设置 （增改)Url*/
+#define URL_SOS_relationfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=relativinfo&op=sos_relationfo",URL_Local]
+
+
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
 blue:((float)(rgbValue & 0xFF)) / 255.0 \
