@@ -200,9 +200,9 @@
 
 -(void)next:(UIButton *)sender
 {
-    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-    [self.navigationController pushViewController:view animated:YES];
-    return;
+//    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
+//    [self.navigationController pushViewController:view animated:YES];
+//    return;
     
     [self.view endEditing:YES];
     

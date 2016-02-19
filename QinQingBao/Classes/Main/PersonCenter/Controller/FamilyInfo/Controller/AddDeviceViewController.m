@@ -166,9 +166,9 @@
 
 -(void)next:(UIButton *)sender
 {
-    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
-    [self.navigationController pushViewController:VC animated:YES];
-    return;
+//    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
+//    [self.navigationController pushViewController:VC animated:YES];
+//    return;
     [self.view endEditing:YES];
     if (selectedDevicename.length == 0)
     {
