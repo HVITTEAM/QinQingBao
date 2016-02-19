@@ -481,6 +481,7 @@
 		01E89AFF1C75BE8300CFD40D /* scan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E89AFE1C75BE8300CFD40D /* scan@2x.png */; };
 		01E89B031C76B45A00CFD40D /* BindingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E89B011C76B45A00CFD40D /* BindingResultViewController.m */; };
 		01E89B041C76B45A00CFD40D /* BindingResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E89B021C76B45A00CFD40D /* BindingResultViewController.xib */; };
+		01E89B071C76BE4500CFD40D /* EditContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E89B061C76BE4500CFD40D /* EditContactViewController.m */; };
 		01E905F71C0D299F00B53AC1 /* UIViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */; };
 		01E905FC1C0D6E9A00B53AC1 /* GPSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */; };
 		01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */; };
@@ -1631,6 +1632,8 @@
 		01E89B001C76B45A00CFD40D /* BindingResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindingResultViewController.h; sourceTree = "<group>"; };
 		01E89B011C76B45A00CFD40D /* BindingResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindingResultViewController.m; sourceTree = "<group>"; };
 		01E89B021C76B45A00CFD40D /* BindingResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingResultViewController.xib; sourceTree = "<group>"; };
+		01E89B051C76BE4500CFD40D /* EditContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditContactViewController.h; sourceTree = "<group>"; };
+		01E89B061C76BE4500CFD40D /* EditContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditContactViewController.m; sourceTree = "<group>"; };
 		01E905F51C0D299F00B53AC1 /* UIViewController+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Placeholder.h"; sourceTree = "<group>"; };
 		01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Placeholder.m"; sourceTree = "<group>"; };
 		01E905F91C0D6E9A00B53AC1 /* GPSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSCell.h; sourceTree = "<group>"; };
@@ -3859,6 +3862,8 @@
 				01E6579A1C7553CB00448F74 /* EmergencyContactViewController.m */,
 				01E6579C1C7557DB00448F74 /* AddContactViewController.h */,
 				01E6579D1C7557DB00448F74 /* AddContactViewController.m */,
+				01E89B051C76BE4500CFD40D /* EditContactViewController.h */,
+				01E89B061C76BE4500CFD40D /* EditContactViewController.m */,
 				01E9A74E1C7473BA00000805 /* ScanCodesViewController.h */,
 				01E9A74F1C7473BA00000805 /* ScanCodesViewController.m */,
 				01E9A71F1C74613500000805 /* AddMemberViewController.h */,
@@ -5709,6 +5714,7 @@
 				01EFD30A1C56028300BDA640 /* FoodCell.m in Sources */,
 				01F49D231C478D700079F45F /* CommonGoodsCellMiddle.m in Sources */,
 				01E6579E1C7557DB00448F74 /* AddContactViewController.m in Sources */,
+				01E89B071C76BE4500CFD40D /* EditContactViewController.m in Sources */,
 				01EB31BF1C040347002D8229 /* CitiesViewController.m in Sources */,
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,
 				01F0DAE31BCE3350004FD908 /* MWZoomingScrollView.m in Sources */,

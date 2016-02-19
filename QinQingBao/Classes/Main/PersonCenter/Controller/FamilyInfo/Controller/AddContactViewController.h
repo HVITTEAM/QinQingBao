@@ -10,7 +10,6 @@
 #import "RelationModel.h"
 
 @interface AddContactViewController : HMCommonViewController
-@property (nonatomic, copy) NSString *member_id;
 @property (nonatomic, copy) void (^addResultClick)(RelationModel *item);
 
 @end

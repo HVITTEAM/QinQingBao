@@ -12,13 +12,14 @@
 #import "HeadProcessView.h"
 
 #import "AddContactViewController.h"
+#import "EditContactViewController.h"
 
 #import "RelationTotal.h"
 #import "RelationModel.h"
 #import "BindingResultViewController.h"
 
 
-@interface EmergencyContactViewController ()
+@interface EmergencyContactViewController ()<UIAlertViewDelegate>
 {
     NSMutableArray *relationArr;
 }
@@ -35,15 +36,22 @@
     
     [self initTableSkin];
     
-    [self getRelation];
+    //    [self getRelation];
     
     [self setupGroups];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
 }
 
 -(void)initTableSkin
 {
     self.title = @"紧急联系人";
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 -(void)getRelation
@@ -95,8 +103,21 @@
         // 2.设置组的所有行数据
         HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:[NSString stringWithFormat:@"%@    %@",obj.rname,obj.rtelnum] icon:nil];
         item.subtitle = obj.relation;
+        obj.index = [relationArr indexOfObject:obj];
         item.operation = ^{
-            NSLog(@"----点击了n---");
+            EditContactViewController *vc = [[EditContactViewController alloc] init];
+            vc.editResultClick = ^(RelationModel *item){
+                [relationArr replaceObjectAtIndex:item.index withObject:item];
+                [self setupGroup];
+                [self.tableView reloadData];
+            };
+            vc.deleteResultClick = ^(RelationModel *item){
+                [relationArr removeObjectAtIndex:item.index];
+                [self setupGroup];
+                [self.tableView reloadData];
+            };
+            vc.item = obj;
+            [self.navigationController pushViewController:vc animated:YES];
         };
         [itemarr addObject:item];
     }
@@ -167,7 +188,7 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setValue:self.member_id forKey:@"member_id"];
     [dict setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[relationArr count]] forKey:@"sos_count"];
-
+    
     for (int i = 1; i < relationArr.count+1 ; i++)
     {
         RelationModel *obj = relationArr[i-1];
@@ -175,6 +196,9 @@
         [dict setValue:obj.rtelnum forKey:[NSString stringWithFormat:@"mobile_%d",i]];
         [dict setValue:obj.relation forKey:[NSString stringWithFormat:@"relation_%d",i]];
     }
+    
+    if (relationArr.count == 0 )
+        return [NoticeHelper AlertShow:@"请设置紧急联系人" view:nil];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_SOS_relationfo parameters: dict
@@ -200,5 +224,18 @@
                                  }];
 }
 
+#pragma  mark UIAlertViewDelegate
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+        [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)back
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
+    [alertView show];
+    
+}
 @end

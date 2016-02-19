@@ -13,7 +13,7 @@
 #import "ScanCodesViewController.h"
 #import "EmergencyContactViewController.h"
 
-@interface AddDeviceViewController ()<UIActionSheetDelegate>
+@interface AddDeviceViewController ()<UIActionSheetDelegate,UIAlertViewDelegate>
 {
     NSDictionary *deviceDict;
     
@@ -33,6 +33,11 @@
     [self initTableSkin];
     
     [self setupGroups];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    [super viewWillDisappear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -62,6 +67,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"scan.png"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
+    
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 # pragma  mark 设置数据源
@@ -120,6 +127,14 @@
         [self setupGroup];
         [self.tableView reloadData];
     }
+}
+
+#pragma  mark UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)setupFooter
@@ -196,6 +211,13 @@
         self.item1.rightText.text = code;
     };
     [self.navigationController pushViewController:scanCodeVC animated:YES];
+}
+
+-(void)back
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
+    [alertView show];
+
 }
 
 

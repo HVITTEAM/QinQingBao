@@ -215,6 +215,10 @@
     {
         return [NoticeHelper AlertShow:@"请输入家属手机号码" view:nil];
     }
+    else if (self.itemTel.rightText.text.length != 11)
+    {
+        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式" view:nil];
+    }
 //    else if (self.itemId.rightText.text.length == 0)
 //    {
 //        return [NoticeHelper AlertShow:@"请输入家属身份证号码" view:nil];
@@ -226,11 +230,11 @@
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Add_mobile_user parameters: @{@"username" : self.itemNick.rightText.text,
                                                                         @"truename":self.itemName.rightText.text,
-                                                                        @"sex" : [NSString stringWithFormat:@"%ld",(long)selectedSexIdx],
+                                                                        @"sex" : selectedSexIdx ? [NSString stringWithFormat:@"%ld",(long)selectedSexIdx] : @"",
                                                                         @"mobile":self.itemTel.rightText.text,
-                                                                        @"areaid":selectedCodeStr,
-                                                                        @"areainfo":selectedAddressStr,
-                                                                        @"identity":self.itemId.rightText.text}
+                                                                        @"areaid":selectedCodeStr ? selectedCodeStr:  @"" ,
+                                                                        @"areainfo":selectedAddressStr ? selectedAddressStr : @"",
+                                                                        @"identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -287,7 +291,7 @@
 /**临时方法 解绑设备*/
 -(void)delete
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"ime" : @"626010120141513"}
+    [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"imei" : @"626010120141513"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
