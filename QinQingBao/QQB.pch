@@ -472,6 +472,9 @@
 /***紧急联系人获取Url*/
 #define URL_Get_relationfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=relativinfo&op=get_relationfo",URL_Local]
 
+/***个人设备列表url*/
+#define URL_get_mem_device_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=get_mem_device",URL_Local]
+
 /***手表sos紧急联系人 设置 （增改)Url*/
 #define URL_SOS_relationfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=relativinfo&op=sos_relationfo",URL_Local]
 

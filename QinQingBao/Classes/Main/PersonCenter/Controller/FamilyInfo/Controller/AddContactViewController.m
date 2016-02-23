@@ -147,7 +147,5 @@
     obj.relation = selectedRealationStr;
     if (self.addResultClick)
         self.addResultClick(obj);
-    [self.navigationController popViewControllerAnimated:YES];
-
 }
 @end

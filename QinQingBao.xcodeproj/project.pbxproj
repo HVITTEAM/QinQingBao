@@ -235,6 +235,11 @@
 		01C0D20B1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */; };
 		01C7AEA81C3E220F00AE0A9C /* UIColor+RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */; };
 		01CEAB011C3E48360015480F /* UIView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CEAB001C3E48360015480F /* UIView+Placeholder.m */; };
+		01CF97A11C7A988800206FCD /* DeviceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A01C7A988800206FCD /* DeviceInfoModel.m */; };
+		01CF97A71C7A98E400206FCD /* DevicesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A41C7A98E400206FCD /* DevicesDetailViewController.m */; };
+		01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A61C7A98E400206FCD /* DevicesInforViewController.m */; };
+		01CF97AA1C7AE8F100206FCD /* QinQingBao.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 01CF97A91C7AE8F100206FCD /* QinQingBao.entitlements */; };
+		01CF97AD1C7AEAD500206FCD /* MTAddressPickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */; };
 		01D5ED621C5C99C800A9E8C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF9C1B7C367600665D87 /* Images.xcassets */; };
 		01D616F71C44CA9400055404 /* AreaModelTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F61C44CA9400055404 /* AreaModelTotal.m */; };
 		01D616FA1C44CAA300055404 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F91C44CAA300055404 /* AreaModel.m */; };
@@ -482,6 +487,7 @@
 		01E89B031C76B45A00CFD40D /* BindingResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E89B011C76B45A00CFD40D /* BindingResultViewController.m */; };
 		01E89B041C76B45A00CFD40D /* BindingResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E89B021C76B45A00CFD40D /* BindingResultViewController.xib */; };
 		01E89B071C76BE4500CFD40D /* EditContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E89B061C76BE4500CFD40D /* EditContactViewController.m */; };
+		01E89B0B1C76FE0000CFD40D /* infoimg.png in Resources */ = {isa = PBXBuildFile; fileRef = 01E89B0A1C76FE0000CFD40D /* infoimg.png */; };
 		01E905F71C0D299F00B53AC1 /* UIViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */; };
 		01E905FC1C0D6E9A00B53AC1 /* GPSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */; };
 		01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */; };
@@ -1285,6 +1291,15 @@
 		01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGB.m"; sourceTree = "<group>"; };
 		01CEAAFF1C3E48360015480F /* UIView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Placeholder.h"; sourceTree = "<group>"; };
 		01CEAB001C3E48360015480F /* UIView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Placeholder.m"; sourceTree = "<group>"; };
+		01CF979F1C7A988800206FCD /* DeviceInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfoModel.h; sourceTree = "<group>"; };
+		01CF97A01C7A988800206FCD /* DeviceInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoModel.m; sourceTree = "<group>"; };
+		01CF97A31C7A98E400206FCD /* DevicesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesDetailViewController.h; sourceTree = "<group>"; };
+		01CF97A41C7A98E400206FCD /* DevicesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesDetailViewController.m; sourceTree = "<group>"; };
+		01CF97A51C7A98E400206FCD /* DevicesInforViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesInforViewController.h; sourceTree = "<group>"; };
+		01CF97A61C7A98E400206FCD /* DevicesInforViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesInforViewController.m; sourceTree = "<group>"; };
+		01CF97A91C7AE8F100206FCD /* QinQingBao.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = QinQingBao.entitlements; sourceTree = "<group>"; };
+		01CF97AB1C7AEAD500206FCD /* MTAddressPickController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAddressPickController.h; sourceTree = "<group>"; };
+		01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAddressPickController.m; sourceTree = "<group>"; };
 		01D616F51C44CA9400055404 /* AreaModelTotal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModelTotal.h; sourceTree = "<group>"; };
 		01D616F61C44CA9400055404 /* AreaModelTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModelTotal.m; sourceTree = "<group>"; };
 		01D616F81C44CAA300055404 /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
@@ -1634,6 +1649,7 @@
 		01E89B021C76B45A00CFD40D /* BindingResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindingResultViewController.xib; sourceTree = "<group>"; };
 		01E89B051C76BE4500CFD40D /* EditContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditContactViewController.h; sourceTree = "<group>"; };
 		01E89B061C76BE4500CFD40D /* EditContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditContactViewController.m; sourceTree = "<group>"; };
+		01E89B0A1C76FE0000CFD40D /* infoimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = infoimg.png; sourceTree = "<group>"; };
 		01E905F51C0D299F00B53AC1 /* UIViewController+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Placeholder.h"; sourceTree = "<group>"; };
 		01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Placeholder.m"; sourceTree = "<group>"; };
 		01E905F91C0D6E9A00B53AC1 /* GPSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSCell.h; sourceTree = "<group>"; };
@@ -2882,6 +2898,7 @@
 		013F3F261BFC6E0A00FF39E5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				01E89B0A1C76FE0000CFD40D /* infoimg.png */,
 				01E89AFE1C75BE8300CFD40D /* scan@2x.png */,
 				01E89AFC1C75B4CB00CFD40D /* scan.png */,
 				013F23251C59C841006711FE /* rabige.png */,
@@ -3685,6 +3702,8 @@
 		01E6D4931BE1E9A300824F51 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01CF979F1C7A988800206FCD /* DeviceInfoModel.h */,
+				01CF97A01C7A988800206FCD /* DeviceInfoModel.m */,
 				01E89ACD1C758FFD00CFD40D /* ArchiveModel */,
 				01E89AF31C7595CC00CFD40D /* RelationTotal.h */,
 				01E89AF41C7595CC00CFD40D /* RelationTotal.m */,
@@ -3855,6 +3874,10 @@
 		01E9A71E1C74613500000805 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01CF97A31C7A98E400206FCD /* DevicesDetailViewController.h */,
+				01CF97A41C7A98E400206FCD /* DevicesDetailViewController.m */,
+				01CF97A51C7A98E400206FCD /* DevicesInforViewController.h */,
+				01CF97A61C7A98E400206FCD /* DevicesInforViewController.m */,
 				01E89B001C76B45A00CFD40D /* BindingResultViewController.h */,
 				01E89B011C76B45A00CFD40D /* BindingResultViewController.m */,
 				01E89B021C76B45A00CFD40D /* BindingResultViewController.xib */,
@@ -4242,6 +4265,8 @@
 		01EFD0BD1B7D84A700A720E7 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				01CF97AB1C7AEAD500206FCD /* MTAddressPickController.h */,
+				01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */,
 				01ED7CA81C3220AB00A2182F /* MTNetReloader */,
 				01E08DD81BABFBC200E00432 /* VenderMannager.h */,
 				01E08DD91BABFBC200E00432 /* VenderMannager.m */,
@@ -4582,6 +4607,7 @@
 		01F227D71B7B3E1400ED4AFB /* QinQingBao */ = {
 			isa = PBXGroup;
 			children = (
+				01CF97A91C7AE8F100206FCD /* QinQingBao.entitlements */,
 				01D9DEA91B7DBF840087F80E /* Frameworks */,
 				01F227FF1B7B3E9700ED4AFB /* Classes */,
 				01F227D81B7B3E1400ED4AFB /* Supporting Files */,
@@ -5036,6 +5062,11 @@
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 42PUMHHWSN;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 1;
+							};
+						};
 					};
 					01F227ED1B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
@@ -5087,6 +5118,7 @@
 				01F49CF71C4730080079F45F /* CommonGoodsDetailHeadCell.xib in Resources */,
 				01EFD2EC1C56026A00BDA640 /* CheckSelfViewController.xib in Resources */,
 				01E4A9851C40ACB500AAAF73 /* OrderGoodsCell.xib in Resources */,
+				01E89B0B1C76FE0000CFD40D /* infoimg.png in Resources */,
 				01E68F9F1BCCA68900A17543 /* Default@2x.png in Resources */,
 				01E690751BCCF5BC00A17543 /* DefinitionTypeView.xib in Resources */,
 				01E68FD61BCCA68900A17543 /* ptz_up.png in Resources */,
@@ -5342,6 +5374,7 @@
 				01E68FC01BCCA68900A17543 /* play_ptz_disable.png in Resources */,
 				01E68FE81BCCA68900A17543 /* playback_fullscreen_playbarline.png in Resources */,
 				01EFD2EE1C56026A00BDA640 /* InfoDetailViewController.xib in Resources */,
+				01CF97AA1C7AE8F100206FCD /* QinQingBao.entitlements in Resources */,
 				0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */,
 				01E68FD01BCCA68900A17543 /* ptz_left.png in Resources */,
 				01D617031C45459800055404 /* hyxxshop.png in Resources */,
@@ -5471,6 +5504,7 @@
 				013F3F1C1BFC53A000FF39E5 /* MJDIYHeader.m in Sources */,
 				01F138581BEA0586007FF79F /* HeartbeatCell.m in Sources */,
 				01EFD3111C56028300BDA640 /* TipsCell.m in Sources */,
+				01CF97A11C7A988800206FCD /* DeviceInfoModel.m in Sources */,
 				013F3F1A1BFC53A000FF39E5 /* MJDIYAutoFooter.m in Sources */,
 				01F49D211C478D700079F45F /* CommonGoodsCellHead.m in Sources */,
 				01E94CD51BC75DB900B956A2 /* YSDemoDataModel.m in Sources */,
@@ -5498,6 +5532,7 @@
 				01F49D251C478D700079F45F /* CommonGoodsDetailEndView.m in Sources */,
 				01328F9A1C4C88270014D283 /* StoreModel.m in Sources */,
 				01F0DAE11BCE3350004FD908 /* MWTapDetectingImageView.m in Sources */,
+				01CF97AD1C7AEAD500206FCD /* MTAddressPickController.m in Sources */,
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
 				01EB286D1BA119CC00937412 /* CancelOrderController.m in Sources */,
 				D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */,
@@ -5774,6 +5809,7 @@
 				01EFD2ED1C56026A00BDA640 /* InfoDetailViewController.m in Sources */,
 				01F49CF31C4730080079F45F /* CommonGoodsDetailBottomCell.m in Sources */,
 				01F33D8E1BB2873F00787620 /* AFDownloadRequestOperation.m in Sources */,
+				01CF97A71C7A98E400206FCD /* DevicesDetailViewController.m in Sources */,
 				01ECDFBC1B7C402100665D87 /* HMCommonCenterItem.m in Sources */,
 				D279DA3F1B8717C200E7CDDF /* BloodCell.m in Sources */,
 				0140E2B51C4F34FB002ECBC5 /* GoodsTypeViewController.m in Sources */,
@@ -5827,6 +5863,7 @@
 				01F0DAE51BCE3350004FD908 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				010B73421C17F2AE007A496B /* ServiceTimeCell.m in Sources */,
 				018BC60A1C50AC7200C883FF /* WifiAddDeviceViewController.m in Sources */,
+				01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */,
 				01FBF0DE1BCBAD4100CA285C /* MJExtensionConst.m in Sources */,
 				01E6D4921BE1E78C00824F51 /* CouponsViewController.m in Sources */,
 				01024CC31BD0A75D00E8CAEC /* openssl_wrapper.m in Sources */,
@@ -5965,6 +6002,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -6005,8 +6043,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhejiang High View Information Technology Co.Ltd (42PUMHHWSN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

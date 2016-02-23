@@ -6,8 +6,8 @@
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-static float cellHeight = 80;
-static float cellWidth = 66;
+static float cellHeight = 75;
+static float cellWidth = 60;
 
 #import "GoodsTypeCell.h"
 #import "ConfModelTotal.h"
@@ -77,6 +77,7 @@ static float cellWidth = 66;
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
+    label.textColor = [UIColor colorWithRGB:@"666666"];
     NSInteger index = indexPath.section *4 + indexPath.row;
     ConfModel *data = [dataProvider objectAtIndex:index];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,data.gc_thumb]];

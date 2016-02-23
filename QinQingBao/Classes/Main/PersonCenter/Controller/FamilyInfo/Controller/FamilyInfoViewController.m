@@ -11,9 +11,13 @@
 #import "HealthArchivesController.h"
 #import "FamilyInforTotal.h"
 #import "FamilyInforModel.h"
+#import "DevicesInforViewController.h"
+#import "DeviceInfoModel.h"
 
 
 @interface FamilyInfoViewController ()
+
+@property(strong,nonatomic)NSMutableArray *devicesArray;                  //设备信息数组
 
 @end
 
@@ -26,6 +30,8 @@
     [self initNavigation];
     
     [self setupGroups];
+    
+    [self loadDevicesDatas];
 }
 
 /**
@@ -35,6 +41,57 @@
 {
     self.title = self.selecteItem.member_truename;
     self.view.backgroundColor = HMGlobalBg;
+}
+
+
+/**
+ *  创建 Cell by swy
+ */
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HMCommonCell *cell = (HMCommonCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    UILabel *numLb = [cell viewWithTag:20];
+    if (!numLb) {
+        numLb = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW - 80, 15, 30, 20)];
+        numLb.tag = 20;
+        numLb.backgroundColor = [UIColor lightGrayColor];
+        numLb.layer.cornerRadius = 10;
+        numLb.layer.masksToBounds = YES;
+        numLb.textAlignment = NSTextAlignmentCenter;
+        numLb.textColor = [UIColor whiteColor];
+        numLb.font = [UIFont systemFontOfSize:15];
+        [cell.contentView addSubview:numLb];
+    }
+    
+    if (indexPath.row != 1) {
+        numLb.hidden = YES;
+    }else{
+        NSInteger num = self.devicesArray.count;
+        if (num == 0) {
+            numLb.hidden = YES;
+        }else{
+            numLb.hidden = NO;
+            numLb.text = [NSString stringWithFormat:@"%d",(int)num];
+        }
+    }
+    return cell;
+}
+
+/**
+ *  设置cell 高by swy
+ */
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)index
+{
+    return 50;
+}
+
+-(NSMutableArray *)devicesArray
+{
+    if (!_devicesArray) {
+        _devicesArray = [[NSMutableArray alloc] init];
+    }
+    return _devicesArray;
 }
 
 
@@ -91,6 +148,7 @@
     
 }
 
+//by swy 修改
 - (void)setupGroup0
 {
     // 1.创建组
@@ -100,36 +158,30 @@
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:@""];
     version.isSubtitle = YES;
-//    version.destVcClass = [DetailInfoViewController class];
     version.operation = ^{
         DetailInfoViewController *view = [[DetailInfoViewController alloc] init];
         view.itemInfo = self.selecteItem;
         [self.navigationController pushViewController:view animated:YES];
     };
-    HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"健康联系人" icon:@""];
-    help.operation = ^{
-        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
+    
+    HMCommonArrowItem *device = [HMCommonArrowItem itemWithTitle:@"硬件设备" icon:@""];
+    device.isSubtitle = YES;
+    device.operation = ^{
+        DevicesInforViewController *devicesInfVC = [[DevicesInforViewController alloc] init];
+        devicesInfVC.selectedFamilyMember = self.selecteItem;
+        devicesInfVC.devicesArray = self.devicesArray;
+        [self.navigationController pushViewController:devicesInfVC animated:YES];
     };
-    help.isSubtitle = YES;
+    
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
     advice.isSubtitle = YES;
     advice.operation = ^{
         [self getDataProvider];
     };
-
-    HMCommonArrowItem *service = [HMCommonArrowItem itemWithTitle:@"服务套餐" icon:@""];
-    service.operation = ^{
-        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
-    };
-
-    service.isSubtitle = YES;
-    HMCommonArrowItem *doctor = [HMCommonArrowItem itemWithTitle:@"医嘱信息" icon:@""];
-    doctor.operation = ^{
-        [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
-    };
-    doctor.isSubtitle = YES;
-    group.items = @[version,help,advice,service,doctor];
+    
+    group.items = @[version,device,advice];
 }
+
 
 - (void)setupFooter
 {
@@ -197,5 +249,43 @@
         
     }
 }
+
+/**
+ *  获取设备数据 by swy
+ */
+-(void)loadDevicesDatas
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSDictionary *dict = @{
+                           @"member_id" : self.selecteItem.member_id,
+                           @"client" : @"ios",
+                           @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                           };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_get_mem_device_list parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [HUD removeFromSuperview];
+        if ([dict[@"code"] integerValue] == 0) {
+            
+            NSMutableArray *dataArray = [DeviceInfoModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            self.devicesArray = dataArray;
+            [self.tableView reloadData];
+            
+        }else if ([dict[@"code"] integerValue] == 14001) {
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            return;
+        }else if ([dict[@"code"] integerValue] == 17001){
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            return;
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求未成功" view:self.view];
+
+    }];
+    
+}
+
 
 @end

@@ -117,7 +117,6 @@
 {
     if (buttonIndex == 0)
         return;
-//    selectedRealationIdx = buttonIndex;
     
     switch (buttonIndex)
     {
@@ -133,6 +132,7 @@
         default:
             break;
     }
+    self.item.relation = selectedRealationStr;
     [self.groups removeAllObjects];
     [self setupGroups];
     [self.tableView reloadData];
@@ -140,6 +140,7 @@
 
 -(void)next:(UIButton *)sender
 {
+    [self.view endEditing:YES];
     if (self.item0.rightText.text.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入姓名" view:nil];
@@ -163,11 +164,11 @@
     obj.relation = selectedRealationStr;
     if (self.editResultClick)
         self.editResultClick(obj);
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)delete:(UIButton *)sender
 {
+    [self.view endEditing:YES];
     RelationModel *obj = [[RelationModel alloc] init];
     obj.index = self.item.index;
     obj.rname = self.item0.rightText.text;
@@ -175,7 +176,6 @@
     obj.relation = selectedRealationStr;
     if (self.deleteResultClick)
         self.deleteResultClick(obj);
-    [self.navigationController popViewControllerAnimated:YES];
 
 }
 @end

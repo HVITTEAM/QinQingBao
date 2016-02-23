@@ -36,7 +36,7 @@
     
     [self initTableSkin];
     
-    //    [self getRelation];
+//    [self getRelation];
     
     [self setupGroups];
 }
@@ -110,11 +110,13 @@
                 [relationArr replaceObjectAtIndex:item.index withObject:item];
                 [self setupGroup];
                 [self.tableView reloadData];
+                [self.navigationController popViewControllerAnimated:YES];
             };
             vc.deleteResultClick = ^(RelationModel *item){
                 [relationArr removeObjectAtIndex:item.index];
                 [self setupGroup];
                 [self.tableView reloadData];
+                [self.navigationController popViewControllerAnimated:YES];
             };
             vc.item = obj;
             [self.navigationController pushViewController:vc animated:YES];
@@ -179,6 +181,7 @@
         [relationArr addObject:item];
         [self setupGroup];
         [self.tableView reloadData];
+        [self.navigationController popViewControllerAnimated:YES];
     };
     [self.navigationController pushViewController:vc animated:YES];
 }

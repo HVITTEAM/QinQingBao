@@ -472,7 +472,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0)
-        return  165;
+        return  175;
     if (indexPath.section == 2) {
         return MTViewH * 0.15;
     }else if (indexPath.section == 1){

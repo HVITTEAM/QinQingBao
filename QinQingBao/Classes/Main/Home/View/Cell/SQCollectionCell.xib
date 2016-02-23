@@ -18,7 +18,7 @@
                         <rect key="frame" x="8" y="8" width="50" height="50"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nuB-rO-Tbv">
-                        <rect key="frame" x="0.0" y="60" width="66" height="28"/>
+                        <rect key="frame" x="0.0" y="58" width="66" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="highlightedColor"/>
                     </label>

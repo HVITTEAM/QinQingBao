@@ -161,14 +161,22 @@
     
     [footview addSubview:okBtn];
     
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 230)/2, 55, 230, 30)];
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infoimg.png"]];
+    img.frame = CGRectMake(lab.x - 20, 58, 20, 20);
+    lab.userInteractionEnabled = NO;
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.text = @"可扫描设备条形码/二维码获取设备识别码";
+    lab.textColor = HMColor(234, 100, 65);
+    lab.textAlignment = NSTextAlignmentCenter;
+    [footview addSubview:lab];
+    [footview addSubview:img];
     self.tableView.tableFooterView = footview;
 }
 
 -(void)next:(UIButton *)sender
 {
-//    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
-//    [self.navigationController pushViewController:VC animated:YES];
-//    return;
+
     [self.view endEditing:YES];
     if (selectedDevicename.length == 0)
     {
