@@ -13,6 +13,10 @@
 #import "HMCommonButtonItem.h"
 #import "HeadProcessView.h"
 
+#import "AreaModel.h"
+
+#import "MTAddressPickController.h"
+
 @interface BasicInfoViewController ()<UIAlertViewDelegate>
 {
     NSInteger selectedSexIdx;
@@ -20,6 +24,8 @@
     
     NSString *selectedAddressStr;
     NSString *selectedCodeStr;
+    
+    NSString *selectedAreainfo;
     
     
 }
@@ -132,11 +138,11 @@
     self.itemAddress = [HMCommonArrowItem itemWithTitle:@"居住地址" icon:nil];
     self.itemAddress.subtitle = selectedAddressStr.length == 0 ? @"选填项" : selectedAddressStr;
     self.itemAddress.operation = ^{
-        UpdateAddressController *textView = [[UpdateAddressController alloc] init];
-        //        textView.inforVO = infoVO;
-        textView.changeDataBlock = ^(NSDictionary *dict, NSString *addressStr){
-            selectedCodeStr = [dict objectForKey:@"member_areaid"];
-            selectedAddressStr = [NSString stringWithFormat:@"%@%@",addressStr,[dict objectForKey:@"member_areainfo"]];
+        MTAddressPickController *textView = [[MTAddressPickController alloc] init];
+        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
+            selectedCodeStr = selectedRegionmodel.area_id;
+            selectedAddressStr = addressStr;
+            selectedAreainfo = areaInfo;
             [weakSelf.groups removeAllObjects];
             [weakSelf setupGroups];
             [weakSelf.tableView reloadData];
@@ -200,10 +206,6 @@
 
 -(void)next:(UIButton *)sender
 {
-//    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-//    [self.navigationController pushViewController:view animated:YES];
-//    return;
-    
     [self.view endEditing:YES];
     
     if (self.itemNick.rightText.text.length == 0)
@@ -228,7 +230,7 @@
                                                                         @"sex" : selectedSexIdx ? [NSString stringWithFormat:@"%ld",(long)selectedSexIdx] : @"",
                                                                         @"mobile":self.itemTel.rightText.text,
                                                                         @"areaid":selectedCodeStr ? selectedCodeStr:  @"" ,
-                                                                        @"areainfo":selectedAddressStr ? selectedAddressStr : @"",
+                                                                        @"areainfo":selectedAreainfo ? selectedAreainfo : @"",
                                                                         @"identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
@@ -268,7 +270,6 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
@@ -280,7 +281,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
-
 }
 
 /**临时方法 解绑设备*/
