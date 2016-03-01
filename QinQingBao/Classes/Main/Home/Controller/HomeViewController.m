@@ -257,8 +257,6 @@ static float cellWidth = 66;
         
         return [self getLocationCity:addressString];
     }];
-
-    
 }
 
 #pragma mark Timer

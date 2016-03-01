@@ -95,7 +95,7 @@
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    NSString *str = [NSString stringWithFormat:@"%lu",_dataProvider.count/2];
+    NSString *str = [NSString stringWithFormat:@"%u",_dataProvider.count/2];
     return ceilf([str floatValue]);
 }
 

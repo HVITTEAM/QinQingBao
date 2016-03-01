@@ -33,7 +33,7 @@
 {
     if (!goodsInfo)
         return;
-    NSString *priceStr                            = [NSString stringWithFormat:@"￥%@",goodsInfo.goods_price];
+    NSString *priceStr                          = [NSString stringWithFormat:@"￥%@",goodsInfo.promotion_price ? goodsInfo.promotion_price : goodsInfo.goods_price];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:priceStr];
     
     [attributedString addAttribute:NSFontAttributeName

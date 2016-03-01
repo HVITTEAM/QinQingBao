@@ -19,10 +19,12 @@
 #import "CommonOrderModel.h"
 #import "ReciverinfoModel.h"
 
+#import "RefundViewController.h"
+
 static CGFloat ENDVIEW_HEIGHT = 50;
 
 
-@interface GoodsOrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface GoodsOrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate,CommonGoodsDetailEndViewDelegate>
 {
     ReciverinfoModel *reciverModel;
 }
@@ -58,9 +60,11 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     _endView.goodsitemInfo = self.item.order_list[0];
     _endView.goodsModel = self.item;
     _endView.nav = self.navigationController;
+    _endView.delegate = self;
     [self.view addSubview:_endView];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
+
 }
 
 - (UITableView *)tableView
@@ -102,7 +106,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                          NSDictionary *reciver_info = [order_common objectForKey:@"reciver_info"];
                                          reciverModel = [ReciverinfoModel objectWithKeyValues:reciver_info];
                                          reciverModel.reciver_name = [order_common objectForKey:@"reciver_name"];
-                                         NSDictionary *invoice_info = [order_common objectForKey:@"invoice_info"];
+//                                         NSDictionary *invoice_info = [order_common objectForKey:@"invoice_info"];
 //                                         if (!invoice_info || [invoice_info isEqualToDictionary:@"null"])
 //                                             reciverModel.inv_title_select = @"";
 //                                         else
@@ -205,10 +209,32 @@ static CGFloat ENDVIEW_HEIGHT = 50;
         }
         else
         {
+            //修改 by swy
             if(middleCell == nil)
                 middleCell = [CommonGoodsDetailMiddleCell commonGoodsDetailMiddleCell];
             
             [middleCell setitemWithData:arr[indexPath.row -1]];
+            
+            if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
+                middleCell.button.hidden = YES;
+            }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
+                middleCell.button.hidden = NO;
+            }
+            
+            __weak typeof(self) weakSelf = self;
+            middleCell.refundOperation = ^(CommonGoodsDetailMiddleCell *midCell){
+                
+                RefundViewController *refundVC = [[RefundViewController alloc] init];
+                refundVC.orderInfo = itemInfo;
+                refundVC.orderGoodsModel = arr[indexPath.row -1];
+                if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
+                    refundVC.isShowRefundType = NO;
+                }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
+                     refundVC.isShowRefundType = YES;
+                }
+                
+                [weakSelf.navigationController pushViewController:refundVC animated:YES];
+            };
             
             cell = middleCell;
         }
@@ -224,6 +250,25 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+#pragma  mark CommonGoodsDetailEndViewDelegate
+/**
+ *  底部的CommonGoodsDetailEndView中的按钮被点击后回调
+ */
+-(void)endView:(CommonGoodsDetailEndView *)endView button:(UIButton *)btn tappedAtIndex:(NSInteger)index
+{
+    if (index == 0) {
+        CommonOrderModel *itemInfo = self.item.order_list[0];
+        RefundViewController *refundVC = [[RefundViewController alloc] init];
+        refundVC.orderInfo = itemInfo;
+        if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
+            refundVC.isShowRefundType = NO;
+        }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
+            refundVC.isShowRefundType = YES;
+        }
+        [self.navigationController pushViewController:refundVC animated:YES];
+    }
 }
 
 @end

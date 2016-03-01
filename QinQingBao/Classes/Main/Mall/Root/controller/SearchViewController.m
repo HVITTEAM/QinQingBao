@@ -83,7 +83,6 @@
     lab.textColor = [UIColor colorWithRGB:@"979797"];
     [self.view addSubview:lab];
     
-    [self.collectView registerNib:[UINib nibWithNibName:@"HistoryViewCell" bundle:nil] forCellWithReuseIdentifier:@"HistoryViewCell"];
     [self.collectView reloadData];
     
     if (data.count == 0)
@@ -107,7 +106,7 @@
     UICollectionViewFlowLayout *flowLayout =[[UICollectionViewFlowLayout alloc]init];
     self.collectView = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 30, MTScreenW - 20, MTScreenH - 20) collectionViewLayout:flowLayout];
     self.collectView.backgroundColor = [UIColor whiteColor];
-    [self.collectView registerNib:[UINib nibWithNibName:@"SQCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"MTCommonCollecttionCell"];
+    [self.collectView registerNib:[UINib nibWithNibName:@"HistoryViewCell" bundle:nil] forCellWithReuseIdentifier:@"HistoryViewCell"];
     self.collectView.delegate = self;
     self.collectView.dataSource = self;
     [self.view addSubview:self.collectView];
@@ -137,6 +136,8 @@
 #pragma mark UITextFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self.view endEditing:NO];
+
     //收起键盘 字符串去首尾空格
     [textField resignFirstResponder];
     NSString *str = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
@@ -196,6 +197,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.view endEditing:NO];
     //跳转界面
     GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
     vc.keyWords = data[indexPath.row];

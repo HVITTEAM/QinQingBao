@@ -54,6 +54,7 @@
 		010729BB1C42018900A6F1B0 /* CommendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 010729BA1C42018900A6F1B0 /* CommendModel.m */; };
 		010729BF1C4202C100A6F1B0 /* CommendList.m in Sources */ = {isa = PBXBuildFile; fileRef = 010729BE1C4202C100A6F1B0 /* CommendList.m */; };
 		010729C21C426D0E00A6F1B0 /* GoodsSelectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 010729C11C426D0E00A6F1B0 /* GoodsSelectedViewController.m */; };
+		010AFFEA1C83F4C300543A38 /* GoodsTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 010AFFE91C83F4C300543A38 /* GoodsTypeModel.m */; };
 		010B73421C17F2AE007A496B /* ServiceTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 010B73401C17F2AE007A496B /* ServiceTimeCell.m */; };
 		010B73431C17F2AE007A496B /* ServiceTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010B73411C17F2AE007A496B /* ServiceTimeCell.xib */; };
 		010B734C1C181827007A496B /* icon_listheader_animation_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 010B734A1C181827007A496B /* icon_listheader_animation_1@2x.png */; };
@@ -179,6 +180,9 @@
 		0157E2431BE888BF004C0908 /* icon_chose_arrow_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E23F1BE888BF004C0908 /* icon_chose_arrow_nor@2x.png */; };
 		0157E2441BE888BF004C0908 /* icon_chose_arrow_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E2401BE888BF004C0908 /* icon_chose_arrow_sel@2x.png */; };
 		0157E2451BE888BF004C0908 /* icon_chose_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E2411BE888BF004C0908 /* icon_chose_bottom@2x.png */; };
+		015F11BB1C8046070058C97B /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */; };
+		015F11BC1C8046070058C97B /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */; };
+		015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */; };
 		016CBFC11C3104B70029C66E /* ServicePhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */; };
 		016CBFC21C3104B70029C66E /* ServicePhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */; };
 		016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E745C1BAFD053009075E5 /* PersonalDataViewController.m */; };
@@ -240,6 +244,7 @@
 		01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A61C7A98E400206FCD /* DevicesInforViewController.m */; };
 		01CF97AA1C7AE8F100206FCD /* QinQingBao.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 01CF97A91C7AE8F100206FCD /* QinQingBao.entitlements */; };
 		01CF97AD1C7AEAD500206FCD /* MTAddressPickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */; };
+		01CF97B31C7C335F00206FCD /* EditInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97B11C7C335F00206FCD /* EditInfoTableViewController.m */; };
 		01D5ED621C5C99C800A9E8C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF9C1B7C367600665D87 /* Images.xcassets */; };
 		01D616F71C44CA9400055404 /* AreaModelTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F61C44CA9400055404 /* AreaModelTotal.m */; };
 		01D616FA1C44CAA300055404 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F91C44CAA300055404 /* AreaModel.m */; };
@@ -464,6 +469,8 @@
 		01E813371C05987100585691 /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E813361C05987100585691 /* OrderModel.m */; };
 		01E8133D1C059A2C00585691 /* OrderTotals.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8133C1C059A2C00585691 /* OrderTotals.m */; };
 		01E813401C059E5000585691 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E8133F1C059E5000585691 /* OrderItem.m */; };
+		01E81CF01C7FF7C1006F4693 /* GoodsSpecCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E81CEF1C7FF7C1006F4693 /* GoodsSpecCell.xib */; };
+		01E81CF31C7FFA1A006F4693 /* GoodsSpecCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E81CF21C7FFA1A006F4693 /* GoodsSpecCollectionView.m */; };
 		01E82E791C0C13A00090360C /* HotCitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E82E771C0C13A00090360C /* HotCitiesCell.m */; };
 		01E82E7A1C0C13A00090360C /* HotCitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E82E781C0C13A00090360C /* HotCitiesCell.xib */; };
 		01E82E7F1C0C15380090360C /* HotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E82E7D1C0C15380090360C /* HotCollectionViewCell.m */; };
@@ -544,6 +551,21 @@
 		01EB6BF21C28D88C008BD878 /* AboutusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB6BF01C28D88C008BD878 /* AboutusViewController.xib */; };
 		01EB6BF61C28DD14008BD878 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB6BF41C28DD14008BD878 /* FeedbackViewController.m */; };
 		01EB6BF71C28DD14008BD878 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */; };
+		01EBD3B21C853EF7009236FA /* RefundDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AB1C853EF7009236FA /* RefundDetailModel.m */; };
+		01EBD3B31C853EF7009236FA /* RefundListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AD1C853EF7009236FA /* RefundListModel.m */; };
+		01EBD3B41C853EF7009236FA /* RefundListTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AF1C853EF7009236FA /* RefundListTotal.m */; };
+		01EBD3B51C853EF7009236FA /* RefundReasonMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3B11C853EF7009236FA /* RefundReasonMode.m */; };
+		01EBD3C01C853F70009236FA /* RefundContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3B91C853F70009236FA /* RefundContentCell.m */; };
+		01EBD3C11C853F70009236FA /* RefundStateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3BB1C853F70009236FA /* RefundStateCell.m */; };
+		01EBD3C21C853F70009236FA /* RefundStateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EBD3BC1C853F70009236FA /* RefundStateCell.xib */; };
+		01EBD3C31C853F70009236FA /* ReminderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3BE1C853F70009236FA /* ReminderCell.m */; };
+		01EBD3C41C853F70009236FA /* ReminderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EBD3BF1C853F70009236FA /* ReminderCell.xib */; };
+		01EBD3C81C853FA6009236FA /* RefundCellBottom.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3C61C853FA6009236FA /* RefundCellBottom.m */; };
+		01EBD3C91C853FA6009236FA /* RefundCellBottom.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EBD3C71C853FA6009236FA /* RefundCellBottom.xib */; };
+		01EBD3D11C854027009236FA /* RefundDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3CB1C854027009236FA /* RefundDetailViewController.m */; };
+		01EBD3D21C854027009236FA /* RefundGoodsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3CD1C854027009236FA /* RefundGoodsListController.m */; };
+		01EBD3D31C854027009236FA /* RefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3CF1C854027009236FA /* RefundViewController.m */; };
+		01EBD3D41C854027009236FA /* RefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EBD3D01C854027009236FA /* RefundViewController.xib */; };
 		01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDF931B7C347800665D87 /* HomeViewController.m */; };
 		01ECDF9A1B7C347800665D87 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF941B7C347800665D87 /* HomeViewController.xib */; };
 		01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF981B7C347800665D87 /* SQCollectionCell.xib */; };
@@ -966,6 +988,8 @@
 		010729BE1C4202C100A6F1B0 /* CommendList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommendList.m; sourceTree = "<group>"; };
 		010729C01C426D0E00A6F1B0 /* GoodsSelectedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSelectedViewController.h; sourceTree = "<group>"; };
 		010729C11C426D0E00A6F1B0 /* GoodsSelectedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSelectedViewController.m; sourceTree = "<group>"; };
+		010AFFE81C83F4C300543A38 /* GoodsTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTypeModel.h; sourceTree = "<group>"; };
+		010AFFE91C83F4C300543A38 /* GoodsTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTypeModel.m; sourceTree = "<group>"; };
 		010B733F1C17F2AE007A496B /* ServiceTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTimeCell.h; sourceTree = "<group>"; };
 		010B73401C17F2AE007A496B /* ServiceTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTimeCell.m; sourceTree = "<group>"; };
 		010B73411C17F2AE007A496B /* ServiceTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceTimeCell.xib; sourceTree = "<group>"; };
@@ -1196,6 +1220,11 @@
 		0157E23F1BE888BF004C0908 /* icon_chose_arrow_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_arrow_nor@2x.png"; sourceTree = "<group>"; };
 		0157E2401BE888BF004C0908 /* icon_chose_arrow_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_arrow_sel@2x.png"; sourceTree = "<group>"; };
 		0157E2411BE888BF004C0908 /* icon_chose_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_bottom@2x.png"; sourceTree = "<group>"; };
+		015F11B81C8046070058C97B /* RecipeCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCollectionHeaderView.h; sourceTree = "<group>"; };
+		015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeCollectionHeaderView.m; sourceTree = "<group>"; };
+		015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionHeaderView.xib; sourceTree = "<group>"; };
+		015F11BE1C804E5B0058C97B /* MTUICollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUICollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTUICollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		016CBFBE1C3104B70029C66E /* ServicePhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePhoneCell.h; sourceTree = "<group>"; };
 		016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePhoneCell.m; sourceTree = "<group>"; };
 		016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePhoneCell.xib; sourceTree = "<group>"; };
@@ -1300,6 +1329,8 @@
 		01CF97A91C7AE8F100206FCD /* QinQingBao.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = QinQingBao.entitlements; sourceTree = "<group>"; };
 		01CF97AB1C7AEAD500206FCD /* MTAddressPickController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTAddressPickController.h; sourceTree = "<group>"; };
 		01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTAddressPickController.m; sourceTree = "<group>"; };
+		01CF97B01C7C335F00206FCD /* EditInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditInfoTableViewController.h; sourceTree = "<group>"; };
+		01CF97B11C7C335F00206FCD /* EditInfoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditInfoTableViewController.m; sourceTree = "<group>"; };
 		01D616F51C44CA9400055404 /* AreaModelTotal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModelTotal.h; sourceTree = "<group>"; };
 		01D616F61C44CA9400055404 /* AreaModelTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModelTotal.m; sourceTree = "<group>"; };
 		01D616F81C44CAA300055404 /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
@@ -1608,6 +1639,9 @@
 		01E8133C1C059A2C00585691 /* OrderTotals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTotals.m; sourceTree = "<group>"; };
 		01E8133E1C059E5000585691 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
 		01E8133F1C059E5000585691 /* OrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItem.m; sourceTree = "<group>"; };
+		01E81CEF1C7FF7C1006F4693 /* GoodsSpecCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoodsSpecCell.xib; sourceTree = "<group>"; };
+		01E81CF11C7FFA1A006F4693 /* GoodsSpecCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSpecCollectionView.h; sourceTree = "<group>"; };
+		01E81CF21C7FFA1A006F4693 /* GoodsSpecCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSpecCollectionView.m; sourceTree = "<group>"; };
 		01E82E761C0C13A00090360C /* HotCitiesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCitiesCell.h; sourceTree = "<group>"; };
 		01E82E771C0C13A00090360C /* HotCitiesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCitiesCell.m; sourceTree = "<group>"; };
 		01E82E781C0C13A00090360C /* HotCitiesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotCitiesCell.xib; sourceTree = "<group>"; };
@@ -1749,6 +1783,32 @@
 		01EB6BF31C28DD14008BD878 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		01EB6BF41C28DD14008BD878 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
+		01EBD3AA1C853EF7009236FA /* RefundDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundDetailModel.h; sourceTree = "<group>"; };
+		01EBD3AB1C853EF7009236FA /* RefundDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundDetailModel.m; sourceTree = "<group>"; };
+		01EBD3AC1C853EF7009236FA /* RefundListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundListModel.h; sourceTree = "<group>"; };
+		01EBD3AD1C853EF7009236FA /* RefundListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundListModel.m; sourceTree = "<group>"; };
+		01EBD3AE1C853EF7009236FA /* RefundListTotal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundListTotal.h; sourceTree = "<group>"; };
+		01EBD3AF1C853EF7009236FA /* RefundListTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundListTotal.m; sourceTree = "<group>"; };
+		01EBD3B01C853EF7009236FA /* RefundReasonMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundReasonMode.h; sourceTree = "<group>"; };
+		01EBD3B11C853EF7009236FA /* RefundReasonMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundReasonMode.m; sourceTree = "<group>"; };
+		01EBD3B81C853F70009236FA /* RefundContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundContentCell.h; sourceTree = "<group>"; };
+		01EBD3B91C853F70009236FA /* RefundContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundContentCell.m; sourceTree = "<group>"; };
+		01EBD3BA1C853F70009236FA /* RefundStateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundStateCell.h; sourceTree = "<group>"; };
+		01EBD3BB1C853F70009236FA /* RefundStateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundStateCell.m; sourceTree = "<group>"; };
+		01EBD3BC1C853F70009236FA /* RefundStateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundStateCell.xib; sourceTree = "<group>"; };
+		01EBD3BD1C853F70009236FA /* ReminderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderCell.h; sourceTree = "<group>"; };
+		01EBD3BE1C853F70009236FA /* ReminderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderCell.m; sourceTree = "<group>"; };
+		01EBD3BF1C853F70009236FA /* ReminderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReminderCell.xib; sourceTree = "<group>"; };
+		01EBD3C51C853FA6009236FA /* RefundCellBottom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RefundCellBottom.h; path = ../listCell/RefundCellBottom.h; sourceTree = "<group>"; };
+		01EBD3C61C853FA6009236FA /* RefundCellBottom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RefundCellBottom.m; path = ../listCell/RefundCellBottom.m; sourceTree = "<group>"; };
+		01EBD3C71C853FA6009236FA /* RefundCellBottom.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RefundCellBottom.xib; path = ../listCell/RefundCellBottom.xib; sourceTree = "<group>"; };
+		01EBD3CA1C854027009236FA /* RefundDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundDetailViewController.h; sourceTree = "<group>"; };
+		01EBD3CB1C854027009236FA /* RefundDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundDetailViewController.m; sourceTree = "<group>"; };
+		01EBD3CC1C854027009236FA /* RefundGoodsListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundGoodsListController.h; sourceTree = "<group>"; };
+		01EBD3CD1C854027009236FA /* RefundGoodsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundGoodsListController.m; sourceTree = "<group>"; };
+		01EBD3CE1C854027009236FA /* RefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundViewController.h; sourceTree = "<group>"; };
+		01EBD3CF1C854027009236FA /* RefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundViewController.m; sourceTree = "<group>"; };
+		01EBD3D01C854027009236FA /* RefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundViewController.xib; sourceTree = "<group>"; };
 		01ECDF921B7C347800665D87 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		01ECDF931B7C347800665D87 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		01ECDF941B7C347800665D87 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -2522,6 +2582,8 @@
 				018BC5BF1C4F7CD300C883FF /* GevalModel.m */,
 				018BC5C21C4F7D8400C883FF /* GevalModelTotal.h */,
 				018BC5C31C4F7D8400C883FF /* GevalModelTotal.m */,
+				010AFFE81C83F4C300543A38 /* GoodsTypeModel.h */,
+				010AFFE91C83F4C300543A38 /* GoodsTypeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2529,9 +2591,17 @@
 		011076FA1C3E8BE9001E5C51 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01E81CED1C7FF76B006F4693 /* collectionCell */,
 				01ED458E1C3F859B00953E34 /* cell */,
 				01ED458A1C3F530600953E34 /* GoodsDetailEndView.h */,
 				01ED458B1C3F530600953E34 /* GoodsDetailEndView.m */,
+				01E81CF11C7FFA1A006F4693 /* GoodsSpecCollectionView.h */,
+				01E81CF21C7FFA1A006F4693 /* GoodsSpecCollectionView.m */,
+				015F11B81C8046070058C97B /* RecipeCollectionHeaderView.h */,
+				015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */,
+				015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */,
+				015F11BE1C804E5B0058C97B /* MTUICollectionViewFlowLayout.h */,
+				015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3065,6 +3135,13 @@
 		01C0D1EE1C46808000FF1CD3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01EBD3CA1C854027009236FA /* RefundDetailViewController.h */,
+				01EBD3CB1C854027009236FA /* RefundDetailViewController.m */,
+				01EBD3CC1C854027009236FA /* RefundGoodsListController.h */,
+				01EBD3CD1C854027009236FA /* RefundGoodsListController.m */,
+				01EBD3CE1C854027009236FA /* RefundViewController.h */,
+				01EBD3CF1C854027009236FA /* RefundViewController.m */,
+				01EBD3D01C854027009236FA /* RefundViewController.xib */,
 				01C0D1F11C46810800FF1CD3 /* GoodsViewController.h */,
 				01C0D1F21C46810800FF1CD3 /* GoodsViewController.m */,
 				01F49CDE1C4727290079F45F /* GoodsOrderDetailViewController.h */,
@@ -3083,6 +3160,7 @@
 		01C0D1EF1C46808000FF1CD3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01EBD3A91C853EF7009236FA /* Refund */,
 				01C0D1FA1C468A9800FF1CD3 /* CommonGoodsTotal.h */,
 				01C0D1FB1C468A9800FF1CD3 /* CommonGoodsTotal.m */,
 				01C0D1FD1C468AA800FF1CD3 /* CommonGoodsModel.h */,
@@ -3102,6 +3180,7 @@
 		01C0D1F01C46808000FF1CD3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01EBD3B71C853F70009236FA /* refundCell */,
 				01266B8A1C48B08900992D2F /* eva */,
 				01F49D131C478D700079F45F /* listCell */,
 				01F49CE21C4730080079F45F /* detailCell */,
@@ -3790,6 +3869,14 @@
 			path = Mall;
 			sourceTree = "<group>";
 		};
+		01E81CED1C7FF76B006F4693 /* collectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				01E81CEF1C7FF7C1006F4693 /* GoodsSpecCell.xib */,
+			);
+			path = collectionCell;
+			sourceTree = "<group>";
+		};
 		01E89ACD1C758FFD00CFD40D /* ArchiveModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3874,6 +3961,8 @@
 		01E9A71E1C74613500000805 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01CF97B01C7C335F00206FCD /* EditInfoTableViewController.h */,
+				01CF97B11C7C335F00206FCD /* EditInfoTableViewController.m */,
 				01CF97A31C7A98E400206FCD /* DevicesDetailViewController.h */,
 				01CF97A41C7A98E400206FCD /* DevicesDetailViewController.m */,
 				01CF97A51C7A98E400206FCD /* DevicesInforViewController.h */,
@@ -4009,6 +4098,39 @@
 				01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		01EBD3A91C853EF7009236FA /* Refund */ = {
+			isa = PBXGroup;
+			children = (
+				01EBD3AA1C853EF7009236FA /* RefundDetailModel.h */,
+				01EBD3AB1C853EF7009236FA /* RefundDetailModel.m */,
+				01EBD3AC1C853EF7009236FA /* RefundListModel.h */,
+				01EBD3AD1C853EF7009236FA /* RefundListModel.m */,
+				01EBD3AE1C853EF7009236FA /* RefundListTotal.h */,
+				01EBD3AF1C853EF7009236FA /* RefundListTotal.m */,
+				01EBD3B01C853EF7009236FA /* RefundReasonMode.h */,
+				01EBD3B11C853EF7009236FA /* RefundReasonMode.m */,
+			);
+			path = Refund;
+			sourceTree = "<group>";
+		};
+		01EBD3B71C853F70009236FA /* refundCell */ = {
+			isa = PBXGroup;
+			children = (
+				01EBD3C51C853FA6009236FA /* RefundCellBottom.h */,
+				01EBD3C61C853FA6009236FA /* RefundCellBottom.m */,
+				01EBD3C71C853FA6009236FA /* RefundCellBottom.xib */,
+				01EBD3B81C853F70009236FA /* RefundContentCell.h */,
+				01EBD3B91C853F70009236FA /* RefundContentCell.m */,
+				01EBD3BA1C853F70009236FA /* RefundStateCell.h */,
+				01EBD3BB1C853F70009236FA /* RefundStateCell.m */,
+				01EBD3BC1C853F70009236FA /* RefundStateCell.xib */,
+				01EBD3BD1C853F70009236FA /* ReminderCell.h */,
+				01EBD3BE1C853F70009236FA /* ReminderCell.m */,
+				01EBD3BF1C853F70009236FA /* ReminderCell.xib */,
+			);
+			path = refundCell;
 			sourceTree = "<group>";
 		};
 		01ECDF911B7C347800665D87 /* Controller */ = {
@@ -5129,6 +5251,7 @@
 				01E68FDE1BCCA68900A17543 /* spkBtn_sel.png in Resources */,
 				0126EDA71B8C6DDA00EC85C1 /* foregroundStar.png in Resources */,
 				0157E2451BE888BF004C0908 /* icon_chose_bottom@2x.png in Resources */,
+				01EBD3C91C853FA6009236FA /* RefundCellBottom.xib in Resources */,
 				01E690611BCCAB5900A17543 /* YSCheckSMSCodeViewController.xib in Resources */,
 				013F3F051BFC487900FF39E5 /* MJRefresh.bundle in Resources */,
 				01EB31C31C040A72002D8229 /* cityGroups.plist in Resources */,
@@ -5200,6 +5323,7 @@
 				01E68FC81BCCA68900A17543 /* ptz_bg.png in Resources */,
 				01E68FE21BCCA68900A17543 /* video.png in Resources */,
 				01E68FD71BCCA68900A17543 /* ptz_up_sel.png in Resources */,
+				01EBD3D41C854027009236FA /* RefundViewController.xib in Resources */,
 				01EB6BF21C28D88C008BD878 /* AboutusViewController.xib in Resources */,
 				01E68FF01BCCA68900A17543 /* title.png in Resources */,
 				01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */,
@@ -5208,6 +5332,7 @@
 				01E68FF31BCCA68900A17543 /* button_red.png in Resources */,
 				01328FA01C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib in Resources */,
 				01E68FC91BCCA68900A17543 /* ptz_bottom_sel.png in Resources */,
+				015F11BC1C8046070058C97B /* RecipeCollectionHeaderView.xib in Resources */,
 				0157E2441BE888BF004C0908 /* icon_chose_arrow_sel@2x.png in Resources */,
 				01E68FFA1BCCA68900A17543 /* circle_failed.png in Resources */,
 				017F0D191C58C62900643C15 /* HistoryViewCell.xib in Resources */,
@@ -5228,6 +5353,7 @@
 				0126EDA61B8C6DDA00EC85C1 /* backgroundStar@2x.png in Resources */,
 				01E89AFD1C75B4CB00CFD40D /* scan.png in Resources */,
 				01E68FBE1BCCA68900A17543 /* play_play.png in Resources */,
+				01E81CF01C7FF7C1006F4693 /* GoodsSpecCell.xib in Resources */,
 				01E68FC41BCCA68900A17543 /* play_stop_sel.png in Resources */,
 				01E68FAA1BCCA68900A17543 /* flunet_disable.png in Resources */,
 				01E603EF1C1683350099275C /* watch5.jpg in Resources */,
@@ -5293,6 +5419,7 @@
 				01E89AFF1C75BE8300CFD40D /* scan@2x.png in Resources */,
 				01052FFA1BCF8C6400120D4A /* amplify_screen_dis.png in Resources */,
 				01E68FEB1BCCA68900A17543 /* playback_playbar_line.png in Resources */,
+				01EBD3C41C853F70009236FA /* ReminderCell.xib in Resources */,
 				01F49CF91C4730080079F45F /* CommonGoodsDetailMiddleCell.xib in Resources */,
 				01E690001BCCA68900A17543 /* connect_failed.png in Resources */,
 				01F87F881C586EE700419FA2 /* try.png in Resources */,
@@ -5316,6 +5443,7 @@
 				01F015D41C5F427B00930B0E /* DiscountViewController.xib in Resources */,
 				01E68FC21BCCA68900A17543 /* play_share.png in Resources */,
 				010530021BCF8C7500120D4A /* sound_off.png in Resources */,
+				01EBD3C21C853F70009236FA /* RefundStateCell.xib in Resources */,
 				01E68FAC1BCCA68900A17543 /* full_loading_logo.png in Resources */,
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
 				01E6D4F41BE1F49B00824F51 /* LICENSE.txt in Resources */,
@@ -5487,6 +5615,7 @@
 				01F85ABC1C575A2F00E463F4 /* GoodsTypeCell.m in Sources */,
 				013F3F081BFC487900FF39E5 /* UIScrollView+MJRefresh.m in Sources */,
 				01F0DB231BCE3D84004FD908 /* SDWebImageDownloader.m in Sources */,
+				01EBD3D21C854027009236FA /* RefundGoodsListController.m in Sources */,
 				01E89AF51C7595CC00CFD40D /* RelationTotal.m in Sources */,
 				011BFC7B1BF3316E009354CE /* CLLocation+MTLocation.m in Sources */,
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
@@ -5496,6 +5625,7 @@
 				01EFD2EF1C56026A00BDA640 /* SymptomDetailViewController.m in Sources */,
 				013F3F181BFC53A000FF39E5 /* MJChiBaoZiFooter2.m in Sources */,
 				01E4A9921C40DF5A00AAAF73 /* InvoiceDetailViewController.m in Sources */,
+				01EBD3C31C853F70009236FA /* ReminderCell.m in Sources */,
 				01FEE2B41B9BE213007C4641 /* ServiceDetailViewController.m in Sources */,
 				01CEAB011C3E48360015480F /* UIView+Placeholder.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
@@ -5521,7 +5651,9 @@
 				0197233B1BD7303800D58F8B /* RSKTouchView.m in Sources */,
 				01EFD30C1C56028300BDA640 /* InfoDetailCell.m in Sources */,
 				01E690701BCCB32D00A17543 /* SecurityUtil.m in Sources */,
+				01EBD3B21C853EF7009236FA /* RefundDetailModel.m in Sources */,
 				01E68F221BCC9B9F00A17543 /* HealthTotalDatas.m in Sources */,
+				01EBD3C01C853F70009236FA /* RefundContentCell.m in Sources */,
 				01C7AEA81C3E220F00AE0A9C /* UIColor+RGB.m in Sources */,
 				01F0DB1D1BCE3D84004FD908 /* README.md in Sources */,
 				01E6906D1BCCB32D00A17543 /* GTMBase64.m in Sources */,
@@ -5578,6 +5710,7 @@
 				01EB6BED1C28D85A008BD878 /* AboutViewController.m in Sources */,
 				01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */,
 				01E6D4FA1BE1F49B00824F51 /* readme.markdown in Sources */,
+				01EBD3C81C853FA6009236FA /* RefundCellBottom.m in Sources */,
 				01EFD3061C56028300BDA640 /* BodyCell.m in Sources */,
 				01E690561BCCAA8000A17543 /* IntercomVolumnView.m in Sources */,
 				01E6905C1BCCAABE00A17543 /* VideoGoDef.m in Sources */,
@@ -5604,6 +5737,7 @@
 				01024CCB1BD0D12100E8CAEC /* ServiceModel.m in Sources */,
 				0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */,
 				0100C5181BFEB8C3005128EA /* UseCouponsViewController.m in Sources */,
+				015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */,
 				013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */,
 				01E5B65D1BB4FB0600F97498 /* VideoCell.m in Sources */,
 				01ECDFBF1B7C402100665D87 /* HMCommonLabelItem.m in Sources */,
@@ -5645,17 +5779,21 @@
 				01F0DB281BCE3D84004FD908 /* UIImage+GIF.m in Sources */,
 				01E68F211BCC9B9F00A17543 /* HealthDataModel.m in Sources */,
 				01E94CD31BC75DB900B956A2 /* YSCameraInfo.m in Sources */,
+				01EBD3B41C853EF7009236FA /* RefundListTotal.m in Sources */,
+				01EBD3D31C854027009236FA /* RefundViewController.m in Sources */,
 				0126ED931B8C6D9200EC85C1 /* ServiceMenuModel.m in Sources */,
 				01E94CD41BC75DB900B956A2 /* YSCloudRecordInfo.m in Sources */,
 				0126ECFA1B8C4E8100EC85C1 /* MASViewAttribute.m in Sources */,
 				01024CBE1BD0A75D00E8CAEC /* base64.m in Sources */,
 				01F0DAEB1BCE3350004FD908 /* PSTCollectionViewItemKey.m in Sources */,
 				01F49D1F1C478D700079F45F /* CommonGoodsCellBottom.m in Sources */,
+				01EBD3D11C854027009236FA /* RefundDetailViewController.m in Sources */,
 				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
 				01E6900D1BCCA8E800A17543 /* circleWaitView.m in Sources */,
 				01F0DAED1BCE3350004FD908 /* PSTCollectionViewUpdateItem.m in Sources */,
 				01024CBF1BD0A75D00E8CAEC /* DataSigner.m in Sources */,
+				010AFFEA1C83F4C300543A38 /* GoodsTypeModel.m in Sources */,
 				01EDBF851C27C0A200A51128 /* MoreChartDataViewController.m in Sources */,
 				01D616FA1C44CAA300055404 /* AreaModel.m in Sources */,
 				01F015E81C5F42CD00930B0E /* CommodityCell.m in Sources */,
@@ -5669,6 +5807,7 @@
 				01E9C4921C53284300A77579 /* EvaFootView.m in Sources */,
 				01E9A7461C74613500000805 /* HeredityinfoController.m in Sources */,
 				01E690591BCCAAA600A17543 /* RealFluxDataView.m in Sources */,
+				01EBD3B51C853EF7009236FA /* RefundReasonMode.m in Sources */,
 				01E92D321BA65E0F0097F8EC /* ServiceCustomCell.m in Sources */,
 				01E9A7451C74613500000805 /* HealthyinfoController.m in Sources */,
 				01D616F71C44CA9400055404 /* AreaModelTotal.m in Sources */,
@@ -5751,6 +5890,7 @@
 				01E6579E1C7557DB00448F74 /* AddContactViewController.m in Sources */,
 				01E89B071C76BE4500CFD40D /* EditContactViewController.m in Sources */,
 				01EB31BF1C040347002D8229 /* CitiesViewController.m in Sources */,
+				01E81CF31C7FFA1A006F4693 /* GoodsSpecCollectionView.m in Sources */,
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,
 				01F0DAE31BCE3350004FD908 /* MWZoomingScrollView.m in Sources */,
 				01E6D48B1BE1E74C00824F51 /* AccountViewController.m in Sources */,
@@ -5762,6 +5902,7 @@
 				0197233C1BD7303800D58F8B /* UIImage+FixOrientation.m in Sources */,
 				01E9A7501C7473BA00000805 /* ScanCodesViewController.m in Sources */,
 				01C0D1FC1C468A9800FF1CD3 /* CommonGoodsTotal.m in Sources */,
+				01CF97B31C7C335F00206FCD /* EditInfoTableViewController.m in Sources */,
 				01E89AF81C7595D900CFD40D /* RelationModel.m in Sources */,
 				01F85AB71C575A0600E463F4 /* HotGoodsView.m in Sources */,
 				0126ED471B8C547000EC85C1 /* CommonRemoteHelper.m in Sources */,
@@ -5806,6 +5947,7 @@
 				01E4A9461C3FA97A00AAAF73 /* PriceDetailCell.m in Sources */,
 				01E690461BCCA96000A17543 /* YSCommonMethods.m in Sources */,
 				01F0DADE1BCE3350004FD908 /* MWGridViewController.m in Sources */,
+				01EBD3C11C853F70009236FA /* RefundStateCell.m in Sources */,
 				01EFD2ED1C56026A00BDA640 /* InfoDetailViewController.m in Sources */,
 				01F49CF31C4730080079F45F /* CommonGoodsDetailBottomCell.m in Sources */,
 				01F33D8E1BB2873F00787620 /* AFDownloadRequestOperation.m in Sources */,
@@ -5843,6 +5985,7 @@
 				01DDF2D11C156C2800958332 /* DataCitiesViewController.m in Sources */,
 				01F015F01C5F42CD00930B0E /* SpecialCell.m in Sources */,
 				0126ED231B8C4F1200EC85C1 /* QCSlideSwitchView.m in Sources */,
+				01EBD3B31C853EF7009236FA /* RefundListModel.m in Sources */,
 				01F0DB2D1BCE3D84004FD908 /* UIView+WebCacheOperation.m in Sources */,
 				01E9A73F1C74613500000805 /* FamilyInfoViewController.m in Sources */,
 				0126ED8C1B8C6D4200EC85C1 /* ServiceCell.m in Sources */,
@@ -5854,6 +5997,7 @@
 				01F016031C5F430700930B0E /* GroupbuyTotal.m in Sources */,
 				01ECDFA81B7C3F9400665D87 /* HMCommonViewController.m in Sources */,
 				01EA20691C2A705100B546A9 /* OrderResultViewController.m in Sources */,
+				015F11BB1C8046070058C97B /* RecipeCollectionHeaderView.m in Sources */,
 				01E9A7411C74613500000805 /* DiseaseinfoController.m in Sources */,
 				01E690851BCCF6AA00A17543 /* TSPopoverTouchView.m in Sources */,
 				01E6D4F81BE1F49B00824F51 /* SVProgressHUD.m in Sources */,

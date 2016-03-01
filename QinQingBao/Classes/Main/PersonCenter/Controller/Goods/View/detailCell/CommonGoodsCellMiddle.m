@@ -36,4 +36,14 @@
     self.countLab.text = item.goods_num;
 }
 
+-(void)setItemWithRefundData:(RefundListModel *)item
+{
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",item.goods_image_url]];
+    [self.goodsIconImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"placeholderImage.png"]];
+    
+    self.goodsTitleLab.text = item.goods_name;
+    self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.refund_amount];
+    self.countLab.text = item.goods_num;
+}
+
 @end

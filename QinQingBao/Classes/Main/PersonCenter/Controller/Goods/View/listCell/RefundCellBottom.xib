@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="refundCellBottom" rowHeight="79" id="KGk-i7-Jjw" customClass="RefundCellBottom">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="78.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共一件商品 合计 ￥99.00 （含运费￥0.00）" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eR8-7M-upn">
+                        <rect key="frame" x="10" y="8" width="300" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPA-bz-8JS" userLabel="bottomline">
+                        <rect key="frame" x="0.0" y="30" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="7kv-Z2-6w9" userLabel=".5"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款金额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9e7-J1-Go7">
+                        <rect key="frame" x="10" y="49" width="68.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥107.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kb0-2D-DFk">
+                        <rect key="frame" x="88" y="49" width="63" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.8980392157" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-3O-mid">
+                        <rect key="frame" x="230" y="43" width="75" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="MlQ-1E-d2O"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="退款详情">
+                            <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="CPA-bz-8JS" firstAttribute="top" secondItem="eR8-7M-upn" secondAttribute="bottom" constant="6" id="4UF-sY-QGr"/>
+                    <constraint firstItem="Kb0-2D-DFk" firstAttribute="leading" secondItem="9e7-J1-Go7" secondAttribute="trailing" constant="10" id="9g1-Fy-zNK"/>
+                    <constraint firstItem="CPA-bz-8JS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="AYu-yO-fXd"/>
+                    <constraint firstItem="9e7-J1-Go7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="CQt-FR-Cfk"/>
+                    <constraint firstAttribute="bottom" secondItem="9e7-J1-Go7" secondAttribute="bottom" constant="10" id="DIH-ic-xpz"/>
+                    <constraint firstItem="eR8-7M-upn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="GPj-lg-HsJ"/>
+                    <constraint firstAttribute="trailing" secondItem="eR8-7M-upn" secondAttribute="trailing" constant="10" id="MQ4-ar-XL8"/>
+                    <constraint firstItem="Kb0-2D-DFk" firstAttribute="centerY" secondItem="9e7-J1-Go7" secondAttribute="centerY" id="Rue-SN-i3e"/>
+                    <constraint firstAttribute="trailing" secondItem="CPA-bz-8JS" secondAttribute="trailing" id="SfY-Gp-gh5"/>
+                    <constraint firstItem="h82-3O-mid" firstAttribute="centerY" secondItem="9e7-J1-Go7" secondAttribute="centerY" id="Vrz-W1-zgu"/>
+                    <constraint firstAttribute="trailing" secondItem="h82-3O-mid" secondAttribute="trailing" constant="15" id="cVA-dD-CCu"/>
+                    <constraint firstItem="eR8-7M-upn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="zUu-iD-m1r"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="descLb" destination="eR8-7M-upn" id="izd-NJ-7np"/>
+                <outlet property="detailInfoBtn" destination="h82-3O-mid" id="X6N-sd-2oX"/>
+                <outlet property="refundAmountLb" destination="Kb0-2D-DFk" id="aKF-oB-jFa"/>
+            </connections>
+            <point key="canvasLocation" x="277" y="322.5"/>
+        </tableViewCell>
+    </objects>
+</document>

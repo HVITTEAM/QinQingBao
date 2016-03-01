@@ -36,7 +36,7 @@
     
     [self initTableSkin];
     
-//    [self getRelation];
+    //    [self getRelation];
     
     [self setupGroups];
 }
@@ -237,8 +237,12 @@
 
 -(void)back
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
-    [alertView show];
-    
+    if (!self.isFromStart)
+        [self.navigationController popViewControllerAnimated:YES];
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
+        [alertView show];
+    }
 }
 @end

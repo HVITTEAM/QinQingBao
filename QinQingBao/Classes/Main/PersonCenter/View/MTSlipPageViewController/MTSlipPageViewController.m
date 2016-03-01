@@ -46,7 +46,6 @@ static const CGFloat kFontSizeOfTabButton = 14.0f;
  **/
 -(void)initView
 {
-    
     self.buttonArr = [[NSMutableArray alloc] init];
     
     self.selectedIndex = 100;
@@ -108,7 +107,6 @@ static const CGFloat kFontSizeOfTabButton = 14.0f;
         [self.buttonArr addObject:button];
     }
     [self.headScrollView addSubview:_shadowImageView];
-
 }
 
 -(void)creatView

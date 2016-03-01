@@ -30,4 +30,8 @@
 @property (nonatomic, copy) NSString *relation;
 @property (nonatomic, copy) NSString *member_mobile;
 
+
+@property (nonatomic, copy)NSString *identity;         //身份证号
+@property (nonatomic, copy)NSString *re_nicename;      //亲属昵称
+
 @end

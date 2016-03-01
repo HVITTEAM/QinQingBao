@@ -34,11 +34,15 @@
     
 }
 
+//修改by swy
 -(void)buttonClick:(UIButton *)sender
 {
-    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
-
-    [[UIApplication sharedApplication] openURL:url];
+    if (self.refundOperation) {
+        self.refundOperation(self);
+    }
+//    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
+//
+//    [[UIApplication sharedApplication] openURL:url];
 }
 
 -(void)setitemWithData:(ExtendOrderGoodsModel *)item

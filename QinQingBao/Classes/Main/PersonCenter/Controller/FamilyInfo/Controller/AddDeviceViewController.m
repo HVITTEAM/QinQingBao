@@ -57,6 +57,9 @@
                                      else
                                      {
                                          deviceDict = [dict objectForKey:@"datas"];
+                                         [self.groups removeAllObjects];
+                                         [self setupGroups];
+                                         [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -70,7 +73,7 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"scan.png"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
     
-     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 # pragma  mark 设置数据源
@@ -94,6 +97,7 @@
     // 2.设置组的所有行数据
     self.item0 = [HMCommonArrowItem itemWithTitle:@"设备名称" icon:nil];
     self.item0.subtitle = selectedDevicename.length == 0 ?  @"请选择" : selectedDevicename;
+    
     self.item0.operation = ^{
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle: @"请选择设备名称"
                                                                  delegate: weakSelf
@@ -176,7 +180,7 @@
 
 -(void)next:(UIButton *)sender
 {
-
+    
     [self.view endEditing:YES];
     if (selectedDevicename.length == 0)
     {
@@ -204,6 +208,7 @@
                                      {
                                          EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
                                          VC.member_id = self.member_id;
+                                         VC.isFromStart = YES;
                                          [self.navigationController pushViewController:VC animated:YES];
                                      }
                                      [HUD removeFromSuperview];
@@ -225,9 +230,13 @@
 
 -(void)back
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
-    [alertView show];
-
+    if (!self.isFromStart)
+        [self.navigationController popViewControllerAnimated:YES];
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
+        [alertView show];
+    }
 }
 
 

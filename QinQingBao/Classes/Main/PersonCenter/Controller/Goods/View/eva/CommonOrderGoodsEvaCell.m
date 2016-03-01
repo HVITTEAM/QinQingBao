@@ -41,7 +41,7 @@
     }
     else
     {
-        for (int i =  btn.tag+1; i < 105; i++)
+        for (int i =  btn.tag + 1; i < 105; i++)
         {
             UIButton *otherBtn = (UIButton*)[self.view viewWithTag:i];
             otherBtn.selected =  NO;

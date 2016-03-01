@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonGoodsModel.h"
+#import "RefundListModel.h"
 
 @interface CommonGoodsCellMiddle : UITableViewCell
 
@@ -25,4 +26,8 @@
 
 -(void)setitemWithData:(CommonGoodsModel *)item;
 
+/**
+ *  头部状态cell,退款退货时使用
+ */
+-(void)setItemWithRefundData:(RefundListModel *)item;
 @end

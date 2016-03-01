@@ -9,6 +9,7 @@
 static CGFloat BUTTON_WIDTH = 80;
 
 #import "CommonGoodsDetailEndView.h"
+#import "RefundViewController.h"
 
 @implementation CommonGoodsDetailEndView
 
@@ -45,6 +46,7 @@ static CGFloat BUTTON_WIDTH = 80;
     [_buyBt addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [_buyBt setTitleColor:[UIColor colorWithRGB:@"f14950"] forState:UIControlStateNormal];
     [self addSubview:_buyBt];
+    _buyBt.tag =1;
     
     //加入购物车
     _add2Car = [[UIButton alloc]initWithFrame:CGRectMake(MTScreenW - 2*BUTTON_WIDTH - 20, 10, BUTTON_WIDTH, self.height -20)];
@@ -59,6 +61,7 @@ static CGFloat BUTTON_WIDTH = 80;
     
     [_add2Car addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [_add2Car setTitleColor:[UIColor colorWithRGB:@"666666"] forState:UIControlStateNormal];
+    _add2Car.tag = 0;
     [self addSubview:_add2Car];
 }
 
@@ -82,8 +85,10 @@ static CGFloat BUTTON_WIDTH = 80;
     }
     else if ([_goodsitemInfo.order_state isEqualToString:@"20"])//已付款
     {
+        //修改 by swy
         [_buyBt setTitle:@"提醒发货" forState:UIControlStateNormal];
-        _add2Car.hidden = YES;
+        [_add2Car setTitle:@"全部退款" forState:UIControlStateNormal];
+        //_add2Car.hidden = YES;
     }
     else if ([_goodsitemInfo.order_state isEqualToString:@"30"])//已发货
     {
@@ -132,6 +137,11 @@ static CGFloat BUTTON_WIDTH = 80;
         //TODO
         [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.window.rootViewController.view];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(endView:button:tappedAtIndex:)]) {
+        [self.delegate endView:self button:btn tappedAtIndex:btn.tag];
+    }
+
 }
 
 //取消订单
@@ -271,6 +281,5 @@ static CGFloat BUTTON_WIDTH = 80;
                                      NSLog(@"出错了....");
                                  }];
 }
-
 
 @end

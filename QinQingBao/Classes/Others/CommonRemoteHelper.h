@@ -28,4 +28,14 @@ typedef NS_ENUM(NSInteger, CommonRemoteType) {
                 dataObj:(NSData *)dataObj success:(void (^)(NSDictionary *dict, id responseObject))success
                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/**
+ *  imageArray数组中的元素为NSDictionary对象，需要有4个key-value，对应的 key为:
+ *   @"fileData":二进制文件,@"name":名字需与服务器对应,@"fileName":文件名,@"mimeType":数据的类型
+ */
++(void)UploadPicWithUrl:(NSString *)url
+             parameters:(id)parameters
+                   type:(CommonRemoteType)type
+                 images:(NSArray *)imageArray
+                success:(void (^)(NSDictionary *dict, id responseObject))success
+                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

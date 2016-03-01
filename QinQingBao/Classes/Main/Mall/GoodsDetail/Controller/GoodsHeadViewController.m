@@ -61,6 +61,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
     /**商店model*/
     StoreModel *storeModel;
     
+    //商品规格参数分类对应的id池
+    NSDictionary *spec_list;
+    
     BOOL imagePlayer;
 }
 
@@ -112,13 +115,14 @@ static CGFloat IMAGEVIEW_HEIGHT;
 {
     _goodsID = goodsID;
     [self getAlleva];
+    [self getGoodsDetailInfo];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (_goodsID)
-        [self getGoodsDetailInfo];
+    //    if (_goodsID)
+    //        [self getGoodsDetailInfo];
 }
 
 /**
@@ -134,9 +138,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 -(void)gotoShopCar
 {
-    //    NSURL *url = [[NSURL alloc]initWithString:@"weixin://qr/zzf254iyti8yx5hu"];
-    //    [[UIApplication sharedApplication ] openURL:url];
-    
     if (![SharedAppUtil defaultCommonUtil].userVO )
         return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
@@ -171,8 +172,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
     };
     self.tableView.tableFooterView = footView;
     
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     self.tableView.tableHeaderView = self.imgPlayer;
     
     self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
@@ -203,6 +202,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     [_pageControl setCurrentPageIndicatorTintColor:[UIColor redColor]];
     [_pageControl setPageIndicatorTintColor:[UIColor grayColor]];
     _pageControl.numberOfPages = [slideImages count];
+    _pageControl.hidden = slideImages.count <=1;
     _pageControl.currentPage = 0;
     return _pageControl;
 }
@@ -221,6 +221,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                      goodsInfo = [GoodsInfoModel objectWithKeyValues:[dict1 objectForKey:@"goods_info"]];
                                      [self.tableView reloadData];
                                      
+                                     //商品规格参数分类对应的id池
+                                     spec_list =  [dict1 objectForKey:@"spec_list"];
                                      
                                      storeModel = [StoreModel objectWithKeyValues:[dict1 objectForKey:@"store_info"]];
                                      
@@ -276,7 +278,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
         UIImageView *imageView = [[UIImageView alloc] init];
         
         [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [imgArr addObject:image];
+            if (image)
+                [imgArr addObject:image];
         }];
         
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
@@ -337,27 +340,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
         page --;  // 默认从第二页开始
         _pageControl.currentPage = page;
     }
-    
-//    CGFloat scrollOffset = self.tableView.contentOffset.y;
-//    
-//    self.navigationController.navigationBar.alpha = scrollOffset/64;
-    //    if(scrollOffset > 64 && self.navigationController.navigationBar.alpha == 0.0)
-    //    {
-    //        self.navigationController.navigationBar.alpha = 0;
-    //        self.navigationController.navigationBar.hidden = NO;
-    //        [UIView animateWithDuration:0.3 animations:^
-    //         {
-    //             self.navigationController.navigationBar.alpha = 1;
-    //         }];
-    //    }
-    //    else if(scrollOffset < 64 && self.navigationController.navigationBar.alpha == 1.0)
-    //    {
-    //        [UIView animateWithDuration:0.3 animations:^{
-    //            self.navigationController.navigationBar.alpha = 0;
-    //        } completion: ^(BOOL finished) {
-    //            self.navigationController.navigationBar.hidden = YES;
-    //        }];
-    //    }
 }
 
 /**
@@ -526,7 +508,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
         NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
         
         [[UIApplication sharedApplication] openURL:url];
-        
     }
     else if(evaArr && evaArr.count > 0)
     {
@@ -537,6 +518,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 #pragma mark - MTGoodsDetailEndViewDelegate
 
+/**立即购买*/
 -(void)buyRightnowClick:(UIButton *)btn
 {
     if (![SharedAppUtil defaultCommonUtil].userVO )
@@ -545,15 +527,14 @@ static CGFloat IMAGEVIEW_HEIGHT;
         return [NoticeHelper AlertShow:@"商品库存不足！" view:self.view];
     
     GoodsSelectedViewController *buyView = [[GoodsSelectedViewController alloc] init];
+    buyView.goodsInfo = goodsInfo;
     buyView.parentVC = self;
-    [self presentSemiViewController:buyView withOptions:@{
-                                                          KNSemiModalOptionKeys.pushParentBack : @(NO),
+    buyView.speclistDict = spec_list;
+    buyView.specnameDict = goodsInfo.spec_name;
+    buyView.specvalueDict = goodsInfo.spec_value;
+    [self presentSemiViewController:buyView withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO),
                                                           KNSemiModalOptionKeys.parentAlpha : @(0.8)
                                                           }];
-    
-    //    UIImageView * bgimgv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"background_01"]];
-    //    [self presentSemiView:buyView withOptions:@{ KNSemiModalOptionKeys.backgroundView:bgimgv }];
-    
     buyView.type = OrderTypeBuyRightnow;
     buyView.goodsID = self.goodsID;
     
@@ -584,6 +565,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     };
 }
 
+/**添加至购物车*/
 -(void)add2CarClick:(UIButton *)btn
 {
     if (![SharedAppUtil defaultCommonUtil].userVO )
@@ -593,10 +575,14 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     GoodsSelectedViewController *buyView = [[GoodsSelectedViewController alloc] init];
     buyView.parentVC = self;
-    [self presentSemiViewController:buyView withOptions:@{
-                                                          KNSemiModalOptionKeys.pushParentBack : @(NO),
-                                                          KNSemiModalOptionKeys.parentAlpha : @(0.8)
-                                                          }];
+    buyView.goodsInfo = goodsInfo;
+    buyView.speclistDict = spec_list;
+    buyView.specnameDict = goodsInfo.spec_name;
+    buyView.specvalueDict = goodsInfo.spec_value;
+    [self presentSemiViewController:buyView withOptions:@{ KNSemiModalOptionKeys.pushParentBack : @(NO),
+                                                           KNSemiModalOptionKeys.parentAlpha : @(0.8),
+                                                           KNSemiModalOptionKeys.animationDuration : @(0.2),
+                                                           }];
     buyView.type = OrderTypeAdd2cart;
     buyView.goodsID = self.goodsID;
     

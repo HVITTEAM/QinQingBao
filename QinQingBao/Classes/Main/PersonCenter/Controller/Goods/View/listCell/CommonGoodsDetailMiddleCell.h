@@ -25,4 +25,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
 
 @property (strong, nonatomic) IBOutlet UILabel *countLab;
+
+//修改by swy
+@property (copy,nonatomic)void(^refundOperation)(CommonGoodsDetailMiddleCell *);
+
 @end

@@ -96,7 +96,8 @@
                                      {
                                          CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
                                          regionList = result.datas;
-                                         //                                         [self.tableView reloadData];
+                                         CityModel * item = [regionList objectAtIndex:0];
+                                         selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -197,10 +198,6 @@
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"详细地址" icon:nil];
     textItem1.placeholder = @"请输入详细地址";
     group1.items = @[textItem1];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        textItem1.rightText.text = selectedStreetItem.area_name;
-    });
-    
     
     //刷新表格
     [self.tableView reloadData];

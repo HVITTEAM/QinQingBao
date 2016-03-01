@@ -425,6 +425,27 @@
 /***订单评论 增加url*/
 #define URL_Dis_add [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=dis_evaluate&op=api_dis_add",URL_Local]
 
+//--------------------退款退货api---------------------
+
+#pragma mark 商城退款退货api
+
+/***订单部分退货退款url*/
+#define URL_Add_refund [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_add_refund",URL_Local]
+
+/***获取退货退款原因url*/
+#define URL_Reason_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_get_reason_list",URL_Local]
+
+/***订单全部退款url*/
+#define URL_Refund_all [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_add_refund_all",URL_Local]
+
+/***商家后台退款审核url*/
+#define URL_Api_edit [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_edit",URL_Local]
+
+/***获取退货退款订单记录列表url*/
+#define URL_refund_return_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_refund_return_list_view",URL_Local]
+/***退货退款记录查看url*/
+#define URL_refund_return [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_refund_return_view",URL_Local]
+
 
 //---------------------症状自查---------------------
 /***获取身体部位url*/
@@ -478,6 +499,8 @@
 /***手表sos紧急联系人 设置 （增改)Url*/
 #define URL_SOS_relationfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=relativinfo&op=sos_relationfo",URL_Local]
 
+/***亲属资料修改url*/
+#define URL_edit_relation_data [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=edit_relation_data",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

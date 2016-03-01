@@ -13,6 +13,8 @@
 @property(nonatomic,copy)NSString *order_id;
 @property(nonatomic,copy)NSString *goods_id;
 @property(nonatomic,copy)NSString *goods_name;
+@property(nonatomic,copy)NSString *common_name;
+@property(nonatomic,copy)NSString *guige;
 @property(nonatomic,copy)NSString *goods_price ;
 @property(nonatomic,copy)NSString *goods_num;
 @property(nonatomic,copy)NSString *goods_image;

@@ -1,0 +1,196 @@
+//
+//  RefundGoodsListController.m
+//  QinQingBao
+//
+//  Created by shi on 16/2/29.
+//  Copyright © 2016年 董徐维. All rights reserved.
+//
+
+#import "RefundGoodsListController.h"
+#import "RefundListTotal.h"
+#import "RefundListModel.h"
+#import "CommonGoodsCellHead.h"
+#import "CommonGoodsCellMiddle.h"
+#import "RefundCellBottom.h"
+#import "RefundDetailViewController.h"
+
+@interface RefundGoodsListController ()
+
+@property(assign,nonatomic)NSInteger nextPage;                    //下一页
+
+@property(assign,nonatomic)BOOL isMoreData;                       //指示是否还有数据
+
+@property(strong,nonatomic)NSMutableArray *dataProvider;         //数据源
+
+@property(assign,nonatomic)BOOL isLoading;                       //指示是否正在向服务器请求数据
+
+@end
+
+@implementation RefundGoodsListController
+
+-(instancetype)init
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    self.hidesBottomBarWhenPushed = YES;
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNextPageRefundListData)];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.nextPage = 1;
+    
+    [self loadFirstPageRefundListData];
+}
+
+#pragma  mark -- 协议方法 --
+#pragma mark - Table view data source
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.dataProvider.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 3;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RefundListModel *model = self.dataProvider[indexPath.section];
+    
+    if (indexPath.row == 0) {
+        //头部
+        CommonGoodsCellHead *headcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsCellHead"];
+        if (!headcell) {
+            headcell = [CommonGoodsCellHead commonGoodsCellHead];
+        }
+        [headcell setItemWithRefundData:model];
+        return headcell;
+    }else if (indexPath.row == 2){
+        //底部
+        RefundCellBottom *bottomcell = [RefundCellBottom refundCellBottomWithTableView:tableView];
+        bottomcell.refundAmountLb.text = model.refund_amount;
+        bottomcell.descLb.text = [NSString stringWithFormat:@"共%@件商品 合计￥%@",model.goods_num,model.refund_amount];
+        return bottomcell;
+    }else{
+        //中间商品底部
+        CommonGoodsCellMiddle *goodscell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsCellMiddle"];
+        if(!goodscell)
+            goodscell = [CommonGoodsCellMiddle commonGoodsCellMiddle];
+        [goodscell setItemWithRefundData:model];
+        return goodscell;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //跳转到退款详情界面
+    RefundListModel *model = self.dataProvider[indexPath.section];
+    RefundDetailViewController *refundDetailVC = [[RefundDetailViewController alloc] init];
+    refundDetailVC.refundId = model.refund_id;
+    refundDetailVC.title = model.goods_name;
+    [self.nav pushViewController:refundDetailVC animated:YES];
+}
+
+#pragma  mark -- 网络相关方法 --
+/**
+ *  加载第一页数据
+ */
+-(void)loadFirstPageRefundListData
+{
+    NSDictionary *params = @{
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"client":@"ios",
+                             @"page":@10,
+                             @"curpage":@(self.nextPage)
+                             };
+    self.isLoading = YES;
+    [CommonRemoteHelper RemoteWithUrl:URL_refund_return_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        self.isLoading = NO;
+        if ([dict[@"code"] integerValue] == 17001) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }else if ([dict[@"code"] integerValue] == 0){
+            RefundListTotal *listTotal = [RefundListTotal objectWithKeyValues:dict];
+            self.dataProvider = listTotal.datas;
+            self.isMoreData = [listTotal.hasmore boolValue];
+            [self.tableView reloadData];
+            //设置下一页的页号
+            self.nextPage ++;
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.isLoading = NO;
+        [NoticeHelper AlertShow:@"数据请求不成功" view:self.view];
+    }];
+}
+
+/**
+ *  加载下一页数据
+ */
+-(void)loadNextPageRefundListData
+{
+    //如果已经在请求数据就不再发送请求
+    if (self.isLoading) {
+        [self.tableView.footer endRefreshing];
+        return;
+    }
+    
+    //没有更多数据不再发送请求
+    if (!self.isMoreData) {
+        [self.tableView.footer endRefreshing];
+        return;
+    }
+    
+    NSDictionary *params = @{
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"client":@"ios",
+                             @"page":@10,
+                             @"curpage":@(self.nextPage)
+                             };
+    self.isLoading = YES;
+    [CommonRemoteHelper RemoteWithUrl:URL_refund_return_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        self.isLoading = NO;
+        //结束上拉刷新
+        [self.tableView.footer endRefreshing];
+        
+        if ([dict[@"code"] integerValue] == 17001) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }else if ([dict[@"code"] integerValue] == 0){
+            
+            RefundListTotal *listTotal = [RefundListTotal objectWithKeyValues:dict];
+            [self.dataProvider addObjectsFromArray:listTotal.datas];
+            self.isMoreData = [listTotal.hasmore boolValue];
+            [self.tableView reloadData];
+            //设置下一页的页号
+            self.nextPage ++;
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.isLoading = NO;
+        //结束上拉刷新
+        [self.tableView.footer endRefreshing];
+        [NoticeHelper AlertShow:@"数据请求不成功" view:self.view];
+    }];
+}
+
+@end

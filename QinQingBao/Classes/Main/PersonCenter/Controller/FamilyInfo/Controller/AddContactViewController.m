@@ -65,7 +65,6 @@
     self.item0 = [HMCommonTextfieldItem itemWithTitle:@"联系人姓名" icon:nil];
     self.item0.placeholder = @"请填写真实姓名";
  
-    
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
     

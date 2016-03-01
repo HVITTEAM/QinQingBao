@@ -45,7 +45,7 @@
 
 
 /**
- *  创建 Cell by swy
+ *  创建 Cell by swy  显示设备的个数
  */
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -157,7 +157,6 @@
 #warning nil会有警告信息log出来
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"基本信息" icon:@""];
-    version.isSubtitle = YES;
     version.operation = ^{
         DetailInfoViewController *view = [[DetailInfoViewController alloc] init];
         view.itemInfo = self.selecteItem;
@@ -165,7 +164,6 @@
     };
     
     HMCommonArrowItem *device = [HMCommonArrowItem itemWithTitle:@"硬件设备" icon:@""];
-    device.isSubtitle = YES;
     device.operation = ^{
         DevicesInforViewController *devicesInfVC = [[DevicesInforViewController alloc] init];
         devicesInfVC.selectedFamilyMember = self.selecteItem;
@@ -174,7 +172,6 @@
     };
     
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
-    advice.isSubtitle = YES;
     advice.operation = ^{
         [self getDataProvider];
     };

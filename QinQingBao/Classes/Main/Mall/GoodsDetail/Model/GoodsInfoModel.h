@@ -16,8 +16,7 @@
 @property(nonatomic,copy)NSString *gc_id_2;
 @property(nonatomic,copy)NSString *gc_id_3;
 @property(nonatomic,copy)NSString *store_id;
-@property(nonatomic,copy)NSString *spec_name;
-@property(nonatomic,copy)NSString *spec_value;
+@property(nonatomic,copy)NSDictionary *spec_value;
 @property(nonatomic,copy)NSString *goods_attr;
 @property(nonatomic,copy)NSString *mobile_body;
 @property(nonatomic,copy)NSString *goods_specname;
@@ -47,7 +46,7 @@
 @property(nonatomic,copy)NSString *presell_deliverdate;
 @property(nonatomic,copy)NSString *is_own_shop;
 @property(nonatomic,copy)NSString *goods_id;
-@property(nonatomic,copy)NSString *goods_promotion_price;
+@property(nonatomic,copy)NSString *promotion_price;
 @property(nonatomic,copy)NSString *goods_promotion_type;
 @property(nonatomic,copy)NSString *goods_click;
 @property(nonatomic,copy)NSString *goods_salenum;
@@ -62,6 +61,9 @@
 @property(nonatomic,copy)NSString *goods_url;
 @property(nonatomic,copy)NSString *goods_image_url;
 @property(nonatomic,copy)NSString *evaluation_good_star;
+@property(nonatomic,retain)NSDictionary *spec_name;
+
+
 
 
 

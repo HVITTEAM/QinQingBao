@@ -65,8 +65,6 @@
 {
     self.title = @"基本信息登记";
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设备解绑" style:UIBarButtonItemStylePlain target:self action:@selector(delete)];
 }
 
 # pragma  mark 设置数据源
@@ -247,6 +245,7 @@
                                          NSString *member_id = [dict1 objectForKey:@"member_id"];
                                          AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
                                          view.member_id = member_id;
+                                         view.isFromStart = YES;
                                          [self.navigationController pushViewController:view animated:YES];
                                      }
                                      [HUD removeFromSuperview];
@@ -276,29 +275,6 @@
                                      else
                                      {
                                          NSLog(@"用户关系绑定成功");
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [self.view endEditing:YES];
-                                 }];
-}
-
-/**临时方法 解绑设备*/
--(void)delete
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"imei" : @"626010120141513"}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解绑成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

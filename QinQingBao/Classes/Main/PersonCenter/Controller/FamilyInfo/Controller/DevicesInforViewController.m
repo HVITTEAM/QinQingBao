@@ -12,7 +12,10 @@
 #import "DeviceInfoModel.h"
 #import "FamilyModel.h"
 
-@interface DevicesInforViewController ()
+@interface DevicesInforViewController ()<UIAlertViewDelegate>
+{
+    NSInteger selectedDeleteIndex;
+}
 
 @end
 
@@ -83,7 +86,8 @@
     
     HMCommonGroup *group = [HMCommonGroup group];
     NSMutableArray *tempItemArray = [[NSMutableArray alloc] init];
-    for (DeviceInfoModel *model in self.devicesArray) {
+    for (DeviceInfoModel *model in self.devicesArray)
+    {
         HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:model.device_name];
         item.subtitle = model.device_code;
         [tempItemArray addObject:item];
@@ -104,6 +108,59 @@
 {
     return 50;
 }
+
+//要求委托方的编辑风格在表视图的一个特定的位置。
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle ==UITableViewCellEditingStyleDelete)
+    {
+        selectedDeleteIndex = indexPath.row;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确认删除?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
+}
+
+#pragma mark UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        DeviceInfoModel *model = self.devicesArray[selectedDeleteIndex];
+        [self deleteDevice:model.device_code];
+    }
+}
+
+/**临时方法 解绑设备*/
+-(void)deleteDevice:(NSString *)imei
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"imei" : imei}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [self.devicesArray removeObjectAtIndex:selectedDeleteIndex];
+                                         [self setupGroups];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解绑成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
+}
+
 
 #pragma mark -- 事件方法 --
 /**

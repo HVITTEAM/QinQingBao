@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GoodsViewController.h"
+#import "RefundGoodsListController.h"
 
 @interface GoodsTypeViewController : UIViewController
 
@@ -23,6 +24,6 @@
 @property (nonatomic, strong) GoodsViewController *vc2;
 @property (nonatomic, strong) GoodsViewController *vc3;
 @property (nonatomic, strong) GoodsViewController *vc4;
-@property (nonatomic, strong) GoodsViewController *vc5;
+@property (nonatomic, strong) RefundGoodsListController *vc5;
 
 @end

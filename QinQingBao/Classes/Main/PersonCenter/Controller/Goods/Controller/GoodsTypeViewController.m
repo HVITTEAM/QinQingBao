@@ -49,7 +49,7 @@
     self.vc4 = [[GoodsViewController alloc] init];
     self.vc4.title = @"待评价";
     
-    self.vc5 = [[GoodsViewController alloc] init];
+    self.vc5 = [[RefundGoodsListController alloc] init];
     self.vc5.title = @"售后/取消";
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
@@ -70,21 +70,24 @@
 -(void)switchView:(UIViewController *)view didselectTab:(NSUInteger)number
 {
     GoodsViewController *vc = nil;
-    if (number == 0) {
-        vc = self.vc0;
-    }else if (number == 1) {
-        vc = self.vc1;
-    } else if (number == 2) {
-        vc = self.vc2;
-    } else if (number == 3) {
-        vc = self.vc3;
-    } else if (number == 4) {
-        vc = self.vc4;
-    } else if (number == 5) {
-        vc = self.vc5;
+    if (number != 5) {
+        if (number == 0) {
+            vc = self.vc0;
+        }else if (number == 1) {
+            vc = self.vc1;
+        } else if (number == 2) {
+            vc = self.vc2;
+        } else if (number == 3) {
+            vc = self.vc3;
+        } else if (number == 4) {
+            vc = self.vc4;
+        }
+        vc.nav = self.navigationController;
+        [vc viewDidCurrentView];
+    }else if (number == 5) {
+        self.vc5.nav = self.navigationController;
+        [self.vc5 loadFirstPageRefundListData];
     }
-    vc.nav = self.navigationController;
-    [vc viewDidCurrentView];
 }
 
 /**

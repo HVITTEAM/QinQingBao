@@ -13,8 +13,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="190" height="30"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRn-Z2-wdl">
-                        <rect key="frame" x="77.5" y="6.5" width="35.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRn-Z2-wdl">
+                        <rect key="frame" x="0.0" y="0.0" width="190" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -24,8 +24,10 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="kRn-Z2-wdl" secondAttribute="centerX" id="0Bu-GU-rv1"/>
-                <constraint firstAttribute="centerY" secondItem="kRn-Z2-wdl" secondAttribute="centerY" id="he9-5H-b5a"/>
+                <constraint firstAttribute="trailing" secondItem="kRn-Z2-wdl" secondAttribute="trailing" id="Bxh-Pg-Ic6"/>
+                <constraint firstItem="kRn-Z2-wdl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fcZ-TK-dJ6"/>
+                <constraint firstAttribute="bottom" secondItem="kRn-Z2-wdl" secondAttribute="bottom" id="rtg-ch-PnN"/>
+                <constraint firstItem="kRn-Z2-wdl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xeO-dz-s8Z"/>
             </constraints>
             <size key="customSize" width="190" height="50"/>
             <connections>
