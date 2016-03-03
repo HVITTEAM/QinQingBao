@@ -37,7 +37,7 @@
 //修改by swy
 -(void)buttonClick:(UIButton *)sender
 {
-    if (self.refundOperation) {
+    if (self.refundOperation && ![sender.titleLabel.text isEqualToString:@"退货退款中"]) {
         self.refundOperation(self);
     }
     //    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
@@ -54,6 +54,9 @@
     self.countLab.text = item.goods_num;
     if (item && [item.refund isEqualToString:@"0"])
     {
+        self.button.layer.borderWidth = 0;
+        self.button.titleLabel.font = [UIFont systemFontOfSize:12];
+        [self.button setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
         [self.button setTitle:@"退货退款中" forState:UIControlStateNormal];
         [self.button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     }
