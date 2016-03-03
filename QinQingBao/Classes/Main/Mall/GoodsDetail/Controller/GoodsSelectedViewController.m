@@ -308,10 +308,10 @@ static CGFloat BUTTONHEIGHT = 50;
 //确定
 -(void)sureClick:(UIButton *)sender
 {
-    if (!allSelected)
-    {
-        return [NoticeHelper AlertShow:desLab.text view:nil];
-    }
+//    if (!allSelected)
+//    {
+//        return [NoticeHelper AlertShow:desLab.text view:nil];
+//    }
     if (self.type == OrderTypeAdd2cart)
     {
         [CommonRemoteHelper RemoteWithUrl:URL_Cart_add parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,

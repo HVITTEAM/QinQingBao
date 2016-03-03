@@ -87,8 +87,8 @@ static CGFloat BUTTON_WIDTH = 80;
     {
         //修改 by swy
         [_buyBt setTitle:@"提醒发货" forState:UIControlStateNormal];
-        [_add2Car setTitle:@"全部退款" forState:UIControlStateNormal];
-        //_add2Car.hidden = YES;
+        //[_add2Car setTitle:@"全部退款" forState:UIControlStateNormal];
+        _add2Car.hidden = YES;
     }
     else if ([_goodsitemInfo.order_state isEqualToString:@"30"])//已发货
     {

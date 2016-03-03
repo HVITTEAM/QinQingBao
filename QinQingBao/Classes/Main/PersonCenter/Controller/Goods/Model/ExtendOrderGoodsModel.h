@@ -26,6 +26,6 @@
 @property(nonatomic,copy)NSString *commis_rate;
 @property(nonatomic,copy)NSString *gc_id;
 @property(nonatomic,copy)NSString *goods_image_url;
-
+@property(nonatomic,copy)NSString *refund;
 
 @end

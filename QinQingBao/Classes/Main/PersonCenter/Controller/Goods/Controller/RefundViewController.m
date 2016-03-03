@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;      //contentView 的高约束
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *refundReasonToSuperTopCons;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *refundReasonToSuperTopCons;  //退款理由textField到contentView顶部距离约束
 
 @property (weak, nonatomic) IBOutlet UIScrollView *rootScrollview;    //滚动用的Scrollview
 
@@ -50,9 +50,11 @@
 
 @property (strong,nonatomic)NSMutableArray *typesArray;      //存放退款类型的数组
 
-@property (strong,nonatomic)RefundReasonMode *selectedReasonMode;    //退款原因Id
+@property (strong,nonatomic)RefundReasonMode *selectedReasonMode;    //选中的退款原因
 
-@property (strong,nonatomic)NSDictionary *selectedTypeDict;      //退款类型Id   //id:1为退款,id:2为退货
+@property (strong,nonatomic)NSDictionary *selectedTypeDict;      //选中退款类型   //id:1为退款,id:2为退货
+  //@{@"typeid":@"1",@"typeContent":@"仅退款"},
+ //@{@"typeid":@"2",@"typeContent":@"退货退款"}
 
 @end
 
@@ -100,12 +102,15 @@
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    //设置contentView 的高约束也就是设置设置了 UIScrollView 的ContentSize
     if (MTScreenH <= 568) {
+        //5s 或 4s 则高度设置 5s 屏幕的高
         self.heightConstraint.constant = 568;
     }else{
+        //其它则设置为当前屏幕的高
         self.heightConstraint.constant = MTScreenH;
     }
-    
+    //设置隐藏或显示退款类型
     if (self.isShowRefundType) {
         self.refundReasonToSuperTopCons.constant = 95;
         self.refundTypeField.hidden = NO;
@@ -124,7 +129,7 @@
     self.refundTypeField.rightView = rightViewType;
     self.refundTypeField.rightViewMode = UITextFieldViewModeAlways;
     //设置默认值
-    self.selectedTypeDict = self.typesArray[0];
+    self.selectedTypeDict = self.typesArray[0];   //默认为退款
     self.refundTypeField.text = self.selectedTypeDict[@"typeContent"];
     
     //退款原因textField
@@ -185,6 +190,9 @@
     return _reasonsArray;
 }
 
+/**
+ *  设置类型数组
+ */
 -(NSMutableArray *)typesArray
 {
     if (!_typesArray) {
@@ -232,11 +240,11 @@
 {
     NSString *explainTextStr = textView.text;
     if (explainTextStr == nil || explainTextStr.length == 0) {
-        //显示提示Label
+        //没有内容时显示提示Label
         self.explainPlaceholderLb.hidden = NO;
         return;
     }
-    //隐藏提示Label
+    //有内容时隐藏提示Label
     self.explainPlaceholderLb.hidden = YES;
 }
 
@@ -257,8 +265,10 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (self.currentView == self.refundTypeField) {
-       return self.typesArray[row];
+       NSDictionary *typedict = self.typesArray[row];
+       return typedict[@"typeContent"];
     }
+    //如果是退款理由
     RefundReasonMode *model = self.reasonsArray[row];
     return model.reason_info;
 }
@@ -267,9 +277,12 @@
 {
     if (self.currentView == self.refundTypeField) {
         self.selectedTypeDict = self.typesArray[row];
+        self.refundTypeField.text = self.selectedTypeDict[@"typeContent"];
         return;
     }
+    //如果是退款理由
     self.selectedReasonMode = self.reasonsArray[row];
+    self.refundReasonField.text = self.selectedReasonMode.reason_info;
 }
 
 #pragma  mark UIAlertViewDelegate
@@ -367,17 +380,25 @@
         [NoticeHelper AlertShow:@"请输退款说明" view:self.view];
         return;
     }
-    
-    if ([self.orderInfo.order_state isEqualToString:@"20"]) {
-        [self refundAll];
-    }else if ([self.orderInfo.order_state isEqualToString:@"30"]){
+//    if ([self.orderInfo.order_state isEqualToString:@"20"]) {
+//        [self refundAll];
+//    }else if ([self.orderInfo.order_state isEqualToString:@"30"]){
+//        
+//        if (self.refundTypeField.text == nil || self.refundTypeField.text.length == 0) {
+//            [NoticeHelper AlertShow:@"请选择退款类型" view:self.view];
+//            return;
+//        }
+//        [self refundPart];
+//    }
+    if ([self.orderInfo.order_state isEqualToString:@"30"]) {
         
         if (self.refundTypeField.text == nil || self.refundTypeField.text.length == 0) {
             [NoticeHelper AlertShow:@"请选择退款类型" view:self.view];
             return;
         }
-        [self refundPart];
     }
+    
+    [self refundPart];
 }
 
 #pragma mark 键盘相关方法
@@ -461,7 +482,7 @@
     //间距
     CGFloat margin = 10;
     
-    //计算还差多少个imageView,并创建
+    //计算还差多少个imageView,并创建它们
     for (int i = 0; i < self.photosArray.count - self.imgViewsArray.count; ++i) {
         UIImageView *imgView = [[UIImageView alloc] init];
         [self.photoView addSubview:imgView];
@@ -475,14 +496,14 @@
 
         //添加小圆点
         UIImageView *delete = [[UIImageView alloc] initWithFrame:CGRectMake(imgViewW -10, -5, 15, 15)];
-        delete.image = [UIImage imageNamed:@"deleteimg"];
+        delete.image = [UIImage imageNamed:@"main_badge"];
         [imgView addSubview:delete];
 
         //放到数组中
         [self.imgViewsArray addObject:imgView];
     }
     
-    //设置位置
+    //设置位置,并设置图片
     for (int i = 0; i < self.imgViewsArray.count; ++i) {
         UIImageView *imgView = self.imgViewsArray[i];
         UIImage *theImage = [[UIImage alloc] initWithData:self.photosArray[i]];
@@ -511,6 +532,7 @@
     [self showPhotosToPhotoView];
 }
 
+#pragma  mark -- 选择相关(UIPickView) --
 /**
  *  显示选择View
  */
@@ -553,6 +575,7 @@
         if ([dict[@"code"] integerValue] == 0) {
 
           self.reasonsArray = [RefundReasonMode objectArrayWithKeyValuesArray:dict[@"datas"]];
+            //设置默认退款理由
           self.selectedReasonMode = self.reasonsArray[0];
           self.refundReasonField.text = self.selectedReasonMode.reason_info;
         }else if ([dict[@"code"] integerValue] == 11010){
@@ -579,8 +602,8 @@
     NSMutableArray *imageArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < self.photosArray.count; ++i ) {
         
-        NSString *name = [NSString stringWithFormat:@"refund_pic%d",i];
-        NSString *filename = [NSString stringWithFormat:@"img%d",i];
+        NSString *name = [NSString stringWithFormat:@"refund_pic%d",i+1];
+        NSString *filename = [NSString stringWithFormat:@"img%d",i+1];
         
         NSDictionary *imageDict = @{
                                     @"fileData":self.photosArray[i],
@@ -616,19 +639,27 @@
                                      @"client" : @"ios",
                                      @"order_id" : self.orderInfo.order_id,
                                      @"buyer_message":self.explainTextView.text,
-                                     @"goods_id":self.orderGoodsModel.goods_id,
+                                     @"goods_id":self.orderGoodsModel.rec_id,
                                      @"refund_amount":self.sumField.text,
-                                     @"goods_num":@"5",
                                      @"reason_id":self.selectedReasonMode.reason_id,
-                                     @"refund_type":self.selectedTypeDict[@"typeid"]
+                                     @"refund_type":self.selectedTypeDict[@"typeid"],
+                                     @"goods_num" : @1
                                      }mutableCopy];
+    
+    if ([self.selectedTypeDict[@"typeid"] isEqualToString:@"1"]) {
+        //取消goods_num这个 key-value
+        [params setValue:nil forKey:@"goods_num"];
+    }else{
+        //设置goods_num这个 key-value
+        [params setValue:@"1" forKey:@"goods_num"];
+    }
     
     //创建图片数组
     NSMutableArray *imageArray = [[NSMutableArray alloc] init];
     for (int i = 0; i < self.photosArray.count; ++i ) {
         
-        NSString *name = [NSString stringWithFormat:@"refund_pic%d",i];
-        NSString *filename = [NSString stringWithFormat:@"img%d",i];
+        NSString *name = [NSString stringWithFormat:@"refund_pic%d",i+1];
+        NSString *filename = [NSString stringWithFormat:@"img%d",i+1];
         
         NSDictionary *imageDict = @{
                                     @"fileData":self.photosArray[i],
@@ -640,16 +671,16 @@
     }
     //发起请求
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper UploadPicWithUrl:URL_Refund_all parameters:params type:CommonRemoteTypePost images:imageArray success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper UploadPicWithUrl:URL_Add_refund parameters:params type:CommonRemoteTypePost images:imageArray success:^(NSDictionary *dict, id responseObject) {
         
         NSLog(@"%@",dict);
         [HUD removeFromSuperview];
 
-        if ([dict[@"code"] integerValue] == 0) {
+        if (dict && [dict[@"code"] integerValue] == 0) {
             
             [self.navigationController popViewControllerAnimated:YES];
             
-        }else if ([dict[@"code"] integerValue] == 11010){
+        }else {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -45,7 +45,7 @@
                             <constraint firstAttribute="width" constant="75" id="MlQ-1E-d2O"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="退款详情">
+                        <state key="normal" title="删除订单">
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>

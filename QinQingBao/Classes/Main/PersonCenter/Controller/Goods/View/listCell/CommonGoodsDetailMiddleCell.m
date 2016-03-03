@@ -40,9 +40,9 @@
     if (self.refundOperation) {
         self.refundOperation(self);
     }
-//    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
-//
-//    [[UIApplication sharedApplication] openURL:url];
+    //    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
+    //
+    //    [[UIApplication sharedApplication] openURL:url];
 }
 
 -(void)setitemWithData:(ExtendOrderGoodsModel *)item
@@ -52,6 +52,15 @@
     self.goodsTitleLab.text = item.goods_name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
     self.countLab.text = item.goods_num;
+    if (item && [item.refund isEqualToString:@"0"])
+    {
+        [self.button setTitle:@"退货退款中" forState:UIControlStateNormal];
+        [self.button setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.button setTitle:@"退货/退款" forState:UIControlStateNormal];
+    }
 }
 
 
@@ -62,7 +71,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
 }
 
 @end

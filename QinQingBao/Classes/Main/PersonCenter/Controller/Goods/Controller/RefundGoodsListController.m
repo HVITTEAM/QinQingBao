@@ -15,6 +15,10 @@
 #import "RefundDetailViewController.h"
 
 @interface RefundGoodsListController ()
+{
+    RefundListModel*selectedDeleteOrder;
+    NSIndexPath * selectedIndexPath;
+}
 
 @property(assign,nonatomic)NSInteger nextPage;                    //下一页
 
@@ -41,7 +45,7 @@
     
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNextPageRefundListData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.backgroundColor = HMGlobalBg;
     self.nextPage = 1;
     
     [self loadFirstPageRefundListData];
@@ -79,6 +83,7 @@
 {
     RefundListModel *model = self.dataProvider[indexPath.section];
     
+    
     if (indexPath.row == 0) {
         //头部
         CommonGoodsCellHead *headcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsCellHead"];
@@ -92,6 +97,11 @@
         RefundCellBottom *bottomcell = [RefundCellBottom refundCellBottomWithTableView:tableView];
         bottomcell.refundAmountLb.text = model.refund_amount;
         bottomcell.descLb.text = [NSString stringWithFormat:@"共%@件商品 合计￥%@",model.goods_num,model.refund_amount];
+        [bottomcell setItemWithRefundData:model];
+        bottomcell.buttonClick = ^(UIButton *btn)
+        {
+            [self buttonClickHandler:btn item:model indexPath:indexPath];
+        };
         return bottomcell;
     }else{
         //中间商品底部
@@ -119,6 +129,9 @@
  */
 -(void)loadFirstPageRefundListData
 {
+    if (self.dataProvider) {
+        [self.dataProvider removeAllObjects];
+    }
     NSDictionary *params = @{
                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client":@"ios",
@@ -129,10 +142,13 @@
     [CommonRemoteHelper RemoteWithUrl:URL_refund_return_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         self.isLoading = NO;
         if ([dict[@"code"] integerValue] == 17001) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            [self.tableView initWithPlaceString:@"暂无数据"];
         }else if ([dict[@"code"] integerValue] == 0){
             RefundListTotal *listTotal = [RefundListTotal objectWithKeyValues:dict];
             self.dataProvider = listTotal.datas;
+            if (self.dataProvider.count == 0) {
+                [self.tableView initWithPlaceString:@"暂无数据"];
+            }
             self.isMoreData = [listTotal.hasmore boolValue];
             [self.tableView reloadData];
             //设置下一页的页号
@@ -191,6 +207,70 @@
         [self.tableView.footer endRefreshing];
         [NoticeHelper AlertShow:@"数据请求不成功" view:self.view];
     }];
+}
+
+#pragma mark  订单操作模块
+
+/**操作按钮对应点击事件**/
+-(void)buttonClickHandler:(UIButton *)btn item:(RefundListModel*)item indexPath:(NSIndexPath *)indexPath
+{
+    if ([btn.titleLabel.text isEqualToString:@"删除订单"])
+    {
+        [self deleteOrder:item indexPath:indexPath];
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"退款详情"])
+    {
+        //跳转到退款详情界面
+        RefundListModel *model = self.dataProvider[indexPath.section];
+        RefundDetailViewController *refundDetailVC = [[RefundDetailViewController alloc] init];
+        refundDetailVC.refundId = model.refund_id;
+        refundDetailVC.title = model.goods_name;
+        [self.nav pushViewController:refundDetailVC animated:YES];
+    }
+}
+
+//删除订单
+-(void)deleteOrder:(RefundListModel*)item indexPath:(NSIndexPath *)indexPath
+{
+    selectedDeleteOrder = item;
+    selectedIndexPath = indexPath;
+    UIAlertView *deleteAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认删除订单？删除后将无法恢复订单。" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: @"取消",nil];
+    deleteAlertView.tag = 200;
+    [deleteAlertView show];
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0)
+    {
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view.window.rootViewController.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Del_order parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                      @"client" : @"ios",
+                                                                      @"order_id" : selectedDeleteOrder.order_id}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         [HUD removeFromSuperview];
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             [self.dataProvider removeObject:self.dataProvider[selectedIndexPath.section]];
+                                             [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:selectedIndexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+                                             
+                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                 [self.tableView reloadData];
+                                             });
+                                         }
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                     }];
+    }
 }
 
 @end

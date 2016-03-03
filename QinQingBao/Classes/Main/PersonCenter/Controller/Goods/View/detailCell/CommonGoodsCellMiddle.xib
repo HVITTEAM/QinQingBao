@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -80,6 +80,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退货退款中" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xLN-aL-b41">
+                                <rect key="frame" x="227" y="60" width="85" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="Uwi-Ro-CCY"/>
+                                    <constraint firstAttribute="height" constant="21" id="aBW-ae-CsT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.38" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -89,6 +99,7 @@
                             <constraint firstItem="SY1-7I-1HQ" firstAttribute="leading" secondItem="212-cJ-YPG" secondAttribute="trailing" constant="48" id="ACZ-FI-8qz"/>
                             <constraint firstItem="ow9-F6-y6D" firstAttribute="leading" secondItem="212-cJ-YPG" secondAttribute="trailing" constant="8" id="Jhd-4W-cme"/>
                             <constraint firstItem="4t8-hd-Nv8" firstAttribute="top" secondItem="Vs6-NZ-WyC" secondAttribute="bottom" constant="4" id="Vc9-M8-dwa"/>
+                            <constraint firstAttribute="trailing" secondItem="xLN-aL-b41" secondAttribute="trailing" constant="8" id="W6R-wc-Adg"/>
                             <constraint firstItem="XLJ-Ct-Zys" firstAttribute="top" secondItem="qZh-8Z-eeK" secondAttribute="top" id="a6f-8u-EX1"/>
                             <constraint firstItem="Vs6-NZ-WyC" firstAttribute="leading" secondItem="212-cJ-YPG" secondAttribute="trailing" constant="8" id="cA1-qj-mTW"/>
                             <constraint firstItem="Vs6-NZ-WyC" firstAttribute="top" secondItem="ow9-F6-y6D" secondAttribute="bottom" constant="2" id="dl4-qU-OZc"/>
@@ -96,6 +107,7 @@
                             <constraint firstAttribute="trailing" secondItem="XLJ-Ct-Zys" secondAttribute="trailing" id="sbA-4h-dJv"/>
                             <constraint firstItem="S8X-zS-WSa" firstAttribute="top" secondItem="SY1-7I-1HQ" secondAttribute="bottom" constant="4" id="ugN-f0-2ip"/>
                             <constraint firstItem="SY1-7I-1HQ" firstAttribute="top" secondItem="ow9-F6-y6D" secondAttribute="bottom" constant="2" id="vGW-Ae-kyU"/>
+                            <constraint firstAttribute="bottom" secondItem="xLN-aL-b41" secondAttribute="bottom" constant="9" id="vLx-tx-cmf"/>
                             <constraint firstItem="4t8-hd-Nv8" firstAttribute="leading" secondItem="212-cJ-YPG" secondAttribute="trailing" constant="8" id="y0D-Jd-8mu"/>
                             <constraint firstItem="S8X-zS-WSa" firstAttribute="leading" secondItem="4t8-hd-Nv8" secondAttribute="trailing" constant="1" id="yIo-R5-TVs"/>
                             <constraint firstItem="212-cJ-YPG" firstAttribute="top" secondItem="XLJ-Ct-Zys" secondAttribute="bottom" constant="9.5" id="zY0-KN-l94"/>
@@ -114,6 +126,7 @@
                 <outlet property="goodsIconImg" destination="212-cJ-YPG" id="Syo-4M-bbw"/>
                 <outlet property="goodsTitleLab" destination="ow9-F6-y6D" id="K3T-i2-CtQ"/>
                 <outlet property="priceLab" destination="SY1-7I-1HQ" id="I3g-Ac-v67"/>
+                <outlet property="refundLab" destination="xLN-aL-b41" id="pJo-Q1-8s0"/>
                 <outlet property="topLine" destination="XLJ-Ct-Zys" id="JfN-Ib-gr7"/>
             </connections>
         </tableViewCell>

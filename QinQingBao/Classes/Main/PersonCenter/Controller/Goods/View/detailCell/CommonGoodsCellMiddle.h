@@ -24,6 +24,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *countLab;
 
+@property (strong, nonatomic) IBOutlet UILabel *refundLab;
+
 -(void)setitemWithData:(CommonGoodsModel *)item;
 
 /**

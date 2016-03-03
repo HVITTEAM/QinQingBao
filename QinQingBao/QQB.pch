@@ -433,7 +433,7 @@
 #define URL_Add_refund [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_add_refund",URL_Local]
 
 /***获取退货退款原因url*/
-#define URL_Reason_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_get_reason_list",URL_Local]
+#define URL_Reason_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=get_reason_list",URL_Local]
 
 /***订单全部退款url*/
 #define URL_Refund_all [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_add_refund_all",URL_Local]

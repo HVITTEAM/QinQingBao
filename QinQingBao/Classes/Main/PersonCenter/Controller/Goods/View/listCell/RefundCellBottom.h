@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RefundListModel.h"
 
 @interface RefundCellBottom : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *refundAmountLb;      //退款金额
@@ -17,4 +18,10 @@
 
 +(RefundCellBottom *)refundCellBottomWithTableView:(UITableView *)tableView;
 
+@property (nonatomic, copy) void (^buttonClick)(UIButton *btn);
+
+/**
+ *  头部状态cell,退款退货时使用
+ */
+-(void)setItemWithRefundData:(RefundListModel *)item;
 @end
