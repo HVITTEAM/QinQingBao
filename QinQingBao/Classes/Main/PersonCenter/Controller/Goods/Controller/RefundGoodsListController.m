@@ -174,6 +174,7 @@
     //没有更多数据不再发送请求
     if (!self.isMoreData) {
         [self.tableView.footer endRefreshing];
+        [self.view showNonedataTooltip];
         return;
     }
     
@@ -190,9 +191,12 @@
         //结束上拉刷新
         [self.tableView.footer endRefreshing];
         
-        if ([dict[@"code"] integerValue] == 17001) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-        }else if ([dict[@"code"] integerValue] == 0){
+        if ([dict[@"code"] integerValue] == 17001)
+        {
+            [self.view showNonedataTooltip];
+            //                [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        else if ([dict[@"code"] integerValue] == 0){
             
             RefundListTotal *listTotal = [RefundListTotal objectWithKeyValues:dict];
             [self.dataProvider addObjectsFromArray:listTotal.datas];
