@@ -12,10 +12,6 @@
 
 @interface GoodsTypeViewController : UIViewController
 
-@property (nonatomic, retain) UIScrollView *scrollView;
-
-@property(nonatomic, retain) NSMutableArray *array;//创建一个数组属性 作为top菜单的数据源
-
 /**标记页面来源，默认是空，为个人服务订单，否则为首页某个人的服务订单*/
 @property(nonatomic, copy) NSString *viewOwer;
 

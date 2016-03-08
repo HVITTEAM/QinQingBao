@@ -136,7 +136,7 @@
     }
 }
 
-/**临时方法 解绑设备*/
+/**解绑设备*/
 -(void)deleteDevice:(NSString *)imei
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"imei" : imei}

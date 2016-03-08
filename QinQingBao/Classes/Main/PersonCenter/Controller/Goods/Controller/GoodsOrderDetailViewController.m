@@ -64,7 +64,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     [self.view addSubview:_endView];
     
     self.tableView.tableFooterView = [[UIView alloc] init];
-
+    
 }
 
 - (UITableView *)tableView
@@ -107,10 +107,10 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                          reciverModel = [ReciverinfoModel objectWithKeyValues:reciver_info];
                                          reciverModel.reciver_name = [order_common objectForKey:@"reciver_name"];
                                          NSDictionary *invoice_info = [order_common objectForKey:@"invoice_info"];
-//                                         if (!invoice_info || [invoice_info isEqualToDictionary:@"null"])
-//                                             reciverModel.inv_title_select = @"";
-//                                         else
-//                                             reciverModel.inv_title_select = [invoice_info objectForKey:@"inv_title_select"];
+                                         //                                         if (!invoice_info || [invoice_info isEqualToDictionary:@"null"])
+                                         //                                             reciverModel.inv_title_select = @"";
+                                         //                                         else
+                                         //                                             reciverModel.inv_title_select = [invoice_info objectForKey:@"inv_title_select"];
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -213,12 +213,14 @@ static CGFloat ENDVIEW_HEIGHT = 50;
             if(middleCell == nil)
                 middleCell = [CommonGoodsDetailMiddleCell commonGoodsDetailMiddleCell];
             
+            //這個訂單 都 已經取消了
             [middleCell setitemWithData:arr[indexPath.row -1]];
-//            if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
-//                middleCell.button.hidden = YES;
-//            }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
-//                middleCell.button.hidden = NO;
-//            }
+            if ([itemInfo.order_state isEqualToString:@"0"]) {//付款未发货
+                middleCell.button.hidden = YES;
+                //客戶都已經評論了
+            }else if([itemInfo.evaluation_state isEqualToString:@"1"]){//付款已发货
+                middleCell.button.hidden = YES;
+            }
             //跳转到退款界面
             __weak typeof(self) weakSelf = self;
             middleCell.refundOperation = ^(CommonGoodsDetailMiddleCell *midCell){
@@ -229,7 +231,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                 if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
                     refundVC.isShowRefundType = NO;
                 }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
-                     refundVC.isShowRefundType = YES;
+                    refundVC.isShowRefundType = YES;
                 }
                 [weakSelf.navigationController pushViewController:refundVC animated:YES];
             };

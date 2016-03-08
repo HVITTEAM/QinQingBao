@@ -533,7 +533,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
     buyView.specnameDict = goodsInfo.spec_name;
     buyView.specvalueDict = goodsInfo.spec_value;
     [self presentSemiViewController:buyView withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO),
-                                                          KNSemiModalOptionKeys.parentAlpha : @(0.8)
+                                                          KNSemiModalOptionKeys.parentAlpha : @(0.8),
+                                                          KNSemiModalOptionKeys.animationDuration : @(0.2),
                                                           }];
     buyView.type = OrderTypeBuyRightnow;
     buyView.goodsID = self.goodsID;

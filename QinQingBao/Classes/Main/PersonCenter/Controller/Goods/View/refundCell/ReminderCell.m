@@ -11,6 +11,7 @@
 @interface ReminderCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *reminderContent;
+@property (weak, nonatomic) IBOutlet UILabel *titleLb;
 
 @end
 
@@ -34,6 +35,9 @@
                                };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict];
     self.reminderContent.attributedText = attrString;
+    
+    CGSize size = [attrString boundingRectWithSize:CGSizeMake(MTScreenW - 35, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+    self.height = size.height + 55;
 }
 
 @end

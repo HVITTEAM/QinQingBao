@@ -27,5 +27,7 @@
 @property(nonatomic,copy)NSString *gc_id;
 @property(nonatomic,copy)NSString *goods_image_url;
 @property(nonatomic,copy)NSString *refund;
+@property(nonatomic,retain)NSDictionary *extend_refund;
+
 
 @end

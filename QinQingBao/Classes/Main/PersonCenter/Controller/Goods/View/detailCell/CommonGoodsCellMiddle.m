@@ -35,7 +35,7 @@
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
     self.countLab.text = item.goods_num;
     
-    if (item.refund && [item.refund isEqualToString:@"0"])
+    if (item.extend_refund)
         self.refundLab.hidden = NO;
     else
         self.refundLab.hidden = YES;

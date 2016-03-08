@@ -24,7 +24,7 @@
 #import "AddressTableViewController.h"
 #import "GoodsViewController.h"
 #import "GoodsTypeViewController.h"
-
+#import "MyMesageViewController.h"
 #define imageHeight 140
 
 @interface ProfileViewController ()
@@ -81,12 +81,6 @@
 }
 
 #pragma mark 初始化界面
-
-///** 屏蔽tableView的样式 */
-//- (id)init
-//{
-//    return [self initWithStyle:UITableViewStylePlain];
-//}
 
 /**
  *  设置tableView属性
@@ -182,17 +176,12 @@
     
     //重置数据源
     [self setupGroup0];
-    [self setupGroup1];
-    [self setupGroup2];
+//    [self setupGroup1];
+//    [self setupGroup2];
     [self setupGroup10];
-    [self setupGroup4];
-    [self setupGroup3];
+//    [self setupGroup4];
+//    [self setupGroup3];
     [self setupGroup5];
-    //    [self setupGroup7];
-    //    [self setupGroup8];
-    //    [self setupGroup9];
-    //    [self setupGroup6];
-    //    [self setupGroup11];
     [self setupFooter];
     
     //刷新表格
@@ -223,11 +212,16 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    HMCommonArrowItem *myData;
-    // 2.设置组的所有行数据
-    myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
+    HMCommonArrowItem *myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
     myData.destVcClass = [PersonalDataViewController class];
-    group.items = @[myData];
+    
+    HMCommonArrowItem *newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
+    newFriend.destVcClass = [MTCouponsViewController class];
+    
+    HMCommonArrowItem *offline = [HMCommonArrowItem itemWithTitle:@"我的亲友" icon:@"pc_family.png"];
+    offline.destVcClass = [FamilyViewController class];
+
+    group.items = @[myData,newFriend,offline];
 }
 
 - (void)setupGroup1
@@ -236,10 +230,7 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    HMCommonArrowItem *newFriend;
-    
-    // 2.设置组的所有行数据
-    newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
+    HMCommonArrowItem *newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
     
     newFriend.destVcClass = [MTCouponsViewController class];
     
@@ -260,23 +251,6 @@
     group.items = @[newFriend];
 }
 
-- (void)setupGroup6
-{
-    // 1.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    
-    // 2.设置组的所有行数据
-    HMCommonArrowItem *goods = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"shop_selected.png"];
-    goods.operation = ^{
-        MTProgressWebViewController *destVC = [[MTProgressWebViewController alloc] init];
-        destVC.title = @"我的商品";
-        destVC.url = URL_Goods(username, key);
-        destVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:destVC animated:YES];
-    };
-    group.items = @[goods];
-}
 
 - (void)setupGroup3
 {
@@ -312,51 +286,11 @@
     HMCommonArrowItem *album = [HMCommonArrowItem itemWithTitle:@"系统设置" icon:@"pc_setup.png"];
     album.destVcClass = [SettingViewController class];
     
-    group.items = @[album];
-}
-
-- (void)setupGroup7
-{
-    // 1.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    
-    HMCommonArrowItem *car;
     // 2.设置组的所有行数据
-    car = [HMCommonArrowItem itemWithTitle:@"我的购物车" icon:@"pc_service.png"];
-    car.destVcClass = [GoodsHeadViewController class];
+    HMCommonArrowItem *collect = [HMCommonArrowItem itemWithTitle:@"关于APP" icon:@"app.png"];
+    collect.destVcClass = [AboutViewController class];
     
-    group.items = @[car];
-}
-
-- (void)setupGroup8
-{
-    // 1.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    
-    HMCommonArrowItem *car;
-    // 2.设置组的所有行数据
-    car = [HMCommonArrowItem itemWithTitle:@"商品分类" icon:@"pc_service.png"];
-    
-    car.destVcClass = [ClassificationViewController class];
-    
-    group.items = @[car];
-}
-
-- (void)setupGroup9
-{
-    // 1.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    
-    HMCommonArrowItem *car;
-    // 2.设置组的所有行数据
-    car = [HMCommonArrowItem itemWithTitle:@"商品列表" icon:@"pc_service.png"];
-    
-    car.destVcClass = [GoodsTableViewController class];
-    
-    group.items = @[car];
+    group.items = @[album,collect];
 }
 
 - (void)setupGroup10
@@ -365,30 +299,19 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    HMCommonArrowItem *car;
-    // 2.设置组的所有行数据
-    car = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"pc_service.png"];
-    
+    HMCommonArrowItem *car = [HMCommonArrowItem itemWithTitle:@"我的商品" icon:@"shop_selected.png"];
     car.destVcClass = [GoodsTypeViewController class];
     
-    group.items = @[car];
+    
+    HMCommonArrowItem *newFriend = [HMCommonArrowItem itemWithTitle:@"我的服务" icon:@"pc_service.png"];
+    newFriend.destVcClass = [OrderTableViewController class];
+    
+    HMCommonArrowItem *msg = [HMCommonArrowItem itemWithTitle:@"我的消息" icon:@"ic_msg.png"];
+    msg.destVcClass = [ MyMesageViewController class];
+    
+    group.items = @[newFriend,car,msg];
 }
 
--(void)setupGroup11
-{
-    // 1.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    
-    HMCommonArrowItem *newFriend;
-    
-    // 2.设置组的所有行数据
-    newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
-    
-    newFriend.destVcClass = [MTCouponsViewController class];
-    
-    group.items = @[newFriend];
-}
 
 # pragma  mark 退出当前账号
 
@@ -425,8 +348,6 @@
                                              [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
                                              
                                              [MTControllerChooseTool setloginOutViewController];
-                                             
-                                             [self clearCookies];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

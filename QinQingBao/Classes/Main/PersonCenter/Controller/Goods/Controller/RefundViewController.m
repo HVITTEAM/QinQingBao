@@ -143,6 +143,7 @@
     //金额textField
     self.sumField.delegate = self;
     self.sumField.text = self.orderInfo.order_amount;
+    self.sumPromptLb.text = [NSString stringWithFormat:@"(最多%@元，含发货邮费%@元)",self.orderInfo.order_amount,self.orderInfo.shipping_fee];
     
     //退款说明的textView
     self.explainTextView.layer.borderColor = HMColor(235, 235, 235).CGColor;
@@ -677,7 +678,8 @@
         [HUD removeFromSuperview];
 
         if (dict && [dict[@"code"] integerValue] == 0) {
-            
+          
+            //TODO 转到退款详情
             [self.navigationController popViewControllerAnimated:YES];
             
         }else {

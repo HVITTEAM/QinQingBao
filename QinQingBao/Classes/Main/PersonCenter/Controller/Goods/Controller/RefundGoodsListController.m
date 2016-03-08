@@ -46,7 +46,6 @@
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNextPageRefundListData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = HMGlobalBg;
-    self.nextPage = 1;
     
     [self loadFirstPageRefundListData];
 }
@@ -119,7 +118,7 @@
     RefundListModel *model = self.dataProvider[indexPath.section];
     RefundDetailViewController *refundDetailVC = [[RefundDetailViewController alloc] init];
     refundDetailVC.refundId = model.refund_id;
-    refundDetailVC.title = model.goods_name;
+//    refundDetailVC.title = model.goods_name;
     [self.nav pushViewController:refundDetailVC animated:YES];
 }
 
@@ -129,9 +128,9 @@
  */
 -(void)loadFirstPageRefundListData
 {
-    if (self.dataProvider) {
-        [self.dataProvider removeAllObjects];
-    }
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    self.nextPage = 1;
     NSDictionary *params = @{
                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client":@"ios",
@@ -140,6 +139,7 @@
                              };
     self.isLoading = YES;
     [CommonRemoteHelper RemoteWithUrl:URL_refund_return_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [HUD removeFromSuperview];
         self.isLoading = NO;
         if ([dict[@"code"] integerValue] == 17001) {
             [self.tableView initWithPlaceString:@"暂无数据"];
@@ -156,6 +156,7 @@
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.isLoading = NO;
+        [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"数据请求不成功" view:self.view];
     }];
 }
@@ -178,15 +179,12 @@
         return;
     }
     
-    NSDictionary *params = @{
-                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+    NSDictionary *params = @{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client":@"ios",
                              @"page":@10,
-                             @"curpage":@(self.nextPage)
-                             };
+                             @"curpage":@(self.nextPage)};
     self.isLoading = YES;
     [CommonRemoteHelper RemoteWithUrl:URL_refund_return_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
         self.isLoading = NO;
         //结束上拉刷新
         [self.tableView.footer endRefreshing];

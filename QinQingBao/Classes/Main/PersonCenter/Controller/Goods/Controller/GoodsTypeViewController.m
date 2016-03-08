@@ -8,8 +8,14 @@
 
 #import "GoodsTypeViewController.h"
 #import "MTSlipPageViewController.h"
+#import "QCSlideSwitchView.h"
 
-@interface GoodsTypeViewController ()<MTSwitchViewDelegate>
+
+@interface GoodsTypeViewController ()<MTSwitchViewDelegate,QCSlideSwitchViewDelegate>
+{
+    
+}
+@property (nonatomic, strong) QCSlideSwitchView *slideSwitchView;
 
 @end
 
@@ -34,6 +40,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initView];
+    
     self.vc0 = [[GoodsViewController alloc] init];
     self.vc0.title = @"全部";
     
@@ -52,10 +61,12 @@
     self.vc5 = [[RefundGoodsListController alloc] init];
     self.vc5.title = @"售后/取消";
     
-    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
-    view.delegate = self;
-    view.viewArr = [NSMutableArray arrayWithObjects:self.vc0,self.vc1,self.vc2,self.vc3,self.vc4,self.vc5, nil];
-    [self.view addSubview:view];
+    //    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
+    //    view.delegate = self;
+    //    view.viewArr = [NSMutableArray arrayWithObjects:self.vc0,self.vc1,self.vc2,self.vc3,self.vc4,self.vc5, nil];
+    //    [self.view addSubview:view];
+    
+    [self.slideSwitchView buildUI];
 }
 
 
@@ -98,5 +109,70 @@
     self.title =   @"我的商品";
     self.view.backgroundColor = [UIColor whiteColor];
 }
+
+#pragma mark - QCSlideSwitchView edit 2016-03-03 by Mr.Tung 为解决view宽度不够显示问题改变控制器
+
+- (NSUInteger)numberOfTab:(QCSlideSwitchView *)view
+{
+    return 6;
+}
+
+- (UIViewController *)slideSwitchView:(QCSlideSwitchView *)view viewOfTab:(NSUInteger)number
+{
+    if (number == 0) {
+        return self.vc0;
+    } else if (number == 1) {
+        return self.vc1;
+    } else if (number == 2) {
+        return self.vc2;
+    } else if (number == 3) {
+        return self.vc3;
+    } else if (number == 4) {
+        return self.vc4;
+    } else if (number == 5) {
+        return self.vc5;
+    }  else {
+        return nil;
+    }
+}
+
+- (void)slideSwitchView:(QCSlideSwitchView *)view didselectTab:(NSUInteger)number
+{
+    GoodsViewController *vc = nil;
+    if (number != 5) {
+        if (number == 0) {
+            vc = self.vc0;
+        }else if (number == 1) {
+            vc = self.vc1;
+        } else if (number == 2) {
+            vc = self.vc2;
+        } else if (number == 3) {
+            vc = self.vc3;
+        } else if (number == 4) {
+            vc = self.vc4;
+        }
+        vc.nav = self.navigationController;
+        [vc viewDidCurrentView];
+    }else if (number == 5) {
+        self.vc5.nav = self.navigationController;
+        [self.vc5 loadFirstPageRefundListData];
+    }
+}
+
+-(void)initView
+{
+    if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.slideSwitchView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50)];
+    self.slideSwitchView.slideSwitchViewDelegate = self;
+    [self.view addSubview:self.slideSwitchView];
+    
+    self.slideSwitchView.tabItemNormalColor = [QCSlideSwitchView colorFromHexRGB:@"868686"];
+    self.slideSwitchView.tabItemSelectedColor = [QCSlideSwitchView colorFromHexRGB:@"1e90ff"];
+    self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
+                                        stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
+}
+
 
 @end

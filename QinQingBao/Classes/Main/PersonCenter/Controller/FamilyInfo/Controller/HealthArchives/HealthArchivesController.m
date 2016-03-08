@@ -136,7 +136,6 @@ static float cellWidth = 66;
     [vc viewDidCurrentView];
 }
 
-
 -(void)initView
 {
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
@@ -147,14 +146,11 @@ static float cellWidth = 66;
     self.slideSwitchView.slideSwitchViewDelegate = self;
     [self.scrollView addSubview:self.slideSwitchView];
     
-    
     self.slideSwitchView.tabItemNormalColor = [QCSlideSwitchView colorFromHexRGB:@"868686"];
     self.slideSwitchView.tabItemSelectedColor = [QCSlideSwitchView colorFromHexRGB:@"1e90ff"];
     self.slideSwitchView.shadowImage = [[UIImage imageNamed:@"red_line_and_shadow.png"]
                                         stretchableImageWithLeftCapWidth:59.0f topCapHeight:0.0f];
 }
-
-
 
 /**
  *  初始化导航栏

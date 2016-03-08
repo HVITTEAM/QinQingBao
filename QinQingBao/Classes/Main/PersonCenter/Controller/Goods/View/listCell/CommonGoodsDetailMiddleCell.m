@@ -52,7 +52,7 @@
     self.goodsTitleLab.text = item.goods_name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
     self.countLab.text = item.goods_num;
-    if (item && [item.refund isEqualToString:@"0"])
+    if (item && item.extend_refund)
     {
         self.button.layer.borderWidth = 0;
         self.button.titleLabel.font = [UIFont systemFontOfSize:12];
@@ -66,15 +66,14 @@
     }
 }
 
-
 - (void)awakeFromNib
 {
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
 }
 
 @end

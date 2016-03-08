@@ -21,7 +21,7 @@
 @property (nonatomic, copy) void (^buttonClick)(UIButton *btn);
 
 /**
- *  头部状态cell,退款退货时使用
+ *  状态cell,退款退货时使用
  */
 -(void)setItemWithRefundData:(RefundListModel *)item;
 @end

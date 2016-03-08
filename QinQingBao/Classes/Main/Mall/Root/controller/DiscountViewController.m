@@ -231,8 +231,6 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
         return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     MTShoppingCarController *shopCar = [[MTShoppingCarController alloc] init];
     [self.navigationController pushViewController:shopCar animated:YES];
-
-//    [NoticeHelper AlertShow:@"导航栏右边按钮被点击" view:self.collectionView];
 }
 
 #pragma mark -- 内部方法 --
