@@ -16,6 +16,7 @@
 #import "AreaModel.h"
 
 #import "MTAddressPickController.h"
+#import "EmergencyContactViewController.h"
 
 @interface BasicInfoViewController ()<UIAlertViewDelegate>
 {
@@ -80,40 +81,24 @@
 
 - (void)setupGroup
 {
-    // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    // 2.设置组的所有行数据
     self.itemNick = [HMCommonTextfieldItem itemWithTitle:@"亲属昵称" icon:nil];
     self.itemNick.placeholder = @"如:爷爷、奶奶等";
-    self.itemNick.buttonClickBlock = ^(UIButton *btn){
-        NSLog(@"----点击了确认按钮-");
-        //        self.telfield.rightText.text = @"15261212811";
-        //        self.telfield.rightText.clearButtonMode =  UITextFieldViewModeNever;
-    };
-    
-    self.itemNick.operation = ^{
-        
-    };
     
     self.itemTel = [HMCommonTextfieldItem itemWithTitle:@"手机号码" icon:nil];
     self.itemTel.placeholder = @"请输入手机号码";
-    self.itemTel.operation = ^{
-        NSLog(@"----点击了n---");
-    };
     
     group.items = @[self.itemNick,self.itemTel];
 }
 
 - (void)setupGroup1
 {
-    // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    // 2.设置组的所有行数据
-    self.itemName = [HMCommonTextfieldItem itemWithTitle:@"姓名" icon:nil];
+    self.itemName = [HMCommonTextfieldItem itemWithTitle:@"使用者姓名" icon:nil];
     self.itemName.placeholder = @"请填写真实姓名";
     self.itemName.operation = ^{
         
@@ -148,14 +133,14 @@
         textView.title = @"居住地址";
         [weakSelf.navigationController pushViewController:textView animated:YES];
     };
-    group.items = @[self.itemName,self.itemSex,self.itemId,self.itemAddress];
+    group.items = @[self.itemName,self.itemId];
 }
 
 - (void)setupFooter
 {
     HeadProcessView *headView = [[HeadProcessView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
     headView.backgroundColor = HMGlobalBg;
-    [headView initWithShowIndex:0];
+    [headView initWithShowIndex:1];
     self.tableView.tableHeaderView = headView;
     
     UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 110)];
@@ -204,6 +189,11 @@
 
 -(void)next:(UIButton *)sender
 {
+    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
+//    VC.member_id = self.member_id;
+//    VC.isFromStart = YES;
+    [self.navigationController pushViewController:VC animated:YES];
+    return;
     [self.view endEditing:YES];
     
     if (self.itemNick.rightText.text.length == 0)
@@ -243,10 +233,10 @@
                                          [self bangdin];
                                          NSDictionary *dict1 = [dict objectForKey:@"datas"];
                                          NSString *member_id = [dict1 objectForKey:@"member_id"];
-                                         AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-                                         view.member_id = member_id;
-                                         view.isFromStart = YES;
-                                         [self.navigationController pushViewController:view animated:YES];
+                                         
+                                         BasicInfoViewController *vc = [[BasicInfoViewController alloc] init];
+
+                                         [self.navigationController pushViewController:vc animated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

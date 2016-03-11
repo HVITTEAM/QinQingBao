@@ -13,4 +13,7 @@
 @interface GoodsOrderDetailViewController : UIViewController
 
 @property (nonatomic, retain) CommonGoodsModel *item;
+/**订单付款成功之后跳到该界面传入id**/
+@property (nonatomic, copy) NSString *orderID;
+
 @end

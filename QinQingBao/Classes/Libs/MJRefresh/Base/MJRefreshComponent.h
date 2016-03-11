@@ -51,6 +51,11 @@ typedef void (^MJRefreshComponentRefreshingBlock)();
 - (void)executeRefreshingCallback;
 
 #pragma mark - 刷新状态控制
+
+//--------------------------------------------------------------------------
+- (void)easeMobBeginRefreshing;  //聊天刷新
+//--------------------------------------------------------------------------
+
 /** 进入刷新状态 */
 - (void)beginRefreshing;
 /** 结束刷新状态 */

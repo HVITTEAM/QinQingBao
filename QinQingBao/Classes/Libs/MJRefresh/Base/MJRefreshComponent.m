@@ -150,6 +150,22 @@
     }
 }
 
+//--------------------------------------------------------------------------
+- (void)easeMobBeginRefreshing
+{
+    [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
+        self.alpha = 1.0;
+    }];
+    self.pullingPercent = 1.0;
+    if (self.window) {
+        self.state = MJRefreshStateRefreshing;
+    } else {
+        self.state = MJRefreshStateWillRefresh;
+    }
+}
+//--------------------------------------------------------------------------
+
+
 #pragma mark 结束刷新状态
 - (void)endRefreshing
 {

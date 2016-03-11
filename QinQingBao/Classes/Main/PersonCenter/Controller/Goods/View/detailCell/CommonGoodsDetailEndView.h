@@ -25,7 +25,7 @@
 @property(nonatomic,strong)UIButton *buyBt;
 @property(nonatomic,strong)UIButton *add2Car;
 
-@property (nonatomic, retain) CommonOrderModel *goodsitemInfo;
+@property (nonatomic, retain) CommonGoodsModel *goodsitemInfo;
 
 @property (nonatomic, retain) CommonGoodsModel *goodsModel;
 

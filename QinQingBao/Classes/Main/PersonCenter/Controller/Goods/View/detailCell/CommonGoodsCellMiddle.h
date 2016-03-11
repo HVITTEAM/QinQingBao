@@ -14,6 +14,8 @@
 
 +(CommonGoodsCellMiddle *) commonGoodsCellMiddle;
 
+@property (strong, nonatomic) IBOutlet UILabel *guigeLab;
+
 @property (strong, nonatomic) IBOutlet UIView *topLine;
 
 @property (strong, nonatomic) IBOutlet UIImageView *goodsIconImg;

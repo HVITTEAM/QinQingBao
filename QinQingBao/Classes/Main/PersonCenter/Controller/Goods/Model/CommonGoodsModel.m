@@ -7,7 +7,7 @@
 //
 
 #import "CommonGoodsModel.h"
-
+#import "ExtendOrderGoodsModel.h"
 @implementation CommonGoodsModel
 
 // 实现这个方法的目的：告诉MJExtension框架statuses和ads数组里面装的是什么模型
@@ -15,6 +15,7 @@
 {
     return @{
              @"order_list" : [CommonOrderModel class],
+             @"goods_list" : [ExtendOrderGoodsModel class],
              };
 }
 @end

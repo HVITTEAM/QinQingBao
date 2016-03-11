@@ -52,6 +52,7 @@
     self.goodsTitleLab.text = item.goods_name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
     self.countLab.text = item.goods_num;
+    self.guigeLab.text = item.guige;
     if (item && item.extend_refund)
     {
         self.button.layer.borderWidth = 0;

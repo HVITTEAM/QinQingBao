@@ -23,4 +23,8 @@
 +(BusinessInfoCell *) businessCell;
 
 @property (nonatomic, retain) UIViewController *parentViewcontroller;
+
+//---------------------------------------------------------------
+@property (nonatomic, copy) void (^callBusinsee)(UIButton *btn);
+//---------------------------------------------------------------
 @end

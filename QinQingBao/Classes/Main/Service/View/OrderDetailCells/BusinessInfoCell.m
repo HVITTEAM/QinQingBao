@@ -14,6 +14,9 @@
 - (IBAction)chatButtonHandler:(id)sender
 {
     NSLog(@"chat");
+    //----------------------------
+    self.callBusinsee(sender);
+    //----------------------------
 }
 
 - (IBAction)mapButtonHandler:(id)sender

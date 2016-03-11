@@ -10,6 +10,7 @@
 #import "AddMemberViewController1.h"
 
 #import "BasicInfoViewController.h"
+#import "AddDeviceViewController.h"
 
 @interface AddMemberViewController ()
 {
@@ -164,7 +165,7 @@
     
     UIButton *changeType = [[UIButton alloc] initWithFrame:CGRectMake(200, CGRectGetMaxY(okBtn.frame) + 10, 120, 20)];
     changeType.titleLabel.font = [UIFont systemFontOfSize:13];
-    [changeType setTitle:@"亲友尚无账号？请先注册" forState:UIControlStateNormal];
+    [changeType setTitle:@"新购买的设备？请先登记" forState:UIControlStateNormal];
     [changeType setTitleColor:MTNavgationBackgroundColor forState:UIControlStateNormal];
     [changeType addTarget:self action:@selector(changeType) forControlEvents:UIControlEventTouchUpInside];
     
@@ -179,12 +180,10 @@
 
 -(void)changeType
 {
-    //    AddMemberViewController1 *vc = [[AddMemberViewController1 alloc] init];
-    //    vc.backHandlerClick =  self.backHandlerClick;
-    //    [self.navigationController pushViewController:vc animated:YES];
-    
-    BasicInfoViewController *vc = [[BasicInfoViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
+//    view.member_id = member_id;
+//    view.isFromStart = YES;
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 /**

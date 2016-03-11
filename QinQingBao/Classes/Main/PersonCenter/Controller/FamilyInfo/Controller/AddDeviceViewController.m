@@ -12,6 +12,7 @@
 #import "HeadProcessView.h"
 #import "ScanCodesViewController.h"
 #import "EmergencyContactViewController.h"
+#import "BasicInfoViewController.h"
 
 @interface AddDeviceViewController ()<UIActionSheetDelegate,UIAlertViewDelegate>
 {
@@ -19,8 +20,9 @@
     
     NSString *selectedDevicename;
 }
-@property (nonatomic,retain) HMCommonArrowItem *item0;
-@property (nonatomic,retain) HMCommonTextfieldItem *item1;
+@property (nonatomic,retain) HMCommonItem *item0;
+@property (nonatomic,retain) HMCommonTextfieldItem *itemimei;
+@property (nonatomic,retain) HMCommonItem *item1;
 @property (nonatomic,retain) HMCommonButtonItem *itemBtn;
 @end
 
@@ -35,11 +37,9 @@
     [self setupGroups];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
-    
-    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -82,42 +82,31 @@
  */
 - (void)setupGroups
 {
+    [self setupGroup0];
     [self setupGroup];
     [self setupFooter];
 }
 
-- (void)setupGroup
+- (void)setupGroup0
 {
-    __weak __typeof(self)weakSelf = self;
-    
-    // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    // 2.设置组的所有行数据
-    self.item0 = [HMCommonArrowItem itemWithTitle:@"设备名称" icon:nil];
-    self.item0.subtitle = selectedDevicename.length == 0 ?  @"请选择" : selectedDevicename;
+    self.itemimei = [HMCommonTextfieldItem itemWithTitle:@"设备IMEI码" icon:nil];
+    self.itemimei.placeholder = @"IMEI码或设备序列号";
     
-    self.item0.operation = ^{
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle: @"请选择设备名称"
-                                                                 delegate: weakSelf
-                                                        cancelButtonTitle: @"取消"
-                                                   destructiveButtonTitle: nil
-                                                        otherButtonTitles: nil];
-        
-        for (NSString *key in deviceDict)
-        {
-            NSLog(@"key: %@ value: %@", key, deviceDict[key]);
-            [actionSheet addButtonWithTitle: deviceDict[key]];
-        }
-        [actionSheet showInView:weakSelf.view];
-    };
+    group.items = @[self.itemimei];
+}
+
+
+- (void)setupGroup
+{
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
     
-    self.item1 = [HMCommonTextfieldItem itemWithTitle:@"设备识别码" icon:nil];
-    self.item1.placeholder = @"IMEI码或序列号";
-    self.item1.operation = ^{
-        NSLog(@"----点击了n---");
-    };
+    self.item0 = [HMCommonItem itemWithTitle:@"设备名称" icon:nil];
+    
+    self.item1 = [HMCommonItem itemWithTitle:@"设备型号" icon:nil];
     
     group.items = @[self.item0,self.item1];
 }
@@ -147,7 +136,7 @@
 {
     HeadProcessView *headView = [[HeadProcessView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
     headView.backgroundColor = HMGlobalBg;
-    [headView initWithShowIndex:1];
+    [headView initWithShowIndex:0];
     self.tableView.tableHeaderView = headView;
     
     UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 110)];
@@ -180,22 +169,62 @@
 
 -(void)next:(UIButton *)sender
 {
-    
+    //如果设备名称为空，说明需要取设备名称
+    if (self.item0.subtitle.length == 0)
+    {
+        [self getDeviceInfor:self.itemimei.rightText.text];
+    }
+    else
+    {
+        BasicInfoViewController *vc = [[BasicInfoViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+        [self.view endEditing:YES];
+        if (selectedDevicename.length == 0)
+        {
+            return [NoticeHelper AlertShow:@"请选择设备名称" view:self.view];
+        }
+        else if (self.item1.rightText.text.length == 0)
+        {
+            return [NoticeHelper AlertShow:@"请输入设备识别码" view:self.view];
+        }
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Add_device parameters: @{@"device_name" : @"手表",
+                                                                       @"device_type":@"2",
+                                                                       @"device_code" : self.item1.rightText.text,
+                                                                       @"detail":@"HVIT-HM111",
+                                                                       @"member_id":self.member_id}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
+                                             VC.member_id = self.member_id;
+                                             VC.isFromStart = YES;
+                                             [self.navigationController pushViewController:VC animated:YES];
+                                         }
+                                         [HUD removeFromSuperview];
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                         [self.view endEditing:YES];
+                                     }];
+        
+    }
+}
+
+/**根据imei码获取设备信息*/
+-(void)getDeviceInfor:(NSString *)imei
+{
     [self.view endEditing:YES];
-    if (selectedDevicename.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请选择设备名称" view:self.view];
-    }
-    else if (self.item1.rightText.text.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请输入设备识别码" view:self.view];
-    }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Add_device parameters: @{@"device_name" : @"手表",
-                                                                   @"device_type":@"2",
-                                                                   @"device_code" : self.item1.rightText.text,
-                                                                   @"detail":@"HVIT-HM111",
-                                                                   @"member_id":self.member_id}
+    [CommonRemoteHelper RemoteWithUrl:URL_get_device_code parameters: @{ @"device_code" : imei}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -206,24 +235,24 @@
                                      }
                                      else
                                      {
-                                         EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
-                                         VC.member_id = self.member_id;
-                                         VC.isFromStart = YES;
-                                         [self.navigationController pushViewController:VC animated:YES];
+                                         NSDictionary *data = [dict objectForKey:@"datas"];
+                                         self.item0.subtitle = [data objectForKey:@"device_name"];
+                                         self.item1.subtitle = [data objectForKey:@"device_detial"];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
-                                     [self.view endEditing:YES];
                                  }];
 }
 
+//扫描条形码
 -(void)scan
 {
     ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
     scanCodeVC.getcodeClick = ^(NSString *code){
-        self.item1.rightText.text = code;
+        self.itemimei.rightText.text = code;
+        [self getDeviceInfor:code];
     };
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }

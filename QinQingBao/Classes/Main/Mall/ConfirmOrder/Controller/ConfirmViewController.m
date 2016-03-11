@@ -31,7 +31,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     NSString *invoiceStr;
     
     MallAddressModel *model;
-    //    NSMutableArray *addressDataProvider;
     
     //是否从地址列表选择回来
     BOOL selectedAddress;
@@ -405,6 +404,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 -(void)orderSubmitSuccess:(OrderResultModel *)item
 {
     OrderSubmitSuccessViewController *buyView = [[OrderSubmitSuccessViewController alloc] init];
+    buyView.nav = self.navigationController;
     buyView.orderModel = item;
     buyView.modalPresentationStyle = UIModalPresentationOverFullScreen;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:buyView animated:YES completion:^{
@@ -419,7 +419,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 
 
 #pragma mark - 监听
-
 -(void)invoiceHandler:(NSNotification *)notification
 {
     invoiceStr = notification.object;

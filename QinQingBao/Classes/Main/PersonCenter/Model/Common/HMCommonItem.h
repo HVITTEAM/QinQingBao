@@ -46,7 +46,6 @@
 @property (nonatomic, copy) NSString *btnTitle;
 
 
-
 + (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon;
 + (instancetype)itemWithTitle:(NSString *)title;
 

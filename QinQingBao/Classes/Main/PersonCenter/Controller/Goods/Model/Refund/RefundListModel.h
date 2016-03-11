@@ -84,6 +84,12 @@
 
 @property(copy,nonatomic)NSString *commis_rate;
 
-@property(copy,nonatomic)NSString *goods_image_url;
+@property(copy,nonatomic)NSString *goods_image_url;     //新增返回字段 商品图片url，如果goods_image不存在，则取默认图片路径data/upload/shop/common/default_goods_image_240.gif
+
+@property(copy,nonatomic)NSString *common_name;       //商品公共名称
+
+@property(copy,nonatomic)NSString *guige;            //规格值
+
+@property(strong,nonatomic)NSMutableArray *pic_list_url;
 
 @end

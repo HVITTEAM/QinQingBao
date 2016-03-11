@@ -107,8 +107,8 @@
 {
     NSLog(@"%f,%f",userLocation.location.coordinate.longitude,userLocation.location.coordinate.latitude);
     //点击大头针，会出现以下信息
-    userLocation.title=@"中国";
-    userLocation.subtitle=@"四大文明古国之一";
+    userLocation.title=@"当前地址";
+    userLocation.subtitle=@"";
     
     //让地图显示用户的位置（iOS8一打开地图会默认转到用户所在位置的地图），该方法不能设置地图精度
     //    [mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];

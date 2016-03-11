@@ -204,11 +204,11 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-//#define URL_Local @"http://61.143.60.87/ylserver"
+#define URL_Local @"http://61.143.60.87/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-#define URL_Local @"http://ibama.hvit.com.cn"
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
@@ -501,6 +501,10 @@
 
 /***亲属资料修改url*/
 #define URL_edit_relation_data [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=edit_relation_data",URL_Local]
+
+//------------------绑定设备 二期-------------------
+/***设备code信息获取、验证url*/
+#define URL_get_device_code [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=get_device_code",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

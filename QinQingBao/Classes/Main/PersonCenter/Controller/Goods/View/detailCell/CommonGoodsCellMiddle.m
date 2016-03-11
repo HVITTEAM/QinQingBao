@@ -34,7 +34,7 @@
     self.goodsTitleLab.text = item.goods_name;
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.goods_price];
     self.countLab.text = item.goods_num;
-    
+    self.guigeLab.text = item.guige;
     if (item.extend_refund)
         self.refundLab.hidden = NO;
     else

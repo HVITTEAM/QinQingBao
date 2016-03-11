@@ -13,6 +13,8 @@
 
 
 
+@property (nonatomic, retain) UINavigationController *nav;
+
 @property (nonatomic, retain) OrderResultModel *orderModel;
 
 @property (nonatomic, copy) void (^cancelClick)(void);

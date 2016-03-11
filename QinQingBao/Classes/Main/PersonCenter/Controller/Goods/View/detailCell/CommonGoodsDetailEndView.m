@@ -65,7 +65,7 @@ static CGFloat BUTTON_WIDTH = 80;
     [self addSubview:_add2Car];
 }
 
--(void)setGoodsitemInfo:(CommonOrderModel *)goodsitemInfo
+-(void)setGoodsitemInfo:(CommonGoodsModel *)goodsitemInfo
 {
     _goodsitemInfo = goodsitemInfo;
     [self setButtonTitles];
@@ -137,11 +137,9 @@ static CGFloat BUTTON_WIDTH = 80;
         //TODO
         [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.window.rootViewController.view];
     }
-    
-    if ([self.delegate respondsToSelector:@selector(endView:button:tappedAtIndex:)]) {
+    else if ([self.delegate respondsToSelector:@selector(endView:button:tappedAtIndex:)]) {
         [self.delegate endView:self button:btn tappedAtIndex:btn.tag];
     }
-
 }
 
 //取消订单
@@ -172,7 +170,6 @@ static CGFloat BUTTON_WIDTH = 80;
                                          else
                                          {
                                              self.goodsitemInfo.order_state = @"0";
-                                             
                                              [self.nav popViewControllerAnimated:YES];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

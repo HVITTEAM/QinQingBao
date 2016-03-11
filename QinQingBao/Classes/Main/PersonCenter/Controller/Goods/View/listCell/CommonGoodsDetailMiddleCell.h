@@ -14,6 +14,8 @@
 
 -(void)setitemWithData:(ExtendOrderGoodsModel *)item;
 
+@property (strong, nonatomic) IBOutlet UILabel *guigeLab;
+
 @property (strong, nonatomic) IBOutlet UIButton *button;
 
 @property (strong, nonatomic) IBOutlet UIView *topLine;

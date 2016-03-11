@@ -27,7 +27,7 @@
     [self addSubview:circle0];
     
     UILabel *lab0 = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/4 - 40, 23, 80, 20)];
-    lab0.text = @"基本信息";
+    lab0.text = @"设备登记";
     lab0.textAlignment = NSTextAlignmentCenter;
     lab0.font = [UIFont systemFontOfSize:13];
     lab0.textColor = [UIColor colorWithRGB:@"666666"];
@@ -39,7 +39,7 @@
     [self addSubview:circle1];
     
     UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 40, 23, 80, 20)];
-    lab1.text = @"设备登记";
+    lab1.text = @"基本信息";
     lab1.textAlignment = NSTextAlignmentCenter;
     lab1.font = [UIFont systemFontOfSize:13];
     lab1.textColor = [UIColor colorWithRGB:@"666666"];

@@ -27,6 +27,8 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 @interface GoodsOrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate,CommonGoodsDetailEndViewDelegate>
 {
     ReciverinfoModel *reciverModel;
+    
+    CommonGoodsModel *dataProvider;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -57,8 +59,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     [self.view addSubview:self.tableView];
     
     _endView = [[CommonGoodsDetailEndView alloc]initWithFrame:CGRectMake(0, MTScreenH - ENDVIEW_HEIGHT, MTScreenW,ENDVIEW_HEIGHT)];
-    _endView.goodsitemInfo = self.item.order_list[0];
-    _endView.goodsModel = self.item;
     _endView.nav = self.navigationController;
     _endView.delegate = self;
     [self.view addSubview:_endView];
@@ -80,16 +80,22 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 -(void)setItem:(CommonGoodsModel *)item
 {
     _item = item;
+    CommonOrderModel *model = self.item.order_list[0];
+    [self setOrderID:model.order_id];
+}
+
+-(void)setOrderID:(NSString *)orderID
+{
+    _orderID = orderID;
     [self getDataProvider];
 }
 
 -(void)getDataProvider
 {
-    CommonOrderModel *model = self.item.order_list[0];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Show_order parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"order_id" : model.order_id}
+                                                                   @"order_id" :self.orderID}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      [HUD removeFromSuperview];
@@ -106,12 +112,11 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                          NSDictionary *reciver_info = [order_common objectForKey:@"reciver_info"];
                                          reciverModel = [ReciverinfoModel objectWithKeyValues:reciver_info];
                                          reciverModel.reciver_name = [order_common objectForKey:@"reciver_name"];
-                                         NSDictionary *invoice_info = [order_common objectForKey:@"invoice_info"];
-                                         //                                         if (!invoice_info || [invoice_info isEqualToDictionary:@"null"])
-                                         //                                             reciverModel.inv_title_select = @"";
-                                         //                                         else
-                                         //                                             reciverModel.inv_title_select = [invoice_info objectForKey:@"inv_title_select"];
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                                         dataProvider = [CommonGoodsModel objectWithKeyValues:dict1];
+                                         
+                                         _endView.goodsitemInfo = dataProvider;
+                                         _endView.goodsModel = dataProvider;
+                                         [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -128,10 +133,8 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     //获取这个订单有多少个商品
-    CommonOrderModel *itemInfo = self.item.order_list[0];
-    NSMutableArray *arr = itemInfo.extend_order_goods;
     if (section == 1)
-        return arr.count + 2;
+        return dataProvider.goods_list.count + 2;
     return 1;
 }
 
@@ -177,9 +180,10 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     
     
     //获取这个订单有多少个商品
-    CommonOrderModel *itemInfo = self.item.order_list[0];
-    NSMutableArray *arr = itemInfo.extend_order_goods;
+    //    CommonOrderModel *itemInfo = self.item.order_list[0];
+    //    NSMutableArray *arr = itemInfo.extend_order_goods;
     
+    //收货地址
     if (indexPath.section == 0)
     {
         if(headCell == nil)
@@ -193,18 +197,14 @@ static CGFloat ENDVIEW_HEIGHT = 50;
         {
             if(middleTopCell == nil)
                 middleTopCell = [GoodsMiddleTopCell goodsMiddleTopCell];
-            [middleTopCell setitemWithData:self.item];
+            [middleTopCell setitemWithData:dataProvider];
             cell = middleTopCell;
         }
-        else if (indexPath.row == arr.count + 1)
+        else if (indexPath.row == dataProvider.goods_list.count + 1)
         {
             if(middleBottomCell == nil)
                 middleBottomCell = [GoodsMiddleBottomCell goodsMiddleBottomCell];
-            //            middleBottomCell.buttonClick = ^(UIButton *btn)
-            //            {
-            //                [self buttonClickHandler:btn item:item indexPath:indexPath];
-            //            };
-            [middleBottomCell setitemWithData:self.item];
+            [middleBottomCell setitemWithData:dataProvider];
             cell = middleBottomCell;
         }
         else
@@ -213,24 +213,26 @@ static CGFloat ENDVIEW_HEIGHT = 50;
             if(middleCell == nil)
                 middleCell = [CommonGoodsDetailMiddleCell commonGoodsDetailMiddleCell];
             
-            //這個訂單 都 已經取消了
-            [middleCell setitemWithData:arr[indexPath.row -1]];
-            if ([itemInfo.order_state isEqualToString:@"0"]) {//付款未发货
+            [middleCell setitemWithData:dataProvider.goods_list[indexPath.row -1]];
+            //已經取消了
+            if ([dataProvider.order_state isEqualToString:@"0"]) {
                 middleCell.button.hidden = YES;
                 //客戶都已經評論了
-            }else if([itemInfo.evaluation_state isEqualToString:@"1"]){//付款已发货
+            }else if([dataProvider.evaluation_state isEqualToString:@"1"]){
+                middleCell.button.hidden = YES;
+                //订单未支付
+            } else if([dataProvider.order_state isEqualToString:@"10"]){
                 middleCell.button.hidden = YES;
             }
             //跳转到退款界面
             __weak typeof(self) weakSelf = self;
             middleCell.refundOperation = ^(CommonGoodsDetailMiddleCell *midCell){
-                
                 RefundViewController *refundVC = [[RefundViewController alloc] init];
-                refundVC.orderInfo = itemInfo;
-                refundVC.orderGoodsModel = arr[indexPath.row -1];
-                if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
+                refundVC.orderInfo = dataProvider;
+                refundVC.orderGoodsModel = dataProvider.goods_list[indexPath.row -1];
+                if ([dataProvider.order_state isEqualToString:@"20"]) {//付款未发货
                     refundVC.isShowRefundType = NO;
-                }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
+                }else if([dataProvider.order_state isEqualToString:@"30"]){//付款已发货
                     refundVC.isShowRefundType = YES;
                 }
                 [weakSelf.navigationController pushViewController:refundVC animated:YES];
@@ -238,12 +240,13 @@ static CGFloat ENDVIEW_HEIGHT = 50;
             cell = middleCell;
         }
     }
+    //订单编号等信息
     else
     {
         if(bottomCell == nil)
             bottomCell = [CommonGoodsDetailBottomCell commonGoodsDetailBottomCell];
         
-        [bottomCell setitemWithData:self.item];
+        [bottomCell setitemWithData:dataProvider];
         cell = bottomCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -256,13 +259,14 @@ static CGFloat ENDVIEW_HEIGHT = 50;
  */
 -(void)endView:(CommonGoodsDetailEndView *)endView button:(UIButton *)btn tappedAtIndex:(NSInteger)index
 {
-    if (index == 0) {
-        CommonOrderModel *itemInfo = self.item.order_list[0];
+    if (index == 0)
+    {
+        //        CommonOrderModel *itemInfo = dataProvider.order_list[0];
         RefundViewController *refundVC = [[RefundViewController alloc] init];
-        refundVC.orderInfo = itemInfo;
-        if ([itemInfo.order_state isEqualToString:@"20"]) {//付款未发货
+        refundVC.orderInfo = dataProvider;
+        if ([dataProvider.order_state isEqualToString:@"20"]) {//付款未发货
             refundVC.isShowRefundType = NO;
-        }else if([itemInfo.order_state isEqualToString:@"30"]){//付款已发货
+        }else if([dataProvider.order_state isEqualToString:@"30"]){//付款已发货
             refundVC.isShowRefundType = YES;
         }
         [self.navigationController pushViewController:refundVC animated:YES];

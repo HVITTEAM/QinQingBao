@@ -8,6 +8,7 @@
 
 #import "OrderSubmitSuccessViewController.h"
 #import "MTChangeCountView.h"
+#import "GoodsOrderDetailViewController.h"
 
 static CGFloat BUTTONHEIGHT = 50;
 static CGFloat VIEWHEIGHT;
@@ -140,6 +141,11 @@ static CGFloat PADDINGBOTTON = 70;
                 {
                     NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
+                    
+                    //支付成功之后跳转到订单详情界面
+                    GoodsOrderDetailViewController *detailVC = [[GoodsOrderDetailViewController alloc] init];
+                    [detailVC setOrderID:self.orderModel.order_id];
+                    [self.nav pushViewController:detailVC animated:YES];
                     [self api_alipay:out_trade_no pay_sn:self.orderModel.pay_sn signedString:sign];
                 }
             }

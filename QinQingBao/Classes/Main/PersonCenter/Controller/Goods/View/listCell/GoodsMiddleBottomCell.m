@@ -52,13 +52,13 @@
 
 -(void)setitemWithData:(CommonGoodsModel *)item
 {
-    CommonOrderModel *itemInfo = item.order_list[0];
+//    CommonOrderModel *itemInfo = item.order_list[0];
     
     //总金额
-    self.priceLab.text = [NSString stringWithFormat:@"￥%@",itemInfo.order_amount];
+    self.priceLab.text = [NSString stringWithFormat:@"￥%@",item.order_amount];
     self.priceLab.textColor = [UIColor colorWithRGB:@"dd2726"];
     //运费
-    self.feeLab.text = [NSString stringWithFormat:@"￥%@",itemInfo.shipping_fee];
+    self.feeLab.text = [NSString stringWithFormat:@"￥%@",item.shipping_fee];
 }
 
 

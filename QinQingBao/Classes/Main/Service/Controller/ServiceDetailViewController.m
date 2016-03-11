@@ -14,6 +14,11 @@
 #import "ServiceTimeCell.h"
 #import "ServicePhoneCell.h"
 
+//-------------------------------------------------------------------------
+#import "ChattingViewController.h"
+#import "BusinessInfoModel.h"
+#import "LoginViewController.h"
+//-------------------------------------------------------------------------
 @interface ServiceDetailViewController ()
 {
     /*所有的评价数据*/
@@ -22,6 +27,10 @@
     NSMutableArray *dataProvider;
     /*当前服务的详细数据*/
     ServiceItemModel *itemInfo;
+    
+    //-------------------------------------------------------------------------
+    BusinessInfoModel *businessModle;
+    //-------------------------------------------------------------------------
 }
 
 @end
@@ -67,6 +76,11 @@
     [self getDataProvider];
     
     [self getAlleva];
+    
+    //-------------------------------------------
+    [self getBusinessData];
+    //-------------------------------------------
+
 }
 
 /**
@@ -192,6 +206,32 @@
             
             [bucell setItemInfo:itemInfo];
             
+            //-------------------------------------------------------------------------
+            bucell.callBusinsee = ^(UIButton *btn) {
+                if (![SharedAppUtil defaultCommonUtil].userVO)
+                {
+                    LoginViewController *login = [[LoginViewController alloc] init];
+                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+                    [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
+                    login.backHiden = NO;
+                    return;
+                }
+                ChattingViewController *chatingViewController = [[ChattingViewController alloc] initWithConversationChatter:businessModle.member_name conversationType:eConversationTypeChat];
+                //chatingViewController.servicrItemMdodel = itemInfo;
+                //chatingViewController.businessInfoModel.orgname = itemInfo.orgname;
+                chatingViewController.businessInfoModel = businessModle;
+                NSLog(@"【商家信息】%@",chatingViewController.businessInfoModel);
+                if ([chatingViewController.businessInfoModel.orgname isEqualToString:@""]) {
+                    chatingViewController.title = @"未知商家";
+                }else {
+                    chatingViewController.title = chatingViewController.businessInfoModel.orgname;
+                }
+                
+                [self.navigationController pushViewController:chatingViewController animated:YES];
+            };
+            //-------------------------------------------------------------------------
+
+            
             cell = bucell;
         }
             break;
@@ -282,5 +322,32 @@
     submitController.serviceTypeItem = self.serviceTypeItem;
     [self.navigationController pushViewController:submitController animated:YES];
 }
+
+//-------------------------------------------------------------------------
+//商家信息
+-(void)getBusinessData {
+    NSString *businessPath = [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid",URL_Local];
+    [CommonRemoteHelper RemoteWithUrl:businessPath parameters:@{@"member_id" : itemInfo.member_id}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if ([codeNum isKindOfClass:[NSString class]]) {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     }else {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         if ([di count] != 0) {
+                                             businessModle = [BusinessInfoModel businessInfo:dict];
+                                         }else {
+                                             [NoticeHelper AlertShow:@"商家资料为空!" view:self.view];
+                                         }
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
+}
+//-------------------------------------------------------------------------
+
 
 @end

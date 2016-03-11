@@ -20,17 +20,17 @@
 
 -(void)setitemWithData:(CommonGoodsModel *)item
 {
-    CommonOrderModel *itemInfo = item.order_list[0];
+//    CommonOrderModel *itemInfo = item.order_list[0];
     
-    if ([itemInfo.order_state isEqualToString:@"0"])
+    if ([item.order_state isEqualToString:@"0"])
         self.statusLab.text = @"已取消";
-    else if ([itemInfo.order_state isEqualToString:@"10"])
+    else if ([item.order_state isEqualToString:@"10"])
         self.statusLab.text = @"未付款";
-    else if ([itemInfo.order_state isEqualToString:@"20"])
+    else if ([item.order_state isEqualToString:@"20"])
         self.statusLab.text = @"已付款";
-    else if ([itemInfo.order_state isEqualToString:@"30"])
+    else if ([item.order_state isEqualToString:@"30"])
         self.statusLab.text = @"已发货";
-    else if ([itemInfo.order_state isEqualToString:@"40"])
+    else if ([item.order_state isEqualToString:@"40"])
         self.statusLab.text = @"交易完成";
 }
 

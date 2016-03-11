@@ -571,22 +571,24 @@
  */
 -(void)loadRefundReasons
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Reason_list parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setValue:self.orderInfo.order_state forKey:@"state_value"];
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Reason_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         if ([dict[@"code"] integerValue] == 0) {
-
-          self.reasonsArray = [RefundReasonMode objectArrayWithKeyValuesArray:dict[@"datas"]];
+            
+            self.reasonsArray = [RefundReasonMode objectArrayWithKeyValuesArray:dict[@"datas"]];
             //设置默认退款理由
-          self.selectedReasonMode = self.reasonsArray[0];
-          self.refundReasonField.text = self.selectedReasonMode.reason_info;
-        }else if ([dict[@"code"] integerValue] == 11010){
+            self.selectedReasonMode = self.reasonsArray[0];
+            self.refundReasonField.text = self.selectedReasonMode.reason_info;
+        }else {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [NoticeHelper AlertShow:@"请求失败，请检查网络" view:self.view];
     }];
 }
-
 /**
  *  全部退款
  */
