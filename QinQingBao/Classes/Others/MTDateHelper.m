@@ -62,8 +62,8 @@
 
 +(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:aDate];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:aDate];
     [components setDay:([components day]+ days)];
     
     NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
@@ -84,7 +84,6 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
     return [formatter stringFromDate:confromTimesp];
 }
-
 
 +(int)getApplicationNettype
 {
