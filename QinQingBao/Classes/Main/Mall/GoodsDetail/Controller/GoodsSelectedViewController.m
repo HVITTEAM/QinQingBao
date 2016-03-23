@@ -107,7 +107,10 @@ static CGFloat BUTTONHEIGHT = 50;
     kucunLab.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:kucunLab];
     
-    desLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imgview.frame) + 10, CGRectGetMaxY(kucunLab.frame), 190, 23)];
+    desLab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imgview.frame) + 10, CGRectGetMaxY(kucunLab.frame), MTScreenW - CGRectGetMaxX(imgview.frame), 23)];
+    desLab.lineBreakMode = NSLineBreakByCharWrapping;
+    [desLab setNumberOfLines:0];
+    //注意这里UILabel的numberoflines(即最大行数限制)设置成0，即不做行数限制。
     NSString *str = @"请选择";
     for (GoodsTypeModel *item in dataProvider)
     {
