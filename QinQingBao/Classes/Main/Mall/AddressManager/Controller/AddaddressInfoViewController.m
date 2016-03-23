@@ -10,7 +10,7 @@
 #import "AreaModelTotal.h"
 #import "AreaModel.h"
 
-@interface AddaddressInfoViewController ()<UIActionSheetDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UITextFieldDelegate>
+@interface AddaddressInfoViewController ()<UIActionSheetDelegate,UITextFieldDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     NSMutableArray *areaList;
     
@@ -73,24 +73,6 @@
             return  @"";
             break;
     }
-    
-    //    switch (PickType)
-    //    {
-    //        case 0:
-    //            selectedProvinceItem  = areaList[0];
-    //            break;
-    //        case  1:
-    //            selectedCityItem  = areaList[0];
-    //            break;
-    //        case  2:
-    //            selectedRegionItem  = areaList[0];
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //
-    //    AreaModel *item = areaList[row];
-    //    return item.area_name;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -123,25 +105,10 @@
         default:
             break;
     }
-    
-    //    switch (PickType) {
-    //        case 0:
-    //            selectedProvinceItem  = areaList[row];
-    //            break;
-    //        case  1:
-    //            selectedCityItem  = areaList[row];
-    //            break;
-    //        case  2:
-    //            selectedRegionItem  = areaList[row];
-    //            break;
-    //        default:
-    //            break;
-    //    }
 }
 
 - (IBAction)clickProvince:(id)sender
 {
-    //    [self getProviceData:@"0"];
     [self showDatePicker];
     PickType = 0;
 }
@@ -190,14 +157,7 @@
     if (self.item)
     {
         NSArray *arr = [self.item.area_info componentsSeparatedByString:@"-"];
-        //        self.provinceTextField.text  = arr[0];
-        //        self.cityTextField.text  = arr[1];
-        //        self.regionTextField.text  = arr[2];
-        //        self.nameTextField.text = self.item.true_name;
-        //        self.phoneTextField.text = self.item.mob_phone;
-        //        self.telephoneTextField.text = self.item.tel_phone;
-        //        self.addressTextField.text = self.item.address;
-        
+     
         self.provinceTextField.text  = self.item.area_info;
         
         selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
@@ -220,19 +180,10 @@
         return [NoticeHelper AlertShow:@"请填写手机号码" view:self.view];
     }else if (_phoneTextField.text.length != 11) {
         return [NoticeHelper AlertShow:@"手机号码格式不正确" view:self.view];
-    }
-    //    if ([_telephoneTextField.text isEqualToString:@""]) {
-    //        return [NoticeHelper AlertShow:@"请填写电话号码" view:self.view];
-    //    }
-    if ([_provinceTextField.text isEqualToString:@""])
+    }if ([_provinceTextField.text isEqualToString:@""])
         return [NoticeHelper AlertShow:@"请填写区域信息" view:self.view];
-    //    if ([_cityTextField.text isEqualToString:@""])
-    //        return [NoticeHelper AlertShow:@"请填写城市信息" view:self.view];
-    //    if ([_regionTextField.text isEqualToString:@""])
-    //        return [NoticeHelper AlertShow:@"请填写区县信息" view:self.view];
     if ([_addressTextField.text isEqualToString:@""])
         return [NoticeHelper AlertShow:@"请填写详细地址信息" view:self.view];
-    
     [self.view endEditing:YES];
     if ([self.title isEqualToString:@"更改收货地址"])
     {
@@ -378,50 +329,50 @@
     _item = item;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    NSTimeInterval animationDuration=0.30f;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    //上移30个单位，按实际情况设置
-    
-    if (CGRectGetMaxY(textField.frame) > MTScreenH - 216)
-    {
-        CGRect rect = CGRectMake(0.0f,MTScreenH - 216 - CGRectGetMaxY(textField.frame),MTScreenW,MTScreenH);
-        self.view.frame = rect;
-        [UIView commitAnimations];
-    }
-    
-    if (textField == self.regionTextField || textField == self.provinceTextField || textField == self.cityTextField)
-        return NO;
-    return YES;
-}
-
-//输入框编辑完成以后，将视图恢复到原始状态
--(void)textFieldDidEndEditing:(UITextField *)textField
-{
-    NSTimeInterval animationDuration = 0.25f;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    //上移30个单位，按实际情况设置
-    CGRect rect = CGRectMake(0.0f,0,MTScreenW,MTScreenH);
-    self.view.frame = rect;
-    [UIView commitAnimations];
-}
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    NSTimeInterval animationDuration=0.30f;
+//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+//    [UIView setAnimationDuration:animationDuration];
+//    //上移30个单位，按实际情况设置
+//    
+//    if (CGRectGetMaxY(textField.frame) > MTScreenH - 216)
+//    {
+//        CGRect rect = CGRectMake(0.0f,MTScreenH - 216 - CGRectGetMaxY(textField.frame),MTScreenW,MTScreenH);
+//        self.view.frame = rect;
+//        [UIView commitAnimations];
+//    }
+//    
+//    if (textField == self.regionTextField || textField == self.provinceTextField || textField == self.cityTextField)
+//        return NO;
+//    return YES;
+//}
+//
+////输入框编辑完成以后，将视图恢复到原始状态
+//-(void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    NSTimeInterval animationDuration = 0.25f;
+//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+//    [UIView setAnimationDuration:animationDuration];
+//    //上移30个单位，按实际情况设置
+//    CGRect rect = CGRectMake(0.0f,0,MTScreenW,MTScreenH);
+//    self.view.frame = rect;
+//    [UIView commitAnimations];
+//}
 
 //要实现的Delegate方法,键盘next下跳
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if(textField.returnKeyType == UIReturnKeyDone)
-    {
-        [self.view endEditing:YES];
-    }
-    if(textField.returnKeyType==UIReturnKeyNext)
-    {
-        
-    }
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    if(textField.returnKeyType == UIReturnKeyDone)
+//    {
+//        [self.view endEditing:YES];
+//    }
+//    if(textField.returnKeyType==UIReturnKeyNext)
+//    {
+//        
+//    }
+//    return YES;
+//}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

@@ -7,7 +7,6 @@
 //
 
 #import "AddMemberViewController.h"
-#import "AddMemberViewController1.h"
 
 #import "BasicInfoViewController.h"
 #import "AddDeviceViewController.h"
@@ -66,7 +65,7 @@
  */
 -(void)initNavigation
 {
-    self.title = @"添加家属";
+    self.title = @"添加亲友";
 }
 
 # pragma  mark 设置数据源
@@ -101,7 +100,7 @@
     };
     
     HMCommonTextfieldItem *telfield = [HMCommonTextfieldItem itemWithTitle:@"识别码" icon:nil];
-    telfield.placeholder = @"已注册的手机号码/身份证号码";
+    telfield.placeholder = @"设备的SIM卡号/IMEI码";
     self.telfield = telfield;
     self.telfield.rightText.userInteractionEnabled = NO;
     telfield.operation = ^{
@@ -181,8 +180,7 @@
 -(void)changeType
 {
     AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-//    view.member_id = member_id;
-//    view.isFromStart = YES;
+        view.isFromStart = YES;
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -244,11 +242,10 @@
         return;
     }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Bang_relation parameters: @{@"mobile" : self.telfield.rightText.text,
-                                                                      @"member_id":[SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                      @"rname" : self.numfield.rightText.text,
-                                                                      @"client":@"ios",
-                                                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+    [CommonRemoteHelper RemoteWithUrl:URL_bang_add_cnditon_user_device_rel_code parameters: @{@"conditon":self.telfield.rightText.text,
+                                                                                              @"rel_name" : self.numfield.rightText.text,
+                                                                                              @"client":@"ios",
+                                                                                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -273,6 +270,5 @@
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
                                  }];
-    
 }
 @end

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HealthModel.h"
 
 @interface HeartImageCell : UITableViewCell
 
 +(HeartImageCell *)heartImageCell;
 
-@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, strong) HealthModel *item;
 
 @end

@@ -14,11 +14,11 @@
 @property (nonatomic, copy) NSString *rela_id;
 @property (nonatomic, copy) NSString *rela_mem_id;
 @property (nonatomic, copy) NSString *oid;
-@property (nonatomic, copy) NSString *status;
-@property (nonatomic, copy) NSString *rname;
-@property (nonatomic, copy) NSString *rtelnum;
+@property (nonatomic, copy) NSString *sos_sataus;
+@property (nonatomic, copy) NSString *sos_name;
+@property (nonatomic, copy) NSString *sos_phone;
 @property (nonatomic, copy) NSString *raddress;
-@property (nonatomic, copy) NSString *relation;
+@property (nonatomic, copy) NSString *sos_relation;
 @property (nonatomic, copy) NSString *rtime;
 
 @end

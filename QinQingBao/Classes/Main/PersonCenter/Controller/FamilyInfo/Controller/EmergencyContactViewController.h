@@ -9,7 +9,9 @@
 #import "HMCommonViewController.h"
 
 @interface EmergencyContactViewController : HMCommonViewController
-@property (nonatomic, copy) NSString *member_id;
+//设备使用者的id
+@property (nonatomic, copy) NSString *ud_id;
+
 //是否来自于新增联系人，是的话退出的时候需要弹出提示
 @property (nonatomic, assign) BOOL isFromStart;
 @end

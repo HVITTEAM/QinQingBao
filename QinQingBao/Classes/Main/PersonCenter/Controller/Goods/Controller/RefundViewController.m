@@ -8,7 +8,6 @@
 
 #import "RefundViewController.h"
 #import "RefundReasonMode.h"
-#import "CommonOrderModel.h"
 #import "ExtendOrderGoodsModel.h"
 
 @interface RefundViewController ()<UITextFieldDelegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
@@ -371,7 +370,6 @@
         [NoticeHelper AlertShow:@"请选择退款原因" view:self.view];
         return;
     }
-    
     if (self.sumField.text == nil || self.sumField.text.length == 0) {
         [NoticeHelper AlertShow:@"请输入退款金额" view:self.view];
         return;
@@ -381,16 +379,17 @@
         [NoticeHelper AlertShow:@"请输退款说明" view:self.view];
         return;
     }
-//    if ([self.orderInfo.order_state isEqualToString:@"20"]) {
-//        [self refundAll];
-//    }else if ([self.orderInfo.order_state isEqualToString:@"30"]){
-//        
-//        if (self.refundTypeField.text == nil || self.refundTypeField.text.length == 0) {
-//            [NoticeHelper AlertShow:@"请选择退款类型" view:self.view];
-//            return;
-//        }
-//        [self refundPart];
-//    }
+    if ([self.orderInfo.order_state isEqualToString:@"20"])
+    {
+        [self refundAll];
+    }
+    else if ([self.orderInfo.order_state isEqualToString:@"30"]){
+        if (self.refundTypeField.text == nil || self.refundTypeField.text.length == 0) {
+            [NoticeHelper AlertShow:@"请选择退款类型" view:self.view];
+            return;
+        }
+        [self refundPart];
+    }
     if ([self.orderInfo.order_state isEqualToString:@"30"]) {
         
         if (self.refundTypeField.text == nil || self.refundTypeField.text.length == 0) {
@@ -398,8 +397,6 @@
             return;
         }
     }
-    
-    [self refundPart];
 }
 
 #pragma mark 键盘相关方法
@@ -637,8 +634,7 @@
  */
 -(void)refundPart
 {
-    NSMutableDictionary *params = [@{
-                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+    NSMutableDictionary *params = [@{ @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"client" : @"ios",
                                      @"order_id" : self.orderInfo.order_id,
                                      @"buyer_message":self.explainTextView.text,
@@ -646,8 +642,7 @@
                                      @"refund_amount":self.sumField.text,
                                      @"reason_id":self.selectedReasonMode.reason_id,
                                      @"refund_type":self.selectedTypeDict[@"typeid"],
-                                     @"goods_num" : @1
-                                     }mutableCopy];
+                                     @"goods_num" : @1}mutableCopy];
     
     if ([self.selectedTypeDict[@"typeid"] isEqualToString:@"1"]) {
         //取消goods_num这个 key-value

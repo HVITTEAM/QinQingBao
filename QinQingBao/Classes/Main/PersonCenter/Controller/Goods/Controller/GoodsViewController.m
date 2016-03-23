@@ -56,7 +56,6 @@
     [self initTableViewSkin];
     
     [self setupRefresh];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -321,12 +320,10 @@
     else if ([btn.titleLabel.text isEqualToString:@"查看物流"])
     {
         [self showDeliver:item];
-//        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
     else if ([btn.titleLabel.text isEqualToString:@"评价"])
     {
         [self showEvaViewControler:indexPath];
-        //        [NoticeHelper AlertShow:@"此功能尚未开通!" view:self.view.window.rootViewController.view];
     }
 }
 

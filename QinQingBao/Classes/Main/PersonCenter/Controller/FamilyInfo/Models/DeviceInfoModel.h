@@ -10,14 +10,17 @@
 
 @interface DeviceInfoModel : NSObject
 
-@property (nonatomic, assign) NSString *deid;                //设备表键值
+@property (nonatomic, copy) NSString *deviceid;                //设备表键值
 
-@property (nonatomic, assign) NSString *de_mem_id;           //用户memberid
+@property (nonatomic, copy) NSString *device_name;           //用户memberid
 
-@property (nonatomic, copy) NSString *device_code;           //设备imei
+@property (nonatomic, copy) NSString *device_type;           //设备imei
 
-@property (nonatomic, copy) NSString *device_name;           //设备名称
+@property (nonatomic, copy) NSString *device_detial;           //设备名称
 
-@property (nonatomic, copy) NSString *detail;                //设备型号
+@property (nonatomic, copy) NSString *device_num;                //设备型号
+
+@property (nonatomic, copy) NSString *device_code;                //设备型号
+
 
 @end

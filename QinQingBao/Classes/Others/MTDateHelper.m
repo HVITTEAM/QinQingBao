@@ -21,7 +21,6 @@
     //    [hud hide:YES afterDelay:1.33];
 }
 
-
 + (NSString *)intervalSinceNow: (NSString *) theDate
 {
     NSDateFormatter *date=[[NSDateFormatter alloc] init];

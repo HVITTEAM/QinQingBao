@@ -36,7 +36,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 static CGFloat IMAGEVIEW_HEIGHT;
 //static CGFloat NAV_HEIGHT = 64;
 
-
 @interface GoodsHeadViewController ()<UIScrollViewAccessibilityDelegate,UITableViewDataSource,UITableViewDelegate,MTGoodsDetailEndViewDelegate>
 {
     /**轮播图片数组*/
@@ -77,9 +76,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 @end
 
-
 @implementation GoodsHeadViewController
-
 
 -(instancetype)init
 {
@@ -121,8 +118,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    //    if (_goodsID)
-    //        [self getGoodsDetailInfo];
 }
 
 /**
@@ -134,7 +129,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
     self.title = @"商品详情";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shopcar.png"] style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopCar)];
 }
-
 
 -(void)gotoShopCar
 {
@@ -455,7 +449,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else
     {
-        
         if (!evaArr || evaArr.count ==0)
         {
             if (commoncell == nil)
@@ -511,8 +504,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else if(evaArr && evaArr.count > 0)
     {
-        QueryAllEvaluationController *allevaluation = [[QueryAllEvaluationController alloc] init];
-        [self.navigationController pushViewController:allevaluation animated:YES];
+        //TODO
     }
 }
 

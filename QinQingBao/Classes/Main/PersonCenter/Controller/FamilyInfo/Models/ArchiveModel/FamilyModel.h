@@ -19,7 +19,6 @@
 
 @interface FamilyModel : NSObject
 
-
 @property (nonatomic, copy) NSString *member_truename;
 @property (nonatomic, copy) NSString *member_id;
 @property (nonatomic, copy) NSString *member_areaid;

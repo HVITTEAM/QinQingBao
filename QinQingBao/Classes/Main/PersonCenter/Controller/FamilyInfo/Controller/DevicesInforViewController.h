@@ -7,12 +7,12 @@
 //
 
 #import "HMCommonViewController.h"
-@class FamilyModel;
+@class DeviceModel;
 
 
 @interface DevicesInforViewController : HMCommonViewController
 
-@property (strong,nonatomic) FamilyModel *selectedFamilyMember;
+@property (strong,nonatomic) DeviceModel *selectedFamilyMember;
 
 @property (strong,nonatomic) NSMutableArray *devicesArray;            //设备数据
 

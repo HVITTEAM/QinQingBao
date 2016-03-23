@@ -31,7 +31,7 @@
     
     [self setupGroups];
     
-    [self loadDevicesDatas];
+    //    [self loadDevicesDatas];
 }
 
 /**
@@ -39,10 +39,9 @@
  */
 -(void)initNavigation
 {
-    self.title = self.selecteItem.member_truename;
+    self.title = self.selecteItem.ud_name;
     self.view.backgroundColor = HMGlobalBg;
 }
-
 
 /**
  *  创建 Cell by swy  显示设备的个数
@@ -89,7 +88,7 @@
 -(NSMutableArray *)devicesArray
 {
     if (!_devicesArray) {
-        _devicesArray = [[NSMutableArray alloc] init];
+        _devicesArray = self.selecteItem.device;
     }
     return _devicesArray;
 }
@@ -127,7 +126,6 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
@@ -136,7 +134,7 @@
                                          FamilyInforTotal *result = [FamilyInforTotal objectWithKeyValues:dict];
                                          HealthArchivesController *viewC = [[HealthArchivesController alloc] init];
                                          viewC.familyInfoTotal = result.datas;
-                                         viewC.title = [NSString stringWithFormat:@"%@的健康档案",self.selecteItem.member_truename];
+                                         viewC.title = [NSString stringWithFormat:@"%@的健康档案",self.selecteItem.ud_name];
                                          [self.navigationController pushViewController:viewC animated:YES];
                                      }
                                      [HUD removeFromSuperview];
@@ -171,13 +169,14 @@
         [self.navigationController pushViewController:devicesInfVC animated:YES];
     };
     
-    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
-    advice.operation = ^{
-        [self getDataProvider];
-    };
+    //    HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"健康档案" icon:@""];
+    //    advice.operation = ^{
+    //        [self getDataProvider];
+    //    };
     
-    group.items = @[version,device,advice];
+    group.items = @[version,device];
 }
+
 
 
 - (void)setupFooter
@@ -217,9 +216,8 @@
     if(buttonIndex == 0)
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Del_relation parameters: @{@"member_id" : self.selecteItem.member_id,
-                                                                         @"client" : @"ios",
-                                                                         @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+        [CommonRemoteHelper RemoteWithUrl:URL_del_base_user_devide parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                                 @"ud_id" : self.selecteItem.ud_id}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          [HUD removeFromSuperview];
                                          id codeNum = [dict objectForKey:@"code"];
@@ -243,7 +241,6 @@
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
                                      }];
-        
     }
 }
 
@@ -269,17 +266,17 @@
             [self.tableView reloadData];
             
         }else if ([dict[@"code"] integerValue] == 14001) {
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
             return;
         }else if ([dict[@"code"] integerValue] == 17001){
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
             return;
         }
-
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求未成功" view:self.view];
-
+        
     }];
     
 }

@@ -25,4 +25,11 @@
 */
 -(UIImage *)scaleImageToSize:(CGSize)size;
 
+/**
+ * 图片模糊方法
+ **/
+
++ (UIImage *)boxblurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
+
++ (UIImage *)coreBlurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
 @end

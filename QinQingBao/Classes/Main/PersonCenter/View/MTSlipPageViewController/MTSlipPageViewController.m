@@ -7,7 +7,7 @@
 //
 
 static const CGFloat kHeightOfTopScrollView = 44.0f;
-static const CGFloat kFontSizeOfTabButton = 14.0f;
+static const CGFloat kFontSizeOfTabButton = 15.0f;
 
 #import "MTSlipPageViewController.h"
 

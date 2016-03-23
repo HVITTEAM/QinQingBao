@@ -499,6 +499,7 @@
 		01E905F71C0D299F00B53AC1 /* UIViewController+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905F61C0D299F00B53AC1 /* UIViewController+Placeholder.m */; };
 		01E905FC1C0D6E9A00B53AC1 /* GPSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */; };
 		01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */; };
+		01E919FD1C9F84AD0026FD24 /* HealthModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E919FC1C9F84AD0026FD24 /* HealthModel.m */; };
 		01E92D321BA65E0F0097F8EC /* ServiceCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */; };
 		01E92D331BA65E0F0097F8EC /* ServiceCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */; };
 		01E94C8D1BC75C4000B956A2 /* EzvizDemoGlobalKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94C141BC75C4000B956A2 /* EzvizDemoGlobalKit.m */; };
@@ -507,7 +508,6 @@
 		01E94CD41BC75DB900B956A2 /* YSCloudRecordInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94CCF1BC75DB900B956A2 /* YSCloudRecordInfo.m */; };
 		01E94CD51BC75DB900B956A2 /* YSDemoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94CD11BC75DB900B956A2 /* YSDemoDataModel.m */; };
 		01E9A73B1C74613500000805 /* AddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E9A7201C74613500000805 /* AddMemberViewController.m */; };
-		01E9A73C1C74613500000805 /* AddMemberViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E9A7221C74613500000805 /* AddMemberViewController1.m */; };
 		01E9A73D1C74613500000805 /* BasicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E9A7241C74613500000805 /* BasicInfoViewController.m */; };
 		01E9A73E1C74613500000805 /* DetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E9A7261C74613500000805 /* DetailInfoViewController.m */; };
 		01E9A73F1C74613500000805 /* FamilyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E9A7281C74613500000805 /* FamilyInfoViewController.m */; };
@@ -533,6 +533,7 @@
 		01EA20731C2A99D600B546A9 /* HomePicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA20721C2A99D600B546A9 /* HomePicModel.m */; };
 		01EAB4391BE8441A00D380A8 /* EvaluationItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EAB4371BE8441A00D380A8 /* EvaluationItemCell.m */; };
 		01EAB43A1BE8441A00D380A8 /* EvaluationItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EAB4381BE8441A00D380A8 /* EvaluationItemCell.xib */; };
+		01EB266F1C92A06900773023 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB266E1C92A06900773023 /* DeviceModel.m */; };
 		01EB28661BA1192C00937412 /* OrderFormDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28601BA1192C00937412 /* OrderFormDetailController.m */; };
 		01EB28671BA1192C00937412 /* OrderFormDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB28611BA1192C00937412 /* OrderFormDetailController.xib */; };
 		01EB28681BA1192C00937412 /* OrderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB28631BA1192C00937412 /* OrderTableViewController.m */; };
@@ -2004,6 +2005,8 @@
 		01E905F91C0D6E9A00B53AC1 /* GPSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPSCell.h; sourceTree = "<group>"; };
 		01E905FA1C0D6E9A00B53AC1 /* GPSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPSCell.m; sourceTree = "<group>"; };
 		01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GPSCell.xib; sourceTree = "<group>"; };
+		01E919FB1C9F84AD0026FD24 /* HealthModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthModel.h; sourceTree = "<group>"; };
+		01E919FC1C9F84AD0026FD24 /* HealthModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthModel.m; sourceTree = "<group>"; };
 		01E92D2F1BA65E0F0097F8EC /* ServiceCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCustomCell.h; sourceTree = "<group>"; };
 		01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCustomCell.m; sourceTree = "<group>"; };
 		01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCustomCell.xib; sourceTree = "<group>"; };
@@ -2019,8 +2022,6 @@
 		01E94CD11BC75DB900B956A2 /* YSDemoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSDemoDataModel.m; sourceTree = "<group>"; };
 		01E9A71F1C74613500000805 /* AddMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMemberViewController.h; sourceTree = "<group>"; };
 		01E9A7201C74613500000805 /* AddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberViewController.m; sourceTree = "<group>"; };
-		01E9A7211C74613500000805 /* AddMemberViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMemberViewController1.h; sourceTree = "<group>"; };
-		01E9A7221C74613500000805 /* AddMemberViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMemberViewController1.m; sourceTree = "<group>"; };
 		01E9A7231C74613500000805 /* BasicInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicInfoViewController.h; sourceTree = "<group>"; };
 		01E9A7241C74613500000805 /* BasicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicInfoViewController.m; sourceTree = "<group>"; };
 		01E9A7251C74613500000805 /* DetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailInfoViewController.h; sourceTree = "<group>"; };
@@ -2068,6 +2069,8 @@
 		01EAB4361BE8441A00D380A8 /* EvaluationItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationItemCell.h; sourceTree = "<group>"; };
 		01EAB4371BE8441A00D380A8 /* EvaluationItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationItemCell.m; sourceTree = "<group>"; };
 		01EAB4381BE8441A00D380A8 /* EvaluationItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationItemCell.xib; sourceTree = "<group>"; };
+		01EB266D1C92A06900773023 /* DeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceModel.h; sourceTree = "<group>"; };
+		01EB266E1C92A06900773023 /* DeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceModel.m; sourceTree = "<group>"; };
 		01EB285F1BA1192C00937412 /* OrderFormDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderFormDetailController.h; sourceTree = "<group>"; };
 		01EB28601BA1192C00937412 /* OrderFormDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderFormDetailController.m; sourceTree = "<group>"; };
 		01EB28611BA1192C00937412 /* OrderFormDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderFormDetailController.xib; sourceTree = "<group>"; };
@@ -4324,6 +4327,8 @@
 				0171791E1BEC98F00070A503 /* AddressModel.m */,
 				017179201BEC990C0070A503 /* BloodModel.h */,
 				017179211BEC990C0070A503 /* BloodModel.m */,
+				01E919FB1C9F84AD0026FD24 /* HealthModel.h */,
+				01E919FC1C9F84AD0026FD24 /* HealthModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4609,6 +4614,8 @@
 				01E89AF41C7595CC00CFD40D /* RelationTotal.m */,
 				01E89AF61C7595D900CFD40D /* RelationModel.h */,
 				01E89AF71C7595D900CFD40D /* RelationModel.m */,
+				01EB266D1C92A06900773023 /* DeviceModel.h */,
+				01EB266E1C92A06900773023 /* DeviceModel.m */,
 			);
 			name = Model;
 			path = Models;
@@ -4801,8 +4808,6 @@
 				01E9A74F1C7473BA00000805 /* ScanCodesViewController.m */,
 				01E9A71F1C74613500000805 /* AddMemberViewController.h */,
 				01E9A7201C74613500000805 /* AddMemberViewController.m */,
-				01E9A7211C74613500000805 /* AddMemberViewController1.h */,
-				01E9A7221C74613500000805 /* AddMemberViewController1.m */,
 				01E9A7231C74613500000805 /* BasicInfoViewController.h */,
 				01E9A7241C74613500000805 /* BasicInfoViewController.m */,
 				01E9A7251C74613500000805 /* DetailInfoViewController.h */,
@@ -7737,7 +7742,7 @@
 						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.OMC = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -8579,7 +8584,6 @@
 				01FBA3591C2D3B54003340D2 /* UIDevice+IPhoneModel.m in Sources */,
 				01ECDAF91C8EB31F0018160F /* UIView+EMWebCacheOperation.m in Sources */,
 				0126ECF81B8C4E8100EC85C1 /* MASConstraintMaker.m in Sources */,
-				01E9A73C1C74613500000805 /* AddMemberViewController1.m in Sources */,
 				01F87F7C1C585AF900419FA2 /* ConfModelTotal.m in Sources */,
 				0126ECFB1B8C4E8100EC85C1 /* MASViewConstraint.m in Sources */,
 				01F85AB41C575A0600E463F4 /* MallRootViewControlelr.m in Sources */,
@@ -8652,6 +8656,7 @@
 				01F015D51C5F427B00930B0E /* GoodsDescriptionViewController.m in Sources */,
 				01F016081C5F430700930B0E /* SpecialModel.m in Sources */,
 				01E9A73E1C74613500000805 /* DetailInfoViewController.m in Sources */,
+				01EB266F1C92A06900773023 /* DeviceModel.m in Sources */,
 				01ECDB0C1C8EB31F0018160F /* EaseConversationListViewController.m in Sources */,
 				01F85AB51C575A0600E463F4 /* MTProgressWebViewController.m in Sources */,
 				01F015EC1C5F42CD00930B0E /* DiscountCountDownCell.m in Sources */,
@@ -8670,6 +8675,7 @@
 				013F3EF81BFC487900FF39E5 /* MJRefreshBackFooter.m in Sources */,
 				01ECDB071C8EB31F0018160F /* EaseMessageReadManager.m in Sources */,
 				01266B9F1C4B3CE600992D2F /* UIViewController+KNSemiModal.m in Sources */,
+				01E919FD1C9F84AD0026FD24 /* HealthModel.m in Sources */,
 				D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */,
 				01BA2D5F1B9EC70C00A2C7BD /* ServiceHeadView.m in Sources */,
 				011077031C3EA896001E5C51 /* SWYPhotoBrowserViewController.m in Sources */,

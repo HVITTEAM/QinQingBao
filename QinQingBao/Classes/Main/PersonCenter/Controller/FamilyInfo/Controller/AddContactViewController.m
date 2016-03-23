@@ -141,9 +141,9 @@
         return [NoticeHelper AlertShow:@"请选择关系" view:nil];
     }
     RelationModel *obj = [[RelationModel alloc] init];
-    obj.rname = self.item0.rightText.text;
-    obj.rtelnum = self.item1.rightText.text;
-    obj.relation = selectedRealationStr;
+    obj.sos_name = self.item0.rightText.text;
+    obj.sos_phone = self.item1.rightText.text;
+    obj.sos_relation = selectedRealationStr;
     if (self.addResultClick)
         self.addResultClick(obj);
 }

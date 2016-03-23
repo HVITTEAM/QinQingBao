@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HealthModel.h"
 
 @interface BloodPressureCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *hightLab;
@@ -14,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
 
-@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, strong) HealthModel *item;
 
 +(BloodPressureCell *)bloodPressureCell;
 @end

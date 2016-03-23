@@ -12,6 +12,8 @@
 #import "FamilyTotal.h"
 #import "LoginViewController.h"
 
+#import "DeviceModel.h"
+
 @interface HealthMonitorViewController ()
 
 @property (nonatomic, retain) UIScrollView *scrollView;
@@ -91,12 +93,12 @@
     
     if (dataProvider.count == 0)
         return;
-    FamilyModel *item = dataProvider[0];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.relation];
+    DeviceModel *item = dataProvider[0];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.ud_name];
 }
 
 /**
- *  获取绑定的家属
+ *  获取绑定的设备
  */
 -(void)getDataProvider
 {
@@ -106,31 +108,29 @@
     dataProvider = [[NSMutableArray alloc] init];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Relation parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                 @"client" : @"ios",
-                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+    [CommonRemoteHelper RemoteWithUrl:URL_get_user_devide parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-//                                         [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
-                                         //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         //                                         [alertView show];
-                                         //                                         [self initWithPlaceString:@"您还没有绑定的家属呐"];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         
+                                         [dataProvider removeAllObjects];
                                      }
                                      else
                                      {
-                                         FamilyTotal *result = [FamilyTotal objectWithKeyValues:dict];
-                                         dataProvider = result.datas;
+                                         dataProvider = [DeviceModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [self removePlace];
+                                         [self setupScrollView];
+                                         [self setupPageControl];
                                      }
-                                     [self addSelfToFamily];
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
-                                     [self addSelfToFamily];
                                  }];
 }
 
@@ -141,7 +141,6 @@
 {
     FamilyModel *fvo = [[FamilyModel alloc] init];
     fvo.member_id = [SharedAppUtil defaultCommonUtil].userVO.member_id;
-    //    fvo.oldname = @"自己";
     fvo.relation = @"自己";
     
     if (!dataProvider)
@@ -195,8 +194,8 @@
     int intPage = (int)(doublePage + 0.5);
     // 设置页码
     pageControl.currentPage = intPage;
-    FamilyModel *item = dataProvider[intPage];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.relation];
+    DeviceModel *item = dataProvider[intPage];
+    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.ud_name];
 }
 
 -(void)addHandler:(id)sender

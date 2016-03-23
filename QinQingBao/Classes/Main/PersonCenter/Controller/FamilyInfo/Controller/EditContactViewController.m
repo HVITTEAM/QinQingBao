@@ -13,7 +13,6 @@
 @interface EditContactViewController ()
 {
     NSString *selectedRealationStr;
-//    NSInteger selectedRealationIdx;
 }
 @property (nonatomic,retain) HMCommonArrowItem *item2;
 @property (nonatomic,retain) HMCommonTextfieldItem *item0;
@@ -35,8 +34,8 @@
 {
     [super viewDidAppear:animated];
     
-    self.item0.rightText.text = self.item.rname;
-    self.item1.rightText.text = self.item.rtelnum;
+    self.item0.rightText.text = self.item.sos_name;
+    self.item1.rightText.text = self.item.sos_phone;
     self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
 }
 
@@ -59,7 +58,7 @@
 {
     __weak __typeof(self)weakSelf = self;
     
-    selectedRealationStr = self.item.relation;
+    selectedRealationStr = self.item.sos_relation;
     
     // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
@@ -74,7 +73,7 @@
     self.item1.placeholder = @"请填写有效电话";
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
-    self.item2.subtitle = selectedRealationStr.length == 0  ? self.item.relation : selectedRealationStr;
+    self.item2.subtitle = selectedRealationStr.length == 0  ? self.item.sos_relation : selectedRealationStr;
     self.item2.operation = ^{
         UIAlertView *alertSex = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:@"" delegate:weakSelf cancelButtonTitle:@"取消" otherButtonTitles:@"子女",@"配偶",@"其他监护人", nil];
         [alertSex show];    };
@@ -132,7 +131,7 @@
         default:
             break;
     }
-    self.item.relation = selectedRealationStr;
+    self.item.sos_relation = selectedRealationStr;
     [self.groups removeAllObjects];
     [self setupGroups];
     [self.tableView reloadData];
@@ -159,9 +158,9 @@
     }
     RelationModel *obj = [[RelationModel alloc] init];
     obj.index = self.item.index;
-    obj.rname = self.item0.rightText.text;
-    obj.rtelnum = self.item1.rightText.text;
-    obj.relation = selectedRealationStr;
+    obj.sos_name = self.item0.rightText.text;
+    obj.sos_phone = self.item1.rightText.text;
+    obj.sos_relation = selectedRealationStr;
     if (self.editResultClick)
         self.editResultClick(obj);
 }
@@ -171,9 +170,9 @@
     [self.view endEditing:YES];
     RelationModel *obj = [[RelationModel alloc] init];
     obj.index = self.item.index;
-    obj.rname = self.item0.rightText.text;
-    obj.rtelnum = self.item1.rightText.text;
-    obj.relation = selectedRealationStr;
+    obj.sos_name = self.item0.rightText.text;
+    obj.sos_phone = self.item1.rightText.text;
+    obj.sos_relation = selectedRealationStr;
     if (self.deleteResultClick)
         self.deleteResultClick(obj);
 

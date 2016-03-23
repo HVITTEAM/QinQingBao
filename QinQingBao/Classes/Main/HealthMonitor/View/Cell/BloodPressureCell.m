@@ -30,7 +30,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setItem:(HealthDataModel *)item
+- (void)setItem:(HealthModel *)item
 {
     _item = item;
     if (item.systolic)

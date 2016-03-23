@@ -261,7 +261,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
 {
     if (index == 0)
     {
-        //        CommonOrderModel *itemInfo = dataProvider.order_list[0];
         RefundViewController *refundVC = [[RefundViewController alloc] init];
         refundVC.orderInfo = dataProvider;
         if ([dataProvider.order_state isEqualToString:@"20"]) {//付款未发货

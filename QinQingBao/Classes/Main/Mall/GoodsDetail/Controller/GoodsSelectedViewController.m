@@ -18,8 +18,7 @@ static CGFloat BUTTONHEIGHT = 50;
     NSMutableArray *dataProvider;
     UIImageView *imgview;
     UILabel *numLab;
-    UIImageView *line;
-    //参数是否全部选择了
+    UIImageView *line;    //参数是否全部选择了
     BOOL allSelected;
     UILabel *desLab;
     //选择的参数ID集合
@@ -298,7 +297,7 @@ static CGFloat BUTTONHEIGHT = 50;
                                      kucunLab.text = [NSString stringWithFormat:@"库存%@件",_goodsInfo.goods_discount];
                                      NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",_goodsInfo.goods_image_url]];
                                      [imgview sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-
+                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
@@ -308,10 +307,10 @@ static CGFloat BUTTONHEIGHT = 50;
 //确定
 -(void)sureClick:(UIButton *)sender
 {
-//    if (!allSelected)
-//    {
-//        return [NoticeHelper AlertShow:desLab.text view:nil];
-//    }
+    if (dataProvider.count > 0 && !allSelected)
+    {
+        return [NoticeHelper AlertShow:desLab.text view:nil];
+    }
     if (self.type == OrderTypeAdd2cart)
     {
         [CommonRemoteHelper RemoteWithUrl:URL_Cart_add parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,

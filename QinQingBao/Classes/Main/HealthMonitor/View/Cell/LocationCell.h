@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "HealthModel.h"
+
 @interface LocationCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *locationLab;
 @property (strong, nonatomic) IBOutlet UILabel *timaLab;
 
-@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, strong) HealthModel *item;
 
 +(LocationCell *)locationCell;
 @end

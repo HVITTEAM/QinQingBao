@@ -35,7 +35,6 @@
     [super viewWillAppear:animated];
 }
 
-
 - (void)viewDidCurrentView
 {
     NSLog(@"加载为当前视图 = %@",self.title);
@@ -61,7 +60,6 @@
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, -25, 0);
-    
 }
 
 #pragma mark 集成刷新控件
@@ -284,6 +282,5 @@
 //    [[UIApplication sharedApplication] openURL:url];
 //    
 //}
-
 
 @end

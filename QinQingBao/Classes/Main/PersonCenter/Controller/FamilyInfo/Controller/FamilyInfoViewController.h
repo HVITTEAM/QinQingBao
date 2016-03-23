@@ -11,9 +11,11 @@
 #import "FamilyModel.h"
 #import "FamilyInforTotal.h"
 
+#import "DeviceModel.h"
+
 @interface FamilyInfoViewController : HMCommonViewController<UIActionSheetDelegate>
 
-@property (nonatomic, retain) FamilyModel *selecteItem;
+@property (nonatomic, retain) DeviceModel *selecteItem;
 
 @property (nonatomic, copy) void (^backHandlerClick)(void);
 

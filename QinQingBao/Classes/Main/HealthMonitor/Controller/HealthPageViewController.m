@@ -14,14 +14,19 @@
 #import "VideoCell.h"
 #import "HeartImageCell.h"
 
+#import "DeviceInfoModel.h"
 
+#import "HealthModel.h"
 @interface HealthPageViewController ()<UIScrollViewDelegate>
 
 @end
 
 @implementation HealthPageViewController
 {
-    NSMutableArray *dataProvider;
+    //目标设备
+    DeviceInfoModel *targetItem;
+    
+    HealthModel *dataModel;
 }
 
 - (void)viewDidLoad
@@ -63,24 +68,28 @@
 //获取所有的数据
 -(void)getDataProvider
 {
-    dataProvider = [[NSMutableArray alloc] init];
-    if (self.familyVO.member_id == nil)
+    if (self.familyVO.device.count == 0)
     {
         [self.tableView.header endRefreshing];
-        return [NoticeHelper AlertShow:@"数据异常!" view:self.view];
+//        return [NoticeHelper AlertShow:@"该家属尚未绑定设备!" view:self.view];
+        return;
     }
-    [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                   @"client" : @"ios",
-                                                                   @"count" : @"1",
-                                                                   @"member_id" : self.familyVO.member_id}
+    
+    for (DeviceInfoModel *item in self.familyVO.device)
+    {
+        if ([item.device_type isEqualToString:@"2"])
+        {
+            targetItem = item;
+            break;
+        }
+    }
+    [CommonRemoteHelper RemoteWithUrl:URL_getMonitor_bycode parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                          @"client" : @"ios",
+                                                                          @"ud_id" : self.familyVO.ud_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
-                                     NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
-                                     if (result.datas.count == 0)
-                                     {
-                                         [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-                                     }
-                                     dataProvider = result.datas;
+                                     
+                                     NSArray *arr = [dict objectForKey:@"datas"];
+                                     dataModel = [HealthModel objectWithKeyValues:arr[0]];
                                      [self.tableView reloadData];
                                      [self.tableView.header endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -133,10 +142,7 @@
             if(sugarCell == nil)
                 sugarCell = [HeartCell heartCell];
             
-            if(dataProvider && dataProvider.count > 0)
-            {
-                sugarCell.item = dataProvider[0];
-            }
+            sugarCell.item = dataModel;
             
             cell = sugarCell;
         }
@@ -148,10 +154,7 @@
             if(bloodPressureCell == nil)
                 bloodPressureCell = [BloodPressureCell bloodPressureCell];
             
-            if(dataProvider && dataProvider.count > 0)
-            {
-                bloodPressureCell.item = dataProvider[0];
-            }
+            bloodPressureCell.item = dataModel;
             
             cell = bloodPressureCell;
         }
@@ -173,10 +176,7 @@
             if(heartCell == nil)
                 heartCell = [HeartbeatCell heartbeatCell];
             
-            if(dataProvider && dataProvider.count > 0)
-            {
-                heartCell.item = dataProvider[0];
-            }
+            heartCell.item = dataModel;
             
             cell = heartCell;
         }
@@ -188,10 +188,7 @@
             if(locationCell == nil)
                 locationCell = [LocationCell locationCell];
             
-            if(dataProvider && dataProvider.count > 0)
-            {
-                locationCell.item = dataProvider[0];
-            }
+            locationCell.item = dataModel;
             cell = locationCell;
         }
             
@@ -203,10 +200,8 @@
             if(heartImageCell == nil)
                 heartImageCell = [HeartImageCell heartImageCell];
             
-            if(dataProvider && dataProvider.count > 0)
-            {
-                heartImageCell.item = dataProvider[0];
-            }
+            heartImageCell.item = dataModel;
+            
             cell = heartImageCell;
         }
             break;
@@ -229,7 +224,7 @@
     {
         case 4:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.relation];
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.rel_name];
             bloodPressureVC.type = ChartTypeSugar;
             vctype = @"6";
             return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
@@ -237,20 +232,19 @@
             break;
         case 3:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.relation];
+            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.rel_name];
             vctype = @"3";
             bloodPressureVC.type = ChartTypeBlood;
         }
             break;
         case 5:
         {
-            if (dataProvider.count > 0)
+            if (dataModel)
             {
-                HealthDataModel *item = dataProvider[0];
-                if (item.ect_img.length > 0 && item.ect_time.length > 0)
+                if (dataModel.ect_img.length > 0 && dataModel.ect_time.length > 0)
                 {
                     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.ect_img]];
+                    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,dataModel.ect_img]];
                     SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:@[iconUrl] currentIndex:0 placeholderImageNmae:@"placeholderImage"];
                     return [self.navigationController presentViewController:photoBrowser animated:YES completion:^{
                         [HUD removeFromSuperview];
@@ -272,9 +266,9 @@
             break;
         case 0:
         {
-            if (dataProvider.count > 0)
+            if (dataModel)
             {
-                bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.relation];
+                bloodPressureVC.title = [NSString stringWithFormat:@"%@的心率统计数据",self.familyVO.ud_name];
                 bloodPressureVC.type = ChartTypeHeart;
                 vctype = @"1";
             }
@@ -294,11 +288,11 @@
             break;
     }
     
-    [CommonRemoteHelper RemoteWithUrl:URL_GetMonitor_one parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                       @"client" : @"ios",
-                                                                       @"count" : @"50",
-                                                                       @"member_id" : self.familyVO.member_id,
-                                                                       @"type" : vctype,}
+    [CommonRemoteHelper RemoteWithUrl:URL_monitor_one_bycode parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                           @"client" : @"ios",
+                                                                           @"count" : @"50",
+                                                                           @"ud_id" : self.familyVO.ud_id,
+                                                                           @"type" : vctype}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
@@ -314,7 +308,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
                                  }];
-    
 }
 
 /**
@@ -323,12 +316,11 @@
 - (void)showPosition
 {
     MapViewController *map = [[MapViewController alloc] init];
-    if (dataProvider.count == 0)
+    if (!dataModel.longitude)
         return [NoticeHelper AlertShow:@"暂无数据" view:self.view];
-    HealthDataModel *item = (HealthDataModel *)dataProvider[0];
-    map.address = item.address;
-    map.latitude = item.latitude;
-    map.longitude = item.longitude;
+    map.address = dataModel.address;
+    map.latitude = dataModel.latitude;
+    map.longitude = dataModel.longitude;
     [self presentViewController:map animated:YES completion:nil];
 }
 
@@ -341,6 +333,5 @@
     videoList.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:videoList animated:YES];
 }
-
 
 @end

@@ -36,8 +36,6 @@
     
     [self initTableSkin];
     
-    //    [self getRelation];
-    
     [self setupGroups];
 }
 
@@ -52,33 +50,6 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-}
-
--(void)getRelation
-{
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_relationfo parameters: @{@"member_id" :self.member_id}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         RelationTotal *result  = [RelationTotal objectWithKeyValues:dict];
-                                         relationArr = result.datas;
-                                         [self setupGroup];
-                                     }
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                     [self.view endEditing:YES];
-                                 }];
-    
 }
 
 # pragma  mark 设置数据源
@@ -101,8 +72,8 @@
     for (RelationModel *obj in relationArr)
     {
         // 2.设置组的所有行数据
-        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:[NSString stringWithFormat:@"%@    %@",obj.rname,obj.rtelnum] icon:nil];
-        item.subtitle = obj.relation;
+        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:[NSString stringWithFormat:@"%@    %@",obj.sos_name,obj.sos_phone] icon:nil];
+        item.subtitle = obj.sos_relation;
         obj.index = [relationArr indexOfObject:obj];
         item.operation = ^{
             EditContactViewController *vc = [[EditContactViewController alloc] init];
@@ -189,22 +160,23 @@
 -(void)next:(UIButton *)sender
 {
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:self.member_id forKey:@"member_id"];
+    [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.member_id forKey:@"member_id"];
+    [dict setValue:self.ud_id forKey:@"ud_id"];
     [dict setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[relationArr count]] forKey:@"sos_count"];
     
     for (int i = 1; i < relationArr.count+1 ; i++)
     {
         RelationModel *obj = relationArr[i-1];
-        [dict setValue:obj.rname forKey:[NSString stringWithFormat:@"name_%d",i]];
-        [dict setValue:obj.rtelnum forKey:[NSString stringWithFormat:@"mobile_%d",i]];
-        [dict setValue:obj.relation forKey:[NSString stringWithFormat:@"relation_%d",i]];
+        [dict setValue:obj.sos_name forKey:[NSString stringWithFormat:@"sos_name_%d",i]];
+        [dict setValue:obj.sos_phone forKey:[NSString stringWithFormat:@"sos_phone_%d",i]];
+        [dict setValue:obj.sos_relation forKey:[NSString stringWithFormat:@"sos_relation_%d",i]];
     }
     
     if (relationArr.count == 0 )
         return [NoticeHelper AlertShow:@"请设置紧急联系人" view:nil];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_SOS_relationfo parameters: dict
+    [CommonRemoteHelper RemoteWithUrl:URL_edit_user_devide parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -216,6 +188,7 @@
                                      else
                                      {
                                          NSLog(@"设置成功！");
+                                         [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
                                          BindingResultViewController *vc = [[BindingResultViewController alloc] init];
                                          [self.navigationController pushViewController:vc animated:YES];
                                      }
@@ -241,6 +214,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     else
     {
+        [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确认退出绑定流程？退出后可以在个人中心-->我的亲友中完成后续操作" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确认退出",nil];
         [alertView show];
     }

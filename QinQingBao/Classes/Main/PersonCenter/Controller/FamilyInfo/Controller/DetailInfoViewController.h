@@ -10,7 +10,8 @@
 #import "HMCommonViewController.h"
 #import "FamilyModel.h"
 
+#import "DeviceModel.h"
 @interface DetailInfoViewController : HMCommonViewController
 
-@property (nonatomic, retain) FamilyModel *itemInfo;
+@property (nonatomic, retain) DeviceModel *itemInfo;
 @end

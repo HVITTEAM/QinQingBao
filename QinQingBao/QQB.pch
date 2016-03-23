@@ -503,8 +503,45 @@
 #define URL_edit_relation_data [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=edit_relation_data",URL_Local]
 
 //------------------绑定设备 二期-------------------
+
+/***新表设备 - 根据 member 获得 设备使用者 获取url*/
+#define URL_get_user_devide [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=get_user_devide",URL_Local]
+
 /***设备code信息获取、验证url*/
-#define URL_get_device_code [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=device&op=get_device_code",URL_Local]
+#define URL_get_device_code [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=get_device_by_code",URL_Local]
+
+/***新表设备 - 用户 绑定url*/
+#define URL_bang_new_device [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=bang_add_user_devide",URL_Local]
+
+/***新表设备 - 用户设备 获取url*/
+#define URL_get_new_device [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=get_user_devide",URL_Local]
+
+/***新表设备 - 设备使用者 资料修改Url*/
+#define URL_edit_user_devide [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=edit_user_devide",URL_Local]
+
+/***新表设备 - 用户绑定设备解绑 删除 按条件解绑Url*/
+#define URL_del_conditon_user_devide [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=del_conditon_user_devide",URL_Local]
+
+/***新表设备 - 用户 解绑 设备使用者 del操作Url*/
+#define URL_del_base_user_devide [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=del_base_user_devide",URL_Local]
+
+/***新表设备 - 设备使用者绑定设备Url*/
+#define URL_bamg_user_devide_rel [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=bamg_user_devide_rel",URL_Local]
+
+/***新表设备 - 与存在的使用者建立绑定关系 根据条件Url*/
+#define URL_bang_add_cnditon_user_device_rel [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=bang_add_cnditon_user_device_rel",URL_Local]
+
+/***监控 - 新表设备 - 与存在的使用者建立绑定关系 根据条件(code 或物联卡)Url*/
+#define URL_bang_add_cnditon_user_device_rel_code [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=bang_add_cnditon_user_device_rel_code",URL_Local]
+
+/***监控 - 获取监控数据 根据code获取Url*/
+#define URL_getMonitor_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=getMonitor_ud_id",URL_Local]
+
+/***监控 - 获取监控信息 根据code码 单组Url*/
+#define URL_monitor_one_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=monitor_one_ud_id",URL_Local]
+
+
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

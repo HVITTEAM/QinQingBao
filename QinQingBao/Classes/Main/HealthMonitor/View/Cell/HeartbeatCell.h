@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HealthModel.h"
 
 @interface HeartbeatCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *heartBeatLab;
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
-@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, strong) HealthModel *item;
 
 +(HeartbeatCell *)heartbeatCell;
 @end

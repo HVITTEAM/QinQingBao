@@ -8,11 +8,9 @@
 
 #import "HMCommonViewController.h"
 
-@class FamilyModel,DeviceInfoModel;
+@class DeviceInfoModel;
 
 @interface DevicesDetailViewController : HMCommonViewController
-
-@property(strong,nonatomic)FamilyModel *selectedFamilyMember;
 
 @property(strong,nonatomic)DeviceInfoModel *selectedDevice;
 

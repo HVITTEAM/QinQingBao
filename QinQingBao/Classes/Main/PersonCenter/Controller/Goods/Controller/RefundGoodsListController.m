@@ -82,7 +82,6 @@
 {
     RefundListModel *model = self.dataProvider[indexPath.section];
     
-    
     if (indexPath.row == 0) {
         //头部
         CommonGoodsCellHead *headcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonGoodsCellHead"];
@@ -192,7 +191,6 @@
         if ([dict[@"code"] integerValue] == 17001)
         {
             [self.view showNonedataTooltip];
-            //                [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         else if ([dict[@"code"] integerValue] == 0){
             

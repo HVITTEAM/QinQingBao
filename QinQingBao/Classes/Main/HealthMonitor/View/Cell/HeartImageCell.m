@@ -19,7 +19,7 @@
     return cell;
 }
 
-- (void)setItem:(HealthDataModel *)item
+- (void)setItem:(HealthModel *)item
 {
     _item = item;
     

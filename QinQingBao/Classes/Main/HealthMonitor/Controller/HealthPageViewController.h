@@ -12,11 +12,11 @@
 #import "BloodPressureCell.h"
 #import "LocationCell.h"
 #import "HeartbeatCell.h"
-#import "FamilyModel.h"
+#import "DeviceModel.h"
 
 @interface HealthPageViewController : UITableViewController
 
 @property (nonatomic, assign) UINavigationController *nav;
 
-@property (nonatomic, retain) FamilyModel *familyVO;
+@property (nonatomic, retain) DeviceModel *familyVO;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HealthModel.h"
 
 @interface HeartCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *heartDataLabel;
@@ -15,7 +16,7 @@
 /** cell更新时间 */
 @property (strong, nonatomic) IBOutlet UILabel *time;
 /** cell对应的item数据 */
-@property (nonatomic, strong) HealthDataModel *item;
+@property (nonatomic, strong) HealthModel *item;
 
 +(HeartCell *)heartCell;
 @end

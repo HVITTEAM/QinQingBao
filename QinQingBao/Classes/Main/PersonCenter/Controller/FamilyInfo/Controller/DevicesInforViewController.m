@@ -10,7 +10,7 @@
 #import "DevicesDetailViewController.h"
 #import "AddDeviceViewController.h"
 #import "DeviceInfoModel.h"
-#import "FamilyModel.h"
+#import "DeviceModel.h"
 
 @interface DevicesInforViewController ()<UIAlertViewDelegate>
 {
@@ -38,7 +38,7 @@
  */
 -(void)initNaviBar
 {
-    self.navigationItem.title = self.selectedFamilyMember.member_truename;
+    self.navigationItem.title = self.selectedFamilyMember.ud_name;
 }
 
 /**
@@ -93,7 +93,6 @@
         [tempItemArray addObject:item];
         item.operation = ^{
             DevicesDetailViewController *detailVC = [[DevicesDetailViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            detailVC.selectedFamilyMember = weakSelf.selectedFamilyMember;
             detailVC.selectedDevice = model;
             [weakSelf.navigationController pushViewController:detailVC animated:YES];
         };
@@ -139,7 +138,8 @@
 /**解绑设备*/
 -(void)deleteDevice:(NSString *)imei
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Del_device parameters: @{@"imei" : imei}
+    [CommonRemoteHelper RemoteWithUrl:URL_del_conditon_user_devide parameters: @{@"ud_phone" : self.selectedFamilyMember.ud_phone,
+                                                                                 @"device_code": imei}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -169,7 +169,7 @@
 -(void)addDevices:(UIButton *)sender
 {
     AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-    view.member_id = self.selectedFamilyMember.member_id;
+    view.selectedFamily = self.selectedFamilyMember;
     [self.navigationController pushViewController:view animated:YES];
 }
 

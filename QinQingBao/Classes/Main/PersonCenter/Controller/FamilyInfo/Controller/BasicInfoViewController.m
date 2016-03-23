@@ -27,8 +27,6 @@
     NSString *selectedCodeStr;
     
     NSString *selectedAreainfo;
-    
-    
 }
 @property (nonatomic,retain) HMCommonTextfieldItem *itemNick;
 @property (nonatomic,retain) HMCommonTextfieldItem *itemTel;
@@ -161,65 +159,22 @@
     self.tableView.tableFooterView = footview;
 }
 
-#pragma mark -- UIAlertViewDelegate
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0)
-        return;
-    selectedSexIdx = buttonIndex;
-    
-    switch (buttonIndex)
-    {
-        case 1:
-            selectedSexStr = @"男";
-            break;
-        case 2:
-            selectedSexStr = @"女";
-            break;
-        case 3:
-            selectedSexStr = @"保密";
-            break;
-        default:
-            break;
-    }
-    [self.groups removeAllObjects];
-    [self setupGroups];
-    [self.tableView reloadData];
-}
-
 -(void)next:(UIButton *)sender
 {
-    EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
-//    VC.member_id = self.member_id;
-//    VC.isFromStart = YES;
-    [self.navigationController pushViewController:VC animated:YES];
-    return;
     [self.view endEditing:YES];
     
     if (self.itemNick.rightText.text.length == 0)
     {
-        return [NoticeHelper AlertShow:@"请输入家属昵称" view:nil];
-    }
-    else if (self.itemName.rightText.text.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请输入家属真实姓名" view:nil];
-    }
-    else if (self.itemTel.rightText.text.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请输入家属手机号码" view:nil];
-    }
-    else if (self.itemTel.rightText.text.length != 11)
-    {
-        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式" view:nil];
+        return [NoticeHelper AlertShow:@"请输入昵称" view:nil];
     }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Add_mobile_user parameters: @{@"username" : self.itemNick.rightText.text,
-                                                                        @"truename":self.itemName.rightText.text,
-                                                                        @"sex" : selectedSexIdx ? [NSString stringWithFormat:@"%ld",(long)selectedSexIdx] : @"",
-                                                                        @"mobile":self.itemTel.rightText.text,
-                                                                        @"areaid":selectedCodeStr ? selectedCodeStr:  @"" ,
-                                                                        @"areainfo":selectedAreainfo ? selectedAreainfo : @"",
-                                                                        @"identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @""}
+    [CommonRemoteHelper RemoteWithUrl:URL_bang_new_device parameters: @{@"device_code" : self.devicecode,
+                                                                        @"rel_name":self.itemNick.rightText.text,
+                                                                        @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                        @"client":@"ios",
+                                                                        @"ud_name": self.itemName.rightText.text ?  self.itemName.rightText.text : @"",
+                                                                        @"ud_phone":self.itemTel.rightText.text ?  self.itemTel.rightText.text : @"",
+                                                                        @"ud_identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -230,13 +185,10 @@
                                      }
                                      else
                                      {
-                                         [self bangdin];
-                                         NSDictionary *dict1 = [dict objectForKey:@"datas"];
-                                         NSString *member_id = [dict1 objectForKey:@"member_id"];
-                                         
-                                         BasicInfoViewController *vc = [[BasicInfoViewController alloc] init];
-
-                                         [self.navigationController pushViewController:vc animated:YES];
+                                         EmergencyContactViewController *VC = [[EmergencyContactViewController alloc] init];
+                                         VC.ud_id = [dict objectForKey:@"datas"];
+                                         VC.isFromStart = self.isFromStart;
+                                         [self.navigationController pushViewController:VC animated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -270,6 +222,14 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
+}
+
+#pragma  mark UIAlertViewDelegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

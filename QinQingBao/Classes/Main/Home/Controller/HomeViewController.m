@@ -113,7 +113,6 @@ static float cellWidth = 66;
     self.vlineTop.constant = self.VlineHeight.constant =  self.tuinaBtnHeight.constant;
     self.checkTop.constant = (self.buttonTypeHeight.constant/2 - self.checkSelfImg.height)/2;
     self.serviceCollectHeight.constant = MTScreenH - self.imagePlayerHeight.constant - self.buttonTypeHeight.constant - CGRectGetMaxY(self.navigationController.navigationBar.frame) - [SharedAppUtil defaultCommonUtil].tabBar.tabBar.height;
-    
 }
 
 /**
@@ -259,7 +258,7 @@ static float cellWidth = 66;
     }];
 }
 
-#pragma mark Timer
+#pragma mark 初始化轮播广告定时器
 /**
  *  初始化定时器
  **/
@@ -580,12 +579,14 @@ static float cellWidth = 66;
     return YES;
 }
 
+#pragma mark 症状自查
 - (IBAction)healthClickHandler:(id)sender
 {
     CheckSelfViewController *healthVC = [[CheckSelfViewController alloc] init];
     [self.navigationController pushViewController:healthVC animated:YES];
 }
 
+#pragma mark 专家问诊
 - (IBAction)questionClickHander:(id)sender
 {
     return [NoticeHelper AlertShow:@"暂未开通!" view:self.view];
@@ -593,6 +594,7 @@ static float cellWidth = 66;
     [self.navigationController pushViewController: healthVC animated:YES];
 }
 
+#pragma mark 推拿保健
 - (IBAction)massageClickHandler:(id)sender
 {
     AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];

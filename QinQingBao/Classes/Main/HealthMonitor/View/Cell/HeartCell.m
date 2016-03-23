@@ -31,7 +31,7 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)setItem:(HealthDataModel *)item
+- (void)setItem:(HealthModel *)item
 {
     _item = item;
     
