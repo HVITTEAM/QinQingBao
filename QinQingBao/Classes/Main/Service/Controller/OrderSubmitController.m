@@ -262,7 +262,6 @@ numberOfRowsInComponent:(NSInteger)component
         return 90;
 }
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -445,7 +444,6 @@ numberOfRowsInComponent:(NSInteger)component
     if (indexPath.section == 0 && indexPath.row == 0)
     {
         FamilyViewController *familyView = [[FamilyViewController alloc] init];
-        familyView.isfromOrder = YES;
         [self.navigationController pushViewController:familyView animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row == 0)
