@@ -78,7 +78,7 @@
     typevalue.userInteractionEnabled = NO;
     typevalue.selected = item.selected;
     [typevalue setTitle:item.value forState:UIControlStateNormal];
-    [typevalue.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:16]];
+    [typevalue.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:13]];
     [typevalue setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [typevalue setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [typevalue setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateSelected];
@@ -104,8 +104,8 @@
         GoodsTypeModel *item = self.dataProvider[indexPath.section];
         UILabel *lab = (UILabel *)[headerView viewWithTag:100];
         if (!lab)
-            lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, MTScreenW, 30)];
-        lab.font = [UIFont systemFontOfSize:16];
+            lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 30)];
+        lab.font = [UIFont systemFontOfSize:14];
         lab.textColor = [UIColor darkGrayColor];
         lab.tag = 100;
         lab.text = item.value;
@@ -120,8 +120,10 @@
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect tmpRect = [@"测试" boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:16],NSFontAttributeName, nil] context:nil];
-    return CGSizeMake(tmpRect.size.width + 20,  30);
+    GoodsTypeModel *sections = self.dataProvider[indexPath.section];
+    GoodsTypeModel *item = sections.datas[indexPath.row];
+    CGRect tmpRect = [item.value boundingRectWithSize:CGSizeMake(MTScreenW - 15, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:13],NSFontAttributeName, nil] context:nil];
+    return CGSizeMake(tmpRect.size.width + 15,  25);
 }
 
 /**
@@ -142,7 +144,7 @@
 
 -(CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    CGSize size = {MTScreenW, 30};
+    CGSize size = {MTScreenW, 25};
     return size;
 }
 
