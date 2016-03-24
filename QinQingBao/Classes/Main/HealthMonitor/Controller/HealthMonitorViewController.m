@@ -13,6 +13,7 @@
 #import "LoginViewController.h"
 
 #import "DeviceModel.h"
+#import "HealthPlaceHolderView.h"
 
 @interface HealthMonitorViewController ()
 
@@ -25,6 +26,8 @@
     UIPageControl *pageControl;
     UILabel *titleLab;
     NSMutableArray *dataProvider;
+    
+    HealthPlaceHolderView *healthPlace;
 }
 
 - (void)viewDidLoad
@@ -34,13 +37,6 @@
     [self initNavigation];
     
     [self getDataProvider];
-    
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
-    [self.scrollView setContentSize:CGSizeMake(MTScreenW, MTScreenH)];
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.backgroundColor = HMGlobalBg;
-    [self.view addSubview:self.scrollView];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -114,9 +110,16 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                         
+                                         if ([codeNum integerValue] == 17001)
+                                         {
+                                             [self showPlaceHolderView];
+                                             [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
                                          [dataProvider removeAllObjects];
                                      }
                                      else
@@ -158,6 +161,22 @@
  */
 - (void)setupScrollView
 {
+    if (dataProvider.count == 0)
+        return [self showPlaceHolderView];
+    else if (healthPlace)
+    {
+        self.navigationItem.title = @"";
+        [healthPlace removeFromSuperview];
+    }
+    
+    if (!self.scrollView)
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
+    [self.scrollView setContentSize:CGSizeMake(MTScreenW, MTScreenH)];
+    self.scrollView.alwaysBounceVertical = YES;
+    self.scrollView.backgroundColor = HMGlobalBg;
+    [self.view addSubview:self.scrollView];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     // 2.添加view
     for (int i = 0; i< dataProvider.count ; i++)
     {
@@ -186,6 +205,30 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
 }
 
+#pragma mark None UI
+/**
+ * 显示空数据界面
+ **/
+-(void)showPlaceHolderView
+{
+    healthPlace = [[[NSBundle mainBundle] loadNibNamed:@"HealthPlaceHolderView" owner:self options:nil] objectAtIndex:0];
+    __weak __typeof(self)weakSelf = self;
+    healthPlace.buttonClick = ^(UIButton *btn){
+        [weakSelf addHandler:btn];
+    };
+    healthPlace.frame = CGRectMake(0, 0, MTScreenW, MTScreenH);
+    //移除之前所显示的UI
+    [self.scrollView removeFromSuperview];
+    self.scrollView = nil;
+    [pageControl removeFromSuperview];
+    pageControl = nil;
+    [titleLab removeFromSuperview];
+    titleLab = nil;
+    
+    self.navigationItem.title = @"监护";
+    [self.view addSubview:healthPlace];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -198,6 +241,11 @@
     titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.ud_name];
 }
 
+/**
+ *  添加亲友
+ *
+ *  @param sender
+ */
 -(void)addHandler:(id)sender
 {
     AddMemberViewController *addView = [[AddMemberViewController alloc] init];

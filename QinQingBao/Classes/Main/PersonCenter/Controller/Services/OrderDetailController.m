@@ -88,7 +88,7 @@
                 return 44;
             else
             {
-                UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+                UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
                 return cell.height;
             }
         }
@@ -104,7 +104,7 @@
                 }
                 else
                 {
-                    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+                    UITableViewCell *cell = [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
                     return cell.height;
                 }
             }

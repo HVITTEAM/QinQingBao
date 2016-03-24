@@ -62,9 +62,7 @@
     [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
     
     //注册用户的apns服务
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)
+    [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound |UIUserNotificationTypeAlert)
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
@@ -93,9 +91,9 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-                                                    message:@"deviceToken获取失败！"
-                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
+//                                                    message:@"deviceToken获取失败！"
+//                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
     //    [alert show];
     
     NSLog(@"--------------deviceToken获取失败--------------------");

@@ -35,6 +35,7 @@ float const fontSize_bt              = 15.0 ;
 {
     [viewWillShow addSubview:self] ;
 }
+
 - (void)dismiss
 {
     [self removeFromSuperview] ;

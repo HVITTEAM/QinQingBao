@@ -72,9 +72,6 @@
     HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
     UINavigationController *navhealth = [[UINavigationController alloc] initWithRootViewController:healthView];
     
-//    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-//    mallView.url =  [[self alloc] getMallurl];
-    
     MallRootViewControlelr *mallView = [[MallRootViewControlelr alloc] init];
     
     UINavigationController *navMall = [[UINavigationController alloc] initWithRootViewController:mallView];
@@ -86,7 +83,7 @@
         //初始化对象
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
         tabBarController.tabBar.barTintColor = [UIColor whiteColor];
-        tabBarController.tabBar.selectedImageTintColor = MTNavgationBackgroundColor;
+        tabBarController.tabBar.tintColor = MTNavgationBackgroundColor;
         [SharedAppUtil defaultCommonUtil].tabBar = tabBarController;
     }
     
@@ -128,11 +125,6 @@
     ProfileViewController *sysview = [[ProfileViewController alloc] init];
     UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     [nav1 setViewControllers:@[sysview] animated:YES];
-    
-    //    MTProgressWebViewController *mallView = [[MTProgressWebViewController alloc] init];
-    //    mallView.url =  [[self alloc] getMallurl];
-    //    UINavigationController *nav2= [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[2];
-    //    [nav2 setViewControllers:@[mallView] animated:YES];
 }
 
 +(void)setloginOutViewController
@@ -158,13 +150,5 @@
     //将其设置为当前窗口的跟视图控制器
     window.rootViewController = nav;
 }
-
--(NSString *)getMallurl
-{
-    NSString *username = ([SharedAppUtil defaultCommonUtil].userVO && [SharedAppUtil defaultCommonUtil].userVO.member_id)? [SharedAppUtil defaultCommonUtil].userVO.member_id : @"";
-    NSString *key = ([SharedAppUtil defaultCommonUtil].userVO && [SharedAppUtil defaultCommonUtil].userVO.key)? [SharedAppUtil defaultCommonUtil].userVO.key : @"";
-    return URL_Mall(username, key);
-}
-
 
 @end

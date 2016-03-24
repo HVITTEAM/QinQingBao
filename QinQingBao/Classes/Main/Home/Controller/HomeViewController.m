@@ -409,21 +409,6 @@ static float cellWidth = 66;
                                  }];
 }
 
-/**
- * 显示异常界面
- **/
--(void)showPlaceHolderView
-{
-    __block MTNetReloader *netReloader = [[MTNetReloader alloc] initWithFrame:self.view.frame
-                                                                  reloadBlock:^{
-                                                                      NSLog(@"Reload") ;
-                                                                      [netReloader dismiss] ;
-                                                                      [self getAdvertisementpic];
-                                                                      [self getTypeList];
-                                                                  }] ;
-    [netReloader showInView:self.view] ;
-}
-
 #pragma mark -- UIScrollView delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender
@@ -601,6 +586,22 @@ static float cellWidth = 66;
     adver.type = 5;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+#pragma mark Net Error
+/**
+ * 显示异常界面
+ **/
+-(void)showPlaceHolderView
+{
+    MTNetReloader *netReloader = [[MTNetReloader alloc] initWithFrame:self.view.frame
+                                                                  reloadBlock:^{
+                                                                      NSLog(@"Reload") ;
+                                                                      [netReloader dismiss] ;
+                                                                      [self getAdvertisementpic];
+                                                                      [self getTypeList];
+                                                                  }] ;
+    [netReloader showInView:self.view];
 }
 
 @end

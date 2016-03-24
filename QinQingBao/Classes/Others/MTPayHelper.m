@@ -12,9 +12,6 @@
 
 @implementation MTPayHelper
 
-/*
- * 确认支付
- */
 +(void)payWithAliPayWitTradeNO:(NSString *)tradeNO productName:(NSString *)productName amount:(NSString *)amount productDescription:(NSString *)productDescription  success:(void (^)(NSDictionary *dict,NSString *signedString))success failure:(void (^)(NSDictionary *dict))failure
 {
     NSLog(@"确认支付");

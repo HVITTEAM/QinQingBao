@@ -152,17 +152,10 @@
     //    }
 }
 
-
 #pragma mark MBTwitterScrollDelegate
 -(void) recievedMBTwitterScrollEvent
 {
     [self performSegueWithIdentifier:@"showPopover" sender:self];
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)index
-//设定cell的高度Path
-{
-    return 50;
 }
 
 # pragma  mark 设置数据源
@@ -176,11 +169,7 @@
     
     //重置数据源
     [self setupGroup0];
-//    [self setupGroup1];
-//    [self setupGroup2];
     [self setupGroup10];
-//    [self setupGroup4];
-//    [self setupGroup3];
     [self setupGroup5];
     [self setupFooter];
     

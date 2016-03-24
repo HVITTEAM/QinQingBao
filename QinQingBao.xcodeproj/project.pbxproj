@@ -129,6 +129,8 @@
 		0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0128A8BD1B9EC7D3002B14E2 /* OrderSubmitCell.xib */; };
 		0128A8C21B9ED064002B14E2 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128A8C11B9ED064002B14E2 /* PayViewController.m */; };
 		0128A8C81B9ED597002B14E2 /* UIViewController+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */; };
+		012AAD191CA28CF000CEE121 /* HealthPlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AAD181CA28CF000CEE121 /* HealthPlaceHolderView.m */; };
+		012AAD1B1CA28D0500CEE121 /* HealthPlaceHolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012AAD1A1CA28D0500CEE121 /* HealthPlaceHolderView.xib */; };
 		01328F9A1C4C88270014D283 /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F991C4C88270014D283 /* StoreModel.m */; };
 		01328F9F1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F9D1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m */; };
 		01328FA01C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328F9E1C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib */; };
@@ -263,7 +265,6 @@
 		01DDF2D11C156C2800958332 /* DataCitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D01C156C2800958332 /* DataCitiesViewController.m */; };
 		01DDF2D51C156E0900958332 /* CitiesTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D41C156E0900958332 /* CitiesTotal.m */; };
 		01DDF2D81C156E1B00958332 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D71C156E1B00958332 /* CityModel.m */; };
-		01E08DDA1BABFBC200E00432 /* VenderMannager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E08DD91BABFBC200E00432 /* VenderMannager.m */; };
 		01E4A9461C3FA97A00AAAF73 /* PriceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4A9441C3FA97A00AAAF73 /* PriceDetailCell.m */; };
 		01E4A9471C3FA97A00AAAF73 /* PriceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E4A9451C3FA97A00AAAF73 /* PriceDetailCell.xib */; };
 		01E4A94B1C3FDDED00AAAF73 /* GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4A94A1C3FDDED00AAAF73 /* GoodsDetailViewController.m */; };
@@ -1443,6 +1444,9 @@
 		0128A8C11B9ED064002B14E2 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		0128A8C61B9ED597002B14E2 /* UIViewController+AOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AOP.h"; sourceTree = "<group>"; };
 		0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AOP.m"; sourceTree = "<group>"; };
+		012AAD171CA28CF000CEE121 /* HealthPlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthPlaceHolderView.h; sourceTree = "<group>"; };
+		012AAD181CA28CF000CEE121 /* HealthPlaceHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthPlaceHolderView.m; sourceTree = "<group>"; };
+		012AAD1A1CA28D0500CEE121 /* HealthPlaceHolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthPlaceHolderView.xib; sourceTree = "<group>"; };
 		01328F981C4C88270014D283 /* StoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
 		01328F991C4C88270014D283 /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
 		01328F9C1C4CCD5E0014D283 /* GoodsMiddleBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsMiddleBottomCell.h; sourceTree = "<group>"; };
@@ -1675,8 +1679,6 @@
 		01DDF2D41C156E0900958332 /* CitiesTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesTotal.m; sourceTree = "<group>"; };
 		01DDF2D61C156E1B00958332 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
 		01DDF2D71C156E1B00958332 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
-		01E08DD81BABFBC200E00432 /* VenderMannager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VenderMannager.h; sourceTree = "<group>"; };
-		01E08DD91BABFBC200E00432 /* VenderMannager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VenderMannager.m; sourceTree = "<group>"; };
 		01E4A9431C3FA97A00AAAF73 /* PriceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDetailCell.h; sourceTree = "<group>"; };
 		01E4A9441C3FA97A00AAAF73 /* PriceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceDetailCell.m; sourceTree = "<group>"; };
 		01E4A9451C3FA97A00AAAF73 /* PriceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceDetailCell.xib; sourceTree = "<group>"; };
@@ -6809,6 +6811,9 @@
 			children = (
 				D279D9FD1B8709FD00E7CDDF /* UUChart */,
 				01ED08B81B84701200115E3A /* Cell */,
+				012AAD171CA28CF000CEE121 /* HealthPlaceHolderView.h */,
+				012AAD181CA28CF000CEE121 /* HealthPlaceHolderView.m */,
+				012AAD1A1CA28D0500CEE121 /* HealthPlaceHolderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6946,8 +6951,6 @@
 				01CF97AB1C7AEAD500206FCD /* MTAddressPickController.h */,
 				01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */,
 				01ED7CA81C3220AB00A2182F /* MTNetReloader */,
-				01E08DD81BABFBC200E00432 /* VenderMannager.h */,
-				01E08DD91BABFBC200E00432 /* VenderMannager.m */,
 				0180A2B21BA7E9C400D26866 /* NoticeHelper.h */,
 				0180A2B31BA7E9C400D26866 /* NoticeHelper.m */,
 				0126EDAA1B8C6E2600EC85C1 /* MTDateHelper.h */,
@@ -8135,6 +8138,7 @@
 				01ECDAD71C8EB31F0018160F /* Contents.json in Resources */,
 				01F49D241C478D700079F45F /* CommonGoodsCellMiddle.xib in Resources */,
 				01ECDA051C8EB31F0018160F /* Contents.json in Resources */,
+				012AAD1B1CA28D0500CEE121 /* HealthPlaceHolderView.xib in Resources */,
 				01E68FC11BCCA68900A17543 /* play_sel.png in Resources */,
 				01ECDA7A1C8EB31F0018160F /* chatBar_more.png in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
@@ -8338,6 +8342,7 @@
 				013F3F221BFC6A8500FF39E5 /* AnimationViewController.m in Sources */,
 				01266B971C4A38F500992D2F /* OrderResultModel.m in Sources */,
 				01EB28661BA1192C00937412 /* OrderFormDetailController.m in Sources */,
+				012AAD191CA28CF000CEE121 /* HealthPlaceHolderView.m in Sources */,
 				018BC60B1C50AC7200C883FF /* WifiInfoViewController.m in Sources */,
 				01E4A96B1C3FFA8600AAAF73 /* GoodsListViewController.m in Sources */,
 				01FBF0E01BCBAD4100CA285C /* MJProperty.m in Sources */,
@@ -8860,7 +8865,6 @@
 				01E9A7411C74613500000805 /* DiseaseinfoController.m in Sources */,
 				01E690851BCCF6AA00A17543 /* TSPopoverTouchView.m in Sources */,
 				01E6D4F81BE1F49B00824F51 /* SVProgressHUD.m in Sources */,
-				01E08DDA1BABFBC200E00432 /* VenderMannager.m in Sources */,
 				01ECDB151C8EB31F0018160F /* EaseMessageTimeCell.m in Sources */,
 				01ECDB011C8EB31F0018160F /* NSObject+EaseMob.m in Sources */,
 				01ECDFE21B7C7ADA00665D87 /* HealthPageViewController.m in Sources */,
