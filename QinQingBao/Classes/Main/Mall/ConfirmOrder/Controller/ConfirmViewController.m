@@ -437,7 +437,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                 NSLog(@"选中了。。。。。");
                 model = item;
                 selectedAddress = YES;
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationLeft];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             };
             [self.navigationController pushViewController:vc animated:YES];
         }

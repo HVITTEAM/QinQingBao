@@ -104,7 +104,7 @@
         GoodsTypeModel *item = self.dataProvider[indexPath.section];
         UILabel *lab = (UILabel *)[headerView viewWithTag:100];
         if (!lab)
-            lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 30)];
+            lab = [[UILabel alloc] initWithFrame:CGRectMake(0, -3, MTScreenW, 30)];
         lab.font = [UIFont systemFontOfSize:14];
         lab.textColor = [UIColor darkGrayColor];
         lab.tag = 100;

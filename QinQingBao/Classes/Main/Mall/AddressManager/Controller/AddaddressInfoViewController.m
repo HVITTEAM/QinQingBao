@@ -25,7 +25,7 @@
 
 //省 数组
 @property (strong, nonatomic) NSArray *provinceArr;
-//城市 数组
+//城市 数组e
 @property (strong, nonatomic) NSArray *cityArr;
 //区县 数组
 @property (strong, nonatomic) NSArray *areaArr;
@@ -157,8 +157,12 @@
     if (self.item)
     {
         NSArray *arr = [self.item.area_info componentsSeparatedByString:@"-"];
-     
+        
         self.provinceTextField.text  = self.item.area_info;
+        self.nameTextField.text = self.item.true_name;
+        self.phoneTextField.text = self.item.mob_phone;
+        self.telephoneTextField.text = self.item.tel_phone;
+        self.addressTextField.text = self.item.address;
         
         selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
         selectedCityItem  = [[AreaModel alloc] initWithName:arr[1] areaid:self.item.city_id];
@@ -328,51 +332,6 @@
 {
     _item = item;
 }
-
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    NSTimeInterval animationDuration=0.30f;
-//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//    [UIView setAnimationDuration:animationDuration];
-//    //上移30个单位，按实际情况设置
-//    
-//    if (CGRectGetMaxY(textField.frame) > MTScreenH - 216)
-//    {
-//        CGRect rect = CGRectMake(0.0f,MTScreenH - 216 - CGRectGetMaxY(textField.frame),MTScreenW,MTScreenH);
-//        self.view.frame = rect;
-//        [UIView commitAnimations];
-//    }
-//    
-//    if (textField == self.regionTextField || textField == self.provinceTextField || textField == self.cityTextField)
-//        return NO;
-//    return YES;
-//}
-//
-////输入框编辑完成以后，将视图恢复到原始状态
-//-(void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    NSTimeInterval animationDuration = 0.25f;
-//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//    [UIView setAnimationDuration:animationDuration];
-//    //上移30个单位，按实际情况设置
-//    CGRect rect = CGRectMake(0.0f,0,MTScreenW,MTScreenH);
-//    self.view.frame = rect;
-//    [UIView commitAnimations];
-//}
-
-//要实现的Delegate方法,键盘next下跳
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    if(textField.returnKeyType == UIReturnKeyDone)
-//    {
-//        [self.view endEditing:YES];
-//    }
-//    if(textField.returnKeyType==UIReturnKeyNext)
-//    {
-//        
-//    }
-//    return YES;
-//}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {

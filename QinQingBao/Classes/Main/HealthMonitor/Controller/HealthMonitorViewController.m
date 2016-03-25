@@ -37,6 +37,8 @@
     [self initNavigation];
     
     [self getDataProvider];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -175,7 +177,6 @@
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.scrollView];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     // 2.添加view
     for (int i = 0; i< dataProvider.count ; i++)
