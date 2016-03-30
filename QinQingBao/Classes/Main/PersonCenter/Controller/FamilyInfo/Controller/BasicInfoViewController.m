@@ -88,7 +88,7 @@
     self.itemTel = [HMCommonTextfieldItem itemWithTitle:@"手机号码" icon:nil];
     self.itemTel.placeholder = @"请输入手机号码";
     
-    group.items = @[self.itemNick,self.itemTel];
+    group.items = @[self.itemNick];
 }
 
 - (void)setupGroup1
@@ -173,8 +173,10 @@
                                                                         @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                         @"client":@"ios",
                                                                         @"ud_name": self.itemName.rightText.text ?  self.itemName.rightText.text : @"",
-                                                                        @"ud_phone":self.itemTel.rightText.text ?  self.itemTel.rightText.text : @"",
-                                                                        @"ud_identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @""}
+//                                                                        @"ud_phone":self.itemTel.rightText.text ?  self.itemTel.rightText.text : @"",
+                                                                        @"ud_identity":self.itemId.rightText.text ?  self.itemId.rightText.text : @"",
+                                                                        @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                        @"client":@"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

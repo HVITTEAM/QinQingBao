@@ -26,6 +26,5 @@
 @property (nonatomic, strong) QCListViewController *vc2;
 @property (nonatomic, strong) QCListViewController *vc3;
 @property (nonatomic, strong) QCListViewController *vc4;
-@property (nonatomic, strong) QCListViewController *vc5;
 
 @end

@@ -48,7 +48,7 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         [self initWithPlaceString:@"暂无数据"];
+                                         [self.view initWithPlaceString:@"暂无数据"];
                                      }
                                      else
                                      {

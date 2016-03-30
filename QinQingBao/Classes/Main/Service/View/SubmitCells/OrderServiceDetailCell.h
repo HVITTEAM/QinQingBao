@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceItemModel.h"
+@class OrderModel;
 
 @interface OrderServiceDetailCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIImageView *serviceIcon;
@@ -17,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *detailLabWidth;
 
 -(void)setdataWithItem:(ServiceItemModel *)item;
+
+-(void)setdataWithOrderModel:(OrderModel *)orderModel;
 
 +(OrderServiceDetailCell *) orderServiceDetailCell;
 @end

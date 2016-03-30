@@ -64,6 +64,7 @@
 @property (nonatomic, retain) NSString *qxrid;
 @property (nonatomic, retain) NSString *dvcode;
 @property (nonatomic, retain) NSString *waddress;
+@property (nonatomic, retain) NSString *totalname;
 @property (nonatomic, retain) NSString *wlat;
 @property (nonatomic, retain) NSString *wlng;
 @property (nonatomic, retain) NSString *wtime;
@@ -95,10 +96,24 @@
 @property (nonatomic, retain) NSString *dis_con;
 @property (nonatomic, retain) NSString *pay_staus;
 @property (nonatomic, retain) NSString *pay_type;
-@property (nonatomic, retain) NSString *totalname;
 @property (nonatomic, retain) NSString *tname;
 
-
-
+@property (nonatomic, retain) NSString *item_url;
+@property (nonatomic, retain) NSString *member_id;
+@property (nonatomic, retain) NSString *org_dis_con;
+@property (nonatomic, retain) NSString *orgid;
+@property (nonatomic, retain) NSString *orglat;
+@property (nonatomic, retain) NSString *orglon;
+@property (nonatomic, retain) NSString *orgphone;
+@property (nonatomic, retain) NSString *orgtelnum;
+@property (nonatomic, retain) NSString *remakr;
+@property (nonatomic, retain) NSString *sumdis;
+@property (nonatomic, retain) NSString *sumgrad;
+@property (nonatomic, retain) NSString *sumsell;
+@property (nonatomic, retain) NSString *voucher_id;
+@property (nonatomic, retain) NSString *voucher_price;
+@property (nonatomic, retain) NSString *worggrade;
+@property (nonatomic, retain) NSString *worgpjtime;
+@property (nonatomic, retain) NSString *pay_time;
 
 @end

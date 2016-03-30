@@ -21,6 +21,7 @@
     //    [hud hide:YES afterDelay:1.33];
 }
 
+
 + (NSString *)intervalSinceNow: (NSString *) theDate
 {
     NSDateFormatter *date=[[NSDateFormatter alloc] init];
@@ -71,6 +72,12 @@
     return [dateday stringFromDate:beginningOfWeek];
 }
 
++(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days formatter:(NSDateFormatter *)dateFormatter
+{
+    NSDate *newDate = [NSDate dateWithTimeInterval:days * 24 * 3600  sinceDate:aDate];
+    return [dateFormatter stringFromDate:newDate];
+}
+
 +(NSString *)getDaySince1970:(NSString *)timeStr dateformat:(NSString *)dateformat
 {
     if ([timeStr doubleValue] < 1 )
@@ -83,6 +90,7 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
     return [formatter stringFromDate:confromTimesp];
 }
+
 
 +(int)getApplicationNettype
 {

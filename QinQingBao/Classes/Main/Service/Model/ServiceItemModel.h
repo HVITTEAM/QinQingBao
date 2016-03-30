@@ -86,7 +86,6 @@
 @property (nonatomic, copy) NSString *store_description;
 
 
-//----------------------------------------------
-@property (nonatomic, copy) NSString *member_id;
-//----------------------------------------------
 @end
+
+

@@ -23,13 +23,13 @@
     _item = item;
     
     self.evaLab.editable = NO;
-    self.evaLab.textColor = MTNavgationBackgroundColor;
+    //self.evaLab.textColor = MTNavgationBackgroundColor;
     self.evaLab.userInteractionEnabled = NO;
     self.evaLab.scrollEnabled = NO;
     self.evaLab.backgroundColor = [UIColor clearColor];
     
     self.evaTimeLab.text = self.item.wpjtime;
-    self.evaTimeLab.textColor = MTNavgationBackgroundColor;
+    //self.evaTimeLab.textColor = MTNavgationBackgroundColor;
 
     self.evaLab.text = self.item.dis_con;
 

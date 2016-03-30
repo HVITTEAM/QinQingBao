@@ -7,32 +7,23 @@
 //
 
 #import "OrderSubmitController.h"
-#import "FamilyModel.h"
 #import "OrderServiceDetailCell.h"
 #import "UseCouponsViewController.h"
 #import "CouponsModel.h"
 #import "OrderItem.h"
 #import "OrderResultViewController.h"
 #import "UpdateAddressController.h"
+#import "OrderTimeViewController.h"
+#import "AddressTableViewController.h"
+#import "OrderManCell.h"
+#import "MallAddressModel.h"
+
+#import "ServiceDetailCell.h"
 
 @interface OrderSubmitController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    NSMutableArray* day;
-    NSMutableArray* time;
-    NSArray* min;
-    
-    NSString* daystr;
-    NSString* timestr;
-    NSString* minstr;
-    
-    //是否选择了服务对象
-    BOOL haveObj;
     
     NSInteger selectedIndex;
-    
-    //服务时间
-    NSString *selectedTimestr;
-    FamilyModel *famVO;
     
     OrderSubmitCell *orderSubmitCell;
     
@@ -40,6 +31,12 @@
     CouponsModel *couponsItem;
 }
 @property(nonatomic,strong)UITableView *tableView;
+
+@property(strong,nonatomic)MallAddressModel *addressModel;
+
+@property(strong,nonatomic)NSString *showTimestr;
+
+@property(strong,nonatomic)NSString *uploadTimestr;
 
 @end
 
@@ -50,8 +47,6 @@
     [super viewDidLoad];
     
     [self initNavigation];
-    
-    [self initDatePickView];
     
     selectedIndex = 1;
     
@@ -69,14 +64,12 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [MTNotificationCenter addObserver:self selector:@selector(selectedObjectHanlder:) name:MTSececteFamily object:nil];
 }
 
 - (UITableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.userInteractionEnabled=YES;
         _tableView.dataSource = self;
@@ -111,162 +104,14 @@
 -(void)initNavigation
 {
     self.title = @"提交订单";
-    haveObj = NO;
 }
 
-/**
- *
- */
--(void)selectedObjectHanlder:(NSNotification *)notification
-{
-    haveObj = YES;
-    famVO  = notification.object;
-    [self.tableView reloadData];
-}
-
-#pragma mark - datePicker data source
-
-/**
- *   创建、并初始化2个NSArray对象，分别作为2列的数据
- */
--(void)initDatePickView
-{
-    NSDate* date=[NSDate date];
-    
-    //今天
-    NSString * now = [MTDateHelper getDaySinceday:date days:0];
-    //明天
-    NSString * tomorrow = [MTDateHelper getDaySinceday:date days:1];
-    
-    //后天
-    NSString * aftertomorrow = [MTDateHelper getDaySinceday:date days:2];
-    
-    //大后天
-    NSString * aftertomorrow1 = [MTDateHelper getDaySinceday:date days:3];
-    
-    //大大后天
-    NSString * aftertomorrow2 = [MTDateHelper getDaySinceday:date days:4];
-    
-    self.datePickView = [[UIPickerView alloc] init];
-    
-    day = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:now,tomorrow,aftertomorrow,aftertomorrow1,aftertomorrow2, nil]];
-    
-    time = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:@"09" , @"10"
-                                                  , @"11",@"12", @"13", @"14",
-                                                  @"15", @"16" , @"17",@"18", nil]];
-    
-    min = [NSArray arrayWithObjects:@"00" , @"30", nil];
-    
-    [self checkTime];
-    
-    self.datePickView.dataSource = self;
-    self.datePickView.delegate = self;
-    
-    daystr = [day objectAtIndex:0];
-    timestr = [time objectAtIndex:0];
-    minstr = [min objectAtIndex:0];
-}
-
-/**
- * 过滤时间 显示合适的预约时间
- **/
--(void)checkTime
-{
-    NSDate *  senddate=[NSDate date];
-    
-    NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-    
-    [dateformatter setDateFormat:@"HH"];
-    
-    NSString *  locationString=[dateformatter stringFromDate:senddate];
-    
-    NSLog(@"locationString:%@",locationString);
-    
-    //如果时间超过了下午6点 就显示第二天 不显示今天的
-    if([locationString floatValue] > 18)
-        [day removeObjectAtIndex:0];
-    
-    //    for (int i = 0; i < time.count; i++)
-    //    {
-    //        if ([time[0] floatValue] <= [locationString floatValue])
-    //        {
-    //            [time removeObjectAtIndex:0];
-    //        }
-    //    }
-}
-
-
-#pragma mark - UIPickerViewDataSource
-
-// UIPickerViewDataSource中定义的方法，该方法返回值决定该控件包含多少列
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView
-{
-    return 3;
-}
-
-// UIPickerViewDataSource中定义的方法，该方法返回值决定该控件指定列包含多少个列表项
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
-{
-    if (component == 0)
-        return day.count;
-    else  if (component == 1)
-        return time.count;
-    else
-        return min.count;
-}
-
-// UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为
-// UIPickerView中指定列、指定列表项上显示的标题
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    if (component == 0)
-        return [day objectAtIndex:row];
-    else  if (component == 1)
-        return [NSString stringWithFormat:@"%@时",[time objectAtIndex:row]];
-    else
-        return [NSString stringWithFormat:@"%@分",[min objectAtIndex:row]];
-}
-
-// 当用户选中UIPickerViewDataSource中指定列、指定列表项时激发该方法
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    
-    switch (component) {
-        case 0:
-            daystr = [day objectAtIndex:row];
-            break;
-        case 1:
-            timestr = [time objectAtIndex:row];
-            break;
-        case 2:
-            minstr = [min objectAtIndex:row];
-            break;
-        default:
-            break;
-    }
-    //    self.item2.subtitle = [NSString stringWithFormat:@"%@%@%@"
-    //                           , daystr , timestr,minstr];
-}
-
-// UIPickerViewDelegate中定义的方法，该方法返回的NSString将作为
-// UIPickerView中指定列的宽度
-- (CGFloat)pickerView:(UIPickerView *)pickerView
-    widthForComponent:(NSInteger)component
-{
-    if (component == 0)
-        return 120;
-    else  if (component == 1)
-        return 90;
-    else
-        return 90;
-}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 7;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -274,19 +119,16 @@ numberOfRowsInComponent:(NSInteger)component
     switch (section)
     {
         case 0:
-            return haveObj ? 2 : 1;
+            return 1;
             break;
         case 1:
-            return 2;
+            return 1;
             break;
         case 2:
-            return 1;
-            break;
-        case 3:
             return 2;
             break;
-        case 4:
-            return 1;
+        case 3:
+            return 0;
             break;
         default:
             return 0;
@@ -295,20 +137,37 @@ numberOfRowsInComponent:(NSInteger)component
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10;
+    return 1;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return [[UIView alloc] init];
+    return 10;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 1)
-        return 100;
-    else if (indexPath.section == 1 && indexPath.row == 1)
+    if (indexPath.section == 0){
+        if (self.addressModel) {
+            static OrderManCell *orderManCell = nil;
+            if (!orderManCell) {
+                orderManCell = [OrderManCell createOrderManCellWithTableView:tableView];
+            }
+            orderManCell.nameStr = self.addressModel.true_name;
+            orderManCell.phoneStr = self.addressModel.mob_phone;
+            orderManCell.addressStr = [NSString stringWithFormat:@"%@%@",self.addressModel.area_info,self.addressModel.address];
+            return [orderManCell setupCellUI];
+        }
+        
+        return 44;
+    }
+    else if (indexPath.section == 2 && indexPath.row == 1)
         return 70;
+    else if (indexPath.section == 3)
+    {
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.height;
+    }
     else
         return 44;
 }
@@ -320,7 +179,16 @@ numberOfRowsInComponent:(NSInteger)component
     
     if (indexPath.section == 0)
     {
-        if (indexPath.row == 0)
+        if (self.addressModel)
+        {
+            OrderManCell *orderManCell = [OrderManCell createOrderManCellWithTableView:tableView];
+            orderManCell.nameStr = self.addressModel.true_name;
+            orderManCell.phoneStr = self.addressModel.mob_phone;
+            orderManCell.addressStr = [NSString stringWithFormat:@"%@%@",self.addressModel.area_info,self.addressModel.address];
+            [orderManCell setupCellUI];
+            cell = orderManCell;
+        }
+        else
         {
             UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommoncell"];
             
@@ -328,77 +196,63 @@ numberOfRowsInComponent:(NSInteger)component
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
             
             commoncell.textLabel.text = @"服务对象";
-            commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
             commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell = commoncell;
         }
-        else
-        {
-            ServiceCustomCell *serviceCuscell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceCustomcell"];
-            
-            if(serviceCuscell == nil)
-                serviceCuscell = [ServiceCustomCell serviceCustomCell];
-            
-            __weak __typeof(self)weakSelf = self;
-            serviceCuscell.changeAddressClick = ^(UIButton *btn){
-                NSLog(@"切换地址");
-                [weakSelf changeAddressHandler];
-            };
-            [serviceCuscell setdataWithItem:famVO];
-            
-            cell = serviceCuscell;
-        }
-        
     }
-    else  if (indexPath.section == 2 && indexPath.row == 0)
+    else  if (indexPath.section == 1 && indexPath.row == 0)
     {
         UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommoncell"];
         
         if (commoncell == nil)
             commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
         
-        commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
         commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        commoncell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
         commoncell.textLabel.text = @"预约时间";
-        commoncell.detailTextLabel.text =  selectedTimestr;
+        commoncell.detailTextLabel.text =  self.showTimestr;
         cell = commoncell;
     }
-    else  if (indexPath.section == 3)
-    {
-        UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPaytypeCell"];
-        if (payTypecell == nil)
-            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTPaytypeCell"];
-        payTypecell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
-        payTypecell.textLabel.text = indexPath.row == 0 ? @"在线支付": @"货到付款";
-        
-        if (selectedIndex == indexPath.row)
-            payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
-        else
-            payTypecell.accessoryType = UITableViewCellAccessoryNone;
-        
-        cell =  payTypecell;
-    }
+    //    else  if (indexPath.section == 3)
+    //    {
+    //        UITableViewCell *payTypecell = [tableView dequeueReusableCellWithIdentifier:@"MTPaytypeCell"];
+    //        if (payTypecell == nil)
+    //            payTypecell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTPaytypeCell"];
+    //        payTypecell.textLabel.text = indexPath.row == 0 ? @"在线支付": @"货到付款";
+    //
+    //        if (selectedIndex == indexPath.row)
+    //            payTypecell.accessoryType = UITableViewCellAccessoryCheckmark;
+    //        else
+    //            payTypecell.accessoryType = UITableViewCellAccessoryNone;
+    //
+    //        cell =  payTypecell;
+    //    }
     else  if (indexPath.section == 4)
     {
         UITableViewCell *vouchercell = [tableView dequeueReusableCellWithIdentifier:@"MTVoucherCell"];
         if (vouchercell == nil)
             vouchercell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTVoucherCell"];
-        vouchercell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
         vouchercell.textLabel.text = @"优惠券";
         if (couponsItem)
             vouchercell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",couponsItem.voucher_price];
         else
         {
             vouchercell.detailTextLabel.text = @"暂未开通";
-            vouchercell.detailTextLabel.font = [UIFont systemFontOfSize:14];
             vouchercell.detailTextLabel.textColor = MTNavgationBackgroundColor;
         }
         vouchercell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell =  vouchercell;
     }
-    else
+    else if (indexPath.section == 3)
+    {
+        ServiceDetailCell *serviceDetailcell = [tableView dequeueReusableCellWithIdentifier:@"MTServiceDetailsCell"];
+        if(serviceDetailcell == nil)
+            serviceDetailcell = [ServiceDetailCell serviceCell];
+        
+        [serviceDetailcell setItemInfo:self.serviceDetailItem];
+        
+        cell = serviceDetailcell;
+    }
+    else  if (indexPath.section == 2)
     {
         if (indexPath.row == 0)
         {
@@ -407,10 +261,9 @@ numberOfRowsInComponent:(NSInteger)component
             if (commoncell == nil)
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommoncell"];
             
-            commoncell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            commoncell.accessoryType = UITableViewCellSelectionStyleNone;
-            commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
-            commoncell.textLabel.text = @"服务详情";
+            commoncell.textLabel.text = @"服务项目";
+            commoncell.detailTextLabel.text =  @"";
+            
             cell = commoncell;
         }
         else
@@ -426,70 +279,56 @@ numberOfRowsInComponent:(NSInteger)component
         }
     }
     
-    //设置背景图片
-    if ([tableView numberOfRowsInSection:indexPath.section] == 1)
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background.png"]];
-    else if (indexPath.row == 0)
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_top.png"]];
-    else
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_bottom.png"]];
+    //    //设置背景图片
+    //    if ([tableView numberOfRowsInSection:indexPath.section] == 1)
+    //        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background.png"]];
+    //    else if (indexPath.row == 0)
+    //        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_top.png"]];
+    //    else
+    //        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_background_bottom.png"]];
     
-    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_middle_background_highlighted"]];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:14];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0)
+    if (indexPath.section == 0)
     {
-        FamilyViewController *familyView = [[FamilyViewController alloc] init];
-        [self.navigationController pushViewController:familyView animated:YES];
+        __weak typeof(self) weakSelf = self;
+        AddressTableViewController *vc = [[AddressTableViewController alloc] init];
+        vc.selectedAddressModelBlock = ^(MallAddressModel *item){
+            weakSelf.addressModel = item;
+            [weakSelf.tableView reloadData];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.section == 2 && indexPath.row == 0)
+    else if (indexPath.section == 1 && indexPath.row == 0)
     {
-        [self showDatePicker];
+        __weak typeof(self)weakSelf = self;
+        OrderTimeViewController *chooseTimeVC = [[OrderTimeViewController alloc] init];
+        chooseTimeVC.finishTimeCallBack = ^(NSString *showTime,NSString *uploadTime){
+            weakSelf.showTimestr = showTime;
+            weakSelf.uploadTimestr = uploadTime;
+            [weakSelf.tableView reloadData];
+        };
+        [self.navigationController pushViewController:chooseTimeVC animated:YES];
     }
     else if (indexPath.section == 3)
     {
-        if (indexPath.row == 0) {
-            [NoticeHelper AlertShow:@"暂不支持在线支付" view:self.view];
-        }
-        //        [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
-        //
-        //        selectedIndex = indexPath.row;
-        //
-        //        [self.tableView reloadData];
+        UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
+        coupons.selectedClick = ^(CouponsModel *item)
+        {
+            NSLog(@"选择优惠券");
+            couponsItem = item;
+            [orderSubmitCell setCouponsModel:item];
+            [self.tableView reloadData];
+        };
+        [self.navigationController pushViewController:coupons animated:YES];
     }
-    else if (indexPath.section == 4)
-    {
-        //优惠券
-//        UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
-//        coupons.selectedClick = ^(CouponsModel *item)
-//        {
-//            NSLog(@"选择优惠券");
-//            couponsItem = item;
-//            [orderSubmitCell setCouponsModel:item];
-//            [self.tableView reloadData];
-//        };
-//        [self.navigationController pushViewController:coupons animated:YES];
-    }
-}
-
-/**
- *  修改临时地址
- */
--(void)changeAddressHandler
-{
-    UpdateAddressController *addressView = [[UpdateAddressController alloc] init];
-    addressView.title = @"修改地址";
-    addressView.changeDataBlock = ^(NSDictionary *dict, NSString *addressStr){
-        famVO.member_areaid = [dict objectForKey:@"member_areaid"];
-        famVO.totalname = addressStr;
-        famVO.member_areainfo = [dict objectForKey:@"member_areainfo"];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    };
-    [self.navigationController pushViewController:addressView animated:YES];
 }
 
 /**
@@ -497,28 +336,28 @@ numberOfRowsInComponent:(NSInteger)component
  */
 -(void)submitClickHandler
 {
-    if (selectedTimestr.length == 0)
+    NSString *telNum = self.addressModel.mob_phone ?:(self.addressModel.tel_phone ?:nil);
+    NSString *address = [NSString stringWithFormat:@"%@",self.addressModel.address];
+    if (self.uploadTimestr.length == 0)
         return [NoticeHelper AlertShow:@"请选择预约时间" view:self.view];
-    else if (famVO == nil)
+    else if (self.addressModel == nil)
         return [NoticeHelper AlertShow:@"请选择服务对象" view:self.view];
-    else if (!famVO.member_truename)
+    else if (!self.addressModel.true_name)
         return [NoticeHelper AlertShow:@"服务对象的真实姓名不能为空" view:self.view];
-    else if (!famVO.member_areaid)
+    else if (!self.addressModel.address)
         return [NoticeHelper AlertShow:@"服务地址不能为空" view:self.view];
-    else if (!famVO.member_mobile)
+    else if (!telNum)
         return [NoticeHelper AlertShow:@"联系号码不能为空" view:self.view];
-    else if (!famVO.member_areainfo)
-        return [NoticeHelper AlertShow:@"服务地址不能为空" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: @{@"tid" : self.serviceTypeItem.tid,
                                                                      @"iid" : self.serviceDetailItem.iid,
                                                                      @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                     @"wtime" : selectedTimestr,
-                                                                     @"wname" : famVO.member_truename,
+                                                                     @"wtime" : self.uploadTimestr,
+                                                                     @"wname" : self.addressModel.true_name,
                                                                      @"wprice" : self.serviceDetailItem.price,
-                                                                     @"dvcode" : famVO.member_areaid,
-                                                                     @"wtelnum" : famVO.member_mobile,
-                                                                     @"waddress" : famVO.member_areainfo,
+                                                                     @"dvcode" : self.addressModel.area_id,
+                                                                     @"wtelnum" : telNum,
+                                                                     @"waddress" : address,
                                                                      @"client" : @"ios",
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"wlevel" : @"1",
@@ -539,17 +378,6 @@ numberOfRowsInComponent:(NSInteger)component
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-                                         //                                         PayViewController *payView = [[PayViewController alloc] init];
-                                         //                                         payView.serviceDetailItem = self.serviceDetailItem;
-                                         //                                         payView.orderItem = item;
-                                         //                                         [self.navigationController pushViewController:payView animated:YES];
-                                         
-                                         //                                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"下单结果"
-                                         //                                                                                         message:@"下单成功"
-                                         //                                                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-                                         //                                         [alert show];
-                                         //                                         [self.navigationController popViewControllerAnimated:YES];
-                                         
                                          OrderResultViewController *vc = [[OrderResultViewController alloc] init];
                                          vc.orderItem = item;
                                          [self.navigationController pushViewController:vc animated:YES];
@@ -560,76 +388,6 @@ numberOfRowsInComponent:(NSInteger)component
                                      [NoticeHelper AlertShow:@"下单失败!" view:self.view];
                                      [HUD removeFromSuperview];
                                  }];
-}
-
--(void)showDatePicker
-{
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        [self setDatePickerIos8];
-    else
-        [self setDatePickerIos7];
-}
-
-
-#pragma mark --- DatePicker
-
--(void)setDatePickerIos8
-{
-    UIAlertController* alertVc=[UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n"
-                                                                   message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    self.datePicker = [[UIDatePicker alloc]init];
-    
-    UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
-        
-        //拼接下单预约时间的字符串
-        NSDate *  timeDate=[NSDate date];
-        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
-        [dateformatter setDateFormat:@"yyyy"];
-        NSString *  yearString=[dateformatter stringFromDate:timeDate];
-        selectedTimestr = [NSString stringWithFormat:@"%@-%@ %@:%@:00",yearString, daystr , timestr,minstr];
-        
-        [self.tableView reloadData];
-    }];
-    UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
-    [alertVc.view addSubview:self.datePickView];
-    [alertVc addAction:ok];
-    [alertVc addAction:no];
-    [self presentViewController:alertVc animated:YES completion:nil];
-}
-
--(void)setDatePickerIos7
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: @"\n\n\n\n\n\n\n\n\n\n\n"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:@"确认"
-                                  otherButtonTitles:nil];
-    
-    self.datePicker = [[UIDatePicker alloc] init];
-    
-    NSDate* minDate = [NSDate date];
-    
-    self.datePicker.minimumDate = minDate;
-    //7天
-    self.datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:3600 *24 *7];
-    
-    self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    [actionSheet addSubview:self.datePicker];
-    [actionSheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(buttonIndex == 0)
-    {
-        NSDate* date=[self.datePicker date];
-        NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-        NSString * curentDatest=[formatter stringFromDate:date];
-        selectedTimestr = curentDatest;
-        [self.tableView reloadData];
-    }
 }
 
 @end

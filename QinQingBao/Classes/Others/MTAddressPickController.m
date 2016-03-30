@@ -78,7 +78,7 @@
     selectedCityStr = cityStr;
     selectedStreetStr = streetStr;
     textItem1.rightText.text = areaInfo;
-    selectedStreetItem = [[AreaModel alloc] initWithName:streetStr areaid:streetCode];
+    selectedStreetItem = [[AreaModel alloc] initWithName:streetStr areaid:streetCode dvcode:streetCode];
 }
 
 /**获取街道数据源**/
@@ -97,7 +97,7 @@
                                          CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
                                          regionList = result.datas;
                                          CityModel * item = [regionList objectAtIndex:0];
-                                         selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode];
+                                         selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode dvcode:item.dvcode];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -145,9 +145,9 @@
     self.provinceArr = @[@"浙江省"];
     self.cityArr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
     self.areaArr = self.cityArr[0][@"regions"];
-    selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
-    selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"] ];
-    selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
+    selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
+    selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+    selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
 }
 
 # pragma  mark 设置数据源
@@ -301,17 +301,17 @@
     if (pickviewTypeAddress)
     {
         CityModel * item = [regionList objectAtIndex:row];
-        selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode];
+        selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode dvcode:item.dvcode];
         return;
     }
     switch (component)
     {
         case 0:
         {
-            selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
+            selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
             
-            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"] ];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 1:
@@ -319,14 +319,14 @@
             self.areaArr = [[self.cityArr objectAtIndex:row] objectForKey:@"regions"];
             [pickView reloadComponent:2];
             [pickView selectRow:0 inComponent:2 animated:YES];
-            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"dvcode"] ];
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             self.areaArr = self.cityArr[row][@"regions"];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 2:
         {
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         default:

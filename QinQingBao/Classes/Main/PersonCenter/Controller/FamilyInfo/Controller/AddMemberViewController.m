@@ -11,6 +11,8 @@
 #import "BasicInfoViewController.h"
 #import "AddDeviceViewController.h"
 
+#import "ScanCodesViewController.h"
+
 @interface AddMemberViewController ()
 {
     
@@ -66,6 +68,9 @@
 -(void)initNavigation
 {
     self.title = @"添加亲友";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"scan.png"] style:UIBarButtonItemStylePlain target:self action:@selector(scan)];
+    
 }
 
 # pragma  mark 设置数据源
@@ -124,32 +129,21 @@
 
 - (void)setupFooter
 {
-    UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 110)];
+    UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 140)];
     
-    UILabel *lab0 = [[UILabel alloc] init];
-    lab0.text = @"说明：验证码发送至被监护老人手机号，有效期为3分钟";
-    lab0.font = [UIFont fontWithName:@"Helvetica" size:12];
-    lab0.textColor = [UIColor grayColor];
-    CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
-    if (size0.width > MTScreenW *0.8)
-    {
-        lab0.width = MTScreenW *0.8;
-        lab0.height = size0.height *2;
-        lab0.numberOfLines = 0 ;
-        footview.height = footview.height + size0.height + 10;
-    }
-    else
-    {
-        lab0.width = size0.width;
-        lab0.height = size0.height;
-    }
-    
-    lab0.x = self.view.width/2 - lab0.width/2;
-    lab0.y = 0;
-    //    [footview addSubview:lab0];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 230)/2, -10, 230, 30)];
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"infoimg.png"]];
+    img.frame = CGRectMake(lab.x - 20, -5, 20, 20);
+    lab.userInteractionEnabled = NO;
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.text = @"可扫描设备条形码/二维码获取设备识别码";
+    lab.textColor = HMColor(234, 100, 65);
+    lab.textAlignment = NSTextAlignmentCenter;
+    [footview addSubview:lab];
+    [footview addSubview:img];
     
     // 1.创建按钮
-    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 50)];
+    UIButton *okBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lab.frame), MTScreenW, 50)];
     
     // 2.设置属性
     okBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -169,7 +163,6 @@
     [changeType addTarget:self action:@selector(changeType) forControlEvents:UIControlEventTouchUpInside];
     
     CGSize size = [changeType.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:changeType.titleLabel.font}];
-    
     changeType.width = size.width;
     changeType.x = MTScreenW - size.width - 10;
     [footview addSubview:changeType];
@@ -180,7 +173,7 @@
 -(void)changeType
 {
     AddDeviceViewController *view = [[AddDeviceViewController alloc] init];
-        view.isFromStart = YES;
+    view.isFromStart = YES;
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -270,5 +263,15 @@
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];
                                  }];
+}
+
+//扫描条形码
+-(void)scan
+{
+    ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
+    scanCodeVC.getcodeClick = ^(NSString *code){
+        self.telfield.rightText.text = code;
+    };
+    [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 @end

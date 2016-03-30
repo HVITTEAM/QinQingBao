@@ -24,7 +24,8 @@
     self.backBtn.layer.cornerRadius = 4;
     
     self.orderNum.text = [NSString stringWithFormat:@"订单编号: %@",self.orderItem.wcode];
-    self.orderPrice.text = [NSString stringWithFormat:@"订单金额: %@ 元",self.orderItem.wprice];
+  
+    self.orderPrice.text = [NSString stringWithFormat:@"订单金额: %@", [self.orderItem.wprice floatValue] == 0 ? @"面议" : self.orderItem.wprice];
     
 }
 

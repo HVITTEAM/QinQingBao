@@ -14,6 +14,7 @@
 @property(nonatomic,copy)NSString *member_id;
 @property(nonatomic,copy)NSString *true_name;
 @property(nonatomic,copy)NSString *area_id;
+@property(nonatomic,copy)NSString *dvcode;
 @property(nonatomic,copy)NSString *city_id;
 @property(nonatomic,copy)NSString *area_info;
 @property(nonatomic,copy)NSString *address;

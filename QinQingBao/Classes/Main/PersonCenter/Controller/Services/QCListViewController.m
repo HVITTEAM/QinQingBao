@@ -9,13 +9,19 @@
 #import "QCListViewController.h"
 #import "OrderModel.h"
 #import "OrderTotals.h"
-#import "OrderDetailController.h"
+//#import "OrderDetailController.h"
+#import "OrderDetailViewController.h"
+#import "OrderPayViewController.h"
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
     NSMutableArray *dataProvider;
     NSInteger currentPageIdx;
 }
+
+@property(strong,nonatomic)NSDateFormatter *formatterOut;
+
+@property(strong,nonatomic)NSDateFormatter *formatterIn;
 
 @end
 
@@ -34,6 +40,7 @@
 {
     [super viewWillAppear:animated];
 }
+
 
 - (void)viewDidCurrentView
 {
@@ -60,6 +67,26 @@
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, -25, 0);
+    
+}
+
+-(NSDateFormatter *)formatterOut
+{
+    if (!_formatterOut) {
+        _formatterOut = [[NSDateFormatter alloc] init];
+        [_formatterOut setDateFormat:@"yyyy年MM月dd日 EEEE aa"];
+    }
+    return _formatterOut;
+}
+
+
+-(NSDateFormatter *)formatterIn
+{
+    if (!_formatterIn) {
+        _formatterIn = [[NSDateFormatter alloc] init];
+        [_formatterIn setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    }
+    return _formatterIn;
 }
 
 #pragma mark 集成刷新控件
@@ -82,14 +109,27 @@
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *dict = [[NSDictionary alloc] init];
     
-    if ([self.title isEqualToString:@"全部订单"])
+    if ([self.title isEqualToString:@"全部"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
-                  @"get_type" : @"0"};
+                  @"get_type" : @"2",
+                  @"status" : @"0,119"
+                  };
+    }
+    else if ([self.title isEqualToString:@"待受理"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                  @"page" : @"100",
+                  @"get_type" : @"2",
+                  @"status" : @"0,9"
+                  };
     }
     else if ([self.title isEqualToString:@"待付款"])
     {
@@ -97,31 +137,13 @@
                   @"client" : @"ios",
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"pay_staus" : @"0",
                   @"page" : @"100",
-                  @"get_type" : @"0"};
+                  @"get_type" : @"2",
+                  @"status" : @"30,49",
+                  @"pay_staus":@"0"
+                  };
     }
-    else if ([self.title isEqualToString:@"受理中"])
-    {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"0,9",
-                  @"page" : @"100",
-                  @"get_type" : @"2"};
-    }
-    else if ([self.title isEqualToString:@"待评价"])
-    {
-        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                  @"client" : @"ios",
-                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"30,39",
-                  @"page" : @"100",
-                  @"get_type" : @"2"};
-    }
-    else if ([self.title isEqualToString:@"取消/售后"])
+    else if ([self.title isEqualToString:@"退款/售后"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
@@ -131,10 +153,22 @@
                   @"page" : @"100",
                   @"get_type" : @"2"};
     }
+//    else if ([self.title isEqualToString:@"取消/售后"])//取消/售后
+//    {
+//        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+//                  @"client" : @"ios",
+//                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+//                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+//                  @"status" : @"50,59",
+//                  @"page" : @"100",
+//                  @"get_type" : @"2"};
+//    }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
+                                     
+                                     NSLog(@"----+++++---%@",responseObject);
                                      [self.tableView removePlace];
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
@@ -177,7 +211,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 160;
+    return 200;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -189,7 +223,8 @@
     cell.deleteClick = ^(UIButton *btn){
         [self deleteOrderClickHandler:indexPath btn:btn];
     };
-    
+    cell.formatterIn = self.formatterIn;
+    cell.formatterOut = self.formatterOut;
     [cell setItem:dataProvider[indexPath.section]];
     
     return  cell;
@@ -197,9 +232,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    OrderDetailController *detailForm = [[OrderDetailController alloc] init];
-    detailForm.orderItem = dataProvider[indexPath.section];
-    [self.nav pushViewController:detailForm animated:YES];
+    OrderDetailViewController *orderDetailVC = [[OrderDetailViewController alloc] init];
+    orderDetailVC.orderInfor = dataProvider[indexPath.section];
+    [self.nav pushViewController:orderDetailVC animated:YES];
 }
 
 /**
@@ -218,11 +253,11 @@
         };
         [self.nav pushViewController:cancelView animated:YES];
     }
-    else if ([btn.titleLabel.text isEqualToString:@"评价订单"])
+    else if ([btn.titleLabel.text isEqualToString:@"去结算"])
     {
-        EvaluationController *evaluaView = [[EvaluationController alloc]init];
-        evaluaView.orderItem = dataProvider[indexPath.section];
-        [self.nav pushViewController:evaluaView animated:YES];
+        OrderPayViewController *orderPayVC = [[OrderPayViewController alloc] init];
+        orderPayVC.orderInfor = dataProvider[indexPath.section];
+        [self.nav pushViewController:orderPayVC animated:YES];
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
     {
@@ -282,5 +317,6 @@
 //    [[UIApplication sharedApplication] openURL:url];
 //    
 //}
+
 
 @end

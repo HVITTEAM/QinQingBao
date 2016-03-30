@@ -10,22 +10,17 @@
 #import "OrderModel.h"
 
 @interface CommonOrderCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UIView *topSapce;
-@property (strong, nonatomic) IBOutlet UIView *bottomSpace;
-@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
-@property (strong, nonatomic) IBOutlet UILabel *namaLab;
 
-@property (strong, nonatomic) IBOutlet UILabel *titleLab;
-@property (strong, nonatomic) IBOutlet UILabel *statusLab;
-@property (strong, nonatomic) IBOutlet UILabel *timeLab;
-@property (strong, nonatomic) IBOutlet UILabel *addressLab;
-
-
-- (IBAction)deleteBtnClickHandler:(id)sender;
 @property (nonatomic, copy) void (^deleteClick)(UIButton *btn);
+
+@property (nonatomic, retain) OrderModel *item;
+
+@property(strong,nonatomic)NSDateFormatter *formatterIn;        //时期格式化对象
+
+@property(strong,nonatomic)NSDateFormatter *formatterOut;        //时期格式化对象
 
 +(CommonOrderCell *) commonOrderCell;
 
-@property (nonatomic, retain) OrderModel *item;
+- (IBAction)deleteBtnClickHandler:(id)sender;
 
 @end

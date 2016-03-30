@@ -183,6 +183,8 @@
                                      dataProvider = result.datas;
                                      if (dataProvider.count == 0)
                                          [self.tableView initWithPlaceString:@"暂无数据!"];
+                                     else
+                                         [self.tableView removePlace];
                                      [self.tableView reloadData];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"出错了....");

@@ -81,10 +81,10 @@
     {
         case 0:
         {
-            selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
+            selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
             
-            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] ];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 1:
@@ -92,14 +92,14 @@
             self.areaArr = [[self.cityArr objectAtIndex:row] objectForKey:@"regions"];
             [pickView reloadComponent:2];
             [pickView selectRow:0 inComponent:2 animated:YES];
-            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"areaid"] ];
+            selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             self.areaArr = self.cityArr[row][@"regions"];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 2:
         {
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         default:
@@ -164,9 +164,9 @@
         self.telephoneTextField.text = self.item.tel_phone;
         self.addressTextField.text = self.item.address;
         
-        selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
-        selectedCityItem  = [[AreaModel alloc] initWithName:arr[1] areaid:self.item.city_id];
-        selectedRegionItem  = [[AreaModel alloc] initWithName:arr[2] areaid:self.item.area_id];
+        selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
+        selectedCityItem  = [[AreaModel alloc] initWithName:arr[1] areaid:self.item.city_id dvcode:self.item.dvcode];
+        selectedRegionItem  = [[AreaModel alloc] initWithName:arr[2] areaid:self.item.area_id dvcode:self.item.dvcode];
     }
 }
 
@@ -232,8 +232,8 @@
                                                                         @"address" : _addressTextField.text,
                                                                         @"tel_phone" : _telephoneTextField.text,
                                                                         @"mob_phone" : _phoneTextField.text,
-                                                                        @"city_id" : selectedCityItem.area_id,
-                                                                        @"area_id" : selectedRegionItem.area_id}
+                                                                        @"city_id" : selectedCityItem.dvcode,
+                                                                        @"area_id" : selectedRegionItem.dvcode}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          [HUD removeFromSuperview];
@@ -267,9 +267,9 @@
     self.provinceArr = @[@"浙江省"];
     self.cityArr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
     self.areaArr = self.cityArr[0][@"regions"];
-    selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11"];
-    selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] ];
-    selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"]];
+    selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
+    selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+    selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
 }
 
 //获取城市级联信息

@@ -12,7 +12,6 @@
 
 @interface UseCouponsViewController : UITableViewController
 
-
 @property (nonatomic, copy) void (^selectedClick)(CouponsModel *item);
 
 @property (nonatomic, assign) UINavigationController *nav;

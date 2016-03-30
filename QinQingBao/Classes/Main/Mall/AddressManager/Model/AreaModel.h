@@ -14,5 +14,5 @@
 @property(nonatomic,copy)NSString *dvcode;
 
 
--(AreaModel *)initWithName:(NSString *)name areaid:(NSString *)areaid;
+-(AreaModel *)initWithName:(NSString *)name areaid:(NSString *)areaid dvcode:(NSString *)dvcode;
 @end

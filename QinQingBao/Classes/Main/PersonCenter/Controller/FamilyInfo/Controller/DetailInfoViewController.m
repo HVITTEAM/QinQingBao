@@ -118,8 +118,8 @@
     nameItem.subtitle = self.itemInfo.ud_name;
     
     //电话
-    HMCommonItem *telItem = [HMCommonItem itemWithTitle:@"电话号码" icon:@""];
-    telItem.subtitle = self.itemInfo.ud_phone;
+    HMCommonItem *telItem = [HMCommonItem itemWithTitle:@"昵称" icon:@""];
+    telItem.subtitle = self.itemInfo.rel_name;
     
     //身份证
     HMCommonArrowItem *IDItem = [HMCommonArrowItem itemWithTitle:@"身份证" icon:@""];
@@ -137,7 +137,7 @@
         [weakSelf.navigationController pushViewController:textFieldVC animated:YES];
     };
     
-    group.items = @[nameItem,telItem,IDItem];
+    group.items = @[telItem,nameItem,IDItem];
 }
 
 /**
@@ -203,7 +203,8 @@
     [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.member_id forKey:@"member_id"];
     [dict setValue:self.itemInfo.ud_id forKey:@"ud_id"];
     [dict setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[self.itemInfo.ud_sos count]] forKey:@"sos_count"];
-    
+    [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+    [dict setValue:@"ios" forKey:@"client"];
     for (int i = 1; i < self.itemInfo.ud_sos.count+1 ; i++)
     {
         RelationModel *obj = self.itemInfo.ud_sos[i-1];

@@ -163,7 +163,8 @@
     [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.member_id forKey:@"member_id"];
     [dict setValue:self.ud_id forKey:@"ud_id"];
     [dict setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[relationArr count]] forKey:@"sos_count"];
-    
+    [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+    [dict setValue:@"ios" forKey:@"client"];
     for (int i = 1; i < relationArr.count+1 ; i++)
     {
         RelationModel *obj = relationArr[i-1];

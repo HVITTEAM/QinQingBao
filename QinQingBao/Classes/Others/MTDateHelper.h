@@ -24,11 +24,12 @@
  */
 + (NSString *)intervalSinceNow: (NSString *) theDate;
 
-
 /**
  * 根据日期和间隔天数 获得需要的日期
  */
 +(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days;
+
++(NSString *)getDaySinceday:(NSDate *)aDate days:(float)days formatter:(NSDateFormatter *)dateFormatter;
 
 /**
  * 时间戳转换成时间

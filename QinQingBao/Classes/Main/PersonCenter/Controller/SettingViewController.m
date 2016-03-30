@@ -8,7 +8,7 @@
 
 #import "SettingViewController.h"
 
-@interface SettingViewController ()
+@interface SettingViewController ()<UIAlertViewDelegate>
 
 @end
 
@@ -17,9 +17,9 @@
 -(instancetype)init
 {
     self = [super init];
-     if (self){
-         self.hidesBottomBarWhenPushed = YES;
-     }
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
     return self;
 }
 
@@ -47,7 +47,6 @@
     self.view.backgroundColor = HMGlobalBg;
 }
 
-
 # pragma  mark 设置数据源
 /**
  *  初始化模型数据
@@ -72,9 +71,15 @@
     
     // 设置组的所有行数据
     HMCommonArrowItem *version = [HMCommonArrowItem itemWithTitle:@"清除缓存" icon:@"pc_accout.png"];
-    // newFriend.destVcClass = [MyAccountViewController class];
+    version.subtitle = [NSString stringWithFormat:@"%.1fM",[self filePath]];
     version.operation = ^{
-        [NoticeHelper AlertShow:@"释放成功" view:self.view];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:[NSString stringWithFormat:@"缓存大小为%@,确定要清除吗？",[NSString stringWithFormat:@"%.1fM",[self filePath]]]
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"确定", nil];
+        [alertView show];
     };
     
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"设置" icon:@"app.png"];
@@ -83,6 +88,63 @@
     };
     
     group.items = @[version,advice];
+}
+
+// 显示缓存大小
+-(float)filePath
+{
+    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
+    return [ self folderSizeAtPath :cachPath];
+    
+}
+//1:首先我们计算一下 单个文件的大小
+- (long)fileSizeAtPath:( NSString *) filePath
+{
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    if ([manager fileExistsAtPath :filePath])
+        return [[manager attributesOfItemAtPath :filePath error : nil ] fileSize ];
+    return 0 ;
+}
+
+//2:遍历文件夹获得文件夹大小，返回多少 M（提示：你可以在工程界设置（)m）
+
+- (float) folderSizeAtPath:( NSString *) folderPath
+{
+    NSFileManager * manager = [ NSFileManager defaultManager ];
+    if (![manager fileExistsAtPath :folderPath]) return 0 ;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath :folderPath] objectEnumerator ];
+    NSString * fileName;
+    long long folderSize = 0 ;
+    while ((fileName = [childFilesEnumerator nextObject ]) != nil ){
+        NSString * fileAbsolutePath = [folderPath stringByAppendingPathComponent :fileName];
+        folderSize += [ self fileSizeAtPath :fileAbsolutePath];
+    }
+    return folderSize/( 1024.0 * 1024.0 );
+}
+
+// 清理缓存
+- (void)clearFile
+{
+    NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
+    NSArray * files = [[ NSFileManager defaultManager ] subpathsAtPath :cachPath];
+    NSLog ( @"cachpath = %@" , cachPath);
+    for ( NSString * p in files)
+    {
+        NSError * error = nil ;
+        NSString * path = [cachPath stringByAppendingPathComponent :p];
+        if ([[ NSFileManager defaultManager ] fileExistsAtPath :path])
+            [[ NSFileManager defaultManager ] removeItemAtPath :path error :&error];
+    }
+    [NoticeHelper AlertShow:@"释放成功" view:self.view];
+    [self setupGroups];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self clearFile];
+    }
 }
 
 

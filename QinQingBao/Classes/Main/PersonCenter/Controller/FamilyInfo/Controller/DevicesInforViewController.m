@@ -138,8 +138,11 @@
 /**解绑设备*/
 -(void)deleteDevice:(NSString *)imei
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_del_conditon_user_devide parameters: @{@"ud_phone" : self.selectedFamilyMember.ud_phone,
-                                                                                 @"device_code": imei}
+    [CommonRemoteHelper RemoteWithUrl:URL_del_base_user_devide parameters: @{@"ud_id" : self.selectedFamilyMember.ud_id,
+                                                                             @"device_id": imei,
+                                                                             @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                             @"client":@"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -151,6 +154,7 @@
                                      else
                                      {
                                          [self.devicesArray removeObjectAtIndex:selectedDeleteIndex];
+                                         self.selectedFamilyMember.device = self.devicesArray;
                                          [self setupGroups];
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"解绑成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];

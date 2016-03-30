@@ -127,7 +127,6 @@
                                      else
                                      {
                                          dataProvider = [DeviceModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         [self removePlace];
                                          [self setupScrollView];
                                          [self setupPageControl];
                                      }

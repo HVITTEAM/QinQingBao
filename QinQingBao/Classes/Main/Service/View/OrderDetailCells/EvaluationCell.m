@@ -66,7 +66,7 @@
     self.contentLabWidth.constant = tmpRect.size.height;
 
     //60是下方的高度
-    self.height = CGRectGetMaxY(self.contentLab.frame) + 60;
+    self.height = CGRectGetMaxY(self.contentLab.frame) + 30;
     
 }
 @end

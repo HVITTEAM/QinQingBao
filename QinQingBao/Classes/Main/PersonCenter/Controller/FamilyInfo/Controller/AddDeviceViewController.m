@@ -20,9 +20,11 @@
     
     NSString *selectedDevicename;
 }
+
 @property (nonatomic,retain) HMCommonItem *item0;
 @property (nonatomic,retain) HMCommonTextfieldItem *itemimei;
 @property (nonatomic,retain) HMCommonItem *item1;
+@property (nonatomic,retain) HMCommonTextfieldItem *item2;
 @property (nonatomic,retain) HMCommonButtonItem *itemBtn;
 @end
 
@@ -63,6 +65,7 @@
 {
     [self setupGroup0];
     [self setupGroup];
+    [self setupGroup1];
     [self setupFooter];
 }
 
@@ -77,7 +80,6 @@
     group.items = @[self.itemimei];
 }
 
-
 - (void)setupGroup
 {
     HMCommonGroup *group = [HMCommonGroup group];
@@ -89,6 +91,17 @@
         self.item1 = [HMCommonItem itemWithTitle:@"设备型号" icon:nil];
     
     group.items = @[self.item0,self.item1];
+}
+
+- (void)setupGroup1
+{
+    HMCommonGroup *group = [HMCommonGroup group];
+    [self.groups addObject:group];
+    
+    if (!self.item2)
+        self.item2 = [HMCommonTextfieldItem itemWithTitle:@"SIM卡号" icon:nil];
+    self.item2.placeholder = @"请输入正确的SIM卡号";
+    group.items = @[self.item2];
 }
 
 #pragma  mark UIActionSheetDelegate
@@ -166,7 +179,8 @@
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_bamg_user_devide_rel parameters: @{@"device_code" : self.itemimei.rightText.text,
-                                                                                 @"ud_id": self.selectedFamily.ud_id}
+                                                                                 @"ud_id": self.selectedFamily.ud_id,
+                                                                                 @"device_num":self.item2.rightText.text}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -185,7 +199,6 @@
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
                                      }];
-        
     }
     else
     {
@@ -206,14 +219,22 @@
                                      [HUD removeFromSuperview];
                                      id codeNum = [dict objectForKey:@"code"];
                                      NSDictionary *data = [dict objectForKey:@"datas"];
-                                     id ud_name = [data objectForKey:@"ud_name"];
+                                     
+                                     id ud_name;
                                      
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
+                                         return;
                                      }
-                                     else if(![ud_name isKindOfClass:[NSNull class]])
+                                     
+                                     if ([[data allKeys] containsObject:@"ud_name"])
+                                     {
+                                         ud_name = [data objectForKey:@"ud_name"];
+                                     }
+                                     
+                                     if(ud_name && ![ud_name isKindOfClass:[NSNull class]])
                                      {
                                          [NoticeHelper AlertShow:@"该设备已经被绑定" view:nil];
                                      }

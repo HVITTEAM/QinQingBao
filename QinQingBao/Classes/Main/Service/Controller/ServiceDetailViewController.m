@@ -295,8 +295,6 @@
         default:
             break;
     }
-    
-    //            cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage resizedImage:@"common_card_background"]];
     return cell;
 }
 
@@ -326,26 +324,26 @@
 //-------------------------------------------------------------------------
 //商家信息
 -(void)getBusinessData {
-    NSString *businessPath = [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid",URL_Local];
-    [CommonRemoteHelper RemoteWithUrl:businessPath parameters:@{@"member_id" : itemInfo.member_id}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if ([codeNum isKindOfClass:[NSString class]]) {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                     }else {
-                                         NSDictionary *di = [dict objectForKey:@"datas"];
-                                         if ([di count] != 0) {
-                                             businessModle = [BusinessInfoModel businessInfo:dict];
-                                         }else {
-                                             [NoticeHelper AlertShow:@"商家资料为空!" view:self.view];
-                                         }
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [self.view endEditing:YES];
-                                 }];
+//    NSString *businessPath = [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid",URL_Local];
+//    [CommonRemoteHelper RemoteWithUrl:businessPath parameters:@{@"member_id" : itemInfo.member_id}
+//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+//                                     id codeNum = [dict objectForKey:@"code"];
+//                                     if ([codeNum isKindOfClass:[NSString class]]) {
+//                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//                                         [alertView show];
+//                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+//                                     }else {
+//                                         NSDictionary *di = [dict objectForKey:@"datas"];
+//                                         if ([di count] != 0) {
+//                                             businessModle = [BusinessInfoModel businessInfo:dict];
+//                                         }else {
+//                                             [NoticeHelper AlertShow:@"商家资料为空!" view:self.view];
+//                                         }
+//                                     }
+//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                     NSLog(@"发生错误！%@",error);
+//                                     [self.view endEditing:YES];
+//                                 }];
 }
 //-------------------------------------------------------------------------
 

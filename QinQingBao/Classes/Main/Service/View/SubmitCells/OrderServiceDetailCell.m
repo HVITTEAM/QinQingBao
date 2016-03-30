@@ -7,6 +7,7 @@
 //
 
 #import "OrderServiceDetailCell.h"
+#import "OrderModel.h"
 
 @implementation OrderServiceDetailCell
 
@@ -40,5 +41,18 @@
     self.detailLabWidth.constant = size.width;
 }
 
+
+-(void)setdataWithOrderModel:(OrderModel *)orderModel
+{
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,orderModel.item_url]];
+    [self.serviceIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    self.serviceTitle.text = orderModel.orgname;
+    self.serviceDesc.text = orderModel.icontent;
+    self.servicePrice.text = nil;
+    
+    CGSize size = [self.serviceTitle.text sizeWithAttributes:@{NSFontAttributeName:self.serviceTitle.font}];
+    self.detailLabWidth.constant = size.width;
+
+}
 
 @end

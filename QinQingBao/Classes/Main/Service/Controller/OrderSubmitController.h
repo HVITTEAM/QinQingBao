@@ -14,11 +14,10 @@
 #import "ServiceItemModel.h"
 #import "ServiceTypeModel.h"
 
-@interface OrderSubmitController : UIViewController<UIActionSheetDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
+@interface OrderSubmitController : UIViewController
 
 @property (nonatomic,retain) UIDatePicker* datePicker;
 
-@property (nonatomic,retain) UIPickerView* datePickView;
 
 /*服务详情**/
 @property (nonatomic, retain) ServiceItemModel *serviceDetailItem;
