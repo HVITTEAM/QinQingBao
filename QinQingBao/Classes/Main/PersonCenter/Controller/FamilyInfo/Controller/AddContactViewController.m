@@ -67,6 +67,7 @@
  
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
+    self.item1.keyboardType = UIKeyboardTypeNumberPad;
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
     self.item2.subtitle = selectedRealationStr.length == 0  ? @"请选择" : selectedRealationStr;
@@ -124,6 +125,7 @@
 
 -(void)next:(UIButton *)sender
 {
+    [self.view endEditing:YES];
     if (self.item0.rightText.text.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入姓名" view:nil];

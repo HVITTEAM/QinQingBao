@@ -18,6 +18,8 @@
 
 @property(nonatomic,getter=isSecureTextEntry) BOOL secureTextEntry;       // default is NO
 
+@property(nonatomic) UIKeyboardType keyboardType;                         // default is UIKeyboardTypeDefault
+
 /** 图标 */
 @property (nonatomic, copy) NSString *icon;
 /** 标题 */

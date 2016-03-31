@@ -71,6 +71,7 @@
 
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
+    self.item1.keyboardType = UIKeyboardTypeNumberPad;
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
     self.item2.subtitle = selectedRealationStr.length == 0  ? self.item.sos_relation : selectedRealationStr;

@@ -217,7 +217,9 @@
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [CommonRemoteHelper RemoteWithUrl:URL_del_base_user_devide parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                                 @"ud_id" : self.selecteItem.ud_id}
+                                                                                 @"ud_id" : self.selecteItem.ud_id,
+                                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                                 @"client":@"ios"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          [HUD removeFromSuperview];
                                          id codeNum = [dict objectForKey:@"code"];

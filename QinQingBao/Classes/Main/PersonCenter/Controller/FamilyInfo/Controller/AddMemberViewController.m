@@ -234,6 +234,11 @@
         [NoticeHelper AlertShow:@"请输入家属昵称" view:self.view];
         return;
     }
+    else if (self.telfield.rightText.text.length == 0)
+    {
+        [NoticeHelper AlertShow:@"请输入设备识别码" view:self.view];
+        return;
+    }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_bang_add_cnditon_user_device_rel_code parameters: @{@"conditon":self.telfield.rightText.text,
                                                                                               @"rel_name" : self.numfield.rightText.text,

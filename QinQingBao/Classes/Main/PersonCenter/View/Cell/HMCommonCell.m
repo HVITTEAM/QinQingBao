@@ -61,6 +61,7 @@
         self.rightText.textColor = [UIColor lightGrayColor];
         self.rightText.font = [UIFont systemFontOfSize:15];
         self.rightText.secureTextEntry = self.item.secureTextEntry;
+        self.rightText.keyboardType = self.item.keyboardType;
         self.item.rightText = _rightText;
     }
     return _rightText;

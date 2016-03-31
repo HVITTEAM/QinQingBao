@@ -296,8 +296,11 @@ static CGFloat IMAGEVIEW_HEIGHT;
         }
         //转换成专题产品模型
         self.groupbuyTotal = [GroupbuyTotal objectWithKeyValues:dict[@"datas"]];
-        GroupbuyMode *model = self.groupbuyTotal.data[0];
-        self.endDate = [NSDate dateWithTimeIntervalSinceNow:[model.count_down integerValue]];
+        if (self.groupbuyTotal.data.count > 0)
+        {
+            GroupbuyMode *model = self.groupbuyTotal.data[0];
+            self.endDate = [NSDate dateWithTimeIntervalSinceNow:[model.count_down integerValue]];
+        }
         [self startCountDown];
         [self.tableView reloadData];
         
@@ -512,7 +515,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         specialCell.delegate = self;
         
         cell = specialCell;
-
+        
     }
     else if (indexPath.section == 1)
     {

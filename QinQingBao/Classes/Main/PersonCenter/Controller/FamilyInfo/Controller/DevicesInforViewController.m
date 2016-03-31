@@ -140,7 +140,6 @@
 {
     [CommonRemoteHelper RemoteWithUrl:URL_del_base_user_devide parameters: @{@"ud_id" : self.selectedFamilyMember.ud_id,
                                                                              @"device_id": imei,
-                                                                             @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                              @"client":@"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
