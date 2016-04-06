@@ -51,7 +51,7 @@ NSString * const kPmStateKey = @"pmState";
 {
     _cellData = cellData;
     
-    self.dateLb.text = cellData[kTimekey];
+    self.dateLb.text = [cellData[kTimekey] substringFromIndex:5];
     self.AMBtn.selected = [cellData[kAmStateKey] boolValue];
     self.PMBtn.selected = [cellData[kPmStateKey] boolValue];
     

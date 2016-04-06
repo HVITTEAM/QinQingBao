@@ -176,6 +176,5 @@
     obj.sos_relation = selectedRealationStr;
     if (self.deleteResultClick)
         self.deleteResultClick(obj);
-
 }
 @end

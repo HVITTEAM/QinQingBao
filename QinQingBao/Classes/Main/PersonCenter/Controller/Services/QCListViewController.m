@@ -12,6 +12,7 @@
 //#import "OrderDetailController.h"
 #import "OrderDetailViewController.h"
 #import "OrderPayViewController.h"
+#import "OrderDetailCancelViewController.h"
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
@@ -232,6 +233,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    OrderModel *orderModel = dataProvider[indexPath.section];
+    
+    NSInteger orderStatus = [orderModel.status integerValue];
+    
+    if (orderStatus >= 50 && orderStatus <= 69) {
+        OrderDetailCancelViewController *cancelVC = [[OrderDetailCancelViewController alloc] init];
+        cancelVC.orderInfor = dataProvider[indexPath.section];
+        [self.nav pushViewController:cancelVC animated:YES];
+        return;
+    }
+    
     OrderDetailViewController *orderDetailVC = [[OrderDetailViewController alloc] init];
     orderDetailVC.orderInfor = dataProvider[indexPath.section];
     [self.nav pushViewController:orderDetailVC animated:YES];

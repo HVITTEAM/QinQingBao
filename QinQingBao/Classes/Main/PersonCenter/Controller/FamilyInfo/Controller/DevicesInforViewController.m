@@ -111,7 +111,10 @@
 //要求委托方的编辑风格在表视图的一个特定的位置。
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return UITableViewCellEditingStyleDelete;
+    if ([self.selectedFamilyMember.member_id isEqualToString:[SharedAppUtil defaultCommonUtil].userVO.member_id])
+        return UITableViewCellEditingStyleDelete;
+    else
+        return UITableViewCellEditingStyleNone;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +134,7 @@
     if(buttonIndex == 1)
     {
         DeviceInfoModel *model = self.devicesArray[selectedDeleteIndex];
-        [self deleteDevice:model.device_code];
+        [self deleteDevice:model.deviceid];
     }
 }
 

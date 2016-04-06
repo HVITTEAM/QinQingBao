@@ -167,6 +167,10 @@
     {
         return [NoticeHelper AlertShow:@"请输入昵称" view:nil];
     }
+    else if (self.itemName.rightText.text.length == 0)
+    {
+        return [NoticeHelper AlertShow:@"请输入姓名" view:nil];
+    }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_bang_new_device parameters: @{@"device_code" : self.devicecode,
                                                                         @"rel_name":self.itemNick.rightText.text,

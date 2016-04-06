@@ -87,7 +87,8 @@
     {
         str = @"已接单";
         self.statusLab.textColor = [UIColor orangeColor];
-        [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+        //[self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+        self.deleteBtn.hidden = YES;
     }
     else if (status >= 20 && status <= 29)
     {
@@ -96,7 +97,7 @@
     }
     else if (status >= 30 && status <= 39)
     {
-        str = @"服务结束";
+        str = @"服务完成";
         self.statusLab.textColor = [UIColor orangeColor];
         [self.deleteBtn setTitle:@"去结算" forState:UIControlStateNormal];
     }
@@ -106,7 +107,7 @@
             str = @"已支付";
             self.deleteBtn.hidden = YES;
         }else{
-            str = @"服务结束";
+            str = @"服务完成";
             self.statusLab.textColor = [UIColor orangeColor];
             [self.deleteBtn setTitle:@"去结算" forState:UIControlStateNormal];
         }
@@ -147,7 +148,6 @@
     
     return str;
 }
-
 - (IBAction)deleteBtnClickHandler:(id)sender
 {
     self.deleteClick(sender);

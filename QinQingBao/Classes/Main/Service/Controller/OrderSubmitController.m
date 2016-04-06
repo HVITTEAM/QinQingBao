@@ -19,20 +19,21 @@
 #import "MallAddressModel.h"
 
 #import "ServiceDetailCell.h"
+#import "AddressListTotal.h"
 
 @interface OrderSubmitController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    
     NSInteger selectedIndex;
     
     OrderSubmitCell *orderSubmitCell;
     
+    NSMutableArray *addressDataProvider;
     //优惠券
     CouponsModel *couponsItem;
 }
 @property(nonatomic,strong)UITableView *tableView;
 
-@property(strong,nonatomic)MallAddressModel *addressModel;
+@property(retain,nonatomic)MallAddressModel *addressModel;
 
 @property(strong,nonatomic)NSString *showTimestr;
 
@@ -58,12 +59,13 @@
     [super viewWillAppear:animated];
     
     [self initTableviewSkin];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [self getDataProvider];
 }
 
 - (UITableView *)tableView
@@ -300,6 +302,7 @@
     {
         __weak typeof(self) weakSelf = self;
         AddressTableViewController *vc = [[AddressTableViewController alloc] init];
+        vc.selectedItem = self.addressModel;
         vc.selectedAddressModelBlock = ^(MallAddressModel *item){
             weakSelf.addressModel = item;
             [weakSelf.tableView reloadData];
@@ -389,5 +392,56 @@
                                      [HUD removeFromSuperview];
                                  }];
 }
+
+#pragma mark 收货地址校验和管理
+/**
+ *  获取当前账号的地址数据
+ */
+-(void)getDataProvider
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Address_list parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios",
+                                                                     @"page" : @100}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     AddressListTotal *result = [AddressListTotal objectWithKeyValues:dict];
+                                     addressDataProvider = result.datas;
+                                     [self checkAddressVaild];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"出错了....");
+                                 }];
+}
+
+/**
+ *  检查当前选中的地址的有效性，如果删除掉了需要作出处理
+ */
+-(void)checkAddressVaild
+{
+    if (!self.addressModel && addressDataProvider.count >0)
+    {
+        self.addressModel = addressDataProvider[0];
+    }
+    else if (self.addressModel && addressDataProvider.count >0)
+    {
+        BOOL find = false;
+        for (MallAddressModel *item in addressDataProvider)
+        {
+            //之前选中的地址是否还存在，万一被删除了呢
+            if ([item.address_id isEqualToString:self.addressModel.address_id])
+            {
+                find = YES;
+                break;
+            }
+        }
+        if (!find)
+            self.addressModel = nil;
+        else
+            return;
+    }
+    else
+        self.addressModel = nil;
+        
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 
 @end

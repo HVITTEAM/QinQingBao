@@ -202,11 +202,11 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-#define URL_Local @"http://61.143.60.87/ylserver"
+//#define URL_Local @"http://61.143.60.87/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-//#define URL_Local @"http://ibama.hvit.com.cn"
+#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];

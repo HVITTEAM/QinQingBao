@@ -86,12 +86,21 @@
     if (cell == nil)
         cell = [AddressInfoCell addressInfoCell];
     
-    [cell setItem:addressDataProvider[indexPath.row]];
+    MallAddressModel *item = addressDataProvider[indexPath.row];
+    [cell setItem:item];
     
-    if (indexPath.row == 0)
+    if (!self.selectedItem && indexPath.row == 0)
     {
-        cell.chooseLable.alpha = 1;
+        //        cell.chooseLable.alpha = 1;
         cell.chooseBtn.alpha = 1;
+    }
+    else if(self.selectedItem && [self.selectedItem.address_id isEqualToString:item.address_id])
+    {
+        cell.chooseBtn.alpha = 1;
+    }
+    else
+    {
+        cell.chooseBtn.alpha = 0;
     }
     
     return cell;

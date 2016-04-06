@@ -152,7 +152,7 @@
 
 -(void)initView
 {
-    self.view.backgroundColor = HMGlobalBg;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.telephoneTextField.placeholder = @"选填";
     if (self.item)
     {

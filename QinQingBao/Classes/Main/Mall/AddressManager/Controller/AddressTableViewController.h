@@ -13,4 +13,9 @@
 
 @property (nonatomic, copy) void (^selectedAddressModelBlock)(MallAddressModel *item);
 
+/**
+ *  选中的地址
+ */
+@property (nonatomic, retain) MallAddressModel *selectedItem;
+
 @end

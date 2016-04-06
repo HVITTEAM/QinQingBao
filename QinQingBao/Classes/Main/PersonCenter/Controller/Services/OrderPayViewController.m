@@ -215,13 +215,11 @@ typedef NS_ENUM(NSInteger, PayType) {
 #pragma mark EvaluateCellDelegate
 -(void)evaluateCell:(EvaluateCell *)cell didEvaluateContentChange:(NSString *)newContent
 {
-    //NSLog(@"%@",newContent);
     self.evaluateContent = newContent;
 }
 
 -(void)evaluateCell:(EvaluateCell *)cell evaluateScore:(NSInteger)score
 {
-    //NSLog(@"%@",@(score));
     self.score = score;
 }
 

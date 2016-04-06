@@ -82,7 +82,6 @@
     self.clickEdit(self.item);
 }
 
-
 - (void)awakeFromNib {
 }
 

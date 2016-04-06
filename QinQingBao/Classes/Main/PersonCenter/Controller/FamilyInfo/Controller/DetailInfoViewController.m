@@ -18,6 +18,14 @@
 #import "AddContactViewController.h"
 
 @interface DetailInfoViewController ()<UIAlertViewDelegate>
+{
+    HMCommonItem *nameItem;
+    HMCommonArrowItem *telItem;
+    HMCommonItem *IDItem;
+    
+    //可编辑姓名item
+    HMCommonArrowItem *nameItem1;
+}
 
 @end
 
@@ -114,30 +122,64 @@
     [self.groups addObject:group];
     
     //姓名
-    HMCommonItem *nameItem = [HMCommonItem itemWithTitle:@"姓名" icon:@""];
+    nameItem = [HMCommonItem itemWithTitle:@"姓名" icon:@""];
     nameItem.subtitle = self.itemInfo.ud_name;
     
-    //电话
-    HMCommonItem *telItem = [HMCommonItem itemWithTitle:@"昵称" icon:@""];
-    telItem.subtitle = self.itemInfo.rel_name;
     
-    //身份证
-    HMCommonArrowItem *IDItem = [HMCommonArrowItem itemWithTitle:@"身份证" icon:@""];
-    IDItem.subtitle = self.itemInfo.ud_identity;
-    IDItem.operation = ^{
+    nameItem1 = [HMCommonArrowItem itemWithTitle:@"姓名" icon:@""];
+    nameItem1.subtitle = self.itemInfo.ud_name;
+    nameItem1.operation = ^{
         EditInfoTableViewController *textFieldVC = [[EditInfoTableViewController alloc]init];
-        textFieldVC.titleStr = @"身份证号";
-        textFieldVC.contentStr = weakSelf.itemInfo.ud_identity;
-        textFieldVC.placeholderStr = @"请输入正确的身份证号";
+        textFieldVC.titleStr = @"姓名";
+        textFieldVC.contentStr = weakSelf.itemInfo.ud_name;
+        textFieldVC.placeholderStr = @"请输入姓名";
         textFieldVC.finishUpdateOperation = ^(NSString *title,NSString *content,NSString *placeholder){
-            weakSelf.itemInfo.ud_identity = content;
+            weakSelf.itemInfo.ud_name = content;
             [weakSelf setupGroups];
             [weakSelf uploadFamilyInforWithFamilyModel];
         };
         [weakSelf.navigationController pushViewController:textFieldVC animated:YES];
     };
     
-    group.items = @[telItem,nameItem,IDItem];
+    
+    //电话
+    telItem = [HMCommonArrowItem itemWithTitle:@"昵称" icon:@""];
+    telItem.subtitle = self.itemInfo.rel_name;
+    telItem.operation = ^{
+        EditInfoTableViewController *textFieldVC = [[EditInfoTableViewController alloc]init];
+        textFieldVC.titleStr = @"昵称";
+        textFieldVC.contentStr = weakSelf.itemInfo.rel_name;
+        textFieldVC.placeholderStr = @"请输入家属昵称";
+        textFieldVC.finishUpdateOperation = ^(NSString *title,NSString *content,NSString *placeholder){
+            weakSelf.itemInfo.rel_name = content;
+            [weakSelf setupGroups];
+            [weakSelf uploadFamilyInforWithFamilyModel];
+        };
+        [weakSelf.navigationController pushViewController:textFieldVC animated:YES];
+    };
+    
+    
+    //身份证
+    IDItem = [HMCommonItem itemWithTitle:@"身份证" icon:@""];
+    IDItem.subtitle = self.itemInfo.ud_identity;
+//    IDItem.operation = ^{
+//        EditInfoTableViewController *textFieldVC = [[EditInfoTableViewController alloc]init];
+//        textFieldVC.titleStr = @"身份证号";
+//        textFieldVC.contentStr = weakSelf.itemInfo.ud_identity;
+//        textFieldVC.placeholderStr = @"请输入正确的身份证号";
+//        textFieldVC.finishUpdateOperation = ^(NSString *title,NSString *content,NSString *placeholder){
+//            weakSelf.itemInfo.ud_identity = content;
+//            [weakSelf setupGroups];
+//            [weakSelf uploadFamilyInforWithFamilyModel];
+//        };
+//        [weakSelf.navigationController pushViewController:textFieldVC animated:YES];
+//    };
+    
+    NSLog(@"%@,%@",self.itemInfo.member_id,[SharedAppUtil defaultCommonUtil].userVO.member_id);
+    if ([self.itemInfo.member_id isEqualToString:[SharedAppUtil defaultCommonUtil].userVO.member_id])
+        group.items = @[telItem,nameItem1,IDItem];
+    else
+        group.items = @[telItem,nameItem,IDItem];
 }
 
 /**
@@ -205,6 +247,10 @@
     [dict setValue:[NSString stringWithFormat:@"%lu",(unsigned long)[self.itemInfo.ud_sos count]] forKey:@"sos_count"];
     [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     [dict setValue:@"ios" forKey:@"client"];
+    [dict setValue:self.itemInfo.rel_name forKey:@"rel_name"];
+//    [dict setValue:self.itemInfo.ud_identity forKey:@"ud_identity"];
+    [dict setValue:self.itemInfo.ud_name forKey:@"ud_name"];
+    
     for (int i = 1; i < self.itemInfo.ud_sos.count+1 ; i++)
     {
         RelationModel *obj = self.itemInfo.ud_sos[i-1];
@@ -213,8 +259,8 @@
         [dict setValue:obj.sos_relation forKey:[NSString stringWithFormat:@"sos_relation_%d",i]];
     }
     
-    if (self.itemInfo.ud_sos.count == 0 )
-        return [NoticeHelper AlertShow:@"请设置紧急联系人" view:nil];
+    //    if (self.itemInfo.ud_sos.count == 0 )
+    //        return [NoticeHelper AlertShow:@"请设置紧急联系人" view:nil];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_edit_user_devide parameters: dict
