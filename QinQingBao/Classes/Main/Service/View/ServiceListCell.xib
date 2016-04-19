@@ -51,12 +51,12 @@
                         <color key="textColor" red="1" green="0.40000000596046448" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="Star">
-                        <rect key="frame" x="88" y="53" width="100" height="20"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FE2-1T-Otm" customClass="TQStarRatingView">
+                        <rect key="frame" x="88" y="53" width="80" height="33"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="IFx-TL-l4M"/>
-                            <constraint firstAttribute="height" constant="20" id="bYc-my-xkz"/>
+                            <constraint firstAttribute="width" constant="80" id="IFx-TL-l4M"/>
+                            <constraint firstAttribute="height" constant="33" id="bYc-my-xkz"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lug-CT-MEQ">

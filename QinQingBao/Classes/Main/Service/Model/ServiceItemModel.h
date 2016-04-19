@@ -85,6 +85,10 @@
 /**店铺说明**/
 @property (nonatomic, copy) NSString *store_description;
 
+/**服务商图片 **/
+@property (nonatomic, copy) NSString *orglogo;
+
+
 
 @end
 

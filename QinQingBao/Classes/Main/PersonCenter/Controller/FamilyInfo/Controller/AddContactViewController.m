@@ -34,8 +34,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    
-    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
 }
 
 -(void)initTableSkin

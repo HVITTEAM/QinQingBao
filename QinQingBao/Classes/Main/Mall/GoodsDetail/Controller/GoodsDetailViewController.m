@@ -78,14 +78,12 @@
     for (int i = 0 ; i <imgArr.count ; i ++) {
         UIImageView *imgView = [[UIImageView alloc] init];
         imgView.backgroundColor = [UIColor whiteColor];
-        //imgView.contentMode = UIViewContentModeScaleAspectFit;
         [imageviewArray addObject:imgView];
         [bgScrollview addSubview:imgView];
         
         imgView.translatesAutoresizingMaskIntoConstraints = NO;
         
         NSDictionary *viewDict = NSDictionaryOfVariableBindings(imgView);
-        
         
         [imgView addConstraint:[NSLayoutConstraint constraintWithItem:imgView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:MTScreenW]];
         

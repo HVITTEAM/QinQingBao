@@ -76,7 +76,7 @@
     
     UILabel *lab = [[UILabel alloc] init];
     
-    NSString *string1                            = @"智慧养老服务中心(v1.1.1.6)";
+    NSString *string1                            = @"智慧养老服务中心(v1.2.1.7)";
 
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string1];
     

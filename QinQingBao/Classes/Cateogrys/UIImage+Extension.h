@@ -32,4 +32,14 @@
 + (UIImage *)boxblurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
 
 + (UIImage *)coreBlurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
+
+/**
+ *  圆角图片
+ *
+ *  @return <#return value description#>
+ */
+- (UIImage *)circleImage;
+
 @end
+
+

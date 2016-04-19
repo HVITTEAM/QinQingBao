@@ -53,12 +53,12 @@ static const char MT_secondScrollView;
 
 - (void)addFirstScrollViewFooter {
     __weak __typeof(self) weakSelf = self;
-    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [weakSelf endFooterRefreshing];
     }];
-//    footer.automaticallyChangeAlpha = 2;
+    footer.automaticallyChangeAlpha = 2;
     [footer setTitle:@"继续拖动,查看图文详情" forState:MJRefreshStateIdle];
-    [footer setTitle:@"释放,加载图文详情" forState:MJRefreshStatePulling];
+//    [footer setTitle:@"释放,加载图文详情" forState:MJRefreshStatePulling];
     
     self.footer = footer;
 }
@@ -103,15 +103,7 @@ static const char MT_secondScrollView;
     self.scrollEnabled = YES;
     
     [UIView animateWithDuration:kAnimationDuration animations:^{
-        
-//        if ([self isKindOfClass:[UITableView class]])
-//        {
-//            UITableView *tableView  = (UITableView *)self;
-//            self.contentInset = UIEdgeInsetsMake(0, -tableView.tableHeaderView.height, self.footer.frame.size.height, 0);
-//            
-//        }
-//        else
-            self.contentInset = UIEdgeInsetsMake(0, 0, self.footer.frame.size.height, 0);
+        self.contentInset = UIEdgeInsetsMake(0, 0, self.footer.frame.size.height, 0);
     }];
     self.contentSize = CGSizeMake(0, self.originContentHeight);
 }

@@ -137,7 +137,6 @@
             detail.selecteItem = data;
             [self.navigationController pushViewController:detail animated:YES];
         };
-        
         [itemArr addObject:item];
     }
     group.items = [itemArr copy];

@@ -45,7 +45,12 @@
         return;
     self.evanumLab.text = [NSString stringWithFormat:@"%.01f分",[itemInfo.sumgrad floatValue]/[itemInfo.sumdis floatValue]];
     float score = [itemInfo.sumgrad floatValue]/[itemInfo.sumdis floatValue];
-    [self.Evaview setScore:score/5 withAnimation:YES];
+    
+    if (score >= 0 && score <= 5)
+        [self.Evaview setScore:score/5 withAnimation:NO];
+    else
+        [self.Evaview setScore:0 withAnimation:NO];
+    
     [self.queryEva setTitle:[NSString stringWithFormat:@"查看全部%@条评价",itemInfo.sumdis] forState:UIControlStateNormal];
 }
 

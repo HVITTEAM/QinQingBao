@@ -199,7 +199,7 @@
     
     NSString * str = [NSString stringWithFormat:@"%0.2f",p.x / self.frame.size.width];
     float score = [str floatValue];
-    p.x = score * self.frame.size.width;
+    p.x = score * self.frame.size.width+2;
     self.starForegroundView.frame = CGRectMake(0, 0, p.x - 2.5, self.frame.size.height);
     
     if(self.delegate && [self.delegate respondsToSelector:@selector(starRatingView: score:)])

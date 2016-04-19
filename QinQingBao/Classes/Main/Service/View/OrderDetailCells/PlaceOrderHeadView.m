@@ -12,8 +12,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    self.backgroundColor = HMGlobalBg;
-    
     self.orderRightnow.layer.cornerRadius = 4;
 }
 

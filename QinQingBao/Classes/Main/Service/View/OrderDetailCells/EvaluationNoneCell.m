@@ -15,27 +15,28 @@
 {
     EvaluationNoneCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"EvaluationNoneCell" owner:self options:nil] objectAtIndex:0];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell.evaView setScore:0 withAnimation:NO];
     return cell;
 }
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    self.evaView.userInteractionEnabled = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     self.backgroundColor = HMGlobalBg;
-    self.evaView.show_star = 10;
-    self.evaView.font_size = 20;
-    
-    self.evaView.empty_color = [UIColor colorWithRed:167.0f / 255.0f green:167.0f / 255.0f blue:167.0f / 255.0f alpha:1.0f];
-    self.evaView.full_color = [UIColor colorWithRed:255.0f / 255.0f green:121.0f / 255.0f blue:22.0f / 255.0f alpha:1.0f];
-    
-//    Star *star1 = [[Star alloc] initWithFrame:CGRectMake(10, 7, 150.0f, 40.0f)];
-//    star1.show_star = 10;
-//    star1.font_size = 20;
-//    [self addSubview:star1];
+}
+
+-(void)setScore:(NSString *)score
+{
+    float fscore = [score floatValue];
+    if (fscore >= 0 && fscore <= 5)
+        [self.evaView setScore:fscore/5 withAnimation:NO];
+    else
+        [self.evaView setScore:0 withAnimation:NO];
+    self.strLab.text = [NSString stringWithFormat:@"%@分",score];
 }
 
 @end

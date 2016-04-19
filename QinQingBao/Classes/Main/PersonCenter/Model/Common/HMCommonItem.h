@@ -12,7 +12,8 @@
 
 /** subtitle是否显示，显示的话detail就在左边 否则在右边 */
 @property (nonatomic, assign) BOOL isSubtitle;
-
+/** 文本输入框 的默认值*/
+@property (nonatomic, copy) NSString *textValue;
 /** 文本输入框 */
 @property (strong, nonatomic) UITextField *rightText;
 

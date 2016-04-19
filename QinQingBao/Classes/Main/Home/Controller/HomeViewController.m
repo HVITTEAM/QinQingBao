@@ -26,6 +26,9 @@ static float cellWidth = 66;
 #import "HomePicModel.h"
 #import "MTNetReloader.h"
 
+
+#import "MassageTableViewController.h"
+
 @interface HomeViewController ()<MTCityChangeDelegate>
 {
     NSMutableArray *dataProvider;
@@ -582,10 +585,14 @@ static float cellWidth = 66;
 #pragma mark 推拿保健
 - (IBAction)massageClickHandler:(id)sender
 {
-    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
-    adver.type = 5;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
-    [self presentViewController:nav animated:YES completion:nil];
+    MassageTableViewController *view = [[MassageTableViewController alloc] init];
+    
+    [self.navigationController pushViewController:view animated:YES];
+
+//    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
+//    adver.type = 5;
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
+//    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark Net Error

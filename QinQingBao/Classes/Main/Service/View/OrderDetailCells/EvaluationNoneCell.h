@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TQStarRatingView.h"
 
 @interface EvaluationNoneCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet Star *evaView;
+@property (strong, nonatomic) IBOutlet TQStarRatingView *evaView;
 
+@property (strong, nonatomic) IBOutlet UILabel *strLab;
 
 + (EvaluationNoneCell*) evanoneCell;
+
+@property (nonatomic, copy) NSString *score;
 @end

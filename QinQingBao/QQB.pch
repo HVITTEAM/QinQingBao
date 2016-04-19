@@ -202,11 +202,11 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-//#define URL_Local @"http://61.143.60.87/ylserver"
+#define URL_Local @"http://61.143.60.87/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-#define URL_Local @"http://ibama.hvit.com.cn"
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
@@ -550,6 +550,16 @@
 /***监控 - 获取监控信息 根据code码 单组Url*/
 #define URL_monitor_one_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=monitor_one_ud_id",URL_Local]
 
+//------------------推拿按摩-------------------
+
+/***寸欣服务 - 获取寸欣的所有服务Url*/
+#define URL_get_iteminfo [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_iteminfos",URL_Local]
+
+/***寸欣服务 - 获取寸欣单个服务信息Url*/
+#define URL_get_iteminfo_by_iid [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_iteminfo_by_iid",URL_Local]
+
+/***寸欣服务 - 获取服务对应的服务商信息，以及服务信息Url*/
+#define URL_get_orginfo_by_iidnum [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_orginfo_by_iidnum",URL_Local]
 
 
 

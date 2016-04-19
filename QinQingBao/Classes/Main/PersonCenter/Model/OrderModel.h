@@ -59,7 +59,7 @@
 @property (nonatomic, retain) NSString *pduid;
 @property (nonatomic, retain) NSString *hfuid;
 @property (nonatomic, retain) NSString *tid;
-@property (nonatomic, retain) NSString *iid;
+@property (nonatomic, retain) NSDictionary *iid;
 @property (nonatomic, retain) NSString *qqrid;
 @property (nonatomic, retain) NSString *qxrid;
 @property (nonatomic, retain) NSString *dvcode;

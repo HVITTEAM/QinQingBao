@@ -81,6 +81,7 @@
 - (void)setupGroups
 {
     [self setupGroup];
+    
 }
 
 - (void)setupGroup
@@ -104,7 +105,6 @@
 
 -(void)doneClickHandler
 {
-    
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? textItem.rightText.text : self.inforVO.member_areainfo;
     NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
     
@@ -126,7 +126,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"保存失败" message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];

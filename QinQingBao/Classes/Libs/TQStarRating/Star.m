@@ -28,8 +28,8 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)drawRect:(CGRect)rect
+{
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     NSString* stars=@"★★★★★";
@@ -40,7 +40,6 @@
     rect.size=starSize;
     [empty_color set];
     [stars drawInRect:rect withFont:font];
-//    [@"☆☆☆☆☆" drawInRect:rect withFont:font];
     
     CGRect clip=rect;
     clip.size.width = clip.size.width * show_star / max_star;

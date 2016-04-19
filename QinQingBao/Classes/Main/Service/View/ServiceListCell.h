@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ServiceModel.h"
-
+#import "TQStarRatingView.h"
 @interface ServiceListCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet Star *starView;
+@property (strong, nonatomic) IBOutlet TQStarRatingView *starView;
 @property (strong, nonatomic) IBOutlet UIImageView *iconImg;
 @property (strong, nonatomic) IBOutlet UILabel *serviceTitleLab;
 @property (strong, nonatomic) IBOutlet UILabel *serviceDetailLab;
