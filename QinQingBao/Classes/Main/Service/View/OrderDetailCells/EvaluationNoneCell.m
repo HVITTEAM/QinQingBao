@@ -21,7 +21,7 @@
 
 - (void)awakeFromNib
 {
-    self.evaView.userInteractionEnabled = YES;
+    self.evaView.userInteractionEnabled = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

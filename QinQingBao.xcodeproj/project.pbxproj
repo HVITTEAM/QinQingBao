@@ -238,7 +238,6 @@
 		018BC60B1C50AC7200C883FF /* WifiInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BC6081C50AC7200C883FF /* WifiInfoViewController.m */; };
 		0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */; };
 		0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */; };
-		0190ED371BF970E000992EE4 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED361BF970E000992EE4 /* Star.m */; };
 		0190ED431BF9DB8F00992EE4 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED421BF9DB8F00992EE4 /* WebViewController.m */; };
 		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
@@ -563,6 +562,7 @@
 		01EA206A1C2A705100B546A9 /* OrderResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EA20681C2A705100B546A9 /* OrderResultViewController.xib */; };
 		01EA206F1C2A99C400B546A9 /* HomePicTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA206E1C2A99C400B546A9 /* HomePicTotal.m */; };
 		01EA20731C2A99D600B546A9 /* HomePicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA20721C2A99D600B546A9 /* HomePicModel.m */; };
+		01EA67CA1CCDB23600C00153 /* MTTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EA67C91CCDB23600C00153 /* MTTextView.m */; };
 		01EAB4391BE8441A00D380A8 /* EvaluationItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EAB4371BE8441A00D380A8 /* EvaluationItemCell.m */; };
 		01EAB43A1BE8441A00D380A8 /* EvaluationItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EAB4381BE8441A00D380A8 /* EvaluationItemCell.xib */; };
 		01EB266F1C92A06900773023 /* DeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB266E1C92A06900773023 /* DeviceModel.m */; };
@@ -583,7 +583,6 @@
 		01EB6BF11C28D88C008BD878 /* AboutusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB6BEF1C28D88C008BD878 /* AboutusViewController.m */; };
 		01EB6BF21C28D88C008BD878 /* AboutusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB6BF01C28D88C008BD878 /* AboutusViewController.xib */; };
 		01EB6BF61C28DD14008BD878 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EB6BF41C28DD14008BD878 /* FeedbackViewController.m */; };
-		01EB6BF71C28DD14008BD878 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */; };
 		01EBD3B21C853EF7009236FA /* RefundDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AB1C853EF7009236FA /* RefundDetailModel.m */; };
 		01EBD3B31C853EF7009236FA /* RefundListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AD1C853EF7009236FA /* RefundListModel.m */; };
 		01EBD3B41C853EF7009236FA /* RefundListTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EBD3AF1C853EF7009236FA /* RefundListTotal.m */; };
@@ -1667,8 +1666,6 @@
 		0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationNoneCell.h; sourceTree = "<group>"; };
 		0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationNoneCell.m; sourceTree = "<group>"; };
 		0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationNoneCell.xib; sourceTree = "<group>"; };
-		0190ED351BF970E000992EE4 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
-		0190ED361BF970E000992EE4 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		0190ED411BF9DB8F00992EE4 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		0190ED421BF9DB8F00992EE4 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		0193B0D11BD5CDCF00F07FBA /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
@@ -2159,6 +2156,8 @@
 		01EA206E1C2A99C400B546A9 /* HomePicTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePicTotal.m; sourceTree = "<group>"; };
 		01EA20711C2A99D600B546A9 /* HomePicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePicModel.h; sourceTree = "<group>"; };
 		01EA20721C2A99D600B546A9 /* HomePicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePicModel.m; sourceTree = "<group>"; };
+		01EA67C81CCDB23600C00153 /* MTTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTextView.h; sourceTree = "<group>"; };
+		01EA67C91CCDB23600C00153 /* MTTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTextView.m; sourceTree = "<group>"; };
 		01EAB4361BE8441A00D380A8 /* EvaluationItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationItemCell.h; sourceTree = "<group>"; };
 		01EAB4371BE8441A00D380A8 /* EvaluationItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationItemCell.m; sourceTree = "<group>"; };
 		01EAB4381BE8441A00D380A8 /* EvaluationItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationItemCell.xib; sourceTree = "<group>"; };
@@ -2191,7 +2190,6 @@
 		01EB6BF01C28D88C008BD878 /* AboutusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutusViewController.xib; sourceTree = "<group>"; };
 		01EB6BF31C28DD14008BD878 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		01EB6BF41C28DD14008BD878 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
 		01EBD3AA1C853EF7009236FA /* RefundDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundDetailModel.h; sourceTree = "<group>"; };
 		01EBD3AB1C853EF7009236FA /* RefundDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundDetailModel.m; sourceTree = "<group>"; };
 		01EBD3AC1C853EF7009236FA /* RefundListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundListModel.h; sourceTree = "<group>"; };
@@ -3621,6 +3619,8 @@
 		0126ED141B8C4F1200EC85C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01EA67C81CCDB23600C00153 /* MTTextView.h */,
+				01EA67C91CCDB23600C00153 /* MTTextView.m */,
 				012AAD361CA4D0EE00CEE121 /* Order */,
 				01F0D00D1B8D99B300EF3238 /* Cell */,
 				01F0D0061B8D474500EF3238 /* MTSlipPageViewController */,
@@ -3735,8 +3735,6 @@
 		0126ED9D1B8C6DDA00EC85C1 /* TQStarRating */ = {
 			isa = PBXGroup;
 			children = (
-				0190ED351BF970E000992EE4 /* Star.h */,
-				0190ED361BF970E000992EE4 /* Star.m */,
 				0126ED9E1B8C6DDA00EC85C1 /* Image */,
 				0126EDA31B8C6DDA00EC85C1 /* TQStarRatingView.h */,
 				0126EDA41B8C6DDA00EC85C1 /* TQStarRatingView.m */,
@@ -5118,7 +5116,6 @@
 				01EB6BF01C28D88C008BD878 /* AboutusViewController.xib */,
 				01EB6BF31C28DD14008BD878 /* FeedbackViewController.h */,
 				01EB6BF41C28DD14008BD878 /* FeedbackViewController.m */,
-				01EB6BF51C28DD14008BD878 /* FeedbackViewController.xib */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -7941,7 +7938,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -8185,7 +8182,6 @@
 				01E68FF01BCCA68900A17543 /* title.png in Resources */,
 				01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */,
 				01F85AC91C57718000E463F4 /* superseller.png in Resources */,
-				01EB6BF71C28DD14008BD878 /* FeedbackViewController.xib in Resources */,
 				01ECDA591C8EB31F0018160F /* chat_location_annotation_someone@2x.png in Resources */,
 				012AAD4F1CA4D0EE00CEE121 /* EvaluateCell.xib in Resources */,
 				01E68FF31BCCA68900A17543 /* button_red.png in Resources */,
@@ -8757,7 +8753,6 @@
 				01E6905C1BCCAABE00A17543 /* VideoGoDef.m in Sources */,
 				01F0DA9F1BCE1DC9004FD908 /* CaptureViewController.m in Sources */,
 				018BC6011C50A6C900C883FF /* CSNAddByQRcodeViewController.m in Sources */,
-				0190ED371BF970E000992EE4 /* Star.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,
 				01E690841BCCF6AA00A17543 /* TSPopoverPopoverView.m in Sources */,
 				01FD4C9C1CAE4B43008F09CF /* DACircularProgressView.m in Sources */,
@@ -8912,6 +8907,7 @@
 				01E919FD1C9F84AD0026FD24 /* HealthModel.m in Sources */,
 				D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */,
 				01BA2D5F1B9EC70C00A2C7BD /* ServiceHeadView.m in Sources */,
+				01EA67CA1CCDB23600C00153 /* MTTextView.m in Sources */,
 				011077031C3EA896001E5C51 /* SWYPhotoBrowserViewController.m in Sources */,
 				01ECDB111C8EB31F0018160F /* EaseViewController.m in Sources */,
 				0128A8C81B9ED597002B14E2 /* UIViewController+AOP.m in Sources */,

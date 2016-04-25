@@ -10,6 +10,6 @@
 
 @interface PersonalDataViewController : UITableViewController<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic,retain) UIDatePicker* datePicker;
+
 
 @end

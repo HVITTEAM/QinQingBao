@@ -74,7 +74,8 @@
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
-    self.itemimei = [HMCommonTextfieldItem itemWithTitle:@"设备IMEI码" icon:nil];
+    if (!self.itemimei)
+        self.itemimei = [HMCommonTextfieldItem itemWithTitle:@"设备IMEI码" icon:nil];
     self.itemimei.placeholder = @"IMEI码或设备序列号";
     
     group.items = @[self.itemimei];
@@ -248,7 +249,7 @@
                                          self.item0.subtitle = [data objectForKey:@"device_name"];
                                          self.item1.subtitle = [data objectForKey:@"device_detial"];
                                          self.itemimei.rightText.enabled = NO;
-                                         [self.tableView reloadData];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

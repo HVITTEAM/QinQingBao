@@ -148,7 +148,6 @@ static float cellWidth = 66;
         [button_back setTitle:[SharedAppUtil defaultCommonUtil].cityVO.dvname forState:UIControlStateNormal];
     [self initLocation];
     
-    
     //给button添加image
     [button_back setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];
     //设置image在button上的位置（上top，左left，下bottom，右right）这里可以写负值，对上写－5，那么image就象上移动5个像素

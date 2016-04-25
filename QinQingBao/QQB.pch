@@ -44,7 +44,6 @@
 #import "UIDevice+IPhoneModel.h"
 #import "UIScrollView+Drag.h"
 #import "UIColor+RGB.h"
-#import "Star.h"
 #import "LoginViewController.h"
 #import "MTProgressWebViewController.h"
 #import "TSPopoverController.h"
