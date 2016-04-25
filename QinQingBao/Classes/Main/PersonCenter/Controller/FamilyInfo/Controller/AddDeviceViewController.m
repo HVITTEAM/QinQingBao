@@ -170,16 +170,16 @@
 {
     [self.view endEditing:YES];
     if (self.itemimei.rightText.text.length == 0)
-        return [NoticeHelper AlertShow:@"请输入设备识别码" view:self.view];
+        return [NoticeHelper AlertShow:@"请输入设备识别码,必填" view:self.view];
     
-    //如果设备名称为空，说明需要取设备名称
-    if (self.item2.rightText.text.length != 11)
+    if (self.item0.subtitle.length == 0)
     {
-        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式" view:nil];
+       return [self getDeviceInfor:self.itemimei.rightText.text];
     }
-    else if (self.item0.subtitle.length == 0)
+    //如果设备名称为空，说明需要取设备名称
+    else if (self.item2.rightText.text.length != 11)
     {
-        [self getDeviceInfor:self.itemimei.rightText.text];
+        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式,必填" view:nil];
     }
     else if (self.selectedFamily)//用户信息已经存在，属于后来新增设备
     {

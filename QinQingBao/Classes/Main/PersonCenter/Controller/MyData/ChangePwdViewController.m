@@ -100,16 +100,25 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
-    if(![self.nowpwd.rightText.text isEqualToString:self.cknowPwd.rightText.text] )
+    //去除左右两边空格
+    NSString *str1 = [self.nowpwd.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *str2 = [self.cknowPwd.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    NSString *str3 = [self.old.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    if(str1.length < 6 )
+        return [NoticeHelper AlertShow:@"密码不能少于6位!" view:self.view];
+    if(![str1 isEqualToString:str2] )
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     [CommonRemoteHelper RemoteWithUrl:URL_ChangePWD parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                @"client" : @"ios",
-                                                               @"oldpassword" : [SecurityUtil encryptMD5String:self.old.rightText.text],
-                                                               @"newpassword" : [SecurityUtil encryptMD5String:self.nowpwd.rightText.text],
-                                                               @"ckpassword" : [SecurityUtil encryptMD5String:self.cknowPwd.rightText.text]}
+                                                               @"oldpassword" : [SecurityUtil encryptMD5String:str3],
+                                                               @"newpassword" : [SecurityUtil encryptMD5String:str1],
+                                                               @"ckpassword" : [SecurityUtil encryptMD5String:str2]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];

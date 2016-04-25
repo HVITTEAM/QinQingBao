@@ -3992,6 +3992,7 @@
 		016E745A1BAFD02C009075E5 /* MyData */ = {
 			isa = PBXGroup;
 			children = (
+				01C0D1ED1C46805900FF1CD3 /* Goods */,
 				016E745B1BAFD053009075E5 /* PersonalDataViewController.h */,
 				016E745C1BAFD053009075E5 /* PersonalDataViewController.m */,
 				01DD671E1BAFDA6D001D0883 /* UpdatePwdViewController.h */,
@@ -4084,7 +4085,8 @@
 				01C0D1EF1C46808000FF1CD3 /* Model */,
 				01C0D1F01C46808000FF1CD3 /* View */,
 			);
-			path = Goods;
+			name = Goods;
+			path = ../Goods;
 			sourceTree = "<group>";
 		};
 		01C0D1EE1C46808000FF1CD3 /* Controller */ = {
@@ -6924,7 +6926,6 @@
 			isa = PBXGroup;
 			children = (
 				01E642511C882936007DC270 /* PushMsg */,
-				01C0D1ED1C46805900FF1CD3 /* Goods */,
 				01EB6BEA1C28D85A008BD878 /* About */,
 				01E6D4881BE1E74C00824F51 /* MyAccount */,
 				016E745A1BAFD02C009075E5 /* MyData */,

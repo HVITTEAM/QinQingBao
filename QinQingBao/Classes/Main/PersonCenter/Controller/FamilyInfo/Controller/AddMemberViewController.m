@@ -231,12 +231,12 @@
     [self.view endEditing:YES];
     if (self.numfield.rightText.text.length == 0)
     {
-        [NoticeHelper AlertShow:@"请输入家属昵称" view:self.view];
+        [NoticeHelper AlertShow:@"请输入家属昵称,必填" view:self.view];
         return;
     }
     else if (self.telfield.rightText.text.length == 0)
     {
-        [NoticeHelper AlertShow:@"请输入设备识别码" view:self.view];
+        [NoticeHelper AlertShow:@"请输入设备识别码,必填" view:self.view];
         return;
     }
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

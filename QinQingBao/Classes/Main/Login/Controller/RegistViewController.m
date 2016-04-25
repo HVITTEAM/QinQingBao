@@ -147,9 +147,17 @@
  */
 - (IBAction)registNow:(id)sender
 {
+    //去除左右两边空格
+    NSString *str1 = [self.passwordText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
     if (![self checkForm])
     {
         [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+        return;
+    }
+    if(str1.length < 6)
+    {
+        [NoticeHelper AlertShow:@"密码不能少于6位！" view:self.view];
         return;
     }
     else if (!self.agreementBtn.selected)
