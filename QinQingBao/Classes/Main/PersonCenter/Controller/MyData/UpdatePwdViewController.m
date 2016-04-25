@@ -183,16 +183,23 @@
 
 -(void)sureHandler:(UIButton *)sender
 {
-    if (self.nowPwd.rightText.text.length == 0 || self.old.rightText.text.length == 0 ||self.code.rightText.text.length == 0)
+    //去除左右两边空格
+    NSString *str1 = [self.nowPwd.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSString *str2 = [self.old.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (str1.length == 0 || str2.length == 0 ||self.code.rightText.text.length == 0)
         return [NoticeHelper AlertShow:@"请输入完整的信息" view:self.view];
-    if(![self.nowPwd.rightText.text isEqualToString:self.old.rightText.text] )
+    if (str1.length <6)
+        return [NoticeHelper AlertShow:@"密码不能少于6位" view:self.view];
+    if(![str1 isEqualToString:str2] )
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.view endEditing:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Forgot parameters: @{@"mobile" : self.tel.rightText.text,
                                                                @"code" : self.code.rightText.text,
-                                                               @"password" : [SecurityUtil encryptMD5String:self.old.rightText.text],
-                                                               @"password_confirm" : [SecurityUtil encryptMD5String:self.nowPwd.rightText.text]}
+                                                               @"password" : [SecurityUtil encryptMD5String:str2],
+                                                               @"password_confirm" : [SecurityUtil encryptMD5String:str1]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      if (dict == nil)
@@ -209,7 +216,7 @@
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"操作成功，返回登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          alertView.delegate = self;
                                          [alertView show];
-                                         //                                         [NoticeHelper AlertShow:@"修改成功！" view:self.view];
+                                         //[NoticeHelper AlertShow:@"修改成功！" view:self.view];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

@@ -14,7 +14,10 @@
 
 
 @interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate>
-
+{
+    
+}
+@property (nonatomic,retain) UIDatePicker* datePicker;
 @end
 
 @implementation PersonalDataViewController
@@ -458,6 +461,20 @@
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
     self.datePicker.locale = locale;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setYear:0];
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    [comps setYear:-90];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    
+    [self.datePicker setMaximumDate:maxDate];
+    
+    [self.datePicker setMinimumDate:minDate];
+
+    
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         NSDate* date=[self.datePicker date];
         NSDateFormatter* formatter=[[NSDateFormatter alloc]init];

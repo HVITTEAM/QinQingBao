@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderModel.h"
+#import "TQStarRatingView.h"
 
 @interface EvaDetailCell : UITableViewCell
 
@@ -16,7 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *evaLab;
 
 @property (strong, nonatomic) IBOutlet UILabel *evaTimeLab;
-@property (strong, nonatomic) IBOutlet Star *evaView;
+@property (strong, nonatomic) IBOutlet TQStarRatingView *evaView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *evaWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *evaHeight;
 

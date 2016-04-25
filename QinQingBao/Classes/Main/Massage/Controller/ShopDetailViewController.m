@@ -106,6 +106,8 @@
     __weak typeof(dataItem) item = dataItem;
     [self.headView setPrice:dataItem.price time:dataItem.price_time];
     self.headView.submitClick = ^(UIButton *button){
+        if (![SharedAppUtil defaultCommonUtil].userVO )
+            return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
         ShopOrderViewController *view = [[ShopOrderViewController alloc] init];
         view.dataItem = item;
         view.title = item.iname;

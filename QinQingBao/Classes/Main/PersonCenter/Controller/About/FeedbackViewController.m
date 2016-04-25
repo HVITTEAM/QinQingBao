@@ -21,11 +21,28 @@
     self.view.backgroundColor = HMGlobalBg;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStylePlain target:self action:@selector(submitHandler)];
+    [self setupTextView];
     
-    self.contentText.layer.borderColor = [[UIColor colorWithRGB:@"979797"] CGColor];
-    self.contentText.layer.borderWidth = 0.5f;
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
+
+- (void)setupTextView
+{
+    // 1.创建输入控件
+    MTTextView *textView = [[MTTextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 20, 150)];
+    textView.alwaysBounceVertical = YES; // 垂直方向上拥有有弹簧效果
+    textView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:textView];
+    self.contentText = textView;
+    self.contentText.layer.borderColor = [[UIColor colorWithRGB:@"e2e2e2"] CGColor];
+    self.contentText.layer.borderWidth = 0.5f;
+    // 2.设置提醒文字（占位文字）
+    textView.placehoder = @"使用中遇到什么问题，欢迎反馈给我们！";
+    
+    // 3.设置字体
+    textView.font = [UIFont systemFontOfSize:15];
+}
+
 
 -(void)submitHandler
 {

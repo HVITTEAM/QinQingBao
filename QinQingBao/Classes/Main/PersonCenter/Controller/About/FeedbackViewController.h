@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTTextView.h"
 
 @interface FeedbackViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITextView *contentText;
-@property (strong, nonatomic) IBOutlet UIButton *suBtn;
+
+@property (nonatomic, strong) MTTextView *contentText;
 
 @end

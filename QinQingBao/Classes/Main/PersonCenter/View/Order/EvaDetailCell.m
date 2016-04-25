@@ -30,21 +30,14 @@
     
     self.evaTimeLab.text = self.item.wpjtime;
     //self.evaTimeLab.textColor = MTNavgationBackgroundColor;
-
+    
     self.evaLab.text = self.item.dis_con;
-
-    self.evaView.show_star = 10;
-    self.evaView.font_size = 18;
-    self.evaView.max_star = 100;
-    self.evaView.isSelect = NO;
-    self.evaView.empty_color = [UIColor colorWithRed:167.0f / 255.0f green:167.0f / 255.0f blue:167.0f / 255.0f alpha:1.0f];
-    self.evaView.full_color = [UIColor colorWithRed:255.0f / 255.0f green:121.0f / 255.0f blue:22.0f / 255.0f alpha:1.0f];
     
     float score = [self.item.wgrade floatValue];
-    if (score && score >= 0)
-        self.evaView.show_star = score *20;
+    if (score >= 0 && score <= 5)
+        [self.evaView setScore:score/5 withAnimation:NO];
     else
-        self.evaView.show_star = 0;
+        [self.evaView setScore:0 withAnimation:NO];
     
     self.evaWidth.constant = MTScreenW - 100;
     
