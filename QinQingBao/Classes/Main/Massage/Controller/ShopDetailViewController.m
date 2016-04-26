@@ -57,6 +57,7 @@
                                          [self setHeadData];
                                          imgUrlArray = dataItem.introduce_url;
                                          self.title = dataItem.iname;
+                                         self.headView.orderRightnow.enabled = YES;
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];

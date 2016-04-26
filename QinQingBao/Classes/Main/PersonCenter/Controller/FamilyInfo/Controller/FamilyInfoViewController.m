@@ -30,8 +30,12 @@
     [self initNavigation];
     
     [self setupGroups];
-    
-    //    [self loadDevicesDatas];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 /**
@@ -245,43 +249,5 @@
                                      }];
     }
 }
-
-/**
- *  获取设备数据 by swy
- */
--(void)loadDevicesDatas
-{
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    NSDictionary *dict = @{
-                           @"member_id" : self.selecteItem.member_id,
-                           @"client" : @"ios",
-                           @"key":[SharedAppUtil defaultCommonUtil].userVO.key
-                           };
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_get_mem_device_list parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        [HUD removeFromSuperview];
-        if ([dict[@"code"] integerValue] == 0) {
-            
-            NSMutableArray *dataArray = [DeviceInfoModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            self.devicesArray = dataArray;
-            [self.tableView reloadData];
-            
-        }else if ([dict[@"code"] integerValue] == 14001) {
-            //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-            return;
-        }else if ([dict[@"code"] integerValue] == 17001){
-            //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-            return;
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [HUD removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求未成功" view:self.view];
-        
-    }];
-    
-}
-
 
 @end

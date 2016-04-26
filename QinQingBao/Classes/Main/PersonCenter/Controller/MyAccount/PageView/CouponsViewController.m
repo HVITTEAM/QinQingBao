@@ -66,6 +66,7 @@
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"page" : @100,
+                  @"voucher_state" : @"1",
                   @"curpage" : @1};
     }
     else if ([self.title isEqualToString:@"已使用"])
@@ -75,10 +76,10 @@
                   @"page" : @100,
                   @"curpage" : @1};
     }
-    else if ([self.title isEqualToString:@"已过去"])
+    else if ([self.title isEqualToString:@"已过期"])
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                  @"voucher_state" : @"1",
+                  @"voucher_state" : @"3",
                   @"page" : @100,
                   @"curpage" : @3};
     }

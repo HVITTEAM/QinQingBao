@@ -12,6 +12,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    self.orderRightnow.enabled = NO;
     self.orderRightnow.layer.cornerRadius = 4;
 }
 

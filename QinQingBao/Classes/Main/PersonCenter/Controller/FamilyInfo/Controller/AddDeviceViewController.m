@@ -197,7 +197,10 @@
                                          }
                                          else
                                          {
-                                             [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+                                             //TODO
+//                                             [self.selectedFamily.device addObject:<#(nonnull id)#>]
+//                                             [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+                                             [self.navigationController popToRootViewControllerAnimated:YES];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

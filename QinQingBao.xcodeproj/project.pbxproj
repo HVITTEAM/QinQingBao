@@ -2137,7 +2137,7 @@
 		01E9A7481C74624500000805 /* HeadProcessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadProcessView.h; sourceTree = "<group>"; };
 		01E9A7491C74624500000805 /* HeadProcessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadProcessView.m; sourceTree = "<group>"; };
 		01E9A74B1C746F6100000805 /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewController.h; sourceTree = "<group>"; };
-		01E9A74C1C746F6100000805 /* AddDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddDeviceViewController.m; path = FamilyInfo/Controller/AddDeviceViewController.m; sourceTree = "<group>"; };
+		01E9A74C1C746F6100000805 /* AddDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDeviceViewController.m; sourceTree = "<group>"; };
 		01E9A74E1C7473BA00000805 /* ScanCodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodesViewController.h; sourceTree = "<group>"; };
 		01E9A74F1C7473BA00000805 /* ScanCodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodesViewController.m; sourceTree = "<group>"; };
 		01E9C48F1C53284300A77579 /* EvaFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaFootView.h; sourceTree = "<group>"; };
@@ -5008,6 +5008,7 @@
 				01E9A7251C74613500000805 /* DetailInfoViewController.h */,
 				01E9A7261C74613500000805 /* DetailInfoViewController.m */,
 				01E9A74B1C746F6100000805 /* AddDeviceViewController.h */,
+				01E9A74C1C746F6100000805 /* AddDeviceViewController.m */,
 				01E9A7271C74613500000805 /* FamilyInfoViewController.h */,
 				01E9A7281C74613500000805 /* FamilyInfoViewController.m */,
 				01E9A7291C74613500000805 /* FamilyViewController.h */,
@@ -6937,7 +6938,6 @@
 				01ECDFCC1B7C45B200665D87 /* ProfileViewController.m */,
 				01ECDFA61B7C3F9400665D87 /* HMCommonViewController.h */,
 				01ECDFA71B7C3F9400665D87 /* HMCommonViewController.m */,
-				01E9A74C1C746F6100000805 /* AddDeviceViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
