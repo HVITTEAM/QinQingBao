@@ -68,9 +68,9 @@
             
         case ChartTypeSugar:
             for (HealthDataModel *item in self.dataProvider) {
-                if (!item.bloodglucose)
-                    item.bloodglucose = @"0";
-                [YTitles addObject:item.bloodglucose];
+                if (!item.bloodsugar)
+                    item.bloodsugar = @"0";
+                [YTitles addObject:item.bloodsugar];
             }
             break;
             
@@ -117,7 +117,7 @@
                 break;
                 
             case ChartTypeSugar:
-                [xTitles addObject:[item.boolg_time substringWithRange:range]];
+                [xTitles addObject:[item.bloodsugar_time substringWithRange:range]];
                 break;
                 
             case ChartTypeHeart:

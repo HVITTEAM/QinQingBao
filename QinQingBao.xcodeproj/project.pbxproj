@@ -278,7 +278,6 @@
 		01D616F71C44CA9400055404 /* AreaModelTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F61C44CA9400055404 /* AreaModelTotal.m */; };
 		01D616FA1C44CAA300055404 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F91C44CAA300055404 /* AreaModel.m */; };
 		01D616FD1C45004100055404 /* MTPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616FC1C45004100055404 /* MTPayHelper.m */; };
-		01D617011C45459800055404 /* chatshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D616FE1C45459800055404 /* chatshop.png */; };
 		01D617021C45459800055404 /* collectshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D616FF1C45459800055404 /* collectshop.png */; };
 		01D617031C45459800055404 /* hyxxshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D617001C45459800055404 /* hyxxshop.png */; };
 		01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB51B7DC3D70087F80E /* MessageUI.framework */; };
@@ -1737,7 +1736,6 @@
 		01D616F91C44CAA300055404 /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
 		01D616FB1C45004100055404 /* MTPayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTPayHelper.h; sourceTree = "<group>"; };
 		01D616FC1C45004100055404 /* MTPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTPayHelper.m; sourceTree = "<group>"; };
-		01D616FE1C45459800055404 /* chatshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatshop.png; sourceTree = "<group>"; };
 		01D616FF1C45459800055404 /* collectshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collectshop.png; sourceTree = "<group>"; };
 		01D617001C45459800055404 /* hyxxshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hyxxshop.png; sourceTree = "<group>"; };
 		01D9DEB51B7DC3D70087F80E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -3940,7 +3938,6 @@
 				01FACED51C4E224B00E8E55D /* shopcar.png */,
 				01266BA11C4B3D2400992D2F /* background_01.png */,
 				01266BA21C4B3D2400992D2F /* background_01@2x.png */,
-				01D616FE1C45459800055404 /* chatshop.png */,
 				01D616FF1C45459800055404 /* collectshop.png */,
 				01D617001C45459800055404 /* hyxxshop.png */,
 				010B73491C181827007A496B /* Refresh */,
@@ -8248,7 +8245,6 @@
 				01ECDA691C8EB31F0018160F /* faceDelete@2x.png in Resources */,
 				01F015D61C5F427B00930B0E /* GoodsDescriptionViewController.xib in Resources */,
 				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
-				01D617011C45459800055404 /* chatshop.png in Resources */,
 				01E603EA1C1683350099275C /* watch0.jpg in Resources */,
 				01ECDA7B1C8EB31F0018160F /* chatBar_more@2x.png in Resources */,
 				01F49D221C478D700079F45F /* CommonGoodsCellHead.xib in Resources */,

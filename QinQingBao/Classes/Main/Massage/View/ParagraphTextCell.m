@@ -29,7 +29,7 @@
     _textValue = textValue;
     self.textLab.userInteractionEnabled = NO;
     self.textLab.text = self.textValue;
-    CGSize size = [self.textLab sizeThatFits:CGSizeMake(MTScreenW - 70, MAXFLOAT)];
+    CGSize size = [self.textLab sizeThatFits:CGSizeMake(MTScreenW - 80, MAXFLOAT)];
     self.textLab.height = size.height;
     self.height = CGRectGetMaxY(self.textLab.frame);
 }

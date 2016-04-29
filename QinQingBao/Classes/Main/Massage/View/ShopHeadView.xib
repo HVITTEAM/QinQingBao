@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hM1-hh-uB4" userLabel="bgview">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-a9-rU7" userLabel="icon">
                             <rect key="frame" x="10" y="5" width="70" height="70"/>
@@ -36,7 +36,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="hM1-hh-uB4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6Ag-eT-9dH"/>
-                <constraint firstAttribute="bottom" secondItem="hM1-hh-uB4" secondAttribute="bottom" constant="-20" id="JGy-qD-VGA"/>
+                <constraint firstAttribute="bottom" secondItem="hM1-hh-uB4" secondAttribute="bottom" id="JGy-qD-VGA"/>
                 <constraint firstItem="hM1-hh-uB4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WdP-Qe-OA6"/>
                 <constraint firstAttribute="trailing" secondItem="hM1-hh-uB4" secondAttribute="trailing" id="caj-OI-MIV"/>
             </constraints>

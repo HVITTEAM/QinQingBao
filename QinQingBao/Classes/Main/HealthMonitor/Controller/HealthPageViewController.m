@@ -23,9 +23,6 @@
 
 @implementation HealthPageViewController
 {
-    //目标设备
-    DeviceInfoModel *targetItem;
-    
     HealthModel *dataModel;
 }
 
@@ -68,24 +65,22 @@
 //获取所有的数据
 -(void)getDataProvider
 {
+    //没有设备 结束刷新
     if (self.familyVO.device.count == 0)
     {
         [self.tableView.header endRefreshing];
-//        return [NoticeHelper AlertShow:@"该家属尚未绑定设备!" view:self.view];
         return;
     }
     
-    for (DeviceInfoModel *item in self.familyVO.device)
+    NSString *str = @"";
+    for (int i = 0 ; i < self.familyVO.device.count ;i++)
     {
-        if ([item.device_type isEqualToString:@"2"])
-        {
-            targetItem = item;
-            break;
-        }
+        DeviceInfoModel *item = self.familyVO.device[i];
+        str = [NSString stringWithFormat:@"%@{'imei':'%@'},",str,item.device_code];
     }
-    [CommonRemoteHelper RemoteWithUrl:URL_getMonitor_bycode parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                          @"client" : @"ios",
-                                                                          @"ud_id" : self.familyVO.ud_id}
+    NSString *strData = [str substringWithRange:NSMakeRange(0, str.length - 1)];
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_getMonitor_bycode parameters: @{@"datas" : [NSString stringWithFormat:@"[%@]",strData]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSArray *arr = [dict objectForKey:@"datas"];
@@ -227,7 +222,6 @@
             bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.rel_name];
             bloodPressureVC.type = ChartTypeSugar;
             vctype = @"6";
-            return  [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
         }
             break;
         case 3:
@@ -288,10 +282,16 @@
             break;
     }
     
-    [CommonRemoteHelper RemoteWithUrl:URL_monitor_one_bycode parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                           @"client" : @"ios",
-                                                                           @"count" : @"50",
-                                                                           @"ud_id" : self.familyVO.ud_id,
+    NSString *str = @"";
+    for (int i = 0 ; i < self.familyVO.device.count ;i++)
+    {
+        DeviceInfoModel *item = self.familyVO.device[i];
+        str = [NSString stringWithFormat:@"%@{'imei':'%@'},",str,item.device_code];
+    }
+    NSString *strData = [str substringWithRange:NSMakeRange(0, str.length - 1)];
+    [CommonRemoteHelper RemoteWithUrl:URL_monitor_one_bycode parameters: @{@"datas" :[NSString stringWithFormat:@"[%@]",strData],
+                                                                           @"page" : @"1",
+                                                                           @"rows" : @"50",
                                                                            @"type" : vctype}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      HealthTotalDatas *result = [HealthTotalDatas objectWithKeyValues:dict];

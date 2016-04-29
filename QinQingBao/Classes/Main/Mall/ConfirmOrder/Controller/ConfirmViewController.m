@@ -532,7 +532,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
             
             CGRect rectInTableView = [_tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
             
-            CGRect rect = [_tableView convertRect:rectInTableView toView:[_tableView superview]];
+//            CGRect rect = [_tableView convertRect:rectInTableView toView:[_tableView superview]];
             
             sub.center = CGPointMake(CGRectGetWidth(self.view.frame)/2.0, sub.frame.size.height/3);
         }else

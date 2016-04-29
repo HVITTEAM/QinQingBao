@@ -28,7 +28,7 @@
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效功效" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8IB-KT-OrO">
                         <rect key="frame" x="70" y="2" width="240" height="50"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>

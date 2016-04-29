@@ -55,7 +55,10 @@
                                      {
                                          dataItem = [MassageModel objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          [self setHeadData];
-                                         imgUrlArray = dataItem.introduce_url;
+                                         if ([dataItem.introduce_url isKindOfClass:[NSArray class]])
+                                             imgUrlArray = dataItem.introduce_url;
+                                         else
+                                             imgUrlArray = @[];
                                          self.title = dataItem.iname;
                                          self.headView.orderRightnow.enabled = YES;
                                          [self.tableView reloadData];

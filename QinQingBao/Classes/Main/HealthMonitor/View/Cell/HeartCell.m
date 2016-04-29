@@ -35,10 +35,10 @@
 {
     _item = item;
     
-    if (item.bloodglucose)
+    if (item.bloodsugar)
     {
-        NSInteger strlength = item.bloodglucose.length;
-        NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodglucose];
+        NSInteger strlength = item.bloodsugar.length;
+        NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodsugar];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
         // 设置富文本样式
@@ -57,11 +57,10 @@
         
         self.heartDataLabel.attributedText = attributedString;
     }
-    if (item.boolg_time)
+    if (item.bloodsugar_time)
     {
-        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.boolg_time];
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.bloodsugar_time];
         self.time.text = time;
-
     }
 }
 

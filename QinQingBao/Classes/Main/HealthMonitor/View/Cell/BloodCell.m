@@ -11,15 +11,11 @@
 @implementation BloodCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
-
 
 - (void)setItem:(HealthDataModel *)item
 {
@@ -32,10 +28,13 @@
             self.decLab.text = @"mmol/L";
             break;
         case ChartTypeSugar:
-            self.bloodLab.text = [NSString stringWithFormat:@"%@",item.bloodglucose];
-            self.timeLab.text = item.boolg_time;
+        {
+            float floatString = [item.bloodsugar floatValue];
+            self.bloodLab.text = [NSString stringWithFormat:@"%.01f",floatString];
+            self.timeLab.text = item.bloodsugar_time;
             self.decLab.text = @"mmHg";
             break;
+        }
         case ChartTypeHeart:
             self.bloodLab.text = [NSString stringWithFormat:@"%@",item.heartrate_avg];
             self.timeLab.text = item.heart_time;
@@ -45,6 +44,4 @@
             break;
     }
  }
-
-
 @end

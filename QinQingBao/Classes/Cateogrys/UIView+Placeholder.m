@@ -28,8 +28,6 @@
     label.x = 0;
     label.y = MTScreenH;
     
-    //[self.navigationController.view insertSubview:label belowSubview:self.navigationController.navigationBar];
-    
     [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:label];
     CGFloat duration = 0.75;
     [UIView animateWithDuration:duration animations:^{
@@ -73,6 +71,5 @@
     [img removeFromSuperview];
     [lable removeFromSuperview];
 }
-
 
 @end

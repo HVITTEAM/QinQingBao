@@ -544,10 +544,15 @@
 #define URL_bang_add_cnditon_user_device_rel_code [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=user_device&op=bang_add_cnditon_user_device_rel_code",URL_Local]
 
 /***监控 - 获取监控数据 根据code获取Url*/
-#define URL_getMonitor_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=getMonitor_ud_id",URL_Local]
+//#define URL_getMonitor_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=getMonitor_ud_id",URL_Local]
+
+#define URL_getMonitor_bycode @"http://120.27.134.215:8081/hyms/app/monitor/get_monitor_datas"
+
 
 /***监控 - 获取监控信息 根据code码 单组Url*/
-#define URL_monitor_one_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=monitor_one_ud_id",URL_Local]
+//#define URL_monitor_one_bycode [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=monitor&op=monitor_one_ud_id",URL_Local]
+
+#define URL_monitor_one_bycode @"http://120.27.134.215:8081/hyms/app/monitor/get_monitor_one_detail"
 
 //------------------推拿按摩-------------------
 
