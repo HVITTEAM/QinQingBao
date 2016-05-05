@@ -162,7 +162,7 @@
     }
     else if (!self.agreementBtn.selected)
     {
-        [NoticeHelper AlertShow:@"请阅读并同意亲情宝服务条款！" view:self.view];
+        [NoticeHelper AlertShow:@"请阅读并同意寸欣健康服务条款！" view:self.view];
         return;
     }
     else

@@ -70,6 +70,30 @@
                                      [HUD removeFromSuperview];
                                  }];
     
+    if (self.shopItem == nil)
+    {
+        [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iidnum parameters:@{@"iidnum" : self.iidnum,
+                                                                                 @"lat" : [SharedAppUtil defaultCommonUtil].lat,
+                                                                                 @"lon" : [SharedAppUtil defaultCommonUtil].lon}
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+                                             self.shopItem = [ServiceItemModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]][0];
+                                         }
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     }];
+
+    }
+    
 }
 
 -(void)initTableSkin

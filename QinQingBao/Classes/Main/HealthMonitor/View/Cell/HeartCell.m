@@ -35,7 +35,7 @@
 {
     _item = item;
     
-    if (item.bloodsugar)
+    if (item.bloodsugar && [item.bloodsugar integerValue] > 0)
     {
         NSInteger strlength = item.bloodsugar.length;
         NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodsugar];

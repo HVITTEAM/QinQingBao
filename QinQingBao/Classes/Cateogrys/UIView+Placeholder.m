@@ -47,9 +47,10 @@
     [self removePlace];
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholderImage.png"]];
     img.tag = 101;
-    img.x = (self.width - 60)/2;
+    img.width = 99;
+    img.height = 53;
+    img.x = (self.width - img.width)/2;
     img.y = MTScreenH/2 - 180;
-    img.width = img.height = 60;
     [self addSubview:img];
     
     UILabel *la = [[UILabel alloc] init];

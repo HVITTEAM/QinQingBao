@@ -21,6 +21,13 @@
     self.title = @"我的消息";
     
     self.view.backgroundColor  = [UIColor whiteColor];
+    
+//    // 获得的就是一个圆形的图片
+//    UIImage *placeHolder = [[UIImage imageNamed:@"1-1.png"] circleImage];
+//    
+//    UIImageView *vie = [[UIImageView alloc] initWithImage:placeHolder];
+//    vie.frame = CGRectMake(10, 100, 80, 80);
+//    [self.view addSubview:vie];
 }
 
 -(instancetype)init

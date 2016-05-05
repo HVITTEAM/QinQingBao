@@ -46,7 +46,7 @@
                                NSParagraphStyleAttributeName:paragraph,
                                NSFontAttributeName:[UIFont boldSystemFontOfSize:17]
                                };
-    NSString *tempStr = @"感谢您使用亲情宝平台进行\n亲友信息登记和硬件设备绑定!";
+    NSString *tempStr = @"感谢您使用寸欣健康平台进行\n亲友信息登记和硬件设备绑定!";
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:tempStr attributes:attrDict];
     self.titleLb.attributedText = attrString;
     self.titleLb.textAlignment = NSTextAlignmentCenter;

@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"亲情宝协议";
+    self.title = @"寸欣健康协议";
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.webv = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];

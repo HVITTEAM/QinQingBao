@@ -132,7 +132,7 @@ static float cellWidth = 66;
     self.bgScrollView.backgroundColor = HMGlobalBg;
     
     self.tabBarItem.title = @"首页";
-    self.navigationItem.title = @"亲情宝";
+    self.navigationItem.title = @"寸欣健康";
     
     self.bgScrollView.height = pageControlY;
     [self.healthBtn setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
@@ -240,10 +240,10 @@ static float cellWidth = 66;
         if (addressString) {
             [self getLocationCity:addressString];
             
-//            [button_back setTitle:addressString forState:UIControlStateNormal];
-//            CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
-//            button_back.width = size.width + 30;
-//            button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
+            //            [button_back setTitle:addressString forState:UIControlStateNormal];
+            //            CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
+            //            button_back.width = size.width + 30;
+            //            button_back.imageEdgeInsets = UIEdgeInsetsMake(16,size.width,12,10);
         }
     }];
     
@@ -585,13 +585,12 @@ static float cellWidth = 66;
 - (IBAction)massageClickHandler:(id)sender
 {
     MassageTableViewController *view = [[MassageTableViewController alloc] init];
-    
     [self.navigationController pushViewController:view animated:YES];
-
-//    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
-//    adver.type = 5;
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
-//    [self presentViewController:nav animated:YES completion:nil];
+    
+    //    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
+    //    adver.type = 5;
+    //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
+    //    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark Net Error
@@ -601,12 +600,12 @@ static float cellWidth = 66;
 -(void)showPlaceHolderView
 {
     MTNetReloader *netReloader = [[MTNetReloader alloc] initWithFrame:self.view.frame
-                                                                  reloadBlock:^{
-                                                                      NSLog(@"Reload") ;
-                                                                      [netReloader dismiss] ;
-                                                                      [self getAdvertisementpic];
-                                                                      [self getTypeList];
-                                                                  }] ;
+                                                          reloadBlock:^{
+                                                              NSLog(@"Reload") ;
+                                                              [netReloader dismiss] ;
+                                                              [self getAdvertisementpic];
+                                                              [self getTypeList];
+                                                          }] ;
     [netReloader showInView:self.view];
 }
 

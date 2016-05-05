@@ -84,9 +84,11 @@
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSArray *arr = [dict objectForKey:@"datas"];
+                                     [self.tableView.header endRefreshing];
+                                     if (arr.count == 0)
+                                         return ;
                                      dataModel = [HealthModel objectWithKeyValues:arr[0]];
                                      [self.tableView reloadData];
-                                     [self.tableView.header endRefreshing];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];

@@ -9,7 +9,10 @@
 #import "MTControllerChooseTool.h"
 #import "MTNewfeatureViewController.h"
 #import "HealthMonitorViewController.h"
-#import "HomeViewController.h"
+//#import "HomeViewController.h"
+
+#import "CXHomeViewController.h"
+
 #import "ProfileViewController.h"
 #import "RootViewController.h"
 #import "LoginViewController.h"
@@ -66,7 +69,7 @@
     UINavigationController *healthLoginNav = [[UINavigationController alloc] initWithRootViewController:healthLogin];
     healthLoginNav.navigationItem.leftBarButtonItem = nil;
     
-    HomeViewController *homeView = [[HomeViewController alloc] init];
+    CXHomeViewController *homeView = [[CXHomeViewController alloc] init];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
     
     HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];

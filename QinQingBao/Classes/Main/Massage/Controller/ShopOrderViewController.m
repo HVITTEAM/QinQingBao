@@ -88,8 +88,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak typeof(self) weakSelf = self;
-    
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     UITableViewCell *cell;
@@ -126,29 +124,9 @@
         shopOrderBuyerInforCell.detailTextLabel.text = customTel;
         cell = shopOrderBuyerInforCell;
         
-        //    }else if (1 == section){
-        //        static NSString *shopOrderNumberCellId = @"shopOrderNumberCell";
-        //        UITableViewCell *shopOrderNumberCell = [tableView dequeueReusableCellWithIdentifier:shopOrderNumberCellId];
-        //        if (!shopOrderNumberCell) {
-        //            shopOrderNumberCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:shopOrderNumberCellId];
-        //            NumPickerView *numPickView = [NumPickerView numPickerViewWithFrame:CGRectMake(0, 0, 90, 30)];
-        //            numPickView.pickerViewButtonColor = HMColor(220, 220, 220);
-        //            numPickView.buttonWidth = 30;
-        //            shopOrderNumberCell.accessoryView = numPickView;
-        //        }
-        //        shopOrderNumberCell.textLabel.text = @"项目数量";
-        //        ((NumPickerView *)shopOrderNumberCell.accessoryView).number = 1;
-        //        ((NumPickerView *)shopOrderNumberCell.accessoryView).numberDidChangeHandle = ^(NSInteger number){
-        //            weakSelf.quantity = number;
-        //            NSLog(@"选择的数量%d",(int)weakSelf.quantity);
-        //        };
-        //
-        //        cell = shopOrderNumberCell;
-        //
     }else if (3 == indexPath.section && 1 == indexPath.row){
         ShopOrderInfoCell *shopInfoCell = [ShopOrderInfoCell createShopOrderInfoCellWithTableView:tableView indexPath:indexPath];
         [shopInfoCell setItem:self.shopItem];
-        
         cell = shopInfoCell;
     }
     
@@ -162,9 +140,8 @@
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (3 == indexPath.section && 1 == indexPath.row) {
+    if (3 == indexPath.section && 1 == indexPath.row)
         return 103;
-    }
     return 50;
 }
 
@@ -230,8 +207,10 @@
                                                                      @"wremark" : @"用户留言",
                                                                      @"voucher_id" :  @"",
                                                                      @"pay_type" : @"3",
+                                                                     @"item_sum" : @"1",
                                                                      @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
-                                                                     @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
+                                                                     @"wlng" :  [SharedAppUtil defaultCommonUtil].lon,
+                                                                     @"w_status" : @"5"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

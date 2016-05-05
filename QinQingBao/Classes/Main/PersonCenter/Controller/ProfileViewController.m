@@ -25,6 +25,10 @@
 #import "GoodsViewController.h"
 #import "GoodsTypeViewController.h"
 #import "MyMesageViewController.h"
+
+#import "BalanceViewController.h"
+
+
 #define imageHeight 140
 
 @interface ProfileViewController ()
@@ -126,38 +130,6 @@
     [_zoomImageview addSubview:_iconImageview];
 }
 
-
-/**
- *  监听属性值发生改变时回调
- */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    //    CGFloat offset = self.tableView.contentOffset.y;
-    //    CGFloat delta = offset / 64.f + 1.f;
-    //    delta = MAX(0, delta);
-    //    [self alphaNavController].barAlpha = MIN(1, delta);
-}
-
-
-#pragma mark UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    //    CGFloat y = scrollView.contentOffset.y;//根据实际选择加不加上NavigationBarHight（44、64 或者没有导航条）
-    //    if (y < -imageHeight) {
-    //        CGRect frame = _zoomImageview.frame;
-    //        frame.origin.y = y;
-    //        frame.size.height =  -y;//contentMode = UIViewContentModeScaleAspectFill时，高度改变宽度也跟着改变
-    //        _zoomImageview.frame = frame;
-    //    }
-}
-
-#pragma mark MBTwitterScrollDelegate
--(void) recievedMBTwitterScrollEvent
-{
-    [self performSegueWithIdentifier:@"showPopover" sender:self];
-}
-
 # pragma  mark 设置数据源
 /**
  *  初始化模型数据
@@ -202,7 +174,7 @@
     [self.groups addObject:group];
     
     HMCommonArrowItem *myData = [HMCommonArrowItem itemWithTitle:@"个人资料" icon:@"pc_user.png"];
-    myData.destVcClass = [PersonalDataViewController class];
+    myData.destVcClass = [BalanceViewController class];
     
     HMCommonArrowItem *newFriend = [HMCommonArrowItem itemWithTitle:@"我的优惠券" icon:@"pc_accout.png"];
     newFriend.destVcClass = [MTCouponsViewController class];

@@ -615,7 +615,7 @@
     }
     //发起请求
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper UploadPicWithUrl:URL_Refund_all parameters:params type:CommonRemoteTypePost images:imageArray success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper UploadPicWithUrl:URL_Refund_all parameters:params  images:imageArray success:^(NSDictionary *dict, id responseObject) {
         [HUD removeFromSuperview];
 
         if ([dict[@"code"] integerValue] == 0) {
@@ -669,7 +669,7 @@
     }
     //发起请求
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper UploadPicWithUrl:URL_Add_refund parameters:params type:CommonRemoteTypePost images:imageArray success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper UploadPicWithUrl:URL_Add_refund parameters:params  images:imageArray success:^(NSDictionary *dict, id responseObject) {
         
         NSLog(@"%@",dict);
         [HUD removeFromSuperview];

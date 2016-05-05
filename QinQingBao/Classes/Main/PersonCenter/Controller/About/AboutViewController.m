@@ -59,7 +59,7 @@
     
     // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
     
-    NSString *string                            = @"亲情宝";
+    NSString *string                            = @"寸欣健康";
     
     lab0.text = string;
     lab0.font = [UIFont fontWithName:@"Helvetica-Bold" size:45];
