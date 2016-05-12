@@ -56,7 +56,7 @@
 {
     _item = item;
     
-    self.titleLab.text = item.tname;
+    self.titleLab.text = item.icontent;
     self.statusLab.text = [self getStatusByStatus:[item.status intValue] payStatus:[item.pay_staus intValue]];
     self.serviceManLab.text = item.wname;
     self.companyLab.text = item.orgname;

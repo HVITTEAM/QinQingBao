@@ -38,6 +38,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     //优惠券
     CouponsModel *couponsItem;
     
+    //最后的总价格
     NSString *totalPrice;
 }
 
@@ -456,7 +457,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     {
         UseCouponsViewController *vc = [[UseCouponsViewController alloc] init];
         vc.title = @"选择优惠券";
-        vc.totalPrice = totalPrice;
+        vc.totalPrice = [NSString stringWithFormat:@"%.2f",[totalPrice floatValue] + [couponsItem.voucher_price floatValue]];
         if(couponsItem)
             vc.selectedModel = couponsItem;
         vc.selectedClick = ^(CouponsModel *item)

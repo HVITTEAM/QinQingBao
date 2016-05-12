@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
 - (IBAction)orderRightnowClickHandler:(id)sender;
 @property (nonatomic, copy) void (^submitClick)(UIButton *btn);
+@property (strong, nonatomic) IBOutlet UILabel *markPriceLab;
 
--(void)setPrice:(NSString *)price time:(NSString *)time;
+-(void)setPrice:(NSString *)price time:(NSString *)time markPrice:(NSString *)markPrice;
 @end

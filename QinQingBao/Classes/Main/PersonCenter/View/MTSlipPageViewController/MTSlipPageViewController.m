@@ -114,7 +114,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     for (int i=0; i < self.viewArr.count; i++) {
         UIViewController *vc = (UIViewController *)self.viewArr[i];
         vc.view.frame = CGRectMake(self.rootScrollView.width*i, 0,
-                                   self.rootScrollView.width, self.rootScrollView.height - 66 - kHeightOfTopScrollView);
+                                   self.rootScrollView.width, self.rootScrollView.height - kHeightOfTopScrollView);
         [self.rootScrollView addSubview:vc.view];
     }
     self.rootScrollView.contentSize = CGSizeMake(MTScreenW * [self.viewArr count], 0);

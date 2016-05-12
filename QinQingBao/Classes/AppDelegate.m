@@ -16,6 +16,14 @@
 #import "CCLocationManager.h"
 
 #import <Bugtags/Bugtags.h>
+
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+
+//微信SDK头文件
+#import "WXApi.h"
+
 /**
  *  SMS appkey
  */
@@ -48,7 +56,7 @@
     [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
     
     [MTControllerChooseTool chooseRootViewController];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     // 初始化荧石SDK库, 设置SDK平台服务器地址
@@ -66,7 +74,47 @@
                                        categories:nil];
     [APService setupWithOption:launchOptions];
     
-//    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
+    //    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
+    
+    /**
+     *  设置ShareSDK的appKey，如果尚未在ShareSDK官网注册过App，请移步到http://mob.com/login 登录后台进行应用注册
+     *  在将生成的AppKey传入到此方法中。
+     *  方法中的第二个第三个参数为需要连接社交平台SDK时触发，
+     *  在此事件中写入连接代码。第四个参数则为配置本地社交平台时触发，根据返回的平台类型来配置平台信息。
+     *  如果您使用的时服务端托管平台信息时，第二、四项参数可以传入nil，第三项参数则根据服务端托管平台来决定要连接的社交SDK。
+     */
+    [ShareSDK registerApp:@"12731697d2ffc"
+          activePlatforms:@[
+                            // 不要使用微信总平台进行初始化
+                            //@(SSDKPlatformTypeWechat),
+                            // 使用微信子平台进行初始化，即可
+                            @(SSDKPlatformSubTypeWechatSession),
+                            @(SSDKPlatformSubTypeWechatTimeline),
+                            ]
+                 onImport:^(SSDKPlatformType platformType) {
+                     
+                     switch (platformType)
+                     {
+                         case SSDKPlatformTypeWechat:
+                             [ShareSDKConnector connectWeChat:[WXApi class]];
+                             break;
+                         default:
+                             break;
+                     }
+                     
+                 }
+          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+              
+              switch (platformType)
+              {
+                  case SSDKPlatformTypeWechat:
+                      [appInfo SSDKSetupWeChatByAppId:@"wx544ef206061848b4"
+                                            appSecret:@"c6f33d454b060fe19c9f57317b24bf32"];
+                      break;
+                  default:
+                      break;
+              }
+          }];
     
     return YES;
 }
@@ -91,11 +139,6 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-//                                                    message:@"deviceToken获取失败！"
-//                                                   delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-    //    [alert show];
-    
     NSLog(@"--------------deviceToken获取失败--------------------");
 }
 
@@ -156,15 +199,34 @@
     application.applicationIconBadgeNumber = 0;
 }
 
+/**
+ *  进程KILL掉之后也会调用，这个只是第一次授权回调，同时也会返回支付信息
+ *
+ *  @param application       <#application description#>
+ *  @param url               <#url description#>
+ *  @param sourceApplication <#sourceApplication description#>
+ *  @param annotation        <#annotation description#>
+ *
+ *  @return <#return value description#>
+ */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation {
-    
+         annotation:(id)annotation
+{
     //跳转支付宝钱包进行支付，处理支付结果
     [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
         NSLog(@"result = %@",resultDic);
         NSLog(@"支付成功!");
     }];
-    
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    //跳转支付宝钱包进行支付，处理支付结果
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+        NSLog(@"支付成功!");
+    }];
     return YES;
 }
 
@@ -183,7 +245,6 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
     [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
 }
-
 
 /**
  * 需要验证身份才能进行下一步操作

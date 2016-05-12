@@ -18,11 +18,14 @@
 @property (nonatomic, copy) NSString *price_min;
 @property (nonatomic, copy) NSString *price_max;
 @property (nonatomic, copy) NSString *price_time_min;
+@property (nonatomic, copy) NSString *price_mem_min;
+@property (nonatomic, copy) NSString *price_mem_max;
 @property (nonatomic, copy) NSString *price_time_max;
 @property (nonatomic, copy) NSString *sell;
 
 
 @property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *price_mem;
 @property (nonatomic, copy) NSString *price_time;
 @property (nonatomic, copy) NSString *effect;
 @property (nonatomic, copy) NSString *process;

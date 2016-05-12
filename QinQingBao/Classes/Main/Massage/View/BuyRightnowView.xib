@@ -17,7 +17,7 @@
                         <constraint firstAttribute="height" constant="20" id="coS-hV-bur"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                    <color key="textColor" red="0.17647058823529413" green="0.6705882352941176" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="0.1656260473" blue="0.1707146702" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1h-DL-mpr">
@@ -43,21 +43,33 @@
                         <constraint firstAttribute="height" constant="0.5" id="Dpj-V1-pIC"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxq-7w-EaY">
+                    <rect key="frame" x="73" y="18" width="35.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="k1B-Vu-ff7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Qnu-ab-IAN" secondAttribute="trailing" id="3pl-bV-jLf"/>
                 <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="x1h-DL-mpr" secondAttribute="bottom" constant="9" id="Beo-f8-Ehz"/>
                 <constraint firstItem="VAc-8R-h4Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Cca-zz-U6H"/>
+                <constraint firstItem="Jxq-7w-EaY" firstAttribute="leading" secondItem="VAc-8R-h4Z" secondAttribute="trailing" constant="10" id="Dzo-Ie-bzQ"/>
                 <constraint firstItem="x1h-DL-mpr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="E0h-VM-VgH"/>
                 <constraint firstAttribute="trailing" secondItem="x1h-DL-mpr" secondAttribute="trailing" constant="10" id="K9L-hC-yUL"/>
                 <constraint firstAttribute="bottom" secondItem="Qnu-ab-IAN" secondAttribute="bottom" id="OXm-QJ-rGA"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="Jxq-7w-EaY" secondAttribute="bottom" constant="10" id="X7j-0C-JiI"/>
                 <constraint firstItem="VAc-8R-h4Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="as1-6k-kZV"/>
                 <constraint firstItem="Qnu-ab-IAN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dba-Ze-M5k"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="markPriceLab" destination="Jxq-7w-EaY" id="3J7-3H-BoY"/>
                 <outlet property="orderRightnow" destination="x1h-DL-mpr" id="qVf-3V-0CC"/>
                 <outlet property="priceLab" destination="VAc-8R-h4Z" id="qGg-vi-QCV"/>
             </connections>

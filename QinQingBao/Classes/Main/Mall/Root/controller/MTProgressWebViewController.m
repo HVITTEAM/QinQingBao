@@ -19,14 +19,21 @@
 {
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
-    UIWebView *webView;
-    
 }
 @property (nonatomic, retain) WebViewJavascriptBridge *bridge;
 
 @end
 
 @implementation MTProgressWebViewController
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -36,16 +43,14 @@
     
     [self initData];
     
-    [self initNavigation];
+    //    [self initNavigation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
-    //    [self.navigationController.navigationBar addSubview:_progressView];
+    [self.navigationController.navigationBar addSubview:_progressView];
     
     [self addEventListener];
 }
@@ -103,11 +108,12 @@
     [WebViewJavascriptBridge enableLogging];
     
     if (!_bridge) {
-        _bridge = [WebViewJavascriptBridge bridgeForWebView:webView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
+        _bridge = [WebViewJavascriptBridge bridgeForWebView:_webView webViewDelegate:self handler:^(id data, WVJBResponseCallback responseCallback) {
             
             NSString *str = [NSString stringWithFormat:@"%@",data];
-            if ([str isEqualToString:@"0"]) {
-                [self.navigationController popViewControllerAnimated:YES];
+            if ([str isEqualToString:@"10"]) {
+                if (![SharedAppUtil defaultCommonUtil].userVO )
+                    return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
             }
             else if ([str isEqualToString:@"1"]) {
                 LoginViewController *login = [[LoginViewController alloc] init];
@@ -166,14 +172,14 @@
     [self.navigationController pushViewController:navShop animated:YES];
 }
 
-//-(void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//
-//    [_progressView removeFromSuperview];
-//
-//    [self clearCookies];
-//}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [_progressView removeFromSuperview];
+    
+    [self clearCookies];
+}
 
 /**
  *清空手机端访问网页的cookie
@@ -195,14 +201,16 @@
 
 -(void)initData
 {
-    webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 70)];
+    _webView.scalesPageToFit = YES;
+    _webView.backgroundColor = [UIColor whiteColor];
+    _webView.multipleTouchEnabled = YES;
     NSURL *iconUrl = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:iconUrl cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:10.0f];
     
     _progressProxy = [[NJKWebViewProgress alloc] init];
     
-    webView.delegate = _progressProxy;
+    _webView.delegate = _progressProxy;
     _progressProxy.webViewProxyDelegate = self;
     _progressProxy.progressDelegate = self;
     
@@ -212,13 +220,10 @@
     _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
     _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
-    [webView loadRequest:request];
+    [_webView loadRequest:request];
     
-    [self.view addSubview:webView];
+    [self.view addSubview:_webView];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 20)];
-    view.backgroundColor = MTNavgationBackgroundColor;
-    [self.view addSubview:view];
 }
 
 #pragma mark - NJKWebViewProgressDelegate

@@ -59,7 +59,7 @@ float const fontSize_bt              = 15.0 ;
     CGRect rectWifi = CGRectZero ;
     rectWifi.size = CGSizeMake(width_displayNoWifiView, height_displayNoWifiView) ;
     rectWifi.origin.x = (self.frame.size.width - width_displayNoWifiView) / 2.0 ;
-    rectWifi.origin.y = (self.frame.size.height - height_displayNoWifiView - height_labelshow - flexY_lb_bt - height_bt) / 2.0 ;
+    rectWifi.origin.y = self.frame.size.height /2 - height_displayNoWifiView - height_labelshow - flexY_lb_bt - height_bt ;
     self.nowifiImgView.frame = rectWifi ;
     
     CGRect rectLabel = CGRectZero ;

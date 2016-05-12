@@ -12,5 +12,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLab;
+@property (strong, nonatomic) IBOutlet UILabel *commentcountLab;
 +(CommonArticleCell *)commonArticleCell;
+
+@property (nonatomic, copy) NSString *subtitle;
 @end

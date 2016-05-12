@@ -47,8 +47,8 @@
     [self removePlace];
     UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholderImage.png"]];
     img.tag = 101;
-    img.width = 99;
-    img.height = 53;
+    img.width = 70;
+    img.height = 70;
     img.x = (self.width - img.width)/2;
     img.y = MTScreenH/2 - 180;
     [self addSubview:img];

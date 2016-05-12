@@ -38,6 +38,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     [self.navigationController.navigationBar addSubview:_progressView];
 }
 
@@ -59,8 +61,8 @@
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"back_icon.png"
-                                                                 highImageName:@"back_icon.png"
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"btn_dismissItem.png"
+                                                                 highImageName:@"btn_dismissItem_highlighted.png"
                                                                         target:self action:@selector(back)];
 }
 
@@ -98,7 +100,6 @@
     self.title  = item.title;
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_WebImg,item.bc_article_url]];
     webv = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    webv.y = 40;
     NSURLRequest *request = [NSURLRequest requestWithURL:iconUrl];
     
     _progressProxy = [[NJKWebViewProgress alloc] init];

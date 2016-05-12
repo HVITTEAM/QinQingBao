@@ -27,4 +27,14 @@
     // Configure the view for the selected state
 }
 
+-(void)setSubtitle:(NSString *)subtitle
+{
+    _subtitle = subtitle;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:subtitle];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:4];//调整行间距
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [subtitle length])];
+    self.subtitleLab.attributedText = attributedString;
+}
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "CommonCouponsCell.h"
 #import "CouponsModel.h"
+@class OrderModel;
 
 @interface UseCouponsViewController : UITableViewController
 
@@ -21,5 +22,7 @@
 
 //当前选择的优惠券
 @property (nonatomic, retain) CouponsModel *selectedModel;
+
+@property(strong,nonatomic)OrderModel *ordermodel;             //选中的服务模型，当选择的为服务时才需要传
 
 @end

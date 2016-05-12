@@ -18,6 +18,9 @@
     
 }
 @property (nonatomic,retain) UIDatePicker* datePicker;
+
+@property(assign,nonatomic)BOOL tapLoginOutButton;      //是否点击了退出按钮
+
 @end
 
 @implementation PersonalDataViewController
@@ -100,7 +103,26 @@
     [view addSubview:lab];
     
     [self.tableView addSubview:view];
+    
+    
+    //退出按钮
+    
+    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 60)];
+    bgview.backgroundColor = [UIColor clearColor];
+    
+    UIButton *logout = [[UIButton alloc] init];
+    logout.frame = CGRectMake(0, 10, MTScreenW, 50);
+    logout.titleLabel.font = [UIFont systemFontOfSize:16];
+    [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
+    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
+    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
+    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [bgview addSubview:logout];
+    
+    self.tableView.tableFooterView = bgview;
 }
+
 
 #pragma mark - Table view data source
 
@@ -111,9 +133,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-    return 6;
+        return 6;
     else
-    return 1;
+        return 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -124,9 +146,9 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0)
-    return 60;
+        return 60;
     else
-    return 44;
+        return 44;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -162,9 +184,9 @@
             contentcell.accessoryView = imageView;
         }
         else if(indexPath.row == 3 || indexPath.row == 4)
-        contentcell.accessoryType = UITableViewCellAccessoryNone;
+            contentcell.accessoryType = UITableViewCellAccessoryNone;
         else
-        contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
     }
     else
@@ -208,9 +230,9 @@
     else if(indexPath.row == 4)
     {
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        [self setDatePickerIos8];
+            [self setDatePickerIos8];
         else
-        [self setDatePickerIos7];
+            [self setDatePickerIos7];
     }
     else if(indexPath.row == 5)
     {
@@ -245,29 +267,29 @@
     if (alertView.tag > 100)
     {
         if(buttonIndex==1)
-        [self shootPiicturePrVideo];
+            [self shootPiicturePrVideo];
         else if(buttonIndex==2)
-        [self selectExistingPictureOrVideo];
+            [self selectExistingPictureOrVideo];
         
     }
     else
     {
         if (buttonIndex == 0)
-        return;
+            return;
         
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:@"ios" forKey:@"client"];
         [dict setObject:[NSNumber numberWithInteger:buttonIndex] forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_birthday != nil)
-        [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
+            [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
         if (infoVO.member_areainfo != nil)
-        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
         [self updataUserInfor:dict];
     }
@@ -376,7 +398,7 @@
                                              iconUrl = [di objectForKey:@"member_avatar"];
                                          }
                                          else
-                                         [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
+                                             [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
                                          [self setDataProvider];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -473,7 +495,7 @@
     [self.datePicker setMaximumDate:maxDate];
     
     [self.datePicker setMinimumDate:minDate];
-
+    
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         NSDate* date=[self.datePicker date];
@@ -485,15 +507,15 @@
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
         if (infoVO.member_sex != nil)
-        [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
-        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
         [self updataUserInfor:dict];
     }];
@@ -521,6 +543,44 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
+    if (self.tapLoginOutButton) {
+        if(buttonIndex == 0)
+        {
+            MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            
+            [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                       @"client" : @"ios",
+                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+                                         type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                             [HUD removeFromSuperview];
+                                             id codeNum = [dict objectForKey:@"code"];
+                                             if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                             {
+                                                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                                 [alertView show];
+                                             }
+                                             else
+                                             {
+                                                 [SharedAppUtil defaultCommonUtil].userVO = nil;
+                                                 [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
+                                                 
+                                                 [MTControllerChooseTool setloginOutViewController];
+                                             }
+                                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             NSLog(@"发生错误！%@",error);
+                                             [HUD removeFromSuperview];
+                                             [self.view endEditing:YES];
+                                             [MTControllerChooseTool setRootViewController];
+                                         }];
+        }else{
+            self.tapLoginOutButton = NO;
+        }
+        
+        return;
+    }
+    
+    
     if(buttonIndex == 0)
     {
         NSDate* date=[self.datePicker date];
@@ -533,18 +593,19 @@
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
         if (infoVO.member_sex != nil)
-        [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
-        [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_areainfo != nil)
-        [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
+            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
-        [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-        [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         [self updataUserInfor:dict];
         
     }
+    
 }
 
 #pragma mark - RSKImageCropViewControllerDelegate
@@ -561,6 +622,26 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self upploadAvatar:data];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+#pragma mark - 退出登陆
+#pragma  mark - 退出当前账号
+-(void)loginOut
+{
+    self.tapLoginOutButton = YES;
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定退出当前账号？"
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:@"确定"
+                                                    otherButtonTitles:nil];
+    [actionSheet showInView:self.view];
+}
+
+-(void)dealloc
+{
+    NSLog(@"sdfsdfsdfsdfsdfsdfsdfsdfasdfsdf");
 }
 
 @end

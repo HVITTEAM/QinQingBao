@@ -16,7 +16,6 @@ static float cellWidth = 66;
 #import "ServiceTypeDatas.h"
 #import "ServiceTypeModel.h"
 #import "AllServiceTypeController.h"
-#import "WebViewController.h"
 #import "CitiesViewController.h"
 #import "AdvertisementViewController.h"
 #import "CCLocationManager.h"
@@ -282,7 +281,6 @@ static float cellWidth = 66;
  */
 -(void)onClickImage:(UITapGestureRecognizer *)tap
 {
-    //    WebViewController *listView = [[WebViewController alloc] init];
     HomePicModel *item = advArr[tap.view.tag];
     if (item.bc_article_url.length == 0)
         return;

@@ -16,6 +16,7 @@
 @property (nonatomic, retain)  NSMutableArray *advArr;
 
 - (IBAction)masageHandler:(id)sender;
+- (IBAction)healthHandler:(id)sender;
 -(void)initImagePlayer;
 
 @property (nonatomic, retain) UINavigationController *nav;

@@ -86,7 +86,6 @@
 
 -(void)back
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -210,7 +209,6 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
         
         NSArray *arr = [dataProvider[indexPath.section -1] objectForKey:@"regions"];
@@ -227,10 +225,8 @@
 
 -(void)btnClickHandler:(UIButton *)btn
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-    [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate selectedChange:btn.titleLabel.text];
-    }];
+    [self.delegate selectedChange:btn.titleLabel.text];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

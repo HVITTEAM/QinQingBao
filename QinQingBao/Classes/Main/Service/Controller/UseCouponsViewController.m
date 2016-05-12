@@ -9,6 +9,7 @@
 #import "UseCouponsViewController.h"
 #import "CouponsModel.h"
 #import "CouponsTotal.h"
+#import "OrderModel.h"
 
 #import "CouponsCell.h"
 
@@ -41,8 +42,11 @@
     
     [self initTableSkin];
     
-    [self getDataProvider];
-    
+    if (self.ordermodel) {
+        [self getDataProviderForServices];
+    }else{
+        [self getDataProvider];
+    }
 }
 
 -(void)initNavgation
@@ -59,7 +63,6 @@
 -(void)sureClickHandler
 {
     [self.navigationController popViewControllerAnimated:YES];
-    //    if (selectedCouModel)
     self.selectedClick(selectedCouModel);
 }
 
@@ -81,13 +84,62 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
+                                         if ([codeNum integerValue] == 17001)
+                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
                                      }
                                      else
                                      {
                                          CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          dataProvider = result.voucher_list;
                                          if (dataProvider.count == 0)
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self.tableView reloadData];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+    
+}
+
+//client 	Y 		登录设备 ['ios', 'android', 'wechat','wap']
+//key 	Y 		登录密钥, 登录接口获取
+//member_id 	Y 		会员id
+//mem_price 	Y 		会员价
+//store_id 	Y 		店铺id
+-(void)getDataProviderForServices
+{
+    NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"client" : @"ios",
+                             @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                             @"mem_price":self.ordermodel.wprice,
+                             @"store_id":self.ordermodel.store_id};
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_get_use_voucher parameters: params
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         if ([codeNum integerValue] == 17001)
+                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                     }
+                                     else
+                                     {
+                                         dataProvider = [CouponsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         if (dataProvider.count == 0)
+                                             [self.tableView initWithPlaceString:@"暂无数据!"];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];

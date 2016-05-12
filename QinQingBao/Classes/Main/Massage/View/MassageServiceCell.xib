@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90分钟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PqN-vl-9ua">
-                        <rect key="frame" x="74" y="43.5" width="42.5" height="21"/>
+                        <rect key="frame" x="92" y="44.5" width="42.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="fsq-2c-ou6"/>
                         </constraints>
@@ -57,10 +57,18 @@
                         <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time" translatesAutoresizingMaskIntoConstraints="NO" id="Pq2-E3-YlP">
+                        <rect key="frame" x="74" y="47" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="UCM-SI-lxK"/>
+                            <constraint firstAttribute="width" constant="16" id="o4P-TE-I8v"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="PqN-vl-9ua" secondAttribute="bottom" constant="5" id="BdG-Yt-lHm"/>
+                    <constraint firstAttribute="bottom" secondItem="PqN-vl-9ua" secondAttribute="bottom" constant="4" id="BdG-Yt-lHm"/>
                     <constraint firstAttribute="bottom" secondItem="iuP-yQ-fcy" secondAttribute="bottom" constant="5" id="Bu4-c5-Obb"/>
+                    <constraint firstItem="PqN-vl-9ua" firstAttribute="leading" secondItem="Pq2-E3-YlP" secondAttribute="trailing" constant="2" id="Crs-H6-ANm"/>
                     <constraint firstItem="PqN-vl-9ua" firstAttribute="leading" secondItem="nPj-Gy-H7K" secondAttribute="trailing" constant="9" id="CzE-Mz-OhG"/>
                     <constraint firstItem="nPj-Gy-H7K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ILv-1w-FZ5"/>
                     <constraint firstItem="PqN-vl-9ua" firstAttribute="top" secondItem="b3y-a7-4Lp" secondAttribute="bottom" constant="8" id="IgA-IE-UBd"/>
@@ -71,9 +79,12 @@
                     <constraint firstItem="iuP-yQ-fcy" firstAttribute="top" secondItem="TW4-Xr-Ceg" secondAttribute="bottom" constant="8" id="hu1-4T-qYh"/>
                     <constraint firstAttribute="trailing" secondItem="TW4-Xr-Ceg" secondAttribute="trailing" constant="14" id="pMg-me-tCa"/>
                     <constraint firstItem="nPj-Gy-H7K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="rLy-cg-yBg"/>
+                    <constraint firstItem="Pq2-E3-YlP" firstAttribute="leading" secondItem="nPj-Gy-H7K" secondAttribute="trailing" constant="9" id="vmH-bF-0dA"/>
+                    <constraint firstAttribute="bottom" secondItem="Pq2-E3-YlP" secondAttribute="bottom" constant="6.5" id="xn5-Ah-dWw"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="CzE-Mz-OhG"/>
                         <exclude reference="IgA-IE-UBd"/>
                         <exclude reference="hu1-4T-qYh"/>
                     </mask>
@@ -88,4 +99,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="time" width="16" height="16"/>
+    </resources>
 </document>

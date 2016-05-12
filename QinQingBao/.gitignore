@@ -1,0 +1,5 @@
+*.DS_Store
+../.DS_Store
+../QinQingBao.xcodeproj/project.xcworkspace/xcuserdata/dongxuwei.xcuserdatad/WorkspaceSettings.xcsettings
+../QinQingBao.xcodeproj/project.pbxproj
+../QinQingBao.xcodeproj/project.xcworkspace/xcuserdata/dongxuwei.xcuserdatad/UserInterfaceState.xcuserstate

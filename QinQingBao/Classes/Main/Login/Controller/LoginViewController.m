@@ -12,32 +12,32 @@
 
 
 @interface LoginViewController ()<UITextFieldDelegate>
-
-- (IBAction)loginNow:(id)sender;
-- (IBAction)regist:(id)sender;
-- (IBAction)backPassword:(id)sender;
-- (IBAction)sigleTapBackgrouned:(id)sender;
-
-@end
-
-@implementation LoginViewController
 {
     
 }
 
+@property (weak, nonatomic) IBOutlet UITextField *accountText;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordText;
+
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+
+//容纳文本输入框的UIView
+@property (strong, nonatomic) IBOutlet UIView *txtview;
+//当前正在使用的文本输入框
+@property (strong,nonatomic)UITextField *currentText;
+//键盘高度
+@property(assign,nonatomic)CGFloat keyBoardH;
+
+@end
+
+@implementation LoginViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //设置登录按钮外观
-    self.loginBtn.layer.cornerRadius = 5.0f;
-    self.loginBtn.layer.masksToBounds = YES;
-    
-    self.mainBgview.backgroundColor = MTNavgationBackgroundColor;
-    
-    self.accountText.delegate = self;
-    self.passwordText.delegate = self;
-    
-    self.backBtn.hidden = self.backHiden;
+
+    [self setupUI];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -47,27 +47,25 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    self.navigationController.navigationBarHidden = YES;
-    
-    //取消导航栏下方黑线
-    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-        NSArray *list=self.navigationController.navigationBar.subviews;
-        for (id obj in list) {
-            if ([obj isKindOfClass:[UIImageView class]]) {
-                UIImageView *imageView=(UIImageView *)obj;
-                NSArray *list2=imageView.subviews;
-                for (id obj2 in list2) {
-                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-                        UIImageView *imageView2=(UIImageView *)obj2;
-                        imageView2.hidden=YES;
-                    }
-                }
-            }
-        }
-    }
+//    self.navigationController.navigationBarHidden = YES;
+//    
+//    //取消导航栏下方黑线
+//    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
+//        NSArray *list=self.navigationController.navigationBar.subviews;
+//        for (id obj in list) {
+//            if ([obj isKindOfClass:[UIImageView class]]) {
+//                UIImageView *imageView=(UIImageView *)obj;
+//                NSArray *list2=imageView.subviews;
+//                for (id obj2 in list2) {
+//                    if ([obj2 isKindOfClass:[UIImageView class]]) {
+//                        UIImageView *imageView2=(UIImageView *)obj2;
+//                        imageView2.hidden=YES;
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
-
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -76,12 +74,36 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)setBackHiden:(BOOL)backHiden
+-(void)setupUI
 {
-    _backHiden = backHiden;
-    if (self.backBtn)
-        self.backBtn.hidden = self.backHiden;
+    //设置登录按钮外观
+    self.loginBtn.layer.cornerRadius = 5.0f;
+    self.loginBtn.layer.masksToBounds = YES;
+    
+    self.accountText.delegate = self;
+    self.passwordText.delegate = self;
+    
+    //设置导航栏
+    UIButton *registBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 44)];
+    [registBtn setTitle:@"注册" forState:UIControlStateNormal];
+    [registBtn setTitleColor:HMColor(244, 143, 54) forState:UIControlStateNormal];
+    registBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    [registBtn addTarget:self action:@selector(regist:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:registBtn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 24, 24)];
+    [backBtn setTitleColor:HMColor(244, 143, 54) forState:UIControlStateNormal];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"btn_dismissItem.png"] forState:UIControlStateNormal];
+    backBtn.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+    [backBtn addTarget:self action:@selector(backHanlder:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    if (!self.backHiden)
+        self.navigationItem.leftBarButtonItem = leftItem;
+    
+    self.navigationItem.title = @"登录";
 }
+
 
 #pragma mark UITextField协议方法
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -100,6 +122,27 @@
     self.currentText = nil;
 }
 
+#pragma UITextField delegate method
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.accountText)
+    {
+        NSUInteger lengthOfString = string.length;
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {//只允许数字输入
+            unichar character = [string characterAtIndex:loopIndex];
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57) return NO; // 57 unichar for 9
+        }
+    }
+    NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+    if (textField == self.accountText)
+    {
+        if (proposedNewLength > 11)
+            return NO;//限制长度
+    }
+    return YES;
+}
+
 /**
  *  单击背景取消键盘
  */
@@ -107,7 +150,7 @@
     [self.view endEditing:YES];
 }
 
-#pragma mark 登录、注册、取回密码
+#pragma mark - 登录、注册、取回密码
 /**
  *  登录
  */
@@ -163,6 +206,7 @@
 - (IBAction)regist:(id)sender
 {
     RegistViewController *registVC = [[RegistViewController alloc] initWithNibName:@"RegistViewController" bundle:nil];
+    registVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:registVC animated:YES];
 }
 
@@ -188,30 +232,7 @@
         return YES;
 }
 
-#pragma UITextField delegate method
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.accountText)
-    {
-        NSUInteger lengthOfString = string.length;
-        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {//只允许数字输入
-            unichar character = [string characterAtIndex:loopIndex];
-            if (character < 48) return NO; // 48 unichar for 0
-            if (character > 57) return NO; // 57 unichar for 9
-        }
-    }
-    NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
-    if (textField == self.accountText)
-    {
-        if (proposedNewLength > 11)
-            return NO;//限制长度
-    }
-    return YES;
-}
-
-
-#pragma mark 解决键盘遮挡文本框
+#pragma mark - 解决键盘遮挡文本框
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
@@ -241,7 +262,7 @@
 }
 
 
-- (IBAction)backHanlder:(id)sender
+- (void)backHanlder:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

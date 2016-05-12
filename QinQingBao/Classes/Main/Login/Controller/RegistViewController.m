@@ -20,16 +20,13 @@
     
 }
 
-- (IBAction)getVerificationCode:(id)sender;
-- (IBAction)agreement:(id)sender;
-- (IBAction)registNow:(id)sender;
-- (IBAction)sigleTapBackgrouned:(id)sender;
 
 @end
 
 @implementation RegistViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     //设置phoneNumText，VerNumText,passwordText代理
@@ -69,10 +66,10 @@
  */
 -(void)updateInterface
 {
-    self.verBtn.layer.cornerRadius = 5.0f;
-    self.verBtn.layer.masksToBounds = YES;
-    self.verBtn.layer.borderWidth = 1.0f;
-    self.verBtn.layer.borderColor = [[UIColor redColor] CGColor];
+//    self.verBtn.layer.cornerRadius = 5.0f;
+//    self.verBtn.layer.masksToBounds = YES;
+//    self.verBtn.layer.borderWidth = 1.0f;
+//    self.verBtn.layer.borderColor = [[UIColor redColor] CGColor];
     
     self.registNowBtn.layer.cornerRadius = 5.0f;
     self.registNowBtn.layer.masksToBounds = YES;
@@ -162,7 +159,7 @@
     }
     else if (!self.agreementBtn.selected)
     {
-        [NoticeHelper AlertShow:@"请阅读并同意寸欣健康服务条款！" view:self.view];
+        [NoticeHelper AlertShow:@"请阅读并同意亲情宝服务条款！" view:self.view];
         return;
     }
     else
@@ -275,7 +272,7 @@
     [self.view endEditing:YES];
 }
 
-#pragma mark 解决键盘遮挡文本框
+#pragma mark - 解决键盘遮挡文本框
 -(void)keyBoardWillShow:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];

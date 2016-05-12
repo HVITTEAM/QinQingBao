@@ -12,14 +12,19 @@
 #import "HomePicTotal.h"
 #import "HomePicModel.h"
 
-#import "MTNetReloader.h"
-
 #import "CCLocationManager.h"
 
 #import "CitiesViewController.h"
 #import "ArticleModel.h"
 
 #import "CommonArticleCell.h"
+
+#import "NewsDetailViewControler.h"
+
+#import "SettlementSlideViewController.h"
+#import "AllArticleTableViewController.h"
+
+#import "MJChiBaoZiHeader.h"
 
 
 @interface CXHomeViewController ()<MTCityChangeDelegate>
@@ -44,13 +49,11 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [titleView removeFromSuperview];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar addSubview:titleView];
 }
 
 - (void)viewDidLoad
@@ -63,20 +66,57 @@
     
     [self getAdvertisementpic];
     
-    [self getNewsData];
+    [self setupRefresh];
+    
+    [self.tableView.header beginRefreshing];
     
     headview.nav = self.navigationController;
 }
+
+#pragma mark 集成刷新控件
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    
+    // 设置回调（一旦进入刷新状态，就调用target的action，也就是调用self的loadNewData方法）
+    //    MJChiBaoZiHeader *head = [MJChiBaoZiHeader headerWithRefreshingTarget:self refreshingAction:@selector(getNewsData)];
+    //    self.tableView.header = head;
+    //    head.lastUpdatedTimeLabel.hidden = YES;
+    //    head.stateLabel.hidden = YES;
+    
+    // 下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getNewsData];
+    }];
+}
+
 
 - (void)initView
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    [self.tableView setSeparatorColor:[UIColor colorWithRGB:@"eeeeee"]];
     
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"HomeHeadView" owner:nil options:nil];
     self.tableView.tableHeaderView.height = 350;
     self.tableView.tableHeaderView = [nibs lastObject];
     headview = (HomeHeadView *)self.tableView.tableHeaderView;
+}
+
+-(void)viewDidLayoutSubviews
+{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)])
+    {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)])
+    {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
 }
 
 /**
@@ -85,10 +125,11 @@
 -(void)initNavigation
 {
     self.tabBarItem.title = @"首页";
-#warning frame 有问题 暂时这样解决
-    titleView = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW/2- 80, -90, 160, 284)];
+    
+    titleView = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW/2- 30, 0, 60, 32)];
     titleView.image = [UIImage imageNamed:@"banner.png"];
     
+    self.navigationItem.titleView = titleView;
     
     cityBtn = [[UIButton alloc] init];
     cityBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
@@ -103,7 +144,7 @@
     //按钮文字
     cityBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     cityBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -14, 0, 0);
-    [cityBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cityBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     CGSize size = [cityBtn.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:cityBtn.titleLabel.font}];
     cityBtn.frame = CGRectMake(0, 0,size.width + 30, 40);
@@ -113,6 +154,14 @@
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:cityBtn];
     [backButton setStyle:UIBarButtonItemStyleDone];
     [self.navigationItem setLeftBarButtonItem:backButton];
+    
+    
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    [rightBtn addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateNormal];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateHighlighted];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    [self.navigationItem setRightBarButtonItem:rightButton];
 }
 
 #pragma mark   初始化地图定位功能
@@ -124,11 +173,34 @@
 {
     //获取定位城市和地区block
     [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
-        if (addressString) {
-            [self getLocationCity:addressString];
+        if (addressString)
+        {
+            [cityBtn setTitle: addressString forState:UIControlStateNormal];
+            
+            NSArray *dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
+            
+            for (id item in dataProvider)
+            {
+                NSArray *arr = [item objectForKey:@"regions"];
+                for (id item_sub in arr)
+                {
+                    NSString *cityStr = [item_sub objectForKey:@"name"];
+                    if ([cityStr isEqualToString:addressString])
+                    {
+                        CityModel *cityVO = [[CityModel alloc] init];
+                        cityVO.dvcode = [item_sub objectForKey:@"dvcode"];
+                        cityVO.dvname = [item_sub objectForKey:@"name"];
+                        [self selectedChange:cityVO.dvname];
+                        [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
+                        [ArchiverCacheHelper saveObjectToLoacl:cityVO key:User_LocationCity_Key filePath:User_LocationCity_Path];
+                        break;
+                    }
+                }
+            }
         }
     }];
     
+
     [[CCLocationManager shareLocation] getLocationError:^(NSString *addressString) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
                                                         message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
@@ -137,12 +209,11 @@
         
         [SharedAppUtil defaultCommonUtil].lat = @"0";
         [SharedAppUtil defaultCommonUtil].lon = @"0";
-        
-        return [self getLocationCity:addressString];
     }];
+    
 }
 
-#pragma mark 获取定位城市的dvname
+#pragma mark 获取定位城市的dvname 已废弃
 
 -(void)getLocationCity:(NSString *)cityStr
 {
@@ -166,7 +237,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                  }];
-    
 }
 
 
@@ -215,7 +285,6 @@
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [self showPlaceHolderView];
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                  }];
 }
@@ -225,19 +294,19 @@
  */
 -(void)getNewsData
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_get_articles parameters:@{@"page" : @1000,
+    [self.tableView.header beginRefreshing];
+    [CommonRemoteHelper RemoteWithUrl:URL_get_articles parameters:@{@"page" : @5,
                                                                     @"p" : @1,
                                                                     @"type" : @0}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
+                                     [self.tableView.header endRefreshing];
                                      NSDictionary *dict1 =  [dict objectForKey:@"datas"];
                                      
                                      dataProvider = [ArticleModel objectArrayWithKeyValuesArray:dict1];
-                                     
                                      [self.tableView reloadData];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [self showPlaceHolderView];
+                                     [self.tableView.header endRefreshing];
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                  }];
 }
@@ -260,11 +329,16 @@
     return 10;
 }
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
         return 44;
-    return 100;
+    return 94;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,45 +347,68 @@
     
     CommonArticleCell *articlecell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonArticleCell"];
     
-    commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     if (commoncell == nil)
         commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
-    
+    commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == 0)
     {
         commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        commoncell.textLabel.text = @"健康·生活";
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 100, 30)];
+        label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [label setText:@"健康·生活"];
+        label.font = [UIFont fontWithName:@"HYQiHei-EZJ" size:13];
+        label.textColor = [UIColor colorWithRGB:@"666666"];
+        [commoncell.contentView addSubview:label];
         return commoncell;
     }
     else
     {
         if (articlecell == nil)
             articlecell = [CommonArticleCell commonArticleCell];
-        
         ArticleModel *item = dataProvider[indexPath.row - 1];
-        
         articlecell.titleLab.text = item.title;
-        articlecell.subtitleLab.text = item.subtitle;
-        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.logo_url]];
+        articlecell.subtitle = item.abstract;
+        articlecell.commentcountLab.text = item.comment_count;
+        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_ImgArticle,item.logo_url]];
+        NSLog(@"图片地址：%@",[NSString stringWithFormat:@"%@%@",URL_ImgArticle,item.logo_url]);
         [articlecell.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         return articlecell;
     }
 }
 
-#pragma mark Net Error
-/**
- * 显示异常界面
- **/
--(void)showPlaceHolderView
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MTNetReloader *netReloader = [[MTNetReloader alloc] initWithFrame:self.view.frame
-                                                          reloadBlock:^{
-                                                              NSLog(@"Reload") ;
-                                                              [netReloader dismiss] ;
-                                                              [self getAdvertisementpic];
-                                                          }] ;
-    [netReloader showInView:self.view];
+    if (indexPath.row == 0)
+    {
+        AllArticleTableViewController *view = [[AllArticleTableViewController alloc] init];
+        [self.navigationController pushViewController:view animated:YES];
+    }
+    else
+    {
+        NewsDetailViewControler *view = [[NewsDetailViewControler alloc] init];
+        ArticleModel *item = dataProvider[indexPath.row - 1];
+        view.articleItem = item;
+        NSString *url;
+        if (![SharedAppUtil defaultCommonUtil].userVO)
+            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@",URL_Local,item.id];
+        else
+            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,item.id,[SharedAppUtil defaultCommonUtil].userVO.key];
+        view.url = url;
+        [self.navigationController pushViewController:view animated:YES];
+    }
 }
+
+/**
+ *  结算
+ */
+-(void)pay
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    SettlementSlideViewController *vc = [[SettlementSlideViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end

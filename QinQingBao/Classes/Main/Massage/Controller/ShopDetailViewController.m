@@ -39,6 +39,11 @@
     [self getDadaProvider];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 -(void)getDadaProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -113,7 +118,7 @@
 -(void)setHeadData
 {
     ShopHeadView *headview = (ShopHeadView *)self.tableView.tableHeaderView;
-    [headview setHeadUrl:dataItem.item_url title:dataItem.iname sellNum:dataItem.sell];
+    [headview setHeadUrl:dataItem.item_url title:dataItem.iname sellNum:dataItem.sell time:dataItem.price_time];
 }
 
 #pragma mark - Table view data source
@@ -132,7 +137,9 @@
     }
     __weak typeof(self) weakSelf = self;
     __weak typeof(dataItem) item = dataItem;
-    [self.headView setPrice:dataItem.price time:dataItem.price_time];
+    
+    [self.headView setPrice:dataItem.price_mem time:dataItem.price_time markPrice:dataItem.price];
+    
     self.headView.submitClick = ^(UIButton *button){
         if (![SharedAppUtil defaultCommonUtil].userVO )
             return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];

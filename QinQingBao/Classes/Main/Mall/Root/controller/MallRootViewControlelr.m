@@ -116,7 +116,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     text.font = [UIFont systemFontOfSize:14];
     text.alpha = 0.9;
     text.text= @"  铁皮枫斗";
-    text.backgroundColor = [UIColor whiteColor];
+    text.backgroundColor = [UIColor colorWithRGB:@"dddddd"];
     [self.view addSubview:text];
     
     customNav = [[SWYNavigationBar alloc] initCustomNavigatinBar];
@@ -414,7 +414,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     
     CGFloat scrollOffset = self.tableView.contentOffset.y;
-    customNav.backgroundColor = [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:scrollOffset/64];
+    customNav.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:scrollOffset/64];
 }
 
 /**

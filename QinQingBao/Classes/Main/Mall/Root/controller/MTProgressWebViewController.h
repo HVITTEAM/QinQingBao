@@ -15,4 +15,5 @@
 
 @property (nonatomic, copy) NSString *url;
 
+@property (nonatomic, retain) UIWebView *webView;
 @end

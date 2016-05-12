@@ -31,6 +31,11 @@
     [self.nav pushViewController:view animated:YES];
 }
 
+- (IBAction)healthHandler:(id)sender
+{
+    [NoticeHelper AlertShow:@"暂未开通,敬请期待！" view:nil];
+}
+
 /**
  *  初始化突变轮播播放器
  */

@@ -20,7 +20,18 @@
 
 @end
 
+
 @implementation UpdatePwdViewController
+
+
+-(instancetype)init
+{
+    self = [super init];
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {

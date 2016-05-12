@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
@@ -15,23 +16,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Tjf-4I-S6D">
-                    <rect key="frame" x="130" y="100" width="60" height="60"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="60" id="kgp-Ix-B4R"/>
-                        <constraint firstAttribute="height" constant="60" id="rMx-q5-zWO"/>
-                    </constraints>
-                </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="El0-5F-Bl2">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="寸欣健康，集在线健康管理、线下科技理疗、智慧养老为一体，拥有国内先进的健康管理理念，服务于中老年人、亚健康人群，为您和家人的健康保驾护航。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="El0-5F-Bl2">
                     <rect key="frame" x="0.0" y="175" width="320" height="300"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="300" id="2gJ-UA-Arz"/>
                     </constraints>
-                    <string key="text">       “寸欣健康”是一款预约居家养老服务、孝敬和关爱老人的手机APP。方便子女们为渐渐年迈的父母及长辈预约居家生活帮助、健康管理、安全防护、保健娱乐等服务。通过智能手表、居家看护宝、血压仪等穿戴设备，亲属可以通过APP实时查看老人的心率、血压数据和位置信息并可以视频通话。我们将陆续提供在线健康自查和问诊服务，以及更多医疗看护服务。孝心商城是晚辈关爱尽孝的专门为老人提供特需用品的电商平台。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Tjf-4I-S6D">
+                    <rect key="frame" x="105" y="100" width="110" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="kgp-Ix-B4R"/>
+                        <constraint firstAttribute="height" constant="60" id="rMx-q5-zWO"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -45,6 +45,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_logo" width="512" height="512"/>
+        <image name="logo" width="2011" height="1077"/>
     </resources>
 </document>

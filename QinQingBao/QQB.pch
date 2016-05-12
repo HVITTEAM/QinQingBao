@@ -62,6 +62,10 @@
 #define AppAPIUrl     @"https://open.ys7.com"
 #define AppAuthUrl    @"https://auth.ys7.com"
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
+#define kSellerAccount @"ofc.er@hvit.com.cn"
+
+#define kAppVersion @"v 2.0.0.1"
+
 
 //Demo 转场集合类
 #import "EzvizDemoGlobalKit.h"
@@ -203,11 +207,11 @@
 
 //#define URL_Local @"http://61.143.60.87/ylserver"
 
-#define URL_Local @"http://test.hvit.com.cn/ylserver"
+//#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-//#define URL_Local @"http://ibama.hvit.com.cn"
+#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
@@ -235,6 +239,9 @@
 
 /***图片url*/
 #define URL_Img  [NSString stringWithFormat:@"%@/public/",URL_Local]
+
+/***文章图片url*/
+#define URL_ImgArticle  [NSString stringWithFormat:@"%@/manager/",URL_Local]
 
 /***轮播图片url*/
 #define URL_AdvanceImg  [NSString stringWithFormat:@"%@/public/",URL_Local]
@@ -570,6 +577,18 @@
 //------------------寸欣-------------------
 /***文章 - 获取文章列表*/
 #define URL_get_articles [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=articleinfo&op=get_articles",URL_Local]
+
+/***评论 - 对某一文章进行评论*/
+#define URL_add_comment [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_comment&op=add_comment",URL_Local]
+
+#define URL_get_member_blance [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cxs&op=get_member_blance",URL_Local]
+
+#define URL_get_use_voucher [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=org&op=get_use_voucher",URL_Local]
+
+#define URL_add_member_blance [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cxs&op=add_member_blance",URL_Local]
+
+/***工单 - 支付*/
+#define URL_pay_workinfo_by_type [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=workinfo&op=pay_workinfo_by_type",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

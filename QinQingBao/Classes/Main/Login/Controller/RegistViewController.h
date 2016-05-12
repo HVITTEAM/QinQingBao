@@ -22,4 +22,5 @@
 @property (strong,nonatomic)UITextField *currentText;
 //键盘高度
 @property(assign,nonatomic)CGFloat keyBoardH;
+
 @end

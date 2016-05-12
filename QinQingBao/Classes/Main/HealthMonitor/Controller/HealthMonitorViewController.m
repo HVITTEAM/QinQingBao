@@ -77,7 +77,7 @@
     
     if (!titleLab)
         titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    titleLab.textColor = [UIColor whiteColor];
+    titleLab.textColor = [UIColor blackColor];
     titleLab.x = MTScreenW/2 - 65;
     
     [self.navigationController.navigationBar addSubview:titleLab];
@@ -86,7 +86,7 @@
         [self.navigationController.navigationBar addSubview:pageControl];
     
     // 2.设置圆点的颜色
-    pageControl.currentPageIndicatorTintColor = HMColor(253, 253, 253); // 当前页的小圆点颜色
+    pageControl.currentPageIndicatorTintColor = [UIColor orangeColor]; // 当前页的小圆点颜色
     pageControl.pageIndicatorTintColor = HMColor(189, 189, 189); // 非当前页的小圆点颜色
     
     if (dataProvider.count == 0)
@@ -202,6 +202,7 @@
  */
 -(void)initNavigation
 {
+    self.navigationController.navigationBar.translucent = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addHandler:)];
 }
 

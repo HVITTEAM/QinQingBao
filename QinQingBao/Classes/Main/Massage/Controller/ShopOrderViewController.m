@@ -36,8 +36,42 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setupUI];
+    
+    [self getUserIcon];
 }
+
+#pragma mark - 与后台数据交互模块
+/**
+ *  获取用户数据数据
+ */
+-(void)getUserIcon
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         NSLog(@"用户信息获取失败");
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         if ([di count] != 0)
+                                         {
+                                             customName = (NSString*)[di objectForKey:@"member_truename"];
+                                             customTel = (NSString*)[di objectForKey:@"member_mobile"];
+                                         }
+                                         [self.tableView reloadData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
 
 #pragma mark - 初始化界面
 /**
@@ -197,7 +231,7 @@
                                                                      @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"wtime" : self.uploadTimestr,
                                                                      @"wname" : customName,
-                                                                     @"wprice" : self.dataItem.price,
+                                                                     @"wprice" : self.dataItem.price_mem,
                                                                      @"dvcode" : self.shopItem.dvcode,
                                                                      @"wtelnum" : customTel,
                                                                      @"waddress" : self.shopItem.totalname,
@@ -222,9 +256,11 @@
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-                                         OrderResultViewController *vc = [[OrderResultViewController alloc] init];
-                                         vc.orderItem = item;
-                                         [self.navigationController pushViewController:vc animated:YES];
+//                                         OrderResultViewController *vc = [[OrderResultViewController alloc] init];
+//                                         vc.orderItem = item;
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"下单成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         [self.navigationController popViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

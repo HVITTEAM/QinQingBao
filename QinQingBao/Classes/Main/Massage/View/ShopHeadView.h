@@ -13,7 +13,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) IBOutlet UILabel *title;
 @property (strong, nonatomic) IBOutlet UILabel *sum;
+@property (strong, nonatomic) IBOutlet UILabel *timeLab;
 
 
--(void)setHeadUrl:(NSString *)url title:(NSString *)title sellNum:(NSString*)sellNum;
+-(void)setHeadUrl:(NSString *)url title:(NSString *)title sellNum:(NSString*)sellNum time:(NSString*)time;
 @end

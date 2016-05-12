@@ -86,7 +86,7 @@
         //初始化对象
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
         tabBarController.tabBar.barTintColor = [UIColor whiteColor];
-        tabBarController.tabBar.tintColor = MTNavgationBackgroundColor;
+        tabBarController.tabBar.tintColor =HMColor(95, 117, 75);
         [SharedAppUtil defaultCommonUtil].tabBar = tabBarController;
     }
     

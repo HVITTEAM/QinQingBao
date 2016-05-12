@@ -22,6 +22,7 @@
     self = [super init];
     if (self){
         self.hidesBottomBarWhenPushed = YES;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     return self;
 }
@@ -46,7 +47,7 @@
     self.vc3 = [[CouponsViewController alloc] init];
     self.vc3.title = @"已过期";
     
-    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
+    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:self.view.bounds];
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3, nil];
     [self.view addSubview:view];

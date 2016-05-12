@@ -55,51 +55,29 @@
 
 -(void)initView
 {
-    UILabel *lab0 = [[UILabel alloc] init];
     
-    // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    logo.frame = CGRectMake(self.view.width/2 - 55, 40, 110, 60);
     
-    NSString *string                            = @"寸欣健康";
-    
-    lab0.text = string;
-    lab0.font = [UIFont fontWithName:@"Helvetica-Bold" size:45];
-    lab0.textColor = MTNavgationBackgroundColor;
-    lab0.textAlignment = NSTextAlignmentCenter;
-    CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
-    lab0.width = self.view.width;
-    lab0.height = size0.height;
-    lab0.x = self.view.width/2 - lab0.width/2;
-    lab0.y = self.navigationController.navigationBar.height;
-    
+    UIImageView *advlogo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"advlogo.png"]];
+    advlogo.frame = CGRectMake(self.view.width/2 - 60, CGRectGetMaxY(logo.frame) + 5, 120, 15);
+
     UIView *view = [[UIView alloc] init];
-    view.height = 150;
+    view.height = 160;
     
     UILabel *lab = [[UILabel alloc] init];
-    
-    NSString *string1                            = @"智慧养老服务中心(v1.2.1.7)";
-
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string1];
-    
-    // 设置富文本样式
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor orangeColor]
-                             range:NSMakeRange(0, 8)];
-    
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor lightGrayColor]
-                             range:NSMakeRange(8, string1.length - 8)];
-   
-    
-    lab.attributedText = attributedString;
+    lab.text = kAppVersion;
+    lab.textColor = MTNavgationBackgroundColor;
     lab.font = [UIFont fontWithName:@"Helvetica" size:13];
-//    lab.textColor = [UIColor orangeColor];
     CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
     lab.width = size.width;
     lab.height = size.height;
-    lab.x = lab0.x + lab0.width/2 - lab.width/2;
-    lab.y = CGRectGetMaxY(lab0.frame) + 10;
+    lab.x = advlogo.x + advlogo.width/2 - lab.width/2;
+    lab.y = CGRectGetMaxY(advlogo.frame) + 10;
     [view addSubview:lab];
-    [view addSubview:lab0];
+    [view addSubview:advlogo];
+    [view addSubview:logo];
+
     
     self.tableView.tableHeaderView = view;
 }
@@ -126,27 +104,10 @@
     
     UILabel *lab = [[UILabel alloc] init];
     
-    // 设置富文本的时候，先设置的先显示，后设置的，如果与先设置的样式不一致，是不会覆盖的，富文本设置的效果具有先后顺序，大家要注意
-    
-    NSString *string                            = @"服务热线: 4001512626";
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    
-    // 设置富文本样式
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor grayColor]
-                             range:NSMakeRange(0, 5)];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont fontWithName:@"Helvetica" size:13]
-                             range:NSMakeRange(0, string.length)];
-    
-    [attributedString addAttribute:NSForegroundColorAttributeName
-                             value:[UIColor redColor]
-                             range:NSMakeRange(6, string.length - 6)];
-    
-    
-    
-    lab.attributedText = attributedString;
+    lab.text = @"服务热线: 4001512626";
+    lab.font = [UIFont fontWithName:@"Helvetica" size:12];
+
+    lab.textColor = MTNavgationBackgroundColor;
     CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
     lab.width = size.width;
     lab.height = size.height;
@@ -155,9 +116,9 @@
     [view addSubview:lab];
     
     UILabel *lab0 = [[UILabel alloc] init];
-    lab0.text = @"注册、登录、绑定等问题，欢迎致电咨询";
-    lab0.font = [UIFont fontWithName:@"Helvetica" size:13];
-    lab0.textColor = [UIColor grayColor];
+    lab0.text = @"浙江海予信息技术有限公司版权所有";
+    lab0.font = [UIFont fontWithName:@"Helvetica" size:12];
+    lab0.textColor = MTNavgationBackgroundColor;
     CGSize size0 = [lab0.text sizeWithAttributes:@{NSFontAttributeName:lab0.font}];
     lab0.width = size0.width;
     lab0.height = size0.height;
@@ -176,7 +137,7 @@
     
     // 设置组的所有行数据
     HMCommonItem*version = [HMCommonItem itemWithTitle:@"当前版本" icon:@"ic_version_update.png"];
-    version.subtitle = @"v1.1.1.5";
+    version.subtitle = kAppVersion;
     
     HMCommonArrowItem *help = [HMCommonArrowItem itemWithTitle:@"关于我们" icon:@"ic_use_help.png"];
     help.destVcClass = [AboutusViewController class];

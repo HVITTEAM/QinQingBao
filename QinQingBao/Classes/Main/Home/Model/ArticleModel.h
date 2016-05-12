@@ -19,5 +19,6 @@
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, copy) NSString *logo_url;
 @property (nonatomic, copy) NSString *abstract;
+@property (nonatomic, copy) NSString *comment_count;
 
 @end

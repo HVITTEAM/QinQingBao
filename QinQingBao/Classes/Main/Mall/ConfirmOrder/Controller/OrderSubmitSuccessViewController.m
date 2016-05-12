@@ -108,7 +108,6 @@ static CGFloat PADDINGBOTTON = 70;
 {
     [self payOrder];
     
-    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
     [self dismissViewControllerAnimated:YES completion:nil];
     [self.parentViewController.navigationController popViewControllerAnimated:YES];
 }
@@ -156,8 +155,7 @@ static CGFloat PADDINGBOTTON = 70;
         //用户中途取消
         if ([[dict objectForKey:@"resultStatus"] isEqualToString:@"6001"])
         {
-            self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
         }
     }];
     self.cancelClick();
@@ -199,7 +197,6 @@ static CGFloat PADDINGBOTTON = 70;
 {
     if (buttonIndex == 0)
     {
-        self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
         [self dismissViewControllerAnimated:YES completion:nil];
         self.cancelClick();
     }

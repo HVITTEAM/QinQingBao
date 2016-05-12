@@ -114,8 +114,7 @@
              _lastAddress = placemark.name;
              NSLog(@"______%@",_lastAddress);
              if (_cityAndAreaBlock) {
-                 _cityAndAreaBlock([NSString stringWithFormat:@"%@%@",placemark.locality,placemark.subLocality]);
-//                 _cityAndAreaBlock(placemark.subLocality);
+                 _cityAndAreaBlock([NSString stringWithFormat:@"%@",placemark.subLocality]);
                  _cityAndAreaBlock = nil;
              }
          }
@@ -129,7 +128,6 @@
          }
          
      }];
-    
     
     _lastCoordinate = CLLocationCoordinate2DMake(marsLoction.coordinate.latitude ,marsLoction.coordinate.longitude);
     if (_locationBlock) {
