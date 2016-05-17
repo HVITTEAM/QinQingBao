@@ -76,9 +76,9 @@
     pageControl.centerY = 38;
     
     if (!titleLab)
-        titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
+        titleLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 30)];
     titleLab.textColor = [UIColor blackColor];
-    titleLab.x = MTScreenW/2 - 65;
+    titleLab.textAlignment = NSTextAlignmentCenter;
     
     [self.navigationController.navigationBar addSubview:titleLab];
     
@@ -92,7 +92,7 @@
     if (dataProvider.count == 0)
         return;
     DeviceModel *item = dataProvider[0];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.ud_name];
+    titleLab.text = item.rel_name;
 }
 
 /**
@@ -239,7 +239,7 @@
     // 设置页码
     pageControl.currentPage = intPage;
     DeviceModel *item = dataProvider[intPage];
-    titleLab.text = [NSString stringWithFormat:@"%@的健康数据",item.ud_name];
+    titleLab.text = item.rel_name;
 }
 
 /**

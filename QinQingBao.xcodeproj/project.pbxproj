@@ -551,6 +551,7 @@
 		01E905FD1C0D6E9A00B53AC1 /* GPSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E905FB1C0D6E9A00B53AC1 /* GPSCell.xib */; };
 		01E92D321BA65E0F0097F8EC /* ServiceCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */; };
 		01E92D331BA65E0F0097F8EC /* ServiceCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */; };
+		01E93DA61CE57729001DC628 /* AdvertisementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E93DA51CE57729001DC628 /* AdvertisementController.m */; };
 		01E94C8D1BC75C4000B956A2 /* EzvizDemoGlobalKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94C141BC75C4000B956A2 /* EzvizDemoGlobalKit.m */; };
 		01E94CD21BC75DB900B956A2 /* YSAlarmInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94CCB1BC75DB900B956A2 /* YSAlarmInfo.m */; };
 		01E94CD31BC75DB900B956A2 /* YSCameraInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E94CCD1BC75DB900B956A2 /* YSCameraInfo.m */; };
@@ -968,7 +969,6 @@
 		01ED2E581BB3ED83007C428F /* LocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ED2E561BB3ED83007C428F /* LocationCell.xib */; };
 		01ED2E5E1BB3F1B3007C428F /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E5B1BB3F1B3007C428F /* MapViewController.m */; };
 		01ED2E5F1BB3F1B3007C428F /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED2E5D1BB3F1B3007C428F /* MyAnnotation.m */; };
-		01ED2E611BB3F1D2007C428F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01ED2E601BB3F1D2007C428F /* MapKit.framework */; };
 		01ED458C1C3F530600953E34 /* GoodsDetailEndView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED458B1C3F530600953E34 /* GoodsDetailEndView.m */; };
 		01ED45911C3F85F000953E34 /* GoodsTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED45901C3F85F000953E34 /* GoodsTitleCell.m */; };
 		01ED459A1C3F880200953E34 /* HeartImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED45981C3F880200953E34 /* HeartImageCell.m */; };
@@ -2168,6 +2168,8 @@
 		01E92D2F1BA65E0F0097F8EC /* ServiceCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCustomCell.h; sourceTree = "<group>"; };
 		01E92D301BA65E0F0097F8EC /* ServiceCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCustomCell.m; sourceTree = "<group>"; };
 		01E92D311BA65E0F0097F8EC /* ServiceCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceCustomCell.xib; sourceTree = "<group>"; };
+		01E93DA41CE57729001DC628 /* AdvertisementController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementController.h; sourceTree = "<group>"; };
+		01E93DA51CE57729001DC628 /* AdvertisementController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisementController.m; sourceTree = "<group>"; };
 		01E94C131BC75C4000B956A2 /* EzvizDemoGlobalKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzvizDemoGlobalKit.h; sourceTree = "<group>"; };
 		01E94C141BC75C4000B956A2 /* EzvizDemoGlobalKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzvizDemoGlobalKit.m; sourceTree = "<group>"; };
 		01E94CCA1BC75DB900B956A2 /* YSAlarmInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSAlarmInfo.h; sourceTree = "<group>"; };
@@ -2843,7 +2845,6 @@
 		01ED2E5B1BB3F1B3007C428F /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		01ED2E5C1BB3F1B3007C428F /* MyAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAnnotation.h; sourceTree = "<group>"; };
 		01ED2E5D1BB3F1B3007C428F /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
-		01ED2E601BB3F1D2007C428F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		01ED458A1C3F530600953E34 /* GoodsDetailEndView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDetailEndView.h; sourceTree = "<group>"; };
 		01ED458B1C3F530600953E34 /* GoodsDetailEndView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDetailEndView.m; sourceTree = "<group>"; };
 		01ED458F1C3F85F000953E34 /* GoodsTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTitleCell.h; sourceTree = "<group>"; };
@@ -3284,7 +3285,6 @@
 				01024BEA1BD0A27E00E8CAEC /* SystemConfiguration.framework in Frameworks */,
 				01ECDAE71C8EB31F0018160F /* libopencore-amrnb.a in Frameworks */,
 				01FF8F851CDB2DDE0089BBC4 /* ShareSDKUI.framework in Frameworks */,
-				01ED2E611BB3F1D2007C428F /* MapKit.framework in Frameworks */,
 				010414401BB13701006EC41B /* OpenAL.framework in Frameworks */,
 				01FF8F821CDB2DDE0089BBC4 /* ShareSDK.framework in Frameworks */,
 				0104143E1BB136F6006EC41B /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -4408,7 +4408,6 @@
 				01024BEB1BD0A29D00E8CAEC /* CoreTelephony.framework */,
 				01024BE91BD0A27E00E8CAEC /* SystemConfiguration.framework */,
 				01024BE31BD0A22500E8CAEC /* Alipay */,
-				01ED2E601BB3F1D2007C428F /* MapKit.framework */,
 				010414481BB137A4006EC41B /* EZVIZ */,
 				0104143F1BB13701006EC41B /* OpenAL.framework */,
 				0104143D1BB136F6006EC41B /* libstdc++.6.0.9.tbd */,
@@ -4703,6 +4702,8 @@
 			children = (
 				01E603D21C1681650099275C /* AdvertisementViewController.h */,
 				01E603D31C1681650099275C /* AdvertisementViewController.m */,
+				01E93DA41CE57729001DC628 /* AdvertisementController.h */,
+				01E93DA51CE57729001DC628 /* AdvertisementController.m */,
 			);
 			path = Advertisement;
 			sourceTree = "<group>";
@@ -8267,6 +8268,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
 							com.apple.OMC = {
 								enabled = 0;
 							};
@@ -9443,6 +9447,7 @@
 				01F016031C5F430700930B0E /* GroupbuyTotal.m in Sources */,
 				01EA20691C2A705100B546A9 /* OrderResultViewController.m in Sources */,
 				015F11BB1C8046070058C97B /* RecipeCollectionHeaderView.m in Sources */,
+				01E93DA61CE57729001DC628 /* AdvertisementController.m in Sources */,
 				01ECDB1C1C8EB31F0018160F /* EaseBubbleView.m in Sources */,
 				01E9A7411C74613500000805 /* DiseaseinfoController.m in Sources */,
 				01E690851BCCF6AA00A17543 /* TSPopoverTouchView.m in Sources */,

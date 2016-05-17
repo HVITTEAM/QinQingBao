@@ -15,9 +15,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyz-Qt-SpN">
-                        <rect key="frame" x="10" y="6" width="100" height="23"/>
+                        <rect key="frame" x="10" y="6" width="120" height="23"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="ErE-hU-tRb"/>
+                            <constraint firstAttribute="width" constant="120" id="6Ic-xg-FOB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="上海">
@@ -33,6 +33,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="cityLab" destination="Eyz-Qt-SpN" id="Nnx-9j-DLf"/>
+                <outlet property="widthConstraint" destination="6Ic-xg-FOB" id="a6A-S0-wYq"/>
             </connections>
         </tableViewCell>
     </objects>

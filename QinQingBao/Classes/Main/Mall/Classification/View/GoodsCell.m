@@ -39,6 +39,7 @@
     else
         [self.starView setScore:0 withAnimation:NO];
     
+    self.starView.userInteractionEnabled = NO;
     self.distanceLab.text = [NSString stringWithFormat:@"销量%@件",item.goods_salenum];
     self.distanceLab.textColor = [UIColor colorWithRGB:@"666666"];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",item.goods_image_url]];

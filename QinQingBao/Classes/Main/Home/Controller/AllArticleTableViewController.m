@@ -114,7 +114,7 @@
     view.articleItem = item;
     NSString *url;
     if (![SharedAppUtil defaultCommonUtil].userVO)
-        url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@",URL_Local,item.id];
+        url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=cxjk&like",URL_Local,item.id];
     else
         url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,item.id,[SharedAppUtil defaultCommonUtil].userVO.key];
     view.url = url;

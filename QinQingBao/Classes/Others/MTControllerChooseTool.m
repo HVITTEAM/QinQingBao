@@ -33,8 +33,8 @@
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    if ([currentVersion isEqualToString:lastVersion]) {
-        
+//    if ([currentVersion isEqualToString:lastVersion]) {
+    
         [UIApplication sharedApplication].statusBarHidden = NO;
         
         UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
@@ -44,20 +44,18 @@
         [SharedAppUtil defaultCommonUtil].userVO = vo;
         [MTControllerChooseTool setRootViewController];
         
-    } else { // 当前版本号 != 上次使用的版本：显示版本新特性
-        window.rootViewController = [[MTNewfeatureViewController alloc] init];
-        
-        // 存储这次使用的软件版本
-        [defaults setObject:currentVersion forKey:versionKey];
-        [defaults synchronize];
-    }
+//    } else { // 当前版本号 != 上次使用的版本：显示版本新特性
+//        window.rootViewController = [[MTNewfeatureViewController alloc] init];
+//        // 存储这次使用的软件版本
+//        [defaults setObject:currentVersion forKey:versionKey];
+//        [defaults synchronize];
+//    }
 }
 
 + (void)setRootViewController
 {
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    
     //登陆界面
     LoginViewController *login = [[LoginViewController alloc] init];
     login.backHiden = YES;
@@ -89,13 +87,11 @@
         tabBarController.tabBar.tintColor =HMColor(95, 117, 75);
         [SharedAppUtil defaultCommonUtil].tabBar = tabBarController;
     }
-    
-    //将2个uivc以数组的方式制定给bar对象
+    //uivc以数组的方式制定给bar对象
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-        [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,healthLoginNav,navMall,navLoginNav, nil];
+        [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,healthLoginNav,navMall,navsys, nil];
     else
         [SharedAppUtil defaultCommonUtil].tabBar.viewControllers = [NSArray arrayWithObjects:navhome,navhealth,navMall,navsys, nil];
-    
     NSArray *barItems = [SharedAppUtil defaultCommonUtil].tabBar.tabBar.items;
     
     ((UITabBarItem *)barItems[0]).title = @"首页";
@@ -124,19 +120,10 @@
     UINavigationController *nav = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[1];
     nav.navigationBarHidden = NO;
     [nav setViewControllers:@[healthView] animated:YES];
-    
-    ProfileViewController *sysview = [[ProfileViewController alloc] init];
-    UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
-    [nav1 setViewControllers:@[sysview] animated:YES];
 }
 
 +(void)setloginOutViewController
 {
-    LoginViewController *login = [[LoginViewController alloc] init];
-    login.backHiden = YES;
-    UINavigationController *nav = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
-    [nav setViewControllers:@[login] animated:YES];
-    
     LoginViewController *healthLogin = [[LoginViewController alloc] init];
     healthLogin.backHiden = YES;
     UINavigationController *nav1 = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[1];

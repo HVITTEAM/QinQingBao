@@ -10,6 +10,7 @@
 #import "CouponsModel.h"
 #import "CouponsTotal.h"
 #import "OrderModel.h"
+#import "StoreModel.h"
 
 #import "CouponsCell.h"
 
@@ -75,11 +76,16 @@
 
 -(void)getDataProvider
 {
+#warning   storeid写死为14 因为我们的商城店铺就只有一个
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Youhuicard parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                    @"voucher_state" : @"1",
                                                                    @"page" : @1000,
-                                                                   @"curpage" : @1}
+                                                                   @"curpage" : @1,
+                                                                   @"voucher_store_id" : @14,
+                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                   @"client" : @"ios",
+                                                                   @"price" : self.ordermodel ?  self.ordermodel.wprice: @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -105,7 +111,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
                                  }];
-    
 }
 
 //client 	Y 		登录设备 ['ios', 'android', 'wechat','wap']

@@ -271,7 +271,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",slideImages[i]]];
         UIImageView *imageView = [[UIImageView alloc] init];
         
-        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (image)
                 [imgArr addObject:image];
         }];
@@ -287,7 +287,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     // 取数组最后一张图片 放在第0页
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",slideImages[slideImages.count - 1]]];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imgPlayer.height); // 添加最后1页在首页 循环
     [self.imgPlayer addSubview:imageView];
     
@@ -295,7 +295,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     //         HomePicModel *item0 = slideImages[0];
     imageView = [[UIImageView alloc] init];
     NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",slideImages[0]]];
-    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake((MTScreenW * ([slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
     [self.view bringSubviewToFront:_pageControl];

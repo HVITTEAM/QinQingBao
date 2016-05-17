@@ -16,6 +16,7 @@
 #import "MassageModel.h"
 
 #import "ShopOrderViewController.h"
+#import "CCLocationManager.h"
 
 @interface ShopDetailViewController ()
 {
@@ -37,10 +38,22 @@
     [self initTableSkin];
     
     [self getDadaProvider];
+    
+    if (![SharedAppUtil defaultCommonUtil].lat  || ![SharedAppUtil defaultCommonUtil].lat )
+    {
+        [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+            NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
+            [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];
+            [SharedAppUtil defaultCommonUtil].lon = [NSString stringWithFormat:@"%f",locationCorrrdinate.longitude];
+            [self getDadaProvider];
+        }];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    self.title = @"服务详情";
+
     [super viewWillAppear:animated];
 }
 
@@ -64,7 +77,6 @@
                                              imgUrlArray = dataItem.introduce_url;
                                          else
                                              imgUrlArray = @[];
-                                         self.title = dataItem.iname;
                                          self.headView.orderRightnow.enabled = YES;
                                          [self.tableView reloadData];
                                      }
@@ -78,8 +90,8 @@
     if (self.shopItem == nil)
     {
         [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iidnum parameters:@{@"iidnum" : self.iidnum,
-                                                                                 @"lat" : [SharedAppUtil defaultCommonUtil].lat,
-                                                                                 @"lon" : [SharedAppUtil defaultCommonUtil].lon}
+                                                                                 @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                                 @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -98,14 +110,12 @@
                                      }];
 
     }
-    
 }
 
 -(void)initTableSkin
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    //    self.tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"ShopHeadView" owner:nil options:nil];
     self.tableView.tableHeaderView = [nibs lastObject];

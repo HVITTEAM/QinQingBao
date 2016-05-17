@@ -91,10 +91,20 @@
     UITableViewCell *cell;
     if (indexPath.section == 0 && indexPath.row == 0) {
         SWYSubtitleCell *accountCell = [SWYSubtitleCell createSWYSubtitleCellWithTableView:tableView];
-        [accountCell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        
+        if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        {
+            accountCell.imageView.image =  [UIImage imageWithName:@"placeholderImage"];
+            accountCell.textLabel.text = @"未登录";
+            accountCell.detailTextLabel.text = @"登录后使用更多功能";
+        }
+        else
+        {
+            [accountCell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+            accountCell.textLabel.text = username;
+            accountCell.detailTextLabel.text = [NSString stringWithFormat:@"账户：%@",account ? account : @""];
+        }
         accountCell.showCorner = YES;
-        accountCell.textLabel.text = username;
-        accountCell.detailTextLabel.text = [NSString stringWithFormat:@"账户：%@",account];
         accountCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell = accountCell;
     }else if (indexPath.section == 0 && indexPath.row == 1){
@@ -102,7 +112,11 @@
         ProfileConsumeCell *consumeCell = [ProfileConsumeCell creatProfileConsumeCellWithTableView:tableView];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileConsumeCell *consumeCell,NSUInteger idx){
             
-            if (idx == 1) {
+            if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+                return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+            if (idx == 1)
+            {
+                
                 BalanceViewController *balanceVC = [[BalanceViewController alloc] init];
                 [weakself.navigationController pushViewController:balanceVC animated:YES];
                 return;
@@ -167,6 +181,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ((indexPath.section  < 2 || (indexPath.section  ==  2 && indexPath.row == 0)) && [SharedAppUtil defaultCommonUtil].userVO == nil)
+        return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     Class class;
     if (indexPath.section == 0 && indexPath.row == 0) {
         class = [PersonalDataViewController class];
@@ -195,7 +211,10 @@
 -(void)getUserIcon
 {
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
         return;
+    }
     [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios"}

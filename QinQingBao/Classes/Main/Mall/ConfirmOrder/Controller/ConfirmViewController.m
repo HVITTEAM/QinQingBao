@@ -388,7 +388,6 @@ static CGFloat ENDVIEW_HEIGHT = 50;
                                      }
                                      else
                                      {
-                                         
                                          NSArray *arr = [dict objectForKey:@"datas"];
                                          OrderResultModel *result = [OrderResultModel objectWithKeyValues:arr[0]];
                                          

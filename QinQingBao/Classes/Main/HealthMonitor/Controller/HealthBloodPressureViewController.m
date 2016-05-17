@@ -89,18 +89,15 @@
         return cell;
     }
     else if (indexPath.section == 1) {
-        
         if (indexPath.row == 0 )
         {
             UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
-            
             if (commoncell == nil)
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
             commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             commoncell.textLabel.font = [UIFont systemFontOfSize:14];
             commoncell.textLabel.textColor = [UIColor orangeColor];
             commoncell.textLabel.text = @"更多数据";
-            
             return commoncell;
         }
         else
@@ -147,26 +144,6 @@
         [self.navigationController pushViewController:moreData animated:YES];
     }
 }
-
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    switch (section)
-//    {
-//        case 0:
-//            return  @"统计图";
-//            break;
-//        case 1:
-//            return  @"详细数据";
-//
-//            break;
-//        case 2:
-//            return  @"温馨提示";
-//            break;
-//        default:
-//             return  @"";
-//            break;
-//    }
-//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {

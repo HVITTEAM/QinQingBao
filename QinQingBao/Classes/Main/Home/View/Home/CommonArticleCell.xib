@@ -22,14 +22,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="IMF-OV-0KG">
-                        <rect key="frame" x="7" y="12" width="70" height="70"/>
+                        <rect key="frame" x="7" y="12" width="80" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="3pc-6z-0be"/>
-                            <constraint firstAttribute="width" constant="70" id="czK-wr-fPD"/>
+                            <constraint firstAttribute="width" constant="80" id="czK-wr-fPD"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="社区送温暖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg7-af-DX6">
-                        <rect key="frame" x="87" y="15" width="80" height="21"/>
+                        <rect key="frame" x="97" y="15" width="80" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="ESb-hh-MRX"/>
                         </constraints>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="社区送温暖社区送温暖" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJW-ON-pgD">
-                        <rect key="frame" x="87" y="36" width="225" height="39.5"/>
+                        <rect key="frame" x="97" y="36" width="215" height="39.5"/>
                         <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                             <constraint firstAttribute="height" constant="21" id="8Kv-d8-bNV"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="10"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="commenticon" translatesAutoresizingMaskIntoConstraints="NO" id="3aL-Em-Uqp">

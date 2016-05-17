@@ -12,10 +12,8 @@
 
 @interface AdvertisementViewController ()
 {
-    UIScrollView *bgScrollview;
     NJKWebViewProgressView *_progressView;
     NJKWebViewProgress *_progressProxy;
-    
     UIWebView *webv;
 }
 
@@ -29,16 +27,12 @@
     
     [self initNavgation];
     
-    [self initScrollView];
-    
     [self initData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.navigationController.navigationBar addSubview:_progressView];
 }
@@ -50,16 +44,10 @@
     [_progressView removeFromSuperview];
 }
 
--(void)initScrollView
-{
-    bgScrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
-    bgScrollview.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:bgScrollview];
-}
 
 -(void)initNavgation
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor redColor];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithImageName:@"btn_dismissItem.png"
                                                                  highImageName:@"btn_dismissItem_highlighted.png"
@@ -68,38 +56,12 @@
 
 -(void)initData
 {
-    UIImageView *lastimg;
-    //按摩推拿
-    if (self.type == 5)
-    {
-        UIImage *img;
-        if (self.type == 3)
-            img = [UIImage imageNamed:@"heartmanager.jpg"];
-        else if (self.type == 4)
-            img = [UIImage imageNamed:@"bloodp.jpg"];
-        else if (self.type == 5)
-            img = [UIImage imageNamed:@"massage.jpg"];
-        CGSize size = img.size;
-        //缩放比例
-        float scalePro = MTScreenW / size.width;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:img];
-        imageView.x = 0;
-        imageView.y = CGRectGetMaxY(lastimg.frame);
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.width = MTScreenW;
-        imageView.height = size.height * scalePro;
-        
-        [bgScrollview addSubview:imageView];
-        bgScrollview.contentSize = CGSizeMake(MTScreenW,  CGRectGetMaxY(imageView.frame));
-        lastimg = imageView;
-        
-        return;
-    }
     //轮播广告图片
     HomePicModel *item = self.selectedItem;
     self.title  = item.title;
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_WebImg,item.bc_article_url]];
     webv = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    webv.backgroundColor = [UIColor redColor];
     NSURLRequest *request = [NSURLRequest requestWithURL:iconUrl];
     
     _progressProxy = [[NJKWebViewProgress alloc] init];
@@ -108,14 +70,12 @@
     _progressProxy.progressDelegate = self;
     
     CGFloat progressBarHeight = 2.f;
-    CGRect navigationBarBounds = self.navigationController.navigationBar.bounds;
-    CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
+    CGRect barFrame = CGRectMake(0, 0, MTScreenW, progressBarHeight);
     _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
     _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     
     [webv loadRequest:request];
     [self.view addSubview:webv];
-    
     NSLog(@"%@",iconUrl);
 }
 

@@ -25,6 +25,9 @@
     
     //可编辑姓名item
     HMCommonArrowItem *nameItem1;
+    
+    //当前正在操作的项目
+    RelationModel *currentEditModel;
 }
 
 @end
@@ -162,19 +165,7 @@
     //身份证
     IDItem = [HMCommonItem itemWithTitle:@"身份证" icon:@""];
     IDItem.subtitle = self.itemInfo.ud_identity;
-//    IDItem.operation = ^{
-//        EditInfoTableViewController *textFieldVC = [[EditInfoTableViewController alloc]init];
-//        textFieldVC.titleStr = @"身份证号";
-//        textFieldVC.contentStr = weakSelf.itemInfo.ud_identity;
-//        textFieldVC.placeholderStr = @"请输入正确的身份证号";
-//        textFieldVC.finishUpdateOperation = ^(NSString *title,NSString *content,NSString *placeholder){
-//            weakSelf.itemInfo.ud_identity = content;
-//            [weakSelf setupGroups];
-//            [weakSelf uploadFamilyInforWithFamilyModel];
-//        };
-//        [weakSelf.navigationController pushViewController:textFieldVC animated:YES];
-//    };
-    
+
     NSLog(@"%@,%@",self.itemInfo.member_id,[SharedAppUtil defaultCommonUtil].userVO.member_id);
     if ([self.itemInfo.member_id isEqualToString:[SharedAppUtil defaultCommonUtil].userVO.member_id])
         group.items = @[telItem,nameItem1,IDItem];
@@ -206,10 +197,12 @@
             EditContactViewController *editVC = [[EditContactViewController alloc] init];
             editVC.item = model;
             editVC.editResultClick = ^(RelationModel *relationMd){
+                currentEditModel = relationMd;
                 [self.itemInfo.ud_sos replaceObjectAtIndex:relationMd.index withObject:relationMd];
                 [self uploadFamilyInforWithFamilyModel];
             };
             editVC.deleteResultClick = ^(RelationModel *relationMd){
+                currentEditModel = relationMd;
                 if (self.itemInfo.ud_sos.count <= 1) {
                     [[[UIAlertView alloc] initWithTitle:@"请至少保留一个紧急联系人" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
                     return;
@@ -248,7 +241,6 @@
     [dict setValue:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     [dict setValue:@"ios" forKey:@"client"];
     [dict setValue:self.itemInfo.rel_name forKey:@"rel_name"];
-//    [dict setValue:self.itemInfo.ud_identity forKey:@"ud_identity"];
     [dict setValue:self.itemInfo.ud_name forKey:@"ud_name"];
     
     for (int i = 1; i < self.itemInfo.ud_sos.count+1 ; i++)
@@ -258,9 +250,7 @@
         [dict setValue:obj.sos_phone forKey:[NSString stringWithFormat:@"sos_phone_%d",i]];
         [dict setValue:obj.sos_relation forKey:[NSString stringWithFormat:@"sos_relation_%d",i]];
     }
-    
-    //    if (self.itemInfo.ud_sos.count == 0 )
-    //        return [NoticeHelper AlertShow:@"请设置紧急联系人" view:nil];
+
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_edit_user_devide parameters: dict

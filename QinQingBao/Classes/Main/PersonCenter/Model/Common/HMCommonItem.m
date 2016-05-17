@@ -7,7 +7,10 @@
 
 #import "HMCommonItem.h"
 
+
 @implementation HMCommonItem
+
+@synthesize textValue;
 
 + (instancetype)itemWithTitle:(NSString *)title icon:(NSString *)icon
 {

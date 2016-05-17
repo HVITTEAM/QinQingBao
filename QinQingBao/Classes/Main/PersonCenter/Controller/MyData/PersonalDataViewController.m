@@ -543,7 +543,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
     if (self.tapLoginOutButton) {
         if(buttonIndex == 0)
         {
@@ -564,8 +563,8 @@
                                              {
                                                  [SharedAppUtil defaultCommonUtil].userVO = nil;
                                                  [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
-                                                 
                                                  [MTControllerChooseTool setloginOutViewController];
+                                                 [self.navigationController popViewControllerAnimated:YES];
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"发生错误！%@",error);

@@ -23,10 +23,12 @@
     self.backgroundColor = HMColor(241, 241, 241);
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)setCityValue:(NSString *)cityValue
+{
+    _cityValue = cityValue;
+    CGSize size = [cityValue sizeWithAttributes:@{NSFontAttributeName:self.cityLab.titleLabel.font}];
+    self.widthConstraint.constant = size.width + 20;
+    [self.cityLab setTitle:_cityValue forState:UIControlStateNormal];
 }
 
 @end

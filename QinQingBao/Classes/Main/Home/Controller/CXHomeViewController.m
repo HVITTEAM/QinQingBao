@@ -93,7 +93,6 @@
     }];
 }
 
-
 - (void)initView
 {
     self.tableView.backgroundColor = HMGlobalBg;
@@ -104,6 +103,7 @@
     self.tableView.tableHeaderView.height = 350;
     self.tableView.tableHeaderView = [nibs lastObject];
     headview = (HomeHeadView *)self.tableView.tableHeaderView;
+    headview.nav = self.navigationController;
 }
 
 -(void)viewDidLayoutSubviews
@@ -133,9 +133,15 @@
     
     cityBtn = [[UIButton alloc] init];
     cityBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+    
+    //如果本地有city信息 就设置为本地的
     if ([SharedAppUtil defaultCommonUtil].cityVO)
         [cityBtn setTitle:[SharedAppUtil defaultCommonUtil].cityVO.dvname forState:UIControlStateNormal];
-    [self initLocation];
+    else//如果没有本地信息
+    {
+        [self initLocation];
+        [self setLocationCity:@"杭州市"];
+    }
     
     //给button添加image
     [cityBtn setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];
@@ -175,42 +181,49 @@
     [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
         if (addressString)
         {
-            [cityBtn setTitle: addressString forState:UIControlStateNormal];
-            
-            NSArray *dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
-            
-            for (id item in dataProvider)
-            {
-                NSArray *arr = [item objectForKey:@"regions"];
-                for (id item_sub in arr)
-                {
-                    NSString *cityStr = [item_sub objectForKey:@"name"];
-                    if ([cityStr isEqualToString:addressString])
-                    {
-                        CityModel *cityVO = [[CityModel alloc] init];
-                        cityVO.dvcode = [item_sub objectForKey:@"dvcode"];
-                        cityVO.dvname = [item_sub objectForKey:@"name"];
-                        [self selectedChange:cityVO.dvname];
-                        [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
-                        [ArchiverCacheHelper saveObjectToLoacl:cityVO key:User_LocationCity_Key filePath:User_LocationCity_Path];
-                        break;
-                    }
-                }
-            }
+            [self setLocationCity:addressString];
         }
     }];
     
-
     [[CCLocationManager shareLocation] getLocationError:^(NSString *addressString) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-                                                        message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
+             
+                                                   message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
-        
-        [SharedAppUtil defaultCommonUtil].lat = @"0";
-        [SharedAppUtil defaultCommonUtil].lon = @"0";
     }];
+}
+
+
+/**
+ *  根据地址 设置当前的地区
+ *
+ *  @param locationStr 城市区划
+ */
+-(void)setLocationCity:(NSString *)locationStr
+{
+    [cityBtn setTitle: locationStr forState:UIControlStateNormal];
     
+    NSArray *dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
+    
+    for (id item in dataProvider)
+    {
+        NSArray *arr = [item objectForKey:@"regions"];
+        for (id item_sub in arr)
+        {
+            NSString *cityStr = [item_sub objectForKey:@"name"];
+            if ([cityStr isEqualToString:locationStr])
+            {
+                CityModel *cityVO = [[CityModel alloc] init];
+                cityVO.dvcode = [item_sub objectForKey:@"dvcode"];
+                cityVO.dvname = [item_sub objectForKey:@"name"];
+                [self selectedChange:cityVO.dvname];
+                [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
+                [ArchiverCacheHelper saveObjectToLoacl:cityVO key:User_LocationCity_Key filePath:User_LocationCity_Path];
+                break;
+            }
+        }
+    }
 }
 
 #pragma mark 获取定位城市的dvname 已废弃
@@ -253,7 +266,6 @@
 {
     CitiesViewController *citiesVc = [[CitiesViewController alloc] init];
     citiesVc.delegate  = self;
-    citiesVc.selectedCity =  cityBtn.titleLabel.text;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citiesVc];
     [self presentViewController:nav animated:YES completion:nil];
 }
@@ -266,6 +278,14 @@
     advArr = [[NSMutableArray alloc] init];
     [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         return ;
+                                     }
                                      
                                      NSDictionary *dict1 =  [dict objectForKey:@"datas"];
                                      
@@ -357,7 +377,8 @@
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(8, 5, 100, 30)];
         label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [label setText:@"健康·生活"];
-        label.font = [UIFont fontWithName:@"HYQiHei-EZJ" size:13];
+        label.font = [UIFont fontWithName:@"HYQiHei-EZJ" size:11];
+        label.font = [UIFont systemFontOfSize:13];
         label.textColor = [UIColor colorWithRGB:@"666666"];
         [commoncell.contentView addSubview:label];
         return commoncell;
@@ -391,7 +412,7 @@
         view.articleItem = item;
         NSString *url;
         if (![SharedAppUtil defaultCommonUtil].userVO)
-            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@",URL_Local,item.id];
+            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=cxjk&like",URL_Local,item.id];
         else
             url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,item.id,[SharedAppUtil defaultCommonUtil].userVO.key];
         view.url = url;

@@ -13,4 +13,7 @@
 + (GPSCell*) GPSCell;
 @property (strong, nonatomic) IBOutlet UIButton *cityLab;
 
+@property (nonatomic, copy) NSString *cityValue;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
+
 @end

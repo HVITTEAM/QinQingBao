@@ -30,15 +30,6 @@
     [self setupGroups];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    self.item0.rightText.text = self.item.sos_name;
-    self.item1.rightText.text = self.item.sos_phone;
-    self.item1.rightText.keyboardType = UIKeyboardTypeNumberPad;
-}
-
 -(void)initTableSkin
 {
     self.title = @"编辑联系人";
@@ -60,17 +51,18 @@
     
     selectedRealationStr = self.item.sos_relation;
     
-    // 1.创建组
+       // 1.创建组
     HMCommonGroup *group = [HMCommonGroup group];
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
     self.item0 = [HMCommonTextfieldItem itemWithTitle:@"联系人姓名" icon:nil];
-    
+    self.item0.textValue = self.item.sos_name;
     self.item0.placeholder = @"请填写真实姓名";
 
     self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
+    self.item1.textValue = self.item.sos_phone;
     self.item1.keyboardType = UIKeyboardTypeNumberPad;
     
     self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
@@ -132,6 +124,8 @@
         default:
             break;
     }
+    self.item.sos_name = self.item0.rightText.text;
+    self.item.sos_phone = self.item1.rightText.text;
     self.item.sos_relation = selectedRealationStr;
     [self.groups removeAllObjects];
     [self setupGroups];

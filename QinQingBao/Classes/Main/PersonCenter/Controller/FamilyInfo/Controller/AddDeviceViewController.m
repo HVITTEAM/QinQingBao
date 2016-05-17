@@ -271,5 +271,4 @@
     [self.navigationController pushViewController:scanCodeVC animated:YES];
 }
 
-
 @end

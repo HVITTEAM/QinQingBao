@@ -14,6 +14,9 @@
 {
     NSString *selectedRealationStr;
     NSInteger selectedRealationIdx;
+    
+    NSString *name;
+    NSString *tel;
 }
 @property (nonatomic,retain) HMCommonArrowItem *item2;
 @property (nonatomic,retain) HMCommonTextfieldItem *item0;
@@ -60,14 +63,19 @@
     [self.groups addObject:group];
     
     // 2.设置组的所有行数据
-    self.item0 = [HMCommonTextfieldItem itemWithTitle:@"联系人姓名" icon:nil];
+    if (!self.item0)
+        self.item0 = [HMCommonTextfieldItem itemWithTitle:@"联系人姓名" icon:nil];
+    self.item0.textValue = name;
     self.item0.placeholder = @"请填写真实姓名";
- 
-    self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
+    
+    if (!self.item1)
+        self.item1 = [HMCommonTextfieldItem itemWithTitle:@"联系电话" icon:nil];
     self.item1.placeholder = @"请填写有效电话";
+    self.item1.textValue = tel;
     self.item1.keyboardType = UIKeyboardTypeNumberPad;
     
-    self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
+    if (!self.item2)
+        self.item2 = [HMCommonArrowItem itemWithTitle:@"与亲友关系" icon:nil ];
     self.item2.subtitle = selectedRealationStr.length == 0  ? @"请选择" : selectedRealationStr;
     self.item2.operation = ^{
         UIAlertView *alertSex = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:@"" delegate:weakSelf cancelButtonTitle:@"取消" otherButtonTitles:@"子女",@"配偶",@"其他监护人", nil];
@@ -102,6 +110,9 @@
         return;
     selectedRealationIdx = buttonIndex;
     
+    name = self.item0.rightText.text;
+    tel = self.item1.rightText.text;
+    
     switch (buttonIndex)
     {
         case 1:
@@ -116,6 +127,7 @@
         default:
             break;
     }
+    
     [self.groups removeAllObjects];
     [self setupGroups];
     [self.tableView reloadData];

@@ -155,6 +155,7 @@
                                      }
                                      else
                                      {
+                                         [SharedAppUtil defaultCommonUtil].needRefleshMonitor = YES;
                                          [self.devicesArray removeObjectAtIndex:selectedDeleteIndex];
                                          self.selectedFamilyMember.device = self.devicesArray;
                                          [self setupGroups];

@@ -24,8 +24,8 @@
      [NSArray arrayWithObjects:[NSNumber numberWithInt:5],
       [NSNumber numberWithInt:2],nil]];
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 10, 69);
-    CGPathAddLineToPoint(path, NULL, MTScreenW,69);
+    CGPathMoveToPoint(path, NULL, 10, 79);
+    CGPathAddLineToPoint(path, NULL, MTScreenW,79);
     [shapeLayer setPath:path];
     CGPathRelease(path);
     [[self layer] addSublayer:shapeLayer];

@@ -37,7 +37,7 @@
 {
     expandedSectionArr = [[NSMutableArray alloc] init];
     
-    self.title = [NSString stringWithFormat:@"当前城市--%@",self.selectedCity];
+    self.title = @"选择地区";
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     
@@ -172,7 +172,10 @@
         
         //赋值
         UIButton *btn = (UIButton *)[gpscell viewWithTag:1];
-        [btn setTitle:[CCLocationManager shareLocation].lastCity forState:UIControlStateNormal];
+        if (![SharedAppUtil defaultCommonUtil].lat)
+            [gpscell setCityValue:@"定位失败，请重试"];
+        else
+            [gpscell setCityValue:[CCLocationManager shareLocation].lastCity];
         btn.backgroundColor = [UIColor whiteColor];
         btn.layer.borderWidth = 0.5;
         btn.layer.borderColor = [HMColor(222, 222, 222) CGColor];
@@ -188,10 +191,6 @@
         }
         NSArray *arr = [dataProvider[indexPath.section -1] objectForKey:@"regions"];
         
-        //        CityModel *vo = dataProvider[indexPath.row];
-        //
-        //        if ([vo.dvname isEqualToString:self.selectedCity])
-        //            commoncell.accessoryType = UITableViewCellAccessoryCheckmark;
         commoncell.textLabel.text = [arr[indexPath.row] objectForKey:@"name"];
         commoncell.textLabel.font = [UIFont systemFontOfSize:14];
         commoncell.backgroundColor = HMGlobalBg;
@@ -225,8 +224,24 @@
 
 -(void)btnClickHandler:(UIButton *)btn
 {
-    [self.delegate selectedChange:btn.titleLabel.text];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (![CCLocationManager shareLocation].lastCity)
+    {
+        [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
+            NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
+            [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];
+            [SharedAppUtil defaultCommonUtil].lon = [NSString stringWithFormat:@"%f",locationCorrrdinate.longitude];
+        }];
+        
+        //获取定位城市和地区block
+        [[CCLocationManager shareLocation] getCityAndArea:^(NSString *addressString) {
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+    }
+    else
+    {
+        [self.delegate selectedChange:btn.titleLabel.text];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

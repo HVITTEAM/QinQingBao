@@ -36,8 +36,6 @@
 
     self.title = @"结算";
     
-    self.navigationController.navigationBar.translucent = NO;
-
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.vc1 = [[SettlementListViewController alloc] init];
@@ -52,7 +50,6 @@
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2, nil];
     [self.view addSubview:view];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated

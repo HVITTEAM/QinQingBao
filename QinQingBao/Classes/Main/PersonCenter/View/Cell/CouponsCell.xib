@@ -50,9 +50,8 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提供方：海予孝心商城" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dEw-Ol-TZn">
-                                <rect key="frame" x="18" y="100" width="136" height="21"/>
+                                <rect key="frame" x="18" y="100" width="120" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="136" id="5U7-kg-5LZ"/>
                                     <constraint firstAttribute="height" constant="21" id="SXU-iB-vep"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
@@ -67,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="满10元使用" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9m-ab-mXS">
-                                <rect key="frame" x="195.5" y="54" width="61.5" height="21"/>
+                                <rect key="frame" x="195" y="54" width="61.5" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="xbL-vI-LTK"/>
                                 </constraints>

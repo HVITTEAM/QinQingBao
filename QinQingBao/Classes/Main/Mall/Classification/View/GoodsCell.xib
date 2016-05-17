@@ -125,6 +125,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="placeholderImage" width="128" height="128"/>
+        <image name="placeholderImage" width="70" height="70"/>
     </resources>
 </document>

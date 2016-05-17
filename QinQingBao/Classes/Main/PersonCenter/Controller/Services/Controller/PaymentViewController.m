@@ -16,7 +16,8 @@
 
 typedef NS_ENUM(NSInteger, PaymentType) {
     PaymentTypeAlipay = 1,
-    PaymentTypeBalance = 6
+    PaymentTypeBalance = 6,
+    PaymentTypeCoupons = 7
 };
 
 @interface PaymentViewController ()<EvaluateCellDelegate>
@@ -47,8 +48,16 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     return self;
 }
 
+
 #pragma mark - 生命周期方法
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -175,7 +184,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             paytypeCell.accessoryView = nil;
         else
             paytypeCell.accessoryView = imgView;
-
+        
         if (indexPath.row == 0)
         {
             [self setPayTypeCell:paytypeCell
@@ -203,7 +212,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                image:[UIImage imageNamed:@"paytype_yue"]];
             }
         }
-            return paytypeCell;
+        return paytypeCell;
         
     }else{
         //评价cell
@@ -249,6 +258,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             CGFloat couponPrice = 0;
             if (weakSelf.couponsModel)
             {
+                //当前需求是：选择了优惠券其他方式就不允许支付了。
+                self.payType = PaymentTypeCoupons;
                 if (servicePrice >= [self.couponsModel.voucher_limit floatValue]) {
                     couponPrice = [self.couponsModel.voucher_price floatValue];
                 }
@@ -270,7 +281,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 self.payType = PaymentTypeBalance;
                 break;
             default:
-                self.payType = PaymentTypeAlipay;
+                self.payType = PaymentTypeCoupons;
                 break;
         }
         
@@ -342,18 +353,29 @@ typedef NS_ENUM(NSInteger, PaymentType) {
  */
 -(void)selectTypeToPay
 {
-    if(self.payType == PaymentTypeAlipay)//选择了支付宝
+    switch (self.payType)
     {
-        [self payWithAliPayWitTradeNO:self.orderModel.wcode
-                          productName:self.orderModel.tname
-                               amount:self.lastPrice
-                   productDescription:self.orderModel.icontent];
+        case PaymentTypeAlipay:
+        {
+            [self payWithAliPayWitTradeNO:self.orderModel.wcode
+                              productName:self.orderModel.tname
+                                   amount:self.lastPrice
+                       productDescription:self.orderModel.icontent];
+        }
+            break;
+        case PaymentTypeBalance:
+        {
+            [self payResultHandel];
+        }
+            break;
+        case PaymentTypeCoupons:
+        {
+            [self payResultHandel];
+        }
+            break;
+        default:
+            break;
     }
-    else if(self.payType == PaymentTypeBalance)//选择了余额支付
-    {
-        [self payResultHandel];
-    }
-    
 }
 
 /**
@@ -407,6 +429,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
  */
 -(void)payResultHandel
 {
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client" : @"ios",
                              @"wid" : self.orderModel.wid,
@@ -415,7 +438,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     [CommonRemoteHelper RemoteWithUrl:URL_pay_workinfo_by_type
                            parameters:params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
+                                     [HUD removeFromSuperview];
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
@@ -428,6 +451,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
+                                     [HUD removeFromSuperview];
                                  }];
 }
 
@@ -476,6 +500,43 @@ typedef NS_ENUM(NSInteger, PaymentType) {
         ((UIImageView *)cell.accessoryView).highlighted = YES;
     }
 }
+
+//
+//#pragma mark - 键盘处理
+//-(void)keyboardWillAppear:(NSNotification *)notification
+//{
+//    NSDictionary *keyboardInfo = notification.userInfo;
+//    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    CGFloat keyboardY = MTScreenH - keyboardFrame.size.height;
+//    NSInteger animationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+//    NSTimeInterval seconds = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+//    
+//    CGFloat bottomViewMaxY = CGRectGetMaxY(self.tableView.tableFooterView.frame);
+//    
+//    NSLog(@"%f   %f",keyboardY,bottomViewMaxY);
+//    
+//    if (bottomViewMaxY > keyboardY) {
+//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, bottomViewMaxY - keyboardY, 0);
+//        [UIView animateWithDuration:seconds delay:0 options:animationCurve animations:^{
+//            self.tableView.contentOffset = CGPointMake(0, bottomViewMaxY - keyboardY);
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//    }
+//}
+//
+//-(void)keyboardWillHide:(NSNotification *)notification
+//{
+//    NSDictionary *keyboardInfo = notification.userInfo;
+//    NSInteger animationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+//    NSTimeInterval seconds = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+//    
+//    [UIView animateWithDuration:seconds delay:0 options:animationCurve animations:^{
+//        self.tableView.contentOffset = CGPointMake(0, 0);
+//    } completion:^(BOOL finished) {
+//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+//    }];
+//}
 
 
 @end

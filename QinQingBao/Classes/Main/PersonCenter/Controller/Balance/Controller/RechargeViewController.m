@@ -36,7 +36,6 @@
         NSInteger ran = (arc4random() % (10));
         tradeNum = [NSString stringWithFormat:@"%@%ld",tradeNum,(long)ran];
     }
-
 }
 
 # pragma  mark - 设置数据源
@@ -60,7 +59,7 @@
 {
     // 创建组
     HMCommonGroup *group = [HMCommonGroup group];
-    group.footer = @"开业酬宾:充值满300元送50元，2016/05/30 24:00前有效";
+    //    group.footer = @"开业酬宾:充值满300元送50元，2016/05/30 24:00前有效";
     [self.groups addObject:group];
     
     // 设置组的所有行数据
@@ -77,7 +76,7 @@
     
     // 设置组的所有行数据
     money = [HMCommonTextfieldItem itemWithTitle:@"金额" icon:nil];
-    money.keyboardType = UIKeyboardTypeNumberPad;
+    money.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     money.rightText.delegate = self;
     money.placeholder = @"请输入充值金额";
     group.items = @[money];
@@ -158,8 +157,7 @@
 -(void)chcekBlance
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_add_member_blance parameters: @{@"money" : money.rightText.text,
+    [CommonRemoteHelper RemoteWithUrl:URL_add_member_blance parameters: @{@"money" :money.rightText.text,
                                                                           @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                           @"way" : @1,
                                                                           @"client" : @"ios"}

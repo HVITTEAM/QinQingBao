@@ -14,6 +14,9 @@
 @property (nonatomic, copy) NSString *bc_article_url;
 @property (nonatomic, copy) NSString *bc_sort;
 @property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *bc_status;
+@property (nonatomic, copy) NSString *bc_goods_id;
+@property (nonatomic, copy) NSString *bc_goods_bg;
 
 
 @end

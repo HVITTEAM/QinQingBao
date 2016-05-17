@@ -127,8 +127,8 @@
     NSMutableArray *itemArr = [[NSMutableArray alloc] init];
     for (DeviceModel *data in dataProvider)
     {
-        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.ud_name icon:@""];
-        item.subtitle = data.rel_name;
+        HMCommonArrowItem *item = [HMCommonArrowItem itemWithTitle:data.rel_name icon:@""];
+        item.subtitle = data.ud_name;
         item.operation = ^{
             FamilyInfoViewController *detail = [[FamilyInfoViewController alloc] init];
             detail.backHandlerClick =  ^{

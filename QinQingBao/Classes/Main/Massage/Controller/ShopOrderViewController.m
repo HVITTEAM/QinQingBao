@@ -199,7 +199,6 @@
             weakSelf.showTimestr = showTime;
             weakSelf.uploadTimestr = uploadTime;
             [weakSelf.tableView reloadData];
-            
             //NSLog(@"%@ %@",weakSelf.showTimestr,weakSelf.uploadTimestr);
         };
         [self.navigationController pushViewController:chooseTimeVC animated:YES];
@@ -242,8 +241,8 @@
                                                                      @"voucher_id" :  @"",
                                                                      @"pay_type" : @"3",
                                                                      @"item_sum" : @"1",
-                                                                     @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
-                                                                     @"wlng" :  [SharedAppUtil defaultCommonUtil].lon,
+                                                                     @"wlat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@"",
                                                                      @"w_status" : @"5"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
@@ -256,8 +255,6 @@
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-//                                         OrderResultViewController *vc = [[OrderResultViewController alloc] init];
-//                                         vc.orderItem = item;
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"下单成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                          [self.navigationController popViewControllerAnimated:YES];

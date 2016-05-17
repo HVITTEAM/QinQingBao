@@ -194,7 +194,7 @@ static float cellWidth = 66;
         HomePicModel *item = slideImages[i];
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.tag = i;
@@ -207,7 +207,7 @@ static float cellWidth = 66;
     HomePicModel *item = slideImages[slideImages.count - 1];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imgPlayer.height); // 添加最后1页在首页 循环
     [self.imgPlayer addSubview:imageView];
     
@@ -215,7 +215,7 @@ static float cellWidth = 66;
     HomePicModel *item0 = slideImages[0];
     imageView = [[UIImageView alloc] init];
     NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item0.bc_value]];
-    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake((MTScreenW * ([slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
     
@@ -333,7 +333,6 @@ static float cellWidth = 66;
     // 2.弹出城市列表
     CitiesViewController *citiesVc = [[CitiesViewController alloc] init];
     citiesVc.delegate  = self;
-    citiesVc.selectedCity =  button_back.titleLabel.text;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:citiesVc];
     [self presentViewController:nav animated:YES completion:nil];
 }

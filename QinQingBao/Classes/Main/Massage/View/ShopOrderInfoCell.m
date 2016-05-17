@@ -46,7 +46,7 @@
     MapViewController *map = [[MapViewController alloc] init];
     map.latitude = self.item.orglat;
     map.longitude = self.item.orglon;
-    map.address = self.item.totalname;
+    map.address = self.item.orgaddress;
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:map animated:YES completion:nil];
 }
 
@@ -54,8 +54,11 @@
 {
     _item = item;
     self.nameLab.text = item.orgname;
-    self.addressLab.text = item.totalname;
-    self.distanceLab.text = [NoticeHelper kilometre2meter:[item.distance floatValue]];
+    self.addressLab.text = item.orgaddress;
+    if (item.distance.length == 0)
+        self.distanceLab.text = @"定位已禁止";
+    else
+        self.distanceLab.text = [NoticeHelper kilometre2meter:[item.distance floatValue]];
     self.distanceLab.textColor = MTNavgationBackgroundColor;
 }
 

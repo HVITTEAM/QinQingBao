@@ -113,6 +113,7 @@
              NSLog(@"______%@",_lastCity);
              _lastAddress = placemark.name;
              NSLog(@"______%@",_lastAddress);
+             //目前只返回区划
              if (_cityAndAreaBlock) {
                  _cityAndAreaBlock([NSString stringWithFormat:@"%@",placemark.subLocality]);
                  _cityAndAreaBlock = nil;
@@ -158,7 +159,8 @@
         if (_getLocationErrorBlock)
         {
             _getLocationErrorBlock(@"需要开启定位服务,请到设置->隐私,打开定位服务");
-            _getLocationErrorBlock = nil;
+//            _getLocationErrorBlock = nil;
+       
         }
     }
 }

@@ -367,8 +367,8 @@
                                                                      @"wremark" : @"用户留言",
                                                                      @"voucher_id" : couponsItem ? couponsItem.voucher_id : @"",
                                                                      @"pay_type" : @"3",
-                                                                     @"wlat" :  [SharedAppUtil defaultCommonUtil].lat,
-                                                                     @"wlng" :  [SharedAppUtil defaultCommonUtil].lon}
+                                                                     @"wlat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                     @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

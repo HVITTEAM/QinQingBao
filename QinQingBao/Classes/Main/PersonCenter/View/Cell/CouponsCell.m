@@ -56,7 +56,7 @@
     self.limitLab.text = [NSString stringWithFormat:@"满%@元使用",couponsModel.voucher_limit];
     self.limitLab.textColor = [UIColor colorWithRGB:@"666666"];
     self.owerLab.textColor = [UIColor colorWithRGB:@"666666"];
-    
+    self.owerLab.text = [NSString stringWithFormat:@"提供方:%@",couponsModel.store_name.length > 0 ? couponsModel.store_name : couponsModel.voucher_owner_name];
     if ([couponsModel.voucher_price floatValue] <= 10)
     {
         self.priceLab.textColor = HMColor(37, 154, 218);

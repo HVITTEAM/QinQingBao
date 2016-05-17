@@ -44,9 +44,7 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iidnum parameters:@{@"iidnum" : self.iid,
-                                                                             @"lat" : [SharedAppUtil defaultCommonUtil].lat,
-                                                                             @"lon" : [SharedAppUtil defaultCommonUtil].lon}
+    [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iidnum parameters:@{@"iidnum" : self.iid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

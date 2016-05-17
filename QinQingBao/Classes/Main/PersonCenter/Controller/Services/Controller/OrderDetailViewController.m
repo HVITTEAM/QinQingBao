@@ -21,6 +21,8 @@
 #import "SWYPhotoBrowserViewController.h"
 #import "ServiceHeadCell.h"
 
+#import "PaymentViewController.h"
+
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -192,7 +194,7 @@
                 titleStr = @"服务跟踪";
                 break;
             case 3:
-                titleStr = @"对技师评价";
+                titleStr = @"对理疗师评价";
                 break;
             default:
                 titleStr = @"";
@@ -255,8 +257,8 @@
  */
 -(void)pay:(UIButton *)sender
 {
-    OrderPayViewController *payVC = [[OrderPayViewController alloc] init];
-    payVC.orderInfor = self.orderInfor;
+    PaymentViewController *payVC = [[PaymentViewController alloc] init];
+    payVC.orderModel = self.orderInfor;
     [self.navigationController pushViewController:payVC animated:YES];
 }
 

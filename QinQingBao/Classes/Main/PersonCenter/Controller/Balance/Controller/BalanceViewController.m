@@ -125,7 +125,6 @@
     
     commoncell.detailTextLabel.text = [MTDateHelper getDaySince1970:model.lg_add_time dateformat:@"yyyy-MM-dd HH:mm:ss"];
     commoncell.textLabel.text = model.lg_desc;
-//    ((UILabel *)commoncell.accessoryView).text = model.lg_av_amount;
     [((UILabel *)commoncell.accessoryView) sizeToFit];
     return commoncell;
 }
@@ -142,11 +141,13 @@
  */
 -(void)loadBalanceData
 {
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client" : @"ios",
                              @"curpage":@"1",
                              @"page":@"50"};
     [CommonRemoteHelper RemoteWithUrl:URL_get_member_blance parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [HUD removeFromSuperview];
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"未获取到数据" view:self.view];
         }else{
@@ -157,7 +158,8 @@
             [self.table reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请示失败" view:self.view];
+        [NoticeHelper AlertShow:@"请求失败" view:self.view];
+        [HUD removeFromSuperview];
     }];
 }
 

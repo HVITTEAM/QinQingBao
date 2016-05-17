@@ -67,23 +67,28 @@
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"page" : @100,
                   @"voucher_state" : @"1",
-                  @"curpage" : @1};
+                  @"curpage" : @1,
+                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios"};
     }
     else if ([self.title isEqualToString:@"已使用"])
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"voucher_state" : @"2",
                   @"page" : @100,
-                  @"curpage" : @1};
+                  @"curpage" : @1,
+                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios"};
     }
     else if ([self.title isEqualToString:@"已过期"])
     {
         dict =  @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"voucher_state" : @"3",
                   @"page" : @100,
-                  @"curpage" : @3};
+                  @"curpage" : @3,
+                  @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios"};
     }
-    
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     

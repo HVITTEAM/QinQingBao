@@ -70,6 +70,8 @@
     
     self.title = @"资讯详情";
     
+    self.webView.height = MTScreenH - 70;
+    
     _inputTextView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
     _inputTextView.backgroundColor = HMColor(239, 239, 239);
     [self.view addSubview:_inputTextView];

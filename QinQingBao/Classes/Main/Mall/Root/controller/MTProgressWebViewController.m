@@ -43,7 +43,7 @@
     
     [self initData];
     
-    //    [self initNavigation];
+    [self initNavigation];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,20 +65,7 @@
  */
 -(void)initNavigation
 {
-    //    self.title = @"商品详情";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"购物车" style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopCar)];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"分类" style:UIBarButtonItemStylePlain target:self action:@selector(gotoShopClass)];
-    
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 20, 150, 37)];
-    searchBar.placeholder = @"江山臭豆腐";
-    [searchBar setBarStyle:UIBarStyleDefault];
-    searchBar.translucent = true;
-    //    searchBar.tintColor=[UIColor blueColor];
-    searchBar.delegate = self;
-    self.navigationItem.titleView = searchBar;
-    UITapGestureRecognizer *searchTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(ClickHandler:)];
-    [searchBar addGestureRecognizer:searchTap];
 }
 
 -(void)ClickHandler:(UITapGestureRecognizer *)tap
@@ -201,15 +188,12 @@
 
 -(void)initData
 {
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 70)];
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
     _webView.scalesPageToFit = YES;
     _webView.backgroundColor = [UIColor whiteColor];
-    _webView.multipleTouchEnabled = YES;
     NSURL *iconUrl = [NSURL URLWithString:self.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:iconUrl cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:10.0f];
-    
     _progressProxy = [[NJKWebViewProgress alloc] init];
-    
     _webView.delegate = _progressProxy;
     _progressProxy.webViewProxyDelegate = self;
     _progressProxy.progressDelegate = self;
@@ -219,11 +203,8 @@
     CGRect barFrame = CGRectMake(0, navigationBarBounds.size.height - progressBarHeight, navigationBarBounds.size.width, progressBarHeight);
     _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
     _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    
     [_webView loadRequest:request];
-    
     [self.view addSubview:_webView];
-    
 }
 
 #pragma mark - NJKWebViewProgressDelegate

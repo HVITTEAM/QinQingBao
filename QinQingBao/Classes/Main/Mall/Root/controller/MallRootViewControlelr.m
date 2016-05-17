@@ -332,7 +332,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         ConfModel *model = slideImages[i];
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,model.image]];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imgPlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.tag = i;
@@ -345,7 +345,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     ConfModel *model = slideImages[slideImages.count - 1];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,model.image]];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
     
@@ -353,7 +353,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     ConfModel *model1 = slideImages[0];
     NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,result.url,model1.image]];
-    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"noneImage"]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     
     imageView.frame = CGRectMake((MTScreenW * ([slideImages count] + 1)) , 0, MTScreenW, self.imgPlayer.height);
     [self.imgPlayer addSubview:imageView];
