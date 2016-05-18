@@ -65,7 +65,7 @@
         HomePicModel *item = _slideImages[i];
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"advplaceholderImage"]];
         imageView.frame = CGRectMake((MTScreenW * i) + MTScreenW, 0, MTScreenW, self.imagePlayer.height);
         imageView.backgroundColor = [UIColor whiteColor];
         imageView.tag = i;
@@ -78,7 +78,7 @@
     HomePicModel *item = _slideImages[_slideImages.count - 1];
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item.bc_value]];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"advplaceholderImage"]];
     imageView.frame = CGRectMake(0, 0, MTScreenW, self.imagePlayer.height); // 添加最后1页在首页 循环
     [self.imagePlayer addSubview:imageView];
     
@@ -86,7 +86,7 @@
     HomePicModel *item0 = _slideImages[0];
     imageView = [[UIImageView alloc] init];
     NSURL *iconUrl1 = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_AdvanceImg,item0.bc_value]];
-    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [imageView sd_setImageWithURL:iconUrl1 placeholderImage:[UIImage imageWithName:@"advplaceholderImage"]];
     imageView.frame = CGRectMake((MTScreenW * ([_slideImages count] + 1)) , 0, MTScreenW, self.imagePlayer.height);
     [self.imagePlayer addSubview:imageView];
     

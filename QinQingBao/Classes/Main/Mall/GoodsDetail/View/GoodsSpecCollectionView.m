@@ -152,7 +152,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //选择的分类
     GoodsTypeModel *sections = self.dataProvider[indexPath.section];
+    //选择的分类中的具体项目
     GoodsTypeModel *clickitem = sections.datas[indexPath.row];
     for (GoodsTypeModel *item in sections.datas)
     {

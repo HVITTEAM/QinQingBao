@@ -266,25 +266,44 @@ static CGFloat BUTTONHEIGHT = 50;
 /**当参数全部选择之后,重新刷新数据**/
 -(void)refleshGoodsData
 {
-    NSMutableArray *targetPool = [[NSMutableArray alloc] init];
-    
+    NSString * idvalue;
     NSArray *keys_specname = [self.speclistDict allKeys];
     for (int i = 0; i < keys_specname.count; i++)
     {
+        BOOL found = NO;//选中的参数id集合必须和给出的参数id集合中一一对应
+
         id key = [keys_specname objectAtIndex:i];
         id value = [self.speclistDict objectForKey:key];
-        
         NSArray *arr = [key componentsSeparatedByString:@"|"];
         
-        if ([selectedIDarr indexOfObject:arr[0]] > 0 &&[selectedIDarr indexOfObject:arr[1]] > 0 &&
-            [selectedIDarr indexOfObject:arr[2]] > 0 &&[selectedIDarr indexOfObject:arr[3]] > 0)
+        for (int i = 0; i  < [arr count]; i ++ )
         {
-            [self getGoodsDetailInfo:value];
+            NSUInteger index = [selectedIDarr indexOfObject:arr[i]];
+            if(index == NSNotFound)
+            {
+                found = NO;
+                break;
+            }
+            else
+            {
+                found = YES;
+                idvalue = [self.speclistDict objectForKey:arr[i]];
+            }
+        }
+        if (found)
+        {
+            NSLog(@"%@",idvalue);
+            [self getGoodsDetailInfo:idvalue];
             break;
         }
-    }
-}
+        else
+        {
+            //TODO 没找到出错了
+        }
 
+    }
+    
+}
 
 -(void)getGoodsDetailInfo:(NSString *)goodsID
 {
