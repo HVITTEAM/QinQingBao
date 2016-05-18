@@ -42,7 +42,6 @@
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
         // 设置富文本样式
-        // 设置富文本样式
         [attributedString addAttribute:NSForegroundColorAttributeName
                                  value:[UIColor redColor]
                                  range:NSMakeRange(0, strlength)];
@@ -53,7 +52,7 @@
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:12.f]
-                                 range:NSMakeRange(3, string.length - strlength)];
+                                 range:NSMakeRange(strlength, string.length - strlength)];
         
         self.heartDataLabel.attributedText = attributedString;
     }
