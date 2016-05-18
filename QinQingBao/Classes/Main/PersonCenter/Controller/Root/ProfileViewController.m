@@ -33,6 +33,9 @@
     NSURL *iconUrl;
     NSString *username;
     NSString *account;
+    
+    UserInforModel *infoVO;
+    
 }
 
 @end
@@ -228,15 +231,21 @@
                                      else
                                      {
                                          NSDictionary *di = [dict objectForKey:@"datas"];
-                                         //NSLog(@"00000000000000%@",di);
+                                         
+                                         infoVO = [UserInforModel objectWithKeyValues:di];
+                                         
                                          if ([di count] != 0)
                                          {
-                                             NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
-                                             iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,url]];
-                                             username = (NSString*)[di objectForKey:@"member_truename"];
-                                             account = (NSString*)[di objectForKey:@"member_mobile"];
+                                             if ([di objectForKey:@"member_avatar"] != [NSNull null])
+                                             {
+                                                 NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
+                                                 iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,url]];
+                                             }
+                                             else
+                                                 iconUrl = nil;
+                                             username = infoVO.member_truename;
+                                             account = infoVO.member_mobile;
                                          }
-                                         
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
