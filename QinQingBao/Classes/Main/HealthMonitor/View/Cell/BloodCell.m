@@ -25,14 +25,14 @@
         case ChartTypeBlood:
             self.bloodLab.text = [NSString stringWithFormat:@"%@/%@",item.systolic,item.diastolic];
             self.timeLab.text = item.bloodp_time;
-            self.decLab.text = @"mmol/L";
+            self.decLab.text = @"mmHg";
             break;
         case ChartTypeSugar:
         {
             float floatString = [item.bloodsugar floatValue];
             self.bloodLab.text = [NSString stringWithFormat:@"%.01f",floatString];
             self.timeLab.text = item.bloodsugar_time;
-            self.decLab.text = @"mmHg";
+            self.decLab.text = @"mmol/L";
             break;
         }
         case ChartTypeHeart:

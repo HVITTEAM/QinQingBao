@@ -64,8 +64,6 @@
     
     [self initView];
     
-    [self getAdvertisementpic];
-    
     [self setupRefresh];
     
     [self.tableView.header beginRefreshing];
@@ -89,6 +87,7 @@
     
     // 下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getAdvertisementpic];
         [self getNewsData];
     }];
 }
@@ -139,9 +138,9 @@
         [cityBtn setTitle:[SharedAppUtil defaultCommonUtil].cityVO.dvname forState:UIControlStateNormal];
     else//如果没有本地信息
     {
-        [self initLocation];
         [self setLocationCity:@"杭州市"];
     }
+    [self initLocation];
     
     //给button添加image
     [cityBtn setImage:[UIImage imageNamed:@"icon_Arrow.png"] forState:UIControlStateNormal];

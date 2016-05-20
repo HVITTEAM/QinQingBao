@@ -122,7 +122,7 @@
                   @"status" : @"0,119"
                   };
     }
-    else if ([self.title isEqualToString:@"待受理"])
+    else if ([self.title isEqualToString:@"待服务"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
@@ -140,12 +140,11 @@
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
-                  @"get_type" : @"2",
-                  @"status" : @"30,49",
+                  @"get_type" : @"0",
                   @"pay_staus":@"0"
                   };
     }
-    else if ([self.title isEqualToString:@"退款/售后"])
+    else if ([self.title isEqualToString:@"待退款"])
     {
         dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                   @"client" : @"ios",
@@ -155,16 +154,16 @@
                   @"page" : @"100",
                   @"get_type" : @"2"};
     }
-//    else if ([self.title isEqualToString:@"取消/售后"])//取消/售后
-//    {
-//        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-//                  @"client" : @"ios",
-//                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-//                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-//                  @"status" : @"50,59",
-//                  @"page" : @"100",
-//                  @"get_type" : @"2"};
-//    }
+    else if ([self.title isEqualToString:@"待评价"])
+    {
+        dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                  @"client" : @"ios",
+                  @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                  @"status" : @"30,39",
+                  @"page" : @"100",
+                  @"get_type" : @"2"};
+    }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
@@ -178,7 +177,6 @@
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {
-                                         //                                         [NoticeHelper AlertShow:@"没有更多的数据了" view:self.view];
                                          NSLog(@"没有更多的数据了");
                                          currentPageIdx --;
                                          self.noneResultHandler();
@@ -266,22 +264,21 @@
         };
         [self.nav pushViewController:cancelView animated:YES];
     }
-    else if ([btn.titleLabel.text isEqualToString:@"去结算"])
+    else if ([btn.titleLabel.text isEqualToString:@"去支付"])
     {
-//        OrderPayViewController *orderPayVC = [[OrderPayViewController alloc] init];
-//        orderPayVC.orderInfor = dataProvider[indexPath.section];
-//        [self.nav pushViewController:orderPayVC animated:YES];
-        
         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
         OrderModel *model = dataProvider[indexPath.section];
         paymentVC.orderModel = model;
         [self.nav pushViewController:paymentVC animated:YES];
-
+    }
+    else if ([btn.titleLabel.text isEqualToString:@"申请退款"])
+    {
+    
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
     {
         NSURL *url = [NSURL URLWithString:@"telprompt://0573-96345"];
-        [[UIApplication sharedApplication] openURL:url];;
+        [[UIApplication sharedApplication] openURL:url];
     }
 }
 

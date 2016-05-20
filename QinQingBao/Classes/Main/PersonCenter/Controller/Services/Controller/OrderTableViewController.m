@@ -41,18 +41,20 @@
     self.vc1.title = @"全部";
     
     self.vc2 = [[QCListViewController alloc] init];
-    self.vc2.title = @"待受理";
+    self.vc2.title = @"待付款";
     
     self.vc3 = [[QCListViewController alloc] init];
-    self.vc3.title = @"待付款";
+    self.vc3.title = @"待服务";
     
     self.vc4 = [[QCListViewController alloc] init];
-    self.vc4.title = @"退款/售后";
+    self.vc4.title = @"待评价";
     
+    self.vc5 = [[QCListViewController alloc] init];
+    self.vc5.title = @"待退款";
     
     MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height - 2, self.view.width, MTScreenH)];
     view.delegate = self;
-    view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4, nil];
+    view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4, self.vc5,nil];
     [self.view addSubview:view];
 }
 
@@ -76,7 +78,10 @@
         vc = self.vc3;
     } else if (number == 3) {
         vc = self.vc4;
+    } else if (number == 4) {
+        vc = self.vc5;
     }
+    
     vc.nav = self.navigationController;
     vc.noneResultHandler = ^(void)
     {
