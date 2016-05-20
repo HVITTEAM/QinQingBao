@@ -333,7 +333,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             __weak typeof(self) weakSelf = self;
             UIWindow *wd = [UIApplication sharedApplication].keyWindow;
             SMSVerificationView *verificationView = [SMSVerificationView showSMSVerificationViewToView:wd];
-            verificationView.phoneNum = @"13738069567";
+            verificationView.phoneNum = [SharedAppUtil defaultCommonUtil].userVO.mobilPhone;
             verificationView.tapConfirmBtnCallBack = ^(NSString *safeNum){
                 weakSelf.numberOfVerification = safeNum;
                 [weakSelf payResultHandel];
@@ -426,8 +426,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                      else
                                      {
-                                         [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-                                    
+                                         [self back];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
@@ -437,7 +436,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 
 -(void)back
 {
-    [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+    if (self.viewControllerOfback)
+        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+    else
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 工具方法

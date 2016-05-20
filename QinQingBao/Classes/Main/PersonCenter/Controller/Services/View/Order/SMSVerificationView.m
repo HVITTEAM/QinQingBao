@@ -116,6 +116,8 @@
  */
 - (IBAction)tapFetchNumberBtnActio:(id)sender
 {
+    if (!self.phoneNum)
+        return [NoticeHelper AlertShow:@"手机号码为空" view:nil];
     [self.countTimer invalidate];
     self.countTimer = nil;
     
@@ -163,11 +165,9 @@
         
         if ([dict[@"code"] integerValue] == 0) {
             [NoticeHelper AlertShow:@"验证码发送成功，注意查收" view:self];
-            
         }else{
             [NoticeHelper AlertShow:@"获取验证码失败！" view:self];
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"获取验证码失败" view:self];
     }];

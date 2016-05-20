@@ -14,6 +14,7 @@
 {
     [aCoder encodeObject:_member_id forKey:@"_member_id"];
     [aCoder encodeObject:_key forKey:@"_key"];
+    [aCoder encodeObject:_mobilPhone forKey:@"_mobilPhone"];
     [aCoder encodeObject:_old_id forKey:@"_old_id"];
 }
 
@@ -25,6 +26,7 @@
         _member_id = [aDecoder decodeObjectForKey:@"_member_id"];
         _key = [aDecoder decodeObjectForKey:@"_key"];
         _old_id = [aDecoder decodeObjectForKey:@"_old_id"];
+        _mobilPhone = [aDecoder decodeObjectForKey:@"_mobilPhone"];
     }
     return self;
 }
@@ -35,7 +37,7 @@
     vo.member_id = [self.member_id copyWithZone:zone];
     vo.key = [self.key copyWithZone:zone];
     vo.old_id = [self.old_id copyWithZone:zone];
-    
+    vo.mobilPhone = [self.mobilPhone copyWithZone:zone];
     return vo;
 }
 

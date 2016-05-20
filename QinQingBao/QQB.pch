@@ -204,8 +204,6 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
-#define URL_Local @"http://61.143.60.87/ylserver"
-
 #define URL_Local @"http://test.hvit.com.cn/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"

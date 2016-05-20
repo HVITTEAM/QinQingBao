@@ -267,7 +267,6 @@
                                          paymentVC.store_id = item.store_id;
                                          paymentVC.productName = self.dataItem.iname;
                                          
-                                         
                                          NSUInteger count = self.navigationController.viewControllers.count;
                                          paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
                                          [self.navigationController pushViewController:paymentVC animated:YES];
