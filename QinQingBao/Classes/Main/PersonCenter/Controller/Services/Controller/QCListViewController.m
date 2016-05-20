@@ -293,6 +293,13 @@
         refundVC.orderModel = model;
         [self.nav pushViewController:refundVC animated:YES];
     }
+    else if ([btn.titleLabel.text isEqualToString:@"评价"])
+    {
+        EvaluationViewController *evaluationVC = [[EvaluationViewController alloc] init];
+        OrderModel *model = dataProvider[indexPath.section];
+        evaluationVC.orderModel = model;
+        [self.nav pushViewController:evaluationVC animated:YES];
+    }
 }
 
 

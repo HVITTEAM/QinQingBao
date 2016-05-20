@@ -20,6 +20,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentBoxView;     //包含输入框，按钮的View
 
+@property (weak, nonatomic) IBOutlet UILabel *promptLb;       //提示信息UILabel
+
 @property (strong,nonatomic)NSTimer *countTimer;
 
 @property (assign,nonatomic)NSInteger secondsOfCount;           //到计时秒数
@@ -80,6 +82,15 @@
     self.cancelBtn.layer.cornerRadius = 7.0f;
     
     self.confirmBtn.layer.cornerRadius = 7.0f;
+}
+
+#pragma mark - setter与getter方法
+-(void)setPhoneNum:(NSString *)phoneNum
+{
+    _phoneNum = phoneNum;
+    
+    NSString *lastNums = [phoneNum substringFromIndex:(phoneNum.length - 4)];
+    self.promptLb.text = [NSString stringWithFormat:@"输入预留手机***%@收到的验证码",lastNums];
 }
 
 #pragma mark - 事件方法

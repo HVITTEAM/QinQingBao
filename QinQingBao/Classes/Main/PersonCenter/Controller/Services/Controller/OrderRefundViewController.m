@@ -344,44 +344,26 @@
  */
 -(void)refundAll
 {
-//    NSMutableDictionary *params = [@{
-//                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-//                                     @"client" : @"ios",
-//                                     @"order_id" : self.orderInfo.order_id,
-//                                     @"buyer_message":self.explainTextView.text
-//                                     }mutableCopy];
-//    
-//    //创建图片数组
-//    NSMutableArray *imageArray = [[NSMutableArray alloc] init];
-//    for (int i = 0; i < self.photosArray.count; ++i ) {
-//        
-//        NSString *name = [NSString stringWithFormat:@"refund_pic%d",i+1];
-//        NSString *filename = [NSString stringWithFormat:@"img%d",i+1];
-//        
-//        NSDictionary *imageDict = @{
-//                                    @"fileData":self.photosArray[i],
-//                                    @"name":name,
-//                                    @"fileName":filename,
-//                                    @"mimeType":@"image/png",
-//                                    };
-//        [imageArray addObject:imageDict];
-//    }
-//    //发起请求
-//    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [CommonRemoteHelper UploadPicWithUrl:URL_Refund_all parameters:params  images:imageArray success:^(NSDictionary *dict, id responseObject) {
-//        [HUD removeFromSuperview];
-//        
-//        if ([dict[@"code"] integerValue] == 0) {
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }else if ([dict[@"code"] integerValue] == 11010){
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-//        }
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [HUD removeFromSuperview];
-//        [NoticeHelper AlertShow:@"请求失败" view:self.view];
-//    }];
+    NSMutableDictionary *params = [@{
+                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"client" : @"ios",
+                                     @"wid" : self.orderModel.wid,
+                                     @"buyer_message":self.explainTextView.text
+                                     }mutableCopy];
+    //发起请求
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_work_add_refund_all parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        if ([dict[@"code"] integerValue] == 0) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }else {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求发送失败,请检查网络是否正常" view:self.view];
+
+    }];
 }
-
-
 
 @end
