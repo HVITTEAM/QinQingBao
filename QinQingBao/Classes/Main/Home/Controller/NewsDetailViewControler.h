@@ -12,4 +12,5 @@
 @interface NewsDetailViewControler : MTProgressWebViewController
 
 @property (nonatomic, retain) ArticleModel *articleItem;
+
 @end

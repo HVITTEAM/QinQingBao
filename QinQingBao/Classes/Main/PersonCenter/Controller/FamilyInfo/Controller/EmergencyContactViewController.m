@@ -118,7 +118,6 @@
     
     [headview addSubview:addBtn];
     
-    
     self.tableView.tableHeaderView = headview;
     
     UIView *footview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenH, 110)];

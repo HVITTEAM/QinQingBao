@@ -12,9 +12,7 @@
 
 @class OrderModel;
 
-
 @interface UseCouponsViewController : UITableViewController
-
 
 @property (nonatomic, copy) void (^selectedClick)(CouponsModel *item);
 

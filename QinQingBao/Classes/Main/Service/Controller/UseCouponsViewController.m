@@ -66,6 +66,9 @@
     self.view.backgroundColor = HMGlobalBg;
 }
 
+/**
+ *  商城的优惠券
+ */
 -(void)getDataProvider
 {
 #warning   storeid写死为14 因为我们的商城店铺就只有一个

@@ -73,79 +73,40 @@
     
 }
 
--(NSString *)getStatusByStatus:(int)status payStatus:(int)payStaus
+-(NSString *)getStatusByStatus:(int)status payStatus:(int)payStatus
 {
-    self.deleteBtn.hidden = NO;
     NSString *str;
-    if (status >=0 && status <= 9)
+    if (payStatus == 0)
     {
-        str = @"待接单";
-        self.statusLab.textColor = [UIColor orangeColor];
-        [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+        str = @"待付款";
+        [self.deleteBtn setTitle:@"去支付" forState:UIControlStateNormal];
     }
-    else if (status >= 10 && status <=19)
+    else if (status >= 0 && status <= 9)
     {
-        str = @"已接单";
-        self.statusLab.textColor = [UIColor orangeColor];
-        //[self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
-        self.deleteBtn.hidden = YES;
-    }
-    else if (status >= 20 && status <= 29)
-    {
-        str = @"";
-        self.deleteBtn.hidden = YES;
+        str = @"待服务";
+        [self.deleteBtn setTitle:@"申请退款" forState:UIControlStateNormal];
     }
     else if (status >= 30 && status <= 39)
     {
-        str = @"服务完成";
-        self.statusLab.textColor = [UIColor orangeColor];
+        str = @"待评价";
+        [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+    }
+    else if (status >= 50 && status <= 69)
+    {
+        str = @"取消/售后";
         [self.deleteBtn setTitle:@"去结算" forState:UIControlStateNormal];
     }
-    else if (status >= 40 && status <= 49)
+    else if (status >= 120 && status <= 129)
     {
-        if (payStaus == 1) {
-            str = @"已支付";
-            self.deleteBtn.hidden = YES;
-        }else{
-            str = @"服务完成";
-            self.statusLab.textColor = [UIColor orangeColor];
-            [self.deleteBtn setTitle:@"去结算" forState:UIControlStateNormal];
-        }
-        
-        self.statusLab.textColor = [UIColor orangeColor];
+        str = @"退款中";
     }
-    else if (status >= 50 && status <= 59)
+    else if (status >= 130 && status <= 139)
     {
-        str = @"已取消";
-        self.statusLab.textColor = MTNavgationBackgroundColor;
-        self.deleteBtn.hidden = YES;
-        
+        if (status == 132)
+            str = @"退款失败";
+        if (status == 132)
+            str = @"退款成功";
     }
-    else if (status >= 60 && status <= 69)
-    {
-        str = @"已拒单";
-        self.statusLab.textColor = MTNavgationBackgroundColor;
-        self.deleteBtn.hidden = YES;
-    }
-    else if ( status >=80 && status <= 99)
-    {
-        str = @"完成";
-        self.statusLab.textColor = MTNavgationBackgroundColor;
-        self.deleteBtn.hidden = YES;
-    }
-    else if (status >=100 && status <= 109)
-    {
-        str = @"投诉中";
-        self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.hidden = YES;
-    }
-    else if ( status >=110 && status <= 119)
-    {
-        str = @"";
-        self.statusLab.textColor = [UIColor orangeColor];
-        self.deleteBtn.hidden = YES;
-    }
-    
     return str;
 }
 - (IBAction)deleteBtnClickHandler:(id)sender
