@@ -8,6 +8,8 @@
 
 #import "SMSVerificationView.h"
 
+#define kSecondCount 60
+
 @interface SMSVerificationView ()
 
 @property (weak, nonatomic) IBOutlet UITextField *verificationNumTextView;      //验证码输入框
@@ -73,12 +75,12 @@
 {
     [super awakeFromNib];
 
+    self.fetchNumberBtn.layer.borderWidth = 1.0f;
     self.fetchNumberBtn.layer.cornerRadius = 7.0f;
     self.fetchNumberBtn.layer.borderColor = HMColor(230, 230, 230).CGColor;
-    self.fetchNumberBtn.layer.borderWidth = 1.0f;
-    
+    [self.fetchNumberBtn setTitleColor:HMColor(220, 220, 220) forState:UIControlStateDisabled];
+    [self.fetchNumberBtn setTitleColor:HMColor(235, 124, 38) forState:UIControlStateNormal];
     self.cancelBtn.layer.cornerRadius = 7.0f;
-    
     self.confirmBtn.layer.cornerRadius = 7.0f;
 }
 
@@ -121,13 +123,11 @@
     [self.countTimer invalidate];
     self.countTimer = nil;
     
-    self.secondsOfCount = 60;
+    self.secondsOfCount = kSecondCount;
     
     self.fetchNumberBtn.enabled = NO;
-    [self.fetchNumberBtn setTitleColor:HMColor(220, 220, 220) forState:UIControlStateNormal];
     
     [self fetchNumberFromServices];
-    
     
     self.countTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(startCount) userInfo:nil repeats:YES];
 }
@@ -142,8 +142,6 @@
     if (self.secondsOfCount <= 0) {
         [self.fetchNumberBtn setTitle:@"重新获取" forState:UIControlStateNormal];
          self.fetchNumberBtn.enabled = YES;
-        [self.fetchNumberBtn setTitleColor:HMColor(235, 124, 38) forState:UIControlStateNormal];
-        
         [self.countTimer invalidate];
         self.countTimer = nil;
         return;

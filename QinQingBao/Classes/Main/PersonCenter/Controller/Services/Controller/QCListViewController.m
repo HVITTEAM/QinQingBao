@@ -280,7 +280,7 @@
         paymentVC.productName = model.icontent;
         [self.nav pushViewController:paymentVC animated:YES];
     }
-    else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
+    else if ([btn.titleLabel.text isEqualToString:@"联系商家"] || [btn.titleLabel.text isEqualToString:@"投诉"])
     {
         NSURL *url = [NSURL URLWithString:@"telprompt://4001512626"];
         [[UIApplication sharedApplication] openURL:url];

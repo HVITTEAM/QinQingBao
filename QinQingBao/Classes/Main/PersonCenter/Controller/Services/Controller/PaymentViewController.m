@@ -338,7 +338,6 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 weakSelf.numberOfVerification = safeNum;
                 [weakSelf payResultHandel];
             };
-            
         }
             break;
         case PaymentTypeCoupons:
