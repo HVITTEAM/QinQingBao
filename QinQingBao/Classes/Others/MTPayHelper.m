@@ -36,8 +36,8 @@
     /*============================================================================*/
     /*=======================需要填写商户app申请的===================================*/
     /*============================================================================*/
-    NSString *partner = @"2088121051826945";
-    NSString *seller = @"ofc.er@hvit.com.cn";
+    NSString *partner = @"2088221350981588";
+    NSString *seller = @"ofc.hz@hvit.com.cn";
     NSString *privateKey = @"MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKdIyxd3pZwIRBOXBkmkZRsTO9VTlsTlh3+cCxYKWgJc9FsKnOcLQxweSB8NVgwlgilc7LfIFKperP+P+U3KHv/NFlmoz5jJ1OTR9oQF+FoMVYqF9C9C8v3NNGxGnHQwak6d67wxYxntUXQjKFUZWlCnFNXR99D34rseGW6ro74xAgMBAAECgYAewAvNKYpAz2gsLbPTL6wCORvjj/UEBqlMtNN43rhC/PFSFvZWpkRU0+AwDRSHMRHnJpTBB798veCRLdcHDKN71/aPuCoESU4UONwVpHE3cpdDVQ0ATIDDMf5lww6WI29xEbuOcKSQMXJPhyBNCT6hYVbORwr7dQMts2P3xA8JHQJBANqJ6XfDbPfx0Io2xI2zfYhXAOIUf6YQ/ACVcoyAHFsi8vCg7pEbfHf5K9nlAqPBTqJpZLQ8w2N12KctPWQ61hcCQQDD9bJeyIs0an6zvEt0TFgBCTpkTsC6zTsYQj7HuYE05FJofgiXRQaq3PfzlhEKOl4uOx84sQibfPSvXrS7RQL3AkA8Issd66bmq6IJBn0byRJ4HAjgLWfa2L2fo4A77VzgL0POt1ouj/O2R9irQvtw+FadFodhmX7itaECj85e8FnNAkACcWCs39EkcSNtOC60n3MFaEkLERRD/+T5s3G26bAbqbEBTnjq8dhYbvLEXZ2OxBWCfAgym7pgvdkLCqI0J3MXAkAhw0vU9MIi9GWz3PoQzXsJyUHE03+zOjlm4ZLWvBNi3YQuXOZ7VXVcf0yT2VPw8N0vvHiAil6go+E3zS+VehRU";
     
 //    NSString *privateKey = @"MIICXQIBAAKBgQDn5FzddkkhXaznBrDMoulKmzWVFlq3ZMKhRVjMmkKQlbyRvU2oZiWj16Fkj05tUYAQSSY1I5OvuriFCH0jkMPB+4hf8ISaeMTEQHUwxObtYpkIYrFQ1dVbzSXWgpyQ9hDe4fgzvxQdchTSgSEWF5t6Dh7w9HA/gv0xnWrJ8N7Z8QIDAQABAoGAOUAT/UkavPYXneH0/FCsMBMpo2kldGmX86DfT4Q2MuQE7iZCafTuDglKez02K58Xcu3cVPo3mAcNTyrNWl5/NYi0cQ4es8yVfVw43rp/uWSwr1nBX/BBdmNP/qr73ctsGiSxD6rwX5WjRLICVwwNI+zKNIOmwdshRLCTEflv0QECQQD80q9A1Uuy0MN5ZCwGRDIQq+njz1qPjkVpShmLaljSW91eHmnA+FjY13INwce6MYHQyU8yiQvM+tk1rGHluqOpAkEA6s5YO33ppnqFyCuduMY87WRaZAl9fsWO8QQl2Zm/BHneweK0+yIewI9MPdiMmjsS2nHmphFkKOQIgbIWlXXxCQJBAKJt1WyI3MZ4e22tHt+zxpqRaIYU/PDIDe40Ti8U1xXnMVS7o2P36lT+LeeKvP/xuJ5kB37HL461BwIFyyul+mkCQFzLZ3s7a5drXGubMR3Q2ktHGaHnTj1HfhIp/Xtdk2wFbc9Z9QQ6m8Sl3Q+kAQ0Cw5So5upCfT7bv7Dh3KL8lWECQQD7HLXXXqaY8esw+DEjArhV/ZuBKKBt5hg6hDVYjUjynEWiBlitBVL3dW37PAMxfxdQJamHN415gNuYCsHAKJ2X";

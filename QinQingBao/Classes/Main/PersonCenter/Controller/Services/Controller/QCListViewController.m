@@ -219,7 +219,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommonOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
+    CommonOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonOrderCell"];
     if (cell == nil)
         cell = [CommonOrderCell commonOrderCell];
     
@@ -269,7 +269,6 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"去支付"])
     {
-        
         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
         OrderModel *model = dataProvider[indexPath.section];
         paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,model.item_url];
@@ -283,7 +282,7 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])
     {
-        NSURL *url = [NSURL URLWithString:@"telprompt://0573-96345"];
+        NSURL *url = [NSURL URLWithString:@"telprompt://4001512626"];
         [[UIApplication sharedApplication] openURL:url];
     }
     else if ([btn.titleLabel.text isEqualToString:@"申请退款"])

@@ -60,7 +60,7 @@
     
     //未支付，需要显示底部的支付视图
     if ([self needsPay]) {
-         [self initBottomView];
+//         [self initBottomView];
     }
     
 //    [self loadWorkPic];

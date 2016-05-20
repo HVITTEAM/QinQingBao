@@ -12,6 +12,7 @@
 @interface CommonOrderCell : UITableViewCell
 
 @property (nonatomic, copy) void (^deleteClick)(UIButton *btn);
+- (IBAction)payClick:(id)sender;
 
 @property (nonatomic, retain) OrderModel *item;
 
@@ -22,5 +23,6 @@
 +(CommonOrderCell *) commonOrderCell;
 
 - (IBAction)deleteBtnClickHandler:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *payButton;
 
 @end
