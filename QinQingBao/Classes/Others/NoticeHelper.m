@@ -38,14 +38,7 @@
 
 +(void)AlertShow:(NSString *)msg view:(UIView *)view
 {
-    //    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
-    //    hud.mode = MBProgressHUDModeText;
-    //    hud.labelText = msg;
-    //    hud.margin = 10.f;
-    //    hud.removeFromSuperViewOnHide = YES;
-    //    [hud hide:YES afterDelay:1.33];
-    //    if (view == nil)
-    view = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+    view = [UIApplication sharedApplication].keyWindow;
     [view makeToast:msg duration:1.3 position:CSToastPositionCenter];
 }
 

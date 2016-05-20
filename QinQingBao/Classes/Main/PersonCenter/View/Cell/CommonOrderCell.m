@@ -79,10 +79,11 @@
 -(NSString *)getStatusByStatus:(int)status payStatus:(int)payStatus
 {
     NSString *str;
-    if (payStatus == 0)
+    if (payStatus == 0 && (status >= 7 && status <= 50))
     {
         str = @"待付款";
         self.payButton.hidden = NO;
+        self.deleteBtn.hidden = NO;
         [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
         [self.payButton setTitle:@"去支付" forState:UIControlStateNormal];
     }
@@ -92,21 +93,29 @@
         if (status >= 0 && status <= 9)
         {
             str = @"等待接单";
+            self.payButton.hidden = NO;
+            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
             [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
         }
         else if (status >= 10 && status <= 19)
         {
             str = @"已接单";
+            self.payButton.hidden = NO;
+            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
             [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
         }
         else if (status >= 30 && status <= 39)
         {
             str = @"服务结束";
+            self.payButton.hidden = NO;
+            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
             [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
         }
         else if ((status >= 40 && status <= 49 ) && self.item.wgrade)
         {
             str = @"已评价";
+            self.payButton.hidden = NO;
+            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
             [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
         }
         else if (status >= 50 && status <= 59)
