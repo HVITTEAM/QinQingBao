@@ -7,12 +7,13 @@
 //
 
 #import "PaymentViewController.h"
-#import "EvaluateCell.h"
 #import "UseCouponsViewController.h"
 #import "OrderModel.h"
 #import "CouponsModel.h"
 #import "SWYSubtitleCell.h"
 #import "BalanceModel.h"
+#import "MassageModel.h"
+#import "SMSVerificationView.h"
 
 typedef NS_ENUM(NSInteger, PaymentType) {
     PaymentTypeAlipay = 1,
@@ -20,19 +21,19 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     PaymentTypeCoupons = 7
 };
 
-@interface PaymentViewController ()<EvaluateCellDelegate>
+@interface PaymentViewController ()
 
 @property(assign,nonatomic)PaymentType payType;           //付款类型
-
-@property(copy,nonatomic)NSString *evaluateContent;       //评价内容
-
-@property(assign,nonatomic)NSInteger score;               //评分
 
 @property(strong,nonatomic)CouponsModel *couponsModel;    //选中的优惠券，未选中时为nil
 
 @property (nonatomic, retain) NSString *balance;//账号余额
 
 @property (nonatomic, retain) NSString *lastPrice;//最终结算金额 扣除优惠券
+
+@property (copy,nonatomic) NSString *numberOfVerification;     //验证码，余额支付时需要
+
+@property (strong,nonatomic)UIButton *confirmBtn;   //确认按钮
 
 @end
 
@@ -43,7 +44,6 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
         self.hidesBottomBarWhenPushed = YES;
-        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     return self;
 }
@@ -51,78 +51,44 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 
 #pragma mark - 生命周期方法
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 60)];
-    UIButton *confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, MTScreenW - 40,40)];
-    [confirmBtn setTitle:@"确认支付" forState:UIControlStateNormal];
-    [confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    confirmBtn.backgroundColor = HMColor(255, 126, 0);
-    confirmBtn.layer.cornerRadius = 8.0f;
-    confirmBtn.layer.masksToBounds = YES;
-    [confirmBtn addTarget:self action:@selector(payNow:) forControlEvents:UIControlEventTouchUpInside];
-    [footView addSubview:confirmBtn];
+    self.confirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(20, 10, MTScreenW - 40,40)];
+    [self.confirmBtn setTitle:[NSString stringWithFormat:@"确认支付(￥%@)",self.lastPrice] forState:UIControlStateNormal];
+    [self.confirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.confirmBtn.backgroundColor = HMColor(255, 126, 0);
+    self.confirmBtn.layer.cornerRadius = 8.0f;
+    self.confirmBtn.layer.masksToBounds = YES;
+    [self.confirmBtn addTarget:self action:@selector(payNow:) forControlEvents:UIControlEventTouchUpInside];
+    [footView addSubview:self.confirmBtn];
     self.tableView.tableFooterView = footView;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+
     //设置默认选项
     self.payType = PaymentTypeAlipay;
-    self.score = 5;
-    self.evaluateContent = @"默认好评";
-    self.navigationItem.title = @"订单支付";
+    self.navigationItem.title = @"结算";
     [self loadBalanceData];
 }
 
--(void)setOrderModel:(OrderModel *)orderModel
+-(void)setWprice:(NSString *)wprice
 {
-    _orderModel = orderModel;
+    _wprice = wprice;
     
     //设置初始的价格
-    self.lastPrice = self.orderModel.wprice;
+    self.lastPrice = wprice;
 }
-#pragma mark - 网络相关
-/**
- *  获取余额相关信息包括使用记录
- */
--(void)loadBalanceData
-{
-    NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                             @"client" : @"ios",
-                             @"curpage":@"1",
-                             @"page":@"50"};
-    [CommonRemoteHelper RemoteWithUrl:URL_get_member_blance parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:@"未获取到数据" view:self.view];
-        }else{
-            BalanceModel *balanceMD = [BalanceModel objectWithKeyValues:dict[@"datas"]];
-            self.balance = balanceMD.available_rc_balance;
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请示失败" view:self.view];
-    }];
-}
-
 
 #pragma mark - 协议方法
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 3;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -136,15 +102,16 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UITableViewCell *cell;
     if (indexPath.section == 0) {  //顶部信息cell
         
         SWYSubtitleCell *infoCell = [SWYSubtitleCell createSWYSubtitleCellWithTableView:tableView];
-        NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,self.orderModel.item_url]];
+        
+        NSURL *iconUrl = [NSURL URLWithString:self.imageUrlStr];
         [infoCell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-        infoCell.textLabel.text = [NSString stringWithFormat:@"￥%@",self.orderModel.wprice];
-        infoCell.detailTextLabel.text = self.orderModel.tname;
-        infoCell.imageView.backgroundColor = [UIColor redColor];
-        return infoCell;
+        infoCell.textLabel.text = [NSString stringWithFormat:@"￥%@",self.wprice];
+        infoCell.detailTextLabel.text = self.content;
+        cell = infoCell;
         
     }else if (indexPath.section == 1){  //代金券cell
         static NSString *couponCellId = @"couponCell";
@@ -164,7 +131,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             couponCell.detailTextLabel.text = [NSString stringWithFormat:@"-%@元",self.couponsModel.voucher_price];
         }
         
-        return couponCell;
+        cell = couponCell;
         
     }else if (indexPath.section == 2){  //支付类型cell
         
@@ -212,14 +179,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                image:[UIImage imageNamed:@"paytype_yue"]];
             }
         }
-        return paytypeCell;
-        
-    }else{
-        //评价cell
-        EvaluateCell *evaluateCell = [EvaluateCell createEvaluateCellWithTableView:tableView];
-        evaluateCell.delegate = self;
-        return evaluateCell;
+        cell = paytypeCell;
     }
+    
+    return cell;
 }
 
 #pragma mark UITableViewDelegate
@@ -227,8 +190,6 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 {
     if (indexPath.section == 0) {
         return 85;
-    }else if (indexPath.section == 3 ) {
-        return 160;
     }
     return 60;
 }
@@ -249,12 +210,12 @@ typedef NS_ENUM(NSInteger, PaymentType) {
         //跳转到优惠券使用界面
         __weak typeof(self) weakSelf = self;
         UseCouponsViewController *useCouponVC = [[UseCouponsViewController alloc] init];
-        useCouponVC.ordermodel = self.orderModel;
-        useCouponVC.totalPrice = self.orderModel.price;
+        useCouponVC.store_id = self.store_id;
+        useCouponVC.totalPrice = self.wprice;
         useCouponVC.selectedModel = self.couponsModel;
         useCouponVC.selectedClick = ^(CouponsModel *item){
             weakSelf.couponsModel = item;
-            CGFloat servicePrice = [self.orderModel.wprice floatValue];
+            CGFloat servicePrice = [weakSelf.wprice floatValue];
             CGFloat couponPrice = 0;
             if (weakSelf.couponsModel)
             {
@@ -265,6 +226,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 }
             }
             weakSelf.lastPrice = [NSString stringWithFormat:@"%.2f",servicePrice - couponPrice];
+            [self.confirmBtn setTitle:[NSString stringWithFormat:@"确认支付(￥%@)",self.lastPrice] forState:UIControlStateNormal];
             [weakSelf.tableView reloadData];
         };
         [self.navigationController pushViewController:useCouponVC animated:YES];
@@ -289,33 +251,36 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     }
 }
 
-#pragma mark - EvaluateCellDelegate
-/**
- *  评分后回调
- */
--(void)evaluateCell:(EvaluateCell *)cell evaluateScore:(NSInteger)score
-{
-    self.score = score;
-    NSLog(@"%ld",(long)self.score);
-}
-
-/**
- *  评价内容发生变化后回调
- */
--(void)evaluateCell:(EvaluateCell *)cell didEvaluateContentChange:(NSString *)newContent
-{
-    self.evaluateContent = newContent;
-    NSLog(@"%@",self.evaluateContent);
-}
 
 #pragma mark - 网络相关方法
+/**
+ *  获取余额相关信息包括使用记录
+ */
+-(void)loadBalanceData
+{
+    NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"client" : @"ios",
+                             @"curpage":@"1",
+                             @"page":@"50"};
+    [CommonRemoteHelper RemoteWithUrl:URL_get_member_blance parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"未获取到余额数据" view:self.view];
+        }else{
+            BalanceModel *balanceMD = [BalanceModel objectWithKeyValues:dict[@"datas"]];
+            self.balance = balanceMD.available_rc_balance;
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请示失败" view:self.view];
+    }];
+}
+
+
 /**
  *  确认支付按钮被点击时调用
  */
 -(void)payNow:(UIButton *)sender
 {
-    if (self.evaluateContent.length == 0)
-        return [NoticeHelper AlertShow:@"请输入评论内容" view:nil];
     //如果选择了优惠券 需要先锁定优惠券
     if (self.couponsModel)
         [self editVoucher];
@@ -330,7 +295,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 {
     NSDictionary *dict =  @{ @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client" : @"ios",
-                             @"wid":self.orderModel.wid,
+                             @"wid":self.wid,
                              @"voucher_id":self.couponsModel.voucher_id};
     [CommonRemoteHelper RemoteWithUrl:URL_edit_voucher parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
@@ -357,15 +322,23 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     {
         case PaymentTypeAlipay:
         {
-            [self payWithAliPayWitTradeNO:self.orderModel.wcode
-                              productName:self.orderModel.tname
+            [self payWithAliPayWitTradeNO:self.wcode
+                              productName:self.productName
                                    amount:self.lastPrice
-                       productDescription:self.orderModel.icontent];
+                       productDescription:self.content];
         }
             break;
         case PaymentTypeBalance:
         {
-            [self payResultHandel];
+            __weak typeof(self) weakSelf = self;
+            UIWindow *wd = [UIApplication sharedApplication].keyWindow;
+            SMSVerificationView *verificationView = [SMSVerificationView showSMSVerificationViewToView:wd];
+            verificationView.phoneNum = @"13738069567";
+            verificationView.tapConfirmBtnCallBack = ^(NSString *safeNum){
+                weakSelf.numberOfVerification = safeNum;
+                [weakSelf payResultHandel];
+            };
+            
         }
             break;
         case PaymentTypeCoupons:
@@ -430,11 +403,17 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 -(void)payResultHandel
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                             @"client" : @"ios",
-                             @"wid" : self.orderModel.wid,
-                             @"voucher_id":self.couponsModel ? self.couponsModel.voucher_id : @"",
-                             @"pay_type" : [NSString stringWithFormat:@"%ld",(long)self.payType]};
+
+    NSMutableDictionary *params = [@{
+                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"client" : @"ios",
+                                     @"wid" : self.wid,
+                                     @"pay_type" : [NSString stringWithFormat:@"%ld",(long)self.payType]
+                                     }mutableCopy];
+    
+    [params setValue:self.couponsModel ? self.couponsModel.voucher_id : nil forKey:@"voucher_id"];
+    [params setValue:self.payType == PaymentTypeBalance?self.numberOfVerification:nil forKey:@"code"];
+    
     [CommonRemoteHelper RemoteWithUrl:URL_pay_workinfo_by_type
                            parameters:params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -447,7 +426,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                      else
                                      {
-                                         [self submitEvaluate];
+                                         [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                    
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
@@ -455,33 +435,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                  }];
 }
 
-/**
- *  提交评论
- */
--(void)submitEvaluate
+-(void)back
 {
-    NSDictionary *dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                            @"client" : @"ios",
-                            @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                            @"wid":self.orderModel.wid,
-                            @"cont":self.evaluateContent,
-                            @"grade":@(self.score)
-                            };
-    [CommonRemoteHelper RemoteWithUrl:URL_Save_dis_cont parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] == 0) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"结算成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }else{
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"评论提交失败" view:self.view];
-    }];
+    [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
 }
-
-
 
 #pragma mark - 工具方法
 /**
@@ -501,42 +458,5 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     }
 }
 
-//
-//#pragma mark - 键盘处理
-//-(void)keyboardWillAppear:(NSNotification *)notification
-//{
-//    NSDictionary *keyboardInfo = notification.userInfo;
-//    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-//    CGFloat keyboardY = MTScreenH - keyboardFrame.size.height;
-//    NSInteger animationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-//    NSTimeInterval seconds = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-//    
-//    CGFloat bottomViewMaxY = CGRectGetMaxY(self.tableView.tableFooterView.frame);
-//    
-//    NSLog(@"%f   %f",keyboardY,bottomViewMaxY);
-//    
-//    if (bottomViewMaxY > keyboardY) {
-//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, bottomViewMaxY - keyboardY, 0);
-//        [UIView animateWithDuration:seconds delay:0 options:animationCurve animations:^{
-//            self.tableView.contentOffset = CGPointMake(0, bottomViewMaxY - keyboardY);
-//        } completion:^(BOOL finished) {
-//            
-//        }];
-//    }
-//}
-//
-//-(void)keyboardWillHide:(NSNotification *)notification
-//{
-//    NSDictionary *keyboardInfo = notification.userInfo;
-//    NSInteger animationCurve = [keyboardInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
-//    NSTimeInterval seconds = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] floatValue];
-//    
-//    [UIView animateWithDuration:seconds delay:0 options:animationCurve animations:^{
-//        self.tableView.contentOffset = CGPointMake(0, 0);
-//    } completion:^(BOOL finished) {
-//        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-//    }];
-//}
-
-
 @end
+

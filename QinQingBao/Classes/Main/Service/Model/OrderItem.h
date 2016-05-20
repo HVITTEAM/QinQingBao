@@ -12,5 +12,6 @@
 @property (nonatomic, retain) NSString *wid;
 @property (nonatomic, retain) NSString *wcode;
 @property (nonatomic, retain) NSString *wprice;
+@property (nonatomic, retain) NSString *store_id;
 
 @end

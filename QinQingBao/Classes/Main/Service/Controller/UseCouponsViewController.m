@@ -30,11 +30,6 @@
 @implementation UseCouponsViewController
 
 
-- (void)viewDidCurrentView
-{
-    NSLog(@"加载为当前视图 = %@",self.title);
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,11 +38,8 @@
     
     [self initTableSkin];
     
-    if (self.ordermodel) {
-        [self getDataProviderForServices];
-    }else{
-        [self getDataProvider];
-    }
+    [self getDataProvider];
+    
 }
 
 -(void)initNavgation
@@ -82,10 +74,10 @@
                                                                    @"voucher_state" : @"1",
                                                                    @"page" : @1000,
                                                                    @"curpage" : @1,
-                                                                   @"voucher_store_id" : @14,
+                                                                   @"voucher_store_id" : self.store_id?:@14,
                                                                    @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                    @"client" : @"ios",
-                                                                   @"price" : self.ordermodel ?  self.ordermodel.wprice: @""}
+                                                                   @"price" : self.totalPrice ?: @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -111,48 +103,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
                                  }];
-}
-
-//client 	Y 		登录设备 ['ios', 'android', 'wechat','wap']
-//key 	Y 		登录密钥, 登录接口获取
-//member_id 	Y 		会员id
-//mem_price 	Y 		会员价
-//store_id 	Y 		店铺id
--(void)getDataProviderForServices
-{
-    NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                             @"client" : @"ios",
-                             @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                             @"mem_price":self.ordermodel.wprice,
-                             @"store_id":self.ordermodel.store_id};
-    
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_use_voucher parameters: params
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         if ([codeNum integerValue] == 17001)
-                                             [self.tableView initWithPlaceString:@"暂无数据!"];
-                                         else
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                     }
-                                     else
-                                     {
-                                         dataProvider = [CouponsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         if (dataProvider.count == 0)
-                                             [self.tableView initWithPlaceString:@"暂无数据!"];
-                                         [self.tableView reloadData];
-                                     }
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                 }];
-    
 }
 
 #pragma mark - Table view data source

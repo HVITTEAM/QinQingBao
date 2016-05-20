@@ -258,7 +258,15 @@
 -(void)pay:(UIButton *)sender
 {
     PaymentViewController *payVC = [[PaymentViewController alloc] init];
-    payVC.orderModel = self.orderInfor;
+    
+    payVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.orderInfor.item_url];
+    payVC.content = self.orderInfor.icontent;
+    payVC.wprice = self.orderInfor.wprice;
+    payVC.wid = self.orderInfor.wid;
+    payVC.wcode = self.orderInfor.wcode;
+    payVC.productName = self.orderInfor.tname;
+    payVC.viewControllerOfback = self.navigationController.viewControllers[1];
+
     [self.navigationController pushViewController:payVC animated:YES];
 }
 

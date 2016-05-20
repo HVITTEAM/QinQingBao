@@ -15,6 +15,9 @@
 #import "OrderDetailCancelViewController.h"
 #import "PaymentViewController.h"
 
+#import "EvaluationViewController.h"
+#import "OrderRefundViewController.h"
+
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
     NSMutableArray *dataProvider;
@@ -272,10 +275,21 @@
 //        orderPayVC.orderInfor = dataProvider[indexPath.section];
 //        [self.nav pushViewController:orderPayVC animated:YES];
         
-        PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+//        PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+//        OrderModel *model = dataProvider[indexPath.section];
+//        paymentVC.orderModel = model;
+//        [self.nav pushViewController:paymentVC animated:YES];
+        
+//        EvaluationViewController *evaluationVC = [[EvaluationViewController alloc] init];
+//        OrderModel *model = dataProvider[indexPath.section];
+//        evaluationVC.orderModel = model;
+//        [self.nav pushViewController:evaluationVC animated:YES];
+        
+        OrderRefundViewController *refundVC = [[OrderRefundViewController alloc] init];
         OrderModel *model = dataProvider[indexPath.section];
-        paymentVC.orderModel = model;
-        [self.nav pushViewController:paymentVC animated:YES];
+        refundVC.orderModel = model;
+        [self.nav pushViewController:refundVC animated:YES];
+        
 
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"])

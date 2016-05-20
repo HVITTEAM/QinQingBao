@@ -93,7 +93,7 @@
     cell.cellButtonTapCallBack = ^(UIButton *tapedBtn){
         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
         OrderModel *model = weakSelf.dataProvider[indexPath.section];
-        paymentVC.orderModel = model;
+//        paymentVC.orderModel = model;
         [weakSelf.nav pushViewController:paymentVC animated:YES];
     };
     

@@ -14,6 +14,7 @@
 #import "OrderItem.h"
 #import "CustominfoViewController.h"
 #import "OrderResultViewController.h"
+#import "PaymentViewController.h"
 
 @interface ShopOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -255,9 +256,22 @@
                                      OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
                                      if (item.wcode.length != 0)
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"下单成功!" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                         [self.navigationController popViewControllerAnimated:YES];
+
+                                         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+                                         
+                                         paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
+                                         paymentVC.content = self.dataItem.iname;
+                                         paymentVC.wprice = item.wprice;
+                                         paymentVC.wid = item.wid;
+                                         paymentVC.wcode = item.wcode;
+                                         paymentVC.store_id = item.store_id;
+                                         paymentVC.productName = self.dataItem.iname;
+                                         
+                                         
+                                         NSUInteger count = self.navigationController.viewControllers.count;
+                                         paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
+                                         [self.navigationController pushViewController:paymentVC animated:YES];
+                                         
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

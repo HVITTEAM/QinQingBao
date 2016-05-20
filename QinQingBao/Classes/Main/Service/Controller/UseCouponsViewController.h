@@ -18,15 +18,13 @@
 
 @property (nonatomic, copy) void (^selectedClick)(CouponsModel *item);
 
-@property (nonatomic, assign) UINavigationController *nav;
-- (void)viewDidCurrentView;
 //订单总金额
 @property (nonatomic, retain) NSString *totalPrice;
 
 //当前选择的优惠券
 @property (nonatomic, retain) CouponsModel *selectedModel;
 
-@property(strong,nonatomic)OrderModel *ordermodel;             //选中的服务模型，当选择的为服务时才需要传
+@property(strong,nonatomic)NSString *store_id;     //店铺id,服务时需要传
 
 
 @end
