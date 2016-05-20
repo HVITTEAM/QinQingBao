@@ -50,6 +50,10 @@
     self.deleteBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
     self.deleteBtn.layer.cornerRadius = 8;
     self.deleteBtn.layer.borderWidth = 1;
+    
+    self.payButton.layer.borderColor = HMColor(200, 200, 200).CGColor;
+    self.payButton.layer.cornerRadius = 8;
+    self.payButton.layer.borderWidth = 1;
 }
 
 -(void)setItem:(OrderModel *)item
@@ -66,7 +70,6 @@
         priceStr = @"面议";
     }
     self.servicePriceLab.text = priceStr;
-    
     NSDate *tempDate = [self.formatterIn dateFromString:item.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
     self.serviceTimeLab.text = serviceTimeStr;
@@ -79,37 +82,82 @@
     if (payStatus == 0)
     {
         str = @"待付款";
-        [self.deleteBtn setTitle:@"去支付" forState:UIControlStateNormal];
+        self.payButton.hidden = NO;
+        [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+        [self.payButton setTitle:@"去支付" forState:UIControlStateNormal];
     }
-    else if (status >= 0 && status <= 9)
+    else
     {
-        str = @"待服务";
-        [self.deleteBtn setTitle:@"申请退款" forState:UIControlStateNormal];
-    }
-    else if (status >= 30 && status <= 39)
-    {
-        str = @"待评价";
-        [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
-    }
-    else if (status >= 50 && status <= 69)
-    {
-        str = @"取消/售后";
-        [self.deleteBtn setTitle:@"去结算" forState:UIControlStateNormal];
-    }
-    else if (status >= 120 && status <= 129)
-    {
-        str = @"退款中";
-    }
-    else if (status >= 130 && status <= 139)
-    {
-        if (status == 132)
-            str = @"退款失败";
-        if (status == 132)
-            str = @"退款成功";
+        self.payButton.hidden = YES;
+        if (status >= 0 && status <= 9)
+        {
+            str = @"等待接单";
+            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+        }
+        else if (status >= 10 && status <= 19)
+        {
+            str = @"已接单";
+            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
+        }
+        else if (status >= 30 && status <= 39)
+        {
+            str = @"服务结束";
+            [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+        }
+        else if ((status >= 40 && status <= 49 ) && self.item.wgrade)
+        {
+            str = @"已评价";
+            [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
+        }
+        else if (status >= 50 && status <= 59)
+        {
+            str = @"已取消";
+            self.deleteBtn.hidden = YES;
+        }
+        else if (status >= 60 && status <= 69)
+        {
+            str = @"已拒单";
+            self.deleteBtn.hidden = YES;
+        }
+        else if (status >= 80 && status <= 99)
+        {
+            str = @"完成";
+            self.deleteBtn.hidden = YES;
+        }
+        else if (status >= 100 && status <= 109)
+        {
+            str = @"投诉中";
+            if (status == 109)
+                [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
+            else
+                self.deleteBtn.hidden = YES;
+        }
+        else if (status >= 120 && status <= 129)
+        {
+            str = @"退款中";
+            self.deleteBtn.hidden = YES;
+        }
+        else if (status >= 130 && status <= 139)
+        {
+            if (status == 132)
+                str = @"退款失败";
+            if (status == 135)
+                str = @"退款成功";
+            self.deleteBtn.hidden = YES;
+        }
+        else
+        {
+            [self.deleteBtn setTitle:@"未知状态" forState:UIControlStateNormal];
+            str = @"未知状态";
+        }
     }
     return str;
 }
 - (IBAction)deleteBtnClickHandler:(id)sender
+{
+    self.deleteClick(sender);
+}
+- (IBAction)payClick:(id)sender
 {
     self.deleteClick(sender);
 }
