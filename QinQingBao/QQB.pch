@@ -592,7 +592,11 @@
 /***工单 - 支付*/
 #define URL_pay_workinfo_by_type [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=workinfo&op=pay_workinfo_by_type",URL_Local]
 
+/***工单 - 交易验证码*/
 #define URL_getsafenum [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=getsafenum",URL_Local]
+
+/***服务 - 买家订单退款申请*/
+#define URL_work_add_refund_all [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=work_add_refund_all",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
