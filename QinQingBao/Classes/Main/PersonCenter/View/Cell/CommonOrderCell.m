@@ -66,9 +66,9 @@
     self.companyLab.text = item.orgname;
     
     NSString *priceStr = item.wprice;
-    if ([priceStr isEqualToString:@"0"]|| [priceStr isEqualToString:@"0.00"]) {
-        priceStr = @"面议";
-    }
+//    if ([priceStr isEqualToString:@"0"]|| [priceStr isEqualToString:@"0.00"]) {
+//        priceStr = @"面议";
+//    }
     self.servicePriceLab.text = priceStr;
     NSDate *tempDate = [self.formatterIn dateFromString:item.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];

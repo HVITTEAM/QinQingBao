@@ -320,7 +320,6 @@
 -(void)loadRefundReasons
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-//    [params setValue:self.orderInfo.order_state forKey:@"state_value"];
     
     [CommonRemoteHelper RemoteWithUrl:URL_Reason_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
@@ -358,7 +357,7 @@
         }else {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
-
+        [HUD removeFromSuperview];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求发送失败,请检查网络是否正常" view:self.view];

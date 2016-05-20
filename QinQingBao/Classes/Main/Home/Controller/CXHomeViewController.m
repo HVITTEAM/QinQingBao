@@ -166,7 +166,7 @@
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateNormal];
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+//    [self.navigationItem setRightBarButtonItem:rightButton];
 }
 
 #pragma mark   初始化地图定位功能
