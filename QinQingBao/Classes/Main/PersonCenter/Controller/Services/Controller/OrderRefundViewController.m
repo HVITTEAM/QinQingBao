@@ -192,6 +192,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    if (self.reasonsArray.count == 0) {
+        return;
+    }
     //如果是退款理由
     self.selectedReasonMode = self.reasonsArray[row];
     self.refundReasonField.text = self.selectedReasonMode.reason_info;
