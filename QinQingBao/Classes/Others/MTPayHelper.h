@@ -20,5 +20,6 @@
  *  @param success       成功回调block
  *  @param failure       失败回调block
  */
-+(void)payWithAliPayWitTradeNO:(NSString *)tradeNO productName:(NSString *)productName amount:(NSString *)amount productDescription:(NSString *)productDescription  success:(void (^)(NSDictionary *dict,NSString *signedString))success failure:(void (^)(NSDictionary *dict))failure;
++(void)payWithAliPayWitTradeNO:(NSString *)tradeNO productName:(NSString *)productName amount:(NSString *)amount productDescription:(NSString *)productDescription notifyURL:(NSString *)notifyURL success:(void (^)(NSDictionary *dict,NSString *signedString))success failure:(void (^)(NSDictionary *dict))failure;
+
 @end

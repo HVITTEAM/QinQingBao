@@ -249,7 +249,7 @@ typedef NS_ENUM(NSInteger, PayType) {
                         amount:(NSString *)productPrice
             productDescription:(NSString *)productDesc
 {
-    [MTPayHelper payWithAliPayWitTradeNO:tradeNo productName:productName amount:productPrice productDescription:productDesc success:^(NSDictionary *dict, NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:tradeNo productName:productName amount:productPrice productDescription:productDesc notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict, NSString *signedString) {
         
         NSLog(@"支付成功");
         

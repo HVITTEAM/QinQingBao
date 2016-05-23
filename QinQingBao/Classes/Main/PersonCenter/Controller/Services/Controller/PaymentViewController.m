@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     self.tableView.tableFooterView = footView;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-
+    
     //设置默认选项
     self.payType = PaymentTypeAlipay;
     self.navigationItem.title = @"结算";
@@ -261,7 +261,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     NSDictionary *params = @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                              @"client" : @"ios",
                              @"curpage":@"1",
-                             @"page":@"50"};
+                             @"page":@"1"};
     [CommonRemoteHelper RemoteWithUrl:URL_get_member_blance parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"未获取到余额数据" view:self.view];
@@ -322,10 +322,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     {
         case PaymentTypeAlipay:
         {
-            [self payWithAliPayWitTradeNO:self.wcode
-                              productName:self.productName
-                                   amount:self.lastPrice
-                       productDescription:self.content];
+            [self payResultHandel];
         }
             break;
         case PaymentTypeBalance:
@@ -358,7 +355,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                         amount:(NSString *)productPrice
             productDescription:(NSString *)productDesc
 {
-    [MTPayHelper payWithAliPayWitTradeNO:tradeNo productName:productName amount:productPrice productDescription:productDesc success:^(NSDictionary *dict, NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:tradeNo productName:productName amount:productPrice productDescription:productDesc notifyURL:URL_AliPay_Service success:^(NSDictionary *dict, NSString *signedString) {
         
         NSLog(@"支付成功");
         
@@ -402,9 +399,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 -(void)payResultHandel
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    NSMutableDictionary *params = [@{
-                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+    
+    NSMutableDictionary *params = [@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"client" : @"ios",
                                      @"wid" : self.wid,
                                      @"pay_type" : [NSString stringWithFormat:@"%ld",(long)self.payType]
@@ -425,7 +421,16 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                      else
                                      {
-                                         [self back];
+                                         //流程更改 支付宝支付：先更改状态再支付
+                                         if (self.payType == PaymentTypeAlipay)
+                                         {
+                                             [self payWithAliPayWitTradeNO:self.wcode
+                                                               productName:self.productName
+                                                                    amount:self.lastPrice
+                                                        productDescription:self.content];
+                                         }
+                                         else
+                                             [self back];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];

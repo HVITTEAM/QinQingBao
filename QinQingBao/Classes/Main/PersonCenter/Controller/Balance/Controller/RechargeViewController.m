@@ -31,11 +31,6 @@
     self.navigationItem.title = @"充值";
     
     tradeNum = @"";
-    for (int i = 0; i < 15; i++)
-    {
-        NSInteger ran = (arc4random() % (10));
-        tradeNum = [NSString stringWithFormat:@"%@%ld",tradeNum,(long)ran];
-    }
 }
 
 # pragma  mark - 设置数据源
@@ -95,27 +90,23 @@
     [bottomBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [bottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     bottomBtn.backgroundColor = HMColor(47, 193, 181);
-    [bottomBtn addTarget:self action:@selector(bottomButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomBtn addTarget:self action:@selector(checkBlance:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:bottomBtn];
     
     self.tableView.tableFooterView = footerView;
 }
 
-
--(void)bottomButtonAction:(UIButton *)sender
+/**
+ *  调用支付宝支付
+ */
+-(void)payWithMoney:(NSString *)moneycount pdr_sn:(NSString *)pdr_sn
 {
-    if (money.rightText.text.length == 0)
-        return [NoticeHelper AlertShow:@"请输入充值金额" view:nil];
-    
-    [self.view endEditing:YES];
-    
-    [MTPayHelper payWithAliPayWitTradeNO:tradeNum productName:@"账户充值" amount:money.rightText.text productDescription:@"寸欣健康账户充值" success:^(NSDictionary *dict, NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:pdr_sn productName:@"账户充值" amount:moneycount productDescription:@"寸欣健康账户充值"
+                                 notifyURL:URL_AliPay_Blance success:^(NSDictionary *dict, NSString *signedString) {
         
         NSLog(@"支付成功");
-        
         NSString *out_trade_no;
         NSString *sign;
-        
         NSString *html = [dict objectForKey:@"result"];
         NSArray *resultStringArray =[html componentsSeparatedByString:NSLocalizedString(@"&", nil)];
         for (NSString *str in resultStringArray)
@@ -135,12 +126,11 @@
                 {
                     NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
-                    
-                    [self chcekBlance];
+                    //支付成功
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
             }
         }
-        [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSDictionary *dict) {
         NSLog(@"支付失败");
         //用户中途取消
@@ -154,12 +144,15 @@
 /**
  *  验证充值成功
  */
--(void)chcekBlance
+-(void)checkBlance:(UIButton *)sender
 {
+    if (money.rightText.text.length == 0)
+        return [NoticeHelper AlertShow:@"请输入充值金额" view:nil];
+    [self.view endEditing:YES];
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_add_member_blance parameters: @{@"money" :money.rightText.text,
                                                                           @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                          @"way" : @1,
                                                                           @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
@@ -170,14 +163,12 @@
                                      }
                                      else
                                      {
-                                         [NoticeHelper AlertShow:@"充值成功！" view:nil];
-                                         //验证成功
-                                         [self.navigationController popViewControllerAnimated:YES];
+                                         NSDictionary *data = [dict objectForKey:@"datas"];
+                                         [self payWithMoney:[data objectForKey:@"money"] pdr_sn:[data objectForKey:@"pdr_sn"]];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                     [self.view endEditing:YES];
                                      [HUD removeFromSuperview];
                                  }];
     

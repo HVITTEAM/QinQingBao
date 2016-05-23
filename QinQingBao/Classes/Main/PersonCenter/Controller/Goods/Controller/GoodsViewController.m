@@ -397,7 +397,7 @@
 //支付
 -(void)pay:(CommonGoodsModel*)item indexPath:(NSIndexPath *)indexPath
 {
-    [MTPayHelper payWithAliPayWitTradeNO:item.pay_sn productName:@"百货" amount:item.pay_amount productDescription:@"海予孝心商城" success:^(NSDictionary *dict,NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:item.pay_sn productName:@"百货" amount:item.pay_amount productDescription:@"海予孝心商城" notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict,NSString *signedString) {
         NSLog(@"支付成功");
         NSString *out_trade_no;
         NSString *sign;
@@ -426,7 +426,8 @@
         }
         CommonOrderModel *orderModel = item.order_list[0];
         orderModel.order_state = @"20";
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationRight];    } failure:^(NSDictionary *dict) {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationRight];
+    } failure:^(NSDictionary *dict) {
             NSLog(@"支付失败");
             //用户中途取消
             if ([[dict objectForKey:@"resultStatus"] isEqualToString:@"6001"])

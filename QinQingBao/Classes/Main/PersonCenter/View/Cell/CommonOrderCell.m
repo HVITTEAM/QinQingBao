@@ -66,98 +66,273 @@
     self.companyLab.text = item.orgname;
     
     NSString *priceStr = item.wprice;
-//    if ([priceStr isEqualToString:@"0"]|| [priceStr isEqualToString:@"0.00"]) {
-//        priceStr = @"面议";
-//    }
+    //    if ([priceStr isEqualToString:@"0"]|| [priceStr isEqualToString:@"0.00"]) {
+    //        priceStr = @"面议";
+    //    }
     self.servicePriceLab.text = priceStr;
     NSDate *tempDate = [self.formatterIn dateFromString:item.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
     self.serviceTimeLab.text = serviceTimeStr;
-    
 }
 
 -(NSString *)getStatusByStatus:(int)status payStatus:(int)payStatus
 {
     NSString *str;
-    if (payStatus == 0 && (status >= 7 && status <= 50))
+    NSLog(@"paystatus---%d,status----%d",payStatus,status);
+    if (payStatus == 0)//未付款
     {
-        str = @"待付款";
-        self.payButton.hidden = NO;
-        self.deleteBtn.hidden = NO;
-        [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
-        [self.payButton setTitle:@"去支付" forState:UIControlStateNormal];
+        switch (status)
+        {
+            case 2:
+            {
+                str = @"提交订单";
+                self.payButton.hidden = NO;
+                self.deleteBtn.hidden = NO;
+                [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+                [self.payButton setTitle:@"去支付" forState:UIControlStateNormal];
+            }
+                break;
+            case 5:
+            {
+                str = @"提交订单";
+                self.payButton.hidden = NO;
+                self.deleteBtn.hidden = NO;
+                [self.deleteBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+                [self.payButton setTitle:@"去支付" forState:UIControlStateNormal];
+            }
+                break;
+            case 55:
+            {
+                str = @"已取消";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+            }
+                break;
+            default:
+            {
+                self.payButton.hidden = YES;
+                self.deleteBtn.hidden = YES;
+                str = @"";
+            }
+                break;
+        }
     }
-    else
+    else//已付款
     {
         self.payButton.hidden = YES;
-        if (status >= 0 && status <= 9)
+        switch (status)
         {
-            str = @"等待接单";
-            self.payButton.hidden = NO;
-            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
-            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
-        }
-        else if (status >= 10 && status <= 19)
-        {
-            str = @"已接单";
-            self.payButton.hidden = NO;
-            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
-            [self.deleteBtn setTitle:@"联系商家" forState:UIControlStateNormal];
-        }
-        else if (status >= 30 && status <= 39)
-        {
-            str = @"服务结束";
-            self.payButton.hidden = NO;
-            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
-            [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
-        }
-        else if ((status >= 40 && status <= 49 ) && self.item.wgrade)
-        {
-            str = @"已评价";
-            self.payButton.hidden = NO;
-            [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
-            [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
-        }
-        else if (status >= 50 && status <= 59)
-        {
-            str = @"已取消";
-            self.deleteBtn.hidden = YES;
-        }
-        else if (status >= 60 && status <= 69)
-        {
-            str = @"已拒单";
-            self.deleteBtn.hidden = YES;
-        }
-        else if (status >= 80 && status <= 99)
-        {
-            str = @"完成";
-            self.deleteBtn.hidden = YES;
-        }
-        else if (status >= 100 && status <= 109)
-        {
-            str = @"投诉中";
-            if (status == 109)
-                [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
-            else
+            case 5:
+            {
+                str = @"提交订单";
+                self.payButton.hidden = YES;
+                self.deleteBtn.hidden = NO;
+                [self.deleteBtn setTitle:@"申请退款" forState:UIControlStateNormal];
+            }
+                break;
+            case 8:
+            {
+                str = @"已分派";
+                self.payButton.hidden = NO;
+                self.deleteBtn.hidden = NO;
+                [self.payButton setTitle:@"申请退款" forState:UIControlStateNormal];
+                [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+            }
+                break;
+            case 12:
+            {
+                str = @"";
+                self.deleteBtn.hidden = NO;
+                self.payButton.hidden = YES;
+                [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+            }
+                break;
+            case 15:
+            {
+                str = @"服务开始";
+                self.deleteBtn.hidden = NO;
+                self.payButton.hidden = YES;
+                [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+            }
+                break;
+            case 22:
+            {
+                str = @"";
                 self.deleteBtn.hidden = YES;
-        }
-        else if (status >= 120 && status <= 129)
-        {
-            str = @"退款中";
-            self.deleteBtn.hidden = YES;
-        }
-        else if (status >= 130 && status <= 139)
-        {
-            if (status == 132)
+                self.payButton.hidden = YES;
+            }
+                break;
+            case 25:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+            }
+                break;
+            case 32:
+            {
+                str = @"服务结束";
+                self.deleteBtn.hidden = NO;
+                self.payButton.hidden = YES;
+                [self.deleteBtn setTitle:@"评价" forState:UIControlStateNormal];
+            }
+                break;
+            case 42:
+            {
+                if (self.item.wgrade)
+                {
+                    str = @"已评价";
+                    self.deleteBtn.hidden = NO;
+                    self.payButton.hidden = YES;
+                    [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
+                }
+                else
+                {
+                    str = @"";
+                    self.deleteBtn.hidden = YES;
+                    self.payButton.hidden = YES;
+                }
+            }
+                break;
+            case 45:
+            {
+                if (self.item.wgrade)
+                {
+                    str = @"已评价";
+                    self.deleteBtn.hidden = NO;
+                    self.payButton.hidden = YES;
+                    [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
+                }
+                else
+                {
+                    str = @"";
+                    self.deleteBtn.hidden = YES;
+                    self.payButton.hidden = YES;
+                }
+            }
+                break;
+            case 52:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+            }
+                break;
+            case 55:
+            {
+                str = @"已取消";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+            }
+                break;
+            case 62:
+            {
+                str = @"已拒单";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 82:
+            {
+                str = @"完成";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 85:
+            {
+                str = @"完成";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 102:
+            {
+                str = @"完成";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 109:
+            {
+                str = @"投诉中";
+                self.deleteBtn.hidden = NO;
+                self.payButton.hidden = YES;
+                [self.deleteBtn setTitle:@"投诉" forState:UIControlStateNormal];
+            }
+                break;
+            case 112:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 114:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 115:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 122:
+            {
+                str = @"退款中";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 125:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 128:
+            {
+                str = @"";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+                
+            }
+                break;
+            case 132:
+            {
                 str = @"退款失败";
-            if (status == 135)
+                self.deleteBtn.hidden = NO;
+                self.payButton.hidden = YES;
+                [self.deleteBtn setTitle:@"申请退款" forState:UIControlStateNormal];
+            }
+                break;
+            case 135:
+            {
                 str = @"退款成功";
-            self.deleteBtn.hidden = YES;
-        }
-        else
-        {
-            [self.deleteBtn setTitle:@"未知状态" forState:UIControlStateNormal];
-            str = @"未知状态";
+            }
+                break;
+            default:
+            {
+                str = @"未知状态";
+                self.deleteBtn.hidden = YES;
+                self.payButton.hidden = YES;
+            }
+                break;
         }
     }
     return str;

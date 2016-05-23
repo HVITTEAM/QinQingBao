@@ -1101,7 +1101,6 @@
 		01F85ABD1C575A2F00E463F4 /* GoodsTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F85ABB1C575A2F00E463F4 /* GoodsTypeCell.xib */; };
 		01F85AC41C57692800E463F4 /* mallcar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85AC21C57692800E463F4 /* mallcar@2x.png */; };
 		01F85AC51C57692800E463F4 /* malltype@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85AC31C57692800E463F4 /* malltype@2x.png */; };
-		01F85AC71C576D0300E463F4 /* topbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85AC61C576D0300E463F4 /* topbg.png */; };
 		01F85AC91C57718000E463F4 /* superseller.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85AC81C57718000E463F4 /* superseller.png */; };
 		01F87F7C1C585AF900419FA2 /* ConfModelTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F87F7B1C585AF900419FA2 /* ConfModelTotal.m */; };
 		01F87F801C585B7C00419FA2 /* ConfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F87F7F1C585B7C00419FA2 /* ConfModel.m */; };
@@ -8279,12 +8278,12 @@
 		01F227CD1B7B3E1400ED4AFB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "董徐维";
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = P5A3MJD6BG;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -8785,7 +8784,6 @@
 				01E68FF11BCCA68900A17543 /* button_bule.png in Resources */,
 				01ECD9F61C8EB31F0018160F /* EaseMob.bundle in Resources */,
 				01ECDA1B1C8EB31F0018160F /* VoiceSearchFeedback011.png in Resources */,
-				01F85AC71C576D0300E463F4 /* topbg.png in Resources */,
 				01ECDA301C8EB31F0018160F /* VoiceSearchFeedback018.png in Resources */,
 				01ECDAB41C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAA61C8EB31F0018160F /* chatBar_more_camera.png in Resources */,

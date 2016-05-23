@@ -58,7 +58,6 @@
  */
 - (void)initView
 {
-    
     self.navigationItem.title = @"我的余额";
     
     self.headView.layer.cornerRadius = self.headView.height/2;

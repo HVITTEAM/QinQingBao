@@ -210,10 +210,14 @@
 
 //#define URL_Local @"http://ibama.hvit.com.cn"
 
+/***充值支付宝回调url*/
+#define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]
 
+/***商品支付宝回调url*/
+#define URL_AliPay_Goods [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local]
 
-/***支付宝回调url*/
-#define URL_AliPay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/work_alipay/call_back_url.php",URL_Local];
+/***服务支付宝回调url*/
+#define URL_AliPay_Service [NSString stringWithFormat:@"%@/shop/mobile/api/payment/work_alipay/call_back_url.php",URL_Local]
 
 /***商品url*/
 #define URL_Pay [NSString stringWithFormat:@"%@/shop/mobile/api/payment/tel_alipay/call_back_url.php",URL_Local];
