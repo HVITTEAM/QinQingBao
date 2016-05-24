@@ -381,7 +381,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 {
                     //NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
-                    [self payResultHandel];
+                    [self back];
                 }
             }
         }
