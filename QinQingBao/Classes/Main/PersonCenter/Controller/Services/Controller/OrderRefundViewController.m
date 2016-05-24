@@ -136,6 +136,28 @@
     self.currentView = nil;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    if (textField == self.sumField) {
+        NSString *legalStr = @"1234567890.";
+        NSCharacterSet *illegalCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:legalStr] invertedSet];
+        
+        NSArray * components = [string componentsSeparatedByCharactersInSet:illegalCharacterSet];
+        NSString *filtered  = [components componentsJoinedByString:@""];
+        BOOL result = [string isEqualToString:filtered];
+        
+        if (!result) {
+            [NoticeHelper AlertShow:@"请输入正确的金额" view:self.view];
+        }
+        
+        return result;
+    }
+    
+    return YES;
+
+}
+
 #pragma  mark UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
@@ -209,9 +231,26 @@
         [NoticeHelper AlertShow:@"请选择退款原因" view:self.view];
         return;
     }
+    
     if (self.sumField.text == nil || self.sumField.text.length == 0) {
         [NoticeHelper AlertShow:@"请输入退款金额" view:self.view];
         return;
+    }
+    
+    //判断输入金额是否正确
+    NSString *expression = @"^\\d+\\.?\\d{0,2}$";
+    
+    NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",expression];
+    BOOL result = [prediccate evaluateWithObject:self.sumField.text];
+    if (!result) {
+        [NoticeHelper AlertShow:@"请输入正确的金额" view:self.view];
+        return;
+    }else{
+        
+        if ([self.sumField.text floatValue] > [self.orderModel.wprice floatValue]) {
+            [NoticeHelper AlertShow:@"退款金额不能大于实付金额" view:self.view];
+            return;
+        }
     }
     
     if (self.explainTextView.text == nil || self.explainTextView.text.length == 0) {

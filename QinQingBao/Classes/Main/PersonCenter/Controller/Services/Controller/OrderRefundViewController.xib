@@ -55,7 +55,7 @@
                                             <rect key="frame" x="20" y="126" width="280" height="40"/>
                                             <color key="textColor" red="0.89878048779999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         </textField>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_badge" translatesAutoresizingMaskIntoConstraints="NO" id="eM8-ed-yMa">
                                             <rect key="frame" x="12" y="103" width="8" height="8"/>
