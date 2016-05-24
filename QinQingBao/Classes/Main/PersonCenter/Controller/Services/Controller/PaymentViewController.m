@@ -381,16 +381,15 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 {
                     //NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
-                    [self payResultHandel];
+                    //支付成功
+                    [self back];
                 }
             }
         }
-        
     } failure:^(NSDictionary *dict) {
         [NoticeHelper AlertShow:@"支付失败，请稍后再试" view:self.view];
     }];
 }
-
 
 /**
  *  支付成功之后,更改状态

@@ -327,6 +327,9 @@
 /***获得用户订单信息url*/
 #define URL_Workinfo_data [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_data",URL_Local]
 
+/***获得用户订单时间轴url*/
+#define URL_Workinfo_status_list [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=workinfo&op=get_workinfo_status_list",URL_Local]
+
 /***修改工单url*/
 #define URL_Ck_workinfo_status [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=ck_workinfo_status",URL_Local]
 

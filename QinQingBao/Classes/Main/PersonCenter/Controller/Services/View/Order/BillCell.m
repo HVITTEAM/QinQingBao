@@ -77,7 +77,7 @@
         imageView.tag = i;
         NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,workPicModel.url,workPicModel.pic_info[i]];
         
-        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"ic_logo"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
         if (i < 5) {

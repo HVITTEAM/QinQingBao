@@ -234,18 +234,9 @@
                                          
                                          infoVO = [UserInforModel objectWithKeyValues:di];
                                          
-                                         if ([di count] != 0)
-                                         {
-                                             if ([di objectForKey:@"member_avatar"] != [NSNull null])
-                                             {
-                                                 NSString *url = (NSString*)[di objectForKey:@"member_avatar"];
-                                                 iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,url]];
-                                             }
-                                             else
-                                                 iconUrl = nil;
-                                             username = infoVO.member_truename;
-                                             account = infoVO.member_mobile;
-                                         }
+                                         iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,infoVO.member_avatar]];
+                                         username = infoVO.member_truename;
+                                         account = infoVO.member_mobile;
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

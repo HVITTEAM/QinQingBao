@@ -58,9 +58,11 @@
     
     [self initTableView];
     
+    [self loadOrderTimeline];
+    
     //未支付，需要显示底部的支付视图
     if ([self needsPay]) {
-//         [self initBottomView];
+         [self initBottomView];
     }
     
 //    [self loadWorkPic];
@@ -246,7 +248,7 @@
         [imageUrlArray addObject:imageURL];
     }
     
-    SWYPhotoBrowserViewController *browser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:imageUrlArray currentIndex:index placeholderImageNmae:@"ic_logo"];
+    SWYPhotoBrowserViewController *browser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:imageUrlArray currentIndex:index placeholderImageNmae:@"placeholderImage"];
     [self presentViewController:browser animated:YES completion:nil];
 }
 
@@ -325,6 +327,31 @@
 //    }];
 //
 //}
+
+/**
+ *  获取订单的时间轴
+ */
+-(void)loadOrderTimeline
+{
+    NSDictionary *dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                            @"client" : @"ios",
+                            @"wid":self.orderInfor.wid,
+                            @"member_id": [SharedAppUtil defaultCommonUtil].userVO.member_id
+                            };
+    [CommonRemoteHelper RemoteWithUrl:URL_Workinfo_status_list parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        NSLog(@"OrderDetail%@",responseObject);
+        NSInteger codeNUm = [dict[@"code"] integerValue];
+        if (codeNUm == 0) {
+            OrderDetailModel *tempOrderDetail = [OrderDetailModel objectWithKeyValues:dict[@"datas"]];
+            [self.tableView reloadData];
+        }else if (codeNUm != 0 && codeNUm != 14001){
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+    }];
+
+}
 
 #pragma mark - 工具方法
 -(BOOL)needsPay

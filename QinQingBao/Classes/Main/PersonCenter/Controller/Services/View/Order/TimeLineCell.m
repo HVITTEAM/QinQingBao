@@ -28,6 +28,17 @@
     [super setSelected:selected animated:animated];
 }
 
+/**
+ *1.提交订单 wctime
+ 2.支付成功 paytime
+ 3.服务开始 wjdtime
+ 4.服务完成 wjstime
+ 5.提出申请退款时间work_add_time
+ 6.卖家处理时间work_seller_time
+ 7.管理员处理时间work_admin_time
+ *
+ *  @param item <#item description#>
+ */
 -(void)setItem:(OrderModel *)item
 {
     NSMutableArray *timeArr = [[NSMutableArray alloc] init];

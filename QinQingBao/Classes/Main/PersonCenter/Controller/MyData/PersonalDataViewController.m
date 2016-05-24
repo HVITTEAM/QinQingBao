@@ -387,7 +387,6 @@
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
-                                         //                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      }
                                      else
                                      {
@@ -395,7 +394,7 @@
                                          if ([di count] != 0)
                                          {
                                              infoVO = [UserInforModel objectWithKeyValues:di];
-                                             iconUrl = [di objectForKey:@"member_avatar"];
+                                             iconUrl = infoVO.member_avatar;
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
@@ -493,8 +492,16 @@
     NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
     
     [self.datePicker setMaximumDate:maxDate];
-    
     [self.datePicker setMinimumDate:minDate];
+    
+    if (infoVO && infoVO.member_birthday)
+    {
+        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+        [inputFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate* inputDate = [inputFormatter dateFromString:infoVO.member_birthday];
+        [self.datePicker setDate:inputDate animated:YES];
+    }
     
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
@@ -640,7 +647,7 @@
 
 -(void)dealloc
 {
-    NSLog(@"sdfsdfsdfsdfsdfsdfsdfsdfasdfsdf");
+    NSLog(@"销毁");
 }
 
 @end

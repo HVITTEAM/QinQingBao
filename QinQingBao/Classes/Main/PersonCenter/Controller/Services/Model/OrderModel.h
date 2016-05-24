@@ -35,7 +35,7 @@
 //"wcontent": null,        工单内容
 //"wmsg": null,            回访记录
 //"wfrom": "",             请求来源
-//"wname": "小明",         客户姓名
+//"wname": "小明",          客户姓名
 //"wtelnum": "1231654987", 客户联系方式
 //"wsltime": null,         受理时间
 //"wlevel": "2",           紧急程度 1正常 0 紧急

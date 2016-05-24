@@ -185,7 +185,7 @@
         NSString *strUrl = imgUrlArray[indexPath.row - 6];
         UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:strUrl];
         if (!image)
-            image = [UIImage imageNamed:@"ic_logo"];
+            image = [UIImage imageNamed:@"placeholderImage"];
         CGFloat scale = image.size.width / image.size.height;
         CGFloat cellHeight = MTScreenW / scale;
         return cellHeight;
