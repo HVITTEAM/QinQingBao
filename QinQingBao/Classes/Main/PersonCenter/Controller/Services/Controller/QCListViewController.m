@@ -145,7 +145,7 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,9",
+                  @"status" : @"0,50",
                   @"pay_staus":@"0"
                   };
     }
