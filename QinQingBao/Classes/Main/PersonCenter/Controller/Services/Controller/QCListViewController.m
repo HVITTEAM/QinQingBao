@@ -133,7 +133,8 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,9"
+                  @"status" : @"0,29",
+                  @"pay_staus":@"1"
                   };
     }
     else if ([self.title isEqualToString:@"待付款"])
@@ -143,7 +144,8 @@
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
-                  @"get_type" : @"0",
+                  @"get_type" : @"2",
+                  @"status" : @"0,9",
                   @"pay_staus":@"0"
                   };
     }
@@ -153,9 +155,11 @@
                   @"client" : @"ios",
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"50,59",
                   @"page" : @"100",
-                  @"get_type" : @"2"};
+                  @"get_type" : @"2",
+                  @"status" : @"0,49",
+                  @"pay_staus":@"2"
+                  };
     }
     else if ([self.title isEqualToString:@"待评价"])
     {
@@ -163,9 +167,10 @@
                   @"client" : @"ios",
                   @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"status" : @"30,39",
                   @"page" : @"100",
-                  @"get_type" : @"2"};
+                  @"get_type" : @"2",
+                  @"status" : @"30,39"
+                  };
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -258,7 +263,7 @@
  */
 -(void)deleteOrderClickHandler:(NSIndexPath *)indexPath btn:(UIButton*)btn
 {
-    if ([btn.titleLabel.text isEqualToString:@"取消订单"])
+    if ([btn.titleLabel.text isEqualToString:@"取消"])
     {
         CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
         cancelView.orderItem = dataProvider[indexPath.section];
