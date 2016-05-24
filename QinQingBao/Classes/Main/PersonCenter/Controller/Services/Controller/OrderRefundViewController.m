@@ -32,7 +32,6 @@
 
 @property (strong,nonatomic)RefundReasonMode *selectedReasonMode;    //选中的退款原因
 
-
 @end
 
 @implementation OrderRefundViewController
@@ -219,7 +218,6 @@
         [NoticeHelper AlertShow:@"请输退款说明" view:self.view];
         return;
     }
-    
     [self refundAll];
 
 }
@@ -340,14 +338,12 @@
     }];
 }
 
-
 /**
  *  全部退款
  */
 -(void)refundAll
 {
-    NSMutableDictionary *params = [@{
-                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+    NSMutableDictionary *params = [@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"client" : @"ios",
                                      @"wid" : self.orderModel.wid,
                                      @"buyer_message":self.explainTextView.text
@@ -364,7 +360,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求发送失败,请检查网络是否正常" view:self.view];
-
     }];
 }
 

@@ -13,12 +13,16 @@
 #import "TimeLineCell.h"
 #import "ReasonCell.h"
 
+#import "TimeLineModel.h"
+
 #define kNavBarHeight 64
 #define kSellerTelDefault @"96345"
 
 @interface OrderDetailCancelViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(strong,nonatomic)UITableView *tableView;
+
+@property(strong,nonatomic)TimeLineModel *timeModel;
 
 @property(strong,nonatomic)NSDateFormatter *formatterOut;
 
@@ -40,6 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self loadOrderTimeline];
     
     self.navigationItem.title = @"订单详情";
     
@@ -141,7 +147,7 @@
         TimeLineCell *timeLineCell = [tableView dequeueReusableCellWithIdentifier:@"MTTimeLineCell"];
         if (timeLineCell == nil)
             timeLineCell =  [TimeLineCell timeLineCell];
-        timeLineCell.item = self.orderInfor;
+        timeLineCell.item = self.timeModel;
         
         return timeLineCell;
         
@@ -243,6 +249,33 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
+}
+
+/**
+ *  获取订单的时间轴
+ */
+-(void)loadOrderTimeline
+{
+    NSDictionary *dict =  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                            @"client" : @"ios",
+                            @"wid":self.orderInfor.wid,
+                            @"member_id": [SharedAppUtil defaultCommonUtil].userVO.member_id
+                            };
+    [CommonRemoteHelper RemoteWithUrl:URL_Workinfo_status_list parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        NSInteger codeNUm = [dict[@"code"] integerValue];
+        if (codeNUm == 0)
+        {
+            self.timeModel = [TimeLineModel objectWithKeyValues:dict[@"datas"]];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        else
+        {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"服务器访问失败");
+    }];
+    
 }
 
 @end

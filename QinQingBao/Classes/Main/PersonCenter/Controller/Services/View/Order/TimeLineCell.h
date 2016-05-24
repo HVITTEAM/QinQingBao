@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OrderModel.h"
+#import "TimeLineModel.h"
 
 @interface TimeLineCell : UITableViewCell
 
 + (TimeLineCell*) timeLineCell;
 
-@property (nonatomic, retain) OrderModel *item;
+@property (nonatomic, retain) TimeLineModel *item;
 @end

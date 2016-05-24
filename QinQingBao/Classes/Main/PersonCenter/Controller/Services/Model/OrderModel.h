@@ -116,6 +116,7 @@
 @property (nonatomic, retain) NSString *worgpjtime;
 @property (nonatomic, retain) NSString *pay_time;
 
+@property (nonatomic, retain) NSString *work_add_time;
 
 @property (nonatomic, retain) NSString *store_id;
 

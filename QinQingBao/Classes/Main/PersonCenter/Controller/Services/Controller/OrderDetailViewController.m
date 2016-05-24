@@ -22,7 +22,7 @@
 #import "ServiceHeadCell.h"
 
 #import "PaymentViewController.h"
-
+#import "TimeLineModel.h"
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -32,6 +32,8 @@
 @property(strong,nonatomic)UITableView *tableView;
 
 @property(strong,nonatomic)WorkPicModel *workPicInfo;
+
+@property(strong,nonatomic)TimeLineModel *timeModel;
 
 @property(strong,nonatomic)NSDateFormatter *formatterOut;
 
@@ -61,11 +63,9 @@
     [self loadOrderTimeline];
     
     //未支付，需要显示底部的支付视图
-    if ([self needsPay]) {
-         [self initBottomView];
-    }
-    
-//    [self loadWorkPic];
+//    if ([self needsPay]) {
+//        [self initBottomView];
+//    }
 }
 
 #pragma mark - setUI方法
@@ -78,7 +78,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     NSInteger tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
-
+    
     if (![self needsPay]) {
         tableViewHeight = MTScreenH - 64;
     }
@@ -169,7 +169,7 @@
         TimeLineCell *timeLineCell = [tableView dequeueReusableCellWithIdentifier:@"MTTimeLineCell"];
         if (timeLineCell == nil)
             timeLineCell =  [TimeLineCell timeLineCell];
-        timeLineCell.item = self.orderInfor;
+        timeLineCell.item = self.timeModel;
         
         return timeLineCell;
         
@@ -268,65 +268,11 @@
     payVC.wcode = self.orderInfor.wcode;
     payVC.productName = self.orderInfor.tname;
     payVC.viewControllerOfback = self.navigationController.viewControllers[1];
-
+    
     [self.navigationController pushViewController:payVC animated:YES];
 }
 
 #pragma mark - 网络相关方法
-/**
- *  获取工单凭证
- */
--(void)loadWorkPic
-{
-    NSDictionary *dict =  @{
-                            @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                            @"client" : @"ios",
-                            @"wid":self.orderInfor.wid
-                            };
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_work_pic parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        NSLog(@"WorkPic%@",responseObject);
-        
-        NSInteger codeNUm = [dict[@"code"] integerValue];
-        
-        if (codeNUm == 0) {
-            WorkPicModel *tempWorkPicMode = [WorkPicModel objectWithKeyValues:dict[@"datas"]];
-            self.workPicInfo = tempWorkPicMode;
-            [self.tableView reloadData];
-        }else if (codeNUm != 0 && codeNUm != 14001){
-            //[NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-    
-}
-
-//-(void)loadOrderDetail
-//{
-//    NSDictionary *dict =  @{
-//                            @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-//                            @"client" : @"ios",
-//                            @"wid":self.orderInfor.wid
-//                            };
-//    [CommonRemoteHelper RemoteWithUrl:URL_Workinfo_data parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-//        NSLog(@"OrderDetail%@",responseObject);
-//
-//        NSInteger codeNUm = [dict[@"code"] integerValue];
-//
-//        if (codeNUm == 0) {
-//            OrderDetailModel *tempOrderDetail = [OrderDetailModel objectWithKeyValues:dict[@"datas"]];
-//            //self.orderDetailInfo = tempOrderDetail;
-//            [self.tableView reloadData];
-//        }else if (codeNUm != 0 && codeNUm != 14001){
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//    }];
-//
-//}
 
 /**
  *  获取订单的时间轴
@@ -339,18 +285,20 @@
                             @"member_id": [SharedAppUtil defaultCommonUtil].userVO.member_id
                             };
     [CommonRemoteHelper RemoteWithUrl:URL_Workinfo_status_list parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        NSLog(@"OrderDetail%@",responseObject);
         NSInteger codeNUm = [dict[@"code"] integerValue];
-        if (codeNUm == 0) {
-            OrderDetailModel *tempOrderDetail = [OrderDetailModel objectWithKeyValues:dict[@"datas"]];
-            [self.tableView reloadData];
-        }else if (codeNUm != 0 && codeNUm != 14001){
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        if (codeNUm == 0)
+        {
+            self.timeModel = [TimeLineModel objectWithKeyValues:dict[@"datas"]];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        else
+        {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+        NSLog(@"服务器访问失败");
     }];
-
+    
 }
 
 #pragma mark - 工具方法

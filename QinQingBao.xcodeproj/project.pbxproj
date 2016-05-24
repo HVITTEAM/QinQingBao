@@ -241,6 +241,7 @@
 		016F24751C4DDF3800FF1BF5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24741C4DDF3800FF1BF5 /* CFNetwork.framework */; };
 		017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017179131BEC45140070A503 /* OrderServiceDetailCell.m */; };
 		017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017179141BEC45140070A503 /* OrderServiceDetailCell.xib */; };
+		017DB0C01CF44661002F97BA /* TimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB0BF1CF44661002F97BA /* TimeLineModel.m */; };
 		017F0D121C58B83F00643C15 /* HotGoodsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017F0D111C58B83F00643C15 /* HotGoodsCell.xib */; };
 		017F0D181C58C62900643C15 /* HistoryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017F0D161C58C62900643C15 /* HistoryViewCell.m */; };
 		017F0D191C58C62900643C15 /* HistoryViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017F0D171C58C62900643C15 /* HistoryViewCell.xib */; };
@@ -1713,6 +1714,8 @@
 		017179121BEC45140070A503 /* OrderServiceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServiceDetailCell.h; sourceTree = "<group>"; };
 		017179131BEC45140070A503 /* OrderServiceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServiceDetailCell.m; sourceTree = "<group>"; };
 		017179141BEC45140070A503 /* OrderServiceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderServiceDetailCell.xib; sourceTree = "<group>"; };
+		017DB0BE1CF44661002F97BA /* TimeLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeLineModel.h; sourceTree = "<group>"; };
+		017DB0BF1CF44661002F97BA /* TimeLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeLineModel.m; sourceTree = "<group>"; };
 		017F0D111C58B83F00643C15 /* HotGoodsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HotGoodsCell.xib; sourceTree = "<group>"; };
 		017F0D151C58C62900643C15 /* HistoryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewCell.h; sourceTree = "<group>"; };
 		017F0D161C58C62900643C15 /* HistoryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewCell.m; sourceTree = "<group>"; };
@@ -4135,6 +4138,8 @@
 				01601D6E1CE08ED200B3712E /* OrderModel.m */,
 				01601D6F1CE08ED200B3712E /* OrderTotals.h */,
 				01601D701CE08ED200B3712E /* OrderTotals.m */,
+				017DB0BE1CF44661002F97BA /* TimeLineModel.h */,
+				017DB0BF1CF44661002F97BA /* TimeLineModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8283,7 +8288,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = P5A3MJD6BG;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -9475,6 +9480,7 @@
 				01ECDB1C1C8EB31F0018160F /* EaseBubbleView.m in Sources */,
 				01E9A7411C74613500000805 /* DiseaseinfoController.m in Sources */,
 				01E690851BCCF6AA00A17543 /* TSPopoverTouchView.m in Sources */,
+				017DB0C01CF44661002F97BA /* TimeLineModel.m in Sources */,
 				01E6D4F81BE1F49B00824F51 /* SVProgressHUD.m in Sources */,
 				01ECDB151C8EB31F0018160F /* EaseMessageTimeCell.m in Sources */,
 				01ECDB011C8EB31F0018160F /* NSObject+EaseMob.m in Sources */,
