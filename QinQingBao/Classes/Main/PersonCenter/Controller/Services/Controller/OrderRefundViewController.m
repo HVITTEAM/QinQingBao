@@ -391,7 +391,13 @@
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_work_add_refund_all parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] == 0) {
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            if (self.viewControllerOfback) {
+                [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+            }else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
         }else {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }

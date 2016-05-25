@@ -22,6 +22,9 @@
 #import "ServiceHeadCell.h"
 
 #import "PaymentViewController.h"
+#import "OrderRefundViewController.h"
+#import "CancelOrderController.h"
+#import "EvaluationViewController.h"
 #import "TimeLineModel.h"
 
 #define kBottomViewHeight 50
@@ -38,6 +41,10 @@
 @property(strong,nonatomic)NSDateFormatter *formatterOut;
 
 @property(strong,nonatomic)NSDateFormatter *formatterIn;
+
+@property(strong,nonatomic)UIButton *bottomLeftBtn;
+
+@property(strong,nonatomic)UIButton *bottomrigthBtn;
 
 @end
 
@@ -61,11 +68,6 @@
     [self initTableView];
     
     [self loadOrderTimeline];
-    
-    //未支付，需要显示底部的支付视图
-//    if ([self needsPay]) {
-//        [self initBottomView];
-//    }
 }
 
 #pragma mark - setUI方法
@@ -77,10 +79,11 @@
     [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSInteger tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
+     NSInteger tableViewHeight = MTScreenH - 64;
     
-    if (![self needsPay]) {
-        tableViewHeight = MTScreenH - 64;
+    if ([self initBottomView]) {
+        
+        tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
     }
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, tableViewHeight) style:UITableViewStyleGrouped];
@@ -92,24 +95,36 @@
 /**
  *  创建底部工具视图
  */
--(void)initBottomView
+-(BOOL)initBottomView
 {
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,MTScreenH - kNavBarHeight - kBottomViewHeight, MTScreenW, kBottomViewHeight)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     
-    UIButton *payBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 80, 7, 60, 35)];
-    [payBtn setTitle:@"支付" forState: UIControlStateNormal];
-    [payBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [payBtn addTarget:self action:@selector(pay:) forControlEvents:UIControlEventTouchUpInside];
-    payBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
-    payBtn.layer.borderWidth = 1.0f;
-    payBtn.layer.cornerRadius = 8.0f;
-    [bottomView addSubview:payBtn];
+    self.bottomLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 165, 7, 70, 35)];
+    [self.bottomLeftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.bottomLeftBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.bottomLeftBtn addTarget:self action:@selector(tapBottomBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.bottomLeftBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
+    self.bottomLeftBtn.layer.borderWidth = 1.0f;
+    self.bottomLeftBtn.layer.cornerRadius = 8.0f;
+    [bottomView addSubview:self.bottomLeftBtn];
+    
+    self.bottomrigthBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 80, 7, 70, 35)];
+    [self.bottomrigthBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.bottomrigthBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.bottomrigthBtn addTarget:self action:@selector(tapBottomBtn:) forControlEvents:UIControlEventTouchUpInside];
+    self.bottomrigthBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
+    self.bottomrigthBtn.layer.borderWidth = 1.0f;
+    self.bottomrigthBtn.layer.cornerRadius = 8.0f;
+    [bottomView addSubview:self.bottomrigthBtn];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5f)];
     line.backgroundColor = HMColor(225, 225, 225);
     [bottomView addSubview:line];
+    
+    BOOL isHide =[self getStatusByStatus:[self.orderInfor.status intValue] payStatus:[self.orderInfor.pay_staus intValue]];
+    return isHide;
 }
 
 #pragma mark - setter、getter方法
@@ -257,19 +272,59 @@
 /**
  *  支付按钮点击调用
  */
--(void)pay:(UIButton *)sender
+-(void)tapBottomBtn:(UIButton *)sender
 {
-    PaymentViewController *payVC = [[PaymentViewController alloc] init];
+    __weak typeof(self) weakSelf = self;
     
-    payVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.orderInfor.item_url];
-    payVC.content = self.orderInfor.icontent;
-    payVC.wprice = self.orderInfor.wprice;
-    payVC.wid = self.orderInfor.wid;
-    payVC.wcode = self.orderInfor.wcode;
-    payVC.productName = self.orderInfor.tname;
-    payVC.viewControllerOfback = self.navigationController.viewControllers[1];
+    NSInteger counts = self.navigationController.viewControllers.count;
+    UIViewController *backToVC = self.navigationController.viewControllers[counts - 2];
     
-    [self.navigationController pushViewController:payVC animated:YES];
+    if ([sender.titleLabel.text isEqualToString:@"取消"])
+    {
+        CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
+        cancelView.orderItem = self.orderInfor;
+        cancelView.doneHandlerClick = ^(void){
+//            [self viewDidCurrentView];
+            [weakSelf.navigationController popToViewController:backToVC animated:YES];
+        };
+        [self.navigationController pushViewController:cancelView animated:YES];
+    }
+    else if ([sender.titleLabel.text isEqualToString:@"去支付"])
+    {
+        PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+        OrderModel *model = self.orderInfor;
+        paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,model.item_url];
+        paymentVC.content = model.icontent;
+        paymentVC.wprice = model.wprice;
+        paymentVC.wid = model.wid;
+        paymentVC.wcode = model.wcode;
+        paymentVC.store_id = model.store_id;
+        paymentVC.productName = model.icontent;
+        paymentVC.viewControllerOfback = backToVC;
+        [self.navigationController pushViewController:paymentVC animated:YES];
+    }
+    else if ([sender.titleLabel.text isEqualToString:@"联系商家"] || [sender.titleLabel.text isEqualToString:@"投诉"])
+    {
+        NSURL *url = [NSURL URLWithString:@"telprompt://4001512626"];
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else if ([sender.titleLabel.text isEqualToString:@"申请退款"])
+    {
+        OrderRefundViewController *refundVC = [[OrderRefundViewController alloc] init];
+        OrderModel *model = self.orderInfor;
+        refundVC.orderModel = model;
+        refundVC.viewControllerOfback = backToVC;
+        [self.navigationController pushViewController:refundVC animated:YES];
+    }
+    else if ([sender.titleLabel.text isEqualToString:@"评价"])
+    {
+        EvaluationViewController *evaluationVC = [[EvaluationViewController alloc] init];
+        OrderModel *model = self.orderInfor;
+        evaluationVC.orderModel = model;
+        evaluationVC.viewControllerOfback = backToVC;
+        [self.navigationController pushViewController:evaluationVC animated:YES];
+    }
+
 }
 
 #pragma mark - 网络相关方法
@@ -302,20 +357,124 @@
 }
 
 #pragma mark - 工具方法
--(BOOL)needsPay
+/**
+ *  根据工单状态设置要显示的操作按钮
+ */
+-(BOOL)getStatusByStatus:(int)status payStatus:(int)payStatus
 {
-    NSInteger orderStatus = [self.orderInfor.status integerValue];
+    NSString *str;
     
-    //未支付，需要显示底部的支付视图
-    if ( orderStatus >= 30 && orderStatus <= 39) {
-        return YES;
-    }
+    //默认按钮都隐藏
+    [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:nil rightBtnHide:YES];
     
-    if ( orderStatus >= 40 && orderStatus <= 49 && [self.orderInfor.pay_staus integerValue] == 0 ) {
-        return YES;
+    if (status >= 0 && status <= 9) {
+        
+        if (payStatus == 0){
+            str = @"未支付";
+            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
+            return YES;
+        }else if (payStatus == 1) {
+            str = @"已支付";
+            if (status == 8) {
+                str = @"已分派";
+            }
+            if (!self.orderInfor.voucher_id) {
+                [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"申请退款" rightBtnHide:NO];
+                return YES;
+            }
+        }else if (payStatus == 2 || payStatus == 3) {
+            str = @"退款中";
+        }else if (payStatus == 4) {
+            str = @"退款成功";
+        }else if (payStatus == 5) {
+            str = @"退款失败";
+        }
+        
+    }else if (status >= 10 && status <= 19){
+        
+        if (payStatus == 0){
+            str = @"未支付";
+            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
+            return YES;
+        }else if (payStatus == 1) {
+            str = @"已分派";
+            if (status == 15) {
+                str = @"服务开始";
+            }
+            
+            if (!self.orderInfor.voucher_id) {
+                [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"申请退款" rightBtnHide:NO];
+                return YES;
+            }
+        }else if (payStatus == 2 || payStatus == 3) {
+            str = @"退款中";
+        }else if (payStatus == 4) {
+            str = @"退款成功";
+        }else if (payStatus == 5) {
+            str = @"退款失败";
+        }
+        
+    }else if (status >= 20 && status <= 29){
+        //无
+    }else if (status >= 30 && status <= 49){
+        if (payStatus == 0){
+            str = @"未支付";
+            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
+            return YES;
+        }else if (payStatus == 1) {
+            str = @"服务完成";
+            if (status == 32) {
+                str = @"服务完成";
+                [self setleftBtnTitle:@"申请退款" leftBtnHide:NO rightBtnTitle:@"评价" rightBtnHide:NO];
+                return YES;
+            }
+            
+            if (status == 42 || [self.orderInfor.wgrade floatValue] != 0 || self.orderInfor.dis_con!=nil) {
+                str = @"已评价";
+            }
+            
+            if (status == 45) {
+                str = @"服务完成";
+            }
+            
+        }else if (payStatus == 2 || payStatus == 3) {
+            str = @"退款中";
+        }else if (payStatus == 4) {
+            str = @"退款成功";
+        }else if (payStatus == 5) {
+            str = @"退款失败";
+        }
+        
+    }else if (status >= 50 && status <= 59){
+        str = @"已取消";
+    }else if (status >= 60 && status <= 69){
+        str = @"已拒单";
+    }else if (status >= 70 && status <= 79){
+        //无
+    }else if (status >= 80 && status <= 99){
+        str = @"完成";
+    }else if (status >= 100 && status <= 119){
+        str = @"投诉中";
+    }else if (status >= 110 && status <= 129){
+        str = @"退货中";
     }
     
     return NO;
+}
+
+/**
+ *  设置底部工具条按钮状态
+ */
+-(void)setleftBtnTitle:(NSString *)leftTitle
+           leftBtnHide:(BOOL)isLeftHide
+          rightBtnTitle:(NSString *)rightTitle
+           rightBtnHide:(BOOL)isRightBtnHide
+{
+    self.bottomLeftBtn.hidden = isLeftHide;
+    [self.bottomLeftBtn setTitle:leftTitle forState:UIControlStateNormal];
+    
+    self.bottomrigthBtn.hidden = isRightBtnHide;
+    [self.bottomrigthBtn setTitle:rightTitle forState:UIControlStateNormal];
 }
 
 @end

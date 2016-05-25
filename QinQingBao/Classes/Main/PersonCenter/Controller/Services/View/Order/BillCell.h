@@ -4,7 +4,7 @@
 //
 //  Created by shi on 16/3/22.
 //  Copyright © 2016年 董徐维. All rights reserved.
-//
+//工单凭证cell
 
 #import <UIKit/UIKit.h>
 @class WorkPicModel;
