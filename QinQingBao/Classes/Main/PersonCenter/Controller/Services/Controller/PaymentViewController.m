@@ -281,37 +281,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
  */
 -(void)payNow:(UIButton *)sender
 {
-    //如果选择了优惠券 需要先锁定优惠券
-    if (self.couponsModel)
-        [self editVoucher];
-    else
         [self selectTypeToPay];
 }
-
-/**
- *  锁定优惠券
- */
--(void)editVoucher
-{
-    NSDictionary *dict =  @{ @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                             @"client" : @"ios",
-                             @"wid":self.wid,
-                             @"voucher_id":self.couponsModel.voucher_id};
-    [CommonRemoteHelper RemoteWithUrl:URL_edit_voucher parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] == 0) {
-            //优惠券锁定成功
-            [self selectTypeToPay];
-            
-        }else{
-            [NoticeHelper AlertShow:@"优惠券使用失败！" view:self.view];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"优惠券锁定失败" view:self.view];
-    }];
-}
-
 
 /**
  *  选择支付方式支付
@@ -420,6 +391,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                      else
                                      {
+                                         [NoticeHelper AlertShow:@"支付成功!" view:nil];
                                          //流程更改 支付宝支付：先更改状态再支付
                                          if (self.payType == PaymentTypeAlipay)
                                          {

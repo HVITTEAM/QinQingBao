@@ -122,7 +122,8 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,119"
+                  @"status" : @"0,119",
+                  @"pay_staus_type" :@"0"
                   };
     }
     else if ([self.title isEqualToString:@"待服务"])
@@ -134,7 +135,9 @@
                   @"page" : @"100",
                   @"get_type" : @"2",
                   @"status" : @"0,29",
-                  @"pay_staus":@"1"
+                  @"pay_staus":@"1",
+                  @"pay_staus_type" :@"0"
+
                   };
     }
     else if ([self.title isEqualToString:@"待付款"])
@@ -146,7 +149,9 @@
                   @"page" : @"100",
                   @"get_type" : @"2",
                   @"status" : @"0,50",
-                  @"pay_staus":@"0"
+                  @"pay_staus":@"0",
+                  @"pay_staus_type" :@"0"
+
                   };
     }
     else if ([self.title isEqualToString:@"待退款"])
@@ -158,7 +163,8 @@
                   @"page" : @"100",
                   @"get_type" : @"2",
                   @"status" : @"0,49",
-                  @"pay_staus":@"2"
+                  @"pay_staus":@"2,5",
+                  @"pay_staus_type" :@"2"
                   };
     }
     else if ([self.title isEqualToString:@"待评价"])
@@ -169,7 +175,9 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"30,39"
+                  @"status" : @"30,39",
+                  @"pay_staus":@"1",
+                  @"pay_staus_type" :@"0"
                   };
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_workinfo_bystatus parameters: dict

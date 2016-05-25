@@ -46,6 +46,10 @@
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 提交订单",item.wctime] atIndex:0];
     }
+    if (item.wqxtime && ![item.wqxtime isEqualToString:@"0000-00-00"])//提交订单
+    {
+        [timeArr insertObject:[NSString stringWithFormat:@"%@ 取消订单",item.wqxtime] atIndex:0];
+    }
     if (item.pay_time && ![item.pay_time isEqualToString:@"0000-00-00"])//支付成功
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 支付成功",item.pay_time] atIndex:0];
@@ -64,11 +68,11 @@
     }
     if (item.seller_message && ![item.seller_message isEqualToString:@"0000-00-00"])// 申请成功/失败
     {
-        if ([item.pay_staus floatValue] == 4) {
-            [timeArr insertObject:[NSString stringWithFormat:@"%@ 申请成功",item.seller_message] atIndex:0];
+        if ([item.pay_staus floatValue] == 4 && [item.work_seller_state floatValue] == 2) {
+            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款成功",item.seller_message] atIndex:0];
         }
         else if ([item.pay_staus floatValue] == 5) {
-            [timeArr insertObject:[NSString stringWithFormat:@"%@ 申请失败",item.seller_message] atIndex:0];
+            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款失败",item.seller_message] atIndex:0];
         }
     }
 
