@@ -14,6 +14,6 @@
 
 @property(strong,nonatomic)OrderModel *orderModel;      //选中的订单模型
 
-@property(weak,nonatomic)UIViewController *viewControllerOfback;
+@property (nonatomic, copy) void (^doneHandlerClick)();
 
 @end

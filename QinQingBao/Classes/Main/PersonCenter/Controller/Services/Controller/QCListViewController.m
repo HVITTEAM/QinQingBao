@@ -279,12 +279,15 @@
  */
 -(void)deleteOrderClickHandler:(NSIndexPath *)indexPath btn:(UIButton*)btn
 {
+    __weak typeof(self) weakSelf = self;
+    
     if ([btn.titleLabel.text isEqualToString:@"取消"])
     {
         CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
         cancelView.orderItem = dataProvider[indexPath.section];
         cancelView.doneHandlerClick = ^(void){
-            [self viewDidCurrentView];
+            [weakSelf viewDidCurrentView];
+            [weakSelf.nav popViewControllerAnimated:YES];
         };
         [self.nav pushViewController:cancelView animated:YES];
     }
@@ -299,6 +302,10 @@
         paymentVC.wcode = model.wcode;
         paymentVC.store_id = model.store_id;
         paymentVC.productName = model.icontent;
+        paymentVC.doneHandlerClick =^{
+            [weakSelf viewDidCurrentView];
+            [weakSelf.nav popViewControllerAnimated:YES];
+        };
         [self.nav pushViewController:paymentVC animated:YES];
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"] || [btn.titleLabel.text isEqualToString:@"投诉"])
@@ -311,6 +318,10 @@
         OrderRefundViewController *refundVC = [[OrderRefundViewController alloc] init];
         OrderModel *model = dataProvider[indexPath.section];
         refundVC.orderModel = model;
+        refundVC.doneHandlerClick = ^{
+            [weakSelf viewDidCurrentView];
+            [weakSelf.nav popViewControllerAnimated:YES];
+        };
         [self.nav pushViewController:refundVC animated:YES];
     }
     else if ([btn.titleLabel.text isEqualToString:@"评价"])
@@ -318,6 +329,11 @@
         EvaluationViewController *evaluationVC = [[EvaluationViewController alloc] init];
         OrderModel *model = dataProvider[indexPath.section];
         evaluationVC.orderModel = model;
+        evaluationVC.doneHandlerClick = ^{
+            [weakSelf viewDidCurrentView];
+            [weakSelf.nav popViewControllerAnimated:YES];
+        };
+
         [self.nav pushViewController:evaluationVC animated:YES];
     }
 }

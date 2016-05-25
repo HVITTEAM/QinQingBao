@@ -126,11 +126,11 @@
         if ([dict[@"code"] integerValue] == 0) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评价成功" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
-            if (self.viewControllerOfback) {
-                [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-            }else{
-                [self.navigationController popViewControllerAnimated:YES];
+            
+            if (self.doneHandlerClick) {
+                self.doneHandlerClick();
             }
+            
         }else{
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }

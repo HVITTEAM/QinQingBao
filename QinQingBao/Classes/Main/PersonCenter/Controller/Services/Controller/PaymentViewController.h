@@ -26,4 +26,6 @@
 
 @property(weak,nonatomic)UIViewController *viewControllerOfback;
 
+@property (nonatomic, copy) void (^doneHandlerClick)();
+
 @end

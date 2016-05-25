@@ -25,6 +25,7 @@
 #import "OrderRefundViewController.h"
 #import "CancelOrderController.h"
 #import "EvaluationViewController.h"
+#import "OrderTableViewController.h"
 #import "TimeLineModel.h"
 
 #define kBottomViewHeight 50
@@ -284,7 +285,7 @@
         CancelOrderController *cancelView  = [[CancelOrderController alloc]init];
         cancelView.orderItem = self.orderInfor;
         cancelView.doneHandlerClick = ^(void){
-//            [self viewDidCurrentView];
+            [(OrderTableViewController *)backToVC refleshData];
             [weakSelf.navigationController popToViewController:backToVC animated:YES];
         };
         [self.navigationController pushViewController:cancelView animated:YES];
@@ -301,6 +302,10 @@
         paymentVC.store_id = model.store_id;
         paymentVC.productName = model.icontent;
         paymentVC.viewControllerOfback = backToVC;
+        paymentVC.doneHandlerClick = ^{
+            [(OrderTableViewController *)backToVC refleshData];
+        };
+
         [self.navigationController pushViewController:paymentVC animated:YES];
     }
     else if ([sender.titleLabel.text isEqualToString:@"联系商家"] || [sender.titleLabel.text isEqualToString:@"投诉"])
@@ -313,7 +318,10 @@
         OrderRefundViewController *refundVC = [[OrderRefundViewController alloc] init];
         OrderModel *model = self.orderInfor;
         refundVC.orderModel = model;
-        refundVC.viewControllerOfback = backToVC;
+        refundVC.doneHandlerClick = ^{
+            [(OrderTableViewController *)backToVC refleshData];
+            [weakSelf.navigationController popToViewController:backToVC animated:YES];
+        };
         [self.navigationController pushViewController:refundVC animated:YES];
     }
     else if ([sender.titleLabel.text isEqualToString:@"评价"])
@@ -321,7 +329,10 @@
         EvaluationViewController *evaluationVC = [[EvaluationViewController alloc] init];
         OrderModel *model = self.orderInfor;
         evaluationVC.orderModel = model;
-        evaluationVC.viewControllerOfback = backToVC;
+        evaluationVC.doneHandlerClick = ^{
+            [(OrderTableViewController *)backToVC refleshData];
+            [weakSelf.navigationController popToViewController:backToVC animated:YES];
+        };
         [self.navigationController pushViewController:evaluationVC animated:YES];
     }
 

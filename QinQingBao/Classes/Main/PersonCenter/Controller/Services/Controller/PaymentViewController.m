@@ -352,6 +352,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                 {
                     //NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
+                    
+                    if (self.doneHandlerClick) {
+                        self.doneHandlerClick();
+                    }
                     //支付成功
                     [self showAlert];
                 }
@@ -401,7 +405,13 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                                         productDescription:self.content];
                                          }
                                          else
+                                         {
+                                             if (self.doneHandlerClick) {
+                                                 self.doneHandlerClick();
+                                             }
                                              [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                         }
+                                         
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];

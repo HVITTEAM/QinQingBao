@@ -52,7 +52,7 @@
                                          [NoticeHelper AlertShow:@"操作成功!" view:self.view];
                                          if(self.doneHandlerClick)
                                              self.doneHandlerClick();
-                                         [self.navigationController popViewControllerAnimated:YES];
+//                                         [self.navigationController popViewControllerAnimated:YES];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

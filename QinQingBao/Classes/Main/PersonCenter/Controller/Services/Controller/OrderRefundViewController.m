@@ -392,10 +392,8 @@
     [CommonRemoteHelper RemoteWithUrl:URL_work_add_refund_all parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] == 0) {
             
-            if (self.viewControllerOfback) {
-                [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-            }else{
-                [self.navigationController popViewControllerAnimated:YES];
+            if (self.doneHandlerClick) {
+                self.doneHandlerClick();
             }
             
         }else {
