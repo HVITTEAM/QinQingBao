@@ -12,6 +12,8 @@
 @interface OrderTableViewController ()<MTSwitchViewDelegate>
 {
     NSMutableArray *dataProvider;
+    
+    QCListViewController *selectedView;
 }
 
 @end
@@ -58,7 +60,6 @@
     [self.view addSubview:view];
 }
 
-
 #pragma mark - 滑动tab视图代理方法
 
 /**
@@ -88,6 +89,13 @@
         [self.view showNonedataTooltip];
     };
     [vc viewDidCurrentView];
+    
+    selectedView = (QCListViewController*)view;
+}
+
+-(void)refleshData
+{
+    [selectedView viewDidCurrentView];
 }
 
 /**

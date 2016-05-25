@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     PaymentTypeCoupons = 7
 };
 
-@interface PaymentViewController ()
+@interface PaymentViewController ()<UIAlertViewDelegate>
 
 @property(assign,nonatomic)PaymentType payType;           //付款类型
 
@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     [footView addSubview:self.confirmBtn];
     self.tableView.tableFooterView = footView;
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(showAlert)];
     
     //设置默认选项
     self.payType = PaymentTypeAlipay;
@@ -281,37 +281,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
  */
 -(void)payNow:(UIButton *)sender
 {
-    //如果选择了优惠券 需要先锁定优惠券
-    if (self.couponsModel)
-        [self editVoucher];
-    else
-        [self selectTypeToPay];
+    [self selectTypeToPay];
 }
-
-/**
- *  锁定优惠券
- */
--(void)editVoucher
-{
-    NSDictionary *dict =  @{ @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                             @"client" : @"ios",
-                             @"wid":self.wid,
-                             @"voucher_id":self.couponsModel.voucher_id};
-    [CommonRemoteHelper RemoteWithUrl:URL_edit_voucher parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] == 0) {
-            //优惠券锁定成功
-            [self selectTypeToPay];
-            
-        }else{
-            [NoticeHelper AlertShow:@"优惠券使用失败！" view:self.view];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"优惠券锁定失败" view:self.view];
-    }];
-}
-
 
 /**
  *  选择支付方式支付
@@ -382,7 +353,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                     //NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
                     //支付成功
-                    [self back];
+                    [self showAlert];
                 }
             }
         }
@@ -420,6 +391,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      }
                                      else
                                      {
+                                         [NoticeHelper AlertShow:@"支付成功!" view:nil];
                                          //流程更改 支付宝支付：先更改状态再支付
                                          if (self.payType == PaymentTypeAlipay)
                                          {
@@ -429,7 +401,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                                         productDescription:self.content];
                                          }
                                          else
-                                             [self back];
+                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
@@ -437,12 +409,25 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                  }];
 }
 
--(void)back
+/**
+ *  退出界面时做出判断
+ */
+-(void)showAlert
 {
     if (self.viewControllerOfback)
-        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否确定退出结算？退出后可在我的服务中继续支付" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: @"取消", nil];
+        [alertView show];
+    }else
         [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+    }
 }
 
 #pragma mark - 工具方法

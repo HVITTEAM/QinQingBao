@@ -113,7 +113,6 @@
             if (status == 15) {
                 str = @"服务开始";
             }
-            
             if (!self.item.voucher_id) {
                 [self setPayBtnTitle:nil payBtnHide:YES delBtnTitle:@"申请退款" delBtnHide:NO];
             }
@@ -135,7 +134,7 @@
             str = @"服务完成";
             if (status == 32) {
                 str = @"服务完成";
-                [self setPayBtnTitle:nil payBtnHide:YES delBtnTitle:@"评价" delBtnHide:NO];
+                [self setPayBtnTitle:@"申请退款" payBtnHide:NO delBtnTitle:@"评价" delBtnHide:NO];
             }
             
             if (status == 42 || [self.item.wgrade floatValue] != 0 || self.item.dis_con!=nil) {

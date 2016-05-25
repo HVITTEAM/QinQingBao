@@ -28,5 +28,10 @@
 @property (nonatomic, strong) QCListViewController *vc4;
 @property (nonatomic, strong) QCListViewController *vc5;
 
+/**
+ *  刷新控制器的数据
+ */
+-(void)refleshData;
+
 
 @end
