@@ -357,7 +357,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                         self.doneHandlerClick();
                     }
                     //支付成功
-                    [self showAlert];
+                    if (self.viewControllerOfback)
+                        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                    else
+                        [self.navigationController popViewControllerAnimated:YES];
                 }
             }
         }
@@ -420,7 +423,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 }
 
 /**
- *  退出界面时做出判断
+ *  手动退出界面时做出判断
  */
 -(void)showAlert
 {

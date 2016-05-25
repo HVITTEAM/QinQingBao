@@ -81,20 +81,18 @@
 -(void)setupUI
 {
     self.title = @"确认订单";
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
     
     CGFloat bottomViewHeight = 60;
-    CGFloat navHeight = 64;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - navHeight - bottomViewHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - bottomViewHeight) style:UITableViewStyleGrouped];
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - navHeight - bottomViewHeight, MTScreenW, bottomViewHeight)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - bottomViewHeight, MTScreenW, bottomViewHeight)];
     [self.view addSubview:bottomView];
     
     UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 20, 40)];
