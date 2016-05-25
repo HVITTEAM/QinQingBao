@@ -74,16 +74,15 @@
  */
 -(void)initTableView
 {
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSInteger tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
+    NSInteger tableViewHeight = MTScreenH - kBottomViewHeight;
     
-    if (![self needsPay]) {
-        tableViewHeight = MTScreenH - 64;
-    }
+//    if (![self needsPay]) {
+//        tableViewHeight = MTScreenH - 64;
+//    }
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, tableViewHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -121,7 +120,6 @@
     }
     return _formatterOut;
 }
-
 
 -(NSDateFormatter *)formatterIn
 {
@@ -214,7 +212,7 @@
     if (indexPath.section == 0) {
         return 85;
     }else if (indexPath.section == 1 && indexPath.row == 1){
-        return 240;
+        return 190;
     }else if (indexPath.section == 2 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
@@ -222,7 +220,6 @@
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
     }
-    
     return 40;
 }
 

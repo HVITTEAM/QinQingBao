@@ -58,10 +58,8 @@
  */
 -(void)initTableView
 {
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - kNavBarHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -200,7 +198,7 @@
     }else if (indexPath.section == 1) {
         return 55;
     }else if (indexPath.section == 2 && indexPath.row == 1){
-        return 240;
+        return 190;
     }else if (indexPath.section == 3 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;

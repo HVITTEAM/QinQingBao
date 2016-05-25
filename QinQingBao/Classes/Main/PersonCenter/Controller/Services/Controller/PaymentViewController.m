@@ -353,7 +353,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                     //NSLog(@"%@",[strArray objectAtIndex:1]);
                     sign = [strArray objectAtIndex:1];
                     //支付成功
-                    [self showAlert];
+                    if (self.viewControllerOfback)
+                        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                    else
+                        [self.navigationController popViewControllerAnimated:YES];
                 }
             }
         }
@@ -401,7 +404,12 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                                         productDescription:self.content];
                                          }
                                          else
-                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                         {
+                                             if (self.viewControllerOfback)
+                                                 [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                             else
+                                                 [self.navigationController popViewControllerAnimated:YES];
+                                         }
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
@@ -410,7 +418,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 }
 
 /**
- *  退出界面时做出判断
+ *  手动退出界面时做出判断
  */
 -(void)showAlert
 {
