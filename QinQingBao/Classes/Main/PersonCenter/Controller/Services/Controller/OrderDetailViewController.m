@@ -77,17 +77,13 @@
  */
 -(void)initTableView
 {
-    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.view.backgroundColor = [UIColor whiteColor];
+    NSInteger tableViewHeight = MTScreenH - kNavBarHeight;
     
-     NSInteger tableViewHeight = MTScreenH - 64;
+    if ([self initBottomView])
+        tableViewHeight = MTScreenH - kBottomViewHeight - kNavBarHeight;
     
-    if ([self initBottomView]) {
-        
-        tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
-    }
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, tableViewHeight) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarHeight, MTScreenW, tableViewHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -98,7 +94,7 @@
  */
 -(BOOL)initBottomView
 {
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,MTScreenH - kNavBarHeight - kBottomViewHeight, MTScreenW, kBottomViewHeight)];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,MTScreenH - kBottomViewHeight, MTScreenW, kBottomViewHeight)];
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     
