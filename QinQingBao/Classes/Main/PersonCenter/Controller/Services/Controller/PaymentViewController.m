@@ -412,7 +412,11 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                              if (self.doneHandlerClick) {
                                                  self.doneHandlerClick();
                                              }
-                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                             
+                                             if (self.viewControllerOfback)
+                                                 [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                             else
+                                                 [self.navigationController popViewControllerAnimated:YES];
                                          }
                                          
                                      }

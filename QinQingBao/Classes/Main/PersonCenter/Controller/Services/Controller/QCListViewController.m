@@ -304,7 +304,6 @@
         paymentVC.productName = model.icontent;
         paymentVC.doneHandlerClick =^{
             [weakSelf viewDidCurrentView];
-            [weakSelf.nav popViewControllerAnimated:YES];
         };
         [self.nav pushViewController:paymentVC animated:YES];
     }

@@ -77,6 +77,7 @@
  */
 -(void)initTableView
 {
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.view.backgroundColor = [UIColor whiteColor];
     
      NSInteger tableViewHeight = MTScreenH - 64;
@@ -86,7 +87,7 @@
         tableViewHeight = MTScreenH - 64 - kBottomViewHeight;
     }
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, tableViewHeight) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -123,8 +124,8 @@
     line.backgroundColor = HMColor(225, 225, 225);
     [bottomView addSubview:line];
     
-    BOOL isHide =[self getStatusByStatus:[self.orderInfor.status intValue] payStatus:[self.orderInfor.pay_staus intValue]];
-    return isHide;
+    BOOL isShow =[self getStatusByStatus:[self.orderInfor.status intValue] payStatus:[self.orderInfor.pay_staus intValue]];
+    return isShow;
 }
 
 #pragma mark - setter、getter方法
