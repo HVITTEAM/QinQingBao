@@ -46,20 +46,12 @@
     [super viewWillAppear:animated];
 }
 
-
 - (void)viewDidCurrentView
 {
     NSLog(@"加载为当前视图 = %@",self.title);
     currentPageIdx = 1;
     dataProvider = [[NSMutableArray alloc] init];
     [self dataRereshing];
-}
-
-
-/** 屏蔽tableView的样式 */
-- (id)init
-{
-    return [self initWithStyle:UITableViewStyleGrouped];
 }
 
 /**
@@ -71,8 +63,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionFooterHeight = 10;
     self.tableView.sectionHeaderHeight = 0;
-    self.tableView.contentInset = UIEdgeInsetsMake(-25, 0, -25, 0);
-    
 }
 
 -(NSDateFormatter *)formatterOut
@@ -106,6 +96,13 @@
         currentPageIdx ++ ;
         [self dataRereshing];
     }];
+    
+    //下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        currentPageIdx = 1;
+        [dataProvider removeAllObjects];
+        [self dataRereshing];
+    }];
 }
 
 #pragma mark 开始进入刷新状态
@@ -137,7 +134,6 @@
                   @"status" : @"0,29",
                   @"pay_staus":@"1",
                   @"pay_staus_type" :@"0"
-
                   };
     }
     else if ([self.title isEqualToString:@"待付款"])
@@ -200,10 +196,12 @@
                                      [dataProvider addObjectsFromArray:[result.datas copy]];
                                      [self.tableView reloadData];
                                      [self.tableView.footer endRefreshing];
+                                     [self.tableView.header endRefreshing];
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.footer endRefreshing];
+                                     [self.tableView.header endRefreshing];
                                      [HUD removeFromSuperview];
                                  }];
 }
@@ -223,6 +221,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -331,40 +339,5 @@
         [self dataRereshing];
     }
 }
-
-//- (void)callHandler:
-//{
-//    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"联系电话"
-//                                                             delegate:self
-//                                                    cancelButtonTitle:@"取消"
-//                                               destructiveButtonTitle:nil
-//                                                    otherButtonTitles:@"客服电话:96345",[NSString stringWithFormat:@"商家固话:%@",_itemInfo.orgtelnum],
-//                                  _itemInfo.orgphone ? [NSString stringWithFormat:@"商家手机:%@",_itemInfo.orgphone] : nil,nil];
-//    [actionSheet showInView:self];
-//
-//}
-//
-//
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    NSURL *url;
-//    switch (buttonIndex)
-//    {
-//        case 0:
-//            url = [NSURL URLWithString:@"telprompt://96345"];
-//            break;
-//        case 1:
-//            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgtelnum]];
-//            break;
-//        case 2:
-//            url = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",_itemInfo.orgphone]];
-//            break;
-//        default:
-//            break;
-//    }
-//    [[UIApplication sharedApplication] openURL:url];
-//
-//}
-
 
 @end

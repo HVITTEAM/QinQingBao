@@ -68,11 +68,11 @@
     }
     if (item.seller_message && ![item.seller_message isEqualToString:@"0000-00-00"])// 申请成功/失败
     {
-        if ([item.pay_staus floatValue] == 4 && [item.work_seller_state floatValue] == 2) {
-            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款成功",item.seller_message] atIndex:0];
+        if ([item.pay_staus floatValue] == 4 && [item.work_seller_state floatValue] == 2  && ![item.work_seller_time isEqualToString:@"0000-00-00"]) {
+            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款成功",item.work_seller_time] atIndex:0];
         }
-        else if ([item.pay_staus floatValue] == 5) {
-            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款失败",item.seller_message] atIndex:0];
+        else if ([item.pay_staus floatValue] == 5 && ![item.work_seller_time isEqualToString:@"0000-00-00"]) {
+            [timeArr insertObject:[NSString stringWithFormat:@"%@ 退款失败",item.work_seller_time] atIndex:0];
         }
     }
 

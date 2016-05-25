@@ -113,7 +113,6 @@
             if (status == 15) {
                 str = @"服务开始";
             }
-            
             if (!self.item.voucher_id) {
                 [self setPayBtnTitle:nil payBtnHide:YES delBtnTitle:@"申请退款" delBtnHide:NO];
             }

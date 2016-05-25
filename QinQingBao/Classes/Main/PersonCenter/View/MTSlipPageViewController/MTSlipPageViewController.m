@@ -118,7 +118,6 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         [self.rootScrollView addSubview:vc.view];
     }
     self.rootScrollView.contentSize = CGSizeMake(MTScreenW * [self.viewArr count], 0);
-    
     //滚动到选中的视图
     [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW, 0) animated:NO];
 }
