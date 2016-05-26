@@ -28,7 +28,6 @@
 +(void)payWithAliPayWitTradeNO:(NSString *)tradeNO productName:(NSString *)productName amount:(NSString *)amount productDescription:(NSString *)productDescription notifyURL:(NSString *)notifyURL success:(void (^)(NSDictionary *dict,NSString *signedString))success failure:(void (^)(NSDictionary *dict))failure
 {
     NSLog(@"确认支付");
-    
     /*
      *商户的唯一的parnter和seller。
      *签约后，支付宝会为每个商户分配一个唯一的 parnter 和 seller。

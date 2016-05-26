@@ -293,7 +293,10 @@ typedef NS_ENUM(NSInteger, PaymentType) {
     {
         case PaymentTypeAlipay:
         {
-            [self payResultHandel];
+            [self payWithAliPayWitTradeNO:self.wcode
+                              productName:self.productName
+                                   amount:self.lastPrice
+                       productDescription:self.content];
         }
             break;
         case PaymentTypeBalance:
@@ -399,17 +402,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      else
                                      {
                                          [NoticeHelper AlertShow:@"支付成功!" view:nil];
-                                         //流程更改 支付宝支付：先更改状态再支付
-                                         if (self.payType == PaymentTypeAlipay)
-                                         {
-                                             [self payWithAliPayWitTradeNO:self.wcode
-                                                               productName:self.productName
-                                                                    amount:self.lastPrice
-                                                        productDescription:self.content];
-                                         }
-                                         else
-                                         {
-                                             if (self.doneHandlerClick) {
+                                         if (self.doneHandlerClick) {
                                                  self.doneHandlerClick();
                                              }
                                              
@@ -417,8 +410,6 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                                  [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
                                              else
                                                  [self.navigationController popViewControllerAnimated:YES];
-                                         }
-                                         
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];

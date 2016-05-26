@@ -30,7 +30,10 @@
 #define sms_appKey @"81de4ff2ac9e"
 #define sms_appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<CLLocationManagerDelegate>
+{
+    CLLocationManager *locationmanager;
+}
 
 @end
 
@@ -256,11 +259,17 @@
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
     login.backHiden = NO;
 }
+
 /**
  *  获取当前位置
  */
 -(void)getLocation
 {
+    locationmanager = [[CLLocationManager alloc] init];
+    [locationmanager requestAlwaysAuthorization];
+    [locationmanager requestWhenInUseAuthorization];
+    locationmanager.delegate = self;
+    
     [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
         NSLog(@"%f %f",locationCorrrdinate.latitude,locationCorrrdinate.longitude);
         [SharedAppUtil defaultCommonUtil].lat = [NSString stringWithFormat:@"%f",locationCorrrdinate.latitude];

@@ -54,7 +54,7 @@
 {
     self.title = @"服务详情";
 
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
 }
 
 -(void)getDadaProvider

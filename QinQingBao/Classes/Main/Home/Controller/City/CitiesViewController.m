@@ -61,27 +61,6 @@
 -(void)getDataProvider
 {
     dataProvider = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
-    
-    //    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    [CommonRemoteHelper RemoteWithUrl:URL_Get_conf_address parameters: @{}
-    //                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-    //                                     id codeNum = [dict objectForKey:@"code"];
-    //                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-    //                                     {
-    //                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-    //                                     }
-    //                                     else
-    //                                     {
-    //                                         CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
-    //                                         dataProvider = result.datas;
-    //                                         [self.tableView reloadData];
-    //                                     }
-    //                                     [HUD removeFromSuperview];
-    //                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    //                                     NSLog(@"发生错误！%@",error);
-    //                                     [HUD removeFromSuperview];
-    //                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-    //                                 }];
 }
 
 -(void)back

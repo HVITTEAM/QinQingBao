@@ -152,7 +152,6 @@
         }else if (payStatus == 5) {
             str = @"退款失败";
         }
-        
     }else if (status >= 50 && status <= 59){
         str = @"已取消";
     }else if (status >= 60 && status <= 69){

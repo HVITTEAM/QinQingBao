@@ -166,7 +166,7 @@
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateNormal];
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-//    [self.navigationItem setRightBarButtonItem:rightButton];
+    //    [self.navigationItem setRightBarButtonItem:rightButton];
 }
 
 #pragma mark   初始化地图定位功能
@@ -186,8 +186,7 @@
     
     [[CCLocationManager shareLocation] getLocationError:^(NSString *addressString) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示消息"
-             
-                                                   message:@"需要开启定位服务,请到设置->隐私,打开定位服务"
+                                                        message:addressString
                                                        delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }];

@@ -9,9 +9,9 @@
 #import "CCLocationManager.h"
 #import "CLLocation+MTLocation.h"
 @interface CCLocationManager (){
-    CLLocationManager *_manager;
     
 }
+@property (nonatomic, strong) CLLocationManager * manager;
 @property (nonatomic, strong) LocationBlock locationBlock;
 @property (nonatomic, strong) NSStringBlock cityBlock;
 @property (nonatomic, strong) NSStringBlock addressBlock;
@@ -159,8 +159,7 @@
         if (_getLocationErrorBlock)
         {
             _getLocationErrorBlock(@"需要开启定位服务,请到设置->隐私,打开定位服务");
-//            _getLocationErrorBlock = nil;
-       
+            _getLocationErrorBlock = nil;
         }
     }
 }
