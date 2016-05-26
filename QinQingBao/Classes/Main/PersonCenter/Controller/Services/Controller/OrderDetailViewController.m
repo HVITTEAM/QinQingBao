@@ -430,7 +430,11 @@
             str = @"服务完成";
             if (status == 32) {
                 str = @"服务完成";
-                [self setleftBtnTitle:@"申请退款" leftBtnHide:NO rightBtnTitle:@"评价" rightBtnHide:NO];
+                if (!self.orderInfor.voucher_id) {
+                    [self setleftBtnTitle:@"申请退款" leftBtnHide:NO rightBtnTitle:@"评价" rightBtnHide:NO];
+                }else{
+                    [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"评价" rightBtnHide:NO];
+                }
                 return YES;
             }
             
