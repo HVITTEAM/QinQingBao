@@ -59,7 +59,6 @@
         
         [self.tableView reloadData];
     }
-    
     [self getDataProvider];
 }
 
@@ -280,7 +279,7 @@
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:@"ios" forKey:@"client"];
         [dict setObject:[NSNumber numberWithInteger:buttonIndex] forKey:@"member_sex"];
-        if (infoVO.member_truename != nil)
+        if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];
         if (infoVO.member_birthday != nil)
             [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
@@ -494,7 +493,7 @@
     [self.datePicker setMaximumDate:maxDate];
     [self.datePicker setMinimumDate:minDate];
     
-    if (infoVO && infoVO.member_birthday)
+    if (infoVO &&  infoVO.member_birthday &&![infoVO.member_birthday isEqualToString:@"0000-00-00"])
     {
         NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
         [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
@@ -513,7 +512,7 @@
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
-        if (infoVO.member_sex != nil)
+        if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
             [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];
@@ -598,7 +597,7 @@
         
         [dict setObject:curentDatest forKey:@"member_birthday"];
         [dict setObject:@"ios" forKey:@"client"];
-        if (infoVO.member_sex != nil)
+        if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
             [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];

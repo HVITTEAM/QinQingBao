@@ -106,7 +106,7 @@ NSString * const kPmStateKey = @"pmState";
         components.minute = 30;
         NSDate *amEndDate = [calendar dateFromComponents:components];
         
-        components.hour = 22;
+        components.hour = 16;
         components.minute = 30;
         NSDate *pmEndDate = [calendar dateFromComponents:components];
         

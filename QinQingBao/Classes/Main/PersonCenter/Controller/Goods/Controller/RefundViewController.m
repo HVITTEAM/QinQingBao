@@ -675,7 +675,6 @@
         [HUD removeFromSuperview];
 
         if (dict && [dict[@"code"] integerValue] == 0) {
-          
             //TODO 转到退款详情
             [self.navigationController popViewControllerAnimated:YES];
             

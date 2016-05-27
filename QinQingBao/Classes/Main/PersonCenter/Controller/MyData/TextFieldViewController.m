@@ -110,7 +110,7 @@
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"ios" forKey:@"client"];
-    if (self.inforVO.member_sex != nil)
+    if (self.inforVO.member_sex != nil && [self.inforVO.member_sex floatValue] > 0)
         [dict setObject:self.inforVO.member_sex forKey:@"member_sex"];
     if (nameStr)
         [dict setObject:nameStr forKey:@"member_truename"];
@@ -120,7 +120,6 @@
         [dict setObject:addressStr forKey:@"member_areainfo"];
     if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
         [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-    
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_EditUserInfor parameters:dict

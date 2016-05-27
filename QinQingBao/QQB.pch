@@ -204,6 +204,8 @@
 #define MTRemoveObsver [MTNotificationCenter removeObserver:self];
 
 
+#define ShopTel @"0571-81909595"
+
 //#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
