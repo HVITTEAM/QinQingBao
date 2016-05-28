@@ -997,6 +997,7 @@
 		01ED695B1C1FFDA10071DEEC /* massage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01ED69581C1FFDA10071DEEC /* massage.jpg */; };
 		01ED7CAB1C3220AB00A2182F /* MTNetReloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED7CAA1C3220AB00A2182F /* MTNetReloader.m */; };
 		01ED862B1CDC2BED00FAD750 /* NewsDetailViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED862A1CDC2BED00FAD750 /* NewsDetailViewControler.m */; };
+		01ED936D1CF84324002A8B24 /* UITextField+Validate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ED936C1CF84324002A8B24 /* UITextField+Validate.m */; };
 		01EDBF851C27C0A200A51128 /* MoreChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBF841C27C0A200A51128 /* MoreChartDataViewController.m */; };
 		01EF37241C59B2560029C1C5 /* HealthHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EF37231C59B2560029C1C5 /* HealthHouseViewController.m */; };
 		01EF37291C59B8CD0029C1C5 /* HouseTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EF37271C59B8CD0029C1C5 /* HouseTypeCell.m */; };
@@ -2902,6 +2903,8 @@
 		01ED86291CDC2BED00FAD750 /* NewsDetailViewControler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewControler.h; sourceTree = "<group>"; };
 		01ED862A1CDC2BED00FAD750 /* NewsDetailViewControler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewControler.m; sourceTree = "<group>"; };
 		01ED862E1CDC821400FAD750 /* HYQiHei-50J.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HYQiHei-50J.ttf"; sourceTree = "<group>"; };
+		01ED936B1CF84324002A8B24 /* UITextField+Validate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Validate.h"; sourceTree = "<group>"; };
+		01ED936C1CF84324002A8B24 /* UITextField+Validate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Validate.m"; sourceTree = "<group>"; };
 		01EDBF831C27C0A200A51128 /* MoreChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreChartDataViewController.h; sourceTree = "<group>"; };
 		01EDBF841C27C0A200A51128 /* MoreChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreChartDataViewController.m; sourceTree = "<group>"; };
 		01EF37221C59B2560029C1C5 /* HealthHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthHouseViewController.h; sourceTree = "<group>"; };
@@ -7702,6 +7705,8 @@
 				01CEAB001C3E48360015480F /* UIView+Placeholder.m */,
 				011076F31C3E8802001E5C51 /* UIScrollView+Drag.h */,
 				011076F41C3E8802001E5C51 /* UIScrollView+Drag.m */,
+				01ED936B1CF84324002A8B24 /* UITextField+Validate.h */,
+				01ED936C1CF84324002A8B24 /* UITextField+Validate.m */,
 			);
 			path = Cateogrys;
 			sourceTree = "<group>";
@@ -8963,6 +8968,7 @@
 				0197233A1BD7303800D58F8B /* RSKImageScrollView.m in Sources */,
 				01E9A73D1C74613500000805 /* BasicInfoViewController.m in Sources */,
 				01266B9B1C4A3B6C00992D2F /* OrderSubmitSuccessViewController.m in Sources */,
+				01ED936D1CF84324002A8B24 /* UITextField+Validate.m in Sources */,
 				01EA81641CE16F2600398FEC /* HealthTotalDatas.m in Sources */,
 				01EFD3081C56028300BDA640 /* DiseaseCell.m in Sources */,
 				01F33D8F1BB2873F00787620 /* DownloadTask.m in Sources */,

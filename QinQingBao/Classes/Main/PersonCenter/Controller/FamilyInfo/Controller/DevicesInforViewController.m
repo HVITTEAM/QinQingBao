@@ -97,6 +97,7 @@
             [weakSelf.navigationController pushViewController:detailVC animated:YES];
         };
     }
+    
     group.items = tempItemArray;
     [self.groups addObject:group];
 }
@@ -108,7 +109,6 @@
     return 50;
 }
 
-//要求委托方的编辑风格在表视图的一个特定的位置。
 -(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self.selectedFamilyMember.member_id isEqualToString:[SharedAppUtil defaultCommonUtil].userVO.member_id])

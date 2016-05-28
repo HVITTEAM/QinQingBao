@@ -171,7 +171,6 @@
                                      NSLog(@"发生错误！%@",error);
                                      [HUD removeFromSuperview];
                                  }];
-    
 }
 
 #pragma mark 只能输入数字

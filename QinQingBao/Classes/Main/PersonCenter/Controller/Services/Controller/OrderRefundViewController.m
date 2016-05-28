@@ -10,6 +10,8 @@
 #import "RefundReasonMode.h"
 #import "OrderModel.h"
 
+#import "UITextField+Validate.h"
+
 @interface OrderRefundViewController ()<UITextFieldDelegate,UITextViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *rootScrollview;    //滚动用的Scrollview
@@ -136,33 +138,16 @@
     self.currentView = nil;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    
-    if (textField == self.sumField) {
-        NSString *legalStr = @"1234567890.";
-        NSCharacterSet *illegalCharacterSet = [[NSCharacterSet characterSetWithCharactersInString:legalStr] invertedSet];
-        
-        NSArray * components = [string componentsSeparatedByCharactersInSet:illegalCharacterSet];
-        NSString *filtered  = [components componentsJoinedByString:@""];
-        BOOL result = [string isEqualToString:filtered];
-        
-        if (!result) {
-            [NoticeHelper AlertShow:@"请输入正确的金额" view:self.view];
-        }
-        
-        return result;
-    }
-    
-    return YES;
-
-}
-
 #pragma  mark UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     self.currentView = textView;
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return [textField isValidAboutMoneyTextFiled:textField shouldChangeCharactersInRange:range replacementString:string decimalNumber:2];
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
