@@ -52,6 +52,8 @@
 #import "UIViewController+KNSemiModal.h"
 
 #import "UINavigationController+FDFullscreenPopGesture.h"
+#import "UITextField+Validate.h"
+
 #import <AlipaySDK/AlipaySDK.h>
 #import "MTPayHelper.h"
 #import "MTDateHelper.h"
@@ -72,6 +74,10 @@
 #import "YSConstStrings.h"
 #import "YSHTTPClient.h"
 
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 
 // 屏幕尺寸
 
@@ -206,11 +212,11 @@
 
 #define ShopTel @"0571-81909595"
 
-//#define URL_Local @"http://test.hvit.com.cn/ylserver"
+#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-#define URL_Local @"http://ibama.hvit.com.cn"
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***充值支付宝回调url*/
 #define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]
@@ -366,6 +372,7 @@
 #define URL_Dingwei_conf [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_dingwei_conf",URL_Local]
 
 //---------------------商城api---------------------
+
 #pragma mark 商城api
 
 /***商城分类Url*/
@@ -474,6 +481,7 @@
 
 
 //---------------------症状自查---------------------
+
 /***获取身体部位url*/
 #define URL_symptom_body_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_body_list",URL_Local]
 
@@ -484,6 +492,7 @@
 #define URL_symptom_info [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=symptom&op=symptom_info",URL_Local]
 
 //---------------------商城首页---------------------
+
 /***首页 - 获取轮播图url*/
 #define URL_Shopcofn [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=baseconf&op=get_pic_shopcofn",URL_Local]
 
@@ -497,6 +506,7 @@
 #define URL_Apiget_goods [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_goods",URL_Local]
 
 //----------------------------//
+
 /***获取专题列表Url*/
 #define URL_Special_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_seecial",URL_Local]
 
@@ -504,6 +514,7 @@
 #define URL_groupbuy_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=index&op=apiget_groupbuy",URL_Local]
 
 //------------------绑定设备-------------------
+
 /***接口新增加用户Url*/
 #define URL_Add_mobile_user [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member&op=add_mobile_user",URL_Local]
 
@@ -586,6 +597,7 @@
 #define URL_get_orginfo_by_iidnum [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_orginfo_by_iidnum",URL_Local]
 
 //------------------寸欣-------------------
+
 /***文章 - 获取文章列表*/
 #define URL_get_articles [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=articleinfo&op=get_articles",URL_Local]
 
@@ -606,6 +618,12 @@
 
 /***服务 - 买家订单退款申请*/
 #define URL_work_add_refund_all [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=work_add_refund_all",URL_Local]
+
+//------------------消息管理-------------------
+
+/***系统消息 - 分类列表（活动资讯，健康小贴士，通知消息）*/
+#define URL_get_systemmsginfos_by_type [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=systemmsginfo&op=get_systemmsginfos_by_type",URL_Local]
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
@@ -632,6 +650,13 @@ typedef NS_ENUM(NSInteger, InvoiceType) {
 typedef NS_ENUM(NSInteger, OrderType) {
     OrderTypeAdd2cart,
     OrderTypeBuyRightnow,
+};
+
+typedef NS_ENUM(NSInteger, MessageType) {
+    MessageTypeEventinfo,//活动资讯
+    MessageTypeHealthTips,//健康贴士
+    MessageTypePushMsg,//推送消息
+    MessageTypeLogistics,//物流助手
 };
 
 //typedef NS_ENUM(NSInteger, iPhoneModel){//0~3

@@ -10,8 +10,6 @@
 #import "RefundReasonMode.h"
 #import "OrderModel.h"
 
-#import "UITextField+Validate.h"
-
 @interface OrderRefundViewController ()<UITextFieldDelegate,UITextViewDelegate,UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *rootScrollview;    //滚动用的Scrollview

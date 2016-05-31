@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *  验证输入框（手机号码，金额）
+ */
 @interface UITextField (Validate)
 /**
  *  验证金额的输入框

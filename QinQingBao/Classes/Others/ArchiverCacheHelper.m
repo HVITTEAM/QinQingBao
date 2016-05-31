@@ -42,7 +42,6 @@
     [archiver finishEncoding];
     
     [data writeToFile:fileSource atomically:YES];
-    
     NSLog(@"归档成功");
 }
 

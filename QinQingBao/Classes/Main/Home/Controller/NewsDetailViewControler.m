@@ -8,8 +8,6 @@
 
 #import "NewsDetailViewControler.h"
 
-#import <ShareSDK/ShareSDK.h>
-#import <ShareSDKUI/ShareSDK+SSUI.h>
 @interface NewsDetailViewControler ()<UITextViewDelegate,UITextFieldDelegate>
 {
     UIView * _inputTextView;
