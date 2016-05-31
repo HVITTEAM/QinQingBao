@@ -1054,6 +1054,7 @@
 		01F08EB71CFD5D4B00207BF0 /* MyMesageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EB41CFD5D4B00207BF0 /* MyMesageViewController.m */; };
 		01F08EBE1CFD5D8B00207BF0 /* EventInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EBD1CFD5D8B00207BF0 /* EventInfoController.m */; };
 		01F08EC11CFD633800207BF0 /* EventMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EC01CFD633800207BF0 /* EventMsgModel.m */; };
+		01F08EC41CFD842E00207BF0 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EC31CFD842E00207BF0 /* test.m */; };
 		01F0B7AF1C51B9D3000BC86A /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */; };
 		01F0B7B51C521458000BC86A /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F0B7B41C521458000BC86A /* areaList.plist */; };
 		01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7B71C522273000BC86A /* AreaListModel.m */; };
@@ -3001,6 +3002,8 @@
 		01F08EBD1CFD5D8B00207BF0 /* EventInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoController.m; sourceTree = "<group>"; };
 		01F08EBF1CFD633800207BF0 /* EventMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMsgModel.h; sourceTree = "<group>"; };
 		01F08EC01CFD633800207BF0 /* EventMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMsgModel.m; sourceTree = "<group>"; };
+		01F08EC21CFD842E00207BF0 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		01F08EC31CFD842E00207BF0 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		01F0B7AD1C51B9D3000BC86A /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		01F0B7B41C521458000BC86A /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
@@ -7612,6 +7615,8 @@
 		01F08EB61CFD5D4B00207BF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01F08EC21CFD842E00207BF0 /* test.h */,
+				01F08EC31CFD842E00207BF0 /* test.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -9183,6 +9188,7 @@
 				01024BF91BD0A48A00E8CAEC /* Order.m in Sources */,
 				016067001CF6AD8C005A3164 /* SDWebImageDecoder.m in Sources */,
 				0181B1A41CDC958D00A1435E /* BalanceViewController.m in Sources */,
+				01F08EC41CFD842E00207BF0 /* test.m in Sources */,
 				01E690741BCCF5BC00A17543 /* DefinitionTypeView.m in Sources */,
 				01ED2E5F1BB3F1B3007C428F /* MyAnnotation.m in Sources */,
 				01ECDB1F1C8EB31F0018160F /* EaseImageView.m in Sources */,
