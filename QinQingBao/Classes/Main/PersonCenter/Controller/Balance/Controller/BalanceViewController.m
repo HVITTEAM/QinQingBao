@@ -101,26 +101,29 @@
     
     BalanceLogModel *model = self.balanceLogArray[indexPath.row];
     
-    if (commoncell == nil){
+    if (commoncell == nil)
+    {
         commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"MTCommonCell"];
         UILabel *lb = [[UILabel alloc] init];
-        lb.font = [UIFont systemFontOfSize:16];
         commoncell.accessoryView = lb;
-        float f = [model.lg_av_amount floatValue];
-        if (f < 0)
-        {
-            lb.textColor = MTNavgationBackgroundColor;
-            lb.text = model.lg_av_amount;
-        }
-        else
-        {
-            lb.text = [NSString stringWithFormat:@"+%@",model.lg_av_amount];
-            lb.textColor = [UIColor orangeColor];
-        }
-        commoncell.textLabel.font = [UIFont systemFontOfSize:16];
-        commoncell.detailTextLabel.font = [UIFont systemFontOfSize:13];
-        commoncell.detailTextLabel.textColor = [UIColor grayColor];
     }
+    
+    UILabel *lb = (UILabel *)commoncell.accessoryView;
+    lb.font = [UIFont systemFontOfSize:16];
+    float f = [model.lg_av_amount floatValue];
+    if (f < 0)
+    {
+        lb.textColor = MTNavgationBackgroundColor;
+        lb.text = model.lg_av_amount;
+    }
+    else
+    {
+        lb.text = [NSString stringWithFormat:@"+%@",model.lg_av_amount];
+        lb.textColor = [UIColor orangeColor];
+    }
+    commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+    commoncell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    commoncell.detailTextLabel.textColor = [UIColor grayColor];
     
     commoncell.detailTextLabel.text = [MTDateHelper getDaySince1970:model.lg_add_time dateformat:@"yyyy-MM-dd HH:mm:ss"];
     commoncell.textLabel.text = model.lg_desc;
@@ -150,6 +153,7 @@
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"未获取到数据" view:self.view];
         }else{
+            NSLog(@"%@",dict);
             BalanceModel *balanceMD = [BalanceModel objectWithKeyValues:dict[@"datas"]];
             self.balanceModel = balanceMD;
             self.balanceLogArray = balanceMD.log;
