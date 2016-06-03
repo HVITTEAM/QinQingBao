@@ -270,7 +270,12 @@
 
 - (IBAction)qqlogin:(id)sender
 {
-    [ShareSDK getUserInfo:SSDKPlatformTypeQQ
+//    SSDKPlatformTypeSinaWeibo 1
+//    SSDKPlatformTypeQQ 998
+//    SSDKPlatformTypeWechat 997
+    UIButton *btn = (UIButton *)sender;
+ 
+    [ShareSDK getUserInfo:btn.tag
            onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
      {
          if (state == SSDKResponseStateSuccess)

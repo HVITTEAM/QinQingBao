@@ -39,7 +39,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx544ef206061848b4</string>
+				<string>wx3b685f707604d3e4</string>
 			</array>
 		</dict>
 		<dict>
@@ -50,17 +50,30 @@
 				<string>tencent1105361439</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb3331200145</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.6</string>
+	<string>0.7</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>weixin</string>
 		<string>wechat</string>
-        <!-- QQ、Qzone URL Scheme 白名单-->
-        <string>mqqopensdkapiV2</string>
+		<string>mqqopensdkapiV2</string>
+		<string>sinaweibo</string>
+		<string>weibosdk</string>
+		<string>sinaweibosso</string>
+		<string>weibosdk2.5</string>
+		<string>sinaweibohd</string>
+		<string>sinaweibohdsso</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -69,10 +82,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchImageFile~iphone</key>
 	<string>Default</string>
 	<key>UIRequiredDeviceCapabilities</key>

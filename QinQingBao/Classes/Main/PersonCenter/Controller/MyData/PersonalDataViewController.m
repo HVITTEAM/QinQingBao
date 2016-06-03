@@ -172,7 +172,7 @@
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
         contentcell.textLabel.text = [dict objectForKey:@"text"];
         contentcell.detailTextLabel.text = [dict objectForKey:@"value"];
-        if(indexPath.row == 0)http:
+        if(indexPath.row == 0)
         {
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
             UIImageView *imageView = [[UIImageView alloc] init];
@@ -181,6 +181,11 @@
             imageView.layer.cornerRadius = imageView.height/2;
             imageView.layer.masksToBounds = YES;
             contentcell.accessoryView = imageView;
+        }
+        else if (indexPath.row == 3 && contentcell.detailTextLabel.text.length == 0)//手机号码为空
+        {
+            contentcell.detailTextLabel.text = @"未绑定";
+            contentcell.detailTextLabel.textColor = MTNavgationBackgroundColor;
         }
         else if(indexPath.row == 3 || indexPath.row == 4)
             contentcell.accessoryType = UITableViewCellAccessoryNone;
@@ -224,6 +229,7 @@
     }
     else if(indexPath.row == 3)
     {
+        //TODO
         return;
     }
     else if(indexPath.row == 4)
@@ -502,7 +508,6 @@
         [self.datePicker setDate:inputDate animated:YES];
     }
     
-    
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         NSDate* date=[self.datePicker date];
         NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
@@ -567,6 +572,10 @@
                                              }
                                              else
                                              {
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
+                                                 
                                                  [SharedAppUtil defaultCommonUtil].userVO = nil;
                                                  [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
                                                  [MTControllerChooseTool setloginOutViewController];
