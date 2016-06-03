@@ -235,6 +235,12 @@ typedef NS_ENUM(NSInteger, PaymentType) {
         //如果结算方式不能更改就不允许点击
         if ([self.lastPrice floatValue] > [self.balance floatValue])
             return;
+        else if ([SharedAppUtil defaultCommonUtil].userVO.mobilPhone.length == 0)
+        {
+            UIAlertView *mobile_alert = [[UIAlertView alloc] initWithTitle:@"提示信息" message:@"您的账号未绑定手机号码,不能使用余额支付" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去绑定", nil];
+            mobile_alert.tag = 100;
+            [mobile_alert show];
+        }
         switch (indexPath.row) {
             case 0:
                 self.payType = PaymentTypeAlipay;
@@ -403,13 +409,13 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                      {
                                          [NoticeHelper AlertShow:@"支付成功!" view:nil];
                                          if (self.doneHandlerClick) {
-                                                 self.doneHandlerClick();
-                                             }
-                                             
-                                             if (self.viewControllerOfback)
-                                                 [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-                                             else
-                                                 [self.navigationController popViewControllerAnimated:YES];
+                                             self.doneHandlerClick();
+                                         }
+                                         
+                                         if (self.viewControllerOfback)
+                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+                                         else
+                                             [self.navigationController popViewControllerAnimated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];
@@ -430,12 +436,22 @@ typedef NS_ENUM(NSInteger, PaymentType) {
         [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark -- UIAlertViewDelegate
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0)
     {
-        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+        if (alertView.tag == 100)
+        {
+            //TODO 去绑定
+        }
+        else
+        {
+            [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+        }
     }
+    
 }
 
 #pragma mark - 工具方法

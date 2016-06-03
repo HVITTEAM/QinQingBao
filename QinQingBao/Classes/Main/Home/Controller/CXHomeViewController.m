@@ -21,7 +21,7 @@
 
 #import "NewsDetailViewControler.h"
 
-#import "SettlementSlideViewController.h"
+#import "MyMesageViewController.h"
 #import "AllArticleTableViewController.h"
 
 #import "MJChiBaoZiHeader.h"
@@ -162,11 +162,11 @@
     
     
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
-    [rightBtn addTarget:self action:@selector(pay) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateNormal];
-    [rightBtn setBackgroundImage:[UIImage imageNamed:@"jiesuan.png"] forState:UIControlStateHighlighted];
+    [rightBtn addTarget:self action:@selector(showView) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"msg_null.png"] forState:UIControlStateNormal];
+    [rightBtn setBackgroundImage:[UIImage imageNamed:@"msg_null.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    //    [self.navigationItem setRightBarButtonItem:rightButton];
+    [self.navigationItem setRightBarButtonItem:rightButton];
 }
 
 #pragma mark   初始化地图定位功能
@@ -419,13 +419,13 @@
 }
 
 /**
- *  结算
+ *  进入推送界面
  */
--(void)pay
+-(void)showView
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
         return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    SettlementSlideViewController *vc = [[SettlementSlideViewController alloc] init];
+    MyMesageViewController *vc = [[MyMesageViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -309,6 +309,8 @@
 		01C0D2021C468BB200FF1CD3 /* CmmonOrderListTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D2011C468BB200FF1CD3 /* CmmonOrderListTotal.m */; };
 		01C0D2051C468BC700FF1CD3 /* CommonOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D2041C468BC700FF1CD3 /* CommonOrderModel.m */; };
 		01C0D20B1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */; };
+		01C67B821CFE783D00FC5E0B /* MessageTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C67B801CFE783D00FC5E0B /* MessageTypeCell.m */; };
+		01C67B831CFE783D00FC5E0B /* MessageTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C67B811CFE783D00FC5E0B /* MessageTypeCell.xib */; };
 		01C7AEA81C3E220F00AE0A9C /* UIColor+RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */; };
 		01C82BE51CC48DF3004D7A16 /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C82BE41CC48DF3004D7A16 /* ShopDetailViewController.m */; };
 		01C82BEA1CC48EA6004D7A16 /* BuyRightnowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C82BE81CC48EA6004D7A16 /* BuyRightnowView.m */; };
@@ -1054,7 +1056,7 @@
 		01F08EB71CFD5D4B00207BF0 /* MyMesageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EB41CFD5D4B00207BF0 /* MyMesageViewController.m */; };
 		01F08EBE1CFD5D8B00207BF0 /* EventInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EBD1CFD5D8B00207BF0 /* EventInfoController.m */; };
 		01F08EC11CFD633800207BF0 /* EventMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EC01CFD633800207BF0 /* EventMsgModel.m */; };
-		01F08EC41CFD842E00207BF0 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EC31CFD842E00207BF0 /* test.m */; };
+		01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0A1991D01615400F6E154 /* FristMsgModel.m */; };
 		01F0B7AF1C51B9D3000BC86A /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */; };
 		01F0B7B51C521458000BC86A /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F0B7B41C521458000BC86A /* areaList.plist */; };
 		01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7B71C522273000BC86A /* AreaListModel.m */; };
@@ -1847,6 +1849,9 @@
 		01C0D2041C468BC700FF1CD3 /* CommonOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonOrderModel.m; sourceTree = "<group>"; };
 		01C0D2091C468CF500FF1CD3 /* ExtendOrderGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendOrderGoodsModel.h; sourceTree = "<group>"; };
 		01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendOrderGoodsModel.m; sourceTree = "<group>"; };
+		01C67B7F1CFE783D00FC5E0B /* MessageTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTypeCell.h; sourceTree = "<group>"; };
+		01C67B801CFE783D00FC5E0B /* MessageTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTypeCell.m; sourceTree = "<group>"; };
+		01C67B811CFE783D00FC5E0B /* MessageTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTypeCell.xib; sourceTree = "<group>"; };
 		01C7AEA61C3E220F00AE0A9C /* UIColor+RGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGB.h"; sourceTree = "<group>"; };
 		01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGB.m"; sourceTree = "<group>"; };
 		01C82BE31CC48DF3004D7A16 /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
@@ -3008,8 +3013,8 @@
 		01F08EBD1CFD5D8B00207BF0 /* EventInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventInfoController.m; sourceTree = "<group>"; };
 		01F08EBF1CFD633800207BF0 /* EventMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMsgModel.h; sourceTree = "<group>"; };
 		01F08EC01CFD633800207BF0 /* EventMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMsgModel.m; sourceTree = "<group>"; };
-		01F08EC21CFD842E00207BF0 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		01F08EC31CFD842E00207BF0 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		01F0A1981D01615400F6E154 /* FristMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FristMsgModel.h; sourceTree = "<group>"; };
+		01F0A1991D01615400F6E154 /* FristMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FristMsgModel.m; sourceTree = "<group>"; };
 		01F0B7AD1C51B9D3000BC86A /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		01F0B7B41C521458000BC86A /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
@@ -7623,6 +7628,8 @@
 			children = (
 				01F08EBF1CFD633800207BF0 /* EventMsgModel.h */,
 				01F08EC01CFD633800207BF0 /* EventMsgModel.m */,
+				01F0A1981D01615400F6E154 /* FristMsgModel.h */,
+				01F0A1991D01615400F6E154 /* FristMsgModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8356,7 +8363,7 @@
 						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -8548,6 +8555,7 @@
 				01E68F2A1BCC9E4C00A17543 /* MyCameraListCell.xib in Resources */,
 				01ECDA911C8EB31F0018160F /* Contents.json in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
+				01C67B831CFE783D00FC5E0B /* MessageTypeCell.xib in Resources */,
 				01266BA41C4B3D2400992D2F /* background_01.png in Resources */,
 				01ECDAC71C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAB01C8EB31F0018160F /* chatBar_more_locationSelected@2x.png in Resources */,
@@ -9187,6 +9195,7 @@
 				D279DA341B8713AD00E7CDDF /* PromptCell.m in Sources */,
 				01F33D851BB2342D00787620 /* UserInforModel.m in Sources */,
 				010EC9E31C438D8900D36417 /* MTShoppingCarCell.m in Sources */,
+				01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */,
 				01FBF0EF1BCBB25E00CA285C /* ServiceTypeModel.m in Sources */,
 				01ECDAEC1C8EB31F0018160F /* EMSDWebImageDecoder.m in Sources */,
 				018BC5C41C4F7D8400C883FF /* GevalModelTotal.m in Sources */,
@@ -9215,7 +9224,6 @@
 				01024BF91BD0A48A00E8CAEC /* Order.m in Sources */,
 				016067001CF6AD8C005A3164 /* SDWebImageDecoder.m in Sources */,
 				0181B1A41CDC958D00A1435E /* BalanceViewController.m in Sources */,
-				01F08EC41CFD842E00207BF0 /* test.m in Sources */,
 				01E690741BCCF5BC00A17543 /* DefinitionTypeView.m in Sources */,
 				01ED2E5F1BB3F1B3007C428F /* MyAnnotation.m in Sources */,
 				01ECDB1F1C8EB31F0018160F /* EaseImageView.m in Sources */,
@@ -9574,6 +9582,7 @@
 				01E4A94B1C3FDDED00AAAF73 /* GoodsDetailViewController.m in Sources */,
 				01E690831BCCF6AA00A17543 /* TSPopoverController.m in Sources */,
 				0126ECF61B8C4E8100EC85C1 /* MASCompositeConstraint.m in Sources */,
+				01C67B821CFE783D00FC5E0B /* MessageTypeCell.m in Sources */,
 				016066D31CF6ACCE005A3164 /* UIView+MJExtension.m in Sources */,
 				01237A5B1CFC319D0070C905 /* MJType.m in Sources */,
 				017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */,

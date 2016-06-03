@@ -124,22 +124,44 @@
  */
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
+    
+    NSLog ( @ "Receive remote notification : %@",userInfo );
+    NSDictionary *alertStr = [userInfo objectForKey:@"aps"];
+    //具体的内容
+    NSString *pushStr = [alertStr objectForKey:@"alert"];
+    //消息的id
+    NSString *msg_id = [userInfo objectForKey:@"msg_id"];
+    //消息的分类
+    NSString *type = [userInfo objectForKey:@"type"];
+    
     if (application.applicationState == UIApplicationStateActive)//当用户正在运行app的时候
     {
-        NSLog ( @ "Receive remote notification : %@",userInfo );
-        NSDictionary *alertStr = [userInfo objectForKey:@"aps"];
-        NSString *pushStr = [alertStr objectForKey:@"alert"];
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:pushStr delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"查看", nil];
         [alert show];
     }
     else
     {
-        //消除BadgeNumber
+        switch ([type integerValue])
+        {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            default:
+                break;
+        }
+        //当用户点击通知栏的消息进入app
         [APService setBadge:0];
         application.applicationIconBadgeNumber = 0;
         
-        // IOS 7 Support Required
         [APService handleRemoteNotification:userInfo];
         completionHandler(UIBackgroundFetchResultNewData);
     }
@@ -251,7 +273,7 @@
  */
 -(void)setShareSDK
 {
-//    [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
+    //    [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
     
     [ShareSDK registerApp:@"12731697d2ffc"
           activePlatforms:@[
@@ -264,7 +286,6 @@
                             @(SSDKPlatformSubTypeWechatTimeline),
                             ]
                  onImport:^(SSDKPlatformType platformType) {
-                     
                      switch (platformType)
                      {
                          case SSDKPlatformTypeWechat:
@@ -281,14 +302,13 @@
                      }
                  }
           onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
-              
               switch (platformType)
               {
                   case SSDKPlatformTypeSinaWeibo:
                       //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-                      [appInfo SSDKSetupSinaWeiboByAppKey:@"568898243"
-                                                appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                                              redirectUri:@"http://www.sharesdk.cn"
+                      [appInfo SSDKSetupSinaWeiboByAppKey:@"3331200145"
+                                                appSecret:@"86dcd3d64e3ae949f82a34305ad86a7a"
+                                              redirectUri:@"http://sns.whalecloud.com/sina2/callback"
                                                  authType:SSDKAuthTypeBoth];
                       break;
                   case SSDKPlatformTypeQQ:
@@ -297,8 +317,8 @@
                                          authType:SSDKAuthTypeBoth];
                       break;
                   case SSDKPlatformTypeWechat:
-                      [appInfo SSDKSetupWeChatByAppId:@"wx544ef206061848b4"
-                                            appSecret:@"c6f33d454b060fe19c9f57317b24bf32"];
+                      [appInfo SSDKSetupWeChatByAppId:@"wx3b685f707604d3e4"
+                                            appSecret:@"118f8dde46fd525d738d8b767e70e43a"];
                       break;
                   default:
                       break;

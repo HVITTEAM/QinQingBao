@@ -125,25 +125,94 @@
                                 <action selector="backPassword:" destination="-1" eventType="touchUpInside" id="RCW-fy-Mve"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MV8-xN-dC6">
-                            <rect key="frame" x="53" y="300" width="53" height="30"/>
-                            <state key="normal" title="QQ登录"/>
+                        <button opaque="NO" tag="998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MV8-xN-dC6">
+                            <rect key="frame" x="50" y="498" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="53" id="Djw-WU-PJq"/>
+                                <constraint firstAttribute="height" constant="50" id="n3r-hy-KbT"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="login_qq"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Djw-WU-PJq"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="qqlogin:" destination="-1" eventType="touchUpInside" id="bt2-fR-4Wd"/>
                             </connections>
                         </button>
+                        <button opaque="NO" tag="997" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1x-1S-JXM">
+                            <rect key="frame" x="130" y="498" width="50" height="50"/>
+                            <state key="normal" backgroundImage="login_wchat"/>
+                            <connections>
+                                <action selector="qqlogin:" destination="-1" eventType="touchUpInside" id="w6b-W4-itM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6Z-pU-seG">
+                            <rect key="frame" x="210" y="498" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="6QS-jd-Bxq"/>
+                                <constraint firstAttribute="height" constant="50" id="SzQ-dt-d28"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="login_weibo"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="6QS-jd-Bxq"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="qqlogin:" destination="-1" eventType="touchUpInside" id="v1r-Dt-pTZ"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54S-m1-xvn">
+                            <rect key="frame" x="60" y="471" width="200" height="1"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="SOB-Ez-rYQ"/>
+                                <constraint firstAttribute="height" constant="0.5" id="wWz-1e-V8U"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="其他方式登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kzO-9D-S7s">
+                            <rect key="frame" x="121" y="461" width="77" height="21"/>
+                            <color key="backgroundColor" white="0.91926606700000002" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="4DD-hs-9ea"/>
+                                <constraint firstAttribute="width" constant="77" id="YBZ-20-EN3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="o1x-1S-JXM" firstAttribute="top" secondItem="kzO-9D-S7s" secondAttribute="bottom" constant="16" id="1hx-hn-2OE"/>
+                        <constraint firstAttribute="bottom" secondItem="MV8-xN-dC6" secondAttribute="bottom" constant="20" id="4R8-vM-Ejo"/>
+                        <constraint firstAttribute="bottom" secondItem="q6Z-pU-seG" secondAttribute="bottom" constant="20" id="7WQ-n9-SSc"/>
+                        <constraint firstItem="o1x-1S-JXM" firstAttribute="centerX" secondItem="54S-m1-xvn" secondAttribute="centerX" constant="-5" id="GpK-Ge-b7I"/>
                         <constraint firstItem="vs9-ic-EaD" firstAttribute="leading" secondItem="dDQ-KA-vrd" secondAttribute="leading" constant="16" id="Q04-jv-Dsv"/>
                         <constraint firstItem="3Ky-xc-NU4" firstAttribute="top" secondItem="vs9-ic-EaD" secondAttribute="bottom" constant="15" id="TwR-j6-GKQ"/>
+                        <constraint firstItem="o1x-1S-JXM" firstAttribute="width" secondItem="q6Z-pU-seG" secondAttribute="width" id="UUF-oG-X8Q"/>
+                        <constraint firstItem="kzO-9D-S7s" firstAttribute="centerX" secondItem="dDQ-KA-vrd" secondAttribute="centerX" id="WFi-Cj-dMb"/>
+                        <constraint firstAttribute="bottom" secondItem="o1x-1S-JXM" secondAttribute="bottom" constant="20" id="YDR-CA-e2p"/>
                         <constraint firstItem="vs9-ic-EaD" firstAttribute="top" secondItem="aHK-7O-jGZ" secondAttribute="bottom" constant="35" id="Zcp-Le-68z"/>
+                        <constraint firstItem="q6Z-pU-seG" firstAttribute="top" secondItem="54S-m1-xvn" secondAttribute="bottom" constant="26.5" id="a8J-YI-Bcx"/>
+                        <constraint firstItem="MV8-xN-dC6" firstAttribute="leading" secondItem="dDQ-KA-vrd" secondAttribute="leading" constant="50" id="bl5-1q-5zn"/>
                         <constraint firstItem="aHK-7O-jGZ" firstAttribute="leading" secondItem="dDQ-KA-vrd" secondAttribute="leading" id="dUe-CR-G0P"/>
                         <constraint firstAttribute="trailing" secondItem="aHK-7O-jGZ" secondAttribute="trailing" id="fN8-fd-BI1"/>
                         <constraint firstItem="3Ky-xc-NU4" firstAttribute="trailing" secondItem="vs9-ic-EaD" secondAttribute="trailing" id="iJh-Lt-OGa"/>
+                        <constraint firstAttribute="trailing" secondItem="q6Z-pU-seG" secondAttribute="trailing" constant="60" id="iPu-eH-3fR"/>
+                        <constraint firstItem="o1x-1S-JXM" firstAttribute="width" secondItem="MV8-xN-dC6" secondAttribute="width" id="rTt-2F-Lyq"/>
                         <constraint firstAttribute="trailing" secondItem="vs9-ic-EaD" secondAttribute="trailing" constant="16" id="s51-8e-94J"/>
                         <constraint firstItem="aHK-7O-jGZ" firstAttribute="top" secondItem="dDQ-KA-vrd" secondAttribute="top" constant="84" id="v2A-C4-cUY"/>
+                        <constraint firstItem="54S-m1-xvn" firstAttribute="centerX" secondItem="dDQ-KA-vrd" secondAttribute="centerX" id="xPI-YA-RwQ"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="UUF-oG-X8Q"/>
+                            <exclude reference="rTt-2F-Lyq"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="sigleTapBackgrouned:" destination="-1" eventType="touchUpInside" id="HyJ-Mq-Z8Z"/>
                     </connections>
@@ -160,4 +229,9 @@
             <point key="canvasLocation" x="149" y="195"/>
         </view>
     </objects>
+    <resources>
+        <image name="login_qq" width="50" height="50"/>
+        <image name="login_wchat" width="50" height="50"/>
+        <image name="login_weibo" width="50" height="50"/>
+    </resources>
 </document>
