@@ -8,63 +8,43 @@
 
 #import "EventInfoController.h"
 #import "EventMsgModel.h"
+#import "NewsCell.h"
+#import "NotificationCell.h"
+#import "LogisticNotificationCell.h"
+#import "NoticeHelper.h"
 
 @interface EventInfoController ()
 {
-    NSArray *dataProvider;
+    NSMutableArray *dataProvider;
 }
 
-@end
-@implementation EventInfoController
+@property (assign,nonatomic)NSUInteger nextPageNumber;
 
+@end
+
+@implementation EventInfoController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    dataProvider = [[NSMutableArray alloc] init];
+    
+    //默认加载第一页
+    self.nextPageNumber = 1;
+    
     self.view.backgroundColor  = HMGlobalBg;
-    self.tableView.tableFooterView = [[UIView alloc] init];
+//    MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self getDadaProvider];
+    
+    [self loadMoreData];
 }
 
 /** 屏蔽tableView的样式 */
 - (id)init
 {
     return [self initWithStyle:UITableViewStyleGrouped];
-}
-
-/**
- *  根据类别获取不同的数据源
- */
--(void)getDadaProvider
-{
-    NSInteger infotype = self.type + 1;
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_systemmsginfos_by_type parameters: @{@"type" : [NSString stringWithFormat:@"%ld",(long)infotype],
-                                                                                   @"page" : @100,
-                                                                                   @"client" : @"ios",
-                                                                                   @"p" : @1,
-                                                                                   @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         dataProvider = [EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         [self.tableView reloadData];
-                                     }
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                 }];
-    
 }
 
 #pragma mark - Table view data source
@@ -80,40 +60,49 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *commonCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
-    if (commonCell == nil)
-        commonCell =  [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
-    commonCell.textLabel.font = [UIFont fontWithName:@"Helvetica-Medium" size:16];
-    commonCell.imageView.image = [UIImage imageNamed:@"1.png"];
-    commonCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    switch (indexPath.row) {
-        case 0:
-            commonCell.textLabel.text = @"活动资讯";
-            break;
-        case 1:
-            commonCell.textLabel.text = @"健康小贴士";
-            break;
-        case 2:
-            commonCell.textLabel.text = @"通知消息";
-            break;
-        case 3:
-            commonCell.textLabel.text = @"物流助手";
-            break;
-        default:
-            break;
+    UITableViewCell *commonCell = nil;
+    
+    if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
+        NewsCell *newsCell = [NewsCell createCellWithTableView:tableView];
+        [newsCell setDataWithMode:dataProvider[indexPath.section]];
+        commonCell = newsCell;
+    }else if (self.type == MessageTypePushMsg){
+        NotificationCell *msgCell = [NotificationCell createCellWithTableView:tableView];
+        [msgCell setDataWithModel:dataProvider[indexPath.section]];
+        commonCell = msgCell;
+    }else{
+        LogisticNotificationCell *logisticCell = [LogisticNotificationCell createCellWithTableView:tableView];
+        [logisticCell setdataWithModel:nil];
+        commonCell = logisticCell;
     }
     return commonCell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
+        return 320;
+    }else if (self.type == MessageTypePushMsg){
+        return 150;
+    }else{
+        return 190;
+    }
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 66;
+    if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips || self.type == MessageTypePushMsg)
+    {
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.height;
+    }else{
+        return 190;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 60;
+    return 45;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -126,8 +115,10 @@
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 150)/2, 15, 150, 23)];
-    lab.text = @"6月10日 11:23";
+    EventMsgModel *model  = dataProvider[section];
+    
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 120)/2, 15, 120, 23)];
+    lab.text = [model.s_push_time substringToIndex:16];
     lab.layer.masksToBounds = YES;
     lab.layer.cornerRadius = 4;
     lab.backgroundColor = HMColor(198, 198, 198);
@@ -138,10 +129,72 @@
     return view;
 }
 
-
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+}
+
+#pragma mark - 网络相关
+-(void)loadMoreData
+{
+    if (self.type == MessageTypeLogistics) {
+        //物流接口
+        
+        return;
+    }
+    //活动资讯、健康小贴士、通知消息
+   [self getDadaProvider];
+}
+
+/**
+ *  根据类别获取不同的数据源 - 活动资讯、健康小贴士、通知消息
+ */
+-(void)getDadaProvider
+{
+    NSInteger infotype = self.type + 1;
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_get_systemmsginfos_by_type parameters: @{@"type" : @(infotype),
+                                                                                   @"page" : @3,
+                                                                                   @"client" : @"ios",
+                                                                                   @"p" : @(self.nextPageNumber),
+                                                                                   @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+
+                                     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                     if (self.tableView.footer.isRefreshing) {
+                                         [self.tableView.footer endRefreshing];
+                                        
+                                    }
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         NSArray *newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [dataProvider addObjectsFromArray:newDatas];
+                                        
+                                         self.nextPageNumber ++;
+                                         [self.tableView reloadData];
+                                     }
+
+                                     if (dataProvider.count == 0) {
+                                         [self.tableView initWithPlaceString:@"暂无数据"];
+                                     }else{
+                                         [self.tableView removePlace];
+                                     }
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+                                     if (self.tableView.footer.isRefreshing) {
+                                         [self.tableView.footer endRefreshing];
+                                     }
+                                     [NoticeHelper AlertShow:@"数据获取失败，请检查网络是否正常！" view:nil];
+                                 }];
     
 }
 

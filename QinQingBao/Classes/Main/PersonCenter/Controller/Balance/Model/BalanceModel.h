@@ -14,6 +14,8 @@
 
 @property(copy,nonatomic)NSString *available_rc_balance;
 
-@property(strong,nonatomic)NSMutableArray *log;
+@property(strong,nonatomic)NSArray *log;
+
+@property(copy,nonatomic)NSString *count;
 
 @end
