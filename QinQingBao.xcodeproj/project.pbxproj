@@ -1182,6 +1182,12 @@
 		D211A6CD1CED4D23002C90FD /* EvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CC1CED4D23002C90FD /* EvaluationViewController.m */; };
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
+		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
+		D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */; };
+		D246D56D1D0179E10003D166 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5661D0179E10003D166 /* NewsCell.m */; };
+		D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5671D0179E10003D166 /* NewsCell.xib */; };
+		D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5691D0179E10003D166 /* NotificationCell.m */; };
+		D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D56A1D0179E10003D166 /* NotificationCell.xib */; };
 		D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA071B8709FD00E7CDDF /* UUChartLabel.m */; };
 		D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA091B8709FD00E7CDDF /* UUColor.m */; };
 		D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA0B1B8709FD00E7CDDF /* UULineChart.m */; };
@@ -3240,6 +3246,15 @@
 		D211A6CE1CED536A002C90FD /* OrderRefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewController.h; sourceTree = "<group>"; };
 		D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewController.m; sourceTree = "<group>"; };
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
+		D246D5621D0179E10003D166 /* LogisticNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticNotificationCell.h; sourceTree = "<group>"; };
+		D246D5631D0179E10003D166 /* LogisticNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticNotificationCell.m; sourceTree = "<group>"; };
+		D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogisticNotificationCell.xib; sourceTree = "<group>"; };
+		D246D5651D0179E10003D166 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		D246D5661D0179E10003D166 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		D246D5671D0179E10003D166 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		D246D5681D0179E10003D166 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
+		D246D5691D0179E10003D166 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
+		D246D56A1D0179E10003D166 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
 		D279DA061B8709FD00E7CDDF /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
 		D279DA071B8709FD00E7CDDF /* UUChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChartLabel.m; sourceTree = "<group>"; };
 		D279DA081B8709FD00E7CDDF /* UUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUColor.h; sourceTree = "<group>"; };
@@ -7615,6 +7630,15 @@
 		01F08EB61CFD5D4B00207BF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D246D5621D0179E10003D166 /* LogisticNotificationCell.h */,
+				D246D5631D0179E10003D166 /* LogisticNotificationCell.m */,
+				D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */,
+				D246D5651D0179E10003D166 /* NewsCell.h */,
+				D246D5661D0179E10003D166 /* NewsCell.m */,
+				D246D5671D0179E10003D166 /* NewsCell.xib */,
+				D246D5681D0179E10003D166 /* NotificationCell.h */,
+				D246D5691D0179E10003D166 /* NotificationCell.m */,
+				D246D56A1D0179E10003D166 /* NotificationCell.xib */,
 				01F08EC21CFD842E00207BF0 /* test.h */,
 				01F08EC31CFD842E00207BF0 /* test.m */,
 			);
@@ -8329,7 +8353,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -8639,6 +8663,7 @@
 				01ECDA451C8EB31F0018160F /* Contents.json in Resources */,
 				01C82BEB1CC48EA6004D7A16 /* BuyRightnowView.xib in Resources */,
 				01ECDAB91C8EB31F0018160F /* Contents.json in Resources */,
+				D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */,
 				01ECDA691C8EB31F0018160F /* faceDelete@2x.png in Resources */,
 				01F015D61C5F427B00930B0E /* GoodsDescriptionViewController.xib in Resources */,
 				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
@@ -8826,6 +8851,7 @@
 				01E68FE01BCCA68900A17543 /* talk.png in Resources */,
 				01E68FAB1BCCA68900A17543 /* flunet_sel.png in Resources */,
 				01ECDA311C8EB31F0018160F /* VoiceSearchFeedback018@2x.png in Resources */,
+				D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */,
 				01E6D4F71BE1F49B00824F51 /* SVProgressHUD.bundle in Resources */,
 				01E68FF11BCCA68900A17543 /* button_bule.png in Resources */,
 				01ECD9F61C8EB31F0018160F /* EaseMob.bundle in Resources */,
@@ -8867,6 +8893,7 @@
 				D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */,
 				01ECDAA21C8EB31F0018160F /* chatBar_colorMore_videoSelected@2x.png in Resources */,
 				01E68FE61BCCA68900A17543 /* video_time_bg.png in Resources */,
+				D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */,
 				01ECDA351C8EB31F0018160F /* Contents.json in Resources */,
 				01E68FD51BCCA68900A17543 /* ptz_turn_sel.png in Resources */,
 				01EFD3121C56028300BDA640 /* TipsCell.xib in Resources */,
@@ -9305,6 +9332,7 @@
 				01F49D1F1C478D700079F45F /* CommonGoodsCellBottom.m in Sources */,
 				01EBD3D11C854027009236FA /* RefundDetailViewController.m in Sources */,
 				01601D9D1CE0900200B3712E /* SettlementCell.m in Sources */,
+				D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */,
 				D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */,
 				01F08EBE1CFD5D8B00207BF0 /* EventInfoController.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
@@ -9384,6 +9412,7 @@
 				011077031C3EA896001E5C51 /* SWYPhotoBrowserViewController.m in Sources */,
 				01ECDB111C8EB31F0018160F /* EaseViewController.m in Sources */,
 				0128A8C81B9ED597002B14E2 /* UIViewController+AOP.m in Sources */,
+				D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */,
 				01FEE2CA1B9C2551007C4641 /* BusinessInfoCell.m in Sources */,
 				01E9A7421C74613500000805 /* HabitViewController.m in Sources */,
 				01FD4C941CAE4B43008F09CF /* MWCaptionView.m in Sources */,
@@ -9504,6 +9533,7 @@
 				01601D681CE08E9600B3712E /* HMCommonViewController.m in Sources */,
 				01FD55B01B9EB505000F96BB /* OrderSubmitController.m in Sources */,
 				01E9C4971C537EE100A77579 /* SectionHeadView.m in Sources */,
+				D246D56D1D0179E10003D166 /* NewsCell.m in Sources */,
 				01E4A9461C3FA97A00AAAF73 /* PriceDetailCell.m in Sources */,
 				01E690461BCCA96000A17543 /* YSCommonMethods.m in Sources */,
 				01ECDAFD1C8EB31F0018160F /* EaseMessageModel.m in Sources */,
