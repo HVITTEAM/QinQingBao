@@ -9,6 +9,7 @@
 #define kSecondCount 60
 
 #import "MobileBindingView.h"
+#import "MTSMSHelper.h"
 
 @interface MobileBindingView ()
 
@@ -154,24 +155,25 @@
 
 #pragma mark - 网络相关
 /**
- *  向服务器获取验证码
+ *  获取验证码
  */
 -(void)fetchNumberFromServicesWidthPhoneNum:(NSString *)phoneNum
 {
-    NSDictionary *params =  @{
-                               @"mobile" : phoneNum
-                              };
-    [CommonRemoteHelper RemoteWithUrl:URL_getsafenum parameters:params type:CommonRemoteTypeGet success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] == 0) {
-            [NoticeHelper AlertShow:@"验证码发送成功，注意查收" view:self];
-        }else{
-            [NoticeHelper AlertShow:@"获取验证码失败！" view:self];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"获取验证码失败" view:self];
-    }];
+//    NSDictionary *params =  @{
+//                               @"mobile" : phoneNum
+//                              };
+//    [CommonRemoteHelper RemoteWithUrl:URL_getsafenum parameters:params type:CommonRemoteTypeGet success:^(NSDictionary *dict, id responseObject) {
+//        
+//        if ([dict[@"code"] integerValue] == 0) {
+//            [NoticeHelper AlertShow:@"验证码发送成功，注意查收" view:self];
+//        }else{
+//            [NoticeHelper AlertShow:@"获取验证码失败！" view:self];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [NoticeHelper AlertShow:@"获取验证码失败" view:self];
+//    }];
     
+    [[MTSMSHelper sharedInstance] getCheckcode:phoneNum];
 }
 
 #pragma mark - 键盘处理相关方法

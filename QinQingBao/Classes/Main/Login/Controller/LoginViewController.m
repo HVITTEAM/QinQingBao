@@ -10,6 +10,7 @@
 #import "RegistViewController.h"
 #import "UpdatePwdViewController.h"
 #import "APService.h"
+#import "MobileBindingView.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -339,9 +340,14 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          //[dict objectForKey:@"errorMsg"]
-                                         if ([[dict objectForKey:@"errorMsg"] isEqualToString:@"10010"])
+                                         if ([codeNum isEqualToString:@"11010"])
                                          {
-                                             //TODO
+                                             UIWindow *wd = [UIApplication sharedApplication].keyWindow;
+                                             MobileBindingView *bindingView = [MobileBindingView showMobileBindingViewToView:wd];
+                                             bindingView.tapConfirmBtnCallBack = ^(NSString *phone,NSString *verificationCode){
+                                                 [self loginSuccessWithOpenid:openid login_type:login_type open_token:open_token mobile:phone code:verificationCode];
+                                             };
+
                                          }
                                          else
                                          {
