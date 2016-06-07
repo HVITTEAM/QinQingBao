@@ -184,6 +184,9 @@
     [UIView commitAnimations];
 }
 
+/**
+ *  分享文章
+ */
 -(void)share
 {
     NSString * url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@",URL_Local,self.articleItem.id];
@@ -191,12 +194,19 @@
     NSArray* imageArray = @[str];
     
     if (imageArray) {
+        //1、创建分享参数（必要）
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:self.articleItem.abstract
                                          images:imageArray
                                             url:[NSURL URLWithString:url]
                                           title:self.articleItem.title
                                            type:SSDKContentTypeAuto];
+        
+        // 定制新浪微博的分享内容
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.articleItem.abstract title:self.articleItem.title image:[UIImage imageNamed:str] url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        // 定制微信好友的分享内容
+        [shareParams SSDKSetupWeChatParamsByText:self.articleItem.abstract title:self.articleItem.title url:[NSURL URLWithString:url] thumbImage:nil image:[UIImage imageNamed:str] musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
+        
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
                                  items:nil

@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 #import "UpdatePwdViewController.h"
-
+#import "APService.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self setupUI];
 }
 
@@ -47,24 +47,24 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-//    self.navigationController.navigationBarHidden = YES;
-//    
-//    //取消导航栏下方黑线
-//    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
-//        NSArray *list=self.navigationController.navigationBar.subviews;
-//        for (id obj in list) {
-//            if ([obj isKindOfClass:[UIImageView class]]) {
-//                UIImageView *imageView=(UIImageView *)obj;
-//                NSArray *list2=imageView.subviews;
-//                for (id obj2 in list2) {
-//                    if ([obj2 isKindOfClass:[UIImageView class]]) {
-//                        UIImageView *imageView2=(UIImageView *)obj2;
-//                        imageView2.hidden=YES;
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    self.navigationController.navigationBarHidden = YES;
+    //
+    //    //取消导航栏下方黑线
+    //    if ([self.navigationController.navigationBar respondsToSelector:@selector( setBackgroundImage:forBarMetrics:)]){
+    //        NSArray *list=self.navigationController.navigationBar.subviews;
+    //        for (id obj in list) {
+    //            if ([obj isKindOfClass:[UIImageView class]]) {
+    //                UIImageView *imageView=(UIImageView *)obj;
+    //                NSArray *list2=imageView.subviews;
+    //                for (id obj2 in list2) {
+    //                    if ([obj2 isKindOfClass:[UIImageView class]]) {
+    //                        UIImageView *imageView2=(UIImageView *)obj2;
+    //                        imageView2.hidden=YES;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -181,6 +181,14 @@
                                          }
                                          else
                                          {
+                                             
+                                             //设置推送标签和别名
+                                             NSMutableSet *tags = [NSMutableSet set];
+                                             //                                             [self setTags:&tags addTag:[NSString stringWithFormat:@"%@",result.groupid]];
+                                             //                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",result.memberid] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+                                             
+                                             
+                                             
                                              [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
@@ -270,11 +278,10 @@
 
 - (IBAction)qqlogin:(id)sender
 {
-//    SSDKPlatformTypeSinaWeibo 1
-//    SSDKPlatformTypeQQ 998
-//    SSDKPlatformTypeWechat 997
+    //SSDKPlatformTypeSinaWeibo 1
+    //SSDKPlatformTypeQQ 998
+    //SSDKPlatformTypeWechat 997
     UIButton *btn = (UIButton *)sender;
- 
     [ShareSDK getUserInfo:btn.tag
            onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
      {
@@ -284,12 +291,98 @@
              NSLog(@"%@",user.credential);
              NSLog(@"token=%@",user.credential.token);
              NSLog(@"nickname=%@",user.nickname);
+             NSLog(@"icon=%@",user.icon);
+             NSString *login_type;
+             switch (btn.tag) {
+                 case SSDKPlatformTypeSinaWeibo:
+                     login_type = @"3";
+                     break;
+                 case SSDKPlatformTypeQQ:
+                     login_type = @"1";
+                     break;
+                 case SSDKPlatformTypeWechat:
+                     login_type = @"2";
+                     break;
+                 default:
+                     break;
+             }
+             [self loginSuccessWithOpenid:user.uid login_type:login_type open_token:user.credential.token mobile:@"" code:@""];
          }
          else
          {
              NSLog(@"%@",error);
          }
-         
      }];
+}
+
+/**
+ *  第三方登录成功调用后台接口注册账号
+ *
+ *  @param openid     第三方登录ID
+ *  @param login_type 第三方登录类型 分别为 qq：1 微信：2 新浪：3
+ *  @param open_token 第三方登录返回的token
+ *  @param mobile     电话号码，如果第一次登陆则需要
+ *  @param code       验证码
+ */
+-(void)loginSuccessWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token mobile:(NSString *)mobile code:(NSString *)code
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_LoginByother parameters: @{@"open_id" : openid,
+                                                                     @"login_type" : login_type,
+                                                                     @"open_token" : open_token,
+                                                                     @"client" : @"ios",
+                                                                     @"mobile":mobile,
+                                                                     @"code" :code}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         //[dict objectForKey:@"errorMsg"]
+                                         if ([[dict objectForKey:@"errorMsg"] isEqualToString:@"10010"])
+                                         {
+                                             //TODO
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                     }
+                                     else
+                                     {
+                                         //设置推送标签和别名
+                                         NSMutableSet *tags = [NSMutableSet set];
+                                         //                                             [self setTags:&tags addTag:[NSString stringWithFormat:@"%@",result.groupid]];
+                                         //                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",result.memberid] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+                                         
+                                         [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         UserModel *vo = [UserModel objectWithKeyValues:di];
+                                         vo.mobilPhone = self.accountText.text;
+                                         [SharedAppUtil defaultCommonUtil].userVO = vo;
+                                         [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
+                                         //backHide如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
+                                         if (!self.backHiden)
+                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                         [MTControllerChooseTool setMainViewcontroller];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+    
+}
+
+#pragma mark - JPush 推送标签和别名
+- (void)setTags:(NSMutableSet **)tags addTag:(NSString *)tag
+{
+    [*tags addObject:tag];
+}
+
+- (void)tagsAliasCallback:(int)iResCode tags:(NSSet *)tags alias:(NSString *)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 @end

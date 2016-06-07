@@ -182,11 +182,6 @@
             imageView.layer.masksToBounds = YES;
             contentcell.accessoryView = imageView;
         }
-        else if (indexPath.row == 3 && contentcell.detailTextLabel.text.length == 0)//手机号码为空
-        {
-            contentcell.detailTextLabel.text = @"未绑定";
-            contentcell.detailTextLabel.textColor = MTNavgationBackgroundColor;
-        }
         else if(indexPath.row == 3 || indexPath.row == 4)
             contentcell.accessoryType = UITableViewCellAccessoryNone;
         else
@@ -234,10 +229,7 @@
     }
     else if(indexPath.row == 4)
     {
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-            [self setDatePickerIos8];
-        else
-            [self setDatePickerIos7];
+        [self setDatePickerIos8];
     }
     else if(indexPath.row == 5)
     {
@@ -537,21 +529,6 @@
     [self presentViewController:alertVc animated:YES completion:nil];
 }
 
--(void)setDatePickerIos7
-{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle: @"\n\n\n\n\n\n\n\n\n\n\n"
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:@"确认"
-                                  otherButtonTitles:nil];
-    
-    self.datePicker = [[UIDatePicker alloc] init];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-    [actionSheet addSubview:self.datePicker];
-    [actionSheet showInView:self.view];
-}
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (self.tapLoginOutButton) {
@@ -572,6 +549,7 @@
                                              }
                                              else
                                              {
+                                                 //清楚第三方的授权信息
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];

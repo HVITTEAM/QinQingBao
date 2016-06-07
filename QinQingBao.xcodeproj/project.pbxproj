@@ -309,8 +309,6 @@
 		01C0D2021C468BB200FF1CD3 /* CmmonOrderListTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D2011C468BB200FF1CD3 /* CmmonOrderListTotal.m */; };
 		01C0D2051C468BC700FF1CD3 /* CommonOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D2041C468BC700FF1CD3 /* CommonOrderModel.m */; };
 		01C0D20B1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */; };
-		01C67B821CFE783D00FC5E0B /* MessageTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C67B801CFE783D00FC5E0B /* MessageTypeCell.m */; };
-		01C67B831CFE783D00FC5E0B /* MessageTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C67B811CFE783D00FC5E0B /* MessageTypeCell.xib */; };
 		01C7AEA81C3E220F00AE0A9C /* UIColor+RGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */; };
 		01C82BE51CC48DF3004D7A16 /* ShopDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C82BE41CC48DF3004D7A16 /* ShopDetailViewController.m */; };
 		01C82BEA1CC48EA6004D7A16 /* BuyRightnowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C82BE81CC48EA6004D7A16 /* BuyRightnowView.m */; };
@@ -1053,6 +1051,8 @@
 		01F016071C5F430700930B0E /* SpecialList.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F015FF1C5F430700930B0E /* SpecialList.m */; };
 		01F016081C5F430700930B0E /* SpecialModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F016011C5F430700930B0E /* SpecialModel.m */; };
 		01F03A091C607EB800966A6E /* PositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F03A081C607EB800966A6E /* PositionCell.xib */; };
+		01F078011D017C1900F71F45 /* MessageTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F077FF1D017C1900F71F45 /* MessageTypeCell.m */; };
+		01F078021D017C1900F71F45 /* MessageTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F078001D017C1900F71F45 /* MessageTypeCell.xib */; };
 		01F08EB71CFD5D4B00207BF0 /* MyMesageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EB41CFD5D4B00207BF0 /* MyMesageViewController.m */; };
 		01F08EBE1CFD5D8B00207BF0 /* EventInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EBD1CFD5D8B00207BF0 /* EventInfoController.m */; };
 		01F08EC11CFD633800207BF0 /* EventMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F08EC01CFD633800207BF0 /* EventMsgModel.m */; };
@@ -1851,9 +1851,6 @@
 		01C0D2041C468BC700FF1CD3 /* CommonOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonOrderModel.m; sourceTree = "<group>"; };
 		01C0D2091C468CF500FF1CD3 /* ExtendOrderGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtendOrderGoodsModel.h; sourceTree = "<group>"; };
 		01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtendOrderGoodsModel.m; sourceTree = "<group>"; };
-		01C67B7F1CFE783D00FC5E0B /* MessageTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTypeCell.h; sourceTree = "<group>"; };
-		01C67B801CFE783D00FC5E0B /* MessageTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTypeCell.m; sourceTree = "<group>"; };
-		01C67B811CFE783D00FC5E0B /* MessageTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTypeCell.xib; sourceTree = "<group>"; };
 		01C7AEA61C3E220F00AE0A9C /* UIColor+RGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RGB.h"; sourceTree = "<group>"; };
 		01C7AEA71C3E220F00AE0A9C /* UIColor+RGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RGB.m"; sourceTree = "<group>"; };
 		01C82BE31CC48DF3004D7A16 /* ShopDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShopDetailViewController.h; sourceTree = "<group>"; };
@@ -3009,6 +3006,9 @@
 		01F016001C5F430700930B0E /* SpecialModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecialModel.h; sourceTree = "<group>"; };
 		01F016011C5F430700930B0E /* SpecialModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpecialModel.m; sourceTree = "<group>"; };
 		01F03A081C607EB800966A6E /* PositionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionCell.xib; sourceTree = "<group>"; };
+		01F077FE1D017C1900F71F45 /* MessageTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTypeCell.h; sourceTree = "<group>"; };
+		01F077FF1D017C1900F71F45 /* MessageTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTypeCell.m; sourceTree = "<group>"; };
+		01F078001D017C1900F71F45 /* MessageTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageTypeCell.xib; sourceTree = "<group>"; };
 		01F08EB31CFD5D4B00207BF0 /* MyMesageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMesageViewController.h; sourceTree = "<group>"; };
 		01F08EB41CFD5D4B00207BF0 /* MyMesageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMesageViewController.m; sourceTree = "<group>"; };
 		01F08EBC1CFD5D8B00207BF0 /* EventInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventInfoController.h; sourceTree = "<group>"; };
@@ -7645,6 +7645,9 @@
 		01F08EB61CFD5D4B00207BF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01F077FE1D017C1900F71F45 /* MessageTypeCell.h */,
+				01F077FF1D017C1900F71F45 /* MessageTypeCell.m */,
+				01F078001D017C1900F71F45 /* MessageTypeCell.xib */,
 				D246D5621D0179E10003D166 /* LogisticNotificationCell.h */,
 				D246D5631D0179E10003D166 /* LogisticNotificationCell.m */,
 				D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */,
@@ -8369,7 +8372,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = P5A3MJD6BG;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8565,7 +8568,6 @@
 				01E68F2A1BCC9E4C00A17543 /* MyCameraListCell.xib in Resources */,
 				01ECDA911C8EB31F0018160F /* Contents.json in Resources */,
 				D2F744AC1B7D7E7F006AC23D /* LoginViewController.xib in Resources */,
-				01C67B831CFE783D00FC5E0B /* MessageTypeCell.xib in Resources */,
 				01266BA41C4B3D2400992D2F /* background_01.png in Resources */,
 				01ECDAC71C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAB01C8EB31F0018160F /* chatBar_more_locationSelected@2x.png in Resources */,
@@ -8699,6 +8701,7 @@
 				01F015D81C5F427B00930B0E /* SpecialViewController.xib in Resources */,
 				01ECDA101C8EB31F0018160F /* VoiceSearchFeedback007@2x.png in Resources */,
 				01EFD3071C56028300BDA640 /* BodyCell.xib in Resources */,
+				01F078021D017C1900F71F45 /* MessageTypeCell.xib in Resources */,
 				01332B8B1C1E5E240061CB79 /* AllServiceViewController.xib in Resources */,
 				01E603E41C1683350099275C /* care_0.jpg in Resources */,
 				01ECDA2F1C8EB31F0018160F /* Contents.json in Resources */,
@@ -9300,6 +9303,7 @@
 				01ECDAE61C8EB31F0018160F /* EMVoiceConverter.mm in Sources */,
 				0140E2B81C4F601C002ECBC5 /* ReciverinfoModel.m in Sources */,
 				01E690551BCCAA8000A17543 /* IntercomView.m in Sources */,
+				01F078011D017C1900F71F45 /* MessageTypeCell.m in Sources */,
 				01EFD0C31B7D865800A720E7 /* MTControllerChooseTool.m in Sources */,
 				01F0D0161B8D99B300EF3238 /* CommonOrderCell.m in Sources */,
 				010729BF1C4202C100A6F1B0 /* CommendList.m in Sources */,
@@ -9593,7 +9597,6 @@
 				01E4A94B1C3FDDED00AAAF73 /* GoodsDetailViewController.m in Sources */,
 				01E690831BCCF6AA00A17543 /* TSPopoverController.m in Sources */,
 				0126ECF61B8C4E8100EC85C1 /* MASCompositeConstraint.m in Sources */,
-				01C67B821CFE783D00FC5E0B /* MessageTypeCell.m in Sources */,
 				016066D31CF6ACCE005A3164 /* UIView+MJExtension.m in Sources */,
 				01237A5B1CFC319D0070C905 /* MJType.m in Sources */,
 				017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */,

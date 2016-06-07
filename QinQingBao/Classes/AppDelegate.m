@@ -17,6 +17,9 @@
 
 #import <Bugtags/Bugtags.h>
 
+#import "NewsDetailViewControler.h"
+#import "EventInfoController.h"
+
 //微信SDK头文件
 #import "WXApi.h"
 
@@ -33,9 +36,14 @@
 #define sms_appKey @"81de4ff2ac9e"
 #define sms_appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
 
-@interface AppDelegate ()<CLLocationManagerDelegate>
+@interface AppDelegate ()<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
     CLLocationManager *locationmanager;
+    
+    //消息的id
+    NSString *msg_id;
+    //消息的分类
+    NSString *type;
 }
 
 @end
@@ -94,6 +102,9 @@
 }
 #endif
 
+
+#pragma mark -- JPush相关
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [APService registerDeviceToken:deviceToken];
@@ -130,34 +141,18 @@
     //具体的内容
     NSString *pushStr = [alertStr objectForKey:@"alert"];
     //消息的id
-    NSString *msg_id = [userInfo objectForKey:@"msg_id"];
+    msg_id = [userInfo objectForKey:@"msg_id"];
     //消息的分类
-    NSString *type = [userInfo objectForKey:@"type"];
+    type = [userInfo objectForKey:@"type"];
     
     if (application.applicationState == UIApplicationStateActive)//当用户正在运行app的时候
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:pushStr delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"查看", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:pushStr delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"查看详情", nil];
         [alert show];
     }
     else
     {
-        switch ([type integerValue])
-        {
-            case 1:
-                
-                break;
-            case 2:
-                
-                break;
-            case 3:
-                
-                break;
-            case 4:
-                
-                break;
-            default:
-                break;
-        }
+        [self sendMsgByType];
         //当用户点击通知栏的消息进入app
         [APService setBadge:0];
         application.applicationIconBadgeNumber = 0;
@@ -166,6 +161,81 @@
         completionHandler(UIBackgroundFetchResultNewData);
     }
 }
+
+/**
+ *  根据type显示不同的view
+ */
+-(void)sendMsgByType
+{
+    //12 文章详情 34 通知界面
+    switch ([type integerValue])
+    {
+        case 1:
+        {
+            [self showArticle:msg_id];
+        }
+            break;
+        case 2:
+        {
+            [self showArticle:msg_id];
+        }
+            break;
+        case 3:
+        {
+            EventInfoController *vc = [[EventInfoController alloc] init];
+            vc.type = MessageTypePushMsg;
+            vc.title = @"通知消息";
+            UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+            UINavigationController *nav = tab.viewControllers[0];
+            [nav pushViewController:vc animated:YES];
+        }
+            break;
+        case 4:
+        {
+            EventInfoController *vc = [[EventInfoController alloc] init];
+            vc.type = MessageTypeLogistics;
+            vc.title = @"物流助手";
+            UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+            UINavigationController *nav = tab.viewControllers[0];
+            [nav pushViewController:vc animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+
+}
+
+/**
+ *  显示文章详情
+ *
+ *  @param idstr 文章id
+ */
+-(void)showArticle:(NSString *)idstr
+{
+    NewsDetailViewControler *view = [[NewsDetailViewControler alloc] init];
+    NSString *url;
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=cxjk&like",URL_Local,idstr];
+    else
+        url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,idstr,[SharedAppUtil defaultCommonUtil].userVO.key];
+    view.url = url;
+    // 切换控制器
+    UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+    UINavigationController *nav = tab.viewControllers[0];
+    [nav pushViewController:view animated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self sendMsgByType];
+    }
+}
+
+#pragma mark -- JPush End
+
 
 /**
  *  在点击设备的home键的时候调用的方法
