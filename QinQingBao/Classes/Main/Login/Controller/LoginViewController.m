@@ -181,15 +181,7 @@
                                          }
                                          else
                                          {
-                                             
-                                             //设置推送标签和别名
-                                             NSMutableSet *tags = [NSMutableSet set];
-                                             //                                             [self setTags:&tags addTag:[NSString stringWithFormat:@"%@",result.groupid]];
-                                             //                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",result.memberid] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
-                                             
-                                             
-                                             
-                                             [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                            [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              vo.mobilPhone = self.accountText.text;
@@ -199,6 +191,12 @@
                                              if (!self.backHiden)
                                                  [self dismissViewControllerAnimated:YES completion:nil];
                                              [MTControllerChooseTool setMainViewcontroller];
+                                             
+                                             
+                                             //设置推送标签和别名
+                                             NSMutableSet *tags = [NSMutableSet set];
+                                             [self setTags:&tags addTag:@""];
+                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",vo.member_id] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -335,11 +333,10 @@
                                                                      @"code" :code}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
-                                     id codeNum = [dict objectForKey:@"code"];
+                                     id codeNum = [dict objectForKey:@"datas"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         //[dict objectForKey:@"errorMsg"]
-                                         if ([[dict objectForKey:@"errorMsg"] isEqualToString:@"10010"])
+                                         if ([codeNum isEqualToString:@"11010"])
                                          {
                                              //TODO
                                          }
@@ -351,11 +348,6 @@
                                      }
                                      else
                                      {
-                                         //设置推送标签和别名
-                                         NSMutableSet *tags = [NSMutableSet set];
-                                         //                                             [self setTags:&tags addTag:[NSString stringWithFormat:@"%@",result.groupid]];
-                                         //                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",result.memberid] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
-                                         
                                          [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          UserModel *vo = [UserModel objectWithKeyValues:di];
@@ -366,6 +358,11 @@
                                          if (!self.backHiden)
                                              [self dismissViewControllerAnimated:YES completion:nil];
                                          [MTControllerChooseTool setMainViewcontroller];
+                                         
+                                         //设置推送标签和别名
+                                         NSMutableSet *tags = [NSMutableSet set];
+                                         [self setTags:&tags addTag:@""];
+                                         [APService setTags:tags alias: [NSString stringWithFormat:@"%@",vo.member_id] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
