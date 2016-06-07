@@ -1184,6 +1184,8 @@
 		D211A6CD1CED4D23002C90FD /* EvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CC1CED4D23002C90FD /* EvaluationViewController.m */; };
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
+		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
+		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
 		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
 		D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */; };
 		D246D56D1D0179E10003D166 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5661D0179E10003D166 /* NewsCell.m */; };
@@ -3251,6 +3253,9 @@
 		D211A6CE1CED536A002C90FD /* OrderRefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewController.h; sourceTree = "<group>"; };
 		D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewController.m; sourceTree = "<group>"; };
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
+		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
+		D22D61771D0655DB008C3EC1 /* MobileBindingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileBindingView.m; sourceTree = "<group>"; };
+		D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileBindingView.xib; sourceTree = "<group>"; };
 		D246D5621D0179E10003D166 /* LogisticNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticNotificationCell.h; sourceTree = "<group>"; };
 		D246D5631D0179E10003D166 /* LogisticNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticNotificationCell.m; sourceTree = "<group>"; };
 		D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogisticNotificationCell.xib; sourceTree = "<group>"; };
@@ -3798,6 +3803,9 @@
 		0126ED141B8C4F1200EC85C1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D22D61761D0655DB008C3EC1 /* MobileBindingView.h */,
+				D22D61771D0655DB008C3EC1 /* MobileBindingView.m */,
+				D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */,
 				01EA67C81CCDB23600C00153 /* MTTextView.h */,
 				01EA67C91CCDB23600C00153 /* MTTextView.m */,
 				01F0D00D1B8D99B300EF3238 /* Cell */,
@@ -8361,7 +8369,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8507,6 +8515,7 @@
 				01E68FC51BCCA68900A17543 /* playback_button.png in Resources */,
 				01E68FAD1BCCA68900A17543 /* full_multiple_bg.png in Resources */,
 				01ED1FD61C41FE37002FD93C /* AddaddressInfoViewController.xib in Resources */,
+				D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */,
 				01ECDA2A1C8EB31F0018160F /* VoiceSearchFeedback016.png in Resources */,
 				01ECDAD51C8EB31F0018160F /* Contents.json in Resources */,
 				01E68FF91BCCA68900A17543 /* circle_bg.png in Resources */,
@@ -9185,6 +9194,7 @@
 				01E6D4F61BE1F49B00824F51 /* SVIndefiniteAnimatedView.m in Sources */,
 				01E5736A1CC0798D005F045D /* MassageTableViewController.m in Sources */,
 				01F4F6821CC471D3003F6B6E /* LeftTitleSubTitleCell.m in Sources */,
+				D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */,
 				01ECDAE91C8EB31F0018160F /* EMGifImage.m in Sources */,
 				010EC9F21C44A52E00D36417 /* AddressListTotal.m in Sources */,
 				01ECDAE41C8EB31F0018160F /* amrFileCodec.mm in Sources */,

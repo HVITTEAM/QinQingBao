@@ -137,7 +137,10 @@
              if (!error)
              {
                  //倒计时
-                 self.sureSendSMS();
+                 if (self.sureSendSMS) {
+                      self.sureSendSMS();
+                 }
+                
              }
              else
              {

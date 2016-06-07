@@ -36,7 +36,7 @@
 /**
  *  创建一个SMSVerificationView并显示到指定view上
  */
-+(SMSVerificationView *)showSMSVerificationViewToView:(UIView *)targetView;
++(SMSVerificationView *)showSMSVerificationViewToView:(UIView *)targetView
 {
     SMSVerificationView *smsView = [[[NSBundle mainBundle] loadNibNamed:@"SMSVerificationView" owner:nil options:nil] lastObject];
     
