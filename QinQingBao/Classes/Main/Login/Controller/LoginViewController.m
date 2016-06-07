@@ -334,7 +334,7 @@
                                                                      @"code" :code}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
-                                     id codeNum = [dict objectForKey:@"datas"];
+                                     id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          if ([codeNum isEqualToString:@"11010"])
@@ -344,7 +344,12 @@
                                              bindingView.tapConfirmBtnCallBack = ^(NSString *phone,NSString *verificationCode){
                                                  [self loginSuccessWithOpenid:openid login_type:login_type open_token:open_token mobile:phone code:verificationCode];
                                              };
-
+                                             bindingView.tapCancelBtnCallBack = ^(void){
+                                                 //清楚第三方的授权信息
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
+                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
+                                             };
                                          }
                                          else
                                          {
