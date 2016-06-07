@@ -27,6 +27,22 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb3331200145</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ41E27A1F</string>
+			</array>
+		</dict>
+		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
@@ -74,6 +90,11 @@
 		<string>weibosdk2.5</string>
 		<string>sinaweibohd</string>
 		<string>sinaweibohdsso</string>
+		<string>mqqOpensdkSSoLogin</string>
+		<string>mqqopensdkapiV3</string>
+		<string>wtloginmqq2</string>
+		<string>mqq</string>
+		<string>mqqapi</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -83,7 +104,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<true/>
+	<string>app在筛选据您最近的商家的时候需要使用您的定位信息</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

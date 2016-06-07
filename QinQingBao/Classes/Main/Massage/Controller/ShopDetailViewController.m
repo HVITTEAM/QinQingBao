@@ -185,7 +185,7 @@
         NSString *strUrl = imgUrlArray[indexPath.row - 6];
         UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:strUrl];
         if (!image)
-            image = [UIImage imageNamed:@"placeholderImage"];
+            image = [UIImage imageNamed:@"placeholderDetail"];
         CGFloat scale = image.size.width / image.size.height;
         CGFloat cellHeight = MTScreenW / scale;
         return cellHeight;
@@ -254,7 +254,7 @@
                 UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:strUrl];
                 if (!image)
                 {
-                    image = [UIImage imageNamed:@"placeholderImage"];
+                    image = [UIImage imageNamed:@"placeholderDetail"];
                     [self loadImageWithIndexpath:indexPath url:strUrl];
                 }
                 imgcell.imgView.image = image;
@@ -305,8 +305,4 @@
         }];
     }
 }
-
-
-
-
 @end

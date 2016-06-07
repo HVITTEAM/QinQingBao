@@ -102,16 +102,6 @@
                                  }];
 }
 
-/**
- *  解析数据源
- *
- *  @param tableView <#tableView description#>
- */
--(void)analyzeData
-{
-    
-}
-
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -261,7 +251,6 @@
     }
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 
 

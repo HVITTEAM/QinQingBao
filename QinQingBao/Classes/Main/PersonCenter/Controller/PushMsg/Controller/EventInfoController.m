@@ -170,6 +170,9 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
+                                         //暂无数据
+                                         if ([codeNum isEqualToString:@"17001"])
+                                             return [self.tableView initWithPlaceString:@"暂无数据"];
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
