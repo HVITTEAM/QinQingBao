@@ -12,6 +12,7 @@
 #import "NotificationCell.h"
 #import "LogisticNotificationCell.h"
 #import "NoticeHelper.h"
+#import "PushMsgModel.h"
 
 @interface EventInfoController ()
 {
@@ -118,11 +119,17 @@
 {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
-    
-    EventMsgModel *model  = dataProvider[section];
-    
+
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 120)/2, 15, 120, 23)];
-    lab.text = [model.s_push_time substringToIndex:16];
+    
+    if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
+        EventMsgModel *model  = dataProvider[section];
+        lab.text = [model.s_push_time substringToIndex:16];
+    }else if (self.type == MessageTypePushMsg){
+        PushMsgModel *model  = dataProvider[section];
+        lab.text = [model.push_time substringToIndex:16];
+    }
+    
     lab.layer.masksToBounds = YES;
     lab.layer.cornerRadius = 4;
     lab.backgroundColor = HMColor(198, 198, 198);
@@ -182,7 +189,13 @@
                                      }
                                      else
                                      {
-                                         NSArray *newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         NSArray *newDatas = [[NSArray alloc] init];
+                                         if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
+                                            newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         }else if (self.type == MessageTypePushMsg){
+                                            newDatas =[PushMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         }
+
                                          [dataProvider addObjectsFromArray:newDatas];
                                          self.nextPageNumber ++;
                                          [self.tableView reloadData];

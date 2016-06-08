@@ -1184,6 +1184,7 @@
 		D211A6CD1CED4D23002C90FD /* EvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CC1CED4D23002C90FD /* EvaluationViewController.m */; };
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
+		D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D216AB501D07FC4F00E85008 /* PushMsgModel.m */; };
 		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
 		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
 		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
@@ -3253,6 +3254,8 @@
 		D211A6CE1CED536A002C90FD /* OrderRefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewController.h; sourceTree = "<group>"; };
 		D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewController.m; sourceTree = "<group>"; };
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
+		D216AB4F1D07FC4F00E85008 /* PushMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgModel.h; sourceTree = "<group>"; };
+		D216AB501D07FC4F00E85008 /* PushMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgModel.m; sourceTree = "<group>"; };
 		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
 		D22D61771D0655DB008C3EC1 /* MobileBindingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileBindingView.m; sourceTree = "<group>"; };
 		D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileBindingView.xib; sourceTree = "<group>"; };
@@ -7638,6 +7641,8 @@
 				01F08EC01CFD633800207BF0 /* EventMsgModel.m */,
 				01F0A1981D01615400F6E154 /* FristMsgModel.h */,
 				01F0A1991D01615400F6E154 /* FristMsgModel.m */,
+				D216AB4F1D07FC4F00E85008 /* PushMsgModel.h */,
+				D216AB501D07FC4F00E85008 /* PushMsgModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8369,7 +8374,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = P5A3MJD6BG;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9467,6 +9472,7 @@
 				01332B8A1C1E5E240061CB79 /* AllServiceViewController.m in Sources */,
 				01328FA41C4CD1AE0014D283 /* GoodsMiddleTopCell.m in Sources */,
 				010EC9DD1C438D8900D36417 /* MTCommodityModel.m in Sources */,
+				D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */,
 				D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */,
 				01E6D4F51BE1F49B00824F51 /* README.md in Sources */,
 				0181B1B01CDC95F900A1435E /* SWYSubtitleCell.m in Sources */,
