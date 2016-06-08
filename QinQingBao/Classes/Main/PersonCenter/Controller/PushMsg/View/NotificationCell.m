@@ -7,7 +7,7 @@
 //
 
 #import "NotificationCell.h"
-#import "EventMsgModel.h"
+#import "PushMsgModel.h"
 
 @interface NotificationCell ()
 
@@ -45,21 +45,21 @@
     self.containerView.layer.borderWidth = 1.0f;
 }
 
--(void)setDataWithModel:(EventMsgModel *)model
+-(void)setDataWithModel:(PushMsgModel *)model
 {
     self.titleLb.text = model.msg_title;
 
-    if (model.abstract) {
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.lineSpacing = 4;
-        NSDictionary *attr = @{
-                               NSFontAttributeName:[UIFont systemFontOfSize:14],
-                               NSForegroundColorAttributeName:HMColor(102, 102, 102),
-                               NSParagraphStyleAttributeName:paragraphStyle
-                               };
-        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.abstract attributes:attr];
-        self.contentLb.attributedText = attrStr;
-    }
+//    if (model.abstract) {
+//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//        paragraphStyle.lineSpacing = 4;
+//        NSDictionary *attr = @{
+//                               NSFontAttributeName:[UIFont systemFontOfSize:14],
+//                               NSForegroundColorAttributeName:HMColor(102, 102, 102),
+//                               NSParagraphStyleAttributeName:paragraphStyle
+//                               };
+//        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.abstract attributes:attr];
+//        self.contentLb.attributedText = attrStr;
+//    }
     
     //计算高度
     self.contentLb.preferredMaxLayoutWidth = MTScreenW - 52;

@@ -24,48 +24,21 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7O-JD-kTk">
-                                <rect key="frame" x="20" y="45.5" width="268" height="36"/>
+                                <rect key="frame" x="20" y="45.5" width="268" height="74"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBX-aV-cfO">
-                                <rect key="frame" x="20" y="92" width="265" height="1"/>
-                                <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="QvH-ft-f0Q"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" text="查看详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGM-EO-hmR">
-                                <rect key="frame" x="20" y="104" width="52" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="common_icon_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="XCz-Lw-tFK">
-                                <rect key="frame" x="270" y="104.5" width="15" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="DVg-Yq-Lc5"/>
-                                    <constraint firstAttribute="height" constant="15" id="syM-Cg-9iT"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xGM-EO-hmR" firstAttribute="top" secondItem="pBX-aV-cfO" secondAttribute="bottom" constant="11" id="92a-gF-DYY"/>
                             <constraint firstItem="A7O-JD-kTk" firstAttribute="leading" secondItem="FQR-JL-zjB" secondAttribute="leading" id="95O-xl-yma"/>
                             <constraint firstItem="A7O-JD-kTk" firstAttribute="top" secondItem="FQR-JL-zjB" secondAttribute="bottom" constant="10" id="Cc2-fn-AAQ"/>
                             <constraint firstAttribute="trailing" secondItem="A7O-JD-kTk" secondAttribute="trailing" constant="12" id="FNy-kx-xld"/>
-                            <constraint firstItem="pBX-aV-cfO" firstAttribute="trailing" secondItem="FQR-JL-zjB" secondAttribute="trailing" id="Kan-cM-a0h"/>
                             <constraint firstItem="FQR-JL-zjB" firstAttribute="top" secondItem="Qjh-pl-8xR" secondAttribute="top" constant="15" id="Osw-lC-bcJ"/>
-                            <constraint firstAttribute="bottom" secondItem="xGM-EO-hmR" secondAttribute="bottom" constant="10" id="aCo-xE-LFq"/>
-                            <constraint firstItem="pBX-aV-cfO" firstAttribute="top" secondItem="A7O-JD-kTk" secondAttribute="bottom" constant="10" id="eZE-7z-hdK"/>
-                            <constraint firstAttribute="trailing" secondItem="XCz-Lw-tFK" secondAttribute="trailing" constant="15" id="fwP-E6-oSE"/>
-                            <constraint firstItem="xGM-EO-hmR" firstAttribute="leading" secondItem="FQR-JL-zjB" secondAttribute="leading" id="irq-B7-HoQ"/>
-                            <constraint firstItem="XCz-Lw-tFK" firstAttribute="centerY" secondItem="xGM-EO-hmR" secondAttribute="centerY" id="lbg-no-g9E"/>
                             <constraint firstItem="FQR-JL-zjB" firstAttribute="leading" secondItem="Qjh-pl-8xR" secondAttribute="leading" constant="20" id="mkt-EO-9rj"/>
                             <constraint firstAttribute="trailing" secondItem="FQR-JL-zjB" secondAttribute="trailing" constant="15" id="o0F-mT-Uru"/>
-                            <constraint firstItem="pBX-aV-cfO" firstAttribute="leading" secondItem="FQR-JL-zjB" secondAttribute="leading" id="vRw-I8-Jzs"/>
+                            <constraint firstAttribute="bottom" secondItem="A7O-JD-kTk" secondAttribute="bottom" constant="10" id="xRk-KE-x3I"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -85,7 +58,4 @@
             <point key="canvasLocation" x="318" y="136"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="common_icon_arrow" width="12" height="12"/>
-    </resources>
 </document>
