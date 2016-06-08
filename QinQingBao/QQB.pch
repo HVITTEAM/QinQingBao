@@ -66,7 +66,7 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 #define kSellerAccount @"ofc.er@hvit.com.cn"
 
-#define kAppVersion @"v 1.3.0.6"
+#define kAppVersion @"v 1.3.0.8"
 
 //Demo 转场集合类
 #import "EzvizDemoGlobalKit.h"

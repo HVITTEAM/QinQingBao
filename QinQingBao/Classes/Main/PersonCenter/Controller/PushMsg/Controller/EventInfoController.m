@@ -159,7 +159,7 @@
     NSInteger infotype = self.type + 1;
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_get_systemmsginfos_by_type parameters: @{@"type" : @(infotype),
-                                                                                   @"page" : @3,
+                                                                                   @"page" : @10,
                                                                                    @"client" : @"ios",
                                                                                    @"p" : @(self.nextPageNumber),
                                                                                    @"key":[SharedAppUtil defaultCommonUtil].userVO.key}

@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *old_id;
 @property (nonatomic, copy) NSString *imei_watch;
 @property (nonatomic, copy) NSString *member_mobile;
-
+//登陆类型 默认为正常登陆  1为第三方
+@property (nonatomic, copy) NSString *logintype;
 
 @end

@@ -352,6 +352,7 @@
                                          [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          UserModel *vo = [UserModel objectWithKeyValues:di];
+                                         vo.logintype = @"1";
                                          [self loginResultSetData:vo];
                                      }
                                      [HUD removeFromSuperview];
