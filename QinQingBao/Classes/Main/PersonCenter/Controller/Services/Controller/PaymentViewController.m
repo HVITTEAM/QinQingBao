@@ -235,7 +235,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
         //如果结算方式不能更改就不允许点击
         if ([self.lastPrice floatValue] > [self.balance floatValue])
             return;
-        else if ([SharedAppUtil defaultCommonUtil].userVO.mobilPhone.length == 0)
+        else if ([SharedAppUtil defaultCommonUtil].userVO.member_mobile.length == 0)
         {
             UIAlertView *mobile_alert = [[UIAlertView alloc] initWithTitle:@"提示信息" message:@"您的账号未绑定手机号码,不能使用余额支付" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"去绑定", nil];
             mobile_alert.tag = 100;
@@ -310,7 +310,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             __weak typeof(self) weakSelf = self;
             UIWindow *wd = [UIApplication sharedApplication].keyWindow;
             SMSVerificationView *verificationView = [SMSVerificationView showSMSVerificationViewToView:wd];
-            verificationView.phoneNum = [SharedAppUtil defaultCommonUtil].userVO.mobilPhone;
+            verificationView.phoneNum = [SharedAppUtil defaultCommonUtil].userVO.member_mobile;
             verificationView.tapConfirmBtnCallBack = ^(NSString *safeNum){
                 weakSelf.numberOfVerification = safeNum;
                 [weakSelf payResultHandel];

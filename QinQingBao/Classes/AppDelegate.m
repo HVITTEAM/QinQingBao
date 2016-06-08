@@ -186,7 +186,7 @@
             vc.type = MessageTypePushMsg;
             vc.title = @"通知消息";
             UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
-            UINavigationController *nav = tab.viewControllers[0];
+            UINavigationController *nav = tab.selectedViewController;
             [nav pushViewController:vc animated:YES];
         }
             break;
@@ -196,7 +196,7 @@
             vc.type = MessageTypeLogistics;
             vc.title = @"物流助手";
             UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
-            UINavigationController *nav = tab.viewControllers[0];
+            UINavigationController *nav = tab.selectedViewController;
             [nav pushViewController:vc animated:YES];
         }
             break;
@@ -222,7 +222,7 @@
     view.url = url;
     // 切换控制器
     UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
-    UINavigationController *nav = tab.viewControllers[0];
+    UINavigationController *nav = tab.selectedViewController;
     [nav pushViewController:view animated:YES];
 }
 
@@ -382,8 +382,8 @@
                                                  authType:SSDKAuthTypeBoth];
                       break;
                   case SSDKPlatformTypeQQ:
-                      [appInfo SSDKSetupQQByAppId:@"1105361439"
-                                           appKey:@"qxSXe28JgayKCgd8"
+                      [appInfo SSDKSetupQQByAppId:@"1104940369"
+                                           appKey:@"Q9PT8FrjYwHZWthH"
                                          authType:SSDKAuthTypeBoth];
                       break;
                   case SSDKPlatformTypeWechat:

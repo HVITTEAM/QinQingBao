@@ -176,28 +176,15 @@
                                          id codeNum = [dict objectForKey:@"code"];
                                          if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                          {
-                                             
                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                              [alertView show];
                                          }
                                          else
                                          {
-                                            [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                             [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
-                                             vo.mobilPhone = self.accountText.text;
-                                             [SharedAppUtil defaultCommonUtil].userVO = vo;
-                                             [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             //backHide如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
-                                             if (!self.backHiden)
-                                                 [self dismissViewControllerAnimated:YES completion:nil];
-                                             [MTControllerChooseTool setMainViewcontroller];
-                                             
-                                             
-                                             //设置推送标签和别名
-                                             NSMutableSet *tags = [NSMutableSet set];
-                                             [self setTags:&tags addTag:@""];
-                                             [APService setTags:tags alias: [NSString stringWithFormat:@"%@",vo.member_id] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+                                             [self loginResultSetData:vo];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -275,6 +262,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark -- 第三方登录
+
 - (IBAction)qqlogin:(id)sender
 {
     //SSDKPlatformTypeSinaWeibo 1
@@ -287,7 +276,8 @@
          if (state == SSDKResponseStateSuccess)
          {
              NSLog(@"uid=%@",user.uid);
-             NSLog(@"%@",user.credential);
+             NSLog(@"credential=%@",user.credential);
+             NSLog(@"openid=%@",[user.credential.rawData objectForKey:@"openid"]);
              NSLog(@"token=%@",user.credential.token);
              NSLog(@"nickname=%@",user.nickname);
              NSLog(@"icon=%@",user.icon);
@@ -362,18 +352,7 @@
                                          [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          UserModel *vo = [UserModel objectWithKeyValues:di];
-                                         vo.mobilPhone = self.accountText.text;
-                                         [SharedAppUtil defaultCommonUtil].userVO = vo;
-                                         [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                         //backHide如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
-                                         if (!self.backHiden)
-                                             [self dismissViewControllerAnimated:YES completion:nil];
-                                         [MTControllerChooseTool setMainViewcontroller];
-                                         
-                                         //设置推送标签和别名
-                                         NSMutableSet *tags = [NSMutableSet set];
-                                         [self setTags:&tags addTag:@""];
-                                         [APService setTags:tags alias: [NSString stringWithFormat:@"%@",vo.member_id] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+                                         [self loginResultSetData:vo];
                                      }
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -381,6 +360,28 @@
                                      [HUD removeFromSuperview];
                                  }];
     
+}
+
+
+/**
+ *  登陆成功之后需要设置本地登陆数据
+ *
+ *  @param uservo 用户信息model
+ */
+-(void)loginResultSetData:(UserModel *)uservo
+{
+    [SharedAppUtil defaultCommonUtil].userVO = uservo;
+    [ArchiverCacheHelper saveObjectToLoacl:uservo key:User_Archiver_Key filePath:User_Archiver_Path];
+    
+    //backHide 是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
+    if (!self.backHiden)
+        [self dismissViewControllerAnimated:YES completion:nil];
+    [MTControllerChooseTool setMainViewcontroller];
+    
+    //设置推送标签和别名
+    NSMutableSet *tags = [NSMutableSet set];
+    [self setTags:&tags addTag:@""];
+    [APService setTags:tags alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 #pragma mark - JPush 推送标签和别名

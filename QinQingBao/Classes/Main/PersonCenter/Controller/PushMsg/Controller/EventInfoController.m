@@ -44,6 +44,10 @@
 /** 屏蔽tableView的样式 */
 - (id)init
 {
+    self = [super init];
+    if (self){
+        self.hidesBottomBarWhenPushed = YES;
+    }
     return [self initWithStyle:UITableViewStyleGrouped];
 }
 
@@ -180,7 +184,6 @@
                                      {
                                          NSArray *newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          [dataProvider addObjectsFromArray:newDatas];
-                                        
                                          self.nextPageNumber ++;
                                          [self.tableView reloadData];
                                      }
