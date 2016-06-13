@@ -74,6 +74,17 @@
 #import "YSConstStrings.h"
 #import "YSHTTPClient.h"
 
+/** 自定义Log，日志开关 0-关闭 1-开启 */
+#define __LOGDEBUG__ (1)
+
+#if defined(__LOGDEBUG__) && __LOGDEBUG__ && DEBUG
+#define CX_Log(...) NSLog(__VA_ARGS__)
+#else
+#define CX_Log(...)
+#endif
+
+// 打印当前控制器,方法名,和行号
+#define CX_PRINT_METHOD CX_Log(@"==%@:%p running method '%@' line %d==", self.class, self, NSStringFromSelector(_cmd),__LINE__);
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -92,7 +103,6 @@
 #define MTScreenH [UIScreen mainScreen].bounds.size.height
 
 #define MTNavH self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height
-
 
 // 颜色
 #define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]

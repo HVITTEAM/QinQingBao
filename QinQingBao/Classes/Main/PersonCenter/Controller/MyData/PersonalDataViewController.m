@@ -126,7 +126,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[SharedAppUtil defaultCommonUtil].userVO.logintype isEqualToString:@"1"] ? 1 : 2;
+    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -202,8 +202,9 @@
                                           title:self.articleItem.title
                                            type:SSDKContentTypeAuto];
         
+        UIImage *sinaImg = [UIImage imageNamed:str];
         // 定制新浪微博的分享内容
-        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.articleItem.abstract title:self.articleItem.title image:[UIImage imageNamed:str] url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.articleItem.abstract title:self.articleItem.title image:sinaImg url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
         // 定制微信好友的分享内容
         [shareParams SSDKSetupWeChatParamsByText:self.articleItem.abstract title:self.articleItem.title url:[NSURL URLWithString:url] thumbImage:nil image:[UIImage imageNamed:str] musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
         

@@ -50,7 +50,6 @@
     [super viewDidLoad];
     
     self.title = @"我的消息";
-    
     self.view.backgroundColor  = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
@@ -82,7 +81,7 @@
 -(void)getDataProvider
 {
     [CommonRemoteHelper RemoteWithUrl:URL_get_systemmsginfos_by_type_first parameters: @{@"client" : @"ios",
-                                                                                         @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                                         @"key":[SharedAppUtil defaultCommonUtil].userVO ? [SharedAppUtil defaultCommonUtil].userVO.key : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -93,7 +92,6 @@
                                      }
                                      else
                                      {
-                                         //                                         dataProvider = [FristMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          dataProvider = [dict objectForKey:@"datas"];
                                          [self.tableView reloadData];
                                      }
@@ -123,6 +121,14 @@
     NSArray *itemArr =  [FristMsgModel objectArrayWithKeyValuesArray:[dataProvider objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row + 1]]];
     
     FristMsgModel *item;
+    
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+    {
+        if (indexPath.row > 1)
+        {
+            typeCell.subtitleLab.text = @"登录后可以查看";
+        }
+    }
     if (itemArr && itemArr.count > 0)
     {
         item = itemArr[0];
@@ -195,6 +201,9 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![SharedAppUtil defaultCommonUtil].userVO && indexPath.row > 1)
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    
     NSArray *itemArr =  [FristMsgModel objectArrayWithKeyValuesArray:[dataProvider objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row + 1]]];
     FristMsgModel *item;
     if (itemArr && itemArr.count > 0)

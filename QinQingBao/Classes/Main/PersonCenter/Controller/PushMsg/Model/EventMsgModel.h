@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, copy) NSString *logo_url;
+@property (nonatomic, copy) NSString *detail_url;
 @property (nonatomic, copy) NSString *abstract;
 @property (nonatomic, copy) NSString *m_create_time;
 @property (nonatomic, copy) NSString *systemmsg_id;
