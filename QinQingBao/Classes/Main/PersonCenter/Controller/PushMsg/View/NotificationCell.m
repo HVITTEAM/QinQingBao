@@ -59,6 +59,8 @@
                                };
         NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.msg_title attributes:attr];
         self.contentLb.attributedText = attrStr;
+    }else{
+        self.contentLb.attributedText = nil;
     }
     
     //计算高度

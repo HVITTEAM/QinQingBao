@@ -55,6 +55,7 @@
     self.titleLb.text = @"已发货";
     self.timeLb.text = [model.create_time substringWithRange:NSMakeRange(5, 5)];
     self.descLb.text = model.msg_title;
+    self.imgView = nil;
 }
 
 @end

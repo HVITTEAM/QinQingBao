@@ -14,6 +14,7 @@
 #import "NoticeHelper.h"
 #import "PushMsgModel.h"
 #import "NewsDetailViewControler.h"
+#import "DeliverViewController.h"
 
 @interface EventInfoController ()
 {
@@ -155,17 +156,17 @@
             url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,model.msg_artid,[SharedAppUtil defaultCommonUtil].userVO.key];
         view.url = url;
         [self.navigationController pushViewController:view animated:YES];
+    }else if (self.type == MessageTypeLogistics){
+        PushMsgModel *model  = dataProvider[indexPath.section];
+        DeliverViewController *deliverVC = [[DeliverViewController alloc] init];
+        deliverVC.orderId = model.sys_relevant_id;
+        [self.navigationController pushViewController:deliverVC animated:YES];
     }
 }
 
 #pragma mark - 网络相关
 -(void)loadMoreData
 {
-//    if (self.type == MessageTypeLogistics) {
-//        //物流接口
-//        
-//        return;
-//    }
     //活动资讯、健康小贴士、通知消息
     [self getDadaProvider];
 }
@@ -204,7 +205,7 @@
                                          NSArray *newDatas = [[NSArray alloc] init];
                                          if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
                                              newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         }else if (self.type == MessageTypePushMsg){
+                                         }else if (self.type == MessageTypePushMsg || self.type == MessageTypeLogistics){
                                              newDatas =[PushMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          }
                                          
