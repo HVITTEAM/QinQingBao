@@ -184,6 +184,7 @@
                                              [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
+                                             vo.logintype = @"0";
                                              [self loginResultSetData:vo];
                                          }
                                          [HUD removeFromSuperview];
@@ -352,6 +353,7 @@
                                          [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          UserModel *vo = [UserModel objectWithKeyValues:di];
+                                         vo.logintype = login_type;
                                          [self loginResultSetData:vo];
                                      }
                                      [HUD removeFromSuperview];

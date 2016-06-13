@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *old_id;
 @property (nonatomic, copy) NSString *imei_watch;
 @property (nonatomic, copy) NSString *member_mobile;
-
+//登陆类型 默认为正常登陆 分别为 0手机号码 qq：1 微信：2 新浪：3
+@property (nonatomic, copy) NSString *logintype;
 
 @end

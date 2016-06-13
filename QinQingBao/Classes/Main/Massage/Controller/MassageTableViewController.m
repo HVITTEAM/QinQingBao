@@ -19,7 +19,7 @@
 
 @implementation MassageTableViewController
 {
-    NSMutableArray *dataProvider;
+    NSArray *dataProvider;
 }
 
 -(instancetype)init
@@ -50,7 +50,9 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"tid" : @43}
+    [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"100",
+                                                                    @"p" : @"1",
+                                                                    @"tid" : @43}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

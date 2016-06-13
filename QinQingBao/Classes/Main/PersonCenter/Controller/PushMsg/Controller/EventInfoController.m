@@ -13,6 +13,7 @@
 #import "LogisticNotificationCell.h"
 #import "NoticeHelper.h"
 #import "PushMsgModel.h"
+#import "NewsDetailViewControler.h"
 
 @interface EventInfoController ()
 {
@@ -35,7 +36,7 @@
     self.nextPageNumber = 1;
     
     self.view.backgroundColor  = HMGlobalBg;
-//    MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
+    //    MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
     self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -119,7 +120,7 @@
 {
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor clearColor];
-
+    
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake((MTScreenW - 120)/2, 15, 120, 23)];
     
     if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
@@ -143,7 +144,18 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips)
+    {
+        EventMsgModel *model  = dataProvider[indexPath.section];
+        NewsDetailViewControler *view = [[NewsDetailViewControler alloc] init];
+        NSString *url;
+        if (![SharedAppUtil defaultCommonUtil].userVO)
+            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=cxjk&like",URL_Local,model.msg_artid];
+        else
+            url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=%@&like",URL_Local,model.msg_artid,[SharedAppUtil defaultCommonUtil].userVO.key];
+        view.url = url;
+        [self.navigationController pushViewController:view animated:YES];
+    }
 }
 
 #pragma mark - 网络相关
@@ -155,7 +167,7 @@
 //        return;
 //    }
     //活动资讯、健康小贴士、通知消息
-   [self getDadaProvider];
+    [self getDadaProvider];
 }
 
 /**
@@ -169,14 +181,14 @@
                                                                                    @"page" : @10,
                                                                                    @"client" : @"ios",
                                                                                    @"p" : @(self.nextPageNumber),
-                                                                                   @"key":[SharedAppUtil defaultCommonUtil].userVO.key}
+                                                                                   @"key":[SharedAppUtil defaultCommonUtil].userVO ? [SharedAppUtil defaultCommonUtil].userVO.key : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-
+                                     
                                      [MBProgressHUD hideHUDForView:self.tableView animated:YES];
                                      if (self.tableView.footer.isRefreshing) {
                                          [self.tableView.footer endRefreshing];
-                                        
-                                    }
+                                         
+                                     }
                                      
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -191,16 +203,16 @@
                                      {
                                          NSArray *newDatas = [[NSArray alloc] init];
                                          if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
-                                            newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                             newDatas =[EventMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          }else if (self.type == MessageTypePushMsg){
-                                            newDatas =[PushMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                             newDatas =[PushMsgModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          }
-
+                                         
                                          [dataProvider addObjectsFromArray:newDatas];
                                          self.nextPageNumber ++;
                                          [self.tableView reloadData];
                                      }
-
+                                     
                                      if (dataProvider.count == 0) {
                                          [self.tableView initWithPlaceString:@"暂无数据"];
                                      }else{

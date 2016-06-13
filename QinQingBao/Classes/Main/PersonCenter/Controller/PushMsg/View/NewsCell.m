@@ -56,7 +56,7 @@
     self.timeLb.text = [model.s_create_time substringWithRange:NSMakeRange(5, 5)];
     self.descLb.text = model.abstract;
     
-    NSString *url = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.logo_url];
+    NSString *url = [NSString stringWithFormat:@"%@%@",URL_ImgArticle,model.detail_url];
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     
     //计算高度

@@ -105,7 +105,19 @@
         {
             [accountCell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
             accountCell.textLabel.text = username;
-            accountCell.detailTextLabel.text = [NSString stringWithFormat:@"账户：%@",account ? account : @""];
+            switch ([[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue]) {
+                case 1:
+                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    break;
+                case 2:
+                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    break;
+                case 3:
+                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    break;
+                default:
+                    break;
+            }
         }
         accountCell.showCorner = YES;
         accountCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -184,7 +196,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ((indexPath.section  < 2 || (indexPath.section  ==  2 && indexPath.row == 0)) && [SharedAppUtil defaultCommonUtil].userVO == nil)
+    if (indexPath.section  < 2 && [SharedAppUtil defaultCommonUtil].userVO == nil)
         return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     Class class;
     if (indexPath.section == 0 && indexPath.row == 0) {
@@ -204,7 +216,6 @@
     }
     
     [self.navigationController pushViewController:[[class alloc] init] animated:YES];
-    
 }
 
 #pragma mark - 与后台数据交互模块

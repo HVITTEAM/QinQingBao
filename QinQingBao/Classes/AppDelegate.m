@@ -44,6 +44,8 @@
     NSString *msg_id;
     //消息的分类
     NSString *type;
+    //文章id
+    NSString *msg_artid;
 }
 
 @end
@@ -144,6 +146,9 @@
     msg_id = [userInfo objectForKey:@"msg_id"];
     //消息的分类
     type = [userInfo objectForKey:@"type"];
+    //文章的id
+    msg_artid = [userInfo objectForKey:@"msg_artid"];
+    
     
     if (application.applicationState == UIApplicationStateActive)//当用户正在运行app的时候
     {
@@ -172,12 +177,12 @@
     {
         case 1:
         {
-            [self showArticle:msg_id];
+            [self showArticle:msg_artid];
         }
             break;
         case 2:
         {
-            [self showArticle:msg_id];
+            [self showArticle:msg_artid];
         }
             break;
         case 3:
@@ -343,8 +348,6 @@
  */
 -(void)setShareSDK
 {
-    //    [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
-    
     [ShareSDK registerApp:@"12731697d2ffc"
           activePlatforms:@[
                             // 不要使用微信总平台进行初始化

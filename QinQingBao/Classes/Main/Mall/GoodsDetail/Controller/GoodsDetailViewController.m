@@ -101,7 +101,7 @@
         }
         
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",imgArr[i]]];
-        [imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"advplaceholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             CGFloat scale = image.size.width / image.size.height;
             CGFloat h = MTScreenW / scale;
             [imgView addConstraint:[NSLayoutConstraint constraintWithItem:imgView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1.0 constant:h]];
