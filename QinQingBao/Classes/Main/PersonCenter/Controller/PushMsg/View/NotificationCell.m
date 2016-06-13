@@ -47,19 +47,19 @@
 
 -(void)setDataWithModel:(PushMsgModel *)model
 {
-    self.titleLb.text = model.msg_title;
+    self.titleLb.text = @"温馨提示";
 
-//    if (model.abstract) {
-//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//        paragraphStyle.lineSpacing = 4;
-//        NSDictionary *attr = @{
-//                               NSFontAttributeName:[UIFont systemFontOfSize:14],
-//                               NSForegroundColorAttributeName:HMColor(102, 102, 102),
-//                               NSParagraphStyleAttributeName:paragraphStyle
-//                               };
-//        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.abstract attributes:attr];
-//        self.contentLb.attributedText = attrStr;
-//    }
+    if (model.msg_title) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.lineSpacing = 4;
+        NSDictionary *attr = @{
+                               NSFontAttributeName:[UIFont systemFontOfSize:14],
+                               NSForegroundColorAttributeName:HMColor(102, 102, 102),
+                               NSParagraphStyleAttributeName:paragraphStyle
+                               };
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.msg_title attributes:attr];
+        self.contentLb.attributedText = attrStr;
+    }
     
     //计算高度
     self.contentLb.preferredMaxLayoutWidth = MTScreenW - 52;

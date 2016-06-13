@@ -7,11 +7,12 @@
 //个人中心-我的消息-物流助手
 
 #import <UIKit/UIKit.h>
+@class PushMsgModel;
 
 @interface LogisticNotificationCell : UITableViewCell
 
 +(instancetype)createCellWithTableView:(UITableView *)tableView;
 
--(void)setdataWithModel:(NSString *)str;
+-(void)setDataWithModel:(PushMsgModel *)model;
 
 @end

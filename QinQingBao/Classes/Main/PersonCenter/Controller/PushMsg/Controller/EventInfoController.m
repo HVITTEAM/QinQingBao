@@ -77,7 +77,7 @@
         commonCell = msgCell;
     }else{
         LogisticNotificationCell *logisticCell = [LogisticNotificationCell createCellWithTableView:tableView];
-        [logisticCell setdataWithModel:nil];
+        [logisticCell setDataWithModel:dataProvider[indexPath.section]];
         commonCell = logisticCell;
     }
     return commonCell;
@@ -125,7 +125,7 @@
     if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips) {
         EventMsgModel *model  = dataProvider[section];
         lab.text = [model.s_push_time substringToIndex:16];
-    }else if (self.type == MessageTypePushMsg){
+    }else if (self.type == MessageTypePushMsg || self.type == MessageTypeLogistics){
         PushMsgModel *model  = dataProvider[section];
         lab.text = [model.push_time substringToIndex:16];
     }
@@ -149,11 +149,11 @@
 #pragma mark - 网络相关
 -(void)loadMoreData
 {
-    if (self.type == MessageTypeLogistics) {
-        //物流接口
-        
-        return;
-    }
+//    if (self.type == MessageTypeLogistics) {
+//        //物流接口
+//        
+//        return;
+//    }
     //活动资讯、健康小贴士、通知消息
    [self getDadaProvider];
 }
