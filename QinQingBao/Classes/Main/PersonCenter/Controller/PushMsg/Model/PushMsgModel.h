@@ -28,4 +28,6 @@
 
 @property (nonatomic, copy) NSString *sys_mem_id;
 
+@property (nonatomic, copy) NSString *goods_fimg;        //物流详情时有值
+
 @end

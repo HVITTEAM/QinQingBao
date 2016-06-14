@@ -55,7 +55,10 @@
     self.titleLb.text = @"已发货";
     self.timeLb.text = [model.create_time substringWithRange:NSMakeRange(5, 5)];
     self.descLb.text = model.msg_title;
-    self.imgView = nil;
+    if (model.goods_fimg) {
+        NSURL *url = [[NSURL alloc] initWithString:model.goods_fimg];
+        [self.imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    }else self.imgView = nil;
 }
 
 @end
