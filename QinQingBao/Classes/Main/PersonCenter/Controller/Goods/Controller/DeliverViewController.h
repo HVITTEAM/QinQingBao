@@ -14,4 +14,6 @@
 
 @property (nonatomic, retain) CommonGoodsModel *item;
 
+@property (nonatomic,copy) NSString *orderId;
+
 @end

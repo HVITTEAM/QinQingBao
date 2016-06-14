@@ -61,28 +61,30 @@
 
 -(void)getDataProvider
 {
-    //    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //    CommonOrderModel *orderModel = self.item.order_list[0];
-    //    [CommonRemoteHelper RemoteWithUrl:URL_Search_deliver parameters:@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-    //                                                                      @"client" : @"ios",
-    //                                                                      @"order_id" : orderModel.order_id}
-    //                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-    //
-    //                                     [HUD removeFromSuperview];
-    //                                     id codeNum = [dict objectForKey:@"code"];
-    //                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-    //                                     {
-    //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-    //                                         [alertView show];
-    //                                     }
-    //                                     else
-    //                                     {
-    //
-    //                                     }
-    //                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    //                                     NSLog(@"发生错误！%@",error);
-    //                                     [HUD removeFromSuperview];
-    //                                 }];
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        CommonOrderModel *orderModel = self.item.order_list[0];
+        [CommonRemoteHelper RemoteWithUrl:URL_Search_deliver parameters:@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                          @"client" : @"ios",
+                                                                          //@"order_id" : orderModel.order_id}
+                                                                          @"order_id" : self.orderId
+                                                                          }
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    
+                                         [HUD removeFromSuperview];
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         else
+                                         {
+    
+                                         }
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         NSLog(@"发生错误！%@",error);
+                                         [HUD removeFromSuperview];
+                                     }];
     
     NSArray *timeArr= [NSArray arrayWithObjects: @"2016-01-19 20:42:13&nbsp;&nbsp;上海市|收件|上海市【青浦东分部】，【苏泊尔海淮专卖店/021-69788558】已揽收",
                        @"2016-01-19 21:27:38&nbsp;&nbsp;上海市|到件|到上海市【青浦东部】",

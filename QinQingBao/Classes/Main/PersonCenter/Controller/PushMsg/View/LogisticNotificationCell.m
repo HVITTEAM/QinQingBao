@@ -7,7 +7,7 @@
 //
 
 #import "LogisticNotificationCell.h"
-
+#import "PushMsgModel.h"
 
 @interface LogisticNotificationCell ()
 
@@ -50,11 +50,15 @@
     self.containerView.layer.borderWidth = 1.0f;
 }
 
--(void)setdataWithModel:(NSString *)str
+-(void)setDataWithModel:(PushMsgModel *)model
 {
     self.titleLb.text = @"已发货";
-    self.timeLb.text = @"06-01";
-    self.descLb.text = @"啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦";
+    self.timeLb.text = [model.create_time substringWithRange:NSMakeRange(5, 5)];
+    self.descLb.text = model.msg_title;
+    if (model.goods_fimg) {
+        NSURL *url = [[NSURL alloc] initWithString:model.goods_fimg];
+        [self.imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    }else self.imgView = nil;
 }
 
 @end
