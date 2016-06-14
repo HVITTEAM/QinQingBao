@@ -91,7 +91,7 @@ static NSString *refundContentCellId = @"refundContent";
         switch (indexPath.row) {
             case 0:
                 cell.titleStr = @"商城名称";
-                cell.contentStr = @"海予孝心商城";
+                cell.contentStr = @"海予健康商城";
                 break;
             case 1:
                 cell.titleStr = @"退款类型";

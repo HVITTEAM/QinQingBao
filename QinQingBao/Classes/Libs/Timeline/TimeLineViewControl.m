@@ -107,7 +107,10 @@ const float VIEW_WIDTH = 225.0;
     for (NSString *timeDescription in time) {
         UILabel *label = [[UILabel alloc] init];
         
-        [label setText:timeDescription];
+        NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[timeDescription dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        
+        label.attributedText = attrStr;
+//        [label setText:timeDescription];
         label.numberOfLines = 2;
         label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
         label.textAlignment = NSTextAlignmentRight;
@@ -147,10 +150,15 @@ const float VIEW_WIDTH = 225.0;
     int i = 0;
     for (NSString *timeDescription in timeDescriptions) {
         UILabel *label = [[UILabel alloc] init];
-        [label setText:timeDescription];
+        
+        NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[timeDescription dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        
+        label.attributedText = attrStr;
+
+//        [label setText:timeDescription];
         label.numberOfLines = 0;
 #warning 设置字体颜色
-        label.textColor = i < currentStatus ? HMColor(253, 179, 37) : [UIColor grayColor];
+        label.textColor = i < currentStatus ? HMColor(43, 139, 39) : [UIColor grayColor];
         label.textAlignment = NSTextAlignmentLeft;
         label.lineBreakMode = NSLineBreakByWordWrapping;
         if(i < currentStatus)
@@ -200,7 +208,7 @@ const float VIEW_WIDTH = 225.0;
         //configure circle
         
         CGSize fittingSize = [label systemLayoutSizeFittingSize: UILayoutFittingCompressedSize];
-        strokeColor = i < currentStatus ? [UIColor orangeColor] : [UIColor lightGrayColor];
+        strokeColor = i < currentStatus ? HMColor(43, 139, 39) : [UIColor lightGrayColor];
         yCenter = (totlaHeight /*+ fittingSize.height/2*/);
         
         UIBezierPath *circle = [UIBezierPath bezierPath];

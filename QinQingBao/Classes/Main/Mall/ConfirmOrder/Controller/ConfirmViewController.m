@@ -250,7 +250,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
         {
             if (commoncell == nil)
                 commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MTCommonCell"];
-            commoncell.textLabel.text = @"海予孝心商城";
+            commoncell.textLabel.text = @"海予健康商城";
             commoncell.imageView.image = [UIImage imageNamed:@"hyxxshop.png"];
             commoncell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
             commoncell.textLabel.font = [UIFont systemFontOfSize:14];

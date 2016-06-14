@@ -93,11 +93,11 @@
     [self addSubview:lab1];
     
     if (dicType ==1) {
-        lab.text=@"海予孝心商城";
+        lab.text=@"海予健康商城";
     }
     else if (dicType ==2)
     {
-        lab.text=@"海予孝心商城";
+        lab.text=@"海予健康商城";
     }
     UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.frame.size.height-0.5, MTScreenW, 0.5)];
     line.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];

@@ -37,8 +37,8 @@
     self.nextPageNumber = 1;
     
     self.view.backgroundColor  = HMGlobalBg;
-    //    MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+//        MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self loadMoreData];
@@ -195,8 +195,10 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          //暂无数据
-                                         if ([codeNum isEqualToString:@"17001"])
+                                         if ([codeNum isEqualToString:@"17001"] && dataProvider.count == 0)
                                              return [self.tableView initWithPlaceString:@"暂无数据"];
+                                         if ([codeNum isEqualToString:@"17001"] && dataProvider.count > 0)
+                                             return [self.tableView showNonedataTooltip];
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }

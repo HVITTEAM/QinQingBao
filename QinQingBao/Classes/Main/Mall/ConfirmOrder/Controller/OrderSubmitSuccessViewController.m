@@ -115,7 +115,7 @@ static CGFloat PADDINGBOTTON = 70;
 /**支付**/
 -(void)payOrder
 {
-    [MTPayHelper payWithAliPayWitTradeNO:self.orderModel.pay_sn productName:@"百货" amount:self.orderModel.order_amount  productDescription:@"海予孝心商城" notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict,NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:self.orderModel.pay_sn productName:@"百货" amount:self.orderModel.order_amount  productDescription:@"海予健康商城" notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict,NSString *signedString) {
         NSLog(@"支付成功");
         
         NSString *out_trade_no;

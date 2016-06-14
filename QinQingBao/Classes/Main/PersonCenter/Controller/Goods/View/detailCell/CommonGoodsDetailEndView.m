@@ -212,7 +212,7 @@ static CGFloat BUTTON_WIDTH = 80;
 //支付
 -(void)pay
 {
-    [MTPayHelper payWithAliPayWitTradeNO:self.goodsModel.pay_sn productName:@"百货" amount:self.goodsModel.pay_amount productDescription:@"海予孝心商城" notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict,NSString *signedString) {
+    [MTPayHelper payWithAliPayWitTradeNO:self.goodsModel.pay_sn productName:@"百货" amount:self.goodsModel.pay_amount productDescription:@"海予健康商城" notifyURL:URL_AliPay_Goods success:^(NSDictionary *dict,NSString *signedString) {
         NSLog(@"支付成功");
         NSString *out_trade_no;
         NSString *sign;
