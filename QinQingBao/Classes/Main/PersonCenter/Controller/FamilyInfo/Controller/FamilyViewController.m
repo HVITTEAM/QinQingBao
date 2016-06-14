@@ -67,7 +67,9 @@
     [self setupGroups];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_user_devide parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id}
+    [CommonRemoteHelper RemoteWithUrl:URL_get_user_devide parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                        @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                        @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

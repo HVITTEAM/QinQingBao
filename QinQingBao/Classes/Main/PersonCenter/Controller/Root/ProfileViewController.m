@@ -107,15 +107,16 @@
             accountCell.textLabel.text = username;
             switch ([[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue]) {
                 case 1:
-                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    accountCell.detailTextLabel.text = @"当前为QQ快捷登入";
                     break;
                 case 2:
-                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    accountCell.detailTextLabel.text = @"当前为微信快捷登入";
                     break;
                 case 3:
-                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
+                    accountCell.detailTextLabel.text = @"当前为微博快捷登入";
                     break;
                 default:
+                    accountCell.detailTextLabel.text = [NSString stringWithFormat:@"手机号：%@",account ? account : @""];
                     break;
             }
         }
