@@ -1185,6 +1185,7 @@
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
 		D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D216AB501D07FC4F00E85008 /* PushMsgModel.m */; };
+		D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */; };
 		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
 		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
 		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
@@ -3256,6 +3257,8 @@
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
 		D216AB4F1D07FC4F00E85008 /* PushMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgModel.h; sourceTree = "<group>"; };
 		D216AB501D07FC4F00E85008 /* PushMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgModel.m; sourceTree = "<group>"; };
+		D22C48B91D0FA9FA003B1853 /* DeliverInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliverInfoModel.h; sourceTree = "<group>"; };
+		D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliverInfoModel.m; sourceTree = "<group>"; };
 		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
 		D22D61771D0655DB008C3EC1 /* MobileBindingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileBindingView.m; sourceTree = "<group>"; };
 		D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileBindingView.xib; sourceTree = "<group>"; };
@@ -4483,6 +4486,8 @@
 				01C0D20A1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m */,
 				0140E2B61C4F601C002ECBC5 /* ReciverinfoModel.h */,
 				0140E2B71C4F601C002ECBC5 /* ReciverinfoModel.m */,
+				D22C48B91D0FA9FA003B1853 /* DeliverInfoModel.h */,
+				D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8374,7 +8379,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9477,6 +9482,7 @@
 				01E6D4F51BE1F49B00824F51 /* README.md in Sources */,
 				0181B1B01CDC95F900A1435E /* SWYSubtitleCell.m in Sources */,
 				01EA81751CE1757B00398FEC /* InfoDetailViewController.m in Sources */,
+				D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */,
 				010EC9F51C44A53F00D36417 /* MallAddressModel.m in Sources */,
 				01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */,
 				01C82BE51CC48DF3004D7A16 /* ShopDetailViewController.m in Sources */,
