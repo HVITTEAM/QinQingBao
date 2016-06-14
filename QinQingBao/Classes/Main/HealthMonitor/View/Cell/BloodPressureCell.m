@@ -77,7 +77,7 @@
                                   range:NSMakeRange(strlength1, string1.length - strlength1)];
         
         self.lowLab.attributedText = attributedString1;
-        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.heart_time];
+        NSString *time                            = [NSString stringWithFormat:@"更新时间: %@",item.bloodp_time];
         self.timeLab.text = time;
     }
 }
