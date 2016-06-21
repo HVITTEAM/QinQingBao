@@ -107,6 +107,10 @@
     
     NSString *str3 = [self.old.rightText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
+    //旧密码
+    NSString *oldpwd = [SharedAppUtil defaultCommonUtil].userVO.pwd;
+    if([str1 isEqualToString:oldpwd])
+        return [NoticeHelper AlertShow:@"新密码和旧密码不能相同" view:self.view];
     if(str1.length < 6 )
         return [NoticeHelper AlertShow:@"新密码不能少于6位!" view:self.view];
     if(![str1 isEqualToString:str2] )

@@ -17,7 +17,7 @@
 
 /*!
  @protocol
- @brief 本协议包括：收发消息, 登陆注销, 加密解密, 媒体操作的回调等其它操作
+ @brief 本协议包括：收发消息, 登录注销, 加密解密, 媒体操作的回调等其它操作
  @discussion
  */
 @protocol EMChatManagerDelegate <EMChatManagerChatDelegate,

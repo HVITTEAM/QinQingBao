@@ -1,6 +1,6 @@
 /*!
  @header IChatManagerLogin.h
- @abstract 为ChatManager提供基础登陆操作
+ @abstract 为ChatManager提供基础登录操作
  @author EaseMob Inc.
  @version 1.00 2014/01/01 Creation (1.00)
  */
@@ -49,7 +49,7 @@
 
 /*!
  @method
- @brief  调用sdk登录接口，登陆成功之后，sdk内部会默认调用一次该函数
+ @brief  调用sdk登录接口，登录成功之后，sdk内部会默认调用一次该函数
          从数据库获取信息，包括自己相关的群组，被屏蔽的群组的id数组，会话，消息
  @discussion 登录成功之后调用
  @result     错误信息
@@ -104,7 +104,7 @@
 /*!
  @method
  @brief 使用用户名密码登录聊天服务器
- @discussion 如果登陆失败, 返回nil
+ @discussion 如果登录失败, 返回nil
  @param username 用户名
  @param password 密码
  @param pError   错误信息
@@ -117,7 +117,7 @@
 /*!
  @method
  @brief 异步方法, 使用用户名密码登录聊天服务器
- @discussion 在登陆过程中, EMChatManagerLoginDelegate中的didLoginWithInfo:error:回调会被触发
+ @discussion 在登录过程中, EMChatManagerLoginDelegate中的didLoginWithInfo:error:回调会被触发
  @param username 用户名
  @param password 密码
  @result

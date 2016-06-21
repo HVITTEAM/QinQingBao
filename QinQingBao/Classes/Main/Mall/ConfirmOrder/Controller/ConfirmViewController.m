@@ -35,7 +35,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     //是否从地址列表选择回来
     BOOL selectedAddress;
     
-    //优惠券
+    //代金券
     CouponsModel *couponsItem;
     
     //最后的总价格
@@ -278,12 +278,12 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     {
         if (commoncell == nil)
             commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCardsCell"];
-        commoncell.textLabel.text = @"优惠券";
+        commoncell.textLabel.text = @"代金券";
         commoncell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         commoncell.textLabel.font = [UIFont systemFontOfSize:16];
         commoncell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        commoncell.detailTextLabel.text = @"选择优惠券";
+        commoncell.detailTextLabel.text = @"选择代金券";
         if (couponsItem)
             commoncell.detailTextLabel.text = [NSString stringWithFormat:@"减%@",couponsItem.voucher_price];
         cell = commoncell;
@@ -455,13 +455,13 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     else if (indexPath.section == 2)
     {
         UseCouponsViewController *vc = [[UseCouponsViewController alloc] init];
-        vc.title = @"选择优惠券";
+        vc.title = @"选择代金券";
         vc.totalPrice = [NSString stringWithFormat:@"%.2f",[totalPrice floatValue] + [couponsItem.voucher_price floatValue]];
         if(couponsItem)
             vc.selectedModel = couponsItem;
         vc.selectedClick = ^(CouponsModel *item)
         {
-            NSLog(@"选择优惠券");
+            NSLog(@"选择代金券");
             couponsItem = item;
             [self setEndviewValue];
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationLeft];

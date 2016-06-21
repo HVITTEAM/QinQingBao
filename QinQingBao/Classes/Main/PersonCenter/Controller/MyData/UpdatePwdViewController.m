@@ -7,6 +7,7 @@
 //
 
 #import "UpdatePwdViewController.h"
+#import "APService.h"
 
 @interface UpdatePwdViewController ()<UIAlertViewDelegate>
 {
@@ -224,10 +225,11 @@
                                      }
                                      else
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"操作成功，返回登陆" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"操作成功，返回登录" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          alertView.delegate = self;
-                                         [alertView show];
-                                         //[NoticeHelper AlertShow:@"修改成功！" view:self.view];
+//                                         [alertView show];
+                                         
+                                         [self loginWithAccount:self.tel.rightText.text pwd:str1];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -235,6 +237,71 @@
                                      [NoticeHelper AlertShow:@"注册失败!" view:self.view];
                                  }];
     
+}
+
+-(void)loginWithAccount:(NSString *)tel pwd:(NSString *)pwd
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : tel,
+                                                              @"password" : [SecurityUtil encryptMD5String:pwd],
+                                                              @"client" : @"ios",
+                                                              @"role" : @"0",
+                                                              @"imei":[SharedAppUtil defaultCommonUtil].deviceToken == nil ? @"" : [SharedAppUtil defaultCommonUtil].deviceToken}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"登录成功！" view:self.view];
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         UserModel *vo = [UserModel objectWithKeyValues:di];
+                                         vo.logintype = @"0";
+                                         vo.member_mobile = tel;
+                                         vo.pwd = [pwd stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                                         [self loginResultSetData:vo];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                     [self.view endEditing:YES];
+                                 }];
+
+}
+
+/**
+ *  登录成功之后需要设置本地登录数据
+ *
+ *  @param uservo 用户信息model
+ */
+-(void)loginResultSetData:(UserModel *)uservo
+{
+    [SharedAppUtil defaultCommonUtil].userVO = uservo;
+    [ArchiverCacheHelper saveObjectToLoacl:uservo key:User_Archiver_Key filePath:User_Archiver_Path];
+    
+    [MTControllerChooseTool setMainViewcontroller];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //设置推送标签和别名
+    NSMutableSet *tags = [NSMutableSet set];
+    [self setTags:&tags addTag:@""];
+    [APService setTags:tags alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+}
+
+#pragma mark - JPush 推送标签和别名
+- (void)setTags:(NSMutableSet **)tags addTag:(NSString *)tag
+{
+    [*tags addObject:tag];
+}
+
+- (void)tagsAliasCallback:(int)iResCode tags:(NSSet *)tags alias:(NSString *)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

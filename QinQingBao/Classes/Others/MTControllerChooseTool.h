@@ -23,7 +23,7 @@
 + (void)setRootViewController;
 
 /**
- *  设置登陆控制器
+ *  设置登录控制器
  */
 + (void)setLoginViewController;
 
@@ -33,7 +33,7 @@
 + (void)setloginOutViewController;
 
 /**
- *  登陆之后更新控制器
+ *  登录之后更新控制器
  */
 + (void)setMainViewcontroller;
 @end

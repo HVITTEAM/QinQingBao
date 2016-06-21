@@ -10,7 +10,7 @@
 #import "EaseMob.h"
 #import "EMError.h"
 @interface EaseHandler : NSObject
--(void)registerAndLoginEase:(NSString *)userName;//注册并登陆
+-(void)registerAndLoginEase:(NSString *)userName;//注册并登录
 -(void)registerEaseMobWithUserName:(NSString *)userName;//注册
 -(void)loginEaseMobWithUserName:(NSString *)userName;//登录
 -(void)logoutEaseMobCallBack;//退出

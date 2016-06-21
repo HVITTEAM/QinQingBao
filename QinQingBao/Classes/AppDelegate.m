@@ -65,10 +65,10 @@
     
     [self getLocation];
     
-    //注册登陆信息超时监听
+    //注册登录信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
     
-    //注册登陆信息超时监听
+    //注册登录信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
     
     [MTControllerChooseTool chooseRootViewController];
@@ -296,7 +296,7 @@
 }
 
 /**
- * 登陆信息超时处理事件
+ * 登录信息超时处理事件
  */
 -(void)loginTimeoutHanlder:(NSNotification *)notification
 {

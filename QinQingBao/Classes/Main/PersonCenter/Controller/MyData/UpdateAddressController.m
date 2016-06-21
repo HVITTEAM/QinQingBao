@@ -305,18 +305,6 @@
     [alertVc addAction:ok];
     [alertVc addAction:no];
     [self presentViewController:alertVc animated:YES completion:nil];
-    
-    
-    //    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@""
-    //                                                             delegate:self
-    //                                                    cancelButtonTitle:@"取消"
-    //                                               destructiveButtonTitle:nil
-    //                                                    otherButtonTitles:@"确定",nil];
-    //    actionSheet.userInteractionEnabled = YES;
-    //    actionSheet.backgroundColor = [UIColor clearColor];
-    
-    //    [actionSheet addSubview:areaPicker];
-    //    [actionSheet showInView:self.view];
 }
 
 #pragma mark - HZAreaPicker delegate

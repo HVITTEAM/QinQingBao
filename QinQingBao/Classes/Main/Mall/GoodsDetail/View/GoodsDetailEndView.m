@@ -48,7 +48,6 @@ static CGFloat CHAT_WIDTH;
     chatImg.frame = CGRectMake(CHAT_WIDTH/2 - 10, 5, 20, 20);
     [self addSubview:chatImg];
     
-    
     _Lab =[[UILabel alloc]initWithFrame:CGRectMake(0, 25,CHAT_WIDTH, 23)];
     _Lab.textAlignment = NSTextAlignmentCenter;
     _Lab.textColor=[UIColor colorWithRGB:@"666666"];

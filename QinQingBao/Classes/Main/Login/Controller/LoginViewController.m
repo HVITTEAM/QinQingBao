@@ -181,10 +181,12 @@
                                          }
                                          else
                                          {
-                                             [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                             [NoticeHelper AlertShow:@"登录成功！" view:self.view];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              vo.logintype = @"0";
+                                             vo.member_mobile = self.accountText.text;
+                                             vo.pwd = [self.passwordText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                                              [self loginResultSetData:vo];
                                          }
                                          [HUD removeFromSuperview];
@@ -311,7 +313,7 @@
  *  @param openid     第三方登录ID
  *  @param login_type 第三方登录类型 分别为 qq：1 微信：2 新浪：3
  *  @param open_token 第三方登录返回的token
- *  @param mobile     电话号码，如果第一次登陆则需要
+ *  @param mobile     电话号码，如果第一次登录则需要
  *  @param code       验证码
  */
 -(void)loginSuccessWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token mobile:(NSString *)mobile code:(NSString *)code
@@ -350,10 +352,11 @@
                                      }
                                      else
                                      {
-                                         [NoticeHelper AlertShow:@"登陆成功！" view:self.view];
+                                         [NoticeHelper AlertShow:@"登录成功！" view:self.view];
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          UserModel *vo = [UserModel objectWithKeyValues:di];
                                          vo.logintype = login_type;
+                                         vo.member_mobile = mobile;
                                          [self loginResultSetData:vo];
                                      }
                                      [HUD removeFromSuperview];
@@ -366,7 +369,7 @@
 
 
 /**
- *  登陆成功之后需要设置本地登陆数据
+ *  登录成功之后需要设置本地登录数据
  *
  *  @param uservo 用户信息model
  */

@@ -12,7 +12,7 @@
 
 @interface PaySettlementCell : UITableViewCell
 
-@property(copy)void(^couponHandle)(void);      //优惠券按钮点击回调
+@property(copy)void(^couponHandle)(void);      //代金券按钮点击回调
 
 +(instancetype)createPaySettlementCellWithTableView:(UITableView *)tableview;
 

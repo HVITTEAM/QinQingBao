@@ -200,7 +200,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CB-EG-2Yl" userLabel="服务市场">
                             <rect key="frame" x="0.0" y="134" width="160" height="66"/>
                             <connections>
-                                <action selector="healthHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="haT-vB-mCC"/>
+                                <action selector="marketHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="5H4-OX-hWb"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-az-VCd" userLabel="健康计划">

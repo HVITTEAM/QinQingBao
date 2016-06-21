@@ -19,7 +19,7 @@
 //订单总金额
 @property (nonatomic, retain) NSString *totalPrice;
 
-//当前选择的优惠券
+//当前选择的代金券
 @property (nonatomic, retain) CouponsModel *selectedModel;
 
 @property(strong,nonatomic)NSString *store_id;     //店铺id,服务时需要传

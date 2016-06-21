@@ -181,6 +181,7 @@
         [self.contentView addSubview:self.rightText];
         HMCommonTextfieldItem *hitem = (HMCommonTextfieldItem *)item;
         self.rightText.placeholder = hitem.placeholder;
+        self.rightText.delegate = hitem.delagate;
         self.rightText.text = hitem.textValue;
         _item.rightText = self.rightText;
         self.rightText.x = 110;

@@ -41,7 +41,7 @@
     [targetView addSubview:mobileBindingView];
     
     mobileBindingView.contentBoxView.transform = CGAffineTransformMakeScale(0.3, 0.3);
-    
+    mobileBindingView.contentBoxView.layer.cornerRadius = 10;
     [UIView animateWithDuration:0.3 animations:^{
         mobileBindingView.contentBoxView.transform = CGAffineTransformIdentity;
     }];

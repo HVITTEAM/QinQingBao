@@ -183,8 +183,6 @@
                                          else
                                          {
                                              [NoticeHelper AlertShow:@"注册成功！" view:self.view];
-                                             
-                                             // [self.navigationController popToRootViewControllerAnimated:YES];
                                              NSDictionary *di = [dict objectForKey:@"datas"];
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;

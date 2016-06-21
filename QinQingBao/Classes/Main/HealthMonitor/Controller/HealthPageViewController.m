@@ -221,16 +221,30 @@
     {
         case 4:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.rel_name];
-            bloodPressureVC.type = ChartTypeSugar;
-            vctype = @"6";
+            if (dataModel)
+            {
+                bloodPressureVC.title = [NSString stringWithFormat:@"%@的血糖统计数据",self.familyVO.rel_name];
+                bloodPressureVC.type = ChartTypeSugar;
+                vctype = @"6";
+            }
+            else
+            {
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            }
         }
             break;
         case 3:
         {
-            bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.rel_name];
-            vctype = @"3";
-            bloodPressureVC.type = ChartTypeBlood;
+            if (dataModel)
+            {
+                bloodPressureVC.title = [NSString stringWithFormat:@"%@的血压统计数据",self.familyVO.rel_name];
+                vctype = @"3";
+                bloodPressureVC.type = ChartTypeBlood;
+            }
+            else
+            {
+                return [NoticeHelper AlertShow:@"暂无数据!" view:self.view];
+            }
         }
             break;
         case 5:
@@ -283,6 +297,10 @@
         default:
             break;
     }
+    
+    //没有绑定设备
+    if (self.familyVO.device.count < 1)
+        return;
     
     NSString *str = @"";
     for (int i = 0 ; i < self.familyVO.device.count ;i++)

@@ -617,7 +617,7 @@
 }
 
 
-#pragma mark - 退出登陆
+#pragma mark - 退出登录
 #pragma  mark - 退出当前账号
 -(void)loginOut
 {

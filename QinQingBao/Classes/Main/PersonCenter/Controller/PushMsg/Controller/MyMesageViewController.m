@@ -166,22 +166,23 @@
         {
             typeCell.headImg.image = [UIImage imageNamed:@"pushMsg.png"];
             typeCell.titleLab.text = @"通知消息";
-            if (item && pushMsg_ID && ![pushMsg_ID isEqualToString:item.systemmsg_id]) {
+            if (item && pushMsg_ID && ![pushMsg_ID isEqualToString:item.sysumsg_id]) {
                 typeCell.badgeView.hidden = NO;
             }
-            else if (item && pushMsg_ID && [pushMsg_ID isEqualToString:item.systemmsg_id]) {
-                typeCell.badgeView.hidden = NO;
+            else if (item && pushMsg_ID && [pushMsg_ID isEqualToString:item.sysumsg_id]) {
+                typeCell.badgeView.hidden = YES;
             }
-        }            break;
+        }
+            break;
         case 3:
         {
             typeCell.headImg.image = [UIImage imageNamed:@"logistics.png"];
             typeCell.titleLab.text = @"物流助手";
-            if (item && logistics_ID && ![logistics_ID isEqualToString:item.systemmsg_id]) {
+            if (item && logistics_ID && ![logistics_ID isEqualToString:item.sysumsg_id]) {
                 typeCell.badgeView.hidden = NO;
             }
-            else  if (item && logistics_ID && [logistics_ID isEqualToString:item.systemmsg_id]) {
-                typeCell.badgeView.hidden = NO;
+            else  if (item && logistics_ID && [logistics_ID isEqualToString:item.sysumsg_id]) {
+                typeCell.badgeView.hidden = YES;
             }
         }
             break;
@@ -241,7 +242,7 @@
             vc.title = @"通知消息";
             if (item)
             {
-                [standard setObject:item.systemmsg_id forKey:kPushMsg];
+                [standard setObject:item.sysumsg_id forKey:kPushMsg];
             }
         }
             break;
@@ -251,7 +252,7 @@
             vc.title = @"物流助手";
             if (item)
             {
-                [standard setObject:item.systemmsg_id forKey:kLogistics];
+                [standard setObject:item.sysumsg_id forKey:kLogistics];
             }
         }
             break;

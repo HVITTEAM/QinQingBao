@@ -126,7 +126,7 @@
 /*!
  @method
  @brief 会话列表信息更新时的回调
- @discussion 1. 当会话列表有更改时(新添加,删除), 2. 登陆成功时, 以上两种情况都会触发此回调
+ @discussion 1. 当会话列表有更改时(新添加,删除), 2. 登录成功时, 以上两种情况都会触发此回调
  @param conversationList 会话列表
  @result
  */

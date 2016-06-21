@@ -41,7 +41,7 @@
     self.title = @"我的账户";
     
     vc1 = [[CouponsViewController alloc] init];
-    vc1.title = @"优惠券";
+    vc1.title = @"代金券";
     
     vc2 = [[BankCardViewController alloc] init];
     vc2.title = @"银行卡";

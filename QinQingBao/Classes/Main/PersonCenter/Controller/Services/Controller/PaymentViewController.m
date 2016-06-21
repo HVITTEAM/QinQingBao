@@ -25,11 +25,11 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 
 @property(assign,nonatomic)PaymentType payType;           //付款类型
 
-@property(strong,nonatomic)CouponsModel *couponsModel;    //选中的优惠券，未选中时为nil
+@property(strong,nonatomic)CouponsModel *couponsModel;    //选中的代金券，未选中时为nil
 
 @property (nonatomic, retain) NSString *balance;//账号余额
 
-@property (nonatomic, retain) NSString *lastPrice;//最终结算金额 扣除优惠券
+@property (nonatomic, retain) NSString *lastPrice;//最终结算金额 扣除代金券
 
 @property (copy,nonatomic) NSString *numberOfVerification;     //验证码，余额支付时需要
 
@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        //跳转到优惠券使用界面
+        //跳转到代金券使用界面
         __weak typeof(self) weakSelf = self;
         UseCouponsViewController *useCouponVC = [[UseCouponsViewController alloc] init];
         useCouponVC.store_id = self.store_id;
@@ -219,7 +219,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
             CGFloat couponPrice = 0;
             if (weakSelf.couponsModel)
             {
-                //当前需求是：选择了优惠券其他方式就不允许支付了。
+                //当前需求是：选择了代金券其他方式就不允许支付了。
                 self.payType = PaymentTypeCoupons;
                 if (servicePrice >= [self.couponsModel.voucher_limit floatValue]) {
                     couponPrice = [self.couponsModel.voucher_price floatValue];

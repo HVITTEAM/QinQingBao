@@ -16,7 +16,7 @@
 
 @end
 @implementation EaseHandler
-#pragma mark --- 注册并登陆
+#pragma mark --- 注册并登录
 -(void)registerAndLoginEase:(NSString *)userName {
     NSLog(@"【环信】注册UserName：%@",userName);
     if (![[EaseMob sharedInstance].chatManager isAutoLoginEnabled]) {
@@ -60,7 +60,7 @@
 }
 
 
-#pragma mark --- 登陆
+#pragma mark --- 登录
 -(void)loginEaseMobWithUserName:(NSString *)userName  {
     if (![[EaseMob sharedInstance].chatManager isAutoLoginEnabled]) {
     [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:userName password:userName completion:^(NSDictionary *loginInfo, EMError *error) {
@@ -83,7 +83,7 @@
 - (void)didLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error {
     if (!error && loginInfo) {
         _isSuccessLogin = YES;
-        NSLog(@"【环信SDK】登陆环信成功。登陆用户信息：%@",loginInfo);
+        NSLog(@"【环信SDK】登录环信成功。登录用户信息：%@",loginInfo);
     }else {
         _isSuccessLogin = NO;
         if (error) {
@@ -96,7 +96,7 @@
 }
 
 
-#pragma mark --- 自动登陆回调
+#pragma mark --- 自动登录回调
 /*!
  @method
  @brief 用户将要进行自动登录操作的回调
@@ -108,10 +108,10 @@
 - (void)willAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error {
     if (!error && loginInfo) {
         _isSuccessLogin = YES;
-        NSLog(@"【环信SDK】将要自动登陆环信成功。登陆信息：%@", loginInfo);
+        NSLog(@"【环信SDK】将要自动登录环信成功。登录信息：%@", loginInfo);
     }else {
         _isSuccessLogin = NO;
-        NSLog(@"【环信SDK】将要自动登陆环信失败");
+        NSLog(@"【环信SDK】将要自动登录环信失败");
         [self toStringWithEaseMobError:error];
     }
 }
@@ -127,10 +127,10 @@
 - (void)didAutoLoginWithInfo:(NSDictionary *)loginInfo error:(EMError *)error {
     if (!error && loginInfo) {
         _isSuccessLogin = YES;
-        NSLog(@"【环信SDK】已经自动登陆环信成功。登陆信息：%@", loginInfo);
+        NSLog(@"【环信SDK】已经自动登录环信成功。登录信息：%@", loginInfo);
     }else {
         _isSuccessLogin = NO;
-        NSLog(@"【环信SDK】已经自动登陆环信失败");
+        NSLog(@"【环信SDK】已经自动登录环信失败");
         [self toStringWithEaseMobError:error];
     }
 }

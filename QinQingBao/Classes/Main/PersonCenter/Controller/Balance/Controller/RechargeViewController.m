@@ -12,9 +12,6 @@
 @interface RechargeViewController ()<UITextFieldDelegate>
 {
     HMCommonTextfieldItem *money;
-    
-    //进入当前界面就生成一个订单号
-    NSString *tradeNum;
 }
 @end
 
@@ -29,8 +26,6 @@
     [self createBottomButton];
     
     self.navigationItem.title = @"充值";
-    
-    tradeNum = @"";
 }
 
 # pragma  mark - 设置数据源
@@ -72,7 +67,7 @@
     // 设置组的所有行数据
     money = [HMCommonTextfieldItem itemWithTitle:@"金额" icon:nil];
     money.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    money.rightText.delegate = self;
+    money.delagate = self;
     money.placeholder = @"请输入充值金额";
     group.items = @[money];
 }
@@ -146,8 +141,8 @@
  */
 -(void)checkBlance:(UIButton *)sender
 {
-    if (money.rightText.text.length == 0)
-        return [NoticeHelper AlertShow:@"请输入充值金额" view:nil];
+    if (money.rightText.text.length == 0 && [money.rightText.text floatValue] > 0)
+        return [NoticeHelper AlertShow:@"请输入正确的充值金额" view:nil];
     [self.view endEditing:YES];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -177,23 +172,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    return [self validateNumber:string];
-}
-
-- (BOOL)validateNumber:(NSString*)number {
-    BOOL res = YES;
-    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-    int i = 0;
-    while (i < number.length) {
-        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
-        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
-        if (range.length == 0) {
-            res = NO;
-            break;
-        }
-        i++;
-    }
-    return res;
+    return [textField isValidAboutMoneyTextFiled:textField shouldChangeCharactersInRange:range replacementString:string decimalNumber:2];
 }
 
 @end

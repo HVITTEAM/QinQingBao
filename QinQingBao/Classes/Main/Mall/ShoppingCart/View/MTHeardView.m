@@ -7,6 +7,7 @@
 //
 
 #import "MTHeardView.h"
+#import "ShopCarModel.h"
 
 
 @interface MTHeardView ()
@@ -14,7 +15,6 @@
 
 @property(nonatomic,assign)NSInteger section ;
 @property(nonatomic,copy)NSMutableArray *carDataArrList;
-
 @end
 
 
@@ -92,15 +92,20 @@
     lab1.textColor=[UIColor colorWithRGB:@"f5a623"];
     [self addSubview:lab1];
     
-    if (dicType ==1) {
-        lab.text=@"海予健康商城";
+    MTShoppIngCarModel *model = [list firstObject];
+    MTShopViewModel *item = model.vm;
+    ShopCarModel *shopmodel = [item.cart_list firstObject];
+    NSString *storename = shopmodel.store_name;
+    
+    if (dicType == 1) {
+        lab.text = storename;
     }
     else if (dicType ==2)
     {
-        lab.text=@"海予健康商城";
+        lab.text = storename;
     }
     UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.frame.size.height-0.5, MTScreenW, 0.5)];
-    line.backgroundColor=[UIColor colorWithRGB:@"e2e2e2"];
+    line.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
     [self addSubview:line];
     
 

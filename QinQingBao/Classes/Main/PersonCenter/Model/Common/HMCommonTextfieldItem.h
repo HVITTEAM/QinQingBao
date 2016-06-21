@@ -13,4 +13,7 @@
 /** placeholder */
 @property (nonatomic, copy) NSString *placeholder;
 
+@property (nonatomic, weak) id delagate;
+
+
 @end

@@ -92,7 +92,7 @@
  */
 -(void)initNavigation
 {
-    self.title =   @"优惠券";
+    self.title =   @"代金券";
     self.view.backgroundColor = [UIColor whiteColor];
 }
 

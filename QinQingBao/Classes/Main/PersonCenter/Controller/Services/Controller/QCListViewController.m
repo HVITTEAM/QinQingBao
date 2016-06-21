@@ -249,8 +249,8 @@
     };
     cell.formatterIn = self.formatterIn;
     cell.formatterOut = self.formatterOut;
-    [cell setItem:dataProvider[indexPath.section]];
-    
+    if (dataProvider.count > 0)
+        [cell setItem:dataProvider[indexPath.section]];
     return  cell;
 }
 

@@ -61,13 +61,13 @@
 
 -(void)initTableSkin
 {
-    self.title = @"使用优惠券";
+    self.title = @"使用代金券";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = HMGlobalBg;
 }
 
 /**
- *  商城的优惠券
+ *  商城的代金券
  */
 -(void)getDataProvider
 {
@@ -159,7 +159,7 @@
 {
     CouponsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell.couponsModel.voucher_limit floatValue] > [self.totalPrice floatValue])
-        return [NoticeHelper AlertShow:@"订单总额没有达到使用该优惠券的最低额度！" view:self.view];
+        return [NoticeHelper AlertShow:@"订单总额没有达到使用该代金券的最低额度！" view:self.view];
     if (lastSelectedIndex && lastSelectedIndex != indexPath)
     {
         CouponsCell *cell = [tableView cellForRowAtIndexPath:lastSelectedIndex];

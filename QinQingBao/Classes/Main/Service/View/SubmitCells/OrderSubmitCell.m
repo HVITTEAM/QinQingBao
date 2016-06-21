@@ -40,7 +40,7 @@
 }
 
 /**
- *  设置优惠券信息
+ *  设置代金券信息
  *
  *  @param couponsModel <#couponsModel description#>
  */

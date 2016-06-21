@@ -11,6 +11,7 @@
 @interface FristMsgModel : NSObject
 
 @property (nonatomic, copy) NSString *systemmsg_id;
+@property (nonatomic, copy) NSString *sysumsg_id;
 @property (nonatomic, copy) NSString *msg_type;
 @property (nonatomic, copy) NSString *msg_title;
 @property (nonatomic, copy) NSString *msg_artid;

@@ -1,6 +1,6 @@
 /*!
  @header EMChatManagerLoginDelegate.h
- @abstract 关于ChatManager中登陆相关功能的异步回调
+ @abstract 关于ChatManager中登录相关功能的异步回调
  @author EaseMob Inc.
  @version 1.00 2014/01/01 Creation (1.00)
  */
@@ -91,7 +91,7 @@
 
 /*!
  @method
- @brief 当前登陆用户掉线重连后发生的通知回调
+ @brief 当前登录用户掉线重连后发生的通知回调
  @discussion
  @result
  */

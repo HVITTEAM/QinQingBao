@@ -19,7 +19,7 @@
 
 /*!
  @property
- @brief 当前登陆用户的昵称, 默认为用户名。
+ @brief 当前登录用户的昵称, 默认为用户名。
         因为环信只有用户ID, 并没有用户信息, 所以在后台发送推送的时候, 并不能知道用户昵称, 导致在推送过来的消息里, 用户名字为用户ID. 为解决此类问题, 环信多添加了一个可以由用户设置的推送昵称的属性，此方法是同步方法，会阻塞调用线程.
  */
 @property (strong, nonatomic) NSString *apnsNickname;
@@ -137,7 +137,7 @@
 
 /*!
  @property
- @brief 当前登陆用户的昵称, 默认为用户名。
+ @brief 当前登录用户的昵称, 默认为用户名。
  因为环信只有用户ID, 并没有用户信息, 所以在后台发送推送的时候, 并不能知道用户昵称, 导致在推送过来的消息里, 用户名字为用户ID. 为解决此类问题, 环信多添加了一个可以由用户设置的推送昵称的属性.
  */
 @property (strong, nonatomic) NSString *nickname EM_DEPRECATED_IOS(2_0_6, 2_1_1, "apnsNickname");

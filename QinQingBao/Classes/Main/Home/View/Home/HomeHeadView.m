@@ -14,6 +14,9 @@
 
 #import "AdvertisementController.h"
 
+#import "MarketViewController.h"
+
+
 @interface HomeHeadView ()<UIScrollViewDelegate>
 {
     UIPageControl *pageControl;
@@ -37,11 +40,18 @@
     [NoticeHelper AlertShow:@"暂未开通,敬请期待！" view:nil];
 }
 
+- (IBAction)marketHandler:(id)sender {
+    MarketViewController *view = [[MarketViewController alloc] init];
+    [self.nav pushViewController:view animated:YES];
+}
+
 /**
  *  初始化突变轮播播放器
  */
 -(void)initImagePlayer
 {
+    [timer invalidate];
+
     self.imagePlayer.bounces = YES;
     self.imagePlayer.pagingEnabled = YES;
     self.imagePlayer.delegate = self;

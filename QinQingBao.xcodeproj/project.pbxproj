@@ -255,6 +255,7 @@
 		0160670A1CF6AD8C005A3164 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F71CF6AD8C005A3164 /* UIImageView+WebCache.m */; };
 		0160670B1CF6AD8C005A3164 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */; };
 		0160670F1CF6C3E1005A3164 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0160670E1CF6C3E1005A3164 /* MBProgressHUD.m */; };
+		01636B471D10FBA600BED8CD /* chatshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01636B461D10FBA600BED8CD /* chatshop.png */; };
 		016CBFC11C3104B70029C66E /* ServicePhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */; };
 		016CBFC21C3104B70029C66E /* ServicePhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */; };
 		016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E745C1BAFD053009075E5 /* PersonalDataViewController.m */; };
@@ -265,6 +266,9 @@
 		016F24711C4DDF2900FF1BF5 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24701C4DDF2900FF1BF5 /* ImageIO.framework */; };
 		016F24731C4DDF3100FF1BF5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24721C4DDF3100FF1BF5 /* Security.framework */; };
 		016F24751C4DDF3800FF1BF5 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24741C4DDF3800FF1BF5 /* CFNetwork.framework */; };
+		01702B821D18CD6600058764 /* MarketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01702B811D18CD6600058764 /* MarketViewController.m */; };
+		01702B861D18CF6100058764 /* CommonMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01702B841D18CF6100058764 /* CommonMarketCell.m */; };
+		01702B871D18CF6100058764 /* CommonMarketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01702B851D18CF6100058764 /* CommonMarketCell.xib */; };
 		017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017179131BEC45140070A503 /* OrderServiceDetailCell.m */; };
 		017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017179141BEC45140070A503 /* OrderServiceDetailCell.xib */; };
 		017DB0C01CF44661002F97BA /* TimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB0BF1CF44661002F97BA /* TimeLineModel.m */; };
@@ -1763,6 +1767,7 @@
 		016066F81CF6AD8C005A3164 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		0160670E1CF6C3E1005A3164 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../../../Pods/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
+		01636B461D10FBA600BED8CD /* chatshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatshop.png; sourceTree = "<group>"; };
 		016CBFBE1C3104B70029C66E /* ServicePhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePhoneCell.h; sourceTree = "<group>"; };
 		016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePhoneCell.m; sourceTree = "<group>"; };
 		016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePhoneCell.xib; sourceTree = "<group>"; };
@@ -1775,6 +1780,11 @@
 		016F24701C4DDF2900FF1BF5 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		016F24721C4DDF3100FF1BF5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		016F24741C4DDF3800FF1BF5 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		01702B801D18CD6600058764 /* MarketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketViewController.h; sourceTree = "<group>"; };
+		01702B811D18CD6600058764 /* MarketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketViewController.m; sourceTree = "<group>"; };
+		01702B831D18CF6100058764 /* CommonMarketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMarketCell.h; sourceTree = "<group>"; };
+		01702B841D18CF6100058764 /* CommonMarketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonMarketCell.m; sourceTree = "<group>"; };
+		01702B851D18CF6100058764 /* CommonMarketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonMarketCell.xib; sourceTree = "<group>"; };
 		017179121BEC45140070A503 /* OrderServiceDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderServiceDetailCell.h; sourceTree = "<group>"; };
 		017179131BEC45140070A503 /* OrderServiceDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderServiceDetailCell.m; sourceTree = "<group>"; };
 		017179141BEC45140070A503 /* OrderServiceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderServiceDetailCell.xib; sourceTree = "<group>"; };
@@ -3991,6 +4001,7 @@
 		013F3F261BFC6E0A00FF39E5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				01636B461D10FBA600BED8CD /* chatshop.png */,
 				01E89B0A1C76FE0000CFD40D /* infoimg.png */,
 				01E89AFE1C75BE8300CFD40D /* scan@2x.png */,
 				01E89AFC1C75B4CB00CFD40D /* scan.png */,
@@ -4343,6 +4354,42 @@
 				01E603CE1C166B350099275C /* StreetViewController.m */,
 			);
 			path = MyData;
+			sourceTree = "<group>";
+		};
+		01702B7B1D18CB6E00058764 /* ServiceMarket */ = {
+			isa = PBXGroup;
+			children = (
+				01702B7C1D18CB6E00058764 /* Controller */,
+				01702B7D1D18CB6E00058764 /* Model */,
+				01702B7E1D18CB6E00058764 /* View */,
+			);
+			path = ServiceMarket;
+			sourceTree = "<group>";
+		};
+		01702B7C1D18CB6E00058764 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				01702B801D18CD6600058764 /* MarketViewController.h */,
+				01702B811D18CD6600058764 /* MarketViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		01702B7D1D18CB6E00058764 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01702B7E1D18CB6E00058764 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01702B831D18CF6100058764 /* CommonMarketCell.h */,
+				01702B841D18CF6100058764 /* CommonMarketCell.m */,
+				01702B851D18CF6100058764 /* CommonMarketCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		0180A2BB1BA80BE000D26866 /* FamilyInfo */ = {
@@ -7813,6 +7860,7 @@
 		01F2280B1B7B410200ED4AFB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				01702B7B1D18CB6E00058764 /* ServiceMarket */,
 				01F228101B7B428300ED4AFB /* Home */,
 				01E573561CBF68FA005F045D /* Massage */,
 				01E8131C1C055DD800585691 /* Mall */,
@@ -8625,6 +8673,7 @@
 				01ECDA1A1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA9F1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA0E1C8EB31F0018160F /* Contents.json in Resources */,
+				01702B871D18CF6100058764 /* CommonMarketCell.xib in Resources */,
 				01E68FF01BCCA68900A17543 /* title.png in Resources */,
 				01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */,
 				01F85AC91C57718000E463F4 /* superseller.png in Resources */,
@@ -8940,6 +8989,7 @@
 				01E4A95F1C3FF20900AAAF73 /* ClassificationViewController.xib in Resources */,
 				01E68FDD1BCCA68900A17543 /* spkBtn.png in Resources */,
 				0126ED8E1B8C6D4200EC85C1 /* ServiceListCell.xib in Resources */,
+				01636B471D10FBA600BED8CD /* chatshop.png in Resources */,
 				01E68FC01BCCA68900A17543 /* play_ptz_disable.png in Resources */,
 				01E68FE81BCCA68900A17543 /* playback_fullscreen_playbarline.png in Resources */,
 				0126EDA51B8C6DDA00EC85C1 /* backgroundStar.png in Resources */,
@@ -9063,6 +9113,7 @@
 				01ED45911C3F85F000953E34 /* GoodsTitleCell.m in Sources */,
 				013F3F221BFC6A8500FF39E5 /* AnimationViewController.m in Sources */,
 				01266B971C4A38F500992D2F /* OrderResultModel.m in Sources */,
+				01702B861D18CF6100058764 /* CommonMarketCell.m in Sources */,
 				012AAD191CA28CF000CEE121 /* HealthPlaceHolderView.m in Sources */,
 				018BC60B1C50AC7200C883FF /* WifiInfoViewController.m in Sources */,
 				01E4A96B1C3FFA8600AAAF73 /* GoodsListViewController.m in Sources */,
@@ -9622,6 +9673,7 @@
 				01ECDB0B1C8EB31F0018160F /* EaseEmotionManager.m in Sources */,
 				0126ED8C1B8C6D4200EC85C1 /* ServiceCell.m in Sources */,
 				01EAB4391BE8441A00D380A8 /* EvaluationItemCell.m in Sources */,
+				01702B821D18CD6600058764 /* MarketViewController.m in Sources */,
 				01ECDAFA1C8EB31F0018160F /* UIImageView+HeadImage.m in Sources */,
 				01601D551CE08DE500B3712E /* OrderDetailController.m in Sources */,
 				0128A8BE1B9EC7D3002B14E2 /* OrderSubmitCell.m in Sources */,

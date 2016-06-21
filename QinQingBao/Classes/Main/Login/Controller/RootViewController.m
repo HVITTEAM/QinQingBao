@@ -56,7 +56,7 @@
 }
 
 /**
- *  跳转到登陆界面
+ *  跳转到登录界面
  */
 - (IBAction)login:(id)sender {
     LoginViewController *loginVC = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];

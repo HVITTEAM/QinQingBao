@@ -17,6 +17,7 @@
 
 - (IBAction)masageHandler:(id)sender;
 - (IBAction)healthHandler:(id)sender;
+- (IBAction)marketHandler:(id)sender;
 -(void)initImagePlayer;
 
 @property (nonatomic, retain) UINavigationController *nav;

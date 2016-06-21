@@ -54,7 +54,7 @@
                                               }
                                               else if ([codeNum isKindOfClass:[NSString class]] && [codeNum isEqualToString: @"14001"])
                                               {
-                                                  NSLog(@"登陆信息过期,请重新登录");
+                                                  NSLog(@"登录信息过期,请重新登录");
                                                   [MTNotificationCenter postNotificationName:MTLoginTimeout object:nil userInfo:nil];
                                                   success(dict,responseObject);
                                               }

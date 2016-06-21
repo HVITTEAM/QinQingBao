@@ -107,10 +107,7 @@ const float VIEW_WIDTH = 225.0;
     for (NSString *timeDescription in time) {
         UILabel *label = [[UILabel alloc] init];
         
-        NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[timeDescription dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        
-        label.attributedText = attrStr;
-//        [label setText:timeDescription];
+        [label setText:timeDescription];
         label.numberOfLines = 2;
         label.textColor = i < currentStatus ? [UIColor blackColor] : [UIColor grayColor];
         label.textAlignment = NSTextAlignmentRight;
@@ -150,12 +147,7 @@ const float VIEW_WIDTH = 225.0;
     int i = 0;
     for (NSString *timeDescription in timeDescriptions) {
         UILabel *label = [[UILabel alloc] init];
-        
-        NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[timeDescription dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
-        
-        label.attributedText = attrStr;
-
-//        [label setText:timeDescription];
+        [label setText:timeDescription];
         label.numberOfLines = 0;
 #warning 设置字体颜色
         label.textColor = i < currentStatus ? HMColor(43, 139, 39) : [UIColor grayColor];

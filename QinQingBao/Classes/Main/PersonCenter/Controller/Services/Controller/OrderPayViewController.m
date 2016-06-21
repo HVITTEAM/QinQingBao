@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, PayType) {
 
 @property(assign,nonatomic)NSInteger score;               //评分
 
-@property(strong,nonatomic)CouponsModel *selectedCoupon;    //选中的优惠券
+@property(strong,nonatomic)CouponsModel *selectedCoupon;    //选中的代金券
 
 @end
 
@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, PayType) {
         paySettlementCell.couponHandle = ^{
             UseCouponsViewController *couponsVC = [[UseCouponsViewController alloc] init];
             couponsVC.totalPrice = weakSelf.orderInfor.wprice;
-            //如果选择了优惠券
+            //如果选择了代金券
             if (weakSelf.selectedCoupon)
                 couponsVC.selectedModel = weakSelf.selectedCoupon;
             couponsVC.selectedClick = ^(CouponsModel *item){
@@ -348,7 +348,7 @@ typedef NS_ENUM(NSInteger, PayType) {
 }
 
 /**
- *  锁定优惠券
+ *  锁定代金券
  */
 -(void)editVoucher
 {
@@ -359,7 +359,7 @@ typedef NS_ENUM(NSInteger, PayType) {
     [CommonRemoteHelper RemoteWithUrl:URL_edit_voucher parameters:dict type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         if ([dict[@"code"] integerValue] == 0) {
-            //优惠券锁定成功
+            //代金券锁定成功
             CGFloat servicePrice = [self.orderInfor.wprice floatValue];
             CGFloat couponPrice = 0;
             if (self.selectedCoupon) {
@@ -375,12 +375,12 @@ typedef NS_ENUM(NSInteger, PayType) {
                                    amount:lastPrice
                        productDescription:self.orderInfor.icontent];
         }else{
-            [NoticeHelper AlertShow:@"优惠券使用失败！" view:self.view];
+            [NoticeHelper AlertShow:@"代金券使用失败！" view:self.view];
 //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"优惠券锁定失败" view:self.view];
+        [NoticeHelper AlertShow:@"代金券锁定失败" view:self.view];
     }];
 }
 

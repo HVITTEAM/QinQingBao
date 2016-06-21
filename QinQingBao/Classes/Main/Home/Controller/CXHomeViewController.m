@@ -39,7 +39,7 @@
     UIImageView *titleView;
     
     //资讯数据源
-    NSMutableArray *dataProvider;
+    NSArray *dataProvider;
 }
 
 @end

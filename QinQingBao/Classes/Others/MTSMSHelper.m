@@ -84,10 +84,10 @@
             if (!isMatch)
             {
                 //手机号码不正确
-                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil)
-                                                              message:NSLocalizedString(@"errorphonenumber", nil)
+                UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"提示", nil)
+                                                              message:NSLocalizedString(@"手机号码错误", nil)
                                                              delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                    cancelButtonTitle:NSLocalizedString(@"好", nil)
                                                     otherButtonTitles:nil, nil];
                 [alert show];
                 return;
@@ -101,10 +101,10 @@
         if (telNumber.length!=11)
         {
             //手机号码不正确
-            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"notice", nil)
-                                                          message:NSLocalizedString(@"errorphonenumber", nil)
+            UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"提示", nil)
+                                                          message:NSLocalizedString(@"手机号码错误", nil)
                                                          delegate:self
-                                                cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                cancelButtonTitle:NSLocalizedString(@"好", nil)
                                                 otherButtonTitles:nil, nil];
             [alert show];
             return;

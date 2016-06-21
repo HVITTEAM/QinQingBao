@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *servicePriceLb;        //服务价格
 
-@property (weak, nonatomic) IBOutlet UIButton *couponBtn;            //优惠券
+@property (weak, nonatomic) IBOutlet UIButton *couponBtn;            //代金券
 
 @property (weak, nonatomic) IBOutlet UILabel *lastPriceLb;           //结算价格
 
@@ -48,7 +48,7 @@
 
 - (IBAction)useCouponAction:(id)sender
 {
-    //如果已经已有优惠卷，由于无法再次锁定，所以不需要再让用户去选择优惠券
+    //如果已经已有优惠卷，由于无法再次锁定，所以不需要再让用户去选择代金券
     if (self.orderInfo.voucher_price && self.orderInfo.voucher_id) {
         return;
     }

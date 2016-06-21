@@ -42,7 +42,7 @@
 
 - (void)initTableSkin
 {
-    self.title = @"推拿理疗";
+    self.title = @"超声理疗";
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
 }

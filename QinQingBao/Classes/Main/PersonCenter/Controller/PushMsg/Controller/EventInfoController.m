@@ -16,6 +16,8 @@
 #import "NewsDetailViewControler.h"
 #import "DeliverViewController.h"
 
+
+
 @interface EventInfoController ()
 {
     NSMutableArray *dataProvider;
@@ -37,7 +39,6 @@
     self.nextPageNumber = 1;
     
     self.view.backgroundColor  = HMGlobalBg;
-//        MJRefreshAutoNormalFooter  MJRefreshBackNormalFooter
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -148,7 +149,15 @@
     if (self.type == MessageTypeEventinfo || self.type == MessageTypeHealthTips)
     {
         EventMsgModel *model  = dataProvider[indexPath.section];
+        
+        ArticleModel *articleItem = [[ArticleModel alloc] init];
+        articleItem.abstract =  model.abstract;
+        articleItem.title = model.title;
+        articleItem.id = model.msg_artid;
+        articleItem.logo_url = model.logo_url;
+        
         NewsDetailViewControler *view = [[NewsDetailViewControler alloc] init];
+        view.articleItem = articleItem;
         NSString *url;
         if (![SharedAppUtil defaultCommonUtil].userVO)
             url = [NSString stringWithFormat:@"%@/admin/manager/index.php/family/article_detail/%@?key=cxjk&like",URL_Local,model.msg_artid];

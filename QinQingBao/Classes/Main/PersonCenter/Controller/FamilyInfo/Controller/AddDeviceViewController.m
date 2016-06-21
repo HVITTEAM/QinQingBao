@@ -177,10 +177,10 @@
        return [self getDeviceInfor:self.itemimei.rightText.text];
     }
     //如果设备名称为空，说明需要取设备名称
-    else if (self.item2.rightText.text.length != 11)
-    {
-        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式,必填" view:nil];
-    }
+//    else if (self.item2.rightText.text.length != 11)
+//    {
+//        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式,必填" view:nil];
+//    }
     else if (self.selectedFamily)//用户信息已经存在，属于后来新增设备
     {
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

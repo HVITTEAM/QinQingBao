@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *servicePriceLb;      //服务价格
 
-@property (weak, nonatomic) IBOutlet UILabel *discountPriceLb;     //优惠券价格
+@property (weak, nonatomic) IBOutlet UILabel *discountPriceLb;     //代金券价格
 
 @property (weak, nonatomic) IBOutlet UILabel *lastPriceLb;         //结算价格
 
@@ -47,7 +47,7 @@
 
 -(void)setDataWithOrderModel:(OrderModel *)orderModel
 {
-    //设置优惠券价格
+    //设置代金券价格
     float voucherPrice = 0;
     self.discountPriceLb.text = @"无";
     if (orderModel.voucher_id && orderModel.voucher_price) {

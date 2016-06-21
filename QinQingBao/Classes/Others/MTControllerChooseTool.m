@@ -56,7 +56,7 @@
 {
     // 切换控制器
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    //登陆界面
+    //登录界面
     LoginViewController *login = [[LoginViewController alloc] init];
     login.backHiden = YES;
     UINavigationController *navLoginNav = [[UINavigationController alloc] initWithRootViewController:login];

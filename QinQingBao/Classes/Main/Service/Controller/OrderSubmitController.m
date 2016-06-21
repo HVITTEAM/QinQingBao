@@ -28,7 +28,7 @@
     OrderSubmitCell *orderSubmitCell;
     
     NSMutableArray *addressDataProvider;
-    //优惠券
+    //代金券
     CouponsModel *couponsItem;
 }
 @property(nonatomic,strong)UITableView *tableView;
@@ -233,7 +233,7 @@
         UITableViewCell *vouchercell = [tableView dequeueReusableCellWithIdentifier:@"MTVoucherCell"];
         if (vouchercell == nil)
             vouchercell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTVoucherCell"];
-        vouchercell.textLabel.text = @"优惠券";
+        vouchercell.textLabel.text = @"代金券";
         if (couponsItem)
             vouchercell.detailTextLabel.text = [NSString stringWithFormat:@"%@元",couponsItem.voucher_price];
         else
@@ -325,7 +325,7 @@
         UseCouponsViewController *coupons = [[UseCouponsViewController alloc] init];
         coupons.selectedClick = ^(CouponsModel *item)
         {
-            NSLog(@"选择优惠券");
+            NSLog(@"选择代金券");
             couponsItem = item;
             [orderSubmitCell setCouponsModel:item];
             [self.tableView reloadData];

@@ -25,7 +25,7 @@
 
 /*!
  @property
- @brief 当前登陆用户的会话对象列表
+ @brief 当前登录用户的会话对象列表
  */
 @property (nonatomic, readonly) NSArray *conversations;
 

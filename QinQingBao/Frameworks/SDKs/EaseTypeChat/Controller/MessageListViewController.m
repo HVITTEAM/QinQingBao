@@ -55,7 +55,7 @@
 
 //删除回话列表
 -(void)removeEmptyConversationsFromDB {
-    //当前登陆用户的会话对象列表
+    //当前登录用户的会话对象列表
     //NSArray *conversations = [EaseMob sharedInstance].chatManager.conversations;
     NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
     NSMutableArray *needRemoveConversations;
