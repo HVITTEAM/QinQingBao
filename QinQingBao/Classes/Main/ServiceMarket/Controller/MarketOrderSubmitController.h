@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MassageModel.h"
+#import "ServiceItemModel.h"
 
 @interface MarketOrderSubmitController : UIViewController
+
+@property(strong,nonatomic)MassageModel *dataItem;
+
+/**
+ *  店铺资料
+ */
+@property (nonatomic, retain) ServiceItemModel *shopItem;
 
 @end

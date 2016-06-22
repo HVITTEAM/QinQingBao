@@ -59,11 +59,11 @@
     
     self.nameItem = [[HMCommonTextfieldItem alloc] init];
     self.nameItem.title = @"姓名";
-    self.nameItem.placeholder = @"请输入姓名";
+    self.nameItem.placeholder = @"必填";
     self.nameItem.textValue = self.name;
     
     self.telItem = [[HMCommonTextfieldItem alloc] init];
-    self.telItem.title = @"电话";
+    self.telItem.title = @"手机号";
     self.telItem.placeholder = @"必填";
     self.telItem.textValue = self.tel;
     
@@ -74,7 +74,7 @@
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
     self.emailItem.title = @"邮箱";
-    self.emailItem.placeholder = @"必填";
+    self.emailItem.placeholder = @"选填";
     self.emailItem.textValue = self.email;
     
     group.items = @[self.nameItem,self.telItem,self.addressItem,self.emailItem];
@@ -108,11 +108,11 @@
     self.tel = self.telItem.rightText.text;
     if (self.tel.length == 0)
     {
-        return [NoticeHelper AlertShow:@"请输入电话" view:nil];
+        return [NoticeHelper AlertShow:@"请输入手机号" view:nil];
     }
-    if (self.tel.length != 11)
-    {
-        return [NoticeHelper AlertShow:@"请输入正确的手机号码格式" view:nil];
+    
+    if (![self validatePhoneNumOrEmail:self.tel type:1]) {
+        return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
     }
     
     self.address = self.addressItem.rightText.text;
@@ -120,16 +120,42 @@
         return [NoticeHelper AlertShow:@"请输入地址" view:nil];
     }
     
+    //邮箱选填,只有输入邮箱时才验证
     self.email = self.emailItem.rightText.text;
-    if (self.email.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入邮箱地址" view:nil];
+    if (self.email.length != 0) {
+        if (![self validatePhoneNumOrEmail:self.email type:2]) {
+            return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
+        }
     }
-
+    
     [self.navigationController popViewControllerAnimated:YES];
     if (self.inforClick)
     {
         self.inforClick(self.name,self.tel,self.address,self.email);
     }
+}
+
+/**
+ *  验证手机或邮箱是否合法
+ *
+ *  @param phoneNumOrEmail 手机号码或邮箱
+ *  @param type            1:表示验证手机号码,2:表示验证邮箱
+ *
+ *  @return  yes:表示通过验证,no表示未通过
+ */
+-(BOOL)validatePhoneNumOrEmail:(NSString *)phoneNumOrEmail type:(NSInteger)type
+{
+    //默认为验证手机号
+    NSString *regular = @"^1[3578]\\d{9}$";
+    if (type == 2) {
+        //验证邮箱
+        regular = @"^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
+    }
+    
+    NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regular];
+    BOOL result =[prediccate evaluateWithObject:phoneNumOrEmail];
+    return result;
+    
 }
 
 @end

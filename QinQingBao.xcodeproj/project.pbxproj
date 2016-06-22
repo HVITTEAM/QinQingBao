@@ -1194,11 +1194,9 @@
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
 		D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D216AB501D07FC4F00E85008 /* PushMsgModel.m */; };
-		D21AC0841D18D69900CDBFDB /* MarketOrderSubmitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC0831D18D69900CDBFDB /* MarketOrderSubmitController.m */; };
 		D21AC0881D18EB0500CDBFDB /* MarketOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC0861D18EB0500CDBFDB /* MarketOrderCell.m */; };
 		D21AC0891D18EB0500CDBFDB /* MarketOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */; };
 		D21AC08C1D19146600CDBFDB /* MarketPromptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC08B1D19146600CDBFDB /* MarketPromptCell.m */; };
-		D21AC0921D19424500CDBFDB /* MarketCustominfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC0911D19424500CDBFDB /* MarketCustominfoController.m */; };
 		D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */; };
 		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
 		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
@@ -1208,6 +1206,8 @@
 		D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5671D0179E10003D166 /* NewsCell.xib */; };
 		D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5691D0179E10003D166 /* NotificationCell.m */; };
 		D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D56A1D0179E10003D166 /* NotificationCell.xib */; };
+		D277D2CA1D1A364C00F20507 /* MarketCustominfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277D2C71D1A364C00F20507 /* MarketCustominfoController.m */; };
+		D277D2CB1D1A364C00F20507 /* MarketOrderSubmitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277D2C91D1A364C00F20507 /* MarketOrderSubmitController.m */; };
 		D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA071B8709FD00E7CDDF /* UUChartLabel.m */; };
 		D279DA111B8709FD00E7CDDF /* UUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA091B8709FD00E7CDDF /* UUColor.m */; };
 		D279DA121B8709FD00E7CDDF /* UULineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA0B1B8709FD00E7CDDF /* UULineChart.m */; };
@@ -3285,15 +3285,11 @@
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
 		D216AB4F1D07FC4F00E85008 /* PushMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgModel.h; sourceTree = "<group>"; };
 		D216AB501D07FC4F00E85008 /* PushMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgModel.m; sourceTree = "<group>"; };
-		D21AC0821D18D69900CDBFDB /* MarketOrderSubmitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOrderSubmitController.h; sourceTree = "<group>"; };
-		D21AC0831D18D69900CDBFDB /* MarketOrderSubmitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketOrderSubmitController.m; sourceTree = "<group>"; };
 		D21AC0851D18EB0500CDBFDB /* MarketOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOrderCell.h; sourceTree = "<group>"; };
 		D21AC0861D18EB0500CDBFDB /* MarketOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketOrderCell.m; sourceTree = "<group>"; };
 		D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketOrderCell.xib; sourceTree = "<group>"; };
 		D21AC08A1D19146600CDBFDB /* MarketPromptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketPromptCell.h; sourceTree = "<group>"; };
 		D21AC08B1D19146600CDBFDB /* MarketPromptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketPromptCell.m; sourceTree = "<group>"; };
-		D21AC0901D19424500CDBFDB /* MarketCustominfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketCustominfoController.h; sourceTree = "<group>"; };
-		D21AC0911D19424500CDBFDB /* MarketCustominfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketCustominfoController.m; sourceTree = "<group>"; };
 		D22C48B91D0FA9FA003B1853 /* DeliverInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliverInfoModel.h; sourceTree = "<group>"; };
 		D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliverInfoModel.m; sourceTree = "<group>"; };
 		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
@@ -3308,6 +3304,10 @@
 		D246D5681D0179E10003D166 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D246D5691D0179E10003D166 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 		D246D56A1D0179E10003D166 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		D277D2C61D1A364C00F20507 /* MarketCustominfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketCustominfoController.h; sourceTree = "<group>"; };
+		D277D2C71D1A364C00F20507 /* MarketCustominfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketCustominfoController.m; sourceTree = "<group>"; };
+		D277D2C81D1A364C00F20507 /* MarketOrderSubmitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOrderSubmitController.h; sourceTree = "<group>"; };
+		D277D2C91D1A364C00F20507 /* MarketOrderSubmitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketOrderSubmitController.m; sourceTree = "<group>"; };
 		D279DA061B8709FD00E7CDDF /* UUChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUChartLabel.h; sourceTree = "<group>"; };
 		D279DA071B8709FD00E7CDDF /* UUChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UUChartLabel.m; sourceTree = "<group>"; };
 		D279DA081B8709FD00E7CDDF /* UUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UUColor.h; sourceTree = "<group>"; };
@@ -4396,12 +4396,14 @@
 		01702B7C1D18CB6E00058764 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D277D2C61D1A364C00F20507 /* MarketCustominfoController.h */,
+				D277D2C71D1A364C00F20507 /* MarketCustominfoController.m */,
+				D277D2C81D1A364C00F20507 /* MarketOrderSubmitController.h */,
+				D277D2C91D1A364C00F20507 /* MarketOrderSubmitController.m */,
 				01702B801D18CD6600058764 /* MarketViewController.h */,
 				01702B811D18CD6600058764 /* MarketViewController.m */,
-				D21AC0821D18D69900CDBFDB /* MarketOrderSubmitController.h */,
-				D21AC0831D18D69900CDBFDB /* MarketOrderSubmitController.m */,
-				D21AC0901D19424500CDBFDB /* MarketCustominfoController.h */,
-				D21AC0911D19424500CDBFDB /* MarketCustominfoController.m */,
+				01F1B9131D1A1BC400057B15 /* MarketDeatilViewController.h */,
+				01F1B9141D1A1BC400057B15 /* MarketDeatilViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -9221,6 +9223,7 @@
 				01ECDAE31C8EB31F0018160F /* EMCDDeviceManagerBase.m in Sources */,
 				01ECD9F41C8EB31E0018160F /* EaseHandler.m in Sources */,
 				01ED459A1C3F880200953E34 /* HeartImageCell.m in Sources */,
+				D277D2CB1D1A364C00F20507 /* MarketOrderSubmitController.m in Sources */,
 				01266B8F1C48B0A800992D2F /* CommonOrderGoodsEvaCell.m in Sources */,
 				01ECDFC11B7C402100665D87 /* HMCommonTextfieldItem.m in Sources */,
 				0126ECFF1B8C4E8100EC85C1 /* TimeLineViewControl.m in Sources */,
@@ -9263,7 +9266,6 @@
 				01EFD3111C56028300BDA640 /* TipsCell.m in Sources */,
 				01601D731CE08ED200B3712E /* OrderTotals.m in Sources */,
 				016067011CF6AD8C005A3164 /* SDWebImageDownloader.m in Sources */,
-				D21AC0841D18D69900CDBFDB /* MarketOrderSubmitController.m in Sources */,
 				01ECDADD1C8EB31F0018160F /* EMAudioPlayerUtil.m in Sources */,
 				01CF97A11C7A988800206FCD /* DeviceInfoModel.m in Sources */,
 				016066C71CF6ACCE005A3164 /* MJRefreshAutoNormalFooter.m in Sources */,
@@ -9297,7 +9299,6 @@
 				01601D921CE0900200B3712E /* EvaDetailCell.m in Sources */,
 				01ECDB001C8EB31F0018160F /* NSDateFormatter+Category.m in Sources */,
 				01FD4C9F1CAE4B43008F09CF /* PSTCollectionViewCell.m in Sources */,
-				D21AC0921D19424500CDBFDB /* MarketCustominfoController.m in Sources */,
 				01E6906D1BCCB32D00A17543 /* GTMBase64.m in Sources */,
 				01E6904C1BCCAA7000A17543 /* RecordingBtnView.m in Sources */,
 				01E6D4F61BE1F49B00824F51 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -9361,6 +9362,7 @@
 				01E6D4FA1BE1F49B00824F51 /* readme.markdown in Sources */,
 				016066D11CF6ACCE005A3164 /* UIScrollView+MJExtension.m in Sources */,
 				016066C81CF6ACCE005A3164 /* MJRefreshAutoStateFooter.m in Sources */,
+				D277D2CA1D1A364C00F20507 /* MarketCustominfoController.m in Sources */,
 				01EBD3C81C853FA6009236FA /* RefundCellBottom.m in Sources */,
 				01EFD3061C56028300BDA640 /* BodyCell.m in Sources */,
 				01E690561BCCAA8000A17543 /* IntercomVolumnView.m in Sources */,

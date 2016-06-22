@@ -12,13 +12,19 @@
 #import "SWYSubtitleCell.h"
 #import "PaymentViewController.h"
 #import "MarketCustominfoController.h"
+#import "OrderItem.h"
 
 @interface MarketOrderSubmitController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
 
-/**  临时使用 */
-@property (strong,nonatomic)NSString *nameStr;
+@property (strong,nonatomic)NSString *customName;
+
+@property (strong,nonatomic)NSString *customTel;
+
+@property (strong,nonatomic)NSString *customAddress;
+
+@property (strong,nonatomic)NSString *customEmail;
 
 @end
 
@@ -51,7 +57,7 @@
     [btn setTitle:@"提交订单" forState:UIControlStateNormal];
     btn.backgroundColor = HMColor(255, 126, 0);
     btn.layer.cornerRadius = 8.0f;
-    [btn addTarget:self action:@selector(submitOrder:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(commitHandle:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:btn];
     [self.view addSubview:bottomView];
 }
@@ -66,7 +72,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        if (!self.nameStr) {
+        if (!self.customName) {
             return 1;
         }
     }
@@ -101,12 +107,13 @@
         SWYSubtitleCell *infoCell = [SWYSubtitleCell createSWYSubtitleCellWithTableView:tableView];
         infoCell.detailTextLabel.textColor = [UIColor darkGrayColor];
         infoCell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        infoCell.textLabel.text = [NSString stringWithFormat:@"%@  %@",self.nameStr,@"13739009098"];
-        infoCell.detailTextLabel.text = @"撒旦法杀毒发撒地方柑柑棋发地方撒点粉啥发撒地方隧道股份噶微弱微任务收到回复";
+        infoCell.textLabel.text = [NSString stringWithFormat:@"%@  %@",self.customName,self.customTel];
+        infoCell.detailTextLabel.text = self.customAddress;
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
         MarketOrderCell *marketOrderCell = [MarketOrderCell createCellWithTableView:tableView];
+        [marketOrderCell setItem:self.dataItem];
         cell = marketOrderCell;
     }else{
         //下单须知
@@ -122,6 +129,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 0.1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,35 +156,92 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        MarketCustominfoController *vc = [MarketCustominfoController initWith:@"老王" tel:@"13739909098" address:@"杭州" email:@"123@qq.com"];
+        MarketCustominfoController *vc = [MarketCustominfoController initWith:self.customName tel:self.customTel address:self.customAddress email:self.customEmail];
         vc.inforClick = ^(NSString *name,NSString *tel,NSString *address,NSString *email){
-            NSLog(@"%@ %@ %@ %@",name,tel,address,email);
-            self.nameStr = name;
+            self.customName = name;
+            self.customTel = tel;
+            self.customAddress = address;
+            self.customEmail = email;
             [self.tableView reloadData];
         };
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
-#pragma mark - 事件
--(void)submitOrder:(UIButton *)sender
+#pragma mark - 事件方法
+/**
+ *  提交预约
+ */
+-(void)commitHandle:(UIButton *)sender
 {
-    PaymentViewController *vc = [[PaymentViewController alloc] init];
-    NSArray *vcs = self.navigationController.viewControllers;
-    UIViewController *backToVC = vcs[vcs.count - 2];
-    vc.imageUrlStr = nil;
-    vc.content = @"描述";
-    vc.wprice = @"180元";
-    vc.wid = @"wid";
-    vc.wcode = @"wcode";
-    vc.store_id = @"storeId";
-    vc.productName = @"productName";
-    vc.viewControllerOfback = backToVC;
-    vc.doneHandlerClick = ^{
-        
-    };
+    if (self.customName == nil)
+        return [NoticeHelper AlertShow:@"请选择联系人信息" view:self.view];
+    NSDate *cDate = [NSDate date];
+    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
+    [fmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString *time = [fmt stringFromDate:cDate];
     
-    [self.navigationController pushViewController:vc animated:YES];
+    NSMutableDictionary *params = [@{
+                                     @"iid" : self.dataItem.iid,
+                                     @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                     @"wtime" : time,
+                                     @"wname" : self.customName,
+                                     @"wprice" : self.dataItem.price_mem,
+                                     @"dvcode" : self.shopItem.dvcode,
+                                     @"wtelnum" : self.customTel,
+                                     @"waddress" : self.shopItem.totalname,
+                                     @"client" : @"ios",
+                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"wlevel" : @"1",
+                                     @"wremark" : @"用户留言",
+                                     @"voucher_id" :  @"",
+                                     @"pay_type" : @"1",
+                                     @"item_sum" : @"1",
+                                     @"wlat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@"",
+                                     @"w_status" : @"5",
+                                     }mutableCopy];
+    
+    [params setValue:self.customEmail forKey: @"email"];
+    
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
+                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                         
+                                         id codeNum = [dict objectForKey:@"code"];
+                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                         OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         if (item.wcode.length != 0)
+                                         {
+                                             
+                                             PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+                                             
+                                             paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
+                                             paymentVC.content = self.dataItem.iname;
+                                             paymentVC.wprice = item.wprice;
+                                             paymentVC.wid = item.wid;
+                                             paymentVC.wcode = item.wcode;
+                                             paymentVC.store_id = item.store_id;
+                                             paymentVC.productName = self.dataItem.iname;
+                                             
+                                             NSUInteger count = self.navigationController.viewControllers.count;
+                                             paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
+                                             [self.navigationController pushViewController:paymentVC animated:YES];
+                                             
+                                         }
+                                         [HUD removeFromSuperview];
+                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                         [NoticeHelper AlertShow:@"下单失败!" view:self.view];
+                                         [HUD removeFromSuperview];
+                                     }];
 }
+
+    
+
 
 @end

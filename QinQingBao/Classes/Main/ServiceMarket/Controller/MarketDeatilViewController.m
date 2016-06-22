@@ -22,6 +22,8 @@
 
 #import "MarketHeadView.h"
 
+#import "MarketOrderSubmitController.h"
+
 @interface MarketDeatilViewController ()
 {
     NSArray *imgUrlArray;
@@ -156,10 +158,10 @@
     self.headView.submitClick = ^(UIButton *button){
         if (![SharedAppUtil defaultCommonUtil].userVO )
             return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-        ShopOrderViewController *view = [[ShopOrderViewController alloc] init];
+        MarketOrderSubmitController *view = [[MarketOrderSubmitController alloc] init];
         view.dataItem = item;
+        view.shopItem = weakSelf.shopItem;
         view.title = item.iname;
-//        view.shopItem = weakSelf.shopItem;
         [weakSelf.navigationController pushViewController:view animated:YES];
     };
     return self.headView;

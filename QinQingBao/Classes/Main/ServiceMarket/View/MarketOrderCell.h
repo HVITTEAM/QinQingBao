@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MassageModel.h"
 
 @interface MarketOrderCell : UITableViewCell
 
@@ -17,5 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLb;
 
 +(instancetype)createCellWithTableView:(UITableView *)tableView;
+
+-(void)setItem:(MassageModel *)dataItem;
 
 @end
