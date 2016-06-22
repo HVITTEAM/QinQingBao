@@ -13,20 +13,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MTCommonMarketCell" id="KGk-i7-Jjw" customClass="CommonMarketCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="190"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="189.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderDetail" translatesAutoresizingMaskIntoConstraints="NO" id="qZS-tW-3Ab">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="130" id="aSd-qs-1GV"/>
+                            <constraint firstAttribute="height" constant="140" id="aSd-qs-1GV"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2400元/位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rnb-M0-WEu">
-                        <rect key="frame" x="9" y="138" width="69" height="21"/>
+                        <rect key="frame" x="9" y="148" width="69" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="u3h-Ev-XTn"/>
                         </constraints>
@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="非会员：2600元/位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3G-uA-ujp">
-                        <rect key="frame" x="8" y="162" width="106.5" height="21"/>
+                        <rect key="frame" x="8" y="172" width="106.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Twz-eT-kuh"/>
                         </constraints>
@@ -44,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售98单" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je2-qL-N2x">
-                        <rect key="frame" x="259" y="138" width="51.5" height="21"/>
+                        <rect key="frame" x="259" y="148" width="51.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="QBc-e6-8b4"/>
                         </constraints>
@@ -53,16 +53,24 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LbQ-CQ-8mL" customClass="TQStarRatingView">
-                        <rect key="frame" x="231" y="163" width="80" height="20"/>
+                        <rect key="frame" x="231" y="173" width="80" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="OI1-Fz-GdN"/>
                             <constraint firstAttribute="height" constant="20" id="veW-dr-pfL"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fEk-BJ-Cov">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="STx-iW-76I"/>
+                            <constraint firstAttribute="height" constant="50" id="eGM-EB-uF1"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Rnb-M0-WEu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="2zD-RI-67g"/>
+                    <constraint firstItem="fEk-BJ-Cov" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4BA-c5-njy"/>
                     <constraint firstItem="je2-qL-N2x" firstAttribute="top" secondItem="qZS-tW-3Ab" secondAttribute="bottom" constant="8" id="6VX-4B-zhG"/>
                     <constraint firstAttribute="trailing" secondItem="qZS-tW-3Ab" secondAttribute="trailing" id="7ap-Uk-5YN"/>
                     <constraint firstItem="LbQ-CQ-8mL" firstAttribute="top" secondItem="je2-qL-N2x" secondAttribute="bottom" constant="4" id="8A8-b5-bTz"/>
@@ -71,10 +79,19 @@
                     <constraint firstItem="Rnb-M0-WEu" firstAttribute="top" secondItem="qZS-tW-3Ab" secondAttribute="bottom" constant="8" id="RHb-F2-X3m"/>
                     <constraint firstItem="qZS-tW-3Ab" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UA7-NN-F3e"/>
                     <constraint firstItem="Z3G-uA-ujp" firstAttribute="top" secondItem="Rnb-M0-WEu" secondAttribute="bottom" constant="3" id="VI9-2r-0Ll"/>
+                    <constraint firstItem="fEk-BJ-Cov" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZaB-zA-MMu"/>
                     <constraint firstAttribute="trailing" secondItem="je2-qL-N2x" secondAttribute="trailing" constant="9" id="lbp-3A-oeF"/>
                     <constraint firstAttribute="trailing" secondItem="LbQ-CQ-8mL" secondAttribute="trailing" constant="9" id="vBV-9z-Xk2"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="evaView" destination="LbQ-CQ-8mL" id="yBE-Cd-euq"/>
+                <outlet property="headImg" destination="qZS-tW-3Ab" id="OOY-7Z-qhq"/>
+                <outlet property="markImg" destination="fEk-BJ-Cov" id="JtJ-jm-q9w"/>
+                <outlet property="markPrice" destination="Z3G-uA-ujp" id="jDX-OO-FJH"/>
+                <outlet property="priceLab" destination="Rnb-M0-WEu" id="ace-JH-VEv"/>
+                <outlet property="sellnumLab" destination="je2-qL-N2x" id="cjT-n3-Brz"/>
+            </connections>
             <point key="canvasLocation" x="505" y="231"/>
         </tableViewCell>
     </objects>

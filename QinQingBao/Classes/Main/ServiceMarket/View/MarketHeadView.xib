@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MarketHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cQP-Kn-7xu">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RYJ-fn-VFb">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Fh2-Tc-wVV"/>
+                        <constraint firstAttribute="width" constant="50" id="k3f-zp-6gf"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="RYJ-fn-VFb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Lhi-rw-1RY"/>
+                <constraint firstAttribute="trailing" secondItem="cQP-Kn-7xu" secondAttribute="trailing" id="MZd-ra-bSH"/>
+                <constraint firstItem="cQP-Kn-7xu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PG6-dq-j8B"/>
+                <constraint firstItem="cQP-Kn-7xu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PXe-mY-vXs"/>
+                <constraint firstItem="RYJ-fn-VFb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TuO-Gb-cOt"/>
+                <constraint firstAttribute="bottom" secondItem="cQP-Kn-7xu" secondAttribute="bottom" id="nRN-zq-9Ym"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="icon" destination="cQP-Kn-7xu" id="PxV-2c-rNf"/>
+                <outlet property="markImg" destination="RYJ-fn-VFb" id="eHB-87-gTn"/>
+            </connections>
+            <point key="canvasLocation" x="273" y="214"/>
+        </view>
+    </objects>
+</document>

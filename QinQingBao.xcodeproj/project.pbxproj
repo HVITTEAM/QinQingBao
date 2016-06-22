@@ -301,6 +301,10 @@
 		0197233B1BD7303800D58F8B /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723361BD7303800D58F8B /* RSKTouchView.m */; };
 		0197233C1BD7303800D58F8B /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723381BD7303800D58F8B /* UIImage+FixOrientation.m */; };
 		019E81611C3BA72E00616AD9 /* agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 019E81601C3BA72E00616AD9 /* agreement.html */; };
+		01A5A28B1D1A204400282964 /* MarketBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5A2891D1A204400282964 /* MarketBuyView.m */; };
+		01A5A28C1D1A204400282964 /* MarketBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A5A28A1D1A204400282964 /* MarketBuyView.xib */; };
+		01A5A2911D1A307C00282964 /* MarketHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5A28F1D1A307C00282964 /* MarketHeadView.m */; };
+		01A5A2921D1A307C00282964 /* MarketHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A5A2901D1A307C00282964 /* MarketHeadView.xib */; };
 		01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */; };
 		01B489861C34CF9A002A3374 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */; };
 		01B489871C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489821C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m */; };
@@ -1078,6 +1082,7 @@
 		01F1385B1BEA0594007FF79F /* HeartbeatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F1385A1BEA0594007FF79F /* HeartbeatCell.xib */; };
 		01F1864B1B8AADF700DA284E /* HealthTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F186491B8AADF700DA284E /* HealthTipCell.m */; };
 		01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F1864A1B8AADF700DA284E /* HealthTipCell.xib */; };
+		01F1B9151D1A1BC400057B15 /* MarketDeatilViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1B9141D1A1BC400057B15 /* MarketDeatilViewController.m */; };
 		01F227DB1B7B3E1400ED4AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227DA1B7B3E1400ED4AFB /* main.m */; };
 		01F227F51B7B3E1400ED4AFB /* QinQingBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F227F41B7B3E1400ED4AFB /* QinQingBaoTests.m */; };
 		01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F228011B7B3E9700ED4AFB /* AppDelegate.m */; };
@@ -1841,6 +1846,12 @@
 		019723371BD7303800D58F8B /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
 		019723381BD7303800D58F8B /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		019E81601C3BA72E00616AD9 /* agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = agreement.html; sourceTree = "<group>"; };
+		01A5A2881D1A204400282964 /* MarketBuyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketBuyView.h; sourceTree = "<group>"; };
+		01A5A2891D1A204400282964 /* MarketBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketBuyView.m; sourceTree = "<group>"; };
+		01A5A28A1D1A204400282964 /* MarketBuyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketBuyView.xib; sourceTree = "<group>"; };
+		01A5A28E1D1A307C00282964 /* MarketHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketHeadView.h; sourceTree = "<group>"; };
+		01A5A28F1D1A307C00282964 /* MarketHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketHeadView.m; sourceTree = "<group>"; };
+		01A5A2901D1A307C00282964 /* MarketHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketHeadView.xib; sourceTree = "<group>"; };
 		01B4897E1C34CF9A002A3374 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -3057,6 +3068,8 @@
 		01F186481B8AADF700DA284E /* HealthTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthTipCell.h; sourceTree = "<group>"; };
 		01F186491B8AADF700DA284E /* HealthTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthTipCell.m; sourceTree = "<group>"; };
 		01F1864A1B8AADF700DA284E /* HealthTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthTipCell.xib; sourceTree = "<group>"; };
+		01F1B9131D1A1BC400057B15 /* MarketDeatilViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketDeatilViewController.h; sourceTree = "<group>"; };
+		01F1B9141D1A1BC400057B15 /* MarketDeatilViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketDeatilViewController.m; sourceTree = "<group>"; };
 		01F227D51B7B3E1400ED4AFB /* QinQingBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QinQingBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F227D91B7B3E1400ED4AFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F227DA1B7B3E1400ED4AFB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -4371,6 +4384,8 @@
 			children = (
 				01702B801D18CD6600058764 /* MarketViewController.h */,
 				01702B811D18CD6600058764 /* MarketViewController.m */,
+				01F1B9131D1A1BC400057B15 /* MarketDeatilViewController.h */,
+				01F1B9141D1A1BC400057B15 /* MarketDeatilViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4385,6 +4400,12 @@
 		01702B7E1D18CB6E00058764 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01A5A28E1D1A307C00282964 /* MarketHeadView.h */,
+				01A5A28F1D1A307C00282964 /* MarketHeadView.m */,
+				01A5A2901D1A307C00282964 /* MarketHeadView.xib */,
+				01A5A2881D1A204400282964 /* MarketBuyView.h */,
+				01A5A2891D1A204400282964 /* MarketBuyView.m */,
+				01A5A28A1D1A204400282964 /* MarketBuyView.xib */,
 				01702B831D18CF6100058764 /* CommonMarketCell.h */,
 				01702B841D18CF6100058764 /* CommonMarketCell.m */,
 				01702B851D18CF6100058764 /* CommonMarketCell.xib */,
@@ -8511,7 +8532,9 @@
 				01E68FDE1BCCA68900A17543 /* spkBtn_sel.png in Resources */,
 				01ECDACC1C8EB31F0018160F /* Contents.json in Resources */,
 				0126EDA71B8C6DDA00EC85C1 /* foregroundStar.png in Resources */,
+				01A5A28C1D1A204400282964 /* MarketBuyView.xib in Resources */,
 				01ECDAA41C8EB31F0018160F /* Contents.json in Resources */,
+				01A5A2921D1A307C00282964 /* MarketHeadView.xib in Resources */,
 				0157E2451BE888BF004C0908 /* icon_chose_bottom@2x.png in Resources */,
 				01ECDAD41C8EB31F0018160F /* chat_sender_bg@2x.png in Resources */,
 				01EBD3C91C853FA6009236FA /* RefundCellBottom.xib in Resources */,
@@ -9327,6 +9350,7 @@
 				01E690841BCCF6AA00A17543 /* TSPopoverPopoverView.m in Sources */,
 				01FD4C9C1CAE4B43008F09CF /* DACircularProgressView.m in Sources */,
 				01F228071B7B3E9700ED4AFB /* AppDelegate.m in Sources */,
+				01F1B9151D1A1BC400057B15 /* MarketDeatilViewController.m in Sources */,
 				016066D01CF6ACCE005A3164 /* MJRefreshConst.m in Sources */,
 				016CBFC11C3104B70029C66E /* ServicePhoneCell.m in Sources */,
 				01E813401C059E5000585691 /* OrderItem.m in Sources */,
@@ -9451,6 +9475,7 @@
 				01F228311B7B45DD00ED4AFB /* MTNewfeatureViewController.m in Sources */,
 				016066C21CF6ACCE005A3164 /* MJRefreshBackFooter.m in Sources */,
 				01ECDB101C8EB31F0018160F /* EaseUsersListViewController.m in Sources */,
+				01A5A2911D1A307C00282964 /* MarketHeadView.m in Sources */,
 				01ED7CAB1C3220AB00A2182F /* MTNetReloader.m in Sources */,
 				D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */,
 				011077001C3E8CD1001E5C51 /* GoodsInfoViewController.m in Sources */,
@@ -9637,6 +9662,7 @@
 				01EFD3151C56182500BDA640 /* ShowAllEvaViewController.m in Sources */,
 				01266B931C48B48800992D2F /* CommonEvaluateGoodsViewController.m in Sources */,
 				0126ED7F1B8C57A700EC85C1 /* AFURLRequestSerialization.m in Sources */,
+				01A5A28B1D1A204400282964 /* MarketBuyView.m in Sources */,
 				01ECDAE01C8EB31F0018160F /* EMCDDeviceManager+Microphone.m in Sources */,
 				01F49CF81C4730080079F45F /* CommonGoodsDetailMiddleCell.m in Sources */,
 				01ECDF991B7C347800665D87 /* HomeViewController.m in Sources */,
