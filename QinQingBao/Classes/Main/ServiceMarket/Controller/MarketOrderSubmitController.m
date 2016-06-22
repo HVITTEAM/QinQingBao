@@ -118,7 +118,7 @@
     }else{
         //下单须知
         MarketPromptCell *pCell = [MarketPromptCell createCellWithTableView:tableView];
-        pCell.contentStr = @"撒旦法撒旦法杀毒发撒地方柑柑棋发贺卡收到回复看沙发哈萨克货到付款哈萨克发货的看啥货到付款哈萨克沙发沙发上发啊发啥呆的地";
+        pCell.contentStr = self.dataItem.remark;
         cell = pCell;
     }
     cell.layoutMargins = UIEdgeInsetsZero;
