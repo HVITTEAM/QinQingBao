@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="MarketBuyView" customClass="MarketBuyView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAc-8R-h4Z">
+                    <rect key="frame" x="15" y="5" width="48" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="coS-hV-bur"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                    <color key="textColor" red="1" green="0.1656260473" blue="0.1707146702" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1h-DL-mpr">
+                    <rect key="frame" x="230" y="10" width="80" height="30"/>
+                    <color key="backgroundColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="1i3-ga-Xm8"/>
+                        <constraint firstAttribute="height" constant="30" id="E0c-VQ-Aql"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="预约下单">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="orderRightnowClickHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="Q1h-I6-GRn"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qnu-ab-IAN" userLabel="bottomLine">
+                    <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                    <color key="backgroundColor" white="0.88" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="Dpj-V1-pIC"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxq-7w-EaY">
+                    <rect key="frame" x="15" y="26" width="35.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="04b-vS-Qj2"/>
+                        <constraint firstAttribute="height" constant="21" id="k1B-Vu-ff7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="k1B-Vu-ff7"/>
+                        </mask>
+                    </variation>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoC-aZ-ztc">
+                    <rect key="frame" x="76" y="26" width="39" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="F92-qn-r1o"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Qnu-ab-IAN" secondAttribute="trailing" id="3pl-bV-jLf"/>
+                <constraint firstItem="Jxq-7w-EaY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="7zf-dV-egb"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="x1h-DL-mpr" secondAttribute="bottom" constant="9" id="Beo-f8-Ehz"/>
+                <constraint firstItem="VAc-8R-h4Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="Cca-zz-U6H"/>
+                <constraint firstItem="Jxq-7w-EaY" firstAttribute="leading" secondItem="VAc-8R-h4Z" secondAttribute="trailing" constant="10" id="Dzo-Ie-bzQ"/>
+                <constraint firstItem="x1h-DL-mpr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="E0h-VM-VgH"/>
+                <constraint firstAttribute="trailing" secondItem="x1h-DL-mpr" secondAttribute="trailing" constant="10" id="K9L-hC-yUL"/>
+                <constraint firstItem="QoC-aZ-ztc" firstAttribute="leading" secondItem="Jxq-7w-EaY" secondAttribute="trailing" constant="25.5" id="KX6-mp-8Y2"/>
+                <constraint firstAttribute="bottom" secondItem="Qnu-ab-IAN" secondAttribute="bottom" id="OXm-QJ-rGA"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="Jxq-7w-EaY" secondAttribute="bottom" constant="5" id="X7j-0C-JiI"/>
+                <constraint firstItem="VAc-8R-h4Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="as1-6k-kZV"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dba-Ze-M5k"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="QoC-aZ-ztc" secondAttribute="bottom" constant="2" id="fWA-xy-qmV"/>
+                <constraint firstItem="Qnu-ab-IAN" firstAttribute="top" secondItem="Jxq-7w-EaY" secondAttribute="bottom" constant="2" id="s1A-rh-4vj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Dzo-Ie-bzQ"/>
+                    <exclude reference="X7j-0C-JiI"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="markPriceLab" destination="Jxq-7w-EaY" id="3J7-3H-BoY"/>
+                <outlet property="orderRightnow" destination="x1h-DL-mpr" id="qVf-3V-0CC"/>
+                <outlet property="priceLab" destination="VAc-8R-h4Z" id="qGg-vi-QCV"/>
+                <outlet property="sellnumLab" destination="QoC-aZ-ztc" id="Ekz-cO-jCU"/>
+            </connections>
+            <point key="canvasLocation" x="253" y="-96"/>
+        </view>
+    </objects>
+</document>

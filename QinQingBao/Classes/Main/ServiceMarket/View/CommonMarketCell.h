@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MassageModel;
 
 @interface CommonMarketCell : UITableViewCell
 
 + (CommonMarketCell*) commonMarketCell;
+
+@property (nonatomic, retain) MassageModel *item;
 @end

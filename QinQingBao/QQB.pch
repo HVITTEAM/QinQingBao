@@ -222,11 +222,11 @@
 
 #define ShopTel @"0571-81909595"
 
-//#define URL_Local @"http://test.hvit.com.cn/ylserver"
+#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
-#define URL_Local @"http://ibama.hvit.com.cn"
+//#define URL_Local @"http://ibama.hvit.com.cn"
 
 /***充值支付宝回调url*/
 #define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]

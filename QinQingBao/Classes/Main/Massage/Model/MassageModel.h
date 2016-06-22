@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString *iname;
 @property (nonatomic, copy) NSString *iid_num;
 @property (nonatomic, copy) NSString *item_url;
+
+
 @property (nonatomic, copy) NSString *price_min;
 @property (nonatomic, copy) NSString *price_max;
 @property (nonatomic, copy) NSString *price_time_min;
@@ -33,6 +35,16 @@
 @property (nonatomic, copy) NSString *medicines;
 @property (nonatomic, copy) NSString *wgrade;
 @property (nonatomic, retain) NSArray *introduce_url;
+
+//服务市场
+@property (nonatomic, copy) NSString *promotion_price;
+
+@property (nonatomic, copy) NSString *sell_month;
+
+@property (nonatomic, copy) NSString *item_url_big;
+
+@property (nonatomic, copy) NSString *server_support;
+
 
 
 
