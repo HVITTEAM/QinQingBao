@@ -45,6 +45,8 @@
 
 @property (nonatomic, copy) NSString *server_support;
 
+@property (nonatomic, copy) NSString *remark;
+
 
 
 

@@ -25,19 +25,28 @@
 {
     [super layoutSubviews];
     
-    CGRect oldImageViewFrame = self.imageView.frame;
-    CGFloat imageViewWidth = self.bounds.size.height - 30;
-    self.imageView.frame = CGRectMake(oldImageViewFrame.origin.x, 15, imageViewWidth, imageViewWidth);
-    
-    if (self.showCorner) {
-        self.imageView.layer.cornerRadius = imageViewWidth / 2;
-        self.imageView.layer.masksToBounds = YES;
+    CGFloat textX = 15.0f;
+    if (self.imageView.image) {
+        
+        CGRect oldImageViewFrame = self.imageView.frame;
+        CGFloat imageViewWidth = self.bounds.size.height - 30;
+        self.imageView.frame = CGRectMake(oldImageViewFrame.origin.x, 15, imageViewWidth, imageViewWidth);
+        
+        if (self.showCorner) {
+            self.imageView.layer.cornerRadius = imageViewWidth / 2;
+            self.imageView.layer.masksToBounds = YES;
+        }
+        
+        textX = CGRectGetMaxX(self.imageView.frame) + 15;
     }
     
-    self.textLabel.frame = CGRectMake(CGRectGetMaxY(self.imageView.frame) + 15, self.textLabel.frame.origin.y - 4, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+    if (self.textLabel.text) {
+        self.textLabel.frame = CGRectMake(textX, self.textLabel.frame.origin.y - 4, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+    }
     
-    self.detailTextLabel.frame = CGRectMake(CGRectGetMaxY(self.imageView.frame) +15, self.detailTextLabel.frame.origin.y + 4, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
+    if (self.detailTextLabel.text) {
+        self.detailTextLabel.frame = CGRectMake(textX, self.detailTextLabel.frame.origin.y + 4, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
+    }
 }
-
 
 @end
