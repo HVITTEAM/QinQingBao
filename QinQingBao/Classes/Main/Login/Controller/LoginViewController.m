@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 #import "UpdatePwdViewController.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "MobileBindingView.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
@@ -384,16 +384,10 @@
     [MTControllerChooseTool setMainViewcontroller];
     
     //设置推送标签和别名
-    NSMutableSet *tags = [NSMutableSet set];
-    [self setTags:&tags addTag:@""];
-    [APService setTags:tags alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+    [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 #pragma mark - JPush 推送标签和别名
-- (void)setTags:(NSMutableSet **)tags addTag:(NSString *)tag
-{
-    [*tags addObject:tag];
-}
 
 - (void)tagsAliasCallback:(int)iResCode tags:(NSSet *)tags alias:(NSString *)alias
 {

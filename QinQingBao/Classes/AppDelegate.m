@@ -10,7 +10,7 @@
 #import "UserModel.h"
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "YSPlayerController.h"
 #import <SMS_SDK/SMS_SDK.h>
 #import "CCLocationManager.h"
@@ -86,9 +86,11 @@
     [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
     
     //注册用户的apns服务
-    [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound |UIUserNotificationTypeAlert)
-                                       categories:nil];
-    [APService setupWithOption:launchOptions];
+    [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+                                                      UIUserNotificationTypeSound |
+                                                      UIUserNotificationTypeAlert)
+                                          categories:nil];
+    [JPUSHService setupWithOption:launchOptions];
     
     //    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
     
@@ -109,7 +111,7 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    [APService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
     
     //格式化deviceToken
     NSString *deviceTokenStr = [[NSString stringWithFormat:@"%@",deviceToken] substringWithRange:NSMakeRange(1,[NSString stringWithFormat:@"%@",deviceToken].length - 2)];
@@ -125,7 +127,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [APService handleRemoteNotification:userInfo];
+    [JPUSHService handleRemoteNotification:userInfo];
 }
 
 /**
@@ -159,10 +161,10 @@
     {
         [self sendMsgByType];
         //当用户点击通知栏的消息进入app
-        [APService setBadge:0];
+        [JPUSHService setBadge:0];
         application.applicationIconBadgeNumber = 0;
         
-        [APService handleRemoteNotification:userInfo];
+        [JPUSHService handleRemoteNotification:userInfo];
         completionHandler(UIBackgroundFetchResultNewData);
     }
 }
@@ -260,7 +262,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     //消除BadgeNumber
-    [APService setBadge:0];
+    [JPUSHService setBadge:0];
     application.applicationIconBadgeNumber = 0;
 }
 

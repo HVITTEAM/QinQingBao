@@ -294,7 +294,6 @@
 		018BC60B1C50AC7200C883FF /* WifiInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BC6081C50AC7200C883FF /* WifiInfoViewController.m */; };
 		0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */; };
 		0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */; };
-		0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
 		019723391BD7303800D58F8B /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723321BD7303800D58F8B /* RSKImageCropViewController.m */; };
 		0197233A1BD7303800D58F8B /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 019723341BD7303800D58F8B /* RSKImageScrollView.m */; };
@@ -1137,6 +1136,7 @@
 		01FBF0BE1BCB891E00CA285C /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBF0BD1BCB891E00CA285C /* ChangePwdViewController.m */; };
 		01FBF0EE1BCBB25E00CA285C /* ServiceTypeDatas.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBF0EB1BCBB25E00CA285C /* ServiceTypeDatas.m */; };
 		01FBF0EF1BCBB25E00CA285C /* ServiceTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FBF0ED1BCBB25E00CA285C /* ServiceTypeModel.m */; };
+		01FBFF321D1B87D300EBF0E2 /* jpush-ios-2.1.8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FBFF301D1B87D300EBF0E2 /* jpush-ios-2.1.8.a */; };
 		01FD4C941CAE4B43008F09CF /* MWCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD4C5C1CAE4B43008F09CF /* MWCaptionView.m */; };
 		01FD4C951CAE4B43008F09CF /* MWGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD4C5F1CAE4B43008F09CF /* MWGridCell.m */; };
 		01FD4C961CAE4B43008F09CF /* MWGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FD4C611CAE4B43008F09CF /* MWGridViewController.m */; };
@@ -1833,8 +1833,6 @@
 		0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationNoneCell.h; sourceTree = "<group>"; };
 		0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationNoneCell.m; sourceTree = "<group>"; };
 		0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationNoneCell.xib; sourceTree = "<group>"; };
-		0193B0D11BD5CDCF00F07FBA /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.2.a"; sourceTree = "<group>"; };
 		0193B0D51BD5D02F00F07FBA /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		019723301BD7303800D58F8B /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropper.h; sourceTree = "<group>"; };
 		019723311BD7303800D58F8B /* RSKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropViewController.h; sourceTree = "<group>"; };
@@ -3166,6 +3164,8 @@
 		01FBF0EB1BCBB25E00CA285C /* ServiceTypeDatas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTypeDatas.m; sourceTree = "<group>"; };
 		01FBF0EC1BCBB25E00CA285C /* ServiceTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceTypeModel.h; sourceTree = "<group>"; };
 		01FBF0ED1BCBB25E00CA285C /* ServiceTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceTypeModel.m; sourceTree = "<group>"; };
+		01FBFF301D1B87D300EBF0E2 /* jpush-ios-2.1.8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.8.a"; sourceTree = "<group>"; };
+		01FBFF311D1B87D300EBF0E2 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		01FD4C5B1CAE4B43008F09CF /* MWCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCaptionView.h; sourceTree = "<group>"; };
 		01FD4C5C1CAE4B43008F09CF /* MWCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWCaptionView.m; sourceTree = "<group>"; };
 		01FD4C5D1CAE4B43008F09CF /* MWCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWCommon.h; sourceTree = "<group>"; };
@@ -3366,12 +3366,12 @@
 				01024BE71BD0A22500E8CAEC /* AlipaySDK.framework in Frameworks */,
 				01FF8F881CDB2DDE0089BBC4 /* libWeiboSDK.a in Frameworks */,
 				01FF8F8C1CDB2DDE0089BBC4 /* MOBFoundation.framework in Frameworks */,
-				0193B0D31BD5CDCF00F07FBA /* libPushSDK-1.8.2.a in Frameworks */,
 				010414311BB1268D006EC41B /* SMS_SDK.framework in Frameworks */,
 				016F246B1C4DDEDB00FF1BF5 /* Bugtags.framework in Frameworks */,
 				01FF8F831CDB2DDE0089BBC4 /* ShareSDKExtension.framework in Frameworks */,
 				01ECDAE81C8EB31F0018160F /* libopencore-amrwb.a in Frameworks */,
 				01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */,
+				01FBFF321D1B87D300EBF0E2 /* jpush-ios-2.1.8.a in Frameworks */,
 				24B3DD6D28FEE0C62052795F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4467,8 +4467,8 @@
 		0193B0D01BD5CDCF00F07FBA /* JPushSdk */ = {
 			isa = PBXGroup;
 			children = (
-				0193B0D11BD5CDCF00F07FBA /* APService.h */,
-				0193B0D21BD5CDCF00F07FBA /* libPushSDK-1.8.2.a */,
+				01FBFF301D1B87D300EBF0E2 /* jpush-ios-2.1.8.a */,
+				01FBFF311D1B87D300EBF0E2 /* JPUSHService.h */,
 			);
 			path = JPushSdk;
 			sourceTree = "<group>";
