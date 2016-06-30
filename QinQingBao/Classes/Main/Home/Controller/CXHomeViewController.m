@@ -26,6 +26,10 @@
 
 #import "MJChiBaoZiHeader.h"
 
+#import "STPopupController.h"
+#import "CXPickerViewController.h"
+#import "RulerViewController.h"
+
 
 @interface CXHomeViewController ()<MTCityChangeDelegate>
 {
@@ -40,6 +44,8 @@
     
     //资讯数据源
     NSArray *dataProvider;
+    
+    UIPickerView *pickView;
 }
 
 @end
@@ -329,7 +335,6 @@
                                  }];
 }
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -423,11 +428,15 @@
  */
 -(void)showView
 {
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    MyMesageViewController *vc = [[MyMesageViewController alloc] init];
+    //    STPopupController *popupController = [[STPopupController alloc] initWithRootViewController:[CXPickerViewController new]];
+    //    popupController.containerView.layer.cornerRadius = 10;
+    //    popupController.hidesCloseButton = YES;
+    //    [popupController presentInViewController:self];
+    
+//    if (![SharedAppUtil defaultCommonUtil].userVO)
+//        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    RulerViewController *vc = [[RulerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 @end

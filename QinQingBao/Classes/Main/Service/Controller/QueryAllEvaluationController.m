@@ -37,9 +37,6 @@
 
 -(void)initTableviewSkin
 {
-//    NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:@"EvaluationHeadView" owner:nil options:nil];
-    //    self.tableView.tableHeaderView = [nibs lastObject];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"所有评价";
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.backgroundColor = HMGlobalBg;
@@ -80,7 +77,7 @@
 
 -(void)getDataProvider
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.itemInfo.iid,
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.itemId,
                                                                      @"page" : @10,
                                                                      @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                                                                      @"client" : @"ios"}
@@ -95,6 +92,7 @@
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {
                                          [self.tableView removePlace];
+                                         [self.view showNonedataTooltip];
                                          currentPageIdx --;
                                      }
                                      else

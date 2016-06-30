@@ -237,7 +237,7 @@
 -(void)queryAllevaluation
 {
     QueryAllEvaluationController *queryAlleva = [[QueryAllEvaluationController alloc] init];
-    queryAlleva.itemInfo = self.selectedItem;
+    queryAlleva.itemId = self.selectedItem.iid;
     [self.navigationController pushViewController:queryAlleva animated:YES];
 }
 

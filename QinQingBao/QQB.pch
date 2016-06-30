@@ -58,6 +58,8 @@
 #import "MTPayHelper.h"
 #import "MTDateHelper.h"
 
+#import "NSObject+RunTime.h"
+
 /**
  *  SDK 正式地址 appKey, 需要开发者申请好appkey方可访问
  */

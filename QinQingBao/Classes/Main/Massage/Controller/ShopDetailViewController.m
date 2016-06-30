@@ -18,9 +18,16 @@
 #import "ShopOrderViewController.h"
 #import "CCLocationManager.h"
 
+#import "EvaluationCell.h"
+#import "EvaluationTotal.h"
+
+#import "QueryAllEvaluationController.h"
+
 @interface ShopDetailViewController ()
 {
     NSArray *imgUrlArray;
+    
+    NSMutableArray *evaArr;
     
     MassageModel *dataItem;
 }
@@ -39,6 +46,8 @@
     
     [self getDadaProvider];
     
+    [self getAlleva];
+    
     if (![SharedAppUtil defaultCommonUtil].lat  || ![SharedAppUtil defaultCommonUtil].lat )
     {
         [[CCLocationManager shareLocation] getLocationCoordinate:^(CLLocationCoordinate2D locationCorrrdinate) {
@@ -50,12 +59,33 @@
     }
 }
 
+
 -(void)viewDidAppear:(BOOL)animated
 {
     self.title = @"服务详情";
 
     [super viewDidAppear:animated];
 }
+
+/**
+ *  获取服务评价
+ */
+-(void)getAlleva
+{
+    evaArr = [[NSMutableArray alloc] init];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_dis_cont parameters: @{@"iid" : self.iid,
+                                                                     @"page" : @10,
+                                                                     @"p" : @1,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
+                                     evaArr = result.datas;
+                                     [self.tableView reloadData];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
 
 -(void)getDadaProvider
 {
@@ -108,7 +138,6 @@
                                          NSLog(@"发生错误！%@",error);
                                          [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      }];
-
     }
 }
 
@@ -206,11 +235,28 @@
     
     if (indexPath.row == 0)
     {
-        EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
-        if(evanoneCell == nil)
-            evanoneCell = [EvaluationNoneCell evanoneCell];
-        [evanoneCell setScore:[NSString stringWithFormat:@"%.1f",[dataItem.wgrade floatValue]]];
-        cell = evanoneCell;
+        if (evaArr.count != 0)
+        {
+            EvaluationCell *evacell = [tableView dequeueReusableCellWithIdentifier:@"MTEvaCell"];
+            
+            if(evacell == nil)
+                evacell = [EvaluationCell evaluationCell];
+            
+            [evacell setdataWithScore:dataItem.wgrade count:@"100"];
+            [evacell setEvaItem:evaArr[0]];
+            evacell.queryClick  = ^(UIButton *btn){
+                [self queryAllevaluation];
+            };
+            cell = evacell;
+        }
+        else
+        {
+            EvaluationNoneCell *evanoneCell = [tableView dequeueReusableCellWithIdentifier:@"MTEvanoneCell"];
+            if(evanoneCell == nil)
+                evanoneCell = [EvaluationNoneCell evanoneCell];
+            [evanoneCell setScore:[NSString stringWithFormat:@"%.1f",[dataItem.wgrade floatValue]]];
+            cell = evanoneCell;
+        }
     }
     else if (indexPath.row == 1)
     {
@@ -304,5 +350,15 @@
             }
         }];
     }
+}
+
+/**
+ *  获取全部评价
+ */
+-(void)queryAllevaluation
+{
+    QueryAllEvaluationController *queryAlleva = [[QueryAllEvaluationController alloc] init];
+    queryAlleva.itemId = dataItem.iid;
+    [self.navigationController pushViewController:queryAlleva animated:YES];
 }
 @end

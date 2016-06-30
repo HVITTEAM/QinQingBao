@@ -1,13 +1,16 @@
 PODS:
   - MBProgressHUD (0.9.2)
+  - STPopup (1.7.0)
   - TPKeyboardAvoiding (1.2.11)
 
 DEPENDENCIES:
   - MBProgressHUD (~> 0.9.2)
+  - STPopup (~> 1.7.0)
   - TPKeyboardAvoiding (~> 1.2.6)
 
 SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  STPopup: 36b45120f51ab3cdf7a10c1b9032b7fc8eef75ac
   TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
 
 COCOAPODS: 0.39.0

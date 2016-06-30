@@ -25,8 +25,11 @@
 - (IBAction)queryAllEvaluationClickHandler:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *evanumLab;
 @property (nonatomic, copy) void (^queryClick)(UIButton *btn);
+//放弃
 @property (nonatomic, retain) ServiceItemModel *itemInfo;
 @property (nonatomic, retain) EvaluationModel *evaItem;
+
+-(void)setdataWithScore:(NSString *)score count:(NSString *)count;
 
 + (EvaluationCell*) evaluationCell;
 @end

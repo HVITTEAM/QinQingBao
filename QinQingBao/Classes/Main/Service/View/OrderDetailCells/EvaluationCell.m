@@ -28,8 +28,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 - (IBAction)queryAllEvaluationClickHandler:(id)sender
@@ -37,7 +35,20 @@
     self.queryClick(sender);
 }
 
+-(void)setdataWithScore:(NSString *)score count:(NSString *)count
+{
+    float fscore = [score floatValue];
+    if (fscore >= 0 && fscore <= 5)
+        [self.Evaview setScore:fscore/5 withAnimation:NO];
+    else
+        [self.Evaview setScore:0 withAnimation:NO];
+    
+    self.evanumLab.text = [NSString stringWithFormat:@"%.01f分",[score floatValue]];
+    
+    [self.queryEva setTitle:[NSString stringWithFormat:@"查看全部%@条评价",count] forState:UIControlStateNormal];
+}
 
+//弃用
 -(void)setItemInfo:(ServiceItemModel *)itemInfo
 {
     _itemInfo = itemInfo;
@@ -59,7 +70,7 @@
     _evaItem = evaItem;
     if (!evaItem)
         return;
-    self.nameLab.text  = @"匿名";
+    self.nameLab.text  = evaItem.member_truename && evaItem.member_truename.length > 0 ?  evaItem.member_truename : @"匿名";
     self.timeLab.text  = evaItem.wpjtime;
     self.contentLab.text  = evaItem.dis_con;
     

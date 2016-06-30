@@ -122,13 +122,11 @@
     
     FristMsgModel *item;
     
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-    {
-        if (indexPath.row > 1)
-        {
-            typeCell.subtitleLab.text = @"登录后可以查看";
-        }
-    }
+    if (![SharedAppUtil defaultCommonUtil].userVO && indexPath.row > 1)
+        typeCell.subtitleLab.text = @"登录后可以查看";
+    else if ([SharedAppUtil defaultCommonUtil].userVO && indexPath.row > 1)
+        typeCell.subtitleLab.text = @"登录后可以查看";
+    
     if (itemArr && itemArr.count > 0)
     {
         item = itemArr[0];

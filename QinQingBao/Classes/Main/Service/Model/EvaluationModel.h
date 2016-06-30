@@ -19,7 +19,7 @@
 /**工单id**/
 @property (nonatomic, copy) NSString *wid;
 /**评论人姓名 **/
-@property (nonatomic, copy) NSString *member_name;
+@property (nonatomic, copy) NSString *member_truename;
 /**评论内容**/
 @property (nonatomic, copy) NSString *dis_con;
 /**评论时间**/

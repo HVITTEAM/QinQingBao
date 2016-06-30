@@ -54,7 +54,7 @@
     
     self.timeLab.text = item.wpjtime;
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
-    self.nameLab.text = @"匿名";
+    self.nameLab.text = item.member_truename && item.member_truename.length > 0 ? item.member_truename : @"匿名";
 }
 
 - (void)setitemWithShopData:(GevalModel *)item

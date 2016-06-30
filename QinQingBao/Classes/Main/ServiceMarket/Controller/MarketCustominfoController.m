@@ -65,6 +65,7 @@
     self.telItem = [[HMCommonTextfieldItem alloc] init];
     self.telItem.title = @"手机号";
     self.telItem.placeholder = @"必填";
+    self.telItem.keyboardType = UIKeyboardTypeNumberPad;
     self.telItem.textValue = self.tel;
     
     self.addressItem = [[HMCommonTextfieldItem alloc] init];
@@ -74,6 +75,7 @@
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
     self.emailItem.title = @"邮箱";
+    self.emailItem.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.emailItem.placeholder = @"选填";
     self.emailItem.textValue = self.email;
     
