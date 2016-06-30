@@ -31,6 +31,13 @@
     
     [self initView];
     
+    if (self.wid) {
+        //如果有wid说明是服务中的物流
+        [self getServiceOrderDeliver];
+        return;
+    }
+    
+    //有orderId或item说明是商品的物流
     [self getDataProvider];
 }
 
@@ -128,5 +135,70 @@
                                  }];
     
 }
+
+
+
+-(void)getServiceOrderDeliver
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_api_search_deliver parameters:@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                      @"client" : @"ios",
+                                                                      @"wc_wid" : self.wid
+                                                                      }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     [HUD removeFromSuperview];
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         DeliverInfoModel * model = [DeliverInfoModel objectWithKeyValues:dict[@"datas"]];
+                                         
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             switch ([model.state integerValue])
+                                             {
+                                                 case 0:
+                                                     lab1.text = @"物流状态:在途";
+                                                     break;
+                                                 case 1:
+                                                     lab1.text = @"物流状态:揽件";
+                                                     break;
+                                                 case 2:
+                                                     lab1.text = @"物流状态:疑难";
+                                                     break;
+                                                 case 3:
+                                                     lab1.text = @"物流状态:签收";
+                                                     break;
+                                                 case 4:
+                                                     lab1.text = @"物流状态:退签";
+                                                     break;
+                                                 case 5:
+                                                     lab1.text = @"物流状态:派件";
+                                                     break;
+                                                 case 6:
+                                                     lab1.text = @"物流状态:退回";
+                                                     break;
+                                                 default:
+                                                     break;
+                                             }
+                                             [bgview addSubview:icon];
+                                             lab2.text = [NSString stringWithFormat:@"物流单号:%@",model.shipping_code];
+                                             lab3.text = [NSString stringWithFormat:@"信息来源:%@",model.express_name];
+                                             TimeLineViewControl *timeline = [[TimeLineViewControl alloc] initWithTimeArray:nil andTimeDescriptionArray:[[model.deliver_info reverseObjectEnumerator] allObjects] andCurrentStatus:1 andFrame:CGRectMake(-30, 100, MTScreenW,MTScreenH)];
+                                             [bgview addSubview:timeline];
+                                             bgview.contentSize = CGSizeMake(MTScreenW, timeline.totalHeight + 100);                                            });
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+
+}
+
+
 
 @end

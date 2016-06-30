@@ -1205,6 +1205,8 @@
 		D21AC0881D18EB0500CDBFDB /* MarketOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC0861D18EB0500CDBFDB /* MarketOrderCell.m */; };
 		D21AC0891D18EB0500CDBFDB /* MarketOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */; };
 		D21AC08C1D19146600CDBFDB /* MarketPromptCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC08B1D19146600CDBFDB /* MarketPromptCell.m */; };
+		D228D90A1D220562001AF0EF /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D228D9091D220562001AF0EF /* ReportViewController.m */; };
+		D228D90E1D220C7D001AF0EF /* WorkReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D228D90D1D220C7D001AF0EF /* WorkReportModel.m */; };
 		D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */; };
 		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
 		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
@@ -3312,6 +3314,10 @@
 		D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketOrderCell.xib; sourceTree = "<group>"; };
 		D21AC08A1D19146600CDBFDB /* MarketPromptCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketPromptCell.h; sourceTree = "<group>"; };
 		D21AC08B1D19146600CDBFDB /* MarketPromptCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketPromptCell.m; sourceTree = "<group>"; };
+		D228D9081D220562001AF0EF /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		D228D9091D220562001AF0EF /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
+		D228D90C1D220C7D001AF0EF /* WorkReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkReportModel.h; sourceTree = "<group>"; };
+		D228D90D1D220C7D001AF0EF /* WorkReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkReportModel.m; sourceTree = "<group>"; };
 		D22C48B91D0FA9FA003B1853 /* DeliverInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliverInfoModel.h; sourceTree = "<group>"; };
 		D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliverInfoModel.m; sourceTree = "<group>"; };
 		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
@@ -4146,6 +4152,8 @@
 				D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */,
 				01601D441CE08DE500B3712E /* QCListViewController.h */,
 				01601D451CE08DE500B3712E /* QCListViewController.m */,
+				D228D9081D220562001AF0EF /* ReportViewController.h */,
+				D228D9091D220562001AF0EF /* ReportViewController.m */,
 				01601D461CE08DE500B3712E /* SettlementListViewController.h */,
 				01601D471CE08DE500B3712E /* SettlementListViewController.m */,
 				01601D481CE08DE500B3712E /* SettlementSlideViewController.h */,
@@ -4167,6 +4175,8 @@
 				01601D701CE08ED200B3712E /* OrderTotals.m */,
 				017DB0BE1CF44661002F97BA /* TimeLineModel.h */,
 				017DB0BF1CF44661002F97BA /* TimeLineModel.m */,
+				D228D90C1D220C7D001AF0EF /* WorkReportModel.h */,
+				D228D90D1D220C7D001AF0EF /* WorkReportModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9288,6 +9298,7 @@
 				011BFC7B1BF3316E009354CE /* CLLocation+MTLocation.m in Sources */,
 				01601D911CE0900200B3712E /* BillCell.m in Sources */,
 				01E5735E1CBF7CFF005F045D /* CustominfoViewController.m in Sources */,
+				D228D90E1D220C7D001AF0EF /* WorkReportModel.m in Sources */,
 				D279DA3B1B8715E100E7CDDF /* ChartCell.m in Sources */,
 				D2EE9ED01CEEA1AB00252633 /* SMSVerificationView.m in Sources */,
 				010EC9E01C438D8900D36417 /* ShopCarModelTotal.m in Sources */,
@@ -9714,6 +9725,7 @@
 				01F85AB81C575A0600E463F4 /* SWYNavigationBar.m in Sources */,
 				01ECDB0D1C8EB31F0018160F /* EaseLocationViewController.m in Sources */,
 				01ECDB241C8EB31F0018160F /* EaseRecordView.m in Sources */,
+				D228D90A1D220562001AF0EF /* ReportViewController.m in Sources */,
 				01EA817B1CE1760C00398FEC /* AllArticleTableViewController.m in Sources */,
 				01ECDB261C8EB31F0018160F /* CustomMessageCell.m in Sources */,
 				01ECDAF31C8EB31F0018160F /* UIButton+EMWebCache.m in Sources */,

@@ -12,8 +12,13 @@
 
 @interface DeliverViewController : UIViewController
 
-@property (nonatomic, retain) CommonGoodsModel *item;
+/**item和orderId只传其中一个即可,商品物流时需要传*/
+@property (nonatomic, retain) CommonGoodsModel *item;     //商品数据(包含了订单id)
 
-@property (nonatomic,copy) NSString *orderId;
+/**item和orderId只传其中一个即可,商品物流时需要传*/
+@property (nonatomic,copy) NSString *orderId;             //商品的订单id
+
+/**服务工单id,服务市场物流时需要传*/
+@property (nonatomic,copy) NSString *wid;           //工单id
 
 @end

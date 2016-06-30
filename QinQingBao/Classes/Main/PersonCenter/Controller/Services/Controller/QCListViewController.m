@@ -17,6 +17,8 @@
 
 #import "EvaluationViewController.h"
 #import "OrderRefundViewController.h"
+#import "DeliverViewController.h"
+#import "ReportViewController.h"
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
@@ -119,8 +121,8 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,119",
-                  @"pay_staus_type" :@"0"
+                  @"status" : @"0,119"
+//                  @"pay_staus_type" :@"0"
                   };
     }
     else if ([self.title isEqualToString:@"待服务"])
@@ -131,7 +133,8 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,29",
+//                  @"status" : @"0,29",
+                  @"status" : @"0,19",
                   @"pay_staus":@"1",
                   @"pay_staus_type" :@"0"
                   };
@@ -181,7 +184,7 @@
                                      OrderTotals *result = [OrderTotals objectWithKeyValues:dict];
                                      NSLog(@"获取到%lu条数据",(unsigned long)result.datas.count);
                                      
-                                     NSLog(@"----+++++---%@",responseObject);
+//                                     NSLog(@"----+++++---%@",responseObject);
                                      [self.tableView removePlace];
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
@@ -334,6 +337,17 @@
         };
 
         [self.nav pushViewController:evaluationVC animated:YES];
+    }else if ([btn.titleLabel.text isEqualToString:@"查看物流"]){
+        DeliverViewController *deliverVC = [[DeliverViewController alloc] init];
+        OrderModel *model = dataProvider[indexPath.section];
+        deliverVC.wid = model.wid;
+        [self.nav pushViewController:deliverVC animated:YES];
+        
+    }else if ([btn.titleLabel.text isEqualToString:@"查看医嘱"]){
+        ReportViewController *reportVC = [[ReportViewController alloc] init];
+        OrderModel *model = dataProvider[indexPath.section];
+        reportVC.wid = model.wid;
+        [self.nav pushViewController:reportVC animated:YES];
     }
 }
 

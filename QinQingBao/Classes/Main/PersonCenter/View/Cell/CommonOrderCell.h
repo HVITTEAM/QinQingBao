@@ -12,7 +12,6 @@
 @interface CommonOrderCell : UITableViewCell
 
 @property (nonatomic, copy) void (^deleteClick)(UIButton *btn);
-- (IBAction)payClick:(id)sender;
 
 @property (nonatomic, retain) OrderModel *item;
 
@@ -21,8 +20,5 @@
 @property(strong,nonatomic)NSDateFormatter *formatterOut;        //时期格式化对象
 
 +(CommonOrderCell *) commonOrderCell;
-
-- (IBAction)deleteBtnClickHandler:(id)sender;
-@property (strong, nonatomic) IBOutlet UIButton *payButton;
 
 @end

@@ -198,7 +198,7 @@
     }else if (indexPath.section == 1) {
         return 55;
     }else if (indexPath.section == 2 && indexPath.row == 1){
-        return 190;
+        return 200;
     }else if (indexPath.section == 3 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
