@@ -46,12 +46,27 @@
 
 -(void)submitHandler
 {
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    
     if (self.contentText.text.length == 0)
         return [NoticeHelper AlertShow:@"请认真填写您的意见和建议" view:self.view];
+    
+    
+    NSDictionary *inforDict = [[NSBundle mainBundle]infoDictionary];
+    NSString *version = inforDict[@"CFBundleShortVersionString"];
+    NSString *build = inforDict[@"CFBundleVersion"];
+    NSString *totalVersion = [NSString stringWithFormat:@"%@.%@",version,build];
+    
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Feedback parameters:  @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                   @"client" : @"ios",
-                                                                  @"content" : self.contentText.text}
+                                                                  @"content" : self.contentText.text,
+                                                                  @"app_version":totalVersion,
+                                                                  @"app_type": @"0"
+                                                                  
+                                                                  }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      id codeNum = [dict objectForKey:@"code"];

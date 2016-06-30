@@ -27,6 +27,8 @@
 #import "EvaluationViewController.h"
 #import "OrderTableViewController.h"
 #import "TimeLineModel.h"
+#import "DeliverViewController.h"
+#import "ReportViewController.h"
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -43,9 +45,14 @@
 
 @property(strong,nonatomic)NSDateFormatter *formatterIn;
 
-@property(strong,nonatomic)UIButton *bottomLeftBtn;
+//界面底部的按钮
+@property(strong,nonatomic)UIButton *oneBtn;
 
-@property(strong,nonatomic)UIButton *bottomrigthBtn;
+@property(strong,nonatomic)UIButton *twoBtn;
+
+@property(strong,nonatomic)UIButton *threeBtn;
+
+@property(strong,nonatomic)UIButton *fourBtn;
 
 @end
 
@@ -98,23 +105,31 @@
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     
-    self.bottomLeftBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 165, 7, 70, 35)];
-    [self.bottomLeftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.bottomLeftBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.bottomLeftBtn addTarget:self action:@selector(tapBottomBtn:) forControlEvents:UIControlEventTouchUpInside];
-    self.bottomLeftBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
-    self.bottomLeftBtn.layer.borderWidth = 1.0f;
-    self.bottomLeftBtn.layer.cornerRadius = 8.0f;
-    [bottomView addSubview:self.bottomLeftBtn];
     
-    self.bottomrigthBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 80, 7, 70, 35)];
-    [self.bottomrigthBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.bottomrigthBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.bottomrigthBtn addTarget:self action:@selector(tapBottomBtn:) forControlEvents:UIControlEventTouchUpInside];
-    self.bottomrigthBtn.layer.borderColor = HMColor(200, 200, 200).CGColor;
-    self.bottomrigthBtn.layer.borderWidth = 1.0f;
-    self.bottomrigthBtn.layer.cornerRadius = 8.0f;
-    [bottomView addSubview:self.bottomrigthBtn];
+    UIButton * (^btnBlock)(void) = ^UIButton *{
+        
+        UIButton *btn = [[UIButton alloc] init];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [btn addTarget:self action:@selector(tapBottomBtn:) forControlEvents:UIControlEventTouchUpInside];
+        btn.layer.borderColor = HMColor(200, 200, 200).CGColor;
+        btn.layer.borderWidth = 1.0f;
+        btn.layer.cornerRadius = 8.0f;
+        [bottomView addSubview:btn];
+        return btn;
+    };
+    
+    self.oneBtn = btnBlock();
+    self.oneBtn.frame = CGRectMake(MTScreenW - 80, 7, 65, 35);
+    
+    self.twoBtn = btnBlock();
+    self.twoBtn.frame = CGRectMake(MTScreenW - 155, 7, 65, 35);
+    
+    self.threeBtn = btnBlock();
+    self.threeBtn.frame = CGRectMake(MTScreenW - 230, 7, 65, 35);
+    
+    self.fourBtn = btnBlock();
+    self.fourBtn.frame = CGRectMake(MTScreenW - 305, 7, 65, 35);
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5f)];
     line.backgroundColor = HMColor(225, 225, 225);
@@ -225,7 +240,7 @@
     if (indexPath.section == 0) {
         return 85;
     }else if (indexPath.section == 1 && indexPath.row == 1){
-        return 190;
+        return 200;
     }else if (indexPath.section == 2 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
@@ -328,6 +343,17 @@
             [weakSelf.navigationController popToViewController:backToVC animated:YES];
         };
         [self.navigationController pushViewController:evaluationVC animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"查看物流"]){
+        DeliverViewController *deliverVC = [[DeliverViewController alloc] init];
+        OrderModel *model = self.orderInfor;
+        deliverVC.wid = model.wid;
+        [self.navigationController pushViewController:deliverVC animated:YES];
+        
+    }else if ([sender.titleLabel.text isEqualToString:@"查看医嘱"]){
+        ReportViewController *reportVC = [[ReportViewController alloc] init];
+        OrderModel *model = self.orderInfor;
+        reportVC.wid = model.wid;
+        [self.navigationController pushViewController:reportVC animated:YES];
     }
 
 }
@@ -367,26 +393,44 @@
  */
 -(BOOL)getStatusByStatus:(int)status payStatus:(int)payStatus
 {
-    NSString *str;
+    NSString *str = nil;
+    BOOL isShowBottomView = NO;
     
     //默认按钮都隐藏
-    [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:nil rightBtnHide:YES];
+    self.oneBtn.hidden = YES;
+    self.twoBtn.hidden = YES;
+    self.threeBtn.hidden = YES;
+    self.fourBtn.hidden = YES;
     
     if (status >= 0 && status <= 9) {
         
         if (payStatus == 0){
-            str = @"未支付";
-            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
-            return YES;
+            str = @"未付款";
+           isShowBottomView = [self showButtonWithTitle:@"取消"];
+           isShowBottomView = [self showButtonWithTitle:@"去支付"];
+            
         }else if (payStatus == 1) {
-            str = @"已支付";
+            str = @"已付款";
+            
             if (status == 8) {
                 str = @"已分派";
             }
-            if (!self.orderInfor.voucher_id) {
-                [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"申请退款" rightBtnHide:NO];
-                return YES;
+            
+            //超声理疗只要付了钱并分派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
+            if (status >= 8) {
+                //tid 43是超声理疗 44是服务市场
+                if ([self.orderInfor.tid isEqualToString:@"43"]) {
+                    if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                        isShowBottomView =[self showButtonWithTitle:@"评价"];
+                    }
+                }
             }
+            
+            if (!self.orderInfor.voucher_id) {
+                //不是优惠券支付时才能退款
+               isShowBottomView = [self showButtonWithTitle:@"申请退款"];
+            }
+            
         }else if (payStatus == 2 || payStatus == 3) {
             str = @"退款中";
         }else if (payStatus == 4) {
@@ -399,18 +443,27 @@
         
         if (payStatus == 0){
             str = @"未支付";
-            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
-            return YES;
+           isShowBottomView = [self showButtonWithTitle:@"取消"];
+            isShowBottomView = [self showButtonWithTitle:@"去支付"];
         }else if (payStatus == 1) {
-            str = @"已分派";
+            
             if (status == 15) {
                 str = @"服务开始";
             }
             
-            if (!self.orderInfor.voucher_id) {
-                [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"申请退款" rightBtnHide:NO];
-                return YES;
+            //超声理疗只要付了钱分并派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
+            //tid 43是超声理疗 44是服务市场
+            if ([self.orderInfor.tid isEqualToString:@"43"]) {
+                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                   isShowBottomView = [self showButtonWithTitle:@"评价"];
+                }
             }
+            
+            if (!self.orderInfor.voucher_id) {
+                //不是优惠券支付时才能退款
+               isShowBottomView = [self showButtonWithTitle:@"申请退款"];
+            }
+            
         }else if (payStatus == 2 || payStatus == 3) {
             str = @"退款中";
         }else if (payStatus == 4) {
@@ -420,30 +473,92 @@
         }
         
     }else if (status >= 20 && status <= 29){
-        //无
-    }else if (status >= 30 && status <= 49){
         if (payStatus == 0){
             str = @"未支付";
-            [self setleftBtnTitle:@"去支付" leftBtnHide:NO rightBtnTitle:@"取消" rightBtnHide:NO];
-            return YES;
+           isShowBottomView = [self showButtonWithTitle:@"取消"];
+           isShowBottomView = [self showButtonWithTitle:@"去支付"];
         }else if (payStatus == 1) {
-            str = @"服务完成";
-            if (status == 32) {
-                str = @"服务完成";
-                if (!self.orderInfor.voucher_id) {
-                    [self setleftBtnTitle:@"申请退款" leftBtnHide:NO rightBtnTitle:@"评价" rightBtnHide:NO];
-                }else{
-                    [self setleftBtnTitle:nil leftBtnHide:YES rightBtnTitle:@"评价" rightBtnHide:NO];
+            
+            //只要器皿寄送出去了就不能退款
+            //配送器皿相当于服务开始,配送报告或上传报告相当于服务结束（完成)
+            
+            if (status == 20) {
+                //器皿配送
+                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
+                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                   isShowBottomView = [self showButtonWithTitle:@"评价"];
                 }
-                return YES;
+                
+            }else if (status == 21){
+                str = @"已上传报告";
+                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
+                isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
+                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                   isShowBottomView = [self showButtonWithTitle:@"评价"];
+                }
+                
+            }else if(status == 22){
+                //派送开始
+                
+            }else if (status == 23 ){
+                str = @"已配送报告";
+                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
+                isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
+                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                    isShowBottomView = [self showButtonWithTitle:@"评价"];
+                }
+            }else if (status == 25){
+                //派送结束
+                
             }
             
-            if (status == 42 || [self.orderInfor.wgrade floatValue] != 0 || self.orderInfor.dis_con!=nil) {
-                str = @"已评价";
-            }
+        }else if (payStatus == 2 || payStatus == 3) {
+            str = @"退款中";
+        }else if (payStatus == 4) {
+            str = @"退款成功";
+        }else if (payStatus == 5) {
+            str = @"退款失败";
+        }
+    }else if (status >= 30 && status <= 39){
+        if (payStatus == 0){
+            str = @"未支付";
+            isShowBottomView = [self showButtonWithTitle:@"取消"];
+            isShowBottomView =[self showButtonWithTitle:@"去支付"];
+        }else if (payStatus == 1) {
             
-            if (status == 45) {
+            if (status == 32) {
+                //评价了就不能退款
                 str = @"服务完成";
+                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
+                    isShowBottomView = [self showButtonWithTitle:@"评价"];
+                    if (!self.orderInfor.voucher_id){
+                       isShowBottomView = [self showButtonWithTitle:@"申请退款"];
+                    }
+                }
+            }
+            
+        }else if (payStatus == 2 || payStatus == 3) {
+            str = @"退款中";
+        }else if (payStatus == 4) {
+            str = @"退款成功";
+        }else if (payStatus == 5) {
+            str = @"退款失败";
+        }
+    }else if (status >= 40 && status <= 49){
+        
+        if (payStatus == 0){
+            str = @"未支付";
+            isShowBottomView = [self showButtonWithTitle:@"取消"];
+            isShowBottomView = [self showButtonWithTitle:@"去支付"];
+        }else if (payStatus == 1) {
+            
+            if ([self.orderInfor.wgrade floatValue] > 0 || self.orderInfor.dis_con!=nil){
+                str = @"已评价";
+                //tid 43是超声理疗 44是服务市场
+                if ([self.orderInfor.tid isEqualToString:@"44"]) {
+                    isShowBottomView = [self showButtonWithTitle:@"查看物流"];
+                    isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
+                }
             }
             
         }else if (payStatus == 2 || payStatus == 3) {
@@ -462,28 +577,50 @@
         //无
     }else if (status >= 80 && status <= 99){
         str = @"完成";
-    }else if (status >= 100 && status <= 119){
+    }else if (status >= 100 && status <= 109){
         str = @"投诉中";
     }else if (status >= 110 && status <= 129){
         str = @"退货中";
     }
+
     
-    return NO;
+    return isShowBottomView;
 }
 
 /**
- *  设置底部工具条按钮状态
+ *  显示一个操作按钮,从右侧开始显示
+ *
+ *  @param title 新显示按钮的标题
+ *
+ *  @return 表示有按钮要显示
  */
--(void)setleftBtnTitle:(NSString *)leftTitle
-           leftBtnHide:(BOOL)isLeftHide
-          rightBtnTitle:(NSString *)rightTitle
-           rightBtnHide:(BOOL)isRightBtnHide
+-(BOOL)showButtonWithTitle:(NSString *)title
 {
-    self.bottomLeftBtn.hidden = isLeftHide;
-    [self.bottomLeftBtn setTitle:leftTitle forState:UIControlStateNormal];
+    if (self.oneBtn.hidden) {
+        [self.oneBtn setTitle:title forState:UIControlStateNormal];
+        self.oneBtn.hidden = NO;
+        return YES;
+    }
     
-    self.bottomrigthBtn.hidden = isRightBtnHide;
-    [self.bottomrigthBtn setTitle:rightTitle forState:UIControlStateNormal];
+    if (self.twoBtn.hidden) {
+        [self.twoBtn setTitle:title forState:UIControlStateNormal];
+        self.twoBtn.hidden = NO;
+        return YES;
+    }
+    
+    if (self.threeBtn.hidden) {
+        [self.threeBtn setTitle:title forState:UIControlStateNormal];
+        self.threeBtn.hidden = NO;
+        return YES;
+    }
+    
+    if (self.fourBtn.hidden) {
+        [self.fourBtn setTitle:title forState:UIControlStateNormal];
+        self.fourBtn.hidden = NO;
+        return YES;
+    }
+    
+    return YES;
 }
 
 @end

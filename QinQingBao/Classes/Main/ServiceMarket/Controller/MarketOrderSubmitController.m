@@ -193,7 +193,7 @@
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
-                                     @"wremark" : @"用户留言",
+//                                     @"wremark" : @"用户留言",
                                      @"voucher_id" :  @"",
                                      @"pay_type" : @"1",
                                      @"item_sum" : @"1",

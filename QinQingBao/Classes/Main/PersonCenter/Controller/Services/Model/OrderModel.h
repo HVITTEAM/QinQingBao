@@ -120,4 +120,7 @@
 
 @property (nonatomic, retain) NSString *store_id;
 
+@property (nonatomic, retain) NSString *mark_type;          //为 1 代表超生理疗 为 2 代表服务市场
+@property (nonatomic, retain) NSString *mark_sell_type;     //1 特惠 2 热销
+
 @end

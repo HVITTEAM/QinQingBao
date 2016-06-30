@@ -18,9 +18,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLb;              //地址
 
-@property (weak, nonatomic) IBOutlet UILabel *timeLb;                 //服务时间
+@property (weak, nonatomic) IBOutlet UILabel *timeLb;                 //下单或预约时间
 
 @property (weak, nonatomic) IBOutlet UILabel *ServiceProviderLb;       //服务商
+
+@property (weak, nonatomic) IBOutlet UILabel *timeTitleLb;            //时间的标题UILabel
 
 @end
 
@@ -59,6 +61,12 @@
     NSDate *tempDate = [self.formatterIn dateFromString:orderModel.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
     self.timeLb.text = serviceTimeStr;
+    
+    //tid 43为理疗服务  44为健康检测
+    self.timeTitleLb.text = @"预约时间";
+    if ([orderModel.tid isEqualToString:@"44"]) {
+        self.timeTitleLb.text = @"下单时间";
+    }
 }
 
 @end
