@@ -7,6 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+/**
+ *  获取状态描述(结果是NSString)
+ */
+extern NSString * const kStatusDesc;
+/**
+ *  获取按钮标题(结果是NSArray)
+ */
+extern NSString * const kButtonTitles;
 
 //"orgname": "海盐县知音洗衣店",  服务商名字
 //"icontent": "服装洗涤",         服务说明
@@ -122,5 +130,18 @@
 
 @property (nonatomic, retain) NSString *mark_type;          //为 1 代表超生理疗 为 2 代表服务市场
 @property (nonatomic, retain) NSString *mark_sell_type;     //1 特惠 2 热销
+
+
+
+
+
+/**
+ *  根据订单状态,支付状态计算对应状态的描述及相应的按钮
+ *
+ *  @return 一个字典对象,存储了对应状态的描述及按钮标题.用 kStatusDesc 这个key来获取状态描述(结果是NSString),
+ *  用 kButtonTitles 来获取按钮标题(结果是NSArray).  如果没有相应的数据,用kStatusDesc,kButtonTitles获取时将得到一个nil;
+ *
+ */
+-(NSDictionary *)getOrderStatusAndButtonTitle;
 
 @end

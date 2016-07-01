@@ -69,15 +69,12 @@
     _item = item;
     
     self.titleLab.text = item.icontent;
-    self.statusLab.text = [self getStatusByStatus:[item.status intValue] payStatus:[item.pay_staus intValue]];
     self.serviceManLab.text = item.wname;
     self.companyLab.text = item.orgname;
     
     NSString *priceStr = [NSString stringWithFormat:@"￥%@",item.wprice];
-    //    if ([priceStr isEqualToString:@"0"]|| [priceStr isEqualToString:@"0.00"]) {
-    //        priceStr = @"面议";
-    //    }
     self.servicePriceLab.text = priceStr;
+    
     NSDate *tempDate = [self.formatterIn dateFromString:item.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
     self.serviceTimeLab.text = serviceTimeStr;
@@ -87,199 +84,31 @@
     if ([item.tid isEqualToString:@"44"]) {
         self.timeTitleLab.text = @"下单时间";
     }
+    
+    //设置状态描述和可点击按钮
+    [self setStatusAndButtons];
 }
 
--(NSString *)getStatusByStatus:(int)status payStatus:(int)payStatus
+/**
+ *  设置Cell的状态描述和相应的点击按钮
+ */
+-(void)setStatusAndButtons
 {
-    NSString *str = nil;
-
     //默认按钮都隐藏
     self.oneBtn.hidden = YES;
     self.twoBtn.hidden = YES;
     self.threeBtn.hidden = YES;
     self.fourBtn.hidden = YES;
     
-    if (status >= 0 && status <= 9) {
+    //获取状态描述和按钮标题
+    NSDictionary *dict = [self.item getOrderStatusAndButtonTitle];
     
-        if (payStatus == 0){
-            str = @"未支付";
-            [self showButtonWithTitle:@"取消"];
-            [self showButtonWithTitle:@"去支付"];
-        
-        }else if (payStatus == 1) {
-            str = @"已支付";
-            
-            if (status == 8) {
-                str = @"已分派";
-            }
-            
-            //超声理疗只要付了钱并分派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
-            if (status >= 8) {
-                //tid 43是超声理疗 44是服务市场
-                if ([self.item.tid isEqualToString:@"43"]) {
-                    if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                        [self showButtonWithTitle:@"评价"];
-                    }
-                }
-            }
-            
-            if (!self.item.voucher_id) {
-                //不是优惠券支付时才能退款
-                [self showButtonWithTitle:@"申请退款"];
-            }
-
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
+    self.statusLab.text = dict[kStatusDesc];
+    NSArray *btnTitles = dict[kButtonTitles];
     
-    }else if (status >= 10 && status <= 19){
-        
-        if (payStatus == 0){
-            str = @"未支付";
-            [self showButtonWithTitle:@"取消"];
-            [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            if (status == 15) {
-                str = @"服务开始";
-            }
-            
-            //超声理疗只要付了钱分并派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
-            //tid 43是超声理疗 44是服务市场
-            if ([self.item.tid isEqualToString:@"43"]) {
-                if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                    [self showButtonWithTitle:@"评价"];
-                }
-            }
-            
-            if (!self.item.voucher_id) {
-                //不是优惠券支付时才能退款
-                [self showButtonWithTitle:@"申请退款"];
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-    
-    }else if (status >= 20 && status <= 29){
-        if (payStatus == 0){
-            str = @"未支付";
-            [self showButtonWithTitle:@"取消"];
-            [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            //只要器皿寄送出去了就不能退款
-            //配送器皿相当于服务开始,配送报告或上传报告相当于服务结束（完成)
-            
-            if (status == 20) {
-               //器皿配送
-                str = @"配送器皿";
-               [self showButtonWithTitle:@"查看物流"];
-                
-            }else if (status == 21){
-                str = @"已上传报告";
-                [self showButtonWithTitle:@"查看物流"];
-                [self showButtonWithTitle:@"查看医嘱"];
-                if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                    [self showButtonWithTitle:@"评价"];
-                }
-                
-            }else if(status == 22){
-            //派送开始
-                
-            }else if (status == 23 ){
-                str = @"已配送报告";
-                [self showButtonWithTitle:@"查看物流"];
-                [self showButtonWithTitle:@"查看医嘱"];
-                if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                    [self showButtonWithTitle:@"评价"];
-                }
-            }else if (status == 25){
-            //派送结束
-                
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-    }else if (status >= 30 && status <= 39){
-        if (payStatus == 0){
-            str = @"未支付";
-            [self showButtonWithTitle:@"取消"];
-            [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-        
-            if (status == 32) {
-                //超声理疗
-                //评价了就不能退款
-                str = @"服务完成";
-                if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                    [self showButtonWithTitle:@"评价"];
-                    if (!self.item.voucher_id){
-                        [self showButtonWithTitle:@"申请退款"];
-                    }
-                }
-            }
-
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-    }else if (status >= 40 && status <= 49){
-    
-        if (payStatus == 0){
-            str = @"未支付";
-            [self showButtonWithTitle:@"取消"];
-            [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            if ([self.item.wgrade floatValue] > 0 || self.item.dis_con!=nil){
-                str = @"已评价";
-                //tid 43是超声理疗 44是服务市场
-                if ([self.item.tid isEqualToString:@"44"]) {
-                    [self showButtonWithTitle:@"查看物流"];
-                    [self showButtonWithTitle:@"查看医嘱"];
-                }
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
- 
-    }else if (status >= 50 && status <= 59){
-        str = @"已取消";
-    }else if (status >= 60 && status <= 69){
-        str = @"已拒单";
-    }else if (status >= 70 && status <= 79){
-        //无
-    }else if (status >= 80 && status <= 99){
-        str = @"完成";
-    }else if (status >= 100 && status <= 109){
-        str = @"投诉中";
-    }else if (status >= 110 && status <= 129){
-        str = @"退货中";
+    for (NSString *title in btnTitles) {
+        [self showButtonWithTitle:title];
     }
-    
-    return str;
 }
 
 - (IBAction)oneBtnClick:(id)sender
