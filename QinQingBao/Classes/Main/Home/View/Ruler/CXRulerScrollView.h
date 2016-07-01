@@ -21,11 +21,13 @@
 @property (nonatomic) NSUInteger rulerHeight;
 
 @property (nonatomic) NSUInteger rulerWidth;
-
+/**
+ *  当前刻度
+ */
 @property (nonatomic) CGFloat rulerValue;
-
-@property (nonatomic) BOOL mode;
-
+/**
+ *  画刻度尺
+ */
 - (void)drawRuler;
 
 @end

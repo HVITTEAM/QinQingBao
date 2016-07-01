@@ -30,6 +30,8 @@
 #import "CXPickerViewController.h"
 #import "RulerViewController.h"
 
+#import "CXCircleRulerViewController.h"
+
 
 @interface CXHomeViewController ()<MTCityChangeDelegate>
 {
@@ -432,10 +434,10 @@
     //    popupController.containerView.layer.cornerRadius = 10;
     //    popupController.hidesCloseButton = YES;
     //    [popupController presentInViewController:self];
-    
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    MyMesageViewController *vc = [[MyMesageViewController alloc] init];
+//    
+//    if (![SharedAppUtil defaultCommonUtil].userVO)
+//        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    CXCircleRulerViewController *vc = [[CXCircleRulerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -44,9 +44,9 @@
     showLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:showLabel];
     
-    CXRuler *ruler = [[CXRuler alloc] initWithFrame:CGRectMake(20, 220, [UIScreen mainScreen].bounds.size.width - 20 * 2, 140)];
-    ruler.rulerDeletate = self;
-    [ruler showRulerScrollViewWithCount:220 average:[NSNumber numberWithFloat:1] currentValue:160 smallMode:YES];
+    CXRuler *ruler = [[CXRuler alloc] initWithFrame:CGRectMake(20, 220, self.view.width - 20 * 2, 120)];
+    ruler.rulerDelegate = self;
+    [ruler showRulerScrollViewWithCount:220 average:[NSNumber numberWithFloat:1] currentValue:160];
     [self.view addSubview:ruler];
 }
 

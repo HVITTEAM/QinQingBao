@@ -1015,6 +1015,9 @@
 		01EDBAF31D25191900369BAA /* CAShapeLayer+MutipleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBAEE1D25191900369BAA /* CAShapeLayer+MutipleData.m */; };
 		01EDBAF41D25191900369BAA /* CXRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBAF01D25191900369BAA /* CXRuler.m */; };
 		01EDBAF51D25191900369BAA /* CXRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBAF21D25191900369BAA /* CXRulerScrollView.m */; };
+		01EDBAFB1D26397B00369BAA /* RulerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBAF91D26397B00369BAA /* RulerViewController.m */; };
+		01EDBAFC1D26397B00369BAA /* RulerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01EDBAFA1D26397B00369BAA /* RulerViewController.xib */; };
+		01EDBB031D2639DF00369BAA /* CXCircleRulerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBB021D2639DF00369BAA /* CXCircleRulerViewController.m */; };
 		01EDBF851C27C0A200A51128 /* MoreChartDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EDBF841C27C0A200A51128 /* MoreChartDataViewController.m */; };
 		01EF37241C59B2560029C1C5 /* HealthHouseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EF37231C59B2560029C1C5 /* HealthHouseViewController.m */; };
 		01EF37291C59B8CD0029C1C5 /* HouseTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01EF37271C59B8CD0029C1C5 /* HouseTypeCell.m */; };
@@ -1070,8 +1073,6 @@
 		01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0A1991D01615400F6E154 /* FristMsgModel.m */; };
 		01F0A6F71D23CC7500569995 /* CXPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0A6F51D23CC7500569995 /* CXPickerViewController.m */; };
 		01F0A6F81D23CC7500569995 /* CXPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F0A6F61D23CC7500569995 /* CXPickerViewController.xib */; };
-		01F0A6FC1D24AF1300569995 /* RulerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0A6FA1D24AF1300569995 /* RulerViewController.m */; };
-		01F0A6FD1D24AF1300569995 /* RulerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F0A6FB1D24AF1300569995 /* RulerViewController.xib */; };
 		01F0B7AF1C51B9D3000BC86A /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */; };
 		01F0B7B51C521458000BC86A /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01F0B7B41C521458000BC86A /* areaList.plist */; };
 		01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F0B7B71C522273000BC86A /* AreaListModel.m */; };
@@ -2971,6 +2972,11 @@
 		01EDBAF01D25191900369BAA /* CXRuler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXRuler.m; sourceTree = "<group>"; };
 		01EDBAF11D25191900369BAA /* CXRulerScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXRulerScrollView.h; sourceTree = "<group>"; };
 		01EDBAF21D25191900369BAA /* CXRulerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXRulerScrollView.m; sourceTree = "<group>"; };
+		01EDBAF81D26397B00369BAA /* RulerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulerViewController.h; sourceTree = "<group>"; };
+		01EDBAF91D26397B00369BAA /* RulerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulerViewController.m; sourceTree = "<group>"; };
+		01EDBAFA1D26397B00369BAA /* RulerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RulerViewController.xib; sourceTree = "<group>"; };
+		01EDBB011D2639DF00369BAA /* CXCircleRulerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXCircleRulerViewController.h; sourceTree = "<group>"; };
+		01EDBB021D2639DF00369BAA /* CXCircleRulerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXCircleRulerViewController.m; sourceTree = "<group>"; };
 		01EDBF831C27C0A200A51128 /* MoreChartDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreChartDataViewController.h; sourceTree = "<group>"; };
 		01EDBF841C27C0A200A51128 /* MoreChartDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreChartDataViewController.m; sourceTree = "<group>"; };
 		01EF37221C59B2560029C1C5 /* HealthHouseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthHouseViewController.h; sourceTree = "<group>"; };
@@ -3064,9 +3070,6 @@
 		01F0A6F41D23CC7500569995 /* CXPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPickerViewController.h; sourceTree = "<group>"; };
 		01F0A6F51D23CC7500569995 /* CXPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPickerViewController.m; sourceTree = "<group>"; };
 		01F0A6F61D23CC7500569995 /* CXPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPickerViewController.xib; sourceTree = "<group>"; };
-		01F0A6F91D24AF1300569995 /* RulerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulerViewController.h; sourceTree = "<group>"; };
-		01F0A6FA1D24AF1300569995 /* RulerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulerViewController.m; sourceTree = "<group>"; };
-		01F0A6FB1D24AF1300569995 /* RulerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RulerViewController.xib; sourceTree = "<group>"; };
 		01F0B7AD1C51B9D3000BC86A /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		01F0B7AE1C51B9D3000BC86A /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		01F0B7B41C521458000BC86A /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
@@ -7398,6 +7401,7 @@
 		01ECDF961B7C347800665D87 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01EDBAFD1D26398B00369BAA /* Circle */,
 				01EDBAEC1D25191900369BAA /* Ruler */,
 				01FF8F4B1CDAD1DD0089BBC4 /* Home */,
 				01EFD2F11C56028300BDA640 /* CheckSelf */,
@@ -7406,9 +7410,6 @@
 				01F0A6F41D23CC7500569995 /* CXPickerViewController.h */,
 				01F0A6F51D23CC7500569995 /* CXPickerViewController.m */,
 				01F0A6F61D23CC7500569995 /* CXPickerViewController.xib */,
-				01F0A6F91D24AF1300569995 /* RulerViewController.h */,
-				01F0A6FA1D24AF1300569995 /* RulerViewController.m */,
-				01F0A6FB1D24AF1300569995 /* RulerViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7625,6 +7626,9 @@
 		01EDBAEC1D25191900369BAA /* Ruler */ = {
 			isa = PBXGroup;
 			children = (
+				01EDBAF81D26397B00369BAA /* RulerViewController.h */,
+				01EDBAF91D26397B00369BAA /* RulerViewController.m */,
+				01EDBAFA1D26397B00369BAA /* RulerViewController.xib */,
 				01EDBAED1D25191900369BAA /* CAShapeLayer+MutipleData.h */,
 				01EDBAEE1D25191900369BAA /* CAShapeLayer+MutipleData.m */,
 				01EDBAEF1D25191900369BAA /* CXRuler.h */,
@@ -7633,6 +7637,15 @@
 				01EDBAF21D25191900369BAA /* CXRulerScrollView.m */,
 			);
 			path = Ruler;
+			sourceTree = "<group>";
+		};
+		01EDBAFD1D26398B00369BAA /* Circle */ = {
+			isa = PBXGroup;
+			children = (
+				01EDBB011D2639DF00369BAA /* CXCircleRulerViewController.h */,
+				01EDBB021D2639DF00369BAA /* CXCircleRulerViewController.m */,
+			);
+			path = Circle;
 			sourceTree = "<group>";
 		};
 		01EFD0BB1B7D832D00A720E7 /* Service */ = {
@@ -8600,7 +8613,7 @@
 				01E68F9F1BCCA68900A17543 /* Default@2x.png in Resources */,
 				01E690751BCCF5BC00A17543 /* DefinitionTypeView.xib in Resources */,
 				01E68FD61BCCA68900A17543 /* ptz_up.png in Resources */,
-				01F0A6FD1D24AF1300569995 /* RulerViewController.xib in Resources */,
+				01EDBAFC1D26397B00369BAA /* RulerViewController.xib in Resources */,
 				01E68F9D1BCCA68900A17543 /* BackBnt_sel.png in Resources */,
 				01ECDA981C8EB31F0018160F /* chatBar_colorMore_photo@2x.png in Resources */,
 				01D5ED621C5C99C800A9E8C1 /* Images.xcassets in Resources */,
@@ -9578,10 +9591,10 @@
 				01F016081C5F430700930B0E /* SpecialModel.m in Sources */,
 				01E9A73E1C74613500000805 /* DetailInfoViewController.m in Sources */,
 				0181B1A71CDC958D00A1435E /* BalanceLogModel.m in Sources */,
-				01F0A6FC1D24AF1300569995 /* RulerViewController.m in Sources */,
 				01C82BF41CC4B189004D7A16 /* ParagraphTextCell.m in Sources */,
 				01FD4CA51CAE4B43008F09CF /* PSTCollectionViewUpdateItem.m in Sources */,
 				01EB266F1C92A06900773023 /* DeviceModel.m in Sources */,
+				01EDBAFB1D26397B00369BAA /* RulerViewController.m in Sources */,
 				01ECDB0C1C8EB31F0018160F /* EaseConversationListViewController.m in Sources */,
 				01F85AB51C575A0600E463F4 /* MTProgressWebViewController.m in Sources */,
 				01F015EC1C5F42CD00930B0E /* DiscountCountDownCell.m in Sources */,
@@ -9714,6 +9727,7 @@
 				01E690271BCCA93600A17543 /* ThumbBtnView.m in Sources */,
 				01FD4C951CAE4B43008F09CF /* MWGridCell.m in Sources */,
 				0157E2421BE888BF004C0908 /* DOPDropDownMenu.m in Sources */,
+				01EDBB031D2639DF00369BAA /* CXCircleRulerViewController.m in Sources */,
 				01FD4CA41CAE4B43008F09CF /* PSTCollectionViewLayout.m in Sources */,
 				013E6E141C1AAD5B00FEBBCB /* AgreementViewController.m in Sources */,
 				01601D5B1CE08DE500B3712E /* PaymentViewController.m in Sources */,

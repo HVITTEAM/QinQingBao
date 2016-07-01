@@ -21,10 +21,15 @@
     NSMutableArray *shapeLayerArr;
 }
 
+/**
+ *  设置刻度值，并且高亮显示
+ *
+ *  @param rulerValue 刻度值
+ */
 - (void)setRulerValue:(CGFloat)rulerValue
 {
     _rulerValue = rulerValue;
-    NSLog(@"rulerValue*****************after:oX:%.0f",rulerValue);
+    NSLog(@"rulerValue*****************当前刻度:oX:%.0f",rulerValue);
     if (shapeLayerArr.count > 0)
     {
         for (CAShapeLayer *layer in shapeLayerArr)
@@ -69,7 +74,10 @@
         rule.textColor = [UIColor blackColor];
         rule.text = [NSString stringWithFormat:@"%.0f",i * [self.rulerAverage floatValue]];
         CGSize textSize = [rule.text sizeWithAttributes:@{ NSFontAttributeName : rule.font }];
-        
+        if (self.rulerValue)
+        {
+            NSLog(@"rulerValue*****************当前刻度:%.0f",self.rulerValue);
+        }
         if (i % 10 == 0)
         {
             shapeLayer.strokeColor = [UIColor grayColor].CGColor;
@@ -116,22 +124,16 @@
                 shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
             }
         }
-
+        
     }
     
     self.frame = CGRectMake(0, 0, self.rulerWidth, self.rulerHeight);
     
-    // 开启最小模式
-    if (_mode)
-    {
-        UIEdgeInsets edge = UIEdgeInsetsMake(0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT, 0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT);
-        self.contentInset = edge;
-        self.contentOffset = CGPointMake(DISTANCEVALUE * (self.rulerValue / [self.rulerAverage floatValue]) - self.rulerWidth + (self.rulerWidth / 2.f + DISTANCELEFTANDRIGHT), 0);
-    }
-    else
-    {
-        self.contentOffset = CGPointMake(DISTANCEVALUE * (self.rulerValue / [self.rulerAverage floatValue]) - self.rulerWidth / 2.f + DISTANCELEFTANDRIGHT, 0);
-    }
+    
+    UIEdgeInsets edge = UIEdgeInsetsMake(0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT, 0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT);
+    self.contentInset = edge;
+    self.contentOffset = CGPointMake(DISTANCEVALUE * (self.rulerValue / [self.rulerAverage floatValue]) - self.rulerWidth + (self.rulerWidth / 2.f + DISTANCELEFTANDRIGHT), 0);
+    
     
     self.contentSize = CGSizeMake(self.rulerCount * DISTANCEVALUE + DISTANCELEFTANDRIGHT * 2.f, self.rulerHeight);
 }
