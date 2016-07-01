@@ -181,10 +181,8 @@
             
             if (status == 20) {
                //器皿配送
+                str = @"配送器皿";
                [self showButtonWithTitle:@"查看物流"];
-                if([self.item.wgrade floatValue] <= 0 && self.item.dis_con==nil){
-                  [self showButtonWithTitle:@"评价"];
-                }
                 
             }else if (status == 21){
                 str = @"已上传报告";
