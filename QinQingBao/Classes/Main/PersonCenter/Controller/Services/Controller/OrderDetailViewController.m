@@ -105,6 +105,9 @@
     bottomView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bottomView];
     
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5f)];
+    line.backgroundColor = HMColor(225, 225, 225);
+    [bottomView addSubview:line];
     
     UIButton * (^btnBlock)(void) = ^UIButton *{
         
@@ -131,12 +134,22 @@
     self.fourBtn = btnBlock();
     self.fourBtn.frame = CGRectMake(MTScreenW - 305, 7, 65, 35);
     
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5f)];
-    line.backgroundColor = HMColor(225, 225, 225);
-    [bottomView addSubview:line];
+    //默认按钮都隐藏
+    self.oneBtn.hidden = YES;
+    self.twoBtn.hidden = YES;
+    self.threeBtn.hidden = YES;
+    self.fourBtn.hidden = YES;
     
-    BOOL isShow =[self getStatusByStatus:[self.orderInfor.status intValue] payStatus:[self.orderInfor.pay_staus intValue]];
-    return isShow;
+    //获取状态描述和按钮标题
+    NSDictionary *dict = [self.orderInfor getOrderStatusAndButtonTitle];
+
+    NSArray *btnTitles = dict[kButtonTitles];
+    
+    for (NSString *title in btnTitles) {
+        [self showButtonWithTitle:title];
+    }
+
+    return btnTitles.count > 0;
 }
 
 #pragma mark - setter、getter方法
@@ -388,203 +401,6 @@
 }
 
 #pragma mark - 工具方法
-/**
- *  根据工单状态设置要显示的操作按钮
- */
--(BOOL)getStatusByStatus:(int)status payStatus:(int)payStatus
-{
-    NSString *str = nil;
-    BOOL isShowBottomView = NO;
-    
-    //默认按钮都隐藏
-    self.oneBtn.hidden = YES;
-    self.twoBtn.hidden = YES;
-    self.threeBtn.hidden = YES;
-    self.fourBtn.hidden = YES;
-    
-    if (status >= 0 && status <= 9) {
-        
-        if (payStatus == 0){
-            str = @"未付款";
-           isShowBottomView = [self showButtonWithTitle:@"取消"];
-           isShowBottomView = [self showButtonWithTitle:@"去支付"];
-            
-        }else if (payStatus == 1) {
-            str = @"已付款";
-            
-            if (status == 8) {
-                str = @"已分派";
-            }
-            
-            //超声理疗只要付了钱并分派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
-            if (status >= 8) {
-                //tid 43是超声理疗 44是服务市场
-                if ([self.orderInfor.tid isEqualToString:@"43"]) {
-                    if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
-                        isShowBottomView =[self showButtonWithTitle:@"评价"];
-                    }
-                }
-            }
-            
-            if (!self.orderInfor.voucher_id) {
-                //不是优惠券支付时才能退款
-               isShowBottomView = [self showButtonWithTitle:@"申请退款"];
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-        
-    }else if (status >= 10 && status <= 19){
-        
-        if (payStatus == 0){
-            str = @"未支付";
-           isShowBottomView = [self showButtonWithTitle:@"取消"];
-            isShowBottomView = [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            if (status == 15) {
-                str = @"服务开始";
-            }
-            
-            //超声理疗只要付了钱分并派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
-            //tid 43是超声理疗 44是服务市场
-            if ([self.orderInfor.tid isEqualToString:@"43"]) {
-                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
-                   isShowBottomView = [self showButtonWithTitle:@"评价"];
-                }
-            }
-            
-            if (!self.orderInfor.voucher_id) {
-                //不是优惠券支付时才能退款
-               isShowBottomView = [self showButtonWithTitle:@"申请退款"];
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-        
-    }else if (status >= 20 && status <= 29){
-        if (payStatus == 0){
-            str = @"未支付";
-           isShowBottomView = [self showButtonWithTitle:@"取消"];
-           isShowBottomView = [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            //只要器皿寄送出去了就不能退款
-            //配送器皿相当于服务开始,配送报告或上传报告相当于服务结束（完成)
-            
-            if (status == 20) {
-                //器皿配送
-                str = @"配送器皿";
-                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
-                
-            }else if (status == 21){
-                str = @"已上传报告";
-                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
-                isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
-                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
-                   isShowBottomView = [self showButtonWithTitle:@"评价"];
-                }
-                
-            }else if(status == 22){
-                //派送开始
-                
-            }else if (status == 23 ){
-                str = @"已配送报告";
-                isShowBottomView = [self showButtonWithTitle:@"查看物流"];
-                isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
-                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
-                    isShowBottomView = [self showButtonWithTitle:@"评价"];
-                }
-            }else if (status == 25){
-                //派送结束
-                
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-    }else if (status >= 30 && status <= 39){
-        if (payStatus == 0){
-            str = @"未支付";
-            isShowBottomView = [self showButtonWithTitle:@"取消"];
-            isShowBottomView =[self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            if (status == 32) {
-                //评价了就不能退款
-                str = @"服务完成";
-                if([self.orderInfor.wgrade floatValue] <= 0 && self.orderInfor.dis_con==nil){
-                    isShowBottomView = [self showButtonWithTitle:@"评价"];
-                    if (!self.orderInfor.voucher_id){
-                       isShowBottomView = [self showButtonWithTitle:@"申请退款"];
-                    }
-                }
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-    }else if (status >= 40 && status <= 49){
-        
-        if (payStatus == 0){
-            str = @"未支付";
-            isShowBottomView = [self showButtonWithTitle:@"取消"];
-            isShowBottomView = [self showButtonWithTitle:@"去支付"];
-        }else if (payStatus == 1) {
-            
-            if ([self.orderInfor.wgrade floatValue] > 0 || self.orderInfor.dis_con!=nil){
-                str = @"已评价";
-                //tid 43是超声理疗 44是服务市场
-                if ([self.orderInfor.tid isEqualToString:@"44"]) {
-                    isShowBottomView = [self showButtonWithTitle:@"查看物流"];
-                    isShowBottomView = [self showButtonWithTitle:@"查看医嘱"];
-                }
-            }
-            
-        }else if (payStatus == 2 || payStatus == 3) {
-            str = @"退款中";
-        }else if (payStatus == 4) {
-            str = @"退款成功";
-        }else if (payStatus == 5) {
-            str = @"退款失败";
-        }
-        
-    }else if (status >= 50 && status <= 59){
-        str = @"已取消";
-    }else if (status >= 60 && status <= 69){
-        str = @"已拒单";
-    }else if (status >= 70 && status <= 79){
-        //无
-    }else if (status >= 80 && status <= 99){
-        str = @"完成";
-    }else if (status >= 100 && status <= 109){
-        str = @"投诉中";
-    }else if (status >= 110 && status <= 129){
-        str = @"退货中";
-    }
-
-    
-    return isShowBottomView;
-}
-
 /**
  *  显示一个操作按钮,从右侧开始显示
  *
