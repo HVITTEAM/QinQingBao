@@ -433,9 +433,9 @@
     //    popupController.hidesCloseButton = YES;
     //    [popupController presentInViewController:self];
     
-//    if (![SharedAppUtil defaultCommonUtil].userVO)
-//        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    RulerViewController *vc = [[RulerViewController alloc] init];
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    MyMesageViewController *vc = [[MyMesageViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
