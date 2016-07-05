@@ -310,7 +310,7 @@
     }
     else if ([btn.titleLabel.text isEqualToString:@"联系商家"] || [btn.titleLabel.text isEqualToString:@"投诉"])
     {
-        NSURL *url = [NSURL URLWithString:@"telprompt://4001512626"];
+        NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",ShopTel1]];
         [[UIApplication sharedApplication] openURL:url];
     }
     else if ([btn.titleLabel.text isEqualToString:@"申请退款"])

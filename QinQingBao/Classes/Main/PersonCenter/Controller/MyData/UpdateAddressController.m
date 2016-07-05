@@ -231,13 +231,17 @@
     
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? str : self.inforVO.member_areainfo;
     NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
-    
+    NSString *mailStr = [self.title isEqualToString:@"修改邮箱"] ? textItem.rightText.text : self.inforVO.member_email;
+
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"ios" forKey:@"client"];
     if (self.inforVO.member_sex != nil && [self.inforVO.member_sex floatValue] > 0)
         [dict setObject:self.inforVO.member_sex forKey:@"member_sex"];
     if (nameStr)
         [dict setObject:nameStr forKey:@"member_truename"];
+    if (mailStr)
+        [dict setObject:mailStr forKey:@"member_email"];
+
     if (self.inforVO.member_birthday != nil)
         [dict setObject:self.inforVO.member_birthday forKey:@"member_birthday"];
     if (addressStr)

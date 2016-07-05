@@ -44,7 +44,7 @@
 
 -(void)buttonClick:(UIButton *)sender
 {
-    NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
+    NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",ShopTel1]];
     
     [[UIApplication sharedApplication] openURL:url];
 }

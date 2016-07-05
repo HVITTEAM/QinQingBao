@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="76" width="160" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="在线咨询" image="phone">
+                        <state key="normal" title="在线咨询" image="chat">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -49,7 +49,7 @@
                         <rect key="frame" x="160" y="76" width="160" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <inset key="imageEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <state key="normal" title="联系客服" image="location">
+                        <state key="normal" title="联系客服" image="phone">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -103,7 +103,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="location" width="24" height="24"/>
+        <image name="chat" width="24" height="24"/>
         <image name="phone" width="24" height="24"/>
     </resources>
 </document>

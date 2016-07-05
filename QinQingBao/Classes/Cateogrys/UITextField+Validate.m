@@ -10,6 +10,7 @@
 
 @implementation UITextField (Validate)
 
+
 -(BOOL)isValidAboutMoneyTextFiled:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string decimalNumber:(NSInteger)number
 {
     NSScanner *scanner    = [NSScanner scannerWithString:string];

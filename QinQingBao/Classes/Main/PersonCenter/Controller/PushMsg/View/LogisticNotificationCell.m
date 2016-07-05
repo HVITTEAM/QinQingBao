@@ -52,9 +52,9 @@
 
 -(void)setDataWithModel:(PushMsgModel *)model
 {
-    self.titleLb.text = @"已发货";
+    self.titleLb.text = model.msg_title;
     self.timeLb.text = [model.create_time substringWithRange:NSMakeRange(5, 5)];
-    self.descLb.text = model.msg_title;
+    self.descLb.text = model.msg_content;
     if (model.goods_fimg) {
         NSURL *url = [[NSURL alloc] initWithString:model.goods_fimg];
         [self.imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];

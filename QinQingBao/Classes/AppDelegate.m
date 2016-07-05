@@ -206,6 +206,16 @@
             UINavigationController *nav = tab.selectedViewController;
             [nav pushViewController:vc animated:YES];
         }
+        case 5:
+        {
+            EventInfoController *vc = [[EventInfoController alloc] init];
+            vc.type = MessageTypePushMsg;
+            vc.title = @"通知消息";
+            UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
+            UINavigationController *nav = tab.selectedViewController;
+            [nav pushViewController:vc animated:YES];
+        }
+            break;
             break;
         default:
             break;

@@ -94,19 +94,22 @@
     textItem = [HMCommonTextfieldItem itemWithTitle:[self.dict valueForKey:@"text"] icon:nil];
     textItem.placeholder = [self.dict valueForKey:@"placeholder"];
     group.items = @[textItem];
+    textItem.textValue = [self.dict valueForKey:@"value"];
     NSLog(@"%@",self.inforVO.member_name);
     [self.tableView reloadData];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        textItem.rightText.text = self.inforVO.member_truename;
-        //NSData 转NSString
-        NSLog(@"%@",[NSString stringWithFormat:@"%@",self.inforVO.member_truename]);
-    });
 }
 
 -(void)doneClickHandler
 {
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? textItem.rightText.text : self.inforVO.member_areainfo;
     NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
+    NSString *mailStr = [self.title isEqualToString:@"修改邮箱"] ? textItem.rightText.text : self.inforVO.member_email;
+
+    if ([self.title isEqualToString:@"修改邮箱"])
+    {
+        if (![self checkMailInput:textItem.rightText.text])
+            return [NoticeHelper AlertShow:@"请输入正确的邮箱格式" view:nil];
+    }
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     [dict setObject:@"ios" forKey:@"client"];
@@ -114,6 +117,8 @@
         [dict setObject:self.inforVO.member_sex forKey:@"member_sex"];
     if (nameStr)
         [dict setObject:nameStr forKey:@"member_truename"];
+    if (mailStr)
+        [dict setObject:mailStr forKey:@"member_email"];
     if (self.inforVO.member_birthday != nil)
         [dict setObject:self.inforVO.member_birthday forKey:@"member_birthday"];
     if (addressStr)
@@ -142,6 +147,14 @@
                                      [self.view endEditing:YES];
                                  }];
     
+}
+
+
+- (BOOL)checkMailInput:(NSString *)mail
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:mail];
 }
 
 @end

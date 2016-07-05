@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) NSString *msg_type;
 
+@property (nonatomic, copy) NSString *msg_content;
+
 @property (nonatomic, copy) NSString *msg_title;
 
 @property (nonatomic, copy) NSString *create_time;

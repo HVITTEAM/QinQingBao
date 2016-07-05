@@ -43,14 +43,14 @@
 
 - (IBAction)leftBtnClickAction:(id)sender
 {
-    NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",@"400-151-2626"]];
-    [[UIApplication sharedApplication] openURL:url];
+    //TODO
+    [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
 }
 
 - (IBAction)rightBtnClickAction:(id)sender
 {
-    //TODO
-    [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
+    NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",ShopTel1]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

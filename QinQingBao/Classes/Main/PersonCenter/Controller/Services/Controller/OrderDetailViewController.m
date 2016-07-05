@@ -216,7 +216,7 @@
         }else if (self.orderInfor.orgtelnum){
             phoneStr = self.orderInfor.orgtelnum;
         }else{
-            phoneStr = ShopTel;
+            phoneStr = ShopTel1;
         }
         
         sellerCell.detailTextLabel.text = phoneStr;
@@ -376,7 +376,7 @@
     }
     else if ([sender.titleLabel.text isEqualToString:@"联系商家"] || [sender.titleLabel.text isEqualToString:@"投诉"])
     {
-        NSURL *url = [NSURL URLWithString:@"telprompt://4001512626"];
+        NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",ShopTel1]];
         [[UIApplication sharedApplication] openURL:url];
     }
     else if ([sender.titleLabel.text isEqualToString:@"申请退款"])

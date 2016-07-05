@@ -498,7 +498,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else if (indexPath.section == 2)
     {
-        NSURL *url  = [NSURL URLWithString:@"telprompt://4001512626"];
+        NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",ShopTel1]];
         
         [[UIApplication sharedApplication] openURL:url];
     }

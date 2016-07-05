@@ -104,7 +104,7 @@
     
     UILabel *lab = [[UILabel alloc] init];
     
-    lab.text = @"服务热线: 4001512626";
+    lab.text = @"服务热线: 400-151-2626";
     lab.font = [UIFont fontWithName:@"Helvetica" size:12];
 
     lab.textColor = MTNavgationBackgroundColor;

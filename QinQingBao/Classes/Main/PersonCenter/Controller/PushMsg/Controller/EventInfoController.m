@@ -17,7 +17,6 @@
 #import "DeliverViewController.h"
 
 
-
 @interface EventInfoController ()
 {
     NSMutableArray *dataProvider;

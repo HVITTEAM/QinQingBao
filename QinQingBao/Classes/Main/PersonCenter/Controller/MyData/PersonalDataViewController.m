@@ -55,6 +55,7 @@
                         @{@"title" : @"修改电话",@"placeholder" : @"请输入电话号码", @"text" : @"电话",@"value" : @"正在获取"},
                         @{@"title" : @"修改生日",@"placeholder" : @"请输入出生日期",@"text" : @"生日",@"value" : @"正在获取"},
                         @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : @"正在获取"},
+                        @{@"title" : @"修改邮箱",@"placeholder" : @"请输入邮箱地址",@"text" : @"邮箱",@"value" : @"正在获取"},
                         nil];
         
         [self.tableView reloadData];
@@ -132,7 +133,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return 6;
+        return 7;
     else
         return 1;
 }
@@ -416,6 +417,7 @@
                     @{@"title" : @"修改电话",@"placeholder" : @"请输入电话号码", @"text" : @"电话",@"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
                     @{@"title" : @"修改生日",@"placeholder" : @"请输入出生日期",@"text" : @"生日",@"value" : infoVO.member_birthday.length > 0 ? infoVO.member_birthday : @"未填写"},
                     @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"},
+                     @{@"title" : @"修改邮箱",@"placeholder" : @"请输入邮箱",@"text" : @"邮箱",@"value" : infoVO.member_email.length > 0 ? infoVO.member_email : @"未填写"},
                     nil];
     [self.tableView reloadData];
 }
@@ -517,6 +519,8 @@
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
             [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+        if (infoVO.member_email != nil)
+            [dict setObject:infoVO.member_email forKey:@"member_email"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
@@ -588,6 +592,8 @@
             [dict setObject:infoVO.member_sex forKey:@"member_sex"];
         if (infoVO.member_truename != nil)
             [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+        if (infoVO.member_email != nil)
+            [dict setObject:infoVO.member_email forKey:@"member_email"];
         if (infoVO.member_areainfo != nil)
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)

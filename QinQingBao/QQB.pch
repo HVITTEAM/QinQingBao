@@ -68,7 +68,7 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 #define kSellerAccount @"ofc.er@hvit.com.cn"
 
-#define kAppVersion @"v 1.5.0.2"
+#define kAppVersion @"v 1.5.1.1"
 
 //Demo 转场集合类
 #import "EzvizDemoGlobalKit.h"
@@ -223,6 +223,9 @@
 
 
 #define ShopTel @"0571-81909595"
+
+#define ShopTel1 @"400-151-2626"
+
 
 #define URL_Local @"http://test.hvit.com.cn/ylserver"
 
