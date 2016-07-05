@@ -13,6 +13,7 @@
 #import "PaymentViewController.h"
 #import "MarketCustominfoController.h"
 #import "OrderItem.h"
+#import "CustomInfoCell.h"
 
 @interface MarketOrderSubmitController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,6 +36,8 @@
     [super viewDidLoad];
     
     [self setupUI];
+    [self getUserInfor];
+    
 }
 
 -(void)setupUI
@@ -71,11 +74,11 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        if (!self.customName) {
-            return 1;
-        }
-    }
+//    if (section == 0) {
+//        if (!self.customName) {
+//            return 1;
+//        }
+//    }
     return 2;
 }
 
@@ -104,11 +107,11 @@
         cell = titleCell;
     }else if (indexPath.section == 0){
         //客户信息
-        SWYSubtitleCell *infoCell = [SWYSubtitleCell createSWYSubtitleCellWithTableView:tableView];
-        infoCell.detailTextLabel.textColor = [UIColor darkGrayColor];
-        infoCell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        infoCell.textLabel.text = [NSString stringWithFormat:@"%@  %@",self.customName,self.customTel];
-        infoCell.detailTextLabel.text = self.customAddress;
+        CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
+        infoCell.nameLb.text = self.customName;
+        infoCell.phoneNumLb.text = self.customTel;
+        infoCell.emailLb.text = self.customEmail;
+        infoCell.addressLb.text = self.customAddress;
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
@@ -146,7 +149,7 @@
     if (0 == indexPath.row) {
         return 50;
     }else if (0 == indexPath.section){
-        return 70;
+        return 140;
     }else if (1== indexPath.section){
         return 120;
     }
@@ -239,6 +242,44 @@
                                          [NoticeHelper AlertShow:@"下单失败!" view:self.view];
                                          [HUD removeFromSuperview];
                                      }];
+}
+
+/**
+ *  获取用户数据数据
+ */
+-(void)getUserInfor
+{
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        return;
+    }
+    [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                     @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         
+                                         UserInforModel* infoVO = [UserInforModel objectWithKeyValues:di];
+                                         self.customName = infoVO.member_truename;
+                                         self.customTel = infoVO.member_mobile;
+                                         self.customEmail = infoVO.member_email;
+                                         self.customAddress = [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo];
+                                         
+                                         [self.tableView reloadData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
 }
 
     

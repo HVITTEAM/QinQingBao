@@ -175,14 +175,14 @@
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == 0 ||section == 1) {
         return 1;
-    }else if (section == 3){   //评论
+    }else if (section == 4){   //评论
         if (!self.orderInfor.wgrade || !self.orderInfor.dis_con) {
             return 0;
         }
@@ -198,21 +198,44 @@
         [serviceHeadCell setDataWithOrderModel:self.orderInfor];
         cell = serviceHeadCell;
         
-    }else if (indexPath.section == 1 && indexPath.row == 1){
+    }else if (indexPath.section == 1){
+        static NSString * sellerCellId = @"sellerCell";
+        UITableViewCell *sellerCell = [tableView dequeueReusableCellWithIdentifier:sellerCellId];
+        if (!sellerCell) {
+            sellerCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:sellerCellId];
+            sellerCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIImageView *accessory = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            accessory.image = [UIImage imageNamed:@"phone"];
+            sellerCell.accessoryView = accessory;
+        }
+        sellerCell.textLabel.text = @"商家电话";
+        
+        NSString *phoneStr;
+        if (self.orderInfor.orgphone) {
+            phoneStr = self.orderInfor.orgphone;
+        }else if (self.orderInfor.orgtelnum){
+            phoneStr = self.orderInfor.orgtelnum;
+        }else{
+            phoneStr = ShopTel;
+        }
+        
+        sellerCell.detailTextLabel.text = phoneStr;
+        return sellerCell;
+
+    }else if (indexPath.section == 2 && indexPath.row == 1){
         ServiceInfoCell *serviceInfoCell = [ServiceInfoCell createServiceInfoCellWithTableView:tableView];
         serviceInfoCell.formatterIn = self.formatterIn;
         serviceInfoCell.formatterOut = self.formatterOut;
         [serviceInfoCell setDataWithOrderModel:self.orderInfor];
         cell = serviceInfoCell;
-    }else if (indexPath.section == 2 && indexPath.row == 1){
+    }else if (indexPath.section == 3 && indexPath.row == 1){
         TimeLineCell *timeLineCell = [tableView dequeueReusableCellWithIdentifier:@"MTTimeLineCell"];
         if (timeLineCell == nil)
             timeLineCell =  [TimeLineCell timeLineCell];
         timeLineCell.item = self.timeModel;
-        
         return timeLineCell;
         
-    }else if (indexPath.section == 3 && indexPath.row == 1){
+    }else if (indexPath.section == 4 && indexPath.row == 1){
         EvaDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"evaDetailCell"];
         
         if (cell == nil)
@@ -228,14 +251,14 @@
         }
         NSString *titleStr;
         switch (indexPath.section) {
-            case 1:
+            case 2:
                 titleStr = @"服务信息";
                 break;
-            case 2:
+            case 3:
                 titleStr = @"服务跟踪";
                 break;
-            case 3:
-                titleStr = @"对理疗师评价";
+            case 4:
+                titleStr = @"客户评价";
                 break;
             default:
                 titleStr = @"";
@@ -252,12 +275,14 @@
 {
     if (indexPath.section == 0) {
         return 85;
-    }else if (indexPath.section == 1 && indexPath.row == 1){
-        return 200;
+    }else if (indexPath.section == 1){
+        return 55;
     }else if (indexPath.section == 2 && indexPath.row == 1){
+        return 200;
+    }else if (indexPath.section == 3 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
-    }else if (indexPath.section == 3 && indexPath.row == 1){
+    }else if (indexPath.section == 4 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
     }
@@ -272,6 +297,25 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section != 1) {
+        return;
+    }
+    
+    NSString *phoneStr;
+    if (self.orderInfor.orgphone) {
+        phoneStr = self.orderInfor.orgphone;
+    }else if (self.orderInfor.orgtelnum){
+        phoneStr = self.orderInfor.orgtelnum;
+    }else{
+        phoneStr = ShopTel;
+    }
+    
+    NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneStr]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 #pragma mark BillCellDelegate
@@ -388,7 +432,7 @@
         if (codeNUm == 0)
         {
             self.timeModel = [TimeLineModel objectWithKeyValues:dict[@"datas"]];
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         else
         {

@@ -46,7 +46,7 @@
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 提交订单",item.wctime] atIndex:0];
     }
-    if (item.wqxtime && ![item.wqxtime isEqualToString:@"0000-00-00"])//提交订单
+    if (item.wqxtime && ![item.wqxtime isEqualToString:@"0000-00-00"])//取消订单
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 取消订单",item.wqxtime] atIndex:0];
     }
@@ -62,6 +62,22 @@
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 服务完成",item.wjstime] atIndex:0];
     }
+    
+    if (item.container_sendtime && ![item.container_sendtime isEqualToString:@"0000-00-00"])//器皿配送时间
+    {
+        [timeArr insertObject:[NSString stringWithFormat:@"%@ 已配送器皿",item.container_sendtime] atIndex:0];
+    }
+    
+    if (item.report_uploadtime && ![item.report_uploadtime isEqualToString:@"0000-00-00"])//报告上传时间
+    {
+        [timeArr insertObject:[NSString stringWithFormat:@"%@ 已上传报告",item.report_uploadtime] atIndex:0];
+    }
+    
+    if (item.report_sendtime && ![item.report_sendtime isEqualToString:@"0000-00-00"])//报告发送时间
+    {
+        [timeArr insertObject:[NSString stringWithFormat:@"%@ 已配送报告",item.report_sendtime] atIndex:0];
+    }
+    
     if (item.work_add_time && ![item.work_add_time isEqualToString:@"0000-00-00"])//申请退款
     {
         [timeArr insertObject:[NSString stringWithFormat:@"%@ 申请退款",item.work_add_time] atIndex:0];
@@ -80,7 +96,7 @@
     TimeLineViewControl *timeline = [[TimeLineViewControl alloc] initWithTimeArray:nil
                                                            andTimeDescriptionArray:[timeArr copy]
                                                                   andCurrentStatus:1
-                                                                          andFrame:CGRectMake(-30, 10, self.width - 30, 35 * timeArr.count)];
+                                                                          andFrame:CGRectMake(-30, 10, MTScreenW - 30, 35 * timeArr.count)];
     [self addSubview:timeline];
     
     self.height = CGRectGetMaxY(timeline.frame);

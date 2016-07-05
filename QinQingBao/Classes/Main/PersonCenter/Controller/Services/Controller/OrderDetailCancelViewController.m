@@ -12,11 +12,10 @@
 #import "ServiceInfoCell.h"
 #import "TimeLineCell.h"
 #import "ReasonCell.h"
-
+#import "ServiceHeadCell.h"
 #import "TimeLineModel.h"
 
 #define kNavBarHeight 64
-#define kSellerTelDefault @"96345"
 
 @interface OrderDetailCancelViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -105,12 +104,9 @@
     NSInteger orderStatus = [self.orderInfor.status integerValue];
     
     if (indexPath.section == 0) {
-        OrderServiceDetailCell *orderServiceDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTOrderServiceDetailCell"];
-        if(orderServiceDetailCell == nil){
-            orderServiceDetailCell = [OrderServiceDetailCell orderServiceDetailCell];
-        }
-        [orderServiceDetailCell setdataWithOrderModel:self.orderInfor];
-        return orderServiceDetailCell;
+        ServiceHeadCell *serviceHeadCell = [ServiceHeadCell createCellWithTableView:tableView];
+        [serviceHeadCell setDataWithOrderModel:self.orderInfor];
+        return serviceHeadCell;
     }else if (indexPath.section == 1){
         static NSString * sellerCellId = @"sellerCell";
         UITableViewCell *sellerCell = [tableView dequeueReusableCellWithIdentifier:sellerCellId];
@@ -129,7 +125,7 @@
         }else if (self.orderInfor.orgtelnum){
             phoneStr = self.orderInfor.orgtelnum;
         }else{
-            phoneStr = kSellerTelDefault;
+            phoneStr = ShopTel;
         }
         
         sellerCell.detailTextLabel.text = phoneStr;
@@ -232,7 +228,7 @@
     }else if (self.orderInfor.orgtelnum){
         phoneStr = self.orderInfor.orgtelnum;
     }else{
-        phoneStr = kSellerTelDefault;
+        phoneStr = ShopTel;
     }
     
     NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneStr]];

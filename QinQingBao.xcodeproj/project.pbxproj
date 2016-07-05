@@ -1220,6 +1220,10 @@
 		D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA3E1B8717C200E7CDDF /* BloodCell.xib */; };
 		D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */; };
 		D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */; };
+		D287E28F1D2A33FC006CE52C /* CustomInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */; };
+		D287E2901D2A33FC006CE52C /* CustomInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */; };
+		D287E2951D2A3DBA006CE52C /* ReportInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E2931D2A3DBA006CE52C /* ReportInfoCell.m */; };
+		D287E2961D2A3DBA006CE52C /* ReportInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D287E2941D2A3DBA006CE52C /* ReportInfoCell.xib */; };
 		D2EE9ED01CEEA1AB00252633 /* SMSVerificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EE9ECF1CEEA1AB00252633 /* SMSVerificationView.m */; };
 		D2EE9ED21CEEA25200252633 /* SMSVerificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2EE9ED11CEEA25200252633 /* SMSVerificationView.xib */; };
 		D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F744A31B7D7E7F006AC23D /* LoginViewController.m */; };
@@ -3331,6 +3335,12 @@
 		D279DA411B8726BB00E7CDDF /* HealthBloodPressureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthBloodPressureViewController.h; sourceTree = "<group>"; };
 		D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBloodPressureViewController.m; sourceTree = "<group>"; };
 		D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthBloodPressureViewController.xib; sourceTree = "<group>"; };
+		D287E28C1D2A33FC006CE52C /* CustomInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomInfoCell.h; sourceTree = "<group>"; };
+		D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoCell.m; sourceTree = "<group>"; };
+		D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoCell.xib; sourceTree = "<group>"; };
+		D287E2921D2A3DBA006CE52C /* ReportInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInfoCell.h; sourceTree = "<group>"; };
+		D287E2931D2A3DBA006CE52C /* ReportInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInfoCell.m; sourceTree = "<group>"; };
+		D287E2941D2A3DBA006CE52C /* ReportInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportInfoCell.xib; sourceTree = "<group>"; };
 		D2EE9ECE1CEEA1AB00252633 /* SMSVerificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMSVerificationView.h; sourceTree = "<group>"; };
 		D2EE9ECF1CEEA1AB00252633 /* SMSVerificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMSVerificationView.m; sourceTree = "<group>"; };
 		D2EE9ED11CEEA25200252633 /* SMSVerificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SMSVerificationView.xib; sourceTree = "<group>"; };
@@ -4225,6 +4235,9 @@
 				D2EE9ECE1CEEA1AB00252633 /* SMSVerificationView.h */,
 				D2EE9ECF1CEEA1AB00252633 /* SMSVerificationView.m */,
 				D2EE9ED11CEEA25200252633 /* SMSVerificationView.xib */,
+				D287E2921D2A3DBA006CE52C /* ReportInfoCell.h */,
+				D287E2931D2A3DBA006CE52C /* ReportInfoCell.m */,
+				D287E2941D2A3DBA006CE52C /* ReportInfoCell.xib */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -4442,6 +4455,9 @@
 				D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */,
 				D21AC08A1D19146600CDBFDB /* MarketPromptCell.h */,
 				D21AC08B1D19146600CDBFDB /* MarketPromptCell.m */,
+				D287E28C1D2A33FC006CE52C /* CustomInfoCell.h */,
+				D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */,
+				D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8552,6 +8568,7 @@
 				01ECDA741C8EB31F0018160F /* chatBar_keyboard.png in Resources */,
 				01E4A9851C40ACB500AAAF73 /* OrderGoodsCell.xib in Resources */,
 				01E89B0B1C76FE0000CFD40D /* infoimg.png in Resources */,
+				D287E2961D2A3DBA006CE52C /* ReportInfoCell.xib in Resources */,
 				01E68F9F1BCCA68900A17543 /* Default@2x.png in Resources */,
 				01E690751BCCF5BC00A17543 /* DefinitionTypeView.xib in Resources */,
 				01E68FD61BCCA68900A17543 /* ptz_up.png in Resources */,
@@ -9035,6 +9052,7 @@
 				01F87F8A1C5887D400419FA2 /* hotgoods.png in Resources */,
 				01ECDA921C8EB31F0018160F /* chatBar_colorMore_cameraSelected@2x.png in Resources */,
 				013F23281C59C841006711FE /* search.png in Resources */,
+				D287E2901D2A33FC006CE52C /* CustomInfoCell.xib in Resources */,
 				01F85AC41C57692800E463F4 /* mallcar@2x.png in Resources */,
 				01E68FEF1BCCA68900A17543 /* qrScan_line.png in Resources */,
 				01E68FC71BCCA68900A17543 /* previously_disable.png in Resources */,
@@ -9291,6 +9309,7 @@
 				016066FC1CF6AD8C005A3164 /* MKAnnotationView+WebCache.m in Sources */,
 				01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */,
 				01FD4C9A1CAE4B43008F09CF /* MWTapDetectingView.m in Sources */,
+				D287E28F1D2A33FC006CE52C /* CustomInfoCell.m in Sources */,
 				010EC9E41C438D8900D36417 /* MTShoppingCartEndView.m in Sources */,
 				01ED1FEB1C41FF7A002FD93C /* GoodsInfoModel.m in Sources */,
 				01601D9F1CE0900200B3712E /* TimeLineCell.m in Sources */,
@@ -9579,6 +9598,7 @@
 				013F3F2E1BFC752800FF39E5 /* NJKWebViewProgress.m in Sources */,
 				01EA81651CE16F2600398FEC /* HeartrateModel.m in Sources */,
 				01EB6BF11C28D88C008BD878 /* AboutusViewController.m in Sources */,
+				D287E2951D2A3DBA006CE52C /* ReportInfoCell.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
 				01F4F6841CC471D3003F6B6E /* ShopOrderInfoCell.m in Sources */,
 				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
