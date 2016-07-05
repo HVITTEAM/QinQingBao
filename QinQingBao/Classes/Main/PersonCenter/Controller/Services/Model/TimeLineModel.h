@@ -12,8 +12,8 @@
 @property (nonatomic, retain) NSString *work_add_time;//提出申请退款时间
 @property (nonatomic, retain) NSString *buyer_message;
 @property (nonatomic, retain) NSString *work_seller_time;//卖家处理时间
-@property (nonatomic, retain) NSString *seller_message;//管理员处理时间
-@property (nonatomic, retain) NSString *work_admin_time;
+@property (nonatomic, retain) NSString *seller_message;
+@property (nonatomic, retain) NSString *work_admin_time; //管理员处理时间
 @property (nonatomic, retain) NSString *admin_message;
 @property (nonatomic, retain) NSString *wctime; //提交订单
 @property (nonatomic, retain) NSString *pay_time; //支付成功
@@ -24,5 +24,9 @@
 @property (nonatomic, retain) NSString *wqxtime;//订单取消时间
 @property (nonatomic, retain) NSString *status;
 @property (nonatomic, retain) NSString *pay_staus;
+
+@property (nonatomic, retain) NSString *report_uploadtime;  //报告上传时间
+@property (nonatomic, retain) NSString *container_sendtime; //器冥配送时间
+@property (nonatomic, retain) NSString *report_sendtime; //报告发送时间
 
 @end

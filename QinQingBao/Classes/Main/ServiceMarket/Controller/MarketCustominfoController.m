@@ -122,12 +122,12 @@
         return [NoticeHelper AlertShow:@"请输入地址" view:nil];
     }
     
-    //邮箱选填,只有输入邮箱时才验证
     self.email = self.emailItem.rightText.text;
-    if (self.email.length != 0) {
-        if (![self validatePhoneNumOrEmail:self.email type:2]) {
-            return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
-        }
+    if (self.email.length == 0) {
+        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
+    }
+    if (![self validatePhoneNumOrEmail:self.email type:2]) {
+        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

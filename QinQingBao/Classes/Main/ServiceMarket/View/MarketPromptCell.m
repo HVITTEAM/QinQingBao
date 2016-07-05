@@ -37,7 +37,7 @@
 
 -(void)setContentStr:(NSString *)contentStr
 {
-    if (!contentStr) {
+    if (!contentStr || contentStr.length == 0) {
         self.height = 0;
         self.contentLb.text = nil;
         self.contentLb.attributedText = nil;

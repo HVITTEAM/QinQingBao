@@ -122,7 +122,6 @@
                   @"page" : @"100",
                   @"get_type" : @"2",
                   @"status" : @"0,119"
-//                  @"pay_staus_type" :@"0"
                   };
     }
     else if ([self.title isEqualToString:@"待服务"])
@@ -133,8 +132,7 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-//                  @"status" : @"0,29",
-                  @"status" : @"0,19",
+                  @"status" : @"0,9",
                   @"pay_staus":@"1",
                   @"pay_staus_type" :@"0"
                   };
@@ -147,7 +145,7 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"0,50",
+                  @"status" : @"0,49",
                   @"pay_staus":@"0",
                   @"pay_staus_type" :@"0"
 
@@ -162,7 +160,7 @@
                   @"page" : @"100",
                   @"get_type" : @"2",
                   @"status" : @"0,49",
-                  @"pay_staus":@"2,5",
+                  @"pay_staus":@"2,3",
                   @"pay_staus_type" :@"2"
                   };
     }
@@ -174,7 +172,7 @@
                   @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                   @"page" : @"100",
                   @"get_type" : @"2",
-                  @"status" : @"30,39",
+                  @"status" : @"21,39",
                   @"pay_staus":@"1",
                   @"pay_staus_type" :@"0"
                   };
