@@ -14,17 +14,19 @@
 
 @interface CXRulerScrollView : UIScrollView
 
-@property (nonatomic) NSUInteger rulerCount;
+@property (nonatomic,assign) NSUInteger rulerCount;
 
-@property (nonatomic) NSNumber * rulerAverage;
+@property (nonatomic,assign) NSNumber * rulerAverage;
 
-@property (nonatomic) NSUInteger rulerHeight;
+@property (nonatomic,assign) CGFloat startValue;
 
-@property (nonatomic) NSUInteger rulerWidth;
+@property (nonatomic,assign) NSUInteger rulerHeight;
+
+@property (nonatomic,assign) NSUInteger rulerWidth;
 /**
  *  当前刻度
  */
-@property (nonatomic) CGFloat rulerValue;
+@property (nonatomic,assign) CGFloat rulerValue;
 /**
  *  画刻度尺
  */

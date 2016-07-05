@@ -10,6 +10,8 @@
 
 @interface EvaluationTotal : NSObject
 
+
+@property (nonatomic, copy) NSString *count;
 /**
  *
  */

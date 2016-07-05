@@ -11,6 +11,8 @@
 
 @interface FamilyInforTotal : NSObject
 
+
+@property (nonatomic, copy) NSString *count;
 /**
  *  指令调度模型数据数组
  */

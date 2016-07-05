@@ -36,7 +36,10 @@
         [self.evaView setScore:fscore/5 withAnimation:NO];
     else
         [self.evaView setScore:0 withAnimation:NO];
-    self.strLab.text = [NSString stringWithFormat:@"%@分",score];
+  
+//    self.strLab.text = [NSString stringWithFormat:@"%@分",score];
+    self.strLab.text = @"暂无评分";
+
 }
 
 @end

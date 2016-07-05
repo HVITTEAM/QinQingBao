@@ -28,7 +28,11 @@
  */
 - (void)setRulerValue:(CGFloat)rulerValue
 {
-    _rulerValue = rulerValue;
+    if (self.startValue)
+        _rulerValue = rulerValue + self.startValue;
+    else
+        _rulerValue = rulerValue;
+    
     NSLog(@"rulerValue*****************当前刻度:oX:%.0f",rulerValue);
     if (shapeLayerArr.count > 0)
     {
@@ -72,12 +76,13 @@
         
         UILabel *rule = [[UILabel alloc] init];
         rule.textColor = [UIColor blackColor];
-        rule.text = [NSString stringWithFormat:@"%.0f",i * [self.rulerAverage floatValue]];
+        rule.text = [NSString stringWithFormat:@"%.0f",i * [self.rulerAverage floatValue] + self.startValue];
         CGSize textSize = [rule.text sizeWithAttributes:@{ NSFontAttributeName : rule.font }];
         if (self.rulerValue)
         {
-            NSLog(@"rulerValue*****************当前刻度:%.0f",self.rulerValue);
+            NSLog(@"rulerValue初始化当前刻度:%.0f",self.rulerValue);
         }
+        
         if (i % 10 == 0)
         {
             shapeLayer.strokeColor = [UIColor grayColor].CGColor;
@@ -93,7 +98,7 @@
             CGPathAddLineToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height - 10);
             rule.frame = CGRectMake(DISTANCELEFTANDRIGHT + DISTANCEVALUE * i - textSize.width / 2, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height, 0, 0);
             [rule sizeToFit];
-            [self addSubview:rule];
+            //            [self addSubview:rule];
         }
         else
         {
@@ -106,7 +111,7 @@
         [self.layer addSublayer:shapeLayer];
         [shapeLayerArr addObject:shapeLayer];
         
-        if ([shapeLayer.flagData isEqualToString:[NSString stringWithFormat:@"%.0f",self.rulerValue]])
+        if ([shapeLayer.flagData isEqualToString:[NSString stringWithFormat:@"%.0f",self.rulerValue - self.startValue]])
         {
             shapeLayer.strokeColor = [UIColor orangeColor].CGColor;
             shapeLayer.lineWidth = 2.f;
@@ -132,8 +137,7 @@
     
     UIEdgeInsets edge = UIEdgeInsetsMake(0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT, 0, self.rulerWidth / 2.f - DISTANCELEFTANDRIGHT);
     self.contentInset = edge;
-    self.contentOffset = CGPointMake(DISTANCEVALUE * (self.rulerValue / [self.rulerAverage floatValue]) - self.rulerWidth + (self.rulerWidth / 2.f + DISTANCELEFTANDRIGHT), 0);
-    
+    self.contentOffset = CGPointMake(DISTANCEVALUE * (self.rulerValue - self.startValue / [self.rulerAverage floatValue]) - self.rulerWidth + (self.rulerWidth / 2.f + DISTANCELEFTANDRIGHT), 0);
     
     self.contentSize = CGSizeMake(self.rulerCount * DISTANCEVALUE + DISTANCELEFTANDRIGHT * 2.f, self.rulerHeight);
 }

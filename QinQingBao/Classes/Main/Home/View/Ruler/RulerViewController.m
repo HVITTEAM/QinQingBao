@@ -46,11 +46,12 @@
     
     CXRuler *ruler = [[CXRuler alloc] initWithFrame:CGRectMake(20, 220, self.view.width - 20 * 2, 120)];
     ruler.rulerDelegate = self;
-    [ruler showRulerScrollViewWithCount:220 average:[NSNumber numberWithFloat:1] currentValue:160];
+    [ruler showRulerScrollViewWithCount:150 average:[NSNumber numberWithFloat:1] startValue:1900 currentValue:2016];
     [self.view addSubview:ruler];
 }
 
-- (void)CXRuler:(CXRulerScrollView *)rulerScrollView{
+- (void)CXRuler:(CXRulerScrollView *)rulerScrollView
+{
     showLabel.text = [NSString stringWithFormat:@"当前刻度值: %.0f",rulerScrollView.rulerValue];
 }
 

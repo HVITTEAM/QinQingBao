@@ -36,6 +36,8 @@
     NSMutableArray *evaArr;
     
     MassageModel *dataItem;
+    
+    EvaluationTotal *result;
 }
 
 @property (nonatomic, retain) MarketBuyView *headView;
@@ -81,7 +83,7 @@
                                                                      @"p" : @1,
                                                                      @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     EvaluationTotal *result = [EvaluationTotal objectWithKeyValues:dict];
+                                    result = [EvaluationTotal objectWithKeyValues:dict];
                                      evaArr = result.datas;
                                      [self.tableView reloadData];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -247,7 +249,7 @@
             if(evacell == nil)
                 evacell = [EvaluationCell evaluationCell];
             
-            [evacell setdataWithScore:dataItem.wgrade count:@"100"];
+            [evacell setdataWithScore:dataItem.wgrade count:result.count];
             [evacell setEvaItem:evaArr[0]];
             evacell.queryClick  = ^(UIButton *btn){
                 [self queryAllevaluation];

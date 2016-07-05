@@ -68,12 +68,17 @@
     
     if (self.item.promotion_price)
     {
+        self.markImg.hidden = NO;
         self.markImg.image = [UIImage imageNamed:@"sell.png"];
     }
-    
-    if ([self.item.sell_month floatValue] > 100)
+    else if ([self.item.sell_month floatValue] > 100)
     {
+        self.markImg.hidden = NO;
         self.markImg.image = [UIImage imageNamed:@"hot.png"];
+    }
+    else
+    {
+        self.markImg.hidden = YES;
     }
     //已售单数
     self.sellnumLab.text = [NSString stringWithFormat:@"已售%@单",self.item.sell];
@@ -90,7 +95,7 @@
     self.evaView.userInteractionEnabled = NO;
     
     //头像
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,self.item.item_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,self.item.item_url_big]];
     [self.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderDetail"]];
 }
 

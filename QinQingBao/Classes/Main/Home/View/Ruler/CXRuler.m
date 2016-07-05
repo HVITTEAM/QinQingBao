@@ -28,16 +28,17 @@
     return self;
 }
 
-- (void)showRulerScrollViewWithCount:(NSUInteger)count average:(NSNumber *)average currentValue:(CGFloat)currentValue
+- (void)showRulerScrollViewWithCount:(NSUInteger)count average:(NSNumber *)average startValue:(CGFloat)startValue currentValue:(CGFloat)currentValue
 {
     //当前刻度不能大于最大刻度
-    if (currentValue > [average floatValue] * count)
+    if (currentValue - startValue > [average floatValue] * count)
     {
-        currentValue = [average floatValue] * count;
+        currentValue = [average floatValue] * count + startValue;
     }
     rulerScrollView.rulerAverage = average;
+    rulerScrollView.startValue = startValue;
     rulerScrollView.rulerCount = count;
-    rulerScrollView.rulerValue = currentValue;
+    rulerScrollView.rulerValue = currentValue - startValue;
     [rulerScrollView drawRuler];
     [self addSubview:rulerScrollView];
     [self drawRacAndLine];

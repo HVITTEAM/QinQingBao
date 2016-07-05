@@ -434,10 +434,10 @@
     //    popupController.containerView.layer.cornerRadius = 10;
     //    popupController.hidesCloseButton = YES;
     //    [popupController presentInViewController:self];
-//    
-//    if (![SharedAppUtil defaultCommonUtil].userVO)
-//        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    CXCircleRulerViewController *vc = [[CXCircleRulerViewController alloc] init];
+    //
+    //    if (![SharedAppUtil defaultCommonUtil].userVO)
+    //        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    RulerViewController *vc = [[RulerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -31,22 +31,26 @@
 //    [[self layer] addSublayer:shapeLayer];
 }
 
-
 -(void)setItem:(MassageModel *)item
 {
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,item.item_url_big]];
     [self.icon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderDetail"]];
     
-    if (self.item.promotion_price)
+    NSLog(@"%@",self.item.promotion_price);
+    if (item.promotion_price)
     {
+        self.markImg.hidden = NO;
         self.markImg.image = [UIImage imageNamed:@"sell.png"];
     }
-    
-    if ([self.item.sell_month floatValue] > 100)
+    else if ([item.sell_month floatValue] > 100)
     {
+        self.markImg.hidden = NO;
         self.markImg.image = [UIImage imageNamed:@"hot.png"];
     }
-
+    else
+    {
+        self.markImg.hidden = YES;
+    }
 }
 
 @end
