@@ -94,7 +94,7 @@
 
 -(void)getDadaProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo_by_iid parameters:@{@"iid" : self.iid}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      

@@ -34,6 +34,7 @@
 -(void)setItem:(MassageModel *)item
 {
     _item = item;
+    
     //会员价
     if (self.item.promotion_price)
     {

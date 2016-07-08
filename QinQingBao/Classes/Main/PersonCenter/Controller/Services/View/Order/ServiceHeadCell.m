@@ -48,8 +48,9 @@
     self.memPriceLb.text = [NSString stringWithFormat:@"%@元",aModel.wprice];
     
     NSString *priceStr = @"非会员:";
+    aModel.price = [NSString stringWithFormat:@"%.02f",[aModel.price floatValue]];
     if (aModel.price) {
-        priceStr = [priceStr stringByAppendingFormat:@"%@",aModel.price];
+        priceStr = [priceStr stringByAppendingFormat:@"%@元",aModel.price];
     }
     
     NSDictionary *attrDic =@{

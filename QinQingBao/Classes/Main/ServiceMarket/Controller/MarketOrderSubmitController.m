@@ -36,8 +36,8 @@
     [super viewDidLoad];
     
     [self setupUI];
-    [self getUserInfor];
     
+    [self getUserInfor];
 }
 
 -(void)setupUI
@@ -74,11 +74,11 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (section == 0) {
-//        if (!self.customName) {
-//            return 1;
-//        }
-//    }
+    //    if (section == 0) {
+    //        if (!self.customName) {
+    //            return 1;
+    //        }
+    //    }
     return 2;
 }
 
@@ -110,7 +110,17 @@
         CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
         infoCell.nameLb.text = self.customName;
         infoCell.phoneNumLb.text = self.customTel;
-        infoCell.emailLb.text = self.customEmail;
+        if (self.customEmail)
+        {
+            infoCell.emailLb.text = self.customEmail;
+            infoCell.emailLb.textColor =  infoCell.nameLb.textColor;
+        }
+        else
+        {
+            infoCell.emailLb.text = @"必填,例sample@hvit.com.cn";
+            infoCell.emailLb.textColor = [UIColor lightGrayColor];
+        }
+        
         infoCell.addressLb.text = self.customAddress;
         cell = infoCell;
     }else if (indexPath.section == 1){
@@ -196,7 +206,7 @@
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
-//                                     @"wremark" : @"用户留言",
+                                     //                                     @"wremark" : @"用户留言",
                                      @"voucher_id" :  @"",
                                      @"pay_type" : @"1",
                                      @"item_sum" : @"1",
@@ -207,41 +217,40 @@
     
     [params setValue:self.customEmail forKey: @"email"];
     
-    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
-                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                     if (item.wcode.length != 0)
+                                     {
                                          
-                                         id codeNum = [dict objectForKey:@"code"];
-                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                         OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                         if (item.wcode.length != 0)
-                                         {
-                                             
-                                             PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
-                                             
-                                             paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
-                                             paymentVC.content = self.dataItem.iname;
-                                             paymentVC.wprice = item.wprice;
-                                             paymentVC.wid = item.wid;
-                                             paymentVC.wcode = item.wcode;
-                                             paymentVC.store_id = item.store_id;
-                                             paymentVC.productName = self.dataItem.iname;
-                                             
-                                             NSUInteger count = self.navigationController.viewControllers.count;
-                                             paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
-                                             [self.navigationController pushViewController:paymentVC animated:YES];
-                                             
-                                         }
-                                         [HUD removeFromSuperview];
-                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         [NoticeHelper AlertShow:@"下单失败!" view:self.view];
-                                         [HUD removeFromSuperview];
-                                     }];
+                                         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+                                         
+                                         paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
+                                         paymentVC.content = self.dataItem.iname;
+                                         paymentVC.wprice = item.wprice;
+                                         paymentVC.wid = item.wid;
+                                         paymentVC.wcode = item.wcode;
+                                         paymentVC.store_id = item.store_id;
+                                         paymentVC.productName = self.dataItem.iname;
+                                         
+                                         NSUInteger count = self.navigationController.viewControllers.count;
+                                         paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
+                                         [self.navigationController pushViewController:paymentVC animated:YES];
+                                         
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [NoticeHelper AlertShow:@"下单失败!" view:self.view];
+                                     [HUD removeFromSuperview];
+                                 }];
 }
 
 /**
@@ -282,7 +291,7 @@
                                  }];
 }
 
-    
+
 
 
 @end

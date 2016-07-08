@@ -63,7 +63,7 @@
     CGSize size = [lb sizeThatFits:CGSizeMake(MTScreenW - 25, MAXFLOAT)];
     lb.frame = CGRectMake(15, 10, size.width, size.height);
     
-    [footView addSubview:lb];
+//    [footView addSubview:lb];
     footView.frame = CGRectMake(0, 0, 0, size.height + 20);
     
 }

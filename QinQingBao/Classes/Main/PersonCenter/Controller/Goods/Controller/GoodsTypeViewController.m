@@ -61,11 +61,6 @@
     self.vc5 = [[RefundGoodsListController alloc] init];
     self.vc5.title = @"售后/取消";
     
-    //    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, 64, self.view.width, MTScreenH + 49)];
-    //    view.delegate = self;
-    //    view.viewArr = [NSMutableArray arrayWithObjects:self.vc0,self.vc1,self.vc2,self.vc3,self.vc4,self.vc5, nil];
-    //    [self.view addSubview:view];
-    
     [self.slideSwitchView buildUI];
 }
 
@@ -163,7 +158,7 @@
 {
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    
+
     self.slideSwitchView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50)];
     self.slideSwitchView.slideSwitchViewDelegate = self;
     [self.view addSubview:self.slideSwitchView];

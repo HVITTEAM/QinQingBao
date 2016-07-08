@@ -71,18 +71,24 @@
     if (!evaItem)
         return;
     self.nameLab.text  = evaItem.member_truename && evaItem.member_truename.length > 0 ?  evaItem.member_truename : @"匿名";
-    self.timeLab.text  = evaItem.wpjtime;
+    
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date =[dateFormat dateFromString:evaItem.wpjtime];
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
+    
+    self.timeLab.text  = [dateFormat1 stringFromDate:date];
     self.contentLab.text  = evaItem.dis_con;
     
     CGRect tmpRect = [self.contentLab.text boundingRectWithSize:CGSizeMake(MTScreenW - 20, 1000)
-                                            options:NSStringDrawingUsesLineFragmentOrigin
-                                         attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.contentLab.font,NSFontAttributeName, nil]
-                                            context:nil];
-
+                                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                                     attributes:[NSDictionary dictionaryWithObjectsAndKeys:self.contentLab.font,NSFontAttributeName, nil]
+                                                        context:nil];
+    
     self.contentLabWidth.constant = tmpRect.size.height;
-
+    
     //60是下方的高度
     self.height = CGRectGetMaxY(self.contentLab.frame) + 30;
-    
 }
 @end

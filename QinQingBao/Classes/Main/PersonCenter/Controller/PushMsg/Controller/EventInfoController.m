@@ -167,7 +167,11 @@
     }else if (self.type == MessageTypeLogistics){
         PushMsgModel *model  = dataProvider[indexPath.section];
         DeliverViewController *deliverVC = [[DeliverViewController alloc] init];
-        deliverVC.orderId = model.sys_relevant_id;
+        if ([model.sys_type isEqualToString:@"order_id"])
+            deliverVC.orderId = model.sys_relevant_id;
+        else
+            deliverVC.wid = model.sys_relevant_id;
+
         [self.navigationController pushViewController:deliverVC animated:YES];
     }
 }
