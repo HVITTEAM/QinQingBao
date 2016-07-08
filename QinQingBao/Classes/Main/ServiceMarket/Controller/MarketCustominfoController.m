@@ -8,6 +8,7 @@
 
 #import "MarketCustominfoController.h"
 #import "HMCommonTextfieldItem.h"
+#import "UpdateAddressController.h"
 
 @interface MarketCustominfoController ()
 
@@ -15,31 +16,14 @@
 
 @property (strong,nonatomic)HMCommonTextfieldItem *telItem;
 
-@property (strong,nonatomic)HMCommonTextfieldItem *addressItem;
+@property (strong,nonatomic)HMCommonArrowItem *addressItem;
 
 @property (strong,nonatomic)HMCommonTextfieldItem *emailItem;
 
-@property (copy,nonatomic)NSString *name;
-
-@property (copy,nonatomic)NSString *tel;
-
-@property (copy,nonatomic)NSString *address;
-
-@property (copy,nonatomic)NSString *email;
 
 @end
 
 @implementation MarketCustominfoController
-
-+(instancetype)initWith:(NSString *)name tel:(NSString *)tel address:(NSString *)address email:(NSString *)email
-{
-    MarketCustominfoController *vc = [[MarketCustominfoController alloc] init];
-    vc.name = name;
-    vc.tel = tel;
-    vc.address = address;
-    vc.email = email;
-    return vc;
-}
 
 - (void)viewDidLoad
 {
@@ -51,32 +35,59 @@
     [self setupFooter];
 }
 
+#pragma mark - UITableViewDataSource
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    HMCommonCell *cell = (HMCommonCell *)[super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.rightText.textAlignment = NSTextAlignmentRight;
+    
+    return cell;
+}
+
+
+#pragma mark - 设置界面
 
 -(void)setupGroups
 {
+    __weak typeof(self)weakSelf = self;
+    
+    [self.groups removeAllObjects];
+    
     HMCommonGroup *group = [[HMCommonGroup alloc] init];
     [self.groups addObject:group];
     
     self.nameItem = [[HMCommonTextfieldItem alloc] init];
     self.nameItem.title = @"姓名";
     self.nameItem.placeholder = @"必填";
-    self.nameItem.textValue = self.name;
+    self.nameItem.textValue = self.infoVO.member_truename;
     
     self.telItem = [[HMCommonTextfieldItem alloc] init];
     self.telItem.title = @"手机号";
     self.telItem.placeholder = @"必填";
     self.telItem.keyboardType = UIKeyboardTypeNumberPad;
-    self.telItem.textValue = self.tel;
+    self.telItem.textValue = self.infoVO.member_mobile;
     
-    self.addressItem = [[HMCommonTextfieldItem alloc] init];
+    self.addressItem = [[HMCommonArrowItem alloc] init];
     self.addressItem.title = @"地址";
-    self.addressItem.placeholder = @"必填";
-    self.addressItem.textValue = self.address;
+    self.addressItem.subtitle = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+    
+    self.addressItem.operation = ^{
+        UpdateAddressController *textView = [[UpdateAddressController alloc] init];
+        textView.inforVO = weakSelf.infoVO;
+        textView.editHandlerBlock = ^(UserInforModel *inforVO){
+            [weakSelf setupGroups];
+            [weakSelf.tableView reloadData];
+        };
+
+        [weakSelf.navigationController pushViewController:textView animated:YES];
+    };
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
     self.emailItem.title = @"邮箱";
     self.emailItem.placeholder = @"必填";
-    self.emailItem.textValue = self.email;
+    self.emailItem.textValue = self.infoVO.member_email;
     
     group.items = @[self.nameItem,self.telItem,self.addressItem,self.emailItem];
 
@@ -96,46 +107,57 @@
     self.tableView.tableFooterView = bottomView;
 }
 
+
+#pragma mark - 事件方法
+/**
+ *  点击确定按钮后调用
+ */
 -(void)next:(UIButton *)sender
 {
     [self.view endEditing:YES];
     
-    self.name = self.nameItem.rightText.text;
-    if (self.name.length == 0)
+    NSString *name = self.nameItem.rightText.text;
+    if (name.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入姓名" view:nil];
     }
     
-    self.tel = self.telItem.rightText.text;
-    if (self.tel.length == 0)
+    NSString *tel = self.telItem.rightText.text;
+    if (tel.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入手机号" view:nil];
     }
     
-    if (![self validatePhoneNumOrEmail:self.tel type:1]) {
+    
+    if (![self validatePhoneNumOrEmail:tel type:1]) {
         return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
     }
     
-    self.address = self.addressItem.rightText.text;
-    if (self.address.length == 0) {
+    NSString *address = self.addressItem.subtitle;
+    if (address.length == 0) {
         return [NoticeHelper AlertShow:@"请输入地址" view:nil];
     }
     
-    self.email = self.emailItem.rightText.text;
-    if (self.email.length == 0) {
+    NSString  *email = self.emailItem.rightText.text;
+    if (email.length == 0) {
         return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
     }
-    if (![self validatePhoneNumOrEmail:self.email type:2]) {
+    if (![self validatePhoneNumOrEmail:email type:2]) {
         return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
     }
+    
+    self.infoVO.member_truename = name;
+    self.infoVO.member_mobile = tel;
+    self.infoVO.member_email = email;
     
     [self.navigationController popViewControllerAnimated:YES];
     if (self.inforClick)
     {
-        self.inforClick(self.name,self.tel,self.address,self.email);
+        self.inforClick();
     }
 }
 
+#pragma mark - 工具方法
 /**
  *  验证手机或邮箱是否合法
  *

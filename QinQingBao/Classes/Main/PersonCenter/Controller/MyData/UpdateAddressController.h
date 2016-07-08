@@ -11,14 +11,15 @@
 @interface UpdateAddressController : HMCommonViewController
 
 /**选择的某一行数据*/
-@property (nonatomic, retain) NSDictionary *dict;
+//@property (nonatomic, retain) NSDictionary *dict;
 
 /**用户资料数据*/
 @property (nonatomic, retain) UserInforModel *inforVO;
 
-/**个人中心回调block*/
+/**个人中心回调block，需要实时更新数据*/
 @property (nonatomic, copy) void (^refleshDta)();
 
-/**下单修改地址回调block*/
-@property (nonatomic, copy) void (^changeDataBlock)(NSDictionary *addressDict, NSString *addressStr);
+/**下单block，需要传回infoVO*/
+@property (nonatomic, copy) void (^editHandlerBlock)(UserInforModel *inforVO);
+
 @end
