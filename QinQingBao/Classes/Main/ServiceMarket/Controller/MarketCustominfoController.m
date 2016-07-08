@@ -85,9 +85,9 @@
     };
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
-    self.emailItem.title = @"Email";
+    self.emailItem.title = @"邮箱";
     self.emailItem.placeholder = @"必填,例sample@hvit.com.cn";
-    self.emailItem.textValue = self.email;
+    self.emailItem.textValue = self.infoVO.member_email;
     
     group.items = @[self.nameItem,self.telItem,self.addressItem,self.emailItem];
 

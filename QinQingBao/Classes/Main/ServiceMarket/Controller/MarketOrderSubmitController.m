@@ -102,11 +102,12 @@
     }else if (indexPath.section == 0){
         //客户信息
         CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
-        infoCell.nameLb.text = self.customName;
-        infoCell.phoneNumLb.text = self.customTel;
-        if (self.customEmail)
+        infoCell.nameLb.text = self.infoVO.member_truename ? self.infoVO.member_truename : @"必填项，请填写姓名";
+        infoCell.phoneNumLb.text = self.infoVO.member_mobile ? self.infoVO.member_mobile : @"必填项，请填写手机号码" ;
+        infoCell.emailLb.text = self.infoVO.member_email;
+        if (self.infoVO.member_email)
         {
-            infoCell.emailLb.text = self.customEmail;
+            infoCell.emailLb.text = self.infoVO.member_email;
             infoCell.emailLb.textColor =  infoCell.nameLb.textColor;
         }
         else
@@ -115,7 +116,11 @@
             infoCell.emailLb.textColor = [UIColor lightGrayColor];
         }
         
-        infoCell.addressLb.text = self.customAddress;
+        if (self.infoVO.totalname && self.infoVO.member_areainfo) {
+            infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+        }
+        else
+             infoCell.addressLb.text = @"必填项，请填写地址";
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
@@ -180,6 +185,7 @@
 {
     if (self.infoVO.member_email.length == 0)
         return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
+    
     NSDate *cDate = [NSDate date];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     [fmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -193,20 +199,19 @@
                                      @"wprice" : self.dataItem.price_mem,
                                      @"dvcode" : self.infoVO.member_areaid,
                                      @"wtelnum" : self.infoVO.member_mobile,
-                                     @"waddress" : self.shopItem.totalname,
+                                     @"waddress" : [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo],
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
-                                     //                                     @"wremark" : @"用户留言",
                                      @"voucher_id" :  @"",
                                      @"pay_type" : @"1",
                                      @"item_sum" : @"1",
                                      @"wlat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
-                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@"",
+                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon : @"",
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
-    [params setValue:self.infoVO.member_email forKey: @"email"];
+    [params setValue:self.infoVO.member_email forKey: @"wemail"];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
