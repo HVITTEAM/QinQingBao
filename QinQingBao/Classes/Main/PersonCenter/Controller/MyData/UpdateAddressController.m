@@ -128,8 +128,8 @@
  */
 -(void)initNavigation
 {
-    if (self.dict)
-        self.title = [self.dict valueForKey:@"title"];
+//    if (self.dict)
+//        self.title = [self.dict valueForKey:@"title"];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(doneClickHandler)];
 }

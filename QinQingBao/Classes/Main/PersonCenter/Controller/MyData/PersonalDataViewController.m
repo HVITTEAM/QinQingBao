@@ -236,7 +236,7 @@
     {
         NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
         UpdateAddressController *textView = [[UpdateAddressController alloc] init];
-        textView.dict = dict;
+//        textView.dict = dict;
         textView.inforVO = infoVO;
         __weak __typeof(self)weakSelf = self;
         textView.refleshDta = ^{

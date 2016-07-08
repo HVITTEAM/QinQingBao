@@ -11,7 +11,7 @@
 @interface UpdateAddressController : HMCommonViewController
 
 /**选择的某一行数据*/
-@property (nonatomic, retain) NSDictionary *dict;
+//@property (nonatomic, retain) NSDictionary *dict;
 
 /**用户资料数据*/
 @property (nonatomic, retain) UserInforModel *inforVO;

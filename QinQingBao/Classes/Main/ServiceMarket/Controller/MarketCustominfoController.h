@@ -11,8 +11,8 @@
 
 @interface MarketCustominfoController : HMCommonViewController
 
-@property (copy)void(^inforClick)(NSString *name ,NSString *tel ,NSString *address, NSString *email);
+@property (strong,nonatomic)UserInforModel* infoVO;
 
-+(instancetype)initWith:(NSString *)name tel:(NSString *)tel address:(NSString *)address email:(NSString *)email;
+@property (copy)void(^inforClick)(void);
 
 @end

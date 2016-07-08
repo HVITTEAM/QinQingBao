@@ -19,13 +19,7 @@
 
 @property(nonatomic,strong)UITableView *tableView;
 
-@property (strong,nonatomic)NSString *customName;
-
-@property (strong,nonatomic)NSString *customTel;
-
-@property (strong,nonatomic)NSString *customAddress;
-
-@property (strong,nonatomic)NSString *customEmail;
+@property (strong,nonatomic)UserInforModel* infoVO;
 
 @end
 
@@ -169,12 +163,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0) {
-        MarketCustominfoController *vc = [MarketCustominfoController initWith:self.customName tel:self.customTel address:self.customAddress email:self.customEmail];
-        vc.inforClick = ^(NSString *name,NSString *tel,NSString *address,NSString *email){
-            self.customName = name;
-            self.customTel = tel;
-            self.customAddress = address;
-            self.customEmail = email;
+        MarketCustominfoController *vc = [[MarketCustominfoController alloc] init];
+        vc.infoVO = self.infoVO;
+        vc.inforClick = ^{
             [self.tableView reloadData];
         };
         [self.navigationController pushViewController:vc animated:YES];
@@ -187,8 +178,8 @@
  */
 -(void)commitHandle:(UIButton *)sender
 {
-    if (self.customName == nil)
-        return [NoticeHelper AlertShow:@"请选择联系人信息" view:self.view];
+    if (self.infoVO.member_email.length == 0)
+        return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
     NSDate *cDate = [NSDate date];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     [fmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -198,10 +189,10 @@
                                      @"iid" : self.dataItem.iid,
                                      @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                      @"wtime" : time,
-                                     @"wname" : self.customName,
+                                     @"wname" : self.infoVO.member_truename,
                                      @"wprice" : self.dataItem.price_mem,
-                                     @"dvcode" : self.shopItem.dvcode,
-                                     @"wtelnum" : self.customTel,
+                                     @"dvcode" : self.infoVO.member_areaid,
+                                     @"wtelnum" : self.infoVO.member_mobile,
                                      @"waddress" : self.shopItem.totalname,
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
@@ -215,7 +206,7 @@
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
-    [params setValue:self.customEmail forKey: @"email"];
+    [params setValue:self.infoVO.member_email forKey: @"email"];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
@@ -277,12 +268,7 @@
                                      {
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          
-                                         UserInforModel* infoVO = [UserInforModel objectWithKeyValues:di];
-                                         self.customName = infoVO.member_truename;
-                                         self.customTel = infoVO.member_mobile;
-                                         self.customEmail = infoVO.member_email;
-                                         self.customAddress = [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo];
-                                         
+                                         self.infoVO = [UserInforModel objectWithKeyValues:di];
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
