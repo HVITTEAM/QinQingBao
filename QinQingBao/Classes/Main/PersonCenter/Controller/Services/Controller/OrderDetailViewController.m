@@ -29,6 +29,7 @@
 #import "TimeLineModel.h"
 #import "DeliverViewController.h"
 #import "ReportViewController.h"
+#import "ServiceInfoEmailCell.h"
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -223,11 +224,23 @@
         return sellerCell;
 
     }else if (indexPath.section == 2 && indexPath.row == 1){
-        ServiceInfoCell *serviceInfoCell = [ServiceInfoCell createServiceInfoCellWithTableView:tableView];
-        serviceInfoCell.formatterIn = self.formatterIn;
-        serviceInfoCell.formatterOut = self.formatterOut;
-        [serviceInfoCell setDataWithOrderModel:self.orderInfor];
-        cell = serviceInfoCell;
+        
+        if ([self.orderInfor.tid isEqualToString:@"43"]) {
+            //超声理疗是没有email的
+            ServiceInfoCell *serviceInfoCell = [ServiceInfoCell createServiceInfoCellWithTableView:tableView];
+            serviceInfoCell.formatterIn = self.formatterIn;
+            serviceInfoCell.formatterOut = self.formatterOut;
+            [serviceInfoCell setDataWithOrderModel:self.orderInfor];
+            cell = serviceInfoCell;
+        }else{
+            //服务市场是有email的
+            ServiceInfoEmailCell *serviceInfoCell = [ServiceInfoEmailCell createCellWithTableView:tableView];
+            serviceInfoCell.formatterIn = self.formatterIn;
+            serviceInfoCell.formatterOut = self.formatterOut;
+            [serviceInfoCell setDataWithOrderModel:self.orderInfor];
+            cell = serviceInfoCell;
+        }
+        
     }else if (indexPath.section == 3 && indexPath.row == 1){
         TimeLineCell *timeLineCell = [tableView dequeueReusableCellWithIdentifier:@"MTTimeLineCell"];
         if (timeLineCell == nil)
@@ -278,7 +291,10 @@
     }else if (indexPath.section == 1){
         return 55;
     }else if (indexPath.section == 2 && indexPath.row == 1){
-        return 200;
+        if ([self.orderInfor.tid isEqualToString:@"43"]) {
+            return 200;
+        }
+        return 230;
     }else if (indexPath.section == 3 && indexPath.row == 1){
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height;
