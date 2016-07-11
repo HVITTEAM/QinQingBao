@@ -107,7 +107,6 @@
     self.tableView.tableFooterView = bottomView;
 }
 
-
 #pragma mark - 事件方法
 /**
  *  点击确定按钮后调用

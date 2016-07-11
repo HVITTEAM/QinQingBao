@@ -119,7 +119,7 @@
         if (self.infoVO.totalname && self.infoVO.member_areainfo)
         {
             infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
-            infoCell.emailLb.textColor =  [UIColor grayColor];
+            infoCell.addressLb.textColor =  [UIColor grayColor];
         }
         else
         {

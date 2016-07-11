@@ -129,7 +129,4 @@
         [self.navigationController pushViewController:view animated:YES];
     }
 }
-
-
-
 @end
