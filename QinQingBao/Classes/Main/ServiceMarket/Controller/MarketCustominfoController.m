@@ -71,7 +71,7 @@
     
     self.addressItem = [[HMCommonArrowItem alloc] init];
     self.addressItem.title = @"地址";
-    self.addressItem.subtitle = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+    self.addressItem.subtitle =  self.infoVO.totalname && self.infoVO.member_areainfo ? [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo]: @"必填,请填写地址";
     
     self.addressItem.operation = ^{
         UpdateAddressController *textView = [[UpdateAddressController alloc] init];

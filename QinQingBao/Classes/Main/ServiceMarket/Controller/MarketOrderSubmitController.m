@@ -102,25 +102,30 @@
     }else if (indexPath.section == 0){
         //客户信息
         CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
-        infoCell.nameLb.text = self.infoVO.member_truename ? self.infoVO.member_truename : @"必填项，请填写姓名";
-        infoCell.phoneNumLb.text = self.infoVO.member_mobile ? self.infoVO.member_mobile : @"必填项，请填写手机号码" ;
-        infoCell.emailLb.text = self.infoVO.member_email;
-        if (self.infoVO.member_email)
-        {
-            infoCell.emailLb.text = self.infoVO.member_email;
-            infoCell.emailLb.textColor =  infoCell.nameLb.textColor;
-        }
-        else
-        {
-            infoCell.emailLb.text = @"必填,例sample@hvit.com.cn";
-            infoCell.emailLb.textColor = [UIColor lightGrayColor];
-        }
         
-        if (self.infoVO.totalname && self.infoVO.member_areainfo) {
+        //姓名
+        infoCell.nameLb.text = self.infoVO.member_truename ? self.infoVO.member_truename : @"必填项，请填写姓名";
+        infoCell.nameLb.textColor = self.infoVO.member_truename ? [UIColor grayColor] : [UIColor lightGrayColor];
+        
+        //手机号码
+        infoCell.phoneNumLb.text = self.infoVO.member_mobile ? self.infoVO.member_mobile : @"必填项，请填写手机号码" ;
+        infoCell.phoneNumLb.textColor = self.infoVO.member_mobile ? [UIColor grayColor] : [UIColor lightGrayColor];
+
+        //邮箱
+        infoCell.emailLb.text = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? self.infoVO.member_email : @"必填,例sample@hvit.com.cn";
+        infoCell.emailLb.textColor = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? [UIColor grayColor] : [UIColor lightGrayColor];
+
+        //地址
+        if (self.infoVO.totalname && self.infoVO.member_areainfo)
+        {
             infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+            infoCell.emailLb.textColor =  [UIColor grayColor];
         }
         else
-             infoCell.addressLb.text = @"必填项，请填写地址";
+        {
+            infoCell.addressLb.text = @"必填项，请填写地址";
+            infoCell.addressLb.textColor = [UIColor lightGrayColor];
+        }
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
