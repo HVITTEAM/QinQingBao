@@ -12,6 +12,7 @@
 @interface MarketHeadView : UIView
 @property (strong, nonatomic) IBOutlet UIImageView *icon;
 @property (strong, nonatomic) IBOutlet UIImageView *markImg;
+@property (strong, nonatomic) IBOutlet UILabel *sellLab;
 
 @property (nonatomic, retain) MassageModel *item;
 

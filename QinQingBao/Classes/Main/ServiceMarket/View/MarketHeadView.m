@@ -51,6 +51,11 @@
     {
         self.markImg.hidden = YES;
     }
+    
+    self.sellLab.layer.masksToBounds = YES;
+    self.sellLab.layer.cornerRadius = 10;
+    self.sellLab.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
+    self.sellLab.text = [NSString stringWithFormat:@"  月售%@单  ",item.sell];
 }
 
 @end

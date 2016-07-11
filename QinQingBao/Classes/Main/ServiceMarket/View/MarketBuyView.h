@@ -10,7 +10,6 @@
 @class MassageModel;
 
 @interface MarketBuyView : UIView
-@property (strong, nonatomic) IBOutlet UILabel *sellnumLab;
 @property (strong, nonatomic) IBOutlet UIButton *orderRightnow;
 @property (strong, nonatomic) IBOutlet UILabel *priceLab;
 - (IBAction)orderRightnowClickHandler:(id)sender;

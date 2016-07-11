@@ -21,6 +21,16 @@
                         <constraint firstAttribute="width" constant="50" id="k3f-zp-6gf"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQV-ql-5lC">
+                    <rect key="frame" x="308" y="110" width="0.0" height="21"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="3ye-7y-ZpY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="RYJ-fn-VFb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Lhi-rw-1RY"/>
@@ -28,6 +38,8 @@
                 <constraint firstItem="cQP-Kn-7xu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PG6-dq-j8B"/>
                 <constraint firstItem="cQP-Kn-7xu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PXe-mY-vXs"/>
                 <constraint firstItem="RYJ-fn-VFb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TuO-Gb-cOt"/>
+                <constraint firstAttribute="bottom" secondItem="OQV-ql-5lC" secondAttribute="bottom" constant="9" id="cVF-hn-fjZ"/>
+                <constraint firstAttribute="trailing" secondItem="OQV-ql-5lC" secondAttribute="trailing" constant="12" id="hFZ-Ma-gES"/>
                 <constraint firstAttribute="bottom" secondItem="cQP-Kn-7xu" secondAttribute="bottom" id="nRN-zq-9Ym"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -35,6 +47,7 @@
             <connections>
                 <outlet property="icon" destination="cQP-Kn-7xu" id="PxV-2c-rNf"/>
                 <outlet property="markImg" destination="RYJ-fn-VFb" id="eHB-87-gTn"/>
+                <outlet property="sellLab" destination="OQV-ql-5lC" id="W08-hR-mfS"/>
             </connections>
             <point key="canvasLocation" x="273" y="214"/>
         </view>
