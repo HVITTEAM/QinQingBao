@@ -67,6 +67,7 @@
     
     [self getAddress];
     
+    self.title = @"修改地址";
     if (self.inforVO.totalname)
     {
         NSArray *array = [self.inforVO.totalname componentsSeparatedByString:@"市"]; //从字符A中分隔成2个元素的数组
@@ -200,7 +201,6 @@
     [self.groups addObject:group1];
     // 3.设置组的所有行数据
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"门牌号" icon:nil];
-//    textItem1.placeholder = [self.dict valueForKey:@"placeholder"];
     textItem1.textValue = self.inforVO.member_areainfo;
     group1.items = @[textItem1];
     

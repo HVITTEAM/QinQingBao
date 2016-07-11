@@ -71,7 +71,7 @@
     
     self.addressItem = [[HMCommonArrowItem alloc] init];
     self.addressItem.title = @"地址";
-    self.addressItem.subtitle = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+    self.addressItem.subtitle =  self.infoVO.totalname && self.infoVO.member_areainfo ? [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo]: @"必填,请填写地址";
     
     self.addressItem.operation = ^{
         UpdateAddressController *textView = [[UpdateAddressController alloc] init];
@@ -86,7 +86,7 @@
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
     self.emailItem.title = @"邮箱";
-    self.emailItem.placeholder = @"必填";
+    self.emailItem.placeholder = @"必填,例sample@hvit.com.cn";
     self.emailItem.textValue = self.infoVO.member_email;
     
     group.items = @[self.nameItem,self.telItem,self.addressItem,self.emailItem];

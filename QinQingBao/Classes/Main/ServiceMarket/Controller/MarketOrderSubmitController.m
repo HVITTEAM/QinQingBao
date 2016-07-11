@@ -30,8 +30,8 @@
     [super viewDidLoad];
     
     [self setupUI];
-    [self getUserInfor];
     
+    [self getUserInfor];
 }
 
 -(void)setupUI
@@ -68,11 +68,11 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (section == 0) {
-//        if (!self.customName) {
-//            return 1;
-//        }
-//    }
+    //    if (section == 0) {
+    //        if (!self.customName) {
+    //            return 1;
+    //        }
+    //    }
     return 2;
 }
 
@@ -102,11 +102,30 @@
     }else if (indexPath.section == 0){
         //客户信息
         CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
-        infoCell.nameLb.text = self.infoVO.member_truename;
-        infoCell.phoneNumLb.text = self.infoVO.member_mobile;
-        infoCell.emailLb.text = self.infoVO.member_email;
-        infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
         
+        //姓名
+        infoCell.nameLb.text = self.infoVO.member_truename ? self.infoVO.member_truename : @"必填项，请填写姓名";
+        infoCell.nameLb.textColor = self.infoVO.member_truename ? [UIColor grayColor] : [UIColor lightGrayColor];
+        
+        //手机号码
+        infoCell.phoneNumLb.text = self.infoVO.member_mobile ? self.infoVO.member_mobile : @"必填项，请填写手机号码" ;
+        infoCell.phoneNumLb.textColor = self.infoVO.member_mobile ? [UIColor grayColor] : [UIColor lightGrayColor];
+
+        //邮箱
+        infoCell.emailLb.text = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? self.infoVO.member_email : @"必填,例sample@hvit.com.cn";
+        infoCell.emailLb.textColor = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? [UIColor grayColor] : [UIColor lightGrayColor];
+
+        //地址
+        if (self.infoVO.totalname && self.infoVO.member_areainfo)
+        {
+            infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
+            infoCell.emailLb.textColor =  [UIColor grayColor];
+        }
+        else
+        {
+            infoCell.addressLb.text = @"必填项，请填写地址";
+            infoCell.addressLb.textColor = [UIColor lightGrayColor];
+        }
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
@@ -171,6 +190,7 @@
 {
     if (self.infoVO.member_email.length == 0)
         return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
+    
     NSDate *cDate = [NSDate date];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     [fmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -188,12 +208,11 @@
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
-//                                     @"wremark" : @"用户留言",
                                      @"voucher_id" :  @"",
                                      @"pay_type" : @"1",
                                      @"item_sum" : @"1",
                                      @"wlat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
-                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@"",
+                                     @"wlng" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon : @"",
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
@@ -202,38 +221,38 @@
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
-                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                     if (item.wcode.length != 0)
+                                     {
                                          
-                                         id codeNum = [dict objectForKey:@"code"];
-                                         if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                         OrderItem *item = [OrderItem objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                         if (item.wcode.length != 0)
-                                         {
-                                             
-                                             PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
-                                             
-                                             paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
-                                             paymentVC.content = self.dataItem.iname;
-                                             paymentVC.wprice = item.wprice;
-                                             paymentVC.wid = item.wid;
-                                             paymentVC.wcode = item.wcode;
-                                             paymentVC.store_id = item.store_id;
-                                             paymentVC.productName = self.dataItem.iname;
-                                             
-                                             NSUInteger count = self.navigationController.viewControllers.count;
-                                             paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
-                                             [self.navigationController pushViewController:paymentVC animated:YES];
-                                             
-                                         }
-                                         [HUD removeFromSuperview];
-                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         [NoticeHelper AlertShow:@"下单失败!" view:self.view];
-                                         [HUD removeFromSuperview];
-                                     }];
+                                         PaymentViewController *paymentVC = [[PaymentViewController alloc] init];
+                                         
+                                         paymentVC.imageUrlStr = [NSString stringWithFormat:@"%@%@",URL_Img,self.dataItem.item_url];
+                                         paymentVC.content = self.dataItem.iname;
+                                         paymentVC.wprice = item.wprice;
+                                         paymentVC.wid = item.wid;
+                                         paymentVC.wcode = item.wcode;
+                                         paymentVC.store_id = item.store_id;
+                                         paymentVC.productName = self.dataItem.iname;
+                                         
+                                         NSUInteger count = self.navigationController.viewControllers.count;
+                                         paymentVC.viewControllerOfback = self.navigationController.viewControllers[count -2];
+                                         [self.navigationController pushViewController:paymentVC animated:YES];
+                                         
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [NoticeHelper AlertShow:@"下单失败!" view:self.view];
+                                     [HUD removeFromSuperview];
+                                 }];
 }
 
 /**
@@ -269,7 +288,7 @@
                                  }];
 }
 
-    
+
 
 
 @end

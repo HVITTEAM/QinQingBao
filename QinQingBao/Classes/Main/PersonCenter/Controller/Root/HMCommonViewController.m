@@ -68,7 +68,7 @@
         cell.item.rightText = cell.rightText;
     }
     // 设置cell所处的行号 和 所处组的总行数
-    [cell setIndexPath:indexPath rowsInSection:group.items.count];
+    [cell setIndexPath:indexPath rowsInSection:[NSNumber numberWithLongLong:group.items.count].intValue];
     return cell;
 }
 
@@ -107,6 +107,5 @@
         item.operation();
     }
 }
-
 
 @end

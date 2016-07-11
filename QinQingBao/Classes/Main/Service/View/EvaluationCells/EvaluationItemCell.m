@@ -52,7 +52,13 @@
     float score = [item.wgrade floatValue];
     [self.evaView setScore:score/5 withAnimation:NO];
     
-    self.timeLab.text = item.wpjtime;
+    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *date =[dateFormat dateFromString:item.wpjtime];
+    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
+    
+    self.timeLab.text  = [dateFormat1 stringFromDate:date];
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
     self.nameLab.text = item.member_truename && item.member_truename.length > 0 ? item.member_truename : @"匿名";
 }
@@ -80,7 +86,7 @@
     float score = [item.geval_scores floatValue];
     [self.evaView setScore:score/5 withAnimation:NO];
     
-    self.timeLab.text = [MTDateHelper getDaySince1970:item.geval_addtime dateformat:@"yyyy-MM-dd HH:MM:ss"];
+    self.timeLab.text = [MTDateHelper getDaySince1970:item.geval_addtime dateformat:@"yyyy-MM-dd"];
     self.headIcon.layer.cornerRadius = self.headIcon.width/2;
     self.nameLab.text = item.geval_frommembername;
 }
