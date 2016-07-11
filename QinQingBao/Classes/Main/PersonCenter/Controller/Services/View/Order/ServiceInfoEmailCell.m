@@ -25,19 +25,53 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timeTitleLb;            //时间的标题UILabel
 
+@property (weak, nonatomic) IBOutlet UILabel *emailLb;                //电子邮箱
+
 @end
 
 @implementation ServiceInfoEmailCell
 
++(instancetype)createCellWithTableView:(UITableView *)tableview
+{
+    static NSString *cellId = @"serviceInfoEmailCell";
+    ServiceInfoEmailCell *cell = [tableview dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ServiceInfoEmailCell" owner:nil options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    return cell;
+}
+
 - (void)awakeFromNib {
-    [super awakeFromNib];
     // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
+
+-(void)setDataWithOrderModel:(OrderModel *)orderModel
+{
+    self.SerialNumberLb.text = orderModel.wcode;
+    self.manLb.text = orderModel.wname;
+    self.phoneLb.text = orderModel.wtelnum;
+    self.addressLb.text = [NSString stringWithFormat:@"%@%@",orderModel.totalname,orderModel.waddress];
+    self.ServiceProviderLb.text = orderModel.orgname;
+    self.emailLb.text = orderModel.wemail;
+    
+    NSDate *tempDate = [self.formatterIn dateFromString:orderModel.wtime];
+    NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
+    self.timeLb.text = serviceTimeStr;
+    
+    //tid 43为理疗服务  44为健康检测
+    self.timeTitleLb.text = @"预约时间";
+    if ([orderModel.tid isEqualToString:@"44"]) {
+        self.timeTitleLb.text = @"下单时间";
+    }
+}
+
 
 @end

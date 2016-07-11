@@ -1211,6 +1211,8 @@
 		D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D22C48BA1D0FA9FA003B1853 /* DeliverInfoModel.m */; };
 		D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D61771D0655DB008C3EC1 /* MobileBindingView.m */; };
 		D22D617A1D0655DB008C3EC1 /* MobileBindingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */; };
+		D239DE771D332FD5005C994C /* ServiceInfoEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */; };
+		D239DE781D332FD5005C994C /* ServiceInfoEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */; };
 		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
 		D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */; };
 		D246D56D1D0179E10003D166 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5661D0179E10003D166 /* NewsCell.m */; };
@@ -3330,6 +3332,9 @@
 		D22D61761D0655DB008C3EC1 /* MobileBindingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobileBindingView.h; sourceTree = "<group>"; };
 		D22D61771D0655DB008C3EC1 /* MobileBindingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MobileBindingView.m; sourceTree = "<group>"; };
 		D22D61781D0655DB008C3EC1 /* MobileBindingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MobileBindingView.xib; sourceTree = "<group>"; };
+		D239DE741D332FD5005C994C /* ServiceInfoEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceInfoEmailCell.h; sourceTree = "<group>"; };
+		D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfoEmailCell.m; sourceTree = "<group>"; };
+		D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceInfoEmailCell.xib; sourceTree = "<group>"; };
 		D246D5621D0179E10003D166 /* LogisticNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticNotificationCell.h; sourceTree = "<group>"; };
 		D246D5631D0179E10003D166 /* LogisticNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticNotificationCell.m; sourceTree = "<group>"; };
 		D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogisticNotificationCell.xib; sourceTree = "<group>"; };
@@ -4248,6 +4253,9 @@
 				01601D851CE0900200B3712E /* PaySettlementCell.xib */,
 				01601D861CE0900200B3712E /* ReasonCell.h */,
 				01601D871CE0900200B3712E /* ReasonCell.m */,
+				D239DE741D332FD5005C994C /* ServiceInfoEmailCell.h */,
+				D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */,
+				D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */,
 				01601D881CE0900200B3712E /* ServiceInfoCell.h */,
 				01601D891CE0900200B3712E /* ServiceInfoCell.m */,
 				01601D8A1CE0900200B3712E /* ServiceInfoCell.xib */,
@@ -8554,7 +8562,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9045,6 +9053,7 @@
 				01E6D4F41BE1F49B00824F51 /* LICENSE.txt in Resources */,
 				017F0D121C58B83F00643C15 /* HotGoodsCell.xib in Resources */,
 				01E68FFD1BCCA68900A17543 /* connect2.png in Resources */,
+				D239DE781D332FD5005C994C /* ServiceInfoEmailCell.xib in Resources */,
 				01C82BF51CC4B189004D7A16 /* ParagraphTextCell.xib in Resources */,
 				01E603E61C1683350099275C /* care_2.jpg in Resources */,
 				01E68FEE1BCCA68900A17543 /* public_long_btn_sel.png in Resources */,
@@ -9325,6 +9334,7 @@
 				01ECDAF21C8EB31F0018160F /* NSData+EMImageContentType.m in Sources */,
 				01ECDAFB1C8EB31F0018160F /* EaseSDKHelper.m in Sources */,
 				01ECDB251C8EB31F0018160F /* EaseConversationCell.m in Sources */,
+				D239DE771D332FD5005C994C /* ServiceInfoEmailCell.m in Sources */,
 				01E89AF51C7595CC00CFD40D /* RelationTotal.m in Sources */,
 				011BFC7B1BF3316E009354CE /* CLLocation+MTLocation.m in Sources */,
 				01601D911CE0900200B3712E /* BillCell.m in Sources */,

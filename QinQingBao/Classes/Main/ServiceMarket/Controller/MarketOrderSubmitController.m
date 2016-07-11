@@ -119,7 +119,7 @@
         if (self.infoVO.totalname && self.infoVO.member_areainfo)
         {
             infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
-            infoCell.emailLb.textColor =  [UIColor grayColor];
+            infoCell.addressLb.textColor =  [UIColor grayColor];
         }
         else
         {
@@ -191,6 +191,9 @@
     if (self.infoVO.member_email.length == 0)
         return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
     
+    if (self.infoVO.member_areainfo.length == 0)
+        return [NoticeHelper AlertShow:@"请填写有效地址" view:self.view];
+    
     NSDate *cDate = [NSDate date];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
     [fmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -204,7 +207,7 @@
                                      @"wprice" : self.dataItem.price_mem,
                                      @"dvcode" : self.infoVO.member_areaid,
                                      @"wtelnum" : self.infoVO.member_mobile,
-                                     @"waddress" : [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo],
+                                     @"waddress" : self.infoVO.member_areainfo,
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
