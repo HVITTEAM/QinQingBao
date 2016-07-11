@@ -184,7 +184,7 @@
                                      @"wprice" : self.dataItem.price_mem,
                                      @"dvcode" : self.infoVO.member_areaid,
                                      @"wtelnum" : self.infoVO.member_mobile,
-                                     @"waddress" : self.shopItem.totalname,
+                                     @"waddress" : [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo],
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
@@ -197,7 +197,7 @@
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
-    [params setValue:self.infoVO.member_email forKey: @"email"];
+    [params setValue:self.infoVO.member_email forKey: @"wemail"];
     
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
