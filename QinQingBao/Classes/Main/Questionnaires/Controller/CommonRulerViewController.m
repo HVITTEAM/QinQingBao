@@ -8,6 +8,7 @@
 
 #import "CommonRulerViewController.h"
 #import "CXRuler.h"
+#import "SexViewController.h"
 
 
 @interface CommonRulerViewController ()<CXRulerDelegate>
@@ -114,7 +115,8 @@
 
 -(void)sure:(id)sender
 {
-    
+    SexViewController *vc = [[SexViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
