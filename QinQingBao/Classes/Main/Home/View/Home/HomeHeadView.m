@@ -16,6 +16,7 @@
 
 #import "MarketViewController.h"
 
+#import "CommonRulerViewController.h"
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
 {
@@ -37,7 +38,9 @@
 
 - (IBAction)healthHandler:(id)sender
 {
-    [NoticeHelper AlertShow:@"暂未开通,敬请期待！" view:nil];
+    CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
+    [vc initWithTitle:@"年龄" startValue:1900 currentValue:2016 count:150 unit:@"年"];
+    [self.nav pushViewController:vc animated:YES];
 }
 
 - (IBAction)marketHandler:(id)sender {

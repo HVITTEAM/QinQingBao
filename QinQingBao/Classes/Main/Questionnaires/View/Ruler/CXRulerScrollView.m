@@ -85,20 +85,20 @@
         
         if (i % 10 == 0)
         {
-            shapeLayer.strokeColor = [UIColor grayColor].CGColor;
-            CGPathMoveToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i , DISTANCETOPANDBOTTOM);
-            CGPathAddLineToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height);
+            shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
+            CGPathMoveToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i , DISTANCETOPANDBOTTOM + 12);
+            CGPathAddLineToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height - 12);
             rule.frame = CGRectMake(DISTANCELEFTANDRIGHT + DISTANCEVALUE * i - textSize.width / 2, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height, 0, 0);
             [rule sizeToFit];
-            [self addSubview:rule];
+//            [self addSubview:rule];
         }
         else if (i % 5 == 0) {
             shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
-            CGPathMoveToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i , DISTANCETOPANDBOTTOM + 10);
-            CGPathAddLineToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height - 10);
+            CGPathMoveToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i , DISTANCETOPANDBOTTOM + 12);
+            CGPathAddLineToPoint(pathRef, NULL, DISTANCELEFTANDRIGHT + DISTANCEVALUE * i, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height - 12);
             rule.frame = CGRectMake(DISTANCELEFTANDRIGHT + DISTANCEVALUE * i - textSize.width / 2, self.rulerHeight - DISTANCETOPANDBOTTOM - textSize.height, 0, 0);
             [rule sizeToFit];
-            //            [self addSubview:rule];
+            [self addSubview:rule];
         }
         else
         {

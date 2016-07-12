@@ -28,7 +28,6 @@
 
 #import "STPopupController.h"
 #import "CXPickerViewController.h"
-#import "RulerViewController.h"
 
 #import "CXCircleRulerViewController.h"
 
