@@ -18,21 +18,18 @@
 {
     [super viewDidLoad];
     
-    // 自定义返回按钮
-    UIButton *btn = [[UIButton alloc] init];
-    [btn setTitle:@"关闭" forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [btn sizeToFit];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIButton *right = [UIButton buttonWithType:UIButtonTypeCustom];
+    right.frame = CGRectMake(0, 0, 50, 50);
+    [right addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [right setTitle:@"关闭" forState:UIControlStateNormal];
+    [right setTitleColor:HMColor(139, 198, 63) forState:UIControlStateNormal];
+    UIBarButtonItem *rightBut = [[UIBarButtonItem alloc]initWithCustomView:right];
+    self.navigationItem.rightBarButtonItem = rightBut;
 }
 
 -(void)back
 {
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 @end

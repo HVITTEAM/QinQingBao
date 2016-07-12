@@ -347,6 +347,8 @@
 		01D616FD1C45004100055404 /* MTPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616FC1C45004100055404 /* MTPayHelper.m */; };
 		01D617021C45459800055404 /* collectshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D616FF1C45459800055404 /* collectshop.png */; };
 		01D617031C45459800055404 /* hyxxshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D617001C45459800055404 /* hyxxshop.png */; };
+		01D8D7761D34BE260043F3D7 /* Question10ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D8D7741D34BE260043F3D7 /* Question10ViewController.m */; };
+		01D8D7771D34BE260043F3D7 /* Question10ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D8D7751D34BE260043F3D7 /* Question10ViewController.xib */; };
 		01D9DEB61B7DC3D70087F80E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D9DEB51B7DC3D70087F80E /* MessageUI.framework */; };
 		01D9DEB91B7DC74B0087F80E /* MTSMSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEB81B7DC74B0087F80E /* MTSMSHelper.m */; };
 		01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D9DEBB1B7DC7C00087F80E /* ArchiverCacheHelper.m */; };
@@ -1947,6 +1949,9 @@
 		01D616FC1C45004100055404 /* MTPayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTPayHelper.m; sourceTree = "<group>"; };
 		01D616FF1C45459800055404 /* collectshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collectshop.png; sourceTree = "<group>"; };
 		01D617001C45459800055404 /* hyxxshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hyxxshop.png; sourceTree = "<group>"; };
+		01D8D7731D34BE260043F3D7 /* Question10ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question10ViewController.h; sourceTree = "<group>"; };
+		01D8D7741D34BE260043F3D7 /* Question10ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question10ViewController.m; sourceTree = "<group>"; };
+		01D8D7751D34BE260043F3D7 /* Question10ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Question10ViewController.xib; sourceTree = "<group>"; };
 		01D9DEB51B7DC3D70087F80E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		01D9DEB71B7DC74B0087F80E /* MTSMSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSMSHelper.h; sourceTree = "<group>"; };
 		01D9DEB81B7DC74B0087F80E /* MTSMSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSMSHelper.m; sourceTree = "<group>"; };
@@ -4160,6 +4165,9 @@
 				015BFDB71D34850200EB4A09 /* CommonRulerViewController.xib */,
 				015BFDBA1D349F5200EB4A09 /* CommonQuesViewController.h */,
 				015BFDBB1D349F5200EB4A09 /* CommonQuesViewController.m */,
+				01D8D7731D34BE260043F3D7 /* Question10ViewController.h */,
+				01D8D7741D34BE260043F3D7 /* Question10ViewController.m */,
+				01D8D7751D34BE260043F3D7 /* Question10ViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8665,6 +8673,7 @@
 				01601D931CE0900200B3712E /* EvaDetailCell.xib in Resources */,
 				01ECDAA01C8EB31F0018160F /* chatBar_colorMore_videoCallSelected@2x.png in Resources */,
 				01ECDA8E1C8EB31F0018160F /* chatBar_colorMore_audioCallSelected@2x.png in Resources */,
+				01D8D7771D34BE260043F3D7 /* Question10ViewController.xib in Resources */,
 				01ECDA181C8EB31F0018160F /* VoiceSearchFeedback010.png in Resources */,
 				01ECDA791C8EB31F0018160F /* Contents.json in Resources */,
 				01EA81761CE1757B00398FEC /* InfoDetailViewController.xib in Resources */,
@@ -9912,6 +9921,7 @@
 				01DB10FC1BF02C1600DA0CC5 /* EvaluationModel.m in Sources */,
 				01601D571CE08DE500B3712E /* OrderFormDetailController.m in Sources */,
 				01D616FD1C45004100055404 /* MTPayHelper.m in Sources */,
+				01D8D7761D34BE260043F3D7 /* Question10ViewController.m in Sources */,
 				01E9E1831BE3085F001D0D65 /* ServiceItemModel.m in Sources */,
 				01FF8F571CDB144D0089BBC4 /* ArticleModel.m in Sources */,
 				01024CC01BD0A75D00E8CAEC /* DataVerifier.m in Sources */,

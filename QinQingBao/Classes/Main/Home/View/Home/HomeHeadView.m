@@ -18,6 +18,7 @@
 
 #import "CommonRulerViewController.h"
 
+
 @interface HomeHeadView ()<UIScrollViewDelegate>
 {
     UIPageControl *pageControl;

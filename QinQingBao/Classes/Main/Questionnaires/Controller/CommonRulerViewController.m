@@ -9,6 +9,7 @@
 #import "CommonRulerViewController.h"
 #import "CXRuler.h"
 
+#import "Question10ViewController.h"
 
 @interface CommonRulerViewController ()<CXRulerDelegate>
 {
@@ -114,7 +115,8 @@
 
 -(void)sure:(id)sender
 {
-    
+    Question10ViewController *vc = [[Question10ViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
