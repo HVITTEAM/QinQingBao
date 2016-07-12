@@ -1205,6 +1205,14 @@
 		D211A6CD1CED4D23002C90FD /* EvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CC1CED4D23002C90FD /* EvaluationViewController.m */; };
 		D211A6D11CED536A002C90FD /* OrderRefundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */; };
 		D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */; };
+		D212C85B1D34BE2900619F77 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D212C8501D34BE2900619F77 /* BasicViewController.m */; };
+		D212C85C1D34BE2900619F77 /* BasicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D212C8511D34BE2900619F77 /* BasicViewController.xib */; };
+		D212C85D1D34BE2900619F77 /* QuestionOneBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = D212C8531D34BE2900619F77 /* QuestionOneBtnController.m */; };
+		D212C85E1D34BE2900619F77 /* QuestionOneBtnController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D212C8541D34BE2900619F77 /* QuestionOneBtnController.xib */; };
+		D212C85F1D34BE2900619F77 /* QuestionTwoBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = D212C8561D34BE2900619F77 /* QuestionTwoBtnController.m */; };
+		D212C8601D34BE2900619F77 /* QuestionTwoBtnController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D212C8571D34BE2900619F77 /* QuestionTwoBtnController.xib */; };
+		D212C8611D34BE2900619F77 /* SexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D212C8591D34BE2900619F77 /* SexViewController.m */; };
+		D212C8621D34BE2900619F77 /* SexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D212C85A1D34BE2900619F77 /* SexViewController.xib */; };
 		D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D216AB501D07FC4F00E85008 /* PushMsgModel.m */; };
 		D21AC0881D18EB0500CDBFDB /* MarketOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D21AC0861D18EB0500CDBFDB /* MarketOrderCell.m */; };
 		D21AC0891D18EB0500CDBFDB /* MarketOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21AC0871D18EB0500CDBFDB /* MarketOrderCell.xib */; };
@@ -3324,6 +3332,18 @@
 		D211A6CE1CED536A002C90FD /* OrderRefundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRefundViewController.h; sourceTree = "<group>"; };
 		D211A6CF1CED536A002C90FD /* OrderRefundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRefundViewController.m; sourceTree = "<group>"; };
 		D211A6D01CED536A002C90FD /* OrderRefundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderRefundViewController.xib; sourceTree = "<group>"; };
+		D212C84F1D34BE2900619F77 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
+		D212C8501D34BE2900619F77 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
+		D212C8511D34BE2900619F77 /* BasicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BasicViewController.xib; sourceTree = "<group>"; };
+		D212C8521D34BE2900619F77 /* QuestionOneBtnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionOneBtnController.h; sourceTree = "<group>"; };
+		D212C8531D34BE2900619F77 /* QuestionOneBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionOneBtnController.m; sourceTree = "<group>"; };
+		D212C8541D34BE2900619F77 /* QuestionOneBtnController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionOneBtnController.xib; sourceTree = "<group>"; };
+		D212C8551D34BE2900619F77 /* QuestionTwoBtnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTwoBtnController.h; sourceTree = "<group>"; };
+		D212C8561D34BE2900619F77 /* QuestionTwoBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTwoBtnController.m; sourceTree = "<group>"; };
+		D212C8571D34BE2900619F77 /* QuestionTwoBtnController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTwoBtnController.xib; sourceTree = "<group>"; };
+		D212C8581D34BE2900619F77 /* SexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexViewController.h; sourceTree = "<group>"; };
+		D212C8591D34BE2900619F77 /* SexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexViewController.m; sourceTree = "<group>"; };
+		D212C85A1D34BE2900619F77 /* SexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SexViewController.xib; sourceTree = "<group>"; };
 		D216AB4F1D07FC4F00E85008 /* PushMsgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushMsgModel.h; sourceTree = "<group>"; };
 		D216AB501D07FC4F00E85008 /* PushMsgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushMsgModel.m; sourceTree = "<group>"; };
 		D21AC0851D18EB0500CDBFDB /* MarketOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOrderCell.h; sourceTree = "<group>"; };
@@ -8607,7 +8627,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8982,6 +9002,7 @@
 				01EB36AB1CB4E1C300120285 /* QinQingBao.entitlements in Resources */,
 				0157E23B1BE87B1E004C0908 /* EvaluationHeadView.xib in Resources */,
 				01FEE2C61B9C0FD8007C4641 /* EvaluationCell.xib in Resources */,
+				D212C85E1D34BE2900619F77 /* QuestionOneBtnController.xib in Resources */,
 				01ECDA631C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA571C8EB31F0018160F /* Contents.json in Resources */,
 				01E68FDA1BCCA68900A17543 /* share_disable.png in Resources */,
@@ -9046,6 +9067,7 @@
 				01E68FEB1BCCA68900A17543 /* playback_playbar_line.png in Resources */,
 				01EBD3C41C853F70009236FA /* ReminderCell.xib in Resources */,
 				01ECDACD1C8EB31F0018160F /* chat_sender_audio_playing_002@2x.png in Resources */,
+				D212C8601D34BE2900619F77 /* QuestionTwoBtnController.xib in Resources */,
 				01F49CF91C4730080079F45F /* CommonGoodsDetailMiddleCell.xib in Resources */,
 				01ECDA6A1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA461C8EB31F0018160F /* chat_video_play.png in Resources */,
@@ -9096,6 +9118,7 @@
 				010530021BCF8C7500120D4A /* sound_off.png in Resources */,
 				01EBD3C21C853F70009236FA /* RefundStateCell.xib in Resources */,
 				01E68FAC1BCCA68900A17543 /* full_loading_logo.png in Resources */,
+				D212C8621D34BE2900619F77 /* SexViewController.xib in Resources */,
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
 				01E6D4F41BE1F49B00824F51 /* LICENSE.txt in Resources */,
 				017F0D121C58B83F00643C15 /* HotGoodsCell.xib in Resources */,
@@ -9193,6 +9216,7 @@
 				01ECDAB81C8EB31F0018160F /* Contents.json in Resources */,
 				016F246A1C4DDEDB00FF1BF5 /* Bugtags.bundle in Resources */,
 				01E68FBC1BCCA68900A17543 /* play_close_sel.png in Resources */,
+				D212C85C1D34BE2900619F77 /* BasicViewController.xib in Resources */,
 				01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */,
 				01ECDA831C8EB31F0018160F /* chatBar_recordBg.png in Resources */,
 				01ECDA421C8EB31F0018160F /* call_silence_h@2x.png in Resources */,
@@ -9371,6 +9395,7 @@
 				D277D2CB1D1A364C00F20507 /* MarketOrderSubmitController.m in Sources */,
 				01266B8F1C48B0A800992D2F /* CommonOrderGoodsEvaCell.m in Sources */,
 				01ECDFC11B7C402100665D87 /* HMCommonTextfieldItem.m in Sources */,
+				D212C85D1D34BE2900619F77 /* QuestionOneBtnController.m in Sources */,
 				0126ECFF1B8C4E8100EC85C1 /* TimeLineViewControl.m in Sources */,
 				01F016071C5F430700930B0E /* SpecialList.m in Sources */,
 				01ED08BC1B84706B00115E3A /* HeartCell.m in Sources */,
@@ -9506,6 +9531,7 @@
 				016066FE1CF6AD8C005A3164 /* SDImageCache.m in Sources */,
 				01EB6BED1C28D85A008BD878 /* AboutViewController.m in Sources */,
 				01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */,
+				D212C8611D34BE2900619F77 /* SexViewController.m in Sources */,
 				01ECDADB1C8EB31F0018160F /* BusinessInfoModel.m in Sources */,
 				01E6D4FA1BE1F49B00824F51 /* readme.markdown in Sources */,
 				016066D11CF6ACCE005A3164 /* UIScrollView+MJExtension.m in Sources */,
@@ -9740,6 +9766,7 @@
 				0181B1B01CDC95F900A1435E /* SWYSubtitleCell.m in Sources */,
 				01EA81751CE1757B00398FEC /* InfoDetailViewController.m in Sources */,
 				D22C48BB1D0FA9FA003B1853 /* DeliverInfoModel.m in Sources */,
+				D212C85F1D34BE2900619F77 /* QuestionTwoBtnController.m in Sources */,
 				010EC9F51C44A53F00D36417 /* MallAddressModel.m in Sources */,
 				01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */,
 				015BFDAC1D3483FD00EB4A09 /* CXRuler.m in Sources */,
@@ -9831,6 +9858,7 @@
 				01EBD3C11C853F70009236FA /* RefundStateCell.m in Sources */,
 				01ECDAEB1C8EB31F0018160F /* EMSDWebImageCompat.m in Sources */,
 				01F49CF31C4730080079F45F /* CommonGoodsDetailBottomCell.m in Sources */,
+				D212C85B1D34BE2900619F77 /* BasicViewController.m in Sources */,
 				01ECDADF1C8EB31F0018160F /* EMCDDeviceManager+Media.m in Sources */,
 				01F33D8E1BB2873F00787620 /* AFDownloadRequestOperation.m in Sources */,
 				01CF97A71C7A98E400206FCD /* DevicesDetailViewController.m in Sources */,
