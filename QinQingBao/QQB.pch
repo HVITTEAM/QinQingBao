@@ -611,6 +611,10 @@
 /***寸欣服务 - 获取服务对应的服务商信息，以及服务信息Url*/
 #define URL_get_orginfo_by_iidnum [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_orginfo_by_iidnum",URL_Local]
 
+/***寸欣服务 -根据IID获取服务对应的服务商信息*/
+#define URL_get_orginfo_by_iid [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=cx_org&op=get_orginfo_by_iid",URL_Local]
+
+
 /***寸欣服务 - 医嘱信息获取*/
 #define URL_get_work_report [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=work_report&op=get_work_report",URL_Local]
 

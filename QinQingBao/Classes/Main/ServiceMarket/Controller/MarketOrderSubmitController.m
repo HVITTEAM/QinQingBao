@@ -92,7 +92,7 @@
             titleCell.textLabel.text = @"客户信息";
             titleCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }else if (indexPath.section == 1){
-            titleCell.textLabel.text = @"寸欣健康科技馆";
+            titleCell.textLabel.text = self.shopItem.orgname;
             titleCell.accessoryType = UITableViewCellAccessoryNone;
         }else{
             titleCell.textLabel.text = @"下单须知";

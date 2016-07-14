@@ -29,9 +29,6 @@
 #import "STPopupController.h"
 #import "CXPickerViewController.h"
 
-#import "CXCircleRulerViewController.h"
-
-
 @interface CXHomeViewController ()<MTCityChangeDelegate>
 {
     //广告轮播图

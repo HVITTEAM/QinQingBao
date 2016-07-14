@@ -106,6 +106,7 @@
     }
     if (textfield.text.length < 1)
         return [NoticeHelper AlertShow:@"评论内容不能为空" view:nil];
+    NSLog(@"%@",textfield.text);
     [CommonRemoteHelper RemoteWithUrl:URL_add_comment parameters:@{@"mem_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                    @"article_id" : self.articleItem.id,
                                                                    @"comment_content" : textfield.text}

@@ -7,6 +7,7 @@
 //
 
 #import "QuestionTwoBtnController.h"
+#import "QuestionThreeController.h"
 
 @interface QuestionTwoBtnController ()
 
@@ -37,8 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+
     [self setupUI];
 }
 
@@ -63,7 +63,8 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
-
+    QuestionThreeController *vc = [[QuestionThreeController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)setupView:(UIView *)v

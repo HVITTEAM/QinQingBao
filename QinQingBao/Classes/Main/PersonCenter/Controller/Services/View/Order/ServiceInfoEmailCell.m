@@ -64,7 +64,7 @@
     
     NSDate *tempDate = [self.formatterIn dateFromString:orderModel.wtime];
     NSString *serviceTimeStr = [self.formatterOut stringFromDate:tempDate];
-    self.timeLb.text = serviceTimeStr;
+    self.timeLb.text = orderModel.wtime;
     
     //tid 43为理疗服务  44为健康检测
     self.timeTitleLb.text = @"预约时间";

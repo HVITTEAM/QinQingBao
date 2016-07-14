@@ -30,9 +30,9 @@
     //非会员区间
     NSString *markpriceStr;
     if ([item.price_min isEqualToString:item.price_max])
-        markpriceStr = [NSString stringWithFormat:@"非会员%@",item.price_min];
+        markpriceStr = [NSString stringWithFormat:@"非会员%@元",item.price_min];
     else
-        markpriceStr = [NSString stringWithFormat:@"非会员%@-%@",item.price_min,item.price_max];
+        markpriceStr = [NSString stringWithFormat:@"非会员%@-%@元",item.price_min,item.price_max];
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:markpriceStr];
     [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid |NSUnderlineStyleSingle) range:NSMakeRange(0, markpriceStr.length)];
     [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, markpriceStr.length)];

@@ -116,7 +116,7 @@
 
 -(void)sure:(id)sender
 {
-    Question10ViewController *vc = [[Question10ViewController alloc] init];
+    SexViewController *vc = [[SexViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

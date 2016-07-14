@@ -18,7 +18,8 @@
 
 @interface MarketViewController ()
 {
-    NSArray *dataProvider;
+    NSMutableArray *dataProvider;
+    NSInteger currentPageIdx;
 }
 
 @end
@@ -37,6 +38,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupRefresh];
+    currentPageIdx = 1;
+    dataProvider = [[NSMutableArray alloc] init];
+    
     [self getDataProvider];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -44,32 +49,74 @@
     self.title = @"服务市场";
 }
 
+#pragma mark 集成刷新控件
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    // 上拉刷新
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        currentPageIdx ++ ;
+        [self getDataProvider];
+    }];
+    
+    //下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        currentPageIdx = 1;
+        [dataProvider removeAllObjects];
+        [self getDataProvider];
+    }];
+}
+
 /**
  *  获取数据源
  */
 -(void)getDataProvider
 {
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"100",
-                                                                    @"p" : @"1",
+    MBProgressHUD *HUD;
+    if (currentPageIdx == 1)
+        HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"10",
+                                                                    @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                                                                     @"tid" : @44}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
+                                     NSArray *arr;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         //                                         [alertView show];
                                      }
                                      else
                                      {
-                                         dataProvider = [MassageModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         arr = [MassageModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          [self.tableView reloadData];
                                      }
+                                     
+                                     [self.tableView removePlace];
+                                     if (arr.count == 0 && currentPageIdx == 1)
+                                     {
+                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                     }
+                                     else if (arr.count == 0 && currentPageIdx > 1)
+                                     {
+                                         NSLog(@"没有更多的数据了");
+                                         currentPageIdx --;
+                                         [self.view showNonedataTooltip];
+                                     }
+                                     [dataProvider addObjectsFromArray:arr];
+                                     [self.tableView reloadData];
+                                     [self.tableView.footer endRefreshing];
+                                     [self.tableView.header endRefreshing];
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     [self.tableView.footer endRefreshing];
+                                     [self.tableView.header endRefreshing];
                                      [HUD removeFromSuperview];
                                  }];
 }

@@ -7,7 +7,7 @@
 //
 
 #import "BasicViewController.h"
-#import "QuestionOneBtnController.h"
+#import "QuestionBtnViewController.h"
 
 @interface BasicViewController ()<UITextFieldDelegate>
 
@@ -52,8 +52,12 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
-    QuestionOneBtnController *vc = [[QuestionOneBtnController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+    QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
+    vc.isMultipleSelection = YES;
+    vc.isTwo = NO;
+    vc.btnHeight = 45;
+    
+    vc.datas = @[@"a0",@"a1",@"a2",@"a3",@"a0",@"a1",@"a2",@"a3"];
+    [self.navigationController pushViewController:vc animated:YES];}
 
 @end

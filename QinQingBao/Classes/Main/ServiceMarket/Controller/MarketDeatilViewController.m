@@ -125,7 +125,7 @@
     
     if (self.shopItem == nil)
     {
-        [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iidnum parameters:@{@"iidnum" : self.iidnum,
+        [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iid parameters:@{@"iid" : self.iid,
                                                                                  @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
                                                                                  @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -138,7 +138,7 @@
                                          }
                                          else
                                          {
-                                             self.shopItem = [ServiceItemModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]][0];
+                                             self.shopItem = [ServiceItemModel objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
