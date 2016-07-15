@@ -1,15 +1,16 @@
 //
-//  MTAddressPickController
+//  AddressController.h
 //  QinQingBao
 //
-//  Created by 董徐维 on 15/11/20.
-//  Copyright © 2015年 董徐维. All rights reserved.
+//  Created by 董徐维 on 16/7/15.
+//  Copyright © 2016年 董徐维. All rights reserved.
 //
 
 #import "HMCommonViewController.h"
+
 #import "AreaModel.h"
 
-@interface MTAddressPickController : HMCommonViewController
+@interface AddressController : HMCommonViewController
 
 /**
  * 初始化参数
@@ -18,7 +19,7 @@
  * streetCode 街道code
  * areaInfo 详细地址
  */
--(void)setItemInfoWith:(NSString *)cityStr streetStr:(NSString *)streetStr streetCode:(NSString*)streetCode areaInfo:(NSString*)areaInfo;
+-(void)setItemInfoWith:(NSString *)cityStr regionStr:(NSString *)regionStr regionCode:(NSString*)regionCode areaInfo:(NSString*)areaInfo;
 
 /**下单修改地址回调block
  * selectedRegionmodel 最后一级的model

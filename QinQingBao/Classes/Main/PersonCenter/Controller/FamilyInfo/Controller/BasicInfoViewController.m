@@ -8,7 +8,6 @@
 
 #import "BasicInfoViewController.h"
 #import "AddDeviceViewController.h"
-#import "UpdateAddressController.h"
 #import "HMCommonTextfieldItem.h"
 #import "HMCommonButtonItem.h"
 #import "HeadProcessView.h"

@@ -12,7 +12,6 @@
 		0100C51E1BFEC574005128EA /* CommonCouponsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0100C51C1BFEC574005128EA /* CommonCouponsCell.xib */; };
 		0100C5511BFEE6AA005128EA /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0100C54A1BFEE6AA005128EA /* area.plist */; };
 		0100C5521BFEE6AA005128EA /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0100C54B1BFEE6AA005128EA /* city.plist */; };
-		0100C5581BFEE7F6005128EA /* UpdateAddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0100C5571BFEE7F6005128EA /* UpdateAddressController.m */; };
 		01024BE61BD0A22500E8CAEC /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01024BE41BD0A22500E8CAEC /* AlipaySDK.bundle */; };
 		01024BE71BD0A22500E8CAEC /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01024BE51BD0A22500E8CAEC /* AlipaySDK.framework */; };
 		01024BEA1BD0A27E00E8CAEC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01024BE91BD0A27E00E8CAEC /* SystemConfiguration.framework */; };
@@ -266,6 +265,7 @@
 		01636B471D10FBA600BED8CD /* chatshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01636B461D10FBA600BED8CD /* chatshop.png */; };
 		016CBFC11C3104B70029C66E /* ServicePhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */; };
 		016CBFC21C3104B70029C66E /* ServicePhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */; };
+		016CF6331D386FF100EECC73 /* AddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CF6321D386FF100EECC73 /* AddressController.m */; };
 		016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E745C1BAFD053009075E5 /* PersonalDataViewController.m */; };
 		016F246A1C4DDEDB00FF1BF5 /* Bugtags.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */; };
 		016F246B1C4DDEDB00FF1BF5 /* Bugtags.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */; };
@@ -365,7 +365,6 @@
 		01DB10FC1BF02C1600DA0CC5 /* EvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DB10FB1BF02C1600DA0CC5 /* EvaluationModel.m */; };
 		01DD67201BAFDA6D001D0883 /* UpdatePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DD671F1BAFDA6D001D0883 /* UpdatePwdViewController.m */; };
 		01DD67241BAFF20A001D0883 /* TextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DD67231BAFF20A001D0883 /* TextFieldViewController.m */; };
-		01DDF2D11C156C2800958332 /* DataCitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D01C156C2800958332 /* DataCitiesViewController.m */; };
 		01DDF2D51C156E0900958332 /* CitiesTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D41C156E0900958332 /* CitiesTotal.m */; };
 		01DDF2D81C156E1B00958332 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DDF2D71C156E1B00958332 /* CityModel.m */; };
 		01E4A9461C3FA97A00AAAF73 /* PriceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E4A9441C3FA97A00AAAF73 /* PriceDetailCell.m */; };
@@ -406,7 +405,6 @@
 		01E5B65D1BB4FB0600F97498 /* VideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B65B1BB4FB0600F97498 /* VideoCell.m */; };
 		01E5B65E1BB4FB0600F97498 /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E5B65C1BB4FB0600F97498 /* VideoCell.xib */; };
 		01E5B6621BB4FD0F00F97498 /* VideoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E5B6611BB4FD0F00F97498 /* VideoListViewController.m */; };
-		01E603CF1C166B350099275C /* StreetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E603CE1C166B350099275C /* StreetViewController.m */; };
 		01E603D41C1681650099275C /* AdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E603D31C1681650099275C /* AdvertisementViewController.m */; };
 		01E603E41C1683350099275C /* care_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01E603D61C1683350099275C /* care_0.jpg */; };
 		01E603E51C1683350099275C /* care_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 01E603D71C1683350099275C /* care_1.jpg */; };
@@ -1285,8 +1283,6 @@
 		0100C51C1BFEC574005128EA /* CommonCouponsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonCouponsCell.xib; sourceTree = "<group>"; };
 		0100C54A1BFEE6AA005128EA /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
 		0100C54B1BFEE6AA005128EA /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
-		0100C5561BFEE7F6005128EA /* UpdateAddressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateAddressController.h; sourceTree = "<group>"; };
-		0100C5571BFEE7F6005128EA /* UpdateAddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateAddressController.m; sourceTree = "<group>"; };
 		01024BE41BD0A22500E8CAEC /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		01024BE51BD0A22500E8CAEC /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		01024BE91BD0A27E00E8CAEC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1827,6 +1823,8 @@
 		016CBFBE1C3104B70029C66E /* ServicePhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePhoneCell.h; sourceTree = "<group>"; };
 		016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePhoneCell.m; sourceTree = "<group>"; };
 		016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePhoneCell.xib; sourceTree = "<group>"; };
+		016CF6311D386FF100EECC73 /* AddressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressController.h; sourceTree = "<group>"; };
+		016CF6321D386FF100EECC73 /* AddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressController.m; sourceTree = "<group>"; };
 		016E745B1BAFD053009075E5 /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
 		016E745C1BAFD053009075E5 /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
 		016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Bugtags.bundle; sourceTree = "<group>"; };
@@ -1991,8 +1989,6 @@
 		01DD671F1BAFDA6D001D0883 /* UpdatePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePwdViewController.m; sourceTree = "<group>"; };
 		01DD67221BAFF20A001D0883 /* TextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldViewController.h; sourceTree = "<group>"; };
 		01DD67231BAFF20A001D0883 /* TextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewController.m; sourceTree = "<group>"; };
-		01DDF2CF1C156C2800958332 /* DataCitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCitiesViewController.h; sourceTree = "<group>"; };
-		01DDF2D01C156C2800958332 /* DataCitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCitiesViewController.m; sourceTree = "<group>"; };
 		01DDF2D31C156E0900958332 /* CitiesTotal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CitiesTotal.h; sourceTree = "<group>"; };
 		01DDF2D41C156E0900958332 /* CitiesTotal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CitiesTotal.m; sourceTree = "<group>"; };
 		01DDF2D61C156E1B00958332 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
@@ -2063,8 +2059,6 @@
 		01E5B65C1BB4FB0600F97498 /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
 		01E5B6601BB4FD0F00F97498 /* VideoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListViewController.h; sourceTree = "<group>"; };
 		01E5B6611BB4FD0F00F97498 /* VideoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListViewController.m; sourceTree = "<group>"; };
-		01E603CD1C166B350099275C /* StreetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetViewController.h; sourceTree = "<group>"; };
-		01E603CE1C166B350099275C /* StreetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetViewController.m; sourceTree = "<group>"; };
 		01E603D21C1681650099275C /* AdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementViewController.h; sourceTree = "<group>"; };
 		01E603D31C1681650099275C /* AdvertisementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisementViewController.m; sourceTree = "<group>"; };
 		01E603D61C1683350099275C /* care_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = care_0.jpg; sourceTree = "<group>"; };
@@ -4551,12 +4545,8 @@
 				01DD67231BAFF20A001D0883 /* TextFieldViewController.m */,
 				01FBF0BC1BCB891E00CA285C /* ChangePwdViewController.h */,
 				01FBF0BD1BCB891E00CA285C /* ChangePwdViewController.m */,
-				0100C5561BFEE7F6005128EA /* UpdateAddressController.h */,
-				0100C5571BFEE7F6005128EA /* UpdateAddressController.m */,
-				01DDF2CF1C156C2800958332 /* DataCitiesViewController.h */,
-				01DDF2D01C156C2800958332 /* DataCitiesViewController.m */,
-				01E603CD1C166B350099275C /* StreetViewController.h */,
-				01E603CE1C166B350099275C /* StreetViewController.m */,
+				016CF6311D386FF100EECC73 /* AddressController.h */,
+				016CF6321D386FF100EECC73 /* AddressController.m */,
 			);
 			path = MyData;
 			sourceTree = "<group>";
@@ -9387,6 +9377,7 @@
 				01DD67201BAFDA6D001D0883 /* UpdatePwdViewController.m in Sources */,
 				01FBF0BE1BCB891E00CA285C /* ChangePwdViewController.m in Sources */,
 				01266B871C47C92F00992D2F /* MallEvaCell.m in Sources */,
+				016CF6331D386FF100EECC73 /* AddressController.m in Sources */,
 				01601D711CE08ED200B3712E /* OrderDetailModel.m in Sources */,
 				01F0D0091B8D478D00EF3238 /* MTSlipPageViewController.m in Sources */,
 				016067021CF6AD8C005A3164 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -9759,7 +9750,6 @@
 				01E9A7421C74613500000805 /* HabitViewController.m in Sources */,
 				01FD4C941CAE4B43008F09CF /* MWCaptionView.m in Sources */,
 				01C0D2021C468BB200FF1CD3 /* CmmonOrderListTotal.m in Sources */,
-				01E603CF1C166B350099275C /* StreetViewController.m in Sources */,
 				01F015D31C5F427B00930B0E /* DiscountViewController.m in Sources */,
 				01FD4C991CAE4B43008F09CF /* MWTapDetectingImageView.m in Sources */,
 				01B489871C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m in Sources */,
@@ -9802,7 +9792,6 @@
 				01C82BE51CC48DF3004D7A16 /* ShopDetailViewController.m in Sources */,
 				01E9A7471C74613500000805 /* HypertensioninfoController.m in Sources */,
 				013990D21CE323C40093C33A /* ServiceHeadCell.m in Sources */,
-				0100C5581BFEE7F6005128EA /* UpdateAddressController.m in Sources */,
 				01ECDAF51C8EB31F0018160F /* UIImage+EMMultiFormat.m in Sources */,
 				01ECDFBE1B7C402100665D87 /* HMCommonItem.m in Sources */,
 				01EFD30A1C56028300BDA640 /* FoodCell.m in Sources */,
@@ -9930,7 +9919,6 @@
 				016066D31CF6ACCE005A3164 /* UIView+MJExtension.m in Sources */,
 				01237A5B1CFC319D0070C905 /* MJType.m in Sources */,
 				017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */,
-				01DDF2D11C156C2800958332 /* DataCitiesViewController.m in Sources */,
 				01ECDAE21C8EB31F0018160F /* EMCDDeviceManager+Remind.m in Sources */,
 				01F015F01C5F42CD00930B0E /* SpecialCell.m in Sources */,
 				0126ED231B8C4F1200EC85C1 /* QCSlideSwitchView.m in Sources */,

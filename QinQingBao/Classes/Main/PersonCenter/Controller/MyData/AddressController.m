@@ -1,36 +1,32 @@
 //
-//  MTAddressPickController
+//  AddressController.m
 //  QinQingBao
 //
-//  Created by 董徐维 on 15/11/20.
-//  Copyright © 2015年 董徐维. All rights reserved.
+//  Created by 董徐维 on 16/7/15.
+//  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "MTAddressPickController.h"
+#import "AddressController.h"
 #import "HMCommonTextfieldItem.h"
 
 #import "AreaModelTotal.h"
 
 #import "CitiesTotal.h"
 
-@interface MTAddressPickController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
+@interface AddressController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
 {
     HMCommonArrowItem *textItem0;
     HMCommonArrowItem *textItem;
     HMCommonTextfieldItem *textItem1;
     
     NSString *selectedCityStr;
-    NSString *selectedStreetStr;
+    NSString *areaInfoStr;
     
     NSMutableArray *areaList;
     
     NSMutableArray *regionList;
     
     UIPickerView* pickView;
-    
-    //是否是弹出选择街道pickview
-    BOOL pickviewTypeAddress;
-    AreaModel *selectedStreetItem;
     
     
     AreaModel *selectedProvinceItem;
@@ -46,7 +42,7 @@
 @property (strong, nonatomic) NSArray *areaArr;
 @end
 
-@implementation MTAddressPickController
+@implementation AddressController
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -73,37 +69,13 @@
     self.view.backgroundColor = HMGlobalBg;
 }
 
--(void)setItemInfoWith:(NSString *)cityStr streetStr:(NSString *)streetStr streetCode:(NSString*)streetCode areaInfo:(NSString*)areaInfo
+-(void)setItemInfoWith:(NSString *)cityStr regionStr:(NSString *)regionStr regionCode:(NSString*)regionCode areaInfo:(NSString*)areaInfo
 {
     selectedCityStr = cityStr;
-    selectedStreetStr = streetStr;
-    textItem1.rightText.text = areaInfo;
-    selectedStreetItem = [[AreaModel alloc] initWithName:streetStr areaid:streetCode dvcode:streetCode];
-}
-
-/**获取街道数据源**/
--(void)getAddress
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_address parameters:@{@"dvcode_id" : selectedRegionItem.area_id,
-                                                                   @"all" : @0}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         NSLog(@"获取地址失败");
-                                     }
-                                     else
-                                     {
-                                         CitiesTotal *result = [CitiesTotal objectWithKeyValues:dict];
-                                         regionList = result.datas;
-                                         CityModel * item = [regionList objectAtIndex:0];
-                                         selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode dvcode:item.dvcode];
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [self.view endEditing:YES];
-                                 }];
+    areaInfoStr = areaInfo;
     
+//    selectedStreetStr = regionStr;
+    selectedRegionItem = [[AreaModel alloc] initWithName:regionStr areaid:regionCode dvcode:regionCode];
 }
 
 /**
@@ -173,23 +145,9 @@
     __weak __typeof(self)weakSelf = self;
     
     textItem0.operation = ^{
-        pickviewTypeAddress = NO;
         [weakSelf setDatePickerCity];
     };
     group0.items = @[textItem0];
-    
-    // 2.创建组
-    HMCommonGroup *group = [HMCommonGroup group];
-    [self.groups addObject:group];
-    // 2.设置组的所有行数据
-    textItem = [HMCommonArrowItem itemWithTitle:@"街道" icon:nil];
-    textItem.subtitle = selectedStreetStr;
-    textItem.operation = ^{
-        pickviewTypeAddress = YES;
-        [weakSelf setDatePickerCity];
-    };
-    
-    group.items = @[textItem];
     
     // 3.创建组
     HMCommonGroup *group1 = [HMCommonGroup group];
@@ -197,6 +155,7 @@
     // 3.设置组的所有行数据
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"详细地址" icon:nil];
     textItem1.placeholder = @"请输入详细地址";
+    textItem1.textValue = areaInfoStr;
     group1.items = @[textItem1];
     
     //刷新表格
@@ -212,17 +171,8 @@
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         
-        if (pickviewTypeAddress)
-        {
-            selectedStreetStr = selectedStreetItem.area_name;
-            [self setupGroups];
-        }
-        else
-        {
             selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name];
             [self setupGroups];
-            [self getAddress];
-        }
     }];
     
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
@@ -237,24 +187,20 @@
  */
 -(void)doneClickHandler
 {
-    selectedCityStr  = [NSString stringWithFormat:@"%@%@%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name,selectedStreetStr,textItem1.rightText.text];
+    selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name];
     if (self.changeDataBlock)
-        self.changeDataBlock(selectedStreetItem,selectedCityStr,textItem1.rightText.text);
+        self.changeDataBlock(selectedRegionItem,selectedCityStr,textItem1.rightText.text);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UIPickerViewDelegate
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    if (pickviewTypeAddress)
-        return 1;
     return 3;
 }
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if (pickviewTypeAddress)
-        return regionList.count;
     switch (component)
     {
         case 0:
@@ -274,12 +220,7 @@
 
 -(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (pickviewTypeAddress)
-    {
-        CityModel * item = [regionList objectAtIndex:row];
-        return item.dvname;
-    }
-    switch (component)
+        switch (component)
     {
         case 0:
             return [self.provinceArr objectAtIndex:row];
@@ -298,20 +239,14 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (pickviewTypeAddress)
-    {
-        CityModel * item = [regionList objectAtIndex:row];
-        selectedStreetItem = [[AreaModel alloc] initWithName:item.dvname areaid:item.dvcode dvcode:item.dvcode];
-        return;
-    }
-    switch (component)
+       switch (component)
     {
         case 0:
         {
             selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
             
             selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 1:
@@ -321,12 +256,12 @@
             [pickView selectRow:0 inComponent:2 animated:YES];
             selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
             self.areaArr = self.cityArr[row][@"regions"];
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         case 2:
         {
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:row] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
             break;
         }
         default:

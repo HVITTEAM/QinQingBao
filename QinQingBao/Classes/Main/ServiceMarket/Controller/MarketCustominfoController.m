@@ -8,7 +8,8 @@
 
 #import "MarketCustominfoController.h"
 #import "HMCommonTextfieldItem.h"
-#import "UpdateAddressController.h"
+
+#import "AddressController.h"
 
 @interface MarketCustominfoController ()
 
@@ -74,14 +75,23 @@
     self.addressItem.subtitle =  self.infoVO.totalname && self.infoVO.member_areainfo ? [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo]: @"必填,请填写地址";
     
     self.addressItem.operation = ^{
-        UpdateAddressController *textView = [[UpdateAddressController alloc] init];
-        textView.inforVO = weakSelf.infoVO;
-        textView.editHandlerBlock = ^(UserInforModel *inforVO){
+        
+        AddressController *textView = [[AddressController alloc] init];
+        if (weakSelf.infoVO.totalname && weakSelf.infoVO.totalname.length > 0 && weakSelf.infoVO.member_areaid && weakSelf.infoVO.member_areaid.length > 0)
+        {
+            [textView setItemInfoWith:weakSelf.infoVO.totalname regionStr:@"西湖区" regionCode:weakSelf.infoVO.member_areaid areaInfo:weakSelf.infoVO.member_areainfo];
+        }
+        
+        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
+            
+            weakSelf.infoVO.member_areaid = selectedRegionmodel.dvcode;
+            weakSelf.infoVO.member_areainfo = areaInfo;
+            weakSelf.infoVO.totalname = addressStr;
             [weakSelf setupGroups];
             [weakSelf.tableView reloadData];
         };
-
         [weakSelf.navigationController pushViewController:textView animated:YES];
+        
     };
     
     self.emailItem = [[HMCommonTextfieldItem alloc] init];
@@ -90,7 +100,7 @@
     self.emailItem.textValue = self.infoVO.member_email;
     
     group.items = @[self.nameItem,self.telItem,self.addressItem,self.emailItem];
-
+    
 }
 
 - (void)setupFooter

@@ -25,7 +25,20 @@
 -(void)setItem:(MassageModel *)item
 {
     _item = item;
-    self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.price_mem];
+    
+    //会员价
+    if (self.item.promotion_price)
+    {
+        self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.promotion_price];
+    }
+    else  if ([self.item.price_mem_max floatValue] == [self.item.price_mem_min floatValue])
+    {
+        self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.price_mem_min];
+    }
+    else
+    {
+        self.priceLab.text = [NSString stringWithFormat:@"%@-%@元/位",self.item.price_mem_min,self.item.price_mem_max];
+    }
     
     NSString *markpriceStr = [NSString stringWithFormat:@"%@元/位",self.item.price];
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:markpriceStr];

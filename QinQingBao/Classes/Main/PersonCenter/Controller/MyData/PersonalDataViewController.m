@@ -9,9 +9,8 @@
 #import "PersonalDataViewController.h"
 #import "ChangePwdViewController.h"
 #import "TextFieldViewController.h"
-#import "UpdateAddressController.h"
 #import "RSKImageCropper.h"
-
+#import "AddressController.h"
 
 @interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate>
 {
@@ -230,18 +229,34 @@
     }
     else if(indexPath.row == 4)
     {
-        [self setDatePickerIos8];
+        [self setDatePicker];
     }
     else if(indexPath.row == 5)
     {
-        NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
-        UpdateAddressController *textView = [[UpdateAddressController alloc] init];
-//        textView.dict = dict;
-        textView.inforVO = infoVO;
-        __weak __typeof(self)weakSelf = self;
-        textView.refleshDta = ^{
-            [weakSelf getDataProvider];
+        AddressController *textView = [[AddressController alloc] init];
+        [textView setItemInfoWith:[NSString stringWithFormat:@"浙江省%@",infoVO.totalname] regionStr:@"西湖区" regionCode:infoVO.member_areaid areaInfo:infoVO.member_areainfo];
+        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:@"ios" forKey:@"client"];
+            if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
+                [dict setObject:infoVO.member_sex forKey:@"member_sex"];
+            if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
+                [dict setObject:infoVO.member_truename forKey:@"member_truename"];
+            if (infoVO.member_birthday != nil)
+                [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
+            if (infoVO.member_email != nil)
+                [dict setObject:infoVO.member_email forKey:@"member_email"];
+            if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
+                [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+            if (areaInfo != nil)
+                [dict setObject:areaInfo forKey:@"member_areainfo"];
+            if (selectedRegionmodel.dvcode != nil)
+                [dict setObject:selectedRegionmodel.dvcode forKey:@"member_areaid"];
+            
+            [self updataUserInfor:dict];
+
         };
+        textView.title = @"居住地址";
         [self.navigationController pushViewController:textView animated:YES];
     }
     
@@ -286,6 +301,8 @@
             [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
         if (infoVO.member_areaid != nil)
             [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
+        if (infoVO.member_email != nil)
+            [dict setObject:infoVO.member_email forKey:@"member_email"];
         if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
             [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
         
@@ -473,7 +490,7 @@
 }
 
 #pragma mark --- DatePicker
--(void)setDatePickerIos8
+-(void)setDatePicker
 {
     UIAlertController* alertVc=[UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n"
                                                                    message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];

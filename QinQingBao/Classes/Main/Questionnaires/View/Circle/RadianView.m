@@ -48,7 +48,7 @@
     self.upperLayer.frame = self.bounds;
     self.lowerLayer.frame = self.upperLayer.frame;
     self.middleLayer.frame = self.upperLayer.frame;
-
+    
     [self setPathByLineWidth:self.lineWidth];
 }
 
@@ -90,8 +90,8 @@
     self.middleLayer.strokeStart = 0;
     self.middleLayer.strokeEnd = 1.0f;
     self.middleLayer.transform = self.upperLayer.transform;
-
-
+    
+    
     [self.layer addSublayer:self.middleLayer];
     [self.layer addSublayer:self.lowerLayer];
     [self.layer addSublayer:self.upperLayer];
@@ -121,9 +121,9 @@
     }
     
     lab.center = CGPointMake(width / 2, height / 2);
-
+    
     CGPathRef circlePath1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(width / 2, height / 2) radius:r - 20 startAngle:0 endAngle:M_PI *2  clockwise:NO].CGPath;
-
+    
     
     CGPathRef circlePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(width / 2, height / 2) radius:r startAngle:M_PI_4 endAngle:M_PI_4 * 3  clockwise:NO].CGPath;
     
@@ -182,15 +182,81 @@
     CGFloat value = percentValue / 100.0;
     self.upperLayer.strokeEnd = value;
     
+    [self.layer removeAllAnimations];
+    
+    //获取所有的颜色
+    id color0 = (id)[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    id color1 = (id)[UIColor colorWithRed:52/255.0 green:171/255.0 blue:222/255.0 alpha:1.0].CGColor;
+    id color2 = (id)[UIColor colorWithRed:141/255.0 green:196/255.0 blue:72/255.0 alpha:1.0].CGColor;
+    id color3 = (id)[UIColor colorWithRed:246/255.0 green:146/255.0 blue:50/255.0 alpha:1.0].CGColor;
+    id color4 = (id)[UIColor colorWithRed:238/255.0 green:91/255.0 blue:49/255.0 alpha:1.0].CGColor;
+    id color5 = (id)[UIColor colorWithRed:217/255.0 green:26/255.0 blue:44/255.0 alpha:1.0].CGColor;
+    NSArray *allColors = @[color0,color1,color2,color3,color4,color5];
+    
+    //起始颜色及结束颜色的索引
+    int colorStartIdx = [self getIdxOfColorByValue:lastStrokeEnd * 100];
+    int colorEndIdx = [self getIdxOfColorByValue:percentValue];
+    
+    //最后所需的颜色数组
+    NSMutableArray *needsColors = [[NSMutableArray alloc] init];
+    
+    //如果要显示的值越来越大,颜色要往前渐变,否则要往后渐变
+    if (value > lastStrokeEnd) {
+        //往前
+        for (int i = colorStartIdx; i <= colorEndIdx; i++) {
+            [needsColors addObject:allColors[i]];
+        }
+    }else{
+        //后退
+        for (int i = colorStartIdx; i >= colorEndIdx; i--) {
+            [needsColors addObject:allColors[i]];
+        }
+    }
+    
+    //动画时间
+    CGFloat duration = 5.0f;
+    
     CABasicAnimation *anima = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    anima.duration = 1.0f;
-    anima.delegate = self;
+    anima.duration = fabs(value - lastStrokeEnd) * duration;
     anima.fromValue = @(lastStrokeEnd);
     anima.toValue = @(value);
-    anima.removedOnCompletion = YES;
-    
+    anima.removedOnCompletion = NO;
     [self.upperLayer addAnimation:anima forKey:nil];
+    
+    CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeColor"];
+    keyAnimation.duration = fabs(value - lastStrokeEnd) * duration;
+    keyAnimation.fillMode = kCAFillModeForwards;
+    keyAnimation.timingFunctions =@[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
+    keyAnimation.values = needsColors;
+    keyAnimation.removedOnCompletion = NO;
+    [self.upperLayer addAnimation:keyAnimation forKey:nil];
+    
 }
+
+/**
+ *  allColors颜色数组中的颜色下标 (allColors在-(void)setPercentValue:(CGFloat)percentValue方法内部)
+ */
+-(int)getIdxOfColorByValue:(CGFloat)value
+{
+    int idx;
+    
+    if (value == 0) {
+        idx = 0;
+    }else if (value >=1 && value <= 20) {
+        idx = 1;
+    }else if (value >=21 && value <= 40){
+        idx = 2;
+    }else if (value >=41 && value <= 60){
+        idx = 3;
+    }else if (value >=61 && value <= 80){
+        idx = 4;
+    }else{
+        idx = 5;
+    }
+    
+    return idx;
+}
+
 
 - (void)animationDidStart:(CAAnimation *)anim
 {

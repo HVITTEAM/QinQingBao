@@ -82,6 +82,7 @@
     //tid 43为理疗服务  44为健康检测
     self.timeTitleLab.text = @"预约时间";
     if ([item.tid isEqualToString:@"44"]) {
+        self.serviceTimeLab.text = item.wtime;
         self.timeTitleLab.text = @"下单时间";
     }
     

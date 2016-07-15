@@ -39,9 +39,9 @@
 
 - (IBAction)healthHandler:(id)sender
 {
-    CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
-    [vc initWithTitle:@"年龄" startValue:1900 currentValue:2016 count:150 unit:@"年"];
-    [self.nav pushViewController:vc animated:YES];
+//    CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
+//    [vc initWithTitle:@"年龄" startValue:1900 currentValue:2016 count:150 unit:@"年"];
+//    [self.nav pushViewController:vc animated:YES];
 }
 
 - (IBAction)marketHandler:(id)sender {

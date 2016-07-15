@@ -83,7 +83,7 @@
                                                                      @"p" : @1,
                                                                      @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                    result = [EvaluationTotal objectWithKeyValues:dict];
+                                     result = [EvaluationTotal objectWithKeyValues:dict];
                                      evaArr = result.datas;
                                      [self.tableView reloadData];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -103,7 +103,7 @@
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          NSLog(@"服务市场详情%@",[dict objectForKey:@"errorMsg"]);
-//                                         [alertView show];
+                                         //                                         [alertView show];
                                      }
                                      else
                                      {
@@ -126,8 +126,8 @@
     if (self.shopItem == nil)
     {
         [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iid parameters:@{@"iid" : self.iid,
-                                                                                 @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
-                                                                                 @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
+                                                                              @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                              @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -163,8 +163,8 @@
 -(void)setHeadData
 {
     MarketHeadView *headview = (MarketHeadView *)self.tableView.tableHeaderView;
-    [headview setItem:dataItem];
-    
+    if (dataItem)
+        [headview setItem:dataItem];
     self.title = dataItem.iname;
 }
 
@@ -184,8 +184,8 @@
     }
     __weak typeof(self) weakSelf = self;
     __weak typeof(dataItem) item = dataItem;
-    
-    [self.headView setItem:dataItem];
+    if (dataItem)
+        [self.headView setItem:dataItem];
     
     self.headView.submitClick = ^(UIButton *button){
         if (![SharedAppUtil defaultCommonUtil].userVO )

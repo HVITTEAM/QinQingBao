@@ -35,7 +35,7 @@
     self.circleView.lineWidth = 12;
     self.circleView.lineThick = 1.5;
     self.circleView.lineSpace = 5;
-    self.circleView.percentValue = 80;
+    self.circleView.percentValue = 19;
     
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
