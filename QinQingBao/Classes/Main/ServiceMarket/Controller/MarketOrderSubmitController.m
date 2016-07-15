@@ -204,7 +204,7 @@
                                      @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                      @"wtime" : time,
                                      @"wname" : self.infoVO.member_truename,
-                                     @"wprice" : self.dataItem.price_mem,
+                                     @"wprice" : self.dataItem.promotion_price ? self.dataItem.promotion_price : self.dataItem.price_mem,
                                      @"dvcode" : self.infoVO.member_areaid,
                                      @"wtelnum" : self.infoVO.member_mobile,
                                      @"waddress" : self.infoVO.member_areainfo,

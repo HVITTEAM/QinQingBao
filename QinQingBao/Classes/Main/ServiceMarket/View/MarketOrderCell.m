@@ -35,7 +35,8 @@
 -(void)setItem:(MassageModel *)dataItem
 {
     self.titleLb.text = dataItem.iname;
-    self.subTitleLb.text = [NSString stringWithFormat:@"%@ 元/位",dataItem.price_mem];
+
+    self.subTitleLb.text = [NSString stringWithFormat:@"%@ 元/位",dataItem.promotion_price ? dataItem.promotion_price : dataItem.price_mem];
     
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,dataItem.item_url]];
     [self.cellImageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderDetail"]];
