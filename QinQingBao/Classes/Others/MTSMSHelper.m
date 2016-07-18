@@ -241,7 +241,8 @@
     
     NSString* tt=[locale objectForKey:NSLocaleCountryCode];
     NSString* defaultCode=[dictCodes objectForKey:tt];
-    self.areaCode = [NSString stringWithFormat:@"+%@",defaultCode];
+//    self.areaCode = [NSString stringWithFormat:@"+%@",defaultCode];
+    self.areaCode = [NSString stringWithFormat:@"+%@",@"86"];
     
     NSString* defaultCountryName=[locale displayNameForKey:NSLocaleCountryCode value:tt];
     _defaultCode=defaultCode;
