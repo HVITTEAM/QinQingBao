@@ -121,12 +121,12 @@
         sellerCell.textLabel.text = @"商家电话";
         
         NSString *phoneStr;
-        if (self.orderInfor.orgphone) {
+        if (self.orderInfor.orgphone && self.orderInfor.orgphone.length > 0) {
             phoneStr = self.orderInfor.orgphone;
-        }else if (self.orderInfor.orgtelnum){
+        }else if (self.orderInfor.orgtelnum && self.orderInfor.orgtelnum.length > 0){
             phoneStr = self.orderInfor.orgtelnum;
         }else{
-            phoneStr = ShopTel;
+            phoneStr = ShopTel1;
         }
         
         sellerCell.detailTextLabel.text = phoneStr;
@@ -237,12 +237,12 @@
     }
     
     NSString *phoneStr;
-    if (self.orderInfor.orgphone) {
+    if (self.orderInfor.orgphone && self.orderInfor.orgphone.length > 0) {
         phoneStr = self.orderInfor.orgphone;
-    }else if (self.orderInfor.orgtelnum){
+    }else if (self.orderInfor.orgtelnum && self.orderInfor.orgtelnum.length > 0){
         phoneStr = self.orderInfor.orgtelnum;
     }else{
-        phoneStr = ShopTel;
+        phoneStr = ShopTel1;
     }
     
     NSURL *url  = [NSURL URLWithString:[NSString stringWithFormat:@"telprompt://%@",phoneStr]];
