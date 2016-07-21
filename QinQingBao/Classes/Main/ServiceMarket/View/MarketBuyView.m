@@ -31,13 +31,9 @@
     {
         self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.promotion_price];
     }
-    else  if ([self.item.price_mem_max floatValue] == [self.item.price_mem_min floatValue])
-    {
-        self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.price_mem_min];
-    }
     else
     {
-        self.priceLab.text = [NSString stringWithFormat:@"%@-%@元/位",self.item.price_mem_min,self.item.price_mem_max];
+        self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.price_mem];
     }
     
     NSString *markpriceStr = [NSString stringWithFormat:@"%@元/位",self.item.price];

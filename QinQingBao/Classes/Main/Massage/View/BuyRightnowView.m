@@ -25,7 +25,7 @@
 {
     self.priceLab.text = [NSString stringWithFormat:@"%@元",price];
     
-    NSString *markpriceStr = [NSString stringWithFormat:@"非会员%@",markPrice];
+    NSString *markpriceStr = [NSString stringWithFormat:@"非会员%@元",markPrice];
     NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:markpriceStr];
     [attri addAttribute:NSStrikethroughStyleAttributeName value:@(NSUnderlinePatternSolid |NSUnderlineStyleSingle) range:NSMakeRange(0, markpriceStr.length)];
     [attri addAttribute:NSStrikethroughColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(0, markpriceStr.length)];
