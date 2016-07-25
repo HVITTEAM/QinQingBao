@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SexViewController">
             <connections>
                 <outlet property="nextBtn" destination="Us4-S3-0Bo" id="KgN-i1-QfT"/>
+                <outlet property="titleLab" destination="IJz-VP-79V" id="neW-fd-4y9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

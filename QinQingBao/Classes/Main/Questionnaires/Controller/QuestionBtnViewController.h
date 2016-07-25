@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionModel.h"
 
 @interface QuestionBtnViewController : UIViewController
 
@@ -17,5 +18,10 @@
 @property (assign,nonatomic)BOOL isMultipleSelection;  //设置是否可以多选   默认单选
 
 @property (assign,nonatomic)CGFloat btnHeight;   //设置按钮高度    默认是45
+
+/**
+ *  题目数据
+ */
+@property (nonatomic, retain) QuestionModel *questionItem;
 
 @end

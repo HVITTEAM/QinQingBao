@@ -140,6 +140,8 @@
 		012AAD211CA4D00900CEE121 /* OrderManCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AAD201CA4D00900CEE121 /* OrderManCell.m */; };
 		012AAD251CA4D01C00CEE121 /* OrderTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AAD231CA4D01C00CEE121 /* OrderTimeCell.m */; };
 		012AAD261CA4D01C00CEE121 /* OrderTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012AAD241CA4D01C00CEE121 /* OrderTimeCell.xib */; };
+		012E4B2B1D45E0EF000590C8 /* WaistHipRatioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012E4B291D45E0EF000590C8 /* WaistHipRatioViewController.m */; };
+		012E4B2C1D45E0EF000590C8 /* WaistHipRatioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012E4B2A1D45E0EF000590C8 /* WaistHipRatioViewController.xib */; };
 		01328F9A1C4C88270014D283 /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F991C4C88270014D283 /* StoreModel.m */; };
 		01328F9F1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F9D1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m */; };
 		01328FA01C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328F9E1C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib */; };
@@ -166,6 +168,7 @@
 		013F3F2F1BFC752800FF39E5 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 013F3F2D1BFC752800FF39E5 /* NJKWebViewProgressView.m */; };
 		0140E2B51C4F34FB002ECBC5 /* GoodsTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140E2B41C4F34FB002ECBC5 /* GoodsTypeViewController.m */; };
 		0140E2B81C4F601C002ECBC5 /* ReciverinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140E2B71C4F601C002ECBC5 /* ReciverinfoModel.m */; };
+		01436A731D421CB90083872F /* QuestionModel_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 01436A721D421CB90083872F /* QuestionModel_1.m */; };
 		01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */; };
 		0157E2391BE87B0E004C0908 /* EvaluationHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */; };
 		0157E23B1BE87B1E004C0908 /* EvaluationHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0157E23A1BE87B1E004C0908 /* EvaluationHeadView.xib */; };
@@ -263,6 +266,8 @@
 		0160670B1CF6AD8C005A3164 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */; };
 		0160670F1CF6C3E1005A3164 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0160670E1CF6C3E1005A3164 /* MBProgressHUD.m */; };
 		01636B471D10FBA600BED8CD /* chatshop.png in Resources */ = {isa = PBXBuildFile; fileRef = 01636B461D10FBA600BED8CD /* chatshop.png */; };
+		016AF4481D41AABF00542680 /* QuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AF4471D41AABF00542680 /* QuestionModel.m */; };
+		016AF44B1D41ADBC00542680 /* OptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 016AF44A1D41ADBC00542680 /* OptionModel.m */; };
 		016CBFC11C3104B70029C66E /* ServicePhoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */; };
 		016CBFC21C3104B70029C66E /* ServicePhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */; };
 		016CF6331D386FF100EECC73 /* AddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CF6321D386FF100EECC73 /* AddressController.m */; };
@@ -1603,6 +1608,9 @@
 		012AAD241CA4D01C00CEE121 /* OrderTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTimeCell.xib; sourceTree = "<group>"; };
 		012AAD2F1CA4D09900CEE121 /* UserInforModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInforModel.h; sourceTree = "<group>"; };
 		012AAD301CA4D09900CEE121 /* UserInforModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInforModel.m; sourceTree = "<group>"; };
+		012E4B281D45E0EF000590C8 /* WaistHipRatioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaistHipRatioViewController.h; sourceTree = "<group>"; };
+		012E4B291D45E0EF000590C8 /* WaistHipRatioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaistHipRatioViewController.m; sourceTree = "<group>"; };
+		012E4B2A1D45E0EF000590C8 /* WaistHipRatioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaistHipRatioViewController.xib; sourceTree = "<group>"; };
 		01328F981C4C88270014D283 /* StoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
 		01328F991C4C88270014D283 /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
 		01328F9C1C4CCD5E0014D283 /* GoodsMiddleBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsMiddleBottomCell.h; sourceTree = "<group>"; };
@@ -1647,6 +1655,8 @@
 		0140E2B41C4F34FB002ECBC5 /* GoodsTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTypeViewController.m; sourceTree = "<group>"; };
 		0140E2B61C4F601C002ECBC5 /* ReciverinfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReciverinfoModel.h; sourceTree = "<group>"; };
 		0140E2B71C4F601C002ECBC5 /* ReciverinfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReciverinfoModel.m; sourceTree = "<group>"; };
+		01436A711D421CB90083872F /* QuestionModel_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionModel_1.h; sourceTree = "<group>"; };
+		01436A721D421CB90083872F /* QuestionModel_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionModel_1.m; sourceTree = "<group>"; };
 		01438E7B1BDDD80A00F92681 /* AllServiceTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllServiceTypeController.h; sourceTree = "<group>"; };
 		01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllServiceTypeController.m; sourceTree = "<group>"; };
 		0157E2371BE87B0E004C0908 /* EvaluationHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationHeadView.h; sourceTree = "<group>"; };
@@ -1820,6 +1830,10 @@
 		016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		0160670E1CF6C3E1005A3164 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = ../../../Pods/MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		01636B461D10FBA600BED8CD /* chatshop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatshop.png; sourceTree = "<group>"; };
+		016AF4461D41AABF00542680 /* QuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionModel.h; sourceTree = "<group>"; };
+		016AF4471D41AABF00542680 /* QuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionModel.m; sourceTree = "<group>"; };
+		016AF4491D41ADBC00542680 /* OptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionModel.h; sourceTree = "<group>"; };
+		016AF44A1D41ADBC00542680 /* OptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionModel.m; sourceTree = "<group>"; };
 		016CBFBE1C3104B70029C66E /* ServicePhoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicePhoneCell.h; sourceTree = "<group>"; };
 		016CBFBF1C3104B70029C66E /* ServicePhoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicePhoneCell.m; sourceTree = "<group>"; };
 		016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServicePhoneCell.xib; sourceTree = "<group>"; };
@@ -4210,6 +4224,9 @@
 				017793C61D37252E00F67D8E /* QuestionResultController.h */,
 				017793C71D37252E00F67D8E /* QuestionResultController.m */,
 				017793C81D37252E00F67D8E /* QuestionResultController.xib */,
+				012E4B281D45E0EF000590C8 /* WaistHipRatioViewController.h */,
+				012E4B291D45E0EF000590C8 /* WaistHipRatioViewController.m */,
+				012E4B2A1D45E0EF000590C8 /* WaistHipRatioViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4217,6 +4234,12 @@
 		015BFD9A1D34816700EB4A09 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				016AF4461D41AABF00542680 /* QuestionModel.h */,
+				016AF4471D41AABF00542680 /* QuestionModel.m */,
+				016AF4491D41ADBC00542680 /* OptionModel.h */,
+				016AF44A1D41ADBC00542680 /* OptionModel.m */,
+				01436A711D421CB90083872F /* QuestionModel_1.h */,
+				01436A721D421CB90083872F /* QuestionModel_1.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8645,7 +8668,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = G688QXM6YK;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9216,6 +9239,7 @@
 				01ED2E581BB3ED83007C428F /* LocationCell.xib in Resources */,
 				01ECDA4D1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAC51C8EB31F0018160F /* chat_receiver_bg.png in Resources */,
+				012E4B2C1D45E0EF000590C8 /* WaistHipRatioViewController.xib in Resources */,
 				01F0B7B51C521458000BC86A /* areaList.plist in Resources */,
 				01E4A95F1C3FF20900AAAF73 /* ClassificationViewController.xib in Resources */,
 				01E68FDD1BCCA68900A17543 /* spkBtn.png in Resources */,
@@ -9580,6 +9604,7 @@
 				01E4A97A1C409E2E00AAAF73 /* DefaultAddressCell.m in Sources */,
 				01F015EE1C5F42CD00930B0E /* DiscountHeadCell.m in Sources */,
 				0126ED801B8C57A700EC85C1 /* AFURLResponseSerialization.m in Sources */,
+				016AF44B1D41ADBC00542680 /* OptionModel.m in Sources */,
 				010EC9DF1C438D8900D36417 /* ShopCarModel.m in Sources */,
 				01E6D4FB1BE1F49B00824F51 /* UIView+Toast.m in Sources */,
 				01ECDAFE1C8EB31F0018160F /* EaseUserModel.m in Sources */,
@@ -9657,7 +9682,9 @@
 				0126ECFA1B8C4E8100EC85C1 /* MASViewAttribute.m in Sources */,
 				01ECDAF11C8EB31F0018160F /* MKAnnotationView+EMWebCache.m in Sources */,
 				01024CBE1BD0A75D00E8CAEC /* base64.m in Sources */,
+				016AF4481D41AABF00542680 /* QuestionModel.m in Sources */,
 				01F49D1F1C478D700079F45F /* CommonGoodsCellBottom.m in Sources */,
+				01436A731D421CB90083872F /* QuestionModel_1.m in Sources */,
 				01EBD3D11C854027009236FA /* RefundDetailViewController.m in Sources */,
 				01601D9D1CE0900200B3712E /* SettlementCell.m in Sources */,
 				D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */,
@@ -9904,6 +9931,7 @@
 				01E6579B1C7553CB00448F74 /* EmergencyContactViewController.m in Sources */,
 				0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */,
 				01E9A74D1C746F6100000805 /* AddDeviceViewController.m in Sources */,
+				012E4B2B1D45E0EF000590C8 /* WaistHipRatioViewController.m in Sources */,
 				01E89AE71C758FFD00CFD40D /* DiseaseinfoTotal.m in Sources */,
 				01237A591CFC319D0070C905 /* MJFoundation.m in Sources */,
 				0126ECFD1B8C4E8100EC85C1 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

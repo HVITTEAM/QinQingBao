@@ -67,7 +67,6 @@
 //        
 //        self.datas = @[@"a0",@"a1",@"a2",@"a3"];
 //    });
-    
 }
 
 #pragma mark - 属性的setter方法和getter方法

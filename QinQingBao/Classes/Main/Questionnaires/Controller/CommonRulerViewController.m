@@ -20,6 +20,10 @@
 
 @implementation CommonRulerViewController
 {
+    
+    //当前刻度
+    CGFloat rulerValue;
+    
     UILabel *showLabel;
     CGFloat _startValue;
     CGFloat _currentValue;
@@ -96,6 +100,8 @@
                              range:NSMakeRange(value.length, _unit.length)];
     
     showLabel.attributedText = attributedString;
+    
+    rulerValue = [value floatValue];
 }
 
 -(void)initButton
@@ -116,8 +122,11 @@
 
 -(void)sure:(id)sender
 {
-    SexViewController *vc = [[SexViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.selectedResult)
+    {
+        self.selectedResult(rulerValue);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

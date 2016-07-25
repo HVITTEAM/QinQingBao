@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonQuesViewController.h"
+#import "QuestionModel.h"
 
 @interface BasicViewController : CommonQuesViewController
+
+/**
+ *  题目数据
+ */
+@property (nonatomic, retain) QuestionModel *questionItem;
 
 @end

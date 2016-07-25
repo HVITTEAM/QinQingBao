@@ -33,7 +33,7 @@
     else
         _rulerValue = rulerValue;
     
-    NSLog(@"rulerValue*****************当前刻度:oX:%.0f",rulerValue);
+//    NSLog(@"rulerValue*****************当前刻度:oX:%.0f",rulerValue);
     if (shapeLayerArr.count > 0)
     {
         for (CAShapeLayer *layer in shapeLayerArr)
@@ -80,7 +80,7 @@
         CGSize textSize = [rule.text sizeWithAttributes:@{ NSFontAttributeName : rule.font }];
         if (self.rulerValue)
         {
-            NSLog(@"rulerValue初始化当前刻度:%.0f",self.rulerValue);
+//            NSLog(@"rulerValue初始化当前刻度:%.0f",self.rulerValue);
         }
         
         if (i % 10 == 0)

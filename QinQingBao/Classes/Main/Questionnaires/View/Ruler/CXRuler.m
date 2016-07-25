@@ -28,6 +28,23 @@
     return self;
 }
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        self.backgroundColor = [UIColor whiteColor];
+        rulerScrollView = [self rulerScrollView];
+        rulerScrollView.rulerHeight = self.height;
+        //EDIT
+        self.width = MTScreenW - 80;
+        rulerScrollView.rulerWidth = self.width;
+        NSLog(@"%f-----%f",self.width,MTScreenW);
+    }
+    return self;
+}
+
+
 - (void)showRulerScrollViewWithCount:(NSUInteger)count average:(NSNumber *)average startValue:(CGFloat)startValue currentValue:(CGFloat)currentValue
 {
     //当前刻度不能大于最大刻度
@@ -46,6 +63,8 @@
 
 - (CXRulerScrollView *)rulerScrollView
 {
+    if (rulerScrollView)
+        return rulerScrollView;
     CXRulerScrollView * rScrollView = [CXRulerScrollView new];
     rScrollView.delegate = self;
     rScrollView.showsHorizontalScrollIndicator = NO;
@@ -91,11 +110,11 @@
     CGFloat offSetX = scrollView.contentOffset.x + self.frame.size.width / 2 - DISTANCELEFTANDRIGHT;
     CGFloat oX = (offSetX / DISTANCEVALUE) * [scrollView.rulerAverage floatValue];
     
-    NSLog(@"rulerValue*****************之前:oX:%.0f",oX);
+//    NSLog(@"rulerValue*****************之前:oX:%.0f",oX);
     
     oX = floor(oX*100) / 100 ;
     
-    NSLog(@"rulerValue*****************之后:oX:%.0f",oX);
+//    NSLog(@"rulerValue*****************之后:oX:%.0f",oX);
     
     rulerScrollView.rulerValue = oX;
     CGFloat offX = (oX / ([scrollView.rulerAverage floatValue])) * DISTANCEVALUE + DISTANCELEFTANDRIGHT - self.width / 2;

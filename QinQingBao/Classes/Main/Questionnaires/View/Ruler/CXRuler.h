@@ -19,6 +19,7 @@
 
 @property (nonatomic, assign) id <CXRulerDelegate> rulerDelegate;
 
+
 /*
 *  count * average = 刻度最大值
 *  @param count        10个小刻度为一个大刻度，大刻度的数量

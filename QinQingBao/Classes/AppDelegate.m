@@ -33,8 +33,11 @@
 /**
  *  SMS appkey
  */
-#define sms_appKey @"81de4ff2ac9e"
-#define sms_appSecret @"7a3ebe233b66e0df2505eb54e1096f37"
+#define sms_appKey @"152e9f3fee53a"
+#define sms_appSecret @"7f24f0f1f76efee6c6caf44a609f5648"
+
+#define APPID @"1064826790"
+
 
 @interface AppDelegate ()<CLLocationManagerDelegate,UIAlertViewDelegate>
 {
@@ -95,6 +98,10 @@
     //    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
     
     [self setShareSDK];
+    
+    // 获取appStore版本号  最后一串数字就是当前app在AppStore上面的唯一id
+    NSString *url = [[NSString alloc] initWithFormat:@"http://itunes.apple.com/lookup?id=%@",APPID];
+    [self Postpath:url];
     
     return YES;
 }
@@ -243,13 +250,6 @@
     [nav pushViewController:view animated:YES];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        [self sendMsgByType];
-    }
-}
 
 #pragma mark -- JPush End
 
@@ -410,4 +410,73 @@
               }
           }];
 }
+
+#pragma mark -- 监测版本信息
+-(void)Postpath:(NSString *)path
+{
+    
+    NSURL *url = [NSURL URLWithString:path];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response,NSData *data,NSError *error){
+        NSMutableDictionary *receiveStatusDic=[[NSMutableDictionary alloc]init];
+        if (data) {
+            
+            NSDictionary *receiveDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            if ([[receiveDic valueForKey:@"resultCount"] intValue]>0)
+            {
+                [receiveStatusDic setValue:@"1" forKey:@"status"];
+                [receiveStatusDic setValue:[[[receiveDic valueForKey:@"results"] objectAtIndex:0] valueForKey:@"version"]   forKey:@"version"];
+            }else{
+                
+                [receiveStatusDic setValue:@"-1" forKey:@"status"];
+            }
+        }else{
+            [receiveStatusDic setValue:@"-1" forKey:@"status"];
+        }
+        
+        [self performSelectorOnMainThread:@selector(receiveData:) withObject:receiveStatusDic waitUntilDone:NO];
+    }];
+    
+}
+-(void)receiveData:(id)sender
+{
+    NSLog(@"receiveData=%@",sender);
+    
+    NSString *version = [sender objectForKey:@"version"];
+    
+    NSString *thisVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString*)kCFBundleVersionKey];
+    
+    if (![version isEqualToString:thisVersion])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:@"当前APP有新版本，是否更新？" delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"去更新", nil];
+        alert.tag = 100;
+        [alert show];
+    }
+
+}
+
+#pragma mark UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1 && alertView.tag == 100)
+    {
+        NSString  *urlStr = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@",APPID];
+        
+        NSURL *url = [NSURL URLWithString:urlStr];
+        [[UIApplication sharedApplication]openURL:url];
+    }
+    else if (buttonIndex == 1)
+    {
+        [self sendMsgByType];
+    }
+}
+
 @end

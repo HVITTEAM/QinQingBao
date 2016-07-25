@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionModel.h"
 
 @interface CommonRulerViewController : UIViewController
 
@@ -20,4 +21,11 @@
  */
 -(void)initWithTitle:(NSString *)title startValue:(CGFloat)startValue currentValue:(CGFloat)currentValue count:(NSUInteger)count unit:(NSString *)unit;
 
+@property (nonatomic, copy) void (^selectedResult)(CGFloat value);
+
+
+/**
+ *  题目数据
+ */
+@property (nonatomic, retain) QuestionModel *questionItem;
 @end

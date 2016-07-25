@@ -90,9 +90,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     CommonArticleCell *articlecell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonArticleCell"];
-    
     
     if (articlecell == nil)
         articlecell = [CommonArticleCell commonArticleCell];

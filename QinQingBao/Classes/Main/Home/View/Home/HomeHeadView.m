@@ -16,7 +16,7 @@
 
 #import "MarketViewController.h"
 
-#import "CommonRulerViewController.h"
+#import "SexViewController.h"
 
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
@@ -39,9 +39,10 @@
 
 - (IBAction)healthHandler:(id)sender
 {
-//    CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
+    SexViewController *vc = [[SexViewController alloc] init];
 //    [vc initWithTitle:@"年龄" startValue:1900 currentValue:2016 count:150 unit:@"年"];
-//    [self.nav pushViewController:vc animated:YES];
+    [self.nav pushViewController:vc animated:YES];
+//    [NoticeHelper AlertShow:@"暂未开通,敬请期待！" view:nil];
 }
 
 - (IBAction)marketHandler:(id)sender {

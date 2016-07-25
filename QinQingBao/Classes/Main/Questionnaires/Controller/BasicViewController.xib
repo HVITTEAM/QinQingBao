@@ -11,8 +11,14 @@
             <connections>
                 <outlet property="ageField" destination="utb-rH-sHb" id="gfh-LN-ar8"/>
                 <outlet property="containerView" destination="6PB-km-19f" id="Nof-5v-Dvk"/>
+                <outlet property="headImg" destination="mNg-nc-Qzv" id="wGZ-5b-rXR"/>
                 <outlet property="heightField" destination="yXc-wQ-aKa" id="FAL-O2-POr"/>
+                <outlet property="lab1" destination="ktz-g0-FB7" id="jQr-jY-jpc"/>
+                <outlet property="lab2" destination="kIg-8X-uYT" id="Skj-EL-dhy"/>
+                <outlet property="lab3" destination="wZC-kC-YPj" id="tAH-x4-6n8"/>
                 <outlet property="nextBtn" destination="ZG3-GP-NOn" id="Cs4-Ol-bYC"/>
+                <outlet property="subtitleLab" destination="lS8-KZ-vu9" id="Fom-Y8-cpS"/>
+                <outlet property="titleLab" destination="8gm-pF-f2u" id="cj9-RV-S6B"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="weightField" destination="gwu-4H-u3T" id="bZT-c3-9dt"/>
             </connections>

@@ -27,7 +27,7 @@
     _item = item;
     
     //会员价
-    if (self.item.promotion_price && self.item.promotion_price.length > 0)
+    if (self.item.promotion_price && [self.item.promotion_price integerValue] > 0)
     {
         self.priceLab.text = [NSString stringWithFormat:@"%@元/位",self.item.promotion_price];
     }
