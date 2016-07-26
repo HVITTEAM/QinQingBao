@@ -10,8 +10,12 @@
 #define btnHorizSpace 10    //按钮之间的水平间距
 
 #import "QuestionBtnViewController.h"
-#import "ButtonCell.h"
 #import "QuestionThreeController.h"
+#import "QuestionResultController.h"
+#import "ButtonCell.h"
+#import "QuestionModel.h"
+#import "QuestionModel_1.h"
+#import "OptionModel.h"
 
 @interface QuestionBtnViewController ()<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -23,7 +27,19 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *btnCollectionView;
 
-@property (strong, nonatomic)NSMutableArray *selectedIdxArray;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bigImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *subtitleLb;
+
+@property (strong, nonatomic)NSMutableArray *selectedIdxArray;   //选中的选项(数组元素是NSIndexPath)
+
+@property (strong,nonatomic)QuestionModel *qModel;
+
+@property (strong,nonatomic)QuestionModel_1 *qModel_1;
 
 @end
 
@@ -38,6 +54,8 @@
     [self setupUI];
     
     [self setCollectionViewHeight];
+    
+    [self setDatasForUI];
 }
 
 -(void)setupUI
@@ -60,13 +78,46 @@
     self.containerView.layer.cornerRadius = 7.0f;
     
     self.btnCollectionView.allowsMultipleSelection = self.isMultipleSelection;
+}
+
+/**
+ *  设置界面的数据
+ */
+-(void)setDatasForUI
+{
+    self.qModel = self.dataProvider[self.eq_id - 1];
+    self.navigationItem.title = self.qModel.eq_title;
     
-    //--------------测试数据,模拟网络取数据,3秒后刷新 ----------------------------------------//
-//    dispatch_time_t time_t = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC));
-//    dispatch_after(time_t, dispatch_get_main_queue(), ^{
-//        
-//        self.datas = @[@"a0",@"a1",@"a2",@"a3"];
-//    });
+    self.qModel_1 = [self.qModel.questions firstObject];
+    self.titleLb.text = self.qModel_1.q_title;
+    self.subtitleLb.text = self.qModel_1.q_subtitle;
+    
+    [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.qModel_1.q_logo_url] placeholderImage:[UIImage imageNamed:@"head"]];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:self.qModel_1.q_detail_url] placeholderImage:[UIImage imageNamed:@"xiaofeiquan"]];
+    
+    
+    //类型  1.单选  2.多选  3.单行输入 4.多行输入  5.多项填空  6.有条件选择
+    switch ([self.qModel_1.q_type integerValue]) {
+        case 1:
+        case 3:
+        case 4:
+        case 5:
+            self.isMultipleSelection = NO;
+            break;
+        case 2:
+        case 6:
+            self.isMultipleSelection = YES;
+            break;
+        default:
+            self.isMultipleSelection = NO;
+            break;
+    }
+    
+    //选项超过4个就两行排列
+    self.datas = self.qModel_1.options;
+    if (self.datas.count >= 5) {
+        self.isTwo = YES;
+    }
 }
 
 #pragma mark - 属性的setter方法和getter方法
@@ -151,7 +202,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"buttonCell" forIndexPath:indexPath];
-    cell.titleLb .text = self.datas[indexPath.row];
+    OptionModel *optionmode = self.datas[indexPath.row];
+    
+    cell.titleLb .text = optionmode.qo_content;
     cell.selected = [self.selectedIdxArray containsObject:indexPath];
     return cell;
 }
@@ -168,6 +221,26 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //14题是有条件多选,"q_rule": "+82+83+85_84"
+    if ([self.qModel.eq_id integerValue] == 14) {
+        OptionModel *optionmode = self.datas[indexPath.row];
+        if ([optionmode.qo_id integerValue] == 84) {
+            for (NSIndexPath *idx in self.selectedIdxArray) {
+                [collectionView deselectItemAtIndexPath:idx animated:YES];
+            }
+            [self.selectedIdxArray removeAllObjects];
+        }else{
+            for (NSIndexPath *idx in self.selectedIdxArray) {
+                OptionModel *optionmode = self.datas[idx.row];
+                if ([optionmode.qo_id integerValue] == 84) {
+                    [collectionView deselectItemAtIndexPath:idx animated:YES];
+                    [self.selectedIdxArray removeObject:idx];
+                }
+                
+            }
+        }
+    }
+    
     [self.selectedIdxArray addObject:indexPath];
 }
 
@@ -176,6 +249,10 @@
     [self.selectedIdxArray removeObject:indexPath];
 }
 
+#pragma mark - 事件方法
+/**
+ *  下一步
+ */
 - (IBAction)nextBtnClicke:(id)sender
 {
 //    //获取选中的数据
@@ -188,8 +265,21 @@
 //
 //    NSLog(@"%@",selectedDatas);
     
-    QuestionThreeController *vc = [[QuestionThreeController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    NSInteger nextQuestionId = self.eq_id + 1;
+    if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
+        QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
+        nextQuestionBtnVC.dataProvider = self.dataProvider;
+        nextQuestionBtnVC.eq_id = nextQuestionId;
+        [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
+    }else if (nextQuestionId == 10){
+        QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
+        nextQuestionThreeVC.dataProvider = self.dataProvider;
+        [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
+    }else if (nextQuestionId == 15){
+        QuestionResultController *vc = [[QuestionResultController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 #pragma mark - 内部方法

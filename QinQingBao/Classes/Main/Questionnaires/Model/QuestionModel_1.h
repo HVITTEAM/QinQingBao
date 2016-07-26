@@ -18,6 +18,8 @@
 @property (nonatomic, copy) NSString *q_logo_url;
 @property (nonatomic, copy) NSString *q_detail_url;
 @property (nonatomic, copy) NSString *q_subtitle;
+@property (nonatomic, copy) NSString *q_rule;
+@property (nonatomic, copy) NSString *q_unit;
 
 @property (nonatomic, strong) NSMutableArray *options;
 

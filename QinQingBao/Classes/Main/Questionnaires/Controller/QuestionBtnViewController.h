@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QuestionModel.h"
+#import "CommonQuesViewController.h"
 
-@interface QuestionBtnViewController : UIViewController
+@interface QuestionBtnViewController : CommonQuesViewController
 
-@property (strong,nonatomic)NSArray *datas;      //数据源
+@property (strong,nonatomic)NSArray *datas;      //数据源(题目选项按钮的数据)
 
 @property (assign,nonatomic) BOOL isTwo;         //设置是否显示两排数据     默认是NO,一排按钮
 
@@ -19,9 +19,11 @@
 
 @property (assign,nonatomic)CGFloat btnHeight;   //设置按钮高度    默认是45
 
+@property (assign,nonatomic)NSInteger eq_id;     //当前题目id
+
 /**
  *  题目数据
  */
-@property (nonatomic, retain) QuestionModel *questionItem;
+@property (nonatomic, retain) NSArray *dataProvider;
 
 @end

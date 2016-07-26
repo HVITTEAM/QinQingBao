@@ -6,8 +6,13 @@
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CommonQuesViewController.h"
 
-@interface WaistHipRatioViewController : UIViewController
+@interface WaistHipRatioViewController : CommonQuesViewController
+
+/**
+ *  题目数据
+ */
+@property (nonatomic,strong)NSArray *dataProvider;
 
 @end

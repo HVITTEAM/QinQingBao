@@ -10,8 +10,14 @@
 #import "CXRuler.h"
 
 #import "QuestionBtnViewController.h"
+//#import "QuestionThreeController.h"
+
+#import "QuestionModel.h"
+#import "QuestionModel_1.h"
+#import "OptionModel.h"
 
 @interface WaistHipRatioViewController ()<CXRulerDelegate>
+
 @property (strong, nonatomic) IBOutlet CXRuler *rule1;
 @property (strong, nonatomic) IBOutlet CXRuler *rule2;
 - (IBAction)next:(id)sender;
@@ -54,11 +60,12 @@
 
 
 - (IBAction)next:(id)sender {
+    
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
-    vc.isMultipleSelection = YES;
-    vc.isTwo = NO;
-    vc.btnHeight = 45;
-    vc.datas = @[@"a0",@"a1",@"a2",@"a3",@"a0",@"a1",@"a2",@"a3"];
+    vc.dataProvider = self.dataProvider;
+    vc.eq_id = 4;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 @end

@@ -7,12 +7,12 @@
 //
 
 #import "CommonQuesViewController.h"
-#import "QuestionModel.h"
 
 @interface QuestionThreeController : CommonQuesViewController
 
 /**
  *  题目数据
  */
-@property (nonatomic, retain) QuestionModel *questionItem;
+@property (nonatomic,strong)NSArray *dataProvider;
+
 @end
