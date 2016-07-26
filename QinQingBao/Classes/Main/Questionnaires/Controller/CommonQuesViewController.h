@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionModel.h"
+#import "QuestionModel_1.h"
+#import "OptionModel.h"
 
 @interface CommonQuesViewController : UIViewController
 

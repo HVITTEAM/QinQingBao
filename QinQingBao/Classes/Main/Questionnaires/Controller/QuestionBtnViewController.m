@@ -118,6 +118,13 @@
     if (self.datas.count >= 5) {
         self.isTwo = YES;
     }
+    
+    //设置默认数据
+    if (self.datas.count > 0) {
+        NSIndexPath *idx = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.btnCollectionView selectItemAtIndexPath:idx animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        [self.selectedIdxArray addObject:idx];
+    }
 }
 
 #pragma mark - 属性的setter方法和getter方法
@@ -300,9 +307,9 @@
     
     self.collectionViewHeightCons.constant = h;
     
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.view layoutIfNeeded];
-    }];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.view layoutIfNeeded];
+//    }];
     [self.btnCollectionView reloadData];
 }
 

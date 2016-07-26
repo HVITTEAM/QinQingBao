@@ -8,10 +8,8 @@
 
 #import "BasicViewController.h"
 #import "QuestionBtnViewController.h"
-#import "QuestionModel_1.h"
 #import "CommonRulerViewController.h"
 #import "WaistHipRatioViewController.h"
-#import "QuestionModel.h"
 
 @interface BasicViewController ()<UITextFieldDelegate>
 {
@@ -20,6 +18,11 @@
     QuestionModel_1 *item1;
     QuestionModel_1 *item2;
     QuestionModel_1 *item3;
+    
+    NSMutableDictionary *dict1;
+    NSMutableDictionary *dict2;
+    NSMutableDictionary *dict3;
+
 }
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 
@@ -71,9 +74,13 @@
     item3 = questionItem.questions[2];
     
     self.lab1.text = item1.q_title;
-    self.lab2.text = item2.q_title;
-    self.lab3.text = item3.q_title;
+    self.lab1.tag = [item1.q_id integerValue];
     
+    self.lab2.text = item2.q_title;
+    self.lab2.tag = [item2.q_id integerValue];
+
+    self.lab3.text = item3.q_title;
+    self.lab3.tag = [item3.q_id integerValue];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -85,6 +92,11 @@
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0f",value);
             self.ageField.text = [NSString stringWithFormat:@"%.0f年",value];
+            
+            dict1 = [[NSMutableDictionary alloc] init];
+            [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab1.tag] forKey:@"q_id"];
+            [dict1 setObject:[NSString stringWithFormat:@"%.0f",value] forKey:@"qa_detail"];
+            [self.answerProvider addObject:dict1];
         };
     }
     else if (textField == self.heightField)
@@ -93,6 +105,10 @@
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0fcm",value);
             self.heightField.text = [NSString stringWithFormat:@"%.0fcm",value];
+            dict2 = [[NSMutableDictionary alloc] init];
+            [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab2.tag] forKey:@"q_id"];
+            [dict2 setObject:[NSString stringWithFormat:@"%.0f",value] forKey:@"qa_detail"];
+            [self.answerProvider addObject:dict2];
         };
     }
     else if (textField == self.weightField)
@@ -101,6 +117,10 @@
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0fkg",value);
             self.weightField.text = [NSString stringWithFormat:@"%.0fkg",value];
+            dict3 = [[NSMutableDictionary alloc] init];
+            [dict3 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab3.tag] forKey:@"q_id"];
+            [dict3 setObject:[NSString stringWithFormat:@"%.0f",value] forKey:@"qa_detail"];
+            [self.answerProvider addObject:dict3];
         };
     }
     [self.navigationController pushViewController:vc animated:YES];
@@ -109,8 +129,33 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
+    //设置初始值
+    if (dict1 == nil)
+    {
+        dict1 = [[NSMutableDictionary alloc] init];
+        [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab1.tag] forKey:@"q_id"];
+        [dict1 setObject:@"1980" forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict1];
+    }
+    if (dict2 == nil)
+    {
+        dict2 = [[NSMutableDictionary alloc] init];
+        [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab2.tag] forKey:@"q_id"];
+        [dict2 setObject:@"170" forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict2];
+
+    }
+    if (dict3 == nil)
+    {
+        dict3 = [[NSMutableDictionary alloc] init];
+        [dict3 setObject:[NSString stringWithFormat:@"%ld",(long)self.lab3.tag] forKey:@"q_id"];
+        [dict3 setObject:@"50" forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict3];
+    }
+
     WaistHipRatioViewController *vc = [[WaistHipRatioViewController alloc] init];
     vc.dataProvider = self.dataProvider;
+    vc.answerProvider = self.answerProvider;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

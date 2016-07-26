@@ -15,4 +15,9 @@
  */
 @property (nonatomic,strong)NSArray *dataProvider;
 
+/**
+ *  答案数据
+ */
+@property (nonatomic, retain) NSMutableArray *answerProvider;
+
 @end

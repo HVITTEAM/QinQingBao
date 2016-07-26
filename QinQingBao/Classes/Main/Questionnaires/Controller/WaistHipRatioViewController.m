@@ -10,12 +10,6 @@
 #import "CXRuler.h"
 
 #import "QuestionBtnViewController.h"
-#import "QuestionModel.h"
-#import "QuestionModel_1.h"
-
-#import "QuestionModel.h"
-#import "QuestionModel_1.h"
-#import "OptionModel.h"
 
 @interface WaistHipRatioViewController ()<CXRulerDelegate>
 {
@@ -26,6 +20,10 @@
     
     //臀围数据
     QuestionModel_1 *answerItem2;
+    
+    
+    NSString *rule1Value;
+    NSString *rule2Value;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 @property (strong, nonatomic) IBOutlet UIImageView *iconImg;
@@ -60,12 +58,14 @@
     self.titleLab.text = questionItem.eq_title;
     //腰围数据
     answerItem = questionItem.questions[0];
-    
     //臀围数据
     answerItem2 = questionItem.questions[1];
     
     self.ruletitleLab1.text = answerItem.q_title;
+    _rule1.tag = [answerItem.q_id integerValue];
+    
     self.ruletitleLab2.text = answerItem2.q_title;
+    _rule2.tag = [answerItem2.q_id integerValue];
     
     [self.headImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_detail_url] placeholderImage:[UIImage imageWithName:nil]];
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:nil]];
@@ -96,12 +96,28 @@
                              range:NSMakeRange(value.length, unitStr.length)];
     
     if (ruler == _rule1)
+    {
         self.value1Lab.attributedText = attributedString;
+        rule1Value = value;
+    }
     else
+    {
         self.value2Lab.attributedText = attributedString;
+        rule2Value = value;
+    }
 }
 
-- (IBAction)next:(id)sender {
+- (IBAction)next:(id)sender
+{
+    NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
+    [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)_rule1.tag] forKey:@"q_id"];
+    [dict1 setObject:rule1Value forKey:@"qa_detail"];
+    [self.answerProvider addObject:dict1];
+    
+    NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
+    [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)_rule2.tag] forKey:@"q_id"];
+    [dict2 setObject:rule2Value forKey:@"qa_detail"];
+    [self.answerProvider addObject:dict2];
     
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;

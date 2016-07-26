@@ -8,7 +8,7 @@
 
 #import "SexViewController.h"
 #import "BasicViewController.h"
-#import "QuestionModel.h"
+
 
 @interface SexViewController ()
 
@@ -24,6 +24,8 @@
 @interface SexViewController ()
 {
     NSArray *dataProvider;
+    //当前选择的选择
+    NSString *selectedId;
 }
 
 @end
@@ -55,12 +57,26 @@
 {
     QuestionModel *item = dataProvider[0];
     self.titleLab.text =  item.eq_title;
+    
+    //设置初始值
+    QuestionModel_1 *item1 = item.questions[0];
+    OptionModel *optionItem = item1.options[0];
+    selectedId = optionItem.qo_id;
 }
 
 - (IBAction)nextBtnClicke:(id)sender
 {
+    QuestionModel *item = dataProvider[0];
+    QuestionModel_1 *item1 = item.questions[0];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
+    [dict1 setObject:item1.q_id forKey:@"q_id"];
+    [dict1 setObject:selectedId forKey:@"qa_detail"];
+    [arr addObject:dict1];
+    
     BasicViewController *vc = [[BasicViewController alloc] init];
     vc.dataProvider = dataProvider;
+    vc.answerProvider = arr;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -91,13 +107,31 @@
 
 - (IBAction)manClick:(id)sender
 {
+    QuestionModel *item = dataProvider[0];
+    QuestionModel_1 *item1 = item.questions[0];
+    for (OptionModel *optionItem in item1.options)
+    {
+        if ([optionItem.qo_content rangeOfString:@"男"].location != NSNotFound)
+        {
+            selectedId = optionItem.qo_id;
+        }
+    }
     [self.manImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.femanImg setBackgroundImage:nil forState:UIControlStateNormal];
 }
 
 - (IBAction)femanClick:(id)sender {
+    QuestionModel *item = dataProvider[0];
+    QuestionModel_1 *item1 = item.questions[0];
+    for (OptionModel *optionItem in item1.options)
+    {
+        if ([optionItem.qo_content rangeOfString:@"女"].location != NSNotFound)
+        {
+            selectedId = optionItem.qo_id;
+        }
+    }
     [self.femanImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.manImg setBackgroundImage:nil forState:UIControlStateNormal];
-
+    
 }
 @end
