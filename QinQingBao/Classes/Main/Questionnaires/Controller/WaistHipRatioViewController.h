@@ -6,7 +6,7 @@
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CommonQuesViewController.h"
 
 @interface WaistHipRatioViewController : UIViewController
 /**

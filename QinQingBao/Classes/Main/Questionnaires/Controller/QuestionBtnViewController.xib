@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionBtnViewController">
             <connections>
+                <outlet property="bigImageView" destination="7xr-es-sPG" id="jLw-wo-wN6"/>
                 <outlet property="btnCollectionView" destination="tHs-NZ-74z" id="G7a-Hq-z6J"/>
                 <outlet property="collectionViewHeightCons" destination="wGA-iX-B40" id="G1v-OY-Yyr"/>
                 <outlet property="containerView" destination="8jA-yA-Yp0" id="zQ5-Qh-xkz"/>
+                <outlet property="logoImageView" destination="Soy-YY-KNP" id="eBe-Dj-gv9"/>
                 <outlet property="nextBtn" destination="dlB-rj-Z1l" id="Nn0-mM-3XY"/>
+                <outlet property="subtitleLb" destination="eAG-qC-IHV" id="j4g-Nl-CN3"/>
+                <outlet property="titleLb" destination="EXb-uf-cV1" id="2Mq-bH-I9I"/>
                 <outlet property="view" destination="Qfj-LD-lpA" id="swA-RU-yro"/>
             </connections>
         </placeholder>
@@ -29,7 +33,6 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-es-sPG">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="120"/>
-                                    <color key="backgroundColor" red="0.1764705882" green="0.74901960779999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="7xr-es-sPG" secondAttribute="height" multiplier="5:2" id="AsW-vI-wja"/>
                                         <constraint firstAttribute="width" secondItem="7xr-es-sPG" secondAttribute="height" multiplier="5:2" id="dCf-bk-lCC"/>

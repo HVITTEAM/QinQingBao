@@ -8,13 +8,10 @@
 
 #import "QuestionThreeController.h"
 
-#import "QuestionResultController.h"
+#import "QuestionBtnViewController.h"
 
 
 @interface QuestionThreeController ()<UIPickerViewDataSource,UIPickerViewDelegate>
-{
-    
-}
 
 @property (strong, nonatomic) IBOutlet UIPickerView *rightPicker;
 
@@ -23,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
+
 @end
 
 @implementation QuestionThreeController
@@ -53,8 +51,10 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
-    QuestionResultController *vc = [[QuestionResultController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
+    nextQuestionBtnVC.dataProvider = self.dataProvider;
+    nextQuestionBtnVC.eq_id = 11;
+    [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
 }
 
 -(void)setupView:(UIView *)v
