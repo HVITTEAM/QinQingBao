@@ -8,9 +8,11 @@
 
 #import "CommonQuesViewController.h"
 
-@interface WaistHipRatioViewController : UIViewController
+@interface WaistHipRatioViewController : CommonQuesViewController
+
 /**
  *  题目数据
  */
-@property (nonatomic, retain) NSArray *dataProvider;
+@property (nonatomic,strong)NSArray *dataProvider;
+
 @end

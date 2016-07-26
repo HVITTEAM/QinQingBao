@@ -13,6 +13,10 @@
 #import "QuestionModel.h"
 #import "QuestionModel_1.h"
 
+#import "QuestionModel.h"
+#import "QuestionModel_1.h"
+#import "OptionModel.h"
+
 @interface WaistHipRatioViewController ()<CXRulerDelegate>
 {
     QuestionModel *questionItem;
