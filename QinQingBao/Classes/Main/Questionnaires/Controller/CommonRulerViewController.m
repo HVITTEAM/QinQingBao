@@ -59,7 +59,7 @@
 -(void)initRuler
 {
     UIImageView *headimg = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50, 90, 100, 100)];
-    headimg.image = [UIImage imageNamed:@"1.png"];
+    headimg.image = [UIImage imageNamed:@"man.png"];
     [self.view addSubview:headimg];
     
     UILabel  *titleLab= [[UILabel alloc] init];
@@ -84,7 +84,7 @@
     [self.view addSubview:ruler];
 }
 
-- (void)CXRuler:(CXRulerScrollView *)rulerScrollView
+- (void)CXRuler:(CXRulerScrollView *)rulerScrollView ruler:(CXRuler *)ruler
 {
     NSString *value                             = [NSString stringWithFormat:@"%.0f",rulerScrollView.rulerValue];
     NSString *string                            = [NSString stringWithFormat:@"%@%@",value,_unit];

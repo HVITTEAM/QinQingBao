@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CXRulerScrollView.h"
+@class CXRuler;
 
 @protocol CXRulerDelegate <NSObject>
 
-- (void)CXRuler:(CXRulerScrollView *)rulerScrollView;
+- (void)CXRuler:(CXRulerScrollView *)rulerScrollView ruler:(CXRuler *)ruler;
 
 @end
 

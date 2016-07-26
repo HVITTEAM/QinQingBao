@@ -419,12 +419,9 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestReloadIgnoringCacheData
                                                        timeoutInterval:10];
-    
     [request setHTTPMethod:@"POST"];
     
-    
     NSOperationQueue *queue = [NSOperationQueue new];
-    
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response,NSData *data,NSError *error){
         NSMutableDictionary *receiveStatusDic=[[NSMutableDictionary alloc]init];
         if (data) {
@@ -452,9 +449,11 @@
     
     NSString *version = [sender objectForKey:@"version"];
     
-    NSString *thisVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString*)kCFBundleVersionKey];
+    NSString *thisVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
-    if (![version isEqualToString:thisVersion])
+    NSString *thisBuild = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+    if (![version isEqualToString:[NSString stringWithFormat:@"%@.%@",thisVersion,thisBuild]])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:@"当前APP有新版本，是否更新？" delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"去更新", nil];
         alert.tag = 100;

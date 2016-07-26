@@ -11,10 +11,11 @@
 #import "QuestionModel_1.h"
 #import "CommonRulerViewController.h"
 #import "WaistHipRatioViewController.h"
+#import "QuestionModel.h"
 
 @interface BasicViewController ()<UITextFieldDelegate>
 {
-    NSArray *dataProvider;
+    QuestionModel *questionItem;
     
     QuestionModel_1 *item1;
     QuestionModel_1 *item2;
@@ -63,10 +64,11 @@
     
     self.navigationItem.title = @"基本信息";
     
-    self.titleLab.text = self.questionItem.eq_title;
-    item1 = self.questionItem.questions[0];
-    item2 = self.questionItem.questions[1];
-    item3 = self.questionItem.questions[2];
+    questionItem = self.dataProvider[1];
+    self.titleLab.text = questionItem.eq_title;
+    item1 = questionItem.questions[0];
+    item2 = questionItem.questions[1];
+    item3 = questionItem.questions[2];
     
     self.lab1.text = item1.q_title;
     self.lab2.text = item2.q_title;
@@ -80,22 +82,27 @@
     if (textField == self.ageField)
     {
         [vc initWithTitle:@"年龄" startValue:1900 currentValue:2016 count:150 unit:@"年"];
-
+        vc.selectedResult = ^(CGFloat value){
+            NSLog(@"%.0f",value);
+            self.ageField.text = [NSString stringWithFormat:@"%.0f年",value];
+        };
     }
     else if (textField == self.heightField)
     {
         [vc initWithTitle:@"身高" startValue:100 currentValue:165 count:120 unit:@"cm"];
-
+        vc.selectedResult = ^(CGFloat value){
+            NSLog(@"%.0fcm",value);
+            self.heightField.text = [NSString stringWithFormat:@"%.0fcm",value];
+        };
     }
     else if (textField == self.weightField)
     {
         [vc initWithTitle:@"体重" startValue:40 currentValue:65 count:150 unit:@"kg"];
-
+        vc.selectedResult = ^(CGFloat value){
+            NSLog(@"%.0fkg",value);
+            self.weightField.text = [NSString stringWithFormat:@"%.0fkg",value];
+        };
     }
-
-    vc.selectedResult = ^(CGFloat value){
-        NSLog(@"%f",value);
-    };
     [self.navigationController pushViewController:vc animated:YES];
     return NO;
 }
@@ -103,10 +110,7 @@
 - (IBAction)nextBtnClicke:(id)sender
 {
     WaistHipRatioViewController *vc = [[WaistHipRatioViewController alloc] init];
-//    vc.isMultipleSelection = YES;
-//    vc.isTwo = NO;
-//    vc.btnHeight = 45;
-//    vc.datas = @[@"a0",@"a1",@"a2",@"a3",@"a0",@"a1",@"a2",@"a3"];
+    vc.dataProvider = self.dataProvider;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

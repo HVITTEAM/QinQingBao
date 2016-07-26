@@ -20,7 +20,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         rulerScrollView = [self rulerScrollView];
         rulerScrollView.rulerHeight = frame.size.height;
         rulerScrollView.rulerWidth = frame.size.width;
@@ -33,7 +33,7 @@
     self = [super initWithCoder:aDecoder];
     if (self)
     {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         rulerScrollView = [self rulerScrollView];
         rulerScrollView.rulerHeight = self.height;
         //EDIT
@@ -91,7 +91,7 @@
             scrollView.rulerValue = ruleValue;
         InitFinish = YES;
         
-        [self.rulerDelegate CXRuler:scrollView];
+        [self.rulerDelegate CXRuler:scrollView ruler:self];
     }
 }
 

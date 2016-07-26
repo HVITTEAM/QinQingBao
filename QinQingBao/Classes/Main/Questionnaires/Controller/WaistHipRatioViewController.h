@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface WaistHipRatioViewController : UIViewController
-
+/**
+ *  题目数据
+ */
+@property (nonatomic, retain) NSArray *dataProvider;
 @end

@@ -14,6 +14,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
+- (IBAction)manClick:(id)sender;
+- (IBAction)femanClick:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *manImg;
+@property (strong, nonatomic) IBOutlet UIButton *femanImg;
 
 @end
 
@@ -56,7 +60,7 @@
 - (IBAction)nextBtnClicke:(id)sender
 {
     BasicViewController *vc = [[BasicViewController alloc] init];
-    vc.questionItem = dataProvider[1];
+    vc.dataProvider = dataProvider;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -85,4 +89,15 @@
 }
 
 
+- (IBAction)manClick:(id)sender
+{
+    [self.manImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
+    [self.femanImg setBackgroundImage:nil forState:UIControlStateNormal];
+}
+
+- (IBAction)femanClick:(id)sender {
+    [self.femanImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
+    [self.manImg setBackgroundImage:nil forState:UIControlStateNormal];
+
+}
 @end

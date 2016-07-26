@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SexViewController">
             <connections>
+                <outlet property="femanImg" destination="hwv-cn-xFo" id="HcA-US-fvT"/>
+                <outlet property="manImg" destination="efi-U9-f5E" id="v87-Ew-aev"/>
                 <outlet property="nextBtn" destination="Us4-S3-0Bo" id="KgN-i1-QfT"/>
                 <outlet property="titleLab" destination="IJz-VP-79V" id="neW-fd-4y9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -44,23 +46,28 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7D-pG-cf6">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                            <state key="normal" backgroundImage="head"/>
+                                            <state key="normal" backgroundImage="man"/>
+                                            <connections>
+                                                <action selector="manClick:" destination="-1" eventType="touchUpInside" id="wC2-UR-gqG"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc0-2z-u8p">
                                             <rect key="frame" x="0.0" y="124.5" width="90" height="90"/>
-                                            <state key="normal" backgroundImage="head"/>
+                                            <state key="normal" backgroundImage="feman"/>
+                                            <connections>
+                                                <action selector="femanClick:" destination="-1" eventType="touchUpInside" id="Q5W-HV-9P5"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efi-U9-f5E">
                                             <rect key="frame" x="35.5" y="80.5" width="20" height="20"/>
-                                            <color key="backgroundColor" red="0.1764705882" green="0.74901960779999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="1Pw-t6-9do"/>
                                                 <constraint firstAttribute="height" constant="20" id="U4w-yj-Wcm"/>
                                             </constraints>
+                                            <state key="normal" backgroundImage="sex_selected"/>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hwv-cn-xFo">
                                             <rect key="frame" x="35.5" y="205" width="20" height="20"/>
-                                            <color key="backgroundColor" red="0.1764705882" green="0.74901960779999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="Anc-kH-ntj"/>
                                                 <constraint firstAttribute="height" constant="20" id="sny-wk-j7R"/>
@@ -135,6 +142,8 @@
         </view>
     </objects>
     <resources>
-        <image name="head" width="150" height="150"/>
+        <image name="feman" width="102" height="102"/>
+        <image name="man" width="102" height="102"/>
+        <image name="sex_selected" width="28" height="28"/>
     </resources>
 </document>
