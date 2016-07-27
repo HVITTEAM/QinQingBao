@@ -54,6 +54,7 @@
     QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
     nextQuestionBtnVC.dataProvider = self.dataProvider;
     nextQuestionBtnVC.eq_id = 11;
+    nextQuestionBtnVC.answerProvider = self.answerProvider;
     [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
 }
 
