@@ -262,28 +262,50 @@
  */
 - (IBAction)nextBtnClicke:(id)sender
 {
-//    //获取选中的数据
-//    NSMutableArray *selectedDatas = [[NSMutableArray alloc] init];
-//    for (NSIndexPath *idx in self.selectedIdxArray) {
-//        [selectedDatas addObject:self.datas[idx.row]];
-//    }
-//    
-//    
-//
-//    NSLog(@"%@",selectedDatas);
+    if (self.selectedIdxArray.count <= 0) {
+        [NoticeHelper AlertShow:@"请先选择答案" view:nil];
+        return;
+    }
     
+    //获取选中的数据
+    NSMutableArray *selectedDatas = [[NSMutableArray alloc] init];
+    for (NSIndexPath *idx in self.selectedIdxArray) {
+        
+        OptionModel *option = self.datas[idx.row];
+        
+        [selectedDatas addObject:option.qo_id];
+    
+    }
+    
+    NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
+
+    [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
+    
+    if (1 == selectedDatas.count) {
+        [answerDict setValue:selectedDatas[0] forKey:@"qa_detail"];
+    }else{
+        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+    }
+    
+    [self.answerProvider addObject:answerDict];
+    
+//    NSLog(@"-------%@",self.answerProvider);
+
     NSInteger nextQuestionId = self.eq_id + 1;
     if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
         QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
         nextQuestionBtnVC.dataProvider = self.dataProvider;
         nextQuestionBtnVC.eq_id = nextQuestionId;
+        nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
     }else if (nextQuestionId == 10){
         QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
         nextQuestionThreeVC.dataProvider = self.dataProvider;
+        nextQuestionThreeVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
     }else if (nextQuestionId == 15){
         QuestionResultController *vc = [[QuestionResultController alloc] init];
+        vc.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:vc animated:YES];
     }
 

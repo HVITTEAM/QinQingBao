@@ -10,4 +10,9 @@
 
 @interface QuestionResultController : CommonQuesViewController
 
+/**
+ *  答案数据
+ */
+@property (nonatomic, retain) NSMutableArray *answerProvider;
+
 @end

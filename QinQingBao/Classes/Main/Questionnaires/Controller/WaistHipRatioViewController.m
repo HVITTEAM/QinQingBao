@@ -122,6 +122,7 @@
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;
     vc.eq_id = 4;
+    vc.answerProvider = self.answerProvider;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
