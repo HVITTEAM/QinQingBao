@@ -324,6 +324,10 @@
 		01A5A28C1D1A204400282964 /* MarketBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A5A28A1D1A204400282964 /* MarketBuyView.xib */; };
 		01A5A2911D1A307C00282964 /* MarketHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5A28F1D1A307C00282964 /* MarketHeadView.m */; };
 		01A5A2921D1A307C00282964 /* MarketHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A5A2901D1A307C00282964 /* MarketHeadView.xib */; };
+		01A6B1271D4841B800DF340C /* AllQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6B1261D4841B800DF340C /* AllQuestionController.m */; };
+		01A6B12B1D4842F000DF340C /* ExamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6B12A1D4842F000DF340C /* ExamModel.m */; };
+		01A6B12F1D48454E00DF340C /* CommonExamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6B12D1D48454E00DF340C /* CommonExamCell.m */; };
+		01A6B1301D48454E00DF340C /* CommonExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6B12E1D48454E00DF340C /* CommonExamCell.xib */; };
 		01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */; };
 		01B489861C34CF9A002A3374 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */; };
 		01B489871C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489821C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m */; };
@@ -1924,6 +1928,13 @@
 		01A5A28E1D1A307C00282964 /* MarketHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketHeadView.h; sourceTree = "<group>"; };
 		01A5A28F1D1A307C00282964 /* MarketHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketHeadView.m; sourceTree = "<group>"; };
 		01A5A2901D1A307C00282964 /* MarketHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketHeadView.xib; sourceTree = "<group>"; };
+		01A6B1251D4841B800DF340C /* AllQuestionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllQuestionController.h; sourceTree = "<group>"; };
+		01A6B1261D4841B800DF340C /* AllQuestionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllQuestionController.m; sourceTree = "<group>"; };
+		01A6B1291D4842F000DF340C /* ExamModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamModel.h; sourceTree = "<group>"; };
+		01A6B12A1D4842F000DF340C /* ExamModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamModel.m; sourceTree = "<group>"; };
+		01A6B12C1D48454E00DF340C /* CommonExamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonExamCell.h; sourceTree = "<group>"; };
+		01A6B12D1D48454E00DF340C /* CommonExamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonExamCell.m; sourceTree = "<group>"; };
+		01A6B12E1D48454E00DF340C /* CommonExamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonExamCell.xib; sourceTree = "<group>"; };
 		01B4897E1C34CF9A002A3374 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -4227,6 +4238,8 @@
 				012E4B281D45E0EF000590C8 /* WaistHipRatioViewController.h */,
 				012E4B291D45E0EF000590C8 /* WaistHipRatioViewController.m */,
 				012E4B2A1D45E0EF000590C8 /* WaistHipRatioViewController.xib */,
+				01A6B1251D4841B800DF340C /* AllQuestionController.h */,
+				01A6B1261D4841B800DF340C /* AllQuestionController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4240,6 +4253,8 @@
 				016AF44A1D41ADBC00542680 /* OptionModel.m */,
 				01436A711D421CB90083872F /* QuestionModel_1.h */,
 				01436A721D421CB90083872F /* QuestionModel_1.m */,
+				01A6B1291D4842F000DF340C /* ExamModel.h */,
+				01A6B12A1D4842F000DF340C /* ExamModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4247,6 +4262,9 @@
 		015BFD9B1D34816700EB4A09 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01A6B12C1D48454E00DF340C /* CommonExamCell.h */,
+				01A6B12D1D48454E00DF340C /* CommonExamCell.m */,
+				01A6B12E1D48454E00DF340C /* CommonExamCell.xib */,
 				015BFDB01D34841000EB4A09 /* CXPickerViewController.h */,
 				015BFDB11D34841000EB4A09 /* CXPickerViewController.m */,
 				015BFDB21D34841000EB4A09 /* CXPickerViewController.xib */,
@@ -9232,6 +9250,7 @@
 				01F87F8A1C5887D400419FA2 /* hotgoods.png in Resources */,
 				01ECDA921C8EB31F0018160F /* chatBar_colorMore_cameraSelected@2x.png in Resources */,
 				013F23281C59C841006711FE /* search.png in Resources */,
+				01A6B1301D48454E00DF340C /* CommonExamCell.xib in Resources */,
 				D287E2901D2A33FC006CE52C /* CustomInfoCell.xib in Resources */,
 				01F85AC41C57692800E463F4 /* mallcar@2x.png in Resources */,
 				01E68FEF1BCCA68900A17543 /* qrScan_line.png in Resources */,
@@ -9517,6 +9536,7 @@
 				01601D921CE0900200B3712E /* EvaDetailCell.m in Sources */,
 				01ECDB001C8EB31F0018160F /* NSDateFormatter+Category.m in Sources */,
 				01FD4C9F1CAE4B43008F09CF /* PSTCollectionViewCell.m in Sources */,
+				01A6B12B1D4842F000DF340C /* ExamModel.m in Sources */,
 				01E6906D1BCCB32D00A17543 /* GTMBase64.m in Sources */,
 				01E6904C1BCCAA7000A17543 /* RecordingBtnView.m in Sources */,
 				01E6D4F61BE1F49B00824F51 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -9658,6 +9678,7 @@
 				01F85AB41C575A0600E463F4 /* MallRootViewControlelr.m in Sources */,
 				0180A2B41BA7E9C400D26866 /* NoticeHelper.m in Sources */,
 				01DDF2D51C156E0900958332 /* CitiesTotal.m in Sources */,
+				01A6B1271D4841B800DF340C /* AllQuestionController.m in Sources */,
 				01ED2E5E1BB3F1B3007C428F /* MapViewController.m in Sources */,
 				0126ECFC1B8C4E8100EC85C1 /* NSArray+MASAdditions.m in Sources */,
 				01E5B6621BB4FD0F00F97498 /* VideoListViewController.m in Sources */,
@@ -9798,6 +9819,7 @@
 				01F4F6841CC471D3003F6B6E /* ShopOrderInfoCell.m in Sources */,
 				01F0D0281B8DB96B00EF3238 /* BankCardCell.m in Sources */,
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,
+				01A6B12F1D48454E00DF340C /* CommonExamCell.m in Sources */,
 				01FD4CA71CAE4B43008F09CF /* PSTGridLayoutItem.m in Sources */,
 				01ED2E521BB3A8A1007C428F /* BloodPressureCell.m in Sources */,
 				01E690491BCCA9E100A17543 /* TipsPublicView.m in Sources */,

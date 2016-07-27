@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonQuesViewController.h"
+#import "ExamModel.h"
 
 @interface SexViewController : CommonQuesViewController
 
+@property (nonatomic, retain) ExamModel *item;
 @end

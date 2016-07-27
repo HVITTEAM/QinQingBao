@@ -111,7 +111,7 @@
 {
     NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
     [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)_rule1.tag] forKey:@"q_id"];
-    [dict1 setObject:rule1Value forKey:@"qa_detail"];
+    [dict1 setObject:rule1Value forKey:@"qa_detail4"];
     [self.answerProvider addObject:dict1];
     
     NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
