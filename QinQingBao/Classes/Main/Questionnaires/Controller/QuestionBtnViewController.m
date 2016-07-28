@@ -298,7 +298,11 @@
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
     
     [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
-    [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+    if (self.isMultipleSelection) {
+        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+    }else{
+        [answerDict setValue:selectedDatas[0] forKey:@"qa_detail"];
+    }
     
     //判断是不是已经保存过答案
     //answerIdx表示题目答案的位置,-1表示还没有回答过题目
