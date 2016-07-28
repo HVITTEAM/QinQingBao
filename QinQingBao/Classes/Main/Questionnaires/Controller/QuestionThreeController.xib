@@ -58,7 +58,7 @@
                                         <action selector="nextBtnClicke:" destination="-1" eventType="touchUpInside" id="bkd-UP-1mw"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7v-aI-wnX">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7v-aI-wnX">
                                     <rect key="frame" x="138" y="460" width="25" height="14"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="13.5" id="4db-RK-DjH"/>

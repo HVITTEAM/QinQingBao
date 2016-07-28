@@ -31,4 +31,9 @@
  */
 @property (nonatomic, retain) NSMutableArray *answerProvider;
 
+/**
+ *  试卷id
+ */
+@property (nonatomic, copy) NSString *exam_id;
+
 @end

@@ -45,10 +45,10 @@
 {
     [super viewDidLoad];
     
-    self.title = @"腰臀比";
-    
     questionItem = self.dataProvider[2];
     
+    self.title = questionItem.eq_title;
+
     [self initView];
 }
 
@@ -62,10 +62,8 @@
     answerItem2 = questionItem.questions[1];
     
     self.ruletitleLab1.text = answerItem.q_title;
-    _rule1.tag = [answerItem.q_id integerValue];
     
     self.ruletitleLab2.text = answerItem2.q_title;
-    _rule2.tag = [answerItem2.q_id integerValue];
     
     [self.headImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_detail_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
@@ -109,37 +107,54 @@
 
 - (IBAction)next:(id)sender
 {
-    //先遍历数据源，如果数据源中存在了对应的key，就说明之前已经保存过，只需要更改值就可以
+    NSArray * array = [NSArray arrayWithArray:[self.answerProvider copy]];
     
-    if (self.answerProvider.count > 4)
+    //是否已经添加到数据源中
+    BOOL find = false;
+    //查找第一个
+    for (NSMutableDictionary *dictItem in array)
     {
-        NSMutableDictionary *dict = self.answerProvider[4];
-        [dict setObject:rule1Value forKey:@"qa_detail"];
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem.q_id])
+        {
+            find = YES;
+            [dictItem setObject:rule1Value forKey:@"qa_detail"];
+            break;
+        }
     }
-    else
+    if (!find)
     {
         NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
-        [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)_rule1.tag] forKey:@"q_id"];
+        [dict1 setObject:answerItem.q_id forKey:@"q_id"];
         [dict1 setObject:rule1Value forKey:@"qa_detail"];
         [self.answerProvider addObject:dict1];
     }
     
-    if (self.answerProvider.count > 5)
+    //查找第二个
+    //是否已经添加到数据源中
+    BOOL find1 = false;
+    for (NSMutableDictionary *dictItem in array)
     {
-        NSMutableDictionary *dict5 = self.answerProvider[5];
-        [dict5 setObject:rule2Value forKey:@"qa_detail"];
+        
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem2.q_id])
+        {
+            find1 = YES;
+            [dictItem setObject:rule2Value forKey:@"qa_detail"];
+            break;
+        }
     }
-    else
+    if (!find1)
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
-        [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)_rule2.tag] forKey:@"q_id"];
+        [dict2 setObject:answerItem2.q_id forKey:@"q_id"];
         [dict2 setObject:rule2Value forKey:@"qa_detail"];
         [self.answerProvider addObject:dict2];
+        
     }
     
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;
     vc.eq_id = 4;
+    vc.exam_id = self.exam_id;
     vc.answerProvider = self.answerProvider;
     
     [self.navigationController pushViewController:vc animated:YES];

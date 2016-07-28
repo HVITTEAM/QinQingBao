@@ -92,9 +92,9 @@
     
     self.nextBtn.layer.cornerRadius = 7.0f;
     
-    self.navigationItem.title = @"血压";
-    
     questionItem = self.dataProvider[9];
+    self.title = questionItem.eq_title;
+
     self.titleLab.text = questionItem.eq_title;
     item1 = questionItem.questions[0];
     item2 = questionItem.questions[1];
@@ -112,13 +112,21 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
-    //先查找数据源，如果数据源中存在了对应的key，就说明之前已经保存过，只需要更改值就可以
-    if (self.answerProvider.count > 12)
+    NSArray * array = [NSArray arrayWithArray:[self.answerProvider copy]];
+    
+    //是否已经添加到数据源中
+    BOOL find = false;
+    //查找第一个
+    for (NSMutableDictionary *dictItem in array)
     {
-        NSMutableDictionary *dict = self.answerProvider[12];
-        [dict setObject:leftSelectedValue forKey:@"qa_detail"];
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item1.q_id])
+        {
+            find = YES;
+            [dictItem setObject:leftSelectedValue forKey:@"qa_detail"];
+            break;
+        }
     }
-    else
+    if (!find)
     {
         NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:item1.q_id forKey:@"q_id"];
@@ -126,13 +134,20 @@
         [self.answerProvider addObject:dict1];
     }
     
-    if (self.answerProvider.count > 13)
+    //查找第二个
+    //是否已经添加到数据源中
+    BOOL find1 = false;
+    for (NSMutableDictionary *dictItem in array)
     {
-        NSMutableDictionary *dict1 = self.answerProvider[13];
         
-        [dict1 setObject:rightSelectedValue forKey:@"qa_detail"];
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item2.q_id])
+        {
+            find1 = YES;
+            [dictItem setObject:rightSelectedValue forKey:@"qa_detail"];
+            break;
+        }
     }
-    else
+    if (!find1)
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:item2.q_id forKey:@"q_id"];
@@ -140,17 +155,25 @@
         [self.answerProvider addObject:dict2];
     }
     
-    if (self.answerProvider.count > 14)
+    //查找第三个
+    //是否已经添加到数据源中
+    BOOL find2 = false;
+    for (NSMutableDictionary *dictItem in array)
     {
-        NSMutableDictionary *dict2 = self.answerProvider[14];
-        [dict2 setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item3.q_id])
+        {
+            find2 = YES;
+            [dictItem setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
+            break;
+        }
     }
-    else
+    if (!find2)
     {
         NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
         [dict3 setObject:item3.q_id forKey:@"q_id"];
         [dict3 setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
         [self.answerProvider addObject:dict3];
+        
     }
     
     QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];

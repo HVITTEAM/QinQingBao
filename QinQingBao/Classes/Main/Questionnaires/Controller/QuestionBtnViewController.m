@@ -185,7 +185,7 @@
 -(void)setIsMultipleSelection:(BOOL)isMultipleSelection
 {
     _isMultipleSelection = isMultipleSelection;
-
+    
     self.btnCollectionView.allowsMultipleSelection = self.isMultipleSelection;
     
     self.selectedIdxArray = nil;
@@ -277,7 +277,7 @@
     }
     
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
-
+    
     [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
     
     if (1 == selectedDatas.count) {
@@ -288,8 +288,8 @@
     
     [self.answerProvider addObject:answerDict];
     
-//    NSLog(@"-------%@",self.answerProvider);
-
+    //    NSLog(@"-------%@",self.answerProvider);
+    
     NSInteger nextQuestionId = self.eq_id + 1;
     if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
         QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
@@ -305,6 +305,7 @@
     }else if (nextQuestionId == 15){
         QuestionResultController *vc = [[QuestionResultController alloc] init];
         vc.answerProvider = self.answerProvider;
+        vc.exam_id = self.exam_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -327,9 +328,9 @@
     
     self.collectionViewHeightCons.constant = h;
     
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [self.view layoutIfNeeded];
-//    }];
+    //    [UIView animateWithDuration:0.3 animations:^{
+    //        [self.view layoutIfNeeded];
+    //    }];
     [self.btnCollectionView reloadData];
 }
 

@@ -11,6 +11,10 @@
 
 
 @interface SexViewController ()
+{
+    //试卷id
+    NSString *exam_id;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
@@ -48,7 +52,6 @@
     [super viewDidLoad];
     
     self.nextBtn.layer.cornerRadius = 7.0f;
-    self.navigationItem.title = @"性别";
     
     [self getDataProvider];
 }
@@ -57,7 +60,8 @@
 {
     QuestionModel *item = dataProvider[0];
     self.titleLab.text =  item.eq_title;
-    
+    self.title = item.eq_title;
+
     //设置初始值
     QuestionModel_1 *item1 = item.questions[0];
     OptionModel *optionItem = item1.options[0];
@@ -77,6 +81,7 @@
     BasicViewController *vc = [[BasicViewController alloc] init];
     vc.dataProvider = dataProvider;
     vc.answerProvider = arr;
+    vc.exam_id = exam_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -97,6 +102,7 @@
                                      else
                                      {
                                          dataProvider = [QuestionModel objectArrayWithKeyValuesArray:[dict1 objectForKey:@"questions"]];
+                                         exam_id = [dict1 objectForKey:@"e_id"];
                                          [self initView];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
