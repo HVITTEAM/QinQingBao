@@ -49,7 +49,7 @@
     CGRect rc = [self.contentView convertRect:self.lab3.frame toView:self.bgview];
     self.vheight.constant  = rc.origin.y;
     
-    [self getResult];
+//    [self getResult];
 }
 
 - (void)updateViewConstraints
@@ -73,7 +73,6 @@
     NSLog(@"%@",resultdict);
     NSString *dictstr = [self dictionaryToJson:[resultdict copy]];
     NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
 }
 
 //词典转换为字符串
