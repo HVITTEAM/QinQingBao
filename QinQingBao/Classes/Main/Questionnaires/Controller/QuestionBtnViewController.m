@@ -35,6 +35,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLb;
 
+@property (weak, nonatomic) IBOutlet UILabel *orderNumberLb;
+
 @property (strong, nonatomic)NSMutableArray *selectedIdxArray;   //选中的选项(数组元素是NSIndexPath)
 
 @property (strong,nonatomic)QuestionModel *qModel;
@@ -85,6 +87,9 @@
  */
 -(void)setDatasForUI
 {
+    //设置页面序号
+    self.orderNumberLb.text = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    
     self.qModel = self.dataProvider[self.eq_id - 1];
     self.navigationItem.title = self.qModel.eq_title;
     
@@ -267,6 +272,43 @@
         return;
     }
     
+    //设置答案
+    [self setAnswer];
+    
+    //跳转到下一级
+    [self toNextVC];
+
+}
+
+#pragma mark - 内部方法
+/**
+ *  设置CollectionView的实际高度
+ */
+-(void)setCollectionViewHeight
+{
+    CGFloat h = 0;
+    if (self.datas.count != 0) {
+        //根据按钮个数计算整个集合视图的高度
+        if (!self.isTwo) {
+            h = self.datas.count * self.btnHeight + (self.datas.count - 1) * btnVertSpace;
+        }else{
+            h = ceil((self.datas.count / 2.0)) * self.btnHeight + ceil((self.datas.count - 1) / 2.0) * btnVertSpace;
+        }
+    }
+    
+    self.collectionViewHeightCons.constant = h;
+    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.view layoutIfNeeded];
+//    }];
+    [self.btnCollectionView reloadData];
+}
+
+/**
+ *  设置答案
+ */
+-(void)setAnswer
+{
     //获取选中的数据
     NSMutableArray *selectedDatas = [[NSMutableArray alloc] init];
     for (NSIndexPath *idx in self.selectedIdxArray) {
@@ -276,14 +318,19 @@
         [selectedDatas addObject:option.qo_id];
     }
     
+    //创建答案
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
     
     [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
+    [answerDict setValue:selectedDatas forKey:@"qa_detail"];
     
-    if (1 == selectedDatas.count) {
-        [answerDict setValue:selectedDatas[0] forKey:@"qa_detail"];
-    }else{
-        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+    //判断是不是已经保存过答案
+    //answerIdx表示题目答案的位置,-1表示还没有回答过题目
+    NSInteger answerIdx = -1;
+    for (NSDictionary *answer in self.answerProvider) {
+        if ([answer[@"q_id"] isEqualToString:self.qModel_1.q_id]) {
+            answerIdx = [self.answerProvider indexOfObject:answer];
+        }
     }
     
     [self.answerProvider addObject:answerDict];

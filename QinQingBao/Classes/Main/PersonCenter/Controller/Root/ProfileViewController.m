@@ -27,6 +27,7 @@
 #import "SettlementSlideViewController.h"
 #import "SWYSubtitleCell.h"
 #import "ProfileConsumeCell.h"
+#import "EstimateViewController.h"
 
 @interface ProfileViewController ()
 {
@@ -85,7 +86,10 @@
     if (section == 0) {
         return 2;
     }
-    return 3;
+    if (section == 1) {
+        return 3;
+    }
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -161,8 +165,11 @@
         }else if (indexPath.section == 1 && indexPath.row == 2){
             [self setCell:cell icon:@"pc_goods.png" title:@"我的商品"];
         }else if (indexPath.section == 2 && indexPath.row == 0){
+            [self setCell:cell icon:@"ic_msg.png" title:@"我的评估"];
+        }
+        else if (indexPath.section == 2 && indexPath.row == 1){
             [self setCell:cell icon:@"ic_msg.png" title:@"我的消息"];
-        }else if (indexPath.section == 2 && indexPath.row == 1){
+        }else if (indexPath.section == 2 && indexPath.row == 2){
             [self setCell:cell icon:@"pc_setup.png" title:@"系统设置"];
         }else{
             [self setCell:cell icon:@"app.png" title:@"关于"];
@@ -209,10 +216,12 @@
     }else if (indexPath.section == 1 && indexPath.row == 2){
         class = [GoodsTypeViewController class];
     }else if (indexPath.section == 2 && indexPath.row == 0){
-        class = [MyMesageViewController class];
+        class = [EstimateViewController class];
     }else if (indexPath.section == 2 && indexPath.row == 1){
+        class = [MyMesageViewController class];
+    }else if (indexPath.section == 2 && indexPath.row == 2){
         class = [SettingViewController class];
-    }else if(indexPath.section == 2 && indexPath.row == 2){
+    }else if(indexPath.section == 2 && indexPath.row == 3){
         class = [AboutViewController class];
     }
     
