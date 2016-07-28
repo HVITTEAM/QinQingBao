@@ -19,7 +19,7 @@
 
 @property (assign,nonatomic)CGFloat btnHeight;   //设置按钮高度    默认是45
 
-@property (assign,nonatomic)NSInteger eq_id;     //当前题目id
+@property (assign,nonatomic)NSInteger eq_id;     //当前题目的序号(即页面序号)
 
 /**
  *  题目数据

@@ -15,6 +15,7 @@
                 <outlet property="containerView" destination="8jA-yA-Yp0" id="zQ5-Qh-xkz"/>
                 <outlet property="logoImageView" destination="Soy-YY-KNP" id="eBe-Dj-gv9"/>
                 <outlet property="nextBtn" destination="dlB-rj-Z1l" id="Nn0-mM-3XY"/>
+                <outlet property="orderNumberLb" destination="ifm-bf-168" id="1oz-Zf-IWX"/>
                 <outlet property="subtitleLb" destination="eAG-qC-IHV" id="j4g-Nl-CN3"/>
                 <outlet property="titleLb" destination="EXb-uf-cV1" id="2Mq-bH-I9I"/>
                 <outlet property="view" destination="Qfj-LD-lpA" id="swA-RU-yro"/>

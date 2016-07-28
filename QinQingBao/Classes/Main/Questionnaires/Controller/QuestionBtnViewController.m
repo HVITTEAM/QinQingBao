@@ -35,6 +35,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLb;
 
+@property (weak, nonatomic) IBOutlet UILabel *orderNumberLb;
+
 @property (strong, nonatomic)NSMutableArray *selectedIdxArray;   //选中的选项(数组元素是NSIndexPath)
 
 @property (strong,nonatomic)QuestionModel *qModel;
@@ -85,6 +87,9 @@
  */
 -(void)setDatasForUI
 {
+    //设置页面序号
+    self.orderNumberLb.text = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    
     self.qModel = self.dataProvider[self.eq_id - 1];
     self.navigationItem.title = self.qModel.eq_title;
     
@@ -267,46 +272,12 @@
         return;
     }
     
-    //获取选中的数据
-    NSMutableArray *selectedDatas = [[NSMutableArray alloc] init];
-    for (NSIndexPath *idx in self.selectedIdxArray) {
-        
-        OptionModel *option = self.datas[idx.row];
-        
-        [selectedDatas addObject:option.qo_id];
-    }
+    //设置答案
+    [self setAnswer];
     
-    NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
+    //跳转到下一级
+    [self toNextVC];
 
-    [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
-    
-    if (1 == selectedDatas.count) {
-        [answerDict setValue:selectedDatas[0] forKey:@"qa_detail"];
-    }else{
-        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
-    }
-    
-    [self.answerProvider addObject:answerDict];
-    
-//    NSLog(@"-------%@",self.answerProvider);
-
-    NSInteger nextQuestionId = self.eq_id + 1;
-    if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
-        QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
-        nextQuestionBtnVC.dataProvider = self.dataProvider;
-        nextQuestionBtnVC.eq_id = nextQuestionId;
-        nextQuestionBtnVC.answerProvider = self.answerProvider;
-        [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
-    }else if (nextQuestionId == 10){
-        QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
-        nextQuestionThreeVC.dataProvider = self.dataProvider;
-        nextQuestionThreeVC.answerProvider = self.answerProvider;
-        [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
-    }else if (nextQuestionId == 15){
-        QuestionResultController *vc = [[QuestionResultController alloc] init];
-        vc.answerProvider = self.answerProvider;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 #pragma mark - 内部方法
@@ -332,5 +303,68 @@
 //    }];
     [self.btnCollectionView reloadData];
 }
+
+/**
+ *  设置答案
+ */
+-(void)setAnswer
+{
+    //获取选中的数据
+    NSMutableArray *selectedDatas = [[NSMutableArray alloc] init];
+    for (NSIndexPath *idx in self.selectedIdxArray) {
+        
+        OptionModel *option = self.datas[idx.row];
+        
+        [selectedDatas addObject:option.qo_id];
+    }
+    
+    //创建答案
+    NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
+    [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
+    [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+    
+    //判断是不是已经保存过答案
+    //answerIdx表示题目答案的位置,-1表示还没有回答过题目
+    NSInteger answerIdx = -1;
+    for (NSDictionary *answer in self.answerProvider) {
+        if ([answer[@"q_id"] isEqualToString:self.qModel_1.q_id]) {
+            answerIdx = [self.answerProvider indexOfObject:answer];
+        }
+    }
+    
+    //小于0表示还没回答过题目,是第一次回答
+    if (answerIdx < 0) {
+        [self.answerProvider addObject:answerDict];
+    }else{
+        self.answerProvider[answerIdx] = answerDict;
+    }
+
+//        NSLog(@"-------%@",self.answerProvider);
+}
+
+/**
+ *  跳转到下一级
+ */
+-(void)toNextVC
+{
+    NSInteger nextQuestionId = self.eq_id + 1;
+    if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
+        QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
+        nextQuestionBtnVC.dataProvider = self.dataProvider;
+        nextQuestionBtnVC.eq_id = nextQuestionId;
+        nextQuestionBtnVC.answerProvider = self.answerProvider;
+        [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
+    }else if (nextQuestionId == 10){
+        QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
+        nextQuestionThreeVC.dataProvider = self.dataProvider;
+        nextQuestionThreeVC.answerProvider = self.answerProvider;
+        [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
+    }else if (nextQuestionId == 15){
+        QuestionResultController *vc = [[QuestionResultController alloc] init];
+        vc.answerProvider = self.answerProvider;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 
 @end
