@@ -93,7 +93,7 @@
     self.subtitleLb.text = self.qModel_1.q_subtitle;
     
     [self.logoImageView sd_setImageWithURL:[NSURL URLWithString:self.qModel_1.q_logo_url] placeholderImage:[UIImage imageNamed:@"head"]];
-    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:self.qModel_1.q_detail_url] placeholderImage:[UIImage imageNamed:@"xiaofeiquan"]];
+    [self.bigImageView sd_setImageWithURL:[NSURL URLWithString:self.qModel_1.q_detail_url] placeholderImage:[UIImage imageNamed:@"placeholder_serviceMarket"]];
     
     
     //类型  1.单选  2.多选  3.单行输入 4.多行输入  5.多项填空  6.有条件选择
@@ -274,7 +274,6 @@
         OptionModel *option = self.datas[idx.row];
         
         [selectedDatas addObject:option.qo_id];
-    
     }
     
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
@@ -308,7 +307,6 @@
         vc.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:vc animated:YES];
     }
-
 }
 
 #pragma mark - 内部方法
