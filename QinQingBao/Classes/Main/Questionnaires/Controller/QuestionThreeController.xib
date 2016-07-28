@@ -8,9 +8,16 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionThreeController">
             <connections>
                 <outlet property="containerView" destination="737-93-aqs" id="cKG-rA-ybE"/>
+                <outlet property="headImg" destination="qKN-rs-S4P" id="dyk-Gv-UsV"/>
+                <outlet property="iconImg" destination="hmE-aG-bOy" id="Qj0-S9-Epp"/>
                 <outlet property="leftPicker" destination="W5R-1O-o7K" id="Xv7-YH-Nx1"/>
+                <outlet property="leftSubtitleLab" destination="pgK-fv-YRD" id="3NQ-fX-ygN"/>
                 <outlet property="nextBtn" destination="Dmo-B2-Nct" id="Jaw-oL-hOa"/>
                 <outlet property="rightPicker" destination="HJg-4v-oLC" id="FrA-W6-SxQ"/>
+                <outlet property="rightSubtitleLab" destination="Uui-b5-fmg" id="QQr-Wy-dts"/>
+                <outlet property="switchBtn" destination="b3j-ak-zoY" id="vCG-zA-xfQ"/>
+                <outlet property="swtchLab" destination="TvZ-P7-N17" id="pBp-BT-epK"/>
+                <outlet property="titleLab" destination="xyk-F6-UMe" id="otJ-px-anK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -80,7 +87,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收缩压" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgK-fv-YRD">
-                                    <rect key="frame" x="35" y="159" width="72" height="15"/>
+                                    <rect key="frame" x="35" y="159" width="42" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="HSa-Hr-KNJ"/>
                                         <constraint firstAttribute="width" constant="72" id="Ra1-Pu-i5Z"/>
@@ -88,6 +95,11 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Ra1-Pu-i5Z"/>
+                                        </mask>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-aG-bOy">
                                     <rect key="frame" x="112" y="21" width="77" height="77"/>
@@ -97,7 +109,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="舒张压" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uui-b5-fmg">
-                                    <rect key="frame" x="193" y="159" width="72" height="15"/>
+                                    <rect key="frame" x="223" y="159" width="42" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="72" id="6KJ-bS-yiB"/>
                                         <constraint firstAttribute="height" constant="15" id="w93-D8-w7u"/>
@@ -105,6 +117,11 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="6KJ-bS-yiB"/>
+                                        </mask>
+                                    </variation>
                                 </label>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5R-1O-o7K">
                                     <rect key="frame" x="8" y="174" width="130" height="150"/>
@@ -121,14 +138,19 @@
                                     </constraints>
                                 </pickerView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否服降压药" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-P7-N17">
-                                    <rect key="frame" x="37" y="367" width="102" height="21"/>
+                                    <rect key="frame" x="37" y="367" width="90" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="102" id="0Fb-nk-d8N"/>
                                         <constraint firstAttribute="height" constant="21" id="U1u-HV-ZBp"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="0Fb-nk-d8N"/>
+                                        </mask>
+                                    </variation>
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b3j-ak-zoY">
                                     <rect key="frame" x="216" y="362" width="51" height="31"/>
@@ -136,6 +158,9 @@
                                         <constraint firstAttribute="width" constant="49" id="B8m-gT-EPe"/>
                                         <constraint firstAttribute="height" constant="31" id="uGa-aw-EBu"/>
                                     </constraints>
+                                    <connections>
+                                        <action selector="swtchHandler:" destination="-1" eventType="valueChanged" id="6At-oK-6KR"/>
+                                    </connections>
                                 </switch>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

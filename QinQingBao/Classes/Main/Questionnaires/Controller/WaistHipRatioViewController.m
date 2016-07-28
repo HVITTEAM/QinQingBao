@@ -67,8 +67,8 @@
     self.ruletitleLab2.text = answerItem2.q_title;
     _rule2.tag = [answerItem2.q_id integerValue];
     
-    [self.headImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_detail_url] placeholderImage:[UIImage imageWithName:nil]];
-    [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:nil]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_detail_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
+    [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
     
     _rule1.rulerDelegate = self;
     [_rule1 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue:(answerItem.q_rule && answerItem.q_rule.length > 0 )? [answerItem.q_rule floatValue] : 80];
@@ -109,15 +109,33 @@
 
 - (IBAction)next:(id)sender
 {
-    NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
-    [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)_rule1.tag] forKey:@"q_id"];
-    [dict1 setObject:rule1Value forKey:@"qa_detail"];
-    [self.answerProvider addObject:dict1];
+    //先遍历数据源，如果数据源中存在了对应的key，就说明之前已经保存过，只需要更改值就可以
     
-    NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
-    [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)_rule2.tag] forKey:@"q_id"];
-    [dict2 setObject:rule2Value forKey:@"qa_detail"];
-    [self.answerProvider addObject:dict2];
+    if (self.answerProvider.count > 4)
+    {
+        NSMutableDictionary *dict = self.answerProvider[4];
+        [dict setObject:rule1Value forKey:@"qa_detail"];
+    }
+    else
+    {
+        NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
+        [dict1 setObject:[NSString stringWithFormat:@"%ld",(long)_rule1.tag] forKey:@"q_id"];
+        [dict1 setObject:rule1Value forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict1];
+    }
+    
+    if (self.answerProvider.count > 5)
+    {
+        NSMutableDictionary *dict5 = self.answerProvider[5];
+        [dict5 setObject:rule2Value forKey:@"qa_detail"];
+    }
+    else
+    {
+        NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
+        [dict2 setObject:[NSString stringWithFormat:@"%ld",(long)_rule2.tag] forKey:@"q_id"];
+        [dict2 setObject:rule2Value forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict2];
+    }
     
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;

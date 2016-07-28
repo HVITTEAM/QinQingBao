@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MTCommonMarketCell" id="KGk-i7-Jjw" userLabel="CommonExamCell" customClass="CommonExamCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="144.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-5R-HGP" userLabel="BGView">
+                        <rect key="frame" x="10" y="0.0" width="300" height="144"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已售98单" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0p-Pt-HnR">
+                                <rect key="frame" x="234" y="120" width="60" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="P2S-bf-9zO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.52941176470588236" green="0.52941176470588236" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_serviceMarket" translatesAutoresizingMaskIntoConstraints="NO" id="G5Y-Jq-JRR">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="115"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="115" id="VUQ-Hg-VsZ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NpT-Ke-8am">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1C9-Qj-3qx"/>
+                                    <constraint firstAttribute="width" constant="40" id="2kQ-Co-gF3"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NpT-Ke-8am" firstAttribute="top" secondItem="odQ-5R-HGP" secondAttribute="top" id="6RA-JC-x07"/>
+                            <constraint firstItem="G5Y-Jq-JRR" firstAttribute="leading" secondItem="odQ-5R-HGP" secondAttribute="leading" id="Hup-JK-pwg"/>
+                            <constraint firstItem="i0p-Pt-HnR" firstAttribute="top" secondItem="G5Y-Jq-JRR" secondAttribute="bottom" constant="5" id="MGn-xQ-R9r"/>
+                            <constraint firstAttribute="trailing" secondItem="G5Y-Jq-JRR" secondAttribute="trailing" id="Q8j-7Q-w70"/>
+                            <constraint firstItem="G5Y-Jq-JRR" firstAttribute="top" secondItem="odQ-5R-HGP" secondAttribute="top" id="YcA-5u-Udr"/>
+                            <constraint firstAttribute="trailing" secondItem="i0p-Pt-HnR" secondAttribute="trailing" constant="6" id="kAa-mb-yFA"/>
+                            <constraint firstItem="NpT-Ke-8am" firstAttribute="leading" secondItem="odQ-5R-HGP" secondAttribute="leading" id="yCs-1S-tml"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="odQ-5R-HGP" secondAttribute="bottom" constant="0.5" id="83r-n3-zM5"/>
+                    <constraint firstItem="odQ-5R-HGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TxO-7a-lI5"/>
+                    <constraint firstItem="odQ-5R-HGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cfg-ah-nYL"/>
+                    <constraint firstAttribute="trailing" secondItem="odQ-5R-HGP" secondAttribute="trailing" constant="10" id="f4E-44-7p3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="bgview" destination="odQ-5R-HGP" id="NYW-yo-CKl"/>
+                <outlet property="headImg" destination="G5Y-Jq-JRR" id="kEu-YJ-ucT"/>
+                <outlet property="markImg" destination="NpT-Ke-8am" id="9Jq-0b-vLC"/>
+                <outlet property="sellnumLab" destination="i0p-Pt-HnR" id="joE-EC-24Y"/>
+            </connections>
+            <point key="canvasLocation" x="505" y="231"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="placeholder_serviceMarket" width="300" height="93"/>
+    </resources>
+</document>

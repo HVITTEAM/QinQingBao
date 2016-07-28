@@ -12,6 +12,34 @@
 
 
 @interface QuestionThreeController ()<UIPickerViewDataSource,UIPickerViewDelegate>
+{
+    QuestionModel *questionItem;
+    QuestionModel_1 *item1;
+    QuestionModel_1 *item2;
+    QuestionModel_1 *item3;
+    
+    NSString *leftSelectedValue;
+    NSString *rightSelectedValue;
+    
+    //收缩压
+    NSMutableArray *data1;
+    //舒张压
+    NSMutableArray *data2;
+}
+- (IBAction)swtchHandler:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *headImg;
+
+@property (strong, nonatomic) IBOutlet UIImageView *iconImg;
+
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
+
+@property (strong, nonatomic) IBOutlet UILabel *swtchLab;
+
+@property (strong, nonatomic) IBOutlet UISwitch *switchBtn;
+
+@property (strong, nonatomic) IBOutlet UILabel *leftSubtitleLab;
+
+@property (strong, nonatomic) IBOutlet UILabel *rightSubtitleLab;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *rightPicker;
 
@@ -29,6 +57,19 @@
 {
     [super viewDidLoad];
     
+    //设置血压的正常范围
+    data1 = [[NSMutableArray alloc] init];
+    for (int i = 90; i  < 140; i ++ )
+    {
+        [data1 addObject:[NSString stringWithFormat:@"%d",i]];
+    }
+    
+    data2 = [[NSMutableArray alloc] init];
+    for (int j = 60; j  < 90; j ++ )
+    {
+        [data2 addObject:[NSString stringWithFormat:@"%d",j]];
+    }
+    
     [self setupUI];
     
     self.leftPicker.delegate = self;
@@ -37,7 +78,12 @@
     self.leftPicker.dataSource = self;
     
     [self.leftPicker selectRow:3 inComponent:0 animated:YES];
+    leftSelectedValue = data1[3];
+    rightSelectedValue = data2[3];
     [self.rightPicker selectRow:3 inComponent:0 animated:YES];
+    
+    OptionModel *item = item3.options[0];
+    self.switchBtn.tag = [item.qo_id integerValue];
 }
 
 -(void)setupUI
@@ -46,11 +92,67 @@
     
     self.nextBtn.layer.cornerRadius = 7.0f;
     
-    self.navigationItem.title = @"病";
+    self.navigationItem.title = @"血压";
+    
+    questionItem = self.dataProvider[9];
+    self.titleLab.text = questionItem.eq_title;
+    item1 = questionItem.questions[0];
+    item2 = questionItem.questions[1];
+    item3 = questionItem.questions[2];
+    
+    self.leftSubtitleLab.text = item1.q_title;
+    
+    self.rightSubtitleLab.text = item2.q_title;
+    
+    self.swtchLab.text = item3.q_title;
+    
+    [self.iconImg sd_setImageWithURL:[NSURL URLWithString:item1.q_logo_url] placeholderImage:[UIImage imageNamed:@"head"]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:item1.q_detail_url] placeholderImage:[UIImage imageNamed:@"placeholder_serviceMarket"]];
 }
 
 - (IBAction)nextBtnClicke:(id)sender
 {
+    //先查找数据源，如果数据源中存在了对应的key，就说明之前已经保存过，只需要更改值就可以
+    if (self.answerProvider.count > 12)
+    {
+        NSMutableDictionary *dict = self.answerProvider[12];
+        [dict setObject:leftSelectedValue forKey:@"qa_detail"];
+    }
+    else
+    {
+        NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
+        [dict1 setObject:item1.q_id forKey:@"q_id"];
+        [dict1 setObject:leftSelectedValue forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict1];
+    }
+    
+    if (self.answerProvider.count > 13)
+    {
+        NSMutableDictionary *dict1 = self.answerProvider[13];
+        
+        [dict1 setObject:rightSelectedValue forKey:@"qa_detail"];
+    }
+    else
+    {
+        NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
+        [dict2 setObject:item2.q_id forKey:@"q_id"];
+        [dict2 setObject:rightSelectedValue forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict2];
+    }
+    
+    if (self.answerProvider.count > 14)
+    {
+        NSMutableDictionary *dict2 = self.answerProvider[14];
+        [dict2 setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
+    }
+    else
+    {
+        NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
+        [dict3 setObject:item3.q_id forKey:@"q_id"];
+        [dict3 setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
+        [self.answerProvider addObject:dict3];
+    }
+    
     QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
     nextQuestionBtnVC.dataProvider = self.dataProvider;
     nextQuestionBtnVC.eq_id = 11;
@@ -74,17 +176,19 @@
 
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 10;
+    return pickerView == self.leftPicker ? data1.count : data2.count;
 }
-
-//-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-//{
-//
-//}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    if (pickerView == self.leftPicker)
+    {
+        leftSelectedValue = data1[row];
+    }
+    else
+    {
+        rightSelectedValue = data2[row];
+    }
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -94,16 +198,36 @@
 
 -(UIView*)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    // NSLog(@"%ld",pickerView.subviews.count);
-    // [[pickerView.subviews objectAtIndex:1] setHidden:TRUE];
-    // [[pickerView.subviews objectAtIndex:2] setHidden:TRUE];
-    
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, 35)];
     lab.textAlignment = NSTextAlignmentCenter;
-    lab.text = @"173cm";
+    lab.text = [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
     lab.font = [UIFont systemFontOfSize:14];
     lab.textColor = [UIColor orangeColor];
     return lab;
 }
 
+- (IBAction)swtchHandler:(id)sender
+{
+    UISwitch *sw = (UISwitch *)sender;
+    if (sw.selected == YES)
+    {
+        for (OptionModel *item in item3.options)
+        {
+            if ([item.qo_content rangeOfString:@"是"].location != NSNotFound)
+            {
+                sw.tag = [item.qo_id integerValue];
+            }
+        }
+    }
+    else
+    {
+        for (OptionModel *item in item3.options)
+        {
+            if ([item.qo_content rangeOfString:@"否"].location != NSNotFound || [item.qo_content rangeOfString:@"不"].location != NSNotFound)
+            {
+                sw.tag = [item.qo_id integerValue];
+            }
+        }
+    }
+}
 @end

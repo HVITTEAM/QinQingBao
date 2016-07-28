@@ -1,22 +1,17 @@
 //
-//  MarketViewController.m
+//  AllQuestionController.m
 //  QinQingBao
 //
-//  Created by 董徐维 on 16/6/21.
+//  Created by 董徐维 on 16/7/27.
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "MarketViewController.h"
+#import "AllQuestionController.h"
+#import "CommonExamCell.h"
+#import "ExamModel.h"
+#import "SexViewController.h"
 
-#import "CommonMarketCell.h"
-
-#import "MassageModel.h"
-
-#import "MarketDeatilViewController.h"
-
-#import "ChooseShopTableViewController.h"
-
-@interface MarketViewController ()
+@interface AllQuestionController ()
 {
     NSMutableArray *dataProvider;
     NSInteger currentPageIdx;
@@ -24,7 +19,7 @@
 
 @end
 
-@implementation MarketViewController
+@implementation AllQuestionController
 
 -(instancetype)init
 {
@@ -46,7 +41,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.view.backgroundColor = HMGlobalBg;
-    self.title = @"服务市场";
+    self.title = @"健康评估";
 }
 
 #pragma mark 集成刷新控件
@@ -78,21 +73,19 @@
     MBProgressHUD *HUD;
     if (currentPageIdx == 1)
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"10",
-                                                                    @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                                                                    @"tid" : @44}
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_examlist parameters:@{@"page" : @"10",
+                                                                    @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
                                      NSArray *arr;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         //                                         [alertView show];
+//                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                      }
                                      else
                                      {
-                                         arr = [MassageModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         arr = [ExamModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          [self.tableView reloadData];
                                      }
                                      
@@ -145,10 +138,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CommonMarketCell *marketcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonMarketCell"];
+    CommonExamCell *marketcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonExamCel"];
     
     if (marketcell == nil)
-        marketcell = [CommonMarketCell commonMarketCell];
+        marketcell = [CommonExamCell commonExamCell];
     
     marketcell.item = dataProvider[indexPath.section];
     
@@ -157,22 +150,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    MassageModel *model = dataProvider[indexPath.row];
-    //如果大于一就显示门店列表
-    if (model.orgids.count > 1)
-    {
-        ChooseShopTableViewController *view = [[ChooseShopTableViewController alloc] init];
-        view.iid = model.iid_num;
-        [self.navigationController pushViewController:view animated:YES];
-    }
-    else
-    {
-        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
-        MassageModel *model = dataProvider[indexPath.section];
-        view.iid = model.iid;
-        view.iidnum = model.iid_num;
-        [self.navigationController pushViewController:view animated:YES];
-    }
+    SexViewController *vc = [[SexViewController alloc] init];
+    vc.item = dataProvider[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

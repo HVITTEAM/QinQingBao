@@ -10,7 +10,6 @@
 #import "CXRuler.h"
 #import "SexViewController.h"
 
-#import "Question10ViewController.h"
 
 @interface CommonRulerViewController ()<CXRulerDelegate>
 {
