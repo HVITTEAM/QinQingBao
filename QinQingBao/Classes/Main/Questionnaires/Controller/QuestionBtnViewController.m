@@ -280,30 +280,6 @@
 
 }
 
-#pragma mark - 内部方法
-/**
- *  设置CollectionView的实际高度
- */
--(void)setCollectionViewHeight
-{
-    CGFloat h = 0;
-    if (self.datas.count != 0) {
-        //根据按钮个数计算整个集合视图的高度
-        if (!self.isTwo) {
-            h = self.datas.count * self.btnHeight + (self.datas.count - 1) * btnVertSpace;
-        }else{
-            h = ceil((self.datas.count / 2.0)) * self.btnHeight + ceil((self.datas.count - 1) / 2.0) * btnVertSpace;
-        }
-    }
-    
-    self.collectionViewHeightCons.constant = h;
-    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [self.view layoutIfNeeded];
-//    }];
-    [self.btnCollectionView reloadData];
-}
-
 /**
  *  设置答案
  */
@@ -333,10 +309,21 @@
         }
     }
     
-    [self.answerProvider addObject:answerDict];
-    
-    //    NSLog(@"-------%@",self.answerProvider);
-    
+    //小于0表示还没回答过题目,是第一次回答
+    if (answerIdx < 0) {
+        [self.answerProvider addObject:answerDict];
+    }else{
+        self.answerProvider[answerIdx] = answerDict;
+    }
+
+//        NSLog(@"-------%@",self.answerProvider);
+}
+
+/**
+ *  跳转到下一级
+ */
+-(void)toNextVC
+{
     NSInteger nextQuestionId = self.eq_id + 1;
     if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
         QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
