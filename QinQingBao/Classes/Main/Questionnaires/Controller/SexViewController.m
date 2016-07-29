@@ -58,10 +58,12 @@
 
 -(void)initView
 {
+    if (!dataProvider || dataProvider.count == 0)
+        return;
     QuestionModel *item = dataProvider[0];
     self.titleLab.text =  item.eq_title;
     self.title = item.eq_title;
-
+    
     //设置初始值
     QuestionModel_1 *item1 = item.questions[0];
     OptionModel *optionItem = item1.options[0];
@@ -70,6 +72,8 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
+    if (!dataProvider || dataProvider.count == 0)
+        return;
     QuestionModel *item = dataProvider[0];
     QuestionModel_1 *item1 = item.questions[0];
     NSMutableArray *arr = [[NSMutableArray alloc] init];

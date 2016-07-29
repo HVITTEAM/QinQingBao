@@ -138,7 +138,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CommonExamCell *marketcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonExamCel"];
+    CommonExamCell *marketcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonExamCell"];
     
     if (marketcell == nil)
         marketcell = [CommonExamCell commonExamCell];
@@ -151,7 +151,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SexViewController *vc = [[SexViewController alloc] init];
-    vc.item = dataProvider[indexPath.row];
+    vc.item = dataProvider[indexPath.section];
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

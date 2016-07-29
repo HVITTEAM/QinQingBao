@@ -663,10 +663,12 @@
 
 /***获取问卷答案列表*/
 #define URL_get_report_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=questionsys&op=get_report_list",URL_Local]
+
 //------------------问卷调查-------------------
 #define URL_Get_examlist [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=questionsys&op=get_examlist",URL_Local]
 
-
+//------------------提交问卷-------------------
+#define URL_Submit_exam [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=questionsys&op=submit_exam",URL_Local]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

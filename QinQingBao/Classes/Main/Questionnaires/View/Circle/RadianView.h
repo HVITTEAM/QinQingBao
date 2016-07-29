@@ -22,6 +22,8 @@
 
 @property(strong,nonatomic)UIColor *upperCircleColor;   //上层圆的颜色,默认为红色
 
+@property (nonatomic, copy) NSString *dangerText;
+
 
 
 @end

@@ -25,6 +25,7 @@
                 <outlet property="lab1" destination="BPm-p5-mMf" id="weC-1Y-Zms"/>
                 <outlet property="lab2" destination="1wi-o6-Xxt" id="xKD-W6-c0v"/>
                 <outlet property="lab3" destination="ZPv-sj-cWV" id="Ejn-7o-fFF"/>
+                <outlet property="titleLab" destination="AFq-mm-ciL" id="NTe-N1-mfT"/>
                 <outlet property="vheight" destination="hum-jG-VF2" id="adn-5x-41T"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -44,8 +45,8 @@
                                     <rect key="frame" x="0.0" y="50" width="320" height="180"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="糖尿病" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFq-mm-ciL">
-                                    <rect key="frame" x="134" y="15" width="51" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFq-mm-ciL">
+                                    <rect key="frame" x="160" y="15" width="0.0" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="8pB-Zw-4DS"/>
                                     </constraints>

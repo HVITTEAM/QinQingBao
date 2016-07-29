@@ -26,7 +26,6 @@
     //舒张压
     NSMutableArray *data2;
 }
-- (IBAction)swtchHandler:(id)sender;
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 
 @property (strong, nonatomic) IBOutlet UIImageView *iconImg;
@@ -35,7 +34,8 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *swtchLab;
 
-@property (strong, nonatomic) IBOutlet UISwitch *switchBtn;
+@property (strong, nonatomic) IBOutlet UIButton *switchBtn;
+- (IBAction)switchHandler:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UILabel *leftSubtitleLab;
 
@@ -90,6 +90,10 @@
 {
     [self setupView:self.containerView];
     
+    [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"yes.png"] forState:UIControlStateSelected];
+    [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"no.png"] forState:UIControlStateNormal];
+    self.switchBtn.selected = YES;
+
     self.nextBtn.layer.cornerRadius = 7.0f;
     
     questionItem = self.dataProvider[9];
@@ -179,6 +183,7 @@
     QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
     nextQuestionBtnVC.dataProvider = self.dataProvider;
     nextQuestionBtnVC.eq_id = 11;
+    nextQuestionBtnVC.exam_id = self.exam_id;
     nextQuestionBtnVC.answerProvider = self.answerProvider;
     [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
 }
@@ -229,9 +234,11 @@
     return lab;
 }
 
-- (IBAction)swtchHandler:(id)sender
-{
-    UISwitch *sw = (UISwitch *)sender;
+
+- (IBAction)switchHandler:(id)sender {
+    
+    UIButton *sw = (UIButton *)sender;
+    sw.selected = !sw.selected;
     if (sw.selected == YES)
     {
         for (OptionModel *item in item3.options)

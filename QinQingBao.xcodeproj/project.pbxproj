@@ -328,6 +328,7 @@
 		01A6B1351D48A37B00DF340C /* CommonRulerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6B1331D48A37B00DF340C /* CommonRulerViewController.xib */; };
 		01A6B1391D48A3B900DF340C /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6B1371D48A3B900DF340C /* ButtonCell.m */; };
 		01A6B13A1D48A3B900DF340C /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6B1381D48A3B900DF340C /* ButtonCell.xib */; };
+		01A6B1401D4AECC900DF340C /* ResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A6B13F1D4AECC900DF340C /* ResultModel.m */; };
 		01B489851C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = 01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */; };
 		01B489861C34CF9A002A3374 /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */; };
 		01B489871C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B489821C34CF9A002A3374 /* WebViewJavascriptBridgeBase.m */; };
@@ -1937,6 +1938,8 @@
 		01A6B1361D48A3B900DF340C /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
 		01A6B1371D48A3B900DF340C /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
 		01A6B1381D48A3B900DF340C /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		01A6B13E1D4AECC900DF340C /* ResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultModel.h; sourceTree = "<group>"; };
+		01A6B13F1D4AECC900DF340C /* ResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultModel.m; sourceTree = "<group>"; };
 		01B4897E1C34CF9A002A3374 /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
 		01B4897F1C34CF9A002A3374 /* WebViewJavascriptBridge.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WebViewJavascriptBridge.js.txt; sourceTree = "<group>"; };
 		01B489801C34CF9A002A3374 /* WebViewJavascriptBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridge.m; sourceTree = "<group>"; };
@@ -4255,6 +4258,8 @@
 				01436A721D421CB90083872F /* QuestionModel_1.m */,
 				01A6B1291D4842F000DF340C /* ExamModel.h */,
 				01A6B12A1D4842F000DF340C /* ExamModel.m */,
+				01A6B13E1D4AECC900DF340C /* ResultModel.h */,
+				01A6B13F1D4AECC900DF340C /* ResultModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9655,6 +9660,7 @@
 				01ECDAF71C8EB31F0018160F /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				01601D941CE0900200B3712E /* EvaluateCell.m in Sources */,
 				01E6905C1BCCAABE00A17543 /* VideoGoDef.m in Sources */,
+				01A6B1401D4AECC900DF340C /* ResultModel.m in Sources */,
 				01F0DA9F1BCE1DC9004FD908 /* CaptureViewController.m in Sources */,
 				018BC6011C50A6C900C883FF /* CSNAddByQRcodeViewController.m in Sources */,
 				0126ED7B1B8C57A700EC85C1 /* AFHTTPSessionManager.m in Sources */,

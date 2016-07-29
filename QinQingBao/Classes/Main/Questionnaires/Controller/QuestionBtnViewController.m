@@ -333,12 +333,14 @@
         QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
         nextQuestionBtnVC.dataProvider = self.dataProvider;
         nextQuestionBtnVC.eq_id = nextQuestionId;
+        nextQuestionBtnVC.exam_id = self.exam_id;
         nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
     }else if (nextQuestionId == 10){
         QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
         nextQuestionThreeVC.dataProvider = self.dataProvider;
         nextQuestionThreeVC.answerProvider = self.answerProvider;
+        nextQuestionThreeVC.exam_id = self.exam_id;
         [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
     }else if (nextQuestionId == 15){
         QuestionResultController *vc = [[QuestionResultController alloc] init];

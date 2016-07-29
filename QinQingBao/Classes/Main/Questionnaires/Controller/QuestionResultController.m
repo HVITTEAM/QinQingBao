@@ -8,8 +8,10 @@
 
 #import "QuestionResultController.h"
 #import "RadianView.h"
+#import "ResultModel.h"
 
 @interface QuestionResultController ()
+@property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet RadianView *circleView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *vheight;
 @property (strong, nonatomic) IBOutlet UIScrollView *bgview;
@@ -30,12 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.title = @"评估结果";
+    
     self.circleView.upperCircleColor = [UIColor orangeColor];
     self.circleView.lowerCircleColor = [UIColor lightGrayColor];
     self.circleView.lineWidth = 12;
     self.circleView.lineThick = 1.5;
     self.circleView.lineSpace = 5;
-    self.circleView.percentValue = 19;
+    
     
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
@@ -49,7 +54,7 @@
     CGRect rc = [self.contentView convertRect:self.lab3.frame toView:self.bgview];
     self.vheight.constant  = rc.origin.y;
     
-//    [self getResult];
+    [self getResult];
 }
 
 - (void)updateViewConstraints
@@ -73,6 +78,34 @@
     NSLog(@"%@",resultdict);
     NSString *dictstr = [self dictionaryToJson:[resultdict copy]];
     NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [self submit_exam:encodingString];
+}
+
+
+/**
+ *  获取数据源
+ */
+-(void)submit_exam:(NSString *)resultStr
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:@{@"result" : resultStr}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                     }
+                                     else
+                                     {
+                                         ResultModel *model = [ResultModel objectWithKeyValues:dict1];
+                                         self.circleView.percentValue = [model.r_totalscore floatValue];
+                                         self.circleView.dangerText = model.r_dangercoefficient;
+                                         self.titleLab.text = model.r_etitle;
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
 }
 
 //词典转换为字符串

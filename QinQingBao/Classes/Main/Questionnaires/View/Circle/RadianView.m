@@ -11,6 +11,10 @@
 @interface RadianView ()
 {
     UILabel *lab;
+    
+    UILabel *la1;
+    
+    UILabel *la;
 }
 
 @property (strong)CAShapeLayer *upperLayer;
@@ -52,6 +56,12 @@
     [self setPathByLineWidth:self.lineWidth];
 }
 
+-(void)setDangerText:(NSString *)dangerText
+{
+    _dangerText = dangerText;
+    lab.text = dangerText;
+}
+
 /**
  *  初始化界面
  */
@@ -83,9 +93,9 @@
     self.lowerLayer.lineDashPattern = self.upperLayer.lineDashPattern;
     self.lowerLayer.transform = self.upperLayer.transform;
     
-    //创建下层的圆
+    //创建中间的圆
     self.middleLayer = [CAShapeLayer layer];
-    self.middleLayer.strokeColor = [[UIColor orangeColor] CGColor];
+    self.middleLayer.strokeColor = [[UIColor whiteColor] CGColor];
     self.middleLayer.fillColor = [[UIColor whiteColor] CGColor];
     self.middleLayer.strokeStart = 0;
     self.middleLayer.strokeEnd = 1.0f;
@@ -96,12 +106,25 @@
     [self.layer addSublayer:self.lowerLayer];
     [self.layer addSublayer:self.upperLayer];
     
-    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2, self.upperLayer.bounds.size.height, 100, 100)];
+    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2, self.upperLayer.bounds.size.height, 100, 30)];
     lab.textAlignment = NSTextAlignmentCenter;
     lab.font = [UIFont boldSystemFontOfSize:20];
     lab.textColor = [UIColor orangeColor];
-    lab.text = @"健康";
     [self addSubview:lab];
+    
+    la = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50,  30, 100, 20)];
+    la.textAlignment = NSTextAlignmentCenter;
+    la.font = [UIFont boldSystemFontOfSize:13];
+    la.textColor = [UIColor lightGrayColor];
+    la.text = @"危险系数";
+    [self addSubview:la];
+    
+    la1 = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50, 20, 100, 50)];
+    la1.textAlignment = NSTextAlignmentCenter;
+    la1.numberOfLines = 0;
+    la1.font = [UIFont boldSystemFontOfSize:12];
+    la1.textColor = [UIColor lightGrayColor];
+    [self addSubview:la1];
 }
 
 /**
@@ -136,6 +159,10 @@
     
     self.middleLayer.lineWidth = 1;
     self.middleLayer.path = circlePath1;
+    
+    la1.center = CGPointMake(width / 2, height / 2 + 30);
+    
+    la.center = CGPointMake(width / 2, height / 2 - 30);
 }
 
 #pragma mark - 以下都是属性的setter方法
@@ -177,6 +204,9 @@
 -(void)setPercentValue:(CGFloat)percentValue
 {
     _percentValue = percentValue;
+    
+    la1.text = [NSString stringWithFormat:@"10年内患病概率为%.0f%",percentValue];
+    
     CGFloat lastStrokeEnd = self.upperLayer.strokeEnd;
     
     CGFloat value = percentValue / 100.0;
@@ -222,7 +252,7 @@
     anima.toValue = @(value);
     anima.removedOnCompletion = NO;
     [self.upperLayer addAnimation:anima forKey:nil];
-    
+
     CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeColor"];
     keyAnimation.duration = fabs(value - lastStrokeEnd) * duration;
     keyAnimation.fillMode = kCAFillModeForwards;
@@ -230,6 +260,9 @@
     keyAnimation.values = needsColors;
     keyAnimation.removedOnCompletion = NO;
     [self.upperLayer addAnimation:keyAnimation forKey:nil];
+    
+    [self.middleLayer addAnimation:keyAnimation forKey:nil];
+
     
 }
 
