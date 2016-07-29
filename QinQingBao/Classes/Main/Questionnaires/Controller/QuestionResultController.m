@@ -9,6 +9,7 @@
 #import "QuestionResultController.h"
 #import "RadianView.h"
 #import "ResultModel.h"
+#import "ReportListModel.h"
 
 @interface QuestionResultController ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
@@ -47,14 +48,12 @@
     
     self.contentView.layer.cornerRadius = 10;
     
-    self.lab1.text = @"中新网北京7月14日电 （记者 李金磊）今年养老金上调何时到位，是当前退休人员普遍关心的问题。中新网（微信公众号：cns2012）记者梳理发现，目前上海已率先提高养老金并进行了发放，北京、天津、浙江等地则透露了发放的时间表，预计9月底发放到位。";
-    self.lab2.text = @"中新网北京7月14日电 （记者 李金磊）今年养老金上调何时到位，是当前退休人员普遍关心的问题。中新网（微信公众号：cns2012）记者梳理发现，目前上海已率先提高养老金并进行了发放，北京、天津、浙江等地则透露了发放的时间表，预计9月底发放到位。";
-    self.lab3.text = @"中新网北京7月14日电 （记者 李金磊）今年养老金上调何时到位，是当前退休人员普遍关心的问题。中新网（微信公众号：cns2012）记者梳理发现，目前上海已率先提高养老金并进行了发放，北京、天津、浙江等地则透露了发放的时间表，预计9月底发放到位。";
-    
     CGRect rc = [self.contentView convertRect:self.lab3.frame toView:self.bgview];
     self.vheight.constant  = rc.origin.y;
     
-    [self getResult];
+    if (self.reportListModel) {
+        [self getReportResult];
+    }else [self getResult];
 }
 
 - (void)updateViewConstraints
@@ -102,6 +101,11 @@
                                          self.circleView.percentValue = [model.r_totalscore floatValue];
                                          self.circleView.dangerText = model.r_dangercoefficient;
                                          self.titleLab.text = model.r_etitle;
+                                         
+                                         self.lab1.text = model.r_result.hmd_advise_diet;
+                                         self.lab2.text = model.r_result.hmd_advise_sports;
+                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                         [self.view setNeedsUpdateConstraints];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -118,4 +122,42 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
 }
+
+/**
+ *  获取问卷具体答案,从个人中心的评估列表中进入时会调用
+ */
+-(void)getReportResult
+{
+    NSDictionary *params = @{
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"rid":self.reportListModel.r_id
+                             };
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_report_detail parameters:params
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                     }
+                                     else
+                                     {
+                                         ResultModel *model = [ResultModel objectWithKeyValues:dict1];
+                                         self.circleView.percentValue = [model.r_totalscore floatValue];
+                                         self.circleView.dangerText = model.r_dangercoefficient;
+                                         self.titleLab.text = model.r_etitle;
+                                         
+                                         self.lab1.text = model.r_result.hmd_advise_diet;
+                                         self.lab2.text = model.r_result.hmd_advise_sports;
+                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                         [self.view setNeedsUpdateConstraints];
+                                        
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
 @end

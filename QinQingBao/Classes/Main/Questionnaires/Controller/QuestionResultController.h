@@ -7,6 +7,7 @@
 //
 
 #import "CommonQuesViewController.h"
+@class ReportListModel;
 
 @interface QuestionResultController : CommonQuesViewController
 
@@ -19,4 +20,10 @@
  *  试卷id
  */
 @property (nonatomic, copy) NSString *exam_id;
+
+/**
+ *  问卷答案列表中的一个数据,从个人中心评价列表中进入该界面时需要传递
+ */
+@property (nonatomic,strong)ReportListModel *reportListModel;
+
 @end

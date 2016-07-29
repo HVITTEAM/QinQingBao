@@ -70,7 +70,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QuestionResultController *vc = [[QuestionResultController alloc] init];
-//    vc.answerProvider = self.answerProvider;
+    vc.reportListModel = self.dataProvider[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

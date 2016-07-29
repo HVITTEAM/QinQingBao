@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AdviseModel.h"
 
 @interface ResultModel : NSObject
 @property (nonatomic, copy) NSString *r_id;
 @property (nonatomic, copy) NSString *r_eid;
 @property (nonatomic, copy) NSString *r_etitle;
 @property (nonatomic, copy) NSString *r_totalscore;
-@property (nonatomic, strong) NSDictionary *r_result;
+@property (nonatomic, strong) AdviseModel *r_result;
 @property (nonatomic, copy) NSString *r_createtime;
 @property (nonatomic, copy) NSString *r_dangercoefficient;
 

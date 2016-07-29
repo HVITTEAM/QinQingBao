@@ -52,6 +52,7 @@
     [super viewDidLoad];
     
     self.nextBtn.layer.cornerRadius = 7.0f;
+    self.titleLab.text = nil;
     
     [self getDataProvider];
 }
