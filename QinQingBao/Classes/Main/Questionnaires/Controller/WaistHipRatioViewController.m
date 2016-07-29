@@ -35,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet CXRuler *rule2;
 @property (strong, nonatomic) IBOutlet UILabel *value1Lab;
 @property (strong, nonatomic) IBOutlet UILabel *value2Lab;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
 - (IBAction)next:(id)sender;
 
 @end
@@ -48,6 +49,10 @@
     questionItem = self.dataProvider[2];
     
     self.title = questionItem.eq_title;
+    
+    self.containerView.layer.borderWidth = 1.0f;
+    self.containerView.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0].CGColor;
+    self.containerView.layer.cornerRadius = 7.0f;
 
     [self initView];
 }
@@ -60,6 +65,7 @@
     answerItem = questionItem.questions[0];
     //臀围数据
     answerItem2 = questionItem.questions[1];
+    self.subtitleLab.text = answerItem.q_subtitle;
     
     self.ruletitleLab1.text = answerItem.q_title;
     

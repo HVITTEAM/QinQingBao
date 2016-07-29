@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WaistHipRatioViewController">
             <connections>
+                <outlet property="containerView" destination="hfg-eS-OHG" id="QNO-q2-yEe"/>
                 <outlet property="headImg" destination="QVL-sD-crk" id="ZIW-uK-pRl"/>
                 <outlet property="iconImg" destination="GRU-IM-1Fs" id="j1B-ka-V1r"/>
                 <outlet property="rule1" destination="3Uh-ER-tFZ" id="Xmb-og-dqO"/>
@@ -61,13 +62,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的腰臀比" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zuE-E3-deE">
-                                    <rect key="frame" x="107" y="128" width="85" height="20.5"/>
+                                    <rect key="frame" x="107" y="130" width="85" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="腰臀比=腰围/臀围" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hou-5M-MWy">
-                                    <rect key="frame" x="102" y="158" width="96" height="14.5"/>
+                                    <rect key="frame" x="102" y="160" width="96" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -79,7 +80,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnw-tW-7tC">
-                                    <rect key="frame" x="131" y="182" width="37.5" height="21"/>
+                                    <rect key="frame" x="131" y="184" width="37.5" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="asx-u1-ejl"/>
                                     </constraints>
@@ -88,13 +89,13 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Uh-ER-tFZ" customClass="CXRuler">
-                                    <rect key="frame" x="30" y="186" width="240" height="120"/>
+                                    <rect key="frame" x="30" y="188" width="240" height="120"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="g6D-jE-wme"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="90cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxB-7I-X8E">
-                                    <rect key="frame" x="132" y="311" width="37.5" height="21"/>
+                                    <rect key="frame" x="132" y="313" width="37.5" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="7Ym-92-q5X"/>
                                     </constraints>
@@ -103,7 +104,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luz-Uw-EaO" customClass="CXRuler">
-                                    <rect key="frame" x="30" y="326" width="240" height="120"/>
+                                    <rect key="frame" x="30" y="328" width="240" height="120"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="f7C-9E-HZE"/>
@@ -116,7 +117,7 @@
                                     </variation>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的腰围" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWj-Pr-v3W">
-                                    <rect key="frame" x="30" y="182" width="56" height="21"/>
+                                    <rect key="frame" x="30" y="184" width="56" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="rjc-DG-yaw"/>
                                     </constraints>
@@ -125,7 +126,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的臀围" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2M-ms-wm0">
-                                    <rect key="frame" x="30" y="311" width="56" height="21"/>
+                                    <rect key="frame" x="30" y="313" width="56" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="fH5-R3-vDz"/>
                                     </constraints>
@@ -144,7 +145,7 @@
                                 <constraint firstItem="QVL-sD-crk" firstAttribute="leading" secondItem="hfg-eS-OHG" secondAttribute="leading" id="Ctp-wk-RHn"/>
                                 <constraint firstItem="eWj-Pr-v3W" firstAttribute="leading" secondItem="hfg-eS-OHG" secondAttribute="leading" constant="30" id="CzG-hn-0FB"/>
                                 <constraint firstItem="Q3a-X5-2ar" firstAttribute="centerX" secondItem="hfg-eS-OHG" secondAttribute="centerX" id="Fla-ke-9AP"/>
-                                <constraint firstItem="zuE-E3-deE" firstAttribute="top" secondItem="QVL-sD-crk" secondAttribute="bottom" constant="8" id="HeK-eP-i3f"/>
+                                <constraint firstItem="zuE-E3-deE" firstAttribute="top" secondItem="QVL-sD-crk" secondAttribute="bottom" constant="10" id="HeK-eP-i3f"/>
                                 <constraint firstAttribute="trailing" secondItem="3Uh-ER-tFZ" secondAttribute="trailing" constant="30" id="HsD-9q-Ino"/>
                                 <constraint firstItem="n2M-ms-wm0" firstAttribute="leading" secondItem="hfg-eS-OHG" secondAttribute="leading" constant="30" id="KwR-Ha-nEe"/>
                                 <constraint firstAttribute="trailing" secondItem="luz-Uw-EaO" secondAttribute="trailing" constant="30" id="L21-mV-Xnq"/>

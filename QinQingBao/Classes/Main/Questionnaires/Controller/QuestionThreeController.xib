@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionThreeController">
@@ -36,7 +37,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="120"/>
                                     <color key="backgroundColor" red="0.1764705882" green="0.74901960779999999" blue="0.71764705880000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="120" id="OmG-6X-vel"/>
+                                        <constraint firstAttribute="width" secondItem="qKN-rs-S4P" secondAttribute="height" multiplier="5:2" id="KLr-Rz-P2G"/>
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmo-B2-Nct">
@@ -125,14 +126,14 @@
                                     </variation>
                                 </label>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5R-1O-o7K">
-                                    <rect key="frame" x="8" y="174" width="130" height="150"/>
+                                    <rect key="frame" x="20" y="174" width="130" height="150"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="130" id="PG8-rl-nxp"/>
                                         <constraint firstAttribute="height" constant="150" id="vVV-mB-bNZ"/>
                                     </constraints>
                                 </pickerView>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJg-4v-oLC">
-                                    <rect key="frame" x="164" y="174" width="130" height="150"/>
+                                    <rect key="frame" x="150" y="174" width="130" height="150"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="130" id="MMa-aB-jtb"/>
                                         <constraint firstAttribute="height" constant="150" id="bI9-u3-1DG"/>
@@ -178,7 +179,7 @@
                                 <constraint firstItem="w7v-aI-wnX" firstAttribute="top" secondItem="Dmo-B2-Nct" secondAttribute="bottom" constant="20" id="GOE-CE-caU"/>
                                 <constraint firstItem="w7v-aI-wnX" firstAttribute="centerX" secondItem="737-93-aqs" secondAttribute="centerX" id="KAL-eK-L2K"/>
                                 <constraint firstItem="pgK-fv-YRD" firstAttribute="top" secondItem="xyk-F6-UMe" secondAttribute="bottom" constant="10" id="KbT-we-MCy"/>
-                                <constraint firstAttribute="trailing" secondItem="HJg-4v-oLC" secondAttribute="trailing" constant="6" id="L8P-fl-VbU"/>
+                                <constraint firstAttribute="trailing" secondItem="HJg-4v-oLC" secondAttribute="trailing" constant="20" id="L8P-fl-VbU"/>
                                 <constraint firstAttribute="bottom" secondItem="w7v-aI-wnX" secondAttribute="bottom" constant="10" id="PKb-cG-WIu"/>
                                 <constraint firstItem="w7v-aI-wnX" firstAttribute="centerX" secondItem="737-93-aqs" secondAttribute="centerX" id="Pos-op-KvZ"/>
                                 <constraint firstItem="Dmo-B2-Nct" firstAttribute="leading" secondItem="737-93-aqs" secondAttribute="leading" constant="35" id="SiD-Dc-nDP"/>
@@ -190,7 +191,7 @@
                                 <constraint firstItem="xyk-F6-UMe" firstAttribute="top" secondItem="qKN-rs-S4P" secondAttribute="bottom" constant="8" id="eoj-C9-sJA"/>
                                 <constraint firstItem="qKN-rs-S4P" firstAttribute="leading" secondItem="737-93-aqs" secondAttribute="leading" id="fsO-ve-916"/>
                                 <constraint firstItem="W5R-1O-o7K" firstAttribute="top" secondItem="pgK-fv-YRD" secondAttribute="bottom" id="ite-dS-3pR"/>
-                                <constraint firstItem="W5R-1O-o7K" firstAttribute="leading" secondItem="737-93-aqs" secondAttribute="leading" constant="8" id="n6K-kp-xLO"/>
+                                <constraint firstItem="W5R-1O-o7K" firstAttribute="leading" secondItem="737-93-aqs" secondAttribute="leading" constant="20" id="n6K-kp-xLO"/>
                                 <constraint firstItem="hmE-aG-bOy" firstAttribute="centerX" secondItem="737-93-aqs" secondAttribute="centerX" id="oDD-9j-WSP"/>
                                 <constraint firstAttribute="height" constant="484" id="r4u-UX-S92"/>
                                 <constraint firstAttribute="trailing" secondItem="qKN-rs-S4P" secondAttribute="trailing" id="uLZ-1p-z9c"/>

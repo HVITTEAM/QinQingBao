@@ -72,7 +72,8 @@
     item1 = questionItem.questions[0];
     item2 = questionItem.questions[1];
     item3 = questionItem.questions[2];
-    
+    self.subtitleLab.text = item1.q_subtitle;
+
     self.lab1.text = item1.q_title;
 //    self.lab1.tag = [item1.q_id integerValue];
     

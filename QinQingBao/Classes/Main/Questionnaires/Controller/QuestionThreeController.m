@@ -84,6 +84,10 @@
     
     OptionModel *item = item3.options[0];
     self.switchBtn.tag = [item.qo_id integerValue];
+    
+    self.containerView.layer.borderWidth = 1.0f;
+    self.containerView.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0].CGColor;
+    self.containerView.layer.cornerRadius = 7.0f;
 }
 
 -(void)setupUI
@@ -93,12 +97,12 @@
     [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"yes.png"] forState:UIControlStateSelected];
     [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"no.png"] forState:UIControlStateNormal];
     self.switchBtn.selected = YES;
-
+    
     self.nextBtn.layer.cornerRadius = 7.0f;
     
     questionItem = self.dataProvider[9];
     self.title = questionItem.eq_title;
-
+    
     self.titleLab.text = questionItem.eq_title;
     item1 = questionItem.questions[0];
     item2 = questionItem.questions[1];
@@ -217,6 +221,18 @@
     {
         rightSelectedValue = data2[row];
     }
+    
+    UILabel *lab = (UILabel*)[pickerView viewForRow:row forComponent:component];
+    lab.textColor = [UIColor orangeColor];
+    lab.font  = [UIFont systemFontOfSize:16];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:lab.text];
+    
+    // 设置富文本样式
+    [attributedString addAttribute:NSForegroundColorAttributeName
+                             value:[UIColor grayColor]
+                             range:NSMakeRange(lab.text.length - 4, 4)];
+    
+    lab.attributedText = attributedString;
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -228,9 +244,25 @@
 {
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, 35)];
     lab.textAlignment = NSTextAlignmentCenter;
-    lab.text = [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
+    NSString *str= [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
+    lab.textColor = [UIColor darkGrayColor];
+    lab.text = str;
     lab.font = [UIFont systemFontOfSize:14];
-    lab.textColor = [UIColor orangeColor];
+    
+//    if (row == 3)
+//    {
+//        lab.textColor = [UIColor orangeColor];
+//        lab.font  = [UIFont systemFontOfSize:16];
+//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:lab.text];
+//        
+//        // 设置富文本样式
+//        [attributedString addAttribute:NSForegroundColorAttributeName
+//                                 value:[UIColor grayColor]
+//                                 range:NSMakeRange(lab.text.length - 4, 4)];
+//        
+//        lab.attributedText = attributedString;
+//        
+//    }
     return lab;
 }
 
