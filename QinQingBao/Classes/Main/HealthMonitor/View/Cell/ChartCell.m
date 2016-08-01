@@ -69,8 +69,8 @@
         case ChartTypeSugar:
             for (HealthDataModel *item in self.dataProvider) {
                 if (!item.bloodsugar)
-                    item.bloodsugar = @"0";
-                [YTitles addObject:item.bloodsugar];
+                    item.bloodsugar = 0;
+                [YTitles addObject:[NSString stringWithFormat:@"%f",item.bloodsugar]];
             }
             break;
             

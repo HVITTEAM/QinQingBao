@@ -11,16 +11,8 @@
 #import "FamilyViewController.h"
 #import "SettingViewController.h"
 #import "OrderTableViewController.h"
-//#import "AccountViewController.h"
 #import "PersonalDataViewController.h"
-//#import "LoginViewController.h"
-//#import "GoodsHeadViewController.h"
-//#import "ClassificationViewController.h"
-//#import "GoodsTableViewController.h"
-//#import "ConfirmViewController.h"
 #import "MTCouponsViewController.h"
-//#import "AddressTableViewController.h"
-//#import "GoodsViewController.h"
 #import "GoodsTypeViewController.h"
 #import "MyMesageViewController.h"
 #import "BalanceViewController.h"
@@ -136,7 +128,6 @@
                 return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
             if (idx == 1)
             {
-                
                 BalanceViewController *balanceVC = [[BalanceViewController alloc] init];
                 [weakself.navigationController pushViewController:balanceVC animated:YES];
                 return;
@@ -165,7 +156,7 @@
         }else if (indexPath.section == 1 && indexPath.row == 2){
             [self setCell:cell icon:@"pc_goods.png" title:@"我的商品"];
         }else if (indexPath.section == 2 && indexPath.row == 0){
-            [self setCell:cell icon:@"ic_msg.png" title:@"我的评估"];
+            [self setCell:cell icon:@"exam.png" title:@"我的评估"];
         }
         else if (indexPath.section == 2 && indexPath.row == 1){
             [self setCell:cell icon:@"ic_msg.png" title:@"我的消息"];
@@ -204,7 +195,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section  < 2 && [SharedAppUtil defaultCommonUtil].userVO == nil)
+    if ((indexPath.section  < 2 || (indexPath.section == 2 && indexPath.row == 0))&& [SharedAppUtil defaultCommonUtil].userVO == nil)
         return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     Class class;
     if (indexPath.section == 0 && indexPath.row == 0) {

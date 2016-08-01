@@ -52,13 +52,13 @@
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *systolic;
 @property (nonatomic, copy) NSString *diastolic;
-@property (nonatomic, copy) NSString *bloodsugar;
+//@property (nonatomic, assign) NSNumber* bloodsugar;
+@property (assign, nonatomic) double bloodsugar;
+
 @property (nonatomic, copy) NSString *heartrate_min;
 @property (nonatomic, copy) NSString *heartrate_avg;
 @property (nonatomic, copy) NSString *heartrate_max;
 @property (nonatomic, copy) NSString *ect_img;
-//@property (nonatomic, copy) NSString *collectiontime;
-//@property (nonatomic, copy) NSString *uploadtime;
 
 
 

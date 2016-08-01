@@ -29,8 +29,8 @@
             break;
         case ChartTypeSugar:
         {
-            float floatString = [item.bloodsugar floatValue];
-            self.bloodLab.text = [NSString stringWithFormat:@"%.01f",floatString];
+//            float floatString = [item.bloodsugar floatValue];
+            self.bloodLab.text = [NSString stringWithFormat:@"%.01f",item.bloodsugar];
             self.timeLab.text = item.bloodsugar_time;
             self.decLab.text = @"mmol/L";
             break;

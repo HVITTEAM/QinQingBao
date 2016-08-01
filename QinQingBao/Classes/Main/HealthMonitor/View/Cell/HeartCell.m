@@ -35,10 +35,11 @@
 {
     _item = item;
     
-    if (item.bloodsugar && [item.bloodsugar integerValue] > 0)
+    if (item.bloodsugar && item.bloodsugar > 0)
     {
-        NSInteger strlength = item.bloodsugar.length;
-        NSString *string                            = [NSString stringWithFormat:@"%@ mmol/L",item.bloodsugar];
+        NSString *str = [NSString stringWithFormat:@"%.01f",item.bloodsugar];
+        NSInteger strlength = str.length;
+        NSString *string                            = [NSString stringWithFormat:@"%.01f mmol/L",item.bloodsugar];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
         // 设置富文本样式

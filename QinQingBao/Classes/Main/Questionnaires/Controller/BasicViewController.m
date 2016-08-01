@@ -70,18 +70,16 @@
     self.title = questionItem.eq_title;
     self.titleLab.text = questionItem.eq_title;
     item1 = questionItem.questions[0];
+    //BMI "BMI=体重（公斤）\/身高（米）的平方，即kg\/m²"
     item2 = questionItem.questions[1];
-    item3 = questionItem.questions[2];
-    self.subtitleLab.text = item1.q_subtitle;
+    item3 = questionItem.questions[1];
+    self.subtitleLab.text = item2.q_subtitle;
 
     self.lab1.text = item1.q_title;
-//    self.lab1.tag = [item1.q_id integerValue];
     
-    self.lab2.text = item2.q_title;
-//    self.lab2.tag = [item2.q_id integerValue];
+    self.lab2.text = @"您的身高";
     
-    self.lab3.text = item3.q_title;
-//    self.lab3.tag = [item3.q_id integerValue];
+    self.lab3.text = @"您的体重";
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -152,7 +150,8 @@
         if ([[dictItem objectForKey:@"q_id"] isEqualToString:item2.q_id])
         {
             find1 = YES;
-            [dictItem setObject:[NSString stringWithFormat:@"%.0f",selectedHeight] forKey:@"qa_detail"];
+            CGFloat BMI = selectedWeight/(selectedHeight/100 *selectedHeight/100);
+            [dictItem setObject:[NSString stringWithFormat:@"%.01f",BMI] forKey:@"qa_detail"];
             break;
         }
     }
@@ -160,29 +159,34 @@
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:item2.q_id forKey:@"q_id"];
-        [dict2 setObject:selectedHeight > 0 ? [NSString stringWithFormat:@"%.0f",selectedHeight] : @"170" forKey:@"qa_detail"];
+        
+        if (selectedWeight <= 0 )selectedWeight = 65;
+        if (selectedHeight <= 0 )selectedHeight = 170;
+
+        CGFloat BMI = selectedWeight/(selectedHeight/100 *selectedHeight/100);
+        [dict2 setObject:[NSString stringWithFormat:@"%.01f",BMI] forKey:@"qa_detail"];
         [self.answerProvider addObject:dict2];
     }
     
     //查找第三个
     //是否已经添加到数据源中
-    BOOL find2 = false;
-    for (NSMutableDictionary *dictItem in array)
-    {
-        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item3.q_id])
-        {
-            find2 = YES;
-            [dictItem setObject:[NSString stringWithFormat:@"%.0f",selectedWeight] forKey:@"qa_detail"];
-            break;
-        }
-    }
-    if (!find2)
-    {
-        NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
-        [dict3 setObject:item3.q_id forKey:@"q_id"];
-        [dict3 setObject:selectedWeight > 0 ? [NSString stringWithFormat:@"%.0f",selectedWeight] : @"60" forKey:@"qa_detail"];
-        [self.answerProvider addObject:dict3];
-    }
+//    BOOL find2 = false;
+//    for (NSMutableDictionary *dictItem in array)
+//    {
+//        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item3.q_id])
+//        {
+//            find2 = YES;
+//            [dictItem setObject:[NSString stringWithFormat:@"%.0f",selectedWeight] forKey:@"qa_detail"];
+//            break;
+//        }
+//    }
+//    if (!find2)
+//    {
+//        NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
+//        [dict3 setObject:item3.q_id forKey:@"q_id"];
+//        [dict3 setObject:selectedWeight > 0 ? [NSString stringWithFormat:@"%.0f",selectedWeight] : @"60" forKey:@"qa_detail"];
+//        [self.answerProvider addObject:dict3];
+//    }
     
     WaistHipRatioViewController *vc = [[WaistHipRatioViewController alloc] init];
     vc.dataProvider = self.dataProvider;

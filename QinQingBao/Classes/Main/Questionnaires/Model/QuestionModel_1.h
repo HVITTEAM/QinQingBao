@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *q_subtitle;
 @property (nonatomic, copy) NSString *q_rule;
 @property (nonatomic, copy) NSString *q_unit;
+@property (nonatomic, copy) NSString *q_keyword;
 @property (nonatomic, strong) NSMutableArray *options;
 
 @end

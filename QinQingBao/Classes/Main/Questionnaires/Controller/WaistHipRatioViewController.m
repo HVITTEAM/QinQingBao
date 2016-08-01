@@ -67,21 +67,21 @@
     //腰围数据
     answerItem = questionItem.questions[0];
     //臀围数据
-    answerItem2 = questionItem.questions[1];
+    answerItem2 = questionItem.questions[0];
     self.subtitleLab.text = answerItem.q_subtitle;
     
-    self.ruletitleLab1.text = answerItem.q_title;
+    self.ruletitleLab1.text = @"您的腰围";
     
-    self.ruletitleLab2.text = answerItem2.q_title;
+    self.ruletitleLab2.text = @"您的臀围";
     
     [self.headImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_detail_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
     
     _rule1.rulerDelegate = self;
-    [_rule1 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue:(answerItem.q_rule && answerItem.q_rule.length > 0 )? [answerItem.q_rule floatValue] : 80];
+    [_rule1 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: 80];
     
     _rule2.rulerDelegate = self;
-    [_rule2 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue:(answerItem2.q_rule && answerItem2.q_rule.length > 0) ? [answerItem2.q_rule floatValue]: 60];
+    [_rule2 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: 60];
     
 }
 - (void)CXRuler:(CXRulerScrollView *)rulerScrollView ruler:(CXRuler *)ruler
@@ -134,31 +134,33 @@
     {
         NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:answerItem.q_id forKey:@"q_id"];
-        [dict1 setObject:rule1Value forKey:@"qa_detail"];
+        
+        CGFloat YDB = [rule1Value floatValue] / [rule2Value floatValue];
+        [dict1 setObject:[NSString stringWithFormat:@"%.01f",YDB] forKey:@"qa_detail"];
         [self.answerProvider addObject:dict1];
     }
     
-    //查找第二个
-    //是否已经添加到数据源中
-    BOOL find1 = false;
-    for (NSMutableDictionary *dictItem in array)
-    {
-        
-        if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem2.q_id])
-        {
-            find1 = YES;
-            [dictItem setObject:rule2Value forKey:@"qa_detail"];
-            break;
-        }
-    }
-    if (!find1)
-    {
-        NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
-        [dict2 setObject:answerItem2.q_id forKey:@"q_id"];
-        [dict2 setObject:rule2Value forKey:@"qa_detail"];
-        [self.answerProvider addObject:dict2];
-        
-    }
+//    //查找第二个
+//    //是否已经添加到数据源中
+//    BOOL find1 = false;
+//    for (NSMutableDictionary *dictItem in array)
+//    {
+//        
+//        if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem2.q_id])
+//        {
+//            find1 = YES;
+//            [dictItem setObject:rule2Value forKey:@"qa_detail"];
+//            break;
+//        }
+//    }
+//    if (!find1)
+//    {
+//        NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
+//        [dict2 setObject:answerItem2.q_id forKey:@"q_id"];
+//        [dict2 setObject:rule2Value forKey:@"qa_detail"];
+//        [self.answerProvider addObject:dict2];
+//        
+//    }
     
     QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;

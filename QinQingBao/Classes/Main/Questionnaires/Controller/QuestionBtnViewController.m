@@ -333,7 +333,6 @@
         self.answerProvider[answerIdx] = answerDict;
     }
 
-//        NSLog(@"-------%@",self.answerProvider);
 }
 
 /**
@@ -381,9 +380,6 @@
     
     self.collectionViewHeightCons.constant = h;
     
-    //    [UIView animateWithDuration:0.3 animations:^{
-    //        [self.view layoutIfNeeded];
-    //    }];
     [self.btnCollectionView reloadData];
 }
 
