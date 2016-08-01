@@ -247,7 +247,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //14题是有条件多选,"q_rule": "+82+83+85_84"
-    if ([self.qModel.eq_id integerValue] == 14) {
+    if (self.eq_id == 14) {
         OptionModel *optionmode = self.datas[indexPath.row];
         if ([optionmode.qo_id integerValue] == 84) {
             for (NSIndexPath *idx in self.selectedIdxArray) {
@@ -266,7 +266,9 @@
         }
     }
     
-    [self.selectedIdxArray addObject:indexPath];
+    if (![self.selectedIdxArray containsObject:indexPath]) {
+        [self.selectedIdxArray addObject:indexPath];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
