@@ -88,7 +88,20 @@
 -(void)setDatasForUI
 {
     //设置页面序号
-    self.orderNumberLb.text = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    NSString *pageNumStr = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    NSDictionary *attr1 = @{
+                           NSFontAttributeName :[UIFont systemFontOfSize:10],
+                           NSForegroundColorAttributeName:HMColor(228, 185, 160)
+                           };
+    
+    NSDictionary *attr2 = @{
+                            NSFontAttributeName :[UIFont systemFontOfSize:14],
+                            NSForegroundColorAttributeName:[UIColor whiteColor]
+                            };
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:pageNumStr attributes:attr1];
+    NSRange range = [pageNumStr rangeOfString:@"/"];
+    [attrStr setAttributes:attr2 range:NSMakeRange(0,range.location)];
+    self.orderNumberLb.attributedText = attrStr;
     
     self.qModel = self.dataProvider[self.eq_id - 1];
     self.navigationItem.title = self.qModel.eq_title;
