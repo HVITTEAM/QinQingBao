@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -188,31 +188,32 @@
                                 <action selector="healthHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="xZE-no-93c"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xk-Dg-Yjk" userLabel="在线咨询">
-                            <rect key="frame" x="160" y="65" width="160" height="69"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="69" id="D6r-G1-pbp"/>
-                            </constraints>
-                            <connections>
-                                <action selector="healthHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="7aP-eJ-ua6"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CB-EG-2Yl" userLabel="服务市场">
                             <rect key="frame" x="0.0" y="134" width="160" height="66"/>
                             <connections>
                                 <action selector="marketHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="5H4-OX-hWb"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-az-VCd" userLabel="健康计划">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="335-az-VCd" userLabel="健康计划">
                             <rect key="frame" x="160" y="134" width="160" height="66"/>
                             <connections>
-                                <action selector="healthHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="RAn-wd-89z"/>
+                                <action selector="healthPlanHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="EHZ-J1-zbs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xk-Dg-Yjk" userLabel="在线咨询">
+                            <rect key="frame" x="160" y="65" width="160" height="69"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="69" id="D6r-G1-pbp"/>
+                            </constraints>
+                            <connections>
+                                <action selector="onlineHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="4zA-Oi-ETI"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="HKU-Hs-s77" firstAttribute="leading" secondItem="XWu-0b-xYj" secondAttribute="trailing" constant="10" id="0I0-i0-Whr"/>
+                        <constraint firstItem="335-az-VCd" firstAttribute="leading" secondItem="9CB-EG-2Yl" secondAttribute="trailing" id="0h0-pb-SsQ"/>
                         <constraint firstItem="XWu-0b-xYj" firstAttribute="top" secondItem="iZE-ft-Ec9" secondAttribute="top" id="1DU-GC-l6H"/>
                         <constraint firstItem="mxL-1p-QgT" firstAttribute="leading" secondItem="XWu-0b-xYj" secondAttribute="trailing" constant="10" id="1fD-wD-UMV"/>
                         <constraint firstItem="7jn-0X-yFc" firstAttribute="top" secondItem="yVZ-xd-qWe" secondAttribute="bottom" id="2YL-45-O5c"/>
@@ -226,6 +227,7 @@
                         <constraint firstItem="XWu-0b-xYj" firstAttribute="leading" secondItem="9CB-EG-2Yl" secondAttribute="trailing" id="CYx-zl-kWo"/>
                         <constraint firstItem="h1Z-F6-aJO" firstAttribute="leading" secondItem="yVZ-xd-qWe" secondAttribute="trailing" id="Eag-bh-CqT"/>
                         <constraint firstItem="HDB-8N-tqZ" firstAttribute="top" secondItem="iZE-ft-Ec9" secondAttribute="top" constant="33" id="EfU-Sj-wz1"/>
+                        <constraint firstAttribute="trailing" secondItem="335-az-VCd" secondAttribute="trailing" id="GnF-OG-NZ3"/>
                         <constraint firstItem="h1Z-F6-aJO" firstAttribute="top" secondItem="iZE-ft-Ec9" secondAttribute="top" id="Gr4-J6-nJo"/>
                         <constraint firstAttribute="trailing" secondItem="8kD-rt-26y" secondAttribute="trailing" id="Gx8-t7-QVd"/>
                         <constraint firstItem="XWu-0b-xYj" firstAttribute="leading" secondItem="yVZ-xd-qWe" secondAttribute="trailing" id="HIe-RW-qXk"/>
@@ -247,6 +249,7 @@
                         <constraint firstItem="yVZ-xd-qWe" firstAttribute="leading" secondItem="iZE-ft-Ec9" secondAttribute="leading" id="d1k-Jx-Af9"/>
                         <constraint firstAttribute="trailing" secondItem="diI-7O-C8n" secondAttribute="trailing" id="dtB-Jf-phv"/>
                         <constraint firstItem="h9v-xC-nNC" firstAttribute="top" secondItem="7jn-0X-yFc" secondAttribute="bottom" constant="12.5" id="eVA-w3-uJj"/>
+                        <constraint firstItem="diI-7O-C8n" firstAttribute="top" secondItem="335-az-VCd" secondAttribute="bottom" id="gJ8-7P-jr9"/>
                         <constraint firstItem="spm-6J-hr4" firstAttribute="top" secondItem="7jn-0X-yFc" secondAttribute="bottom" constant="10.5" id="gp3-Jc-pZE"/>
                         <constraint firstItem="Ah4-pt-jBZ" firstAttribute="top" secondItem="iZE-ft-Ec9" secondAttribute="top" constant="9" id="gwo-BJ-Ss9"/>
                         <constraint firstItem="diI-7O-C8n" firstAttribute="top" secondItem="9CB-EG-2Yl" secondAttribute="bottom" id="hCu-nw-zzv"/>
@@ -269,6 +272,7 @@
                         <constraint firstItem="a3p-Cc-SDf" firstAttribute="top" secondItem="2ML-xQ-gZl" secondAttribute="bottom" constant="1" id="suJ-6j-lJ1"/>
                         <constraint firstItem="diI-7O-C8n" firstAttribute="leading" secondItem="iZE-ft-Ec9" secondAttribute="leading" id="tSb-0c-VWe"/>
                         <constraint firstItem="UDy-Sd-4VX" firstAttribute="leading" secondItem="iZE-ft-Ec9" secondAttribute="leading" constant="10" id="xEn-D3-j20"/>
+                        <constraint firstItem="335-az-VCd" firstAttribute="top" secondItem="4xk-Dg-Yjk" secondAttribute="bottom" id="xUX-V0-LxQ"/>
                     </constraints>
                 </view>
             </subviews>

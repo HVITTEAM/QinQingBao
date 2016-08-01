@@ -146,12 +146,6 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="254" y="238"/>
         </view>
-        <view contentMode="scaleToFill" id="K23-ff-gEg">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="899" y="366"/>
-        </view>
     </objects>
     <resources>
         <image name="head" width="150" height="150"/>

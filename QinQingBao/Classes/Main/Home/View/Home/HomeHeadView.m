@@ -49,6 +49,15 @@
     [self.nav pushViewController:view animated:YES];
 }
 
+- (IBAction)onlineHandler:(id)sender {
+    [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
+    
+}
+
+- (IBAction)healthPlanHandler:(id)sender {
+    [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
+}
+
 /**
  *  初始化突变轮播播放器
  */
