@@ -25,6 +25,8 @@
     NSMutableArray *data1;
     //舒张压
     NSMutableArray *data2;
+    
+    IBOutlet UILabel *pageLab;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 
@@ -93,6 +95,23 @@
 -(void)setupUI
 {
     [self setupView:self.containerView];
+    
+    //设置页面序号
+    NSString *pageNumStr = @"10/14";
+    NSDictionary *attr1 = @{
+                            NSFontAttributeName :[UIFont systemFontOfSize:10],
+                            NSForegroundColorAttributeName:HMColor(228, 185, 160)
+                            };
+    
+    NSDictionary *attr2 = @{
+                            NSFontAttributeName :[UIFont systemFontOfSize:14],
+                            NSForegroundColorAttributeName:[UIColor whiteColor]
+                            };
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:pageNumStr attributes:attr1];
+    NSRange range = [pageNumStr rangeOfString:@"/"];
+    [attrStr setAttributes:attr2 range:NSMakeRange(0,range.location)];
+    pageLab.attributedText = attrStr;
+
     
     [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"yes.png"] forState:UIControlStateSelected];
     [self.switchBtn setBackgroundImage:[UIImage imageNamed:@"no.png"] forState:UIControlStateNormal];
