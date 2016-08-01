@@ -36,8 +36,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *value1Lab;
 @property (strong, nonatomic) IBOutlet UILabel *value2Lab;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 - (IBAction)next:(id)sender;
-
 @end
 
 @implementation WaistHipRatioViewController
@@ -60,6 +60,9 @@
 
 -(void)initView
 {
+    
+    self.nextBtn.layer.cornerRadius = 7.0f;
+
     self.titleLab.text = questionItem.eq_title;
     //腰围数据
     answerItem = questionItem.questions[0];
