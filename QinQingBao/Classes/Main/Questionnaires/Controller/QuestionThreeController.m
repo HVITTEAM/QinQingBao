@@ -122,11 +122,11 @@
     questionItem = self.dataProvider[9];
     self.title = questionItem.eq_title;
     
-    self.titleLab.text = questionItem.eq_title;
     item1 = questionItem.questions[0];
     item2 = questionItem.questions[1];
     item3 = questionItem.questions[2];
-    
+    self.titleLab.text = item1.q_title;
+
     self.leftSubtitleLab.text = item1.q_title;
     
     self.rightSubtitleLab.text = item2.q_title;
