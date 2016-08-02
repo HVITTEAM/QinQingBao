@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionThreeController">
@@ -86,10 +87,9 @@
                                     </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" translatesAutoresizingMaskIntoConstraints="NO" id="hmE-aG-bOy">
-                                    <rect key="frame" x="112" y="21" width="77" height="77"/>
+                                    <rect key="frame" x="112" y="36.5" width="77" height="77"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="77" id="CQd-mh-Elr"/>
-                                        <constraint firstAttribute="height" constant="76.5" id="zsU-we-l5u"/>
+                                        <constraint firstAttribute="width" secondItem="hmE-aG-bOy" secondAttribute="height" multiplier="1:1" id="J26-VW-I6J"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="舒张压" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uui-b5-fmg">
@@ -156,7 +156,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10/14" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luU-pY-hk6">
-                                    <rect key="frame" x="265" y="131.5" width="31" height="14.5"/>
+                                    <rect key="frame" x="265" y="131" width="31" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -165,9 +165,9 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="HJg-4v-oLC" firstAttribute="top" secondItem="luU-pY-hk6" secondAttribute="bottom" constant="58" id="9cl-OO-hwz"/>
+                                <constraint firstItem="hmE-aG-bOy" firstAttribute="centerY" secondItem="qKN-rs-S4P" secondAttribute="centerY" id="9d2-cM-3OY"/>
                                 <constraint firstItem="TvZ-P7-N17" firstAttribute="top" secondItem="W5R-1O-o7K" secondAttribute="bottom" constant="43" id="9lJ-Ks-QL4"/>
                                 <constraint firstAttribute="height" constant="484" id="ACi-ve-I0g"/>
-                                <constraint firstItem="hmE-aG-bOy" firstAttribute="top" secondItem="737-93-aqs" secondAttribute="top" constant="21" id="CFG-Ly-F6Z"/>
                                 <constraint firstItem="nBG-D1-g78" firstAttribute="top" secondItem="HJg-4v-oLC" secondAttribute="bottom" constant="37" id="DiY-FB-vqG"/>
                                 <constraint firstAttribute="trailing" secondItem="Uui-b5-fmg" secondAttribute="trailing" constant="35" id="Eqa-Sa-Fze"/>
                                 <constraint firstItem="pgK-fv-YRD" firstAttribute="top" secondItem="xyk-F6-UMe" secondAttribute="bottom" constant="10" id="KbT-we-MCy"/>
@@ -221,6 +221,7 @@
                 <constraint firstItem="PIi-2P-yta" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CPQ-Ax-yt7"/>
                 <constraint firstItem="PIi-2P-yta" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GMS-4x-jON"/>
                 <constraint firstAttribute="trailing" secondItem="PIi-2P-yta" secondAttribute="trailing" id="HBv-r2-W7h"/>
+                <constraint firstItem="hmE-aG-bOy" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="6:25" id="rUW-6b-li0"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="393" y="295"/>

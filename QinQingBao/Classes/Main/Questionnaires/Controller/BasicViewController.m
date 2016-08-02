@@ -45,6 +45,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fieldHeightCon;
+
 @end
 
 @implementation BasicViewController
@@ -64,6 +66,16 @@
     
     self.nextBtn.layer.cornerRadius = 7.0f;
     
+    CGFloat heightCon = 45;
+    if (MTScreenW <= 320) {
+        heightCon *= 1;
+    }else if (MTScreenW == 375){
+        heightCon *= 1.17;
+    }else if (MTScreenW == 414){
+        heightCon *= 1.29;
+    }
+    
+    self.fieldHeightCon.constant = heightCon;
     
     questionItem = self.dataProvider[1];
     

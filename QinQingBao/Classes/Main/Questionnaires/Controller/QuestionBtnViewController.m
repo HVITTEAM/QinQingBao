@@ -334,7 +334,7 @@
     }else{
         self.answerProvider[answerIdx] = answerDict;
     }
-
+//    NSLog(@"-------------%@",self.answerProvider);
 }
 
 /**
