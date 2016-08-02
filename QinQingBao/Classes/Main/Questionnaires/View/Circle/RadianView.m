@@ -59,7 +59,7 @@
 -(void)setDangerText:(NSString *)dangerText
 {
     _dangerText = dangerText;
-    lab.text = dangerText;
+    la.text = dangerText;
 }
 
 /**
@@ -106,24 +106,24 @@
     [self.layer addSublayer:self.lowerLayer];
     [self.layer addSublayer:self.upperLayer];
     
-    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2, self.upperLayer.bounds.size.height, 100, 30)];
+    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2, self.upperLayer.bounds.size.height, 100, 50)];
     lab.textAlignment = NSTextAlignmentCenter;
-    lab.font = [UIFont boldSystemFontOfSize:20];
+    lab.font = [UIFont boldSystemFontOfSize:44];
     lab.textColor = [UIColor orangeColor];
     [self addSubview:lab];
     
-    la = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50,  30, 100, 20)];
+    la = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50,  0, 100, 20)];
     la.textAlignment = NSTextAlignmentCenter;
-    la.font = [UIFont boldSystemFontOfSize:13];
-    la.textColor = [UIColor lightGrayColor];
-    la.text = @"危险系数";
+    la.font = [UIFont systemFontOfSize:19];
+    la.textColor = [UIColor colorWithRGB:@"#666666"];
+    la.text = @"中危";
     [self addSubview:la];
     
     la1 = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50, 20, 100, 50)];
     la1.textAlignment = NSTextAlignmentCenter;
-    la1.numberOfLines = 0;
-    la1.font = [UIFont boldSystemFontOfSize:12];
-    la1.textColor = [UIColor lightGrayColor];
+    la1.font = [UIFont systemFontOfSize:12];
+    la1.textColor = [UIColor colorWithRGB:@"#4d4d4d"];
+    la1.text = @"10年内患病概率";
     [self addSubview:la1];
 }
 
@@ -160,9 +160,9 @@
     self.middleLayer.lineWidth = 1;
     self.middleLayer.path = circlePath1;
     
-    la1.center = CGPointMake(width / 2, height / 2 + 30);
+    la1.center = CGPointMake(width / 2, height / 2 + 40);
     
-    la.center = CGPointMake(width / 2, height / 2 - 30);
+    la.center = CGPointMake(width / 2, height / 2 - 40);
 }
 
 #pragma mark - 以下都是属性的setter方法
@@ -205,7 +205,16 @@
 {
     _percentValue = percentValue;
     
-    la1.text = [NSString stringWithFormat:@"10年内患病概率为%.0f%",percentValue];
+    NSString *str = [NSString stringWithFormat:@"%.0f",percentValue];
+    
+    NSString *string                            = [NSString stringWithFormat:@"%.0f%%",percentValue];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    [attributedString addAttribute:NSFontAttributeName
+                             value:[UIFont systemFontOfSize:13.f]
+                             range:NSMakeRange(str.length, 1)];
+    
+    lab.attributedText = attributedString;
     
     CGFloat lastStrokeEnd = self.upperLayer.strokeEnd;
     

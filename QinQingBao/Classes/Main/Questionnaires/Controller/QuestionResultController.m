@@ -38,7 +38,7 @@
     
     self.circleView.upperCircleColor = [UIColor orangeColor];
     self.circleView.lowerCircleColor = [UIColor lightGrayColor];
-    self.circleView.lineWidth = 12;
+    self.circleView.lineWidth = 15;
     self.circleView.lineThick = 1.5;
     self.circleView.lineSpace = 5;
     
@@ -46,10 +46,8 @@
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
     
-    self.contentView.layer.cornerRadius = 10;
-    
     CGRect rc = [self.contentView convertRect:self.lab3.frame toView:self.bgview];
-    self.vheight.constant  = rc.origin.y;
+    self.vheight.constant  = rc.origin.y + 20;
     
     if (self.reportListModel) {
         [self getReportResult];
