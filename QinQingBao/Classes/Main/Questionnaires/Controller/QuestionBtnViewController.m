@@ -313,6 +313,8 @@
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
     
     [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
+    [answerDict setValue:self.qModel_1.q_type forKey:@"q_type"];
+    
     if (self.isMultipleSelection) {
         [answerDict setValue:selectedDatas forKey:@"qa_detail"];
     }else{
