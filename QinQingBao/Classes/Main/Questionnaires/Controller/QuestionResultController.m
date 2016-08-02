@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lab3;
 @property (strong, nonatomic) IBOutlet UIButton *btn1;
 @property (strong, nonatomic) IBOutlet UIButton *btn2;
+@property (strong, nonatomic) IBOutlet UIImageView *bottomImg;
 - (IBAction)btn1Handler:(id)sender;
 - (IBAction)btn2Handler:(id)sender;
 
@@ -46,9 +47,8 @@
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
     
-    CGRect rc = [self.contentView convertRect:self.lab3.frame toView:self.bgview];
-    self.vheight.constant  = rc.origin.y + 20;
-    
+    CGRect rc = [self.contentView convertRect:self.bottomImg.frame toView:self.bgview];
+    self.vheight.constant  = rc.origin.y;
     if (self.reportListModel) {
         [self getReportResult];
     }else [self getResult];
@@ -58,7 +58,7 @@
 {
     [super updateViewConstraints];
     
-    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame))];
+    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
 }
 
 - (IBAction)btn1Handler:(id)sender {
@@ -84,7 +84,9 @@
  */
 -(void)submit_exam:(NSString *)resultStr
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:@{@"result" : resultStr}
+    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:@{@"result" : resultStr,
+                                                                   @"client" : @"ios",
+                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key ? [SharedAppUtil defaultCommonUtil].userVO.key : @""}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
