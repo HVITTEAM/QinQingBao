@@ -30,7 +30,7 @@
         self.titleLb.textColor = [UIColor colorWithRed:247/255.0f green:147/255.0f blue:30/255.0f alpha:1.0f];
     }else{
         self.layer.borderColor = [UIColor colorWithRed:230/255.0f green:230/255.0f blue:230/255.0f alpha:1.0f].CGColor;
-        self.titleLb.textColor = [UIColor darkTextColor];
+        self.titleLb.textColor = [UIColor colorWithRed:102/255.0f green:102/255.0f blue:102/255.0f alpha:1.0f];
     }
 }
 

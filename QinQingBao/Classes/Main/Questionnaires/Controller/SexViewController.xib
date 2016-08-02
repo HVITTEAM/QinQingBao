@@ -34,6 +34,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="kjH-IG-ybh"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <state key="normal" title="下一步">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -98,12 +99,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJz-VP-79V">
-                                    <rect key="frame" x="126" y="50" width="68" height="21"/>
+                                    <rect key="frame" x="124" y="50" width="72" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="W4T-Yb-y4b"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
