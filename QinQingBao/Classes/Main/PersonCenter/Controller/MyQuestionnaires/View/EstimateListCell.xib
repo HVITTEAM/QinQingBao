@@ -17,6 +17,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dqr-Dg-erC">
                         <rect key="frame" x="10" y="15" width="300" height="111.5"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topwave" translatesAutoresizingMaskIntoConstraints="NO" id="joN-qq-PrJ">
+                                <rect key="frame" x="0.0" y="-5" width="300" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="iy1-y7-1y7"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="问卷名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M31-eg-3pN">
                                 <rect key="frame" x="10" y="15" width="60" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -61,12 +67,15 @@
                             <constraint firstItem="xF4-ew-Zey" firstAttribute="top" secondItem="Suk-wM-7MT" secondAttribute="bottom" constant="15" id="CJv-st-VLS"/>
                             <constraint firstItem="rte-ZD-BfC" firstAttribute="trailing" secondItem="Oyk-yp-SOz" secondAttribute="trailing" id="Cy2-29-3h7"/>
                             <constraint firstItem="Oyk-yp-SOz" firstAttribute="centerY" secondItem="M31-eg-3pN" secondAttribute="centerY" id="DRp-HI-fMI"/>
+                            <constraint firstItem="joN-qq-PrJ" firstAttribute="top" secondItem="dqr-Dg-erC" secondAttribute="top" constant="-5" id="DTh-D0-3JQ"/>
                             <constraint firstItem="Suk-wM-7MT" firstAttribute="top" secondItem="M31-eg-3pN" secondAttribute="bottom" constant="15" id="QQr-nX-lzF"/>
                             <constraint firstAttribute="trailing" secondItem="Oyk-yp-SOz" secondAttribute="trailing" constant="10" id="bPu-We-KH4"/>
+                            <constraint firstItem="joN-qq-PrJ" firstAttribute="leading" secondItem="dqr-Dg-erC" secondAttribute="leading" id="c5g-xy-2GI"/>
                             <constraint firstItem="xF4-ew-Zey" firstAttribute="leading" secondItem="M31-eg-3pN" secondAttribute="leading" id="cjZ-G8-Jyg"/>
                             <constraint firstItem="1iR-tW-eY2" firstAttribute="centerY" secondItem="Suk-wM-7MT" secondAttribute="centerY" id="fiB-3f-Qhk"/>
                             <constraint firstItem="1iR-tW-eY2" firstAttribute="leading" secondItem="Oyk-yp-SOz" secondAttribute="leading" id="hoE-Cx-GPz"/>
                             <constraint firstItem="rte-ZD-BfC" firstAttribute="centerY" secondItem="xF4-ew-Zey" secondAttribute="centerY" id="oF6-MW-B36"/>
+                            <constraint firstAttribute="trailing" secondItem="joN-qq-PrJ" secondAttribute="trailing" id="qtg-Sv-zUj"/>
                             <constraint firstItem="M31-eg-3pN" firstAttribute="top" secondItem="dqr-Dg-erC" secondAttribute="top" constant="15" id="rNL-FP-0jP"/>
                             <constraint firstItem="Oyk-yp-SOz" firstAttribute="leading" secondItem="M31-eg-3pN" secondAttribute="trailing" constant="15" id="slb-hd-jmm"/>
                             <constraint firstItem="rte-ZD-BfC" firstAttribute="leading" secondItem="Oyk-yp-SOz" secondAttribute="leading" id="u2S-Cq-Lg3"/>
@@ -90,4 +99,7 @@
             <point key="canvasLocation" x="282" y="349.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="topwave" width="339" height="18"/>
+    </resources>
 </document>

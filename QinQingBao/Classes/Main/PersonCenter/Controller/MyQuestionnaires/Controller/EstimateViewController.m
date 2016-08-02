@@ -42,6 +42,7 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
+    self.dataProvider = [[NSMutableArray alloc] init];
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
     [self getDatasFormServices];
@@ -97,6 +98,11 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         
+        if([dict[@"code"] integerValue] == 17001){
+            [self.view showNonedataTooltip];
+            return;
+        }
+        
         if([dict[@"code"] integerValue] != 0){
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
             return;
@@ -105,7 +111,7 @@
         self.p++;
         
         NSMutableArray *datas = [[ReportListModel objectArrayWithKeyValuesArray:dict[@"datas"]] mutableCopy];
-        self.dataProvider = datas;
+        [self.dataProvider addObjectsFromArray:[datas copy]];
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -117,9 +123,6 @@
 
 -(void)loadMoreDatas
 {
-//    if (self.tableView.footer.isRefreshing) {
-//        return;
-//    }
     [self getDatasFormServices];
 }
 

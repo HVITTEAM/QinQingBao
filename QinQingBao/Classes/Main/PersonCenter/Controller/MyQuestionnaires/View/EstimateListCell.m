@@ -35,7 +35,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     self.nameLb.text = nil;
     self.timeLb.text = nil;
     self.resultLb.text = nil;
