@@ -316,7 +316,17 @@
     [answerDict setValue:self.qModel_1.q_type forKey:@"q_type"];
     
     if (selectedDatas.count > 1) {
-        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+//        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
+        NSMutableString *str = [@"[" mutableCopy];
+        for (int i = 0; i < selectedDatas.count; i++) {
+            [str appendFormat:@"%@",selectedDatas[i]];
+            if (i < selectedDatas.count - 1) {
+                [str appendString:@","];
+            }
+        }
+        [str appendString:@"]"];
+        [answerDict setValue:str forKey:@"qa_detail"];
+        
     }else if(selectedDatas.count == 1){
         [answerDict setValue:selectedDatas[0] forKey:@"qa_detail"];
     }
