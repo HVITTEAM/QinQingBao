@@ -66,8 +66,8 @@
                                 <constraint firstItem="AFq-mm-ciL" firstAttribute="top" secondItem="36p-lT-7i4" secondAttribute="top" constant="15" id="tal-05-emU"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lac-az-vXi">
-                            <rect key="frame" x="10" y="250" width="300" height="282.5"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lac-az-vXi">
+                            <rect key="frame" x="10" y="250" width="300" height="191"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我们的建议" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QP4-dc-mCd">
                                     <rect key="frame" x="112" y="8" width="75" height="21"/>
@@ -75,7 +75,7 @@
                                         <constraint firstAttribute="height" constant="21" id="KNw-g3-LUY"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.37254901960784315" green="0.38431372549019605" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Izn-3K-BTZ" userLabel="topline">
@@ -91,21 +91,12 @@
                                         <constraint firstAttribute="height" constant="21" id="UHR-Sg-vxW"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="16"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.47843137254901957" green="0.50980392156862742" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="260" verticalCompressionResistancePriority="760" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BPm-p5-mMf">
                                     <rect key="frame" x="5" y="72" width="287" height="30.5"/>
                                     <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="13"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="运动方面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4t-Us-rPR">
-                                    <rect key="frame" x="118" y="124" width="64" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="UhI-xK-Oj9"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="16"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -128,7 +119,7 @@
                                         <constraint firstAttribute="height" constant="21" id="dU9-Jz-qRj"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="16"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="0.47843137254901957" green="0.50980392156862742" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPq-7E-66e" userLabel="bottomline">
@@ -142,6 +133,15 @@
                                     <rect key="frame" x="6" y="232" width="287" height="30.5"/>
                                     <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="13"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="运动方面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K4t-Us-rPR">
+                                    <rect key="frame" x="118" y="124" width="64" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="UhI-xK-Oj9"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="16"/>
+                                    <color key="textColor" red="0.47843137254901957" green="0.50980392156862742" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>

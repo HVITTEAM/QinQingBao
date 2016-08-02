@@ -60,14 +60,15 @@
 
 -(void)initView
 {
-    
     self.nextBtn.layer.cornerRadius = 7.0f;
 
-    self.titleLab.text = questionItem.eq_title;
     //腰围数据
     answerItem = questionItem.questions[0];
     //臀围数据
     answerItem2 = questionItem.questions[0];
+    
+    self.titleLab.text = answerItem.q_title;
+
     self.subtitleLab.text = answerItem.q_subtitle;
     
     self.ruletitleLab1.text = @"您的腰围";

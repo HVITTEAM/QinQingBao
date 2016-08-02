@@ -63,11 +63,12 @@
         return;
     QuestionModel *item = dataProvider[0];
     self.titleLab.text =  item.eq_title;
-    self.title = item.eq_title;
     
     //设置初始值
     QuestionModel_1 *item1 = item.questions[0];
     OptionModel *optionItem = item1.options[0];
+    self.title = item1.q_title;
+
     selectedId = optionItem.qo_id;
 }
 
