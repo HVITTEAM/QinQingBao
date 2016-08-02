@@ -15,6 +15,8 @@
     UILabel *la1;
     
     UILabel *la;
+    
+    CGFloat currentValue;
 }
 
 @property (strong)CAShapeLayer *upperLayer;
@@ -205,21 +207,12 @@
 {
     _percentValue = percentValue;
     
-    NSString *str = [NSString stringWithFormat:@"%.0f",percentValue];
-    
-    NSString *string                            = [NSString stringWithFormat:@"%.0f%%",percentValue];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    
-    [attributedString addAttribute:NSFontAttributeName
-                             value:[UIFont systemFontOfSize:13.f]
-                             range:NSMakeRange(str.length, 1)];
-    
-    lab.attributedText = attributedString;
-    
     CGFloat lastStrokeEnd = self.upperLayer.strokeEnd;
     
     CGFloat value = percentValue / 100.0;
     self.upperLayer.strokeEnd = value;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(setupLabel:) userInfo:nil repeats:YES];
     
     [self.layer removeAllAnimations];
     
@@ -271,8 +264,6 @@
     [self.upperLayer addAnimation:keyAnimation forKey:nil];
     
     [self.middleLayer addAnimation:keyAnimation forKey:nil];
-
-    
 }
 
 /**
@@ -308,6 +299,49 @@
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     NSLog(@"stop");
+}
+
+//设置跳数
+- (void)setupLabel:(NSTimer *)timer
+{
+    currentValue ++;
+    static int flag = 1;
+
+    if ((currentValue >= self.percentValue))
+    {
+        
+        NSString *str = [NSString stringWithFormat:@"%.0f",currentValue];
+        
+        NSString *string                            = [NSString stringWithFormat:@"%.0f%%",currentValue];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont systemFontOfSize:13.f]
+                                 range:NSMakeRange(str.length, 1)];
+        
+        lab.attributedText = attributedString;
+
+        flag = 1;
+        [timer invalidate];
+        timer = nil;
+        return;
+    }
+    else
+    {
+        NSString *str = [NSString stringWithFormat:@"%.0f",currentValue];
+        
+        NSString *string                            = [NSString stringWithFormat:@"%.0f%%",currentValue];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        
+        [attributedString addAttribute:NSFontAttributeName
+                                 value:[UIFont systemFontOfSize:13.f]
+                                 range:NSMakeRange(str.length, 1)];
+        
+            lab.attributedText = attributedString;
+    }
+    
+    flag++;
+    
 }
 
 @end
