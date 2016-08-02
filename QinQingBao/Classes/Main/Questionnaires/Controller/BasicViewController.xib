@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="ageField" destination="utb-rH-sHb" id="gfh-LN-ar8"/>
                 <outlet property="containerView" destination="6PB-km-19f" id="Nof-5v-Dvk"/>
+                <outlet property="fieldHeightCon" destination="R1R-MH-SUP" id="R3f-2p-SUC"/>
                 <outlet property="headImg" destination="mNg-nc-Qzv" id="wGZ-5b-rXR"/>
                 <outlet property="heightField" destination="yXc-wQ-aKa" id="FAL-O2-POr"/>
                 <outlet property="lab1" destination="ktz-g0-FB7" id="jQr-jY-jpc"/>
@@ -47,10 +48,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6PB-km-19f">
-                                    <rect key="frame" x="32" y="192" width="256" height="135"/>
+                                    <rect key="frame" x="25" y="192" width="270" height="135"/>
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="utb-rH-sHb">
-                                            <rect key="frame" x="50" y="0.0" width="196" height="45"/>
+                                            <rect key="frame" x="50" y="0.0" width="210" height="45"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="R1R-MH-SUP"/>
                                             </constraints>
@@ -62,7 +63,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yXc-wQ-aKa">
-                                            <rect key="frame" x="50" y="45" width="196" height="45"/>
+                                            <rect key="frame" x="50" y="45" width="210" height="45"/>
                                             <color key="textColor" red="0.96862745098039216" green="0.57647058823529407" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -71,7 +72,7 @@
                                             </connections>
                                         </textField>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gwu-4H-u3T">
-                                            <rect key="frame" x="50" y="90" width="196" height="45"/>
+                                            <rect key="frame" x="50" y="90" width="210" height="45"/>
                                             <color key="textColor" red="0.96862745098039216" green="0.57647058823529407" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -80,14 +81,14 @@
                                             </connections>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hN7-KY-c53">
-                                            <rect key="frame" x="0.0" y="44" width="256" height="1"/>
+                                            <rect key="frame" x="0.0" y="44" width="270" height="1"/>
                                             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="1vz-Kc-qPi"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qli-DF-MWK">
-                                            <rect key="frame" x="0.0" y="89" width="256" height="1"/>
+                                            <rect key="frame" x="0.0" y="89" width="270" height="1"/>
                                             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="I08-pB-Yyx"/>
@@ -178,12 +179,14 @@
                                 <constraint firstItem="xlT-vV-7Oq" firstAttribute="centerX" secondItem="XHn-XI-l4G" secondAttribute="centerX" id="IsM-p1-nq9"/>
                                 <constraint firstItem="lS8-KZ-vu9" firstAttribute="top" secondItem="8gm-pF-f2u" secondAttribute="bottom" constant="10" id="KA4-vq-RR4"/>
                                 <constraint firstItem="lS8-KZ-vu9" firstAttribute="centerX" secondItem="XHn-XI-l4G" secondAttribute="centerX" id="QjA-Lg-P4S"/>
+                                <constraint firstItem="6PB-km-19f" firstAttribute="leading" secondItem="XHn-XI-l4G" secondAttribute="leading" constant="25" id="TYU-qW-Soj"/>
                                 <constraint firstItem="mNg-nc-Qzv" firstAttribute="width" secondItem="XHn-XI-l4G" secondAttribute="width" multiplier="6:25" id="X5z-ZE-YUW"/>
                                 <constraint firstItem="8gm-pF-f2u" firstAttribute="top" secondItem="mNg-nc-Qzv" secondAttribute="bottom" constant="10" id="b1w-mF-ypk"/>
                                 <constraint firstItem="ZG3-GP-NOn" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6PB-km-19f" secondAttribute="bottom" constant="88" id="e3K-KX-5hL"/>
                                 <constraint firstAttribute="bottom" secondItem="xlT-vV-7Oq" secondAttribute="bottom" constant="10" id="fuX-R3-IcN"/>
                                 <constraint firstItem="mNg-nc-Qzv" firstAttribute="top" secondItem="XHn-XI-l4G" secondAttribute="bottom" multiplier="0.1" id="guG-v6-6zv"/>
                                 <constraint firstItem="mNg-nc-Qzv" firstAttribute="centerX" secondItem="XHn-XI-l4G" secondAttribute="centerX" id="hOL-c1-HV9"/>
+                                <constraint firstAttribute="trailing" secondItem="6PB-km-19f" secondAttribute="trailing" constant="25" id="jXw-pi-GI8"/>
                                 <constraint firstItem="6PB-km-19f" firstAttribute="centerX" secondItem="XHn-XI-l4G" secondAttribute="centerX" id="m0D-Rx-Ds8"/>
                                 <constraint firstItem="6PB-km-19f" firstAttribute="top" secondItem="lS8-KZ-vu9" secondAttribute="bottom" constant="10" id="myt-pD-XL7"/>
                                 <constraint firstItem="ZG3-GP-NOn" firstAttribute="leading" secondItem="XHn-XI-l4G" secondAttribute="leading" constant="20" id="ydC-p9-kmL"/>
@@ -206,7 +209,6 @@
                 <constraint firstItem="PlI-Ij-y8n" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="e91-bD-gyA"/>
                 <constraint firstItem="XHn-XI-l4G" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" priority="230" constant="-64" id="eey-YH-30E"/>
                 <constraint firstAttribute="bottom" secondItem="PlI-Ij-y8n" secondAttribute="bottom" id="hyE-Mc-rct"/>
-                <constraint firstItem="6PB-km-19f" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="v9v-Uy-2Pk"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="339" y="361"/>

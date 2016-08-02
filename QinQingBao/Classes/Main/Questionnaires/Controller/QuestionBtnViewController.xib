@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -83,7 +83,7 @@
                                     </constraints>
                                 </imageView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="tHs-NZ-74z">
-                                    <rect key="frame" x="20" y="225" width="260" height="204"/>
+                                    <rect key="frame" x="15" y="225" width="270" height="204"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="204" id="wGA-iX-B40"/>
@@ -108,7 +108,7 @@
                                 <constraint firstItem="dlB-rj-Z1l" firstAttribute="leading" secondItem="8jA-yA-Yp0" secondAttribute="leading" constant="20" id="9no-cv-Bu6"/>
                                 <constraint firstAttribute="trailing" secondItem="7xr-es-sPG" secondAttribute="trailing" id="A17-G0-Be6"/>
                                 <constraint firstItem="Soy-YY-KNP" firstAttribute="centerX" secondItem="7xr-es-sPG" secondAttribute="centerX" id="AWx-la-ge7"/>
-                                <constraint firstAttribute="trailing" secondItem="tHs-NZ-74z" secondAttribute="trailing" constant="20" id="CzN-NE-RV0"/>
+                                <constraint firstAttribute="trailing" secondItem="tHs-NZ-74z" secondAttribute="trailing" constant="15" id="CzN-NE-RV0"/>
                                 <constraint firstItem="EXb-uf-cV1" firstAttribute="centerX" secondItem="8jA-yA-Yp0" secondAttribute="centerX" id="IDB-LR-VDj"/>
                                 <constraint firstAttribute="bottom" secondItem="dlB-rj-Z1l" secondAttribute="bottom" constant="10" id="Jz4-WH-34I"/>
                                 <constraint firstItem="Soy-YY-KNP" firstAttribute="centerY" secondItem="7xr-es-sPG" secondAttribute="centerY" id="RDD-uB-eAd"/>
@@ -116,7 +116,7 @@
                                 <constraint firstItem="ifm-bf-168" firstAttribute="trailing" secondItem="CG8-1x-i5D" secondAttribute="trailing" constant="-4" id="Z2f-rS-lgQ"/>
                                 <constraint firstItem="eAG-qC-IHV" firstAttribute="centerX" secondItem="8jA-yA-Yp0" secondAttribute="centerX" id="Zrc-v4-mfV"/>
                                 <constraint firstItem="eAG-qC-IHV" firstAttribute="top" secondItem="EXb-uf-cV1" secondAttribute="bottom" constant="10" id="cg5-X6-PlN"/>
-                                <constraint firstItem="tHs-NZ-74z" firstAttribute="leading" secondItem="8jA-yA-Yp0" secondAttribute="leading" constant="20" id="dPf-BD-sZN"/>
+                                <constraint firstItem="tHs-NZ-74z" firstAttribute="leading" secondItem="8jA-yA-Yp0" secondAttribute="leading" constant="15" id="dPf-BD-sZN"/>
                                 <constraint firstItem="7xr-es-sPG" firstAttribute="top" secondItem="8jA-yA-Yp0" secondAttribute="top" id="kzV-hR-BbO"/>
                                 <constraint firstAttribute="trailing" secondItem="dlB-rj-Z1l" secondAttribute="trailing" constant="20" id="mrn-cN-DDe"/>
                                 <constraint firstItem="dlB-rj-Z1l" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tHs-NZ-74z" secondAttribute="bottom" constant="40" id="yao-pg-6fN"/>
