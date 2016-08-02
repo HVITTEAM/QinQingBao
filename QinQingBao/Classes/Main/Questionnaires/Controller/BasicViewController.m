@@ -148,6 +148,7 @@
     {
         NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:item1.q_id forKey:@"q_id"];
+        [dict1 setValue:item1.q_type forKey:@"q_type"];
         [dict1 setObject:selectedAge > 0 ? [NSString stringWithFormat:@"%.0f",selectedAge] : @"1980" forKey:@"qa_detail"];
         [self.answerProvider addObject:dict1];
     }
@@ -171,6 +172,7 @@
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:item2.q_id forKey:@"q_id"];
+        [dict2 setValue:item2.q_type forKey:@"q_type"];
         
         if (selectedWeight <= 0 )selectedWeight = 65;
         if (selectedHeight <= 0 )selectedHeight = 170;

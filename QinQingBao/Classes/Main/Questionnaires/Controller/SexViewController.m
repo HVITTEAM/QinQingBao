@@ -82,6 +82,7 @@
     NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
     [dict1 setObject:item1.q_id forKey:@"q_id"];
     [dict1 setObject:selectedId forKey:@"qa_detail"];
+    [dict1 setValue:item1.q_type forKey:@"q_type"];
     [arr addObject:dict1];
     
     BasicViewController *vc = [[BasicViewController alloc] init];

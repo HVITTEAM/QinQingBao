@@ -157,6 +157,7 @@
     {
         NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:item1.q_id forKey:@"q_id"];
+        [dict1 setValue:item1.q_type forKey:@"q_type"];
         [dict1 setObject:leftSelectedValue forKey:@"qa_detail"];
         [self.answerProvider addObject:dict1];
     }
@@ -171,6 +172,7 @@
         {
             find1 = YES;
             [dictItem setObject:rightSelectedValue forKey:@"qa_detail"];
+            
             break;
         }
     }
@@ -178,6 +180,7 @@
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:item2.q_id forKey:@"q_id"];
+        [dict2 setValue:item2.q_type forKey:@"q_type"];
         [dict2 setObject:rightSelectedValue forKey:@"qa_detail"];
         [self.answerProvider addObject:dict2];
     }
@@ -198,6 +201,7 @@
     {
         NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
         [dict3 setObject:item3.q_id forKey:@"q_id"];
+        [dict3 setValue:item3.q_type forKey:@"q_type"];
         [dict3 setObject:[NSString stringWithFormat:@"%.0ld",(long)self.switchBtn.tag] forKey:@"qa_detail"];
         [self.answerProvider addObject:dict3];
         
