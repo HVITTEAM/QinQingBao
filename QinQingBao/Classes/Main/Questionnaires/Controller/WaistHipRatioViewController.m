@@ -134,6 +134,7 @@
     {
         NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:answerItem.q_id forKey:@"q_id"];
+        [dict1 setObject:answerItem.q_type forKey:@"q_type"];
         
         CGFloat YDB = [rule1Value floatValue] / [rule2Value floatValue];
         [dict1 setObject:[NSString stringWithFormat:@"%.01f",YDB] forKey:@"qa_detail"];
