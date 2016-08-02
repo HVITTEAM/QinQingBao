@@ -305,18 +305,15 @@
     for (NSIndexPath *idx in self.selectedIdxArray) {
         
         OptionModel *option = self.datas[idx.row];
-        
         [selectedDatas addObject:option.qo_id];
     }
     
     //创建答案
     NSMutableDictionary *answerDict = [[NSMutableDictionary alloc] init];
-    
     [answerDict setValue:self.qModel_1.q_id forKey:@"q_id"];
     [answerDict setValue:self.qModel_1.q_type forKey:@"q_type"];
     
     if (selectedDatas.count > 1) {
-//        [answerDict setValue:selectedDatas forKey:@"qa_detail"];
         NSMutableString *str = [@"[" mutableCopy];
         for (int i = 0; i < selectedDatas.count; i++) {
             [str appendFormat:@"%@",selectedDatas[i]];
