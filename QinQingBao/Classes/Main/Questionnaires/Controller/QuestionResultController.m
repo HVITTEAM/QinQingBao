@@ -46,9 +46,9 @@
     
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
-    
-    CGRect rc = [self.contentView convertRect:self.bottomImg.frame toView:self.bgview];
-    self.vheight.constant  = rc.origin.y;
+//    
+//    CGRect rc = [self.contentView convertRect:self.bottomImg.frame toView:self.bgview];
+//    self.vheight.constant  = rc.origin.y;
     if (self.reportListModel) {
         [self getReportResult];
     }else [self getResult];
@@ -58,7 +58,8 @@
 {
     [super updateViewConstraints];
     
-    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
+//    CGFloat dd = CGRectGetMaxY(self.contentView.frame);
+//    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
 }
 
 - (IBAction)btn1Handler:(id)sender {
@@ -105,7 +106,7 @@
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
                                          self.lab3.text = model.r_result.hmd_advise_other;
-                                         [self.view setNeedsUpdateConstraints];
+//                                         [self.view setNeedsUpdateConstraints];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -152,7 +153,7 @@
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
                                          self.lab3.text = model.r_result.hmd_advise_other;
-                                         [self.view setNeedsUpdateConstraints];
+//                                         [self.view setNeedsUpdateConstraints];
                                         
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

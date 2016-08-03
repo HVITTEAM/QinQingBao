@@ -27,7 +27,7 @@
                 <outlet property="lab2" destination="1wi-o6-Xxt" id="xKD-W6-c0v"/>
                 <outlet property="lab3" destination="ZPv-sj-cWV" id="Ejn-7o-fFF"/>
                 <outlet property="titleLab" destination="AFq-mm-ciL" id="NTe-N1-mfT"/>
-                <outlet property="vheight" destination="hum-jG-VF2" id="adn-5x-41T"/>
+                <outlet property="vheight" destination="rHW-db-lfr" id="QiM-qA-6mc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -82,8 +82,8 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lac-az-vXi">
-                            <rect key="frame" x="10" y="310" width="300" height="235.5"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lac-az-vXi">
+                            <rect key="frame" x="10" y="310" width="300" height="198"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="topwave" translatesAutoresizingMaskIntoConstraints="NO" id="kHY-Bk-0hP">
                                     <rect key="frame" x="0.0" y="-9" width="300" height="18"/>
@@ -160,7 +160,7 @@
                                         <constraint firstAttribute="height" constant="0.5" id="b8F-gD-5is"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="256" verticalCompressionResistancePriority="756" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-sj-cWV">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="256" verticalCompressionResistancePriority="756" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-sj-cWV">
                                     <rect key="frame" x="20" y="215" width="260" height="0.0"/>
                                     <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="13"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -216,7 +216,6 @@
                                 <constraint firstItem="kHY-Bk-0hP" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" id="e9w-4D-fMz"/>
                                 <constraint firstItem="hnW-R7-OvR" firstAttribute="leading" secondItem="Flg-4z-ozl" secondAttribute="trailing" constant="11" id="fFy-Zo-5f2"/>
                                 <constraint firstAttribute="trailing" secondItem="QPq-7E-66e" secondAttribute="trailing" id="huj-xZ-0mF"/>
-                                <constraint firstAttribute="height" constant="300" id="hum-jG-VF2"/>
                                 <constraint firstItem="QP4-dc-mCd" firstAttribute="centerX" secondItem="lac-az-vXi" secondAttribute="centerX" id="ixY-Ic-65n"/>
                                 <constraint firstItem="hnW-R7-OvR" firstAttribute="centerX" secondItem="lac-az-vXi" secondAttribute="centerX" id="jLI-Qq-zQN"/>
                                 <constraint firstItem="1wi-o6-Xxt" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" constant="20" id="jOJ-5f-9Xd"/>
@@ -227,6 +226,7 @@
                                 <constraint firstItem="IdQ-dm-8JR" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" id="puT-as-08e"/>
                                 <constraint firstItem="Izn-3K-BTZ" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" id="pxB-Va-3Jw"/>
                                 <constraint firstAttribute="trailing" secondItem="31k-2t-8p2" secondAttribute="trailing" id="q48-In-pal"/>
+                                <constraint firstAttribute="height" constant="236" id="rHW-db-lfr"/>
                                 <constraint firstAttribute="trailing" secondItem="BPm-p5-mMf" secondAttribute="trailing" constant="20" id="rIt-8G-7Lx"/>
                                 <constraint firstItem="K4t-Us-rPR" firstAttribute="leading" secondItem="foh-CY-xcc" secondAttribute="trailing" constant="11" id="rd8-hA-FCt"/>
                                 <constraint firstItem="ZPv-sj-cWV" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" constant="20" id="roI-BX-poy"/>
@@ -234,11 +234,6 @@
                                 <constraint firstItem="31k-2t-8p2" firstAttribute="leading" secondItem="lac-az-vXi" secondAttribute="leading" id="uaN-uM-1dl"/>
                                 <constraint firstItem="Izn-3K-BTZ" firstAttribute="top" secondItem="QP4-dc-mCd" secondAttribute="bottom" constant="10" id="yql-Ha-NiQ"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="hum-jG-VF2"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
