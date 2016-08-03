@@ -14,7 +14,6 @@
 @interface QuestionResultController ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet RadianView *circleView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *vheight;
 @property (strong, nonatomic) IBOutlet UIScrollView *bgview;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UILabel *lab1;
@@ -46,21 +45,11 @@
     
     self.btn1.layer.cornerRadius = 8;
     self.btn2.layer.cornerRadius = 8;
-//    
-//    CGRect rc = [self.contentView convertRect:self.bottomImg.frame toView:self.bgview];
-//    self.vheight.constant  = rc.origin.y;
     if (self.reportListModel) {
         [self getReportResult];
     }else [self getResult];
 }
 
-- (void)updateViewConstraints
-{
-    [super updateViewConstraints];
-    
-//    CGFloat dd = CGRectGetMaxY(self.contentView.frame);
-//    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
-}
 
 - (IBAction)btn1Handler:(id)sender {
 }
@@ -106,7 +95,6 @@
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
                                          self.lab3.text = model.r_result.hmd_advise_other;
-//                                         [self.view setNeedsUpdateConstraints];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -121,7 +109,6 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
     
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
 }
 
 /**
@@ -153,8 +140,6 @@
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
                                          self.lab3.text = model.r_result.hmd_advise_other;
-//                                         [self.view setNeedsUpdateConstraints];
-                                        
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

@@ -130,6 +130,19 @@
 
 - (IBAction)nextBtnClicke:(id)sender
 {
+    if ( self.ageField.text.length == 0)
+    {
+       return [NoticeHelper AlertShow:@"请填写年龄" view:nil];
+    }
+    if ( self.heightField.text.length == 0)
+    {
+       return [NoticeHelper AlertShow:@"请填写身高" view:nil];
+    }
+    if ( self.weightField.text.length == 0)
+    {
+       return [NoticeHelper AlertShow:@"请填写体重" view:nil];
+    }
+    
     NSArray * array = [NSArray arrayWithArray:[self.answerProvider copy]];
     
     //是否已经添加到数据源中
