@@ -54,12 +54,12 @@
     }else [self getResult];
 }
 
-- (void)updateViewConstraints
-{
-    [super updateViewConstraints];
-    
-    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
-}
+//- (void)updateViewConstraints
+//{
+//    [super updateViewConstraints];
+//    
+////    [self.bgview setContentSize:CGSizeMake(MTScreenW - 20,CGRectGetMaxY(self.contentView.frame) + 5)];
+//}
 
 - (IBAction)btn1Handler:(id)sender {
 }
