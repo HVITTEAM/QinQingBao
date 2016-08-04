@@ -246,24 +246,39 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //14题是有条件多选,"q_rule": "+82+83+85_84"
-    if (self.eq_id == 14) {
-        OptionModel *optionmode = self.datas[indexPath.row];
-        if ([optionmode.qo_id integerValue] == 84) {
+    
+    
+    if (self.qModel_1.q_rule) {
+    
+        NSArray *options = [self analyzeRules:self.qModel_1.q_rule];
+        NSMutableArray *options_one = options[0];
+        NSMutableArray *options_two = options[1];
+        
+        //按规则多选
+        OptionModel *selectedOption = self.datas[indexPath.row];
+        if ([options_one containsObject:selectedOption.qo_id]) {
+            NSMutableArray *deSelectedOptions = [[NSMutableArray alloc] init];
             for (NSIndexPath *idx in self.selectedIdxArray) {
-                [collectionView deselectItemAtIndexPath:idx animated:YES];
-            }
-            [self.selectedIdxArray removeAllObjects];
-        }else{
-            for (NSIndexPath *idx in self.selectedIdxArray) {
-                OptionModel *optionmode = self.datas[idx.row];
-                if ([optionmode.qo_id integerValue] == 84) {
+                OptionModel *option = self.datas[idx.row];
+                if ([options_two containsObject:option.qo_id]) {
+                    [deSelectedOptions addObject:idx];
                     [collectionView deselectItemAtIndexPath:idx animated:YES];
-                    [self.selectedIdxArray removeObject:idx];
                 }
-                
             }
+            [self.selectedIdxArray removeObjectsInArray:deSelectedOptions];
+            
+        }else{
+             NSMutableArray *deSelectedOptions = [[NSMutableArray alloc] init];
+            for (NSIndexPath *idx in self.selectedIdxArray) {
+                OptionModel *option = self.datas[idx.row];
+                if ([options_one containsObject:option.qo_id]) {
+                    [deSelectedOptions addObject:idx];
+                    [collectionView deselectItemAtIndexPath:idx animated:YES];
+                }
+            }
+            [self.selectedIdxArray removeObjectsInArray:deSelectedOptions];
         }
+        
     }
     
     if (![self.selectedIdxArray containsObject:indexPath]) {
@@ -352,7 +367,7 @@
 -(void)toNextVC
 {
     NSInteger nextQuestionId = self.eq_id + 1;
-    if (nextQuestionId >= 4 && nextQuestionId < 15 && nextQuestionId != 10) {
+    if (nextQuestionId >= 4 && nextQuestionId < 16 && nextQuestionId != 10) {
         QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
         nextQuestionBtnVC.dataProvider = self.dataProvider;
         nextQuestionBtnVC.eq_id = nextQuestionId;
@@ -365,7 +380,7 @@
         nextQuestionThreeVC.answerProvider = self.answerProvider;
         nextQuestionThreeVC.exam_id = self.exam_id;
         [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
-    }else if (nextQuestionId == 15){
+    }else if (nextQuestionId == 16){
         QuestionResultController *vc = [[QuestionResultController alloc] init];
         vc.answerProvider = self.answerProvider;
         vc.exam_id = self.exam_id;
@@ -393,5 +408,65 @@
     
     [self.btnCollectionView reloadData];
 }
+
+/**
+ *  解析规则
+ *
+ *  @param rule 规则字符串
+ *
+ *  @return 返回一个数组,数组元素也是一个数组,表示一组可同时存在的选项,不同组选项之间不共存
+ */
+-(NSArray *)analyzeRules:(NSString *)rule
+{
+#define option1 1
+#define option2 2
+    
+    NSMutableArray *options_one = [[NSMutableArray alloc] init];
+    NSMutableArray *options_two = [[NSMutableArray alloc] init];
+    
+    NSRange range = NSMakeRange(0, 1);
+    //当前选项id
+    __block NSMutableString *optionId;
+    //当前选项属于哪一组
+    __block NSInteger whichOption = option1;
+    
+    void(^chooseOptionsBlock)() = ^{
+        if (optionId) {
+            if (option1 == whichOption) {
+                //当前选项id存在且属于第一组
+                [options_one addObject:optionId];
+            }else{
+                [options_two addObject:optionId];
+            }
+        }
+    };
+    //通过循环对选项进行分组
+    for (int i = 0; i < rule.length; i++) {
+        range.location = i;
+        //获取单个字符
+        NSString *tempStr = [rule substringWithRange:range];
+        if ([tempStr isEqualToString:@"+"]) {
+            chooseOptionsBlock();
+            optionId = [[NSMutableString alloc] init];
+            whichOption = option1;
+        }else if ([tempStr isEqualToString:@"_"]){
+            chooseOptionsBlock();
+            optionId = [[NSMutableString alloc] init];
+            whichOption = option2;
+        }else{
+            [optionId appendString:tempStr];
+        }
+        
+        if (i == rule.length -1) {
+            chooseOptionsBlock();
+        }
+    }
+    
+    return @[options_one,options_two];
+    
+#undef option1
+#undef option2
+}
+
 
 @end
