@@ -79,7 +79,7 @@
     
     questionItem = self.dataProvider[1];
     
-    self.title = questionItem.eq_title;
+    self.title = questionItem.eq_subtitle;
     item1 = questionItem.questions[0];
     //BMI "BMI=体重（公斤）\/身高（米）的平方，即kg\/m²"
     item2 = questionItem.questions[1];

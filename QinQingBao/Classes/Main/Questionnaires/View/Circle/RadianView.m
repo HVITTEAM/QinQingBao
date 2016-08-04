@@ -108,7 +108,7 @@
     [self.layer addSublayer:self.lowerLayer];
     [self.layer addSublayer:self.upperLayer];
     
-    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2, self.upperLayer.bounds.size.height, 100, 50)];
+    lab = [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50, self.upperLayer.bounds.size.height, 100, 50)];
     lab.textAlignment = NSTextAlignmentCenter;
     lab.font = [UIFont boldSystemFontOfSize:44];
     lab.textColor = [UIColor orangeColor];
@@ -145,7 +145,7 @@
         r = (width - lineWidth) / 2.0;
     }
     
-    lab.center = CGPointMake(width / 2, height / 2);
+    lab.center = CGPointMake(width / 2 + 6.5, height / 2);
     
     CGPathRef circlePath1 = [UIBezierPath bezierPathWithArcCenter:CGPointMake(width / 2, height / 2) radius:r - 20 startAngle:0 endAngle:M_PI *2  clockwise:NO].CGPath;
     

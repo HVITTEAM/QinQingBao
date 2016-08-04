@@ -12,6 +12,7 @@
 @property (nonatomic, copy) NSString *eq_id;
 @property (nonatomic, copy) NSString *eq_eid;
 @property (nonatomic, copy) NSString *eq_title;
+@property (nonatomic, copy) NSString *eq_subtitle;
 @property (nonatomic, copy) NSString *eq_qids;
 @property (nonatomic, copy) NSString *eq_sort;
 

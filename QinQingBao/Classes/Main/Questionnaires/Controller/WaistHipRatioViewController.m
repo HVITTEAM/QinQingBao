@@ -48,7 +48,7 @@
     
     questionItem = self.dataProvider[2];
     
-    self.title = questionItem.eq_title;
+    self.title = questionItem.eq_subtitle;
     
     self.containerView.layer.borderWidth = 1.0f;
     self.containerView.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0].CGColor;

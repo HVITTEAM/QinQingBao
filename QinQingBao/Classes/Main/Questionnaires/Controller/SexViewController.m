@@ -67,7 +67,7 @@
     //设置初始值
     QuestionModel_1 *item1 = item.questions[0];
     OptionModel *optionItem = item1.options[0];
-    self.title = item1.q_title;
+    self.title = item.eq_subtitle;
 
     selectedId = optionItem.qo_id;
 }

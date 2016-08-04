@@ -120,7 +120,7 @@
     self.nextBtn.layer.cornerRadius = 7.0f;
     
     questionItem = self.dataProvider[9];
-    self.title = questionItem.eq_title;
+    self.title = questionItem.eq_subtitle;
     
     item1 = questionItem.questions[0];
     item2 = questionItem.questions[1];
@@ -265,18 +265,18 @@
 
 -(UIView*)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, 35)];
-    lab.textAlignment = NSTextAlignmentCenter;
-    NSString *str= [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
-    lab.textColor = [UIColor darkGrayColor];
-    lab.text = str;
-    lab.font = [UIFont systemFontOfSize:14];
-    
 //    if (row == 3)
 //    {
+//        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, 35)];
+//        lab.textAlignment = NSTextAlignmentCenter;
+//        NSString *str= [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
+//        lab.textColor = [UIColor darkGrayColor];
+//        lab.text = str;
+//        lab.font = [UIFont systemFontOfSize:14];
+//
 //        lab.textColor = [UIColor orangeColor];
-//        lab.font  = [UIFont systemFontOfSize:16];
-//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:lab.text];
+//        lab.font  = [UIFont systemFontOfSize:14];
+//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:str];
 //        
 //        // 设置富文本样式
 //        [attributedString addAttribute:NSForegroundColorAttributeName
@@ -284,11 +284,19 @@
 //                                 range:NSMakeRange(lab.text.length - 4, 4)];
 //        
 //        lab.attributedText = attributedString;
-//        
+//        return lab;
 //    }
-    return lab;
+//    else
+//    {
+        UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, view.width, 35)];
+        lab1.textAlignment = NSTextAlignmentCenter;
+        NSString *str= [NSString stringWithFormat:@"%@mmHg",pickerView == self.leftPicker ? data1[row] : data2[row]];
+        lab1.textColor = [UIColor darkGrayColor];
+        lab1.text = str;
+        lab1.font = [UIFont systemFontOfSize:14];
+        return lab1;
+//    }
 }
-
 
 - (IBAction)switchHandler:(id)sender {
     

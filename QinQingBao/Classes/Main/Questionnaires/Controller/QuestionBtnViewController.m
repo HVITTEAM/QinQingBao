@@ -104,7 +104,7 @@
     self.orderNumberLb.attributedText = attrStr;
     
     self.qModel = self.dataProvider[self.eq_id - 1];
-    self.navigationItem.title = self.qModel.eq_title;
+    self.navigationItem.title = self.qModel.eq_subtitle;
     
     self.qModel_1 = [self.qModel.questions firstObject];
     self.titleLb.text = self.qModel_1.q_title;
