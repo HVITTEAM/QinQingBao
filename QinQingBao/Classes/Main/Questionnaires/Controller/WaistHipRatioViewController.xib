@@ -13,6 +13,7 @@
                 <outlet property="headImg" destination="QVL-sD-crk" id="ZIW-uK-pRl"/>
                 <outlet property="iconImg" destination="GRU-IM-1Fs" id="j1B-ka-V1r"/>
                 <outlet property="nextBtn" destination="6xf-so-hVc" id="PJZ-bF-GfZ"/>
+                <outlet property="pageLab" destination="znJ-SA-vKB" id="aMj-3D-6zU"/>
                 <outlet property="rule1" destination="3Uh-ER-tFZ" id="Xmb-og-dqO"/>
                 <outlet property="rule2" destination="luz-Uw-EaO" id="y4V-gR-lkk"/>
                 <outlet property="ruletitleLab1" destination="eWj-Pr-v3W" id="MiI-E3-Wa9"/>

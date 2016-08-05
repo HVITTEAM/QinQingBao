@@ -68,7 +68,7 @@
     QuestionModel_1 *item1 = item.questions[0];
     OptionModel *optionItem = item1.options[0];
     self.title = item.eq_subtitle;
-
+    
     selectedId = optionItem.qo_id;
 }
 

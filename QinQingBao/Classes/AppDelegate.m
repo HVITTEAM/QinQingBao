@@ -93,7 +93,9 @@
                                                       UIUserNotificationTypeSound |
                                                       UIUserNotificationTypeAlert)
                                           categories:nil];
-    [JPUSHService setupWithOption:launchOptions];
+//    [JPUSHService setupWithOption:launchOptions];
+    
+    [JPUSHService setupWithOption:launchOptions appKey:@"acfe90ae99f621a1ea5b0e04" channel:@"" apsForProduction:YES];
     
     //    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
     

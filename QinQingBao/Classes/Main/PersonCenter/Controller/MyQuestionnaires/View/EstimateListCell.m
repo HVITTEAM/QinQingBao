@@ -29,7 +29,6 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"EstimateListCell" owner:nil options:nil] lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    
     return cell;
 }
 
@@ -39,7 +38,6 @@
     self.timeLb.text = nil;
     self.resultLb.text = nil;
 }
-
 
 -(void)setItem:(ReportListModel *)item
 {
