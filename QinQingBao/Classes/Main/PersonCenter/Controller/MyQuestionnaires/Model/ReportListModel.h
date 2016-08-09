@@ -14,7 +14,7 @@
 
 @property(copy,nonatomic)NSString *r_id;
 
-@property(copy,nonatomic)NSString *r_etitle;
+@property(copy,nonatomic)NSString *r_hmtitle;
 
 @property(copy,nonatomic)NSString *r_createtime;
 

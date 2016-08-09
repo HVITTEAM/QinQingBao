@@ -98,6 +98,10 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         
+        if([dict[@"code"] integerValue] == 17001 && self.dataProvider.count == 0){
+            [self.view initWithPlaceString:@"暂无数据"];
+        }
+        
         if([dict[@"code"] integerValue] == 17001){
             [self.view showNonedataTooltip];
             return;

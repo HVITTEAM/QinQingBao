@@ -12,7 +12,7 @@
 @interface ResultModel : NSObject
 @property (nonatomic, copy) NSString *r_id;
 @property (nonatomic, copy) NSString *r_eid;
-@property (nonatomic, copy) NSString *r_etitle;
+@property (nonatomic, copy) NSString *r_hmtitle;
 @property (nonatomic, copy) NSString *r_totalscore;
 @property (nonatomic, strong) AdviseModel *r_result;
 @property (nonatomic, copy) NSString *r_createtime;

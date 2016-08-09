@@ -21,7 +21,6 @@
 
 @property (strong,nonatomic)HMCommonTextfieldItem *emailItem;
 
-
 @end
 
 @implementation MarketCustominfoController

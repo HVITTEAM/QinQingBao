@@ -41,7 +41,7 @@
 
 -(void)setItem:(ReportListModel *)item
 {
-    self.nameLb.text = item.r_etitle;
+    self.nameLb.text = item.r_hmtitle;
     self.timeLb.text = [MTDateHelper getDaySince1970:item.r_createtime dateformat:@"yyyy-MM-dd hh:mm"];
     self.resultLb.text = item.r_danger;
 }

@@ -70,7 +70,6 @@
     [self submit_exam:encodingString];
 }
 
-
 /**
  *  获取数据源
  */
@@ -92,7 +91,7 @@
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          self.circleView.percentValue = [model.r_totalscore floatValue];
                                          self.circleView.dangerText = model.r_dangercoefficient;
-                                         self.titleLab.text = model.r_etitle;
+                                         self.titleLab.text = model.r_hmtitle;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
@@ -137,7 +136,7 @@
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          self.circleView.percentValue = [model.r_totalscore floatValue];
                                          self.circleView.dangerText = model.r_dangercoefficient;
-                                         self.titleLab.text = model.r_etitle;
+                                         self.titleLab.text = model.r_hmtitle;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;

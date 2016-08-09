@@ -36,16 +36,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QinQingBao/Classes/Main/Questionnaires/View/CommonExamCell.m"
-            timestampString = "491384240.479058"
+            filePath = "QinQingBao/Classes/Main/Questionnaires/Controller/QuestionResultController.m"
+            timestampString = "492423189.869443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "-setItem:"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "-submit_exam:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
