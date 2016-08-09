@@ -1245,6 +1245,10 @@
 		D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5671D0179E10003D166 /* NewsCell.xib */; };
 		D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5691D0179E10003D166 /* NotificationCell.m */; };
 		D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D56A1D0179E10003D166 /* NotificationCell.xib */; };
+		D27175181D585ECE007B9D78 /* ClasslistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27175171D585ECE007B9D78 /* ClasslistViewController.m */; };
+		D271751C1D5862E4007B9D78 /* ClasslistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751B1D5862E4007B9D78 /* ClasslistModel.m */; };
+		D27175201D5865BA007B9D78 /* ClasslistModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */; };
+		D27175211D5865BA007B9D78 /* ClasslistModelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D271751F1D5865BA007B9D78 /* ClasslistModelCell.xib */; };
 		D277D2CA1D1A364C00F20507 /* MarketCustominfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277D2C71D1A364C00F20507 /* MarketCustominfoController.m */; };
 		D277D2CB1D1A364C00F20507 /* MarketOrderSubmitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D277D2C91D1A364C00F20507 /* MarketOrderSubmitController.m */; };
 		D279DA101B8709FD00E7CDDF /* UUChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA071B8709FD00E7CDDF /* UUChartLabel.m */; };
@@ -3413,6 +3417,13 @@
 		D246D5681D0179E10003D166 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D246D5691D0179E10003D166 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 		D246D56A1D0179E10003D166 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		D27175161D585ECE007B9D78 /* ClasslistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistViewController.h; sourceTree = "<group>"; };
+		D27175171D585ECE007B9D78 /* ClasslistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistViewController.m; sourceTree = "<group>"; };
+		D271751A1D5862E4007B9D78 /* ClasslistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistModel.h; sourceTree = "<group>"; };
+		D271751B1D5862E4007B9D78 /* ClasslistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistModel.m; sourceTree = "<group>"; };
+		D271751D1D5865BA007B9D78 /* ClasslistModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistModelCell.h; sourceTree = "<group>"; };
+		D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistModelCell.m; sourceTree = "<group>"; };
+		D271751F1D5865BA007B9D78 /* ClasslistModelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClasslistModelCell.xib; sourceTree = "<group>"; };
 		D277D2C61D1A364C00F20507 /* MarketCustominfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketCustominfoController.h; sourceTree = "<group>"; };
 		D277D2C71D1A364C00F20507 /* MarketCustominfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketCustominfoController.m; sourceTree = "<group>"; };
 		D277D2C81D1A364C00F20507 /* MarketOrderSubmitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketOrderSubmitController.h; sourceTree = "<group>"; };
@@ -4246,6 +4257,8 @@
 				012E4B2A1D45E0EF000590C8 /* WaistHipRatioViewController.xib */,
 				01A6B1251D4841B800DF340C /* AllQuestionController.h */,
 				01A6B1261D4841B800DF340C /* AllQuestionController.m */,
+				D27175161D585ECE007B9D78 /* ClasslistViewController.h */,
+				D27175171D585ECE007B9D78 /* ClasslistViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4265,6 +4278,8 @@
 				01A6B13F1D4AECC900DF340C /* ResultModel.m */,
 				D2319F331D4B26EB00470F71 /* AdviseModel.h */,
 				D2319F341D4B26EB00470F71 /* AdviseModel.m */,
+				D271751A1D5862E4007B9D78 /* ClasslistModel.h */,
+				D271751B1D5862E4007B9D78 /* ClasslistModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4272,6 +4287,9 @@
 		015BFD9B1D34816700EB4A09 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D271751D1D5865BA007B9D78 /* ClasslistModelCell.h */,
+				D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */,
+				D271751F1D5865BA007B9D78 /* ClasslistModelCell.xib */,
 				01A6B1361D48A3B900DF340C /* ButtonCell.h */,
 				01A6B1371D48A3B900DF340C /* ButtonCell.m */,
 				01A6B1381D48A3B900DF340C /* ButtonCell.xib */,
@@ -8738,7 +8756,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9293,6 +9311,7 @@
 				01FF8F871CDB2DDE0089BBC4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */,
 				01ECDAA21C8EB31F0018160F /* chatBar_colorMore_videoSelected@2x.png in Resources */,
+				D27175211D5865BA007B9D78 /* ClasslistModelCell.xib in Resources */,
 				01E68FE61BCCA68900A17543 /* video_time_bg.png in Resources */,
 				D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */,
 				01ECDA351C8EB31F0018160F /* Contents.json in Resources */,
@@ -9543,6 +9562,7 @@
 				01601D521CE08DE500B3712E /* EvaluationController.m in Sources */,
 				01FEE2B41B9BE213007C4641 /* ServiceDetailViewController.m in Sources */,
 				01CEAB011C3E48360015480F /* UIView+Placeholder.m in Sources */,
+				D27175201D5865BA007B9D78 /* ClasslistModelCell.m in Sources */,
 				01601D9A1CE0900200B3712E /* ReasonCell.m in Sources */,
 				D208E8621D48AE26007B7AD4 /* ReportListModel.m in Sources */,
 				01ECDB1E1C8EB31F0018160F /* EaseChatToolbarItem.m in Sources */,
@@ -9820,6 +9840,7 @@
 				01E9A73E1C74613500000805 /* DetailInfoViewController.m in Sources */,
 				015BFDAD1D3483FD00EB4A09 /* CXRulerScrollView.m in Sources */,
 				0181B1A71CDC958D00A1435E /* BalanceLogModel.m in Sources */,
+				D27175181D585ECE007B9D78 /* ClasslistViewController.m in Sources */,
 				01C82BF41CC4B189004D7A16 /* ParagraphTextCell.m in Sources */,
 				01FD4CA51CAE4B43008F09CF /* PSTCollectionViewUpdateItem.m in Sources */,
 				01EB266F1C92A06900773023 /* DeviceModel.m in Sources */,
@@ -9947,6 +9968,7 @@
 				01E9A7401C74613500000805 /* FamilyViewController.m in Sources */,
 				01C0D1F31C46810800FF1CD3 /* GoodsViewController.m in Sources */,
 				01F08EC11CFD633800207BF0 /* EventMsgModel.m in Sources */,
+				D271751C1D5862E4007B9D78 /* ClasslistModel.m in Sources */,
 				01EA81721CE1757B00398FEC /* CheckSelfViewController.m in Sources */,
 				01EFD3101C56028300BDA640 /* SectionHeaderView.m in Sources */,
 				01ECDAD81C8EB31F0018160F /* ChattingViewController.m in Sources */,

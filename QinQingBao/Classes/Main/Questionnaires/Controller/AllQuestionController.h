@@ -10,4 +10,6 @@
 
 @interface AllQuestionController : UITableViewController
 
+@property(copy,nonatomic)NSString *c_id;  //分类ID;
+
 @end
