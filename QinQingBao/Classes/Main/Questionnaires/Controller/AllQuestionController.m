@@ -74,7 +74,9 @@
     if (currentPageIdx == 1)
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_examlist parameters:@{@"page" : @"10",
-                                                                    @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx]}
+                                                                    @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                                                                    @"c_id":self.c_id
+                                                                    }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -153,7 +155,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SexViewController *vc = [[SexViewController alloc] init];
-    vc.item = dataProvider[indexPath.section];
+    ExamModel *item = dataProvider[indexPath.section];
+    vc.examId = item.e_id;
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

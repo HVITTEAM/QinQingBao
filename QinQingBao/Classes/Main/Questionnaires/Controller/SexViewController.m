@@ -97,7 +97,7 @@
  */
 -(void)getDataProvider
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_questions parameters:@{@"id" : self.item.e_id}
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_questions parameters:@{@"id" :self.examId}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

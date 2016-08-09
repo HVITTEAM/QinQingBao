@@ -12,5 +12,6 @@
 
 @interface SexViewController : CommonQuesViewController
 
-@property (nonatomic, retain) ExamModel *item;
+@property (nonatomic, retain) NSString *examId;
+
 @end

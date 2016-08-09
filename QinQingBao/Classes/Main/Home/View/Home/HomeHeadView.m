@@ -16,8 +16,7 @@
 
 #import "MarketViewController.h"
 
-
-#import "AllQuestionController.h"
+#import "ClasslistViewController.h"
 
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
@@ -40,7 +39,7 @@
 
 - (IBAction)healthHandler:(id)sender
 {
-    AllQuestionController *vc = [[AllQuestionController alloc] init];
+    ClasslistViewController *vc = [[ClasslistViewController alloc] init];
     [self.nav pushViewController:vc animated:YES];
 }
 
