@@ -211,6 +211,8 @@
     vc.dataProvider = self.dataProvider;
     vc.answerProvider = self.answerProvider;
     vc.exam_id = self.exam_id;
+    vc.calculatype = self.calculatype;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

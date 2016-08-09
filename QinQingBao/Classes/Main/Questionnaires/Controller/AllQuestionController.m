@@ -156,8 +156,8 @@
 {
     SexViewController *vc = [[SexViewController alloc] init];
     ExamModel *item = dataProvider[indexPath.section];
-    vc.examId = item.e_id;
-
+    vc.exam_id = item.e_id;
+    vc.calculatype = item.e_calculatype;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -186,6 +186,7 @@
     vc.eq_id = 4;
     vc.exam_id = self.exam_id;
     vc.answerProvider = self.answerProvider;
+    vc.calculatype = self.calculatype;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

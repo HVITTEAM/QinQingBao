@@ -77,7 +77,9 @@
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:@{@"result" : resultStr,
                                                                    @"client" : @"ios",
-                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key ? [SharedAppUtil defaultCommonUtil].userVO.key : @""}
+                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key ? [SharedAppUtil defaultCommonUtil].userVO.key : @"",
+                                                                   @"calculatype":self.calculatype
+                                                                   }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

@@ -16,4 +16,5 @@
 @property (nonatomic, copy) NSString *e_logourl;
 @property (nonatomic, copy) NSString *e_itemurl;
 @property (nonatomic, copy) NSString *count;
+@property (nonatomic, copy) NSString *e_calculatype;
 @end

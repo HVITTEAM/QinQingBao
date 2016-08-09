@@ -11,10 +11,10 @@
 
 
 @interface SexViewController ()
-{
-    //试卷id
-    NSString *exam_id;
-}
+//{
+//    //试卷id
+//    NSString *exam_id;
+//}
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
@@ -88,7 +88,8 @@
     BasicViewController *vc = [[BasicViewController alloc] init];
     vc.dataProvider = dataProvider;
     vc.answerProvider = arr;
-    vc.exam_id = exam_id;
+    vc.exam_id = self.exam_id;
+    vc.calculatype = self.calculatype;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -97,7 +98,7 @@
  */
 -(void)getDataProvider
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_questions parameters:@{@"id" :self.examId}
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_questions parameters:@{@"id" :self.exam_id}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -109,7 +110,6 @@
                                      else
                                      {
                                          dataProvider = [QuestionModel objectArrayWithKeyValuesArray:[dict1 objectForKey:@"questions"]];
-                                         exam_id = [dict1 objectForKey:@"e_id"];
                                          [self initView];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

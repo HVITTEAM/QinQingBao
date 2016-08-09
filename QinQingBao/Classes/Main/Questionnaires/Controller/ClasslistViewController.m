@@ -11,6 +11,7 @@
 #import "ClasslistModel.h"
 #import "ClasslistModelCell.h"
 #import "SexViewController.h"
+#import "ClasslistExamInfoModel.h"
 
 
 @interface ClasslistViewController ()
@@ -85,7 +86,9 @@
     
     if (exam_infoArray.count == 1) {
         SexViewController *vc = [[SexViewController alloc] init];
-        vc.examId = exam_infoArray[0];
+        ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
+        vc.exam_id = examInfoModel.e_id;
+        vc.calculatype = examInfoModel.e_calculatype;
         [self.navigationController pushViewController:vc animated:YES];
     }else if(exam_infoArray.count> 1){
         AllQuestionController *vc = [[AllQuestionController alloc] init];

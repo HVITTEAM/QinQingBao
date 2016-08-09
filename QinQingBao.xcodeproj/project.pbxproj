@@ -1274,6 +1274,7 @@
 		D2F744AE1B7D7E7F006AC23D /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F744A71B7D7E7F006AC23D /* RegistViewController.xib */; };
 		D2F744AF1B7D7E7F006AC23D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F744A91B7D7E7F006AC23D /* RootViewController.m */; };
 		D2F744B01B7D7E7F006AC23D /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F744AA1B7D7E7F006AC23D /* RootViewController.xib */; };
+		D2FF0AE51D59BBD100D606EC /* ClasslistExamInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2FF0AE41D59BBD100D606EC /* ClasslistExamInfoModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3464,6 +3465,8 @@
 		D2F744A81B7D7E7F006AC23D /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		D2F744A91B7D7E7F006AC23D /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		D2F744AA1B7D7E7F006AC23D /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		D2FF0AE31D59BBD100D606EC /* ClasslistExamInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistExamInfoModel.h; sourceTree = "<group>"; };
+		D2FF0AE41D59BBD100D606EC /* ClasslistExamInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistExamInfoModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4299,6 +4302,8 @@
 				D2319F341D4B26EB00470F71 /* AdviseModel.m */,
 				D271751A1D5862E4007B9D78 /* ClasslistModel.h */,
 				D271751B1D5862E4007B9D78 /* ClasslistModel.m */,
+				D2FF0AE31D59BBD100D606EC /* ClasslistExamInfoModel.h */,
+				D2FF0AE41D59BBD100D606EC /* ClasslistExamInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9799,6 +9804,7 @@
 				0126ECFA1B8C4E8100EC85C1 /* MASViewAttribute.m in Sources */,
 				01ECDAF11C8EB31F0018160F /* MKAnnotationView+EMWebCache.m in Sources */,
 				01024CBE1BD0A75D00E8CAEC /* base64.m in Sources */,
+				D2FF0AE51D59BBD100D606EC /* ClasslistExamInfoModel.m in Sources */,
 				016AF4481D41AABF00542680 /* QuestionModel.m in Sources */,
 				01F49D1F1C478D700079F45F /* CommonGoodsCellBottom.m in Sources */,
 				01436A731D421CB90083872F /* QuestionModel_1.m in Sources */,

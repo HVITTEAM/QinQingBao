@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ClasslistExamInfoModel.h"
 
 @interface ClasslistModel : NSObject
 

@@ -211,6 +211,7 @@
     nextQuestionBtnVC.dataProvider = self.dataProvider;
     nextQuestionBtnVC.eq_id = 11;
     nextQuestionBtnVC.exam_id = self.exam_id;
+    nextQuestionBtnVC.calculatype = self.calculatype;
     nextQuestionBtnVC.answerProvider = self.answerProvider;
     [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
 }
