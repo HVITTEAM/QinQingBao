@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SMS_SDK/SMS_SDK.h>
-#import <SMS_SDK/CountryAndAreaCode.h>
+#import <SMS_SDK/SMSSDK.h>
+#import <SMS_SDK/Extend/SMSSDKCountryAndAreaCode.h>
 
 @interface MTSMSHelper : NSObject<UIAlertViewDelegate>
 
@@ -20,13 +20,7 @@
 @property (nonatomic, copy) void (^sureSendSMS)();
 
 
-
 +(MTSMSHelper *)sharedInstance;
-
-/**
- * 获取支持的地区列表
- **/
--(void)setTheLocalAreaCode;
 
 /**
  * 发送验证码

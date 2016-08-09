@@ -174,8 +174,8 @@ extern NSString * const WeiboSDKGetAidFailNotification;
 + (void)inviteFriend:(NSString* )data withUid:(NSString *)uid withToken:(NSString *)access_token delegate:(id<WBHttpRequestDelegate>)delegate withTag:(NSString*)tag;
 
 /*
- 第三方调用微博短信注册或者登录
- @param navTitle 为登录页navigationBar的title，如果为空的话，默认为“验证码登录”
+ 第三方调用微博短信注册或者登陆
+ @param navTitle 为登陆页navigationBar的title，如果为空的话，默认为“验证码登陆”
 */
 + (void)messageRegister:(NSString *)navTitle;
 @end
@@ -428,6 +428,37 @@ extern NSString * const WeiboSDKGetAidFailNotification;
  WBSendMessageToWeiboResponse
  */
 @interface WBSendMessageToWeiboResponse : WBBaseResponse
+
+/**
+ 可能在分享过程中用户进行了授权操作，当此值不为空时，为用户相应授权信息
+ */
+@property (nonatomic,strong) WBAuthorizeResponse *authResponse;
+@end
+
+#pragma mark - ShareMessageToContact Request/Response
+/**
+ 第三方应用分享链接到私信
+ */
+@interface WBShareMessageToContactRequest : WBBaseRequest
+
+/**
+ 分享链接的消息
+ */
+@property (nonatomic, strong) WBMessageObject *message;
+
+/**
+ 返回一个 WBShareMessageToContactRequest 对象
+ 此方法生成对象被[WeiboSDK sendRequest:]会唤起微博客户端的发布器进行分享
+ @param message 需要发送给微博客户端的消息对象
+ @return 返回一个*自动释放的*WBSendMessageToWeiboRequest对象
+ */
++ (id)requestWithMessage:(WBMessageObject *)message;
+@end
+
+/**
+ WBSendMessageToWeiboResponse
+ */
+@interface WBShareMessageToContactResponse : WBBaseResponse
 
 /**
  可能在分享过程中用户进行了授权操作，当此值不为空时，为用户相应授权信息

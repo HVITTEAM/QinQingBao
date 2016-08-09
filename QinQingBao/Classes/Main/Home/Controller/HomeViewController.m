@@ -154,7 +154,7 @@ static float cellWidth = 66;
     //按钮文字
     button_back.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button_back.titleEdgeInsets = UIEdgeInsetsMake(0, -14, 0, 0);
-    [button_back setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button_back setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     CGSize size = [button_back.titleLabel.text sizeWithAttributes:@{NSFontAttributeName:button_back.titleLabel.font}];
     button_back.frame = CGRectMake(0, 0,size.width + 30, 40);
@@ -537,7 +537,6 @@ static float cellWidth = 66;
         return UIEdgeInsetsMake(VSpace, HSpace, VSpace, HSpace);//分别为上、左、下、右
     else
         return UIEdgeInsetsMake(0, HSpace, VSpace, HSpace);//分别为上、左、下、右
-    
 }
 
 #pragma mark --UICollectionViewDelegate，
@@ -583,11 +582,6 @@ static float cellWidth = 66;
 {
     MassageTableViewController *view = [[MassageTableViewController alloc] init];
     [self.navigationController pushViewController:view animated:YES];
-    
-    //    AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
-    //    adver.type = 5;
-    //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:adver];
-    //    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark Net Error

@@ -147,8 +147,10 @@
     if (cell == nil)
         cell = [MassageServiceCell massageServiceCell];
     
-    [cell setItem:dataProvider[indexPath.row]];
-    
+    if (self.tableView.header.state != MJRefreshStateRefreshing)
+    {
+        [cell setItem:dataProvider[indexPath.row]];
+    }
     return cell;
 }
 

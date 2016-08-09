@@ -81,7 +81,7 @@
                                      NSArray *arr;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-//                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                      }
                                      else
                                      {
@@ -143,8 +143,10 @@
     if (marketcell == nil)
         marketcell = [CommonExamCell commonExamCell];
     
-    marketcell.item = dataProvider[indexPath.section];
-    
+    if (self.tableView.header.state != MJRefreshStateRefreshing)
+    {
+        marketcell.item = dataProvider[indexPath.section];
+    }
     return marketcell;
 }
 

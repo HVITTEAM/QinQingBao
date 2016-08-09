@@ -145,6 +145,5 @@
     }
     [self.femanImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.manImg setBackgroundImage:nil forState:UIControlStateNormal];
-    
 }
 @end

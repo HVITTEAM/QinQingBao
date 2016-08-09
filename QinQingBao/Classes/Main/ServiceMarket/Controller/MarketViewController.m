@@ -150,14 +150,15 @@
     if (marketcell == nil)
         marketcell = [CommonMarketCell commonMarketCell];
     
-    marketcell.item = dataProvider[indexPath.section];
-    
+    if (self.tableView.header.state != MJRefreshStateRefreshing)
+    {
+        marketcell.item = dataProvider[indexPath.section];
+    }
     return marketcell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     MassageModel *model = dataProvider[indexPath.row];
     //如果大于一就显示门店列表
     if (model.orgids.count > 1)

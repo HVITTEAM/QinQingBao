@@ -12,7 +12,7 @@
 #import "SDImageCache.h"
 #import "JPUSHService.h"
 #import "YSPlayerController.h"
-#import <SMS_SDK/SMS_SDK.h>
+#import <SMS_SDK/SMSSDK.h>
 #import "CCLocationManager.h"
 
 #import <Bugtags/Bugtags.h>
@@ -86,7 +86,7 @@
     
     [[YSHTTPClient sharedInstance] setClientAppKey:AppKey];
     
-    [SMS_SDK registerApp:sms_appKey withSecret:sms_appSecret];
+    [SMSSDK registerApp:sms_appKey withSecret:sms_appSecret];
     
     //注册用户的apns服务
     [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |

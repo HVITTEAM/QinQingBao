@@ -52,9 +52,11 @@
 
 
 - (IBAction)btn1Handler:(id)sender {
+    [NoticeHelper AlertShow:@"该功能尚未开通" view:nil];
 }
 
 - (IBAction)btn2Handler:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 -(void)getResult
