@@ -24,4 +24,10 @@
  *  试卷id
  */
 @property (nonatomic, copy) NSString *exam_id;
+
+/**
+ *  模型计算ID
+ */
+@property (nonatomic, copy) NSString *calculatype;
+
 @end

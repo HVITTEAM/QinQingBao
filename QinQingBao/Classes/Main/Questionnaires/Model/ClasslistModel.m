@@ -10,4 +10,11 @@
 
 @implementation ClasslistModel
 
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"exam_info" : [ClasslistExamInfoModel class]
+             };
+}
+
 @end

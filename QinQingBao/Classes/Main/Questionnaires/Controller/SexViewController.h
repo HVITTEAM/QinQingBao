@@ -9,9 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "CommonQuesViewController.h"
 #import "ExamModel.h"
+#import "ClasslistExamInfoModel.h"
 
 @interface SexViewController : CommonQuesViewController
 
-@property (nonatomic, retain) NSString *examId;
+/**
+ *  试卷id
+ */
+@property (nonatomic, copy) NSString *exam_id;
+
+/**
+ *  模型计算ID
+ */
+@property (nonatomic, copy) NSString *calculatype;
 
 @end

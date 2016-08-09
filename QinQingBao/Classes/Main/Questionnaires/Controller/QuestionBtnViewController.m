@@ -372,6 +372,7 @@
         nextQuestionBtnVC.dataProvider = self.dataProvider;
         nextQuestionBtnVC.eq_id = nextQuestionId;
         nextQuestionBtnVC.exam_id = self.exam_id;
+        nextQuestionBtnVC.calculatype = self.calculatype;
         nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
     }else if (nextQuestionId == 10){
@@ -379,11 +380,13 @@
         nextQuestionThreeVC.dataProvider = self.dataProvider;
         nextQuestionThreeVC.answerProvider = self.answerProvider;
         nextQuestionThreeVC.exam_id = self.exam_id;
+        nextQuestionThreeVC.calculatype = self.calculatype;
         [self.navigationController pushViewController:nextQuestionThreeVC animated:YES];
     }else if (nextQuestionId == 17){
         QuestionResultController *vc = [[QuestionResultController alloc] init];
         vc.answerProvider = self.answerProvider;
         vc.exam_id = self.exam_id;
+        vc.calculatype = self.calculatype;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
