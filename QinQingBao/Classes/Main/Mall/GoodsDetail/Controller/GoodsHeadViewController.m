@@ -63,6 +63,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
     //商品规格参数分类对应的id池
     NSDictionary *spec_list;
     
+    //商品默认规格参数
+    NSString *defaultSpec;
+    
     BOOL imagePlayer;
 }
 
@@ -427,12 +430,25 @@ static CGFloat IMAGEVIEW_HEIGHT;
     {
         if (commoncell == nil)
             commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"MTCommonCell"];
-        commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         commoncell.textLabel.text = @"商品规格/选项";
         commoncell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         commoncell.textLabel.font = [UIFont systemFontOfSize:16];
         commoncell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        commoncell.detailTextLabel.text = @"标配";
+        
+        
+        NSString *str  = @"";
+        
+       //TODO  当前是默认只有一个规则参数
+        NSArray *arr = [goodsInfo.goods_spec allKeys];
+        for (NSString *keyStr in arr)
+        {
+            str = [NSString stringWithFormat:@"%@",[goodsInfo.goods_spec objectForKey:keyStr]];
+            //设置默认
+            defaultSpec = keyStr;
+        }
+        commoncell.detailTextLabel.text = str.length > 0 ? str: @"标配";
+        commoncell.accessoryType = str.length > 0 ? UITableViewCellAccessoryDisclosureIndicator: UITableViewCellAccessoryNone;
+
         cell = commoncell;
     }
     else if (indexPath.section == 2)
@@ -494,7 +510,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
     else if (indexPath.section == 1)
     {
-        
+        [self showSpecView];
     }
     else if (indexPath.section == 2)
     {
@@ -508,6 +524,65 @@ static CGFloat IMAGEVIEW_HEIGHT;
     }
 }
 
+#pragma mark - 规格参数模块
+
+-(void)showSpecView
+{
+    GoodsSelectedViewController *buyView = [[GoodsSelectedViewController alloc] init];
+    buyView.type = OrderTypeChooseSpec;
+
+    buyView.defaultSpec = defaultSpec;
+    buyView.goodsInfo = goodsInfo;
+    buyView.parentVC = self;
+    buyView.speclistDict = spec_list;
+    buyView.specnameDict = goodsInfo.spec_name;
+    buyView.specvalueDict = goodsInfo.spec_value;
+    [self presentSemiViewController:buyView withOptions:@{KNSemiModalOptionKeys.pushParentBack : @(NO),
+                                                          KNSemiModalOptionKeys.parentAlpha : @(0.8),
+                                                          KNSemiModalOptionKeys.animationDuration : @(0.2),
+                                                          }];
+    buyView.goodsID = self.goodsID;
+    
+    buyView.submitClick = ^(BOOL isSuccess)
+    {
+        if (isSuccess)
+        {
+            [self dismissSemiModalView];
+            [NoticeHelper AlertShow:@"商品已添加至购物车!" view:self.view.window.rootViewController.view];
+        }
+    };
+
+    
+    buyView.orderClick = ^(NSString *number)
+    {
+        ConfirmViewController *vc = [[ConfirmViewController alloc] init];
+        vc.storeModel = storeModel;
+        vc.fromCart = NO;
+        
+        MTCommodityModel *item_info =  [[MTCommodityModel alloc] init];
+        item_info.full_name = goodsInfo.goods_name;
+        item_info.icon = goodsInfo.goods_image_url;
+        item_info.sale_price = goodsInfo.goods_price;
+        item_info.item_state = @"1";
+        item_info.stock_quantity = @"99";
+        
+        MTShoppIngCarModel *goodsModel = [[MTShoppIngCarModel alloc] init];
+        goodsModel.item_info = item_info;
+        goodsModel.count = number;
+        goodsModel.goods_id = goodsInfo.goods_id;
+        goodsModel.item_size = @"SINGLE";
+        goodsModel.type = 1;
+        goodsModel.isSelect=YES;
+        [self dismissSemiModalViewWithCompletion:^{
+            vc.goodsArr = [[NSMutableArray alloc] initWithArray:@[goodsModel]];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+    };
+
+}
+
+
+
 #pragma mark - MTGoodsDetailEndViewDelegate
 
 /**立即购买*/
@@ -519,6 +594,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
         return [NoticeHelper AlertShow:@"商品库存不足！" view:self.view];
     
     GoodsSelectedViewController *buyView = [[GoodsSelectedViewController alloc] init];
+    buyView.type = OrderTypeBuyRightnow;
+    buyView.defaultSpec = defaultSpec;
     buyView.goodsInfo = goodsInfo;
     buyView.parentVC = self;
     buyView.speclistDict = spec_list;
@@ -528,7 +605,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                                           KNSemiModalOptionKeys.parentAlpha : @(0.8),
                                                           KNSemiModalOptionKeys.animationDuration : @(0.2),
                                                           }];
-    buyView.type = OrderTypeBuyRightnow;
     buyView.goodsID = self.goodsID;
     
     buyView.orderClick = ^(NSString *number)
@@ -567,7 +643,9 @@ static CGFloat IMAGEVIEW_HEIGHT;
         return [NoticeHelper AlertShow:@"商品库存不足！" view:self.view];
     
     GoodsSelectedViewController *buyView = [[GoodsSelectedViewController alloc] init];
+    buyView.type = OrderTypeAdd2cart;
     buyView.parentVC = self;
+    buyView.defaultSpec = defaultSpec;
     buyView.goodsInfo = goodsInfo;
     buyView.speclistDict = spec_list;
     buyView.specnameDict = goodsInfo.spec_name;
@@ -576,7 +654,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
                                                            KNSemiModalOptionKeys.parentAlpha : @(0.8),
                                                            KNSemiModalOptionKeys.animationDuration : @(0.2),
                                                            }];
-    buyView.type = OrderTypeAdd2cart;
     buyView.goodsID = self.goodsID;
     
     buyView.submitClick = ^(BOOL isSuccess)

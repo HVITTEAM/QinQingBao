@@ -19,5 +19,9 @@
 
 @property (nonatomic, copy) void (^selectedBlock)(NSMutableArray *dataProvider);
 
+/**
+ *  商品默认规格参数
+ */
+@property (nonatomic, copy) NSString *defaultSpec;
 
 @end

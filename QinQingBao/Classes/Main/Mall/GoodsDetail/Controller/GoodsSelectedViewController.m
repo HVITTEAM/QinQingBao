@@ -82,14 +82,46 @@ static CGFloat BUTTONHEIGHT = 50;
 
 - (void)initView
 {
-    UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.height - BUTTONHEIGHT, MTScreenW, BUTTONHEIGHT)];
-    [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [sureBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
-    sureBtn.backgroundColor = [UIColor colorWithRGB:@"dd2726"];
-    [sureBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    [sureBtn addTarget:self action:@selector(sureClick:) forControlEvents:UIControlEventTouchUpInside];
-    [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view addSubview:sureBtn];
+    if (self.type != OrderTypeChooseSpec)
+    {
+        UIButton *sureBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.height - BUTTONHEIGHT, MTScreenW, BUTTONHEIGHT)];
+        [sureBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [sureBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
+        sureBtn.backgroundColor = [UIColor colorWithRGB:@"dd2726"];
+        [sureBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+        [sureBtn addTarget:self action:@selector(sureClick:) forControlEvents:UIControlEventTouchUpInside];
+        [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.view addSubview:sureBtn];
+    }
+    else
+    {
+        
+        //加入购物车
+        UIButton *add2CarBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.view.height - BUTTONHEIGHT, MTScreenW/2, BUTTONHEIGHT)];
+        [add2CarBtn setTitle:@"加入购物车" forState:UIControlStateNormal];
+        [add2CarBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
+        
+        [add2CarBtn setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
+        [add2CarBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
+        
+        [[add2CarBtn layer]setCornerRadius:3.0];
+        [add2CarBtn addTarget:self action:@selector(addToShopCar) forControlEvents:UIControlEventTouchUpInside];
+        [add2CarBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.view addSubview:add2CarBtn];
+        
+        //立刻购买
+        UIButton *buyBtn = [[UIButton alloc]initWithFrame:CGRectMake(MTScreenW/2,self.view.height - BUTTONHEIGHT, MTScreenW/2, BUTTONHEIGHT)];
+        [buyBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+        [buyBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
+        
+        [buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+        [buyBtn setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
+        
+        [[buyBtn layer]setCornerRadius:3.0];
+        [buyBtn addTarget:self action:@selector(buyRightNow) forControlEvents:UIControlEventTouchUpInside];
+        [buyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.view addSubview:buyBtn];
+    }
     
     //图片
     imgview = [[UIImageView alloc] initWithFrame:CGRectMake(10, -20, 100, 100)];
@@ -128,14 +160,15 @@ static CGFloat BUTTONHEIGHT = 50;
     [self.view addSubview:contentView];
     
     GoodsSpecCollectionView *view = [[GoodsSpecCollectionView alloc] initWithFrame:CGRectMake(20, 0, MTScreenW - 40, 50)];
+    view.defaultSpec = self.defaultSpec;
     view.dataProvider  = dataProvider;
     __weak __typeof(GoodsSpecCollectionView *)weakview = view;
     view.loadViewRepleteBlock = ^(void){
         CGSize size = {MTScreenW, weakview.height + 60};
         contentView.contentSize = size;
         weakview.y = 0;
-        numLab.y =  CGRectGetMaxY(view.frame) + 15;
-        _changeView.y = CGRectGetMaxY(view.frame) + 15;
+        numLab.y =  CGRectGetMaxY(view.frame) + 20;
+        _changeView.y = CGRectGetMaxY(view.frame) + 20;
         line.y = CGRectGetMinY(numLab.frame) - 5;
     };
     view.selectedBlock = ^(NSMutableArray *dataArr)
@@ -175,13 +208,13 @@ static CGFloat BUTTONHEIGHT = 50;
     };
     [contentView addSubview:view];
     
-    numLab = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(view.frame) + 10, 100, 30)];
+    numLab = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(view.frame) + 20, 100, 30)];
     numLab.text = @"购买数量:";
     numLab.textColor = [UIColor colorWithRGB:@"333333"];
-    numLab.font = [UIFont systemFontOfSize:16];
+    numLab.font = [UIFont systemFontOfSize:14];
     [contentView addSubview:numLab];
     
-    _changeView = [[MTChangeCountView alloc] initWithFrame:CGRectMake(MTScreenW - 120, CGRectGetMaxY(view.frame) + 10, 160, 35) chooseCount:1 totalCount: 20];
+    _changeView = [[MTChangeCountView alloc] initWithFrame:CGRectMake(MTScreenW - 120, CGRectGetMaxY(view.frame) + 20, 160, 35) chooseCount:1 totalCount: 20];
     
     [_changeView.subButton addTarget:self action:@selector(subButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -212,7 +245,6 @@ static CGFloat BUTTONHEIGHT = 50;
 //减
 - (void)subButtonPressed:(id)sender
 {
-    
     if (self.choosedCount >1) {
         [self deleteCar];
     }
@@ -273,7 +305,7 @@ static CGFloat BUTTONHEIGHT = 50;
         BOOL found = NO;//选中的参数id集合必须和给出的参数id集合中一一对应
 
         id key = [keys_specname objectAtIndex:i];
-        id value = [self.speclistDict objectForKey:key];
+//        id value = [self.speclistDict objectForKey:key];
         NSArray *arr = [key componentsSeparatedByString:@"|"];
         
         for (int i = 0; i  < [arr count]; i ++ )
@@ -298,7 +330,7 @@ static CGFloat BUTTONHEIGHT = 50;
         }
         else
         {
-            //TODO 没找到出错了
+            //TODO 没找到
         }
 
     }
@@ -335,41 +367,57 @@ static CGFloat BUTTONHEIGHT = 50;
     }
     if (self.type == OrderTypeAdd2cart)
     {
-        [CommonRemoteHelper RemoteWithUrl:URL_Cart_add parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                     @"goods_id" : self.goodsID,
-                                                                     @"client" : @"ios",
-                                                                     @"quantity" : _changeView.numberFD.text}
-                                     type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                         
-                                         id codeNum = [dict objectForKey:@"code"];
-                                         if([codeNum isKindOfClass:[NSString class]])
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                         else
-                                         {
-                                             self.submitClick(YES);
-                                             [self back];
-                                         }
-                                         
-                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         NSLog(@"出错了....");
-                                         [NoticeHelper AlertShow:@"添加失败!" view:self.view];
-                                     }];
-        
+        [self addToShopCar];
     }
-    else
+    else if (self.type == OrderTypeBuyRightnow)
     {
-        self.orderClick(_changeView.numberFD.text);
+        [self buyRightNow];
     }
+}
+
+
+/**
+ *  添加到购物车
+ */
+-(void)addToShopCar
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Cart_add parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                 @"goods_id" : self.goodsID,
+                                                                 @"client" : @"ios",
+                                                                 @"quantity" : _changeView.numberFD.text}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         self.submitClick(YES);
+                                         [self back];
+                                     }
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"出错了....");
+                                     [NoticeHelper AlertShow:@"添加失败!" view:self.view];
+                                 }];
+
+}
+
+/**
+ *  立即购买
+ */
+-(void)buyRightNow
+{
+    self.orderClick(_changeView.numberFD.text);
+
 }
 
 -(void)back
 {
     [self.parentVC dismissSemiModalView];
 }
-
-
 
 @end

@@ -12,7 +12,7 @@
 
 @interface GoodsSelectedViewController : UIViewController
 
-@property (nonatomic, assign) OrderType *type;
+@property (nonatomic, assign) OrderType type;
 
 //添加购物车提交block
 @property (nonatomic, copy) void (^submitClick)(BOOL isSuccess);
@@ -32,5 +32,10 @@
 
 /**商品信息model*/
 @property (nonatomic, retain) GoodsInfoModel *goodsInfo;
+/**
+
+ *  商品默认规格参数
+ */
+@property (nonatomic, copy) NSString *defaultSpec;
 
 @end

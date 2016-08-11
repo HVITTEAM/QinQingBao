@@ -76,11 +76,11 @@ static CGFloat CHAT_WIDTH;
     //立刻购买
     _buyBt = [[UIButton alloc]initWithFrame:CGRectMake(MTScreenW - BUTTON_WIDTH, 0, BUTTON_WIDTH, self.height)];
     _buyBt.hidden = NO;
-    _buyBt.tag=18;
+    _buyBt.tag = 18;
     [_buyBt setTitle:@"立即购买" forState:UIControlStateNormal];
     [_buyBt.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     
-    [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
+    [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
     [_buyBt setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
     
     [[_buyBt layer]setCornerRadius:3.0];
@@ -95,7 +95,7 @@ static CGFloat CHAT_WIDTH;
     [_add2Car setTitle:@"加入购物车" forState:UIControlStateNormal];
     [_add2Car.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:16]];
     
-    [_add2Car setBackgroundImage:[UIImage imageWithColor:MTNavgationBackgroundColor] forState:UIControlStateNormal];
+    [_add2Car setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
     [_add2Car setBackgroundImage:[UIImage imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateDisabled];
     
     [[_add2Car layer]setCornerRadius:3.0];

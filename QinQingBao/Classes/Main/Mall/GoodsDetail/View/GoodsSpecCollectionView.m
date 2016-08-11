@@ -73,6 +73,14 @@
     GoodsTypeModel *sections = self.dataProvider[indexPath.section];
     GoodsTypeModel *item = sections.datas[indexPath.row];
     
+    //选择默认
+    if ([item.key isEqualToString:self.defaultSpec])
+    {
+        item.selected = YES;
+        sections.selected = YES;
+        if (self.selectedBlock)
+            self.selectedBlock(self.dataProvider);
+    }
     //赋值
     UIButton *typevalue = (UIButton *)[cell viewWithTag:100];
     typevalue.userInteractionEnabled = NO;
@@ -168,6 +176,7 @@
     }
     
     [UIView performWithoutAnimation:^{
+        self.defaultSpec = @"";
         [self.colectView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
     }];
     

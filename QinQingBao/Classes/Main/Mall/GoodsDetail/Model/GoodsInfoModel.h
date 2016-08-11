@@ -51,7 +51,7 @@
 @property(nonatomic,copy)NSString *goods_click;
 @property(nonatomic,copy)NSString *goods_salenum;
 @property(nonatomic,copy)NSString *goods_collect;
-@property(nonatomic,copy)NSString *goods_spec;
+@property(nonatomic,copy)NSDictionary *goods_spec;
 @property(nonatomic,copy)NSString *goods_storage;
 @property(nonatomic,copy)NSString *color_id;
 @property(nonatomic,copy)NSString *evaluation_count;
