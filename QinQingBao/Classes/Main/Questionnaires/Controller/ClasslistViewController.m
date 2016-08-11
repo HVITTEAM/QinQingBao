@@ -80,6 +80,7 @@
         SexViewController *vc = [[SexViewController alloc] init];
         ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
         vc.exam_id = examInfoModel.e_id;
+        vc.e_title = model.c_title;
         vc.calculatype = examInfoModel.e_calculatype;
         [self.navigationController pushViewController:vc animated:YES];
     }else if(exam_infoArray.count> 1){

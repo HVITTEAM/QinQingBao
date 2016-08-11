@@ -26,6 +26,9 @@
  */
 @property (nonatomic, copy) NSString *calculatype;
 
+@property (nonatomic, copy) NSString *e_title;
+
+
 /**
  *  问卷答案列表中的一个数据,从个人中心评价列表中进入该界面时需要传递
  */

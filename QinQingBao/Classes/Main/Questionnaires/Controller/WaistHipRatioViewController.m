@@ -156,6 +156,7 @@
         NSMutableDictionary * dict1 = [[NSMutableDictionary alloc] init];
         [dict1 setObject:answerItem.q_id forKey:@"q_id"];
         [dict1 setObject:rule1Value forKey:@"qa_detail"];
+        [dict1 setValue:answerItem.q_type forKey:@"q_type"];
         [self.answerProvider addObject:dict1];
     }
     
@@ -177,6 +178,8 @@
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:answerItem2.q_id forKey:@"q_id"];
         [dict2 setObject:rule2Value forKey:@"qa_detail"];
+        [dict2 setValue:answerItem2.q_type forKey:@"q_type"];
+
         [self.answerProvider addObject:dict2];
         
     }
@@ -187,7 +190,8 @@
     vc.exam_id = self.exam_id;
     vc.answerProvider = self.answerProvider;
     vc.calculatype = self.calculatype;
-    
+    vc.e_title = self.e_title;
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -23,4 +23,7 @@
  */
 @property (nonatomic, copy) NSString *calculatype;
 
+@property (nonatomic, copy) NSString *e_title;
+
+
 @end

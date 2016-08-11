@@ -44,7 +44,7 @@
 -(void)setItem:(ReportListModel *)item
 {
     self.nameLb.text = item.r_etitle;
-    self.timeLb.text = [MTDateHelper getDaySince1970:item.r_createtime dateformat:@"yyyy-MM-dd hh:mm"];
+    self.timeLb.text = item.r_createtime;
     self.resultLb.text = item.r_hmtitle;
    
     if ([item.r_danger isEqualToString:@"健康达人"])

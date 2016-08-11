@@ -142,7 +142,7 @@
     
     if (self.tableView.header.state != MJRefreshStateRefreshing)
     {
-        marketcell.item = dataProvider[indexPath.section];
+        [marketcell setModelWith:dataProvider[indexPath.section]];
     }
     return marketcell;
 }
@@ -153,6 +153,7 @@
     ExamModel *item = dataProvider[indexPath.section];
     vc.eq_id = 1;
     vc.exam_id = item.e_id;
+    vc.e_title = item.e_title;
     vc.calculatype = item.e_calculatype;
     [self.navigationController pushViewController:vc animated:YES];
 }

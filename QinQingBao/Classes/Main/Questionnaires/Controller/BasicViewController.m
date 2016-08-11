@@ -182,6 +182,7 @@
     {
         NSMutableDictionary * dict2 = [[NSMutableDictionary alloc] init];
         [dict2 setObject:item2.q_id forKey:@"q_id"];
+        [dict2 setValue:item2.q_type forKey:@"q_type"];
         [dict2 setObject:selectedHeight > 0 ? [NSString stringWithFormat:@"%.0f",selectedHeight] : @"170" forKey:@"qa_detail"];
         [self.answerProvider addObject:dict2];
     }
@@ -202,6 +203,7 @@
     {
         NSMutableDictionary *dict3 = [[NSMutableDictionary alloc] init];
         [dict3 setObject:item3.q_id forKey:@"q_id"];
+        [dict3 setValue:item3.q_type forKey:@"q_type"];
         [dict3 setObject:selectedWeight > 0 ? [NSString stringWithFormat:@"%.0f",selectedWeight] : @"60" forKey:@"qa_detail"];
         [self.answerProvider addObject:dict3];
     }
@@ -210,6 +212,7 @@
     vc.dataProvider = self.dataProvider;
     vc.answerProvider = self.answerProvider;
     vc.exam_id = self.exam_id;
+    vc.e_title = self.e_title;
     vc.calculatype = self.calculatype;
     
     [self.navigationController pushViewController:vc animated:YES];

@@ -27,6 +27,12 @@
 @property (nonatomic, copy) NSString *exam_id;
 
 /**
+ *  e_title
+ */
+@property (nonatomic, copy) NSString *e_title;
+
+
+/**
  *  模型计算ID
  */
 @property (nonatomic, copy) NSString *calculatype;

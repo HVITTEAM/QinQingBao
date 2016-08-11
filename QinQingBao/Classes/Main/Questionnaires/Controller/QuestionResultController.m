@@ -79,7 +79,9 @@
 {
     NSMutableDictionary *resultdict = [[NSMutableDictionary alloc] init];
     [resultdict setObject:self.exam_id forKey:@"exam_id"];
+    [resultdict setObject:self.e_title forKey:@"r_etitle"];
     [resultdict setObject:self.answerProvider forKey:@"qitem"];
+    
     NSLog(@"%@",resultdict);
     NSString *dictstr = [self dictionaryToJson:[resultdict copy]];
     NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -100,7 +102,6 @@
         [paramDict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     }
     
-    
     [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
@@ -116,7 +117,7 @@
                                          self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
                                          self.circleView.dangerText = model.r_dangercoefficient;
                                          self.titleLab.text = model.r_hmtitle;
-                                         self.circleView.midStr = model.hmd_diseaseprobability;
+                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
@@ -161,7 +162,7 @@
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
                                          self.circleView.dangerText = model.r_dangercoefficient;
-                                         self.circleView.midStr = model.hmd_diseaseprobability;
+                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
                                          self.titleLab.text = model.r_hmtitle;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;

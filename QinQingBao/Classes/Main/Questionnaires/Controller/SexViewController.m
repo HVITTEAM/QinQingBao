@@ -90,6 +90,7 @@
     vc.answerProvider = arr;
     vc.exam_id = self.exam_id;
     vc.calculatype = self.calculatype;
+    vc.e_title = self.e_title;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
