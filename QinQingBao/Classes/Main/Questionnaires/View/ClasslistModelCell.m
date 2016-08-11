@@ -38,6 +38,7 @@
 {
     self.containerView.layer.cornerRadius = 8;
     self.numberBkView.layer.cornerRadius = 8;
+    self.numberLb.text = nil;
 }
 
 -(void)setModelWith:(ClasslistModel *)model

@@ -283,8 +283,8 @@
 		017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017179131BEC45140070A503 /* OrderServiceDetailCell.m */; };
 		017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017179141BEC45140070A503 /* OrderServiceDetailCell.xib */; };
 		017793A31D35D10200F67D8E /* RadianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017793A21D35D10200F67D8E /* RadianView.m */; };
-		017793BA1D35E3EF00F67D8E /* QuestionBtnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017793B81D35E3EF00F67D8E /* QuestionBtnViewController.m */; };
-		017793BB1D35E3EF00F67D8E /* QuestionBtnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017793B91D35E3EF00F67D8E /* QuestionBtnViewController.xib */; };
+		017793BA1D35E3EF00F67D8E /* CommonBtnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017793B81D35E3EF00F67D8E /* CommonBtnViewController.m */; };
+		017793BB1D35E3EF00F67D8E /* CommonBtnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017793B91D35E3EF00F67D8E /* CommonBtnViewController.xib */; };
 		017793C91D37252E00F67D8E /* QuestionResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 017793C71D37252E00F67D8E /* QuestionResultController.m */; };
 		017793CA1D37252E00F67D8E /* QuestionResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017793C81D37252E00F67D8E /* QuestionResultController.xib */; };
 		017DB0C01CF44661002F97BA /* TimeLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 017DB0BF1CF44661002F97BA /* TimeLineModel.m */; };
@@ -1245,6 +1245,7 @@
 		D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5671D0179E10003D166 /* NewsCell.xib */; };
 		D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5691D0179E10003D166 /* NotificationCell.m */; };
 		D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D56A1D0179E10003D166 /* NotificationCell.xib */; };
+		D2612C4A1D5AB83100F75112 /* DiseaseBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2612C491D5AB83100F75112 /* DiseaseBtnController.m */; };
 		D27175181D585ECE007B9D78 /* ClasslistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27175171D585ECE007B9D78 /* ClasslistViewController.m */; };
 		D271751C1D5862E4007B9D78 /* ClasslistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751B1D5862E4007B9D78 /* ClasslistModel.m */; };
 		D27175201D5865BA007B9D78 /* ClasslistModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */; };
@@ -1261,6 +1262,7 @@
 		D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA3E1B8717C200E7CDDF /* BloodCell.xib */; };
 		D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */; };
 		D279DA451B8726BB00E7CDDF /* HealthBloodPressureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */; };
+		D27A381B1D5ADA2C00EFAF2D /* LifeHealthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27A381A1D5ADA2C00EFAF2D /* LifeHealthViewController.m */; };
 		D287E28F1D2A33FC006CE52C /* CustomInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */; };
 		D287E2901D2A33FC006CE52C /* CustomInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */; };
 		D287E2951D2A3DBA006CE52C /* ReportInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E2931D2A3DBA006CE52C /* ReportInfoCell.m */; };
@@ -1868,9 +1870,9 @@
 		017179141BEC45140070A503 /* OrderServiceDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderServiceDetailCell.xib; sourceTree = "<group>"; };
 		017793A11D35D10200F67D8E /* RadianView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadianView.h; sourceTree = "<group>"; };
 		017793A21D35D10200F67D8E /* RadianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadianView.m; sourceTree = "<group>"; };
-		017793B71D35E3EF00F67D8E /* QuestionBtnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionBtnViewController.h; sourceTree = "<group>"; };
-		017793B81D35E3EF00F67D8E /* QuestionBtnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionBtnViewController.m; sourceTree = "<group>"; };
-		017793B91D35E3EF00F67D8E /* QuestionBtnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionBtnViewController.xib; sourceTree = "<group>"; };
+		017793B71D35E3EF00F67D8E /* CommonBtnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonBtnViewController.h; sourceTree = "<group>"; };
+		017793B81D35E3EF00F67D8E /* CommonBtnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonBtnViewController.m; sourceTree = "<group>"; };
+		017793B91D35E3EF00F67D8E /* CommonBtnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommonBtnViewController.xib; sourceTree = "<group>"; };
 		017793C61D37252E00F67D8E /* QuestionResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionResultController.h; sourceTree = "<group>"; };
 		017793C71D37252E00F67D8E /* QuestionResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionResultController.m; sourceTree = "<group>"; };
 		017793C81D37252E00F67D8E /* QuestionResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionResultController.xib; sourceTree = "<group>"; };
@@ -3418,6 +3420,8 @@
 		D246D5681D0179E10003D166 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D246D5691D0179E10003D166 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 		D246D56A1D0179E10003D166 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		D2612C481D5AB83100F75112 /* DiseaseBtnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiseaseBtnController.h; sourceTree = "<group>"; };
+		D2612C491D5AB83100F75112 /* DiseaseBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseBtnController.m; sourceTree = "<group>"; };
 		D27175161D585ECE007B9D78 /* ClasslistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistViewController.h; sourceTree = "<group>"; };
 		D27175171D585ECE007B9D78 /* ClasslistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistViewController.m; sourceTree = "<group>"; };
 		D271751A1D5862E4007B9D78 /* ClasslistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistModel.h; sourceTree = "<group>"; };
@@ -3446,6 +3450,8 @@
 		D279DA411B8726BB00E7CDDF /* HealthBloodPressureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthBloodPressureViewController.h; sourceTree = "<group>"; };
 		D279DA421B8726BB00E7CDDF /* HealthBloodPressureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBloodPressureViewController.m; sourceTree = "<group>"; };
 		D279DA431B8726BB00E7CDDF /* HealthBloodPressureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthBloodPressureViewController.xib; sourceTree = "<group>"; };
+		D27A38191D5ADA2C00EFAF2D /* LifeHealthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeHealthViewController.h; sourceTree = "<group>"; };
+		D27A381A1D5ADA2C00EFAF2D /* LifeHealthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeHealthViewController.m; sourceTree = "<group>"; };
 		D287E28C1D2A33FC006CE52C /* CustomInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomInfoCell.h; sourceTree = "<group>"; };
 		D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoCell.m; sourceTree = "<group>"; };
 		D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoCell.xib; sourceTree = "<group>"; };
@@ -4238,11 +4244,15 @@
 				01A6B1311D48A37B00DF340C /* CommonRulerViewController.h */,
 				01A6B1321D48A37B00DF340C /* CommonRulerViewController.m */,
 				01A6B1331D48A37B00DF340C /* CommonRulerViewController.xib */,
-				017793B71D35E3EF00F67D8E /* QuestionBtnViewController.h */,
-				017793B81D35E3EF00F67D8E /* QuestionBtnViewController.m */,
-				017793B91D35E3EF00F67D8E /* QuestionBtnViewController.xib */,
+				017793B71D35E3EF00F67D8E /* CommonBtnViewController.h */,
+				017793B81D35E3EF00F67D8E /* CommonBtnViewController.m */,
+				017793B91D35E3EF00F67D8E /* CommonBtnViewController.xib */,
 				015BFDBA1D349F5200EB4A09 /* CommonQuesViewController.h */,
 				015BFDBB1D349F5200EB4A09 /* CommonQuesViewController.m */,
+				D2612C481D5AB83100F75112 /* DiseaseBtnController.h */,
+				D2612C491D5AB83100F75112 /* DiseaseBtnController.m */,
+				D27A38191D5ADA2C00EFAF2D /* LifeHealthViewController.h */,
+				D27A381A1D5ADA2C00EFAF2D /* LifeHealthViewController.m */,
 				D212C84F1D34BE2900619F77 /* BasicViewController.h */,
 				D212C8501D34BE2900619F77 /* BasicViewController.m */,
 				D212C8511D34BE2900619F77 /* BasicViewController.xib */,
@@ -9195,7 +9205,7 @@
 				012AAD1B1CA28D0500CEE121 /* HealthPlaceHolderView.xib in Resources */,
 				01601D951CE0900200B3712E /* EvaluateCell.xib in Resources */,
 				01E68FC11BCCA68900A17543 /* play_sel.png in Resources */,
-				017793BB1D35E3EF00F67D8E /* QuestionBtnViewController.xib in Resources */,
+				017793BB1D35E3EF00F67D8E /* CommonBtnViewController.xib in Resources */,
 				01ECDA7A1C8EB31F0018160F /* chatBar_more.png in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
 				01ECD9FF1C8EB31F0018160F /* Contents.json in Resources */,
@@ -9654,6 +9664,7 @@
 				01EA206F1C2A99C400B546A9 /* HomePicTotal.m in Sources */,
 				019723391BD7303800D58F8B /* RSKImageCropViewController.m in Sources */,
 				01F0D0181B8D99B300EF3238 /* HMBadgeView.m in Sources */,
+				D27A381B1D5ADA2C00EFAF2D /* LifeHealthViewController.m in Sources */,
 				010EC9E71C438D8900D36417 /* MTShopViewModel.m in Sources */,
 				01E4BE571BA0162900BF41EF /* QueryAllEvaluationController.m in Sources */,
 				010B73541C181D46007A496B /* UINavigationBar+Awesome.m in Sources */,
@@ -9816,6 +9827,7 @@
 				016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */,
 				0181B1A81CDC958D00A1435E /* BalanceModel.m in Sources */,
 				011076F51C3E8802001E5C51 /* UIScrollView+Drag.m in Sources */,
+				D2612C4A1D5AB83100F75112 /* DiseaseBtnController.m in Sources */,
 				01EA20731C2A99D600B546A9 /* HomePicModel.m in Sources */,
 				01E9C4921C53284300A77579 /* EvaFootView.m in Sources */,
 				01E9A7461C74613500000805 /* HeredityinfoController.m in Sources */,
@@ -9860,7 +9872,7 @@
 				012AAD211CA4D00900CEE121 /* OrderManCell.m in Sources */,
 				016066C61CF6ACCE005A3164 /* MJRefreshAutoGifFooter.m in Sources */,
 				01E6D4911BE1E78C00824F51 /* BankCardViewController.m in Sources */,
-				017793BA1D35E3EF00F67D8E /* QuestionBtnViewController.m in Sources */,
+				017793BA1D35E3EF00F67D8E /* CommonBtnViewController.m in Sources */,
 				01E4A99F1C41225500AAAF73 /* GoodsClassModel.m in Sources */,
 				01ECDFBD1B7C402100665D87 /* HMCommonGroup.m in Sources */,
 				01E690601BCCAB5900A17543 /* YSCheckSMSCodeViewController.m in Sources */,

@@ -22,18 +22,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="290" height="145"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAN-je-SxJ">
-                                <rect key="frame" x="104" y="105" width="83" height="30"/>
+                                <rect key="frame" x="109" y="114" width="73.5" height="25"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchresult_doctors_icon" translatesAutoresizingMaskIntoConstraints="NO" id="spJ-VN-Vyn">
-                                        <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                        <rect key="frame" x="10" y="5" width="15" height="15"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="AD1-pj-ola"/>
-                                            <constraint firstAttribute="height" constant="20" id="HVR-hU-7sA"/>
+                                            <constraint firstAttribute="width" constant="15" id="AD1-pj-ola"/>
+                                            <constraint firstAttribute="height" constant="15" id="HVR-hU-7sA"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Lh-zK-IDY">
-                                        <rect key="frame" x="40" y="7" width="33" height="16"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <rect key="frame" x="35" y="6" width="28.5" height="13.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -55,7 +55,7 @@
                             <constraint firstAttribute="trailing" secondItem="MmV-g4-OdN" secondAttribute="trailing" id="aWD-d0-v63"/>
                             <constraint firstAttribute="bottom" secondItem="MmV-g4-OdN" secondAttribute="bottom" id="gZ4-Vb-HXu"/>
                             <constraint firstItem="MmV-g4-OdN" firstAttribute="leading" secondItem="4ZG-Co-smc" secondAttribute="leading" id="nUM-lP-x4C"/>
-                            <constraint firstAttribute="bottom" secondItem="GAN-je-SxJ" secondAttribute="bottom" constant="10" id="y8j-0D-Gaj"/>
+                            <constraint firstAttribute="bottom" secondItem="GAN-je-SxJ" secondAttribute="bottom" constant="6" id="y8j-0D-Gaj"/>
                             <constraint firstAttribute="width" secondItem="4ZG-Co-smc" secondAttribute="height" multiplier="2:1" id="zv9-nG-cpr"/>
                         </constraints>
                     </view>

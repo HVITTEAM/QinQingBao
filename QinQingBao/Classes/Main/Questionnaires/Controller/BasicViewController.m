@@ -7,7 +7,6 @@
 //
 
 #import "BasicViewController.h"
-#import "QuestionBtnViewController.h"
 #import "CommonRulerViewController.h"
 #import "WaistHipRatioViewController.h"
 

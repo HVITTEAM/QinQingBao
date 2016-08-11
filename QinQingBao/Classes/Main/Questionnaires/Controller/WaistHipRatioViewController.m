@@ -9,7 +9,7 @@
 #import "WaistHipRatioViewController.h"
 #import "CXRuler.h"
 
-#import "QuestionBtnViewController.h"
+#import "DiseaseBtnController.h"
 
 @interface WaistHipRatioViewController ()<CXRulerDelegate>
 {
@@ -181,7 +181,7 @@
         
     }
     
-    QuestionBtnViewController *vc = [[QuestionBtnViewController alloc] init];
+    DiseaseBtnController *vc = [[DiseaseBtnController alloc] init];
     vc.dataProvider = self.dataProvider;
     vc.eq_id = 4;
     vc.exam_id = self.exam_id;

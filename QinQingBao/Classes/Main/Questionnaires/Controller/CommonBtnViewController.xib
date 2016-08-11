@@ -7,7 +7,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuestionBtnViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonBtnViewController">
             <connections>
                 <outlet property="bigImageView" destination="7xr-es-sPG" id="jLw-wo-wN6"/>
                 <outlet property="btnCollectionView" destination="tHs-NZ-74z" id="G7a-Hq-z6J"/>
@@ -76,7 +76,7 @@
                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head" translatesAutoresizingMaskIntoConstraints="NO" id="Soy-YY-KNP">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Soy-YY-KNP">
                                     <rect key="frame" x="111" y="36" width="77" height="76.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Soy-YY-KNP" secondAttribute="height" id="03S-T5-9KD"/>
@@ -148,7 +148,6 @@
         </view>
     </objects>
     <resources>
-        <image name="head" width="150" height="150"/>
         <image name="pageNumber" width="83" height="44"/>
     </resources>
 </document>
