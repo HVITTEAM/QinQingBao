@@ -8,7 +8,7 @@
 
 #import "QuestionThreeController.h"
 
-#import "QuestionBtnViewController.h"
+#import "DiseaseBtnController.h"
 
 
 @interface QuestionThreeController ()<UIPickerViewDataSource,UIPickerViewDelegate>
@@ -207,7 +207,7 @@
         
     }
     
-    QuestionBtnViewController *nextQuestionBtnVC = [[QuestionBtnViewController alloc] init];
+    DiseaseBtnController *nextQuestionBtnVC = [[DiseaseBtnController alloc] init];
     nextQuestionBtnVC.dataProvider = self.dataProvider;
     nextQuestionBtnVC.eq_id = 11;
     nextQuestionBtnVC.exam_id = self.exam_id;

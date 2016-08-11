@@ -9,7 +9,7 @@
 #import "AllQuestionController.h"
 #import "CommonExamCell.h"
 #import "ExamModel.h"
-#import "SexViewController.h"
+#import "LifeHealthViewController.h"
 
 @interface AllQuestionController ()
 {
@@ -154,8 +154,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SexViewController *vc = [[SexViewController alloc] init];
+    LifeHealthViewController *vc = [[LifeHealthViewController alloc] init];
     ExamModel *item = dataProvider[indexPath.section];
+    vc.eq_id = 1;
     vc.exam_id = item.e_id;
     vc.calculatype = item.e_calculatype;
     [self.navigationController pushViewController:vc animated:YES];
