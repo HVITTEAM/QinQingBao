@@ -7,7 +7,7 @@
 //
 
 #import "AllQuestionController.h"
-#import "CommonExamCell.h"
+#import "ExamCell.h"
 #import "ExamModel.h"
 #import "LifeHealthViewController.h"
 
@@ -40,6 +40,8 @@
     [self getDataProvider];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.estimatedRowHeight = 70;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.view.backgroundColor = HMGlobalBg;
     self.title = @"健康评估";
 }
@@ -130,22 +132,15 @@
     return 10;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 145;
-}
-
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     return [[UIView alloc] init];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    CommonExamCell *marketcell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonExamCell"];
+    ExamCell *marketcell = [ExamCell createCellWithTableView:tableView];
     
-    if (marketcell == nil)
-        marketcell = [CommonExamCell commonExamCell];
-    
-    marketcell.item = dataProvider[indexPath.section];
+    [marketcell setModelWith:dataProvider[indexPath.section]];
     
     return marketcell;
 }

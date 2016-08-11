@@ -1,15 +1,15 @@
 //
-//  ClasslistModelCell.m
+//  ExamCell.m
 //  QinQingBao
 //
-//  Created by shi on 16/8/8.
+//  Created by shi on 16/8/11.
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "ClasslistModelCell.h"
-#import "ClasslistModel.h"
+#import "ExamCell.h"
+#import "ExamModel.h"
 
-@interface ClasslistModelCell ()
+@interface ExamCell ()
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
@@ -21,14 +21,14 @@
 
 @end
 
-@implementation ClasslistModelCell
+@implementation ExamCell
 
 +(instancetype)createCellWithTableView:(UITableView *)tableView
 {
-    static NSString *cellid = @"classlistModelCell";
-    ClasslistModelCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
+    static NSString *cellid = @"examCell";
+    ExamCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ClasslistModelCell" owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ExamCell" owner:nil options:nil] lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -41,11 +41,11 @@
     self.numberLb.text = nil;
 }
 
--(void)setModelWith:(ClasslistModel *)model
+-(void)setModelWith:(ExamModel *)model
 {
     self.numberLb.text = [NSString stringWithFormat:@"有%@人次参与",model.count?:@"0"];
     
-    NSURL *url = [NSURL URLWithString:model.c_itemurl];
+    NSURL *url = [NSURL URLWithString:model.e_itemurl];
     
     [self.bkImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
 }
