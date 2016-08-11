@@ -1240,6 +1240,8 @@
 		D2319F351D4B26EB00470F71 /* AdviseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2319F341D4B26EB00470F71 /* AdviseModel.m */; };
 		D239DE771D332FD5005C994C /* ServiceInfoEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */; };
 		D239DE781D332FD5005C994C /* ServiceInfoEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */; };
+		D23BCD971D5C4FCF0091D440 /* ExamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D23BCD951D5C4FCF0091D440 /* ExamCell.m */; };
+		D23BCD981D5C4FCF0091D440 /* ExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BCD961D5C4FCF0091D440 /* ExamCell.xib */; };
 		D246D56B1D0179E10003D166 /* LogisticNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5631D0179E10003D166 /* LogisticNotificationCell.m */; };
 		D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */; };
 		D246D56D1D0179E10003D166 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5661D0179E10003D166 /* NewsCell.m */; };
@@ -3412,6 +3414,9 @@
 		D239DE741D332FD5005C994C /* ServiceInfoEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceInfoEmailCell.h; sourceTree = "<group>"; };
 		D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfoEmailCell.m; sourceTree = "<group>"; };
 		D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceInfoEmailCell.xib; sourceTree = "<group>"; };
+		D23BCD941D5C4FCF0091D440 /* ExamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamCell.h; sourceTree = "<group>"; };
+		D23BCD951D5C4FCF0091D440 /* ExamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamCell.m; sourceTree = "<group>"; };
+		D23BCD961D5C4FCF0091D440 /* ExamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExamCell.xib; sourceTree = "<group>"; };
 		D246D5621D0179E10003D166 /* LogisticNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogisticNotificationCell.h; sourceTree = "<group>"; };
 		D246D5631D0179E10003D166 /* LogisticNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogisticNotificationCell.m; sourceTree = "<group>"; };
 		D246D5641D0179E10003D166 /* LogisticNotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogisticNotificationCell.xib; sourceTree = "<group>"; };
@@ -4324,6 +4329,9 @@
 				D271751D1D5865BA007B9D78 /* ClasslistModelCell.h */,
 				D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */,
 				D271751F1D5865BA007B9D78 /* ClasslistModelCell.xib */,
+				D23BCD941D5C4FCF0091D440 /* ExamCell.h */,
+				D23BCD951D5C4FCF0091D440 /* ExamCell.m */,
+				D23BCD961D5C4FCF0091D440 /* ExamCell.xib */,
 				01A6B1361D48A3B900DF340C /* ButtonCell.h */,
 				01A6B1371D48A3B900DF340C /* ButtonCell.m */,
 				01A6B1381D48A3B900DF340C /* ButtonCell.xib */,
@@ -9225,6 +9233,7 @@
 				012AAD1B1CA28D0500CEE121 /* HealthPlaceHolderView.xib in Resources */,
 				01601D951CE0900200B3712E /* EvaluateCell.xib in Resources */,
 				01E68FC11BCCA68900A17543 /* play_sel.png in Resources */,
+				D23BCD981D5C4FCF0091D440 /* ExamCell.xib in Resources */,
 				017793BB1D35E3EF00F67D8E /* CommonBtnViewController.xib in Resources */,
 				01ECDA7A1C8EB31F0018160F /* chatBar_more.png in Resources */,
 				0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */,
@@ -9966,6 +9975,7 @@
 				01EB31BF1C040347002D8229 /* CitiesViewController.m in Sources */,
 				017793A31D35D10200F67D8E /* RadianView.m in Sources */,
 				01ECDADA1C8EB31F0018160F /* BusinessDataCenter.m in Sources */,
+				D23BCD971D5C4FCF0091D440 /* ExamCell.m in Sources */,
 				01ECDAEA1C8EB31F0018160F /* EMSDImageCache.m in Sources */,
 				01E81CF31C7FFA1A006F4693 /* GoodsSpecCollectionView.m in Sources */,
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,

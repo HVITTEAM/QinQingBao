@@ -38,6 +38,8 @@
     self.dataProvider = [[NSMutableArray alloc] init];
     
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    self.tableView.estimatedRowHeight = 70;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [self getDataProvider];
     
@@ -59,16 +61,6 @@
 }
 
 #pragma mark - UITableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 145;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath].height;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 10;
