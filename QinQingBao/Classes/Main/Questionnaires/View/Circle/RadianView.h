@@ -10,7 +10,11 @@
 
 @interface RadianView : UIView
 
+//圆圈的值
 @property(assign,nonatomic)CGFloat percentValue;   //0到100的值,表示百分比,默认为0
+
+//中间显示的文本
+@property (nonatomic, copy) NSString *midStr;
 
 @property(assign,nonatomic)CGFloat lineWidth;  //线宽  默认为20
 

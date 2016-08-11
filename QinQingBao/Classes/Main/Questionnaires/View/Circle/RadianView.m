@@ -203,6 +203,11 @@
     self.lowerLayer.lineDashPattern = self.upperLayer.lineDashPattern;
 }
 
+-(void)setMidStr:(NSString *)midStr
+{
+    _midStr = midStr;
+}
+
 -(void)setPercentValue:(CGFloat)percentValue
 {
     _percentValue = percentValue;
@@ -309,15 +314,12 @@
 
     if ((currentValue >= self.percentValue))
     {
-        
-        NSString *str = [NSString stringWithFormat:@"%.0f",currentValue];
-        
-        NSString *string                            = [NSString stringWithFormat:@"%.0f%%",currentValue];
+        NSString *string                            = [NSString stringWithFormat:@"%@%%",self.midStr];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:13.f]
-                                 range:NSMakeRange(str.length, 1)];
+                                 range:NSMakeRange(self.midStr.length, 1)];
         
         lab.attributedText = attributedString;
 
@@ -328,14 +330,13 @@
     }
     else
     {
-        NSString *str = [NSString stringWithFormat:@"%.0f",currentValue];
         
-        NSString *string                            = [NSString stringWithFormat:@"%.0f%%",currentValue];
+        NSString *string                            = [NSString stringWithFormat:@"%@%%",self.midStr];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         
         [attributedString addAttribute:NSFontAttributeName
                                  value:[UIFont systemFontOfSize:13.f]
-                                 range:NSMakeRange(str.length, 1)];
+                                 range:NSMakeRange(self.midStr.length, 1)];
         
             lab.attributedText = attributedString;
     }

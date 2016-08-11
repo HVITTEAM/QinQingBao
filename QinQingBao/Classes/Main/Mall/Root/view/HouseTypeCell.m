@@ -80,11 +80,11 @@ static float cellWidth = 66;
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
     UILabel *label = (UILabel *)[cell viewWithTag:2];
+    label.textColor = [UIColor colorWithRGB:@"666666"];
     NSInteger index = indexPath.section *4 + indexPath.row;
     if (index < dataProvider.count) {
         GoodsClassModel *data = [dataProvider objectAtIndex:index];
         NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,data.url,data.gc_thumb]];
-        //        NSURL *iconUrl = [NSURL URLWithString:data.image];
         [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         label.text = data.gc_name;
     }

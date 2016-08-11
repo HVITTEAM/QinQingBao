@@ -43,7 +43,6 @@
         self.promptView.backgroundColor = [UIColor whiteColor];
         [self.promptView initWithPlaceString:@"正在加载请稍后"];
         [self.view addSubview:self.promptView];
-        
         [self getDataProvider];
     }else{
         [self setDatasForUI];
@@ -162,7 +161,6 @@
             }
             [self.selectedIdxArray removeObjectsInArray:deSelectedOptions];
         }
-        
     }
     
     //需要调用父类的这个方法
@@ -287,6 +285,5 @@
                                      NSLog(@"发生错误！%@",error);
                                  }];
 }
-
 
 @end

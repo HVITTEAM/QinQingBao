@@ -34,6 +34,22 @@
 {
     [super viewDidLoad];
     
+    UIImageView *img = [[UIImageView alloc] init];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, queue, ^{
+        [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
+    });
+    dispatch_group_async(group, queue, ^{
+        [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
+    });
+    dispatch_group_async(group, queue, ^{  [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
+        
+    });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"全部加载完成");
+    });
+    
     self.title = @"评估结果";
     
     self.circleView.upperCircleColor = [UIColor orangeColor];
@@ -75,11 +91,17 @@
  */
 -(void)submit_exam:(NSString *)resultStr
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:@{@"result" : resultStr,
-                                                                   @"client" : @"ios",
-                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key ? [SharedAppUtil defaultCommonUtil].userVO.key : @"",
-                                                                   @"calculatype":self.calculatype
-                                                                   }
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] initWithDictionary:@{@"result" : resultStr,
+                                                                                       @"client" : @"ios",
+                                                                                       @"calculatype":self.calculatype
+                                                                                       }];
+    if ( [SharedAppUtil defaultCommonUtil].userVO.key)
+    {
+        [paramDict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+    }
+    
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -91,9 +113,10 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_totalscore floatValue];
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
                                          self.circleView.dangerText = model.r_dangercoefficient;
                                          self.titleLab.text = model.r_hmtitle;
+                                         self.circleView.midStr = model.hmd_diseaseprobability;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;
                                          self.lab2.text = model.r_result.hmd_advise_sports;
@@ -136,8 +159,9 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_totalscore floatValue];
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
                                          self.circleView.dangerText = model.r_dangercoefficient;
+                                         self.circleView.midStr = model.hmd_diseaseprobability;
                                          self.titleLab.text = model.r_hmtitle;
                                          
                                          self.lab1.text = model.r_result.hmd_advise_diet;

@@ -14,6 +14,8 @@
 @property (nonatomic, copy) NSString *r_eid;
 @property (nonatomic, copy) NSString *r_hmtitle;
 @property (nonatomic, copy) NSString *r_totalscore;
+@property (nonatomic, copy) NSString *hmd_diseaseprobability;
+@property (nonatomic, copy) NSArray *r_dangerpercent;
 @property (nonatomic, strong) AdviseModel *r_result;
 @property (nonatomic, copy) NSString *r_createtime;
 @property (nonatomic, copy) NSString *r_dangercoefficient;

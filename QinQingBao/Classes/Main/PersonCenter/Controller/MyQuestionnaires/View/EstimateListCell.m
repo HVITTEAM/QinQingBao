@@ -17,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *resultLb;
 
+@property (strong, nonatomic) IBOutlet UIImageView *levelImg;
+
 @end
 
 @implementation EstimateListCell
@@ -41,9 +43,46 @@
 
 -(void)setItem:(ReportListModel *)item
 {
-    self.nameLb.text = item.r_hmtitle;
+    self.nameLb.text = item.r_etitle;
     self.timeLb.text = [MTDateHelper getDaySince1970:item.r_createtime dateformat:@"yyyy-MM-dd hh:mm"];
-    self.resultLb.text = item.r_danger;
+    self.resultLb.text = item.r_hmtitle;
+   
+    if ([item.r_danger isEqualToString:@"健康达人"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_1.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"蓝色预警"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_2.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"黄色语境"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_3.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"橙色预警"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_4.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"极低危"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_5.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"低危"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_6.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"中危"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_7.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"高危"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_8.png"];
+    }
+    else if ([item.r_danger isEqualToString:@"极高危"])
+    {
+        self.levelImg.image = [UIImage imageNamed:@"level_9.png"];
+    }
 }
 
 @end
