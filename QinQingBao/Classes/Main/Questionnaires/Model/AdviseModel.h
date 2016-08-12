@@ -18,4 +18,8 @@
 
 @property (nonatomic, copy) NSString *hmd_advise_other;
 
+//生命健康
+@property (nonatomic, copy) NSString *hmd_advise;
+
+
 @end

@@ -18,7 +18,6 @@
 
 @property(copy,nonatomic)NSString *r_etitle;
 
-
 @property(copy,nonatomic)NSString *r_createtime;
 
 @property(copy,nonatomic)NSString *r_danger;

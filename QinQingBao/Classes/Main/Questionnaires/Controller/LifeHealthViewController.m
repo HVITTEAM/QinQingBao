@@ -10,7 +10,7 @@
 #import "QuestionModel.h"
 #import "QuestionModel_1.h"
 #import "OptionModel.h"
-#import "QuestionResultController.h"
+#import "QuestionResultController2.h"
 
 @interface LifeHealthViewController ()
 
@@ -252,7 +252,7 @@
         nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
     }else if (nextQuestionId == self.dataProvider.count + 1){
-        QuestionResultController *vc = [[QuestionResultController alloc] init];
+        QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
         vc.answerProvider = self.answerProvider;
         vc.exam_id = self.exam_id;
         vc.e_title = self.e_title;

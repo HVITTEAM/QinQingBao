@@ -18,7 +18,6 @@
     return cell;
 }
 
-
 -(void)initView
 {
     self.topLine.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];

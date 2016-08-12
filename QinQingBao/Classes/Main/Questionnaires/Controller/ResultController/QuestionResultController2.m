@@ -1,24 +1,22 @@
 //
-//  QuestionResultController.m
+//  QuestionResultController2.m
 //  QinQingBao
 //
 //  Created by 董徐维 on 16/7/14.
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "QuestionResultController.h"
+#import "QuestionResultController2.h"
 #import "RadianView.h"
 #import "ResultModel.h"
 #import "ReportListModel.h"
 
-@interface QuestionResultController ()
+@interface QuestionResultController2 ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet RadianView *circleView;
 @property (strong, nonatomic) IBOutlet UIScrollView *bgview;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 @property (strong, nonatomic) IBOutlet UILabel *lab1;
-@property (strong, nonatomic) IBOutlet UILabel *lab2;
-@property (strong, nonatomic) IBOutlet UILabel *lab3;
 @property (strong, nonatomic) IBOutlet UIButton *btn1;
 @property (strong, nonatomic) IBOutlet UIButton *btn2;
 @property (strong, nonatomic) IBOutlet UIImageView *bottomImg;
@@ -27,29 +25,12 @@
 
 @end
 
-@implementation QuestionResultController
+@implementation QuestionResultController2
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //push太慢
-    
-    UIImageView *img = [[UIImageView alloc] init];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_group_async(group, queue, ^{
-        [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
-    });
-    dispatch_group_async(group, queue, ^{
-        [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
-    });
-    dispatch_group_async(group, queue, ^{  [img sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/logo_white_fe6da1ec.png"] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
-        
-    });
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        NSLog(@"全部加载完成");
-    });
     
     self.title = @"评估结果";
     
@@ -115,28 +96,16 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
-                                         self.circleView.dangerText = model.r_dangercoefficient;
                                          self.titleLab.text = model.r_hmtitle;
-                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
+                                         self.lab1.text = model.r_result.hmd_advise;
                                          
-                                         self.lab1.text = model.r_result.hmd_advise_diet;
-                                         self.lab2.text = model.r_result.hmd_advise_sports;
-                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                         self.circleView.midStr = model.r_dangercoefficient;
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
+
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];
-}
-
-//词典转换为字符串
-- (NSString*)dictionaryToJson:(NSDictionary *)dic
-{
-    NSError *parseError = nil;
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
-    
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 /**
@@ -161,18 +130,25 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
-                                         self.circleView.dangerText = model.r_dangercoefficient;
-                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
                                          self.titleLab.text = model.r_hmtitle;
+                                         self.lab1.text = model.r_result.hmd_advise;
                                          
-                                         self.lab1.text = model.r_result.hmd_advise_diet;
-                                         self.lab2.text = model.r_result.hmd_advise_sports;
-                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                         self.circleView.midStr = model.r_dangercoefficient;
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];
+}
+
+//词典转换为字符串
+- (NSString*)dictionaryToJson:(NSDictionary *)dic
+{
+    NSError *parseError = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 @end

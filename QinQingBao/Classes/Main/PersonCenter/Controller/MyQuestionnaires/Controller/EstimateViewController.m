@@ -10,6 +10,7 @@
 #import "EstimateListCell.h"
 #import "ReportListModel.h"
 #import "QuestionResultController.h"
+#import "QuestionResultController2.h"
 
 @interface EstimateViewController ()
 
@@ -41,7 +42,7 @@
     self.navigationItem.title = @"我的评估";
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
     self.dataProvider = [[NSMutableArray alloc] init];
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
@@ -51,7 +52,7 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return self.dataProvider.count;
 }
 
@@ -70,9 +71,21 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    QuestionResultController *vc = [[QuestionResultController alloc] init];
-    vc.reportListModel = self.dataProvider[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    ReportListModel *reportListModel = self.dataProvider[indexPath.row];
+    
+    //如果reid = 1 就是疾病风险
+    if ([reportListModel.r_eid isEqualToString:@"1"])
+    {
+        QuestionResultController *vc = [[QuestionResultController alloc] init];
+        vc.reportListModel = reportListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
+        vc.reportListModel = reportListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - 网络相关
@@ -85,7 +98,7 @@
     if (self.p == 1) {
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
-
+    
     NSDictionary *params = @{
                              @"client":@"ios",
                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
