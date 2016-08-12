@@ -23,6 +23,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *bigImageView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bigImageViewWidthHeightCons;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 
 @property (weak, nonatomic) IBOutlet UILabel *subtitleLb;
