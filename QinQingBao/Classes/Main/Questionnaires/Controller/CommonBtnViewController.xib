@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonBtnViewController">
             <connections>
                 <outlet property="bigImageView" destination="7xr-es-sPG" id="jLw-wo-wN6"/>
+                <outlet property="bigImageViewWidthHeightCons" destination="AsW-vI-wja" id="uz0-Vg-yA4"/>
                 <outlet property="btnCollectionView" destination="tHs-NZ-74z" id="G7a-Hq-z6J"/>
                 <outlet property="collectionViewHeightCons" destination="wGA-iX-B40" id="G1v-OY-Yyr"/>
                 <outlet property="containerView" destination="8jA-yA-Yp0" id="zQ5-Qh-xkz"/>
@@ -32,7 +33,7 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jA-yA-Yp0">
                             <rect key="frame" x="10" y="10" width="300" height="526.5"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-es-sPG">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_serviceMarket" translatesAutoresizingMaskIntoConstraints="NO" id="7xr-es-sPG">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="7xr-es-sPG" secondAttribute="height" multiplier="2:1" id="AsW-vI-wja"/>
@@ -149,5 +150,6 @@
     </objects>
     <resources>
         <image name="pageNumber" width="83" height="44"/>
+        <image name="placeholder_serviceMarket" width="300" height="93"/>
     </resources>
 </document>

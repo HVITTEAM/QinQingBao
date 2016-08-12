@@ -46,7 +46,7 @@
 -(void)setDatasForUI
 {
     //设置页面序号
-    NSString *pageNumStr = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    NSString *pageNumStr = [NSString stringWithFormat:@"%d/%02d",(int)self.eq_id,(int)self.dataProvider.count];
     NSDictionary *attr1 = @{
                             NSFontAttributeName :[UIFont systemFontOfSize:10],
                             NSForegroundColorAttributeName:HMColor(228, 185, 160)

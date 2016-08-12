@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="111.5"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zo6-fn-Ju0">
-                                <rect key="frame" x="216.5" y="80.5" width="73.5" height="25"/>
+                                <rect key="frame" x="221.5" y="80.5" width="68.5" height="25"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" translatesAutoresizingMaskIntoConstraints="NO" id="b8x-Ki-81a">
                                         <rect key="frame" x="10" y="5" width="15" height="15"/>
@@ -32,17 +32,17 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXU-jF-AqH">
-                                        <rect key="frame" x="35" y="6" width="28.5" height="13.5"/>
+                                        <rect key="frame" x="30" y="6" width="28.5" height="13.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                        <color key="textColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.49838238109999999" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.29679112343128833" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="uXU-jF-AqH" firstAttribute="centerY" secondItem="b8x-Ki-81a" secondAttribute="centerY" id="A7X-Ra-22H"/>
                                     <constraint firstAttribute="trailing" secondItem="uXU-jF-AqH" secondAttribute="trailing" constant="10" id="McM-0y-P6D"/>
-                                    <constraint firstItem="uXU-jF-AqH" firstAttribute="leading" secondItem="b8x-Ki-81a" secondAttribute="trailing" constant="10" id="kUX-2v-lRg"/>
+                                    <constraint firstItem="uXU-jF-AqH" firstAttribute="leading" secondItem="b8x-Ki-81a" secondAttribute="trailing" constant="5" id="kUX-2v-lRg"/>
                                     <constraint firstItem="b8x-Ki-81a" firstAttribute="top" secondItem="zo6-fn-Ju0" secondAttribute="top" constant="5" id="sAt-K9-3TD"/>
                                     <constraint firstAttribute="bottom" secondItem="b8x-Ki-81a" secondAttribute="bottom" constant="5" id="u1J-gm-o9t"/>
                                     <constraint firstItem="b8x-Ki-81a" firstAttribute="leading" secondItem="zo6-fn-Ju0" secondAttribute="leading" constant="10" id="xHe-Um-PYo"/>

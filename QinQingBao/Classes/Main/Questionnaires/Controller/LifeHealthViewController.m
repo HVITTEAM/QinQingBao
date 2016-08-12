@@ -38,11 +38,18 @@
 {
     [super viewDidLoad];
 
+    self.bigImageViewWidthHeightCons.active = NO;
+    NSLayoutConstraint *cons = [NSLayoutConstraint constraintWithItem:self.bigImageView
+                                                            attribute:NSLayoutAttributeWidth
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:self.bigImageView
+                                                            attribute:NSLayoutAttributeHeight
+                                                           multiplier:668/260.0
+                                                             constant:0];
+    cons.active = YES;
+    
+//    [self.bigImageView addConstraint:];
     if (self.eq_id <= 1) {
-        self.promptView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, MTScreenH - 64)];
-        self.promptView.backgroundColor = [UIColor whiteColor];
-        [self.promptView initWithPlaceString:@"正在加载请稍后"];
-        [self.view addSubview:self.promptView];
         [self getDataProvider];
     }else{
         [self setDatasForUI];
@@ -56,17 +63,8 @@
  */
 -(void)setDatasForUI
 {
-    if (self.promptView) {
-        [UIView animateWithDuration:0.8 animations:^{
-            self.promptView.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self.promptView removeFromSuperview];
-        }];
-        
-    }
-    
     //设置页面序号
-    NSString *pageNumStr = [NSString stringWithFormat:@"%d/%d",(int)self.eq_id,(int)self.dataProvider.count];
+    NSString *pageNumStr = [NSString stringWithFormat:@"%d/%02d",(int)self.eq_id,(int)self.dataProvider.count];
     NSDictionary *attr1 = @{
                             NSFontAttributeName :[UIFont systemFontOfSize:10],
                             NSForegroundColorAttributeName:HMColor(228, 185, 160)
@@ -115,9 +113,9 @@
     
     //选项超过4个就两行排列
     self.datas = self.qModel_1.options;
-    if (self.datas.count >= 5) {
-        self.isTwo = YES;
-    }
+//    if (self.datas.count >= 5) {
+//        self.isTwo = YES;
+//    }
     
     //设置默认数据
     if (self.datas.count > 0) {
