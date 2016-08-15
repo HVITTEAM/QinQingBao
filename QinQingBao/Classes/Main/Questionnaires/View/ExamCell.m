@@ -47,7 +47,7 @@
     
     NSURL *url = [NSURL URLWithString:model.e_itemurl];
     
-    [self.bkImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    [self.bkImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderDetail"]];
 }
 
 @end
