@@ -111,7 +111,7 @@
 //重写父类方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.qModel_1.q_rule) {
+    if (self.qModel_1.q_rule && self.qModel_1.q_rule.length > 0) {
         
         NSArray *options = [self analyzeRules:self.qModel_1.q_rule];
         NSMutableArray *options_one = options[0];

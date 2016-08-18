@@ -58,7 +58,7 @@
 -(void)initRuler
 {
     UIImageView *headimg = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW/2 - 50, 90, 100, 100)];
-    headimg.image = [UIImage imageNamed:@"man.png"];
+    headimg.image = self.headImgData;
     [self.view addSubview:headimg];
     
     UILabel  *titleLab= [[UILabel alloc] init];

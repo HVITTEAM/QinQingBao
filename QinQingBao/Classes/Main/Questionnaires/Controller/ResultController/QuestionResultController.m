@@ -49,6 +49,9 @@
     if (self.reportListModel) {
         [self getReportResult];
     }else [self getResult];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+
 }
 
 
@@ -57,7 +60,7 @@
 }
 
 - (IBAction)btn2Handler:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 
 -(void)getResult
@@ -99,7 +102,7 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
+                                         self.circleView.percentValue = [model.r_result.hmd_diseaseprobability floatValue];
                                          self.circleView.dangerText = model.r_dangercoefficient;
                                          self.titleLab.text = model.r_hmtitle;
                                          self.circleView.midStr = model.r_result.hmd_diseaseprobability;
@@ -145,7 +148,7 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
+                                         self.circleView.percentValue = [model.r_result.hmd_diseaseprobability floatValue];
                                          self.circleView.dangerText = model.r_dangercoefficient;
                                          self.circleView.midStr = model.r_result.hmd_diseaseprobability;
                                          self.titleLab.text = model.r_hmtitle;
@@ -157,6 +160,12 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];
+}
+
+
+-(void)back
+{
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 
 @end
