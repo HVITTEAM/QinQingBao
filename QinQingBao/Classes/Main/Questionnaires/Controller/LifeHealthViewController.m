@@ -37,7 +37,7 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.bigImageViewWidthHeightCons.active = NO;
     NSLayoutConstraint *cons = [NSLayoutConstraint constraintWithItem:self.bigImageView
                                                             attribute:NSLayoutAttributeWidth
@@ -48,14 +48,15 @@
                                                              constant:0];
     cons.active = YES;
     
-//    [self.bigImageView addConstraint:];
+    //    [self.bigImageView addConstraint:];
     if (self.eq_id <= 1) {
         [self getDataProvider];
     }else{
         [self setDatasForUI];
     }
     
-    self.answerProvider = [[NSMutableArray alloc] init];
+    if (!self.answerProvider)
+        self.answerProvider = [[NSMutableArray alloc] init];
 }
 
 /**
@@ -113,9 +114,9 @@
     
     //选项超过4个就两行排列
     self.datas = self.qModel_1.options;
-//    if (self.datas.count >= 5) {
-//        self.isTwo = YES;
-//    }
+    //    if (self.datas.count >= 5) {
+    //        self.isTwo = YES;
+    //    }
     
     //设置默认数据
     if (self.datas.count > 0) {
@@ -129,7 +130,7 @@
 //重写父类方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.qModel_1.q_rule) {
+    if (self.qModel_1.q_rule && self.qModel_1.q_rule.length > 0) {
         
         NSArray *options = [self analyzeRules:self.qModel_1.q_rule];
         NSMutableArray *options_one = options[0];

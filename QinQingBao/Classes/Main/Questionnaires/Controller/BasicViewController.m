@@ -22,6 +22,7 @@
     CGFloat selectedHeight;
     CGFloat selectedWeight;
 }
+
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
@@ -90,17 +91,20 @@
     self.lab2.text = item2.q_title;
     
     self.lab3.text = item3.q_title;
+    
+    self.headImg.image = self.headImgData;
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
+    vc.headImgData = self.headImgData;
     if (textField == self.ageField)
     {
-        [vc initWithTitle:@"年龄" startValue:1900 currentValue:1990 count:110 unit:@"年"];
+        [vc initWithTitle:@"年龄" startValue:1 currentValue:25 count:110 unit:@"岁"];
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0f",value);
-            self.ageField.text = [NSString stringWithFormat:@"%.0f年",value];
+            self.ageField.text = [NSString stringWithFormat:@"%.0f岁",value];
             selectedAge = value;
         };
     }

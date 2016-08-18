@@ -626,7 +626,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
         goodsModel.goods_id = goodsInfo.goods_id;
         goodsModel.item_size = @"SINGLE";
         goodsModel.type = 1;
-        goodsModel.isSelect=YES;
+        goodsModel.isSelect = YES;
         [self dismissSemiModalViewWithCompletion:^{
             vc.goodsArr = [[NSMutableArray alloc] initWithArray:@[goodsModel]];
             [self.navigationController pushViewController:vc animated:YES];

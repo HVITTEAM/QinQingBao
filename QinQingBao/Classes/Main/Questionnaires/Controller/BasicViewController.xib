@@ -166,7 +166,7 @@
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="man" translatesAutoresizingMaskIntoConstraints="NO" id="mNg-nc-Qzv">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholderImage" translatesAutoresizingMaskIntoConstraints="NO" id="mNg-nc-Qzv">
                                     <rect key="frame" x="122" y="50.5" width="77" height="76.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="mNg-nc-Qzv" secondAttribute="height" id="LXJ-gx-DQk"/>
@@ -216,6 +216,6 @@
         </view>
     </objects>
     <resources>
-        <image name="man" width="102" height="102"/>
+        <image name="placeholderImage" width="70" height="70"/>
     </resources>
 </document>

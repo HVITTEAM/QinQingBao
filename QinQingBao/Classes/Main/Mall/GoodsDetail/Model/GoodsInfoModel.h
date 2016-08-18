@@ -63,7 +63,8 @@
 @property(nonatomic,copy)NSString *evaluation_good_star;
 @property(nonatomic,retain)NSDictionary *spec_name;
 
-
+//是否被选中
+@property (nonatomic, assign) BOOL selected;
 
 
 

@@ -85,6 +85,7 @@
         QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
         vc.reportListModel = reportListModel;
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
 }
 

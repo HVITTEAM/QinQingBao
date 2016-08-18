@@ -46,6 +46,8 @@
     if (self.reportListModel) {
         [self getReportResult];
     }else [self getResult];
+    
+     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 
@@ -149,6 +151,11 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
     
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
+-(void)back
+{
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 
 @end

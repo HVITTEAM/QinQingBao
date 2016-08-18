@@ -18,6 +18,8 @@
 
 #import "ClasslistViewController.h"
 
+#import "HealthPlanController.h"
+
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
 {
@@ -50,11 +52,11 @@
 
 - (IBAction)onlineHandler:(id)sender {
     [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
-    
 }
 
 - (IBAction)healthPlanHandler:(id)sender {
-    [NoticeHelper AlertShow:@"暂未开通此功能" view:nil];
+    HealthPlanController *view = [[HealthPlanController alloc] init];
+    [self.nav pushViewController:view animated:YES];
 }
 
 /**

@@ -30,6 +30,7 @@
     NSArray *dataProvider;
     //当前选择的选择
     NSString *selectedId;
+    UIButton *selectededBtn;
 }
 
 @end
@@ -86,6 +87,15 @@
     [arr addObject:dict1];
     
     BasicViewController *vc = [[BasicViewController alloc] init];
+    if (!selectededBtn || selectededBtn.tag == 1)
+    {
+        vc.headImgData = [UIImage imageNamed:@"man.png"];
+    }
+    else if (selectededBtn.tag == 0)
+    {
+        vc.headImgData = [UIImage imageNamed:@"feman.png"];
+    }
+    
     vc.dataProvider = dataProvider;
     vc.answerProvider = arr;
     vc.exam_id = self.exam_id;
@@ -127,11 +137,14 @@
     {
         if ([optionItem.qo_content rangeOfString:@"男"].location != NSNotFound)
         {
+            self.manImg.tag = 1;
             selectedId = optionItem.qo_id;
         }
     }
     [self.manImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.femanImg setBackgroundImage:nil forState:UIControlStateNormal];
+    
+    selectededBtn = sender;
 }
 
 - (IBAction)femanClick:(id)sender {
@@ -141,10 +154,12 @@
     {
         if ([optionItem.qo_content rangeOfString:@"女"].location != NSNotFound)
         {
+            self.femanImg.tag = 0;
             selectedId = optionItem.qo_id;
         }
     }
     [self.femanImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.manImg setBackgroundImage:nil forState:UIControlStateNormal];
+    selectededBtn = sender;
 }
 @end

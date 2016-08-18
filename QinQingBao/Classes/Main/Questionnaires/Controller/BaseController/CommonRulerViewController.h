@@ -28,4 +28,7 @@
  *  题目数据
  */
 @property (nonatomic, retain) QuestionModel *questionItem;
+
+@property (nonatomic, retain) UIImage *headImgData;
+
 @end
