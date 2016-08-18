@@ -16,6 +16,8 @@
 
 #import "ChooseShopTableViewController.h"
 
+#import "TypeinfoModel.h"
+
 @interface MarketViewController ()
 {
     NSMutableArray *dataProvider;
@@ -46,7 +48,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.view.backgroundColor = HMGlobalBg;
-    self.title = @"服务市场";
+    self.title = self.typeinfoModel.tname_app;
 }
 
 #pragma mark 集成刷新控件
@@ -80,7 +82,8 @@
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"10",
                                                                     @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                                                                    @"tid" : @44}
+                                                                    @"tid" : self.typeinfoModel.tid_app
+                                                                    }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

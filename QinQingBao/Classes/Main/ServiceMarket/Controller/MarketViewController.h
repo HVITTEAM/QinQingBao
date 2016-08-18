@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class TypeinfoModel;
 
 @interface MarketViewController : UITableViewController
+
+@property(strong,nonatomic)TypeinfoModel *typeinfoModel;
 
 @end

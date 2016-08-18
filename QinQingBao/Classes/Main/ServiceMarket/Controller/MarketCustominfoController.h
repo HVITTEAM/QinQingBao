@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HMCommonViewController.h"
+#import "MarketCustomInfo.h"
 
-@interface MarketCustominfoController : HMCommonViewController
+@interface MarketCustominfoController : UITableViewController
 
-@property (strong,nonatomic)UserInforModel* infoVO;
+@property(strong,nonatomic)MarketCustomInfo *customInfo;
 
-@property (copy)void(^inforClick)(void);
+@property (copy)void(^customInfoCallBack)(MarketCustomInfo * customInfo);
 
 @end

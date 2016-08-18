@@ -14,12 +14,18 @@
 #import "MarketCustominfoController.h"
 #import "OrderItem.h"
 #import "CustomInfoCell.h"
+#import "ExtendFooterView.h"
+#import "MarketCustomInfo.h"
 
 @interface MarketOrderSubmitController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong)UITableView *tableView;
+@property (nonatomic,strong)UITableView *tableView;
 
-@property (strong,nonatomic)UserInforModel* infoVO;
+@property(strong,nonatomic)MarketCustomInfo *customInfo;
+
+@property(assign,nonatomic)BOOL isExtend;
+
+@property(strong,nonatomic)UIView *bottomView;
 
 @end
 
@@ -32,18 +38,37 @@
     [self setupUI];
     
     [self getUserInfor];
+    
+    self.isExtend = NO;
+    if (!_customInfo) {
+        _customInfo = [[MarketCustomInfo alloc] init];
+    }
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self setBottomViewPosition];
+}
+
+#pragma mark - 界面相关
 -(void)setupUI
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:self.tableView];
-    
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
+}
+
+/**
+ *  创建提交按钮view
+ */
+-(UIView *)createBottomView
+{
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 60)];
     bottomView.backgroundColor = [UIColor whiteColor];
     
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 1)];
@@ -56,7 +81,35 @@
     btn.layer.cornerRadius = 8.0f;
     [btn addTarget:self action:@selector(commitHandle:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:btn];
-    [self.view addSubview:bottomView];
+    return bottomView;
+}
+
+/**
+ *  设置提交按钮view
+ */
+-(void)setBottomViewPosition
+{
+    [self.bottomView removeFromSuperview];
+    self.tableView.tableFooterView = nil;
+    self.bottomView = [self createBottomView];
+    CGFloat h = 0;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 2; j++) {
+            NSIndexPath *idx = [NSIndexPath indexPathForRow:j inSection:i];
+            h += [self tableView:self.tableView heightForRowAtIndexPath:idx];
+        }
+        h += [self tableView:self.tableView heightForFooterInSection:i];
+        h += [self tableView:self.tableView heightForHeaderInSection:i];
+    }
+    
+    if (h + 64 + 60 > MTScreenH) {
+        self.tableView.frame = CGRectMake(0, 0, MTScreenW, MTScreenH);
+        self.tableView.tableFooterView = self.bottomView;
+    }else{
+        self.tableView.frame = CGRectMake(0, 0, MTScreenW, MTScreenH - 60);
+        self.bottomView.frame = CGRectMake(0, MTScreenH - 60, MTScreenW, 60);
+        [self.view addSubview:self.bottomView];
+    }
 }
 
 #pragma mark - 协议方法
@@ -68,11 +121,6 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    if (section == 0) {
-    //        if (!self.customName) {
-    //            return 1;
-    //        }
-    //    }
     return 2;
 }
 
@@ -102,30 +150,9 @@
     }else if (indexPath.section == 0){
         //客户信息
         CustomInfoCell *infoCell = [CustomInfoCell createCellWithTableView:tableView];
-        
-        //姓名
-        infoCell.nameLb.text = self.infoVO.member_truename ? self.infoVO.member_truename : @"必填项，请填写姓名";
-        infoCell.nameLb.textColor = self.infoVO.member_truename ? [UIColor grayColor] : [UIColor lightGrayColor];
-        
-        //手机号码
-        infoCell.phoneNumLb.text = self.infoVO.member_mobile ? self.infoVO.member_mobile : @"必填项，请填写手机号码" ;
-        infoCell.phoneNumLb.textColor = self.infoVO.member_mobile ? [UIColor grayColor] : [UIColor lightGrayColor];
-
-        //邮箱
-        infoCell.emailLb.text = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? self.infoVO.member_email : @"必填,例sample@hvit.com.cn";
-        infoCell.emailLb.textColor = (self.infoVO.member_email && self.infoVO.member_email.length > 0) ? [UIColor grayColor] : [UIColor lightGrayColor];
-
-        //地址
-        if (self.infoVO.totalname && self.infoVO.member_areainfo)
-        {
-            infoCell.addressLb.text = [NSString stringWithFormat:@"%@%@",self.infoVO.totalname,self.infoVO.member_areainfo];
-            infoCell.addressLb.textColor =  [UIColor grayColor];
-        }
-        else
-        {
-            infoCell.addressLb.text = @"必填项，请填写地址";
-            infoCell.addressLb.textColor = [UIColor lightGrayColor];
-        }
+        [infoCell setdataWithCustomInfo:self.customInfo];
+        infoCell.isExtend = self.isExtend;
+        [infoCell setupCellHeight];
         cell = infoCell;
     }else if (indexPath.section == 1){
         //店铺信息
@@ -145,12 +172,35 @@
 #pragma  mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    if (section == 1) {
+        return 10;
+    }
     return 0.1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    if (section == 0) {
+        return 45;
+    }
     return 10;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    if (section == 0) {
+        __weak typeof (self) weakSelf = self;
+      ExtendFooterView *v = [[ExtendFooterView alloc] initWithTitle:@"查看详情" extendTitle:@"收起详情" imageName:@"arrowdown" extend:self.isExtend section:section];
+        v.extendFooterViewTapCallBack = ^(NSInteger section, BOOL extend){
+            weakSelf.isExtend = extend;
+            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            [self setBottomViewPosition];
+        };
+        return v;
+    }
+    
+    return nil;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -162,8 +212,6 @@
 {
     if (0 == indexPath.row) {
         return 50;
-    }else if (0 == indexPath.section){
-        return 140;
     }else if (1== indexPath.section){
         return 120;
     }
@@ -172,11 +220,15 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     if (indexPath.section == 0 && indexPath.row == 0) {
         MarketCustominfoController *vc = [[MarketCustominfoController alloc] init];
-        vc.infoVO = self.infoVO;
-        vc.inforClick = ^{
-            [self.tableView reloadData];
+        vc.customInfo = self.customInfo;
+        vc.customInfoCallBack = ^(MarketCustomInfo * customInfo){
+            weakSelf.customInfo = customInfo;
+            [weakSelf.tableView reloadData];
+            
+            [self setBottomViewPosition];
         };
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -188,10 +240,16 @@
  */
 -(void)commitHandle:(UIButton *)sender
 {
-    if (self.infoVO.member_email.length == 0)
+    if (self.customInfo.name.length <= 0)
+        return [NoticeHelper AlertShow:@"请填写姓名" view:self.view];
+    
+    if (self.customInfo.tel.length <= 0)
+        return [NoticeHelper AlertShow:@"请填写地址" view:self.view];
+    
+    if (self.customInfo.email.length <= 0)
         return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
     
-    if (self.infoVO.member_areainfo.length == 0)
+    if (self.customInfo.areainfo.length <= 0)
         return [NoticeHelper AlertShow:@"请填写有效地址" view:self.view];
     
     NSDate *cDate = [NSDate date];
@@ -203,11 +261,11 @@
                                      @"iid" : self.dataItem.iid,
                                      @"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                      @"wtime" : time,
-                                     @"wname" : self.infoVO.member_truename,
+                                     @"wname" : self.customInfo.name,
                                      @"wprice" : self.dataItem.promotion_price ? self.dataItem.promotion_price : self.dataItem.price_mem,
-                                     @"dvcode" : self.infoVO.member_areaid,
-                                     @"wtelnum" : self.infoVO.member_mobile,
-                                     @"waddress" : self.infoVO.member_areainfo,
+                                     @"dvcode" : self.customInfo.dvcode,
+                                     @"wtelnum" : self.customInfo.tel,
+                                     @"waddress" : self.customInfo.areainfo,
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
@@ -219,8 +277,14 @@
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
-    [params setValue:self.infoVO.member_email forKey: @"wemail"];
-    
+    [params setValue:self.customInfo.email forKey: @"wemail"];
+    [params setValue:@([MarketCustomInfo sexToNumber:self.customInfo.sex]) forKey: @"wc_sex"];
+    [params setValue:self.customInfo.birthday forKey: @"wc_birthday"];
+    [params setValue:self.customInfo.height forKey: @"wc_height"];
+    [params setValue:self.customInfo.weight forKey: @"wc_weight"];
+    [params setValue:@([MarketCustomInfo womanSpecialToNumber:self.customInfo.womanSpecial]) forKey: @"wc_monthday"];
+    [params setValue:self.customInfo.caseHistory forKey: @"wc_sickhistory"];
+    [params setValue:self.customInfo.medicine forKey: @"wc_medication"];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
@@ -282,8 +346,22 @@
                                      {
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          
-                                         self.infoVO = [UserInforModel objectWithKeyValues:di];
+                                        UserInforModel* infoVO = [UserInforModel objectWithKeyValues:di];
+                                         
+                                         self.customInfo.name = infoVO.member_truename;
+                                         self.customInfo.tel = infoVO.member_mobile;
+                                         self.customInfo.email = infoVO.member_email;
+                                         
+                                         self.customInfo.sex = [MarketCustomInfo numberToSex:[infoVO.member_sex integerValue]];
+                                         
+                                         self.customInfo.birthday = infoVO.member_birthday;
+                                         self.customInfo.totalname = infoVO.totalname;
+                                         self.customInfo.areainfo = infoVO.member_areainfo;
+                                         self.customInfo.dvcode = infoVO.member_areaid;
+                                         
                                          [self.tableView reloadData];
+                                         
+                                         [self setBottomViewPosition];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
