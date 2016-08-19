@@ -8,6 +8,7 @@
 
 #import "CustomInfoController.h"
 #import "InfoValue1Cell.h"
+#import "InterveneModel.h"
 
 @interface CustomInfoController ()
 
@@ -48,35 +49,35 @@
         switch (indexPath.row) {
             case 0:
                 cell.textLabel.text = @"姓名";
-                cell.detailTextLabel.text = @"姓名";
+                cell.detailTextLabel.text = self.interveneModel.wname;
                 break;
             case 1:
                 cell.textLabel.text = @"电话";
-                cell.detailTextLabel.text = @"电话";
+                cell.detailTextLabel.text = self.interveneModel.wtelnum;
                 break;
             case 2:
                 cell.textLabel.text = @"Email";
-                cell.detailTextLabel.text = @"Email";
+                cell.detailTextLabel.text = self.interveneModel.wp_email;
                 break;
             case 4:
                 cell.textLabel.text = @"性别";
-                cell.detailTextLabel.text = @"性别";
+                cell.detailTextLabel.text = self.interveneModel.wc_sex;
                 break;
             case 5:
                 cell.textLabel.text = @"出生日期";
-                cell.detailTextLabel.text = @"出生日期";
+                cell.detailTextLabel.text = self.interveneModel.wc_birthday;
                 break;
             case 6:
                 cell.textLabel.text = @"身高";
-                cell.detailTextLabel.text = @"身高";
+                cell.detailTextLabel.text = self.interveneModel.wc_height;
                 break;
             case 7:
                 cell.textLabel.text = @"体重";
-                cell.detailTextLabel.text = @"体重";
+                cell.detailTextLabel.text = self.interveneModel.wc_weight;
                 break;
             case 8:
                 cell.textLabel.text = @"女性特殊期";
-                cell.detailTextLabel.text = @"女性特殊期";
+                cell.detailTextLabel.text = self.interveneModel.wc_monthday;
                 break;
             default:
                 break;
@@ -88,11 +89,12 @@
        InfoValue1Cell *infoValue1Cell = [InfoValue1Cell createCellWithTableView:tableView];
         
         if (indexPath.row == 3) {
-            [infoValue1Cell setTitle:@"地址" value:nil];
+            
+            [infoValue1Cell setTitle:@"地址" value:self.interveneModel.waddress];
         }else if (indexPath.row == 9){
-            [infoValue1Cell setTitle:@"既往病史" value:@"撒旦法撒旦法来就是了"];
+            [infoValue1Cell setTitle:@"既往病史" value:self.interveneModel.wc_sickhistory];
         }else if (indexPath.row == 10){
-            [infoValue1Cell setTitle:@"既往病史" value:@"撒旦法撒旦法来就是了都放假了束带结发老师嫁老大废旧塑料地方就是李东方吉林省撒旦法撒旦法来就是了都水电费金沙岛积分拉伸000000"];
+            [infoValue1Cell setTitle:@"服药情况" value:self.interveneModel.wc_medication];
         }
         
         return infoValue1Cell;

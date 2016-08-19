@@ -198,7 +198,7 @@
         cell.textLabel.text = @"基本信息";
         cell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.wname;
+        cell.detailTextLabel.text = self.dataItem.wname;
         cell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -305,6 +305,7 @@
     if (indexPath.section == 0 && indexPath.row == 1)
     {
         CustomInfoController *customInfoVC = [[CustomInfoController alloc] init];
+        customInfoVC.interveneModel = self.dataItem;
         [self.navigationController pushViewController:customInfoVC animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row >0)

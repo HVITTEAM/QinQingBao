@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class InterveneModel;
 
 @interface CustomInfoController : UITableViewController
+
+@property(strong,nonatomic)InterveneModel *interveneModel;
 
 @end

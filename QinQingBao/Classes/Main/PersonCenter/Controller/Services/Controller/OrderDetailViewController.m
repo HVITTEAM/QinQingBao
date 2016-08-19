@@ -30,6 +30,7 @@
 #import "DeliverViewController.h"
 #import "ReportViewController.h"
 #import "ServiceInfoEmailCell.h"
+#import "InterveneController.h"
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -423,10 +424,10 @@
         [self.navigationController pushViewController:deliverVC animated:YES];
         
     }else if ([sender.titleLabel.text isEqualToString:@"干预方案"]){
-        ReportViewController *reportVC = [[ReportViewController alloc] init];
         OrderModel *model = self.orderInfor;
-        reportVC.wid = model.wid;
-        [self.navigationController pushViewController:reportVC animated:YES];
+        InterveneController *view = [[InterveneController alloc] init];
+        view.wid = model.wid;
+        [self.self.navigationController pushViewController:view animated:YES];
     }
 
 }

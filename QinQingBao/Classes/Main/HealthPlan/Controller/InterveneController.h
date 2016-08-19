@@ -11,8 +11,6 @@
 
 @interface InterveneController : UIViewController
 
-@property (nonatomic, copy) NSString *wname;
-
 @property (nonatomic, copy) NSString *wid;
 
 @end

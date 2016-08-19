@@ -32,7 +32,13 @@
 @property (nonatomic, copy) NSString *wc_medication;
 @property (nonatomic, copy) NSString *item_url_big;
 
+@property (nonatomic, copy) NSString *wtelnum;
+@property (nonatomic, copy) NSString *waddress;
+@property (nonatomic, copy) NSString *wname;
+
 @property (nonatomic, strong) NSArray *goodsinfos;
+
+
 
 
 
