@@ -422,7 +422,7 @@
         deliverVC.wid = model.wid;
         [self.navigationController pushViewController:deliverVC animated:YES];
         
-    }else if ([sender.titleLabel.text isEqualToString:@"查看医嘱"]){
+    }else if ([sender.titleLabel.text isEqualToString:@"干预方案"]){
         ReportViewController *reportVC = [[ReportViewController alloc] init];
         OrderModel *model = self.orderInfor;
         reportVC.wid = model.wid;

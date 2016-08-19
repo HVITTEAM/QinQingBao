@@ -22,6 +22,7 @@
 #import "GoodsInfoModel.h"
 #import "GoodsHeadViewController.h"
 #import "MTShoppingCarController.h"
+#import "CustomInfoController.h"
 
 @interface InterveneController ()<InterveneEndViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong) InterveneEndView *endView;
@@ -303,7 +304,8 @@
 {
     if (indexPath.section == 0 && indexPath.row == 1)
     {
-        //TODO 跳转到个人信息界面
+        CustomInfoController *customInfoVC = [[CustomInfoController alloc] init];
+        [self.navigationController pushViewController:customInfoVC animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row >0)
     {

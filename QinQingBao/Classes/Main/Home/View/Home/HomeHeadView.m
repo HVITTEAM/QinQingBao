@@ -19,6 +19,7 @@
 #import "ClasslistViewController.h"
 
 #import "MarketClasslistController.h"
+#import "HealthPlanController.h"
 
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
