@@ -172,7 +172,8 @@
 {
     CommonPlanModel *model = dataProvider[indexPath.row];
     InterveneController *view = [[InterveneController alloc] init];
-    view.planItem = model;
+    view.wname = model.wname;
+    view.wid = model.wid;
     [self.navigationController pushViewController:view animated:YES];
 }
 
