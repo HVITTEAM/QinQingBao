@@ -14,11 +14,11 @@
 #import "OrderPayViewController.h"
 #import "OrderDetailCancelViewController.h"
 #import "PaymentViewController.h"
-
 #import "EvaluationViewController.h"
 #import "OrderRefundViewController.h"
 #import "DeliverViewController.h"
 #import "ReportViewController.h"
+#import "InterveneController.h"
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
@@ -341,11 +341,11 @@
         deliverVC.wid = model.wid;
         [self.nav pushViewController:deliverVC animated:YES];
         
-    }else if ([btn.titleLabel.text isEqualToString:@"查看医嘱"]){
-        ReportViewController *reportVC = [[ReportViewController alloc] init];
+    }else if ([btn.titleLabel.text isEqualToString:@"干预方案"]){
         OrderModel *model = dataProvider[indexPath.section];
-        reportVC.wid = model.wid;
-        [self.nav pushViewController:reportVC animated:YES];
+        InterveneController *view = [[InterveneController alloc] init];
+        view.wid = model.wid;
+        [self.nav pushViewController:view animated:YES];
     }
 }
 

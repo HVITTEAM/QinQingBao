@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MarketCustomInfo;
 
 @interface CustomInfoCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *nameTitleLb;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 
@@ -18,6 +21,26 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLb;
 
+@property (weak, nonatomic) IBOutlet UILabel *sexLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *birthdayLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *heightLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *weightLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *womanSpecial;
+
+@property (weak, nonatomic) IBOutlet UILabel *caseHistoryLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *medicationLb;
+
+@property (assign,nonatomic)BOOL isExtend;
+
 +(instancetype)createCellWithTableView:(UITableView *)tableView;
+
+-(void)setupCellHeight;
+
+-(void)setdataWithCustomInfo:(MarketCustomInfo *)aCustomInfo;
 
 @end

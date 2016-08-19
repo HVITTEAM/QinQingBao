@@ -18,6 +18,7 @@
 
 #import "ClasslistViewController.h"
 
+#import "MarketClasslistController.h"
 #import "HealthPlanController.h"
 
 
@@ -46,7 +47,7 @@
 }
 
 - (IBAction)marketHandler:(id)sender {
-    MarketViewController *view = [[MarketViewController alloc] init];
+    MarketClasslistController *view = [[MarketClasslistController alloc] init];
     [self.nav pushViewController:view animated:YES];
 }
 

@@ -34,7 +34,13 @@
 @property (nonatomic, copy) NSString *wname;
 @property (nonatomic, copy) NSString *wtelname;
 
+@property (nonatomic, copy) NSString *wtelnum;
+@property (nonatomic, copy) NSString *waddress;
+@property (nonatomic, copy) NSString *wname;
+
 @property (nonatomic, strong) NSArray *goodsinfos;
+
+
 
 
 

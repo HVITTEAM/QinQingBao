@@ -621,6 +621,9 @@
 /***寸欣服务 - 工单-查看物流信息*/
 #define URL_api_search_deliver [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=workinfo&op=api_search_deliver",URL_Local]
 
+/***寸欣服务 - 获取服务分类列表*/
+#define URL_Get_typeinfo_applist [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=typeinfo_app&op=get_typeinfo_applist",URL_Local]
+
 //------------------寸欣-------------------
 
 /***文章 - 获取文章列表*/
