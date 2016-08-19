@@ -31,6 +31,8 @@
 @property (nonatomic, copy) NSString *wc_sickhistory;
 @property (nonatomic, copy) NSString *wc_medication;
 @property (nonatomic, copy) NSString *item_url_big;
+@property (nonatomic, copy) NSString *wname;
+@property (nonatomic, copy) NSString *wtelname;
 
 @property (nonatomic, strong) NSArray *goodsinfos;
 

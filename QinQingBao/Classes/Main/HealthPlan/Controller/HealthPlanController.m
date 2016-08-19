@@ -170,7 +170,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommonPlanModel *model = dataProvider[indexPath.row];
+    CommonPlanModel *model = dataProvider[indexPath.section];
     InterveneController *view = [[InterveneController alloc] init];
     view.wname = model.wname;
     view.wid = model.wid;

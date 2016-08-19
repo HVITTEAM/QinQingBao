@@ -217,7 +217,7 @@
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
-            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal,self.dataItem.wp_long_goal]];
+            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @""]];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 2)
