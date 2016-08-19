@@ -197,7 +197,7 @@
         cell.textLabel.text = @"基本信息";
         cell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.planItem.wname;
+        cell.detailTextLabel.text = self.wname;
         cell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

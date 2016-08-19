@@ -11,5 +11,8 @@
 
 @interface InterveneController : UIViewController
 
-@property (nonatomic, retain) CommonPlanModel *planItem;
+@property (nonatomic, copy) NSString *wname;
+
+@property (nonatomic, copy) NSString *wid;
+
 @end
