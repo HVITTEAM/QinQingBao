@@ -100,7 +100,7 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : @"91578",
+    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : self.wid,
                                                                        @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                        @"client":@"ios"
                                                                        }
@@ -283,7 +283,6 @@
             recommendGoodsCell.changeClick = ^(UIButton *btn){
                 [self selectedChnageHandler];
             };
-            //            [recommendGoodsCell addObserver:self forKeyPath:@"goodsItem.selected" options:NSKeyValueObservingOptionNew context:NULL];
             cell = recommendGoodsCell;
         }
     }

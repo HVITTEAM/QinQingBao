@@ -56,6 +56,8 @@
 }
 
 - (IBAction)healthPlanHandler:(id)sender {
+    if (![SharedAppUtil defaultCommonUtil].userVO )
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     HealthPlanController *view = [[HealthPlanController alloc] init];
     [self.nav pushViewController:view animated:YES];
 }
