@@ -54,10 +54,10 @@
     [self addSubview:img];
     
     UILabel *la = [[UILabel alloc] init];
-    la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
     la.textColor = [UIColor grayColor];
     la.tag = 100;
-    CGSize size = [placeStr sizeWithFont:la.font];
+    la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
+    CGSize size = [placeStr sizeWithAttributes:@{ NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:12]}];
     la.size = size;
     la.text = placeStr;
     la.x = (self.width - la.width)/2;

@@ -47,6 +47,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="headJmg" destination="nxb-uW-GQc" id="8TW-hl-suh"/>
                 <outlet property="textLab" destination="8IB-KT-OrO" id="RM2-AS-ohb"/>
                 <outlet property="titleLab" destination="vba-Fd-GYO" id="tJX-B9-Ynf"/>
             </connections>

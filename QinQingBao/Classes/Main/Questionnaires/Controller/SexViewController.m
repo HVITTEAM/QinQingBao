@@ -131,35 +131,36 @@
 
 - (IBAction)manClick:(id)sender
 {
+    selectededBtn = sender;
+
     QuestionModel *item = dataProvider[0];
     QuestionModel_1 *item1 = item.questions[0];
     for (OptionModel *optionItem in item1.options)
     {
         if ([optionItem.qo_content rangeOfString:@"男"].location != NSNotFound)
         {
-            self.manImg.tag = 1;
+            selectededBtn.tag = 1;
             selectedId = optionItem.qo_id;
         }
     }
     [self.manImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.femanImg setBackgroundImage:nil forState:UIControlStateNormal];
     
-    selectededBtn = sender;
 }
 
 - (IBAction)femanClick:(id)sender {
+    selectededBtn = sender;
     QuestionModel *item = dataProvider[0];
     QuestionModel_1 *item1 = item.questions[0];
     for (OptionModel *optionItem in item1.options)
     {
         if ([optionItem.qo_content rangeOfString:@"女"].location != NSNotFound)
         {
-            self.femanImg.tag = 0;
+            selectededBtn.tag = 0;
             selectedId = optionItem.qo_id;
         }
     }
     [self.femanImg setBackgroundImage:[UIImage imageNamed:@"sex_selected.png"] forState:UIControlStateNormal];
     [self.manImg setBackgroundImage:nil forState:UIControlStateNormal];
-    selectededBtn = sender;
 }
 @end

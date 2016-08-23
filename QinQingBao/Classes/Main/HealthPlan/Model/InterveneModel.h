@@ -35,6 +35,7 @@
 
 @property (nonatomic, copy) NSString *wtelnum;
 @property (nonatomic, copy) NSString *waddress;
+@property (nonatomic, copy) NSString *totalname;
 
 @property (nonatomic, strong) NSArray *goodsinfos;
 

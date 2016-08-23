@@ -68,8 +68,10 @@
     
     NSLog(@"%@",resultdict);
     NSString *dictstr = [self dictionaryToJson:[resultdict copy]];
+    //去掉换行符
     NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [self submit_exam:encodingString];
+    NSString *resultStr = [encodingString stringByReplacingOccurrencesOfString:@"%0A%20%20" withString:@""];
+    [self submit_exam:resultStr];
 }
 
 /**

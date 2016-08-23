@@ -59,7 +59,6 @@
     }
 }
 
-
 -(void)viewDidAppear:(BOOL)animated
 {
     self.title = @"服务详情";
