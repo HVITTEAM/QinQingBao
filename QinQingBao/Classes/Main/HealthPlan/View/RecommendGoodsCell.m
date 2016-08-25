@@ -42,7 +42,8 @@
     _goodsItem = goodsItem;
     self.selectedBtn.selected = self.goodsItem.selected;
     self.nameLab.text = self.goodsItem.goods_name;
-    self.subtitleLab.text = [NSString stringWithFormat:@"选项:%@",self.goodsItem.goods_spec ? self.goodsItem.goods_spec : @"标配"];
+    
+    self.subtitleLab.text = [NSString stringWithFormat:@"选项:%@",goodsItem.goods_spec && [goodsItem.goods_spec allValues].count > 0 ? [goodsItem.goods_spec allValues][0] : @"标配"];
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",self.goodsItem.goods_price];
     
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",goodsItem.goods_image_url]];

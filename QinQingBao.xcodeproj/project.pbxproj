@@ -286,6 +286,7 @@
 		017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017179141BEC45140070A503 /* OrderServiceDetailCell.xib */; };
 		017738E01D65B3E800F6DC99 /* InterveneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 017738DF1D65B3E800F6DC99 /* InterveneModel.m */; };
 		017738E41D65B3E900F6DC99 /* InterveneEndView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017738E31D65B3E900F6DC99 /* InterveneEndView.m */; };
+		017738E81D66E80F00F6DC99 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 017738E71D66E80F00F6DC99 /* Images.xcassets */; };
 		017793A31D35D10200F67D8E /* RadianView.m in Sources */ = {isa = PBXBuildFile; fileRef = 017793A21D35D10200F67D8E /* RadianView.m */; };
 		0177DA751D5D6302008D5C95 /* AllQuestionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA4C1D5D6302008D5C95 /* AllQuestionController.m */; };
 		0177DA761D5D6302008D5C95 /* CommonBtnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA4F1D5D6302008D5C95 /* CommonBtnViewController.m */; };
@@ -387,7 +388,6 @@
 		01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A61C7A98E400206FCD /* DevicesInforViewController.m */; };
 		01CF97AD1C7AEAD500206FCD /* MTAddressPickController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97AC1C7AEAD500206FCD /* MTAddressPickController.m */; };
 		01CF97B31C7C335F00206FCD /* EditInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97B11C7C335F00206FCD /* EditInfoTableViewController.m */; };
-		01D5ED621C5C99C800A9E8C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF9C1B7C367600665D87 /* Images.xcassets */; };
 		01D616F71C44CA9400055404 /* AreaModelTotal.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F61C44CA9400055404 /* AreaModelTotal.m */; };
 		01D616FA1C44CAA300055404 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616F91C44CAA300055404 /* AreaModel.m */; };
 		01D616FD1C45004100055404 /* MTPayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D616FC1C45004100055404 /* MTPayHelper.m */; };
@@ -1906,6 +1906,7 @@
 		017738DF1D65B3E800F6DC99 /* InterveneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterveneModel.m; sourceTree = "<group>"; };
 		017738E21D65B3E900F6DC99 /* InterveneEndView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterveneEndView.h; sourceTree = "<group>"; };
 		017738E31D65B3E900F6DC99 /* InterveneEndView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterveneEndView.m; sourceTree = "<group>"; };
+		017738E71D66E80F00F6DC99 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		017793A11D35D10200F67D8E /* RadianView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadianView.h; sourceTree = "<group>"; };
 		017793A21D35D10200F67D8E /* RadianView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadianView.m; sourceTree = "<group>"; };
 		0177DA4B1D5D6302008D5C95 /* AllQuestionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllQuestionController.h; sourceTree = "<group>"; };
@@ -3055,7 +3056,6 @@
 		01ECDF931B7C347800665D87 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		01ECDF941B7C347800665D87 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		01ECDF981B7C347800665D87 /* SQCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SQCollectionCell.xib; sourceTree = "<group>"; };
-		01ECDF9C1B7C367600665D87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01ECDFAA1B7C402100665D87 /* HMCommonArrowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonArrowItem.h; sourceTree = "<group>"; };
 		01ECDFAB1B7C402100665D87 /* HMCommonArrowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCommonArrowItem.m; sourceTree = "<group>"; };
 		01ECDFAC1B7C402100665D87 /* HMCommonButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonButtonItem.h; sourceTree = "<group>"; };
@@ -8297,10 +8297,10 @@
 		01F227D81B7B3E1400ED4AFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				017738E71D66E80F00F6DC99 /* Images.xcassets */,
 				01ED862E1CDC821400FAD750 /* HYQiHei-50J.ttf */,
 				019E81601C3BA72E00616AD9 /* agreement.html */,
 				0193B0D51BD5D02F00F07FBA /* PushConfig.plist */,
-				01ECDF9C1B7C367600665D87 /* Images.xcassets */,
 				01F227D91B7B3E1400ED4AFB /* Info.plist */,
 				01F227DA1B7B3E1400ED4AFB /* main.m */,
 				01F227FE1B7B3E3700ED4AFB /* QQB.pch */,
@@ -8977,7 +8977,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = G688QXM6YK;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8992,7 +8992,7 @@
 					};
 					01F227ED1B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = P5A3MJD6BG;
 						TestTargetID = 01F227D41B7B3E1400ED4AFB;
 					};
 				};
@@ -9056,7 +9056,6 @@
 				01E68FD61BCCA68900A17543 /* ptz_up.png in Resources */,
 				01E68F9D1BCCA68900A17543 /* BackBnt_sel.png in Resources */,
 				01ECDA981C8EB31F0018160F /* chatBar_colorMore_photo@2x.png in Resources */,
-				01D5ED621C5C99C800A9E8C1 /* Images.xcassets in Resources */,
 				01ECDAC21C8EB31F0018160F /* Contents.json in Resources */,
 				01F1385B1BEA0594007FF79F /* HeartbeatCell.xib in Resources */,
 				D208E85F1D48A389007B7AD4 /* EstimateListCell.xib in Resources */,
@@ -9550,6 +9549,7 @@
 				01E68FD51BCCA68900A17543 /* ptz_turn_sel.png in Resources */,
 				01EFD3121C56028300BDA640 /* TipsCell.xib in Resources */,
 				01F1864C1B8AADF700DA284E /* HealthTipCell.xib in Resources */,
+				017738E81D66E80F00F6DC99 /* Images.xcassets in Resources */,
 				01E603F11C1683350099275C /* watch7.jpg in Resources */,
 				01F87F8A1C5887D400419FA2 /* hotgoods.png in Resources */,
 				01ECDA921C8EB31F0018160F /* chatBar_colorMore_cameraSelected@2x.png in Resources */,

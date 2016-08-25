@@ -22,7 +22,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-5R-HGP" userLabel="BGView">
                         <rect key="frame" x="10" y="0.0" width="300" height="144"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="money" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-Ru-NTB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="客户小头像" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-Ru-NTB">
                                 <rect key="frame" x="10" y="121" width="16" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="16" id="QU1-hp-s0M"/>
@@ -99,7 +99,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="money" width="36" height="36"/>
         <image name="placeholder_serviceMarket" width="300" height="93"/>
+        <image name="客户小头像" width="18" height="18"/>
     </resources>
 </document>

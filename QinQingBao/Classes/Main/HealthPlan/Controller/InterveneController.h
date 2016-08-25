@@ -11,6 +11,7 @@
 
 @interface InterveneController : UIViewController
 
+//工单id
 @property (nonatomic, copy) NSString *wid;
 
 @end

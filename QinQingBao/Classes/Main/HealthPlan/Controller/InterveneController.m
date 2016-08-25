@@ -88,6 +88,8 @@
     //一开始不显示
     showEndView = NO;
     
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
     [self.view addSubview:self.tableView];
     
     [self.view addSubview:self.endView];
@@ -100,7 +102,7 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : @"91578",
+    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : self.wid,
                                                                        @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                        @"client":@"ios"
                                                                        }
@@ -109,7 +111,10 @@
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         
+                                         if ([codeNum isEqualToString:@"17001"])
+                                         {
+                                             [self.view initWithPlaceString:@"暂无数据"];
+                                         }
                                      }
                                      else
                                      {
@@ -150,12 +155,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return self.dataItem ? (goodsInfoArr && goodsInfoArr.count >0 ? 3 : 2) : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 2 : section == 1 ? 6 : goodsInfoArr.count + 1;
+    return section == 0 ? 2 : section == 1 ? 7 : goodsInfoArr.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -218,7 +223,7 @@
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
-            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal,self.dataItem.wp_long_goal]];
+            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 2)
@@ -270,6 +275,7 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CommonCell"];
             }
             cell.textLabel.text = @"寸欣健康为您推荐";
+            cell.imageView.image = [UIImage imageNamed:@"推荐商品"];
             cell.textLabel.font = [UIFont systemFontOfSize:14];
             cell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -283,7 +289,6 @@
             recommendGoodsCell.changeClick = ^(UIButton *btn){
                 [self selectedChnageHandler];
             };
-            //            [recommendGoodsCell addObserver:self forKeyPath:@"goodsItem.selected" options:NSKeyValueObservingOptionNew context:NULL];
             cell = recommendGoodsCell;
         }
     }

@@ -63,8 +63,15 @@
                                          NSDictionary *di = [dict objectForKey:@"datas"];
                                          if ([di count] != 0)
                                          {
-                                             customName = (NSString*)[di objectForKey:@"member_truename"];
-                                             customTel = (NSString*)[di objectForKey:@"member_mobile"];
+                                             id temp = [di objectForKey:@"member_truename"];
+                                             if ([temp isKindOfClass:[NSString class]]) {
+                                                 customName = (NSString*)temp;
+                                             }
+                                             
+                                             temp = [di objectForKey:@"member_mobile"];
+                                             if ([temp isKindOfClass:[NSString class]]) {
+                                                 customTel = (NSString*)temp;
+                                             }
                                          }
                                          [self.tableView reloadData];
                                      }

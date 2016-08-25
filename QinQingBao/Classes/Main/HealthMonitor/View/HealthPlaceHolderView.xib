@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="healthPlaceHolderView" translatesAutoresizingMaskIntoConstraints="NO" id="76V-ts-hXm">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderDevice" translatesAutoresizingMaskIntoConstraints="NO" id="76V-ts-hXm">
                     <rect key="frame" x="50" y="80" width="220" height="220"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="220" id="Sso-pz-d3s"/>
@@ -68,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="healthPlaceHolderView" width="220" height="220"/>
+        <image name="PlaceholderDevice" width="197" height="197"/>
     </resources>
 </document>

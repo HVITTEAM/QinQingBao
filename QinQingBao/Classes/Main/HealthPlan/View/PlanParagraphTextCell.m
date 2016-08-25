@@ -8,6 +8,11 @@
 
 #import "PlanParagraphTextCell.h"
 
+@interface PlanParagraphTextCell ()
+@property (strong, nonatomic) IBOutlet UIImageView *headJmg;
+
+@end
+
 @implementation PlanParagraphTextCell
 
 + (PlanParagraphTextCell*) planParagraphTextCell
@@ -20,13 +25,16 @@
 
 -(void)setTitle:(NSString *)title withValue:(NSString *)value
 {
+    self.headJmg.image = [UIImage imageNamed:title];
     self.titleLab.text = title;
-    if (value && value.length > 0)
-        [self setTextValue:value];
+    [self setTextValue:value];
 }
 
 -(void)setTextValue:(NSString *)textValue
 {
+    if (!textValue) {
+        textValue = @"无";
+    }
     _textValue = textValue;
     self.textLab.userInteractionEnabled = NO;
     self.textLab.text = self.textValue;
