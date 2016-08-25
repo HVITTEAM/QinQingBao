@@ -46,14 +46,9 @@
     self.subtitleLab.text = [NSString stringWithFormat:@"选项:%@",goodsItem.goods_spec && [goodsItem.goods_spec allValues].count > 0 ? [goodsItem.goods_spec allValues][0] : @"标配"];
     self.priceLab.text = [NSString stringWithFormat:@"￥%@",self.goodsItem.goods_price];
     
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",@"",goodsItem.goods_image_url]];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@/shop/data/upload/shop/store/goods/%@/%@",URL_Local,goodsItem.store_id,goodsItem.goods_image]];
+
     [self.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
 }
-
-
-//- (void)dealloc
-//{
-//    [self removeObserver:self.parnetVC forKeyPath:@"goodsItem"];
-//}
 
 @end

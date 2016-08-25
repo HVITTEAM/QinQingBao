@@ -47,9 +47,9 @@
 
 -(void)setDataWithModel:(PushMsgModel *)model
 {
-    self.titleLb.text = @"温馨提示";
+    self.titleLb.text = model.msg_title  && model.msg_title.length > 0 ? model.msg_title  : @"温馨提示";
 
-    if (model.msg_title) {
+    if (model.msg_content) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineSpacing = 4;
         NSDictionary *attr = @{
@@ -57,7 +57,7 @@
                                NSForegroundColorAttributeName:HMColor(102, 102, 102),
                                NSParagraphStyleAttributeName:paragraphStyle
                                };
-        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.msg_title attributes:attr];
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:model.msg_content attributes:attr];
         self.contentLb.attributedText = attrStr;
     }else{
         self.contentLb.attributedText = nil;

@@ -85,7 +85,7 @@
     item3 = questionItem.questions[2];
     self.titleLab.text = questionItem.eq_title;
     self.subtitleLab.text = questionItem.eq_subtitle;
-
+    
     self.lab1.text = item1.q_title;
     
     self.lab2.text = item2.q_title;
@@ -93,6 +93,30 @@
     self.lab3.text = item3.q_title;
     
     self.headImg.image = self.headImgData;
+    
+    [self initdata];
+}
+
+/**
+ *  初始化数据
+ */
+-(void)initdata
+{
+    for (NSMutableDictionary *dictItem in [self.answerProvider copy])
+    {
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item1.q_id])
+        {
+            self.ageField.text = [dictItem objectForKey:@"qa_detail"];
+        }
+        else if ([[dictItem objectForKey:@"q_id"] isEqualToString:item2.q_id])
+        {
+            self.heightField.text = [dictItem objectForKey:@"qa_detail"];
+        }
+        else if ([[dictItem objectForKey:@"q_id"] isEqualToString:item3.q_id])
+        {
+           self.weightField.text = [dictItem objectForKey:@"qa_detail"];
+        }
+    }
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -101,7 +125,7 @@
     vc.headImgData = self.headImgData;
     if (textField == self.ageField)
     {
-        [vc initWithTitle:@"年龄" startValue:1 currentValue:25 count:110 unit:@"岁"];
+        [vc initWithTitle:@"年龄" startValue:1 currentValue:self.ageField.text && self.ageField.text.length > 0 ? [self.ageField.text integerValue] : 25 count:110 unit:@"岁"];
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0f",value);
             self.ageField.text = [NSString stringWithFormat:@"%.0f岁",value];
@@ -110,7 +134,7 @@
     }
     else if (textField == self.heightField)
     {
-        [vc initWithTitle:@"身高" startValue:100 currentValue:165 count:120 unit:@"cm"];
+        [vc initWithTitle:@"身高" startValue:100 currentValue:self.heightField.text && self.heightField.text.length > 0? [self.heightField.text integerValue] : 165 count:120 unit:@"cm"];
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0fcm",value);
             self.heightField.text = [NSString stringWithFormat:@"%.0fcm",value];
@@ -119,7 +143,7 @@
     }
     else if (textField == self.weightField)
     {
-        [vc initWithTitle:@"体重" startValue:40 currentValue:65 count:150 unit:@"kg"];
+        [vc initWithTitle:@"体重" startValue:40 currentValue:self.weightField.text && self.weightField.text.length > 0? [self.weightField.text integerValue] :65 count:150 unit:@"kg"];
         vc.selectedResult = ^(CGFloat value){
             NSLog(@"%.0fkg",value);
             self.weightField.text = [NSString stringWithFormat:@"%.0fkg",value];
@@ -134,15 +158,15 @@
 {
     if ( self.ageField.text.length == 0)
     {
-       return [NoticeHelper AlertShow:@"请填写年龄" view:nil];
+        return [NoticeHelper AlertShow:@"请填写年龄" view:nil];
     }
     if ( self.heightField.text.length == 0)
     {
-       return [NoticeHelper AlertShow:@"请填写身高" view:nil];
+        return [NoticeHelper AlertShow:@"请填写身高" view:nil];
     }
     if ( self.weightField.text.length == 0)
     {
-       return [NoticeHelper AlertShow:@"请填写体重" view:nil];
+        return [NoticeHelper AlertShow:@"请填写体重" view:nil];
     }
     
     NSArray * array = [NSArray arrayWithArray:[self.answerProvider copy]];
@@ -174,11 +198,11 @@
     BOOL find1 = false;
     for (NSMutableDictionary *dictItem in array)
     {
-    
+        
         if ([[dictItem objectForKey:@"q_id"] isEqualToString:item2.q_id])
         {
             find1 = YES;
-                [dictItem setObject:[NSString stringWithFormat:@"%.0f",selectedHeight] forKey:@"qa_detail"];
+            [dictItem setObject:[NSString stringWithFormat:@"%.0f",selectedHeight] forKey:@"qa_detail"];
             break;
         }
     }
@@ -221,5 +245,4 @@
     
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 @end

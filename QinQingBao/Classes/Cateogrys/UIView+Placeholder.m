@@ -51,7 +51,7 @@
     img.height = 70;
     img.x = (self.width - img.width)/2;
     img.y = MTScreenH/2 - 180;
-    [self addSubview:img];
+//    [self addSubview:img];
     
     UILabel *la = [[UILabel alloc] init];
     la.textColor = [UIColor grayColor];

@@ -104,7 +104,28 @@
     _rule2.rulerDelegate = self;
     [_rule2 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: 60];
     
+    [self initdata];
 }
+
+/**
+ *  初始化数据
+ */
+-(void)initdata
+{
+    for (NSMutableDictionary *dictItem in [self.answerProvider copy])
+    {
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem.q_id])
+        {
+            [_rule1 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: [[dictItem objectForKey:@"qa_detail"] floatValue]];
+
+        }
+        else if ([[dictItem objectForKey:@"q_id"] isEqualToString:answerItem2.q_id])
+        {
+            [_rule2 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: [[dictItem objectForKey:@"qa_detail"] floatValue]];
+        }
+    }
+}
+
 - (void)CXRuler:(CXRulerScrollView *)rulerScrollView ruler:(CXRuler *)ruler
 {
     

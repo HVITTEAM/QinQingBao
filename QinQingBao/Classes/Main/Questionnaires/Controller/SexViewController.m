@@ -31,6 +31,8 @@
     //当前选择的选择
     NSString *selectedId;
     UIButton *selectededBtn;
+    
+    NSMutableArray *answerDataProvider;
 }
 
 @end
@@ -54,6 +56,8 @@
     
     self.nextBtn.layer.cornerRadius = 7.0f;
     self.titleLab.text = nil;
+    
+    answerDataProvider = [[NSMutableArray alloc] init];
     
     [self getDataProvider];
 }
@@ -79,12 +83,27 @@
         return;
     QuestionModel *item = dataProvider[0];
     QuestionModel_1 *item1 = item.questions[0];
-    NSMutableArray *arr = [[NSMutableArray alloc] init];
-    NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
-    [dict1 setObject:item1.q_id forKey:@"q_id"];
-    [dict1 setObject:selectedId forKey:@"qa_detail"];
-    [dict1 setValue:item1.q_type forKey:@"q_type"];
-    [arr addObject:dict1];
+    
+    //是否已经添加到数据源中
+    BOOL find = false;
+    //查找第一个
+    for (NSMutableDictionary *dictItem in [answerDataProvider copy])
+    {
+        if ([[dictItem objectForKey:@"q_id"] isEqualToString:item1.q_id])
+        {
+            find = YES;
+            [dictItem setObject:selectedId forKey:@"qa_detail"];
+            break;
+        }
+    }
+    if (!find)
+    {
+        NSMutableDictionary *dict1 = [[NSMutableDictionary alloc] init];
+        [dict1 setObject:item1.q_id forKey:@"q_id"];
+        [dict1 setObject:selectedId forKey:@"qa_detail"];
+        [dict1 setValue:item1.q_type forKey:@"q_type"];
+        [answerDataProvider addObject:dict1];
+    }
     
     BasicViewController *vc = [[BasicViewController alloc] init];
     if (!selectededBtn || selectededBtn.tag == 1)
@@ -97,7 +116,7 @@
     }
     
     vc.dataProvider = dataProvider;
-    vc.answerProvider = arr;
+    vc.answerProvider = answerDataProvider;
     vc.exam_id = self.exam_id;
     vc.calculatype = self.calculatype;
     vc.e_title = self.e_title;
@@ -132,7 +151,7 @@
 - (IBAction)manClick:(id)sender
 {
     selectededBtn = sender;
-
+    
     QuestionModel *item = dataProvider[0];
     QuestionModel_1 *item1 = item.questions[0];
     for (OptionModel *optionItem in item1.options)

@@ -65,7 +65,7 @@
 
 //是否被选中
 @property (nonatomic, assign) BOOL selected;
-
+@property(nonatomic,copy)NSString *goods_image;
 
 
 @end

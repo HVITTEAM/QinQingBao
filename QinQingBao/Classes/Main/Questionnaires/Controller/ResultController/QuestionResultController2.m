@@ -47,7 +47,7 @@
         [self getReportResult];
     }else [self getResult];
     
-     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 
@@ -104,8 +104,8 @@
                                          self.lab1.text = model.r_result.hmd_advise;
                                          
                                          self.circleView.midStr = model.r_dangercoefficient;
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
-
+                                         CGFloat totle = [model.r_dangerpercent[1] floatValue] == 4 ? [model.r_dangerpercent[1] floatValue] + 1 : [model.r_dangerpercent[1] floatValue];
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / totle *100;
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -138,7 +138,8 @@
                                          self.lab1.text = model.r_result.hmd_advise;
                                          
                                          self.circleView.midStr = model.r_dangercoefficient;
-                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / [model.r_dangerpercent[1] floatValue] *100;
+                                         CGFloat totle = [model.r_dangerpercent[1] floatValue] == 4 ? [model.r_dangerpercent[1] floatValue] + 1 : [model.r_dangerpercent[1] floatValue];
+                                         self.circleView.percentValue = [model.r_dangerpercent[0] floatValue] / totle *100;
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
