@@ -23,10 +23,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     
     self.contentImageView.layer.cornerRadius = 8.0f;
     self.contentImageView.layer.masksToBounds = YES;
+    
+    self.numberBkView.layer.cornerRadius = 8;
+    self.numberLb.text = nil;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

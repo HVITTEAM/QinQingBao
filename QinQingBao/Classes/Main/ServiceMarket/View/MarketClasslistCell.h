@@ -12,6 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 
+@property (weak, nonatomic) IBOutlet UILabel *numberLb;
+
+@property (weak, nonatomic) IBOutlet UIView *numberBkView;
+
 +(instancetype)createCellWithTableView:(UITableView *)tableView;
 
 @end

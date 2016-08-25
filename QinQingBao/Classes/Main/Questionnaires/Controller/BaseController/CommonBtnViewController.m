@@ -10,7 +10,6 @@
 #define btnHorizSpace 10    //按钮之间的水平间距
 
 #import "CommonBtnViewController.h"
-#import "ButtonCell.h"
 
 @interface CommonBtnViewController ()
 
@@ -137,9 +136,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ButtonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"buttonCell" forIndexPath:indexPath];
-    OptionModel *optionmode = self.datas[indexPath.row];
-    
-    cell.titleLb .text = optionmode.qo_content;
+//    OptionModel *optionmode = self.datas[indexPath.row];
+//    
+//    cell.titleLb .text = optionmode.qo_content;
     cell.selected = [self.selectedIdxArray containsObject:indexPath];
     return cell;
 }

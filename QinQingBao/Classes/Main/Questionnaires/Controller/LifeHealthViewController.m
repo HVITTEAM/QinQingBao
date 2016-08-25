@@ -49,14 +49,23 @@
     cons.active = YES;
     
     //    [self.bigImageView addConstraint:];
+    
+    if (!self.answerProvider)
+        self.answerProvider = [[NSMutableArray alloc] init];
+    
     if (self.eq_id <= 1) {
         [self getDataProvider];
     }else{
         [self setDatasForUI];
     }
     
-    if (!self.answerProvider)
-        self.answerProvider = [[NSMutableArray alloc] init];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //界面消失时认为用户已经选择完成,设置答案
+    [self setAnswer];
 }
 
 /**
@@ -114,20 +123,57 @@
     
     //选项超过4个就两行排列
     self.datas = self.qModel_1.options;
-    //    if (self.datas.count >= 5) {
-    //        self.isTwo = YES;
-    //    }
     
-    //设置默认数据
-    if (self.datas.count > 0) {
+    //----以下为设置默认数据-----//
+    //判断是不是已经保存过答案
+    //answerIdx表示题目答案的位置,-1表示还没有回答过题目
+    NSInteger answerIdx = -1;
+    for (NSDictionary *answer in self.answerProvider) {
+        if ([answer[@"q_id"] isEqualToString:self.qModel_1.q_id]) {
+            answerIdx = [self.answerProvider indexOfObject:answer];
+        }
+    }
+    
+    //小于0表示还没回答过题目,是第一次回答
+    if (answerIdx < 0) {
         NSIndexPath *idx = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.btnCollectionView selectItemAtIndexPath:idx animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         [self.selectedIdxArray addObject:idx];
+    }else{
+        NSDictionary *oldAnswerDict = self.answerProvider[answerIdx];
+        NSString *optionStr = oldAnswerDict[@"qa_detail"];
+        NSArray *arr = [optionStr componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"[],"]];
+        NSLog(@"%@",arr);
+        
+        for (int i = 0; i < arr.count; i++) {
+            NSString *option = arr[i];
+            for (int j = 0; j < self.datas.count; j++) {
+                
+                OptionModel *optionmode = self.datas[j];
+                if ([option isEqualToString:optionmode.qo_id]) {
+                    NSIndexPath *idx = [NSIndexPath indexPathForRow:j inSection:0];
+                    [self.btnCollectionView selectItemAtIndexPath:idx animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+                    [self.selectedIdxArray addObject:idx];
+                }
+                
+            }
+            
+        }
     }
+    //----设置默认数据end-----//
+
 }
 
 #pragma mark - 重写父类方法
 //重写父类方法
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ButtonCell *cell = (ButtonCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    OptionModel *optionmode = self.datas[indexPath.row];
+    cell.titleLb .text = optionmode.qo_content;
+    return cell;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.qModel_1.q_rule && self.qModel_1.q_rule.length > 0) {
@@ -232,7 +278,7 @@
     }else{
         self.answerProvider[answerIdx] = answerDict;
     }
-    //    NSLog(@"-------------%@",self.answerProvider);
+        NSLog(@"-------------%@",self.answerProvider);
 }
 
 /**
