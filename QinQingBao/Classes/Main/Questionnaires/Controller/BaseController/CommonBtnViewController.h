@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CommonQuesViewController.h"
+#import "ButtonCell.h"
 
 @interface CommonBtnViewController : CommonQuesViewController <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 

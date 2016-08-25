@@ -60,6 +60,8 @@
     NSURL *url = [[NSURL alloc] initWithString:model.url_app];
     [cell.contentImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     
+    cell.numberLb.text = [NSString stringWithFormat:@"有%@人次参与",model.sell?:@"0"];
+    
     return cell;
 }
 
