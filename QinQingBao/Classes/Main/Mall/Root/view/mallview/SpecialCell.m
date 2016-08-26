@@ -112,7 +112,7 @@
         
         NSString *urlStr = [NSString stringWithFormat:@"%@/shop/%@%@",URL_Local,self.intermediateImageUrl,model.image];
         NSURL *url = [[NSURL alloc] initWithString:urlStr];
-        [imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder_serviceMarket"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
     }

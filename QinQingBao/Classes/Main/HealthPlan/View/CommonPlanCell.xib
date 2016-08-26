@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HYQiHei-50J.ttf">
@@ -50,6 +51,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_serviceMarket" translatesAutoresizingMaskIntoConstraints="NO" id="G5Y-Jq-JRR">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="115"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="G5Y-Jq-JRR" secondAttribute="height" multiplier="60:23" id="O1D-bH-4b6"/>
                                     <constraint firstAttribute="height" constant="115" id="VUQ-Hg-VsZ"/>
                                 </constraints>
                             </imageView>

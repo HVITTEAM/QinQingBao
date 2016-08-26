@@ -45,6 +45,7 @@
 {
     self.nameLb.text = item.r_etitle;
     self.timeLb.text = item.r_createtime;
+    self.timeLb.adjustsFontSizeToFitWidth = YES;
     self.resultLb.text = item.r_hmtitle;
    
     if ([item.r_danger isEqualToString:@"健康达人"])

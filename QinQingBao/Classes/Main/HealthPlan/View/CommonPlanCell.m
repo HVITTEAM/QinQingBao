@@ -45,8 +45,9 @@
     self.markPrice.text  = [dateFormat1 stringFromDate:date];
     
     //头像
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,self.item.item_url_big]];
+    NSURL *iconUrl = [NSURL URLWithString:self.item.item_url_big];
     [self.headImg sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
+
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, MTScreenW - 20, 115) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(8, 8)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -54,6 +55,5 @@
     maskLayer.path = maskPath.CGPath;
     self.headImg.layer.mask = maskLayer;
 }
-
 
 @end
