@@ -17,6 +17,8 @@
 {
     NSMutableArray *dataProvider;
     NSInteger currentPageIdx;
+    
+    CGFloat totla;
 }
 
 @end
@@ -40,10 +42,38 @@
     
     [self setupRefresh];
     
-    currentPageIdx = 1;
+    currentPageIdx = 0;
     dataProvider = [[NSMutableArray alloc] init];
     
     [self getDataProvider];
+    
+    //    [self downimg];
+}
+
+-(void)downimg
+{
+    currentPageIdx ++;
+    UInt64 start = [[NSDate date] timeIntervalSince1970]*1000;
+    NSURL *iconUrl = [NSURL URLWithString:@"http://ibama.hvit.com.cn/questionsys/images/e_images/detail_1470887431_1.png"];
+    //覆盖方法，指哪打哪，这个方法是下载imagePath2的时候响应
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    
+    [manager downloadImageWithURL:iconUrl options:SDWebImageCacheMemoryOnly progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        
+        UInt64 finish = [[NSDate date] timeIntervalSince1970]*1000;
+        NSLog(@"单次耗时%llu", finish - start);
+        
+        totla = totla + (finish - start);
+        CGFloat cvg  = totla/currentPageIdx;
+        
+        NSLog(@"总值%.0f,次数%ld,平均值%.0f",totla,(long)currentPageIdx,cvg);
+        
+        [[SDImageCache sharedImageCache] cleanDisk];
+        [[SDImageCache sharedImageCache] clearDisk];
+        [[SDImageCache sharedImageCache] clearMemory];
+        [self downimg];
+    }];
 }
 
 -(void)initView
@@ -96,20 +126,20 @@
                                      NSArray *arr;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                       
+                                         
                                      }
                                      else
                                      {
                                          arr = [CommonPlanModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                       
+                                         
                                          [self.tableView reloadData];
                                      }
                                      
                                      [self.tableView removePlace];
                                      if (arr.count == 0 && currentPageIdx == 1)
                                      {
-//                                         [self.tableView initWithPlaceString:@"暂无数据!"];
-                                           [self showPlaceholderview];
+                                         //                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self showPlaceholderview];
                                      }
                                      else if (arr.count == 0 && currentPageIdx > 1)
                                      {
@@ -165,7 +195,7 @@
     {
         commonPlanCell.item = dataProvider[indexPath.section];
     }
-
+    
     return commonPlanCell;
 }
 
@@ -194,7 +224,7 @@
     la.x = (self.view.width - la.width)/2;
     la.y = CGRectGetMaxY(img.frame) + 10;
     [self.view addSubview:la];
-
+    
     UILabel *la1 = [[UILabel alloc] init];
     la1.textColor = [UIColor lightGrayColor];
     CGSize size1 = [@"咨询热线: 400-151-2626" sizeWithAttributes:@{ NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:14] }];
