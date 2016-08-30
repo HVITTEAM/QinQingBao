@@ -47,15 +47,15 @@
     
     [self getDataProvider];
     
-    //    [self downimg];
+//    [self downimg];
 }
 
 -(void)downimg
 {
     currentPageIdx ++;
     UInt64 start = [[NSDate date] timeIntervalSince1970]*1000;
-    NSURL *iconUrl = [NSURL URLWithString:@"http://ibama.hvit.com.cn/questionsys/images/e_images/detail_1470887431_1.png"];
-    //覆盖方法，指哪打哪，这个方法是下载imagePath2的时候响应
+    NSURL *iconUrl = [NSURL URLWithString:@"http://app.hvit.com.cn/one/image/14_05075737633549572_1280.jpg"];
+    
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     
     [manager downloadImageWithURL:iconUrl options:SDWebImageCacheMemoryOnly progress:^(NSInteger receivedSize, NSInteger expectedSize) {

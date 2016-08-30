@@ -11,6 +11,9 @@
 #import "ResultModel.h"
 #import "ReportListModel.h"
 
+#define LINESPACE 4
+
+
 @interface QuestionResultController ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet RadianView *circleView;
@@ -156,9 +159,24 @@
                                          self.circleView.midStr = model.r_result.hmd_diseaseprobability;
                                          self.titleLab.text = model.r_hmtitle;
                                          
-                                         self.lab1.text = model.r_result.hmd_advise_diet;
-                                         self.lab2.text = model.r_result.hmd_advise_sports;
-                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                         
+                                         NSMutableAttributedString *attributedString1 = [[NSMutableAttributedString alloc] initWithString:model.r_result.hmd_advise_diet];
+                                         NSMutableParagraphStyle *paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+                                         [paragraphStyle1 setLineSpacing:LINESPACE];//调整行间距
+                                         [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [model.r_result.hmd_advise_diet length])];
+                                         self.lab1.attributedText = attributedString1;
+                                         
+                                         NSMutableAttributedString *attributedString2 = [[NSMutableAttributedString alloc] initWithString:model.r_result.hmd_advise_sports];
+                                         NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+                                         [paragraphStyle2 setLineSpacing:LINESPACE];//调整行间距
+                                         [attributedString2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [model.r_result.hmd_advise_sports length])];
+                                         self.lab2.attributedText = attributedString2;
+
+                                         NSMutableAttributedString *attributedString3 = [[NSMutableAttributedString alloc] initWithString:model.r_result.hmd_advise_other];
+                                         NSMutableParagraphStyle *paragraphStyle3 = [[NSMutableParagraphStyle alloc] init];
+                                         [paragraphStyle3 setLineSpacing:LINESPACE];//调整行间距
+                                         [attributedString3 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle3 range:NSMakeRange(0, [model.r_result.hmd_advise_other length])];
+                                         self.lab3.attributedText = attributedString3;
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

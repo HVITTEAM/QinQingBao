@@ -278,8 +278,14 @@
 -(void)getAdvertisementpic
 {
     advArr = [[NSMutableArray alloc] init];
+    
+    UInt64 start = [[NSDate date] timeIntervalSince1970]*1000;
+
     [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     UInt64 finish = [[NSDate date] timeIntervalSince1970]*1000;
+                                     NSLog(@"轮播图单次耗时%llu", finish - start);
                                      
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -317,10 +323,15 @@
 -(void)getNewsData
 {
     [self.tableView.header beginRefreshing];
+    UInt64 start = [[NSDate date] timeIntervalSince1970]*1000;
     [CommonRemoteHelper RemoteWithUrl:URL_get_articles parameters:@{@"page" : @5,
                                                                     @"p" : @1,
                                                                     @"type" : @0}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     UInt64 finish = [[NSDate date] timeIntervalSince1970]*1000;
+                                     NSLog(@"资讯列表单次耗时%llu", finish - start);
+
                                      [self.tableView.header endRefreshing];
                                      NSDictionary *dict1 =  [dict objectForKey:@"datas"];
                                      

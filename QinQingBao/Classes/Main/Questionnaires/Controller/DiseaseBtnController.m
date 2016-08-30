@@ -270,7 +270,7 @@
 -(void)toNextVC
 {
     NSInteger nextQuestionId = self.eq_id + 1;
-    if (nextQuestionId >= 4 && nextQuestionId <= 16 && nextQuestionId != 10) {
+    if (nextQuestionId >= 4 && nextQuestionId <= 16 && nextQuestionId != 11) {
         DiseaseBtnController *nextQuestionBtnVC = [[DiseaseBtnController alloc] init];
         nextQuestionBtnVC.dataProvider = self.dataProvider;
         nextQuestionBtnVC.eq_id = nextQuestionId;
@@ -279,7 +279,7 @@
         nextQuestionBtnVC.calculatype = self.calculatype;
         nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
-    }else if (nextQuestionId == 10){
+    }else if (nextQuestionId == 11){
         QuestionThreeController *nextQuestionThreeVC = [[QuestionThreeController alloc] init];
         nextQuestionThreeVC.dataProvider = self.dataProvider;
         nextQuestionThreeVC.answerProvider = self.answerProvider;

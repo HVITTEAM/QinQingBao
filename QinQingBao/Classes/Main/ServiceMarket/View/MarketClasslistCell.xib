@@ -22,7 +22,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5g-Zz-C6N">
-                        <rect key="frame" x="125" y="114" width="68.5" height="25"/>
+                        <rect key="frame" x="125" y="108" width="68.5" height="25"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" translatesAutoresizingMaskIntoConstraints="NO" id="xr1-nS-fYS">
                                 <rect key="frame" x="10" y="5" width="15" height="15"/>
@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.1964783281733746" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xr1-nS-fYS" firstAttribute="leading" secondItem="N5g-Zz-C6N" secondAttribute="leading" constant="10" id="1S5-CD-FWA"/>
                             <constraint firstItem="xr1-nS-fYS" firstAttribute="top" secondItem="N5g-Zz-C6N" secondAttribute="top" constant="5" id="CM5-63-0hp"/>
@@ -52,7 +52,7 @@
                 <constraints>
                     <constraint firstItem="GfX-wE-Pyb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="0rZ-u8-62K"/>
                     <constraint firstItem="N5g-Zz-C6N" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="9Yt-Cb-BRD"/>
-                    <constraint firstItem="N5g-Zz-C6N" firstAttribute="bottom" secondItem="GfX-wE-Pyb" secondAttribute="bottom" constant="-6" id="VfL-RP-TAw"/>
+                    <constraint firstItem="N5g-Zz-C6N" firstAttribute="bottom" secondItem="GfX-wE-Pyb" secondAttribute="bottom" constant="-12" id="VfL-RP-TAw"/>
                     <constraint firstAttribute="trailing" secondItem="GfX-wE-Pyb" secondAttribute="trailing" constant="15" id="YOQ-c7-DuH"/>
                     <constraint firstAttribute="bottom" secondItem="GfX-wE-Pyb" secondAttribute="bottom" constant="15" id="ol5-Nl-kp8"/>
                     <constraint firstItem="GfX-wE-Pyb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="tdF-PH-aDY"/>

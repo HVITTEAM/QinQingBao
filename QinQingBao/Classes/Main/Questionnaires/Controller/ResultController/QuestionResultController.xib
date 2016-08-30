@@ -236,7 +236,7 @@
                     </variation>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0g-Pk-EiN">
-                    <rect key="frame" x="20" y="518" width="125" height="45"/>
+                    <rect key="frame" x="20" y="513" width="125" height="45"/>
                     <color key="backgroundColor" red="0.4823529411764706" green="0.74117647058823533" blue="0.19215686274509805" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="6Xc-FE-6qd"/>
@@ -249,7 +249,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaZ-eL-KMY">
-                    <rect key="frame" x="175" y="518" width="125" height="45"/>
+                    <rect key="frame" x="175" y="513" width="125" height="45"/>
                     <color key="backgroundColor" red="0.14509803921568629" green="0.60392156862745094" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="i0B-W5-FPs"/>
@@ -264,7 +264,7 @@
             </subviews>
             <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="v0g-Pk-EiN" secondAttribute="bottom" constant="5" id="2KJ-Oh-u0V"/>
+                <constraint firstAttribute="bottom" secondItem="v0g-Pk-EiN" secondAttribute="bottom" constant="10" id="2KJ-Oh-u0V"/>
                 <constraint firstAttribute="trailing" secondItem="YaZ-eL-KMY" secondAttribute="trailing" constant="20" id="5dR-bz-bR4"/>
                 <constraint firstItem="v0g-Pk-EiN" firstAttribute="width" secondItem="YaZ-eL-KMY" secondAttribute="width" id="7g5-fm-cQE"/>
                 <constraint firstAttribute="trailing" secondItem="3HA-uw-AI5" secondAttribute="trailing" id="Hio-Gj-Kb2"/>
@@ -273,7 +273,7 @@
                 <constraint firstAttribute="bottom" secondItem="3HA-uw-AI5" secondAttribute="bottom" constant="60" id="Tgy-UD-cXA"/>
                 <constraint firstItem="3HA-uw-AI5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="X2G-uE-78t"/>
                 <constraint firstItem="3HA-uw-AI5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="foR-uk-m5Y"/>
-                <constraint firstAttribute="bottom" secondItem="YaZ-eL-KMY" secondAttribute="bottom" constant="5" id="grC-fW-mbB"/>
+                <constraint firstAttribute="bottom" secondItem="YaZ-eL-KMY" secondAttribute="bottom" constant="10" id="grC-fW-mbB"/>
                 <constraint firstItem="v0g-Pk-EiN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="m7b-y9-yO7"/>
                 <constraint firstItem="lac-az-vXi" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="nT5-NS-G8d"/>
                 <constraint firstItem="3HA-uw-AI5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zOT-Ke-XtZ"/>

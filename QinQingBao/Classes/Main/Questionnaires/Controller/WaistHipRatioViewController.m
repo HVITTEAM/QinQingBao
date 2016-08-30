@@ -99,10 +99,10 @@
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:answerItem.q_logo_url] placeholderImage:[UIImage imageWithName:@"placeholder_serviceMarket"]];
     
     _rule1.rulerDelegate = self;
-    [_rule1 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: 80];
+    [_rule1 showRulerScrollViewWithCount:150 average:[NSNumber numberWithFloat:1] startValue:1 currentValue: 80];
     
     _rule2.rulerDelegate = self;
-    [_rule2 showRulerScrollViewWithCount:100 average:[NSNumber numberWithFloat:1] startValue:0 currentValue: 60];
+    [_rule2 showRulerScrollViewWithCount:150 average:[NSNumber numberWithFloat:1] startValue:1 currentValue: 60];
     
     [self initdata];
 }

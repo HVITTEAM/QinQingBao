@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="290" height="145"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GAN-je-SxJ">
-                                <rect key="frame" x="111.5" y="114" width="68.5" height="25"/>
+                                <rect key="frame" x="111.5" y="108" width="68.5" height="25"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person" translatesAutoresizingMaskIntoConstraints="NO" id="spJ-VN-Vyn">
                                         <rect key="frame" x="10" y="5" width="15" height="15"/>
@@ -38,7 +38,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0078431372549019607" green="0.0" blue="0.0" alpha="0.20391592492260061" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="spJ-VN-Vyn" firstAttribute="leading" secondItem="GAN-je-SxJ" secondAttribute="leading" constant="10" id="MUt-Fe-3K7"/>
                                     <constraint firstAttribute="trailing" secondItem="0Lh-zK-IDY" secondAttribute="trailing" constant="10" id="WNy-aR-yJM"/>
@@ -55,7 +55,7 @@
                             <constraint firstAttribute="trailing" secondItem="MmV-g4-OdN" secondAttribute="trailing" id="aWD-d0-v63"/>
                             <constraint firstAttribute="bottom" secondItem="MmV-g4-OdN" secondAttribute="bottom" id="gZ4-Vb-HXu"/>
                             <constraint firstItem="MmV-g4-OdN" firstAttribute="leading" secondItem="4ZG-Co-smc" secondAttribute="leading" id="nUM-lP-x4C"/>
-                            <constraint firstAttribute="bottom" secondItem="GAN-je-SxJ" secondAttribute="bottom" constant="6" id="y8j-0D-Gaj"/>
+                            <constraint firstAttribute="bottom" secondItem="GAN-je-SxJ" secondAttribute="bottom" constant="12" id="y8j-0D-Gaj"/>
                             <constraint firstAttribute="width" secondItem="4ZG-Co-smc" secondAttribute="height" multiplier="2:1" id="zv9-nG-cpr"/>
                         </constraints>
                     </view>

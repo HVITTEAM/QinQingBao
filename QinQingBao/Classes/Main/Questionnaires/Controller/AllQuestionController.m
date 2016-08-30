@@ -43,7 +43,7 @@
     self.tableView.estimatedRowHeight = 70;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.view.backgroundColor = HMGlobalBg;
-    self.title = @"健康评估";
+    self.title = @"生命健康系统功能评估";
 }
 
 #pragma mark 集成刷新控件

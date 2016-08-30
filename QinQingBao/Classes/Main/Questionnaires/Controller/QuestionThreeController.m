@@ -121,7 +121,7 @@
     
     self.nextBtn.layer.cornerRadius = 7.0f;
     
-    questionItem = self.dataProvider[9];
+    questionItem = self.dataProvider[10];
     self.title = questionItem.eq_subtitle;
     
     item1 = questionItem.questions[0];

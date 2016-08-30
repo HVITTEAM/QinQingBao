@@ -10,7 +10,7 @@
 #import "RadianView.h"
 #import "ResultModel.h"
 #import "ReportListModel.h"
-
+#define LINESPACE 4
 @interface QuestionResultController2 ()
 @property (strong, nonatomic) IBOutlet UILabel *titleLab;
 @property (strong, nonatomic) IBOutlet RadianView *circleView;
@@ -56,7 +56,7 @@
 }
 
 - (IBAction)btn2Handler:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
 }
 
 -(void)getResult
@@ -101,7 +101,13 @@
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          self.titleLab.text = model.r_hmtitle;
-                                         self.lab1.text = model.r_result.hmd_advise;
+                                         
+                                         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:model.r_result.hmd_advise];
+                                         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                                         [paragraphStyle setLineSpacing:LINESPACE];//调整行间距
+                                         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [model.r_result.hmd_advise length])];
+                                         self.lab1.attributedText = attributedString;
+                                         
                                          
                                          self.circleView.midStr = model.r_dangercoefficient;
                                          CGFloat totle = [model.r_dangerpercent[1] floatValue] == 4 ? [model.r_dangerpercent[1] floatValue] + 1 : [model.r_dangerpercent[1] floatValue];
@@ -135,7 +141,13 @@
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          self.titleLab.text = model.r_hmtitle;
-                                         self.lab1.text = model.r_result.hmd_advise;
+                                         
+                                         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:model.r_result.hmd_advise];
+                                         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                                         [paragraphStyle setLineSpacing:LINESPACE];//调整行间距
+                                         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [model.r_result.hmd_advise length])];
+                                         self.lab1.attributedText = attributedString;
+                                         
                                          
                                          self.circleView.midStr = model.r_dangercoefficient;
                                          CGFloat totle = [model.r_dangerpercent[1] floatValue] == 4 ? [model.r_dangerpercent[1] floatValue] + 1 : [model.r_dangerpercent[1] floatValue];
