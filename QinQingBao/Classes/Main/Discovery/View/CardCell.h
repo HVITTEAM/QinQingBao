@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PostsModel.h"
 @interface CardCell : UITableViewCell
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
 /**
- *  设置假数据
+ *  设置数据
  */
-- (void)setData;
+@property (nonatomic, retain) PostsModel *itemdata;
 
 @end

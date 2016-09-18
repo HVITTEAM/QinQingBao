@@ -14,14 +14,21 @@
 #import "ProfileTopCell.h"
 #import "CollectTypeCell.h"
 
+#import "PostsModel.h"
 
 #import "SendMsgViewController.h"
+
+
+#import "CardCell.h"
+
 #define headHeight 220
 
 @interface PublicProfileViewController ()<UIScrollViewDelegate>
 {
     UserInforModel *infoVO;
     NSString *iconUrl;
+    
+    NSArray *postsArr;
 }
 
 @property(nonatomic,strong)UIView *headView;
@@ -37,6 +44,8 @@
     [self initNavigation];
     
     [self initHeadView];
+    
+    [self getUserPosts];
     
     self.view.backgroundColor = HMGlobalBg;
     self.navigationItem.title = @"";
@@ -110,6 +119,31 @@
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
+/**
+ *  获取发帖数据
+ */
+-(void)getUserPosts
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"uid" : @"1"
+                                                                       }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+    
+}
+
 #pragma mark 导航栏点击
 
 -(void)navgationHandler:(UIButton *)sender
@@ -135,19 +169,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (0 == section)
+        return 1;
+    else
+        return postsArr.count;
 }
 
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    return 60;
+    
+    if (0 == indexPath.section) {
+        return 60;
+    }
+    
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -183,7 +225,12 @@
             [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
         };
         cell = consumeCell;
-        
+    }
+    else if (indexPath.section == 1)
+    {
+        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
+        [cardCell setItemdata:postsArr[indexPath.row]];
+        cell = cardCell;
     }
     return cell;
 }
@@ -225,8 +272,8 @@
                                              // 显示个人资料
                                              LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
-                                             [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-                              
+                                             [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
+                                             
                                              [headView initWithName:infoVO.member_truename professional:@"认证专家"];
                                          }
                                          else

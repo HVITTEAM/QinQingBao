@@ -1213,6 +1213,7 @@
 		01F6DBBC1D8E406000300679 /* ScrollMenuTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBB01D8E406000300679 /* ScrollMenuTableCell.m */; };
 		01F6DBBD1D8E406000300679 /* ScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBB21D8E406000300679 /* ScrollMenuView.m */; };
 		01F6DBBE1D8E406000300679 /* SiglePicCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBB41D8E406000300679 /* SiglePicCardCell.m */; };
+		01F6DBC21D8E640B00300679 /* PostsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBC11D8E640B00300679 /* PostsModel.m */; };
 		01F85A921C5743B100E463F4 /* topbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85A911C5743B100E463F4 /* topbg.png */; };
 		01F85AB41C575A0600E463F4 /* MallRootViewControlelr.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F85AA81C575A0600E463F4 /* MallRootViewControlelr.m */; };
 		01F85AB51C575A0600E463F4 /* MTProgressWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F85AAA1C575A0600E463F4 /* MTProgressWebViewController.m */; };
@@ -3430,6 +3431,8 @@
 		01F6DBB21D8E406000300679 /* ScrollMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollMenuView.m; sourceTree = "<group>"; };
 		01F6DBB31D8E406000300679 /* SiglePicCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiglePicCardCell.h; sourceTree = "<group>"; };
 		01F6DBB41D8E406000300679 /* SiglePicCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiglePicCardCell.m; sourceTree = "<group>"; };
+		01F6DBC01D8E640B00300679 /* PostsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsModel.h; sourceTree = "<group>"; };
+		01F6DBC11D8E640B00300679 /* PostsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsModel.m; sourceTree = "<group>"; };
 		01F85A911C5743B100E463F4 /* topbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbg.png; sourceTree = "<group>"; };
 		01F85AA71C575A0600E463F4 /* MallRootViewControlelr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallRootViewControlelr.h; sourceTree = "<group>"; };
 		01F85AA81C575A0600E463F4 /* MallRootViewControlelr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallRootViewControlelr.m; sourceTree = "<group>"; };
@@ -8811,6 +8814,8 @@
 		01F6DBA41D8E406000300679 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				01F6DBC01D8E640B00300679 /* PostsModel.h */,
+				01F6DBC11D8E640B00300679 /* PostsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -10415,6 +10420,7 @@
 				D257C4A61D65B977002D18F5 /* ExtendFooterView.m in Sources */,
 				01ED7CAB1C3220AB00A2182F /* MTNetReloader.m in Sources */,
 				D279DA441B8726BB00E7CDDF /* HealthBloodPressureViewController.m in Sources */,
+				01F6DBC21D8E640B00300679 /* PostsModel.m in Sources */,
 				011077001C3E8CD1001E5C51 /* GoodsInfoViewController.m in Sources */,
 				01ECDB1A1C8EB31F0018160F /* EaseBubbleView+Video.m in Sources */,
 				01E6906F1BCCB32D00A17543 /* NSString+MD5.m in Sources */,

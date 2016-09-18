@@ -106,22 +106,30 @@
     self.lineView.frame = CGRectMake(0, self.bounds.size.height - 1, self.bounds.size.width, 1);
 }
 
-- (void)setData
+-(void)setItemdata:(PostsModel *)itemdata
 {
-    self.portraitView.image = [UIImage imageNamed:@"ic_blood_pressure"];
-    self.timeLb.text = @"8月27日 16:00";
-    self.nameLb.text = @"王主任";
-    self.headTagLb.text = @"主任";
+    _itemdata = itemdata;
     
-    self.titleLb.text = @"电机富乐山监督管理局山东老家斐林试东老家斐林试东老家斐林试东老家斐林试";
-    self.contentLb.text = @"粘合胶荣威入伍鹅肉围殴肉我饿u人粘合胶肉潍坊三闾大夫叫啥了江东父老数据的风流教师夺善良的放假了世纪东方了叫啥两地分居啥李东方";
-    self.photoNum = 3;
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    self.timeLb.text = self.itemdata.dateline;
+    self.nameLb.text = self.itemdata.author;
+    self.headTagLb.text = @"超凡大师";
+    
+    self.titleLb.text = self.itemdata.subject;
+    self.contentLb.text = self.itemdata.messages;
+    self.photoNum = self.itemdata.picture.count;
     
     [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
     
-    //设置位置
     [self layoutCell];
-
+    
+    for (UIImageView *img in self.photos)
+    {
+        NSInteger idx = [self.photos indexOfObject:img];
+        if (idx >= self.itemdata.picture.count)
+            break;
+        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    }
 }
 
 #pragma mark - 设置cell子视图的位置
@@ -135,7 +143,7 @@
     [self layoutTextInfoView];
     
     [self layoutPhotosView];
-
+    
     [self layoutBottomBarView];
 }
 
@@ -300,7 +308,7 @@
     headTagLb.layer.masksToBounds = YES;
     [infoView addSubview:headTagLb];
     self.headTagLb = headTagLb;
-
+    
     //关注
     UIButton *attentionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     attentionBtn.backgroundColor = [UIColor whiteColor];
@@ -322,7 +330,6 @@
     UIView *textInfoView = [[UIView alloc] init];
     [self.contentView addSubview:textInfoView];
     self.textInfoView = textInfoView;
-//    textInfoView.backgroundColor = [UIColor redColor];
     
     //文章标题
     UILabel *titleLb = [[UILabel alloc] init];
@@ -333,7 +340,7 @@
     //文章内容
     UILabel *contentLb = [[UILabel alloc] init];
     contentLb.numberOfLines = 0;
-   [textInfoView addSubview:contentLb];
+    [textInfoView addSubview:contentLb];
     self.contentLb = contentLb;
 }
 
@@ -345,7 +352,6 @@
     UIView *photosView = [[UIView alloc] init];
     [self.contentView addSubview:photosView];
     self.photosView = photosView;
-//    photosView.backgroundColor = [UIColor brownColor];
     
     self.photos = [[NSMutableArray alloc] init];
     
@@ -365,11 +371,10 @@
     UIView *bottomBarView = [[UIView alloc] init];
     [self.contentView addSubview:bottomBarView];
     self.bottomBarView = bottomBarView;
-//    bottomBarView.backgroundColor = [UIColor yellowColor];
     
-    self.ydBtn = [self createBtnWithTitle:@"阅读" image:@"yd_icon"];
-    self.dzBtn = [self createBtnWithTitle:@"点赞" image:@"dz_icon"];
-    self.plBtn = [self createBtnWithTitle:@"评论" image:@"pl_icon"];
+    self.ydBtn = [self createBtnWithTitle:self.itemdata.views image:@"yd_icon"];
+    self.dzBtn = [self createBtnWithTitle:self.itemdata.recommend_add image:@"dz_icon"];
+    self.plBtn = [self createBtnWithTitle:self.itemdata.replies image:@"pl_icon"];
     
     self.barTagBtn = [self createBtnWithTitle:@"健康专题" image:@"qz_icon"];
     [self.barTagBtn setTitleColor:HMColor(98, 50, 02) forState:UIControlStateNormal];

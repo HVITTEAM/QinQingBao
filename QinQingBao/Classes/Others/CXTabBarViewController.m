@@ -21,7 +21,7 @@
 #import "DiscoveryViewController.h"
 #import "CXTabBar.h"
 
-//#import "PublicProfileViewController.h"
+#import "PublicProfileViewController.h"
 
 #import "CXComposeViewController.h"
 
@@ -79,7 +79,7 @@
     MallRootViewControlelr *mall = [[MallRootViewControlelr alloc] init];
     [self addOneChlildVc:mall title:@"商城" imageName:@"shop_normal.png" selectedImageName:@"shop_selected.png"];
     
-    PrivateProfileViewController *profile = [[PrivateProfileViewController alloc] init];
+    PublicProfileViewController *profile = [[PublicProfileViewController alloc] init];
     [self addOneChlildVc:profile title:@"我的" imageName:@"third_normal.png" selectedImageName:@"third_selected.png"];
 }
 
