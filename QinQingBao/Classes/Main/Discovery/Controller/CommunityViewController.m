@@ -39,6 +39,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *ownerLb;
 
+@property (strong, nonatomic) NSArray *allPosts;
+
 @end
 
 @implementation CommunityViewController
@@ -63,6 +65,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self setupUI];
+    
+    [self getUserPosts];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,7 +141,7 @@
         return 3;
     }
     
-    return 20;
+    return self.allPosts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -153,12 +157,13 @@
         newsCell.textLabel.text = @"水电费金砂街道富乐山绝地反击上岛咖啡绝色赌妃图格里克韩国帅哥世界大学城星罗棋布时";
         cell = newsCell;
     }else{
-//        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-//        [cardCell setData];
-//        cell = cardCell;
-        SiglePicCardCell *siglePicCardCell = [SiglePicCardCell createCellWithTableView:tableView];
-        [siglePicCardCell setData];
-        cell = siglePicCardCell;
+        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
+        PostsModel *model = self.allPosts[indexPath.row];
+        [cardCell setItemdata:model];
+        cell = cardCell;
+//        SiglePicCardCell *siglePicCardCell = [SiglePicCardCell createCellWithTableView:tableView];
+//        [siglePicCardCell setData];
+//        cell = siglePicCardCell;
     }
     
     return cell;
@@ -304,6 +309,31 @@
     [tabView addSubview:self.line];
     
     return tabView;
+}
+
+/**
+ *  获取发帖数据
+ */
+-(void)getUserPosts
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"uid" : @"1"
+                                                                       }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                        self.allPosts = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+    
 }
 
 @end

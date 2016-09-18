@@ -118,18 +118,29 @@
     self.titleLb.text = self.itemdata.subject;
     self.contentLb.text = self.itemdata.messages;
     self.photoNum = self.itemdata.picture.count;
-    
+
+    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
+    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
+    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
+    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
+    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
+    [self.plBtn setTitle:pl forState:UIControlStateNormal];
     [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
     
     [self layoutCell];
     
-    for (UIImageView *img in self.photos)
-    {
-        NSInteger idx = [self.photos indexOfObject:img];
-        if (idx >= self.itemdata.picture.count)
-            break;
-        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    for (int i = 0; i < self.itemdata.picture.count; i++) {
+        UIImageView *img = self.photos[i];
+        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     }
+    
+//    for (UIImageView *img in self.photos)
+//    {
+//        NSInteger idx = [self.photos indexOfObject:img];
+//        if (idx >= self.itemdata.picture.count)
+//            break;
+//        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+//    }
 }
 
 #pragma mark - 设置cell子视图的位置
