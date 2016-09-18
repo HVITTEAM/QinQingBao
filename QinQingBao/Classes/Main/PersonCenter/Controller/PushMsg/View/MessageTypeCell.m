@@ -13,10 +13,11 @@
 
 +(MessageTypeCell *) messageTypeCell
 {
-    MessageTypeCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageTypeCell" owner:self options:nil] objectAtIndex:0];
+    MessageTypeCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageTypeCell" owner:self options:nil] lastObject];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.badgeView.layer.cornerRadius = 5;
     cell.badgeView.hidden = YES;
+
     return cell;
 }
 

@@ -381,8 +381,7 @@
     //backHide 是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
     if (!self.backHiden)
         [self dismissViewControllerAnimated:YES completion:nil];
-    [MTControllerChooseTool setMainViewcontroller];
-    
+    [MTNotificationCenter postNotificationName:MTReLogin object:nil];
     //设置推送标签和别名
     [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }

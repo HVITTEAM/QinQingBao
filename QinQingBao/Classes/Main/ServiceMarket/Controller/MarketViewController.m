@@ -175,7 +175,6 @@
         MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
         MassageModel *model = dataProvider[indexPath.section];
         view.iid = model.iid;
-        view.iidnum = model.iid_num;
         [self.navigationController pushViewController:view animated:YES];
     }
 }

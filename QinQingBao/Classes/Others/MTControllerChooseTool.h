@@ -30,10 +30,11 @@
 /**
  *  设置注销控制器
  */
-+ (void)setloginOutViewController;
++ (void)setPrivateProfileViewController;
 
 /**
  *  登录之后更新控制器
  */
 + (void)setMainViewcontroller;
+
 @end

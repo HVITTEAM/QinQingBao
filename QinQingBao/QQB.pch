@@ -106,6 +106,9 @@
 
 #define MTNavH self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height
 
+// 是否为iOS7
+#define iOS7 ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
+
 // 颜色
 #define HMColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
@@ -183,9 +186,16 @@
 
 
 /** 通知 */
-
+// 超时
 #define MTLoginTimeout @"MTLoginTimeout"
 
+// 注销
+#define MTLoginout @"MTLoginout"
+
+// 重新登录成功
+#define MTReLogin @"MTReLogin"
+
+// 需要登录
 #define MTNeedLogin @"MTNeedLogin"
 
 #define MTSececteFamily @"HMSelectedFamily"
@@ -720,6 +730,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
     MessageTypePushMsg,//推送消息
     MessageTypeLogistics,//物流助手
 };
+
 
 //typedef NS_ENUM(NSInteger, iPhoneModel){//0~3
 //    iPhone4,//320*480

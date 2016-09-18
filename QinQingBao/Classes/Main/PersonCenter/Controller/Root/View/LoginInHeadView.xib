@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="LoginInHeadView" customClass="LoginInHeadView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headbg" translatesAutoresizingMaskIntoConstraints="NO" id="g2o-Ig-7cw" userLabel="cententimg">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="224"/>
+                    <color key="backgroundColor" red="0.37254901960784315" green="0.45882352941176469" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pc_user" translatesAutoresizingMaskIntoConstraints="NO" id="Uru-fe-HaH">
+                    <rect key="frame" x="120" y="72" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="AG7-HU-bZD"/>
+                        <constraint firstAttribute="height" constant="80" id="ikD-gS-5DT"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1I6-yb-NiZ">
+                    <rect key="frame" x="45" y="98.5" width="60" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="5nr-0q-w1V"/>
+                        <constraint firstAttribute="height" constant="27" id="DMR-ih-6V4"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="关注" image="follow"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                            <color key="value" red="0.95200866460800171" green="0.98464363813400269" blue="0.97639530897140503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="followHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="FYb-Sk-N3G"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="066-JH-TY1">
+                    <rect key="frame" x="215" y="98.5" width="60" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Vgr-eQ-RWG"/>
+                        <constraint firstAttribute="height" constant="27" id="WpA-jl-zhf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="私信" image="letter"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                            <color key="value" red="0.95200866460800171" green="0.98464363813400269" blue="0.97639530897140503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="letterHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="Qh0-Is-QMz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4e-Mq-waf" userLabel="loginBtn">
+                    <rect key="frame" x="133" y="159" width="54" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="DPi-ek-aIR"/>
+                    </constraints>
+                    <state key="normal" title="未登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="loginHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="LtI-Kf-53l"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="认证专家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulT-8S-RFE">
+                    <rect key="frame" x="195" y="168" width="40" height="15"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="bZx-tH-QkQ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.14117647059999999" green="0.61176470589999998" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.38823529410000002" green="0.58039215690000001" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="1I6-yb-NiZ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="25q-BR-fgt"/>
+                <constraint firstItem="R4e-Mq-waf" firstAttribute="top" secondItem="Uru-fe-HaH" secondAttribute="bottom" constant="7" id="2WB-QW-TsU"/>
+                <constraint firstItem="g2o-Ig-7cw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4bj-kx-AE9"/>
+                <constraint firstItem="Uru-fe-HaH" firstAttribute="leading" secondItem="1I6-yb-NiZ" secondAttribute="trailing" constant="15" id="8dt-WA-IDT"/>
+                <constraint firstItem="ulT-8S-RFE" firstAttribute="top" secondItem="Uru-fe-HaH" secondAttribute="bottom" constant="16" id="BZA-kR-YRH"/>
+                <constraint firstItem="Uru-fe-HaH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DOn-EM-sfa"/>
+                <constraint firstItem="ulT-8S-RFE" firstAttribute="leading" secondItem="R4e-Mq-waf" secondAttribute="trailing" constant="8" id="GbU-tY-n2z"/>
+                <constraint firstItem="R4e-Mq-waf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IIz-7Y-Awa"/>
+                <constraint firstItem="066-JH-TY1" firstAttribute="leading" secondItem="Uru-fe-HaH" secondAttribute="trailing" constant="15" id="Mr6-vs-quh"/>
+                <constraint firstItem="g2o-Ig-7cw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cNT-fl-zGE"/>
+                <constraint firstAttribute="bottom" secondItem="g2o-Ig-7cw" secondAttribute="bottom" id="lMW-51-6IV"/>
+                <constraint firstAttribute="trailing" secondItem="g2o-Ig-7cw" secondAttribute="trailing" id="ni1-mf-mdh"/>
+                <constraint firstItem="066-JH-TY1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="onn-jh-zbp"/>
+                <constraint firstItem="Uru-fe-HaH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="taO-aY-ap6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="followBtn" destination="1I6-yb-NiZ" id="uKo-Hv-Ta2"/>
+                <outlet property="headView" destination="g2o-Ig-7cw" id="QyW-0i-iuN"/>
+                <outlet property="letterBtn" destination="066-JH-TY1" id="peK-Ee-UyB"/>
+                <outlet property="loginBtn" destination="R4e-Mq-waf" id="lfK-VZ-Lls"/>
+                <outlet property="professionLab" destination="ulT-8S-RFE" id="bzV-e4-5HS"/>
+                <outlet property="userIcon" destination="Uru-fe-HaH" id="5Sb-xm-crI"/>
+            </connections>
+            <point key="canvasLocation" x="280" y="191"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="follow" width="72" height="30"/>
+        <image name="headbg" width="160" height="66"/>
+        <image name="letter" width="72" height="30"/>
+        <image name="pc_user" width="128" height="128"/>
+    </resources>
+</document>

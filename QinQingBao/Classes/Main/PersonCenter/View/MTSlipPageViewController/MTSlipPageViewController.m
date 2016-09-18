@@ -12,6 +12,12 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
 #import "MTSlipPageViewController.h"
 
 
+@interface MTSlipPageViewController ()
+@property (nonatomic, strong)  UIScrollView *rootScrollView;
+@property (nonatomic, strong)  UIView *headScrollView;
+@property (nonatomic, strong)  UIImageView *shadowImageView;
+@end
+
 @implementation MTSlipPageViewController
 
 - (void)drawRect:(CGRect)rect
@@ -177,7 +183,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     if (self.selectedIndex != index + 100)
     {
         [self.delegate switchView:self.viewArr[index] didselectTab:index];
-
+        
         //新页面
         //赋值按钮ID
         self.selectedIndex = index + 100;

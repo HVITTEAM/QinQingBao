@@ -42,7 +42,7 @@
     
     [self setupRefresh];
     
-    currentPageIdx = 0;
+    currentPageIdx = 1;
     dataProvider = [[NSMutableArray alloc] init];
     
     [self getDataProvider];
@@ -123,10 +123,10 @@
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
-                                     NSArray *arr;
+                                     NSArray *arr = @[];;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         
+                                        
                                      }
                                      else
                                      {
@@ -138,7 +138,6 @@
                                      [self.tableView removePlace];
                                      if (arr.count == 0 && currentPageIdx == 1)
                                      {
-                                         //                                         [self.tableView initWithPlaceString:@"暂无数据!"];
                                          [self showPlaceholderview];
                                      }
                                      else if (arr.count == 0 && currentPageIdx > 1)
@@ -218,9 +217,10 @@
     
     UILabel *la = [[UILabel alloc] init];
     la.textColor = MTNavgationBackgroundColor;
+    la.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
     CGSize size = [@"你还没有专属的健康计划" sizeWithAttributes:@{ NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:16] }];
-    la.size = size;
     la.text = @"你还没有专属的健康计划";
+    la.size = size;
     la.x = (self.view.width - la.width)/2;
     la.y = CGRectGetMaxY(img.frame) + 10;
     [self.view addSubview:la];
@@ -228,8 +228,9 @@
     UILabel *la1 = [[UILabel alloc] init];
     la1.textColor = [UIColor lightGrayColor];
     CGSize size1 = [@"咨询热线: 400-151-2626" sizeWithAttributes:@{ NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:14] }];
-    la1.size = size1;
     la1.text = @"咨询热线: 400-151-2626";
+    la1.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    la1.size = size1;
     la1.x = (self.view.width - la1.width)/2;
     la1.y = CGRectGetMaxY(la.frame) + 10;
     [self.view addSubview:la1];

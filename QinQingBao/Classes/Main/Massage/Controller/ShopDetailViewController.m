@@ -62,7 +62,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     self.title = @"服务详情";
-
+    
     [super viewDidAppear:animated];
 }
 
@@ -119,8 +119,8 @@
     if (self.shopItem == nil)
     {
         [CommonRemoteHelper RemoteWithUrl:URL_get_orginfo_by_iid parameters:@{@"iid" : self.iid,
-                                                                                 @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
-                                                                                 @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
+                                                                              @"lat" : [SharedAppUtil defaultCommonUtil].lat ? [SharedAppUtil defaultCommonUtil].lat : @"",
+                                                                              @"lon" : [SharedAppUtil defaultCommonUtil].lon ? [SharedAppUtil defaultCommonUtil].lon :@""}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -241,7 +241,7 @@
             if(evacell == nil)
                 evacell = [EvaluationCell evaluationCell];
             
-            [evacell setdataWithScore:dataItem.wgrade count:@"100"];
+            [evacell setdataWithScore:dataItem.wgrade count:[NSString stringWithFormat:@"%lu",(unsigned long)evaArr.count]];
             [evacell setEvaItem:evaArr[0]];
             evacell.queryClick  = ^(UIButton *btn){
                 [self queryAllevaluation];

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="HYQiHei-50J.ttf">
-            <string>HYQiHei-EZJ</string>
-            <string>HYQiHei-EZJ</string>
-            <string>HYQiHei-EZJ</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,19 +23,19 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动资讯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90O-qw-6l6">
                         <rect key="frame" x="70" y="10" width="68" height="20"/>
-                        <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fX-Pz-Cab">
                         <rect key="frame" x="70" y="57.5" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2D-B6-vko">
                         <rect key="frame" x="312" y="8" width="0.0" height="0.0"/>
-                        <fontDescription key="fontDescription" name="HYQiHei-EZJ" family="HYQiHei" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -64,15 +57,9 @@
                     <constraint firstItem="U2D-B6-vko" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VXS-SY-Ipl"/>
                     <constraint firstAttribute="trailing" secondItem="U2D-B6-vko" secondAttribute="trailing" constant="8" id="XOk-0a-Nup"/>
                     <constraint firstItem="90O-qw-6l6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="djq-Pz-Mo8"/>
-                    <constraint firstItem="2fX-Pz-Cab" firstAttribute="top" secondItem="U2D-B6-vko" secondAttribute="bottom" constant="20" id="jR9-aG-V09"/>
                     <constraint firstAttribute="bottom" secondItem="cO5-me-FuI" secondAttribute="bottom" constant="15" id="jVg-J9-g2q"/>
                     <constraint firstItem="90O-qw-6l6" firstAttribute="leading" secondItem="xdV-Zk-dQ2" secondAttribute="trailing" constant="10" id="q6y-YA-Ycs"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="jR9-aG-V09"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="badgeView" destination="cO5-me-FuI" id="aRD-FB-Q7w"/>

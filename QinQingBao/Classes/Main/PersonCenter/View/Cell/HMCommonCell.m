@@ -145,17 +145,22 @@
     // 2.设置背景图片
     if (rows == 1) {
         bgView.image = [UIImage resizedImage:@"common_card_background"];
-        selectedBgView.image = [UIImage resizedImage:@"common_card_background_highlighted"];
+        if (![self.item isKindOfClass:[HMCommonTextfieldItem class]])
+            selectedBgView.image = [UIImage resizedImage:@"common_card_background_highlighted"];
     } else if (indexPath.row == 0) { // 首行
         bgView.image = [UIImage resizedImage:@"common_card_top_background"];
-        selectedBgView.image = [UIImage resizedImage:@"common_card_top_background_highlighted"];
+        if (![self.item isKindOfClass:[HMCommonTextfieldItem class]])
+            selectedBgView.image = [UIImage resizedImage:@"common_card_top_background_highlighted"];
     } else if (indexPath.row == rows - 1) { // 末行
         bgView.image = [UIImage resizedImage:@"common_card_bottom_background"];
-        selectedBgView.image = [UIImage resizedImage:@"common_card_bottom_background_highlighted"];
+        if (![self.item isKindOfClass:[HMCommonTextfieldItem class]])
+            selectedBgView.image = [UIImage resizedImage:@"common_card_bottom_background_highlighted"];
     } else { // 中间
         bgView.image = [UIImage resizedImage:@"common_card_middle_background"];
-        selectedBgView.image = [UIImage resizedImage:@"common_card_middle_background_highlighted"];
+        if (![self.item isKindOfClass:[HMCommonTextfieldItem class]])
+            selectedBgView.image = [UIImage resizedImage:@"common_card_middle_background_highlighted"];
     }
+
 }
 
 - (void)setItem:(HMCommonItem *)item

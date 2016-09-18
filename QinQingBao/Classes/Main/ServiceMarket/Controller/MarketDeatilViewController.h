@@ -12,10 +12,6 @@
 @interface MarketDeatilViewController : UITableViewController
 @property (nonatomic, copy) NSString *iid;
 
-/**
- *  店铺id
- */
-@property (nonatomic, copy) NSString *iidnum;
 
 /**
  *  店铺资料

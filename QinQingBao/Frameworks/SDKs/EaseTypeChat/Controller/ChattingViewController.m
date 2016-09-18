@@ -406,12 +406,6 @@
 
 }
 
-
-
-
-
-
-
 //用户信息
 -(void)getDataProvider
 {

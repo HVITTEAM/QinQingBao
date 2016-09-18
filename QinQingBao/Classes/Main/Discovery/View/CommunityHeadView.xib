@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommunityViewController">
+            <connections>
+                <outlet property="headIconView" destination="rVm-jm-ylh" id="is7-aV-OB8"/>
+                <outlet property="headTitleLb" destination="p2w-YJ-ynr" id="IYl-ve-MpO"/>
+                <outlet property="numberLb" destination="SLa-JP-fx3" id="7Qd-fr-Gja"/>
+                <outlet property="ownerLb" destination="VyI-4s-xKo" id="nSM-QE-xth"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="262-FN-CuE">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uyb-o5-4Jm">
+                    <rect key="frame" x="20" y="25" width="30" height="30"/>
+                    <state key="normal" title="返回">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="us0-ib-NSc"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="健康资讯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2w-YJ-ynr">
+                    <rect key="frame" x="90" y="60" width="64" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与人数:2000万 帖子:200万" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLa-JP-fx3">
+                    <rect key="frame" x="90" y="87" width="159" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="圈主:大老金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyI-4s-xKo">
+                    <rect key="frame" x="90" y="105.5" width="64" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_escort" translatesAutoresizingMaskIntoConstraints="NO" id="rVm-jm-ylh">
+                    <rect key="frame" x="20" y="60" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="3YD-vS-ra9"/>
+                        <constraint firstAttribute="width" constant="60" id="n4n-1b-mrC"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="VyI-4s-xKo" firstAttribute="leading" secondItem="p2w-YJ-ynr" secondAttribute="leading" id="1TX-ZM-3E5"/>
+                <constraint firstItem="p2w-YJ-ynr" firstAttribute="top" secondItem="rVm-jm-ylh" secondAttribute="top" id="328-Zz-EIV"/>
+                <constraint firstItem="p2w-YJ-ynr" firstAttribute="leading" secondItem="rVm-jm-ylh" secondAttribute="trailing" constant="10" id="5YE-sL-x9z"/>
+                <constraint firstItem="SLa-JP-fx3" firstAttribute="centerY" secondItem="rVm-jm-ylh" secondAttribute="centerY" constant="4" id="9Fv-bw-fN9"/>
+                <constraint firstItem="rVm-jm-ylh" firstAttribute="leading" secondItem="262-FN-CuE" secondAttribute="leading" constant="20" id="avU-IL-NyX"/>
+                <constraint firstItem="VyI-4s-xKo" firstAttribute="bottom" secondItem="rVm-jm-ylh" secondAttribute="bottom" id="e6C-iI-Do6"/>
+                <constraint firstAttribute="bottom" secondItem="rVm-jm-ylh" secondAttribute="bottom" constant="20" id="qza-NH-kK8"/>
+                <constraint firstItem="SLa-JP-fx3" firstAttribute="leading" secondItem="p2w-YJ-ynr" secondAttribute="leading" id="rKy-te-agV"/>
+                <constraint firstItem="Uyb-o5-4Jm" firstAttribute="leading" secondItem="262-FN-CuE" secondAttribute="leading" constant="20" id="rLS-rh-Yw6"/>
+                <constraint firstItem="Uyb-o5-4Jm" firstAttribute="top" secondItem="262-FN-CuE" secondAttribute="top" constant="25" id="v38-hM-0fw"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="299" y="22"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_escort" width="44" height="44"/>
+    </resources>
+</document>

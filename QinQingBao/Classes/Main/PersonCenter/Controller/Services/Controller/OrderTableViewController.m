@@ -54,7 +54,7 @@
     self.vc5 = [[QCListViewController alloc] init];
     self.vc5.title = @"待退款";
     
-    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height - 2, self.view.width, MTScreenH)];
+    MTSlipPageViewController *view = [[MTSlipPageViewController alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.height + [UIApplication sharedApplication].statusBarFrame.size.height, self.view.width, MTScreenH)];
     view.delegate = self;
     view.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4, self.vc5,nil];
     [self.view addSubview:view];

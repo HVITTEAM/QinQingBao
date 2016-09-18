@@ -57,7 +57,7 @@
     self.descLb.text = model.abstract;
     
     NSString *url = [NSString stringWithFormat:@"%@%@",URL_ImgArticle,model.detail_url];
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"advplaceholderImage"]];
     
     //计算高度
     self.width = MTScreenW;

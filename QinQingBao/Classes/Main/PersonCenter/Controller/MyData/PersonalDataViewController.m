@@ -12,7 +12,7 @@
 #import "RSKImageCropper.h"
 #import "AddressController.h"
 
-@interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate>
+@interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     
 }
@@ -119,7 +119,7 @@
     [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
     [bgview addSubview:logout];
     
-    self.tableView.tableFooterView = bgview;
+//    self.tableView.tableFooterView = bgview;
 }
 
 
@@ -574,11 +574,8 @@
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
-                                                 
-                                                 [SharedAppUtil defaultCommonUtil].userVO = nil;
-                                                 [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
-                                                 [MTControllerChooseTool setloginOutViewController];
-                                                 [self.navigationController popViewControllerAnimated:YES];
+
+                                                 [MTNotificationCenter postNotificationName:MTLoginout object:nil userInfo:nil];
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"发生错误！%@",error);

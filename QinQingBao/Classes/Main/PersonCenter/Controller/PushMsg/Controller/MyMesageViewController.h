@@ -10,4 +10,6 @@
 
 @interface MyMesageViewController : UITableViewController
 
+@property (nonatomic, strong) UIViewController *parentVC;
+
 @end

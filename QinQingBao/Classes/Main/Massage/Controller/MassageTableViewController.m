@@ -168,7 +168,6 @@
     {
         ShopDetailViewController *view = [[ShopDetailViewController alloc] init];
         view.iid = model.iid;
-        view.iidnum = model.iid_num;
         [self.navigationController pushViewController:view animated:YES];
     }
 }

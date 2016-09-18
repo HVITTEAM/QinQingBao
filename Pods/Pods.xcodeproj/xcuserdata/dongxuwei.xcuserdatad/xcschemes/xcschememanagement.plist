@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-QinQingBao.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,17 +27,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>03D31407D0721A8EB17322BCE8E19762</key>
+		<key>720DC254F1F6D8FD41BD9F9FD6F843AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CCE5C6FB78E6ED067C56D8B360E25A0</key>
+		<key>72C0FA849E76543858E9E0919099B7FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6CEEAAA8F614017FCDC73FD95BC3C9F0</key>
+		<key>A722D03618F3480E0BBAF0E6C08B0E19</key>
 		<dict>
 			<key>primary</key>
 			<true/>

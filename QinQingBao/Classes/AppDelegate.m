@@ -19,6 +19,7 @@
 
 #import "NewsDetailViewControler.h"
 #import "EventInfoController.h"
+#import "CXTabBarViewController.h"
 
 //微信SDK头文件
 #import "WXApi.h"
@@ -61,18 +62,13 @@
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
     // 2.显示窗口(成为主窗口)
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     NSUUID *str = [[UIDevice currentDevice] identifierForVendor];
     NSLog(@"设备ID:%@",str);
     
     [self getLocation];
-    
-    //注册登录信息超时监听
-    [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
-    
-    //注册登录信息超时监听
-    [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
     
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
@@ -307,33 +303,6 @@
         NSLog(@"支付成功!");
     }];
     return YES;
-}
-
-/**
- * 登录信息超时处理事件
- */
--(void)loginTimeoutHanlder:(NSNotification *)notification
-{
-    [SharedAppUtil defaultCommonUtil].userVO = nil;
-    [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
-    [MTControllerChooseTool setRootViewController];
-    
-    [SharedAppUtil defaultCommonUtil].tabBar.selectedIndex = 0;
-    LoginViewController *login = [[LoginViewController alloc] init];
-    login.backHiden = NO;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-    [[SharedAppUtil defaultCommonUtil].tabBar presentViewController:nav animated:YES completion:nil];
-}
-
-/**
- * 需要验证身份才能进行下一步操作
- */
--(void)needLoginoutHanlder:(NSNotification *)notification
-{
-    LoginViewController *login = [[LoginViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
-    login.backHiden = NO;
 }
 
 /**

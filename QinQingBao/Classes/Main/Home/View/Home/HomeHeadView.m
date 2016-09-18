@@ -21,6 +21,9 @@
 #import "MarketClasslistController.h"
 #import "HealthPlanController.h"
 
+#import "ShopDetailViewController.h"
+
+#import "MarketDeatilViewController.h"
 
 @interface HomeHeadView ()<UIScrollViewDelegate>
 {
@@ -149,9 +152,37 @@
     HomePicModel *item = _advArr[tap.view.tag];
     if (item.bc_article_url.length == 0)
         return;
-    AdvertisementController *adver = [[AdvertisementController alloc] init];
-    adver.item = item;
-    [self.nav pushViewController:adver animated:YES];
+    
+    // 43 超声理疗 44 精准健康监测分析 45疾病易感性基因检测
+    
+    if ([item.bc_type_app_id isEqualToString:@"43"])
+    {
+        ShopDetailViewController *view = [[ShopDetailViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.nav pushViewController:view animated:YES];
+
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"44"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.nav pushViewController:view animated:YES];
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"45"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.nav pushViewController:view animated:YES];
+    }
+    else
+    {
+        AdvertisementController *adver = [[AdvertisementController alloc] init];
+        adver.item = item;
+        [self.nav pushViewController:adver animated:YES];
+    }
 }
 
 #pragma mark -- UIScrollView delegate

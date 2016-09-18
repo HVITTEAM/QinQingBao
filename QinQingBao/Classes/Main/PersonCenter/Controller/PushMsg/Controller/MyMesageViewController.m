@@ -52,11 +52,6 @@
     self.title = @"我的消息";
     self.view.backgroundColor  = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
     //判断消息未读与已读
     NSUserDefaults *standard = [NSUserDefaults standardUserDefaults];
@@ -67,15 +62,6 @@
     
     [self getDataProvider];
     
-}
-
--(instancetype)init
-{
-    self = [super init];
-    if (self){
-        self.hidesBottomBarWhenPushed = YES;
-    }
-    return self;
 }
 
 -(void)getDataProvider
@@ -123,8 +109,6 @@
     FristMsgModel *item;
     
     if (![SharedAppUtil defaultCommonUtil].userVO && indexPath.row > 1)
-        typeCell.subtitleLab.text = @"登录后可以查看";
-    else if ([SharedAppUtil defaultCommonUtil].userVO && indexPath.row > 1)
         typeCell.subtitleLab.text = @"登录后可以查看";
     
     if (itemArr && itemArr.count > 0)
@@ -257,9 +241,11 @@
         default:
             break;
     }
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (self.parentVC)
+        [self.parentVC.navigationController pushViewController:vc animated:YES];
+    else
+        [self.navigationController pushViewController:vc animated:YES];
 }
-
-
 
 @end

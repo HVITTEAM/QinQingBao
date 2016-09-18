@@ -17,6 +17,8 @@
 @property (nonatomic, copy) NSString *bc_status;
 @property (nonatomic, copy) NSString *bc_goods_id;
 @property (nonatomic, copy) NSString *bc_goods_bg;
+@property (nonatomic, copy) NSString *bc_item_id;
+@property (nonatomic, copy) NSString *bc_type_app_id;
 
 
 @end

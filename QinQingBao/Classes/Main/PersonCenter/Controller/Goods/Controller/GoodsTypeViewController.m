@@ -158,8 +158,8 @@
 {
     if ([self respondsToSelector:@selector(edgesForExtendedLayout)])
         self.edgesForExtendedLayout = UIRectEdgeNone;
-
-    self.slideSwitchView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 50)];
+    
+    self.slideSwitchView = [[QCSlideSwitchView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 64)];
     self.slideSwitchView.slideSwitchViewDelegate = self;
     [self.view addSubview:self.slideSwitchView];
     

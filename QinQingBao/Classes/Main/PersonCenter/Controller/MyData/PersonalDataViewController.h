@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonalDataViewController : UITableViewController<UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
-
+@interface PersonalDataViewController : UITableViewController
 
 
 @end

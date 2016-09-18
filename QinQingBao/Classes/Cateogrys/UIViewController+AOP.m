@@ -8,6 +8,11 @@
 
 #import "UIViewController+AOP.h"
 #import <objc/runtime.h>
+
+
+@interface UIViewController ()
+@end
+
 @implementation UIViewController (AOP)
 
 + (void)load
@@ -43,6 +48,11 @@ void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector)
 - (void)aop_viewDidAppear:(BOOL)animated
 {
     [self aop_viewDidAppear:animated];
+    
+    // 禁用  返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 -(void)aop_viewWillAppear:(BOOL)animated
@@ -64,4 +74,7 @@ void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector)
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     self.navigationController.navigationBar.tintColor = [UIColor grayColor];
 }
+
+
+
 @end

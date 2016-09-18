@@ -145,7 +145,7 @@
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"意见反馈" icon:@"ic_feedback.png"];
     advice.destVcClass = [FeedbackViewController class];
     
-    group.items = @[help,advice];
+    group.items = @[version,help];
 }
 
 @end

@@ -122,7 +122,7 @@
                                     </constraints>
                                 </pickerView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="是否服降压药" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TvZ-P7-N17">
-                                    <rect key="frame" x="37" y="406" width="90" height="21"/>
+                                    <rect key="frame" x="37" y="391" width="90" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="102" id="0Fb-nk-d8N"/>
                                         <constraint firstAttribute="height" constant="21" id="U1u-HV-ZBp"/>
@@ -137,7 +137,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBG-D1-g78">
-                                    <rect key="frame" x="203" y="399" width="73" height="32"/>
+                                    <rect key="frame" x="203" y="388" width="73" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="73" id="GPZ-2a-aZQ"/>
                                         <constraint firstAttribute="height" constant="32" id="ao2-dg-so5"/>
@@ -178,9 +178,9 @@
                                 <constraint firstAttribute="trailing" secondItem="luU-pY-hk6" secondAttribute="trailing" constant="4" id="5xH-dF-xtB"/>
                                 <constraint firstItem="HJg-4v-oLC" firstAttribute="top" secondItem="luU-pY-hk6" secondAttribute="bottom" constant="58" id="9cl-OO-hwz"/>
                                 <constraint firstItem="hmE-aG-bOy" firstAttribute="centerY" secondItem="qKN-rs-S4P" secondAttribute="centerY" id="9d2-cM-3OY"/>
-                                <constraint firstItem="TvZ-P7-N17" firstAttribute="top" secondItem="W5R-1O-o7K" secondAttribute="bottom" constant="35" id="9lJ-Ks-QL4"/>
+                                <constraint firstItem="TvZ-P7-N17" firstAttribute="top" secondItem="W5R-1O-o7K" secondAttribute="bottom" constant="20" id="9lJ-Ks-QL4"/>
                                 <constraint firstAttribute="height" constant="484" id="ACi-ve-I0g"/>
-                                <constraint firstItem="nBG-D1-g78" firstAttribute="top" secondItem="HJg-4v-oLC" secondAttribute="bottom" constant="28" id="DiY-FB-vqG"/>
+                                <constraint firstItem="nBG-D1-g78" firstAttribute="top" secondItem="HJg-4v-oLC" secondAttribute="bottom" constant="17" id="DiY-FB-vqG"/>
                                 <constraint firstAttribute="trailing" secondItem="Uui-b5-fmg" secondAttribute="trailing" constant="35" id="Eqa-Sa-Fze"/>
                                 <constraint firstItem="pgK-fv-YRD" firstAttribute="top" secondItem="xyk-F6-UMe" secondAttribute="bottom" constant="10" id="KbT-we-MCy"/>
                                 <constraint firstAttribute="trailing" secondItem="HJg-4v-oLC" secondAttribute="trailing" constant="20" id="L8P-fl-VbU"/>
