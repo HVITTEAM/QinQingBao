@@ -10,12 +10,13 @@
 #import "LoopImageView.h"
 #import "ScrollMenuTableCell.h"
 #import "CommunityViewController.h"
+#import "SectionlistModel.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSMutableArray *healthCommunityDatas;
+@property (strong, nonatomic) NSArray *healthCommunityDatas;
 
 @end
 
@@ -25,6 +26,8 @@
     [super viewDidLoad];
     
     [self setupUI];
+    
+    [self loadSectionlist];
 }
 
 - (void)setupUI
@@ -64,20 +67,14 @@
 
     tbv.tableHeaderView = loopView;
     
-    self.healthCommunityDatas = [@[@{KScrollMenuTitle:@"健康资讯",KScrollMenuImg:@"healthNews_icon"},
-                                  @{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"heart_brain_icon"},
-                                  @{KScrollMenuTitle:@"易疲劳",KScrollMenuImg:@"fatigue_icon"},
-                                  @{KScrollMenuTitle:@"减肥瘦身",KScrollMenuImg:@"reduceWeight_icon"},
-                                   @{KScrollMenuTitle:@"易疲劳",KScrollMenuImg:@"fatigue_icon"},
-                                   @{KScrollMenuTitle:@"减肥瘦身",KScrollMenuImg:@"reduceWeight_icon"}
-                                  ]copy];
+
     
 }
 
-- (NSMutableArray *)healthCommunityDatas
+- (NSArray *)healthCommunityDatas
 {
     if (!_healthCommunityDatas) {
-        _healthCommunityDatas = [[NSMutableArray alloc] init];
+        _healthCommunityDatas = [[NSArray alloc] init];
     }
     
     return _healthCommunityDatas;
@@ -140,7 +137,24 @@
                 menuCell.shouldShowIndicator = NO;
                 menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
             }
-            menuCell.datas = self.healthCommunityDatas;
+            
+            NSMutableArray *ar = [[NSMutableArray alloc] init];
+            for (int i = 0; i < self.healthCommunityDatas.count; i++) {
+                SectionlistModel *model = self.healthCommunityDatas[i];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                dict[KScrollMenuTitle] = model.name;
+                dict[KScrollMenuImg] = model.avatar;
+                [ar addObject:dict];
+            }
+            
+            menuCell.datas = ar;
+            menuCell.selectMenuItemCallBack = ^(NSInteger idx){
+                SectionlistModel *model = weakSelf.healthCommunityDatas[idx];
+                CommunityViewController *communityVC = [[CommunityViewController alloc] init];
+                communityVC.sectionModel = model;
+                [weakSelf.navigationController pushViewController:communityVC animated:YES];
+            };
+            
         }
         
         cell = menuCell;
@@ -175,6 +189,27 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
+}
+
+- (void)loadSectionlist
+{
+    NSDictionary *params = @{
+                             @"sectionid":@"38"
+                             };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Sectionlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"出错" view:nil];
+            return;
+        }
+
+        self.healthCommunityDatas = [SectionlistModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 @end
