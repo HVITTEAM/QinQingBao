@@ -700,6 +700,8 @@
 /***帖子 - 获取关注人帖子列表*/
 #define URL_Get_followlist @"http:/test.hvit.com.cn//discuz/uc_client/hvit_app/ylserver_api/followlist.php"
 
+/***帖子 - 获取帖子详情*/
+#define URL_Get_articledetail @"http:/test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/articledetail.php"
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

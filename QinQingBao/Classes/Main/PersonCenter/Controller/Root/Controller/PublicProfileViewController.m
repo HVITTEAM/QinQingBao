@@ -18,6 +18,7 @@
 
 #import "SendMsgViewController.h"
 
+#import "PostsDetailViewController.h"
 
 #import "CardCell.h"
 
@@ -233,6 +234,16 @@
         cell = cardCell;
     }
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1)
+    {
+        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+        [view setItemdata:postsArr[indexPath.row]];
+        [self.navigationController pushViewController:view animated:YES];
+    }
 }
 
 #pragma mark - cellClick

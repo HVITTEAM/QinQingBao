@@ -1214,6 +1214,8 @@
 		01F6DBBD1D8E406000300679 /* ScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBB21D8E406000300679 /* ScrollMenuView.m */; };
 		01F6DBBE1D8E406000300679 /* SiglePicCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBB41D8E406000300679 /* SiglePicCardCell.m */; };
 		01F6DBC21D8E640B00300679 /* PostsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBC11D8E640B00300679 /* PostsModel.m */; };
+		01F6DBC51D8E76D000300679 /* PostsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBC41D8E76D000300679 /* PostsDetailViewController.m */; };
+		01F6DBC81D8E796900300679 /* DetailPostsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F6DBC71D8E796900300679 /* DetailPostsModel.m */; };
 		01F85A921C5743B100E463F4 /* topbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F85A911C5743B100E463F4 /* topbg.png */; };
 		01F85AB41C575A0600E463F4 /* MallRootViewControlelr.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F85AA81C575A0600E463F4 /* MallRootViewControlelr.m */; };
 		01F85AB51C575A0600E463F4 /* MTProgressWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F85AAA1C575A0600E463F4 /* MTProgressWebViewController.m */; };
@@ -3433,6 +3435,10 @@
 		01F6DBB41D8E406000300679 /* SiglePicCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiglePicCardCell.m; sourceTree = "<group>"; };
 		01F6DBC01D8E640B00300679 /* PostsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsModel.h; sourceTree = "<group>"; };
 		01F6DBC11D8E640B00300679 /* PostsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsModel.m; sourceTree = "<group>"; };
+		01F6DBC31D8E76D000300679 /* PostsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsDetailViewController.h; sourceTree = "<group>"; };
+		01F6DBC41D8E76D000300679 /* PostsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailViewController.m; sourceTree = "<group>"; };
+		01F6DBC61D8E796900300679 /* DetailPostsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailPostsModel.h; sourceTree = "<group>"; };
+		01F6DBC71D8E796900300679 /* DetailPostsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailPostsModel.m; sourceTree = "<group>"; };
 		01F85A911C5743B100E463F4 /* topbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topbg.png; sourceTree = "<group>"; };
 		01F85AA71C575A0600E463F4 /* MallRootViewControlelr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallRootViewControlelr.h; sourceTree = "<group>"; };
 		01F85AA81C575A0600E463F4 /* MallRootViewControlelr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallRootViewControlelr.m; sourceTree = "<group>"; };
@@ -8807,6 +8813,8 @@
 				01F6DBA11D8E406000300679 /* CommunityViewController.m */,
 				01F6DBA21D8E406000300679 /* DiscoveryViewController.h */,
 				01F6DBA31D8E406000300679 /* DiscoveryViewController.m */,
+				01F6DBC31D8E76D000300679 /* PostsDetailViewController.h */,
+				01F6DBC41D8E76D000300679 /* PostsDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8816,6 +8824,8 @@
 			children = (
 				01F6DBC01D8E640B00300679 /* PostsModel.h */,
 				01F6DBC11D8E640B00300679 /* PostsModel.m */,
+				01F6DBC61D8E796900300679 /* DetailPostsModel.h */,
+				01F6DBC71D8E796900300679 /* DetailPostsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -10302,6 +10312,7 @@
 				0126ED791B8C57A700EC85C1 /* AFHTTPRequestOperation.m in Sources */,
 				0100C5181BFEB8C3005128EA /* UseCouponsViewController.m in Sources */,
 				01ECDB1D1C8EB31F0018160F /* EaseChatToolbar.m in Sources */,
+				01F6DBC51D8E76D000300679 /* PostsDetailViewController.m in Sources */,
 				01ECDAF41C8EB31F0018160F /* UIImage+EMGIF.m in Sources */,
 				015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */,
 				01EA81741CE1757B00398FEC /* HealthServicesController.m in Sources */,
@@ -10600,6 +10611,7 @@
 				01601D5B1CE08DE500B3712E /* PaymentViewController.m in Sources */,
 				010729C21C426D0E00A6F1B0 /* GoodsSelectedViewController.m in Sources */,
 				01E690821BCCF6AA00A17543 /* TSActionSheet.m in Sources */,
+				01F6DBC81D8E796900300679 /* DetailPostsModel.m in Sources */,
 				01601D721CE08ED200B3712E /* OrderModel.m in Sources */,
 				01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */,
 				01F42E4F1C433E7B0007F73F /* GoodsInfoTotal.m in Sources */,
