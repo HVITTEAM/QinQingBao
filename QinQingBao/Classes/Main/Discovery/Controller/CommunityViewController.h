@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SectionlistModel;
 
 @interface CommunityViewController : UIViewController
+
+@property (strong, nonatomic) SectionlistModel *sectionModel;
 
 @end

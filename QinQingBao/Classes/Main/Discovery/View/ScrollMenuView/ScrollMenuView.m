@@ -110,6 +110,12 @@ static NSString *scrollMenuCellId = @"scrollMenuCell";
     self.layout.colSpace = colSpace;
 }
 
+- (void)setDatas:(NSArray<NSDictionary<NSString *,NSString *> *> *)datas
+{
+    _datas = datas;
+    [self.collectionView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;

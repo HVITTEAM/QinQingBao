@@ -695,6 +695,10 @@
 /***健康计划 - 获取列表*/
 #define URL_Get_healthplan_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=work_report&op=get_healthplan_list",URL_Local]
 
+//---发现------
+#define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
+
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

@@ -1316,6 +1316,7 @@
 		D246D56E1D0179E10003D166 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D5671D0179E10003D166 /* NewsCell.xib */; };
 		D246D56F1D0179E10003D166 /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D246D5691D0179E10003D166 /* NotificationCell.m */; };
 		D246D5701D0179E10003D166 /* NotificationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D246D56A1D0179E10003D166 /* NotificationCell.xib */; };
+		D24D29051D8E665800AD0984 /* SectionlistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D24D29041D8E665800AD0984 /* SectionlistModel.m */; };
 		D257C4A11D65B952002D18F5 /* TextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D257C49D1D65B952002D18F5 /* TextCell.m */; };
 		D257C4A21D65B952002D18F5 /* TextTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D257C49F1D65B952002D18F5 /* TextTwoCell.m */; };
 		D257C4A31D65B952002D18F5 /* TextTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D257C4A01D65B952002D18F5 /* TextTwoCell.xib */; };
@@ -3622,6 +3623,8 @@
 		D246D5681D0179E10003D166 /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D246D5691D0179E10003D166 /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 		D246D56A1D0179E10003D166 /* NotificationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationCell.xib; sourceTree = "<group>"; };
+		D24D29031D8E665800AD0984 /* SectionlistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionlistModel.h; sourceTree = "<group>"; };
+		D24D29041D8E665800AD0984 /* SectionlistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionlistModel.m; sourceTree = "<group>"; };
 		D257C49C1D65B952002D18F5 /* TextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCell.h; sourceTree = "<group>"; };
 		D257C49D1D65B952002D18F5 /* TextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCell.m; sourceTree = "<group>"; };
 		D257C49E1D65B952002D18F5 /* TextTwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextTwoCell.h; sourceTree = "<group>"; };
@@ -8811,6 +8814,8 @@
 		01F6DBA41D8E406000300679 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D24D29031D8E665800AD0984 /* SectionlistModel.h */,
+				D24D29041D8E665800AD0984 /* SectionlistModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8818,12 +8823,12 @@
 		01F6DBA51D8E406000300679 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01F6DBAB1D8E406000300679 /* ScrollMenuView */,
 				01F6DBA61D8E406000300679 /* CardCell.h */,
 				01F6DBA71D8E406000300679 /* CardCell.m */,
 				01F6DBA81D8E406000300679 /* CommunityHeadView.xib */,
 				01F6DBA91D8E406000300679 /* LoopImageView.h */,
 				01F6DBAA1D8E406000300679 /* LoopImageView.m */,
-				01F6DBAB1D8E406000300679 /* ScrollMenuView */,
 				01F6DBB31D8E406000300679 /* SiglePicCardCell.h */,
 				01F6DBB41D8E406000300679 /* SiglePicCardCell.m */,
 			);
@@ -9289,7 +9294,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -10593,6 +10598,7 @@
 				013E6E141C1AAD5B00FEBBCB /* AgreementViewController.m in Sources */,
 				01601D5B1CE08DE500B3712E /* PaymentViewController.m in Sources */,
 				010729C21C426D0E00A6F1B0 /* GoodsSelectedViewController.m in Sources */,
+				D24D29051D8E665800AD0984 /* SectionlistModel.m in Sources */,
 				01E690821BCCF6AA00A17543 /* TSActionSheet.m in Sources */,
 				01601D721CE08ED200B3712E /* OrderModel.m in Sources */,
 				01D9DEBE1B7DC7C00087F80E /* ArchiverCacheHelper.m in Sources */,

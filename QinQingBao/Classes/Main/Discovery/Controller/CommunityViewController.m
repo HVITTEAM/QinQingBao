@@ -9,6 +9,7 @@
 #import "CommunityViewController.h"
 #import "CardCell.h"
 #import "SiglePicCardCell.h"
+#import "SectionlistModel.h"
 
 #define kBkImageViewHeight 140
 #define kHeadViewHeith 140
