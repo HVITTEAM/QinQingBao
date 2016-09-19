@@ -184,7 +184,6 @@
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (0 == indexPath.section) {
         return 60;
     }

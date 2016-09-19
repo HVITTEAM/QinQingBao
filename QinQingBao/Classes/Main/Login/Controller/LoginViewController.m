@@ -166,11 +166,10 @@
         [self.view endEditing:YES];
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
+        [CommonRemoteHelper RemoteWithUrl:URL_Login_New parameters: @{@"username" : self.accountText.text,
                                                                   @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                   @"client" : @"ios",
-                                                                  @"role" : @"0",
-                                                                  @"imei":[SharedAppUtil defaultCommonUtil].deviceToken == nil ? @"" : [SharedAppUtil defaultCommonUtil].deviceToken}
+                                                                  @"sys" : @"2"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];

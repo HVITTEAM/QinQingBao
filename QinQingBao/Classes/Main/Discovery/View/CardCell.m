@@ -117,6 +117,7 @@
     
     self.titleLb.text = self.itemdata.subject;
     self.contentLb.text = self.itemdata.messages;
+    
     self.photoNum = self.itemdata.picture.count;
 
     NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";

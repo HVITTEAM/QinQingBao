@@ -239,6 +239,8 @@
 
 #define URL_Local @"http://test.hvit.com.cn/ylserver"
 
+#define URL_Local_New @"http://test.hvit.com.cn"
+
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
 //#define URL_Local @"http://ibama.hvit.com.cn"
@@ -294,8 +296,14 @@
 /***用户登录url*/
 #define URL_Login  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=login",URL_Local]
 
+/***用户登录（用户中心）url*/
+#define URL_Login_New  [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/login",URL_Local_New]
+
 /***用户登出url*/
 #define URL_Logout  [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=logout",URL_Local]
+
+/***用户登出（用户中心）url*/
+#define URL_Logout_New  [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/logout",URL_Local_New]
 
 /***上传头像url*/
 #define URL_UploadAvatar [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=member&op=uploadAvatar",URL_Local]
@@ -700,8 +708,15 @@
 /***帖子 - 获取关注人帖子列表*/
 #define URL_Get_followlist @"http:/test.hvit.com.cn//discuz/uc_client/hvit_app/ylserver_api/followlist.php"
 
+/***帖子 - 不同标识获取帖子列表*/
+#define URL_Get_flaglist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/flaglist.php",URL_Local_New]
+
+/***帖子 - 获取特殊标识的帖子列表*/
+#define URL_Get_recommendlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/recommendlist.php",URL_Local_New]
+
 //***获取板块下级列表【可用于健康圈子】*/
 #define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
+
 /***帖子 - 获取帖子详情*/
 #define URL_Get_articledetail @"http:/test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/articledetail.php"
 
@@ -738,6 +753,13 @@ typedef NS_ENUM(NSInteger, MessageType) {
     MessageTypeHealthTips,//健康贴士
     MessageTypePushMsg,//推送消息
     MessageTypeLogistics,//物流助手
+};
+
+typedef NS_ENUM(NSInteger, BBSType) {
+    BBSType_1,//推荐
+    BBSType_2,//关注
+    BBSType_3,//说说
+    BBSType_4,//资讯
 };
 
 

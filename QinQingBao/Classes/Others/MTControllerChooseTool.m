@@ -11,7 +11,7 @@
 #import "HealthMonitorViewController.h"
 //#import "HomeViewController.h"
 
-//#import "CXHomeViewController.h"
+#import "CXHomeViewController.h"
 #import "NewHomeViewController.h"
 
 #import "ProfileViewController.h"
@@ -80,7 +80,7 @@
     UINavigationController *healthLoginNav = [[UINavigationController alloc] initWithRootViewController:healthLogin];
     healthLoginNav.navigationItem.leftBarButtonItem = nil;
     
-    NewHomeViewController *homeView = [[NewHomeViewController alloc] init];
+    CXHomeViewController *homeView = [[CXHomeViewController alloc] init];
     UINavigationController *navhome = [[UINavigationController alloc] initWithRootViewController:homeView];
     
     HealthMonitorViewController *healthView = [[HealthMonitorViewController alloc] init];
