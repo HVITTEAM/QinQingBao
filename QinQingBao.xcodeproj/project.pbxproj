@@ -150,6 +150,7 @@
 		01328FA51C4CD1AE0014D283 /* GoodsMiddleTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328FA31C4CD1AE0014D283 /* GoodsMiddleTopCell.xib */; };
 		01332B8A1C1E5E240061CB79 /* AllServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01332B881C1E5E240061CB79 /* AllServiceViewController.m */; };
 		01332B8B1C1E5E240061CB79 /* AllServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01332B891C1E5E240061CB79 /* AllServiceViewController.xib */; };
+		0133DA6F1D8F8459008A2513 /* SXDetails.css in Resources */ = {isa = PBXBuildFile; fileRef = 0133DA6E1D8F8459008A2513 /* SXDetails.css */; };
 		01341B711D5859EA00B565ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01341B6B1D5859EA00B565ED /* InfoPlist.strings */; };
 		01341B731D5859EA00B565ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01341B6F1D5859EA00B565ED /* InfoPlist.strings */; };
 		01341B761D585CF400B565ED /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01341B751D585CF400B565ED /* MOBFoundation.framework */; };
@@ -1721,6 +1722,7 @@
 		01332B871C1E5E240061CB79 /* AllServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllServiceViewController.h; sourceTree = "<group>"; };
 		01332B881C1E5E240061CB79 /* AllServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllServiceViewController.m; sourceTree = "<group>"; };
 		01332B891C1E5E240061CB79 /* AllServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllServiceViewController.xib; sourceTree = "<group>"; };
+		0133DA6E1D8F8459008A2513 /* SXDetails.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = SXDetails.css; sourceTree = "<group>"; };
 		01341B6C1D5859EA00B565ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		01341B701D5859EA00B565ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
 		01341B751D585CF400B565ED /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
@@ -8812,6 +8814,7 @@
 		01F6DB9F1D8E406000300679 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0133DA6E1D8F8459008A2513 /* SXDetails.css */,
 				01F6DBA01D8E406000300679 /* CommunityViewController.h */,
 				01F6DBA11D8E406000300679 /* CommunityViewController.m */,
 				01F6DBA21D8E406000300679 /* DiscoveryViewController.h */,
@@ -9309,7 +9312,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = G688QXM6YK;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9324,7 +9327,7 @@
 					};
 					01F227ED1B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = P5A3MJD6BG;
+						DevelopmentTeam = 42PUMHHWSN;
 						TestTargetID = 01F227D41B7B3E1400ED4AFB;
 					};
 				};
@@ -9679,6 +9682,7 @@
 				01ECDA231C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAAB1C8EB31F0018160F /* Contents.json in Resources */,
 				01EFD30D1C56028300BDA640 /* InfoDetailCell.xib in Resources */,
+				0133DA6F1D8F8459008A2513 /* SXDetails.css in Resources */,
 				01ECDABB1C8EB31F0018160F /* chat_receiver_audio_playing000@2x.png in Resources */,
 				01E603E91C1683350099275C /* care_5.jpg in Resources */,
 				01E68FB51BCCA68900A17543 /* full_video_sel.png in Resources */,

@@ -224,6 +224,9 @@
                 return;
             }
             [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+            
+            PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+            [self.navigationController pushViewController:view animated:YES];
         };
         cell = consumeCell;
     }

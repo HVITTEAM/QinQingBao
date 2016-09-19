@@ -24,7 +24,8 @@
 
 @implementation CXComposeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [self loadNotificationCell];
@@ -107,7 +108,6 @@
     UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5)];
     topLine.backgroundColor = [UIColor colorWithRGB:@"dddddd"];
     [inputContentView addSubview:topLine];
-    
 }
 
 #pragma mark UITextViewDelegate
@@ -170,6 +170,8 @@
     [attributedString appendAttributedString:textStr];
     
     contentView.attributedText = attributedString;
+    
+    NSLog(@"%@",contentView.attributedText);
 }
 
 -(void)getPic
@@ -181,7 +183,6 @@
 {
     NSLog(@"send");
 }
-
 
 #pragma 拍照模块
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -290,10 +291,10 @@
     
     [UIView commitAnimations];
 }
+
 //键盘消失时的处理，文本输入框回到页面底部。
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    
     NSDictionary* userInfo = [notification userInfo];
     
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
