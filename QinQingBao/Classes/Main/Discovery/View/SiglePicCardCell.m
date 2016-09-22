@@ -119,7 +119,7 @@
     self.nameLb.text = self.itemdata.author;
     self.headTagLb.text = @"超凡大师";
     
-    self.titleLb.text = self.itemdata.subject;
+    self.titleLb.text = self.itemdata.subjects;
     self.contentLb.text = self.itemdata.messages;
     
 //    self.photoNum = self.itemdata.picture.count;

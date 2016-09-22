@@ -18,7 +18,7 @@
 #import "MarketDeatilViewController.h"
 #import "MarketDeatilViewController.h"
 #import "AdvertisementController.h"
-#import "SectionListPosts.h"
+#import "PostsModel.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -192,8 +192,8 @@
     }else{
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         
-        SectionListPosts *model = self.postsDatas[indexPath.row - 1];
-        [cardCell setSectionListPosts:model];
+        PostsModel *model = self.postsDatas[indexPath.row - 1];
+        [cardCell setPostsModel:model];
         cell = cardCell;
     }
 
@@ -284,7 +284,7 @@
             return;
         }
         
-        NSArray *datas = [SectionListPosts objectArrayWithKeyValuesArray:dict[@"datas"]];
+        NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         [self.postsDatas addObjectsFromArray:datas];
         self.pageNum++;
         

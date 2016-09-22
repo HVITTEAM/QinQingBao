@@ -194,14 +194,14 @@
         else
         {
             CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
-            [cardCell1 setItemdata:postsArr[indexPath.row]];
+            [cardCell1 setPostsModel:postsArr[indexPath.row]];
             cell = cardCell1;
         }
     }
     else
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        [cardCell setItemdata:postsArr[indexPath.row]];
+        [cardCell setPostsModel:postsArr[indexPath.row]];
         cell = cardCell;
     }
     

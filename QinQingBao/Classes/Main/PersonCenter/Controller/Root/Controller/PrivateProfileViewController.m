@@ -266,7 +266,7 @@
     else if (indexPath.section == 2)
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        [cardCell setItemdata:postsArr[indexPath.row]];
+        [cardCell setPostsModel:postsArr[indexPath.row]];
         cell = cardCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
