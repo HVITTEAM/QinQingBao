@@ -785,6 +785,8 @@
 /***帖子 - 获取帖子详情*/
 #define URL_Get_articledetail @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/articledetail.php"
 
+/***帖子 - 个人信息列表*/
+#define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
 /***帖子 - 获取版块详细列表*/
 #define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
 
@@ -793,10 +795,6 @@
 
 /***关注 - 加关注与取消关注*/
 #define URL_attention_do @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/attention_do.php"
-
-/***帖子 - 个人信息列表*/
-#define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
-
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
