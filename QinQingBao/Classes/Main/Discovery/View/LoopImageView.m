@@ -133,7 +133,7 @@
             imgv.tag = 1000 + i - 1;
         }
         
-        [imgv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"AppIcon"]];
+        [imgv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"advplaceholderImage"]];
         
     }
     
@@ -196,7 +196,10 @@
 
 - (void)tapImageView:(UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"%d",(int)recognizer.view.tag);
+//    NSLog(@"%d",(int)recognizer.view.tag);
+    if (self.tapLoopImageCallBack) {
+        self.tapLoopImageCallBack(recognizer.view.tag - 1000);
+    }
 }
 
 - (void)nextImage

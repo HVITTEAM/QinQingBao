@@ -6,14 +6,14 @@
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "SectionlistModel.h"
+#import "CircleModel.h"
 
-@implementation SectionlistModel
+@implementation CircleModel
 
 + (NSDictionary *)replacedKeyFromPropertyName
 {
     return @{
-             @"sectionId":@"id"
+              @"sectionid":@"id"
              };
 }
 

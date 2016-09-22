@@ -14,7 +14,7 @@
 //作者名称
 @property(copy,nonatomic)NSString *author;
  //作者头像
-@property(copy,nonatomic)NSArray *avatar;
+@property(copy,nonatomic)NSString *avatar;
 //是否为关注对象 1为关注 0为未关注
 @property(copy,nonatomic)NSString *is_home_friend;
 //帖子id

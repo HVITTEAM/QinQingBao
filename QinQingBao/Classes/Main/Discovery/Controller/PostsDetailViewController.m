@@ -8,8 +8,11 @@
 
 #import "PostsDetailViewController.h"
 #import "DetailPostsModel.h"
+#import "PostsDetailUserCell.h"
+#import "PostsDetailDZCell.h"
+#import "PostsCommentCell.h"
 
-@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
+@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate>
 {
     DetailPostsModel *detailData;
     
@@ -19,6 +22,16 @@
     
     CGFloat cellHeight;
 }
+
+
+@property (strong, nonatomic) UIView *replyBar;
+
+@property (strong, nonatomic) UITextView *replayTextView;
+
+@property (strong, nonatomic) UIButton *replyBtn;
+
+@property (assign, nonatomic) CGFloat keyBoardHeight;
+
 @end
 
 @implementation PostsDetailViewController
@@ -37,25 +50,60 @@
 {
     [super viewDidLoad];
     
-    //    [self initView];
-    //
-    //    [self getDetailData];
-    
-    tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStylePlain];
     tableview.delegate =self;
     tableview.dataSource = self;
+    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableview.backgroundColor = HMGlobalBg;
     [self.view addSubview:tableview];
     
+//    [self getDetailData];
+    
+    self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
+    self.replyBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.replyBar];
+    
+    UITextView *txtView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 80, 40)];
+    txtView.layer.borderColor = HMColor(235, 235, 235).CGColor;
+    txtView.layer.borderWidth = 1.0f;
+    txtView.layer.cornerRadius = 8.0f;
+    txtView.delegate = self;
+    txtView.font = [UIFont systemFontOfSize:15];
+    [self.replyBar addSubview:txtView];
+    self.replayTextView = txtView;
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 60, 10, 50, 40)];
+    btn.backgroundColor = HMColor(148, 191, 54);
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTitle:@"回复" forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 8.0f;
+    [self.replyBar addSubview:btn];
+    self.replyBtn = btn;
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 1)];
+    line.backgroundColor = HMColor(235, 235, 235);
+    [self.replyBar addSubview:line];
+
 }
 
--(void)initView
+- (void)viewWillAppear:(BOOL)animated
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)getDetailData
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"uid" : @"1",
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{
                                                                           @"tid" : self.itemdata.tid
                                                                           }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -79,37 +127,87 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    if (section == 0) {
+        return 3;
+    }
+    return 2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return cellHeight;
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 60;
+        
+    }else if (indexPath.section == 0 && indexPath.row == 1){
+        return cellHeight;
+    }else if (indexPath.section == 0 && indexPath.row == 2){
+        return 110;
+        
+    }else if (indexPath.section == 1 && indexPath.row == 0){
+        return 40;
+    }
+
+    return [self tableView:tableview cellForRowAtIndexPath:indexPath].height;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sss"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"sss"];
-        
-        _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 100)];
-        _webView.delegate = self;
-        _webView.scrollView.bounces = NO;
-        _webView.scrollView.showsHorizontalScrollIndicator = NO;
-        _webView.backgroundColor  = [UIColor redColor];
-        _webView.scrollView.scrollEnabled = NO;
-        [_webView sizeToFit];
-        [cell addSubview:_webView];
-        [self showInWebView];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+       PostsDetailUserCell *cell = [PostsDetailUserCell createCellWithTableView:tableview];
+        cell.postsDetailData = detailData;
+        return cell;
+       
+    }else if (indexPath.section == 0 && indexPath.row == 1){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sss"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"sss"];
+            
+            _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 100)];
+            _webView.delegate = self;
+            _webView.scrollView.bounces = NO;
+            _webView.scrollView.showsHorizontalScrollIndicator = NO;
+            _webView.backgroundColor  = [UIColor redColor];
+            _webView.scrollView.scrollEnabled = NO;
+            [_webView sizeToFit];
+            [cell addSubview:_webView];
+            [self showInWebView];
+        }
+        cell.textLabel.text = @"add";
+        return cell;
+    }else if (indexPath.section == 0 && indexPath.row == 2){
+        PostsDetailDZCell *cell = [PostsDetailDZCell createCellWithTableView:tableview];
+        return cell;
+    }else if (indexPath.section == 1 && indexPath.row == 0){
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"titleCell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"titleCell"];
+            cell.textLabel.textColor = HMColor(153, 153, 153);
+            cell.textLabel.font = [UIFont systemFontOfSize:14];
+        }
+        cell.textLabel.text = [NSString stringWithFormat:@"评论数 %@",@8];
+        return cell;
     }
-    cell.textLabel.text = @"add";
-    return cell;
+    else{
+        PostsCommentCell *cell = [PostsCommentCell createCellWithTableView:tableview];
+        [cell layoutCell];
+        return cell;
+    }
 }
 
 #pragma mark - 拼接html语言
@@ -175,6 +273,77 @@
     
     cellHeight = newFrame.size.height;
     [tableview reloadData];
+}
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView
+{
+    CGFloat replayTextHeight = textView.contentSize.height;
+    
+    if (replayTextHeight < 40) {
+        replayTextHeight = 40;
+    }else if (replayTextHeight >= 80){
+        replayTextHeight = 80;
+    }
+
+    CGRect replayBarFrame = CGRectMake(0, MTScreenH - replayTextHeight - 20 - self.keyBoardHeight , MTScreenW, replayTextHeight + 20);
+    CGRect replayTextFrame = CGRectMake(10, 10, MTScreenW - 80, replayTextHeight);
+    
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        self.replyBar.frame = replayBarFrame;
+        self.replayTextView.frame = replayTextFrame;
+    }];
+    
+    if (replayTextHeight < 80) {
+        [textView setContentOffset:CGPointZero animated:YES];
+    }
+
+}
+
+#pragma mark - 键盘相关
+/**
+ *  键盘出现
+ */
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    NSDictionary *info = notification.userInfo;
+    CGFloat animationTime = [info[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGRect keyframe = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyBoardH = keyframe.size.height;
+    self.keyBoardHeight = keyBoardH;
+
+    CGRect replyBarFrame = self.replyBar.frame;
+    replyBarFrame.origin.y = MTScreenH - keyBoardH - replyBarFrame.size.height;
+    
+    CGRect tableFrame = CGRectMake(0, 0, MTScreenW, MTScreenH - keyBoardH - replyBarFrame.size.height);
+    
+    [UIView animateWithDuration:animationTime animations:^{
+        tableview.frame = tableFrame;
+        self.replyBar.frame = replyBarFrame;
+    }];
+    
+}
+
+/**
+ *  键盘隐藏
+ */
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    self.keyBoardHeight = 0;
+    
+    NSDictionary *info = notification.userInfo;
+    CGFloat animationTime = [info[UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    
+    CGRect replyBarFrame = self.replyBar.frame;
+    replyBarFrame.origin.y = MTScreenH - replyBarFrame.size.height;
+    
+    CGRect tableFrame = CGRectMake(0, 0, MTScreenW, MTScreenH - replyBarFrame.size.height);
+    
+    [UIView animateWithDuration:animationTime animations:^{
+        tableview.frame = tableFrame;
+        self.replyBar.frame = replyBarFrame;
+    }];
 }
 
 @end

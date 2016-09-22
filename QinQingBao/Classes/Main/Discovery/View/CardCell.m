@@ -106,41 +106,134 @@
     self.lineView.frame = CGRectMake(0, self.bounds.size.height - 1, self.bounds.size.width, 1);
 }
 
+#pragma mark - 设置cell数据
 -(void)setItemdata:(PostsModel *)itemdata
 {
     _itemdata = itemdata;
     
+    //设置用户信息
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     self.timeLb.text = self.itemdata.dateline;
     self.nameLb.text = self.itemdata.author;
     self.headTagLb.text = @"超凡大师";
-    
-    self.titleLb.text = self.itemdata.subject;
-    self.contentLb.text = self.itemdata.messages;
-    self.photoNum = self.itemdata.picture.count;
 
-    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
-    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
-    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
-    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
-    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
-    [self.plBtn setTitle:pl forState:UIControlStateNormal];
-    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
+    //设置标题与内容
+    NSString *tagName = @"re_icon";;
+    [self setTitle:self.itemdata.subject content:self.itemdata.messages titleTag:tagName];
     
-    [self layoutCell];
-    
+    //设置图片
+    self.photoNum = self.itemdata.picture.count;
     for (int i = 0; i < self.itemdata.picture.count; i++) {
         UIImageView *img = self.photos[i];
         [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     }
+
+    //设置底部按钮栏
+    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
+    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
     
-//    for (UIImageView *img in self.photos)
-//    {
-//        NSInteger idx = [self.photos indexOfObject:img];
-//        if (idx >= self.itemdata.picture.count)
-//            break;
-//        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-//    }
+    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
+    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
+    
+    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
+    [self.plBtn setTitle:pl forState:UIControlStateNormal];
+    
+    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
+    
+    [self layoutCell];
+}
+
+-(void)setSectionListPosts:(SectionListPosts *)sectionListPosts
+{
+    _sectionListPosts = sectionListPosts;
+    
+    //设置用户信息
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:sectionListPosts.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    self.timeLb.text = sectionListPosts.dateline;
+    self.nameLb.text = sectionListPosts.author;
+    self.headTagLb.text = @"超凡大师";
+    
+    //设置标题与内容
+    NSString *tagName = nil;
+    if (sectionListPosts.is_hot) {
+        tagName = @"re_icon";
+    }else if (self.sectionListPosts.is_digest){
+        tagName = @"jing_icon";
+    }
+
+    [self setTitle:sectionListPosts.subjects content:sectionListPosts.messages titleTag:tagName];
+    
+    //设置图片
+    //...............临时这样做..........
+    if ([sectionListPosts.attachmentpicture isKindOfClass:[NSString class]]) {
+        self.photoNum = 0;
+    }else{
+        self.photoNum = sectionListPosts.attachmentpicture.count;
+    }
+    
+    for (int i = 0; i < self.photoNum; i++) {
+        UIImageView *img = self.photos[i];
+        [img sd_setImageWithURL:[NSURL URLWithString:sectionListPosts.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    }
+    
+    //设置底部按钮栏
+    NSString *yd = sectionListPosts.views && [sectionListPosts.views integerValue] != 0?sectionListPosts.views:@"阅读";
+    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
+    
+    NSString *dz = sectionListPosts.views && [sectionListPosts.replies integerValue] != 0?sectionListPosts.replies:@"点赞";
+    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
+    
+    NSString *pl = sectionListPosts.views && [sectionListPosts.recommend_add integerValue] != 0?sectionListPosts.recommend_add:@"评论";
+    [self.plBtn setTitle:pl forState:UIControlStateNormal];
+    
+    [self.barTagBtn setTitle:sectionListPosts.forum_name forState:UIControlStateNormal];
+    
+    [self layoutCell];
+}
+
+/**
+ *  设置标题与内容 
+ * titleStr:标题 .
+ * contentStr:内容 .
+ * imageName:标题的小标志,没有传nil
+ */
+- (void)setTitle:(NSString *)titleStr content:(NSString *)contentStr titleTag:(NSString *)imageName
+{
+    if (titleStr) {
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineSpacing = 5;
+        NSDictionary *attrDict = @{
+                                   NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
+                                   NSForegroundColorAttributeName:HMColor(54, 54, 54),
+                                   NSParagraphStyleAttributeName:paragraph
+                                   };
+        
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",titleStr] attributes:attrDict];
+        
+        if (imageName) {
+            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+            attachment.image = [UIImage imageNamed:imageName];
+            attachment.bounds = CGRectMake(0, -3, 18, 17);
+            
+            NSAttributedString *hotIcon = [NSAttributedString attributedStringWithAttachment:attachment];
+            [attrStr insertAttributedString:hotIcon atIndex:0];
+//            [attrStr setAttributes:attrDict range:NSMakeRange(1, attrStr.length - 1)];
+        }
+        
+        self.titleLb.attributedText = attrStr;
+    }
+    
+    if (contentStr) {
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineSpacing = 4;
+        NSDictionary *attrDict1 = @{
+                                    NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                    NSForegroundColorAttributeName:HMColor(102, 102, 102),
+                                    NSParagraphStyleAttributeName:paragraph
+                                    };
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict1];
+        self.contentLb.attributedText = attrStr;
+    }
 }
 
 #pragma mark - 设置cell子视图的位置
@@ -185,48 +278,14 @@
  */
 - (void)layoutTextInfoView
 {
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.lineSpacing = 5;
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
-                               NSForegroundColorAttributeName:HMColor(54, 54, 54),
-                               NSParagraphStyleAttributeName:paragraph
-                               };
-    NSString *titleStr = self.titleLb.text;
-    if (titleStr) {
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:titleStr attributes:attrDict];
-        if (YES) {
-            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-            attachment.image = [UIImage imageNamed:@"checkPayType"];
-            
-            NSAttributedString *hotIcon = [NSAttributedString attributedStringWithAttachment:attachment];
-            [attrStr insertAttributedString:hotIcon atIndex:0];
-            
-            [attrStr setAttributes:attrDict range:NSMakeRange(1, attrStr.length - 1)];
-        }
-        
-        self.titleLb.attributedText = attrStr;
-        CGSize size = [self.titleLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
-        self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, size.height);
-    }
+    CGSize titleSize = [self.titleLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
+    self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, titleSize.height);
     
-    paragraph.lineSpacing = 4;
-    NSDictionary *attrDict1 = @{
-                                NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                NSForegroundColorAttributeName:HMColor(102, 102, 102),
-                                NSParagraphStyleAttributeName:paragraph
-                                };
-    NSString *contentStr = self.contentLb.text;
-    if (contentStr) {
-        CGSize size = [contentStr boundingRectWithSize:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrDict1 context:nil].size;
-        if (titleStr) {
-            self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 12, size.width, size.height);
-        }else{
-            self.contentLb.frame = CGRectMake(0, 0, size.width, size.height);
-        }
-        
-        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict1];
-        self.contentLb.attributedText = attrStr;
+    CGSize size = [self.contentLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
+    if (self.contentLb.attributedText) {
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 12, size.width, size.height);
+    }else{
+        self.contentLb.frame = CGRectMake(0, 0, size.width, size.height);
     }
     
     self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 12, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));
@@ -331,6 +390,8 @@
     [attentionBtn setTitleColor:HMColor(247, 147, 30) forState:UIControlStateNormal];
     [infoView addSubview:attentionBtn];
     self.attentionBtn = attentionBtn;
+    
+    [self.attentionBtn addTarget:self action:@selector(tapAttentionBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 /**
@@ -405,6 +466,28 @@
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     [self.bottomBarView addSubview:btn];
     return btn;
+}
+
+- (void)tapAttentionBtn:(UIButton *)sender
+{
+    //操作动作，add或del，add是加关注，del是取消关注
+    NSDictionary *params = @{
+                             @"action":@"add",
+                             @"uid": @"123",
+                             @"rel":@"321",
+                             };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
 }
 
 @end

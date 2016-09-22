@@ -140,13 +140,13 @@ static NSString *scrollMenuCellId = @"scrollMenuCell";
     if (imgName) {
         if ([imgName hasPrefix:@"http://"]) {
             NSURL *url = [[NSURL alloc] initWithString:imgName];
-            [imgv sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            }];
+            [imgv sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"ScrollMenuIcon.png"]];
+
         }else{
-            imgv.image = [UIImage imageNamed:imgName];
+            imgv.image = [UIImage imageNamed:imgName]?:[UIImage imageNamed:@"ScrollMenuIcon.png"];
         }
     }else{
-        imgv.image = nil;
+        imgv.image = [UIImage imageNamed:@"ScrollMenuIcon.png"];
     }
 
     return cell;

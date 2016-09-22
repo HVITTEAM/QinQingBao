@@ -10,13 +10,27 @@
 #import "LoopImageView.h"
 #import "ScrollMenuTableCell.h"
 #import "CommunityViewController.h"
-#import "SectionlistModel.h"
+#import "CircleModel.h"
+#import "PostsDetailViewController.h"
+#import "HomePicModel.h"
+#import "CardCell.h"
+#import "ShopDetailViewController.h"
+#import "MarketDeatilViewController.h"
+#import "MarketDeatilViewController.h"
+#import "AdvertisementController.h"
+#import "SectionListPosts.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *healthCommunityDatas;
+@property (strong, nonatomic) NSArray *healthCommunityDatas;    //健康圈数据
+
+@property (strong, nonatomic) NSArray *advDatas;     //轮播图数据
+
+@property (strong, nonatomic) NSMutableArray *postsDatas;     //热门帖子数据
+
+@property (assign, nonatomic) NSInteger pageNum;     //分页数
 
 @end
 
@@ -27,14 +41,17 @@
     
     [self setupUI];
     
-    [self loadSectionlist];
+    [self loadCirclelist];
+    
+    [self getAdvertisementpic];
+    
+    [self loadFlaglist];
 }
 
 - (void)setupUI
 {
+    //导航栏
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
-    self.navigationController.navigationBar.translucent = NO;
-    
     UITextField *searhField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, MTScreenW - 20, 30)];
     searhField.placeholder = @"输入搜索关键字";
     searhField.borderStyle = UITextBorderStyleRoundedRect;
@@ -43,32 +60,28 @@
     searhField.leftViewMode = UITextFieldViewModeAlways;
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 20, 20)];
-    imgView.backgroundColor = [UIColor redColor];
-    imgView.image = [UIImage imageNamed:@"lockIcon"];
+    imgView.image = [UIImage imageNamed:@"search"];
     [leftView addSubview:imgView];
     searhField.leftView = leftView;
     self.navigationItem.titleView = searhField;
     
-    UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 64) style:UITableViewStyleGrouped];
+    //UITableView
+    UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     tbv.delegate = self;
     tbv.dataSource = self;
     tbv.backgroundColor = HMGlobalBg;
     [self.view addSubview:tbv];
     self.tableView = tbv;
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
+    __weak typeof(self) weakSelf = self;
+    //轮播图
     LoopImageView *loopView = [[LoopImageView alloc] init];
     loopView.bounds = CGRectMake(0, 0, MTScreenW, (int)(MTScreenW / 3));
-    loopView.imageUrls = @[
-                           @"http://www.xxjxsj.cn/article/uploadpic/2012-4/201241221251481736.jpg",
-                           @"http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg",
-                           @"http://img.taopic.com/uploads/allimg/130711/318756-130G1222R317.jpg",
-                           @"http://pic14.nipic.com/20110610/7181928_110502231129_2.jpg"
-                           ];
-
+    loopView.tapLoopImageCallBack= ^(NSInteger idx){
+        [weakSelf onClickImage:idx];
+    };
     tbv.tableHeaderView = loopView;
-    
-
-    
 }
 
 - (NSArray *)healthCommunityDatas
@@ -80,6 +93,15 @@
     return _healthCommunityDatas;
 }
 
+- (NSMutableArray *)postsDatas
+{
+    if (!_postsDatas) {
+        _postsDatas = [[NSMutableArray alloc] init];
+    }
+    
+    return _postsDatas;
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -88,6 +110,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 2) {
+        return self.postsDatas.count + 1;
+    }
     return 2;
 }
 
@@ -98,38 +123,44 @@
     UITableViewCell *cell = nil;
     if (indexPath.row == 0){
         static NSString *cellId = @"titleCellId";
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
         switch (indexPath.section) {
             case 0:
-                cell.textLabel.text = @"健康服务";
+                cell.textLabel.text = @"健康检测";
                 break;
             case 1:
                 cell.textLabel.text = @"健康圈";
                 break;
             default:
-                cell.textLabel.text = @"热门帐号";
+                cell.textLabel.text = @"热门帖子";
                 break;
         }
         
     }else if (indexPath.row == 1 && indexPath.section != 2){
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
-        menuCell.selectMenuItemCallBack = ^(NSInteger idx){
-            CommunityViewController *communityVC = [[CommunityViewController alloc] init];
-            [weakSelf.navigationController pushViewController:communityVC animated:YES];
-        };
         menuCell.row = 1;
         menuCell.col = 4;
         menuCell.colSpace = 10;
         if (indexPath.section == 0) {
+            //健康检测
             menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
             menuCell.shouldShowIndicator = NO;
-            menuCell.datas = @[@{KScrollMenuTitle:@"健康检测",KScrollMenuImg:@"healthTesting_icon"},
-                               @{KScrollMenuTitle:@"基因检测",KScrollMenuImg:@"gene_icon"},
-                               @{KScrollMenuTitle:@"超声理疗",KScrollMenuImg:@"Ultrasonic_icon"},
-                               @{KScrollMenuTitle:@"健康计划",KScrollMenuImg:@"healthPan_icon"}
+            menuCell.datas = @[@{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"xnxg_icon"},
+                               @{KScrollMenuTitle:@"精英压力",KScrollMenuImg:@"jyyl_icon"},
+                               @{KScrollMenuTitle:@"肝脏排毒",KScrollMenuImg:@"gzpd_icon"},
+                               @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
                                ];
+            menuCell.selectMenuItemCallBack = ^(NSInteger idx){
+                
+                //跳转
+            };
         }else{
-
+            //健康圈
             if (self.healthCommunityDatas.count > 4) {
                 menuCell.shouldShowIndicator = YES;
                 menuCell.margin = UIEdgeInsetsMake(10, 10, 0, 10);
@@ -140,7 +171,7 @@
             
             NSMutableArray *ar = [[NSMutableArray alloc] init];
             for (int i = 0; i < self.healthCommunityDatas.count; i++) {
-                SectionlistModel *model = self.healthCommunityDatas[i];
+                CircleModel *model = self.healthCommunityDatas[i];
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
                 dict[KScrollMenuTitle] = model.name;
                 dict[KScrollMenuImg] = model.avatar;
@@ -149,9 +180,9 @@
             
             menuCell.datas = ar;
             menuCell.selectMenuItemCallBack = ^(NSInteger idx){
-                SectionlistModel *model = weakSelf.healthCommunityDatas[idx];
+                CircleModel *model = weakSelf.healthCommunityDatas[idx];
                 CommunityViewController *communityVC = [[CommunityViewController alloc] init];
-                communityVC.sectionModel = model;
+                communityVC.circleModel = model;
                 [weakSelf.navigationController pushViewController:communityVC animated:YES];
             };
             
@@ -159,9 +190,11 @@
         
         cell = menuCell;
     }else{
+        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"asdfsadf"];
-        cell.textLabel.text = @"hello";
+        SectionListPosts *model = self.postsDatas[indexPath.row - 1];
+        [cardCell setSectionListPosts:model];
+        cell = cardCell;
     }
 
     return cell;
@@ -171,14 +204,18 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0){
-        return 36;
+        return 40;
+    }else if (indexPath.section == 0){
+        return 100;
     }else if (indexPath.section == 1) {
         if (self.healthCommunityDatas.count > 4) {
             return 120;
+        }else{
+            return 100;
         }
     }
-    
-    return 100;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -191,25 +228,152 @@
     return 10;
 }
 
-- (void)loadSectionlist
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2 && indexPath.row != 0) {
+        PostsDetailViewController *detailVC = [[PostsDetailViewController alloc] init];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
+}
+
+#pragma mark - 网络相关
+/**
+ * 获取健康圈数据
+ **/
+- (void)loadCirclelist
 {
     NSDictionary *params = @{
-                             @"sectionid":@"38"
+                             @"circleid":@"38"
                              };
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Sectionlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Circle parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
     
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"出错" view:nil];
             return;
         }
 
-        self.healthCommunityDatas = [SectionlistModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        self.healthCommunityDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
+}
+
+/**
+ * 获取热门帖子数据  标识位【推荐贴：1；热门帖：2；说说：3】
+ **/
+- (void)loadFlaglist
+{
+    NSDictionary *params = @{
+                             @"flag":@2,
+                             @"p": @(self.pageNum),
+                             @"page":@(3),
+                             @"key":@"",
+                             @"sys":@"",
+                             @"client":@""
+                             };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [self.tableView.footer endRefreshing];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+        
+        NSArray *datas = [SectionListPosts objectArrayWithKeyValuesArray:dict[@"datas"]];
+        [self.postsDatas addObjectsFromArray:datas];
+        self.pageNum++;
+        
+        [self.tableView reloadData];
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.tableView.footer endRefreshing];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  加载更多数据
+ */
+- (void)loadMoreDatas
+{
+    [self loadFlaglist];
+}
+
+/**
+ * 获取轮播图片
+ **/
+-(void)getAdvertisementpic
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+
+        if([dict[@"code"] integerValue] != 0){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            return ;
+        }
+        
+        self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
+    
+        NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.advDatas.count; i++) {
+            HomePicModel *model = self.advDatas[i];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
+            [imageUrls addObject:urlStr];
+        }
+        LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
+        loopView.imageUrls = imageUrls;
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
+    }];
+}
+
+#pragma mark - 事件方法
+/**
+ *  轮播广告点击事件
+ */
+-(void)onClickImage:(NSInteger)idx
+{
+    HomePicModel *item = self.advDatas[idx];
+    if (item.bc_article_url.length == 0)
+        return;
+    
+    // 43 超声理疗 44 精准健康监测分析 45疾病易感性基因检测
+    
+    if ([item.bc_type_app_id isEqualToString:@"43"])
+    {
+        ShopDetailViewController *view = [[ShopDetailViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:view animated:YES];
+        
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"44"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:view animated:YES];
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"45"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:view animated:YES];
+    }
+    else
+    {
+        AdvertisementController *adver = [[AdvertisementController alloc] init];
+        adver.item = item;
+        [self.navigationController pushViewController:adver animated:YES];
+    }
 }
 
 @end

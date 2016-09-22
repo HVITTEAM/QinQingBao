@@ -9,9 +9,11 @@
 #import "CommunityViewController.h"
 #import "CardCell.h"
 #import "SiglePicCardCell.h"
-#import "SectionlistModel.h"
+#import "CircleModel.h"
+#import "CircleSticklistModel.h"
+#import "SectionListPosts.h"
+#import "PostsDetailViewController.h"
 
-#define kBkImageViewHeight 140
 #define kHeadViewHeith 140
 #define kTabViewHeight 50
 #define kNewsCellHeight 50
@@ -22,24 +24,36 @@
 @interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
-
-@property (strong, nonatomic) UIView *line;
-
+/**标签栏*/
 @property (strong, nonatomic) UIView *tabView;
-
-@property (strong, nonatomic) UIImageView *bkImageView;
-
+/**标签栏上的指示条*/
+@property (strong, nonatomic) UIView *line;
+/**自定义导航栏*/
 @property (strong, nonatomic) UIView *navBar;
-
+/**头部版块信息视图*/
+@property (strong, nonatomic) UIView *headView;
+/**图标*/
 @property (weak, nonatomic) IBOutlet UIImageView *headIconView;
-
+/**名称*/
 @property (weak, nonatomic) IBOutlet UILabel *headTitleLb;
-
+/**参与人数和帖子数*/
 @property (weak, nonatomic) IBOutlet UILabel *numberLb;
-
+/**版主*/
 @property (weak, nonatomic) IBOutlet UILabel *ownerLb;
 
-@property (strong, nonatomic) NSArray *allPosts;
+/**置顶数据源*/
+@property (strong, nonatomic) NSMutableArray *zdPosts;
+/**所有数据源*/
+@property (strong, nonatomic) NSMutableArray *allPosts;
+/**热点数据源*/
+@property (strong, nonatomic) NSMutableArray *hotPosts;
+
+/**当前是否选中所有标签*/
+@property (assign, nonatomic) BOOL isAllData;
+/**所有数据的分页数*/
+@property (assign, nonatomic) NSInteger allPageNum;
+/**热点数据的分页数*/
+@property (assign, nonatomic) NSInteger hotPageNum;
 
 @end
 
@@ -53,20 +67,19 @@
     return self;
 }
 
-- (void)dealloc
-{
-    NSLog(@"释放");
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    self.isAllData = YES;
+    
     [self setupUI];
     
-    [self getUserPosts];
+    //加载所有数据和置顶数据
+    [self loadSectionlistDataWithType:nil];
+    [self loadSectionlistDataWithType:@2];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,33 +98,35 @@
 
 - (void)setupUI
 {
-    UIImageView *bkImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, kBkImageViewHeight)];
-    bkImageView.image = [UIImage imageNamed:@"1-1"];
-    bkImageView.contentMode = UIViewContentModeScaleAspectFill;
-    [self.view addSubview:bkImageView];
-    self.bkImageView = bkImageView;
-    
-    UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStylePlain];
+    //UITableView
+    UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     tbv.showsVerticalScrollIndicator = NO;
-    tbv.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    tbv.contentInset = UIEdgeInsetsMake(kHeadViewHeith, 0, 0, 0);
     tbv.delegate = self;
     tbv.dataSource = self;
     tbv.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tbv];
     self.tableView = tbv;
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
 
+    //头部视图
     UIView *headView = [[[NSBundle mainBundle] loadNibNamed:@"CommunityHeadView" owner:self options:nil] firstObject];
-    headView.backgroundColor = [UIColor clearColor];
-    headView.frame = CGRectMake(0, 0, MTScreenW, kHeadViewHeith);
-    self.tableView.tableHeaderView = headView;
+    headView.frame = CGRectMake(0, -kHeadViewHeith, MTScreenW, kHeadViewHeith);
+    [self.tableView addSubview:headView];
+    self.headView = headView;
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.circleModel.avatar]];
+    [self.headIconView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    self.headTitleLb.text = self.circleModel.name;
+    self.numberLb.text = [NSString stringWithFormat:@"参与人数:%@ 帖子:%@",self.circleModel.num_author,self.circleModel.num_article];
+    self.ownerLb.text = [NSString stringWithFormat:@"版主:%@",self.circleModel.moderators];
     
+    //自定义导航条
     self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0, MTScreenW, 64)];
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
-    
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(15, 27, 30, 30);
-    [backBtn setImage:[UIImage imageNamed:@"checkMark_icon"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"btn_dismissItem"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
     titleLb.textAlignment = NSTextAlignmentCenter;
@@ -123,10 +138,36 @@
     [self.navBar addSubview:lv];
     [self.navBar addSubview:backBtn];
     [self.navBar addSubview:titleLb];
-    
     [self.view addSubview:self.navBar];
 }
 
+#pragma mark - gettter和setter方法
+- (NSMutableArray *)allPosts
+{
+    if (!_allPosts) {
+        _allPosts = [[NSMutableArray alloc] init];
+    }
+    
+    return _allPosts;
+}
+
+- (NSMutableArray *)hotPosts
+{
+    if (!_hotPosts) {
+        _hotPosts = [[NSMutableArray alloc] init];
+    }
+    
+    return _hotPosts;
+}
+
+- (NSMutableArray *)zdPosts
+{
+    if (!_zdPosts) {
+        _zdPosts = [[NSMutableArray alloc] init];
+    }
+    
+    return _zdPosts;
+}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -138,10 +179,14 @@
 {
     
     if (0 == section) {
-        return 3;
+        return self.zdPosts.count;
     }
     
-    return self.allPosts.count;
+    if (self.isAllData) {
+        return self.allPosts.count;
+    }
+    
+    return self.hotPosts.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,18 +197,26 @@
         UITableViewCell *newsCell = [tableView dequeueReusableCellWithIdentifier:newsCellId];
         if (!newsCell) {
             newsCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:newsCellId];
+            newsCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            newsCell.imageView.image = [UIImage imageNamed:@"zhiDing_icon"];
         }
-        newsCell.imageView.image = [UIImage imageNamed:@"sport"];
-        newsCell.textLabel.text = @"水电费金砂街道富乐山绝地反击上岛咖啡绝色赌妃图格里克韩国帅哥世界大学城星罗棋布时";
+        SectionListPosts *model = self.zdPosts[indexPath.row];
+            
+        newsCell.textLabel.text = model.subjects;
+        
         cell = newsCell;
     }else{
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        PostsModel *model = self.allPosts[indexPath.row];
-        [cardCell setItemdata:model];
+        
+        SectionListPosts *model;
+        if (self.isAllData) {
+            model = self.allPosts[indexPath.row];
+        }else{
+            model = self.hotPosts[indexPath.row];
+        }
+        
+        [cardCell setSectionListPosts:model];
         cell = cardCell;
-//        SiglePicCardCell *siglePicCardCell = [SiglePicCardCell createCellWithTableView:tableView];
-//        [siglePicCardCell setData];
-//        cell = siglePicCardCell;
     }
     
     return cell;
@@ -213,39 +266,32 @@
     return self.tabView;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[UIView alloc] init];
+    PostsDetailViewController *postsDetailVC = [[PostsDetailViewController alloc] init];
+    [self.navigationController pushViewController:postsDetailVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < 0) {
-        CGFloat distance = -scrollView.contentOffset.y;
-        self.bkImageView.frame = CGRectMake(0, 0, MTScreenW, kBkImageViewHeight + distance);
+    if (scrollView.contentOffset.y < -kHeadViewHeith) {
+        self.headView.frame = CGRectMake(0, scrollView.contentOffset.y, MTScreenW, -scrollView.contentOffset.y);
         
     }else{
-        self.bkImageView.frame = CGRectMake(0, -scrollView.contentOffset.y, MTScreenW, kBkImageViewHeight);
+        self.headView.frame = CGRectMake(0, -kHeadViewHeith, MTScreenW, kHeadViewHeith);
     }
     
-    CGFloat positionY = kHeadViewHeith + 3 * kNewsCellHeight + 10;
-
-    if (scrollView.contentOffset.y > positionY - 64) {
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
-    }else{
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    }
-    
-    if (scrollView.contentOffset.y > positionY - 128) {
+    if (scrollView.contentOffset.y > 0) {
         CGFloat delta = 1.0 / 64;
-        self.navBar.alpha = (scrollView.contentOffset.y - (positionY - 128)) * delta;
+        self.navBar.alpha = scrollView.contentOffset.y * delta;
     }else{
         self.navBar.alpha = 0;
     }
 
 }
 
+#pragma mark - 点击事件方法
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -259,13 +305,20 @@
     
     [sender setTitleColor:HMColor(112, 164, 38) forState:UIControlStateNormal];
     
+    
     if (sender == leftbtn) {
-        NSLog(@"全部数据");
+        self.isAllData = YES;
+        if (self.allPosts.count == 0) {
+            [self loadSectionlistDataWithType:nil];
+        }
         
     }else{
-        NSLog(@"热门数据");
+        self.isAllData = NO;
+        if (self.hotPosts.count == 0) {
+            [self loadSectionlistDataWithType:@1];
+        }
     }
- 
+    
     [self.tableView reloadData];
     
     CGRect frame = self.line.frame;
@@ -277,6 +330,71 @@
     }];
 }
 
+#pragma mark - 加载数据网络相关
+/**
+ *  获取版块详细列表  版块内特殊标志的列表  热门：1；置顶：2  不传为全部
+ */
+- (void)loadSectionlistDataWithType:(NSNumber *)type
+{
+    NSMutableDictionary *params = [@{
+                             @"sectionid":self.circleModel.sectionid,
+                             @"page":@(3),
+                             @"sys":@"",
+                             @"client":@"",
+                             @"key":@"",
+                             } mutableCopy];
+
+    params[@"tag"] = type?type:nil;
+    
+    if (self.isAllData) {
+        params[@"p"] = @(self.allPageNum);
+    }else{
+        params[@"p"] = @(self.hotPageNum);
+    }
+
+    [CommonRemoteHelper RemoteWithUrl:URL_Sectionlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [self.tableView.footer endRefreshing];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+    
+        NSArray *datas = [SectionListPosts objectArrayWithKeyValuesArray:dict[@"datas"]];
+        
+        if ([type isEqual:@1]) {//所有数据
+            [self.hotPosts addObjectsFromArray:datas];
+            self.hotPageNum++;
+        }else if ([type isEqual:@2]){ //置顶数据
+            [self.zdPosts addObjectsFromArray:datas];
+        }else{
+            //全部数据
+            [self.allPosts addObjectsFromArray:datas];
+            self.allPageNum++;
+        }
+        
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.tableView.footer endRefreshing];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  加载更多数据
+ */
+- (void)loadMoreDatas
+{
+    if (self.isAllData) {
+        [self loadSectionlistDataWithType:nil];
+    }else{
+        [self loadSectionlistDataWithType:@1];
+    }
+}
+
+#pragma mark - 工具方法
 - (UIView *)createTabView
 {
     UIView *tabView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, kTabViewHeight)];
@@ -311,29 +429,5 @@
     return tabView;
 }
 
-/**
- *  获取发帖数据
- */
--(void)getUserPosts
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"uid" : @"1"
-                                                                       }
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                        self.allPosts = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                 }];
-    
-}
 
 @end

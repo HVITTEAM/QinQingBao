@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSArray *imageUrls;
 
+@property (strong, nonatomic) void(^tapLoopImageCallBack)(NSInteger idx);
+
 - (void)stopAutoScroll;
 
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SectionlistModel;
+@class CircleModel;
 
 @interface CommunityViewController : UIViewController
 
-@property (strong, nonatomic) SectionlistModel *sectionModel;
+@property (strong, nonatomic) CircleModel *circleModel;
 
 @end
