@@ -186,7 +186,7 @@
                                      [self.tableView removePlace];
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self.tableView initWithPlaceString:PlaceholderStr_Order imgPath:@"placeholder-1.png"];
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {

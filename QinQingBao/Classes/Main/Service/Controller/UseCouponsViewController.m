@@ -86,7 +86,7 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          if ([codeNum integerValue] == 17001)
-                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                             [self.tableView initWithPlaceString:@"暂无数据!" imgPath:@"placeholder-2.png"];
                                          else
                                          {
                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -98,7 +98,7 @@
                                          CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          dataProvider = result.voucher_list;
                                          if (dataProvider.count == 0)
-                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                             [self.tableView initWithPlaceString:@"暂无数据!" imgPath:@"placeholder-2.png"];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];

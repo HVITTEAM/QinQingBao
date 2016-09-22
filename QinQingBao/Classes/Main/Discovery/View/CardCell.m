@@ -118,8 +118,9 @@
     self.titleLb.text = self.itemdata.subject;
     self.contentLb.text = self.itemdata.messages;
     
-    self.photoNum = self.itemdata.picture.count;
-
+    if (self.itemdata.picture.count > 0)
+        self.photoNum = self.itemdata.picture.count;
+    
     NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
     [self.ydBtn setTitle:yd forState:UIControlStateNormal];
     NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
@@ -135,13 +136,13 @@
         [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     }
     
-//    for (UIImageView *img in self.photos)
-//    {
-//        NSInteger idx = [self.photos indexOfObject:img];
-//        if (idx >= self.itemdata.picture.count)
-//            break;
-//        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-//    }
+    //    for (UIImageView *img in self.photos)
+    //    {
+    //        NSInteger idx = [self.photos indexOfObject:img];
+    //        if (idx >= self.itemdata.picture.count)
+    //            break;
+    //        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[idx]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    //    }
 }
 
 #pragma mark - 设置cell子视图的位置

@@ -113,7 +113,7 @@
         [self.tableView.footer endRefreshing];
         
         if([dict[@"code"] integerValue] == 17001 && self.dataProvider.count == 0){
-            [self.view initWithPlaceString:@"暂无数据"];
+            [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
             return;
         }
         

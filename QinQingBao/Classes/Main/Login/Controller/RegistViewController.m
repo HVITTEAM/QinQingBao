@@ -9,6 +9,7 @@
 #import "RegistViewController.h"
 #import "AgreementViewController.h"
 
+#import "JPUSHService.h"
 
 @interface RegistViewController ()<UITextFieldDelegate>
 {
@@ -66,10 +67,10 @@
  */
 -(void)updateInterface
 {
-//    self.verBtn.layer.cornerRadius = 5.0f;
-//    self.verBtn.layer.masksToBounds = YES;
-//    self.verBtn.layer.borderWidth = 1.0f;
-//    self.verBtn.layer.borderColor = [[UIColor redColor] CGColor];
+    //    self.verBtn.layer.cornerRadius = 5.0f;
+    //    self.verBtn.layer.masksToBounds = YES;
+    //    self.verBtn.layer.borderWidth = 1.0f;
+    //    self.verBtn.layer.borderColor = [[UIColor redColor] CGColor];
     
     self.registNowBtn.layer.cornerRadius = 5.0f;
     self.registNowBtn.layer.masksToBounds = YES;
@@ -187,7 +188,13 @@
                                              UserModel *vo = [UserModel objectWithKeyValues:di];
                                              [SharedAppUtil defaultCommonUtil].userVO = vo;
                                              [ArchiverCacheHelper saveObjectToLoacl:vo key:User_Archiver_Key filePath:User_Archiver_Path];
-                                             [MTControllerChooseTool setMainViewcontroller];
+                                             
+                                             [MTNotificationCenter postNotificationName:MTReLogin object:nil];
+                                             
+                                             [self loginBBS:vo];
+                                             //设置推送标签和别名
+                                             [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",vo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+                                             
                                              [self.navigationController.viewControllers[0] dismissViewControllerAnimated:YES completion:nil];
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -196,6 +203,48 @@
                                          [NoticeHelper AlertShow:@"注册失败!" view:self.view];
                                      }];
     }
+}
+
+// 登录bbs
+-(void)loginBBS:(UserModel *)vo
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :vo.key,
+                                                                            @"client" : @"ios",
+                                                                            @"targetsys" : @"4",
+                                                                            @"discuz_uname" : @"我是你爸爸"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     NSLog(@"%@",dict);
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *datas = [dict objectForKey:@"datas"];
+                                         
+                                         BBSUserModel *bbsmodel = [[BBSUserModel alloc] init];
+                                         bbsmodel.BBS_Key = [datas objectForKey:@"key"];
+                                         bbsmodel.BBS_Member_id = [datas objectForKey:@"member_id"];
+                                         bbsmodel.BBS_Member_mobile = [datas objectForKey:@"member_mobile"];
+                                         bbsmodel.BBS_Sys = [datas objectForKey:@"sys"];
+                                         
+                                         [SharedAppUtil defaultCommonUtil].bbsVO = bbsmodel;
+                                         [ArchiverCacheHelper saveObjectToLoacl:bbsmodel key:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
+
+#pragma mark - JPush 推送标签和别名
+
+- (void)tagsAliasCallback:(int)iResCode tags:(NSSet *)tags alias:(NSString *)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 /**

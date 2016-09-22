@@ -20,7 +20,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.view.backgroundColor = HMGlobalBg;
     
-    [self.tableView initWithPlaceString:@"暂无数据!"];
+    [self.tableView initWithPlaceString:@"暂无数据!" imgPath:nil];
 }
 
 #pragma mark - Table view data source

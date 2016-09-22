@@ -23,6 +23,6 @@
  *
  *  @param placeStr 显示文本
  */
-- (void)initWithPlaceString:(NSString *)placeStr;
+- (void)initWithPlaceString:(NSString *)placeStr imgPath:(NSString *)imgPath;
 
 @end

@@ -21,6 +21,13 @@
     return cell;
 }
 
+-(void)setZan:(NSInteger)zannum fansnum:(NSInteger)fansnum attentionnum:(NSInteger)attentionnum
+{
+    self.zanLab.text = [NSString stringWithFormat:@"%ld",(long)zannum];
+    self.fansLab.text = [NSString stringWithFormat:@"%ld",(long)fansnum];
+    self.attentionLab.text = [NSString stringWithFormat:@"%ld",(long)attentionnum];
+}
+
 - (IBAction)tapButtonAction:(UIButton *)sender
 {
     if (self.tapConsumeCellBtnCallback) {

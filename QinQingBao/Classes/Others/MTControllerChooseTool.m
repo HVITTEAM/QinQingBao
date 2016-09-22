@@ -10,6 +10,7 @@
 #import "MTNewfeatureViewController.h"
 #import "HealthMonitorViewController.h"
 //#import "HomeViewController.h"
+#import "BBSUserModel.h"
 
 #import "CXHomeViewController.h"
 #import "NewHomeViewController.h"
@@ -45,10 +46,12 @@
     [UIApplication sharedApplication].statusBarHidden = NO;
     
     UserModel *vo = [ArchiverCacheHelper getLocaldataBykey:User_Archiver_Key filePath:User_Archiver_Path];
-    
+    BBSUserModel *bbsvo = [ArchiverCacheHelper getLocaldataBykey:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
     CityModel *cityVO =  [ArchiverCacheHelper getLocaldataBykey:User_LocationCity_Key filePath:User_LocationCity_Path];
     [SharedAppUtil defaultCommonUtil].cityVO = cityVO;
+    [SharedAppUtil defaultCommonUtil].bbsVO = bbsvo;
     [SharedAppUtil defaultCommonUtil].userVO = vo;
+    
 //    [MTControllerChooseTool setRootViewController];
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
 

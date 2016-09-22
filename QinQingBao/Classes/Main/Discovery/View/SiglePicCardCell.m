@@ -108,18 +108,32 @@
     self.lineView.frame = CGRectMake(0, self.bounds.size.height - 1, self.bounds.size.width, 1);
 }
 
-- (void)setData
+-(void)setItemdata:(PostsModel *)itemdata
 {
-    self.portraitView.image = [UIImage imageNamed:@"ic_blood_pressure"];
-    self.timeLb.text = @"8月27日 16:00";
-    self.nameLb.text = @"王主任";
-    self.headTagLb.text = @"主任";
+    _itemdata = itemdata;
+
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+
     
-    self.titleLb.text = @"电机富乐山监督管理局山东老家斐林试东老家斐林试东老家斐林试东老家斐林试";
-    self.contentLb.text = @"粘合胶荣威入伍鹅肉围殴肉我饿u人粘合胶肉潍坊三闾大夫叫啥了江东父老数据的风流教师夺善良的放假了世纪东方了叫啥两地分居啥李东方";
+    self.timeLb.text = self.itemdata.dateline;
+    self.nameLb.text = self.itemdata.author;
+    self.headTagLb.text = @"超凡大师";
+    
+    self.titleLb.text = self.itemdata.subject;
+    self.contentLb.text = self.itemdata.messages;
+    
+//    self.photoNum = self.itemdata.picture.count;
+    
+    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
+    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
+    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
+    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
+    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
+    [self.plBtn setTitle:pl forState:UIControlStateNormal];
+    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
+
     self.photoNum = 1;
     
-    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
     
     //设置位置
     [self layoutCell];
@@ -157,6 +171,7 @@
     self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
     
     self.attentionBtn.frame = CGRectMake(CGRectGetWidth(self.userInfoView.frame) - 50, 5, 50, 30);
+    self.attentionBtn.hidden = YES;
 }
 
 /**

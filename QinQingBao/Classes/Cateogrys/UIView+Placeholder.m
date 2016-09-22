@@ -42,24 +42,29 @@
     }];
 }
 
-- (void)initWithPlaceString:(NSString *)placeStr
+- (void)initWithPlaceString:(NSString *)placeStr imgPath:(NSString *)imgPath
 {
     [self removePlace];
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"placeholderImage.png"]];
+    if (!imgPath)
+        imgPath = @"placeholderImage.png";
+    
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgPath]];
     img.tag = 101;
     img.width = 70;
     img.height = 70;
     img.x = (self.width - img.width)/2;
     img.y = MTScreenH/2 - 180;
-//    [self addSubview:img];
+    [self addSubview:img];
     
     UILabel *la = [[UILabel alloc] init];
     la.textColor = [UIColor grayColor];
     la.tag = 100;
+    la.numberOfLines = 0;
     la.font = [UIFont fontWithName:@"Helvetica Neue" size:12];
-    CGSize size = [placeStr sizeWithAttributes:@{ NSFontAttributeName : [UIFont fontWithName:@"Helvetica Neue" size:12]}];
-    la.size = size;
     la.text = placeStr;
+    la.textAlignment = NSTextAlignmentCenter;
+    la.width = MTScreenW;
+    la.height = 50;
     la.x = (self.width - la.width)/2;
     la.y = MTScreenH/2 - 106;
     [self addSubview:la];

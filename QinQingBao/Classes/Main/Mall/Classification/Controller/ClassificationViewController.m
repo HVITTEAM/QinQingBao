@@ -164,7 +164,7 @@
                                      totalPage = [str integerValue];
                                      if (result.goods_list.count == 0 && currentPageIdx == 1)
                                      {
-                                         [self.symptomTableView initWithPlaceString:@"暂无数据!"];
+                                         [self.symptomTableView initWithPlaceString:@"暂无数据!" imgPath:nil];
                                      }
                                      else if (result.goods_list.count == 0 && currentPageIdx > 1)
                                      {

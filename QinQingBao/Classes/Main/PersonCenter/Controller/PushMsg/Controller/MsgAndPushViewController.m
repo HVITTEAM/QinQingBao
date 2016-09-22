@@ -7,13 +7,13 @@
 //
 
 #import "MsgAndPushViewController.h"
-#import "PostsTableViewController.h"
+#import "PrivateLetterViewController.h"
 #import "MyMesageViewController.h"
 
 @interface MsgAndPushViewController ()
 
 @property (nonatomic, strong) MyMesageViewController *vc1;
-@property (nonatomic, strong) PostsTableViewController *vc2;
+@property (nonatomic, strong) PrivateLetterViewController *vc2;
 @end
 
 @implementation MsgAndPushViewController
@@ -40,7 +40,7 @@
     self.vc1.parentVC = self;
     self.vc1.title = @"提醒";
     
-    self.vc2 = [[PostsTableViewController alloc] init];
+    self.vc2 = [[PrivateLetterViewController alloc] init];
     self.vc1.parentVC = self;
     self.vc2.title = @"私信";
     

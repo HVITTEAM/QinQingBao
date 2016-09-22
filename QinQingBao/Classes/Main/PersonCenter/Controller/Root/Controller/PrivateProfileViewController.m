@@ -21,15 +21,29 @@
 
 #import "MsgAndPushViewController.h"
 
-#define headHeight 220
+#import "PostsDetailViewController.h"
+#import "PostsModel.h"
+#import "CardCell.h"
+
+#import "MyRelationViewController.h"
+
+#define headHeight MTScreenH*0.3
+
 
 @interface PrivateProfileViewController ()<UIScrollViewDelegate>
 {
     UserInforModel *infoVO;
     NSString *iconUrl;
+    
+    NSArray *postsArr;
+    
+    
+    NSString *count_attention;
+    
+    NSString *count_fans;
 }
 
-@property(nonatomic,strong)UIView *headView;
+@property(nonatomic,strong)LoginInHeadView *headView;
 
 @end
 
@@ -51,8 +65,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 0, 0);
+
+    self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
     if (self.headView)
         self.headView.frame = CGRectMake(0, -headHeight, MTScreenW, headHeight);
@@ -66,6 +80,11 @@
     [super viewDidAppear:animated];
     
     [self getDataProvider];
+    
+    [self getUserPosts];
+    
+    [self getUserFannum];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -88,7 +107,7 @@
     
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"LoginInHeadView" owner:self options:nil] lastObject];
     
-    LoginInHeadView *headView = (LoginInHeadView *)self.headView;
+    LoginInHeadView *headView = self.headView;
     
     headView.isUserata = NO;
     // 显示个人资料
@@ -151,6 +170,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat y = scrollView.contentOffset.y;
+    NSLog(@"%f,%f",y,headHeight);
     if (y <= -headHeight)
     {
         CGRect frame = self.headView.frame;
@@ -164,11 +184,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (2 == section)
+        return postsArr.count;
     return 1;
 }
 
@@ -177,7 +199,8 @@
 {
     if (indexPath.section == 1)
         return  80;
-    return 60;
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -190,6 +213,7 @@
     return [[UIView alloc] init];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell;
@@ -197,6 +221,7 @@
     if (indexPath.section == 0)
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
+        [consumeCell setZan:0 fansnum:[count_fans integerValue] attentionnum:[count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
             if ([SharedAppUtil defaultCommonUtil].userVO == nil)
@@ -204,13 +229,22 @@
             
             if (idx == 100)
             {
-                return;
+                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
             }
             else if (idx == 200)
             {
-                return;
+                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                view.type = 1;
+                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
+                [self.navigationController pushViewController:view animated:YES];
             }
-            [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+            else
+            {
+                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                view.type = 2;
+                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
+                [self.navigationController pushViewController:view animated:YES];
+            }
         };
         cell = consumeCell;
         
@@ -228,6 +262,12 @@
         };
         
         cell = collectTypeCell;
+    }
+    else if (indexPath.section == 2)
+    {
+        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
+        [cardCell setItemdata:postsArr[indexPath.row]];
+        cell = cardCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -262,7 +302,73 @@
     [self.navigationController pushViewController:[[class alloc] init] animated:YES];
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2)
+    {
+        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+        [view setItemdata:postsArr[indexPath.row]];
+        [self.navigationController pushViewController:view animated:YES];
+    }
+}
+
 #pragma mark -- 与后台数据交互模块
+
+/**
+ *  获取关注数目和粉丝数目
+ */
+-(void)getUserFannum
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return;
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_fansnum parameters: @{@"action" : @"stat",
+                                                                    @"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *data = [dict objectForKey:@"datas"];
+                                         count_attention = [data objectForKey:@"count_attention"];
+                                         count_fans = [data objectForKey:@"count_fans"];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
+/**
+ *  获取发帖数据
+ */
+-(void)getUserPosts
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return;
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"client" : @"ios",
+                                                                       @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
 /**
  *  获取数据
  */
@@ -270,7 +376,6 @@
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
         return;
-    
     [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios"}
@@ -293,10 +398,9 @@
                                              LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-//                                             [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
+                                             // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
                                              
                                              [headView initWithName:infoVO.member_truename professional:@"认证专家"];
-                                             
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
@@ -306,5 +410,4 @@
                                      [self.view endEditing:YES];
                                  }];
 }
-
 @end

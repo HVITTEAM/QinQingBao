@@ -7,13 +7,18 @@
 //
 
 #import "PostsTableViewController.h"
+#import "PostsDetailViewController.h"
+
 #import "CardCell.h"
 #import "PostsModel.h"
+#import "QuestionCell.h"
 #import "SiglePicCardCell.h"
 
 @interface PostsTableViewController ()
 {
     NSArray *postsArr;
+    
+    NSArray *recommendlist;
 }
 @end
 
@@ -25,11 +30,12 @@
     
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 105, 0);
     
     [self setupRefresh];
     
     [self getData];
- 
+    
 }
 
 #pragma mark 集成刷新控件
@@ -37,6 +43,11 @@
 -(void)getData
 {
     if (self.type == BBSType_4 || self.type == BBSType_1)
+    {
+        [self getRecommendlist];
+        [self getUserPosts];
+    }
+    else if (self.type == BBSType_4)
     {
         [self getRecommendlist];
     }
@@ -75,7 +86,7 @@
                                      {
                                          postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          if (postsArr.count == 0)
-                                             [self.tableView initWithPlaceString:@"暂无数据"];
+                                             [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -101,7 +112,7 @@
                                      }
                                      else
                                      {
-                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         recommendlist = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -115,12 +126,34 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if (self.type  == BBSType_1)
+        return 3;
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return postsArr.count;
+    if (self.type  == BBSType_1)
+    {
+        switch (section)
+        {
+            case 0:
+                return 3;
+                break;
+            case 1:
+                return 1;
+                break;
+            case 2:
+                return postsArr.count;
+                break;
+            default:
+                return  postsArr.count;
+        }
+    }
+    else  if (self.type  == BBSType_4)
+        return recommendlist.count;
+    else
+        return postsArr.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,42 +162,41 @@
     return cell.height;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    if (self.type  == BBSType_1)
+        return 8;
+    return 0;
+}
+
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
     
-    //    if (indexPath.section == 0)
-    //    {
-    //        ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
-    //        consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
-    //
-    //            if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-    //                return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-    //
-    //            if (idx == 100)
-    //            {
-    //                return;
-    //            }
-    //            else if (idx == 200)
-    //            {
-    //                return;
-    //            }
-    //            [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
-    //
-    //            PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    //            [self.navigationController pushViewController:view animated:YES];
-    //        };
-    //        cell = consumeCell;
-    //    }
-    //    else if (indexPath.section == 1)
-    //    {
-    
     if (self.type == BBSType_4 || self.type == BBSType_1)
     {
-        SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
-        [picCell setData];
-        cell = picCell;
-        //    [cardCell setItemdata:postsArr[indexPath.row]];
+        if (indexPath.section == 0)
+        {
+            SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
+            [picCell setItemdata:recommendlist[indexPath.row]];
+            cell = picCell;
+        }
+        else if (indexPath.section == 1)
+        {
+            QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
+            cell = quecell;
+        }
+        else
+        {
+            CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
+            [cardCell1 setItemdata:postsArr[indexPath.row]];
+            cell = cardCell1;
+        }
     }
     else
     {
@@ -176,5 +208,11 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+//    [view setItemdata:postsArr[indexPath.row]];
+    [self.parentVC.navigationController pushViewController:view animated:YES];
+}
 
 @end

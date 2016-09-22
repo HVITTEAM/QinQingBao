@@ -117,12 +117,12 @@
         return [NoticeHelper AlertShow:@"两次密码输入不同!" view:self.view];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
-    [CommonRemoteHelper RemoteWithUrl:URL_ChangePWD parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+    [CommonRemoteHelper RemoteWithUrl:URL_ChangePWD_New parameters: @{@"member_id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                   @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                   @"client" : @"ios",
                                                                   @"oldpassword" : [SecurityUtil encryptMD5String:str3],
                                                                   @"newpassword" : [SecurityUtil encryptMD5String:str1],
-                                                                  @"ckpassword" : [SecurityUtil encryptMD5String:str2]}
+                                                                  @"confirmpassword" : [SecurityUtil encryptMD5String:str2]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
                                      [self.view endEditing:YES];

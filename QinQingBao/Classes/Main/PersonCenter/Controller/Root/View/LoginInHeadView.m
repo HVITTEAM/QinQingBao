@@ -7,6 +7,7 @@
 //
 
 #import "LoginInHeadView.h"
+#define kRefreshHeaderRotateAnimationKey @"RotateAnimationKey"
 
 @implementation LoginInHeadView
 
@@ -78,6 +79,22 @@
     if (self.navbtnClick) {
         UIButton *btn = (UIButton *)sender;
         self.navbtnClick(btn.tag);
+    }
+}
+
+
+-(void)setRefleshStates:(RefreshViewState)states
+{
+    if (states == RefreshViewStateRefreshing)
+    {
+        CABasicAnimation *_rotateAnimation;
+        _rotateAnimation = [[CABasicAnimation alloc] init];
+        _rotateAnimation.keyPath = @"transform.rotation.z";
+        _rotateAnimation.fromValue = @0;
+        _rotateAnimation.toValue = @(M_PI * 2);
+        _rotateAnimation.duration = 1.0;
+        _rotateAnimation.repeatCount = MAXFLOAT;
+        [self.refleshBtn.layer addAnimation:_rotateAnimation forKey:kRefreshHeaderRotateAnimationKey];
     }
 }
 
