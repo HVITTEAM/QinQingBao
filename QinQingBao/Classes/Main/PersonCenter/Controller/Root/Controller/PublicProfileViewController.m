@@ -210,7 +210,7 @@
     else if (indexPath.section == 1)
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        [cardCell setItemdata:postsArr[indexPath.row]];
+        [cardCell setPostsModel:postsArr[indexPath.row]];
         cell = cardCell;
     }
     return cell;

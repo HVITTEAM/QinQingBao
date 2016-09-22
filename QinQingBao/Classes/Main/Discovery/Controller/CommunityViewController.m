@@ -11,7 +11,7 @@
 #import "SiglePicCardCell.h"
 #import "CircleModel.h"
 #import "CircleSticklistModel.h"
-#import "SectionListPosts.h"
+#import "PostsModel.h"
 #import "PostsDetailViewController.h"
 
 #define kHeadViewHeith 140
@@ -200,7 +200,7 @@
             newsCell.selectionStyle = UITableViewCellSelectionStyleNone;
             newsCell.imageView.image = [UIImage imageNamed:@"zhiDing_icon"];
         }
-        SectionListPosts *model = self.zdPosts[indexPath.row];
+        PostsModel *model = self.zdPosts[indexPath.row];
             
         newsCell.textLabel.text = model.subjects;
         
@@ -208,14 +208,14 @@
     }else{
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         
-        SectionListPosts *model;
+        PostsModel *model;
         if (self.isAllData) {
             model = self.allPosts[indexPath.row];
         }else{
             model = self.hotPosts[indexPath.row];
         }
         
-        [cardCell setSectionListPosts:model];
+        [cardCell setPostsModel:model];
         cell = cardCell;
     }
     
@@ -361,7 +361,7 @@
             return;
         }
     
-        NSArray *datas = [SectionListPosts objectArrayWithKeyValuesArray:dict[@"datas"]];
+        NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         
         if ([type isEqual:@1]) {//所有数据
             [self.hotPosts addObjectsFromArray:datas];

@@ -8,19 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "PostsModel.h"
-#import "SectionListPosts.h"
 @interface CardCell : UITableViewCell
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
-/**
- *  设置数据
- */
-@property (nonatomic, retain) PostsModel *itemdata;
 
 /**
  *  设置版块内部的帖子数据
  */
-@property (nonatomic, retain) SectionListPosts *sectionListPosts;
+@property (nonatomic, retain) PostsModel *postsModel;
 
 @end

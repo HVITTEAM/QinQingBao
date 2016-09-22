@@ -107,86 +107,51 @@
 }
 
 #pragma mark - 设置cell数据
--(void)setItemdata:(PostsModel *)itemdata
+
+-(void)setPostsModel:(PostsModel *)PostsModel
 {
-    _itemdata = itemdata;
+    _postsModel = PostsModel;
     
     //设置用户信息
-    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-    self.timeLb.text = self.itemdata.dateline;
-    self.nameLb.text = self.itemdata.author;
-    self.headTagLb.text = @"超凡大师";
-
-    //设置标题与内容
-    NSString *tagName = @"re_icon";;
-    [self setTitle:self.itemdata.subject content:self.itemdata.messages titleTag:tagName];
-    
-    //设置图片
-    self.photoNum = self.itemdata.picture.count;
-    for (int i = 0; i < self.itemdata.picture.count; i++) {
-        UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:self.itemdata.picture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-    }
-
-    //设置底部按钮栏
-    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
-    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
-    
-    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
-    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
-    
-    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
-    [self.plBtn setTitle:pl forState:UIControlStateNormal];
-    
-    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
-    
-    [self layoutCell];
-}
-
--(void)setSectionListPosts:(SectionListPosts *)sectionListPosts
-{
-    _sectionListPosts = sectionListPosts;
-    
-    //设置用户信息
-    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:sectionListPosts.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-    self.timeLb.text = sectionListPosts.dateline;
-    self.nameLb.text = sectionListPosts.author;
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:PostsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    self.timeLb.text = PostsModel.dateline;
+    self.nameLb.text = PostsModel.author;
     self.headTagLb.text = @"超凡大师";
     
     //设置标题与内容
     NSString *tagName = nil;
-    if (sectionListPosts.is_hot) {
+    if (PostsModel.is_hot) {
         tagName = @"re_icon";
-    }else if (self.sectionListPosts.is_digest){
+    }else if (self.postsModel.is_digest){
         tagName = @"jing_icon";
     }
 
-    [self setTitle:sectionListPosts.subjects content:sectionListPosts.messages titleTag:tagName];
+    [self setTitle:PostsModel.subjects content:PostsModel.messages titleTag:tagName];
     
     //设置图片
     //...............临时这样做..........
-    if ([sectionListPosts.attachmentpicture isKindOfClass:[NSString class]]) {
+    if ([PostsModel.attachmentpicture isKindOfClass:[NSString class]]) {
         self.photoNum = 0;
     }else{
-        self.photoNum = sectionListPosts.attachmentpicture.count;
+        self.photoNum = PostsModel.attachmentpicture.count;
     }
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:sectionListPosts.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+        [img sd_setImageWithURL:[NSURL URLWithString:PostsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     }
     
     //设置底部按钮栏
-    NSString *yd = sectionListPosts.views && [sectionListPosts.views integerValue] != 0?sectionListPosts.views:@"阅读";
+    NSString *yd = PostsModel.views && [PostsModel.views integerValue] != 0?PostsModel.views:@"阅读";
     [self.ydBtn setTitle:yd forState:UIControlStateNormal];
     
-    NSString *dz = sectionListPosts.views && [sectionListPosts.replies integerValue] != 0?sectionListPosts.replies:@"点赞";
+    NSString *dz = PostsModel.views && [PostsModel.replies integerValue] != 0?PostsModel.replies:@"点赞";
     [self.dzBtn setTitle:dz forState:UIControlStateNormal];
     
-    NSString *pl = sectionListPosts.views && [sectionListPosts.recommend_add integerValue] != 0?sectionListPosts.recommend_add:@"评论";
+    NSString *pl = PostsModel.views && [PostsModel.recommend_add integerValue] != 0?PostsModel.recommend_add:@"评论";
     [self.plBtn setTitle:pl forState:UIControlStateNormal];
     
-    [self.barTagBtn setTitle:sectionListPosts.forum_name forState:UIControlStateNormal];
+    [self.barTagBtn setTitle:PostsModel.forum_name forState:UIControlStateNormal];
     
     [self layoutCell];
 }
@@ -444,9 +409,9 @@
     [self.contentView addSubview:bottomBarView];
     self.bottomBarView = bottomBarView;
     
-    self.ydBtn = [self createBtnWithTitle:self.itemdata.views image:@"yd_icon"];
-    self.dzBtn = [self createBtnWithTitle:self.itemdata.recommend_add image:@"dz_icon"];
-    self.plBtn = [self createBtnWithTitle:self.itemdata.replies image:@"pl_icon"];
+    self.ydBtn = [self createBtnWithTitle:self.postsModel.views image:@"yd_icon"];
+    self.dzBtn = [self createBtnWithTitle:self.postsModel.recommend_add image:@"dz_icon"];
+    self.plBtn = [self createBtnWithTitle:self.postsModel.replies image:@"pl_icon"];
     
     self.barTagBtn = [self createBtnWithTitle:@"健康专题" image:@"qz_icon"];
     [self.barTagBtn setTitleColor:HMColor(98, 50, 02) forState:UIControlStateNormal];
