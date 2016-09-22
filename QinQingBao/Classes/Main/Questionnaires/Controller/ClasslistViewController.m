@@ -103,7 +103,7 @@
         
         if([dict[@"code"] integerValue] != 0){
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            [self.tableView initWithPlaceString:@"暂无数据"];
+            [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
             return;
         }
         [self.tableView removePlace];
@@ -113,7 +113,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.tableView initWithPlaceString:@"暂无数据"];
+        [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
         [NoticeHelper AlertShow:@"请求出错" view:nil];
     }];}
 

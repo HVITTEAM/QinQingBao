@@ -93,7 +93,7 @@
          if (commonArry.count == 0)
          {
              self.endView.hidden = YES;
-             [self.tableView initWithPlaceString:@"您的购物车没有商品"];
+             [self.tableView initWithPlaceString:@"您的购物车没有商品" imgPath:nil];
          }
          else
          {

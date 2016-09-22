@@ -234,7 +234,7 @@
         {
             MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
-            [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+            [CommonRemoteHelper RemoteWithUrl:URL_Logout_New parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                        @"client" : @"ios",
                                                                        @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                          type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -263,11 +263,8 @@
         }else{
             self.tapLoginOutButton = NO;
         }
-        
         return;
     }
 }
-
-
 
 @end

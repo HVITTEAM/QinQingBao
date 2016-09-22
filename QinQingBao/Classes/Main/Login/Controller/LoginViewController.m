@@ -11,6 +11,7 @@
 #import "UpdatePwdViewController.h"
 #import "JPUSHService.h"
 #import "MobileBindingView.h"
+#import "BBSUserModel.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 {
@@ -166,11 +167,10 @@
         [self.view endEditing:YES];
         
         MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Login parameters: @{@"username" : self.accountText.text,
-                                                                  @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
-                                                                  @"client" : @"ios",
-                                                                  @"role" : @"0",
-                                                                  @"imei":[SharedAppUtil defaultCommonUtil].deviceToken == nil ? @"" : [SharedAppUtil defaultCommonUtil].deviceToken}
+        [CommonRemoteHelper RemoteWithUrl:URL_Login_New parameters: @{@"username" : self.accountText.text,
+                                                                      @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
+                                                                      @"client" : @"ios",
+                                                                      @"sys" : @"2"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          
                                          id codeNum = [dict objectForKey:@"code"];
@@ -187,7 +187,8 @@
                                              vo.logintype = @"0";
                                              vo.member_mobile = self.accountText.text;
                                              vo.pwd = [self.passwordText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                                             [self loginResultSetData:vo];
+                                             
+                                             [self loginBBS:vo];
                                          }
                                          [HUD removeFromSuperview];
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -196,6 +197,42 @@
                                          [self.view endEditing:YES];
                                      }];
     }
+}
+
+// 登录bbs
+-(void)loginBBS:(UserModel *)vo
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :vo.key,
+                                                                            @"client" : @"ios",
+                                                                            @"targetsys" : @"4",
+                                                                            @"discuz_uname" : @"我是你爸爸"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     NSLog(@"%@",dict);
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         NSDictionary *datas = [dict objectForKey:@"datas"];
+                                         
+                                         BBSUserModel *bbsmodel = [[BBSUserModel alloc] init];
+                                         bbsmodel.BBS_Key = [datas objectForKey:@"key"];
+                                         bbsmodel.BBS_Member_id = [datas objectForKey:@"member_id"];
+                                         bbsmodel.BBS_Member_mobile = [datas objectForKey:@"member_mobile"];
+                                         bbsmodel.BBS_Sys = [datas objectForKey:@"sys"];
+                                         
+                                         [SharedAppUtil defaultCommonUtil].bbsVO = bbsmodel;
+                                         [ArchiverCacheHelper saveObjectToLoacl:bbsmodel key:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
+                                         
+                                         [self loginResultSetData:vo];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
 }
 
 /**

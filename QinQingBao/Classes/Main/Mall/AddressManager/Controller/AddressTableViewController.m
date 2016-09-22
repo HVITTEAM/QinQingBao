@@ -52,7 +52,7 @@
                                      AddressListTotal *result = [AddressListTotal objectWithKeyValues:dict];
                                      addressDataProvider = result.datas;
                                      if (addressDataProvider.count == 0)
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self.tableView initWithPlaceString:@"暂无数据!" imgPath:nil];
                                      else
                                          [self.tableView removePlace];
                                      [self.tableView reloadData];

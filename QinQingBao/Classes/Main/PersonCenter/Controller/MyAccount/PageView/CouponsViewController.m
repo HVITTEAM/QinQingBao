@@ -103,7 +103,7 @@
                                          CouponsTotal *result = [CouponsTotal objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          dataProvider = result.voucher_list;
                                          if (dataProvider.count == 0)
-                                             [self.tableView initWithPlaceString:@"暂无数据!"];
+                                             [self.tableView initWithPlaceString:@"暂无数据!" imgPath:nil];
                                          [self.tableView reloadData];
                                      }
                                      [HUD removeFromSuperview];

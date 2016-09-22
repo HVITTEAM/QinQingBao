@@ -10,12 +10,15 @@
 #import <Foundation/Foundation.h>
 #import "UserModel.h"
 #import "CityModel.h"
+#import "BBSUserModel.h"
 
 @interface SharedAppUtil : NSObject
 
 +(SharedAppUtil *)defaultCommonUtil;
 
 @property (nonatomic, retain) UserModel *userVO;
+
+@property (nonatomic, retain) BBSUserModel *bbsVO;
 
 @property (nonatomic, retain) CityModel *cityVO;
 

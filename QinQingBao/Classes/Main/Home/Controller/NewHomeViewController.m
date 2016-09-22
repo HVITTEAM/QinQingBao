@@ -10,6 +10,7 @@
 #import "MyMesageViewController.h"
 #import "MsgAndPushViewController.h"
 
+#import "SearchViewController.h"
 
 
 @interface NewHomeViewController ()
@@ -17,14 +18,10 @@
     PostsTableViewController *selectedView;
 }
 
-
 @property (nonatomic, strong) PostsTableViewController *vc1;
 @property (nonatomic, strong) PostsTableViewController *vc2;
 @property (nonatomic, strong) PostsTableViewController *vc3;
 @property (nonatomic, strong) PostsTableViewController *vc4;
-
-
-
 @end
 
 @implementation NewHomeViewController
@@ -48,15 +45,23 @@
 -(void)initRootController
 {
     self.vc1 = [[PostsTableViewController alloc] init];
+    self.vc1.type = BBSType_1;
+    self.vc1.parentVC = self;
     self.vc1.title = @"推荐";
     
     self.vc2 = [[PostsTableViewController alloc] init];
+    self.vc2.type = BBSType_2;
+    self.vc2.parentVC = self;
     self.vc2.title = @"关注";
     
     self.vc3 = [[PostsTableViewController alloc] init];
+    self.vc3.type = BBSType_3;
+    self.vc3.parentVC = self;
     self.vc3.title = @"说说";
     
     self.vc4 = [[PostsTableViewController alloc] init];
+    self.vc4.type = BBSType_4;
+    self.vc4.parentVC = self;
     self.vc4.title = @"资讯";
     
     self.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4,nil];
@@ -104,7 +109,7 @@
  */
 -(void)searchView
 {
-    MyMesageViewController *vc = [[MyMesageViewController alloc] init];
+    SearchViewController *vc = [[SearchViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

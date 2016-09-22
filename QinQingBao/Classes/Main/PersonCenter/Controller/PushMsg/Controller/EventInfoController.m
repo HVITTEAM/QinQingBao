@@ -208,7 +208,7 @@
                                      {
                                          //暂无数据
                                          if ([codeNum isEqualToString:@"17001"] && dataProvider.count == 0)
-                                             return [self.tableView initWithPlaceString:@"暂无数据"];
+                                             return [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
                                          if ([codeNum isEqualToString:@"17001"] && dataProvider.count > 0)
                                              return [self.tableView showNonedataTooltip];
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -229,7 +229,7 @@
                                      }
                                      
                                      if (dataProvider.count == 0) {
-                                         [self.tableView initWithPlaceString:@"暂无数据"];
+                                         [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
                                      }else{
                                          [self.tableView removePlace];
                                      }

@@ -37,11 +37,19 @@
              success:(void (^)(NSDictionary *dict, id responseObject))success
              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    NSMutableDictionary *dict = [(NSDictionary *)parameters mutableCopy];
+    for (NSString *keystr in [dict allKeys])
+    {
+        if ([keystr isEqualToString:@"key"])
+        {
+            [dict setObject:@"2" forKey:@"sys"];
+        }
+    }
     if (type == CommonRemoteTypePost)
     {
         // 请求的方法
         [[CommonRemoteHelper sharedInstance] POST:url
-                                       parameters:parameters
+                                       parameters:dict
                                           success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                               NSString *html = operation.responseString;
                                               NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];
@@ -72,7 +80,7 @@
     {
         // 请求的方法
         [[CommonRemoteHelper sharedInstance] GET:url
-                                      parameters:parameters
+                                      parameters:dict
                                          success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                              NSString *html = operation.responseString;
                                              NSData* data=[html dataUsingEncoding:NSUTF8StringEncoding];

@@ -141,12 +141,12 @@
         [HUD removeFromSuperview];
         self.isLoading = NO;
         if ([dict[@"code"] integerValue] == 17001) {
-            [self.tableView initWithPlaceString:@"暂无数据"];
+            [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
         }else if ([dict[@"code"] integerValue] == 0){
             RefundListTotal *listTotal = [RefundListTotal objectWithKeyValues:dict];
             self.dataProvider = listTotal.datas;
             if (self.dataProvider.count == 0) {
-                [self.tableView initWithPlaceString:@"暂无数据"];
+                [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
             }
             self.isMoreData = [listTotal.hasmore boolValue];
             [self.tableView reloadData];

@@ -18,10 +18,7 @@
     [aCoder encodeObject:_old_id forKey:@"_old_id"];
     [aCoder encodeObject:_logintype forKey:@"_logintype"];
     [aCoder encodeObject:_pwd forKey:@"_pwd"];
-
-
 }
-
 
 //解码
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -34,8 +31,7 @@
         _member_mobile = [aDecoder decodeObjectForKey:@"_member_mobile"];
         _logintype = [aDecoder decodeObjectForKey:@"_logintype"];
         _pwd = [aDecoder decodeObjectForKey:@"_pwd"];
-
-    }
+        }
     return self;
 }
 
@@ -48,7 +44,6 @@
     vo.member_mobile = [self.member_mobile copyWithZone:zone];
     vo.logintype = [self.logintype copyWithZone:zone];
     vo.pwd = [self.pwd copyWithZone:zone];
-
     return vo;
 }
 

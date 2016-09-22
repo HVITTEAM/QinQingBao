@@ -10,4 +10,5 @@
 
 @interface PublicProfileViewController : UITableViewController
 
+@property (nonatomic, copy) NSString *uid;
 @end

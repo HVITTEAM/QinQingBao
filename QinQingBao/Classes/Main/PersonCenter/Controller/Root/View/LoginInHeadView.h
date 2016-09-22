@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    RefreshViewStateNormal,
+    RefreshViewStateWillRefresh,
+    RefreshViewStateRefreshing,
+} RefreshViewState;
+
 @interface LoginInHeadView : UIView
 
 /**
@@ -28,6 +34,9 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *professionLab;
 
+@property (strong, nonatomic) IBOutlet UIImageView *refleshBtn;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgTop;
 - (IBAction)letterHandler:(id)sender;
 
 - (IBAction)followHandler:(id)sender;
@@ -51,5 +60,7 @@
  *  @param professional 职称
  */
 -(void)initWithName:(NSString *)name professional:(NSString *)professional;
+
+-(void)setRefleshStates:(RefreshViewState)states;
 
 @end

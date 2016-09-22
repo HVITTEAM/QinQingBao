@@ -22,13 +22,14 @@
 
 #import "CardCell.h"
 
+#import "BBSPersonalModel.h"
+
+
 #define headHeight 220
 
 @interface PublicProfileViewController ()<UIScrollViewDelegate>
 {
-    UserInforModel *infoVO;
-    NSString *iconUrl;
-    
+    BBSPersonalModel *personalInfo;
     NSArray *postsArr;
 }
 
@@ -120,30 +121,6 @@
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
-/**
- *  获取发帖数据
- */
--(void)getUserPosts
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"uid" : @"1"
-                                                                       }
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                 }];
-    
-}
 
 #pragma mark 导航栏点击
 
@@ -184,7 +161,6 @@
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (0 == indexPath.section) {
         return 60;
     }
@@ -210,6 +186,7 @@
     if (indexPath.section == 0)
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
+        [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
             if ([SharedAppUtil defaultCommonUtil].userVO == nil)
@@ -257,17 +234,15 @@
 }
 
 #pragma mark -- 与后台数据交互模块
+
 /**
- *  获取数据
+ *  获取发帖数据
  */
--(void)getDataProvider
+-(void)getUserPosts
 {
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-        return;
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                     @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                     @"client" : @"ios"}
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"client" : @"ios",
+                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                       }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -277,21 +252,51 @@
                                      }
                                      else
                                      {
-                                         NSDictionary *di = [dict objectForKey:@"datas"];
-                                         if ([di count] != 0)
-                                         {
-                                             infoVO = [UserInforModel objectWithKeyValues:di];
-                                             iconUrl = infoVO.member_avatar;
-                                             
-                                             // 显示个人资料
-                                             LoginInHeadView *headView = (LoginInHeadView *)self.headView;
-                                             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
-                                             [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
-                                             
-                                             [headView initWithName:infoVO.member_truename professional:@"认证专家"];
-                                         }
-                                         else
-                                             [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
+                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+    
+}
+
+
+/**
+ *  获取个人信息数据
+ */
+-(void)getDataProvider
+{
+    NSDictionary *paramDict = [[NSDictionary alloc] init];
+    if ([SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
+    {
+        paramDict = @{@"uid" : self.uid,
+                      @"client" : @"ios",
+                      @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+    }
+    else
+    {
+        paramDict = @{@"uid" : self.uid,};
+    }
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: paramDict
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         personalInfo = [BBSPersonalModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         
+                                         LoginInHeadView *headView = (LoginInHeadView *)self.headView;
+                                         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,personalInfo.avatar]];
+                                         [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+                                         [headView initWithName:personalInfo.author professional:personalInfo.grouptitle];
+
+                                         [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);

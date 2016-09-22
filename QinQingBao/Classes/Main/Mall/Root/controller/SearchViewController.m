@@ -14,6 +14,8 @@
     NSMutableArray *data;
     
     UILabel *nonelab;
+    
+    UITextField *text;
 }
 @end
 
@@ -45,6 +47,13 @@
     [self.collectView reloadData];
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (![text isExclusiveTouch]) {
+        [text resignFirstResponder];
+    }
+}
+
 - (void)viewDidLoad
 {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -53,7 +62,7 @@
     
     [self initCollectionView];
     
-    UITextField *text = [[UITextField alloc] init];
+    text = [[UITextField alloc] init];
     text.layer.cornerRadius = 3;
     text.returnKeyType = UIReturnKeySearch;
     text.textColor = [UIColor colorWithRGB:@"979797"];

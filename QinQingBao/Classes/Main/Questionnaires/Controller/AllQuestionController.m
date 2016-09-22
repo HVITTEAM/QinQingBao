@@ -96,7 +96,7 @@
                                      [self.tableView removePlace];
                                      if (arr.count == 0 && currentPageIdx == 1)
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self.tableView initWithPlaceString:@"暂无数据!" imgPath:nil];
                                      }
                                      else if (arr.count == 0 && currentPageIdx > 1)
                                      {

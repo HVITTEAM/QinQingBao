@@ -87,7 +87,7 @@
                                      
                                      if (result.datas.count == 0 && currentPageIdx == 1)
                                      {
-                                         [self.tableView initWithPlaceString:@"暂无数据!"];
+                                         [self.tableView initWithPlaceString:@"暂无数据!" imgPath:nil];
                                      }
                                      else if (result.datas.count == 0 && currentPageIdx > 1)
                                      {

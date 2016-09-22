@@ -113,7 +113,7 @@
                                      {
                                          if ([codeNum isEqualToString:@"17001"])
                                          {
-                                             [self.view initWithPlaceString:@"暂无数据"];
+                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
                                          }
                                      }
                                      else

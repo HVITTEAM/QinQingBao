@@ -76,7 +76,7 @@
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          if([codeNum integerValue] == 17001)
-                                             [self.view initWithPlaceString:@"暂无数据"];
+                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
                                          [dataProvider removeAllObjects];
                                          [self setupGroups];
                                      }
@@ -84,7 +84,7 @@
                                      {
                                          dataProvider = [DeviceModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          if (dataProvider.count == 0)
-                                             return [self.view initWithPlaceString:@"暂无数据"];
+                                             return [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
                                          [self setupGroups];
                                          [self.view removePlace];
                                      }

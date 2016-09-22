@@ -122,6 +122,43 @@
 #define MTNavgationBackgroundColor [UIColor colorWithRed:12/255.0 green:167/255.0 blue:161/255.0 alpha:1.0]
 
 
+#pragma mark pleaceholderStr
+/**
+ *  我的粉丝界面
+ */
+#define PlaceholderStr_Fans @"您还没有关注,\n快去看看他们都在聊些什么吧!"
+
+/**
+ *  我的关注界面
+ */
+#define PlaceholderStr_Attention @"您还没有关注,\n快去看看他们都在聊些什么吧!"
+
+/**
+ *  我的评估界面
+ */
+#define PlaceholderStr_Question @"暂无数据,快去参与健康评估吧!"
+
+/**
+ *  我的订单界面
+ */
+#define PlaceholderStr_Order @"暂无相关订单"
+
+/**
+ *  我的代金券界面
+ */
+#define PlaceholderStr_Coup @"您还没有代金券"
+
+/**
+ *  我的帖子界面
+ */
+#define PlaceholderStr_Posts @"暂无帖子，快去关注更多账号吧"
+
+/**
+ *  我的私信界面
+ */
+#define PlaceholderStr_Letter @"暂无消息"
+
+
 
 /**
  *  附近100公里之内  默认
@@ -145,6 +182,15 @@
  *  用户信息归档路径
  */
 #define User_Archiver_Path @"userInforPath"
+
+/**
+ *  BBS用户信息归档key
+ */
+#define BBSUser_Archiver_Key @"bbsuserInfor"
+/**
+ *  BBS用户信息归档路径
+ */
+#define BBSUser_Archiver_Path @"bbsuserInforPath"
 
 /**
  *  定位城市信息归档key
@@ -238,6 +284,8 @@
 
 
 #define URL_Local @"http://test.hvit.com.cn/ylserver"
+
+#define URL_Local_New @"http://test.hvit.com.cn"
 
 //#define URL_Local @"http://172.16.13.53/ylserver"
 
@@ -695,10 +743,42 @@
 /***健康计划 - 获取列表*/
 #define URL_Get_healthplan_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=work_report&op=get_healthplan_list",URL_Local]
 
+//------------------用户中心-------------------
+
+/***用户登录（用户中心）url*/
+#define URL_Login_New  [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/login",URL_Local_New]
+
+/***用户登出（用户中心）url*/
+#define URL_Logout_New  [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/logout",URL_Local_New]
+
+/***忘记密码url*/
+#define URL_Forgot_New  [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/forgotPassword",URL_Local_New]
+
+/***修改密码url*/
+#define URL_ChangePWD_New [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/changepassword",URL_Local_New]
+
 //------------------论坛相关-------------------
+
+/***系统用户 - 系统之间登录*/
+#define URL_Get_loginToOtherSys [NSString stringWithFormat:@"%@/ucenter/admin/index.php/mb_common_member/loginToOtherSys",URL_Local_New]
+
+/***关注 - 某会员的关注与粉丝数目*/
+#define URL_Get_fansnum [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/attention_count.php",URL_Local_New]
+
+/***关注 - 某会员的关注 / 粉丝列表*/
+#define URL_Get_attention_list [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/attention_list.php",URL_Local_New]
+
+/***关注 - 关注 - 加关注与取消关注*/
+#define URL_Get_attention_do [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/attention_do.php",URL_Local_New]
 
 /***帖子 - 获取关注人帖子列表*/
 #define URL_Get_followlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/followlist.php"
+
+/***帖子 - 不同标识获取帖子列表*/
+#define URL_Get_flaglist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/flaglist.php",URL_Local_New]
+
+/***帖子 - 获取特殊标识的帖子列表*/
+#define URL_Get_recommendlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/recommendlist.php",URL_Local_New]
 
 //***获取板块下级列表【可用于健康圈子】*/
 #define URL_Circle @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/circle.php"
@@ -713,6 +793,10 @@
 
 /***关注 - 加关注与取消关注*/
 #define URL_attention_do @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/attention_do.php"
+
+/***帖子 - 个人信息列表*/
+#define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
@@ -747,6 +831,14 @@ typedef NS_ENUM(NSInteger, MessageType) {
     MessageTypeHealthTips,//健康贴士
     MessageTypePushMsg,//推送消息
     MessageTypeLogistics,//物流助手
+};
+
+typedef NS_ENUM(NSInteger, BBSType) {
+    BBSType_none,
+    BBSType_1,//推荐
+    BBSType_2,//关注
+    BBSType_3,//说说
+    BBSType_4,//资讯
 };
 
 
