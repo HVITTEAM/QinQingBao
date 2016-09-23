@@ -170,7 +170,6 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat y = scrollView.contentOffset.y;
-    NSLog(@"%f,%f",y,headHeight);
     if (y <= -headHeight)
     {
         CGRect frame = self.headView.frame;

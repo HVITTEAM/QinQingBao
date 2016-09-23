@@ -202,7 +202,7 @@
         }
         PostsModel *model = self.zdPosts[indexPath.row];
             
-        newsCell.textLabel.text = model.subjects;
+        newsCell.textLabel.text = model.subject;
         
         cell = newsCell;
     }else{
