@@ -26,9 +26,9 @@
 /**是否是精华*/
 @property (copy, nonatomic) NSString *is_digest;
 /**文章标题*/
-@property (copy, nonatomic) NSString *subjects;
+@property (copy, nonatomic) NSString *subject;
 /**文章内容*/
-@property (copy, nonatomic) NSString *messages;
+@property (copy, nonatomic) NSString *message;
 /**浏览数*/
 @property (copy, nonatomic) NSString *views;
 /**回复数*/

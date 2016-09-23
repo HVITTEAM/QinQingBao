@@ -126,7 +126,7 @@
         tagName = @"jing_icon";
     }
 
-    [self setTitle:PostsModel.subjects content:PostsModel.messages titleTag:tagName];
+    [self setTitle:PostsModel.subject content:PostsModel.message titleTag:tagName];
     
     //设置图片
     //...............临时这样做..........
