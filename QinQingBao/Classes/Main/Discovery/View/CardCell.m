@@ -435,24 +435,9 @@
 
 - (void)tapAttentionBtn:(UIButton *)sender
 {
-    //操作动作，add或del，add是加关注，del是取消关注
-    NSDictionary *params = @{
-                             @"action":@"add",
-                             @"uid": @"123",
-                             @"rel":@"321",
-                             };
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            return;
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
-    }];
+    if (self.attentionBlock) {
+        self.attentionBlock(self.indexpath);
+    }
 }
 
 @end

@@ -12,10 +12,13 @@
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
-
 /**
- *  设置版块内部的帖子数据
+ *  设置帖子数据
  */
 @property (nonatomic, retain) PostsModel *postsModel;
+
+@property (strong, nonatomic) NSIndexPath *indexpath;
+
+@property (copy) void(^attentionBlock)(NSIndexPath *idxPath);
 
 @end

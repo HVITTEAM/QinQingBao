@@ -194,6 +194,10 @@
         
         PostsModel *model = self.postsDatas[indexPath.row - 1];
         [cardCell setPostsModel:model];
+        cardCell.indexpath = indexPath;
+        cardCell.attentionBlock = ^(NSIndexPath *idx){
+            [weakSelf attentionAction:idx type:@"add"];
+        };
         cell = cardCell;
     }
 
@@ -303,6 +307,46 @@
 - (void)loadMoreDatas
 {
     [self loadFlaglist];
+}
+
+/**
+ *  加关注与取消关注，add是加关注，del是取消关注
+ */
+- (void)attentionAction:(NSIndexPath *)idx type:(NSString *)type
+{
+    PostsModel *model = self.postsDatas[idx.row - 1];
+    
+    
+    NSDictionary *params = @{
+                             @"action":type,
+                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                             @"rel":model.authorid,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            model.is_home_friend = @"1";
+            NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
+            [NoticeHelper AlertShow:str view:nil];
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+
 }
 
 /**
