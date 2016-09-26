@@ -205,8 +205,8 @@
             [self.navigationController pushViewController:view animated:YES];
         };
         cardCell.indexpath = indexPath;
-        cardCell.attentionBlock = ^(NSIndexPath *idx){
-            [weakSelf attentionAction:idx];
+        cardCell.attentionBlock = ^(PostsModel *model){
+            [weakSelf attentionAction:model];
         };
         cell = cardCell;
     }
@@ -322,10 +322,8 @@
 /**
  *  加关注与取消关注，add是加关注，del是取消关注
  */
-- (void)attentionAction:(NSIndexPath *)idx
+- (void)attentionAction:(PostsModel *)model
 {
-    PostsModel *model = self.postsDatas[idx.row - 1];
-    
     NSString *type = @"add";
     if ([model.is_home_friend integerValue] != 0) {
         type = @"del";

@@ -452,7 +452,7 @@
 - (void)tapAttentionBtn:(UIButton *)sender
 {
     if (self.attentionBlock) {
-        self.attentionBlock(self.indexpath);
+        self.attentionBlock(self.postsModel);
     }
 }
 

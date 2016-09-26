@@ -20,6 +20,6 @@
 @property (nonatomic, copy) void (^portraitClick)(PostsModel *postsModel);
 @property (strong, nonatomic) NSIndexPath *indexpath;
 
-@property (copy) void(^attentionBlock)(NSIndexPath *idxPath);
+@property (copy) void(^attentionBlock)(PostsModel *model);
 
 @end
