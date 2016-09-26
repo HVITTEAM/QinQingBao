@@ -7,6 +7,7 @@
 //
 
 #import "QuestionCell.h"
+#import "ClasslistModel.h"
 
 @implementation QuestionCell
 
@@ -20,18 +21,48 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell = [[[NSBundle mainBundle] loadNibNamed:@"QuestionCell" owner:nil options:nil] lastObject];
     }
-    
     return cell;
 }
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+
+-(void)setDataProvider:(NSArray *)dataProvider
+{
+    _dataProvider = dataProvider;
+    ClasslistModel *model = dataProvider[0];
+    ClasslistModel *model1 = dataProvider[1];
+
+    NSURL *url = [NSURL URLWithString:model.c_itemurl];
+    NSURL *url1 = [NSURL URLWithString:model1.c_itemurl];
+
+    self.img1.layer.masksToBounds = YES;
+    self.img1.layer.cornerRadius = 6;
+    self.img2.layer.masksToBounds = YES;
+    self.img2.layer.cornerRadius = 6;
+    [self.img1 sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    [self.img2 sd_setImageWithURL:url1 placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+
+    self.img1.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
+    [self.img1 addGestureRecognizer:singleTap];
+
+    self.img2.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap2 =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
+    [self.img2 addGestureRecognizer:singleTap2];
+
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)onClickImage:(UITapGestureRecognizer *)recognizer
+{
+    if(self.portraitClick)
+    {
+        if (recognizer.view == self.img1)
+        {
+            self.portraitClick(_dataProvider[0]);
+        }
+        else
+        {
+            self.portraitClick(_dataProvider[1]);
+        }
+    }
 }
 
 @end

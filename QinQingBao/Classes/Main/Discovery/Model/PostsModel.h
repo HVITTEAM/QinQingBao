@@ -37,6 +37,11 @@
 @property (copy, nonatomic) NSString *recommend_add;
 /**返回图片*/
 @property (copy, nonatomic) NSArray *attachmentpicture;
+
+/**返回图片*/
+@property (copy, nonatomic) NSString *picture;
 /**标签名称*/
 @property (copy, nonatomic) NSString *forum_name;
+/**楼主信息*/
+@property (copy, nonatomic) NSString *grouptitle;
 @end

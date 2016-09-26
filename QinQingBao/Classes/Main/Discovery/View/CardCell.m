@@ -231,6 +231,8 @@
     self.userInfoView.frame = CGRectMake(kMargin, 12, MTScreenW - 2 * kMargin, 40);
     
     self.portraitView.frame = CGRectMake(0, 0, 40, 40);
+    self.portraitView.layer.cornerRadius = self.portraitView.width/2;
+    self.portraitView.layer.masksToBounds = YES;
     
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame) + 10, 2, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
@@ -239,8 +241,15 @@
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame) + 7, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
     
     
-    [self.headTagLb sizeToFit];
-    self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    if (self.headTagLb.text.length == 0)
+    {
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2,0, 0);
+    }
+    else
+    {
+        [self.headTagLb sizeToFit];
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    }
     
     [self.attentionBtn sizeToFit];
     CGFloat w = CGRectGetWidth(self.attentionBtn.frame);
@@ -327,6 +336,9 @@
     portraitView.backgroundColor = HMColor(230, 230, 230);
     self.portraitView = portraitView;
     [infoView addSubview:portraitView];
+    self.portraitView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.portraitView addGestureRecognizer:singleTap];
     
     //姓名
     UILabel *nameLb = [[UILabel alloc] init];
@@ -447,6 +459,13 @@
     if (self.attentionBlock) {
         self.attentionBlock(self.indexpath);
     }
+}
+
+// 个人头像点击事件
+-(void)onClickImage
+{
+    if(self.portraitClick)
+        self.portraitClick(self.postsModel);
 }
 
 @end

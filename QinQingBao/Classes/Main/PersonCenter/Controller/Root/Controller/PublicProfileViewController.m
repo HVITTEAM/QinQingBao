@@ -25,12 +25,13 @@
 #import "BBSPersonalModel.h"
 
 
-#define headHeight 220
+#define headHeight MTScreenH*0.3
 
 @interface PublicProfileViewController ()<UIScrollViewDelegate>
 {
     BBSPersonalModel *personalInfo;
     NSArray *postsArr;
+    UILabel * titleLabel;
 }
 
 @property(nonatomic,strong)UIView *headView;
@@ -50,7 +51,6 @@
     [self getUserPosts];
     
     self.view.backgroundColor = HMGlobalBg;
-    self.navigationItem.title = @"";
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -61,10 +61,12 @@
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 0, 0);
     
     if (self.headView)
-        self.headView.frame = CGRectMake(0, -headHeight, MTScreenW, headHeight);
+        self.headView.frame = CGRectMake(0, -headHeight - 20, MTScreenW, headHeight);
     
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    [self updateViewConstraints];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -101,14 +103,21 @@
     [self.tableView addSubview:self.headView];
     
     headView.navbtnClick = ^(NSInteger type){
-        if (type == 1)
+        if ([SharedAppUtil checkLoginStates])
         {
-            NSLog(@"关注");
-        }
-        else if (type == 2)
-        {
-            SendMsgViewController *view = [[SendMsgViewController alloc] init];
-            [self.navigationController pushViewController:view animated:YES];
+            if (type == 0)
+            {
+                [self relationOperateWithID:self.uid type:type];
+            }
+            else if (type == 1)
+            {
+                [self relationOperateWithID:self.uid type:type];
+            }
+            else if (type == 2)
+            {
+                SendMsgViewController *view = [[SendMsgViewController alloc] init];
+                [self.navigationController pushViewController:view animated:YES];
+            }
         }
     };
 }
@@ -141,6 +150,25 @@
         frame.origin.y = y;
         self.headView.frame = frame;
     }
+    
+    CGFloat alpha;
+    if ((scrollView.contentOffset.y + headHeight) > 0) {
+        alpha = (scrollView.contentOffset.y + headHeight) / 64;
+    }else{
+        alpha = 0;
+    }
+    
+    //    UIImage *img = [UIImage imageNamed:@"red_line_and_shadow.png"];
+    //    self.navigationController.navigationBar.alpha = alpha;
+    
+    if (titleLabel == nil)
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
+    titleLabel.text = personalInfo.author;
+    titleLabel.alpha = alpha;
+    //    self.navigationItem.titleView = titleLabel;
+    
+    UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
 }
 
 #pragma mark - Table view data source
@@ -189,21 +217,27 @@
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
-            if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-                return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
-            
-            if (idx == 100)
+            if ([SharedAppUtil checkLoginStates])
             {
-                return;
+                if (idx == 100)
+                {
+                    //                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+                }
+                else if (idx == 200)
+                {
+                    //                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                    //                view.type = 1;
+                    //                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
+                    //                [self.navigationController pushViewController:view animated:YES];
+                }
+                else
+                {
+                    //                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                    //                view.type = 2;
+                    //                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
+                    //                [self.navigationController pushViewController:view animated:YES];
+                }
             }
-            else if (idx == 200)
-            {
-                return;
-            }
-            [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
-            
-            PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-            [self.navigationController pushViewController:view animated:YES];
         };
         cell = consumeCell;
     }
@@ -240,9 +274,7 @@
  */
 -(void)getUserPosts
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"client" : @"ios",
-                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                       }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: @{@"uid" :self.uid }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -276,7 +308,7 @@
     }
     else
     {
-        paramDict = @{@"uid" : self.uid,};
+        paramDict = @{@"uid" : self.uid};
     }
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: paramDict
@@ -293,15 +325,47 @@
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,personalInfo.avatar]];
-                                         [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-                                         [headView initWithName:personalInfo.author professional:personalInfo.grouptitle];
-
-                                         [self.tableView reloadData];
+                                         [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
+                                         [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                         
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
 }
+
+/**
+ *  加关注与取消关注
+ * targetUId 操作的目标id type 0删除 1添加
+ */
+-(void)relationOperateWithID:(NSString *)targetUId type:(NSInteger)type
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view.window animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters: @{@"action" : type == 1 ? @"add" : @"del",
+                                                                         @"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                                                                         @"rel" : targetUId,
+                                                                         @"client" : @"ios",
+                                                                         @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [HUD removeFromSuperview];
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"操作成功" view:nil];
+                                         [self getDataProvider];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+}
+
 
 @end

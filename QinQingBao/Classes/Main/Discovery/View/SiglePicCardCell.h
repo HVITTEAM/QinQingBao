@@ -17,4 +17,7 @@
  *  设置数据
  */
 @property (nonatomic, retain) PostsModel *itemdata;
+
+@property (nonatomic, copy) void (^portraitClick)(PostsModel *postsModel);
+
 @end

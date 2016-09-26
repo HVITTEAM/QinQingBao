@@ -24,6 +24,7 @@
 #import "PublicProfileViewController.h"
 
 #import "CXComposeViewController.h"
+#import "CompleteInfoController.h"
 
 #import "BHBPopView.h"
 
@@ -46,7 +47,7 @@
     // 创建中间的tabbar
     [self addCustomTabBar];
     
-    //注册登录信息超时监听
+    //注册寸欣账户登录信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
     
     //注册注销监听
@@ -57,6 +58,10 @@
     
     //注册需要登录监听
     [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
+    
+    //注册需要登录论坛健康
+    [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTCompleteInfo object:nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -152,12 +157,15 @@
 #pragma mark - CXTabBarDelegate
 - (void)tabBarDidClickedPlusButton:(CXTabBar *)tabBar
 {
-    [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
-        // 弹出发微博控制器
-        CXComposeViewController *compose = [[CXComposeViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
-        [self presentViewController:nav animated:YES completion:nil];
-    }];
+    if ([SharedAppUtil checkLoginStates])
+    {
+        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
+            // 弹出发微博控制器
+            CXComposeViewController *compose = [[CXComposeViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
+            [self presentViewController:nav animated:YES completion:nil];
+        }];
+    }
 }
 
 
@@ -196,6 +204,16 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
     login.backHiden = NO;
+}
+
+/**
+ * 注册需要登录论坛健康
+ */
+-(void)needCompleteHanlder:(NSNotification *)notification
+{
+    // 完善论坛资料
+    CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
+    [self presentViewController:conplete animated:YES completion:nil];
 }
 
 @end

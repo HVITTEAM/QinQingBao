@@ -16,6 +16,10 @@
 
 +(SharedAppUtil *)defaultCommonUtil;
 
+// 检查本地登录状态
++(BOOL)checkLoginStates;
+
+
 @property (nonatomic, retain) UserModel *userVO;
 
 @property (nonatomic, retain) BBSUserModel *bbsVO;

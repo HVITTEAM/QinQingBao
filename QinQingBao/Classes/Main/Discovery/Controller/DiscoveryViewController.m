@@ -20,6 +20,9 @@
 #import "AdvertisementController.h"
 #import "PostsModel.h"
 
+#import "PublicProfileViewController.h"
+
+
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -191,7 +194,6 @@
         cell = menuCell;
     }else{
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        
         PostsModel *model = self.postsDatas[indexPath.row - 1];
         [cardCell setPostsModel:model];
         cardCell.indexpath = indexPath;

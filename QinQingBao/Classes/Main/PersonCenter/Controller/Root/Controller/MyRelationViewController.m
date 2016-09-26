@@ -152,7 +152,8 @@
                                      else
                                      {
                                          NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
-                                         [self.tableView reloadData];
+                                         [dataProvider removeAllObjects];
+                                         [self getDataProvider];
                                          [NoticeHelper AlertShow:str view:nil];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

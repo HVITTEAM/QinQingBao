@@ -42,7 +42,10 @@
     {
         if ([keystr isEqualToString:@"key"])
         {
-            [dict setObject:@"2" forKey:@"sys"];
+            if ([url rangeOfString:@"discuz"].location != NSNotFound)
+                [dict setObject:@"4" forKey:@"sys"];
+            else
+                [dict setObject:@"2" forKey:@"sys"];
         }
     }
     if (type == CommonRemoteTypePost)

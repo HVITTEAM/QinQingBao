@@ -22,4 +22,7 @@
 @property(copy,nonatomic)NSString *count_fans;
 
 @property(copy,nonatomic)NSString *is_mine;
+
+@property(copy,nonatomic)NSString *is_home_friend;
+
 @end

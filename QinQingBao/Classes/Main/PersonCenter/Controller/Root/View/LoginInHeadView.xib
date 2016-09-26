@@ -29,7 +29,6 @@
                         <constraint firstAttribute="height" constant="27" id="DMR-ih-6V4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="关注" image="follow"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
                             <color key="value" red="0.95200866460800171" green="0.98464363813400269" blue="0.97639530897140503" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -71,19 +70,19 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4e-Mq-waf" userLabel="loginBtn">
-                    <rect key="frame" x="133" y="159" width="54" height="30"/>
+                    <rect key="frame" x="145" y="159" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="DPi-ek-aIR"/>
                     </constraints>
-                    <state key="normal" title="未登录">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="loginHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="LtI-Kf-53l"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="认证专家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulT-8S-RFE">
-                    <rect key="frame" x="195" y="168" width="40" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulT-8S-RFE">
+                    <rect key="frame" x="183" y="168" width="0.0" height="15"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="bZx-tH-QkQ"/>
@@ -134,7 +133,6 @@
     </objects>
     <resources>
         <image name="AlbumReflashIcon" width="30" height="30"/>
-        <image name="follow" width="72" height="30"/>
         <image name="letter" width="72" height="30"/>
         <image name="pc_user" width="128" height="128"/>
         <image name="profilebg" width="360" height="360"/>
