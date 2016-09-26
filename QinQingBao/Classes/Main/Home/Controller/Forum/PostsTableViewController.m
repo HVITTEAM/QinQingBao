@@ -304,6 +304,10 @@
     if ([cell isKindOfClass:[CardCell class]])
     {
         CardCell *cardCell = (CardCell *)cell;
+        
+        cardCell.attentionBlock = ^(NSIndexPath *idx){
+            [self attentionAction:idx];
+        };
         // 头像点击 进入个人信息界面
         cardCell.portraitClick = ^(PostsModel *item)
         {
@@ -323,5 +327,14 @@
     //    [view setItemdata:postsArr[indexPath.row]];
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
+
+/**
+ *  加关注与取消关注，add是加关注，del是取消关注
+ */
+- (void)attentionAction:(NSIndexPath *)idx
+{
+    
+}
+
 
 @end
