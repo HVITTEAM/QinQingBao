@@ -7,6 +7,7 @@
 //
 
 #import "PostsDetailDZCell.h"
+#import "DetailPostsModel.h"
 
 @interface PostsDetailDZCell ()
 
@@ -41,15 +42,24 @@
     
 }
 
-- (IBAction)dianZanAction:(id)sender {
+- (void)setPostsDetailData:(DetailPostsModel *)postsDetailData
+{
+    _postsDetailData = postsDetailData;
     
-    self.isDianZan = !self.isDianZan;
-    if (self.isDianZan) {
-        self.zanLb.text = @"已点赞";
-        self.zanBackgroundView.backgroundColor = [HMColor(251, 176, 51) colorWithAlphaComponent:0.6];
-    }else{
+    self.zanNumLb.text = postsDetailData.count_recommend;
+    if ([postsDetailData.is_recommend isEqualToString:@"0"]) {
         self.zanLb.text = @"点赞";
         self.zanBackgroundView.backgroundColor = HMColor(251, 176, 51);
+    }else{
+        self.zanLb.text = @"已点赞";
+        self.zanBackgroundView.backgroundColor = [HMColor(251, 176, 51) colorWithAlphaComponent:0.6];
+    }
+}
+
+- (IBAction)dianZanAction:(id)sender {
+    
+    if (self.dianZanBlock) {
+        self.dianZanBlock();
     }
 }
 

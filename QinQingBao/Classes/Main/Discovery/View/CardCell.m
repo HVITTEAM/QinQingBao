@@ -108,50 +108,57 @@
 
 #pragma mark - 设置cell数据
 
--(void)setPostsModel:(PostsModel *)PostsModel
+-(void)setPostsModel:(PostsModel *)postsModel
 {
-    _postsModel = PostsModel;
+    _postsModel = postsModel;
     
     //设置用户信息
-    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:PostsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-    self.timeLb.text = PostsModel.dateline;
-    self.nameLb.text = PostsModel.author;
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:postsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    self.timeLb.text = postsModel.dateline;
+    self.nameLb.text = postsModel.author;
     self.headTagLb.text = @"超凡大师";
+    
+    //设置是否关注
+    if ([postsModel.is_home_friend integerValue] != 0) {
+        [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
+    }else{
+        [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
+    }
     
     //设置标题与内容
     NSString *tagName = nil;
-    if (PostsModel.is_hot) {
+    if ([postsModel.is_hot integerValue] != 0) {
         tagName = @"re_icon";
-    }else if (self.postsModel.is_digest){
+    }else if ([self.postsModel.is_digest integerValue] != 0){
         tagName = @"jing_icon";
     }
 
-    [self setTitle:PostsModel.subject content:PostsModel.message titleTag:tagName];
+    [self setTitle:postsModel.subject content:postsModel.message titleTag:tagName];
     
     //设置图片
     //...............临时这样做..........
-    if ([PostsModel.attachmentpicture isKindOfClass:[NSString class]]) {
+    if ([postsModel.attachmentpicture isKindOfClass:[NSString class]]) {
         self.photoNum = 0;
     }else{
-        self.photoNum = PostsModel.attachmentpicture.count;
+        self.photoNum = postsModel.attachmentpicture.count;
     }
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:PostsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     }
     
     //设置底部按钮栏
-    NSString *yd = PostsModel.views && [PostsModel.views integerValue] != 0?PostsModel.views:@"阅读";
+    NSString *yd = postsModel.views && [postsModel.views integerValue] != 0?postsModel.views:@"阅读";
     [self.ydBtn setTitle:yd forState:UIControlStateNormal];
     
-    NSString *dz = PostsModel.views && [PostsModel.replies integerValue] != 0?PostsModel.replies:@"点赞";
+    NSString *dz = postsModel.views && [postsModel.replies integerValue] != 0?postsModel.replies:@"点赞";
     [self.dzBtn setTitle:dz forState:UIControlStateNormal];
     
-    NSString *pl = PostsModel.views && [PostsModel.recommend_add integerValue] != 0?PostsModel.recommend_add:@"评论";
+    NSString *pl = postsModel.views && [postsModel.recommend_add integerValue] != 0?postsModel.recommend_add:@"评论";
     [self.plBtn setTitle:pl forState:UIControlStateNormal];
     
-    [self.barTagBtn setTitle:PostsModel.forum_name forState:UIControlStateNormal];
+    [self.barTagBtn setTitle:postsModel.forum_name forState:UIControlStateNormal];
     
     [self layoutCell];
 }
@@ -235,7 +242,9 @@
     [self.headTagLb sizeToFit];
     self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
     
-    self.attentionBtn.frame = CGRectMake(CGRectGetWidth(self.userInfoView.frame) - 50, 5, 50, 30);
+    [self.attentionBtn sizeToFit];
+    CGFloat w = CGRectGetWidth(self.attentionBtn.frame);
+    self.attentionBtn.frame = CGRectMake(CGRectGetWidth(self.userInfoView.frame) - w - kMargin, 5, w + 10, 25);
 }
 
 /**
@@ -248,9 +257,9 @@
     
     CGSize size = [self.contentLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
     if (self.contentLb.attributedText) {
-        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 12, size.width, size.height);
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 10, size.width, size.height);
     }else{
-        self.contentLb.frame = CGRectMake(0, 0, size.width, size.height);
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame), size.width, 0);
     }
     
     self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 12, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));

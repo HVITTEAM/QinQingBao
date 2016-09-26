@@ -790,11 +790,19 @@
 /***帖子 - 获取版块详细列表*/
 #define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
 
-/***帖子 - 不同标识获取帖子列表*/
-#define URL_flaglist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/flaglist.php"
+/***点赞 - 点赞帖子*/
+#define URL_Get_support_thread @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_thread.php"
 
-/***关注 - 加关注与取消关注*/
-#define URL_attention_do @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/attention_do.php"
+/***点赞 - 点赞评论*/
+#define URL_Support_reply @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_reply.php"
+
+/***评论 - 评论列表*/
+#define URL_Get_Commonlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/commonlist.php"
+
+/***评论 - 评论帖子或评论帖子的评论*/
+#define URL_Reply_post @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/reply_post.php"
+
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

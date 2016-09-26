@@ -29,6 +29,7 @@
     PostsDetailUserCell *cell = [tableView dequeueReusableCellWithIdentifier:detailUserId];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"PostsDetailUserCell" owner:nil options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     return cell;
@@ -36,22 +37,19 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.portraitView.layer.cornerRadius = self.portraitView.width / 2;
+    self.portraitView.layer.masksToBounds = YES;
+    
     self.attentionBtn.layer.cornerRadius = 5;
     self.attentionBtn.layer.borderWidth = 1.0f;
+    self.attentionBtn.layer.borderColor = HMColor(251, 176, 59).CGColor;
     
     self.tagLb.layer.cornerRadius = 4;
     self.tagLb.layer.masksToBounds = YES;
     
     self.nameLb.text = nil;
     self.tagLb.text = nil;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self.tagLb sizeToFit];
-    self.tagLb.frame = CGRectMake(self.tagLb.frame.origin.x, self.tagLb.frame.origin.y - 1, self.tagLb.frame.size.width + 4, self.tagLb.frame.size.height + 2);
 }
 
 - (void)setPostsDetailData:(DetailPostsModel *)postsDetailData
@@ -64,12 +62,15 @@
     self.tagLb.text = @"无敌";
     if ([postsDetailData.is_home_friend isEqualToString:@"0"]) {
         [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
-        [self.attentionBtn setTitleColor:HMColor(251,176,59) forState:UIControlStateNormal];
-        self.attentionBtn.layer.borderColor = HMColor(251,176,59).CGColor;
     }else{
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
-        [self.attentionBtn setTitleColor:HMColor(153, 153, 153) forState:UIControlStateNormal];
-        self.attentionBtn.layer.borderColor = HMColor(153, 153, 153).CGColor;
+    }
+}
+
+- (IBAction)tapAttentionBtn:(UIButton *)sender
+{
+    if (self.attentionBlock) {
+        self.attentionBlock();
     }
 }
 

@@ -11,18 +11,21 @@
 #import "PostsDetailUserCell.h"
 #import "PostsDetailDZCell.h"
 #import "PostsCommentCell.h"
+#import "DetailPostsModel.h"
+#import "CommentModel.h"
 
 @interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate>
 {
-    DetailPostsModel *detailData;
-    
     UIWebView *_webView;
     
-    UITableView *tableview;
+    
     
     CGFloat cellHeight;
 }
 
+@property (strong, nonatomic) UITableView *tableview;
+
+@property (strong, nonatomic) DetailPostsModel *detailData;
 
 @property (strong, nonatomic) UIView *replyBar;
 
@@ -31,6 +34,8 @@
 @property (strong, nonatomic) UIButton *replyBtn;
 
 @property (assign, nonatomic) CGFloat keyBoardHeight;
+
+@property (strong, nonatomic) NSArray *commentDatas;
 
 @end
 
@@ -50,15 +55,14 @@
 {
     [super viewDidLoad];
     
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStylePlain];
-    tableview.delegate =self;
-    tableview.dataSource = self;
-    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableview.backgroundColor = HMGlobalBg;
-    [self.view addSubview:tableview];
+    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStylePlain];
+    self.tableview.delegate =self;
+    self.tableview.dataSource = self;
+    self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableview.backgroundColor = HMGlobalBg;
+    [self.view addSubview:self.tableview];
     
-//    [self getDetailData];
-    
+    //回复工具栏
     self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
     self.replyBar.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.replyBar];
@@ -83,6 +87,10 @@
     UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 1)];
     line.backgroundColor = HMColor(235, 235, 235);
     [self.replyBar addSubview:line];
+    
+    [self getDetailData];
+    
+    [self loadCommonlist];
 
 }
 
@@ -101,28 +109,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)getDetailData
-{
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{
-                                                                          @"tid" : self.itemdata.tid
-                                                                          }
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         detailData = [DetailPostsModel objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                 }];
-    
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -135,7 +121,7 @@
     if (section == 0) {
         return 3;
     }
-    return 2;
+    return self.commentDatas.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,7 +138,7 @@
         return 40;
     }
 
-    return [self tableView:tableview cellForRowAtIndexPath:indexPath].height;
+    return [self tableView:self.tableview cellForRowAtIndexPath:indexPath].height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -168,9 +154,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof (self) weakSelf = self;
+    
     if (indexPath.section == 0 && indexPath.row == 0) {
-       PostsDetailUserCell *cell = [PostsDetailUserCell createCellWithTableView:tableview];
-        cell.postsDetailData = detailData;
+       PostsDetailUserCell *cell = [PostsDetailUserCell createCellWithTableView:tableView];
+        cell.postsDetailData = self.detailData;
+        cell.attentionBlock = ^{
+            [weakSelf attentionAction];
+        };
         return cell;
        
     }else if (indexPath.section == 0 && indexPath.row == 1){
@@ -191,8 +182,13 @@
         cell.textLabel.text = @"add";
         return cell;
     }else if (indexPath.section == 0 && indexPath.row == 2){
-        PostsDetailDZCell *cell = [PostsDetailDZCell createCellWithTableView:tableview];
+        PostsDetailDZCell *cell = [PostsDetailDZCell createCellWithTableView:tableView];
+        cell.postsDetailData = self.detailData;
+        cell.dianZanBlock = ^{
+            [weakSelf supportAction];
+        };
         return cell;
+        
     }else if (indexPath.section == 1 && indexPath.row == 0){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"titleCell"];
         if (!cell) {
@@ -204,8 +200,14 @@
         return cell;
     }
     else{
-        PostsCommentCell *cell = [PostsCommentCell createCellWithTableView:tableview];
-        [cell layoutCell];
+        PostsCommentCell *cell = [PostsCommentCell createCellWithTableView:tableView];
+        
+        CommentModel *model = self.commentDatas[indexPath.row - 1];
+        cell.commentModel = model;
+        cell.indexpath = indexPath;
+        cell.dianZanBlock = ^(NSIndexPath *idx){
+            [weakSelf support_replyAction:idx];
+        };
         return cell;
     }
 }
@@ -272,7 +274,7 @@
     webView.frame = newFrame;
     
     cellHeight = newFrame.size.height;
-    [tableview reloadData];
+    [self.tableview reloadData];
 }
 
 #pragma mark - UITextViewDelegate
@@ -319,7 +321,7 @@
     CGRect tableFrame = CGRectMake(0, 0, MTScreenW, MTScreenH - keyBoardH - replyBarFrame.size.height);
     
     [UIView animateWithDuration:animationTime animations:^{
-        tableview.frame = tableFrame;
+        self.tableview.frame = tableFrame;
         self.replyBar.frame = replyBarFrame;
     }];
     
@@ -341,9 +343,210 @@
     CGRect tableFrame = CGRectMake(0, 0, MTScreenW, MTScreenH - replyBarFrame.size.height);
     
     [UIView animateWithDuration:animationTime animations:^{
-        tableview.frame = tableFrame;
+        self.tableview.frame = tableFrame;
         self.replyBar.frame = replyBarFrame;
     }];
 }
+
+#pragma mark - 网络相关
+/**
+ *  获取帖子详情数据
+ */
+-(void)getDetailData
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{
+                                                                          @"tid" : self.itemdata.tid,
+                                                                          @"client":@"ios"
+                                                                          }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         self.detailData = [DetailPostsModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         [self.tableview reloadData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
+/**
+ *  加关注与取消关注，add是加关注，del是取消关注
+ */
+- (void)attentionAction
+{
+    NSString *type = @"add";
+    if ([self.detailData.is_home_friend integerValue] != 0) {
+        type = @"del";
+    }
+    
+    NSDictionary *params = @{
+                             @"action":type,
+                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                             @"rel":self.detailData.authorid,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            if ([type isEqualToString:@"add"]) {
+                self.detailData.is_home_friend = @"1";
+            }else{
+                self.detailData.is_home_friend = @"0";
+            }
+            
+            NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
+            [NoticeHelper AlertShow:str view:nil];
+            [self.tableview reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+- (void)supportAction
+{
+    //目前只能点赞,不能取消
+    NSString *doType = @"add";
+    if ([self.detailData.is_recommend integerValue] != 0) {
+       return [NoticeHelper AlertShow:@"您已点赞" view:nil];
+    }
+    
+    NSDictionary *params = @{
+                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                             @"tid":self.detailData.tid,
+                             @"dowhat":doType,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_support_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            if ([doType isEqualToString:@"add"]) {
+                self.detailData.is_recommend = @"1";
+            }else{
+                self.detailData.is_recommend = @"0";
+            }
+            
+            self.detailData.count_recommend = dict[@"datas"][@"recommend_add"];
+            
+            NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
+            [NoticeHelper AlertShow:str view:nil];
+            [self.tableview reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  点赞评论
+ */
+- (void)support_replyAction:(NSIndexPath *)idx
+{
+    CommentModel *model = self.commentDatas[idx.row - 1];
+    
+    NSString *doType = @"against";
+    if ([model.is_support isEqualToString:@"0"]) {
+        doType = @"support";
+    }
+    
+    NSDictionary *params = @{
+                             @"tid":self.detailData.tid,
+                             @"pid":model.pid,
+                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                             @"dowhat":doType,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Support_reply parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            NSString *type = dict[@"datas"][@"dowhat"];
+            if ([type isEqualToString:@"support"]) {
+                model.is_support = @"1";
+            }else{
+               model.is_support = @"0";
+            }
+            
+            model.support = dict[@"datas"][@"support"];
+            [self.tableview reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+- (void)loadCommonlist
+{
+    NSDictionary *params = @{
+                             @"tid":self.itemdata.tid,
+                             @"p":@0,
+                             @"page":@10,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            
+            self.commentDatas = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            [self.tableview reloadData];
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+
+}
+
 
 @end

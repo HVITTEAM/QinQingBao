@@ -14,6 +14,8 @@
 
 @property (strong, nonatomic) DetailPostsModel *postsDetailData;
 
+@property (copy) void(^attentionBlock)();
+
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
 @end

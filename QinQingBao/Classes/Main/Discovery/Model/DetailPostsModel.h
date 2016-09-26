@@ -27,4 +27,11 @@
 @property(copy,nonatomic)NSString *count_recommend;
 //是否已点赞   0为未点赞  1为已点赞
 @property(copy,nonatomic)NSString *is_recommend;
+
+@property(copy,nonatomic)NSString *is_hot;
+
+@property(copy,nonatomic)NSString *is_digest;
+
+@property(copy,nonatomic)NSString *forum_name;
+
 @end

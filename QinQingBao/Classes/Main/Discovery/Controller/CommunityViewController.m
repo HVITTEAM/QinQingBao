@@ -55,6 +55,10 @@
 /**热点数据的分页数*/
 @property (assign, nonatomic) NSInteger hotPageNum;
 
+@property (assign, nonatomic) CGFloat offsetYWhenBeginDrag;
+
+@property (assign, nonatomic) CGFloat alphaWhenBeginDrag;
+
 @end
 
 @implementation CommunityViewController
@@ -191,6 +195,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     UITableViewCell *cell = nil;
     if (indexPath.section == 0) {
         static NSString *newsCellId = @"newsCell";
@@ -216,6 +221,10 @@
         }
         
         [cardCell setPostsModel:model];
+        cardCell.indexpath = indexPath;
+        cardCell.attentionBlock = ^(NSIndexPath *idx){
+            [weakSelf attentionAction:idx];
+        };
         cell = cardCell;
     }
     
@@ -269,6 +278,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *postsDetailVC = [[PostsDetailViewController alloc] init];
+    if (self.isAllData) {
+        postsDetailVC.itemdata = self.allPosts[indexPath.row];
+    }else{
+        postsDetailVC.itemdata = self.hotPosts[indexPath.row];
+    }
+    
     [self.navigationController pushViewController:postsDetailVC animated:YES];
 }
 
@@ -282,13 +297,22 @@
         self.headView.frame = CGRectMake(0, -kHeadViewHeith, MTScreenW, kHeadViewHeith);
     }
     
-    if (scrollView.contentOffset.y > 0) {
-        CGFloat delta = 1.0 / 64;
-        self.navBar.alpha = scrollView.contentOffset.y * delta;
-    }else{
-        self.navBar.alpha = 0;
+    //导航栏设置
+    CGFloat tempAlpha = 0;
+    CGFloat delta = 1.0 / 64;
+    if (scrollView.contentOffset.y > self.offsetYWhenBeginDrag) {
+        tempAlpha = self.alphaWhenBeginDrag + (scrollView.contentOffset.y - self.offsetYWhenBeginDrag) * delta;
+        self.navBar.alpha = (tempAlpha <= 1.0?tempAlpha:1.0);
+    }else if (scrollView.contentOffset.y < -64){
+        tempAlpha = self.alphaWhenBeginDrag - (-64 - scrollView.contentOffset.y) * delta;
+        self.navBar.alpha = (tempAlpha >=0?tempAlpha:0);
     }
+}
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    self.offsetYWhenBeginDrag = scrollView.contentOffset.y;
+    self.alphaWhenBeginDrag = self.navBar.alpha;
 }
 
 #pragma mark - 点击事件方法
@@ -339,11 +363,10 @@
     NSMutableDictionary *params = [@{
                              @"sectionid":self.circleModel.sectionid,
                              @"page":@(3),
-                             @"sys":@"",
-                             @"client":@"",
-                             @"key":@"",
+                             @"client":@"ios"
                              } mutableCopy];
 
+    params[@"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     params[@"tag"] = type?type:nil;
     
     if (self.isAllData) {
@@ -393,6 +416,60 @@
         [self loadSectionlistDataWithType:@1];
     }
 }
+
+/**
+ *  加关注与取消关注，add是加关注，del是取消关注
+ */
+- (void)attentionAction:(NSIndexPath *)idx
+{
+    PostsModel *model = nil;
+    if (self.isAllData) {
+        model = self.allPosts[idx.row];
+    }else{
+        model = self.hotPosts[idx.row];
+    }
+    
+    NSString *type = @"add";
+    if ([model.is_home_friend integerValue] != 0) {
+        type = @"del";
+    }
+    
+    NSDictionary *params = @{
+                             @"action":type,
+                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                             @"rel":model.authorid,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            if ([type isEqualToString:@"add"]) {
+                model.is_home_friend = @"1";
+            }else{
+                model.is_home_friend = @"0";
+            }
+            NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
+            [NoticeHelper AlertShow:str view:nil];
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+    
+}
+
 
 #pragma mark - 工具方法
 - (UIView *)createTabView

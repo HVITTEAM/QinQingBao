@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentModel.h"
 
 @interface PostsCommentCell : UITableViewCell
 
-+ (instancetype)createCellWithTableView:(UITableView *)tableView;
+@property (strong, nonatomic) CommentModel *commentModel;
 
-- (void)layoutCell;
+@property (strong, nonatomic) NSIndexPath *indexpath;
+
+@property (copy) void(^dianZanBlock)(NSIndexPath *idxPath);
+
++ (instancetype)createCellWithTableView:(UITableView *)tableView;
 
 @end

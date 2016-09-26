@@ -196,7 +196,7 @@
         [cardCell setPostsModel:model];
         cardCell.indexpath = indexPath;
         cardCell.attentionBlock = ^(NSIndexPath *idx){
-            [weakSelf attentionAction:idx type:@"add"];
+            [weakSelf attentionAction:idx];
         };
         cell = cardCell;
     }
@@ -236,6 +236,7 @@
 {
     if (indexPath.section == 2 && indexPath.row != 0) {
         PostsDetailViewController *detailVC = [[PostsDetailViewController alloc] init];
+        detailVC.itemdata = self.postsDatas[indexPath.row - 1];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
@@ -270,16 +271,15 @@
  **/
 - (void)loadFlaglist
 {
-    NSDictionary *params = @{
+    NSMutableDictionary *params = [@{
                              @"flag":@2,
                              @"p": @(self.pageNum),
                              @"page":@(3),
-                             @"key":@"",
-                             @"sys":@"",
-                             @"client":@""
-                             };
+                             @"client":@"ios"
+                             }mutableCopy];
+    params[@"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
-    [CommonRemoteHelper RemoteWithUrl:URL_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         [self.tableView.footer endRefreshing];
         
@@ -312,10 +312,14 @@
 /**
  *  加关注与取消关注，add是加关注，del是取消关注
  */
-- (void)attentionAction:(NSIndexPath *)idx type:(NSString *)type
+- (void)attentionAction:(NSIndexPath *)idx
 {
     PostsModel *model = self.postsDatas[idx.row - 1];
     
+    NSString *type = @"add";
+    if ([model.is_home_friend integerValue] != 0) {
+        type = @"del";
+    }
     
     NSDictionary *params = @{
                              @"action":type,
@@ -326,7 +330,7 @@
                              };
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         [HUD removeFromSuperview];
         id codeNum = [dict objectForKey:@"code"];
@@ -337,7 +341,12 @@
         }
         else
         {
-            model.is_home_friend = @"1";
+            if ([type isEqualToString:@"add"]) {
+                model.is_home_friend = @"1";
+            }else{
+                model.is_home_friend = @"0";
+            }
+            
             NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
             [NoticeHelper AlertShow:str view:nil];
             [self.tableView reloadData];
