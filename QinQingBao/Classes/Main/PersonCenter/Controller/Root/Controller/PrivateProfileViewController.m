@@ -25,6 +25,7 @@
 #import "PostsModel.h"
 #import "CardCell.h"
 
+#import "BBSPersonalModel.h"
 #import "MyRelationViewController.h"
 
 #define headHeight MTScreenH*0.3
@@ -32,15 +33,16 @@
 
 @interface PrivateProfileViewController ()<UIScrollViewDelegate>
 {
+    
+    
+    UILabel *titleLabel;
+    
+    BBSPersonalModel *personalInfo;
+
     UserInforModel *infoVO;
     NSString *iconUrl;
     
     NSArray *postsArr;
-    
-    
-    NSString *count_attention;
-    
-    NSString *count_fans;
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -58,7 +60,6 @@
     [self initHeadView];
     
     self.view.backgroundColor = HMGlobalBg;
-    self.navigationItem.title = @"";
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
@@ -84,7 +85,6 @@
     [self getUserPosts];
     
     [self getUserFannum];
-
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -139,6 +139,7 @@
     
     self.navigationItem.rightBarButtonItems = @[rightBarBtn0,rightBarBtn1];
     
+    self.navigationItem.title = @"";
     // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
@@ -177,6 +178,26 @@
         frame.origin.y = y;
         self.headView.frame = frame;
     }
+    
+    CGFloat alpha;
+    if ((scrollView.contentOffset.y + headHeight) > 0) {
+        alpha = (scrollView.contentOffset.y + headHeight) / 64;
+    }else{
+        alpha = 0;
+    }
+    
+    //    UIImage *img = [UIImage imageNamed:@"red_line_and_shadow.png"];
+    //    self.navigationController.navigationBar.alpha = alpha;
+    
+    if (titleLabel == nil)
+        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
+    titleLabel.text = infoVO.member_truename;
+    titleLabel.alpha = alpha;
+//    self.navigationItem.titleView = titleLabel;
+    
+    UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+
 }
 
 #pragma mark - Table view data source
@@ -220,7 +241,7 @@
     if (indexPath.section == 0)
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
-        [consumeCell setZan:0 fansnum:[count_fans integerValue] attentionnum:[count_attention integerValue]];
+        [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
             if ([SharedAppUtil defaultCommonUtil].userVO == nil)
@@ -228,7 +249,7 @@
             
             if (idx == 100)
             {
-                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+//                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
             }
             else if (idx == 200)
             {
@@ -266,6 +287,12 @@
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         [cardCell setPostsModel:postsArr[indexPath.row]];
+        
+        // 头像点击 进入个人信息界面
+        cardCell.portraitClick = ^(PostsModel *item)
+        {
+            
+        };
         cell = cardCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -315,14 +342,15 @@
 #pragma mark -- 与后台数据交互模块
 
 /**
- *  获取关注数目和粉丝数目
+ *  获取BBS账号信息
  */
 -(void)getUserFannum
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
         return;
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_fansnum parameters: @{@"action" : @"stat",
-                                                                    @"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                                                                           @"client" : @"ios",
+                                                                           @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
@@ -332,9 +360,12 @@
                                      }
                                      else
                                      {
-                                         NSDictionary *data = [dict objectForKey:@"datas"];
-                                         count_attention = [data objectForKey:@"count_attention"];
-                                         count_fans = [data objectForKey:@"count_fans"];
+                                         personalInfo = [BBSPersonalModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         
+                                         LoginInHeadView *headView = (LoginInHeadView *)self.headView;
+                                         
+                                         [headView initWithName:infoVO.member_truename professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                         
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -347,10 +378,9 @@
  */
 -(void)getUserPosts
 {
-    if (![SharedAppUtil defaultCommonUtil].userVO)
+    if (![SharedAppUtil defaultCommonUtil].bbsVO)
         return;
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"client" : @"ios",
-                                                                       @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
@@ -399,7 +429,7 @@
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                              // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
                                              
-                                             [headView initWithName:infoVO.member_truename professional:@"认证专家"];
+                                             [headView initWithName:infoVO.member_truename professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];

@@ -108,50 +108,46 @@
 
 #pragma mark - 设置cell数据
 
--(void)setPostsModel:(PostsModel *)PostsModel
+-(void)setPostsModel:(PostsModel *)postsModel
 {
-    _postsModel = PostsModel;
+    _postsModel = postsModel;
     
     //设置用户信息
-    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:PostsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
-    self.timeLb.text = PostsModel.dateline;
-    self.nameLb.text = PostsModel.author;
-    self.headTagLb.text = @"超凡大师";
+    [self.portraitView sd_setImageWithURL:[NSURL URLWithString:postsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    
+    self.timeLb.text = postsModel.dateline;
+    self.nameLb.text = postsModel.author;
+    self.headTagLb.text = postsModel.grouptitle;
     
     //设置标题与内容
     NSString *tagName = nil;
-    if (PostsModel.is_hot) {
+    if (postsModel.is_hot) {
         tagName = @"re_icon";
     }else if (self.postsModel.is_digest){
         tagName = @"jing_icon";
     }
 
-    [self setTitle:PostsModel.subject content:PostsModel.message titleTag:tagName];
+    [self setTitle:postsModel.subject content:postsModel.message titleTag:tagName];
     
     //设置图片
     //...............临时这样做..........
-    if ([PostsModel.attachmentpicture isKindOfClass:[NSString class]]) {
+    if ([postsModel.attachmentpicture isKindOfClass:[NSString class]]) {
         self.photoNum = 0;
     }else{
-        self.photoNum = PostsModel.attachmentpicture.count;
+        self.photoNum = postsModel.attachmentpicture.count;
     }
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:PostsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     }
     
     //设置底部按钮栏
-    NSString *yd = PostsModel.views && [PostsModel.views integerValue] != 0?PostsModel.views:@"阅读";
-    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
+    [self.ydBtn setTitle:postsModel.views forState:UIControlStateNormal];
+    [self.dzBtn setTitle:postsModel.recommend_add forState:UIControlStateNormal];
+    [self.plBtn setTitle:postsModel.replies  forState:UIControlStateNormal];
     
-    NSString *dz = PostsModel.views && [PostsModel.replies integerValue] != 0?PostsModel.replies:@"点赞";
-    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
-    
-    NSString *pl = PostsModel.views && [PostsModel.recommend_add integerValue] != 0?PostsModel.recommend_add:@"评论";
-    [self.plBtn setTitle:pl forState:UIControlStateNormal];
-    
-    [self.barTagBtn setTitle:PostsModel.forum_name forState:UIControlStateNormal];
+    [self.barTagBtn setTitle:postsModel.forum_name forState:UIControlStateNormal];
     
     [self layoutCell];
 }
@@ -224,6 +220,8 @@
     self.userInfoView.frame = CGRectMake(kMargin, 12, MTScreenW - 2 * kMargin, 40);
     
     self.portraitView.frame = CGRectMake(0, 0, 40, 40);
+    self.portraitView.layer.cornerRadius = self.portraitView.width/2;
+    self.portraitView.layer.masksToBounds = YES;
     
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame) + 10, 2, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
@@ -232,8 +230,15 @@
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame) + 7, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
     
     
-    [self.headTagLb sizeToFit];
-    self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    if (self.headTagLb.text.length == 0)
+    {
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2,0, 0);
+    }
+    else
+    {
+        [self.headTagLb sizeToFit];
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    }
     
     self.attentionBtn.frame = CGRectMake(CGRectGetWidth(self.userInfoView.frame) - 50, 5, 50, 30);
 }
@@ -318,6 +323,9 @@
     portraitView.backgroundColor = HMColor(230, 230, 230);
     self.portraitView = portraitView;
     [infoView addSubview:portraitView];
+    self.portraitView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.portraitView addGestureRecognizer:singleTap];
     
     //姓名
     UILabel *nameLb = [[UILabel alloc] init];
@@ -442,7 +450,7 @@
                              @"rel":@"321",
                              };
     
-    [CommonRemoteHelper RemoteWithUrl:URL_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
@@ -453,6 +461,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
+}
+
+// 个人头像点击事件
+-(void)onClickImage
+{
+    if(self.portraitClick)
+        self.portraitClick(self.postsModel);
 }
 
 @end

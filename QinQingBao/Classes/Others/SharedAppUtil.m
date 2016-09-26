@@ -20,6 +20,22 @@
     return util;
 }
 
++(BOOL)checkLoginStates
+{
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        [MTNotificationCenter postNotificationName:MTNeedLogin object:nil];
+        return NO;
+    }
+    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
+    {
+        [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
+        return NO;
+    }
+    else
+        return YES;
+}
+
 -(void)setLat:(NSString *)lat
 {
     if (lat.length == 0 )

@@ -8,7 +8,7 @@
 
 #import "RegistViewController.h"
 #import "AgreementViewController.h"
-
+#import "CompleteInfoController.h"
 #import "JPUSHService.h"
 
 @interface RegistViewController ()<UITextFieldDelegate>
@@ -194,8 +194,12 @@
                                              [self loginBBS:vo];
                                              //设置推送标签和别名
                                              [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",vo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
-                                             
                                              [self.navigationController.viewControllers[0] dismissViewControllerAnimated:YES completion:nil];
+                                             
+                                             // 完善论坛资料
+//                                             CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
+//                                             [self.navigationController pushViewController:conplete animated:YES];
+
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);

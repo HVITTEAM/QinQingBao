@@ -20,6 +20,9 @@
 #import "AdvertisementController.h"
 #import "PostsModel.h"
 
+#import "PublicProfileViewController.h"
+
+
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
@@ -191,9 +194,16 @@
         cell = menuCell;
     }else{
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        
         PostsModel *model = self.postsDatas[indexPath.row - 1];
         [cardCell setPostsModel:model];
+        
+        // 头像点击 进入个人信息界面
+        cardCell.portraitClick = ^(PostsModel *item)
+        {
+            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+            view.uid = item.authorid;
+            [self.navigationController pushViewController:view animated:YES];
+        };
         cell = cardCell;
     }
 

@@ -29,7 +29,7 @@
 
 -(void)back
 {
-    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[0] animated:YES];
 }
 
 @end

@@ -58,8 +58,9 @@ typedef enum {
  *
  *  @param name         名字
  *  @param professional 职称
+ *  @param isfriend 是否已经关注
  */
--(void)initWithName:(NSString *)name professional:(NSString *)professional;
+-(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend;
 
 -(void)setRefleshStates:(RefreshViewState)states;
 

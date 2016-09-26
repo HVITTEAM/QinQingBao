@@ -154,6 +154,11 @@
 #define PlaceholderStr_Posts @"暂无帖子，快去关注更多账号吧"
 
 /**
+ *  未登录
+ */
+#define PlaceholderStr_Login @"你还未登录，请登录账号再查看"
+
+/**
  *  我的私信界面
  */
 #define PlaceholderStr_Letter @"暂无消息"
@@ -243,6 +248,9 @@
 
 // 需要登录
 #define MTNeedLogin @"MTNeedLogin"
+
+// 需要完善资料
+#define MTCompleteInfo @"MTCompleteInfo"
 
 #define MTSececteFamily @"HMSelectedFamily"
 
@@ -774,6 +782,9 @@
 /***帖子 - 获取关注人帖子列表*/
 #define URL_Get_followlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/followlist.php"
 
+/***帖子 - 个人帖子列表*/
+#define URL_Get_personallist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personallist.php",URL_Local_New]
+
 /***帖子 - 不同标识获取帖子列表*/
 #define URL_Get_flaglist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/flaglist.php",URL_Local_New]
 
@@ -790,9 +801,6 @@
 
 /***帖子 - 不同标识获取帖子列表*/
 #define URL_flaglist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/flaglist.php"
-
-/***关注 - 加关注与取消关注*/
-#define URL_attention_do @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/attention_do.php"
 
 /***帖子 - 个人信息列表*/
 #define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]

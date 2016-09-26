@@ -47,11 +47,25 @@
     }
 }
 
--(void)initWithName:(NSString *)name professional:(NSString *)professional
+-(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend
 {
     [self.loginBtn setTitle:name forState:UIControlStateNormal];
     
-    self.professionLab.text = [NSString stringWithFormat:@" %@ ",professional];
+    if (!professional || professional.length == 0)
+        self.professionLab.text = @"";
+    else
+        self.professionLab.text = [NSString stringWithFormat:@" %@ ",professional];
+    
+    if (isfriend && [isfriend integerValue] == 0)
+    {
+        self.followBtn.tag = 1;
+        [self.followBtn setBackgroundImage:[UIImage imageNamed:@"follow.png"] forState:UIControlStateNormal];
+    }
+    else if (isfriend && [isfriend integerValue] == 1)
+    {
+        self.followBtn.tag = 0;
+        [self.followBtn setBackgroundImage:[UIImage imageNamed:@"nofollow.png"] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark 个人中心操作模块

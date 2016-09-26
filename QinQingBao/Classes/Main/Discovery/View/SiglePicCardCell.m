@@ -117,23 +117,26 @@
     
     self.timeLb.text = self.itemdata.dateline;
     self.nameLb.text = self.itemdata.author;
-    self.headTagLb.text = @"超凡大师";
+    self.headTagLb.text = self.itemdata.grouptitle;
     
     self.titleLb.text = self.itemdata.subject;
     self.contentLb.text = self.itemdata.message;
     
 //    self.photoNum = self.itemdata.picture.count;
     
-    NSString *yd = itemdata.views && [itemdata.views integerValue] != 0?itemdata.views:@"阅读";
-    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
-    NSString *dz = itemdata.views && [itemdata.replies integerValue] != 0?itemdata.replies:@"点赞";
-    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
-    NSString *pl = itemdata.views && [itemdata.recommend_add integerValue] != 0?itemdata.recommend_add:@"评论";
-    [self.plBtn setTitle:pl forState:UIControlStateNormal];
-    [self.barTagBtn setTitle:@"健康专题" forState:UIControlStateNormal];
-
-    self.photoNum = 1;
+    [self.ydBtn setTitle:itemdata.views forState:UIControlStateNormal];
+    [self.dzBtn setTitle:itemdata.recommend_add forState:UIControlStateNormal];
+    [self.plBtn setTitle:itemdata.replies  forState:UIControlStateNormal];
     
+    [self.barTagBtn setTitle:itemdata.forum_name forState:UIControlStateNormal];
+
+    // 设置图片
+    if (itemdata.picture.length == 0) {
+        self.photoNum = 0;
+    }else{
+        self.photoNum = 1;
+    }
+    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:itemdata.picture] placeholderImage:[UIImage imageNamed:@"placeholderDetail"]];
     
     //设置位置
     [self layoutCell];
@@ -159,7 +162,9 @@
     self.userInfoView.frame = CGRectMake(kMargin, 12, MTScreenW - 2 * kMargin, 40);
     
     self.portraitView.frame = CGRectMake(0, 0, 40, 40);
-    
+    self.portraitView.layer.cornerRadius = self.portraitView.width/2;
+    self.portraitView.layer.masksToBounds = YES;
+
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame) + 10, 2, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
     
@@ -167,8 +172,17 @@
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame) + 7, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
     
     
-    [self.headTagLb sizeToFit];
-    self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    
+    if (self.headTagLb.text.length == 0)
+    {
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2,0, 0);
+    }
+    else
+    {
+        [self.headTagLb sizeToFit];
+        [self.headTagLb sizeToFit];
+        self.headTagLb.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame) + 10, 2, CGRectGetWidth(self.headTagLb.frame) + 8, CGRectGetHeight(self.headTagLb.frame)+4);
+    }
     
     self.attentionBtn.frame = CGRectMake(CGRectGetWidth(self.userInfoView.frame) - 50, 5, 50, 30);
     self.attentionBtn.hidden = YES;
@@ -208,16 +222,16 @@
     NSString *titleStr = self.titleLb.text;
     if (titleStr) {
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:titleStr attributes:attrDict];
-        if (YES) {
-            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-            attachment.image = [UIImage imageNamed:@"checkPayType"];
-            
-            NSAttributedString *hotIcon = [NSAttributedString attributedStringWithAttachment:attachment];
-            [attrStr insertAttributedString:hotIcon atIndex:0];
-            
-            [attrStr setAttributes:attrDict range:NSMakeRange(1, attrStr.length - 1)];
-        }
-        
+//        if (YES) {
+//            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+//            attachment.image = [UIImage imageNamed:@"checkPayType"];
+//            
+//            NSAttributedString *hotIcon = [NSAttributedString attributedStringWithAttachment:attachment];
+//            [attrStr insertAttributedString:hotIcon atIndex:0];
+//            
+//            [attrStr setAttributes:attrDict range:NSMakeRange(1, attrStr.length - 1)];
+//        }
+//        
         self.titleLb.attributedText = attrStr;
         CGSize size = [self.titleLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
         self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, size.height);
@@ -283,7 +297,10 @@
     portraitView.backgroundColor = HMColor(230, 230, 230);
     self.portraitView = portraitView;
     [infoView addSubview:portraitView];
-    
+    self.portraitView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.portraitView addGestureRecognizer:singleTap];
+
     //姓名
     UILabel *nameLb = [[UILabel alloc] init];
     nameLb.textColor = HMColor(53, 53, 53);
@@ -392,6 +409,13 @@
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
     [self.bottomBarView addSubview:btn];
     return btn;
+}
+
+// 个人头像点击事件
+-(void)onClickImage
+{
+    if(self.portraitClick)
+        self.portraitClick(self.itemdata);
 }
 
 @end

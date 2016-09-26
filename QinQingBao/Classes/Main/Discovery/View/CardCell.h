@@ -18,4 +18,7 @@
  */
 @property (nonatomic, retain) PostsModel *postsModel;
 
+@property (nonatomic, copy) void (^portraitClick)(PostsModel *postsModel);
+
+
 @end

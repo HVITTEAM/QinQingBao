@@ -363,6 +363,8 @@
 		018BC6091C50AC7200C883FF /* ResetDeviceTipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BC6041C50AC7200C883FF /* ResetDeviceTipsViewController.m */; };
 		018BC60A1C50AC7200C883FF /* WifiAddDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BC6061C50AC7200C883FF /* WifiAddDeviceViewController.m */; };
 		018BC60B1C50AC7200C883FF /* WifiInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018BC6081C50AC7200C883FF /* WifiInfoViewController.m */; };
+		0190BFEE1D98CFE000E8992A /* CompleteInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190BFEC1D98CFE000E8992A /* CompleteInfoController.m */; };
+		0190BFEF1D98CFE000E8992A /* CompleteInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190BFED1D98CFE000E8992A /* CompleteInfoController.xib */; };
 		0190ED321BF96A5800992EE4 /* EvaluationNoneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */; };
 		0190ED331BF96A5800992EE4 /* EvaluationNoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */; };
 		0193B0D61BD5D02F00F07FBA /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0193B0D51BD5D02F00F07FBA /* PushConfig.plist */; };
@@ -2106,6 +2108,9 @@
 		018BC6061C50AC7200C883FF /* WifiAddDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiAddDeviceViewController.m; sourceTree = "<group>"; };
 		018BC6071C50AC7200C883FF /* WifiInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiInfoViewController.h; sourceTree = "<group>"; };
 		018BC6081C50AC7200C883FF /* WifiInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiInfoViewController.m; sourceTree = "<group>"; };
+		0190BFEB1D98CFE000E8992A /* CompleteInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteInfoController.h; sourceTree = "<group>"; };
+		0190BFEC1D98CFE000E8992A /* CompleteInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteInfoController.m; sourceTree = "<group>"; };
+		0190BFED1D98CFE000E8992A /* CompleteInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteInfoController.xib; sourceTree = "<group>"; };
 		0190ED2F1BF96A5800992EE4 /* EvaluationNoneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationNoneCell.h; sourceTree = "<group>"; };
 		0190ED301BF96A5800992EE4 /* EvaluationNoneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationNoneCell.m; sourceTree = "<group>"; };
 		0190ED311BF96A5800992EE4 /* EvaluationNoneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EvaluationNoneCell.xib; sourceTree = "<group>"; };
@@ -8779,6 +8784,9 @@
 				D2F744AA1B7D7E7F006AC23D /* RootViewController.xib */,
 				013E6E121C1AAD5B00FEBBCB /* AgreementViewController.h */,
 				013E6E131C1AAD5B00FEBBCB /* AgreementViewController.m */,
+				0190BFEB1D98CFE000E8992A /* CompleteInfoController.h */,
+				0190BFEC1D98CFE000E8992A /* CompleteInfoController.m */,
+				0190BFED1D98CFE000E8992A /* CompleteInfoController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -9541,6 +9549,7 @@
 				0100426B1D61A24C00C87F13 /* PlanParagraphTextCell.xib in Resources */,
 				01ED459B1C3F880200953E34 /* HeartImageCell.xib in Resources */,
 				01ECDA2C1C8EB31F0018160F /* Contents.json in Resources */,
+				0190BFEF1D98CFE000E8992A /* CompleteInfoController.xib in Resources */,
 				01ECDA931C8EB31F0018160F /* Contents.json in Resources */,
 				01E68FD91BCCA68900A17543 /* setup_sel.png in Resources */,
 				01ECDA531C8EB31F0018160F /* Contents.json in Resources */,
@@ -10545,6 +10554,7 @@
 				01F6DBBC1D8E406000300679 /* ScrollMenuTableCell.m in Sources */,
 				01E9A73E1C74613500000805 /* DetailInfoViewController.m in Sources */,
 				015BFDAD1D3483FD00EB4A09 /* CXRulerScrollView.m in Sources */,
+				0190BFEE1D98CFE000E8992A /* CompleteInfoController.m in Sources */,
 				0181B1A71CDC958D00A1435E /* BalanceLogModel.m in Sources */,
 				01C82BF41CC4B189004D7A16 /* ParagraphTextCell.m in Sources */,
 				01F07A861D92803900E75B0B /* PrivateLetterViewController.m in Sources */,

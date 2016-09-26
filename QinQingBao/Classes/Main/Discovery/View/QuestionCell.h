@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ClasslistModel.h"
 
 @interface QuestionCell : UITableViewCell
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
+@property (strong, nonatomic) IBOutlet UIImageView *img1;
+@property (strong, nonatomic) IBOutlet UIImageView *img2;
+
+@property (nonatomic, retain) NSArray *dataProvider;
+
+@property (nonatomic, copy) void (^portraitClick)(ClasslistModel *itemData);
+
 @end

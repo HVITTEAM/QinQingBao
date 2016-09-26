@@ -8,17 +8,24 @@
 
 #import "PostsTableViewController.h"
 #import "PostsDetailViewController.h"
+#import "PublicProfileViewController.h"
+
+#import "SexViewController.h"
+#import "AllQuestionController.h"
 
 #import "CardCell.h"
 #import "PostsModel.h"
 #import "QuestionCell.h"
 #import "SiglePicCardCell.h"
+#import "ClasslistModel.h"
 
 @interface PostsTableViewController ()
 {
     NSArray *postsArr;
     
     NSArray *recommendlist;
+    
+    NSArray *questiondata;
 }
 @end
 
@@ -42,10 +49,16 @@
 
 -(void)getData
 {
-    if (self.type == BBSType_4 || self.type == BBSType_1)
+    [self.tableView removePlace];
+    if (self.type == BBSType_1)
     {
+        [self getDataProvider];
         [self getRecommendlist];
         [self getUserPosts];
+    }
+    if (self.type == BBSType_2)
+    {
+        [self getFollowlist];
     }
     else if (self.type == BBSType_4)
     {
@@ -86,7 +99,7 @@
                                      {
                                          postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
                                          if (postsArr.count == 0)
-                                             [self.tableView initWithPlaceString:@"暂无数据" imgPath:nil];
+                                             [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -95,6 +108,42 @@
                                      
                                  }];
 }
+
+/**
+ *  获取关注人帖子数据
+ */
+-(void)getFollowlist
+{
+    if (![SharedAppUtil defaultCommonUtil].bbsVO) {
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
+    }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                                                                       @"client" : @"ios"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [self.tableView.header endRefreshing];
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     {
+                                         if ([codeNum integerValue] == 17001) {
+                                             return [self.tableView initWithPlaceString:PlaceholderStr_Attention imgPath:@"placeholder-2"];
+                                         }
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         if (postsArr.count == 0)
+                                             [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+                                         [self.tableView reloadData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.tableView.header endRefreshing];
+                                     
+                                 }];
+}
+
 
 /**
  *  获取说说和资讯数据
@@ -121,6 +170,23 @@
                                      
                                  }];
 }
+
+/**
+ *  获取问卷数据
+ */
+-(void)getDataProvider
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_classlist parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        if([dict[@"code"] integerValue] != 0){
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+        questiondata = [[ClasslistModel objectArrayWithKeyValuesArray:dict[@"datas"]] mutableCopy];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }];}
 
 #pragma mark - Table view data source
 
@@ -184,11 +250,41 @@
         {
             SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
             [picCell setItemdata:recommendlist[indexPath.row]];
+            
+            // 头像点击 进入个人信息界面
+            picCell.portraitClick = ^(PostsModel *item)
+            {
+                PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+                view.hidesBottomBarWhenPushed = YES;
+                view.uid = item.authorid;
+                [self.parentVC.navigationController pushViewController:view animated:YES];
+            };
+            
             cell = picCell;
         }
         else if (indexPath.section == 1)
         {
             QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
+            if (questiondata)
+                quecell.dataProvider = questiondata;
+            quecell.portraitClick = ^(ClasslistModel *itemData){
+                
+                // 问卷调查
+                NSArray *exam_infoArray = itemData.exam_info;
+                if (exam_infoArray.count == 1) {
+                    SexViewController *vc = [[SexViewController alloc] init];
+                    ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
+                    vc.exam_id = examInfoModel.e_id;
+                    vc.e_title = itemData.c_title;
+                    vc.calculatype = examInfoModel.e_calculatype;
+                    [self.parentVC.navigationController pushViewController:vc animated:YES];
+                }else if(exam_infoArray.count> 1){
+                    AllQuestionController *vc = [[AllQuestionController alloc] init];
+                    vc.c_id = itemData.c_id;
+                    [self.parentVC.navigationController pushViewController:vc animated:YES];
+                }
+            };
+            
             cell = quecell;
         }
         else
@@ -205,13 +301,26 @@
         cell = cardCell;
     }
     
+    if ([cell isKindOfClass:[CardCell class]])
+    {
+        CardCell *cardCell = (CardCell *)cell;
+        // 头像点击 进入个人信息界面
+        cardCell.portraitClick = ^(PostsModel *item)
+        {
+            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+            view.hidesBottomBarWhenPushed = YES;
+            view.uid = item.authorid;
+            [self.parentVC.navigationController pushViewController:view animated:YES];
+        };
+        
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-//    [view setItemdata:postsArr[indexPath.row]];
+    //    [view setItemdata:postsArr[indexPath.row]];
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
 
