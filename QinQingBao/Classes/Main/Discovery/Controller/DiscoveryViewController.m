@@ -196,6 +196,14 @@
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         PostsModel *model = self.postsDatas[indexPath.row - 1];
         [cardCell setPostsModel:model];
+        
+        // 头像点击 进入个人信息界面
+        cardCell.portraitClick = ^(PostsModel *item)
+        {
+            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+            view.uid = item.authorid;
+            [self.navigationController pushViewController:view animated:YES];
+        };
         cardCell.indexpath = indexPath;
         cardCell.attentionBlock = ^(NSIndexPath *idx){
             [weakSelf attentionAction:idx];

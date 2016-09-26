@@ -114,10 +114,10 @@
     
     //设置用户信息
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:postsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    
     self.timeLb.text = postsModel.dateline;
     self.nameLb.text = postsModel.author;
-    self.headTagLb.text = @"超凡大师";
-    
+    self.headTagLb.text = postsModel.grouptitle;
     //设置是否关注
     if ([postsModel.is_home_friend integerValue] != 0) {
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
@@ -145,18 +145,13 @@
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     }
     
     //设置底部按钮栏
-    NSString *yd = postsModel.views && [postsModel.views integerValue] != 0?postsModel.views:@"阅读";
-    [self.ydBtn setTitle:yd forState:UIControlStateNormal];
-    
-    NSString *dz = postsModel.views && [postsModel.replies integerValue] != 0?postsModel.replies:@"点赞";
-    [self.dzBtn setTitle:dz forState:UIControlStateNormal];
-    
-    NSString *pl = postsModel.views && [postsModel.recommend_add integerValue] != 0?postsModel.recommend_add:@"评论";
-    [self.plBtn setTitle:pl forState:UIControlStateNormal];
+    [self.ydBtn setTitle:postsModel.views forState:UIControlStateNormal];
+    [self.dzBtn setTitle:postsModel.recommend_add forState:UIControlStateNormal];
+    [self.plBtn setTitle:postsModel.replies  forState:UIControlStateNormal];
     
     [self.barTagBtn setTitle:postsModel.forum_name forState:UIControlStateNormal];
     

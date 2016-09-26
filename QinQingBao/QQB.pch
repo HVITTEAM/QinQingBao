@@ -804,6 +804,9 @@
 /***点赞 - 点赞帖子*/
 #define URL_Get_support_thread @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_thread.php"
 
+/***帖子 - 个人信息列表*/
+#define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
+
 /***点赞 - 点赞评论*/
 #define URL_Support_reply @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_reply.php"
 

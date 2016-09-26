@@ -205,7 +205,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :vo.key,
                                                                             @"client" : @"ios",
                                                                             @"targetsys" : @"4",
-                                                                            @"discuz_uname" : @"我是你爸爸"}
+                                                                            @"discuz_uname" : @"大猫"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSLog(@"%@",dict);
