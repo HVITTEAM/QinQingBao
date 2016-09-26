@@ -305,8 +305,8 @@
     {
         CardCell *cardCell = (CardCell *)cell;
         
-        cardCell.attentionBlock = ^(NSIndexPath *idx){
-            [self attentionAction:idx];
+        cardCell.attentionBlock = ^(PostsModel *model){
+            [self attentionAction:model];
         };
         // 头像点击 进入个人信息界面
         cardCell.portraitClick = ^(PostsModel *item)
@@ -324,17 +324,59 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    //    [view setItemdata:postsArr[indexPath.row]];
+    [view setItemdata:postsArr[indexPath.row]];
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
+
 
 /**
  *  加关注与取消关注，add是加关注，del是取消关注
  */
-- (void)attentionAction:(NSIndexPath *)idx
+- (void)attentionAction:(PostsModel *)model
 {
-    
+    if ([SharedAppUtil checkLoginStates])
+    {
+        NSString *type = @"add";
+        if ([model.is_home_friend integerValue] != 0) {
+            type = @"del";
+        }
+        NSDictionary *params = @{
+                                 @"action":type,
+                                 @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                                 @"rel":model.authorid,
+                                 @"client":@"ios",
+                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                                 };
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            
+            [HUD removeFromSuperview];
+            id codeNum = [dict objectForKey:@"code"];
+            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            }
+            else
+            {
+                if ([type isEqualToString:@"add"]) {
+                    model.is_home_friend = @"1";
+                }else{
+                    model.is_home_friend = @"0";
+                }
+                NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
+                [NoticeHelper AlertShow:str view:nil];
+                [self.tableView reloadData];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        }];
+    }
 }
+
+
 
 
 @end

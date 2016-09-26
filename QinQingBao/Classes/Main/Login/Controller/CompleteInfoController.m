@@ -24,10 +24,12 @@
     
     self.title = @"完善资料";
     
+    self.nameTextfield.leftViewMode = UITextFieldViewModeAlways;
+    self.nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+      self.nameTextfield.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"name.png"]];
     self.headImg.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImg addGestureRecognizer:singleTap];
-
 }
 
 // 完善资料

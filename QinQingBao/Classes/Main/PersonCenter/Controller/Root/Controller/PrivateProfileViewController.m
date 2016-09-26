@@ -364,7 +364,7 @@
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          
-                                         [headView initWithName:infoVO.member_truename professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                         [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
                                          
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
@@ -428,8 +428,8 @@
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                              // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
-                                             
-                                             [headView initWithName:infoVO.member_truename professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+
+                                             [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];

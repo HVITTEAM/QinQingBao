@@ -215,36 +215,13 @@
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
-        consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
-            
-            if ([SharedAppUtil checkLoginStates])
-            {
-                if (idx == 100)
-                {
-                    //                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
-                }
-                else if (idx == 200)
-                {
-                    //                MyRelationViewController *view = [[MyRelationViewController alloc] init];
-                    //                view.type = 1;
-                    //                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
-                    //                [self.navigationController pushViewController:view animated:YES];
-                }
-                else
-                {
-                    //                MyRelationViewController *view = [[MyRelationViewController alloc] init];
-                    //                view.type = 2;
-                    //                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
-                    //                [self.navigationController pushViewController:view animated:YES];
-                }
-            }
-        };
         cell = consumeCell;
     }
     else if (indexPath.section == 1)
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
         [cardCell setPostsModel:postsArr[indexPath.row]];
+        cardCell.attentionBtn.hidden = YES;
         cell = cardCell;
     }
     return cell;

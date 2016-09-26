@@ -60,7 +60,7 @@
     [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTNeedLogin object:nil];
     
     //注册需要登录论坛健康
-    [MTNotificationCenter addObserver:self selector:@selector(needLoginoutHanlder:) name:MTCompleteInfo object:nil];
+    [MTNotificationCenter addObserver:self selector:@selector(needCompleteHanlder:) name:MTCompleteInfo object:nil];
     
 }
 
@@ -179,6 +179,10 @@
     [SharedAppUtil defaultCommonUtil].userVO = nil;
     [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
     
+    [SharedAppUtil defaultCommonUtil].bbsVO = nil;
+    [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].bbsVO key:User_Archiver_Key filePath:User_Archiver_Path];
+
+    
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     //    [navlogin popToRootViewControllerAnimated:YES];
     PrivateProfileViewController *login = navlogin.viewControllers[0];
@@ -213,7 +217,8 @@
 {
     // 完善论坛资料
     CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
-    [self presentViewController:conplete animated:YES completion:nil];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:conplete];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 @end

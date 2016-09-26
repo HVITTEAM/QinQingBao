@@ -22,4 +22,6 @@
 
 @property (copy) void(^attentionBlock)(PostsModel *model);
 
+/** 关注按钮 */
+@property (strong, nonatomic) UIButton *attentionBtn;
 @end
