@@ -38,8 +38,7 @@
 /** 用户信息标签 */
 @property (strong, nonatomic) UILabel *headTagLb;
 
-/** 关注按钮 */
-@property (strong, nonatomic) UIButton *attentionBtn;
+
 
 /** 文章标题 */
 @property (strong, nonatomic) UILabel *titleLb;

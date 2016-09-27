@@ -25,4 +25,7 @@
 
 @property(copy,nonatomic)NSString *is_home_friend;
 
+@property(copy,nonatomic)NSString *count_article;
+
+
 @end

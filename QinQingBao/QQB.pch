@@ -793,11 +793,13 @@
 
 //***获取板块下级列表【可用于健康圈子】*/
 #define URL_Circle @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/circle.php"
+
 /***帖子 - 获取帖子详情*/
-#define URL_Get_articledetail @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/articledetail.php"
+#define URL_Get_articledetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/articledetail.php",URL_Local_New]
 
 /***帖子 - 个人信息列表*/
 #define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
+
 /***帖子 - 获取版块详细列表*/
 #define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface DetailPostsModel : NSObject
  //作者id
 @property(copy,nonatomic)NSString *authorid;

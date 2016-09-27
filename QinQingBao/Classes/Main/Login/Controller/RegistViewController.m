@@ -195,11 +195,6 @@
                                              //设置推送标签和别名
                                              [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",vo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
                                              [self.navigationController.viewControllers[0] dismissViewControllerAnimated:YES completion:nil];
-                                             
-                                             // 完善论坛资料
-//                                             CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
-//                                             [self.navigationController pushViewController:conplete animated:YES];
-
                                          }
                                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          NSLog(@"发生错误！%@",error);
@@ -214,16 +209,24 @@
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :vo.key,
                                                                             @"client" : @"ios",
-                                                                            @"targetsys" : @"4",
-                                                                            @"discuz_uname" : @"我是你爸爸"}
+                                                                            @"targetsys" : @"4"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSLog(@"%@",dict);
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         // 当目标系统不存在该用户的时候：
+                                         if ([codeNum integerValue] == 18001)
+                                         {
+                                             CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
+                                             [self.navigationController pushViewController:conplete animated:YES];
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
                                      }
                                      else
                                      {

@@ -12,6 +12,8 @@
 #import "PostsDetailDZCell.h"
 #import "PostsCommentCell.h"
 #import "DetailPostsModel.h"
+#import "DetailImgModel.h"
+
 #import "CommentModel.h"
 
 @interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
@@ -194,7 +196,7 @@
     }else if (indexPath.section == 1 && indexPath.row == 0){
         return 40;
     }
-
+    
     return [self tableView:self.tableview cellForRowAtIndexPath:indexPath].height;
 }
 
@@ -214,13 +216,13 @@
     __weak typeof (self) weakSelf = self;
     
     if (indexPath.section == 0 && indexPath.row == 0) {
-       PostsDetailUserCell *cell = [PostsDetailUserCell createCellWithTableView:tableView];
+        PostsDetailUserCell *cell = [PostsDetailUserCell createCellWithTableView:tableView];
         cell.postsDetailData = self.detailData;
         cell.attentionBlock = ^{
             [weakSelf attentionAction];
         };
         return cell;
-       
+        
     }else if (indexPath.section == 0 && indexPath.row == 1){
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sss"];
         if (!cell) {
@@ -234,7 +236,9 @@
             _webView.scrollView.scrollEnabled = NO;
             [_webView sizeToFit];
             [cell addSubview:_webView];
-            [self showInWebView];
+            
+            if (self.detailData)
+                [self showInWebView];
         }
         cell.textLabel.text = @"add";
         return cell;
@@ -303,38 +307,43 @@
 - (NSString *)touchBody
 {
     NSMutableString *body = [NSMutableString string];
-    [body appendFormat:@"<div class=\"title\">%@</div>",@"我的标题"];
-    [body appendFormat:@"<div class=\"time\">%@</div>",@"时间"];
-    [body appendString:@"<p>　　近日王楠老公郭斌发微博称：遇到一些欺负人近日王楠老公郭斌发微博称：遇到一些欺负人的事总是很难缓过劲，曾经的九一八！整个国家被一个比咱小太多的Sb国家从头到脚羞辱欺负的到家了！我是去过日本却从不用它包括电器之內的 任何产品！甚至在日本住酒店很小人地把水都打开，还觉得解气！其实这没用！咱得多方位加油！加油！</p><!--IMG#0--><p>　　王楠转发了此条微博手动点赞：这就是郭同学，永远这么直接，我手动点赞！永远不要忘记曾经的九一八！<br/></p><!--IMG#0--><p>　　然而有网友表示，王楠老公郭斌先前微博照片中，手上戴着的正好就是日本品牌G-SHOCK手表。<br/></p><!--IMG#0--><p>　　郭斌手上的G-SHOCK是CASIO手表的品牌之一，具有耐用、防水等特点。<br/></p><p> 特别声明：本文为网易自媒体平台“网易号”作者上传并发布，仅代表该作者观点。网易仅提供信息发布平台。</p>"];
+    [body appendFormat:@"<div class=\"title\">%@</div>",self.detailData.subject];
+    [body appendFormat:@"<div class=\"time\">%@ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width=\"16\" height=\"10\" src=\"%@\"> %@ </div>",self.detailData.dateline,[[NSBundle mainBundle] URLForResource:@"yd_icon.png" withExtension:nil],self.detailData.views];
+    [body appendString:self.detailData.message];
     
     
-    NSMutableString *imgHtml = [NSMutableString string];
-    
-    // 设置img的div
-    [imgHtml appendString:@"<div class=\"img-parent\">"];
-    
-    // 数组存放被切割的像素
-    //        NSArray *pixel = [detailImgModel.pixel componentsSeparatedByString:@"*"];
-    CGFloat width = 690;
-    CGFloat height = 1127;
-    // 判断是否超过最大宽度
-    CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width * 0.96;
-    if (width > maxWidth) {
-        height = maxWidth / width * height;
-        width = maxWidth;
+    // 遍历img
+    for (DetailImgModel *detailImgModel in self.detailData.img) {
+        NSMutableString *imgHtml = [NSMutableString string];
+        
+        // 设置img的div
+        [imgHtml appendString:@"<div class=\"img-parent\">"];
+        
+        // 数组存放被切割的像素
+        NSArray *pixel = [detailImgModel.pixel componentsSeparatedByString:@"*"];
+        CGFloat width = [[pixel firstObject]floatValue];
+        CGFloat height = [[pixel lastObject]floatValue];
+        // 判断是否超过最大宽度
+        CGFloat maxWidth = [UIScreen mainScreen].bounds.size.width * 0.96;
+        if (width > maxWidth) {
+            height = maxWidth / width * height;
+            width = maxWidth;
+        }
+        
+        NSString *onload = @"this.onclick = function() {"
+        "  window.location.href = 'sx:src=' +this.src;"
+        "};";
+        [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\">",onload,width,height,detailImgModel.src];
+        // 结束标记
+        [imgHtml appendString:@"</div>"];
+        // 替换标记
+        [body replaceOccurrencesOfString:detailImgModel.ref withString:imgHtml options:NSCaseInsensitiveSearch range:NSMakeRange(0, body.length)];
     }
-    
-    NSString *onload = @"this.onclick = function() {"
-    "  window.location.href = 'sx:src=' +this.src;"
-    "};";
-    [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\">",onload,width,height,@"http://dingyue.nosdn.127.net/aGMZtB5xhSw=P18ZTdlxOz7VjftxEvzU9CiE=3NcPq4YJ1474254066396compressflag.jpg"];
-    // 结束标记
-    [imgHtml appendString:@"</div>"];
-    // 替换标记
-    [body replaceOccurrencesOfString:@"<!--IMG#0-->" withString:imgHtml options:NSCaseInsensitiveSearch range:NSMakeRange(0, body.length)];
-    
     return body;
 }
+
+
+#pragma mark UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -347,6 +356,41 @@
     [self.tableview reloadData];
 }
 
+#pragma mark - ******************* 将发出通知时调用
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *url = request.URL.absoluteString;
+    NSRange range = [url rangeOfString:@"sx:src="];
+    if (range.location != NSNotFound) {
+        NSInteger begin = range.location + range.length;
+        NSString *src = [url substringFromIndex:begin];
+        [self imgageClick:src];
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - ******************** 图片点击方法
+- (void)imgageClick:(NSString *)src
+{
+    CX_Log(@"点击图片");
+    
+    NSInteger currentIdx = 0;
+    NSMutableArray *arr= [[NSMutableArray alloc] init];
+    for (DetailImgModel *item in self.detailData.img)
+    {
+        if ([src isEqualToString:item.src] )
+        {
+            currentIdx = [self.detailData.img indexOfObject:item];
+        }
+        [arr addObject:item.src];
+    }
+    
+    SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:[arr copy] currentIndex:currentIdx placeholderImageNmae:@"placeholderImage"];
+    [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+}
+
+
 #pragma mark - UITextViewDelegate
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -357,7 +401,7 @@
     }else if (replayTextHeight >= 80){
         replayTextHeight = 80;
     }
-
+    
     CGRect replayBarFrame = CGRectMake(0, MTScreenH - replayTextHeight - 20 - self.keyBoardHeight , MTScreenW, replayTextHeight + 20);
     CGRect replayTextFrame = CGRectMake(10, 10, MTScreenW - 80, replayTextHeight);
     
@@ -401,7 +445,7 @@
     CGRect keyframe = [info[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat keyBoardH = keyframe.size.height;
     self.keyBoardHeight = keyBoardH;
-
+    
     CGRect replyBarFrame = self.replyBar.frame;
     replyBarFrame.origin.y = MTScreenH - keyBoardH - replyBarFrame.size.height;
     
@@ -445,10 +489,9 @@
  */
 -(void)getDetailData
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{
-                                                                          @"tid" : self.itemdata.tid,
-                                                                          @"client":@"ios"
-                                                                          }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : @13,
+                                                                          @"client":@"ios",
+                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ?  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -459,7 +502,7 @@
                                      else
                                      {
                                          self.detailData = [DetailPostsModel objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                         [self.tableview reloadData];
+                                         [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -518,7 +561,7 @@
     //目前只能点赞,不能取消
     NSString *doType = @"add";
     if ([self.detailData.is_recommend integerValue] != 0) {
-       return [NoticeHelper AlertShow:@"您已点赞" view:nil];
+        return [NoticeHelper AlertShow:@"您已点赞" view:nil];
     }
     
     NSDictionary *params = @{
@@ -597,7 +640,7 @@
             if ([type isEqualToString:@"support"]) {
                 model.is_support = @"1";
             }else{
-               model.is_support = @"0";
+                model.is_support = @"0";
             }
             
             model.support = dict[@"datas"][@"support"];

@@ -187,7 +187,9 @@
                                              vo.logintype = @"0";
                                              vo.member_mobile = self.accountText.text;
                                              vo.pwd = [self.passwordText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-                                             
+                                             [self loginResultSetData:vo];
+
+                                             NSLog(@"寸欣健康登录成功！");
                                              [self loginBBS:vo];
                                          }
                                          [HUD removeFromSuperview];
@@ -199,24 +201,24 @@
     }
 }
 
-// 登录bbs
+// 尝试登录bbs
 -(void)loginBBS:(UserModel *)vo
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :vo.key,
                                                                             @"client" : @"ios",
-                                                                            @"targetsys" : @"4",
-                                                                            @"discuz_uname" : @"大猫"}
+                                                                            @"targetsys" : @"4"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSLog(@"%@",dict);
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         NSLog(@"BBS登录失败！");
                                      }
                                      else
                                      {
+                                         NSLog(@"BBS登录成功！");
+
                                          NSDictionary *datas = [dict objectForKey:@"datas"];
                                          
                                          BBSUserModel *bbsmodel = [[BBSUserModel alloc] init];
@@ -227,8 +229,6 @@
                                          
                                          [SharedAppUtil defaultCommonUtil].bbsVO = bbsmodel;
                                          [ArchiverCacheHelper saveObjectToLoacl:bbsmodel key:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
-                                         
-                                         [self loginResultSetData:vo];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -355,6 +355,7 @@
  */
 -(void)loginSuccessWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token mobile:(NSString *)mobile code:(NSString *)code
 {
+    NSLog(@"adaaaaa%@",openid);
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_LoginByother parameters: @{@"open_id" : openid,
                                                                      @"login_type" : login_type,
