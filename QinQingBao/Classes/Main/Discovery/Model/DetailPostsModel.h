@@ -41,6 +41,7 @@
 
 @property(copy,nonatomic)NSString *views;
 
+@property(copy,nonatomic)NSMutableArray *img;
 @property(copy,nonatomic)NSString *fid;
 
 @end

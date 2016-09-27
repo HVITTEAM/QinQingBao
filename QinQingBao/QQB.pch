@@ -818,8 +818,14 @@
 /***评论 - 评论帖子或评论帖子的评论*/
 #define URL_Reply_post @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/reply_post.php"
 
+/***评论 - 帖子 - 发布帖子*/
+#define URL_Get_newthread_post [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/newthread_post.php",URL_Local_New]
+
+/***评论 - 上传 - 多个图片*/
+#define URL_Get_upload_image_multy [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/upload_image_multy.php",URL_Local_New]
+
 /***帖子 - 删除帖子*/
-#define URL_Delete_thread @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php"
+#define URL_Get_delete_thread [NSString stringWithFormat:@"%@test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

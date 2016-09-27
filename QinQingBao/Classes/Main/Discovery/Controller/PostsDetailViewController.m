@@ -16,6 +16,8 @@
 
 #import "CommentModel.h"
 
+#import "SWYPhotoBrowserViewController.h"
+
 @interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
 {
     UIWebView *_webView;
@@ -774,7 +776,7 @@
                              };
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         [HUD removeFromSuperview];
         id codeNum = [dict objectForKey:@"code"];
