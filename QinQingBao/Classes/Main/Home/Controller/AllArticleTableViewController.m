@@ -94,7 +94,6 @@
     
     if (articlecell == nil)
         articlecell = [CommonArticleCell commonArticleCell];
-    
     ArticleModel *item = dataProvider[indexPath.row];
     
     articlecell.titleLab.text = item.title;

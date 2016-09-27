@@ -134,6 +134,8 @@
 		0128A8BF1B9EC7D3002B14E2 /* OrderSubmitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0128A8BD1B9EC7D3002B14E2 /* OrderSubmitCell.xib */; };
 		0128A8C21B9ED064002B14E2 /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128A8C11B9ED064002B14E2 /* PayViewController.m */; };
 		0128A8C81B9ED597002B14E2 /* UIViewController+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */; };
+		012910C71D9A0D9200A0C69D /* DetailImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012910C61D9A0D9200A0C69D /* DetailImgModel.m */; };
+		012910CC1D9A185F00A0C69D /* yd_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 012910CB1D9A185F00A0C69D /* yd_icon.png */; };
 		012AAD191CA28CF000CEE121 /* HealthPlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AAD181CA28CF000CEE121 /* HealthPlaceHolderView.m */; };
 		012AAD1B1CA28D0500CEE121 /* HealthPlaceHolderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012AAD1A1CA28D0500CEE121 /* HealthPlaceHolderView.xib */; };
 		012AAD1E1CA4CFCB00CEE121 /* OrderTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012AAD1D1CA4CFCA00CEE121 /* OrderTimeViewController.m */; };
@@ -1714,6 +1716,9 @@
 		0128A8C11B9ED064002B14E2 /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayViewController.m; sourceTree = "<group>"; };
 		0128A8C61B9ED597002B14E2 /* UIViewController+AOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AOP.h"; sourceTree = "<group>"; };
 		0128A8C71B9ED597002B14E2 /* UIViewController+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AOP.m"; sourceTree = "<group>"; };
+		012910C51D9A0D9200A0C69D /* DetailImgModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailImgModel.h; sourceTree = "<group>"; };
+		012910C61D9A0D9200A0C69D /* DetailImgModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailImgModel.m; sourceTree = "<group>"; };
+		012910CB1D9A185F00A0C69D /* yd_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yd_icon.png; sourceTree = "<group>"; };
 		012AAD171CA28CF000CEE121 /* HealthPlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthPlaceHolderView.h; sourceTree = "<group>"; };
 		012AAD181CA28CF000CEE121 /* HealthPlaceHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthPlaceHolderView.m; sourceTree = "<group>"; };
 		012AAD1A1CA28D0500CEE121 /* HealthPlaceHolderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthPlaceHolderView.xib; sourceTree = "<group>"; };
@@ -8895,6 +8900,7 @@
 		01F6DB9F1D8E406000300679 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				012910CB1D9A185F00A0C69D /* yd_icon.png */,
 				0133DA6E1D8F8459008A2513 /* SXDetails.css */,
 				01F6DBA01D8E406000300679 /* CommunityViewController.h */,
 				01F6DBA11D8E406000300679 /* CommunityViewController.m */,
@@ -8921,6 +8927,8 @@
 				D296D0691D9521EF00FF727D /* CommentModel.m */,
 				D2E6506A1D98AF0900532554 /* CommentContentModel.h */,
 				D2E6506B1D98AF0900532554 /* CommentContentModel.m */,
+				012910C51D9A0D9200A0C69D /* DetailImgModel.h */,
+				012910C61D9A0D9200A0C69D /* DetailImgModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9603,6 +9611,7 @@
 				01ECDA251C8EB31F0018160F /* VoiceSearchFeedback014@2x.png in Resources */,
 				010EC9E51C438D8900D36417 /* RecommenCell.xib in Resources */,
 				01F85ABD1C575A2F00E463F4 /* GoodsTypeCell.xib in Resources */,
+				012910CC1D9A185F00A0C69D /* yd_icon.png in Resources */,
 				01601DA01CE0900200B3712E /* TimeLineCell.xib in Resources */,
 				01F015ED1C5F42CD00930B0E /* DiscountCountDownCell.xib in Resources */,
 				01ECDAAA1C8EB31F0018160F /* chatBar_more_cameraSelected@2x.png in Resources */,
@@ -10678,6 +10687,7 @@
 				01E690541BCCAA8000A17543 /* IntercomCtrlView.m in Sources */,
 				01E6D48B1BE1E74C00824F51 /* AccountViewController.m in Sources */,
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
+				012910C71D9A0D9200A0C69D /* DetailImgModel.m in Sources */,
 				0174AD901D853752001D0697 /* SendMsgViewController.m in Sources */,
 				01E4BE501B9FEA2800BF41EF /* PayButtonCell.m in Sources */,
 				01EF37291C59B8CD0029C1C5 /* HouseTypeCell.m in Sources */,

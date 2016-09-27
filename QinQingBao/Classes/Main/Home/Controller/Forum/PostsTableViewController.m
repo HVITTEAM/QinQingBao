@@ -21,11 +21,15 @@
 
 @interface PostsTableViewController ()
 {
-    NSArray *postsArr;
+    NSMutableArray *postsArr;
     
     NSArray *recommendlist;
     
     NSArray *questiondata;
+    
+    // 当前第几页
+    NSInteger currentPageIdx;
+    
 }
 @end
 
@@ -75,10 +79,17 @@
  */
 - (void)setupRefresh
 {
+    currentPageIdx = 0;
+    postsArr = [[NSMutableArray alloc] init];
+    
     // 下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        currentPageIdx = 0;
+        postsArr = [[NSMutableArray alloc] init];
         [self getData];
     }];
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getData)];
 }
 
 /**
@@ -86,26 +97,70 @@
  */
 -(void)getUserPosts
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters: @{@"flag" : [NSString stringWithFormat:@"%ld",(long)self.type] }
+    currentPageIdx ++;
+    NSDictionary *paramDict = [[NSDictionary alloc] init];
+    if ([SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
+    {
+        paramDict = @{@"flag" : [NSString stringWithFormat:@"%ld",(long)self.type],
+                      @"client" : @"ios",
+                      @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                      @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                      @"page" : @"10"};
+    }
+    else
+    {
+        paramDict = @{@"flag" : [NSString stringWithFormat:@"%ld",(long)self.type],
+                      @"client" : @"ios",
+                      @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                      @"page" : @"10"};
+    }
+
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters: paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
+                                         if([codeNum integerValue] == 17001 && postsArr.count == 0)
+                                         {
+                                             return;
+//                                             return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+                                         }
+                                         else if([codeNum integerValue] == 17001 && postsArr.count > 0)
+                                         {
+                                             return;
+//                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                         }
+                                         
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
                                      else
                                      {
-                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         if (postsArr.count == 0)
-                                             [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+                                         NSArray *arr =[PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         
+                                         if (arr.count == 0 && currentPageIdx == 1)
+                                         {
+                                             CX_Log(@"没有发帖数据");
+                                         }
+                                         else if (arr.count == 0 && currentPageIdx > 1)
+                                         {
+                                             currentPageIdx --;
+                                             [self.view showNonedataTooltip];
+                                         }
+                                         
+                                         [postsArr addObjectsFromArray:[arr copy]];
+                                         
                                          [self.tableView reloadData];
                                      }
+
+                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
-                                     
+                                     [self.tableView.footer endRefreshing];
+
                                  }];
 }
 
@@ -117,30 +172,53 @@
     if (![SharedAppUtil defaultCommonUtil].bbsVO) {
         return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
     }
+    currentPageIdx ++;
     [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
-                                                                       @"client" : @"ios"}
+                                                                       @"client" : @"ios",
+                                                                       @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                                                                       @"page" : @"10"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         if ([codeNum integerValue] == 17001) {
+                                         if([codeNum integerValue] == 17001 && postsArr.count == 0)
+                                         {
                                              return [self.tableView initWithPlaceString:PlaceholderStr_Attention imgPath:@"placeholder-2"];
                                          }
+                                         else if([codeNum integerValue] == 17001 && postsArr.count > 0)
+                                         {
+                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                         }
+                                         
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
                                      else
                                      {
-                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         if (postsArr.count == 0)
-                                             [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+                                         NSArray *arr =[PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         
+                                         if (arr.count == 0 && currentPageIdx == 1)
+                                         {
+                                             CX_Log(@"没有发帖数据");
+                                         }
+                                         else if (arr.count == 0 && currentPageIdx > 1)
+                                         {
+                                             currentPageIdx --;
+                                             [self.view showNonedataTooltip];
+                                         }
+                                         
+                                         [postsArr addObjectsFromArray:[arr copy]];
+                                         
                                          [self.tableView reloadData];
                                      }
+                                     
+                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
-                                     
+                                     [self.tableView.header endRefreshing];
                                  }];
 }
 
@@ -153,6 +231,8 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_recommendlist parameters: @{@"recommend" : self.type == BBSType_4 ? @"2" : @"3"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
+                                     [self.tableView.footer endRefreshing];
+
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
@@ -167,12 +247,13 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
-                                     
+                                     [self.tableView.footer endRefreshing];
+
                                  }];
 }
 
 /**
- *  获取问卷数据
+ *  获取问卷调查数据
  */
 -(void)getDataProvider
 {
@@ -297,7 +378,8 @@
     else
     {
         CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        [cardCell setPostsModel:postsArr[indexPath.row]];
+        if (postsArr.count > 0)
+            [cardCell setPostsModel:postsArr[indexPath.row]];
         cell = cardCell;
     }
     

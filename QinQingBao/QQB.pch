@@ -793,11 +793,13 @@
 
 //***获取板块下级列表【可用于健康圈子】*/
 #define URL_Circle @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/circle.php"
+
 /***帖子 - 获取帖子详情*/
-#define URL_Get_articledetail @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/articledetail.php"
+#define URL_Get_articledetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/articledetail.php",URL_Local_New]
 
 /***帖子 - 个人信息列表*/
 #define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
+
 /***帖子 - 获取版块详细列表*/
 #define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
 
@@ -816,6 +818,14 @@
 /***评论 - 评论帖子或评论帖子的评论*/
 #define URL_Reply_post @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/reply_post.php"
 
+/***评论 - 帖子 - 发布帖子*/
+#define URL_Get_newthread_post [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/newthread_post.php",URL_Local_New]
+
+/***评论 - 上传 - 多个图片*/
+#define URL_Get_upload_image_multy [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/upload_image_multy.php",URL_Local_New]
+
+/***帖子 - 删除帖子*/
+#define URL_Get_delete_thread [NSString stringWithFormat:@"%@test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

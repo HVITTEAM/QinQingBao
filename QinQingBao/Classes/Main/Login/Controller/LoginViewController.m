@@ -355,6 +355,7 @@
  */
 -(void)loginSuccessWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token mobile:(NSString *)mobile code:(NSString *)code
 {
+    NSLog(@"adaaaaa%@",openid);
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_LoginByother parameters: @{@"open_id" : openid,
                                                                      @"login_type" : login_type,

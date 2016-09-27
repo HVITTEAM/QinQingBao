@@ -26,14 +26,20 @@
     
     self.nameTextfield.leftViewMode = UITextFieldViewModeAlways;
     self.nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-      self.nameTextfield.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"name.png"]];
+    self.nameTextfield.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"name.png"]];
     self.headImg.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImg addGestureRecognizer:singleTap];
 }
 
-// 完善资料
--(void)complete
+
+// 个人头像点击事件
+-(void)onClickImage
+{
+    
+}
+
+- (IBAction)btnHandler:(id)sender
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                             @"client" : @"ios",
@@ -66,12 +72,4 @@
                                  }];
 }
 
-// 个人头像点击事件
--(void)onClickImage
-{
-    
-}
-
-- (IBAction)btnHandler:(id)sender {
-}
 @end

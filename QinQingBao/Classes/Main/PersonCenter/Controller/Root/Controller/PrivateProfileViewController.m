@@ -33,16 +33,17 @@
 
 @interface PrivateProfileViewController ()<UIScrollViewDelegate>
 {
-    
-    
     UILabel *titleLabel;
     
     BBSPersonalModel *personalInfo;
-
+    
     UserInforModel *infoVO;
     NSString *iconUrl;
     
-    NSArray *postsArr;
+    NSMutableArray *postsArr;
+    
+    // 当前第几页
+    NSInteger currentPageIdx;
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -59,6 +60,8 @@
     
     [self initHeadView];
     
+    [self setupRefresh];
+    
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
@@ -66,7 +69,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
     if (self.headView)
@@ -166,6 +169,22 @@
     }
 }
 
+#pragma mark 集成刷新控件
+
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    currentPageIdx = 1;
+    postsArr = [[NSMutableArray alloc] init];
+    
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getUserPosts)];
+
+}
+
+
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -193,11 +212,11 @@
         titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
     titleLabel.text = infoVO.member_truename;
     titleLabel.alpha = alpha;
-//    self.navigationItem.titleView = titleLabel;
+    //    self.navigationItem.titleView = titleLabel;
     
     UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
-
+    
 }
 
 #pragma mark - Table view data source
@@ -210,7 +229,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (2 == section)
-        return postsArr.count;
+        return postsArr.count + 1;
     return 1;
 }
 
@@ -249,7 +268,7 @@
             
             if (idx == 100)
             {
-//                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+                //                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
             }
             else if (idx == 200)
             {
@@ -285,15 +304,28 @@
     }
     else if (indexPath.section == 2)
     {
-        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        [cardCell setPostsModel:postsArr[indexPath.row]];
-        
-        // 头像点击 进入个人信息界面
-        cardCell.portraitClick = ^(PostsModel *item)
+        if (indexPath.row == 0)
         {
+            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
+            if (commoncell == nil)
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
+            commoncell.textLabel.text = [NSString stringWithFormat:@"我的帖子  %ld",(long)[personalInfo.count_article integerValue]];
+            commoncell.textLabel.font = [UIFont systemFontOfSize:15];
+            commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
+            cell = commoncell;
+        }
+        else
+        {
+            CardCell *cardCell = [CardCell createCellWithTableView:tableView];
+            [cardCell setPostsModel:postsArr[indexPath.row - 1]];
             
-        };
-        cell = cardCell;
+            // 头像点击 进入个人信息界面
+            cardCell.portraitClick = ^(PostsModel *item)
+            {
+                
+            };
+            cell = cardCell;
+        }
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -353,7 +385,7 @@
                                                                            @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
@@ -378,23 +410,58 @@
  */
 -(void)getUserPosts
 {
-    if (![SharedAppUtil defaultCommonUtil].bbsVO)
-        return;
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id }
+    currentPageIdx ++;
+    NSDictionary *paramDict = [[NSDictionary alloc] init];
+    if (![SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
+        return [self.tableView.footer endRefreshing];
+    
+    paramDict = @{@"uid" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                  @"client" : @"ios",
+                  @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
+                  @"page" : @"10"};
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [self.tableView.footer endRefreshing];
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)
                                      {
+                                         if([codeNum integerValue] == 17001 && postsArr.count == 0)
+                                         {
+                                             return ;
+//                                             [NoticeHelper AlertShow:@"您还没有发帖" view:nil]
+                                         }
+                                         else if([codeNum integerValue] == 17001 && postsArr.count > 0)
+                                         {
+                                             return;
+//                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                         }
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                                         [alertView show];
+                                         [alertView show];
                                      }
                                      else
                                      {
-                                         postsArr = [PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                                         NSArray *arr =[PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         
+                                         if (arr.count == 0 && currentPageIdx == 1)
+                                         {
+                                             CX_Log(@"没有新的发帖数据");
+                                         }
+                                         else if (arr.count == 0 && currentPageIdx > 1)
+                                         {
+                                             currentPageIdx --;
+                                             //                                             [self.view showNonedataTooltip];
+                                         }
+                                         
+                                         [postsArr addObjectsFromArray:[arr copy]];
+                                         
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [self.tableView.footer endRefreshing];
+                                     
                                  }];
 }
 
@@ -428,7 +495,7 @@
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                              // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
-
+                                             
                                              [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
                                          }
                                          else

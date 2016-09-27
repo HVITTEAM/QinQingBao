@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface DetailPostsModel : NSObject
  //作者id
 @property(copy,nonatomic)NSString *authorid;
@@ -33,5 +34,13 @@
 @property(copy,nonatomic)NSString *is_digest;
 
 @property(copy,nonatomic)NSString *forum_name;
+
+@property(copy,nonatomic)NSString *grouptitle;
+
+@property(copy,nonatomic)NSString *dateline;
+
+@property(copy,nonatomic)NSString *views;
+
+@property(copy,nonatomic)NSMutableArray *img;
 
 @end

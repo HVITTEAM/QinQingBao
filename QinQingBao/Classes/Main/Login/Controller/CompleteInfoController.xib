@@ -7,8 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompleteInfoController">
             <connections>
-                <outlet property="btn" destination="VuN-rE-OGX" id="fA8-s4-VzC"/>
-                <outlet property="headImg" destination="nEY-w1-lt4" id="tnW-E9-r8W"/>
+                <outlet property="btn" destination="VuN-rE-OGX" id="hQe-6I-rf0"/>
+                <outlet property="headImg" destination="nEY-w1-lt4" id="XI2-Ft-MYp"/>
                 <outlet property="nameTextfield" destination="koj-uK-iyq" id="wfj-UT-EI0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -49,7 +49,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="btnHandler:" destination="-1" eventType="touchUpInside" id="70s-eX-8Vt"/>
+                        <action selector="btnHandler:" destination="-1" eventType="touchUpInside" id="PNh-DI-aJk"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昵称请控制在2-15个字符，支持中英文、数字和下划线" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCG-78-nfE">
