@@ -14,18 +14,14 @@
 #import "DetailPostsModel.h"
 #import "CommentModel.h"
 
-@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate>
+@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
 {
     UIWebView *_webView;
-    
-    
     
     CGFloat cellHeight;
 }
 
 @property (strong, nonatomic) UITableView *tableview;
-
-@property (strong, nonatomic) DetailPostsModel *detailData;
 
 @property (strong, nonatomic) UIView *replyBar;
 
@@ -33,9 +29,17 @@
 
 @property (strong, nonatomic) UIButton *replyBtn;
 
-@property (assign, nonatomic) CGFloat keyBoardHeight;
+@property (strong, nonatomic) UILabel *replyPlaceholdeLb;
 
-@property (strong, nonatomic) NSArray *commentDatas;
+@property (assign, nonatomic) CGFloat keyBoardHeight;
+/**帖子详情数据*/
+@property (strong, nonatomic) DetailPostsModel *detailData;
+/**评论数据源*/
+@property (strong, nonatomic) NSMutableArray *commentDatas;
+/**被回复评论的IndexPath,如果回复的是楼主,则设置为nil*/
+@property (strong, nonatomic) NSIndexPath *replyCommentIdx;
+
+@property (assign, nonatomic) NSInteger pageNum;
 
 @end
 
@@ -55,43 +59,23 @@
 {
     [super viewDidLoad];
     
+    self.pageNum = 1;
+    
     self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStylePlain];
     self.tableview.delegate =self;
     self.tableview.dataSource = self;
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableview.backgroundColor = HMGlobalBg;
     [self.view addSubview:self.tableview];
+    self.tableview.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
-    //回复工具栏
-    self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
-    self.replyBar.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.replyBar];
+    [self setupNaviBar];
     
-    UITextView *txtView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 80, 40)];
-    txtView.layer.borderColor = HMColor(235, 235, 235).CGColor;
-    txtView.layer.borderWidth = 1.0f;
-    txtView.layer.cornerRadius = 8.0f;
-    txtView.delegate = self;
-    txtView.font = [UIFont systemFontOfSize:15];
-    [self.replyBar addSubview:txtView];
-    self.replayTextView = txtView;
-    
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 60, 10, 50, 40)];
-    btn.backgroundColor = HMColor(148, 191, 54);
-    btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn setTitle:@"回复" forState:UIControlStateNormal];
-    btn.layer.cornerRadius = 8.0f;
-    [self.replyBar addSubview:btn];
-    self.replyBtn = btn;
-    
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 1)];
-    line.backgroundColor = HMColor(235, 235, 235);
-    [self.replyBar addSubview:line];
+    [self setupReplyBar];
     
     [self getDetailData];
     
     [self loadCommonlist];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -107,6 +91,79 @@
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (NSMutableArray *)commentDatas
+{
+    if (!_commentDatas) {
+        _commentDatas = [[NSMutableArray alloc] init];
+    }
+    return _commentDatas;
+}
+
+#pragma mark - 界面创建
+/**
+ *  创建回复工具栏
+ */
+- (void)setupReplyBar
+{
+    self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 54, MTScreenW, 54)];
+    self.replyBar.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.replyBar];
+    
+    UITextView *txtView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 80, 34)];
+    txtView.layer.borderColor = HMColor(235, 235, 235).CGColor;
+    txtView.layer.borderWidth = 1.0f;
+    txtView.layer.cornerRadius = 8.0f;
+    txtView.delegate = self;
+    txtView.font = [UIFont systemFontOfSize:15];
+    [self.replyBar addSubview:txtView];
+    self.replayTextView = txtView;
+    
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 60, 10, 50, 34)];
+    btn.backgroundColor = HMColor(148, 191, 54);
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [btn setTitle:@"回复" forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 8.0f;
+    [btn addTarget:self action:@selector(replyMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.replyBar addSubview:btn];
+    self.replyBtn = btn;
+    
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectOffset(self.replayTextView.frame, 5, 0)];
+    lb.textColor = [UIColor lightGrayColor];
+    lb.font = [UIFont systemFontOfSize:15];
+    lb.text = @"回复:楼主";
+    [self.replyBar addSubview:lb];
+    self.replyPlaceholdeLb = lb;
+    
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 1)];
+    line.backgroundColor = HMColor(235, 235, 235);
+    [self.replyBar addSubview:line];
+    
+    //默认回复楼主
+    self.replyCommentIdx = nil;
+}
+
+- (void)setupNaviBar
+{
+    UIImage *img = [UIImage imageNamed:@"titlebar_delete"];
+    img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *delItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(delItemClick:)];
+    
+    img = [UIImage imageNamed:@"title_share_icon_normal"];
+    img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(shareItemClick:)];
+    
+    UIButton *authorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 25)];
+    [authorBtn setTitle:@"楼主" forState:UIControlStateNormal];
+    authorBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    authorBtn.layer.cornerRadius = 5.0f;
+    authorBtn.layer.borderColor = HMColor(198, 150, 102).CGColor;
+    authorBtn.layer.borderWidth = 1.0f;
+    [authorBtn setTitleColor:HMColor(198, 150, 102) forState:UIControlStateNormal];
+    [authorBtn addTarget:self action:@selector(authorItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *authorItem = [[UIBarButtonItem alloc] initWithCustomView:authorBtn];
+    self.navigationItem.rightBarButtonItems = @[delItem,shareItem,authorItem];
 }
 
 #pragma mark - Table view data source
@@ -212,6 +269,19 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 1 && indexPath.row != 0) {
+        self.replyCommentIdx = indexPath;
+        CommentModel *model = self.commentDatas[indexPath.row - 1];
+        self.replyPlaceholdeLb.text = [NSString stringWithFormat:@"回复:%@",model.author];
+        self.replayTextView.text = nil;
+        self.replyPlaceholdeLb.hidden = NO;
+        [self.replayTextView becomeFirstResponder];
+    }
+
+}
+
 #pragma mark - 拼接html语言
 - (void)showInWebView
 {
@@ -282,8 +352,8 @@
 {
     CGFloat replayTextHeight = textView.contentSize.height;
     
-    if (replayTextHeight < 40) {
-        replayTextHeight = 40;
+    if (replayTextHeight < 34) {
+        replayTextHeight = 34;
     }else if (replayTextHeight >= 80){
         replayTextHeight = 80;
     }
@@ -300,7 +370,24 @@
     if (replayTextHeight < 80) {
         [textView setContentOffset:CGPointZero animated:YES];
     }
+    
+    //设置Placeholde文本
+    if (textView.text.length <=0) {
+        self.replyPlaceholdeLb.hidden = NO;
+    }else{
+        self.replyPlaceholdeLb.hidden = YES;
+    }
+}
 
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.replayTextView.text.length <= 0) {
+        self.replyPlaceholdeLb.text = @"回复:楼主";
+        self.replyCommentIdx = nil;
+    }
+    
+    [self.view endEditing:YES];
 }
 
 #pragma mark - 键盘相关
@@ -323,8 +410,12 @@
     [UIView animateWithDuration:animationTime animations:^{
         self.tableview.frame = tableFrame;
         self.replyBar.frame = replyBarFrame;
+    } completion:^(BOOL finished) {
+        if (self.replyCommentIdx) {   //存在,说明是对评论进行回复,让该条评论可见
+            [self.tableview scrollToRowAtIndexPath:self.replyCommentIdx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+
     }];
-    
 }
 
 /**
@@ -417,6 +508,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
 }
@@ -463,6 +555,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
 }
@@ -512,6 +605,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
 }
@@ -520,14 +614,16 @@
 {
     NSDictionary *params = @{
                              @"tid":self.itemdata.tid,
-                             @"p":@0,
-                             @"page":@10,
+                             @"p":@(self.pageNum),
+                             @"page":@5,
                              @"client":@"ios",
                              @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
                              };
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
 
+        [self.tableview.footer endRefreshing];
+        
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
@@ -537,16 +633,135 @@
         else
         {
             
-            self.commentDatas = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            [self.commentDatas addObjectsFromArray:arr];
             [self.tableview reloadData];
+            self.pageNum++;
             
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.tableview.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-
 }
 
+/**
+ *  评论帖子或评论帖子的评论
+ */
+- (void)reply_post:(NSDictionary *)params
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Reply_post parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+           
+            
+            [NoticeHelper AlertShow:dict[@"datas"][@"message"] view:nil];
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+- (void)replyMessage:(UIButton *)sender
+{
+    NSString *replyContent = self.replayTextView.text;
+    if (replyContent.length < 10) {
+        return [NoticeHelper AlertShow:@"评价字数不得小于10个" view:nil];
+    }
+    
+    NSMutableDictionary *params = nil;
+    if (self.replyCommentIdx) { //说明是对评论进行回复
+        CommentModel *model = self.commentDatas[self.replyCommentIdx.row - 1];
+        params = [@{
+                    @"tid":self.detailData.tid,
+                    @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                    @"message":self.replayTextView.text,
+                    @"reppid":model.pid,
+                    @"replyname":model.author,
+                    @"replytime":model.dateline,
+                    @"authorid":model.authorid,
+                    @"client":@"ios",
+                    @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                    }mutableCopy];
+        
+        NSUInteger location = model.commen.newcommon.length < 50?model.commen.newcommon.length:50;
+        params[@"replyquote"] = [model.commen.newcommon substringToIndex:location];
+    }else{
+        params = [@{
+                    @"fid":self.detailData.fid,
+                    @"tid":self.detailData.tid,
+                    @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                    @"message":self.replayTextView.text,
+                    @"authorid":self.detailData.authorid,
+                    @"client":@"ios",
+                    @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                    }mutableCopy];
+    }
+    
+    [self reply_post:params];
+}
+
+/**
+ *  下拉刷新
+ */
+- (void)loadMoreDatas
+{
+    [self loadCommonlist];
+}
+
+#pragma mark - 导航栏事件
+- (void)delItemClick:(UINavigationItem *)item
+{
+    NSDictionary *params = @{
+                             @"tid":self.detailData.tid,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            if (self.deletePostsSuccessBlock) {
+                self.deletePostsSuccessBlock();
+            }
+            [self.navigationController popToViewController:self animated:YES];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+- (void)shareItemClick:(UINavigationItem *)item
+{
+    
+}
+
+- (void)authorItemClick:(UIButton *)item
+{
+    
+}
 
 @end

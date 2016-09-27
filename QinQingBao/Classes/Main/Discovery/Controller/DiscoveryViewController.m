@@ -42,6 +42,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.pageNum = 1;
+    
     [self setupUI];
     
     [self loadCirclelist];
@@ -244,9 +246,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     if (indexPath.section == 2 && indexPath.row != 0) {
         PostsDetailViewController *detailVC = [[PostsDetailViewController alloc] init];
-        detailVC.itemdata = self.postsDatas[indexPath.row - 1];
+        PostsModel *postsModel = self.postsDatas[indexPath.row - 1];
+        detailVC.itemdata = postsModel;
+        detailVC.deletePostsSuccessBlock = ^{
+            [weakSelf.postsDatas removeObject:postsModel];
+            [weakSelf.tableView reloadData];
+        };
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }

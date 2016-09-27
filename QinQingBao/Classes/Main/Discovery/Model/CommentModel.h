@@ -13,6 +13,8 @@
 
 @property(copy,nonatomic)NSString *pid;
 
+@property(copy,nonatomic)NSString *fid;
+
 @property(copy,nonatomic)NSString *authorid;
 
 @property(copy,nonatomic)NSString *author;

@@ -13,4 +13,6 @@
 
 @property (nonatomic, retain) PostsModel *itemdata;
 
+@property (strong, nonatomic) void(^deletePostsSuccessBlock)(void);
+
 @end

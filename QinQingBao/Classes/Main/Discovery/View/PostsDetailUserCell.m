@@ -41,11 +41,11 @@
     self.portraitView.layer.cornerRadius = self.portraitView.width / 2;
     self.portraitView.layer.masksToBounds = YES;
     
-    self.attentionBtn.layer.cornerRadius = 5;
+    self.attentionBtn.layer.cornerRadius = 3;
     self.attentionBtn.layer.borderWidth = 1.0f;
     self.attentionBtn.layer.borderColor = HMColor(251, 176, 59).CGColor;
     
-    self.tagLb.layer.cornerRadius = 4;
+    self.tagLb.layer.cornerRadius = 2;
     self.tagLb.layer.masksToBounds = YES;
     
     self.nameLb.text = nil;
@@ -59,7 +59,7 @@
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.postsDetailData.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = postsDetailData.author;
-    self.tagLb.text = @"无敌";
+    self.tagLb.text = [NSString stringWithFormat:@" %@  ",postsDetailData.grouptitle];
     if ([postsDetailData.is_home_friend isEqualToString:@"0"]) {
         [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
     }else{

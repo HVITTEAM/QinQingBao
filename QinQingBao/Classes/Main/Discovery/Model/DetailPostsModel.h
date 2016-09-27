@@ -34,4 +34,12 @@
 
 @property(copy,nonatomic)NSString *forum_name;
 
+@property(copy,nonatomic)NSString *grouptitle;
+
+@property(copy,nonatomic)NSString *dateline;
+
+@property(copy,nonatomic)NSString *views;
+
+@property(copy,nonatomic)NSString *fid;
+
 @end

@@ -13,6 +13,8 @@
 #import "CircleSticklistModel.h"
 #import "PostsModel.h"
 #import "PostsDetailViewController.h"
+#import "BHBPopView.h"
+#import "CXComposeViewController.h"
 
 #define kHeadViewHeith 140
 #define kTabViewHeight 50
@@ -59,6 +61,8 @@
 
 @property (assign, nonatomic) CGFloat alphaWhenBeginDrag;
 
+@property (strong, nonatomic) UIImageView *postView;
+
 @end
 
 @implementation CommunityViewController
@@ -78,6 +82,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.isAllData = YES;
+    
+    self.allPageNum = 1;
+    self.hotPageNum = 1;
     
     [self setupUI];
     
@@ -143,6 +150,15 @@
     [self.navBar addSubview:backBtn];
     [self.navBar addSubview:titleLb];
     [self.view addSubview:self.navBar];
+    
+    self.postView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"post_icon"]];
+    self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 60, 50, 50);
+    self.postView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(postAction)];
+    recognizer.numberOfTapsRequired= 1;
+    recognizer.numberOfTouchesRequired = 1;
+    [self.postView addGestureRecognizer:recognizer];
+    [self.view addSubview:self.postView];
 }
 
 #pragma mark - gettter和setter方法
@@ -277,12 +293,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     PostsDetailViewController *postsDetailVC = [[PostsDetailViewController alloc] init];
+    PostsModel *postsModel;
     if (self.isAllData) {
-        postsDetailVC.itemdata = self.allPosts[indexPath.row];
+        postsModel = self.allPosts[indexPath.row];
     }else{
-        postsDetailVC.itemdata = self.hotPosts[indexPath.row];
+        postsModel = self.hotPosts[indexPath.row];
     }
+    postsDetailVC.itemdata = postsModel;
+    postsDetailVC.deletePostsSuccessBlock = ^{
+        if (weakSelf.isAllData) {
+            [self.allPosts removeObject:postsModel];
+        }else{
+            [self.hotPosts removeObject:postsModel];
+        }
+        [weakSelf.tableView reloadData];
+    };
     
     [self.navigationController pushViewController:postsDetailVC animated:YES];
 }
@@ -313,6 +340,24 @@
 {
     self.offsetYWhenBeginDrag = scrollView.contentOffset.y;
     self.alphaWhenBeginDrag = self.navBar.alpha;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH, 50, 50);
+    }];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self scrollViewDidEndDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 60, 50, 50);
+    }];
 }
 
 #pragma mark - 点击事件方法
@@ -461,6 +506,19 @@
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
     
+}
+
+- (void)postAction
+{
+    if ([SharedAppUtil checkLoginStates])
+    {
+        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
+            // 弹出发微博控制器
+            CXComposeViewController *compose = [[CXComposeViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
+            [self presentViewController:nav animated:YES completion:nil];
+        }];
+    }
 }
 
 
