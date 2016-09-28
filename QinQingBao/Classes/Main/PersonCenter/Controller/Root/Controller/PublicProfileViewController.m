@@ -53,9 +53,9 @@
     
     [self initHeadView];
     
-    [self getUserPosts];
-    
     [self setupRefresh];
+    
+    [self getUserPosts];
     
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -117,8 +117,6 @@
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"LoginInHeadView" owner:self options:nil] lastObject];
     
     LoginInHeadView *headView = (LoginInHeadView *)self.headView;
-    
-    headView.isUserata = YES;
     
     [self.tableView addSubview:self.headView];
     
@@ -265,7 +263,7 @@
     if (indexPath.section == 1)
     {
         PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-        [view setItemdata:postsArr[indexPath.row]];
+        [view setItemdata:postsArr[indexPath.row -1]];
         [self.navigationController pushViewController:view animated:YES];
     }
 }
@@ -378,7 +376,7 @@
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,personalInfo.avatar]];
                                          [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
-                                         [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                         [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          
                                          [self.tableView reloadData];
                                      }

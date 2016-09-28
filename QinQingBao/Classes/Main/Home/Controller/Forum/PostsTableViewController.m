@@ -29,7 +29,6 @@
     
     // 当前第几页
     NSInteger currentPageIdx;
-    
 }
 @end
 
@@ -114,7 +113,7 @@
                       @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                       @"page" : @"10"};
     }
-
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters: paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
@@ -125,12 +124,12 @@
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
                                              return;
-//                                             return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+                                             //                                             return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
                                              return;
-//                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                             //                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
                                          
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -154,18 +153,18 @@
                                          
                                          [self.tableView reloadData];
                                      }
-
+                                     
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
-
+                                     
                                  }];
 }
 
 /**
- *  获取关注人帖子数据
+ *  获取关注人帖子数据 
  */
 -(void)getFollowlist
 {
@@ -213,8 +212,6 @@
                                          
                                          [self.tableView reloadData];
                                      }
-                                     
-                                     
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
@@ -232,7 +229,7 @@
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
-
+                                     
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
@@ -248,7 +245,7 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
-
+                                     
                                  }];
 }
 
@@ -371,7 +368,8 @@
         else
         {
             CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
-            [cardCell1 setPostsModel:postsArr[indexPath.row]];
+            if (postsArr.count > 0)
+                [cardCell1 setPostsModel:postsArr[indexPath.row]];
             cell = cardCell1;
         }
     }
@@ -406,7 +404,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    [view setItemdata:postsArr[indexPath.row]];
+    if (self.type == BBSType_1 && indexPath.section == 0)
+        [view setItemdata:recommendlist[indexPath.row]];
+    else
+        [view setItemdata:postsArr[indexPath.row]];
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
 
@@ -457,8 +458,5 @@
         }];
     }
 }
-
-
-
 
 @end

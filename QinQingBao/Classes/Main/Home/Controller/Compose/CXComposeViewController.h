@@ -10,4 +10,7 @@
 
 @interface CXComposeViewController : UIViewController
 
+// 帖子所在版块
+@property (nonatomic, assign) NSInteger fid;
+
 @end

@@ -14,11 +14,19 @@
 @interface CXComposeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
 
 {
+    MTTextView *titleField;
+    
     MTTextView *contentView;
     
     UIView * inputContentView;
     
     CGFloat navigationAndstatusbarHeight;
+    
+    // 图片数组
+    NSMutableArray *imgDataArr;
+    
+    // 图片上传成功之后返回的id数组
+    NSArray *imgIDArr;
 }
 @end
 
@@ -33,6 +41,8 @@
     [self initNavigation];
     
     [self initView];
+    
+    imgDataArr = [[NSMutableArray alloc] init];
 }
 
 /**
@@ -61,13 +71,12 @@
     
     [self.navigationItem setLeftBarButtonItem:leftButton];
     [self.navigationItem setRightBarButtonItem:rightBarButton];
-    
 }
 
 -(void)initView
 {
     // 标题文本框
-    MTTextView *titleField = [[MTTextView alloc] initWithFrame:CGRectMake(10, 4, MTScreenW, 40)];
+    titleField = [[MTTextView alloc] initWithFrame:CGRectMake(10, 4, MTScreenW, 40)];
     titleField.font = [UIFont systemFontOfSize:16];
     titleField.textColor = [UIColor colorWithRGB:@"999999"];
     titleField.alwaysBounceVertical = YES; // 垂直方向上拥有有弹簧效果
@@ -132,14 +141,12 @@
     textView.attributedText = attributedString;
 }
 
-
 /**
  *  添加图片到textView上
  *
  *  @param img   图片
- *  @param index 添加的位置
  */
--(void)setNewContent:(UIImage *)img index:(NSInteger)index
+-(void)setNewContent:(UIImage *)img
 {
     NSLog(@"%f---%f",img.size.width,img.size.height);
     
@@ -170,18 +177,11 @@
     [attributedString appendAttributedString:textStr];
     
     contentView.attributedText = attributedString;
-    
-    NSLog(@"%@",contentView.attributedText);
 }
 
 -(void)getPic
 {
     [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
-}
-
--(void)send
-{
-    NSLog(@"send");
 }
 
 #pragma 拍照模块
@@ -202,7 +202,13 @@
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
         
-        [self setNewContent:image index:0];
+        //        NSData *imgdata1 = UIImageJPEGRepresentation(image, 1);
+        NSData *imgdata = [UIImage compressImg:image];
+        
+        // 讲图片数据添加到数组中
+        [imgDataArr addObject:imgdata];
+        [self setNewContent:image];
+        
         [picker dismissViewControllerAnimated:NO completion:nil];
     }
 }
@@ -241,6 +247,154 @@
     }
 }
 
+#pragma mark - 与后台交互模块
+
+-(void)send
+{
+    [self.view endEditing:YES];
+    NSString *titlestr = [titleField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *contentstr = [contentView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (titlestr.length < 5 || titlestr.length > 50)
+    {
+        return [NoticeHelper AlertShow:@"帖子标题长度在5-50个字之间" view:nil];
+    }
+    else if(contentstr.length == 0)
+    {
+        return [NoticeHelper AlertShow:@"帖子内容不能为空" view:nil];
+    }
+    
+    // 如果有图片就先上传图片
+    if (imgDataArr.count > 0)
+    {
+        [self uploadImg];
+    }
+    else
+    {
+        [self uploadPosts];
+    }
+}
+
+/**
+ *  将属性字符串转换成一般性字符串
+ *
+ */
+-(NSString *)attributedToString
+{
+    NSAttributedString * att = contentView.attributedText;
+    
+    NSMutableAttributedString * resutlAtt = [[NSMutableAttributedString alloc]initWithAttributedString:att];
+    
+    __block  NSInteger imgIdx = 0;
+    
+    //枚举出所有的属性字符串
+    [att enumerateAttributesInRange:NSMakeRange(0, att.length) options:NSAttributedStringEnumerationReverse usingBlock:^(NSDictionary *attrs, NSRange range, BOOL *stop) {
+        //NSTextAttachment value类型
+        NSTextAttachment * textAtt = [attrs objectForKey:@"NSAttachment"];//从字典中取得那一个图片
+        if (textAtt)
+        {
+            NSString *text = [NSString stringWithFormat:@"[attachimg]%@[/attachimg]",imgIDArr[imgIdx]];
+            [resutlAtt replaceCharactersInRange:range withString:text];
+            imgIdx ++;
+        }
+    }];
+    
+    return [resutlAtt.string stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
+}
+
+-(void)uploadImg
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] init];
+    paramDict = [@{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                   @"client" : @"ios",
+                   @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                   @"sys" : @"4",
+                   @"fid" : [NSString stringWithFormat:@"%li",(long)self.fid]} mutableCopy];
+    //创建上传的图片数组
+    NSMutableArray *imageArray = [[NSMutableArray alloc] init];
+    
+    for (NSData *data in imgDataArr)
+    {
+        NSString *key = [NSString stringWithFormat:@"Filedata[%lu]",(unsigned long)[imgDataArr indexOfObject:data]];
+        
+        NSDictionary *imageDict = @{
+                                    @"fileData":data,
+                                    @"name":key,
+                                    @"fileName":@"img.jpg",
+                                    @"mimeType":@"image/png",
+                                    };
+        
+        [imageArray addObject:imageDict];
+    }
+    
+    [CommonRemoteHelper UploadPicWithUrl:URL_Get_upload_image_multy parameters:paramDict  images:imageArray success:^(NSDictionary *dict, id responseObject) {
+        [HUD removeFromSuperview];
+        
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            CX_Log(@"图片上传成功");
+            NSDictionary *dataDict = [dict objectForKey:@"datas"];
+            
+            imgIDArr = [[[dataDict objectForKey:@"aids"] reverseObjectEnumerator] allObjects];
+            [self uploadPosts];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [HUD removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求失败" view:self.view];
+    }];
+}
+
+-(void)uploadPosts
+{
+    NSString *messagestr  = [self attributedToString];
+    
+    // 拼接上传图片id的字符串
+    NSString *idStr  = @"";
+    for (NSString *str in imgIDArr)
+    {
+        if ([imgIDArr indexOfObject:str] == 0)
+            idStr = [NSString stringWithFormat:@"%@%@",idStr,str];
+        else
+            idStr = [NSString stringWithFormat:@"%@,%@",idStr,str];
+    }
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_newthread_post parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                                                                           @"client" : @"ios",
+                                                                           @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                                                                           @"subject" : titleField.text,
+                                                                           @"message" : messagestr,
+                                                                           @"fid" : [NSString stringWithFormat:@"%li",(long)self.fid],
+                                                                           @"attachimg" : idStr}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [HUD removeFromSuperview];
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"帖子发表成功" view:nil];
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+}
 
 #pragma mark - 键盘处理事件
 

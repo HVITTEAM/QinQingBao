@@ -56,10 +56,13 @@
 {
     _postsDetailData = postsDetailData;
     
+    if (!postsDetailData) {
+        return;
+    }
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.postsDetailData.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = postsDetailData.author;
-    self.tagLb.text = [NSString stringWithFormat:@" %@  ",postsDetailData.grouptitle];
+    self.tagLb.text = [NSString stringWithFormat:@"%@ ",postsDetailData.grouptitle];
     if ([postsDetailData.is_home_friend isEqualToString:@"0"]) {
         [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
     }else{

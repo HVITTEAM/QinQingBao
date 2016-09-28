@@ -40,6 +40,13 @@
  */
 - (UIImage *)circleImage;
 
+/**
+ *  将图片压缩到100k左右
+ *
+ *  @return 图片data数据
+ */
++(NSData *)compressImg:(UIImage *)image;
+
 @end
 
 

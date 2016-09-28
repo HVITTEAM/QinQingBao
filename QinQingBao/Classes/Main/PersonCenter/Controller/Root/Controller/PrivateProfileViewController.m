@@ -111,8 +111,6 @@
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"LoginInHeadView" owner:self options:nil] lastObject];
     
     LoginInHeadView *headView = self.headView;
-    
-    headView.isUserata = NO;
     // 显示个人资料
     headView.inforClick = ^(void){
         [self.navigationController pushViewController:[[PersonalDataViewController alloc] init] animated:YES];
@@ -176,12 +174,9 @@
  */
 - (void)setupRefresh
 {
-    currentPageIdx = 1;
+    currentPageIdx = 0;
     postsArr = [[NSMutableArray alloc] init];
-    
-    
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getUserPosts)];
-
 }
 
 
@@ -366,7 +361,7 @@
     if (indexPath.section == 2)
     {
         PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-        [view setItemdata:postsArr[indexPath.row]];
+        [view setItemdata:postsArr[indexPath.row-1]];
         [self.navigationController pushViewController:view animated:YES];
     }
 }
@@ -396,7 +391,7 @@
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          
-                                         [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                         [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
@@ -456,7 +451,7 @@
                                          
                                          [postsArr addObjectsFromArray:[arr copy]];
                                          
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -496,7 +491,7 @@
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                              // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
                                              
-                                             [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend];
+                                             [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];

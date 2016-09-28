@@ -13,6 +13,8 @@
 
 -(void)awakeFromNib
 {
+    self.letterBtn.hidden = YES;
+    self.followBtn.hidden = YES;
     self.userIcon.layer.cornerRadius = self.userIcon.width/2;
     self.userIcon.layer.masksToBounds = YES;
     
@@ -31,24 +33,35 @@
         self.professionLab.text = @"";
     }
 }
+//
+//-(void)setIsUserata:(BOOL)isUserata
+//{
+//    _isUserata = isUserata;
+//    if (isUserata)
+//    {
+//        self.letterBtn.hidden = NO;
+//        self.followBtn.hidden = NO;
+//    }
+//    else
+//    {
+//        self.letterBtn.hidden = YES;
+//        self.followBtn.hidden = YES;
+//    }
+//}
 
--(void)setIsUserata:(BOOL)isUserata
+-(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend  is_mine:(NSString *)is_mine
 {
-    _isUserata = isUserata;
-    if (isUserata)
-    {
-        self.letterBtn.hidden = NO;
-        self.followBtn.hidden = NO;
-    }
-    else
+    if (is_mine && [is_mine integerValue] == 1)
     {
         self.letterBtn.hidden = YES;
         self.followBtn.hidden = YES;
     }
-}
-
--(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend
-{
+    else
+    {
+        self.letterBtn.hidden = NO;
+        self.followBtn.hidden = NO;
+    }
+    
     [self.loginBtn setTitle:name forState:UIControlStateNormal];
     
     if (!professional || professional.length == 0)

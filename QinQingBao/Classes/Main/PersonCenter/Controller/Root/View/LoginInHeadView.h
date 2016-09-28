@@ -20,7 +20,7 @@ typedef enum {
  *  是否是用户资料界面
  *  用户资料界面显示关注和私信按钮，个人中心不显示
  */
-@property (nonatomic, assign) BOOL isUserata;
+//@property (nonatomic, assign) BOOL isUserata;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 
@@ -59,8 +59,9 @@ typedef enum {
  *  @param name         名字
  *  @param professional 职称
  *  @param isfriend 是否已经关注
+ *  @param is_mine 是否是自己
  */
--(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend;
+-(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend is_mine:(NSString *)is_mine;
 
 -(void)setRefleshStates:(RefreshViewState)states;
 

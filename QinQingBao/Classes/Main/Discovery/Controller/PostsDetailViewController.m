@@ -491,7 +491,7 @@
  */
 -(void)getDetailData
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : @13,
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
                                                                           @"client":@"ios",
                                                                           @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ?  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -672,6 +672,10 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
+            if ([codeNum integerValue] == 17001)
+            {
+                return CX_Log(@"评论数据为空");
+            }
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
@@ -696,6 +700,7 @@
  */
 - (void)reply_post:(NSDictionary *)params
 {
+    [self.view endEditing:YES];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Reply_post parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
 
@@ -703,13 +708,15 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
+            if ([codeNum integerValue] == 17001)
+            {
+                return CX_Log(@"评论数据为空");
+            }
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
         else
         {
-           
-            
             [NoticeHelper AlertShow:dict[@"datas"][@"message"] view:nil];
         }
 
