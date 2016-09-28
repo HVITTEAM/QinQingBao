@@ -11,6 +11,8 @@
 #import "OthermsgCell.h"
 
 #import "YCXMenu.h"
+#import "BBSPersonalModel.h"
+#import "PriletterlistModel.h"
 
 #define contentViewHeight 60
 
@@ -20,9 +22,11 @@
     UITextView *textfield;
     UITableView *tableview;
     
-    NSArray *arr;
+    NSMutableArray *priletterDatas;
 }
 @property (nonatomic , strong) NSMutableArray *items;
+
+@property (nonatomic, assign) NSInteger pageNum;
 
 @end
 
@@ -58,15 +62,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadNotificationCell];
+    self.pageNum = 1;
     
-    arr = @[@"Hi",@"你好",@"如果只是静",@"态显示textView的内容为设",@"置的行间距，执行如下代码置的行间距，执行如下代码.快件在【杭州下城集散中心】已装车，准备发往 【杭州西湖兰庭公寓营业点!",@"你好大华十大的d",@"置的行间距，执行如下代码",@"撒的次数a",@"和哈哈哈哈哈哈哈哈哈",@"和你说的爱上对方即可a",@"ableVi是我的",@"那好吧",@"再见",@"bye",@"bye bye"];
+    priletterDatas = [[NSMutableArray alloc] init];
+
+    [self loadNotificationCell];
     
     [self initTable];
     
     [self initView];
     
     [self initNavigation];
+    
+    [self getPrivateletterList];
 }
 
 /**
@@ -102,6 +110,10 @@
     tableview.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.view addSubview:tableview];
     [tableview setContentOffset:CGPointMake(0, tableview.height) animated:NO];
+    __weak typeof(self) weakSelf = self;
+    tableview.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf loadMoreDatas];
+    }];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -118,7 +130,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return priletterDatas.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,12 +145,14 @@
     SelfmsgCell *selfcell = [tableView dequeueReusableCellWithIdentifier:@"MTSelfmsgCell"];
     OthermsgCell *othercell = [tableView dequeueReusableCellWithIdentifier:@"MTOthermsgCell"];
 
-    if (indexPath.row %2 == 0)
+    PriletterlistModel *model = priletterDatas[indexPath.row];
+    
+    if ([[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:model.authorid])
     {
         if (!selfcell) {
             selfcell = [SelfmsgCell selfmsgCell];
         }
-        [selfcell initWithContent:arr[indexPath.row] icon:nil];
+        [selfcell initWithContent:model.message icon:model.avatar];
         return selfcell;
     }
     else
@@ -146,7 +160,7 @@
         if (!othercell) {
             othercell = [OthermsgCell othermsgCell];
         }
-        [othercell initWithContent:arr[indexPath.row] icon:nil];
+        [othercell initWithContent:model.message icon:model.avatar];
         return othercell;
     }
 }
@@ -158,7 +172,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"王博士";
+    self.title = self.otherInfo.author;
     
     inputContentView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - contentViewHeight, MTScreenW, contentViewHeight)];
     inputContentView.backgroundColor = [UIColor whiteColor];
@@ -186,6 +200,7 @@
     [sendBtn setBackgroundColor:[UIColor  colorWithRGB:@"94bf36"]];
     sendBtn.layer.cornerRadius = 4;
     [inputContentView addSubview:sendBtn];
+    [sendBtn addTarget:self action:@selector(sendPrivateletterAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
@@ -245,8 +260,11 @@
     [UIView setAnimationCurve:(UIViewAnimationCurve)animationCurve];
     inputContentView.frame = newTextViewFrame;
     tableview.frame = newTableViewFrame;
-    [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:arr.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
+    if (priletterDatas.count > 0) {
+        [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:priletterDatas.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+
     [UIView commitAnimations];
 }
 //键盘消失时的处理，文本输入框回到页面底部。
@@ -274,10 +292,106 @@
     CGRect newTableViewFrame = self.view.frame;
     newTableViewFrame.size.height = MTScreenH - contentViewHeight;
     tableview.frame = newTableViewFrame;
-    [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:arr.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-
+    if (priletterDatas.count > 0) {
+    [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:priletterDatas.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
     [UIView commitAnimations];
 }
 
+#pragma mark - 网络相关
+/**
+ *  获取私信数据
+ */
+- (void)getPrivateletterList
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    NSDictionary *params = @{
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"authorid":self.authorid,
+                             @"p": @(self.pageNum),
+                             @"page":@"20",
+                             };
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_priletterlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [tableview.header endRefreshing];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            NSArray *ar = [PriletterlistModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            [priletterDatas addObjectsFromArray:ar];
+            self.pageNum ++;
+            [tableview reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [tableview.header endRefreshing];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  加载更多数据
+ */
+- (void)loadMoreDatas
+{
+    [self getPrivateletterList];
+}
+
+/**
+ *  发送私信
+ */
+- (void)sendPrivateletterAction:(UIButton *)sender
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    NSString *msg = textfield.text;
+    if (msg.length <= 0) {
+        return [NoticeHelper AlertShow:@"请输入内容" view:nil];
+    }
+    
+    NSDictionary *params = @{
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"authorid":self.authorid,
+                             @"message": msg,
+                             };
+    
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Send_priletter parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        [HUD removeFromSuperview];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+            textfield.text = nil;
+            
+            //重新获取私信
+            self.pageNum = 1;
+            [priletterDatas removeAllObjects];
+            [self getPrivateletterList];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
 
 @end

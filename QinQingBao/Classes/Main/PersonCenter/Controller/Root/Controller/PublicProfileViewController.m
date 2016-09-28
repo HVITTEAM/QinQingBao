@@ -136,6 +136,8 @@
             else if (type == 2)
             {
                 SendMsgViewController *view = [[SendMsgViewController alloc] init];
+                view.authorid = self.uid;
+                view.otherInfo = personalInfo;
                 [self.navigationController pushViewController:view animated:YES];
             }
         }

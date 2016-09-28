@@ -7,8 +7,14 @@
 //
 
 #import "PrivateLetterViewController.h"
+#import "PrivateLetterCell.h"
+#import "AllpriletterModel.h"
 
 @interface PrivateLetterViewController ()
+
+@property (strong, nonatomic) NSMutableArray *dataProvider;
+
+@property (nonatomic, assign) NSInteger pageNum;
 
 @end
 
@@ -18,7 +24,13 @@
     
     [super viewDidLoad];
     
+    self.pageNum = 1;
+    
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
+    
     [self initTableView];
+    
+    [self getAllPriletterList];
     
 }
 
@@ -27,73 +39,88 @@
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
     
-    [self.view initWithPlaceString:PlaceholderStr_Letter imgPath:@"placeholder-3.png"];
+//    [self.view initWithPlaceString:PlaceholderStr_Letter imgPath:@"placeholder-3.png"];
+}
+
+- (NSMutableArray *)dataProvider
+{
+    if (!_dataProvider) {
+        _dataProvider = [[NSMutableArray alloc] init];
+    }
+    
+    return _dataProvider;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataProvider.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PrivateLetterCell *cell = [PrivateLetterCell createCellWithTableView:tableView];
+    cell.item = self.dataProvider[indexPath.row];
+    return cell;
 }
 
-/*
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
- 
- // Configure the cell...
- 
- return cell;
- }
- */
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 65;
+}
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
+#pragma mark - 网络相关
+/**
+ *  获取个人的所有私信
  */
+- (void)getAllPriletterList
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    NSDictionary *params = @{
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"p": @(self.pageNum),
+                             @"page":@"20",
+                             };
+    [CommonRemoteHelper RemoteWithUrl:URL_get_allpriletter parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [self.tableView.footer endRefreshing];
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            NSArray *ar = [AllpriletterModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            [self.dataProvider addObjectsFromArray:ar];
+            self.pageNum ++;
+            
+//            if (self.dataProvider.count > 0) {
+//                [self.view removePlace];
+//            }
+            
+            [self.tableView reloadData];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.tableView.footer endRefreshing];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
+/**
+ *  加载更多数据
  */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)loadMoreDatas
+{
+    [self getAllPriletterList];
+}
 
 @end

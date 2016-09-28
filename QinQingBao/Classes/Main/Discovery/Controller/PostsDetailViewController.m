@@ -18,6 +18,9 @@
 
 #import "SWYPhotoBrowserViewController.h"
 
+#define kReplyTextViewHeight 34
+#define kReplyBarHeight (kReplyTextViewHeight + 20)
+
 @interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
 {
     UIWebView *_webView;
@@ -65,7 +68,7 @@
     
     self.pageNum = 1;
     
-    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - 60) style:UITableViewStylePlain];
+    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - kReplyBarHeight) style:UITableViewStylePlain];
     self.tableview.delegate =self;
     self.tableview.dataSource = self;
     self.tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -111,11 +114,11 @@
  */
 - (void)setupReplyBar
 {
-    self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 54, MTScreenW, 54)];
+    self.replyBar = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - kReplyBarHeight, MTScreenW, kReplyBarHeight)];
     self.replyBar.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.replyBar];
     
-    UITextView *txtView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 80, 34)];
+    UITextView *txtView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, MTScreenW - 80, kReplyTextViewHeight)];
     txtView.layer.borderColor = HMColor(235, 235, 235).CGColor;
     txtView.layer.borderWidth = 1.0f;
     txtView.layer.cornerRadius = 8.0f;
@@ -124,7 +127,7 @@
     [self.replyBar addSubview:txtView];
     self.replayTextView = txtView;
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 60, 10, 50, 34)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 60, 10, 50, kReplyTextViewHeight)];
     btn.backgroundColor = HMColor(148, 191, 54);
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [btn setTitle:@"回复" forState:UIControlStateNormal];
@@ -259,7 +262,7 @@
             cell.textLabel.textColor = HMColor(153, 153, 153);
             cell.textLabel.font = [UIFont systemFontOfSize:14];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"评论数 %@",@8];
+        cell.textLabel.text = [NSString stringWithFormat:@"评论数 %@",self.itemdata.replies];
         return cell;
     }
     else{
@@ -398,8 +401,8 @@
 {
     CGFloat replayTextHeight = textView.contentSize.height;
     
-    if (replayTextHeight < 34) {
-        replayTextHeight = 34;
+    if (replayTextHeight < kReplyTextViewHeight) {
+        replayTextHeight = kReplyTextViewHeight;
     }else if (replayTextHeight >= 80){
         replayTextHeight = 80;
     }
@@ -460,7 +463,6 @@
         if (self.replyCommentIdx) {   //存在,说明是对评论进行回复,让该条评论可见
             [self.tableview scrollToRowAtIndexPath:self.replyCommentIdx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
-
     }];
 }
 
@@ -491,9 +493,9 @@
  */
 -(void)getDetailData
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : @13,
-                                                                          @"client":@"ios",
-                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ?  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" }
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
+                                                                          @"client":@"ios"
+                                                                        }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -516,6 +518,11 @@
  */
 - (void)attentionAction
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     NSString *type = @"add";
     if ([self.detailData.is_home_friend integerValue] != 0) {
         type = @"del";
@@ -558,8 +565,16 @@
     }];
 }
 
+/**
+ *  点赞帖子
+ */
 - (void)supportAction
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     //目前只能点赞,不能取消
     NSString *doType = @"add";
     if ([self.detailData.is_recommend integerValue] != 0) {
@@ -610,6 +625,11 @@
  */
 - (void)support_replyAction:(NSIndexPath *)idx
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     CommentModel *model = self.commentDatas[idx.row - 1];
     
     NSString *doType = @"against";
@@ -657,13 +677,13 @@
 
 - (void)loadCommonlist
 {
-    NSDictionary *params = @{
+    NSMutableDictionary *params = [@{
                              @"tid":self.itemdata.tid,
                              @"p":@(self.pageNum),
                              @"page":@5,
                              @"client":@"ios",
-                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
-                             };
+                             }mutableCopy];
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
 
@@ -708,9 +728,19 @@
         }
         else
         {
-           
-            
             [NoticeHelper AlertShow:dict[@"datas"][@"message"] view:nil];
+            
+            //恢复回复工具栏大小
+            self.replayTextView.text = nil;
+            self.replyPlaceholdeLb.hidden = NO;
+            self.replyBar.frame = CGRectMake(0, MTScreenH - kReplyBarHeight, MTScreenW, kReplyBarHeight);
+            self.replayTextView.frame = CGRectMake(10, 10, MTScreenW - 80, kReplyTextViewHeight);
+            self.tableview.frame = CGRectMake(0, 0, MTScreenW, MTScreenH - kReplyBarHeight);
+            
+            //重新获取评论
+            self.pageNum = 1;
+            [self.commentDatas removeAllObjects];
+            [self loadCommonlist];
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -721,6 +751,11 @@
 
 - (void)replyMessage:(UIButton *)sender
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     NSString *replyContent = self.replayTextView.text;
     if (replyContent.length < 10) {
         return [NoticeHelper AlertShow:@"评价字数不得小于10个" view:nil];
@@ -755,6 +790,7 @@
                     }mutableCopy];
     }
     
+    [self.view endEditing:YES];
     [self reply_post:params];
 }
 
@@ -769,6 +805,11 @@
 #pragma mark - 导航栏事件
 - (void)delItemClick:(UINavigationItem *)item
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     NSDictionary *params = @{
                              @"tid":self.detailData.tid,
                              @"client":@"ios",

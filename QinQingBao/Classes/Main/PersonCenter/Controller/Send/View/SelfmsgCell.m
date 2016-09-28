@@ -39,12 +39,12 @@
 
     // 头像
     UIImageView *headImg = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW  -50, 5, 40, 40)];
-    headImg.image = [UIImage imageNamed:@"head"];
+    [headImg sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"]];
     [self addSubview:headImg];
     
     // 文本
     UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 5, 100, 40)];
-    NSString *str = content;
+    NSString *str = content.length > 0?content:@"";
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 4;
     NSDictionary *attributes = @{
