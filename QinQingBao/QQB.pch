@@ -780,7 +780,7 @@
 #define URL_Get_attention_do [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/attention_do.php",URL_Local_New]
 
 /***帖子 - 获取关注人帖子列表*/
-#define URL_Get_followlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/followlist.php"
+#define URL_Get_followlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/followlist.php",URL_Local_New]
 
 /***帖子 - 个人帖子列表*/
 #define URL_Get_personallist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personallist.php",URL_Local_New]
@@ -792,7 +792,7 @@
 #define URL_Get_recommendlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/recommendlist.php",URL_Local_New]
 
 //***获取板块下级列表【可用于健康圈子】*/
-#define URL_Circle @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/circle.php"
+#define URL_Circle [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/circle.php",URL_Local_New]
 
 /***帖子 - 获取帖子详情*/
 #define URL_Get_articledetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/articledetail.php",URL_Local_New]
@@ -801,22 +801,22 @@
 #define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
 
 /***帖子 - 获取版块详细列表*/
-#define URL_Sectionlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php"
+#define URL_Sectionlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/sectionlist.php",URL_Local_New]
 
 /***点赞 - 点赞帖子*/
-#define URL_Get_support_thread @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_thread.php"
+#define URL_Get_support_thread [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/support_thread.php",URL_Local_New]
 
 /***帖子 - 个人信息列表*/
 #define URL_Get_personaldetail [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/personaldetail.php",URL_Local_New]
 
 /***点赞 - 点赞评论*/
-#define URL_Support_reply @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/support_reply.php"
+#define URL_Support_reply [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/support_reply.php",URL_Local_New]
 
 /***评论 - 评论列表*/
-#define URL_Get_Commonlist @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/commonlist.php"
+#define URL_Get_Commonlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/commonlist.php",URL_Local_New]
 
 /***评论 - 评论帖子或评论帖子的评论*/
-#define URL_Reply_post @"http://test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/reply_post.php"
+#define URL_Reply_post [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/reply_post.php",URL_Local_New]
 
 /***评论 - 帖子 - 发布帖子*/
 #define URL_Get_newthread_post [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/newthread_post.php",URL_Local_New]
@@ -827,6 +827,14 @@
 /***帖子 - 删除帖子*/
 #define URL_Get_delete_thread [NSString stringWithFormat:@"%@test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php",URL_Local_New]
 
+/***私信 - 获取私信列表*/
+#define URL_Get_priletterlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/priletterlist.php",URL_Local_New]
+
+/***私信 - 发送私信消息*/
+#define URL_Send_priletter [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/send_priletter.php",URL_Local_New]
+
+/***私信 - 获取个人私信列表*/
+#define URL_get_allpriletter [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/allpriletter.php",URL_Local_New]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

@@ -467,6 +467,11 @@
  */
 - (void)attentionAction:(PostsModel *)model
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     NSString *type = @"add";
     if ([model.is_home_friend integerValue] != 0) {
         type = @"del";
@@ -508,6 +513,7 @@
     
 }
 
+#pragma mark - 发帖
 - (void)postAction
 {
     if ([SharedAppUtil checkLoginStates])

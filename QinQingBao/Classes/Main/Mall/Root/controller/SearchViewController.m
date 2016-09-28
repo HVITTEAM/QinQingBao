@@ -8,6 +8,7 @@
 
 #import "SearchViewController.h"
 #import "GoodsTableViewController.h"
+#import "SearchPostsViewController.h"
 
 @interface SearchViewController ()<UITextFieldDelegate>
 {
@@ -70,7 +71,8 @@
     text.tintColor = [UIColor darkGrayColor];
     text.alpha = 0.9;
     text.delegate = self;
-    text.text= @"    铁皮枫斗";
+//    text.text= @"    铁皮枫斗";
+    text.placeholder= @"输入关键字";
     text.backgroundColor = [UIColor whiteColor];
     text.width = MTScreenW *0.7;
     text.height = 30;
@@ -156,9 +158,15 @@
     [ArchiverCacheHelper saveNSMutableArrayToLoacl:data key:Search_Archiver_Key filePath:Search_Archiver_Path];
     
     //跳转界面
-    GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
-    vc.keyWords = str;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.type == SearchTypeMall) {
+        GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
+        vc.keyWords = str;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (self.type == SearchTypePosts){
+        SearchPostsViewController *searchPostsVC = [[SearchPostsViewController alloc]init];
+        searchPostsVC.keyWords = str;
+        [self.navigationController pushViewController:searchPostsVC animated:YES];
+    }
     return YES;
 }
 
@@ -206,11 +214,19 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.view endEditing:NO];
     //跳转界面
-    GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
-    vc.keyWords = data[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.type == SearchTypeMall) {
+        GoodsTableViewController *vc = [[GoodsTableViewController alloc] init];
+        vc.keyWords = data[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (self.type == SearchTypePosts){
+        SearchPostsViewController *searchPostsVC = [[SearchPostsViewController alloc]init];
+        searchPostsVC.keyWords = data[indexPath.row];
+        [self.navigationController pushViewController:searchPostsVC animated:YES];
+    }
+    
+    [self.view endEditing:NO];
+
 }
 
 @end

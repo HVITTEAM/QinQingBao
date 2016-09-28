@@ -21,9 +21,10 @@
 #import "PostsModel.h"
 
 #import "PublicProfileViewController.h"
+#import "SearchViewController.h"
 
 
-@interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -68,6 +69,7 @@
     imgView.image = [UIImage imageNamed:@"search"];
     [leftView addSubview:imgView];
     searhField.leftView = leftView;
+    searhField.delegate = self;
     self.navigationItem.titleView = searhField;
     
     //UITableView
@@ -285,7 +287,7 @@
 }
 
 /**
- * 获取热门帖子数据  标识位【推荐贴：1；热门帖：2；说说：3】
+ * 获取热门帖子数据  标识位【推荐贴：1；热门帖：2；说说：3  根据帖子标题查询帖子列表：4】
  **/
 - (void)loadFlaglist
 {
@@ -332,6 +334,11 @@
  */
 - (void)attentionAction:(PostsModel *)model
 {
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
     NSString *type = @"add";
     if ([model.is_home_friend integerValue] != 0) {
         type = @"del";
@@ -443,6 +450,14 @@
         adver.item = item;
         [self.navigationController pushViewController:adver animated:YES];
     }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    SearchViewController *searchVc = [[SearchViewController alloc] init];
+    searchVc.type = SearchTypePosts;
+    [self.navigationController pushViewController:searchVc animated:YES];
+    return NO;
 }
 
 @end

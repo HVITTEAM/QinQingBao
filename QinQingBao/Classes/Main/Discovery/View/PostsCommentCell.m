@@ -69,6 +69,8 @@
     [self.zanNumBtn setTitle:[NSString stringWithFormat:@"%@赞",commentModel.support] forState:UIControlStateNormal];
     
     self.portraitView.frame = CGRectMake(kMargin, 10, 40, 40);
+    self.portraitView.layer.cornerRadius= 20;
+    self.portraitView.layer.masksToBounds = YES;
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame)+10, 12, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
     [self.timeLb sizeToFit];
