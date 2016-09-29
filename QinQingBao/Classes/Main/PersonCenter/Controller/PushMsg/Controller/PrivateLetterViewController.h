@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PrivateLetterViewController : UITableViewController
+@property (nonatomic, strong) UIViewController *parentVC;
 
 @end

@@ -59,6 +59,11 @@
     if (!postsDetailData) {
         return;
     }
+    
+    // 不能关注自己
+    if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.postsDetailData.authorid])
+        self.attentionBtn.hidden = YES;
+    
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.postsDetailData.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = postsDetailData.author;
@@ -68,6 +73,7 @@
     }else{
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
     }
+    
 }
 
 - (IBAction)tapAttentionBtn:(UIButton *)sender

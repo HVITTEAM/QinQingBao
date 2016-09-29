@@ -41,7 +41,7 @@
     self.vc1.title = @"提醒";
     
     self.vc2 = [[PrivateLetterViewController alloc] init];
-    self.vc1.parentVC = self;
+    self.vc2.parentVC = self;
     self.vc2.title = @"私信";
     
     self.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,nil];

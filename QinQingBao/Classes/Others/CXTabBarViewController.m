@@ -197,7 +197,7 @@
     
     [SharedAppUtil defaultCommonUtil].bbsVO = nil;
     [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].bbsVO key:User_Archiver_Key filePath:User_Archiver_Path];
-
+    
     
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     //    [navlogin popToRootViewControllerAnimated:YES];

@@ -45,7 +45,7 @@
 #pragma mark - setter/getter
 - (NSMutableArray *)items {
     if (!_items) {
-           _items = [@[[YCXMenuItem menuItem:@"加入黑名单"
+        _items = [@[[YCXMenuItem menuItem:@"加入黑名单"
                                     image:nil
                                       tag:100
                                  userInfo:nil],
@@ -65,7 +65,7 @@
     self.pageNum = 1;
     
     priletterDatas = [[NSMutableArray alloc] init];
-
+    
     [self loadNotificationCell];
     
     [self initTable];
@@ -136,7 +136,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-//    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    //    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     return cell.height;
 }
 
@@ -144,7 +144,7 @@
 {
     SelfmsgCell *selfcell = [tableView dequeueReusableCellWithIdentifier:@"MTSelfmsgCell"];
     OthermsgCell *othercell = [tableView dequeueReusableCellWithIdentifier:@"MTOthermsgCell"];
-
+    
     PriletterlistModel *model = priletterDatas[indexPath.row];
     
     if ([[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:model.authorid])
@@ -263,7 +263,7 @@
     if (priletterDatas.count > 0) {
         [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:priletterDatas.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
-
+    
     [UIView commitAnimations];
 }
 //键盘消失时的处理，文本输入框回到页面底部。
@@ -287,12 +287,12 @@
     CGRect newTextViewFrame = inputContentView.frame;
     newTextViewFrame.origin.y = MTScreenH - inputContentView.frame.size.height;
     inputContentView.frame = newTextViewFrame;
-
+    
     CGRect newTableViewFrame = self.view.frame;
     newTableViewFrame.size.height = MTScreenH - contentViewHeight;
     tableview.frame = newTableViewFrame;
     if (priletterDatas.count > 0) {
-    [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:priletterDatas.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:priletterDatas.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
     [UIView commitAnimations];
 }
@@ -320,6 +320,8 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
+            if([codeNum integerValue] == 17001)
+                return ;
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
@@ -350,6 +352,7 @@
  */
 - (void)sendPrivateletterAction:(UIButton *)sender
 {
+    [self.view endEditing:YES];
     //判断是否登录
     if (![SharedAppUtil checkLoginStates]) {
         return;
@@ -372,7 +375,7 @@
         
         [HUD removeFromSuperview];
         id codeNum = [dict objectForKey:@"code"];
-        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        if(!codeNum || [codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];

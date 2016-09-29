@@ -7,8 +7,9 @@
 //
 
 #import "CompleteInfoController.h"
+#import "RSKImageCropper.h"
 
-@interface CompleteInfoController ()
+@interface CompleteInfoController ()<RSKImageCropViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextfield;
 @property (strong, nonatomic) IBOutlet UIButton *btn;
@@ -22,21 +23,44 @@
 {
     [super viewDidLoad];
     
-    self.title = @"完善资料";
+    [self initView];
     
+    [self initNavgation];
+}
+
+-(void)initView
+{
+    self.title = @"完善资料";
+
     self.nameTextfield.leftViewMode = UITextFieldViewModeAlways;
     self.nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.nameTextfield.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"name.png"]];
     self.headImg.userInteractionEnabled=YES;
+    self.headImg.layer.masksToBounds = YES;
+    self.headImg.layer.cornerRadius = self.headImg.width/2;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImg addGestureRecognizer:singleTap];
+    
+    self.btn.layer.masksToBounds = YES;
+    self.btn.layer.cornerRadius = 8;
+
+}
+
+-(void)initNavgation
+{
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 12, 23)];
+    [leftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn setBackgroundImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
+    [leftBtn setBackgroundImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateHighlighted];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    [self.navigationItem setLeftBarButtonItem:leftButton];
 }
 
 
 // 个人头像点击事件
 -(void)onClickImage
 {
-    
+    [self getPic];
 }
 
 - (IBAction)btnHandler:(id)sender
@@ -71,5 +95,93 @@
                                      NSLog(@"发生错误！%@",error);
                                  }];
 }
+
+-(void)getPic
+{
+    [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+#pragma 拍照模块
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    //用[NSDate date]可以获取系统当前时间
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    //输出格式为：2010-10-27 10:22:13
+    NSLog(@"%@",currentDateStr);
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        
+        RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
+        imageCropVC.title = @"裁剪照片";
+        imageCropVC.delegate = self;
+        [self.navigationController pushViewController:imageCropVC animated:YES];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
+- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
+{
+    
+}
+
+-(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    NSLog(@"您取消了选择图片");
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType
+{
+    NSArray *mediatypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+    if([UIImagePickerController isSourceTypeAvailable:sourceType] &&[mediatypes count]>0)
+    {
+        NSArray *mediatypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.mediaTypes = mediatypes;
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        picker.sourceType = sourceType;
+        NSString *requiredmediatype = (NSString *)kUTTypeImage;
+        NSArray *arrmediatypes = [NSArray arrayWithObject:requiredmediatype];
+        [picker setMediaTypes:arrmediatypes];
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误信息!" message:@"当前设备不支持拍摄功能" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
+{
+    self.headImg.image = croppedImage;
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)back
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 @end

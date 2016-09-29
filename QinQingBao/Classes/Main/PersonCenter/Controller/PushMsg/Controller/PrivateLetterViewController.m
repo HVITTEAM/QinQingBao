@@ -9,6 +9,7 @@
 #import "PrivateLetterViewController.h"
 #import "PrivateLetterCell.h"
 #import "AllpriletterModel.h"
+#import "SendMsgViewController.h"
 
 @interface PrivateLetterViewController ()
 
@@ -26,20 +27,17 @@
     
     self.pageNum = 1;
     
-    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
-    
     [self initTableView];
     
     [self getAllPriletterList];
     
+    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
 }
 
 -(void)initTableView
 {
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
-    
-//    [self.view initWithPlaceString:PlaceholderStr_Letter imgPath:@"placeholder-3.png"];
 }
 
 - (NSMutableArray *)dataProvider
@@ -47,7 +45,6 @@
     if (!_dataProvider) {
         _dataProvider = [[NSMutableArray alloc] init];
     }
-    
     return _dataProvider;
 }
 
@@ -57,7 +54,6 @@
 {
     return self.dataProvider.count;
 }
-
 
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -71,6 +67,16 @@
     return 65;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AllpriletterModel *item = self.dataProvider[indexPath.row];
+    SendMsgViewController *view = [[SendMsgViewController alloc] init];
+    view.authorid = item.authorid;
+//    view.otherInfo = personalInfo;
+    [self.parentVC.navigationController pushViewController:view animated:YES];
+
+}
+
 #pragma mark - 网络相关
 /**
  *  获取个人的所有私信
@@ -78,20 +84,23 @@
 - (void)getAllPriletterList
 {
     //判断是否登录
-    if (![SharedAppUtil checkLoginStates]) {
-        return;
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
+    }
+    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
+    {
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
     }
     
-    NSDictionary *params = @{
-                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+    NSDictionary *params = @{@"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
                              @"client":@"ios",
                              @"p": @(self.pageNum),
-                             @"page":@"20",
-                             };
+                             @"page":@"10",};
     [CommonRemoteHelper RemoteWithUrl:URL_get_allpriletter parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [self.tableView.footer endRefreshing];
         id codeNum = [dict objectForKey:@"code"];
-        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        if([codeNum integerValue] > 0)
         {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];

@@ -297,6 +297,9 @@
 		016CBFC21C3104B70029C66E /* ServicePhoneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016CBFC01C3104B70029C66E /* ServicePhoneCell.xib */; };
 		016CF6331D386FF100EECC73 /* AddressController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016CF6321D386FF100EECC73 /* AddressController.m */; };
 		016E745D1BAFD053009075E5 /* PersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 016E745C1BAFD053009075E5 /* PersonalDataViewController.m */; };
+		016EDF071D9D03AB0054949F /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF011D9D03AB0054949F /* SDBrowserImageView.m */; };
+		016EDF081D9D03AB0054949F /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF031D9D03AB0054949F /* SDPhotoBrowser.m */; };
+		016EDF091D9D03AB0054949F /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF061D9D03AB0054949F /* SDWaitingView.m */; };
 		016F246A1C4DDEDB00FF1BF5 /* Bugtags.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */; };
 		016F246B1C4DDEDB00FF1BF5 /* Bugtags.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */; };
 		016F246D1C4DDF0C00FF1BF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F246C1C4DDF0C00FF1BF5 /* AVFoundation.framework */; };
@@ -2011,6 +2014,13 @@
 		016CF6321D386FF100EECC73 /* AddressController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressController.m; sourceTree = "<group>"; };
 		016E745B1BAFD053009075E5 /* PersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalDataViewController.h; sourceTree = "<group>"; };
 		016E745C1BAFD053009075E5 /* PersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalDataViewController.m; sourceTree = "<group>"; };
+		016EDF001D9D03AB0054949F /* SDBrowserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBrowserImageView.h; sourceTree = "<group>"; };
+		016EDF011D9D03AB0054949F /* SDBrowserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBrowserImageView.m; sourceTree = "<group>"; };
+		016EDF021D9D03AB0054949F /* SDPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowser.h; sourceTree = "<group>"; };
+		016EDF031D9D03AB0054949F /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
+		016EDF041D9D03AB0054949F /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
+		016EDF051D9D03AB0054949F /* SDWaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWaitingView.h; sourceTree = "<group>"; };
+		016EDF061D9D03AB0054949F /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
 		016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Bugtags.bundle; sourceTree = "<group>"; };
 		016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugtags.framework; sourceTree = "<group>"; };
 		016F246C1C4DDF0C00FF1BF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -4925,6 +4935,7 @@
 		016066D51CF6AD8C005A3164 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
+				016EDEFF1D9D03AB0054949F /* SDPhotoBrowser */,
 				016066D61CF6AD8C005A3164 /* LICENSE */,
 				016066D71CF6AD8C005A3164 /* README.md */,
 				016066D81CF6AD8C005A3164 /* SDWebImage */,
@@ -5058,6 +5069,20 @@
 				016CF6321D386FF100EECC73 /* AddressController.m */,
 			);
 			path = MyData;
+			sourceTree = "<group>";
+		};
+		016EDEFF1D9D03AB0054949F /* SDPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				016EDF001D9D03AB0054949F /* SDBrowserImageView.h */,
+				016EDF011D9D03AB0054949F /* SDBrowserImageView.m */,
+				016EDF021D9D03AB0054949F /* SDPhotoBrowser.h */,
+				016EDF031D9D03AB0054949F /* SDPhotoBrowser.m */,
+				016EDF041D9D03AB0054949F /* SDPhotoBrowserConfig.h */,
+				016EDF051D9D03AB0054949F /* SDWaitingView.h */,
+				016EDF061D9D03AB0054949F /* SDWaitingView.m */,
+			);
+			path = SDPhotoBrowser;
 			sourceTree = "<group>";
 		};
 		01702B7B1D18CB6E00058764 /* ServiceMarket */ = {
@@ -10362,6 +10387,7 @@
 				D22D61791D0655DB008C3EC1 /* MobileBindingView.m in Sources */,
 				01ECDAE91C8EB31F0018160F /* EMGifImage.m in Sources */,
 				010EC9F21C44A52E00D36417 /* AddressListTotal.m in Sources */,
+				016EDF071D9D03AB0054949F /* SDBrowserImageView.m in Sources */,
 				01ECDAE41C8EB31F0018160F /* amrFileCodec.mm in Sources */,
 				01F49D251C478D700079F45F /* CommonGoodsDetailEndView.m in Sources */,
 				016066CC1CF6ACCE005A3164 /* MJRefreshGifHeader.m in Sources */,
@@ -10416,6 +10442,7 @@
 				013FE9E01D8138CA0079AFDE /* NewHomeViewController.m in Sources */,
 				01E89B031C76B45A00CFD40D /* BindingResultViewController.m in Sources */,
 				016066FE1CF6AD8C005A3164 /* SDImageCache.m in Sources */,
+				016EDF091D9D03AB0054949F /* SDWaitingView.m in Sources */,
 				01EB6BED1C28D85A008BD878 /* AboutViewController.m in Sources */,
 				01F0B7B81C522273000BC86A /* AreaListModel.m in Sources */,
 				01ECDADB1C8EB31F0018160F /* BusinessInfoModel.m in Sources */,
@@ -10473,6 +10500,7 @@
 				01ECDAF41C8EB31F0018160F /* UIImage+EMGIF.m in Sources */,
 				015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */,
 				01EA81741CE1757B00398FEC /* HealthServicesController.m in Sources */,
+				016EDF081D9D03AB0054949F /* SDPhotoBrowser.m in Sources */,
 				013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */,
 				01ECDB161C8EB31F0018160F /* EaseBubbleView+File.m in Sources */,
 				016066FB1CF6AD8C005A3164 /* README.md in Sources */,

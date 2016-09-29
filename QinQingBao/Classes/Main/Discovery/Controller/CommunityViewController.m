@@ -136,8 +136,8 @@
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
     UIButton *backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(15, 27, 30, 30);
-    [backBtn setImage:[UIImage imageNamed:@"btn_dismissItem"] forState:UIControlStateNormal];
+    backBtn.frame = CGRectMake(15, 23, 40, 40);
+    [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
     titleLb.textAlignment = NSTextAlignmentCenter;
@@ -152,7 +152,7 @@
     [self.view addSubview:self.navBar];
     
     self.postView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"post_icon"]];
-    self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 60, 50, 50);
+    self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 80, 70, 70);
     self.postView.userInteractionEnabled = YES;
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(postAction)];
     recognizer.numberOfTapsRequired= 1;
@@ -342,7 +342,7 @@
     self.alphaWhenBeginDrag = self.navBar.alpha;
     
     [UIView animateWithDuration:0.3 animations:^{
-        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH, 50, 50);
+        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH, 70, 70);
     }];
 }
 
@@ -356,7 +356,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [UIView animateWithDuration:0.3 animations:^{
-        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 60, 50, 50);
+        self.postView.frame = CGRectMake((MTScreenW - 50) / 2, MTScreenH - 80, 70, 70);
     }];
 }
 
@@ -527,7 +527,6 @@
     }
 }
 
-
 #pragma mark - 工具方法
 - (UIView *)createTabView
 {
@@ -562,6 +561,5 @@
     
     return tabView;
 }
-
 
 @end

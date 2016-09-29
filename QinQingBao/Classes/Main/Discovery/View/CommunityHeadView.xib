@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,8 +22,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uyb-o5-4Jm">
-                    <rect key="frame" x="20" y="25" width="30" height="30"/>
-                    <state key="normal" title="返回">
+                    <rect key="frame" x="20" y="30" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Pgf-7J-spv"/>
+                        <constraint firstAttribute="width" constant="20" id="uDi-Cv-Xn7"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -61,12 +65,12 @@
                 <constraint firstItem="p2w-YJ-ynr" firstAttribute="top" secondItem="rVm-jm-ylh" secondAttribute="top" id="328-Zz-EIV"/>
                 <constraint firstItem="p2w-YJ-ynr" firstAttribute="leading" secondItem="rVm-jm-ylh" secondAttribute="trailing" constant="10" id="5YE-sL-x9z"/>
                 <constraint firstItem="SLa-JP-fx3" firstAttribute="centerY" secondItem="rVm-jm-ylh" secondAttribute="centerY" constant="4" id="9Fv-bw-fN9"/>
+                <constraint firstItem="Uyb-o5-4Jm" firstAttribute="top" secondItem="262-FN-CuE" secondAttribute="top" constant="30" id="HBj-Qf-kSw"/>
                 <constraint firstAttribute="trailing" secondItem="XZB-VX-aZL" secondAttribute="trailing" id="J5d-3w-0Cb"/>
                 <constraint firstItem="XZB-VX-aZL" firstAttribute="leading" secondItem="262-FN-CuE" secondAttribute="leading" id="YZH-Fr-LaL"/>
                 <constraint firstItem="rVm-jm-ylh" firstAttribute="leading" secondItem="262-FN-CuE" secondAttribute="leading" constant="20" id="avU-IL-NyX"/>
                 <constraint firstItem="VyI-4s-xKo" firstAttribute="bottom" secondItem="rVm-jm-ylh" secondAttribute="bottom" id="e6C-iI-Do6"/>
                 <constraint firstAttribute="bottom" secondItem="XZB-VX-aZL" secondAttribute="bottom" id="ixd-L3-NqB"/>
-                <constraint firstItem="rVm-jm-ylh" firstAttribute="top" secondItem="Uyb-o5-4Jm" secondAttribute="bottom" constant="5" id="mW3-fd-D0D"/>
                 <constraint firstItem="XZB-VX-aZL" firstAttribute="top" secondItem="262-FN-CuE" secondAttribute="top" id="oko-aR-JH6"/>
                 <constraint firstAttribute="bottom" secondItem="rVm-jm-ylh" secondAttribute="bottom" constant="20" id="qza-NH-kK8"/>
                 <constraint firstItem="SLa-JP-fx3" firstAttribute="leading" secondItem="p2w-YJ-ynr" secondAttribute="leading" id="rKy-te-agV"/>
@@ -78,6 +82,7 @@
         </view>
     </objects>
     <resources>
+        <image name="back_icon" width="20" height="20"/>
         <image name="bk_circle_head" width="360" height="360"/>
         <image name="ic_escort" width="44" height="44"/>
     </resources>

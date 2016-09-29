@@ -825,7 +825,7 @@
 #define URL_Get_upload_image_multy [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/upload_image_multy.php",URL_Local_New]
 
 /***帖子 - 删除帖子*/
-#define URL_Get_delete_thread [NSString stringWithFormat:@"%@test.hvit.com.cn/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php",URL_Local_New]
+#define URL_Get_delete_thread [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_thread.php",URL_Local_New]
 
 /***私信 - 获取私信列表*/
 #define URL_Get_priletterlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/priletterlist.php",URL_Local_New]

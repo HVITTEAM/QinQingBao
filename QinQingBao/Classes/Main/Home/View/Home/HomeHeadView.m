@@ -161,7 +161,6 @@
         view.iid = item.bc_item_id;
         view.hidesBottomBarWhenPushed = YES;
         [self.nav pushViewController:view animated:YES];
-
     }
     else if ([item.bc_type_app_id isEqualToString:@"44"])
     {

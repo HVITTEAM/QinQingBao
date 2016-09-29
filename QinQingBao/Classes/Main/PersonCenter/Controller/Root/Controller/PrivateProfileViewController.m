@@ -209,6 +209,9 @@
     titleLabel.alpha = alpha;
     //    self.navigationItem.titleView = titleLabel;
     
+    
+//    UIImage *img = [UIImage imageNamed:@"nav_shadow.png"];
+    
     UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
     [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
     
@@ -313,7 +316,7 @@
         {
             CardCell *cardCell = [CardCell createCellWithTableView:tableView];
             [cardCell setPostsModel:postsArr[indexPath.row - 1]];
-            
+            cardCell.attentionBtn.hidden = YES;
             // 头像点击 进入个人信息界面
             cardCell.portraitClick = ^(PostsModel *item)
             {

@@ -39,13 +39,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QinQingBao/Classes/Main/Discovery/Controller/PostsDetailViewController.m"
-            timestampString = "496745478.458059"
+            filePath = "QinQingBao/Classes/Main/PersonCenter/Controller/Send/Controller/SendMsgViewController.m"
+            timestampString = "496826683.929792"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
-            landmarkName = "-delItemClick:"
+            startingLineNumber = "395"
+            endingLineNumber = "395"
+            landmarkName = "-sendPrivateletterAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -55,13 +55,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QinQingBao/Classes/Main/Discovery/Controller/PostsDetailViewController.m"
-            timestampString = "496745485.533868"
+            filePath = "QinQingBao/Classes/Main/PersonCenter/Controller/Send/Controller/SendMsgViewController.m"
+            timestampString = "496826691.285617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
-            landmarkName = "-getDetailData"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-sendPrivateletterAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -71,13 +71,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QinQingBao/Classes/Main/Discovery/Controller/PostsDetailViewController.m"
-            timestampString = "496745496.353783"
+            filePath = "QinQingBao/Classes/Main/PersonCenter/Controller/Send/Controller/SendMsgViewController.m"
+            timestampString = "496826705.745434"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "715"
-            endingLineNumber = "715"
-            landmarkName = "-reply_post:"
+            startingLineNumber = "383"
+            endingLineNumber = "383"
+            landmarkName = "-sendPrivateletterAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QinQingBao/Classes/Main/PersonCenter/Controller/Send/Controller/SendMsgViewController.m"
+            timestampString = "496826706.437281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "-sendPrivateletterAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QinQingBao/Classes/Main/PersonCenter/Controller/Send/Controller/SendMsgViewController.m"
+            timestampString = "496826713.636767"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "-sendPrivateletterAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

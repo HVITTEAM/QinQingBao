@@ -110,6 +110,7 @@
 -(void)searchView
 {
     SearchViewController *vc = [[SearchViewController alloc] init];
+    vc.type = SearchTypePosts;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

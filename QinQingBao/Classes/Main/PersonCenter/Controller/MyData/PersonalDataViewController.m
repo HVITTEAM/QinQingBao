@@ -631,6 +631,7 @@
 {
     UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
     NSData *data = UIImageJPEGRepresentation(slt, 1);
+    self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self upploadAvatar:data];
     [self.navigationController popViewControllerAnimated:YES];

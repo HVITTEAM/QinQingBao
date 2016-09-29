@@ -21,11 +21,13 @@
 #define kReplyTextViewHeight 34
 #define kReplyBarHeight (kReplyTextViewHeight + 20)
 
-@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate>
+@interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate,UIActionSheetDelegate>
 {
     UIWebView *_webView;
     
     CGFloat cellHeight;
+    
+    UIView *palceView;
 }
 
 @property (strong, nonatomic) UITableView *tableview;
@@ -167,10 +169,23 @@
     authorBtn.layer.cornerRadius = 5.0f;
     authorBtn.layer.borderColor = HMColor(198, 150, 102).CGColor;
     authorBtn.layer.borderWidth = 1.0f;
+    
     [authorBtn setTitleColor:HMColor(198, 150, 102) forState:UIControlStateNormal];
+    [authorBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [authorBtn setBackgroundColor:[UIColor whiteColor]];
+    
     [authorBtn addTarget:self action:@selector(authorItemClick:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *authorItem = [[UIBarButtonItem alloc] initWithCustomView:authorBtn];
-    self.navigationItem.rightBarButtonItems = @[delItem,shareItem,authorItem];
+    
+    // 只能删除自己的帖子
+    if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.itemdata.authorid])
+    {
+        self.navigationItem.rightBarButtonItems = @[delItem,shareItem,authorItem];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItems = @[shareItem,authorItem];
+    }
 }
 
 #pragma mark - Table view data source
@@ -233,7 +248,7 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:@"sss"];
             
-            _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 100)];
+            _webView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 10)];
             _webView.delegate = self;
             _webView.scrollView.bounces = NO;
             _webView.scrollView.showsHorizontalScrollIndicator = NO;
@@ -245,7 +260,6 @@
             if (self.detailData)
                 [self showInWebView];
         }
-        cell.textLabel.text = @"add";
         return cell;
     }else if (indexPath.section == 0 && indexPath.row == 2){
         PostsDetailDZCell *cell = [PostsDetailDZCell createCellWithTableView:tableView];
@@ -288,7 +302,7 @@
         self.replyPlaceholdeLb.hidden = NO;
         [self.replayTextView becomeFirstResponder];
     }
-
+    
 }
 
 #pragma mark - 拼接html语言
@@ -356,8 +370,9 @@
     CGRect newFrame = webView.frame;
     newFrame.size.height = actualSize.height;
     webView.frame = newFrame;
-    
     cellHeight = newFrame.size.height;
+    
+    [palceView removeFromSuperview];
     [self.tableview reloadData];
 }
 
@@ -488,15 +503,35 @@
 }
 
 #pragma mark - 网络相关
+
+-(UIView *)getPalceView
+{
+    palceView = [[UIView alloc] initWithFrame:self.view.bounds];
+    palceView.backgroundColor = [UIColor whiteColor];
+    
+    // 添加转圈圈
+    UIActivityIndicatorView *av =[[UIActivityIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
+    av.center=self.view.center;
+    [av setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+    [av setBackgroundColor:[UIColor whiteColor]];
+    [av startAnimating];
+    [palceView addSubview:av];
+    
+    return palceView;
+}
+
 /**
  *  获取帖子详情数据
  */
 -(void)getDetailData
 {
+    [self.view addSubview:[self getPalceView]];
+    CX_Log(@"开始加载帖子详情");
     [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
-                                                                          @"client":@"ios",
-                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ?  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" }
+                                                                          @"client":@"ios"
+                                                                          }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     CX_Log(@"帖子详情加载完成");
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
@@ -678,15 +713,15 @@
 - (void)loadCommonlist
 {
     NSMutableDictionary *params = [@{
-                             @"tid":self.itemdata.tid,
-                             @"p":@(self.pageNum),
-                             @"page":@5,
-                             @"client":@"ios",
-                             }mutableCopy];
-    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
+                                     @"tid":self.itemdata.tid,
+                                     @"p":@(self.pageNum),
+                                     @"page":@5,
+                                     @"client":@"ios",
+                                     }mutableCopy];
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" ;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-
+        
         [self.tableview.footer endRefreshing];
         
         id codeNum = [dict objectForKey:@"code"];
@@ -704,7 +739,7 @@
             
             NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
             [self.commentDatas addObjectsFromArray:arr];
-            [self.tableview reloadData];
+            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
             self.pageNum++;
             
         }
@@ -723,7 +758,7 @@
     [self.view endEditing:YES];
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Reply_post parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-
+        
         [HUD removeFromSuperview];
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
@@ -751,7 +786,7 @@
             [self.commentDatas removeAllObjects];
             [self loadCommonlist];
         }
-
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [HUD removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
@@ -814,48 +849,104 @@
 #pragma mark - 导航栏事件
 - (void)delItemClick:(UINavigationItem *)item
 {
-    //判断是否登录
-    if (![SharedAppUtil checkLoginStates]) {
-        return;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+    [alertView show];
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSDictionary *params = @{@"tid":self.detailData.tid,
+                                 @"client":@"ios",
+                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            
+            [HUD removeFromSuperview];
+            id codeNum = [dict objectForKey:@"code"];
+            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            }
+            else
+            {
+                if (self.deletePostsSuccessBlock) {
+                    self.deletePostsSuccessBlock();
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [HUD removeFromSuperview];
+            [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        }];
+    }
+}
+
+
+- (void)shareItemClick:(UINavigationItem *)item
+{
+    [NoticeHelper AlertShow:@"暂未开通" view:nil];
+}
+
+// 只看楼主
+- (void)authorItemClick:(UIButton *)item
+{
+    item.selected = !item.selected;
+    if (item.selected)
+    {
+        [item setBackgroundColor:HMColor(198, 150, 102)];
+        [NoticeHelper AlertShow:@"只看楼主" view:nil];
+    }
+    else
+    {
+        [item setBackgroundColor:[UIColor whiteColor]];
+        [NoticeHelper AlertShow:@"查看全部" view:nil];
     }
     
-    NSDictionary *params = @{
-                             @"tid":self.detailData.tid,
-                             @"client":@"ios",
-                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
-                             };
+    [self.commentDatas removeAllObjects];
+    self.pageNum = 1;
     
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    NSMutableDictionary *params = [@{@"host" : item.selected ? @"1" : @"0",
+                                     @"tid":self.itemdata.tid,
+                                     @"p":@(self.pageNum),
+                                     @"page":@5,
+                                     @"client":@"ios", }mutableCopy];
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" ;
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
-        [HUD removeFromSuperview];
+        [self.tableview.footer endRefreshing];
+        
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
+            if ([codeNum integerValue] == 17001)
+            {
+                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+                return CX_Log(@"评论数据为空");
+            }
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
         else
         {
-            if (self.deletePostsSuccessBlock) {
-                self.deletePostsSuccessBlock();
-            }
-            [self.navigationController popToViewController:self animated:YES];
+            
+            NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            [self.commentDatas addObjectsFromArray:arr];
+            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            self.pageNum++;
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [HUD removeFromSuperview];
+        [self.tableview.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-}
-
-- (void)shareItemClick:(UINavigationItem *)item
-{
     
-}
-
-- (void)authorItemClick:(UIButton *)item
-{
     
 }
 

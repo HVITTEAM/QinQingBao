@@ -429,7 +429,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:@"当前APP有新版本，是否更新？" delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"去更新", nil];
         alert.tag = 100;
-        [alert show];
+//        [alert show];
     }
 }
 
