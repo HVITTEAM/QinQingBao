@@ -219,7 +219,6 @@
                                  }];
 }
 
-
 /**
  *  获取说说和资讯数据
  */
@@ -406,7 +405,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    if (self.type == BBSType_1 && indexPath.section == 0)
+    if ((self.type == BBSType_1 && indexPath.section == 0) || self.type == BBSType_4)
         [view setItemdata:recommendlist[indexPath.row]];
     else
         [view setItemdata:postsArr[indexPath.row]];

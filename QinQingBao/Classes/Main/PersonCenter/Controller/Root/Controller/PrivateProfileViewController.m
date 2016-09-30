@@ -44,6 +44,9 @@
     
     // 当前第几页
     NSInteger currentPageIdx;
+    
+    UIButton *rightBtn0;
+    UIButton *rightBtn1;
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -58,10 +61,10 @@
 {
     [super viewDidLoad];
     
-    [self initNavigation];
-    
     [self initHeadView];
     
+    [self initNavigation];
+
     [self setupRefresh];
     
     self.view.backgroundColor = HMGlobalBg;
@@ -141,23 +144,19 @@
  */
 -(void)initNavigation
 {
-    UIButton *rightBtn0 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    rightBtn0 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 35,25 - headHeight, 24, 24)];
     [rightBtn0 addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn0.tag = 100;
     [rightBtn0 setBackgroundImage:[UIImage imageNamed:@"ic_msg.png"] forState:UIControlStateNormal];
     [rightBtn0 setBackgroundImage:[UIImage imageNamed:@"ic_msg.png"] forState:UIControlStateHighlighted];
-    UIBarButtonItem *rightBarBtn0 = [[UIBarButtonItem alloc] initWithCustomView:rightBtn0];
+    [self.view addSubview:rightBtn0];
     
-    UIButton *rightBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
+    rightBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 70, 25 - headHeight, 24, 24)];
     rightBtn1.tag = 200;
     [rightBtn1 addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn1 setBackgroundImage:[UIImage imageNamed:@"pc_setup.png"] forState:UIControlStateNormal];
     [rightBtn1 setBackgroundImage:[UIImage imageNamed:@"pc_setup.png"] forState:UIControlStateHighlighted];
-    UIBarButtonItem *rightBarBtn1 = [[UIBarButtonItem alloc] initWithCustomView:rightBtn1];
-    
-    self.navigationItem.rightBarButtonItems = @[rightBarBtn0,rightBarBtn1];
-    
-    self.navigationItem.title = @"";
+    [self.view addSubview:rightBtn1];
 }
 
 #pragma mark 导航栏点击
@@ -169,7 +168,6 @@
         {
             SettingViewController *vc = [[SettingViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
-            
         }
             break;
         case 100:
@@ -215,6 +213,10 @@
     }else{
         alpha = 0;
     }
+    
+    rightBtn0.y = 25 + scrollView.contentOffset.y;
+    rightBtn1.y = 25 + scrollView.contentOffset.y;
+
     self.navBar.y = scrollView.contentOffset.y + headHeight;
     self.navBar.alpha = alpha;
 }

@@ -545,6 +545,7 @@
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"网络出错,请重试" view:nil];
                                  }];
 }
 
