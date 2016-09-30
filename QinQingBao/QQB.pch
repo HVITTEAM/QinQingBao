@@ -836,6 +836,13 @@
 /***私信 - 获取个人私信列表*/
 #define URL_get_allpriletter [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/allpriletter.php",URL_Local_New]
 
+/***私信 - 黑名单操作*/
+#define URL_Blacklist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/blacklist.php",URL_Local_New]
+
+/***私信 - 清除个人私信记录*/
+#define URL_Delete_chatlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_chatlist.php",URL_Local_New]
+
+
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
 blue:((float)(rgbValue & 0xFF)) / 255.0 \

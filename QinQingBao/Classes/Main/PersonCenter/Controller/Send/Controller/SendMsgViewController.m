@@ -93,9 +93,17 @@
 
 -(void)navgationHandler
 {
+    __weak typeof(self) weakSelf = self;
     [YCXMenu setTintColor:[UIColor darkGrayColor]];
     [YCXMenu showMenuInView:[UIApplication sharedApplication].keyWindow.rootViewController.view fromRect:CGRectMake(self.view.frame.size.width - 55, self.navigationController.navigationBar.height + 10, 50, 0) menuItems:self.items selected:^(NSInteger index, YCXMenuItem *item) {
-        NSLog(@"%@",item);
+        
+        if (item.tag == 100){
+            [weakSelf blockListOperationWithType:1 author:weakSelf.otherInfo.author];
+        }else{
+             NSLog(@"删除聊天记录");
+             NSLog(@"%@",item);
+        }
+       
     }];
 }
 
@@ -313,7 +321,7 @@
                              @"client":@"ios",
                              @"authorid":self.authorid,
                              @"p": @(self.pageNum),
-                             @"page":@"20",
+                             @"page":@"100",
                              };
     [CommonRemoteHelper RemoteWithUrl:URL_Get_priletterlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [tableview.header endRefreshing];
@@ -329,8 +337,12 @@
         {
             NSArray *ar = [PriletterlistModel objectArrayWithKeyValuesArray:dict[@"datas"]];
             [priletterDatas addObjectsFromArray:ar];
+            
+            NSIndexPath *idx = [NSIndexPath indexPathForItem:priletterDatas.count-1 inSection:0];
+
             self.pageNum ++;
             [tableview reloadData];
+            [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -352,7 +364,7 @@
  */
 - (void)sendPrivateletterAction:(UIButton *)sender
 {
-    [self.view endEditing:YES];
+//    [self.view endEditing:YES];
     //判断是否登录
     if (![SharedAppUtil checkLoginStates]) {
         return;
@@ -368,6 +380,7 @@
                              @"client":@"ios",
                              @"authorid":self.authorid,
                              @"message": msg,
+                             @"messageid":@"909090"
                              };
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -382,13 +395,91 @@
         }
         else
         {
-            [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
-            textfield.text = nil;
             
-            //重新获取私信
-            self.pageNum = 1;
+            if ([dict[@"data"] isEqualToString:@"909090"]) {
+                NSLog(@"成功了啊");
+                [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+                textfield.text = nil;
+                
+                //重新获取私信
+                self.pageNum = 1;
+                [priletterDatas removeAllObjects];
+                [self getPrivateletterList];
+            }
+
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  黑名单操作【action为 0:查找黑名单列表，1:添加黑名单；2:删除黑名单】
+ */
+- (void)blockListOperationWithType:(NSInteger)opType author:(NSString *)blackName
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [@{
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"action":@(opType),
+                             }mutableCopy];
+    params[@"author"] = blackName;
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Blacklist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            if([codeNum integerValue] == 17001)
+                return ;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
+/**
+ *  清除个人私信记录
+ */
+- (void)clearChatlist
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    NSDictionary *params = @{
+                              @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                              @"client":@"ios",
+                              @"authorid":self.authorid,
+                            };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Delete_chatlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+        {
+            if([codeNum integerValue] == 17001)
+                return ;
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
             [priletterDatas removeAllObjects];
-            [self getPrivateletterList];
+            [tableview reloadData];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
