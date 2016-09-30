@@ -61,6 +61,8 @@
     
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if (self.headView)
+        self.headView.frame = CGRectMake(0, -headHeight - 20, MTScreenW, headHeight);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -68,9 +70,6 @@
     [super viewWillAppear:animated];
     
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 0, 0);
-    
-    if (self.headView)
-        self.headView.frame = CGRectMake(0, -headHeight - 20, MTScreenW, headHeight);
     
     [self updateViewConstraints];
     
@@ -148,7 +147,7 @@
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
     backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    backBtn.frame = CGRectMake(15, 23 - headHeight, 40, 40);
+    backBtn.frame = CGRectMake(15, 20 - headHeight, 40, 40);
     [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
