@@ -836,6 +836,10 @@
 /***私信 - 获取个人私信列表*/
 #define URL_get_allpriletter [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/allpriletter.php",URL_Local_New]
 
+/***登录 - 第三方登录*/
+#define URL_LoginByother_new [NSString stringWithFormat:@"%@/ucenter/admin/index.php/tpl_member/checkAndLogin",URL_Local]
+
+
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
 blue:((float)(rgbValue & 0xFF)) / 255.0 \
