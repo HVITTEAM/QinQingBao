@@ -11,8 +11,10 @@
 
 @interface SendMsgViewController : UIViewController
 
-@property (strong, nonatomic) BBSPersonalModel *otherInfo;
+/** 对方名字 */
+@property (strong, nonatomic) NSString *otherName;
 
+/** 对方id */
 @property (strong, nonatomic) NSString *authorid;
 
 @end

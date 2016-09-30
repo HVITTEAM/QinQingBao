@@ -10,9 +10,9 @@
 
 @interface CircleModel : NSObject
 
-@property (copy, nonatomic) NSString *sectionid;   //下一级版本id
+@property (copy, nonatomic) NSString *sectionid;   //版块id
 
-@property (copy, nonatomic) NSString *name;        //下级版块名称
+@property (copy, nonatomic) NSString *name;        //版块名称
 
 @property (copy, nonatomic) NSString *avatar;      //版块头像
 

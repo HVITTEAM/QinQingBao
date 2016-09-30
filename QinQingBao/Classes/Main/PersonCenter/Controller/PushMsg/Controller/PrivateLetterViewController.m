@@ -72,7 +72,7 @@
     AllpriletterModel *item = self.dataProvider[indexPath.row];
     SendMsgViewController *view = [[SendMsgViewController alloc] init];
     view.authorid = item.authorid;
-//    view.otherInfo = personalInfo;
+    view.otherName = item.author;
     [self.parentVC.navigationController pushViewController:view animated:YES];
 
 }
@@ -108,14 +108,16 @@
         else
         {
             NSArray *ar = [AllpriletterModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            [self.dataProvider addObjectsFromArray:ar];
-            self.pageNum ++;
-            
-//            if (self.dataProvider.count > 0) {
-//                [self.view removePlace];
-//            }
-            
-            [self.tableView reloadData];
+            if (ar.count > 0) {
+                [self.dataProvider addObjectsFromArray:ar];
+                self.pageNum ++;
+                
+                //            if (self.dataProvider.count > 0) {
+                //                [self.view removePlace];
+                //            }
+                
+                [self.tableView reloadData];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

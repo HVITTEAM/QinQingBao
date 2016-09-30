@@ -136,7 +136,7 @@
             {
                 SendMsgViewController *view = [[SendMsgViewController alloc] init];
                 view.authorid = self.uid;
-                view.otherInfo = personalInfo;
+                view.otherName = personalInfo.author;
                 [self.navigationController pushViewController:view animated:YES];
             }
         }

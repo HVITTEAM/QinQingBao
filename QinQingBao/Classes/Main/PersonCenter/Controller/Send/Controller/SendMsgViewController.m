@@ -16,6 +16,13 @@
 
 #define contentViewHeight 60
 
+//【0:查找黑名单列表，1:添加黑名单；2:删除黑名单】
+typedef NS_ENUM(NSInteger, BlackListOperation) {
+    BlackListOperationGetList=0,
+    BlackListOperationAdd=1,
+    BlackListOperationDel=2
+};
+
 @interface SendMsgViewController ()<UITextViewDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UIView * inputContentView;
@@ -26,7 +33,12 @@
 }
 @property (nonatomic , strong) NSMutableArray *items;
 
+@property (nonatomic , strong) NSMutableArray *blackNameArray;
+
 @property (nonatomic, assign) NSInteger pageNum;
+
+///对方是否是黑名单
+@property (assign, nonatomic) BOOL isBlackName;
 
 @end
 
@@ -55,6 +67,14 @@
                                  userInfo:nil],
                     ] mutableCopy];
     }
+    
+    YCXMenuItem *item0 = _items[0];
+    if (self.isBlackName) {
+        item0.title = @"删除黑名单";
+    }else{
+        item0.title = @"加入黑名单";
+    }
+    
     return _items;
 }
 
@@ -65,6 +85,7 @@
     self.pageNum = 1;
     
     priletterDatas = [[NSMutableArray alloc] init];
+    self.blackNameArray = [[NSMutableArray alloc] init];
     
     [self loadNotificationCell];
     
@@ -75,6 +96,8 @@
     [self initNavigation];
     
     [self getPrivateletterList];
+    
+    [self blockListOperationWithType:BlackListOperationGetList author:nil];
 }
 
 /**
@@ -98,10 +121,13 @@
     [YCXMenu showMenuInView:[UIApplication sharedApplication].keyWindow.rootViewController.view fromRect:CGRectMake(self.view.frame.size.width - 55, self.navigationController.navigationBar.height + 10, 50, 0) menuItems:self.items selected:^(NSInteger index, YCXMenuItem *item) {
         
         if (item.tag == 100){
-            [weakSelf blockListOperationWithType:1 author:weakSelf.otherInfo.author];
+            BlackListOperation op = BlackListOperationAdd;
+            if (weakSelf.isBlackName) {
+                op = BlackListOperationDel;
+            }
+            [weakSelf blockListOperationWithType:op author:weakSelf.otherName];
         }else{
-             NSLog(@"删除聊天记录");
-             NSLog(@"%@",item);
+            [weakSelf clearChatlist];
         }
        
     }];
@@ -180,7 +206,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = self.otherInfo.author;
+    self.title = self.otherName;
     
     inputContentView = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - contentViewHeight, MTScreenW, contentViewHeight)];
     inputContentView.backgroundColor = [UIColor whiteColor];
@@ -321,7 +347,7 @@
                              @"client":@"ios",
                              @"authorid":self.authorid,
                              @"p": @(self.pageNum),
-                             @"page":@"100",
+                             @"page":@"15",
                              };
     [CommonRemoteHelper RemoteWithUrl:URL_Get_priletterlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [tableview.header endRefreshing];
@@ -336,13 +362,17 @@
         else
         {
             NSArray *ar = [PriletterlistModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            [priletterDatas addObjectsFromArray:ar];
             
-            NSIndexPath *idx = [NSIndexPath indexPathForItem:priletterDatas.count-1 inSection:0];
+            if (ar.count > 0) {
 
-            self.pageNum ++;
-            [tableview reloadData];
-            [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                [priletterDatas addObjectsFromArray:ar];
+                
+                NSIndexPath *idx = [NSIndexPath indexPathForItem:priletterDatas.count-1 inSection:0];
+                
+                self.pageNum ++;
+                [tableview reloadData];
+                [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -397,7 +427,6 @@
         {
             
             if ([dict[@"data"] isEqualToString:@"909090"]) {
-                NSLog(@"成功了啊");
                 [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
                 textfield.text = nil;
                 
@@ -417,7 +446,7 @@
 /**
  *  黑名单操作【action为 0:查找黑名单列表，1:添加黑名单；2:删除黑名单】
  */
-- (void)blockListOperationWithType:(NSInteger)opType author:(NSString *)blackName
+- (void)blockListOperationWithType:(BlackListOperation)opType author:(NSString *)blackName
 {
     //判断是否登录
     if (![SharedAppUtil checkLoginStates]) {
@@ -442,7 +471,20 @@
         }
         else
         {
-            [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+            if (opType == BlackListOperationGetList) {
+                self.blackNameArray = dict[@"datas"];
+                self.isBlackName = NO;
+                if ([self.blackNameArray containsObject:self.otherName]) {
+                    self.isBlackName = YES;
+                }
+                
+            }else if (opType == BlackListOperationAdd){
+                self.isBlackName = YES;
+                [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+            }else{
+                self.isBlackName = NO;
+                [NoticeHelper AlertShow:dict[@"successMsg"] view:nil];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -458,6 +500,10 @@
     //判断是否登录
     if (![SharedAppUtil checkLoginStates]) {
         return;
+    }
+    
+    if (priletterDatas.count <= 0) {
+        return [NoticeHelper AlertShow:@"没有需要清除的记录" view:nil];
     }
     
     NSDictionary *params = @{

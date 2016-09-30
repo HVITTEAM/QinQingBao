@@ -20,6 +20,7 @@
 
 #define kReplyTextViewHeight 34
 #define kReplyBarHeight (kReplyTextViewHeight + 20)
+#define kNoPostsPrompt @"帖子被火星人带走了!"
 
 @interface PostsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,UITextViewDelegate,UIScrollViewDelegate,UIActionSheetDelegate>
 {
@@ -533,9 +534,9 @@
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      CX_Log(@"帖子详情加载完成");
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:kNoPostsPrompt delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
                                          [alertView show];
                                      }
                                      else
@@ -716,10 +717,10 @@
     NSMutableDictionary *params = [@{
                                      @"tid":self.itemdata.tid,
                                      @"p":@(self.pageNum),
-                                     @"page":@5,
+                                     @"page":@10,
                                      @"client":@"ios",
                                      }mutableCopy];
-    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" ;
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
@@ -739,10 +740,12 @@
         {
             
             NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            [self.commentDatas addObjectsFromArray:arr];
-            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-            self.pageNum++;
-            
+            if (arr.count > 0) {
+                [self.commentDatas addObjectsFromArray:arr];
+//                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                [self.tableview reloadData];
+                self.pageNum++;
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -886,6 +889,14 @@
             [NoticeHelper AlertShow:@"请求出错了" view:nil];
         }];
     }
+    
+    //找不到帖子时
+    if ([alertView.message isEqualToString:kNoPostsPrompt]) {
+        if (self.deletePostsSuccessBlock) {
+            self.deletePostsSuccessBlock();
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -917,7 +928,7 @@
                                      @"p":@(self.pageNum),
                                      @"page":@5,
                                      @"client":@"ios", }mutableCopy];
-    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @"" ;
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
@@ -938,9 +949,11 @@
         {
             
             NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            [self.commentDatas addObjectsFromArray:arr];
-            [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-            self.pageNum++;
+            if (arr.count > 0) {
+                [self.commentDatas addObjectsFromArray:arr];
+                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+                self.pageNum++;
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

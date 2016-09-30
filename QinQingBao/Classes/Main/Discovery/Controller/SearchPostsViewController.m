@@ -114,7 +114,7 @@
     NSMutableDictionary *params = [@{
                                      @"flag":@4,
                                      @"p": @(self.pageNum),
-                                     @"page":@(3),
+                                     @"page":@(10),
                                      @"client":@"ios"
                                      }mutableCopy];
     params[@"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
@@ -130,11 +130,12 @@
         }
         
         NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        [self.dataProvider addObjectsFromArray:datas];
-        self.pageNum++;
-        
-        [self.tableView reloadData];
-        
+        if (datas.count > 0) {
+            [self.dataProvider addObjectsFromArray:datas];
+            self.pageNum++;
+            
+            [self.tableView reloadData];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.tableView.footer endRefreshing];

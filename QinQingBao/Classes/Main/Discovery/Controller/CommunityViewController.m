@@ -407,7 +407,7 @@
 {
     NSMutableDictionary *params = [@{
                              @"sectionid":self.circleModel.sectionid,
-                             @"page":@(3),
+                             @"page":@(10),
                              @"client":@"ios"
                              } mutableCopy];
 
@@ -430,19 +430,20 @@
         }
     
         NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        
-        if ([type isEqual:@1]) {//所有数据
-            [self.hotPosts addObjectsFromArray:datas];
-            self.hotPageNum++;
-        }else if ([type isEqual:@2]){ //置顶数据
-            [self.zdPosts addObjectsFromArray:datas];
-        }else{
-            //全部数据
-            [self.allPosts addObjectsFromArray:datas];
-            self.allPageNum++;
+        if (datas.count > 0) {
+            if ([type isEqual:@1]) {//所有数据
+                [self.hotPosts addObjectsFromArray:datas];
+                self.hotPageNum++;
+            }else if ([type isEqual:@2]){ //置顶数据
+                [self.zdPosts addObjectsFromArray:datas];
+            }else{
+                //全部数据
+                [self.allPosts addObjectsFromArray:datas];
+                self.allPageNum++;
+            }
+            
+            [self.tableView reloadData];
         }
-        
-        [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.tableView.footer endRefreshing];
@@ -521,6 +522,22 @@
         [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
             // 弹出发微博控制器
             CXComposeViewController *compose = [[CXComposeViewController alloc] init];
+            if ([item.title isEqualToString:@"健康资讯"])
+            {
+                compose.fid = 39;
+            }
+            else if ([item.title isEqualToString:@"心脑血管"])
+            {
+                compose.fid = 40;
+            }
+            else if ([item.title isEqualToString:@"易疲劳"])
+            {
+                compose.fid = 41;
+            }
+            else if ([item.title isEqualToString:@"减肥瘦身"])
+            {
+                compose.fid = 42;
+            }
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
             [self presentViewController:nav animated:YES completion:nil];
         }];
