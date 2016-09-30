@@ -32,15 +32,19 @@
     BBSPersonalModel *personalInfo;
     
     NSMutableArray *postsArr;
-
+    
     UILabel * titleLabel;
     
     // 当前第几页
     NSInteger currentPageIdx;
+    
+    UIButton *backBtn;
 }
 
 @property(nonatomic,strong)UIView *headView;
 
+/**自定义导航栏*/
+@property (strong, nonatomic) UIView *navBar;
 @end
 
 @implementation PublicProfileViewController
@@ -48,8 +52,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self initNavigation];
     
     [self initHeadView];
     
@@ -70,10 +72,9 @@
     if (self.headView)
         self.headView.frame = CGRectMake(0, -headHeight - 20, MTScreenW, headHeight);
     
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
     [self updateViewConstraints];
+    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -86,8 +87,9 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+    
+    self.navigationController.navigationBarHidden = NO;
+    
 }
 
 #pragma mark 集成刷新控件
@@ -99,7 +101,7 @@
 {
     currentPageIdx = 0;
     postsArr = [[NSMutableArray alloc] init];
-
+    
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getUserPosts)];
 }
 
@@ -140,22 +142,34 @@
             }
         }
     };
+    
+    //自定义导航条
+    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0, MTScreenW, 64)];
+    self.navBar.backgroundColor = [UIColor whiteColor];
+    self.navBar.alpha = 0;
+    backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn.frame = CGRectMake(15, 23 - headHeight, 40, 40);
+    [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
+    UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    titleLb.textColor = [UIColor darkTextColor];
+    titleLb.font = [UIFont systemFontOfSize:17];
+    titleLb.text = @"标题";
+    UIView *lv = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, 0.5)];
+    lv.backgroundColor = HMColor(230, 230, 230);
+    [self.navBar addSubview:lv];
+    [self.navBar addSubview:titleLb];
+    [self.headView addSubview:self.navBar];
+    
+    [self.view addSubview:backBtn];
 }
-
-/**
- *  初始化导航栏
- */
--(void)initNavigation
-{
-    // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
-}
-
 
 #pragma mark 导航栏点击
 
 -(void)navgationHandler:(UIButton *)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UIScrollViewDelegate
@@ -178,17 +192,9 @@
         alpha = 0;
     }
     
-    //    UIImage *img = [UIImage imageNamed:@"red_line_and_shadow.png"];
-    //    self.navigationController.navigationBar.alpha = alpha;
-    
-    if (titleLabel == nil)
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
-    titleLabel.text = personalInfo.author;
-    titleLabel.alpha = alpha;
-    //    self.navigationItem.titleView = titleLabel;
-    
-    UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
-    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+    backBtn.y = 23 + scrollView.contentOffset.y;
+    self.navBar.y = scrollView.contentOffset.y + headHeight;
+    self.navBar.alpha = alpha;
 }
 
 #pragma mark - Table view data source
@@ -315,7 +321,7 @@
                                          {
                                              return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
-
+                                         
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
                                      }
@@ -332,15 +338,15 @@
                                              currentPageIdx --;
                                              [self.view showNonedataTooltip];
                                          }
-                                       
+                                         
                                          [postsArr addObjectsFromArray:[arr copy]];
-
+                                         
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.footer endRefreshing];
-
+                                     
                                  }];
     
 }

@@ -48,6 +48,8 @@
 
 @property(nonatomic,strong)LoginInHeadView *headView;
 
+/**自定义导航栏*/
+@property (strong, nonatomic) UIView *navBar;
 @end
 
 @implementation PrivateProfileViewController
@@ -75,8 +77,7 @@
     if (self.headView)
         self.headView.frame = CGRectMake(0, -headHeight, MTScreenW, headHeight);
     
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -93,9 +94,9 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBarHidden = NO;
 }
+
 
 /**
  *  初始化头部视图
@@ -117,6 +118,22 @@
     };
     
     [self.tableView addSubview:self.headView];
+    
+    //自定义导航条
+    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0, MTScreenW, 64)];
+    self.navBar.backgroundColor = [UIColor whiteColor];
+    self.navBar.alpha = 0;
+    
+    UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    titleLb.textColor = [UIColor darkTextColor];
+    titleLb.font = [UIFont systemFontOfSize:17];
+    titleLb.text = @"个人中心";
+    UIView *lv = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, 0.5)];
+    lv.backgroundColor = HMColor(230, 230, 230);
+    [self.navBar addSubview:lv];
+    [self.navBar addSubview:titleLb];
+    [self.headView addSubview:self.navBar];
 }
 
 /**
@@ -141,7 +158,6 @@
     self.navigationItem.rightBarButtonItems = @[rightBarBtn0,rightBarBtn1];
     
     self.navigationItem.title = @"";
-    // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_icon_white"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
 #pragma mark 导航栏点击
@@ -199,22 +215,8 @@
     }else{
         alpha = 0;
     }
-    
-    //    UIImage *img = [UIImage imageNamed:@"red_line_and_shadow.png"];
-    //    self.navigationController.navigationBar.alpha = alpha;
-    
-    if (titleLabel == nil)
-        titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
-    titleLabel.text = infoVO.member_truename;
-    titleLabel.alpha = alpha;
-    //    self.navigationItem.titleView = titleLabel;
-    
-    
-//    UIImage *img = [UIImage imageNamed:@"nav_shadow.png"];
-    
-    UIImage *img = [UIImage imageWithColor:[UIColor colorWithRed:255 green:255 blue:255 alpha:alpha]];
-    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
-    
+    self.navBar.y = scrollView.contentOffset.y + headHeight;
+    self.navBar.alpha = alpha;
 }
 
 #pragma mark - Table view data source
@@ -428,12 +430,12 @@
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
                                              return ;
-//                                             [NoticeHelper AlertShow:@"您还没有发帖" view:nil]
+                                             //                                             [NoticeHelper AlertShow:@"您还没有发帖" view:nil]
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
                                              return;
-//                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                             //                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
