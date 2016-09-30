@@ -48,7 +48,7 @@
 
 -(void)initNavgation
 {
-    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 12, 23)];
+    UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     [leftBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setBackgroundImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [leftBtn setBackgroundImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateHighlighted];
@@ -65,18 +65,61 @@
 
 - (IBAction)btnHandler:(id)sender
 {
+    NSString *str = [self.nameTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    if (str.length > 15 || str.length < 2)
+    {
+        return [NoticeHelper AlertShow:@"昵称不能少于2个字，不能大于15个字" view:nil];
+    }
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    [CommonRemoteHelper RemoteWithUrl:URL_DiscuzRegisterFromCx parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                            @"client" : @"ios",
+                                                                            @"truename" : str}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [HUD removeFromSuperview];
+
+                                     NSLog(@"%@",dict);
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+                                         [self loginBBS];
+                                     }
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+}
+
+// 登录bbs
+-(void)loginBBS
+{
     [CommonRemoteHelper RemoteWithUrl:URL_Get_loginToOtherSys parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                             @"client" : @"ios",
-                                                                            @"targetsys" : @"4",
-                                                                            @"discuz_uname" : @"我是你爸爸"}
+                                                                            @"targetsys" : @"4"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      NSLog(@"%@",dict);
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+                                         // 当目标系统不存在该用户的时候：  "errorMsg": "请激活论坛用户，输入用户名",
+                                         if ([codeNum integerValue] == 18001)
+                                         {
+                                            
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
                                      }
                                      else
                                      {
@@ -95,6 +138,7 @@
                                      NSLog(@"发生错误！%@",error);
                                  }];
 }
+
 
 -(void)getPic
 {
@@ -181,7 +225,5 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-
 
 @end

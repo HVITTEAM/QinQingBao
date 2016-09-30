@@ -171,7 +171,8 @@
                                                                      @"password" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                      @"password_confirm" : [SecurityUtil encryptMD5String:self.passwordText.text],
                                                                      @"code" : self.VerNumText.text,
-                                                                     @"client" : @"ios"}
+                                                                     @"client" : @"ios",
+                                                                     @"sys" : @"2"}
                                      type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                          [HUD removeFromSuperview];
                                          [self.view endEditing:YES];
@@ -214,13 +215,12 @@
                                      
                                      NSLog(@"%@",dict);
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         // 当目标系统不存在该用户的时候：
+                                         // 当目标系统不存在该用户的时候：  "errorMsg": "请激活论坛用户，输入用户名",
                                          if ([codeNum integerValue] == 18001)
                                          {
-                                             CompleteInfoController *conplete = [[CompleteInfoController alloc] init];
-                                             [self.navigationController pushViewController:conplete animated:YES];
+                                             [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
                                          }
                                          else
                                          {

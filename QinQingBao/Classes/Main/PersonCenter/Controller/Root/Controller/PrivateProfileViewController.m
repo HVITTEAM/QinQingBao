@@ -62,8 +62,6 @@
     [super viewDidLoad];
     
     [self initHeadView];
-    
-    [self initNavigation];
 
     [self setupRefresh];
     
@@ -92,6 +90,8 @@
     [self getUserPosts];
     
     [self getUserFannum];
+    
+    [self initNavigation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -265,8 +265,7 @@
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
-            if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-                return   [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+            [SharedAppUtil checkLoginStates];
             
             if (idx == 100)
             {
@@ -382,6 +381,8 @@
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
         return;
+    if (![SharedAppUtil defaultCommonUtil].bbsVO)
+        return;
     [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
                                                                            @"client" : @"ios",
                                                                            @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
@@ -412,10 +413,19 @@
  */
 -(void)getUserPosts
 {
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        personalInfo = nil;
+        [postsArr removeAllObjects];
+        [self.tableView reloadData];
+        return  [self.tableView.footer endRefreshing];
+    }
+    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
+    {
+        return  [self.tableView.footer endRefreshing];
+    }
     currentPageIdx ++;
     NSDictionary *paramDict = [[NSDictionary alloc] init];
-    if (![SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
-        return [self.tableView.footer endRefreshing];
     
     paramDict = @{@"uid" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
                   @"client" : @"ios",
@@ -431,11 +441,13 @@
                                      {
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
+                                             currentPageIdx --;
                                              return ;
                                              //                                             [NoticeHelper AlertShow:@"您还没有发帖" view:nil]
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
+                                             currentPageIdx --;
                                              return;
                                              //                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
@@ -449,6 +461,7 @@
                                          if (arr.count == 0 && currentPageIdx == 1)
                                          {
                                              CX_Log(@"没有新的发帖数据");
+                                             currentPageIdx --;
                                          }
                                          else if (arr.count == 0 && currentPageIdx > 1)
                                          {

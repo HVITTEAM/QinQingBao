@@ -314,10 +314,12 @@
                                      {
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
+                                             currentPageIdx -- ;
                                              return [NoticeHelper AlertShow:@"TA还没有发帖" view:nil];
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
+                                             currentPageIdx --;
                                              return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
                                          
@@ -330,6 +332,7 @@
                                          
                                          if (arr.count == 0 && currentPageIdx == 1)
                                          {
+                                             currentPageIdx --;
                                              CX_Log(@"没有发帖数据");
                                          }
                                          else if (arr.count == 0 && currentPageIdx > 1)
