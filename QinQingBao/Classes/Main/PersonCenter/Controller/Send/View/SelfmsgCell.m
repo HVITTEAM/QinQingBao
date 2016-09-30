@@ -39,7 +39,7 @@
 
     // 头像
     UIImageView *headImg = [[UIImageView alloc] initWithFrame:CGRectMake(MTScreenW  -50, 5, 40, 40)];
-    [headImg sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"head"]];
+    [headImg sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     [self addSubview:headImg];
     
     // 文本

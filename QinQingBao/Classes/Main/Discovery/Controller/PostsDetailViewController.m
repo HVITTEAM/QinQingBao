@@ -529,7 +529,8 @@
     [self.view addSubview:[self getPalceView]];
     CX_Log(@"开始加载帖子详情");
     [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
-                                                                          @"client":@"ios"
+                                                                          @"client":@"ios",
+                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @""
                                                                           }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      CX_Log(@"帖子详情加载完成");

@@ -41,7 +41,7 @@
 
 - (void)setItem:(AllpriletterModel *)item
 {
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"head"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     self.titleLb.text = item.author;
     self.contentLb.text = item.message;
 }

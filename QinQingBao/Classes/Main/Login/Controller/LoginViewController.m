@@ -357,12 +357,13 @@
 {
     NSLog(@"adaaaaa%@",openid);
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_LoginByother parameters: @{@"open_id" : openid,
+    [CommonRemoteHelper RemoteWithUrl:URL_LoginByother_new parameters: @{@"open_id" : openid,
                                                                      @"login_type" : login_type,
                                                                      @"open_token" : open_token,
                                                                      @"client" : @"ios",
                                                                      @"mobile":mobile,
-                                                                     @"code" :code}
+                                                                     @"code" :code,
+                                                                     @"sys" : @"2"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

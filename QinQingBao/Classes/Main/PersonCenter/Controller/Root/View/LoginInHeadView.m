@@ -33,21 +33,6 @@
         self.professionLab.text = @"";
     }
 }
-//
-//-(void)setIsUserata:(BOOL)isUserata
-//{
-//    _isUserata = isUserata;
-//    if (isUserata)
-//    {
-//        self.letterBtn.hidden = NO;
-//        self.followBtn.hidden = NO;
-//    }
-//    else
-//    {
-//        self.letterBtn.hidden = YES;
-//        self.followBtn.hidden = YES;
-//    }
-//}
 
 -(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend  is_mine:(NSString *)is_mine
 {

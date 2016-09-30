@@ -42,7 +42,7 @@
     {
         if ([keystr isEqualToString:@"key"])
         {
-            if ([url rangeOfString:@"discuz"].location != NSNotFound)
+            if ([url rangeOfString:@"discuz"].location != NSNotFound && [url rangeOfString:@"discuzRegisterFromCx"].location == NSNotFound)
                 [dict setObject:@"4" forKey:@"sys"];
             else
                 [dict setObject:@"2" forKey:@"sys"];

@@ -196,7 +196,7 @@
     [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].userVO key:User_Archiver_Key filePath:User_Archiver_Path];
     
     [SharedAppUtil defaultCommonUtil].bbsVO = nil;
-    [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].bbsVO key:User_Archiver_Key filePath:User_Archiver_Path];
+    [ArchiverCacheHelper saveObjectToLoacl:[SharedAppUtil defaultCommonUtil].bbsVO key:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
     
     
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
