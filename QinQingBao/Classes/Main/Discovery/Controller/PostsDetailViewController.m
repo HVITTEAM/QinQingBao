@@ -313,8 +313,20 @@
     [html appendString:@"<html>"];
     [html appendString:@"<head>"];
     [html appendFormat:@"<link rel=\"stylesheet\" href=\"%@\">",[[NSBundle mainBundle] URLForResource:@"SXDetails.css" withExtension:nil]];
-    [html appendString:@"</head>"];
     
+    [html appendFormat:@"<script src=%@>",[[NSBundle mainBundle] URLForResource:@"jquery-2.2.0.js" withExtension:nil]];
+
+    [html appendString:@"</script>"];
+    
+    [html appendFormat:@"<script src=%@>",[[NSBundle mainBundle] URLForResource:@"jquery.lazyload.js" withExtension:nil]];
+
+    [html appendString:@"</script>"];
+    
+    [html appendString:@"<script type='text/javascript'>"];
+    [html appendFormat:@"jQuery(document).ready(function(){$(\"img\").lazyload({placeholder : '%@',threshold : 100,effect: \"show\"});});",[[NSBundle mainBundle] URLForResource:@"holder.jpg" withExtension:nil]];
+    [html appendString:@"</script>"];
+    
+    [html appendString:@"</head>"];
     [html appendString:@"<body>"];
     [html appendString:[self touchBody]];
     [html appendString:@"</body>"];
@@ -353,7 +365,7 @@
         NSString *onload = @"this.onclick = function() {"
         "  window.location.href = 'sx:src=' +this.src;"
         "};";
-        [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" src=\"%@\">",onload,width,height,detailImgModel.src];
+        [imgHtml appendFormat:@"<img onload=\"%@\" width=\"%f\" height=\"%f\" data-original=\"%@\">",onload,width,height,detailImgModel.src];
         // 结束标记
         [imgHtml appendString:@"</div>"];
         // 替换标记
@@ -528,14 +540,17 @@
 {
     [self.view addSubview:[self getPalceView]];
     CX_Log(@"开始加载帖子详情");
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
-                                                                          @"client":@"ios",
-                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @""
-                                                                          }
+    
+    NSMutableDictionary *params = [@{@"tid" : self.itemdata.tid,
+                                     @"client":@"ios",
+                                     }mutableCopy];
+    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      CX_Log(@"帖子详情加载完成");
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:kNoPostsPrompt delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
                                          [alertView show];
@@ -743,7 +758,6 @@
             NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
             if (arr.count > 0) {
                 [self.commentDatas addObjectsFromArray:arr];
-//                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
                 [self.tableview reloadData];
                 self.pageNum++;
             }
@@ -901,10 +915,67 @@
 }
 
 
+
+/**
+ *  分享文章
+ */
 - (void)shareItemClick:(UINavigationItem *)item
 {
     [NoticeHelper AlertShow:@"暂未开通" view:nil];
+    
+    NSString * url = self.detailData.share_url;
+    NSString *str = [NSString stringWithFormat:@"%@%@",URL_ImgArticle,self.detailData.avatar];
+    NSArray* imageArray = @[str];
+    
+    if (imageArray) {
+        //1、创建分享参数（必要）
+        NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+        [shareParams SSDKSetupShareParamsByText:self.detailData.message
+                                         images:imageArray
+                                            url:[NSURL URLWithString:url]
+                                          title:self.detailData.subject
+                                           type:SSDKContentTypeAuto];
+        
+        UIImage *sinaImg = [UIImage imageNamed:str];
+        // 定制新浪微博的分享内容
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.detailData.message title:self.detailData.subject image:sinaImg url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        // 定制微信好友的分享内容
+        [shareParams SSDKSetupWeChatParamsByText:self.detailData.message title:self.detailData.subject url:[NSURL URLWithString:url] thumbImage:nil image:[UIImage imageNamed:str] musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
+        
+        //2、分享（可以弹出我们的分享菜单和编辑界面）
+        [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
+                                 items:nil
+                           shareParams:shareParams
+                   onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                       
+                       switch (state) {
+                           case SSDKResponseStateSuccess:
+                           {
+                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                                   message:nil
+                                                                                  delegate:nil
+                                                                         cancelButtonTitle:@"确定"
+                                                                         otherButtonTitles:nil];
+                               [alertView show];
+                               break;
+                           }
+                           case SSDKResponseStateFail:
+                           {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                               message:[NSString stringWithFormat:@"%@",error]
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil, nil];
+                               [alert show];
+                               break;
+                           }
+                           default:
+                               break;
+                       }
+                   }
+         ];}
 }
+
 
 // 只看楼主
 - (void)authorItemClick:(UIButton *)item
@@ -961,8 +1032,6 @@
         [self.tableview.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-    
-    
 }
 
 @end

@@ -10,7 +10,6 @@
 #import "HealthBloodPressureViewController.h"
 #import "HealthTotalDatas.h"
 #import "MapViewController.h"
-#import "VideoListViewController.h"
 #import "VideoCell.h"
 #import "HeartImageCell.h"
 
@@ -349,9 +348,9 @@
  */
 -(void)showVideo
 {
-    VideoListViewController *videoList = [[VideoListViewController alloc] init];
-    videoList.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:videoList animated:YES];
+//    VideoListViewController *videoList = [[VideoListViewController alloc] init];
+//    videoList.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:videoList animated:YES];
 }
 
 @end

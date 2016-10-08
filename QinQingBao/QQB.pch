@@ -70,12 +70,6 @@
 
 #define kAppVersion @"v 1.7.0.1"
 
-//Demo 转场集合类
-#import "EzvizDemoGlobalKit.h"
-//#import "UIViewController+EzvizTransition.h"
-#import "YSConstStrings.h"
-#import "YSHTTPClient.h"
-
 /** 自定义Log，日志开关 0-关闭 1-开启 */
 #define __LOGDEBUG__ (1)
 
@@ -841,6 +835,12 @@
 
 /***私信 - 清除个人私信记录*/
 #define URL_Delete_chatlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_chatlist.php",URL_Local_New]
+
+/***登录 - 第三方登录*/
+#define URL_LoginByother_new [NSString stringWithFormat:@"%@/ucenter/admin/index.php/tpl_member/checkAndLogin",URL_Local]
+
+/***注册 - 后续流程*/
+#define URL_DiscuzRegisterFromCx [NSString stringWithFormat:@"%@/ucenter/admin/index.php/tpl_member/discuzRegisterFromCx",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

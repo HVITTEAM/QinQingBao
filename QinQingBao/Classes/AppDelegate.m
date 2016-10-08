@@ -12,7 +12,6 @@
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
 #import "JPUSHService.h"
-#import "YSPlayerController.h"
 #import <SMS_SDK/SMSSDK.h>
 #import "CCLocationManager.h"
 
@@ -74,14 +73,6 @@
     [MTControllerChooseTool chooseRootViewController];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    
-    // 初始化荧石SDK库, 设置SDK平台服务器地址
-    NSMutableDictionary *dictServers = [NSMutableDictionary dictionary];
-    [dictServers setObject:@"https://auth.ys7.com" forKey:kAuthServer];
-    [dictServers setObject:@"https://open.ys7.com" forKey:kApiServer];
-    [YSPlayerController loadSDKWithPlatfromServers:dictServers];
-    
-    [[YSHTTPClient sharedInstance] setClientAppKey:AppKey];
     
     [SMSSDK registerApp:sms_appKey withSecret:sms_appSecret];
     

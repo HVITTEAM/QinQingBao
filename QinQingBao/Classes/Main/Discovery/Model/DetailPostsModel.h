@@ -44,4 +44,6 @@
 @property(copy,nonatomic)NSMutableArray *img;
 @property(copy,nonatomic)NSString *fid;
 
+@property(copy,nonatomic)NSString *share_url;
+
 @end
