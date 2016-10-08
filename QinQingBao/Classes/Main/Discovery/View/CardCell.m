@@ -133,7 +133,7 @@
     }
 
     [self setTitle:postsModel.subject content:postsModel.message titleTag:tagName];
-    
+
     //设置图片
     //...............临时这样做..........
     if ([postsModel.attachmentpicture isKindOfClass:[NSString class]]) {
@@ -165,9 +165,9 @@
  */
 - (void)setTitle:(NSString *)titleStr content:(NSString *)contentStr titleTag:(NSString *)imageName
 {
-    if (titleStr) {
+    if (titleStr.length > 0) {
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-        paragraph.lineSpacing = 5;
+        paragraph.lineSpacing = 2;
         NSDictionary *attrDict = @{
                                    NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
                                    NSForegroundColorAttributeName:HMColor(54, 54, 54),
@@ -187,9 +187,11 @@
         }
         
         self.titleLb.attributedText = attrStr;
+    }else{
+        self.titleLb.attributedText = nil;
     }
     
-    if (contentStr) {
+    if (contentStr.length > 0) {
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
         paragraph.lineSpacing = 4;
         NSDictionary *attrDict1 = @{
@@ -199,6 +201,8 @@
                                     };
         NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict1];
         self.contentLb.attributedText = attrStr;
+    }else{
+        self.contentLb.attributedText = nil;
     }
 }
 
@@ -259,13 +263,19 @@
     self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, titleSize.height);
     
     CGSize size = [self.contentLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
-    if (self.contentLb.attributedText) {
+    if (self.contentLb.attributedText && self.titleLb.attributedText) {
         self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 10, size.width, size.height);
+    }else if (self.contentLb.attributedText && self.titleLb.attributedText == nil){
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame), size.width, size.height);
     }else{
         self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame), size.width, 0);
     }
     
-    self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 12, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));
+    if (self.titleLb.attributedText.length <= 0 && self.contentLb.attributedText.length <= 0) {
+        self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame), MTScreenW - 2 * kMargin, 0);
+    }else{
+        self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 10, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));
+    }
 }
 
 /**

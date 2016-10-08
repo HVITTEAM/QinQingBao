@@ -17,6 +17,7 @@
 #import "CommentModel.h"
 
 #import "SWYPhotoBrowserViewController.h"
+#import "PublicProfileViewController.h"
 
 #define kReplyTextViewHeight 34
 #define kReplyBarHeight (kReplyTextViewHeight + 20)
@@ -242,6 +243,12 @@
         cell.attentionBlock = ^{
             [weakSelf attentionAction];
         };
+        cell.portraitClickBlock = ^(NSString *authorId){
+            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+            view.uid = authorId;
+            [weakSelf.navigationController pushViewController:view animated:YES];
+        };
+        
         return cell;
         
     }else if (indexPath.section == 0 && indexPath.row == 1){
@@ -528,14 +535,16 @@
 {
     [self.view addSubview:[self getPalceView]];
     CX_Log(@"开始加载帖子详情");
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters: @{@"tid" : self.itemdata.tid,
-                                                                          @"client":@"ios",
-                                                                          @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key ? [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key : @""
-                                                                          }
+    NSMutableDictionary *params = [@{@"tid" : self.itemdata.tid,
+                                     @"client":@"ios"
+                                     }mutableCopy];
+    params[ @"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
+
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters:params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      CX_Log(@"帖子详情加载完成");
                                      id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+                                     if([codeNum integerValue] > 0)
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:kNoPostsPrompt delegate:self cancelButtonTitle:@"返回" otherButtonTitles: nil];
                                          [alertView show];
@@ -927,7 +936,7 @@
     NSMutableDictionary *params = [@{@"host" : item.selected ? @"1" : @"0",
                                      @"tid":self.itemdata.tid,
                                      @"p":@(self.pageNum),
-                                     @"page":@5,
+                                     @"page":@10,
                                      @"client":@"ios", }mutableCopy];
     params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     

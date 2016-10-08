@@ -56,7 +56,7 @@
     textView.backgroundColor = [UIColor clearColor];
     
     // 如果宽度大于60%的屏幕就需要换行
-    CGSize size = [textView.text sizeWithAttributes:@{NSFontAttributeName:textView.font}];
+    CGSize size = [textView.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]}];
     
     if (size.width > textMaxWidth)
     {
