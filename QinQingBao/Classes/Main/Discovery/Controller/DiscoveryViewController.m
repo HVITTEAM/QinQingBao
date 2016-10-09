@@ -65,8 +65,8 @@
     searhField.font = [UIFont systemFontOfSize:14];
     searhField.leftViewMode = UITextFieldViewModeAlways;
     UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 20, 20)];
-    imgView.image = [UIImage imageNamed:@"search"];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2, 16, 16)];
+    imgView.image = [UIImage imageNamed:@"search_gray"];
     [leftView addSubview:imgView];
     searhField.leftView = leftView;
     searhField.delegate = self;
@@ -76,7 +76,9 @@
     UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     tbv.delegate = self;
     tbv.dataSource = self;
-    tbv.backgroundColor = HMGlobalBg;
+    tbv.backgroundColor = HMColor(245, 245, 245);
+    tbv.separatorInset = UIEdgeInsetsZero;
+    tbv.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:tbv];
     self.tableView = tbv;
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
@@ -134,6 +136,8 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.font = [UIFont systemFontOfSize:16];
+            cell.layoutMargins = UIEdgeInsetsZero;
         }
         
         switch (indexPath.section) {
@@ -152,7 +156,7 @@
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
         menuCell.row = 1;
         menuCell.col = 4;
-        menuCell.colSpace = 10;
+        menuCell.colSpace = 40;
         if (indexPath.section == 0) {
             //健康检测
             menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -224,12 +228,12 @@
     if (indexPath.row == 0){
         return 40;
     }else if (indexPath.section == 0){
-        return 100;
+        return 90;
     }else if (indexPath.section == 1) {
         if (self.healthCommunityDatas.count > 4) {
-            return 120;
+            return 110;
         }else{
-            return 100;
+            return 90;
         }
     }
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];

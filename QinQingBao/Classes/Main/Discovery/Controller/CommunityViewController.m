@@ -79,7 +79,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = HMGlobalBg;
+    self.view.backgroundColor = HMColor(245, 245, 245);
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.isAllData = YES;
@@ -283,6 +283,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    if (0 == self.zdPosts.count) {
+        return 0.01;
+    }
     return 10;
 }
 

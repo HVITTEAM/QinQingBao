@@ -18,6 +18,7 @@
 @property (nonatomic, retain) PostsModel *postsModel;
 
 @property (nonatomic, copy) void (^portraitClick)(PostsModel *postsModel);
+
 @property (strong, nonatomic) NSIndexPath *indexpath;
 
 @property (copy) void(^attentionBlock)(PostsModel *model);
