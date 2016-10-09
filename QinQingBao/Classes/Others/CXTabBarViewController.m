@@ -200,7 +200,6 @@
     
     
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
-    //    [navlogin popToRootViewControllerAnimated:YES];
     PrivateProfileViewController *login = navlogin.viewControllers[0];
     [login initHeadView];
 }

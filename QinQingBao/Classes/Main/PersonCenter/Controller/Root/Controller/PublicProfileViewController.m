@@ -57,6 +57,8 @@
     
     [self setupRefresh];
     
+    [self getDataProvider];
+
     [self getUserPosts];
     
     self.view.backgroundColor = HMGlobalBg;
@@ -79,8 +81,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [self getDataProvider];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -150,15 +150,14 @@
     backBtn.frame = CGRectMake(15, 20 - headHeight, 40, 40);
     [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
-    UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
-    titleLb.textAlignment = NSTextAlignmentCenter;
-    titleLb.textColor = [UIColor darkTextColor];
-    titleLb.font = [UIFont systemFontOfSize:17];
-    titleLb.text = @"标题";
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor darkTextColor];
+    titleLabel.font = [UIFont systemFontOfSize:17];
     UIView *lv = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, 0.5)];
     lv.backgroundColor = HMColor(230, 230, 230);
     [self.navBar addSubview:lv];
-    [self.navBar addSubview:titleLb];
+    [self.navBar addSubview:titleLabel];
     [self.headView addSubview:self.navBar];
     
     [self.view addSubview:backBtn];
@@ -388,6 +387,7 @@
                                          [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
                                          [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          
+                                         titleLabel.text = personalInfo.author;
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

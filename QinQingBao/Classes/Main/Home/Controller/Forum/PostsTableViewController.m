@@ -169,7 +169,9 @@
 -(void)getFollowlist
 {
     if (![SharedAppUtil defaultCommonUtil].bbsVO) {
-        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-0"];
     }
     currentPageIdx ++;
     [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,

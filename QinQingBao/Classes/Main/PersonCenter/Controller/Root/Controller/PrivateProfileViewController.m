@@ -12,6 +12,7 @@
 #import "ProfileTopCell.h"
 #import "CollectTypeCell.h"
 
+#import "HealthPlanController.h"
 #import "OrderTableViewController.h"
 #import "GoodsTypeViewController.h"
 #import "EstimateViewController.h"
@@ -31,7 +32,7 @@
 #define headHeight MTScreenH*0.3
 
 
-@interface PrivateProfileViewController ()<UIScrollViewDelegate>
+@interface PrivateProfileViewController ()<UIScrollViewDelegate,HeadRefleshDelegate>
 {
     UILabel *titleLabel;
     
@@ -62,9 +63,11 @@
     [super viewDidLoad];
     
     [self initHeadView];
-
+    
     [self setupRefresh];
     
+    [self refleshData];
+
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
@@ -73,6 +76,12 @@
 {
     [super viewWillAppear:animated];
     
+    //注册重新登录成功监听
+    [MTNotificationCenter addObserver:self selector:@selector(refleshData) name:MTReLogin object:nil];
+    
+    //注册注销监听
+    [MTNotificationCenter addObserver:self selector:@selector(refleshData) name:MTLoginout object:nil];
+
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
     if (self.headView)
@@ -86,12 +95,6 @@
     [super viewDidAppear:animated];
     
     [self getDataProvider];
-    
-    [self getUserPosts];
-    
-    [self getUserFannum];
-    
-    [self initNavigation];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -100,6 +103,27 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
+/**
+ * 刷新帖子数据
+ */
+-(void)refleshData
+{
+    currentPageIdx = 1;
+    postsArr = [[NSMutableArray alloc] init];
+    
+    [self getUserPosts];
+    
+    [self getUserFannum];
+
+}
+
+/**
+ * 结束刷新帖子数据
+ */
+-(void)endrefleshData
+{
+    [self.headView setStates:RefreshViewStateNormal];
+}
 
 /**
  *  初始化头部视图
@@ -113,6 +137,7 @@
     }
     
     self.headView = [[[NSBundle mainBundle] loadNibNamed:@"LoginInHeadView" owner:self options:nil] lastObject];
+    self.headView.delegate = self;
     
     LoginInHeadView *headView = self.headView;
     // 显示个人资料
@@ -137,6 +162,8 @@
     [self.navBar addSubview:lv];
     [self.navBar addSubview:titleLb];
     [self.headView addSubview:self.navBar];
+    
+    [self initNavigation];
 }
 
 /**
@@ -188,7 +215,7 @@
  */
 - (void)setupRefresh
 {
-    currentPageIdx = 0;
+    currentPageIdx = 1;
     postsArr = [[NSMutableArray alloc] init];
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getUserPosts)];
 }
@@ -216,9 +243,28 @@
     
     rightBtn0.y = 25 + scrollView.contentOffset.y;
     rightBtn1.y = 25 + scrollView.contentOffset.y;
-
+    
     self.navBar.y = scrollView.contentOffset.y + headHeight;
     self.navBar.alpha = alpha;
+    
+    // 下拉超过50像素
+    if ([SharedAppUtil defaultCommonUtil].bbsVO && self.headView.states !=RefreshViewStateRefreshing &&scrollView.contentOffset.y + headHeight < -50)
+    {
+        self.headView.refleshBtn.alpha = 1;
+        [self.headView updateRefreshHeaderWithOffsetY:y scrollView:self.tableView];
+        
+    }
+}
+
+#pragma mark HeadRefleshDelegate
+
+- (void)refleshWithStates:(RefreshViewState)states
+{
+    if (states == RefreshViewStateRefreshing)
+    {
+        [self refleshData];
+        
+    }
 }
 
 #pragma mark - Table view data source
@@ -318,8 +364,12 @@
         else
         {
             CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-            [cardCell setPostsModel:postsArr[indexPath.row - 1]];
+            if (postsArr.count != 0)
+            {
+                [cardCell setPostsModel:postsArr[indexPath.row - 1]];
+            }
             cardCell.attentionBtn.hidden = YES;
+
             // 头像点击 进入个人信息界面
             cardCell.portraitClick = ^(PostsModel *item)
             {
@@ -354,6 +404,9 @@
             break;
         case 3:
             class = [OrderTableViewController class];
+            break;
+        case 4:
+            class = [HealthPlanController class];
             break;
         default:
             break;
@@ -399,7 +452,7 @@
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          
-                                         [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
+                                         [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];
                                          
                                          [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                                      }
@@ -424,7 +477,6 @@
     {
         return  [self.tableView.footer endRefreshing];
     }
-    currentPageIdx ++;
     NSDictionary *paramDict = [[NSDictionary alloc] init];
     
     paramDict = @{@"uid" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
@@ -435,21 +487,18 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [self endrefleshData];
                                      [self.tableView.footer endRefreshing];
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)
                                      {
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
-                                             currentPageIdx --;
-                                             return ;
-                                             //                                             [NoticeHelper AlertShow:@"您还没有发帖" view:nil]
+                                             return;
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
-                                             currentPageIdx --;
-                                             return;
-                                             //                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
                                          }
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];
@@ -461,27 +510,27 @@
                                          if (arr.count == 0 && currentPageIdx == 1)
                                          {
                                              CX_Log(@"没有新的发帖数据");
-                                             currentPageIdx --;
                                          }
                                          else if (arr.count == 0 && currentPageIdx > 1)
                                          {
-                                             currentPageIdx --;
-                                             //                                             [self.view showNonedataTooltip];
+                                             //[self.view showNonedataTooltip];
+                                         }else
+                                         {
+                                             currentPageIdx ++;
+                                             [postsArr addObjectsFromArray:[arr copy]];
+                                             
+                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
                                          }
-                                         
-                                         [postsArr addObjectsFromArray:[arr copy]];
-                                         
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.tableView.footer endRefreshing];
-                                     
+                                     [self endrefleshData];
                                  }];
 }
 
 /**
- *  获取数据
+ *  获取头像数据
  */
 -(void)getDataProvider
 {
@@ -509,9 +558,8 @@
                                              LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-                                             // [headView.loginBtn setTitle:[NSString stringWithFormat:@"%@",infoVO.member_truename] forState:UIControlStateNormal];
                                              
-                                             [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
+                                             [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];

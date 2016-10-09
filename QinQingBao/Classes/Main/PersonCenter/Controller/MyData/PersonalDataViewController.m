@@ -112,14 +112,17 @@
     UIButton *logout = [[UIButton alloc] init];
     logout.frame = CGRectMake(0, 10, MTScreenW, 50);
     logout.titleLabel.font = [UIFont systemFontOfSize:16];
-    [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        [logout setTitle:@"登录" forState:UIControlStateNormal];
+    else
+        [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
     [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
     [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
-    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [logout addTarget:self action:@selector(loginOut:) forControlEvents:UIControlEventTouchUpInside];
     [bgview addSubview:logout];
     
-//    self.tableView.tableFooterView = bgview;
+    self.tableView.tableFooterView = bgview;
 }
 
 
@@ -557,9 +560,9 @@
         {
             MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
-            [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                       @"client" : @"ios",
-                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+            [CommonRemoteHelper RemoteWithUrl:URL_Logout_New parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                           @"client" : @"ios",
+                                                                           @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                          type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                              [HUD removeFromSuperview];
                                              id codeNum = [dict objectForKey:@"code"];
@@ -574,14 +577,14 @@
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
-
+                                                 
                                                  [MTNotificationCenter postNotificationName:MTLoginout object:nil userInfo:nil];
+                                                 [self setupFooter];
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"发生错误！%@",error);
                                              [HUD removeFromSuperview];
                                              [self.view endEditing:YES];
-                                             [MTControllerChooseTool setRootViewController];
                                          }];
         }else{
             self.tapLoginOutButton = NO;
@@ -640,8 +643,13 @@
 
 #pragma mark - 退出登录
 #pragma  mark - 退出当前账号
--(void)loginOut
+-(void)loginOut:(UIButton *)sender
 {
+    if ([sender.titleLabel.text isEqualToString:@"登录"])
+    {
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil];
+    }
+    
     self.tapLoginOutButton = YES;
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定退出当前账号？"
