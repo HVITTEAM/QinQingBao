@@ -546,6 +546,7 @@
 -(void)getDetailData
 {
     [self.view addSubview:[self getPalceView]];
+    CX_Log(@"开始加载帖子详情");
     
     NSMutableDictionary *params = [@{@"tid" : self.itemdata.tid,
                                      @"client":@"ios"
