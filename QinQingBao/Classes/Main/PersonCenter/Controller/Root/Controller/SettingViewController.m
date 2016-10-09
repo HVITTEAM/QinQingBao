@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "AboutViewController.h"
 #import "FeedbackViewController.h"
+#import "MsgAndPushViewController.h"
 
 
 @interface SettingViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
@@ -61,19 +62,19 @@
 
 - (void)setupFooter
 {
-    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 60)];
+    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 70)];
     bgview.backgroundColor = [UIColor clearColor];
     
     logout = [[UIButton alloc] init];
-    logout.frame = CGRectMake(0, 10, MTScreenW, 50);
+    logout.frame = CGRectMake(20, 15, MTScreenW - 40, 45);
     logout.titleLabel.font = [UIFont systemFontOfSize:16];
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         [logout setTitle:@"登录" forState:UIControlStateNormal];
     else
         [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
-    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [logout setBackgroundColor:HMColor(251, 176, 59)];
+    logout.layer.cornerRadius = 6.0f;
     [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
     [bgview addSubview:logout];
     
@@ -130,7 +131,10 @@
         [NoticeHelper AlertShow:@"此功能暂尚未启用,敬请期待" view:self.view];
     };
     
-    group.items = @[version];
+    HMCommonArrowItem *updata = [HMCommonArrowItem itemWithTitle:@"消息通知" icon:@"nil"];
+    updata.destVcClass = [MsgAndPushViewController class];
+    
+    group.items = @[updata,version];
 }
 
 - (void)setupGroup1
@@ -146,7 +150,11 @@
     HMCommonArrowItem *advice = [HMCommonArrowItem itemWithTitle:@"关于app" icon:@"nil"];
     advice.destVcClass = [AboutViewController class];
     
-    group.items = @[version,advice];
+    HMCommonItem*updata = [HMCommonItem itemWithTitle:@"检查更新" icon:nil];
+    updata.subtitle = kAppVersion;
+    
+    
+    group.items = @[updata,version,advice];
 }
 
 

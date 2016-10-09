@@ -102,7 +102,7 @@
 -(void)doneClickHandler
 {
     NSString *addressStr = [self.title isEqualToString:@"修改地址"] ? textItem.rightText.text : self.inforVO.member_areainfo;
-    NSString *nameStr = [self.title isEqualToString:@"修改姓名"] ? textItem.rightText.text : self.inforVO.member_truename;
+    NSString *nameStr = [self.title isEqualToString:@"修改昵称"] ? textItem.rightText.text : self.inforVO.member_truename;
     NSString *mailStr = [self.title isEqualToString:@"修改邮箱"] ? textItem.rightText.text : self.inforVO.member_email;
 
     if ([self.title isEqualToString:@"修改邮箱"])

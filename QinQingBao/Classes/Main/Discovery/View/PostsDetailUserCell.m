@@ -73,7 +73,7 @@
     self.nameLb.text = postsDetailData.author;
     self.tagLb.text = [NSString stringWithFormat:@"%@ ",postsDetailData.grouptitle];
     if ([postsDetailData.is_home_friend isEqualToString:@"0"]) {
-        [self.attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
+        [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
     }else{
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
     }

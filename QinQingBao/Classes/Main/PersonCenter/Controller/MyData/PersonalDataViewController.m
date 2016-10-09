@@ -38,7 +38,6 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,27 +47,33 @@
     if (!infoVO)
     {
         dataProvider = [[NSMutableArray alloc] initWithObjects:
-                        @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : @""},
-                        @{@"title" : @"修改姓名",@"placeholder" : @"请输入姓名",  @"text" : @"姓名",@"value" : @"正在获取"},
-                        @{@"title" : @"",@"placeholder" : @"",@"text" : @"性别",@"value" : @"正在获取"},
-                        @{@"title" : @"修改电话",@"placeholder" : @"请输入电话号码", @"text" : @"电话",@"value" : @"正在获取"},
-                        @{@"title" : @"修改生日",@"placeholder" : @"请输入出生日期",@"text" : @"生日",@"value" : @"正在获取"},
-                        @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : @"正在获取"},
-                        @{@"title" : @"修改邮箱",@"placeholder" : @"请输入邮箱地址",@"text" : @"邮箱",@"value" : @"正在获取"},
-                        nil];
-        
-        [self.tableView reloadData];
+                        @[
+                          @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : @""},
+                          @{@"title" : @"修改昵称",@"placeholder" : @"请输入昵称",@"text" : @"昵称", @"value" : @"正在获取"},
+                          @{@"title" : @"",@"placeholder" : @"请输入性别",@"text" : @"性别", @"value" : @"正在获取"},
+                          @{@"title" : @"",@"placeholder" : @"请输入出生日期",@"text" : @"出生日期", @"value" : @"正在获取"}
+                          ],
+                        @[
+                          @{@"title" : @"",@"placeholder" : @"请输入电话",@"text" : @"电话", @"value" : @"正在获取"},
+                          @{@"title" : @"修改邮箱",@"placeholder" : @"请输入Email",@"text" : @"Email", @"value" : @"正在获取"},
+                          @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : @"正在获取"}
+                          ],
+                        @[
+                          @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未通过"},
+                          @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
+                          ],nil];
     }
+    
     [self getDataProvider];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     //    清除图片缓存
     [[SDImageCache sharedImageCache] clearDisk];
     [[SDImageCache sharedImageCache] clearMemory];
-    
-    [super viewWillAppear:animated];
     
     [self initTableviewSkin];
 }
@@ -86,31 +91,12 @@
 
 - (void)setupFooter
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 100, MTScreenW, 50)];
-    
-    UILabel *lab = [[UILabel alloc] init];
-    lab.textAlignment = NSTextAlignmentCenter;
-    lab.font = [UIFont systemFontOfSize:13];
-    lab.textColor = [UIColor orangeColor];
-    lab.numberOfLines = 0;
-    lab.text = @"请填写个人真实信息，方便我们与您家人进\n行信息确认，确保信息的安全性!";
-    CGSize size = [lab.text sizeWithAttributes:@{NSFontAttributeName:lab.font}];
-    lab.width = size.width;
-    lab.height = size.height;
-    lab.x = self.view.width/2 - lab.width/2;
-    lab.y = 0;
-    [view addSubview:lab];
-    
-    [self.tableView addSubview:view];
-    
-    
     //退出按钮
-    
-    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 60)];
+    UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 70)];
     bgview.backgroundColor = [UIColor clearColor];
     
     UIButton *logout = [[UIButton alloc] init];
-    logout.frame = CGRectMake(0, 10, MTScreenW, 50);
+    logout.frame = CGRectMake(20, 20, MTScreenW - 40, 45);
     logout.titleLabel.font = [UIFont systemFontOfSize:16];
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         [logout setTitle:@"登录" forState:UIControlStateNormal];
@@ -125,19 +111,21 @@
     self.tableView.tableFooterView = bgview;
 }
 
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
+//    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return 7;
+        return 4;
+    else if (section == 1)
+        return 3;
     else
-        return 1;
+        return 2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -148,7 +136,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     if (indexPath.section == 0 && indexPath.row == 0)
-        return 60;
+        return 70;
     else
         return 44;
 }
@@ -159,83 +147,94 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *content = @"contentCell";
+    static NSString *contentCellId = @"contentCell";
+    static NSString *portraitCellId = @"portraitCell";
+
+    UITableViewCell *cell = nil;
     
-    UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:content];
-    
-    if (indexPath.section == 0)
-    {
-        if(contentcell == nil)
-        {
-            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:content];
-            contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            contentcell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
-        }
-        contentcell.accessoryType = UITableViewCellAccessoryNone;
-        NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
-        contentcell.textLabel.text = [dict objectForKey:@"text"];
-        contentcell.detailTextLabel.text = [dict objectForKey:@"value"];
-        if(indexPath.row == 0)
-        {
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
+    if (indexPath.section == 0 && indexPath.row == 0){
+        UITableViewCell *portraitCell = [tableView dequeueReusableCellWithIdentifier:portraitCellId];
+        if (portraitCell == nil) {
+            portraitCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:portraitCellId];
             UIImageView *imageView = [[UIImageView alloc] init];
-            [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-            imageView.width = imageView.height = 50;
+            imageView.width = 50;
+            imageView.height = 50;
             imageView.layer.cornerRadius = imageView.height/2;
             imageView.layer.masksToBounds = YES;
-            contentcell.accessoryView = imageView;
+            portraitCell.accessoryView = imageView;
         }
-        else if(indexPath.row == 3 || indexPath.row == 4)
-            contentcell.accessoryType = UITableViewCellAccessoryNone;
-        else
+        
+        NSDictionary *dict = dataProvider[indexPath.section][indexPath.row];
+        portraitCell.textLabel.text = [dict objectForKey:@"text"];
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
+        UIImageView *imageView = (UIImageView *)portraitCell.accessoryView;
+        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        
+        cell = portraitCell;
+    
+    }else{
+    
+        UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:contentCellId];
+        if (contentcell == nil) {
+            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:contentCellId];
+        }
+        if (indexPath.section == 2) {
             contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-    }
-    else
-    {
-        if(contentcell == nil)
-        {
-            contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:content];
-            contentcell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-            contentcell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:12];
+        }else{
+            contentcell.accessoryType = UITableViewCellAccessoryNone;
         }
-        contentcell.textLabel.text = @"修改密码";
-        contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
+        NSDictionary *dict = dataProvider[indexPath.section][indexPath.row];
+        contentcell.textLabel.text = [dict objectForKey:@"text"];
+        contentcell.detailTextLabel.text = [dict objectForKey:@"value"];
+        
+        if ([[dict objectForKey:@"value"] isEqualToString:@"已通过"]) {
+            contentcell.detailTextLabel.textColor = HMColor(98, 204, 116);
+        }else if ([[dict objectForKey:@"value"] isEqualToString:@"未通过"]){
+            contentcell.detailTextLabel.textColor = HMColor(241, 90, 36);
+        }else{
+            contentcell.detailTextLabel.textColor = [UIColor lightGrayColor];
+        }
+        
+        cell = contentcell;
     }
-    return  contentcell;
+    
+    cell.textLabel.textColor = HMColor(51, 51, 51);
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
-    {
-        ChangePwdViewController *updateView = [[ChangePwdViewController alloc]init];
-        [self.navigationController pushViewController:updateView animated:YES];
-    }
-    else if(indexPath.row == 0)
-    {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         UIAlertView *alertPic = [[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
         alertPic.tag = 101;
         [alertPic show];
-    }
-    else if(indexPath.row == 2)
-    {
+        
+    }else if (indexPath.section == 0 && indexPath.row == 1){
+        [self changeFieldWithIndexPath:indexPath];
+        NSLog(@"姓名");
+        
+    }else if (indexPath.section == 0 && indexPath.row == 2){
         UIAlertView *alertSex = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil];
         alertSex.tag = 99;
         [alertSex show];
-    }
-    else if(indexPath.row == 3)
-    {
-        //TODO
-        return;
-    }
-    else if(indexPath.row == 4)
-    {
+        
+    }else if (indexPath.section == 0 && indexPath.row == 3){
         [self setDatePicker];
-    }
-    else if(indexPath.row == 5)
-    {
+        
+    }else if (indexPath.section == 1 && indexPath.row == 0){
+
+        NSLog(@"电话");
+        
+    }else if (indexPath.section == 1 && indexPath.row == 1){
+        [self changeFieldWithIndexPath:indexPath];
+        NSLog(@"email");
+        
+    }else if (indexPath.section == 1 && indexPath.row == 2){
         AddressController *textView = [[AddressController alloc] init];
         [textView setItemInfoWith:[NSString stringWithFormat:@"浙江省%@",infoVO.totalname] regionStr:@"西湖区" regionCode:infoVO.member_areaid areaInfo:infoVO.member_areainfo];
         textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
@@ -257,24 +256,32 @@
                 [dict setObject:selectedRegionmodel.dvcode forKey:@"member_areaid"];
             
             [self updataUserInfor:dict];
-
+            
         };
         textView.title = @"居住地址";
         [self.navigationController pushViewController:textView animated:YES];
+
+        
+    }else if (indexPath.section == 2 && indexPath.row == 0){
+        NSLog(@"专家认证");
+        
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+        ChangePwdViewController *updateView = [[ChangePwdViewController alloc]init];
+        [self.navigationController pushViewController:updateView animated:YES];
     }
-    
-    else
-    {
-        NSDictionary *dict = [dataProvider objectAtIndex:indexPath.row];
-        TextFieldViewController *textView = [[TextFieldViewController alloc] init];
-        textView.dict = dict;
-        textView.inforVO = infoVO;
-        __weak __typeof(self)weakSelf = self;
-        textView.refleshDta = ^{
-            [weakSelf getDataProvider];
-        };
-        [self.navigationController pushViewController:textView animated:YES];
-    }
+}
+
+- (void)changeFieldWithIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dict = dataProvider[indexPath.section][indexPath.row];
+    TextFieldViewController *textView = [[TextFieldViewController alloc] init];
+    textView.dict = dict;
+    textView.inforVO = infoVO;
+    __weak __typeof(self)weakSelf = self;
+    textView.refleshDta = ^{
+        [weakSelf getDataProvider];
+    };
+    [self.navigationController pushViewController:textView animated:YES];
 }
 
 #pragma mark -- 拍照选择模块
@@ -431,14 +438,22 @@
 {
     NSString *sexStr = [infoVO.member_sex  isEqual: @"1"] ? @"男" : [infoVO.member_sex  isEqual: @"2"] ? @"女" : @"保密";
     dataProvider = [[NSMutableArray alloc] initWithObjects:
-                    @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : infoVO.member_avatar.length > 0 ? @"" : @"未上传"},
-                    @{@"title" : @"修改姓名",@"placeholder" : @"请输入姓名",  @"text" : @"姓名",@"value" : infoVO.member_truename.length > 0 ? infoVO.member_truename : @"未填写"},
-                    @{@"title" : @"",@"placeholder" : @"",@"text" : @"性别",@"value" : infoVO.member_sex.length > 0 ? sexStr : @"未填写"},
-                    @{@"title" : @"修改电话",@"placeholder" : @"请输入电话号码", @"text" : @"电话",@"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
-                    @{@"title" : @"修改生日",@"placeholder" : @"请输入出生日期",@"text" : @"生日",@"value" : infoVO.member_birthday.length > 0 ? infoVO.member_birthday : @"未填写"},
-                    @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"住址",@"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"},
-                     @{@"title" : @"修改邮箱",@"placeholder" : @"请输入邮箱",@"text" : @"邮箱",@"value" : infoVO.member_email.length > 0 ? infoVO.member_email : @"未填写"},
-                    nil];
+                    @[
+                      @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : infoVO.member_avatar.length > 0 ? @"" : @"未上传"},
+                      @{@"title" : @"修改昵称",@"placeholder" : @"请输入昵称",@"text" : @"昵称", @"value" :  infoVO.member_truename.length > 0 ? infoVO.member_truename : @"未填写"},
+                      @{@"title" : @"",@"placeholder" : @"请输入性别",@"text" : @"性别", @"value" : infoVO.member_sex.length > 0 ? sexStr : @"未填写"},
+                      @{@"title" : @"",@"placeholder" : @"请输入出生日期",@"text" : @"出生日期", @"value" : infoVO.member_birthday.length > 0 ? infoVO.member_birthday : @"未填写"}
+                      ],
+                    @[
+                      @{@"title" : @"",@"placeholder" : @"请输入电话",@"text" : @"电话", @"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
+                      @{@"title" : @"修改邮箱",@"placeholder" : @"请输入Email",@"text" : @"Email", @"value" : infoVO.member_email.length > 0 ? infoVO.member_email : @"未填写"},
+                      @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"}
+                      ],
+                    @[
+                      @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未申请"},
+                      @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
+                      ],nil];
+
     [self.tableView reloadData];
 }
 

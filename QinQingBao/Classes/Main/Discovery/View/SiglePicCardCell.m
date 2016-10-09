@@ -105,7 +105,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 1, self.bounds.size.width, 1);
+    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 2, self.bounds.size.width, 2);
 }
 
 -(void)setItemdata:(PostsModel *)itemdata
@@ -114,7 +114,7 @@
 
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
 
-    self.timeLb.text = self.itemdata.dateline;
+    self.timeLb.text = [self.itemdata.dateline substringWithRange:NSMakeRange(5, 11)];
     self.nameLb.text = self.itemdata.author;
     self.headTagLb.text = self.itemdata.grouptitle;
     
@@ -197,7 +197,7 @@
 {
     self.userInfoView.frame = CGRectMake(kMargin, 12, MTScreenW - 2 * kMargin, 40);
     
-    self.portraitView.frame = CGRectMake(0, 0, 40, 40);
+    self.portraitView.frame = CGRectMake(0, 2, 36, 36);
     self.portraitView.layer.cornerRadius = self.portraitView.width/2;
     self.portraitView.layer.masksToBounds = YES;
 
@@ -275,7 +275,7 @@
     self.bottomBarView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.textInfoView.frame) + 10, MTScreenW - 2 * kMargin, 30);
     
     [self.barTagBtn sizeToFit];
-    self.barTagBtn.frame = CGRectMake(0, 0, CGRectGetWidth(self.barTagBtn.frame) + 15, 30);
+    self.barTagBtn.frame = CGRectMake(0, 2, CGRectGetWidth(self.barTagBtn.frame) + 15, 25);
     
     [self.plBtn sizeToFit];
     self.plBtn.frame = CGRectMake(MTScreenW - 2 * kMargin -(CGRectGetWidth(self.plBtn.frame) + 10), 0, CGRectGetWidth(self.plBtn.frame) + 10, 30);
@@ -339,7 +339,7 @@
     attentionBtn.backgroundColor = [UIColor whiteColor];
     attentionBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     attentionBtn.layer.cornerRadius = 5;
-    [attentionBtn setTitle:@"关注" forState:UIControlStateNormal];
+    [attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
     attentionBtn.layer.borderWidth = 1.0f;
     attentionBtn.layer.borderColor = HMColor(247, 147, 30).CGColor;
     [attentionBtn setTitleColor:HMColor(247, 147, 30) forState:UIControlStateNormal];
