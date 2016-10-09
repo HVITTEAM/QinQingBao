@@ -830,9 +830,13 @@
 /***私信 - 获取个人私信列表*/
 #define URL_get_allpriletter [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/allpriletter.php",URL_Local_New]
 
+/***登录 - 第三方登录*/
+#define URL_LoginByother_new [NSString stringWithFormat:@"%@/ucenter/admin/index.php/tpl_member/checkAndLogin",URL_Local_New]
 /***私信 - 黑名单操作*/
 #define URL_Blacklist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/blacklist.php",URL_Local_New]
 
+/***注册 - 后续流程*/
+#define URL_DiscuzRegisterFromCx [NSString stringWithFormat:@"%@/ucenter/admin/index.php/tpl_member/discuzRegisterFromCx",URL_Local_New]
 /***私信 - 清除个人私信记录*/
 #define URL_Delete_chatlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_chatlist.php",URL_Local_New]
 

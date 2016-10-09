@@ -16,6 +16,8 @@
 
 @property (copy) void(^attentionBlock)();
 
+@property (copy) void (^portraitClickBlock)(NSString *authorId);
+
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
 @end

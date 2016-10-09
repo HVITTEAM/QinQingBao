@@ -15,6 +15,7 @@
 #import "PostsDetailViewController.h"
 #import "BHBPopView.h"
 #import "CXComposeViewController.h"
+#import "PublicProfileViewController.h"
 
 #define kHeadViewHeith 140
 #define kTabViewHeight 50
@@ -237,6 +238,13 @@
         }
         
         [cardCell setPostsModel:model];
+        // 头像点击 进入个人信息界面
+        cardCell.portraitClick = ^(PostsModel *item)
+        {
+            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+            view.uid = item.authorid;
+            [weakSelf.navigationController pushViewController:view animated:YES];
+        };
         cardCell.indexpath = indexPath;
         cardCell.attentionBlock = ^(PostsModel *model){
             [weakSelf attentionAction:model];

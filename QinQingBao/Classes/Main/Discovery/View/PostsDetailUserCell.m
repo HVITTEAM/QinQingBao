@@ -40,6 +40,10 @@
     
     self.portraitView.layer.cornerRadius = self.portraitView.width / 2;
     self.portraitView.layer.masksToBounds = YES;
+    self.portraitView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
+    [self.portraitView addGestureRecognizer:singleTap];
+    
     
     self.attentionBtn.layer.cornerRadius = 3;
     self.attentionBtn.layer.borderWidth = 1.0f;
@@ -80,6 +84,13 @@
 {
     if (self.attentionBlock) {
         self.attentionBlock();
+    }
+}
+
+- (void)onClickImage
+{
+    if (self.portraitClickBlock) {
+        self.portraitClickBlock(self.postsDetailData.authorid);
     }
 }
 

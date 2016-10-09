@@ -54,3 +54,4 @@ fastlane/screenshots
 # system generated
  .DS_Store
 
+Pods/.DS_Store

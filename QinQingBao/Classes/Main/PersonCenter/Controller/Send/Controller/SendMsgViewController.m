@@ -347,7 +347,7 @@ typedef NS_ENUM(NSInteger, BlackListOperation) {
                              @"client":@"ios",
                              @"authorid":self.authorid,
                              @"p": @(self.pageNum),
-                             @"page":@"15",
+                             @"page":@"10",
                              };
     [CommonRemoteHelper RemoteWithUrl:URL_Get_priletterlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [tableview.header endRefreshing];
@@ -365,13 +365,25 @@ typedef NS_ENUM(NSInteger, BlackListOperation) {
             
             if (ar.count > 0) {
 
-                [priletterDatas addObjectsFromArray:ar];
-                
-                NSIndexPath *idx = [NSIndexPath indexPathForItem:priletterDatas.count-1 inSection:0];
+                if (priletterDatas.count == 0) {
+                    [priletterDatas addObjectsFromArray:ar];
+                }else{
+                    [ar enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        [priletterDatas insertObject:obj atIndex:idx];
+                    }];
+                }
                 
                 self.pageNum ++;
                 [tableview reloadData];
-                [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                
+                if (self.pageNum == 2) {
+                    NSIndexPath *idx = [NSIndexPath indexPathForItem:priletterDatas.count-1 inSection:0];
+                    [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                }else{
+                    NSIndexPath *idx = [NSIndexPath indexPathForItem:ar.count-1 inSection:0];
+                    [tableview scrollToRowAtIndexPath:idx atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
+
             }
         }
         

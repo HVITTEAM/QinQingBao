@@ -114,16 +114,14 @@
 
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
 
-    
     self.timeLb.text = self.itemdata.dateline;
     self.nameLb.text = self.itemdata.author;
     self.headTagLb.text = self.itemdata.grouptitle;
     
-    self.titleLb.text = self.itemdata.subject;
-    self.contentLb.text = self.itemdata.message;
+    //设置文字内容
+    [self setTitle:self.itemdata.subject content:self.itemdata.message];
     
-//    self.photoNum = self.itemdata.picture.count;
-    
+    //设置底部工具栏
     [self.ydBtn setTitle:itemdata.views forState:UIControlStateNormal];
     [self.dzBtn setTitle:itemdata.recommend_add forState:UIControlStateNormal];
     [self.plBtn setTitle:itemdata.replies  forState:UIControlStateNormal];
@@ -141,6 +139,44 @@
     //设置位置
     [self layoutCell];
 }
+
+/**
+ *  设置标题与内容
+ * titleStr:标题 .
+ * contentStr:内容 .
+ */
+- (void)setTitle:(NSString *)titleStr content:(NSString *)contentStr
+{
+    if (titleStr.length > 0) {
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineSpacing = 2;
+        NSDictionary *attrDict = @{
+                                   NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
+                                   NSForegroundColorAttributeName:HMColor(54, 54, 54),
+                                   NSParagraphStyleAttributeName:paragraph
+                                   };
+        
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:titleStr attributes:attrDict];
+        self.titleLb.attributedText = attrStr;
+    }else{
+        self.titleLb.attributedText = nil;
+    }
+    
+    if (contentStr.length > 0) {
+        NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+        paragraph.lineSpacing = 4;
+        NSDictionary *attrDict1 = @{
+                                    NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                    NSForegroundColorAttributeName:HMColor(102, 102, 102),
+                                    NSParagraphStyleAttributeName:paragraph
+                                    };
+        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict1];
+        self.contentLb.attributedText = attrStr;
+    }else{
+        self.contentLb.attributedText = nil;
+    }
+}
+
 
 #pragma mark - 设置cell子视图的位置
 /**
@@ -197,7 +233,7 @@
     CGFloat photoheight = (int)(photoWidth / 2 + 0.5);
     
     if (self.photoNum != 0) {
-        self.photosView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 12,photoWidth, photoheight);
+        self.photosView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 10,photoWidth, photoheight);
         self.picImageView.hidden = NO;
     }else{
         self.photosView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame), photoWidth, 0);
@@ -212,51 +248,23 @@
  */
 - (void)layoutTextInfoView
 {
-    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
-    paragraph.lineSpacing = 5;
-    NSDictionary *attrDict = @{
-                               NSFontAttributeName:[UIFont boldSystemFontOfSize:16],
-                               NSForegroundColorAttributeName:HMColor(54, 54, 54),
-                               NSParagraphStyleAttributeName:paragraph
-                               };
-    NSString *titleStr = self.titleLb.text;
-    if (titleStr) {
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:titleStr attributes:attrDict];
-//        if (YES) {
-//            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-//            attachment.image = [UIImage imageNamed:@"checkPayType"];
-//            
-//            NSAttributedString *hotIcon = [NSAttributedString attributedStringWithAttachment:attachment];
-//            [attrStr insertAttributedString:hotIcon atIndex:0];
-//            
-//            [attrStr setAttributes:attrDict range:NSMakeRange(1, attrStr.length - 1)];
-//        }
-//        
-        self.titleLb.attributedText = attrStr;
-        CGSize size = [self.titleLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
-        self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, size.height);
+    CGSize titleSize = [self.titleLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
+    self.titleLb.frame = CGRectMake(0, 0, MTScreenW - 2 * kMargin, titleSize.height);
+    
+    CGSize size = [self.contentLb sizeThatFits:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT)];
+    if (self.contentLb.attributedText && self.titleLb.attributedText) {
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 10, size.width, size.height);
+    }else if (self.contentLb.attributedText && self.titleLb.attributedText == nil){
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame), size.width, size.height);
+    }else{
+        self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame), size.width, 0);
     }
     
-    paragraph.lineSpacing = 4;
-    NSDictionary *attrDict1 = @{
-                                NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                NSForegroundColorAttributeName:HMColor(102, 102, 102),
-                                NSParagraphStyleAttributeName:paragraph
-                                };
-    NSString *contentStr = self.contentLb.text;
-    if (contentStr) {
-        CGSize size = [contentStr boundingRectWithSize:CGSizeMake(MTScreenW - 2 * kMargin, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attrDict1 context:nil].size;
-        if (titleStr) {
-            self.contentLb.frame = CGRectMake(0, CGRectGetMaxY(self.titleLb.frame) + 12, size.width, size.height);
-        }else{
-            self.contentLb.frame = CGRectMake(0, 0, size.width, size.height);
-        }
-        
-        NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:contentStr attributes:attrDict1];
-        self.contentLb.attributedText = attrStr;
+    if (self.titleLb.attributedText.length <= 0 && self.contentLb.attributedText.length <= 0) {
+        self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.photosView.frame), MTScreenW - 2 * kMargin, 0);
+    }else{
+        self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.photosView.frame) + 10, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));
     }
-    
-    self.textInfoView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.photosView.frame) + 12, MTScreenW - 2 * kMargin, CGRectGetMaxY(self.contentLb.frame));
 }
 
 /**
@@ -264,7 +272,7 @@
  */
 - (void)layoutBottomBarView
 {
-    self.bottomBarView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.textInfoView.frame) + 12, MTScreenW - 2 * kMargin, 30);
+    self.bottomBarView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.textInfoView.frame) + 10, MTScreenW - 2 * kMargin, 30);
     
     [self.barTagBtn sizeToFit];
     self.barTagBtn.frame = CGRectMake(0, 0, CGRectGetWidth(self.barTagBtn.frame) + 15, 30);
@@ -278,7 +286,7 @@
     [self.ydBtn sizeToFit];
     self.ydBtn.frame = CGRectMake(CGRectGetMinX(self.dzBtn.frame) - 10 - (CGRectGetWidth(self.ydBtn.frame) + 10), 0, CGRectGetWidth(self.ydBtn.frame) + 10, 30);
     
-    self.height = CGRectGetMaxY(self.bottomBarView.frame) + 12;
+    self.height = CGRectGetMaxY(self.bottomBarView.frame) + 10;
 
 }
 
@@ -385,7 +393,7 @@
     UIView *bottomBarView = [[UIView alloc] init];
     [self.contentView addSubview:bottomBarView];
     self.bottomBarView = bottomBarView;
-//    bottomBarView.backgroundColor = [UIColor yellowColor];
+//    bottomBarView.backgroundColor = [UIColor brownColor];
     
     self.ydBtn = [self createBtnWithTitle:@"阅读" image:@"yd_icon"];
     self.dzBtn = [self createBtnWithTitle:@"点赞" image:@"dz_icon"];
