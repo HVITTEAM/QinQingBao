@@ -140,7 +140,6 @@
 		01328FA51C4CD1AE0014D283 /* GoodsMiddleTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328FA31C4CD1AE0014D283 /* GoodsMiddleTopCell.xib */; };
 		01332B8A1C1E5E240061CB79 /* AllServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01332B881C1E5E240061CB79 /* AllServiceViewController.m */; };
 		01332B8B1C1E5E240061CB79 /* AllServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01332B891C1E5E240061CB79 /* AllServiceViewController.xib */; };
-		0133DA6F1D8F8459008A2513 /* SXDetails.css in Resources */ = {isa = PBXBuildFile; fileRef = 0133DA6E1D8F8459008A2513 /* SXDetails.css */; };
 		01341B711D5859EA00B565ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01341B6B1D5859EA00B565ED /* InfoPlist.strings */; };
 		01341B731D5859EA00B565ED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 01341B6F1D5859EA00B565ED /* InfoPlist.strings */; };
 		01341B761D585CF400B565ED /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01341B751D585CF400B565ED /* MOBFoundation.framework */; };
@@ -255,6 +254,7 @@
 		016067091CF6AD8C005A3164 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F51CF6AD8C005A3164 /* UIImageView+HighlightedWebCache.m */; };
 		0160670A1CF6AD8C005A3164 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F71CF6AD8C005A3164 /* UIImageView+WebCache.m */; };
 		0160670B1CF6AD8C005A3164 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */; };
+		0160D15F1DAB8B77002B6B83 /* temp.html in Resources */ = {isa = PBXBuildFile; fileRef = 0160D15E1DAB8B77002B6B83 /* temp.html */; };
 		016144D41D93C1D00088FCD3 /* BBSPersonalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 016144D31D93C1D00088FCD3 /* BBSPersonalModel.m */; };
 		016144DA1D93CA720088FCD3 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 016144D91D93CA720088FCD3 /* UserModel.m */; };
 		016144DD1D93CA920088FCD3 /* BBSUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 016144DC1D93CA920088FCD3 /* BBSUserModel.m */; };
@@ -1563,7 +1563,6 @@
 		01332B871C1E5E240061CB79 /* AllServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllServiceViewController.h; sourceTree = "<group>"; };
 		01332B881C1E5E240061CB79 /* AllServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllServiceViewController.m; sourceTree = "<group>"; };
 		01332B891C1E5E240061CB79 /* AllServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllServiceViewController.xib; sourceTree = "<group>"; };
-		0133DA6E1D8F8459008A2513 /* SXDetails.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = SXDetails.css; sourceTree = "<group>"; };
 		01341B6C1D5859EA00B565ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		01341B701D5859EA00B565ED /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = InfoPlist.strings; sourceTree = "<group>"; };
 		01341B751D585CF400B565ED /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MOBFoundation.framework; sourceTree = "<group>"; };
@@ -1766,6 +1765,7 @@
 		016066F71CF6AD8C005A3164 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		016066F81CF6AD8C005A3164 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		016066F91CF6AD8C005A3164 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		0160D15E1DAB8B77002B6B83 /* temp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = temp.html; sourceTree = "<group>"; };
 		016144D21D93C1D00088FCD3 /* BBSPersonalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSPersonalModel.h; sourceTree = "<group>"; };
 		016144D31D93C1D00088FCD3 /* BBSPersonalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSPersonalModel.m; sourceTree = "<group>"; };
 		016144D81D93CA720088FCD3 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
@@ -8222,12 +8222,12 @@
 		01F6DB9F1D8E406000300679 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0160D15E1DAB8B77002B6B83 /* temp.html */,
 				015657B71DAA373C00506882 /* qz_icon.png */,
 				01AB34B31DA8891E00BABF17 /* holder.jpg */,
 				01AB34B41DA8891E00BABF17 /* jquery-2.2.0.js */,
 				01AB34B51DA8891E00BABF17 /* jquery.lazyload.js */,
 				012910CB1D9A185F00A0C69D /* yd_icon.png */,
-				0133DA6E1D8F8459008A2513 /* SXDetails.css */,
 				01F6DBA01D8E406000300679 /* CommunityViewController.h */,
 				01F6DBA11D8E406000300679 /* CommunityViewController.m */,
 				01F6DBA21D8E406000300679 /* DiscoveryViewController.h */,
@@ -8749,7 +8749,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = G688QXM6YK;
+						DevelopmentTeam = 42PUMHHWSN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9019,6 +9019,7 @@
 				01C82BEB1CC48EA6004D7A16 /* BuyRightnowView.xib in Resources */,
 				01ECDAB91C8EB31F0018160F /* Contents.json in Resources */,
 				D246D56C1D0179E10003D166 /* LogisticNotificationCell.xib in Resources */,
+				0160D15F1DAB8B77002B6B83 /* temp.html in Resources */,
 				01ECDA691C8EB31F0018160F /* faceDelete@2x.png in Resources */,
 				01F015D61C5F427B00930B0E /* GoodsDescriptionViewController.xib in Resources */,
 				D279DA401B8717C200E7CDDF /* BloodCell.xib in Resources */,
@@ -9053,7 +9054,6 @@
 				01ECDA231C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAAB1C8EB31F0018160F /* Contents.json in Resources */,
 				01EFD30D1C56028300BDA640 /* InfoDetailCell.xib in Resources */,
-				0133DA6F1D8F8459008A2513 /* SXDetails.css in Resources */,
 				01ECDABB1C8EB31F0018160F /* chat_receiver_audio_playing000@2x.png in Resources */,
 				01ECDAD31C8EB31F0018160F /* chat_sender_bg.png in Resources */,
 				01ECDA091C8EB31F0018160F /* VoiceSearchFeedback005.png in Resources */,
@@ -10289,7 +10289,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhejiang High View Information Technology Co.Ltd (42PUMHHWSN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -10312,7 +10312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhejiang High View Information Technology Co.Ltd (42PUMHHWSN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

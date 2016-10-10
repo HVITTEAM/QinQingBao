@@ -23,7 +23,7 @@
 #import "CardCell.h"
 
 #import "BBSPersonalModel.h"
-
+#import "MyRelationViewController.h"
 
 #define headHeight MTScreenH*0.3
 
@@ -58,7 +58,7 @@
     [self setupRefresh];
     
     [self getDataProvider];
-
+    
     [self getUserPosts];
     
     self.view.backgroundColor = HMGlobalBg;
@@ -148,7 +148,7 @@
     self.navBar.alpha = 0;
     backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn.frame = CGRectMake(15, 20 - headHeight, 40, 40);
-    [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"back_icon"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 27, MTScreenW, 30)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -184,11 +184,18 @@
     }
     
     CGFloat alpha;
+    
+    
     if ((scrollView.contentOffset.y + headHeight) > 0) {
         alpha = (scrollView.contentOffset.y + headHeight) / 64;
     }else{
         alpha = 0;
     }
+    
+    if (alpha >0.5)
+        [backBtn setImage:[UIImage imageNamed:@"back_black"] forState:UIControlStateNormal];
+    else
+        [backBtn setImage:[UIImage imageNamed:@"back_icon"] forState:UIControlStateNormal];
     
     backBtn.y = 23 + scrollView.contentOffset.y;
     self.navBar.y = scrollView.contentOffset.y + headHeight;
@@ -239,6 +246,27 @@
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
+        consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
+            if (idx == 100)
+            {
+                //                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
+            }
+            else if (idx == 200)
+            {
+                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                view.type = 1;
+                view.uid = self.uid;
+                [self.navigationController pushViewController:view animated:YES];
+            }
+            else
+            {
+                MyRelationViewController *view = [[MyRelationViewController alloc] init];
+                view.type = 2;
+                view.uid = self.uid;
+                [self.navigationController pushViewController:view animated:YES];
+            }
+        };
+
         cell = consumeCell;
     }
     else if (indexPath.section == 1)
@@ -266,7 +294,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
+    if (indexPath.section == 1 && indexPath.row > 0)
     {
         PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
         [view setItemdata:postsArr[indexPath.row -1]];
@@ -383,7 +411,7 @@
                                          personalInfo = [BBSPersonalModel objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
-                                         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,personalInfo.avatar]];
+                                         NSURL *url = [NSURL URLWithString:personalInfo.avatar];
                                          [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
                                          [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          

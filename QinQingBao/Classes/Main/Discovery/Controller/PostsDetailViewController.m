@@ -30,6 +30,8 @@
     CGFloat cellHeight;
     
     UIView *palceView;
+    
+    UIButton *authorBtn;
 }
 
 @property (strong, nonatomic) UITableView *tableview;
@@ -165,7 +167,7 @@
     img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(shareItemClick:)];
     
-    UIButton *authorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 25)];
+    authorBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 25)];
     [authorBtn setTitle:@"楼主" forState:UIControlStateNormal];
     authorBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     authorBtn.layer.cornerRadius = 5.0f;
@@ -295,7 +297,7 @@
             CommentModel *model = self.commentDatas[indexPath.row - 1];
             cell.commentModel = model;
         }
-       
+        
         cell.indexpath = indexPath;
         cell.dianZanBlock = ^(NSIndexPath *idx){
             [weakSelf support_replyAction:idx];
@@ -320,31 +322,18 @@
 #pragma mark - 拼接html语言
 - (void)showInWebView
 {
-    NSMutableString *html = [NSMutableString string];
-    [html appendString:@"<html>"];
-    [html appendString:@"<head>"];
-    [html appendFormat:@"<link rel=\"stylesheet\" href=\"%@\">",[[NSBundle mainBundle] URLForResource:@"SXDetails.css" withExtension:nil]];
+    NSString *HtmlString = [self touchBody];
     
-    [html appendFormat:@"<script src=%@>",[[NSBundle mainBundle] URLForResource:@"jquery-2.2.0.js" withExtension:nil]];
-
-    [html appendString:@"</script>"];
+    NSString *tempPath = [[NSBundle mainBundle]pathForResource:@"temp" ofType:@"html"];
     
-    [html appendFormat:@"<script src=%@>",[[NSBundle mainBundle] URLForResource:@"jquery.lazyload.js" withExtension:nil]];
-
-    [html appendString:@"</script>"];
+    NSString *tempHtml = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
     
-    [html appendString:@"<script type='text/javascript'>"];
-    [html appendFormat:@"jQuery(document).ready(function(){$(\"img\").lazyload({placeholder : '%@',threshold : 100,effect: \"show\"});});",[[NSBundle mainBundle] URLForResource:@"holder.jpg" withExtension:nil]];
-    [html appendString:@"</script>"];
+    tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"{{Content_holder}}" withString:HtmlString];
     
-    [html appendString:@"</head>"];
-    [html appendString:@"<body>"];
-    [html appendString:[self touchBody]];
-    [html appendString:@"</body>"];
+    NSString *basePath = [[NSBundle mainBundle] bundlePath];
+    NSURL *baseURL = [NSURL fileURLWithPath:basePath];
     
-    [html appendString:@"</html>"];
-    
-    [_webView loadHTMLString:html baseURL:nil];
+    [_webView loadHTMLString:tempHtml baseURL:baseURL];
 }
 
 - (NSString *)touchBody
@@ -353,12 +342,8 @@
     [body appendFormat:@"<div class=\"title\">%@</div>",self.detailData.subject];
     
     [body appendFormat:@"<div class=\"time\"><span style=\"display: inline-block;line-height: 20px;height: 20px;\">%@</span><div style=\"height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;padding-top: 5px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img width=\"16\" height=\"10\" src=\"%@\">&nbsp;%@</div><div style=\"float: right;height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;background: #fbf8f5;border: 1px solid F0EAE5;border-radius: 4px;padding-top: 2px;\"><img width=\"12\" height=\"12\" src=\"%@\"> &nbsp;%@</div><div style=\"clear: both;\"></div></div>",self.detailData.dateline,[[NSBundle mainBundle] URLForResource:@"yd_icon.png" withExtension:nil],self.detailData.views,[[NSBundle mainBundle] URLForResource:@"qz_icon.png" withExtension:nil],self.detailData.forum_name];
-
-//    <div class=\"time\"><span style=\"display: inline-block;line-height: 20px;height: 20px;\">%@</span><div style=\"height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;padding-top: 5px;\"><img width=\"16\" height=\"10\" src=\"%@\"> 健康专题</div><div style=\"float: right;height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;background: rebeccapurple;border-radius: 4px;padding-top: 5px;\"><img width=\"16\" height=\"10\" src=\"%@\">%@</div><div style=\"clear: both;"></div></div>
     
-//    [body appendFormat:@"<div class=\"time\">%@ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img width=\"16\" height=\"10\" src=\"%@\"> %@ </div>",self.detailData.dateline,[[NSBundle mainBundle] URLForResource:@"yd_icon.png" withExtension:nil],self.detailData.views];
     [body appendString:self.detailData.message];
-    
     
     // 遍历img
     for (DetailImgModel *detailImgModel in self.detailData.img) {
@@ -561,7 +546,7 @@
                                      @"client":@"ios"
                                      }mutableCopy];
     params[ @"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
-
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Get_articledetail parameters:params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      CX_Log(@"帖子详情加载完成");
@@ -736,6 +721,8 @@
             
             model.support = dict[@"datas"][@"support"];
             [self.tableview reloadData];
+            
+            [self addheats];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -746,12 +733,11 @@
 
 - (void)loadCommonlist
 {
-    NSMutableDictionary *params = [@{
+    NSMutableDictionary *params = [@{@"host" : authorBtn.selected ? @"1" : @"0",
                                      @"tid":self.itemdata.tid,
                                      @"p":@(self.pageNum),
                                      @"page":@10,
-                                     @"client":@"ios",
-                                     }mutableCopy];
+                                     @"client":@"ios", }mutableCopy];
     params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -763,6 +749,7 @@
         {
             if ([codeNum integerValue] == 17001)
             {
+                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
                 return CX_Log(@"评论数据为空");
             }
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -774,7 +761,7 @@
             NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
             if (arr.count > 0) {
                 [self.commentDatas addObjectsFromArray:arr];
-                [self.tableview reloadData];
+                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
                 self.pageNum++;
             }
         }
@@ -783,6 +770,7 @@
         [self.tableview.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
+    
 }
 
 /**
@@ -798,7 +786,11 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
-            if ([codeNum integerValue] == 17001)
+            if ([codeNum integerValue] == 17001 && self.commentDatas.count > 0)
+            {
+                return [self.tableview showNonedataTooltip];
+            }
+            else if ([codeNum integerValue] == 17001)
             {
                 return CX_Log(@"评论数据为空");
             }
@@ -937,10 +929,8 @@
  */
 - (void)shareItemClick:(UINavigationItem *)item
 {
-    [NoticeHelper AlertShow:@"暂未开通" view:nil];
-    
     NSString * url = self.detailData.share_url;
-    NSString *str = [NSString stringWithFormat:@"%@%@",URL_ImgArticle,self.detailData.avatar];
+    NSString *str = self.detailData.avatar;
     NSArray* imageArray = @[str];
     
     if (imageArray) {
@@ -967,6 +957,8 @@
                        switch (state) {
                            case SSDKResponseStateSuccess:
                            {
+                               [self addheats];
+
                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
                                                                                    message:nil
                                                                                   delegate:nil
@@ -1010,42 +1002,37 @@
     
     [self.commentDatas removeAllObjects];
     self.pageNum = 1;
+    [self loadCommonlist];
+}
+
+/**
+ *  增加帖子热度
+ */
+- (void)addheats
+{
+    //判断是否登录
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return ;
+    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
+        return ;
     
-    NSMutableDictionary *params = [@{@"host" : item.selected ? @"1" : @"0",
-                                     @"tid":self.itemdata.tid,
-                                     @"p":@(self.pageNum),
-                                     @"page":@10,
-                                     @"client":@"ios", }mutableCopy];
-    params[@"key"] =  [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
+    NSDictionary *params = @{@"tid":self.detailData.tid,
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_Commonlist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        [self.tableview.footer endRefreshing];
+    [CommonRemoteHelper RemoteWithUrl:URL_Addheats parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
         {
-            if ([codeNum integerValue] == 17001)
-            {
-                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-                return CX_Log(@"评论数据为空");
-            }
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            return CX_Log(@"评论数据为空");
         }
         else
         {
             
-            NSArray *arr = [CommentModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            if (arr.count > 0) {
-                [self.commentDatas addObjectsFromArray:arr];
-                [self.tableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-                self.pageNum++;
-            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.tableview.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
 }

@@ -10,6 +10,7 @@
 #import "BBSRelationModel.h"
 #import "BBSRelationCell.h"
 
+#import "PublicProfileViewController.h"
 
 @interface MyRelationViewController ()
 {
@@ -53,6 +54,8 @@
         paramDict = @{@"action" : @"attention",
                       @"attention_uid" :self.uid,
                       @"client" : @"ios",
+                      @"page" : @"1000",
+                      @"p" : @"1",
                       @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
     }
     else
@@ -61,6 +64,8 @@
         paramDict = @{@"action" : @"fans",
                       @"fans_uid" : self.uid,
                       @"client" : @"ios",
+                      @"page" : @"1000",
+                      @"p" : @"1",
                       @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_list parameters: paramDict
@@ -125,6 +130,14 @@
     };
     [cell setItem:dataProvider[indexPath.row]];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
+    BBSRelationModel *item = dataProvider[indexPath.row];
+    view.uid = item.fans_id ? item.fans_id : item.attention_id;
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 #pragma mark -- 与后台数据交互模块

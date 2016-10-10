@@ -91,20 +91,19 @@
 
 - (void)setupFooter
 {
-    //退出按钮
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 70)];
     bgview.backgroundColor = [UIColor clearColor];
     
     UIButton *logout = [[UIButton alloc] init];
-    logout.frame = CGRectMake(20, 20, MTScreenW - 40, 45);
+    logout.frame = CGRectMake(20, 15, MTScreenW - 40, 45);
     logout.titleLabel.font = [UIFont systemFontOfSize:16];
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         [logout setTitle:@"登录" forState:UIControlStateNormal];
     else
         [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
-    [logout setTitleColor:HMColor(255, 10, 10) forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background"] forState:UIControlStateNormal];
-    [logout setBackgroundImage:[UIImage resizedImage:@"common_card_background_highlighted"] forState:UIControlStateHighlighted];
+    [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [logout setBackgroundColor:HMColor(251, 176, 59)];
+    logout.layer.cornerRadius = 6.0f;
     [logout addTarget:self action:@selector(loginOut:) forControlEvents:UIControlEventTouchUpInside];
     [bgview addSubview:logout];
     
@@ -114,7 +113,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
+    //    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
     return 3;
 }
 
@@ -149,7 +148,7 @@
 {
     static NSString *contentCellId = @"contentCell";
     static NSString *portraitCellId = @"portraitCell";
-
+    
     UITableViewCell *cell = nil;
     
     if (indexPath.section == 0 && indexPath.row == 0){
@@ -172,9 +171,9 @@
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         
         cell = portraitCell;
-    
+        
     }else{
-    
+        
         UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:contentCellId];
         if (contentcell == nil) {
             contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:contentCellId];
@@ -227,7 +226,7 @@
         [self setDatePicker];
         
     }else if (indexPath.section == 1 && indexPath.row == 0){
-
+        
         NSLog(@"电话");
         
     }else if (indexPath.section == 1 && indexPath.row == 1){
@@ -260,7 +259,7 @@
         };
         textView.title = @"居住地址";
         [self.navigationController pushViewController:textView animated:YES];
-
+        
         
     }else if (indexPath.section == 2 && indexPath.row == 0){
         NSLog(@"专家认证");
@@ -453,7 +452,7 @@
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未申请"},
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
                       ],nil];
-
+    
     [self.tableView reloadData];
 }
 

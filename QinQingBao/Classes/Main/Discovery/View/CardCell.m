@@ -29,6 +29,9 @@
 /** 头像 */
 @property (strong, nonatomic) UIImageView *portraitView;
 
+/** 头像加V */
+@property (strong, nonatomic) UIImageView *markView;
+
 /** 时间 */
 @property (strong, nonatomic) UILabel *timeLb;
 
@@ -100,7 +103,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 2, self.bounds.size.width, 2);
+    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 0.5, self.bounds.size.width, 0.5);
 }
 
 #pragma mark - 设置cell数据
@@ -112,12 +115,17 @@
     //设置用户信息
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:postsModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
+    // 设置是否加V
+    self.markView.hidden = postsModel.grouptitle.length>0 ? NO : YES;
+    
     self.timeLb.text = [postsModel.dateline substringWithRange:NSMakeRange(5, 11)];
     self.nameLb.text = postsModel.author;
     self.headTagLb.text = postsModel.grouptitle;
     //设置是否关注
     if ([postsModel.is_home_friend integerValue] != 0) {
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"B3B3B3"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"B3B3B3"] forState:UIControlStateNormal];
     }else{
         [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
     }
@@ -230,6 +238,8 @@
     self.portraitView.layer.cornerRadius = self.portraitView.width/2;
     self.portraitView.layer.masksToBounds = YES;
     
+    self.markView.frame = CGRectMake(23, 23, 15, 15);
+
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame) + 10, 2, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
     
@@ -342,6 +352,12 @@
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.portraitView addGestureRecognizer:singleTap];
     
+    //加v
+    UIImageView *markView = [[UIImageView alloc] init];
+    markView.image = [UIImage imageNamed:@"v.png"];
+    self.markView = markView;
+    [infoView addSubview:markView];
+    
     //姓名
     UILabel *nameLb = [[UILabel alloc] init];
     nameLb.textColor = HMColor(53, 53, 53);
@@ -435,8 +451,8 @@
     self.ydBtn = [self createBtnWithTitle:self.postsModel.views image:@"yd_icon"];
     self.dzBtn = [self createBtnWithTitle:self.postsModel.recommend_add image:@"dz_icon"];
     self.plBtn = [self createBtnWithTitle:self.postsModel.replies image:@"pl_icon"];
+    self.barTagBtn = [self createBtnWithTitle:self.postsModel.forum_name image:@"qz_icon"];
     
-    self.barTagBtn = [self createBtnWithTitle:@"健康专题" image:@"qz_icon"];
     [self.barTagBtn setTitleColor:HMColor(98, 50, 02) forState:UIControlStateNormal];
     self.barTagBtn.backgroundColor = HMColor(251, 248, 245);
     self.barTagBtn.layer.cornerRadius = 5;

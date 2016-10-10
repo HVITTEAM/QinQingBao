@@ -35,7 +35,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     [self initView];
@@ -46,8 +47,6 @@
     dataProvider = [[NSMutableArray alloc] init];
     
     [self getDataProvider];
-    
-//    [self downimg];
 }
 
 -(void)downimg
@@ -95,7 +94,6 @@
 {
     // 上拉刷新
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        currentPageIdx ++ ;
         [self getDataProvider];
     }];
     
@@ -131,7 +129,7 @@
                                      else
                                      {
                                          arr = [CommonPlanModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         
+                                         currentPageIdx ++ ;
                                          [self.tableView reloadData];
                                      }
                                      
@@ -143,7 +141,6 @@
                                      else if (arr.count == 0 && currentPageIdx > 1)
                                      {
                                          NSLog(@"没有更多的数据了");
-                                         currentPageIdx --;
                                          [self.view showNonedataTooltip];
                                      }
                                      [dataProvider addObjectsFromArray:arr];

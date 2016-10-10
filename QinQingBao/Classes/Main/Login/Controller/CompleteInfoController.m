@@ -13,6 +13,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextfield;
 @property (strong, nonatomic) IBOutlet UIButton *btn;
+
+@property (nonatomic, retain) UIImage *iconImg;
 - (IBAction)btnHandler:(id)sender;
 
 @end
@@ -26,6 +28,12 @@
     [self initView];
     
     [self initNavgation];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
 }
 
 -(void)initView
@@ -71,14 +79,21 @@
     {
         return [NoticeHelper AlertShow:@"昵称不能少于2个字，不能大于15个字" view:nil];
     }
+    
+    if ( !self.iconImg)
+        return [NoticeHelper AlertShow:@"请选择头像" view:nil];
+    UIImage *slt = [self.iconImg scaleImageToSize:CGSizeMake(70,70)];
+    NSData *data = UIImageJPEGRepresentation(slt, 1);
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-
-    [CommonRemoteHelper RemoteWithUrl:URL_DiscuzRegisterFromCx parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                            @"client" : @"ios",
-                                                                            @"truename" : str}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper UploadPicWithUrl:URL_DiscuzRegisterFromCx
+                              parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
+                                            @"client" : @"ios",
+                                            @"truename" : str}
+                                    type:CommonRemoteTypePost  dataObj:data
+                                 success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
-
+                                     
                                      NSLog(@"%@",dict);
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)
@@ -216,6 +231,7 @@
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
 {
     self.headImg.image = croppedImage;
+    self.iconImg = croppedImage;
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.navigationController popViewControllerAnimated:YES];

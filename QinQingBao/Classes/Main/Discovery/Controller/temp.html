@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <style>
+                    .title
+                    {
+                        text-align:left;
+                        font-size:18px;
+                        font-weight:bold;
+                        color:black;
+                        margin-left:0px;
+                    }
+                
+                .time
+                {
+                    text-align:left;
+                    font-size:13px;
+                    color:gray;
+                    margin-top:5px;
+                    margin-bottom:7px;
+                    margin-left:0px;
+                }
+                
+                .img-parent
+                {
+                    text-align:center;
+                    margin-bottom:10px;
+                }
+                </style>
+                <script src='jquery-2.2.0.js'></script>
+                <script src='jquery.lazyload.js'></script>
+                
+                <script type='text/javascript'>
+                    jQuery(document).ready(
+                                           function(){
+                                           $("img").lazyload({
+                                                             placeholder : 'holder.jpg',
+                                                             threshold : 100,
+                                                             effect: "show"
+                                                             });
+                                           
+                                           });
+                                           
+                    </script>
+                </head>
+    <body>
+        
+        <div class='text-content'>
+            {{Content_holder}}
+        </div>
+        
+    </body>
+</html>

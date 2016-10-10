@@ -77,10 +77,13 @@
     [super viewWillAppear:animated];
     
     //注册重新登录成功监听
-    [MTNotificationCenter addObserver:self selector:@selector(refleshData) name:MTReLogin object:nil];
+    [MTNotificationCenter addObserver:self selector:@selector(refleshDataByLogin) name:MTReLogin object:nil];
     
     //注册注销监听
-    [MTNotificationCenter addObserver:self selector:@selector(refleshData) name:MTLoginout object:nil];
+    [MTNotificationCenter addObserver:self selector:@selector(refleshDataByLogin) name:MTLoginout object:nil];
+    
+    //注册寸欣账户登录信息超时监听
+    [MTNotificationCenter addObserver:self selector:@selector(refleshDataByLogin) name:MTLoginTimeout object:nil];
 
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
@@ -103,14 +106,22 @@
     self.navigationController.navigationBarHidden = NO;
 }
 
+-(void)refleshDataByLogin
+{
+    personalInfo = nil;
+    [postsArr removeAllObjects];
+    [self.tableView reloadData];
+
+    [self refleshData];
+}
+
 /**
  * 刷新帖子数据
  */
 -(void)refleshData
 {
     currentPageIdx = 1;
-    postsArr = [[NSMutableArray alloc] init];
-    
+     
     [self getUserPosts];
     
     [self getUserFannum];
@@ -417,7 +428,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2)
+    if (indexPath.section == 2 && indexPath.row > 0)
     {
         PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
         [view setItemdata:postsArr[indexPath.row-1]];
@@ -454,7 +465,7 @@
                                          
                                          [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];
                                          
-                                         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+                                         [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
