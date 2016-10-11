@@ -9,7 +9,12 @@
 #import "LoginInHeadView.h"
 #define kRefreshHeaderRotateAnimationKey @"RotateAnimationKey"
 static const CGFloat criticalY = -50.f;
+@interface LoginInHeadView ()
+{
+    UIImageView *markView;
+}
 
+@end
 @implementation LoginInHeadView
 
 -(void)awakeFromNib
@@ -17,13 +22,16 @@ static const CGFloat criticalY = -50.f;
     [super awakeFromNib];
     self.letterBtn.hidden = YES;
     self.followBtn.hidden = YES;
-    self.userIcon.layer.cornerRadius = self.userIcon.width/2;
-    self.userIcon.layer.masksToBounds = YES;
     self.userIcon.userInteractionEnabled=YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loginHandler:)];
     [self.userIcon addGestureRecognizer:singleTap];
 
-    
+    //加v
+    markView = [[UIImageView alloc] initWithFrame:CGRectMake(self.userIcon.width - 20, self.userIcon.height - 20, 16, 16)];
+    markView.image = [UIImage imageNamed:@"v.png"];
+    markView.hidden = YES;
+    [self.userIcon addSubview:markView];
+
     self.professionLab.layer.cornerRadius = 4;
     self.professionLab.layer.masksToBounds = YES;
     
@@ -56,9 +64,15 @@ static const CGFloat criticalY = -50.f;
     [self.loginBtn setTitle:name forState:UIControlStateNormal];
     
     if (!professional || professional.length == 0)
+    {
+        markView.hidden = YES;
         self.professionLab.text = @"";
+    }
     else
+    {
+        markView.hidden = NO;
         self.professionLab.text = [NSString stringWithFormat:@" %@ ",professional];
+    }
     
     if (isfriend && [isfriend integerValue] == 0)
     {

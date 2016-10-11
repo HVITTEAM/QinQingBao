@@ -530,7 +530,7 @@
                                              currentPageIdx ++;
                                              [postsArr addObjectsFromArray:[arr copy]];
                                              
-                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
                                          }
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -568,8 +568,11 @@
                                              // 显示个人资料
                                              LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
-                                             [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
                                              
+                                             [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                 headView.userIcon.image = [image circleImage];
+                                             }];
+
                                              [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];
                                          }
                                          else

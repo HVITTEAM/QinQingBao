@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "RegistViewController.h"
+#import "RegistCompleteInfoController.h"
+
 #import "UpdatePwdViewController.h"
 #import "JPUSHService.h"
 #import "MobileBindingView.h"
@@ -334,7 +336,9 @@
                  default:
                      break;
              }
-             [self loginSuccessWithOpenid:user.uid login_type:login_type open_token:user.credential.token mobile:@"" code:@""];
+             RegistCompleteInfoController *vc = [[RegistCompleteInfoController alloc] init];
+             [vc registWithOpenid:user.uid login_type:login_type open_token:user.credential.token nickname:user.nickname icon:user.icon];
+             [self.navigationController pushViewController:vc animated:YES];
          }
          else
          {
@@ -342,69 +346,6 @@
          }
      }];
 }
-
-/**
- *  第三方登录成功调用后台接口注册账号
- *
- *  @param openid     第三方登录ID
- *  @param login_type 第三方登录类型 分别为 qq：1 微信：2 新浪：3
- *  @param open_token 第三方登录返回的token
- *  @param mobile     电话号码，如果第一次登录则需要
- *  @param code       验证码
- */
--(void)loginSuccessWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token mobile:(NSString *)mobile code:(NSString *)code
-{
-    NSLog(@"adaaaaa%@",openid);
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_LoginByother_new parameters: @{@"open_id" : openid,
-                                                                     @"login_type" : login_type,
-                                                                     @"open_token" : open_token,
-                                                                     @"client" : @"ios",
-                                                                     @"mobile":mobile,
-                                                                     @"code" :code,
-                                                                     @"sys" : @"2"}
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         if ([codeNum isEqualToString:@"11010"])
-                                         {
-                                             UIWindow *wd = [UIApplication sharedApplication].keyWindow;
-                                             MobileBindingView *bindingView = [MobileBindingView showMobileBindingViewToView:wd];
-                                             bindingView.tapConfirmBtnCallBack = ^(NSString *phone,NSString *verificationCode){
-                                                 [self loginSuccessWithOpenid:openid login_type:login_type open_token:open_token mobile:phone code:verificationCode];
-                                             };
-                                             bindingView.tapCancelBtnCallBack = ^(void){
-                                                 //清楚第三方的授权信息
-                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
-                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
-                                                 [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
-                                             };
-                                         }
-                                         else
-                                         {
-                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                             [alertView show];
-                                         }
-                                     }
-                                     else
-                                     {
-                                         [NoticeHelper AlertShow:@"登录成功！" view:self.view];
-                                         NSDictionary *di = [dict objectForKey:@"datas"];
-                                         UserModel *vo = [UserModel objectWithKeyValues:di];
-                                         vo.logintype = login_type;
-                                         vo.member_mobile = mobile;
-                                         [self loginResultSetData:vo];
-                                     }
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                 }];
-    
-}
-
 
 /**
  *  登录成功之后需要设置本地登录数据
@@ -416,7 +357,7 @@
     [SharedAppUtil defaultCommonUtil].userVO = uservo;
     [ArchiverCacheHelper saveObjectToLoacl:uservo key:User_Archiver_Key filePath:User_Archiver_Path];
     
-    //backHide 是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
+    //是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
     if (!self.backHiden)
         [self dismissViewControllerAnimated:YES completion:nil];
     [MTNotificationCenter postNotificationName:MTReLogin object:nil];

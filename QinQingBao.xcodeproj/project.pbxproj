@@ -361,6 +361,8 @@
 		019D634A1DA8E9DD00CE6622 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 019D63481DA8E9DD00CE6622 /* libssl.a */; };
 		019D634C1DA8EB6A00CE6622 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 019D634B1DA8EB6A00CE6622 /* MBProgressHUD.m */; };
 		019E81611C3BA72E00616AD9 /* agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = 019E81601C3BA72E00616AD9 /* agreement.html */; };
+		01A2D5C21DACB1F8005BCAF9 /* RegistCompleteInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A2D5C01DACB1F8005BCAF9 /* RegistCompleteInfoController.m */; };
+		01A2D5C31DACB1F8005BCAF9 /* RegistCompleteInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A2D5C11DACB1F8005BCAF9 /* RegistCompleteInfoController.xib */; };
 		01A5A28B1D1A204400282964 /* MarketBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5A2891D1A204400282964 /* MarketBuyView.m */; };
 		01A5A28C1D1A204400282964 /* MarketBuyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A5A28A1D1A204400282964 /* MarketBuyView.xib */; };
 		01A5A2911D1A307C00282964 /* MarketHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A5A28F1D1A307C00282964 /* MarketHeadView.m */; };
@@ -1951,6 +1953,9 @@
 		019D63481DA8E9DD00CE6622 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		019D634B1DA8EB6A00CE6622 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		019E81601C3BA72E00616AD9 /* agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = agreement.html; sourceTree = "<group>"; };
+		01A2D5BF1DACB1F8005BCAF9 /* RegistCompleteInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistCompleteInfoController.h; sourceTree = "<group>"; };
+		01A2D5C01DACB1F8005BCAF9 /* RegistCompleteInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistCompleteInfoController.m; sourceTree = "<group>"; };
+		01A2D5C11DACB1F8005BCAF9 /* RegistCompleteInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistCompleteInfoController.xib; sourceTree = "<group>"; };
 		01A5A2881D1A204400282964 /* MarketBuyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketBuyView.h; sourceTree = "<group>"; };
 		01A5A2891D1A204400282964 /* MarketBuyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketBuyView.m; sourceTree = "<group>"; };
 		01A5A28A1D1A204400282964 /* MarketBuyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketBuyView.xib; sourceTree = "<group>"; };
@@ -8130,6 +8135,9 @@
 		01F228121B7B428300ED4AFB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				01A2D5BF1DACB1F8005BCAF9 /* RegistCompleteInfoController.h */,
+				01A2D5C01DACB1F8005BCAF9 /* RegistCompleteInfoController.m */,
+				01A2D5C11DACB1F8005BCAF9 /* RegistCompleteInfoController.xib */,
 				D2F744A21B7D7E7F006AC23D /* LoginViewController.h */,
 				D2F744A31B7D7E7F006AC23D /* LoginViewController.m */,
 				D2F744A41B7D7E7F006AC23D /* LoginViewController.xib */,
@@ -8987,6 +8995,7 @@
 				01ECDAAC1C8EB31F0018160F /* chatBar_more_location.png in Resources */,
 				01E89B041C76B45A00CFD40D /* BindingResultViewController.xib in Resources */,
 				01ECDABA1C8EB31F0018160F /* messageToolbarBg@2x.png in Resources */,
+				01A2D5C31DACB1F8005BCAF9 /* RegistCompleteInfoController.xib in Resources */,
 				01ECDA381C8EB31F0018160F /* call_out.png in Resources */,
 				01EA206A1C2A705100B546A9 /* OrderResultViewController.xib in Resources */,
 				01EF372A1C59B8CD0029C1C5 /* HouseTypeCell.xib in Resources */,
@@ -9776,6 +9785,7 @@
 				01F08EBE1CFD5D8B00207BF0 /* EventInfoController.m in Sources */,
 				D2F744AB1B7D7E7F006AC23D /* LoginViewController.m in Sources */,
 				01FD4CA81CAE4B43008F09CF /* PSTGridLayoutRow.m in Sources */,
+				01A2D5C21DACB1F8005BCAF9 /* RegistCompleteInfoController.m in Sources */,
 				016067051CF6AD8C005A3164 /* UIButton+WebCache.m in Sources */,
 				01ECDB231C8EB31F0018160F /* EaseChatBarMoreView.m in Sources */,
 				01237A5E1CFC319D0070C905 /* NSObject+MJKeyValue.m in Sources */,
