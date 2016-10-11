@@ -66,6 +66,9 @@
                                               else if ([codeNum isKindOfClass:[NSString class]] && [codeNum isEqualToString: @"14001"])
                                               {
                                                   NSLog(@"登录信息过期,请重新登录");
+                                                  //取消所有的网络请求
+                                                  [[CommonRemoteHelper sharedInstance].operationQueue cancelAllOperations];
+                                                  
                                                   [MTNotificationCenter postNotificationName:MTLoginTimeout object:nil userInfo:nil];
                                                   success(dict,responseObject);
                                               }

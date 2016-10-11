@@ -92,7 +92,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AlbumReflashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Hr9-JS-RR7">
-                    <rect key="frame" x="10" y="68" width="30" height="30"/>
+                    <rect key="frame" x="10" y="10" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="bhl-I5-20i"/>
                         <constraint firstAttribute="height" constant="30" id="d3O-CF-WuI"/>
@@ -112,6 +112,7 @@
                 <constraint firstItem="ulT-8S-RFE" firstAttribute="leading" secondItem="R4e-Mq-waf" secondAttribute="trailing" constant="8" id="GbU-tY-n2z"/>
                 <constraint firstItem="R4e-Mq-waf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IIz-7Y-Awa"/>
                 <constraint firstItem="066-JH-TY1" firstAttribute="leading" secondItem="Uru-fe-HaH" secondAttribute="trailing" constant="15" id="Mr6-vs-quh"/>
+                <constraint firstItem="Hr9-JS-RR7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Nvk-yf-ILY"/>
                 <constraint firstItem="g2o-Ig-7cw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cNT-fl-zGE"/>
                 <constraint firstAttribute="bottom" secondItem="g2o-Ig-7cw" secondAttribute="bottom" id="lMW-51-6IV"/>
                 <constraint firstAttribute="trailing" secondItem="g2o-Ig-7cw" secondAttribute="trailing" id="ni1-mf-mdh"/>
@@ -119,6 +120,11 @@
                 <constraint firstItem="Uru-fe-HaH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="taO-aY-ap6"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="EiJ-lY-yP2"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="followBtn" destination="1I6-yb-NiZ" id="uKo-Hv-Ta2"/>
                 <outlet property="headView" destination="g2o-Ig-7cw" id="QyW-0i-iuN"/>

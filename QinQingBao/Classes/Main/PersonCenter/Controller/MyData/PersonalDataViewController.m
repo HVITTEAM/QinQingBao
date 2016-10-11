@@ -92,18 +92,20 @@
 
 - (void)setupFooter
 {
-    //退出按钮
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 70)];
     bgview.backgroundColor = [UIColor clearColor];
     
     UIButton *logout = [[UIButton alloc] init];
-    logout.frame = CGRectMake(20, 20, MTScreenW - 40, 45);
+    logout.frame = CGRectMake(20, 15, MTScreenW - 40, 45);
     logout.titleLabel.font = [UIFont systemFontOfSize:16];
-    [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        [logout setTitle:@"登录" forState:UIControlStateNormal];
+    else
+        [logout setTitle:@"退出当前帐号" forState:UIControlStateNormal];
     [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [logout setBackgroundColor:HMColor(251, 176, 59)];
     logout.layer.cornerRadius = 6.0f;
-    [logout addTarget:self action:@selector(loginOut) forControlEvents:UIControlEventTouchUpInside];
+    [logout addTarget:self action:@selector(loginOut:) forControlEvents:UIControlEventTouchUpInside];
     [bgview addSubview:logout];
     
     self.tableView.tableFooterView = bgview;
@@ -112,7 +114,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
+    //    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
     return 3;
 }
 
@@ -147,7 +149,7 @@
 {
     static NSString *contentCellId = @"contentCell";
     static NSString *portraitCellId = @"portraitCell";
-
+    
     UITableViewCell *cell = nil;
     
     if (indexPath.section == 0 && indexPath.row == 0){
@@ -170,9 +172,9 @@
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
         
         cell = portraitCell;
-    
+        
     }else{
-    
+        
         UITableViewCell *contentcell = [tableView dequeueReusableCellWithIdentifier:contentCellId];
         if (contentcell == nil) {
             contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:contentCellId];
@@ -225,7 +227,7 @@
         [self setDatePicker];
         
     }else if (indexPath.section == 1 && indexPath.row == 0){
-
+        
         NSLog(@"电话");
         
     }else if (indexPath.section == 1 && indexPath.row == 1){
@@ -258,7 +260,7 @@
         };
         textView.title = @"居住地址";
         [self.navigationController pushViewController:textView animated:YES];
-
+        
         
     }else if (indexPath.section == 2 && indexPath.row == 0){
         AuthenticateViewController *authenticateVC = [[AuthenticateViewController alloc] init];
@@ -453,7 +455,7 @@
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未申请"},
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
                       ],nil];
-
+    
     [self.tableView reloadData];
 }
 
@@ -575,9 +577,9 @@
         {
             MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             
-            [CommonRemoteHelper RemoteWithUrl:URL_Logout parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
-                                                                       @"client" : @"ios",
-                                                                       @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
+            [CommonRemoteHelper RemoteWithUrl:URL_Logout_New parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
+                                                                           @"client" : @"ios",
+                                                                           @"key" : [SharedAppUtil defaultCommonUtil].userVO.key}
                                          type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                              [HUD removeFromSuperview];
                                              id codeNum = [dict objectForKey:@"code"];
@@ -592,15 +594,14 @@
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
-
+                                                 
                                                  [MTNotificationCenter postNotificationName:MTLoginout object:nil userInfo:nil];
-                                                 [self.navigationController popViewControllerAnimated:YES];
+                                                 [self setupFooter];
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"发生错误！%@",error);
                                              [HUD removeFromSuperview];
                                              [self.view endEditing:YES];
-                                             [MTControllerChooseTool setRootViewController];
                                          }];
         }else{
             self.tapLoginOutButton = NO;
@@ -659,8 +660,13 @@
 
 #pragma mark - 退出登录
 #pragma  mark - 退出当前账号
--(void)loginOut
+-(void)loginOut:(UIButton *)sender
 {
+    if ([sender.titleLabel.text isEqualToString:@"登录"])
+    {
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil];
+    }
+    
     self.tapLoginOutButton = YES;
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"确定退出当前账号？"

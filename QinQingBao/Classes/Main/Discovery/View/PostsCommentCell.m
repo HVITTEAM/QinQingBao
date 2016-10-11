@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) UIButton *zanNumBtn;
 
+@property (strong, nonatomic) UIButton *authorBtn;
+
 @property (strong, nonatomic) SubCommentView *commentView;
 
 @end
@@ -48,6 +50,7 @@
 {
     _commentModel = commentModel;
     
+    self.authorBtn.hidden = [commentModel.is_host integerValue] == 0;
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:commentModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = commentModel.author;
@@ -73,6 +76,10 @@
     self.portraitView.layer.masksToBounds = YES;
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame)+10, 12, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
+    
+    [self.authorBtn sizeToFit];
+    self.authorBtn.frame = CGRectMake(CGRectGetMaxX(self.nameLb.frame)+10, 12, CGRectGetWidth(self.authorBtn.frame), 18);
+    
     [self.timeLb sizeToFit];
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame)+5, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
     [self.zanNumBtn sizeToFit];
@@ -121,6 +128,20 @@
     nameLb.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:nameLb];
     self.nameLb = nameLb;
+    
+    //楼主
+    UIButton *authorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    authorBtn.backgroundColor = [UIColor whiteColor];
+    authorBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    authorBtn.layer.cornerRadius = 5;
+    [authorBtn setTitle:@"楼主" forState:UIControlStateNormal];
+    authorBtn.layer.borderWidth = 1.0f;
+    authorBtn.layer.borderColor = [UIColor colorWithRGB:@"3FD0E4"].CGColor;
+    authorBtn.backgroundColor = [UIColor colorWithRGB:@"3FD0E4"];
+
+    [authorBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.contentView addSubview:authorBtn];
+    self.authorBtn = authorBtn;
     
     //时间
     UILabel *timeLb = [[UILabel alloc] init];

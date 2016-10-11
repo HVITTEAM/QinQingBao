@@ -14,6 +14,13 @@ typedef enum {
     RefreshViewStateRefreshing,
 } RefreshViewState;
 
+@protocol HeadRefleshDelegate <NSObject>
+
+- (void)refleshWithStates:(RefreshViewState)states;
+@end
+
+
+
 @interface LoginInHeadView : UIView
 
 /**
@@ -36,7 +43,6 @@ typedef enum {
 
 @property (strong, nonatomic) IBOutlet UIImageView *refleshBtn;
 
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *imgTop;
 - (IBAction)letterHandler:(id)sender;
 
 - (IBAction)followHandler:(id)sender;
@@ -63,6 +69,8 @@ typedef enum {
  */
 -(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend is_mine:(NSString *)is_mine;
 
--(void)setRefleshStates:(RefreshViewState)states;
+@property (nonatomic, assign) id <HeadRefleshDelegate>delegate;
 
+@property (nonatomic, assign) RefreshViewState states;
+- (void)updateRefreshHeaderWithOffsetY:(CGFloat)y scrollView:(UIScrollView*)scrollView;
 @end

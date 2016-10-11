@@ -31,6 +31,9 @@
 /** 头像 */
 @property (strong, nonatomic) UIImageView *portraitView;
 
+/** 头像加V */
+@property (strong, nonatomic) UIImageView *markView;
+
 /** 时间 */
 @property (strong, nonatomic) UILabel *timeLb;
 
@@ -105,7 +108,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 2, self.bounds.size.width, 2);
+    self.lineView.frame = CGRectMake(0, self.bounds.size.height - 0.5, self.bounds.size.width, 0.5);
 }
 
 -(void)setItemdata:(PostsModel *)itemdata
@@ -113,6 +116,9 @@
     _itemdata = itemdata;
 
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+
+    // 设置是否加V
+    self.markView.hidden = itemdata.grouptitle.length>0 ? NO : YES;
 
     self.timeLb.text = [self.itemdata.dateline substringWithRange:NSMakeRange(5, 11)];
     self.nameLb.text = self.itemdata.author;
@@ -200,6 +206,8 @@
     self.portraitView.frame = CGRectMake(0, 2, 36, 36);
     self.portraitView.layer.cornerRadius = self.portraitView.width/2;
     self.portraitView.layer.masksToBounds = YES;
+
+    self.markView.frame = CGRectMake(23, 23, 15, 15);
 
     [self.nameLb sizeToFit];
     self.nameLb.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame) + 10, 2, CGRectGetWidth(self.nameLb.frame), CGRectGetHeight(self.nameLb.frame));
@@ -309,6 +317,12 @@
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.portraitView addGestureRecognizer:singleTap];
 
+    //加v
+    UIImageView *markView = [[UIImageView alloc] init];
+    markView.image = [UIImage imageNamed:@"v.png"];
+    self.markView = markView;
+    [infoView addSubview:markView];
+    
     //姓名
     UILabel *nameLb = [[UILabel alloc] init];
     nameLb.textColor = HMColor(53, 53, 53);

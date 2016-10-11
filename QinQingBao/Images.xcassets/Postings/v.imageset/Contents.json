@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "认证小.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "健康评估.png",
+      "filename" : "认证大@2x.png",
       "scale" : "2x"
     },
     {

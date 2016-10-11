@@ -43,7 +43,7 @@ static float cellWidth = 60;
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 //定义展示的Section的个数
@@ -88,6 +88,12 @@ static float cellWidth = 60;
             imageView.image = [UIImage imageWithName:@"type4"];
         }
             break;
+        case 4:
+        {
+            label.text = @"干预方案";
+            imageView.image = [UIImage imageWithName:@"type5"];
+        }
+            break;
         default:
             break;
     }
@@ -108,7 +114,7 @@ static float cellWidth = 60;
  */
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return (MTScreenW - cellWidth*4)/5;
+    return (MTScreenW - cellWidth*5)/6;
 }
 
 /**
@@ -122,8 +128,8 @@ static float cellWidth = 60;
 //定义每个UICollectionView 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    float VSpace = (self.height - cellHeight*2)/4;
-    float HSpace = (self.width - cellWidth*4)/8;
+    float VSpace = (self.height - cellHeight*2)/5;
+    float HSpace = (self.width - cellWidth*5)/8;
     
     return UIEdgeInsetsMake(0, HSpace, VSpace, HSpace);//分别为上、左、下、右
 }

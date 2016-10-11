@@ -188,7 +188,6 @@
                                              vo.member_mobile = self.accountText.text;
                                              vo.pwd = [self.passwordText.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                                              [self loginResultSetData:vo];
-
                                              NSLog(@"寸欣健康登录成功！");
                                              [self loginBBS:vo];
                                          }

@@ -99,7 +99,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         [button setTitle:vc.title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button setTitleColor:HMColor(12, 146, 241) forState:UIControlStateSelected];
+        [button setTitleColor:[UIColor colorWithRGB:@"70a426"] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(selectNameButton:) forControlEvents:UIControlEventTouchUpInside];
         [self.headScrollView addSubview:bgview];
         [self.headScrollView addSubview:button];

@@ -29,6 +29,10 @@
 
 @property(copy,nonatomic)NSString *positition;
 
+@property(copy,nonatomic)NSString *is_host;
+
+@property(copy,nonatomic)NSString *grouptitle;
+
 @property(strong,nonatomic)CommentContentModel *commen;
 
 @end

@@ -169,7 +169,9 @@
 -(void)getFollowlist
 {
     if (![SharedAppUtil defaultCommonUtil].bbsVO) {
-        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-2"];
+        [self.tableView.header endRefreshing];
+        [self.tableView.footer endRefreshing];
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-0"];
     }
     currentPageIdx ++;
     [CommonRemoteHelper RemoteWithUrl:URL_Get_followlist parameters: @{@"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
@@ -270,7 +272,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.type  == BBSType_1)
-        return 3;
+        return 5;
     return 1;
 }
 
@@ -281,12 +283,18 @@
         switch (section)
         {
             case 0:
-                return 3;
+                return 1;
                 break;
             case 1:
                 return 1;
                 break;
             case 2:
+                return 1;
+                break;
+            case 3:
+                return 1;
+                break;
+            case 4:
                 return postsArr.count;
                 break;
             default:
@@ -301,7 +309,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   if(indexPath.section == 1)
+   if(indexPath.section == 3)
        return (MTScreenW+30)/4;
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
@@ -310,7 +318,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (self.type  == BBSType_1)
-        return 8;
+        return 5;
     return 0;
 }
 
@@ -325,11 +333,10 @@
     
     if (self.type == BBSType_4 || self.type == BBSType_1)
     {
-        if (indexPath.section == 0)
+        if (indexPath.section < 3)
         {
             SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
-            [picCell setItemdata:recommendlist[indexPath.row]];
-            
+            [picCell setItemdata:self.type == BBSType_4  ? recommendlist[indexPath.row] :recommendlist[indexPath.section]];
             // 头像点击 进入个人信息界面
             picCell.portraitClick = ^(PostsModel *item)
             {
@@ -341,7 +348,7 @@
             
             cell = picCell;
         }
-        else if (indexPath.section == 1)
+        else if (indexPath.section == 3)
         {
             QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
             if (questiondata)
@@ -405,7 +412,9 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    if ((self.type == BBSType_1 && indexPath.section == 0) || self.type == BBSType_4)
+    if ((self.type == BBSType_1 && indexPath.section < 3) )
+        [view setItemdata:recommendlist[indexPath.section]];
+    else  if ( self.type == BBSType_4)
         [view setItemdata:recommendlist[indexPath.row]];
     else
         [view setItemdata:postsArr[indexPath.row]];
