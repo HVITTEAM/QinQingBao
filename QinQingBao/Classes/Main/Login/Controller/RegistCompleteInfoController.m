@@ -1,18 +1,30 @@
 //
-//  CompleteInfoController.m
+//  RegistCompleteInfoController.m
 //  QinQingBao
 //
 //  Created by 董徐维 on 16/9/26.
 //  Copyright © 2016年 董徐维. All rights reserved.
 //
 
-#import "CompleteInfoController.h"
+#import "RegistCompleteInfoController.h"
 #import "RSKImageCropper.h"
-
-@interface CompleteInfoController ()<RSKImageCropViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+#import "JPUSHService.h"
+#import "BBSUserModel.h"
+@interface RegistCompleteInfoController ()<RSKImageCropViewControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    float timesec;
+    
+    NSString *btnTitle;
+    
+    NSTimer *timer;
+}
+@property (strong, nonatomic) IBOutlet UITextField *telTextfield;
+@property (strong, nonatomic) IBOutlet UITextField *codeTextfield;
+@property (strong, nonatomic) IBOutlet UIButton *codeBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *headImg;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextfield;
 @property (strong, nonatomic) IBOutlet UIButton *btn;
+- (IBAction)codeClickHandler:(id)sender;
 //键盘高度
 @property(assign,nonatomic)CGFloat keyBoardH;
 @property (nonatomic, retain) UIImage *iconImg;
@@ -20,7 +32,7 @@
 
 @end
 
-@implementation CompleteInfoController
+@implementation RegistCompleteInfoController
 
 - (void)viewDidLoad
 {
@@ -85,7 +97,12 @@
 -(void)initView
 {
     self.title = @"完善资料";
-
+    self.view.backgroundColor = [UIColor colorWithRGB:@"F5F5F5"];
+    
+    self.nameTextfield.layer.borderWidth = 0;
+    self.codeTextfield.layer.borderWidth = 0;
+    self.telTextfield.layer.borderWidth = 0;
+    
     self.nameTextfield.leftViewMode = UITextFieldViewModeAlways;
     self.nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     UIView *View0 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 24)];
@@ -94,15 +111,42 @@
     [View0 addSubview:img0];
     self.nameTextfield.leftView = View0;
     
+    self.codeTextfield.leftViewMode = UITextFieldViewModeAlways;
+    self.codeTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    UIView *View1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 24)];
+    UIImageView *img1 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, 24, 24)];
+    img1.image =[UIImage imageNamed:@"code.png"];
+    [View1 addSubview:img1];
+    self.codeTextfield.leftView = View1;
+    
+    self.telTextfield.leftViewMode = UITextFieldViewModeAlways;
+    self.telTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    UIView *View2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 24)];
+    UIImageView *img2 = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, 24, 24)];
+    img2.image =[UIImage imageNamed:@"tel.png"];
+    [View2 addSubview:img2];
+    self.telTextfield.leftView = View2;
+    
     self.headImg.userInteractionEnabled=YES;
     self.headImg.layer.masksToBounds = YES;
-    self.headImg.layer.cornerRadius = self.headImg.width/2;
+    self.headImg.layer.cornerRadius = 45;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.headImg addGestureRecognizer:singleTap];
     
     self.btn.layer.masksToBounds = YES;
     self.btn.layer.cornerRadius = 8;
-
+    
+    self.codeBtn.layer.masksToBounds = YES;
+    [self.codeBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.codeBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    self.codeBtn.layer.borderWidth = 0.5;
+    self.codeBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.codeBtn.layer.cornerRadius = 12;
+    
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_icon] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        self.iconImg = image;
+    }];
+    self.nameTextfield.text = _nickname;
 }
 
 -(void)initNavgation
@@ -124,44 +168,7 @@
 
 - (IBAction)btnHandler:(id)sender
 {
-    NSString *str = [self.nameTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-    if (str.length > 15 || str.length < 2)
-    {
-        return [NoticeHelper AlertShow:@"昵称不能少于2个字，不能大于15个字" view:nil];
-    }
-    
-    if ( !self.iconImg)
-        return [NoticeHelper AlertShow:@"请选择头像" view:nil];
-    UIImage *slt = [self.iconImg scaleImageToSize:CGSizeMake(70,70)];
-    NSData *data = UIImageJPEGRepresentation(slt, 1);
-    
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper UploadPicWithUrl:URL_DiscuzRegisterFromCx
-                              parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
-                                            @"client" : @"ios",
-                                            @"truename" : str}
-                                    type:CommonRemoteTypePost  dataObj:data
-                                 success:^(NSDictionary *dict, id responseObject) {
-                                     [HUD removeFromSuperview];
-                                     
-                                     NSLog(@"%@",dict);
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                         [self loginBBS];
-                                     }
-                                     
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                 }];
+    [self regist];
 }
 
 // 登录bbs
@@ -179,7 +186,7 @@
                                          // 当目标系统不存在该用户的时候：  "errorMsg": "请激活论坛用户，输入用户名",
                                          if ([codeNum integerValue] == 18001)
                                          {
-                                            
+                                             
                                          }
                                          else
                                          {
@@ -199,6 +206,11 @@
                                          
                                          [SharedAppUtil defaultCommonUtil].bbsVO = bbsmodel;
                                          [ArchiverCacheHelper saveObjectToLoacl:bbsmodel key:BBSUser_Archiver_Key filePath:BBSUser_Archiver_Path];
+                                         
+                                         //是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
+                                         [MTNotificationCenter postNotificationName:MTReLogin object:nil];
+                                         [self dismissViewControllerAnimated:YES completion:nil];
+
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -291,6 +303,124 @@
 -(void)back
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+/**
+ *  获取验证码
+ */
+- (IBAction)codeClickHandler:(id)sender
+{
+    if (self.telTextfield.text.length != 11)
+        return [NoticeHelper AlertShow:@"请输入正确的手机号！" view:self.view];
+    [self.view endEditing:YES];
+    [[MTSMSHelper sharedInstance] getCheckcode:self.telTextfield.text];
+    [MTSMSHelper sharedInstance].sureSendSMS = ^{
+        [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
+        [self countdownHandler];
+    };
+}
+
+
+#pragma mark 倒计时模块
+
+/**
+ *  倒计时
+ */
+-(void)countdownHandler
+{
+    timesec = 60.0f;
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+}
+
+-(void)timerFireMethod:(NSTimer *)theTimer
+{
+    if (timesec == 1) {
+        [theTimer invalidate];
+        timesec = 60;
+        [self.codeBtn setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [self.codeBtn setTitleColor:HMColor(69, 134, 229) forState:UIControlStateNormal];
+        [self.codeBtn setEnabled:YES];
+    }else
+    {
+        timesec--;
+        NSString *title = [NSString stringWithFormat:@"%.f秒后重发",timesec];
+        [self.codeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [self.codeBtn setEnabled:NO];
+        [self.codeBtn setTitle:title forState:UIControlStateNormal];
+    }
+}
+
+-(void)registWithOpenid:(NSString *)openid login_type:(NSString *)login_type open_token:(NSString *)open_token nickname:(NSString *)nickname icon:(NSString *)icon
+{
+    _openid = openid;
+    _login_type = login_type;
+    _open_token = open_token;
+    _nickname = nickname;
+    _icon = icon;
+}
+
+/**
+ *  第三方登录成功调用后台接口注册账号
+ = */
+-(void)regist
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_LoginByother_new parameters: @{@"open_id" : self.openid,
+                                                                         @"login_type" : self.login_type,
+                                                                         @"open_token" : self.open_token,
+                                                                         @"client" : @"ios",
+                                                                         @"mobile":self.telTextfield.text,
+                                                                         @"code" :self.codeTextfield.text,
+                                                                         @"sys" : @"2"}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         if ([codeNum isEqualToString:@"11010"])
+                                         {
+                                             //清楚第三方的授权信息
+                                             [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
+                                             [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
+                                             [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                     }
+                                     else
+                                     {
+                                         [NoticeHelper AlertShow:@"登录成功！" view:self.view];
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         UserModel *vo = [UserModel objectWithKeyValues:di];
+                                         vo.logintype = self.login_type;
+                                         vo.member_mobile = self.telTextfield.text;
+                                         [self loginResultSetData:vo];
+                                     }
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [HUD removeFromSuperview];
+                                 }];
+    
+}
+
+/**
+ *  登录成功之后需要设置本地登录数据
+ *
+ *  @param uservo 用户信息model
+ */
+-(void)loginResultSetData:(UserModel *)uservo
+{
+    [SharedAppUtil defaultCommonUtil].userVO = uservo;
+    [ArchiverCacheHelper saveObjectToLoacl:uservo key:User_Archiver_Key filePath:User_Archiver_Path];
+    [self loginBBS];
+    //设置推送标签和别名
+    [JPUSHService setTags:nil alias: [NSString stringWithFormat:@"qqb%@",uservo.member_mobile] callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
 }
 
 @end

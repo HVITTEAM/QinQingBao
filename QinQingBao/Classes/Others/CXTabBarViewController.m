@@ -25,6 +25,7 @@
 
 #import "CXComposeViewController.h"
 #import "CompleteInfoController.h"
+#import "RegistCompleteInfoController.h"
 
 #import "BHBPopView.h"
 
@@ -183,7 +184,6 @@
         }];
     }
 }
-
 
 #pragma mark - NSNotification Center
 

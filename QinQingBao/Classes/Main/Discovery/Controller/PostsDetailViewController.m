@@ -324,10 +324,13 @@
 {
     NSString *HtmlString = [self touchBody];
     
+    CX_Log(@"开始加载html");
+
     NSString *tempPath = [[NSBundle mainBundle]pathForResource:@"temp" ofType:@"html"];
     
     NSString *tempHtml = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
-    
+    CX_Log(@"结束加载html");
+
     tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"{{Content_holder}}" withString:HtmlString];
     
     NSString *basePath = [[NSBundle mainBundle] bundlePath];
@@ -338,6 +341,7 @@
 
 - (NSString *)touchBody
 {
+    CX_Log(@"开始加载body");
     NSMutableString *body = [NSMutableString string];
     [body appendFormat:@"<div class=\"title\">%@</div>",self.detailData.subject];
     
@@ -372,6 +376,8 @@
         // 替换标记
         [body replaceOccurrencesOfString:detailImgModel.ref withString:imgHtml options:NSCaseInsensitiveSearch range:NSMakeRange(0, body.length)];
     }
+    CX_Log(@"结束加载body");
+
     return body;
 }
 
@@ -420,7 +426,7 @@
         [arr addObject:item.src];
     }
     
-    SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:[arr copy] currentIndex:currentIdx placeholderImageNmae:@"placeholderImage"];
+    SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:[arr copy] currentIndex:currentIdx placeholderImageNmae:@"advplaceholderImage"];
     [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
 }
 

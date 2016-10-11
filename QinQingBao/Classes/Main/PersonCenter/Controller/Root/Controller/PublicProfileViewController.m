@@ -175,6 +175,7 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat y = scrollView.contentOffset.y;
+    NSLog(@"%f",y);
     if (y <= -headHeight)
     {
         CGRect frame = self.headView.frame;
@@ -412,7 +413,12 @@
                                          
                                          LoginInHeadView *headView = (LoginInHeadView *)self.headView;
                                          NSURL *url = [NSURL URLWithString:personalInfo.avatar];
-                                         [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user"]];
+                                         
+                                         UIImageView *img = [[UIImageView alloc] init];
+                                         [img sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                             headView.userIcon.image = [image circleImage];
+                                         }];
+                                         
                                          [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];
                                          
                                          titleLabel.text = personalInfo.author;
