@@ -11,7 +11,6 @@
 #import "AbilityCell.h"
 #import "AuthenticateResultController.h"
 #import "ExpertModel.h"
-#import "JobSelectViewController.h"
 #import "JobSelectView.h"
 #import "RSKImageCropViewController.h"
 
@@ -20,13 +19,13 @@
 @property (strong, nonatomic) NSArray *dataProvider;
 
 @property (strong, nonatomic) NSArray *expertDatas;
-
+//当前操作的cell的NSIndexPath
 @property (strong, nonatomic) NSIndexPath *currentIdx;
-
+//选中的性别
 @property (strong, nonatomic) NSNumber *selectedSex;
-
+//选中的专家数据
 @property (strong, nonatomic) ExpertModel *selectedExpertModel;
-
+//选中的图片数据
 @property (strong, nonatomic) NSData *selectedPicData;
 
 @end
@@ -44,11 +43,11 @@
     self.navigationItem.title = @"申请专家认证";
 
     NSMutableDictionary *dict1 = [@{@"title" : @"",@"placeholder" : @"",@"text" : @"头像",@"value" : @"自己真实照片"}mutableCopy];
-    NSMutableDictionary *dict2 = [@{@"title" : @"修改姓名",@"placeholder" : @"请输入姓名",@"text" : @"姓名", @"value" : @"真实姓名"}mutableCopy];
-    NSMutableDictionary *dict3 = [@{@"title" : @"选择性别",@"placeholder" : @"",@"text" : @"性别", @"value" : @"请选择"}mutableCopy];
-    NSMutableDictionary *dict4 = [@{@"title" : @"修改身份证号",@"placeholder" : @"请输入身份证号",@"text" : @"身份证号", @"value" : @"请填写"}mutableCopy];
-    NSMutableDictionary *dict5 = [@{@"title" : @"修改所属单位",@"placeholder" : @"请输入所属单位",@"text" : @"所属单位", @"value" : @"请填写"}mutableCopy];
-    NSMutableDictionary *dict6 = [@{@"title" : @"选择职称",@"placeholder" : @"请输入职称",@"text" : @"职称", @"value" : @"请填写"}mutableCopy];
+    NSMutableDictionary *dict2 = [@{@"title" : @"修改姓名",@"placeholder" : @"请输入姓名",@"text" : @"姓名", @"value" : @""}mutableCopy];
+    NSMutableDictionary *dict3 = [@{@"title" : @"选择性别",@"placeholder" : @"请选择",@"text" : @"性别", @"value" : @""}mutableCopy];
+    NSMutableDictionary *dict4 = [@{@"title" : @"修改身份证号",@"placeholder" : @"请输入身份证号",@"text" : @"身份证号", @"value" : @""}mutableCopy];
+    NSMutableDictionary *dict5 = [@{@"title" : @"修改所属单位",@"placeholder" : @"请输入所属单位",@"text" : @"所属单位", @"value" : @""}mutableCopy];
+    NSMutableDictionary *dict6 = [@{@"title" : @"选择职称",@"placeholder" : @"请输入职称",@"text" : @"职称", @"value" : @""}mutableCopy];
     NSMutableDictionary *dict7 = [@{@"title" : @"",@"placeholder" : @"请填写",@"text" : @"擅长领域", @"value" : @""}mutableCopy];
     
     
@@ -117,6 +116,7 @@
             imageView.width = 50;
             imageView.height = 50;
             imageView.layer.cornerRadius = imageView.height/2;
+            imageView.backgroundColor = HMColor(230, 230, 230);
             imageView.layer.masksToBounds = YES;
             portraitCell.accessoryView = imageView;
             portraitCell.detailTextLabel.numberOfLines = 0;
@@ -126,7 +126,6 @@
         portraitCell.textLabel.text = [dict objectForKey:@"text"];
         portraitCell.detailTextLabel.text = [NSString stringWithFormat:@"\n%@",[dict objectForKey:@"value"]];
         UIImageView *img = (UIImageView *)portraitCell.accessoryView;
-        img.backgroundColor = [UIColor lightTextColor];
         img.image = [UIImage imageWithData:self.selectedPicData];
 
         cell = portraitCell;
@@ -148,7 +147,9 @@
         
         NSDictionary *dict = self.dataProvider[indexPath.section][indexPath.row];
         otherCell.textLabel.text = [dict objectForKey:@"text"];
-        otherCell.detailTextLabel.text = [dict objectForKey:@"value"];
+        
+        NSString *valueStr = dict[@"value"];
+        otherCell.detailTextLabel.text = valueStr.length>0?valueStr:dict[@"placeholder"];
         
         cell = otherCell;
     }
@@ -365,6 +366,24 @@
         return;
     }
     
+    //判断字段是否为空
+    for (int i = 0; i < self.dataProvider.count; i++) {
+        NSMutableArray *temps =  self.dataProvider[i];
+        for (int j = 0; j < temps.count ; j++) {
+           NSString *valuesStr =  temps[j][@"value"];
+            if (valuesStr.length <=0) {
+                [NoticeHelper AlertShow:[NSString stringWithFormat:@"%@不能为空",temps[j][@"text"]] view:nil];
+                return;
+            }
+        }
+    }
+    
+    //判断头像是否为空
+    if (self.selectedPicData.length <= 0) {
+        [NoticeHelper AlertShow:@"头像不能为空" view:nil];
+        return;
+    }
+    
     NSMutableDictionary *params = [@{
                                      @"uid":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
                                      @"client":@"ios",
@@ -376,26 +395,28 @@
     params[@"identity_card"] = self.dataProvider[1][2][@"value"];
     params[@"company"] = self.dataProvider[2][0][@"value"];
     params[@"skilled_field"] = self.dataProvider[2][2][@"value"];
-//    params[@"Filedata"] = @"";
     params[@"sys"] = @4;
     
-    NSMutableDictionary *picInfoDict = [[NSMutableDictionary alloc] init];
-    picInfoDict[@"fileData"] = self.selectedPicData;
-    picInfoDict[@"name"] = @"Filedata";
-    picInfoDict[@"fileName"] = @"img.png";
-    picInfoDict[@"mimeType"] = @"image/png";
-    
+    //创建图片数据
+    NSDictionary *picInfoDict = @{
+                                  @"fileData" : self.selectedPicData,
+                                  @"name" : @"Filedata",
+                                  @"fileName" : @"expertImg.png",
+                                  @"mimeType" : @"image/png"
+                                };
+   
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper UploadPicWithUrl:URL_expert_apply parameters:params images:@[picInfoDict] success:^(NSDictionary *dict, id responseObject) {
         [HUD removeFromSuperview];
         AuthenticateResultController *resultVC = [[AuthenticateResultController alloc] init];
         if([[dict objectForKey:@"code"] integerValue] > 0){
             resultVC.isSuccess = NO;
+            resultVC.msg = @"抱歉,您的认证未通过!";
             resultVC.reason = dict[@"errorMsg"];
             
         }else{
-            resultVC.isSuccess = NO;
-            
+            resultVC.isSuccess = YES;
+            resultVC.msg = dict[@"datas"][@"message"];
         }
         
         [self.navigationController pushViewController:resultVC animated:YES];

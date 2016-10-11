@@ -24,4 +24,6 @@
 
 @property(copy,nonatomic)NSString *avatar;
 
+@property(copy,nonatomic)NSString *no_read;
+
 @end

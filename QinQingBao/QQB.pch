@@ -841,6 +841,9 @@
 /***私信 - 清除个人私信记录*/
 #define URL_Delete_chatlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_chatlist.php",URL_Local_New]
 
+/***帖子 - 增加帖子热度*/
+#define URL_Addheats [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/addheats.php",URL_Local_New]
+
 /***专家认证 - 提交申请*/
 #define URL_expert_apply [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/expert_apply.php",URL_Local_New]
 

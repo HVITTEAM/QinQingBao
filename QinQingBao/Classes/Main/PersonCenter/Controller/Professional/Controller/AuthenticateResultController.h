@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) NSString *reason;
 
+@property (strong, nonatomic) NSString *msg;
+
 @property (assign, nonatomic) BOOL isSuccess;
 
 @end

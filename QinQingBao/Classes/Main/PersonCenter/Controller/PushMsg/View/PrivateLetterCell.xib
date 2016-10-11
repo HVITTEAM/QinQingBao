@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,46 +12,63 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
+                <frame key="frameInset" width="320" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Taq-tS-igv">
-                        <rect key="frame" x="70" y="34.5" width="240" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-2t-QGD">
-                        <rect key="frame" x="15" y="12.5" width="40" height="40"/>
-                        <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.7359138257575758" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="2tT-Tm-JSy"/>
                             <constraint firstAttribute="height" constant="40" id="G7d-VO-KwM"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ov-sv-0nr">
-                        <rect key="frame" x="70" y="12.5" width="37.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_badge" translatesAutoresizingMaskIntoConstraints="NO" id="Uss-EV-QbT">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="2uW-Pp-NWw"/>
+                            <constraint firstAttribute="width" constant="15" id="3u5-Y9-Dga"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlj-go-CVu">
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="Uss-EV-QbT" firstAttribute="leading" secondItem="rdS-2t-QGD" secondAttribute="trailing" constant="-7" id="2iR-ln-wYk"/>
                     <constraint firstAttribute="trailing" secondItem="Taq-tS-igv" secondAttribute="trailing" constant="10" id="Jwf-JH-Qpj"/>
                     <constraint firstItem="rdS-2t-QGD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KFz-Tg-2JY"/>
                     <constraint firstItem="Taq-tS-igv" firstAttribute="leading" secondItem="4Ov-sv-0nr" secondAttribute="leading" id="RvG-vp-Ktt"/>
+                    <constraint firstItem="Zlj-go-CVu" firstAttribute="centerY" secondItem="4Ov-sv-0nr" secondAttribute="centerY" id="SSl-C8-P6w"/>
                     <constraint firstItem="4Ov-sv-0nr" firstAttribute="top" secondItem="rdS-2t-QGD" secondAttribute="top" id="eJe-Dz-JVb"/>
                     <constraint firstItem="Taq-tS-igv" firstAttribute="bottom" secondItem="rdS-2t-QGD" secondAttribute="bottom" id="ix8-YK-y6L"/>
+                    <constraint firstAttribute="trailing" secondItem="Zlj-go-CVu" secondAttribute="trailing" constant="15" id="lhF-9c-5zu"/>
                     <constraint firstItem="rdS-2t-QGD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="mFz-bS-2rT"/>
                     <constraint firstItem="4Ov-sv-0nr" firstAttribute="leading" secondItem="rdS-2t-QGD" secondAttribute="trailing" constant="15" id="nZH-l7-Qab"/>
+                    <constraint firstItem="Uss-EV-QbT" firstAttribute="centerY" secondItem="rdS-2t-QGD" secondAttribute="centerY" constant="-10" id="ysO-Je-nGC"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="contentLb" destination="Taq-tS-igv" id="nKR-GR-IJa"/>
                 <outlet property="iconView" destination="rdS-2t-QGD" id="JoA-T0-IHC"/>
+                <outlet property="noReadIcon" destination="Uss-EV-QbT" id="6ZG-bR-UAJ"/>
+                <outlet property="timeLb" destination="Zlj-go-CVu" id="NVS-sw-BtY"/>
                 <outlet property="titleLb" destination="4Ov-sv-0nr" id="nPu-Zg-qyF"/>
             </connections>
-            <point key="canvasLocation" x="291" y="267.5"/>
+            <point key="canvasLocation" x="230" y="195"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="main_badge" width="19" height="19"/>
+    </resources>
 </document>

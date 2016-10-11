@@ -102,7 +102,7 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"Msg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
         }
         else

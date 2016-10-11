@@ -1172,7 +1172,6 @@
 		D23B0C801DAB61180032AFE2 /* AuthenticateResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C7E1DAB61180032AFE2 /* AuthenticateResultController.m */; };
 		D23B0C811DAB61180032AFE2 /* AuthenticateResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */; };
 		D23B0C841DAB714E0032AFE2 /* ExpertModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C831DAB714E0032AFE2 /* ExpertModel.m */; };
-		D23B0C8A1DAB796D0032AFE2 /* JobSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */; };
 		D23B0C8D1DAB7F0B0032AFE2 /* JobSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C8C1DAB7F0B0032AFE2 /* JobSelectView.m */; };
 		D23BCD971D5C4FCF0091D440 /* ExamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D23BCD951D5C4FCF0091D440 /* ExamCell.m */; };
 		D23BCD981D5C4FCF0091D440 /* ExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BCD961D5C4FCF0091D440 /* ExamCell.xib */; };
@@ -3328,8 +3327,6 @@
 		D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticateResultController.xib; sourceTree = "<group>"; };
 		D23B0C821DAB714E0032AFE2 /* ExpertModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpertModel.h; sourceTree = "<group>"; };
 		D23B0C831DAB714E0032AFE2 /* ExpertModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertModel.m; sourceTree = "<group>"; };
-		D23B0C881DAB796D0032AFE2 /* JobSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSelectViewController.h; sourceTree = "<group>"; };
-		D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSelectViewController.m; sourceTree = "<group>"; };
 		D23B0C8B1DAB7F0B0032AFE2 /* JobSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSelectView.h; sourceTree = "<group>"; };
 		D23B0C8C1DAB7F0B0032AFE2 /* JobSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSelectView.m; sourceTree = "<group>"; };
 		D23BCD941D5C4FCF0091D440 /* ExamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamCell.h; sourceTree = "<group>"; };
@@ -8730,8 +8727,6 @@
 				D23B0C7D1DAB61180032AFE2 /* AuthenticateResultController.h */,
 				D23B0C7E1DAB61180032AFE2 /* AuthenticateResultController.m */,
 				D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */,
-				D23B0C881DAB796D0032AFE2 /* JobSelectViewController.h */,
-				D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -8822,7 +8817,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9709,7 +9704,6 @@
 				01F6DBC51D8E76D000300679 /* PostsDetailViewController.m in Sources */,
 				01ECDAF41C8EB31F0018160F /* UIImage+EMGIF.m in Sources */,
 				015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */,
-				D23B0C8A1DAB796D0032AFE2 /* JobSelectViewController.m in Sources */,
 				01EA81741CE1757B00398FEC /* HealthServicesController.m in Sources */,
 				016EDF081D9D03AB0054949F /* SDPhotoBrowser.m in Sources */,
 				013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */,
@@ -10266,7 +10260,7 @@
 				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10321,7 +10315,7 @@
 				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

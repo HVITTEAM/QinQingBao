@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthenticateResultController">
@@ -18,26 +19,23 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请失败" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cW4-0L-G7y">
-                    <rect key="frame" x="132" y="262" width="56" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jS1-9P-uIn">
-                    <rect key="frame" x="75" y="289" width="168.5" height="27"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="理由:您提交的资料不真实" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9p-Ud-KFZ">
-                            <rect key="frame" x="5" y="5" width="158.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.77647058823529413" green="0.61176470588235299" blue="0.42745098039215684" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.77647058823529413" green="0.61176470588235299" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.99215686274509807" green="0.97647058823529409" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.99215686274509807" green="0.97647058823529409" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="m9p-Ud-KFZ" secondAttribute="trailing" constant="5" id="BV2-mS-fUU"/>
                         <constraint firstItem="m9p-Ud-KFZ" firstAttribute="leading" secondItem="jS1-9P-uIn" secondAttribute="leading" constant="5" id="cm8-Op-5Cb"/>
@@ -46,42 +44,38 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2a-vc-Y8I">
-                    <rect key="frame" x="80" y="336" width="160" height="40"/>
-                    <color key="backgroundColor" red="0.56862745098039214" green="0.70980392156862748" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="2Qy-ln-S9d"/>
                         <constraint firstAttribute="width" constant="160" id="hq6-jJ-EzC"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="重新申请">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.56862745098039214" green="0.70980392156862748" blue="0.1764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="ReApplyAction:" destination="-1" eventType="touchUpInside" id="DHy-Wz-sQA"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o7R-RS-uPI">
-                    <rect key="frame" x="110" y="142" width="100" height="100"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="3zr-vX-fQq"/>
                         <constraint firstAttribute="width" constant="100" id="iAB-e4-qQs"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="jS1-9P-uIn" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="E8i-4X-JVq"/>
-                <constraint firstItem="o7R-RS-uPI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" multiplier="0.25" id="OBF-BA-QkG"/>
+                <constraint firstItem="o7R-RS-uPI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" multiplier="0.23" id="OBF-BA-QkG"/>
                 <constraint firstItem="cW4-0L-G7y" firstAttribute="top" secondItem="o7R-RS-uPI" secondAttribute="bottom" constant="20" id="UPm-iE-xP2"/>
-                <constraint firstItem="k2a-vc-Y8I" firstAttribute="top" secondItem="jS1-9P-uIn" secondAttribute="bottom" constant="20" id="UxI-is-aF2"/>
+                <constraint firstItem="k2a-vc-Y8I" firstAttribute="top" secondItem="jS1-9P-uIn" secondAttribute="bottom" constant="30" id="UxI-is-aF2"/>
                 <constraint firstItem="o7R-RS-uPI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aCL-SY-Req"/>
                 <constraint firstItem="k2a-vc-Y8I" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="c4g-jy-HLo"/>
                 <constraint firstItem="cW4-0L-G7y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ogM-ps-0YQ"/>
                 <constraint firstItem="jS1-9P-uIn" firstAttribute="top" secondItem="cW4-0L-G7y" secondAttribute="bottom" constant="10" id="rMg-7H-3cp"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="243" y="285"/>
+            <point key="canvasLocation" x="233" y="155"/>
         </view>
     </objects>
 </document>

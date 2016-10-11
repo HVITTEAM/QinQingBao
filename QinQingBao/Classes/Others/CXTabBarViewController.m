@@ -159,7 +159,7 @@
 {
     if ([SharedAppUtil checkLoginStates])
     {
-        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
+        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/liver_curing_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"肝脏养护"] andSelectBlock:^(BHBItem *item) {
             // 弹出发微博控制器
             CXComposeViewController *compose = [[CXComposeViewController alloc] init];
             if ([item.title isEqualToString:@"健康资讯"])
@@ -174,7 +174,7 @@
             {
                 compose.fid = 41;
             }
-            else if ([item.title isEqualToString:@"减肥瘦身"])
+            else if ([item.title isEqualToString:@"肝脏养护"])
             {
                 compose.fid = 42;
             }

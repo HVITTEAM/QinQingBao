@@ -27,5 +27,6 @@
 
 @property(copy,nonatomic)NSString *count_article;
 
+@property(copy,nonatomic)NSString *expert_status;
 
 @end

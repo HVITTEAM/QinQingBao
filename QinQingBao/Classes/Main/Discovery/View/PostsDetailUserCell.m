@@ -71,7 +71,14 @@
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.postsDetailData.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = postsDetailData.author;
-    self.tagLb.text = [NSString stringWithFormat:@"%@ ",postsDetailData.grouptitle];
+    
+    if (postsDetailData.grouptitle.length > 0) {
+        self.tagLb.hidden = NO;
+        self.tagLb.text = [NSString stringWithFormat:@"%@ ",postsDetailData.grouptitle];
+    }else{
+        self.tagLb.hidden = YES;
+    }
+    
     if ([postsDetailData.is_home_friend isEqualToString:@"0"]) {
         [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
     }else{

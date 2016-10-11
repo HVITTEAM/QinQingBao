@@ -13,7 +13,8 @@
 + (NSDictionary *)replacedKeyFromPropertyName
 {
     return @{
-             @"isnew":@"new"
+             @"isnew":@"new",
+             @"no_read":@"new_read"
              };
 }
 

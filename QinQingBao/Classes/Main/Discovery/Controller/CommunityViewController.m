@@ -307,7 +307,9 @@
     __weak typeof(self) weakSelf = self;
     PostsDetailViewController *postsDetailVC = [[PostsDetailViewController alloc] init];
     PostsModel *postsModel;
-    if (self.isAllData) {
+    if (indexPath.section == 0) {
+        postsModel = self.zdPosts[indexPath.row];
+    }else if (self.isAllData) {
         postsModel = self.allPosts[indexPath.row];
     }else{
         postsModel = self.hotPosts[indexPath.row];
@@ -436,13 +438,15 @@
         [self.tableView.footer endRefreshing];
         
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            if (![type isEqual:@2]) {//置顶数据
+                [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            }
             return;
         }
     
         NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         if (datas.count > 0) {
-            if ([type isEqual:@1]) {//所有数据
+            if ([type isEqual:@1]) {//热门数据
                 [self.hotPosts addObjectsFromArray:datas];
                 self.hotPageNum++;
             }else if ([type isEqual:@2]){ //置顶数据
@@ -530,7 +534,7 @@
 {
     if ([SharedAppUtil checkLoginStates])
     {
-        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/reduceWeight_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"减肥瘦身"] andSelectBlock:^(BHBItem *item) {
+        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/liver_curing_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"肝脏养护"] andSelectBlock:^(BHBItem *item) {
             // 弹出发微博控制器
             CXComposeViewController *compose = [[CXComposeViewController alloc] init];
             if ([item.title isEqualToString:@"健康资讯"])
@@ -545,7 +549,7 @@
             {
                 compose.fid = 41;
             }
-            else if ([item.title isEqualToString:@"减肥瘦身"])
+            else if ([item.title isEqualToString:@"肝脏养护"])
             {
                 compose.fid = 42;
             }

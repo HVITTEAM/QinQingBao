@@ -16,6 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLb;
 
+@property (weak, nonatomic) IBOutlet UILabel *timeLb;
+
+@property (weak, nonatomic) IBOutlet UIImageView *noReadIcon;
+
 @end
 
 @implementation PrivateLetterCell
@@ -35,15 +39,25 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.iconView.layer.cornerRadius = self.iconView.width / 2;
+    self.iconView.layer.cornerRadius = 40 / 2;
     self.iconView.layer.masksToBounds = YES;
 }
 
 - (void)setItem:(AllpriletterModel *)item
 {
+    _item = item;
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:item.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     self.titleLb.text = item.author;
     self.contentLb.text = item.message;
+    
+    self.timeLb.text = [item.lastdateline substringWithRange:NSMakeRange(0, 16)];
+    
+    if (item.no_read.length > 0 && ![item.no_read isEqualToString:@"0"]) {
+        self.noReadIcon.hidden = NO;
+    }else{
+        self.noReadIcon.hidden = YES;
+    }
+    
 }
 
 @end

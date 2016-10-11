@@ -109,6 +109,8 @@
     if (self.selectCompleteCallBack) {
         self.selectCompleteCallBack(model);
     }
+    
+    [self hideView];
 }
 
 - (void)hideView

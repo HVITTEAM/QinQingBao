@@ -12,6 +12,7 @@
 #import "RSKImageCropper.h"
 #import "AddressController.h"
 #import "AuthenticateViewController.h"
+#import "BBSPersonalModel.h"
 
 @interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -20,6 +21,8 @@
 @property (nonatomic,retain) UIDatePicker* datePicker;
 
 @property(assign,nonatomic)BOOL tapLoginOutButton;      //是否点击了退出按钮
+
+@property (strong, nonatomic) BBSPersonalModel *personalInfo;
 
 @end
 
@@ -60,12 +63,14 @@
                           @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : @"正在获取"}
                           ],
                         @[
-                          @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未通过"},
+                          @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @""},
                           @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
                           ],nil];
     }
     
     [self getDataProvider];
+    
+    [self getUserFannum];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -189,10 +194,10 @@
         contentcell.textLabel.text = [dict objectForKey:@"text"];
         contentcell.detailTextLabel.text = [dict objectForKey:@"value"];
         
-        if ([[dict objectForKey:@"value"] isEqualToString:@"已通过"]) {
-            contentcell.detailTextLabel.textColor = HMColor(98, 204, 116);
-        }else if ([[dict objectForKey:@"value"] isEqualToString:@"未通过"]){
+        if ([[dict objectForKey:@"value"] isEqualToString:@"未通过"]) {
             contentcell.detailTextLabel.textColor = HMColor(241, 90, 36);
+        }else if ([[dict objectForKey:@"value"] isEqualToString:@"已通过"]){
+            contentcell.detailTextLabel.textColor = HMColor(145, 181, 45);
         }else{
             contentcell.detailTextLabel.textColor = [UIColor lightGrayColor];
         }
@@ -439,6 +444,18 @@
 -(void)setDataProvider
 {
     NSString *sexStr = [infoVO.member_sex  isEqual: @"1"] ? @"男" : [infoVO.member_sex  isEqual: @"2"] ? @"女" : @"保密";
+    
+    NSString *expert_status = nil;
+    if (self.personalInfo.expert_status.length <= 0 || [self.personalInfo.expert_status isEqualToString:@"0"]) {
+        expert_status = @"未申请";
+    }else if ([self.personalInfo.expert_status isEqualToString:@"1"]){
+        expert_status = @"已申请";
+    }else if ([self.personalInfo.expert_status isEqualToString:@"2"]){
+        expert_status = @"已通过";
+    }else{
+        expert_status = @"未通过";
+    }
+
     dataProvider = [[NSMutableArray alloc] initWithObjects:
                     @[
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : infoVO.member_avatar.length > 0 ? @"" : @"未上传"},
@@ -452,7 +469,7 @@
                       @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"}
                       ],
                     @[
-                      @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @"未申请"},
+                      @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : expert_status},
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"修改密码", @"value" : @""},
                       ],nil];
     
@@ -508,6 +525,39 @@
                                      [self.view endEditing:YES];
                                  }];
 }
+
+/**
+ *  获取BBS账号信息
+ */
+-(void)getUserFannum
+{
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return;
+    if (![SharedAppUtil defaultCommonUtil].bbsVO)
+        return;
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
+                                                                           @"client" : @"ios",
+                                                                           @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum integerValue] > 0)
+                                     {
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                     }
+                                     else
+                                     {
+                                         self.personalInfo = [BBSPersonalModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         
+                                         [self setDataProvider];
+                                         
+                                         [self.tableView reloadData];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
 
 #pragma mark --- DatePicker
 -(void)setDatePicker

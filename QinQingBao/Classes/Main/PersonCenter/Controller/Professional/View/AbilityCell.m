@@ -36,7 +36,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    self.contentTextView.layer.borderColor = HMColor(204, 204, 204).CGColor;
+    self.contentTextView.layer.borderColor = HMColor(230, 230, 230).CGColor;
     self.contentTextView.layer.borderWidth = 1.0f;
 }
 
