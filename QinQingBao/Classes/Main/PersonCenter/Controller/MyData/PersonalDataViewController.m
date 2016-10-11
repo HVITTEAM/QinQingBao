@@ -11,6 +11,7 @@
 #import "TextFieldViewController.h"
 #import "RSKImageCropper.h"
 #import "AddressController.h"
+#import "AuthenticateViewController.h"
 
 @interface PersonalDataViewController ()<RSKImageCropViewControllerDelegate,UIAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -260,7 +261,9 @@
 
         
     }else if (indexPath.section == 2 && indexPath.row == 0){
-        NSLog(@"专家认证");
+        AuthenticateViewController *authenticateVC = [[AuthenticateViewController alloc] init];
+        authenticateVC.infoVO = infoVO;
+        [self.navigationController pushViewController:authenticateVC animated:YES];
         
     }else if (indexPath.section == 2 && indexPath.row == 1){
         ChangePwdViewController *updateView = [[ChangePwdViewController alloc]init];

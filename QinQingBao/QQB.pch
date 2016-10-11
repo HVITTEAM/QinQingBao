@@ -841,6 +841,11 @@
 /***私信 - 清除个人私信记录*/
 #define URL_Delete_chatlist [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/delete_chatlist.php",URL_Local_New]
 
+/***专家认证 - 提交申请*/
+#define URL_expert_apply [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/expert_apply.php",URL_Local_New]
+
+/***专家认证 - 获取专家列表*/
+#define URL_Get_expert_list [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/expert_list.php",URL_Local_New]
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

@@ -1164,6 +1164,15 @@
 		D2319F351D4B26EB00470F71 /* AdviseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2319F341D4B26EB00470F71 /* AdviseModel.m */; };
 		D239DE771D332FD5005C994C /* ServiceInfoEmailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */; };
 		D239DE781D332FD5005C994C /* ServiceInfoEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */; };
+		D23B0C711DAB242A0032AFE2 /* AuthenticateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C701DAB242A0032AFE2 /* AuthenticateViewController.m */; };
+		D23B0C741DAB2EFB0032AFE2 /* InputFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C731DAB2EFB0032AFE2 /* InputFieldViewController.m */; };
+		D23B0C7B1DAB40480032AFE2 /* AbilityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C791DAB40480032AFE2 /* AbilityCell.m */; };
+		D23B0C7C1DAB40480032AFE2 /* AbilityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23B0C7A1DAB40480032AFE2 /* AbilityCell.xib */; };
+		D23B0C801DAB61180032AFE2 /* AuthenticateResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C7E1DAB61180032AFE2 /* AuthenticateResultController.m */; };
+		D23B0C811DAB61180032AFE2 /* AuthenticateResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */; };
+		D23B0C841DAB714E0032AFE2 /* ExpertModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C831DAB714E0032AFE2 /* ExpertModel.m */; };
+		D23B0C8A1DAB796D0032AFE2 /* JobSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */; };
+		D23B0C8D1DAB7F0B0032AFE2 /* JobSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = D23B0C8C1DAB7F0B0032AFE2 /* JobSelectView.m */; };
 		D23BCD971D5C4FCF0091D440 /* ExamCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D23BCD951D5C4FCF0091D440 /* ExamCell.m */; };
 		D23BCD981D5C4FCF0091D440 /* ExamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D23BCD961D5C4FCF0091D440 /* ExamCell.xib */; };
 		D2405B581D669465009348FD /* InfoValue1Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2405B561D669465009348FD /* InfoValue1Cell.m */; };
@@ -3305,6 +3314,22 @@
 		D239DE741D332FD5005C994C /* ServiceInfoEmailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceInfoEmailCell.h; sourceTree = "<group>"; };
 		D239DE751D332FD5005C994C /* ServiceInfoEmailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceInfoEmailCell.m; sourceTree = "<group>"; };
 		D239DE761D332FD5005C994C /* ServiceInfoEmailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceInfoEmailCell.xib; sourceTree = "<group>"; };
+		D23B0C6F1DAB242A0032AFE2 /* AuthenticateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticateViewController.h; sourceTree = "<group>"; };
+		D23B0C701DAB242A0032AFE2 /* AuthenticateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticateViewController.m; sourceTree = "<group>"; };
+		D23B0C721DAB2EFB0032AFE2 /* InputFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputFieldViewController.h; sourceTree = "<group>"; };
+		D23B0C731DAB2EFB0032AFE2 /* InputFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputFieldViewController.m; sourceTree = "<group>"; };
+		D23B0C781DAB40480032AFE2 /* AbilityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbilityCell.h; sourceTree = "<group>"; };
+		D23B0C791DAB40480032AFE2 /* AbilityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbilityCell.m; sourceTree = "<group>"; };
+		D23B0C7A1DAB40480032AFE2 /* AbilityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AbilityCell.xib; sourceTree = "<group>"; };
+		D23B0C7D1DAB61180032AFE2 /* AuthenticateResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticateResultController.h; sourceTree = "<group>"; };
+		D23B0C7E1DAB61180032AFE2 /* AuthenticateResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticateResultController.m; sourceTree = "<group>"; };
+		D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthenticateResultController.xib; sourceTree = "<group>"; };
+		D23B0C821DAB714E0032AFE2 /* ExpertModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpertModel.h; sourceTree = "<group>"; };
+		D23B0C831DAB714E0032AFE2 /* ExpertModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertModel.m; sourceTree = "<group>"; };
+		D23B0C881DAB796D0032AFE2 /* JobSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSelectViewController.h; sourceTree = "<group>"; };
+		D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSelectViewController.m; sourceTree = "<group>"; };
+		D23B0C8B1DAB7F0B0032AFE2 /* JobSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobSelectView.h; sourceTree = "<group>"; };
+		D23B0C8C1DAB7F0B0032AFE2 /* JobSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobSelectView.m; sourceTree = "<group>"; };
 		D23BCD941D5C4FCF0091D440 /* ExamCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExamCell.h; sourceTree = "<group>"; };
 		D23BCD951D5C4FCF0091D440 /* ExamCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExamCell.m; sourceTree = "<group>"; };
 		D23BCD961D5C4FCF0091D440 /* ExamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExamCell.xib; sourceTree = "<group>"; };
@@ -7531,6 +7556,7 @@
 		01ECDF9E1B7C3EBF00665D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D23B0C6A1DAB22900032AFE2 /* Professional */,
 				0174AD871D853752001D0697 /* Send */,
 				D208E8541D48A22E007B7AD4 /* MyQuestionnaires */,
 				01601D611CE08E9600B3712E /* Root */,
@@ -8681,6 +8707,53 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D23B0C6A1DAB22900032AFE2 /* Professional */ = {
+			isa = PBXGroup;
+			children = (
+				D23B0C6C1DAB22DA0032AFE2 /* Controller */,
+				D23B0C6D1DAB22DA0032AFE2 /* Model */,
+				D23B0C6E1DAB22DA0032AFE2 /* View */,
+			);
+			path = Professional;
+			sourceTree = "<group>";
+		};
+		D23B0C6C1DAB22DA0032AFE2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D23B0C6F1DAB242A0032AFE2 /* AuthenticateViewController.h */,
+				D23B0C701DAB242A0032AFE2 /* AuthenticateViewController.m */,
+				D23B0C721DAB2EFB0032AFE2 /* InputFieldViewController.h */,
+				D23B0C731DAB2EFB0032AFE2 /* InputFieldViewController.m */,
+				D23B0C7D1DAB61180032AFE2 /* AuthenticateResultController.h */,
+				D23B0C7E1DAB61180032AFE2 /* AuthenticateResultController.m */,
+				D23B0C7F1DAB61180032AFE2 /* AuthenticateResultController.xib */,
+				D23B0C881DAB796D0032AFE2 /* JobSelectViewController.h */,
+				D23B0C891DAB796D0032AFE2 /* JobSelectViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D23B0C6D1DAB22DA0032AFE2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D23B0C821DAB714E0032AFE2 /* ExpertModel.h */,
+				D23B0C831DAB714E0032AFE2 /* ExpertModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D23B0C6E1DAB22DA0032AFE2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D23B0C781DAB40480032AFE2 /* AbilityCell.h */,
+				D23B0C791DAB40480032AFE2 /* AbilityCell.m */,
+				D23B0C7A1DAB40480032AFE2 /* AbilityCell.xib */,
+				D23B0C8B1DAB7F0B0032AFE2 /* JobSelectView.h */,
+				D23B0C8C1DAB7F0B0032AFE2 /* JobSelectView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D279D9FD1B8709FD00E7CDDF /* UUChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -8919,6 +8992,7 @@
 				01ECDA381C8EB31F0018160F /* call_out.png in Resources */,
 				01EA206A1C2A705100B546A9 /* OrderResultViewController.xib in Resources */,
 				01EF372A1C59B8CD0029C1C5 /* HouseTypeCell.xib in Resources */,
+				D23B0C811DAB61180032AFE2 /* AuthenticateResultController.xib in Resources */,
 				01ECDA821C8EB31F0018160F /* Contents.json in Resources */,
 				0177DA831D5D6303008D5C95 /* QuestionThreeController.xib in Resources */,
 				01ECDA9A1C8EB31F0018160F /* chatBar_colorMore_photoSelected@2x.png in Resources */,
@@ -8949,6 +9023,7 @@
 				01F07A821D92186B00E75B0B /* BBSRelationCell.xib in Resources */,
 				01ECDABE1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA6B1C8EB31F0018160F /* imageDownloadFail@2x.png in Resources */,
+				D23B0C7C1DAB40480032AFE2 /* AbilityCell.xib in Resources */,
 				01601D531CE08DE500B3712E /* EvaluationController.xib in Resources */,
 				01ECDABC1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA471C8EB31F0018160F /* Contents.json in Resources */,
@@ -9538,6 +9613,7 @@
 				013FE9E51D813CF70079AFDE /* PostsTableViewController.m in Sources */,
 				01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */,
 				01FBF0EF1BCBB25E00CA285C /* ServiceTypeModel.m in Sources */,
+				D23B0C711DAB242A0032AFE2 /* AuthenticateViewController.m in Sources */,
 				01ECDAEC1C8EB31F0018160F /* EMSDWebImageDecoder.m in Sources */,
 				018BC5C41C4F7D8400C883FF /* GevalModelTotal.m in Sources */,
 				01E690861BCCF6AA00A17543 /* UIBarButtonItem+WEPopover.m in Sources */,
@@ -9587,6 +9663,7 @@
 				01EBD3C81C853FA6009236FA /* RefundCellBottom.m in Sources */,
 				01EFD3061C56028300BDA640 /* BodyCell.m in Sources */,
 				01ECDB061C8EB31F0018160F /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
+				D23B0C8D1DAB7F0B0032AFE2 /* JobSelectView.m in Sources */,
 				01FF8F541CDAD85A0089BBC4 /* CXHomeViewController.m in Sources */,
 				01ECDAF71C8EB31F0018160F /* UIImageView+EMHighlightedWebCache.m in Sources */,
 				01601D941CE0900200B3712E /* EvaluateCell.m in Sources */,
@@ -9628,6 +9705,7 @@
 				01F6DBC51D8E76D000300679 /* PostsDetailViewController.m in Sources */,
 				01ECDAF41C8EB31F0018160F /* UIImage+EMGIF.m in Sources */,
 				015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */,
+				D23B0C8A1DAB796D0032AFE2 /* JobSelectViewController.m in Sources */,
 				01EA81741CE1757B00398FEC /* HealthServicesController.m in Sources */,
 				016EDF081D9D03AB0054949F /* SDPhotoBrowser.m in Sources */,
 				013F3F1B1BFC53A000FF39E5 /* MJDIYBackFooter.m in Sources */,
@@ -9722,6 +9800,7 @@
 				0181B1A81CDC958D00A1435E /* BalanceModel.m in Sources */,
 				D257C4A21D65B952002D18F5 /* TextTwoCell.m in Sources */,
 				011076F51C3E8802001E5C51 /* UIScrollView+Drag.m in Sources */,
+				D23B0C7B1DAB40480032AFE2 /* AbilityCell.m in Sources */,
 				01EA20731C2A99D600B546A9 /* HomePicModel.m in Sources */,
 				01E9C4921C53284300A77579 /* EvaFootView.m in Sources */,
 				01E9A7461C74613500000805 /* HeredityinfoController.m in Sources */,
@@ -9818,6 +9897,7 @@
 				0126ED811B8C57A700EC85C1 /* AFURLSessionManager.m in Sources */,
 				01A6B12F1D48454E00DF340C /* CommonExamCell.m in Sources */,
 				D2D15FB91D8FCF400032C966 /* PostsDetailUserCell.m in Sources */,
+				D23B0C841DAB714E0032AFE2 /* ExpertModel.m in Sources */,
 				01FD4CA71CAE4B43008F09CF /* PSTGridLayoutItem.m in Sources */,
 				01ED2E521BB3A8A1007C428F /* BloodPressureCell.m in Sources */,
 				01F016021C5F430700930B0E /* GroupbuyMode.m in Sources */,
@@ -9946,6 +10026,7 @@
 				D257C4B71D65BB8C002D18F5 /* CustomInfoController.m in Sources */,
 				01ECDADF1C8EB31F0018160F /* EMCDDeviceManager+Media.m in Sources */,
 				01F33D8E1BB2873F00787620 /* AFDownloadRequestOperation.m in Sources */,
+				D23B0C801DAB61180032AFE2 /* AuthenticateResultController.m in Sources */,
 				01CF97A71C7A98E400206FCD /* DevicesDetailViewController.m in Sources */,
 				01ECDFBC1B7C402100665D87 /* HMCommonCenterItem.m in Sources */,
 				01ECDB221C8EB31F0018160F /* EaseFacialView.m in Sources */,
@@ -9954,6 +10035,7 @@
 				0157E2391BE87B0E004C0908 /* EvaluationHeadView.m in Sources */,
 				0126ED7C1B8C57A700EC85C1 /* AFNetworkReachabilityManager.m in Sources */,
 				01237A5A1CFC319D0070C905 /* MJIvar.m in Sources */,
+				D23B0C741DAB2EFB0032AFE2 /* InputFieldViewController.m in Sources */,
 				0162EA891D869DB500A5EF1C /* BHBCenterView.m in Sources */,
 				01F4F6791CC471BE003F6B6E /* ShopOrderViewController.m in Sources */,
 				01EFD3151C56182500BDA640 /* ShowAllEvaViewController.m in Sources */,
