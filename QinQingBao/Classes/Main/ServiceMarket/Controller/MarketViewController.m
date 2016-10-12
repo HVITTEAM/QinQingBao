@@ -48,7 +48,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.view.backgroundColor = HMGlobalBg;
-    self.title = self.typeinfoModel.tname_app;
+    self.title = self.navTitle;
+}
+
+- (void)setTypeinfoModel:(TypeinfoModel *)typeinfoModel
+{
+    _typeinfoModel = typeinfoModel;
+    
+    self.navTitle = typeinfoModel.tname_app;
+    self.tid = self.typeinfoModel.tid_app;
 }
 
 #pragma mark 集成刷新控件
@@ -77,12 +85,16 @@
  */
 -(void)getDataProvider
 {
+    if (self.tid.length <= 0) {
+       return [NoticeHelper AlertShow:@"id为空,无法获取数据" view:nil];
+    }
+    
     MBProgressHUD *HUD;
     if (currentPageIdx == 1)
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_get_iteminfo parameters:@{@"page" : @"10",
                                                                     @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                                                                    @"tid" : self.typeinfoModel.tid_app
+                                                                    @"tid" : self.tid
                                                                     }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      

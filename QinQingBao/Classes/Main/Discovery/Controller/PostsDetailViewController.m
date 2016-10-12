@@ -159,6 +159,8 @@
 
 - (void)setupNaviBar
 {
+    self.navigationItem.title = self.itemdata.subject;
+    
     UIImage *img = [UIImage imageNamed:@"titlebar_delete"];
     img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIBarButtonItem *delItem = [[UIBarButtonItem alloc] initWithImage:img style:UIBarButtonItemStylePlain target:self action:@selector(delItemClick:)];

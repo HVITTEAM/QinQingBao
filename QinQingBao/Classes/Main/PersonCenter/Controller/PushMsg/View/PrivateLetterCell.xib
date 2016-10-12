@@ -34,8 +34,8 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_badge" translatesAutoresizingMaskIntoConstraints="NO" id="Uss-EV-QbT">
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="2uW-Pp-NWw"/>
-                            <constraint firstAttribute="width" constant="15" id="3u5-Y9-Dga"/>
+                            <constraint firstAttribute="height" constant="10" id="2uW-Pp-NWw"/>
+                            <constraint firstAttribute="width" constant="10" id="3u5-Y9-Dga"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlj-go-CVu">
@@ -45,7 +45,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Uss-EV-QbT" firstAttribute="leading" secondItem="rdS-2t-QGD" secondAttribute="trailing" constant="-7" id="2iR-ln-wYk"/>
+                    <constraint firstItem="Uss-EV-QbT" firstAttribute="leading" secondItem="rdS-2t-QGD" secondAttribute="trailing" constant="-8" id="2iR-ln-wYk"/>
                     <constraint firstAttribute="trailing" secondItem="Taq-tS-igv" secondAttribute="trailing" constant="10" id="Jwf-JH-Qpj"/>
                     <constraint firstItem="rdS-2t-QGD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KFz-Tg-2JY"/>
                     <constraint firstItem="Taq-tS-igv" firstAttribute="leading" secondItem="4Ov-sv-0nr" secondAttribute="leading" id="RvG-vp-Ktt"/>

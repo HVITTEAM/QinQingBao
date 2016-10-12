@@ -19,6 +19,8 @@
 
 @property (strong, nonatomic) UILabel *timeLb;
 
+@property (strong, nonatomic) UILabel *floorLb;
+
 @property (strong, nonatomic) UILabel *contentLb;
 
 @property (strong, nonatomic) UIButton *zanNumBtn;
@@ -54,7 +56,8 @@
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:commentModel.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
     
     self.nameLb.text = commentModel.author;
-    self.timeLb.text = commentModel.dateline;
+    self.timeLb.text = [commentModel.dateline substringWithRange:NSMakeRange(0, 16)];
+    self.floorLb.text = [NSString stringWithFormat:@"%@楼",commentModel.positition];
 
     if (commentModel.commen.newcommon) {
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
@@ -82,6 +85,10 @@
     
     [self.timeLb sizeToFit];
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame)+5, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
+    
+    [self.floorLb sizeToFit];
+    self.floorLb.frame = CGRectMake(CGRectGetMaxX(self.timeLb.frame) + 6, CGRectGetMinY(self.timeLb.frame), CGRectGetWidth(self.floorLb.frame), CGRectGetHeight(self.floorLb.frame));
+    
     [self.zanNumBtn sizeToFit];
     CGFloat w = CGRectGetWidth(self.zanNumBtn.frame);
     self.zanNumBtn.frame = CGRectMake(MTScreenW - w - 10 - kMargin, 12, w + 10, 25);
@@ -149,7 +156,14 @@
     timeLb.font = [UIFont systemFontOfSize:10];
     [self.contentView addSubview:timeLb];
     self.timeLb = timeLb;
-        
+    
+    //楼层
+    UILabel *floorLb = [[UILabel alloc] init];
+    floorLb.textColor = HMColor(153, 153, 153);
+    floorLb.font = [UIFont systemFontOfSize:10];
+    [self.contentView addSubview:floorLb];
+    self.floorLb = floorLb;
+    
     //赞
     UIButton *zanNumBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     zanNumBtn.backgroundColor = [UIColor whiteColor];

@@ -27,7 +27,7 @@
 
 @property(copy,nonatomic)NSString *is_support;
 
-@property(copy,nonatomic)NSString *positition;
+@property(copy,nonatomic)NSString *positition;  //第几楼
 
 @property(copy,nonatomic)NSString *is_host;
 
