@@ -338,6 +338,8 @@
     NSString *basePath = [[NSBundle mainBundle] bundlePath];
     NSURL *baseURL = [NSURL fileURLWithPath:basePath];
     
+    CX_Log(@"开始loadHTMLString");
+
     [_webView loadHTMLString:tempHtml baseURL:baseURL];
 }
 
@@ -388,6 +390,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    CX_Log(@"结束loadHTMLString");
     CGSize actualSize = [webView sizeThatFits:CGSizeZero];
     CGRect newFrame = webView.frame;
     newFrame.size.height = actualSize.height;
