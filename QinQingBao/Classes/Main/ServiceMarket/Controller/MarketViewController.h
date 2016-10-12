@@ -13,4 +13,8 @@
 
 @property(strong,nonatomic)TypeinfoModel *typeinfoModel;
 
+@property (copy, nonatomic) NSString *navTitle;
+
+@property (copy, nonatomic) NSString *tid;
+
 @end

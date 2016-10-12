@@ -22,7 +22,7 @@
 
 #import "PublicProfileViewController.h"
 #import "SearchViewController.h"
-
+#import "MarketViewController.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 
@@ -156,7 +156,7 @@
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
         menuCell.row = 1;
         menuCell.col = 4;
-        menuCell.colSpace = 40;
+        menuCell.colSpace = 30;
         if (indexPath.section == 0) {
             //健康检测
             menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
@@ -167,8 +167,33 @@
                                @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
                                ];
             menuCell.selectMenuItemCallBack = ^(NSInteger idx){
+                //跳转服务市场
                 
-                //跳转
+                NSString *title = nil;
+                NSString *tid = nil;
+                switch (idx) {
+                    case 0:
+                        title = @"心脑血管";
+                        tid = @"44";
+                        break;
+                    case 1:
+                        title = @"精英压力";
+                        tid = @"45";
+                        break;
+                    case 2:
+                        title = @"肝脏排毒";
+                        tid = @"46";
+                        break;
+                    default:
+                        title = @"其他";
+                        tid = @"47";
+                        break;
+                }
+                
+                MarketViewController *marketListVC = [[MarketViewController alloc] init];
+                marketListVC.navTitle = title;
+                marketListVC.tid = tid;
+                [weakSelf.navigationController pushViewController:marketListVC animated:YES];
             };
         }else{
             //健康圈
@@ -283,7 +308,9 @@
         }
 
         self.healthCommunityDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        [self.tableView reloadData];
+        NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:1];
+        [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
+//        [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -317,7 +344,9 @@
             [self.postsDatas addObjectsFromArray:datas];
             self.pageNum++;
             
-            [self.tableView reloadData];
+//            [self.tableView reloadData];
+            NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:2];
+            [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
