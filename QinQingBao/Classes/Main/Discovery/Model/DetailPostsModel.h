@@ -46,4 +46,7 @@
 
 @property(copy,nonatomic)NSString *share_url;
 
+@property(copy,nonatomic)NSString *jiequmessage
+;
+
 @end

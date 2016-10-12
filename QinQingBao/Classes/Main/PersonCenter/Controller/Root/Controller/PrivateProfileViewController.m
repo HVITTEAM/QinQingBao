@@ -83,7 +83,7 @@
     [MTNotificationCenter addObserver:self selector:@selector(refleshDataByLogin) name:MTLoginout object:nil];
     
     //注册寸欣账户登录信息超时监听
-    [MTNotificationCenter addObserver:self selector:@selector(refleshDataByLogin) name:MTLoginTimeout object:nil];
+    [MTNotificationCenter addObserver:self selector:@selector(loginTimeout) name:MTLoginTimeout object:nil];
 
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
@@ -105,6 +105,22 @@
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
+
+// 登录超时
+-(void)loginTimeout
+{
+    personalInfo = nil;
+    LoginInHeadView *headView = self.headView;
+
+    [headView.userIcon sd_setImageWithURL:nil placeholderImage:[UIImage imageWithName:@"pc_user"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    }];
+    
+    [headView initWithName:@"请登录" professional:@"" isfriend:@"" is_mine:@"1"];
+    
+    [postsArr removeAllObjects];
+    [self.tableView reloadData];
+}
+
 
 -(void)refleshDataByLogin
 {
@@ -156,10 +172,10 @@
         [self.navigationController pushViewController:[[PersonalDataViewController alloc] init] animated:YES];
     };
     
-    [self.tableView addSubview:self.headView];
+    [self.tableView insertSubview:self.headView atIndex:0];
     
     //自定义导航条
-    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0, MTScreenW, 64)];
+      self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0 ,-headHeight-20, MTScreenW, 64)];
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
     
@@ -172,8 +188,8 @@
     lv.backgroundColor = HMColor(230, 230, 230);
     [self.navBar addSubview:lv];
     [self.navBar addSubview:titleLb];
-    [self.headView addSubview:self.navBar];
-    
+    [self.view addSubview:self.navBar];
+
     [self initNavigation];
 }
 
@@ -255,7 +271,7 @@
     rightBtn0.y = 25 + scrollView.contentOffset.y;
     rightBtn1.y = 25 + scrollView.contentOffset.y;
     
-    self.navBar.y = scrollView.contentOffset.y + headHeight;
+     self.navBar.y = scrollView.contentOffset.y;
     self.navBar.alpha = alpha;
     
     // 下拉超过50像素
@@ -264,6 +280,10 @@
         self.headView.refleshBtn.alpha = 1;
         [self.headView updateRefreshHeaderWithOffsetY:y scrollView:self.tableView];
         
+    }
+    else if(self.headView.states !=RefreshViewStateRefreshing)
+    {
+        self.headView.refleshBtn.alpha = 0;
     }
 }
 
@@ -322,7 +342,9 @@
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
         consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
             
-            [SharedAppUtil checkLoginStates];
+            //判断是否登录
+            if (![SharedAppUtil checkLoginStates])
+                return;
             
             if (idx == 100)
             {

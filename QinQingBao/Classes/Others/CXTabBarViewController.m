@@ -201,7 +201,9 @@
     
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     PrivateProfileViewController *login = navlogin.viewControllers[0];
-    [login initHeadView];
+    if (![notification.name  isEqual: MTLoginTimeout]) {
+        [login initHeadView];
+    }
 }
 
 /**

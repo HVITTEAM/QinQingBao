@@ -121,8 +121,11 @@
 
 #pragma mark UITextViewDelegate
 
+
 - (void)textViewDidChange:(UITextView *)textView
 {
+    if(contentView.markedTextRange == nil)
+        return;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:contentView.attributedText];
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];

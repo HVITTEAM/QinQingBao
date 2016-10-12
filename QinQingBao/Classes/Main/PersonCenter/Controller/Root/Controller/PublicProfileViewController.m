@@ -119,7 +119,7 @@
     
     LoginInHeadView *headView = (LoginInHeadView *)self.headView;
     
-    [self.tableView addSubview:self.headView];
+    [self.tableView insertSubview:self.headView atIndex:0];
     
     headView.navbtnClick = ^(NSInteger type){
         if ([SharedAppUtil checkLoginStates])
@@ -143,7 +143,7 @@
     };
     
     //自定义导航条
-    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0, MTScreenW, 64)];
+    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0 ,-headHeight-20, MTScreenW, 64)];
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
     backBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -158,8 +158,7 @@
     lv.backgroundColor = HMColor(230, 230, 230);
     [self.navBar addSubview:lv];
     [self.navBar addSubview:titleLabel];
-    [self.headView addSubview:self.navBar];
-    
+    [self.view addSubview:self.navBar];
     [self.view addSubview:backBtn];
 }
 
@@ -186,7 +185,6 @@
     
     CGFloat alpha;
     
-    
     if ((scrollView.contentOffset.y + headHeight) > 0) {
         alpha = (scrollView.contentOffset.y + headHeight) / 64;
     }else{
@@ -199,8 +197,9 @@
         [backBtn setImage:[UIImage imageNamed:@"back_icon"] forState:UIControlStateNormal];
     
     backBtn.y = 23 + scrollView.contentOffset.y;
-    self.navBar.y = scrollView.contentOffset.y + headHeight;
+    self.navBar.y = scrollView.contentOffset.y;
     self.navBar.alpha = alpha;
+    
 }
 
 #pragma mark - Table view data source
@@ -267,7 +266,7 @@
                 [self.navigationController pushViewController:view animated:YES];
             }
         };
-
+        
         cell = consumeCell;
     }
     else if (indexPath.section == 1)
@@ -416,7 +415,8 @@
                                          
                                          UIImageView *img = [[UIImageView alloc] init];
                                          [img sd_setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                             headView.userIcon.image = [image circleImage];
+                                             if (image)
+                                                 headView.userIcon.image = [image circleImage];
                                          }];
                                          
                                          [headView initWithName:personalInfo.author professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:personalInfo.is_mine];

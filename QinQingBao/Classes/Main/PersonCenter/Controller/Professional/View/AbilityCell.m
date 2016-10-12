@@ -42,6 +42,8 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    if(textView.markedTextRange == nil)
+        NSLog(@"dad");
     if (textView.text.length > 0) {
         self.placeholderLb.hidden = YES;
     }else{
