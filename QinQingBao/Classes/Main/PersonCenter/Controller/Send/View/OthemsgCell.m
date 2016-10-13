@@ -38,6 +38,8 @@
     // 头像
     UIImageView *headImg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 40, 40)];
     [headImg sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"pc_user"]];
+    headImg.layer.cornerRadius = 40/2;
+    headImg.layer.masksToBounds = YES;
     [self addSubview:headImg];
     
     // 文本

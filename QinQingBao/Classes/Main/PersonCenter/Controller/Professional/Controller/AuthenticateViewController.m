@@ -401,8 +401,8 @@
     NSDictionary *picInfoDict = @{
                                   @"fileData" : self.selectedPicData,
                                   @"name" : @"Filedata",
-                                  @"fileName" : @"expertImg.png",
-                                  @"mimeType" : @"image/png"
+                                  @"fileName" : @"expertImg.jpg",
+                                  @"mimeType" : @"image/jpeg"
                                 };
    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

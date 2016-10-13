@@ -507,7 +507,8 @@
 {
     [CommonRemoteHelper UploadPicWithUrl:URL_UploadAvatar
                               parameters:@{@"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
-                                           @"client" : @"ios"}
+                                           @"client" : @"ios",
+                                           @"sys":@"2"}
                                     type:CommonRemoteTypePost  dataObj:imgdata
                                  success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
