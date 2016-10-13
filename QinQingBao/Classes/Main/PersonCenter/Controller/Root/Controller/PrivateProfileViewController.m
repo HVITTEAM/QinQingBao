@@ -67,7 +67,7 @@
     [self setupRefresh];
     
     [self refleshData];
-
+    
     self.view.backgroundColor = HMGlobalBg;
     self.automaticallyAdjustsScrollViewInsets = NO;
 }
@@ -84,7 +84,7 @@
     
     //注册寸欣账户登录信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(loginTimeout) name:MTLoginTimeout object:nil];
-
+    
     self.tableView.contentInset = UIEdgeInsetsMake(headHeight, 0, 40, 0);
     
     if (self.headView)
@@ -111,7 +111,7 @@
 {
     personalInfo = nil;
     LoginInHeadView *headView = self.headView;
-
+    
     [headView.userIcon sd_setImageWithURL:nil placeholderImage:[UIImage imageWithName:@"pc_user"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
     
@@ -127,7 +127,7 @@
     personalInfo = nil;
     [postsArr removeAllObjects];
     [self.tableView reloadData];
-
+    
     [self refleshData];
 }
 
@@ -137,11 +137,11 @@
 -(void)refleshData
 {
     currentPageIdx = 1;
-     
+    
     [self getUserPosts];
     
     [self getUserFannum];
-
+    
 }
 
 /**
@@ -175,7 +175,7 @@
     [self.tableView insertSubview:self.headView atIndex:0];
     
     //自定义导航条
-      self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0 ,-headHeight-20, MTScreenW, 64)];
+    self.navBar = [[UIView alloc] initWithFrame:CGRectMake(0 ,-headHeight-20, MTScreenW, 64)];
     self.navBar.backgroundColor = [UIColor whiteColor];
     self.navBar.alpha = 0;
     
@@ -189,7 +189,7 @@
     [self.navBar addSubview:lv];
     [self.navBar addSubview:titleLb];
     [self.view addSubview:self.navBar];
-
+    
     [self initNavigation];
 }
 
@@ -198,14 +198,16 @@
  */
 -(void)initNavigation
 {
-    rightBtn0 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 35,25 - headHeight, 24, 24)];
+    if (!rightBtn0)
+        rightBtn0 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 35,25 - headHeight, 24, 24)];
     [rightBtn0 addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     rightBtn0.tag = 100;
     [rightBtn0 setBackgroundImage:[UIImage imageNamed:@"ic_msg.png"] forState:UIControlStateNormal];
     [rightBtn0 setBackgroundImage:[UIImage imageNamed:@"ic_msg.png"] forState:UIControlStateHighlighted];
     [self.view addSubview:rightBtn0];
     
-    rightBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 70, 25 - headHeight, 24, 24)];
+    if (!rightBtn1)
+        rightBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 70, 25 - headHeight, 24, 24)];
     rightBtn1.tag = 200;
     [rightBtn1 addTarget:self action:@selector(navgationHandler:) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn1 setBackgroundImage:[UIImage imageNamed:@"pc_setup.png"] forState:UIControlStateNormal];
@@ -271,7 +273,7 @@
     rightBtn0.y = 25 + scrollView.contentOffset.y;
     rightBtn1.y = 25 + scrollView.contentOffset.y;
     
-     self.navBar.y = scrollView.contentOffset.y;
+    self.navBar.y = scrollView.contentOffset.y;
     self.navBar.alpha = alpha;
     
     // 下拉超过50像素
@@ -402,7 +404,7 @@
                 [cardCell setPostsModel:postsArr[indexPath.row - 1]];
             }
             cardCell.attentionBtn.hidden = YES;
-
+            
             // 头像点击 进入个人信息界面
             cardCell.portraitClick = ^(PostsModel *item)
             {
@@ -594,7 +596,7 @@
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                  headView.userIcon.image = [image circleImage];
                                              }];
-
+                                             
                                              [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];
                                          }
                                          else

@@ -55,8 +55,7 @@
                       @"attention_uid" :self.uid,
                       @"client" : @"ios",
                       @"page" : @"1000",
-                      @"p" : @"1",
-                      @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+                      @"p" : @"1"};
     }
     else
     {
@@ -65,15 +64,20 @@
                       @"fans_uid" : self.uid,
                       @"client" : @"ios",
                       @"page" : @"1000",
-                      @"p" : @"1",
-                      @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+                      @"p" : @"1"};
     }
     [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_list parameters: paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
-                                         if([codeNum integerValue] == 17001)
+                                        if([codeNum integerValue] == 17001 && dataProvider.count == 0)
+                                         {
+                                             [self.tableView reloadData];
+
+                                             [self.view initWithPlaceString:PlaceholderStr_Fans imgPath:@"placeholder-0.png"];
+                                         }
+                                         else if([codeNum integerValue] == 17001)
                                          {
                                              [self.view initWithPlaceString:PlaceholderStr_Fans imgPath:@"placeholder-0.png"];
                                          }
@@ -174,7 +178,5 @@
                                      [HUD removeFromSuperview];
                                  }];
 }
-
-
 
 @end

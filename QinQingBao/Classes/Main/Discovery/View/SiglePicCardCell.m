@@ -135,12 +135,8 @@
     [self.barTagBtn setTitle:itemdata.forum_name forState:UIControlStateNormal];
 
     // 设置图片
-    if (itemdata.picture.length == 0) {
-        self.photoNum = 0;
-    }else{
-        self.photoNum = 1;
-    }
-    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:itemdata.picture] placeholderImage:[UIImage imageNamed:@"placeholderDetail"]];
+    self.photoNum = itemdata.attachmentpicture_bigthumb.count;
+    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:[itemdata.attachmentpicture_bigthumb firstObject]] placeholderImage:[UIImage imageNamed:@"placeholderDetail"]];
     
     //设置位置
     [self layoutCell];
@@ -238,7 +234,7 @@
 - (void)layoutPhotosView
 {
     CGFloat photoWidth = MTScreenW - 2 * kMargin;
-    CGFloat photoheight = (int)(photoWidth / 2 + 0.5);
+    CGFloat photoheight = (int)(photoWidth * 312 / 720 + 0.5);
     
     if (self.photoNum != 0) {
         self.photosView.frame = CGRectMake(kMargin, CGRectGetMaxY(self.userInfoView.frame) + 10,photoWidth, photoheight);

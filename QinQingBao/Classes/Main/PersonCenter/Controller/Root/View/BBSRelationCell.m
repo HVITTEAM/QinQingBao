@@ -43,9 +43,10 @@
     _item = item;
     
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",item.avatar]];
-    [self.headImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [self.headImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user.png"]];
     self.nameLab.text = item.name;
-    self.groupTitleLab.text = [NSString stringWithFormat:@" %@ ",item.grouptitle];
+    if (item.grouptitle && item.grouptitle.length > 0)
+        self.groupTitleLab.text = [NSString stringWithFormat:@" %@ ",item.grouptitle];
     
     // 如果是我的粉丝
     if (item.fans_id && [item.fans_id integerValue] > 0)
