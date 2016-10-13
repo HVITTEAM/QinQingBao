@@ -142,15 +142,15 @@
 
     //设置图片
     //...............临时这样做..........
-    if ([postsModel.attachmentpicture isKindOfClass:[NSString class]]) {
+    if ([postsModel.attachmentpicture_smallthumb isKindOfClass:[NSString class]]) {
         self.photoNum = 0;
     }else{
-        self.photoNum = postsModel.attachmentpicture.count;
+        self.photoNum = postsModel.attachmentpicture_smallthumb.count;
     }
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
-        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+        [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture_smallthumb[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     }
     
     //设置底部按钮栏

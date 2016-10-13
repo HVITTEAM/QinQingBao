@@ -143,7 +143,7 @@
     self.codeBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.codeBtn.layer.cornerRadius = 12;
     
-    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_icon] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_icon] placeholderImage:[UIImage imageNamed:@"pc_user.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         self.iconImg = image;
     }];
     self.nameTextfield.text = _nickname;
