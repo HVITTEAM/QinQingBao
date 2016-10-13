@@ -138,6 +138,8 @@
 {
     currentPageIdx = 1;
     
+    personalInfo = nil;
+    [postsArr removeAllObjects];
     [self getUserPosts];
     
     [self getUserFannum];
@@ -296,7 +298,6 @@
     if (states == RefreshViewStateRefreshing)
     {
         [self refleshData];
-        
     }
 }
 
