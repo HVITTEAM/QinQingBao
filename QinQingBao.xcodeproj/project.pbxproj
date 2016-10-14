@@ -1222,6 +1222,10 @@
 		D2A8C4171D9BBBDC00944ED6 /* PrivateLetterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A8C4151D9BBBDC00944ED6 /* PrivateLetterCell.m */; };
 		D2A8C4181D9BBBDC00944ED6 /* PrivateLetterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A8C4161D9BBBDC00944ED6 /* PrivateLetterCell.xib */; };
 		D2A8C41B1D9BC08100944ED6 /* AllpriletterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A8C41A1D9BC08100944ED6 /* AllpriletterModel.m */; };
+		D2A977151DB06A1600A0438D /* ReportListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A977141DB06A1600A0438D /* ReportListViewController.m */; };
+		D2A9771A1DB06B8400A0438D /* ReportListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A977181DB06B8400A0438D /* ReportListCell.m */; };
+		D2A9771B1DB06B8400A0438D /* ReportListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2A977191DB06B8400A0438D /* ReportListCell.xib */; };
+		D2A9771E1DB0B24700A0438D /* ReportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A9771D1DB0B24700A0438D /* ReportDetailViewController.m */; };
 		D2D15FB91D8FCF400032C966 /* PostsDetailUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D15FB71D8FCF400032C966 /* PostsDetailUserCell.m */; };
 		D2D15FBA1D8FCF400032C966 /* PostsDetailUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D15FB81D8FCF400032C966 /* PostsDetailUserCell.xib */; };
 		D2D9E9BA1D90C52B005D893D /* PostsDetailDZCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9E9B81D90C52B005D893D /* PostsDetailDZCell.m */; };
@@ -3414,6 +3418,13 @@
 		D2A8C4161D9BBBDC00944ED6 /* PrivateLetterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateLetterCell.xib; sourceTree = "<group>"; };
 		D2A8C4191D9BC08100944ED6 /* AllpriletterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllpriletterModel.h; sourceTree = "<group>"; };
 		D2A8C41A1D9BC08100944ED6 /* AllpriletterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllpriletterModel.m; sourceTree = "<group>"; };
+		D2A977131DB06A1600A0438D /* ReportListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportListViewController.h; sourceTree = "<group>"; };
+		D2A977141DB06A1600A0438D /* ReportListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportListViewController.m; sourceTree = "<group>"; };
+		D2A977171DB06B8400A0438D /* ReportListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportListCell.h; sourceTree = "<group>"; };
+		D2A977181DB06B8400A0438D /* ReportListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportListCell.m; sourceTree = "<group>"; };
+		D2A977191DB06B8400A0438D /* ReportListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportListCell.xib; sourceTree = "<group>"; };
+		D2A9771C1DB0B24700A0438D /* ReportDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportDetailViewController.h; sourceTree = "<group>"; };
+		D2A9771D1DB0B24700A0438D /* ReportDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportDetailViewController.m; sourceTree = "<group>"; };
 		D2D15FB61D8FCF400032C966 /* PostsDetailUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsDetailUserCell.h; sourceTree = "<group>"; };
 		D2D15FB71D8FCF400032C966 /* PostsDetailUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsDetailUserCell.m; sourceTree = "<group>"; };
 		D2D15FB81D8FCF400032C966 /* PostsDetailUserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostsDetailUserCell.xib; sourceTree = "<group>"; };
@@ -3519,6 +3530,10 @@
 				010042651D616FC500C87F13 /* InterveneController.m */,
 				01BAF1BF1D645120000D2E45 /* HealthPlanController.h */,
 				01BAF1C01D645120000D2E45 /* HealthPlanController.m */,
+				D2A977131DB06A1600A0438D /* ReportListViewController.h */,
+				D2A977141DB06A1600A0438D /* ReportListViewController.m */,
+				D2A9771C1DB0B24700A0438D /* ReportDetailViewController.h */,
+				D2A9771D1DB0B24700A0438D /* ReportDetailViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3551,6 +3566,9 @@
 				01BAF1BA1D643203000D2E45 /* PlanReportTitleCell.h */,
 				01BAF1BB1D643203000D2E45 /* PlanReportTitleCell.m */,
 				01BAF1BC1D643203000D2E45 /* PlanReportTitleCell.xib */,
+				D2A977171DB06B8400A0438D /* ReportListCell.h */,
+				D2A977181DB06B8400A0438D /* ReportListCell.m */,
+				D2A977191DB06B8400A0438D /* ReportListCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8825,7 +8843,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8837,7 +8855,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -9172,6 +9190,7 @@
 				01ECDA191C8EB31F0018160F /* VoiceSearchFeedback010@2x.png in Resources */,
 				01ECDABD1C8EB31F0018160F /* chat_receiver_audio_playing001@2x.png in Resources */,
 				01ECDA711C8EB31F0018160F /* chatBar_faceSelected.png in Resources */,
+				D2A9771B1DB06B8400A0438D /* ReportListCell.xib in Resources */,
 				01ECDA4E1C8EB31F0018160F /* chatBar_more_face.png in Resources */,
 				01ECDA4B1C8EB31F0018160F /* chatBar_more_cardSelected.png in Resources */,
 				017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */,
@@ -9625,6 +9644,7 @@
 				01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */,
 				01FBF0EF1BCBB25E00CA285C /* ServiceTypeModel.m in Sources */,
 				D23B0C711DAB242A0032AFE2 /* AuthenticateViewController.m in Sources */,
+				D2A9771A1DB06B8400A0438D /* ReportListCell.m in Sources */,
 				01ECDAEC1C8EB31F0018160F /* EMSDWebImageDecoder.m in Sources */,
 				018BC5C41C4F7D8400C883FF /* GevalModelTotal.m in Sources */,
 				01E690861BCCF6AA00A17543 /* UIBarButtonItem+WEPopover.m in Sources */,
@@ -9701,6 +9721,7 @@
 				D2E6506F1D98B6C900532554 /* SubCommentView.m in Sources */,
 				01ECDADE1C8EB31F0018160F /* EMAudioRecorderUtil.m in Sources */,
 				01ECDB181C8EB31F0018160F /* EaseBubbleView+Location.m in Sources */,
+				D2A9771E1DB0B24700A0438D /* ReportDetailViewController.m in Sources */,
 				0177DA841D5D6303008D5C95 /* QuestionTwoBtnController.m in Sources */,
 				01BAF1CA1D64527E000D2E45 /* CommonPlanCell.m in Sources */,
 				0177DA7E1D5D6303008D5C95 /* DiseaseBtnController.m in Sources */,
@@ -9981,6 +10002,7 @@
 				01DD67241BAFF20A001D0883 /* TextFieldViewController.m in Sources */,
 				D24D29091D8E77F800AD0984 /* CircleModel.m in Sources */,
 				01024CC41BD0A75D00E8CAEC /* RSADataSigner.m in Sources */,
+				D2A977151DB06A1600A0438D /* ReportListViewController.m in Sources */,
 				01F2283A1B7B465800ED4AFB /* UIBarButtonItem+Extension.m in Sources */,
 				01E4A98F1C40DD0100AAAF73 /* InvoiceViewController.m in Sources */,
 				01ECDFC01B7C402100665D87 /* HMCommonSwitchItem.m in Sources */,
@@ -10270,10 +10292,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10325,10 +10346,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

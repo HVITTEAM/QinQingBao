@@ -171,6 +171,7 @@
     if (![SharedAppUtil defaultCommonUtil].bbsVO) {
         [self.tableView.header endRefreshing];
         [self.tableView.footer endRefreshing];
+        [self.tableView reloadData];
         return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-0"];
     }
     currentPageIdx ++;

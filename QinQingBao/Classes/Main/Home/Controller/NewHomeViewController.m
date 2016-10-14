@@ -11,6 +11,7 @@
 #import "MsgAndPushViewController.h"
 
 #import "SearchViewController.h"
+#import "ReportListViewController.h"
 
 
 @interface NewHomeViewController ()
@@ -92,7 +93,13 @@
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateNormal];
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    UIButton *reportBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 17)];
+    [reportBtn addTarget:self action:@selector(reportListView) forControlEvents:UIControlEventTouchUpInside];
+    [reportBtn setBackgroundImage:[UIImage imageNamed:@"reportList_icon"] forState:UIControlStateNormal];
+    [reportBtn setBackgroundImage:[UIImage imageNamed:@"reportList_icon"] forState:UIControlStateHighlighted];
+    UIBarButtonItem *reportItem = [[UIBarButtonItem alloc] initWithCustomView:reportBtn];
+    self.navigationItem.rightBarButtonItems = @[rightButton,reportItem];
 }
 
 /**
@@ -112,6 +119,20 @@
     SearchViewController *vc = [[SearchViewController alloc] init];
     vc.type = SearchTypePosts;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+/**
+ *  进入检测报告列表界面
+ */
+- (void)reportListView
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]) {
+        return;
+    }
+    
+    ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
+    [self.navigationController pushViewController:reportListVC animated:YES];
 }
 
 @end

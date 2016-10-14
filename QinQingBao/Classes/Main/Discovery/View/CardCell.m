@@ -128,6 +128,8 @@
         [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"B3B3B3"] forState:UIControlStateNormal];
     }else{
         [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"f7931e"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"f7931e"] forState:UIControlStateNormal];
     }
     
     //设置标题与内容
