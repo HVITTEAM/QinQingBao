@@ -18,7 +18,6 @@
     NSString *btnTitle;
     
     NSTimer *timer;
-    
 }
 
 

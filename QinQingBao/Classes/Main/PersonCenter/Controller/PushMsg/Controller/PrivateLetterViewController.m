@@ -10,6 +10,7 @@
 #import "PrivateLetterCell.h"
 #import "AllpriletterModel.h"
 #import "SendMsgViewController.h"
+#import "MsgAndPushViewController.h"
 
 @interface PrivateLetterViewController ()
 
@@ -107,14 +108,17 @@
         }
         else
         {
+            NSString *msgNum = [dict objectForKey:@"allnew"];
+            NSLog(@"有%@条未读私信",msgNum);
+            
+            MsgAndPushViewController *vc = (MsgAndPushViewController *)self.parentVC;
+            [vc setBadge:msgNum];
             NSArray *ar = [AllpriletterModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            
             if (ar.count > 0) {
                 [self.dataProvider addObjectsFromArray:ar];
                 self.pageNum ++;
-                
-                //            if (self.dataProvider.count > 0) {
-                //                [self.view removePlace];
-                //            }
+    
                 
                 [self.tableView reloadData];
             }

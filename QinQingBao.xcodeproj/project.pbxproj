@@ -172,6 +172,7 @@
 		0157E2431BE888BF004C0908 /* icon_chose_arrow_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E23F1BE888BF004C0908 /* icon_chose_arrow_nor@2x.png */; };
 		0157E2441BE888BF004C0908 /* icon_chose_arrow_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E2401BE888BF004C0908 /* icon_chose_arrow_sel@2x.png */; };
 		0157E2451BE888BF004C0908 /* icon_chose_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0157E2411BE888BF004C0908 /* icon_chose_bottom@2x.png */; };
+		0158B8731DAF82D1003BF6F4 /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 0158B8721DAF82D1003BF6F4 /* UIView+Badge.m */; };
 		015BFDAB1D3483FD00EB4A09 /* CAShapeLayer+MutipleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BFDA21D3483FD00EB4A09 /* CAShapeLayer+MutipleData.m */; };
 		015BFDAC1D3483FD00EB4A09 /* CXRuler.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BFDA41D3483FD00EB4A09 /* CXRuler.m */; };
 		015BFDAD1D3483FD00EB4A09 /* CXRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BFDA61D3483FD00EB4A09 /* CXRulerScrollView.m */; };
@@ -1629,6 +1630,8 @@
 		0157E23F1BE888BF004C0908 /* icon_chose_arrow_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_arrow_nor@2x.png"; sourceTree = "<group>"; };
 		0157E2401BE888BF004C0908 /* icon_chose_arrow_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_arrow_sel@2x.png"; sourceTree = "<group>"; };
 		0157E2411BE888BF004C0908 /* icon_chose_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_chose_bottom@2x.png"; sourceTree = "<group>"; };
+		0158B8711DAF82D1003BF6F4 /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Badge.h"; sourceTree = "<group>"; };
+		0158B8721DAF82D1003BF6F4 /* UIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Badge.m"; sourceTree = "<group>"; };
 		015BFDA11D3483FD00EB4A09 /* CAShapeLayer+MutipleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAShapeLayer+MutipleData.h"; sourceTree = "<group>"; };
 		015BFDA21D3483FD00EB4A09 /* CAShapeLayer+MutipleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAShapeLayer+MutipleData.m"; sourceTree = "<group>"; };
 		015BFDA31D3483FD00EB4A09 /* CXRuler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXRuler.h; sourceTree = "<group>"; };
@@ -8108,6 +8111,8 @@
 				01ED936C1CF84324002A8B24 /* UITextField+Validate.m */,
 				01ED3A441D2204970079D1AC /* NSObject+RunTime.h */,
 				01ED3A451D2204970079D1AC /* NSObject+RunTime.m */,
+				0158B8711DAF82D1003BF6F4 /* UIView+Badge.h */,
+				0158B8721DAF82D1003BF6F4 /* UIView+Badge.m */,
 			);
 			path = Cateogrys;
 			sourceTree = "<group>";
@@ -9573,6 +9578,7 @@
 				01ECDB1E1C8EB31F0018160F /* EaseChatToolbarItem.m in Sources */,
 				012CA4C91D83D66A005FC78A /* MsgAndPushViewController.m in Sources */,
 				01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */,
+				0158B8731DAF82D1003BF6F4 /* UIView+Badge.m in Sources */,
 				01E9A7431C74613500000805 /* HealthArchivesController.m in Sources */,
 				013F3F1C1BFC53A000FF39E5 /* MJDIYHeader.m in Sources */,
 				01601D501CE08DE500B3712E /* CancelOrderController.m in Sources */,

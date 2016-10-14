@@ -98,6 +98,8 @@
     [super viewDidAppear:animated];
     
     [self getDataProvider];
+    
+    [self getAllPriletterList];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -138,10 +140,13 @@
 {
     currentPageIdx = 1;
     
+    personalInfo = nil;
+    [postsArr removeAllObjects];
     [self getUserPosts];
     
     [self getUserFannum];
     
+    [self getAllPriletterList];
 }
 
 /**
@@ -277,7 +282,7 @@
     self.navBar.alpha = alpha;
     
     // 下拉超过50像素
-    if ([SharedAppUtil defaultCommonUtil].bbsVO && self.headView.states !=RefreshViewStateRefreshing &&scrollView.contentOffset.y + headHeight < -50)
+    if (self.headView.states !=RefreshViewStateRefreshing &&scrollView.contentOffset.y + headHeight < -50)
     {
         self.headView.refleshBtn.alpha = 1;
         [self.headView updateRefreshHeaderWithOffsetY:y scrollView:self.tableView];
@@ -296,7 +301,6 @@
     if (states == RefreshViewStateRefreshing)
     {
         [self refleshData];
-        
     }
 }
 
@@ -467,10 +471,8 @@
  */
 -(void)getUserFannum
 {
-    if (![SharedAppUtil defaultCommonUtil].userVO)
-        return;
-    if (![SharedAppUtil defaultCommonUtil].bbsVO)
-        return;
+    if (![SharedAppUtil defaultCommonUtil].userVO || [SharedAppUtil defaultCommonUtil].bbsVO == nil)
+        return [self endrefleshData];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_personaldetail parameters: @{@"uid" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
                                                                            @"client" : @"ios",
                                                                            @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
@@ -506,10 +508,12 @@
         personalInfo = nil;
         [postsArr removeAllObjects];
         [self.tableView reloadData];
+        [self endrefleshData];
         return  [self.tableView.footer endRefreshing];
     }
     else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
     {
+        [self endrefleshData];
         return  [self.tableView.footer endRefreshing];
     }
     NSDictionary *paramDict = [[NSDictionary alloc] init];
@@ -570,7 +574,7 @@
 -(void)getDataProvider
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
-        return;
+        return [self endrefleshData];
     [CommonRemoteHelper RemoteWithUrl:URL_GetUserInfor parameters: @{@"id" : [SharedAppUtil defaultCommonUtil].userVO.member_id,
                                                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                                                      @"client" : @"ios"}
@@ -606,5 +610,36 @@
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
+}
+
+/**
+ *  获取个人的所有私信
+ */
+- (void)getAllPriletterList
+{
+    //判断是否登录
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil || [SharedAppUtil defaultCommonUtil].bbsVO == nil)
+        return [self endrefleshData];
+    
+    NSDictionary *params = @{@"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"p": @1,
+                             @"page":@"10",};
+    [CommonRemoteHelper RemoteWithUrl:URL_get_allpriletter parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)
+        {
+            
+        }
+        else
+        {
+            NSString *msgNum = [dict objectForKey:@"allnew"];
+            NSLog(@"有%@条未读私信",msgNum);
+            if ([msgNum integerValue] >0)
+                [rightBtn0 initWithBadgeValue:msgNum];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
 }
 @end

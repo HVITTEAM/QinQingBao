@@ -10,6 +10,7 @@
 #import "PrivateLetterViewController.h"
 #import "MyMesageViewController.h"
 
+
 @interface MsgAndPushViewController ()
 
 @property (nonatomic, strong) MyMesageViewController *vc1;
@@ -31,7 +32,13 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initRootController];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 -(void)initRootController

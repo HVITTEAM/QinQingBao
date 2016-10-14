@@ -42,6 +42,7 @@
 #import "SVProgressHUD.h"
 #import "UIView+Placeholder.h"
 #import "UIDevice+IPhoneModel.h"
+#import "UIView+Badge.h"
 #import "UIScrollView+Drag.h"
 #import "UIColor+RGB.h"
 #import "LoginViewController.h"
@@ -903,6 +904,9 @@ typedef NS_ENUM(NSInteger, BBSType) {
 //};
 
 #define HTTP_REQUEST_OK_CODE          200
+
+static const char MT_UIViewControllerBadgeValue = '0';
+
 
 #define IS_IOS7_OR_LATER                            ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 

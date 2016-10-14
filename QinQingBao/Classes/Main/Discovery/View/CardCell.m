@@ -152,6 +152,7 @@
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
+        img.contentMode = UIViewContentModeScaleAspectFit;
         [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture_smallthumb[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     }
     

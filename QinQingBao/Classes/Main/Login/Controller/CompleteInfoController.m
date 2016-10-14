@@ -85,7 +85,7 @@
 -(void)initView
 {
     self.title = @"完善资料";
-
+    
     self.nameTextfield.leftViewMode = UITextFieldViewModeAlways;
     self.nameTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     UIView *View0 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 24)];
@@ -102,7 +102,7 @@
     
     self.btn.layer.masksToBounds = YES;
     self.btn.layer.cornerRadius = 8;
-
+    
 }
 
 -(void)initNavgation
@@ -125,7 +125,7 @@
 - (IBAction)btnHandler:(id)sender
 {
     NSString *str = [self.nameTextfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
+    
     if (str.length > 15 || str.length < 2)
     {
         return [NoticeHelper AlertShow:@"昵称不能少于2个字，不能大于15个字" view:nil];
@@ -136,32 +136,37 @@
     UIImage *slt = [self.iconImg scaleImageToSize:CGSizeMake(70,70)];
     NSData *data = UIImageJPEGRepresentation(slt, 1);
     
+    //创建图片数据
+    NSDictionary *picInfoDict = @{@"fileData" : data,
+                                  @"name" : @"avatar",
+                                  @"fileName" : @"img.jpg",
+                                  @"mimeType" : @"image/jpeg"};
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper UploadPicWithUrl:URL_DiscuzRegisterFromCx
-                              parameters: @{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
-                                            @"client" : @"ios",
-                                            @"truename" : str}
-                                    type:CommonRemoteTypePost  dataObj:data
-                                 success:^(NSDictionary *dict, id responseObject) {
-                                     [HUD removeFromSuperview];
-                                     
-                                     NSLog(@"%@",dict);
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)
-                                     {
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         [self dismissViewControllerAnimated:YES completion:nil];
-                                         [self loginBBS];
-                                     }
-                                     
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [HUD removeFromSuperview];
-                                 }];
+    [CommonRemoteHelper UploadPicWithUrl:URL_DiscuzRegisterFromCx parameters:@{@"key" :[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                               @"client" : @"ios",
+                                                                               @"sys" : @"2",
+                                                                               @"truename" : str}
+                                  images:@[picInfoDict] success:^(NSDictionary *dict, id responseObject) {
+                                      [HUD removeFromSuperview];
+                                      
+                                      NSLog(@"%@",dict);
+                                      id codeNum = [dict objectForKey:@"code"];
+                                      if([codeNum integerValue] > 0)
+                                      {
+                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                          [alertView show];
+                                      }
+                                      else
+                                      {
+                                          [self dismissViewControllerAnimated:YES completion:nil];
+                                          [self loginBBS];
+                                      }
+                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                      [HUD removeFromSuperview];
+                                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请求发送失败,请检查网络" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                      [alertView show];
+                                  }];
 }
 
 // 登录bbs
@@ -179,7 +184,10 @@
                                          // 当目标系统不存在该用户的时候：  "errorMsg": "请激活论坛用户，输入用户名",
                                          if ([codeNum integerValue] == 18001)
                                          {
-                                            
+                                             //                                             [self dismissViewControllerAnimated:YES completion:nil];
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                             //                                             [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
                                          }
                                          else
                                          {
