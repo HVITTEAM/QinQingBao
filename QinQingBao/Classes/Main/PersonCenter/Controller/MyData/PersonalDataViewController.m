@@ -647,7 +647,7 @@
                                                  [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
                                                  
                                                  [MTNotificationCenter postNotificationName:MTLoginout object:nil userInfo:nil];
-                                                 [self setupFooter];
+                                                 [self.navigationController popViewControllerAnimated:YES];
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              NSLog(@"发生错误！%@",error);
@@ -709,7 +709,6 @@
 }
 
 
-#pragma mark - 退出登录
 #pragma  mark - 退出当前账号
 -(void)loginOut:(UIButton *)sender
 {

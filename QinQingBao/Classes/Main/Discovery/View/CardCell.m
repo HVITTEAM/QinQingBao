@@ -127,6 +127,8 @@
         self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"B3B3B3"].CGColor;
         [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"B3B3B3"] forState:UIControlStateNormal];
     }else{
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"f7931e"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"f7931e"] forState:UIControlStateNormal];
         [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
     }
     
@@ -150,6 +152,7 @@
     
     for (int i = 0; i < self.photoNum; i++) {
         UIImageView *img = self.photos[i];
+        img.contentMode = UIViewContentModeScaleAspectFit;
         [img sd_setImageWithURL:[NSURL URLWithString:postsModel.attachmentpicture_smallthumb[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     }
     

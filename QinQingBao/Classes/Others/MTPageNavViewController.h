@@ -12,4 +12,5 @@
 
 @property (nonatomic, strong) NSMutableArray *viewArr;
 
+-(void)setBadge:(NSString *)value;
 @end

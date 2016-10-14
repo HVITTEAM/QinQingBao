@@ -16,6 +16,7 @@
 @interface NewHomeViewController ()
 {
     PostsTableViewController *selectedView;
+    UIButton *rightBtn;
 }
 
 @property (nonatomic, strong) PostsTableViewController *vc1;
@@ -29,13 +30,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self initNavigation];
+    
+    [self getAllPriletterList];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self initNavigation];
+
     [self initRootController];
 }
 
@@ -75,10 +79,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     //去除导航栏下方的横线
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]]
-//                       forBarPosition:UIBarPositionAny
-//                           barMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]]
+    //                       forBarPosition:UIBarPositionAny
+    //                           barMetrics:UIBarMetricsDefault];
+    //    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 19)];
     [leftBtn addTarget:self action:@selector(searchView) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +91,7 @@
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     [self.navigationItem setLeftBarButtonItem:leftButton];
     
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 17)];
+    rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 17)];
     [rightBtn addTarget:self action:@selector(showView) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateNormal];
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateHighlighted];
@@ -112,6 +116,45 @@
     SearchViewController *vc = [[SearchViewController alloc] init];
     vc.type = SearchTypePosts;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - 网络相关
+/**
+ *  获取个人的所有私信
+ */
+- (void)getAllPriletterList
+{
+    //判断是否登录
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        return;
+    }
+    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
+    {
+        return ;
+    }
+    
+    NSDictionary *params = @{@"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
+                             @"client":@"ios",
+                             @"p": @1,
+                             @"page":@"10",};
+    [CommonRemoteHelper RemoteWithUrl:URL_get_allpriletter parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"Msg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+        }
+        else
+        {
+            NSString *msgNum = [dict objectForKey:@"allnew"];
+            NSLog(@"有%@条未读私信",msgNum);
+            if ([msgNum integerValue] >0)
+                [rightBtn initWithBadgeValue:msgNum];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
 }
 
 @end

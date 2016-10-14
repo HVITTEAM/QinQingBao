@@ -69,7 +69,10 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     
     for (int i = 0; i < self.viewArr.count; i++)
     {
+        
         UIViewController *vc = (UIViewController *)self.viewArr[i];
+        
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
         [button setFrame:CGRectMake(((MTScreenW - 120)/self.viewArr.count) *i,0,(MTScreenW - 120)/self.viewArr.count, kHeightOfTopScrollView - 5)];
@@ -162,5 +165,23 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         } completion:^(BOOL finished) {
         }];
     }
+}
+
+/**
+ 设置角标
+ @param value badgevalue
+ */
+-(void)setBadge:(NSString *)value
+{
+    for (int i = 0; i < self.buttonArr.count; i++)
+    {
+        UIButton *btn = (UIButton *)self.buttonArr[i];
+        
+        if ([btn.titleLabel.text  isEqual:@"私信"])
+        {
+            [btn.titleLabel initWithBadgeValue:value];
+        }
+    }
+    
 }
 @end

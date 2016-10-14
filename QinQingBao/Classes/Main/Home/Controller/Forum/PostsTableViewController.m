@@ -327,6 +327,11 @@
     return [[UIView alloc] init];
 }
 
+-(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
@@ -413,11 +418,20 @@
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
     if ((self.type == BBSType_1 && indexPath.section < 3) )
+    {
+        if(!recommendlist || recommendlist.count==0)return;
         [view setItemdata:recommendlist[indexPath.section]];
+    }
     else  if ( self.type == BBSType_4)
+    {
+        if(!recommendlist || recommendlist.count==0)return;
         [view setItemdata:recommendlist[indexPath.row]];
+    }
     else
+    {
+        if(!postsArr || postsArr.count==0)return;
         [view setItemdata:postsArr[indexPath.row]];
+    }
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
 

@@ -955,10 +955,9 @@
         
         UIImage *sinaImg = [UIImage imageNamed:str];
         // 定制新浪微博的分享内容
-        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.detailData.jiequmessage title:self.detailData.subject image:sinaImg url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
+        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.detailData.message title:self.detailData.subject image:sinaImg url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
         // 定制微信好友的分享内容
         [shareParams SSDKSetupWeChatParamsByText:self.detailData.jiequmessage title:self.detailData.subject url:[NSURL URLWithString:url] thumbImage:nil image:[UIImage imageNamed:str] musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
-        
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
                                  items:nil
