@@ -119,7 +119,7 @@
         }
         else  if ([dict[@"code"] integerValue] != 0)
         {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
             return;
         }
         
