@@ -38,7 +38,7 @@ NSString * const kButtonTitles = @"buttonTitles";
             
             //超声理疗只要付了钱并分派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
             if (status >= 8) {
-                //tid 43是超声理疗 44是服务市场
+                //tid 43是超声理疗 44是服务市场 47其他
                 if ([self.tid isEqualToString:@"43"]) {
                     if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                         [btnTitles addObject:@"评价"];
@@ -72,7 +72,7 @@ NSString * const kButtonTitles = @"buttonTitles";
             }
             
             //超声理疗只要付了钱分并派了技师就可以评价,服务市场需要配送报告或上传报告后才能评价
-            //tid 43是超声理疗 44是服务市场
+            //tid 43是超声理疗 44是服务市场  47其他
             if ([self.tid isEqualToString:@"43"]) {
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
@@ -175,8 +175,8 @@ NSString * const kButtonTitles = @"buttonTitles";
             
             if ([self.wgrade floatValue] > 0 || self.dis_con!=nil){
                 str = @"已评价";
-                //tid 43是超声理疗 44是服务市场
-                if ([self.tid isEqualToString:@"44"]) {
+                //tid 43是超声理疗 44是服务市场 47其他
+                if (![self.tid isEqualToString:@"43"]) {
                     [btnTitles addObject:@"查看物流"];
                     [btnTitles addObject:@"检测报告"];
                     [btnTitles addObject:@"干预方案"];
