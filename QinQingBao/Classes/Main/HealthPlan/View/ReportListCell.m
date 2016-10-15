@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLb;
+@property (strong, nonatomic) IBOutlet UILabel *timelab;
+@property (strong, nonatomic) IBOutlet UILabel *sizeLabel;
 
 @end
 
@@ -32,6 +34,24 @@
     return cell;
 }
 
+-(void)setItem:(InterveneModel *)item
+{
+    _item = item;
+    
+    self.titleLb.text = item.iname;
+    self.subTitleLb.text = item.wname;
+    self.timelab.text = item.create_time;
+    if ([item.filesize integerValue] > 1)
+    {
+        float size = [item.filesize integerValue]/1024;
+        self.sizeLabel.text = [NSString stringWithFormat:@"%.0fkb",size];
+    }
+    else
+        self.sizeLabel.hidden = YES;
 
+//    NSURL *iconUrl = [NSURL URLWithString:item.item_url];
+    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Img,self.item.item_url]];
+    [self.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+}
 
 @end

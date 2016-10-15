@@ -112,7 +112,7 @@
     [expressionBtn setBackgroundImage:[UIImage imageNamed:@"expression.png"] forState:UIControlStateNormal];
     [expressionBtn setBackgroundImage:[UIImage imageNamed:@"expression.png"] forState:UIControlStateSelected];
     expressionBtn.size = expressionBtn.currentBackgroundImage.size;
-    [inputContentView addSubview:expressionBtn];
+//    [inputContentView addSubview:expressionBtn];
     
     UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5)];
     topLine.backgroundColor = [UIColor colorWithRGB:@"dddddd"];

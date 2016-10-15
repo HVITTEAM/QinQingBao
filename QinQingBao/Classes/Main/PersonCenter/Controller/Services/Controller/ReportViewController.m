@@ -84,13 +84,13 @@
 {
     ReportInfoCell *reportInfoCell = [ReportInfoCell createCellWithTableView:tableView];
     if (0 == indexPath.row) {
-        [self setCell:reportInfoCell iconName:@"report_diet_icon" title:@"饮食方面" content:self.reportInfo.wp_advice_diet];
+        [self setCell:reportInfoCell iconName:@"report_diet_icon" title:@"饮食方面" content:self.reportInfo.advice_diet];
         
     }else if (1 == indexPath.row){
-        [self setCell:reportInfoCell iconName:@"report_sport_icon" title:@"运动方面" content:self.reportInfo.wp_advice_sport];
+        [self setCell:reportInfoCell iconName:@"report_sport_icon" title:@"运动方面" content:self.reportInfo.advice_sport];
 
     }else{
-        [self setCell:reportInfoCell iconName:@"report_other_icon" title:@"其他方面" content:self.reportInfo.wp_advice_others];
+        [self setCell:reportInfoCell iconName:@"report_other_icon" title:@"其他方面" content:self.reportInfo.advice_others];
     }
     
     [reportInfoCell computeCellHeight];

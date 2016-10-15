@@ -19,11 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
     self.webView.delegate = self;
+    self.webView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webView];
     
-    NSURL *url = [[NSURL alloc] initWithString:@"http://192.168.2.117:8080/FineChatServer/test.pdf"];
+    NSURL *url = [[NSURL alloc] initWithString:self.urlstr];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     request.timeoutInterval = 60;
 
@@ -44,7 +46,6 @@
 {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
-
 
 
 @end

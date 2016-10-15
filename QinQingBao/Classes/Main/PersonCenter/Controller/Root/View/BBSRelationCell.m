@@ -48,6 +48,14 @@
     if (item.grouptitle && item.grouptitle.length > 0)
         self.groupTitleLab.text = [NSString stringWithFormat:@" %@ ",item.grouptitle];
     
+    if([SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
+    {
+        NSLog(@"%@",[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id);
+        if (![[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString: self.owerId ]|| ![[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString: self.owerId])
+        {
+            self.btn.hidden = YES;
+        }
+    }
     // 如果是我的粉丝
     if (item.fans_id && [item.fans_id integerValue] > 0)
     {

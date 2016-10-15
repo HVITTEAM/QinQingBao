@@ -278,6 +278,18 @@
     rightBtn0.y = 25 + scrollView.contentOffset.y;
     rightBtn1.y = 25 + scrollView.contentOffset.y;
     
+    
+    if (alpha >0.5)
+    {
+        rightBtn1.hidden = YES;
+        rightBtn0.hidden = YES;
+    }
+    else
+    {
+        rightBtn1.hidden = NO;
+        rightBtn0.hidden = NO;
+    }
+
     self.navBar.y = scrollView.contentOffset.y;
     self.navBar.alpha = alpha;
     

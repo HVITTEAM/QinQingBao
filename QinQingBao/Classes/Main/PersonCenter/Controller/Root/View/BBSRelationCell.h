@@ -20,6 +20,9 @@
 
 @property (nonatomic, retain) BBSRelationModel *item;
 
+@property (nonatomic, copy) NSString *owerId;
+
+
 // type 1为加关注 0为删除关注
 @property (nonatomic, copy) void (^relationChangeBlock)(NSString *targetUId ,NSInteger type);
 

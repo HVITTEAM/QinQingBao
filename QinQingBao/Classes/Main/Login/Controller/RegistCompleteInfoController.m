@@ -210,7 +210,7 @@
                                          //是否隐藏左上角的返回按钮 如果是yes的话，说明是在监控和个人中心界面 否则在下单的时候弹出的界面
                                          [MTNotificationCenter postNotificationName:MTReLogin object:nil];
                                          [self dismissViewControllerAnimated:YES completion:nil];
-
+                                         
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -366,6 +366,13 @@
  = */
 -(void)regist
 {
+    if (self.telTextfield.text.length == 0)
+        return [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+    else if (self.codeTextfield.text.length == 0)
+        return [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+    else if (self.nameTextfield.text.length == 0)
+        return [NoticeHelper AlertShow:@"请输入完整信息！" view:self.view];
+    
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_LoginByother_new parameters: @{@"open_id" : self.openid,
                                                                          @"login_type" : self.login_type,

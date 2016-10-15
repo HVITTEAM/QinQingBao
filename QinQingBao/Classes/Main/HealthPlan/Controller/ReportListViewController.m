@@ -9,6 +9,7 @@
 #import "ReportListViewController.h"
 #import "ReportListCell.h"
 #import "ReportDetailViewController.h"
+#import "InterveneModel.h"
 
 @interface ReportListViewController ()
 
@@ -42,8 +43,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.footer= [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
-    [self.tableView initWithPlaceString:@"您还没有检测报告" imgPath:@"placeholder-1"];
-    
     [self getReportListData];
 }
 
@@ -58,14 +57,14 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.dataProvider.count;
-    return 3;
+    return self.dataProvider.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ReportListCell *cell = [ReportListCell createCellWithTableView:tableView];
-    
+    InterveneModel *item = self.dataProvider[indexPath.section];
+    cell.item = item;
     return cell;
 }
 
@@ -78,6 +77,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
+    InterveneModel *item = self.dataProvider[indexPath.section];
+    VC.urlstr = item.advice_report;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
@@ -93,41 +94,51 @@
 - (void)getReportListData
 {
     //判断是否登录
-    if (![SharedAppUtil checkLoginStates]) {
+    if (![SharedAppUtil checkLoginStates])
         return;
-    }
     
-    NSMutableDictionary *params = [@{
+    NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"p": @(self.p),
                                      @"page":@(10),
                                      @"client":@"ios"
                                      }mutableCopy];
-    
+    params[@"wid"] = self.wid;
+
     if (self.isfirst) {
         self.isfirst = NO;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_member_reports parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         
-        if ([dict[@"code"] integerValue] != 0) {
+        if ([dict[@"code"] integerValue] == 17001 && self.dataProvider.count > 0)
+        {
+            return [self.tableView showNonedataTooltip];
+        }
+        else  if ([dict[@"code"] integerValue] != 0)
+        {
 //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
             return;
         }
         
-        NSArray *datas = nil;
-        if (datas.count > 0) {
+        NSArray *datas = [InterveneModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        if (datas.count > 0)
+        {
             [self.dataProvider addObjectsFromArray:datas];
             self.p++;
             //设置数据
-            [self.dataProvider addObjectsFromArray:@[]];
             [self.tableView reloadData];
         }
         
-        if (self.dataProvider.count > 0) {
+        if (self.dataProvider.count > 0)
+        {
             [self.tableView removePlace];
+        }
+        else if(self.dataProvider.count == 0)
+        {
+            [self.tableView initWithPlaceString:@"您还没有检测报告" imgPath:@"placeholder-1"];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -135,7 +146,7 @@
         [self.tableView.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-
+    
 }
 
 @end

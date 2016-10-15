@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "InterveneModel.h"
 @interface ReportListCell : UITableViewCell
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
+@property (nonatomic, retain) InterveneModel *item;
 @end

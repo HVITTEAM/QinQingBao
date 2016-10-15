@@ -50,7 +50,7 @@
     NSDictionary *paramDict = [[NSDictionary alloc] init];
     if (self.type == 1)
     {
-        self.title = @"我的关注";
+        self.title = @"关注列表";
         paramDict = @{@"action" : @"attention",
                       @"attention_uid" :self.uid,
                       @"client" : @"ios",
@@ -59,7 +59,7 @@
     }
     else
     {
-        self.title = @"我的粉丝";
+        self.title = @"粉丝列表";
         paramDict = @{@"action" : @"fans",
                       @"fans_uid" : self.uid,
                       @"client" : @"ios",
@@ -128,6 +128,7 @@
     if(cell == nil)
         cell = [BBSRelationCell BBSRelationCell];
     
+    cell.owerId = _uid;
     cell.relationChangeBlock = ^(NSString *targetUId,NSInteger type)
     {
         [self relationOperateWithID:targetUId type:type];
