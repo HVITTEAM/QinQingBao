@@ -10,4 +10,6 @@
 
 @interface ReportListViewController : UITableViewController
 
+@property (copy, nonatomic) NSString *wid;
+
 @end

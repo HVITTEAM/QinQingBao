@@ -19,6 +19,7 @@
 #import "DeliverViewController.h"
 #import "ReportViewController.h"
 #import "InterveneController.h"
+#import "ReportListViewController.h"
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
@@ -346,6 +347,11 @@
         InterveneController *view = [[InterveneController alloc] init];
         view.wid = model.wid;
         [self.nav pushViewController:view animated:YES];
+    }else if ([btn.titleLabel.text isEqualToString:@"检测报告"]){
+        OrderModel *model = dataProvider[indexPath.section];
+        ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
+        reportListVC.wid = model.wid;
+        [self.nav pushViewController:reportListVC animated:YES];
     }
 }
 

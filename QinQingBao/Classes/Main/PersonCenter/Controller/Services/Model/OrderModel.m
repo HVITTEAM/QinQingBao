@@ -110,6 +110,7 @@ NSString * const kButtonTitles = @"buttonTitles";
             }else if (status == 21){
                 str = @"已上传报告";
                 [btnTitles addObject:@"查看物流"];
+                [btnTitles addObject:@"检测报告"];
                 [btnTitles addObject:@"干预方案"];
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
@@ -121,6 +122,7 @@ NSString * const kButtonTitles = @"buttonTitles";
             }else if (status == 23 ){
                 str = @"已配送报告";
                 [btnTitles addObject:@"查看物流"];
+                [btnTitles addObject:@"检测报告"];
                 [btnTitles addObject:@"干预方案"];
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
@@ -176,6 +178,7 @@ NSString * const kButtonTitles = @"buttonTitles";
                 //tid 43是超声理疗 44是服务市场
                 if ([self.tid isEqualToString:@"44"]) {
                     [btnTitles addObject:@"查看物流"];
+                    [btnTitles addObject:@"检测报告"];
                     [btnTitles addObject:@"干预方案"];
                 }
             }
