@@ -101,7 +101,7 @@
     }
 
     CGFloat commentWidth = MTScreenW - self.nameLb.frame.origin.x - kMargin;
-    if (commentModel.commen.oldcommon) {
+    if (commentModel.commen.oldcommon && commentModel.commen.oldcommon.length>0) {
         self.commentView.itemData = commentModel.commen;
         CGSize sz = [self.commentView getSizeByWidth:commentWidth];
         self.commentView.frame = CGRectMake(CGRectGetMaxX(self.portraitView.frame)+10, CGRectGetMaxY(self.contentLb.frame)+10, sz.width, sz.height);

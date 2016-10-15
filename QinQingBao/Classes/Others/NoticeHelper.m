@@ -122,22 +122,44 @@
     return [dateday stringFromDate:beginningOfWeek];
 }
 
-+(int)getApplicationNettype
+// 判断网络类型
++ (NetworkStates)getNetworkStates
 {
-    // 状态栏是由当前app控制的，首先获取当前app
-    UIApplication *app = [UIApplication sharedApplication];
-    
-    NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
-    
-    int type = 0;
-    for (id child in children) {
+    NSArray *subviews = [[[[UIApplication sharedApplication] valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    // 保存网络状态
+    NetworkStates states = NetworkStatesNone;
+    for (id child in subviews) {
         if ([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")]) {
-            type = [[child valueForKeyPath:@"dataNetworkType"] intValue];
+            //获取到状态栏码
+            int networkType = [[child valueForKeyPath:@"dataNetworkType"] intValue];
+            switch (networkType) {
+                case 0:
+                    states = NetworkStatesNone;
+                    //无网模式
+                    break;
+                case 1:
+                    states = NetworkStates2G;
+                    break;
+                case 2:
+                    states = NetworkStates3G;
+                    break;
+                case 3:
+                    states = NetworkStates4G;
+                    break;
+                case 5:
+                {
+                    states = NetworkStatesWIFI;
+                }
+                    break;
+                default:
+                    break;
+            }
         }
     }
-    NSLog(@"----%d", type);
-    return type;
+    //根据状态选择
+    return states;
 }
+
 
 + (NSString *)kilometre2meter:(float)meter
 {

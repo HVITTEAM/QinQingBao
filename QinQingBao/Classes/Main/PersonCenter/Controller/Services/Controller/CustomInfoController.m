@@ -57,7 +57,7 @@
                 break;
             case 2:
                 cell.textLabel.text = @"Email";
-                cell.detailTextLabel.text = self.interveneModel.email;
+                cell.detailTextLabel.text = self.interveneModel.wp_email;
                 break;
             case 4:
                 cell.textLabel.text = @"性别";

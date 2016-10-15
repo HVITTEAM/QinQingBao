@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef NS_ENUM(NSUInteger, NetworkStates) {
+    NetworkStatesNone, // 没有网络
+    NetworkStates2G, // 2G
+    NetworkStates3G, // 3G
+    NetworkStates4G, // 4G
+    NetworkStatesWIFI // WIFI
+};
 @interface NoticeHelper : NSObject
 
 
@@ -47,10 +53,6 @@
  */
 + (NSString *)kilometre2meter:(float)meter;
 
-/**
- * 根据运行时特性获取当前网络类型
- * 0 - 无网络 ; 1 - 2G ; 2 - 3G ; 3 - 4G ; 5 - WIFI
- */
-+(int)getApplicationNettype;
++ (NetworkStates)getNetworkStates;
 
 @end

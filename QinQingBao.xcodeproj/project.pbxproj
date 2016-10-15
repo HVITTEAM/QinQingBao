@@ -165,6 +165,7 @@
 		0140E2B81C4F601C002ECBC5 /* ReciverinfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140E2B71C4F601C002ECBC5 /* ReciverinfoModel.m */; };
 		01436A731D421CB90083872F /* QuestionModel_1.m in Sources */ = {isa = PBXBuildFile; fileRef = 01436A721D421CB90083872F /* QuestionModel_1.m */; };
 		01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */; };
+		0151E0F91DB20F56007761E3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0151E0F81DB20F56007761E3 /* Reachability.m */; };
 		015657B81DAA373C00506882 /* qz_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 015657B71DAA373C00506882 /* qz_icon.png */; };
 		0157E2391BE87B0E004C0908 /* EvaluationHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */; };
 		0157E23B1BE87B1E004C0908 /* EvaluationHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0157E23A1BE87B1E004C0908 /* EvaluationHeadView.xib */; };
@@ -1621,6 +1622,8 @@
 		01436A721D421CB90083872F /* QuestionModel_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionModel_1.m; sourceTree = "<group>"; };
 		01438E7B1BDDD80A00F92681 /* AllServiceTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllServiceTypeController.h; sourceTree = "<group>"; };
 		01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllServiceTypeController.m; sourceTree = "<group>"; };
+		0151E0F71DB20F56007761E3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0151E0F81DB20F56007761E3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		015657B71DAA373C00506882 /* qz_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qz_icon.png; sourceTree = "<group>"; };
 		0157E2371BE87B0E004C0908 /* EvaluationHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationHeadView.h; sourceTree = "<group>"; };
 		0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationHeadView.m; sourceTree = "<group>"; };
@@ -3461,6 +3464,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01024BEA1BD0A27E00E8CAEC /* SystemConfiguration.framework in Frameworks */,
 				016F24711C4DDF2900FF1BF5 /* ImageIO.framework in Frameworks */,
 				01ECDB2E1C8EB5E80018160F /* libsqlite3.tbd in Frameworks */,
 				019D634A1DA8E9DD00CE6622 /* libssl.a in Frameworks */,
@@ -3487,7 +3491,6 @@
 				01FF8F8A1CDB2DDE0089BBC4 /* libWeChatSDK.a in Frameworks */,
 				01024BEC1BD0A29E00E8CAEC /* CoreTelephony.framework in Frameworks */,
 				019D63491DA8E9DD00CE6622 /* libcrypto.a in Frameworks */,
-				01024BEA1BD0A27E00E8CAEC /* SystemConfiguration.framework in Frameworks */,
 				01ECDAE71C8EB31F0018160F /* libopencore-amrnb.a in Frameworks */,
 				01FF8F851CDB2DDE0089BBC4 /* ShareSDKUI.framework in Frameworks */,
 				010414401BB13701006EC41B /* OpenAL.framework in Frameworks */,
@@ -7794,6 +7797,8 @@
 		01EFD0BD1B7D84A700A720E7 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				0151E0F71DB20F56007761E3 /* Reachability.h */,
+				0151E0F81DB20F56007761E3 /* Reachability.m */,
 				01A820281D824C45002E30E3 /* CXTabBar.h */,
 				01A820291D824C45002E30E3 /* CXTabBar.m */,
 				01CF97AB1C7AEAD500206FCD /* MTAddressPickController.h */,
@@ -10169,6 +10174,7 @@
 				01024CC01BD0A75D00E8CAEC /* DataVerifier.m in Sources */,
 				01601D9B1CE0900200B3712E /* ServiceInfoCell.m in Sources */,
 				01FD4C971CAE4B43008F09CF /* MWPhoto.m in Sources */,
+				0151E0F91DB20F56007761E3 /* Reachability.m in Sources */,
 				01F0B7AF1C51B9D3000BC86A /* WGS84TOGCJ02.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

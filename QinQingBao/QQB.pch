@@ -897,7 +897,6 @@ typedef NS_ENUM(NSInteger, BBSType) {
     BBSType_4,//资讯
 };
 
-
 //typedef NS_ENUM(NSInteger, iPhoneModel){//0~3
 //    iPhone4,//320*480
 //    iPhone5,//320*568

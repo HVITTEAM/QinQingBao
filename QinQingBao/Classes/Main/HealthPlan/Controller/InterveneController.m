@@ -223,7 +223,7 @@
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
-            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.short_goal ? self.dataItem.short_goal : @"无" ,self.dataItem.long_goal ? self.dataItem.long_goal : @"无"]];
+            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 2)
@@ -231,7 +231,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"膳食调养" withValue:self.dataItem.advice_diet];
+            [paragraphTextCell setTitle:@"膳食调养" withValue:self.dataItem.wp_advice_diet];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 3)
@@ -239,7 +239,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"运动养生" withValue:self.dataItem.advice_sport];
+            [paragraphTextCell setTitle:@"运动养生" withValue:self.dataItem.advice_report];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 4)
@@ -247,7 +247,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"自然疗法" withValue:self.dataItem.naturopathy];
+            [paragraphTextCell setTitle:@"自然疗法" withValue:self.dataItem.wp_naturopathy];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 5)
@@ -255,7 +255,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"营养素干预" withValue:self.dataItem.nutrient_plan];
+            [paragraphTextCell setTitle:@"营养素干预" withValue:self.dataItem.wp_nutrient_plan];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 6)
@@ -263,7 +263,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"其他" withValue:self.dataItem.advice_others];
+            [paragraphTextCell setTitle:@"其他" withValue:self.dataItem.wp_advice_others];
             cell = paragraphTextCell;
         }
     }

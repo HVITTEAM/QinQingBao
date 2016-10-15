@@ -138,7 +138,7 @@
         }
         else if(self.dataProvider.count == 0)
         {
-            [self.tableView initWithPlaceString:@"您还没有检测报告" imgPath:@"placeholder-1"];
+            [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

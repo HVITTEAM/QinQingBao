@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "UserModel.h"
+#import "Reachability.h"
 
 #import "SDWebImageManager.h"
 #import "SDImageCache.h"
@@ -50,6 +51,9 @@
     NSString *type;
     //文章id
     NSString *msg_artid;
+    
+    Reachability *_reacha;
+    NetworkStates _preStatus;
 }
 
 @end
@@ -68,6 +72,8 @@
     NSUUID *str = [[UIDevice currentDevice] identifierForVendor];
     NSLog(@"设备ID:%@",str);
     
+    [self checkNetworkStates];
+    
     [self getLocation];
     
     [MTControllerChooseTool chooseRootViewController];
@@ -81,7 +87,7 @@
                                                       UIUserNotificationTypeSound |
                                                       UIUserNotificationTypeAlert)
                                           categories:nil];
-//    [JPUSHService setupWithOption:launchOptions];
+    //    [JPUSHService setupWithOption:launchOptions];
     
     [JPUSHService setupWithOption:launchOptions appKey:@"acfe90ae99f621a1ea5b0e04" channel:@"" apsForProduction:YES];
     
@@ -217,7 +223,7 @@
         default:
             break;
     }
-
+    
 }
 
 /**
@@ -420,7 +426,7 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"消息提示" message:@"当前APP有新版本，是否更新？" delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"去更新", nil];
         alert.tag = 100;
-//        [alert show];
+        //        [alert show];
     }
 }
 
@@ -437,6 +443,47 @@
     else if (buttonIndex == 1)
     {
         [self sendMsgByType];
+    }
+}
+
+// 实时监控网络状态
+- (void)checkNetworkStates
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChange) name:kReachabilityChangedNotification object:nil];
+    _reacha = [Reachability reachabilityWithHostName:@"http://www.baidu.com"];
+    [_reacha startNotifier];
+}
+
+- (void)networkChange
+{
+    NSString *tips;
+    NetworkStates currentStates = [NoticeHelper getNetworkStates];
+    if (currentStates == _preStatus) {
+        return;
+    }
+    _preStatus = currentStates;
+    switch (currentStates) {
+        case NetworkStatesNone:
+            tips = @"当前无网络, 请检查您的网络状态";
+            break;
+        case NetworkStates2G:
+            tips = @"切换到了2G网络";
+            break;
+        case NetworkStates3G:
+            tips = @"切换到了3G网络";
+            break;
+        case NetworkStates4G:
+            tips = @"切换到了4G网络";
+            break;
+        case NetworkStatesWIFI:
+            tips = nil;
+            break;
+        default:
+            break;
+    }
+    
+    if (tips.length) {
+        [[[UIAlertView alloc] initWithTitle:@"寸欣健康" message:@"正在使用蜂窝移动网络，继续使用可能产生流量费用" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
     }
 }
 

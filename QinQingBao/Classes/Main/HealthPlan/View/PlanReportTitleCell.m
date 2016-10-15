@@ -38,7 +38,7 @@
     [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
     self.timeLab.text = [dateFormat1 stringFromDate:date];
     
-    self.contentLab.text = item.general_analysis;
+    self.contentLab.text = item.wp_general_analysis;
     CGSize size = [self.contentLab sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
     self.contentLab.height = size.height;
     
