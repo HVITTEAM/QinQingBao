@@ -134,7 +134,6 @@
     if (![SharedAppUtil checkLoginStates]) {
         return;
     }
-    
     ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
     [self.navigationController pushViewController:reportListVC animated:YES];
 }
@@ -163,8 +162,7 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"Msg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+            
         }
         else
         {

@@ -173,6 +173,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
  */
 -(void)setBadge:(NSString *)value
 {
+    if([value integerValue] <1)return;
     for (int i = 0; i < self.buttonArr.count; i++)
     {
         UIButton *btn = (UIButton *)self.buttonArr[i];

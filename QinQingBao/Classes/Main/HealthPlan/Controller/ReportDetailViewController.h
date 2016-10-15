@@ -10,4 +10,5 @@
 
 @interface ReportDetailViewController : UIViewController
 
+@property (nonatomic, copy) NSString *urlstr;
 @end

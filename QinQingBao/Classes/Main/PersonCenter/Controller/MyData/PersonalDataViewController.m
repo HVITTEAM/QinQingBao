@@ -700,8 +700,8 @@
 
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
 {
-    UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
-    NSData *data = UIImageJPEGRepresentation(slt, 1);
+//    UIImage *slt = [croppedImage scaleImageToSize:CGSizeMake(70,70)];
+    NSData *data = UIImageJPEGRepresentation(croppedImage, 0.5);
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self upploadAvatar:data];

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ReportListViewController : UITableViewController
-
+@property (nonatomic, copy) NSString *wid;
 @end

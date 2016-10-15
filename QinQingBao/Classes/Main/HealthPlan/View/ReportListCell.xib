@@ -34,15 +34,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bM-5J-Pcm">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PtU-qe-OKu">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PtU-qe-OKu" secondAttribute="trailing" constant="9.5" id="1oC-xO-57l"/>
                             <constraint firstItem="bhY-j9-74T" firstAttribute="top" secondItem="07t-vs-Fzk" secondAttribute="top" constant="10" id="8WX-jX-GTe"/>
+                            <constraint firstItem="PtU-qe-OKu" firstAttribute="baseline" secondItem="3bM-5J-Pcm" secondAttribute="baseline" id="D0J-Nw-bAQ"/>
                             <constraint firstItem="7IS-zc-Dzo" firstAttribute="leading" secondItem="bhY-j9-74T" secondAttribute="trailing" constant="10" id="ERV-cg-9r7"/>
                             <constraint firstItem="0g4-o3-OeT" firstAttribute="leading" secondItem="7IS-zc-Dzo" secondAttribute="leading" id="Gy7-3A-H2k"/>
                             <constraint firstItem="7IS-zc-Dzo" firstAttribute="top" secondItem="bhY-j9-74T" secondAttribute="top" constant="4" id="M8I-ON-MCm"/>
                             <constraint firstAttribute="bottom" secondItem="bhY-j9-74T" secondAttribute="bottom" constant="10" id="bsO-FC-EFp"/>
                             <constraint firstItem="0g4-o3-OeT" firstAttribute="bottom" secondItem="bhY-j9-74T" secondAttribute="bottom" constant="-4" id="cXT-ep-vqG"/>
+                            <constraint firstItem="3bM-5J-Pcm" firstAttribute="leading" secondItem="0g4-o3-OeT" secondAttribute="trailing" constant="10" id="ebZ-7a-DFt"/>
+                            <constraint firstItem="3bM-5J-Pcm" firstAttribute="baseline" secondItem="0g4-o3-OeT" secondAttribute="baseline" id="gfD-eJ-oS6"/>
                             <constraint firstItem="bhY-j9-74T" firstAttribute="leading" secondItem="07t-vs-Fzk" secondAttribute="leading" constant="10" id="yTL-vw-YeO"/>
                         </constraints>
                     </view>
@@ -57,7 +71,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="imgView" destination="bhY-j9-74T" id="grv-Jm-mRS"/>
+                <outlet property="sizeLabel" destination="PtU-qe-OKu" id="Jpx-JI-9lA"/>
                 <outlet property="subTitleLb" destination="0g4-o3-OeT" id="SxK-3Y-x8N"/>
+                <outlet property="timelab" destination="3bM-5J-Pcm" id="Qx7-gf-fgt"/>
                 <outlet property="titleLb" destination="7IS-zc-Dzo" id="6Kg-xw-Vbf"/>
             </connections>
             <point key="canvasLocation" x="33" y="26"/>

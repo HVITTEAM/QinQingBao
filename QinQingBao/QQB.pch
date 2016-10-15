@@ -851,6 +851,9 @@
 /***专家认证 - 获取专家列表*/
 #define URL_Get_expert_list [NSString stringWithFormat:@"%@/discuz/uc_client/hvit_app/ylserver_api/expert_list.php",URL_Local_New]
 
+/***服务 - 获取上传报告信息（获取所有个人报告）*/
+#define URL_Get_member_reports [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=work_report&op=get_member_reports",URL_Local]
+
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
 blue:((float)(rgbValue & 0xFF)) / 255.0 \

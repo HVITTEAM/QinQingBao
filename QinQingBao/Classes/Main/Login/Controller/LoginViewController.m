@@ -336,9 +336,51 @@
                  default:
                      break;
              }
-             RegistCompleteInfoController *vc = [[RegistCompleteInfoController alloc] init];
-             [vc registWithOpenid:user.uid login_type:login_type open_token:user.credential.token nickname:user.nickname icon:user.icon];
-             [self.navigationController pushViewController:vc animated:YES];
+             
+             MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+             [CommonRemoteHelper RemoteWithUrl:URL_LoginByother_new parameters: @{@"open_id" : user.uid,
+                                                                                  @"login_type" : login_type,
+                                                                                  @"open_token" : user.credential.token,
+                                                                                  @"client" : @"ios",
+                                                                                  @"sys" : @"2"}
+                                          type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                              
+                                              id codeNum = [dict objectForKey:@"code"];
+                                              if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                              {
+                                                  if ([codeNum isEqualToString:@"11010"])
+                                                  {
+                                                      //清楚第三方的授权信息
+                                                      [ShareSDK cancelAuthorize:SSDKPlatformTypeQQ];
+                                                      [ShareSDK cancelAuthorize:SSDKPlatformTypeWechat];
+                                                      [ShareSDK cancelAuthorize:SSDKPlatformTypeSinaWeibo];
+                                                      
+                                                      RegistCompleteInfoController *vc = [[RegistCompleteInfoController alloc] init];
+                                                      [vc registWithOpenid:user.uid login_type:login_type open_token:user.credential.token nickname:user.nickname icon:user.icon];
+                                                      [self.navigationController pushViewController:vc animated:YES];
+                                                  }
+                                                  else
+                                                  {
+                                                      UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                                      [alertView show];
+                                                  }
+                                              }
+                                              else
+                                              {
+                                                  [NoticeHelper AlertShow:@"登录成功！" view:self.view];
+                                                  NSDictionary *di = [dict objectForKey:@"datas"];
+                                                  UserModel *vo = [UserModel objectWithKeyValues:di];
+                                                  vo.logintype = login_type;
+                                                  [self loginBBS:vo];
+                                                  [self loginResultSetData:vo];
+                                              }
+                                              [HUD removeFromSuperview];
+                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                              NSLog(@"发生错误！%@",error);
+                                              [HUD removeFromSuperview];
+                                          }];
+
+       
          }
          else
          {
@@ -346,6 +388,8 @@
          }
      }];
 }
+
+
 
 /**
  *  登录成功之后需要设置本地登录数据
