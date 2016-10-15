@@ -69,7 +69,7 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 #define kSellerAccount @"ofc.er@hvit.com.cn"
 
-#define kAppVersion @"v 1.7.0.1"
+#define kAppVersion @"v 2.0.0.1"
 
 /** 自定义Log，日志开关 0-关闭 1-开启 */
 #define __LOGDEBUG__ (1)
@@ -286,13 +286,13 @@
 #define ShopTel1 @"400-151-2626"
 
 
-#define URL_Local @"http://test.hvit.com.cn/ylserver"
+//#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
-#define URL_Local_New @"http://test.hvit.com.cn"
+//#define URL_Local_New @"http://test.hvit.com.cn"
 
-//#define URL_Local @"http://172.16.13.53/ylserver"
+#define URL_Local @"http://cxjk.hvit.com.cn"
 
-//#define URL_Local @"http://ibama.hvit.com.cn"
+#define URL_Local_New @"http://cxjk.hvit.com.cn"
 
 /***充值支付宝回调url*/
 #define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]

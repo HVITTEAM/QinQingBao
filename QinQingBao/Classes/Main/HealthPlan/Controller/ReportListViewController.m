@@ -77,7 +77,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
-    InterveneModel *item = self.dataProvider[indexPath.section];
+    InterveneModel *item = self.dataProvider[indexPath.row];
     VC.urlstr = item.advice_report;
     [self.navigationController pushViewController:VC animated:YES];
 }

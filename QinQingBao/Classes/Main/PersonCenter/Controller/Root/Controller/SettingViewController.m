@@ -153,18 +153,16 @@
     HMCommonItem*updata = [HMCommonItem itemWithTitle:@"检查更新" icon:nil];
     updata.subtitle = kAppVersion;
     
-    
-    group.items = @[updata,version,advice];
+    group.items = @[version,advice];
 }
-
 
 // 显示缓存大小
 -(float)filePath
 {
     NSString * cachPath = [ NSSearchPathForDirectoriesInDomains ( NSCachesDirectory , NSUserDomainMask , YES ) firstObject ];
     return [ self folderSizeAtPath :cachPath];
-    
 }
+
 //计算一下 单个文件的大小
 - (long)fileSizeAtPath:( NSString *) filePath
 {

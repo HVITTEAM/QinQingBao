@@ -422,6 +422,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
     [btn setTitle:title forState:UIControlStateNormal];
+    btn.enabled = NO;
     [btn setTitleColor:HMColor(153, 153, 153) forState:UIControlStateNormal];
     [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];

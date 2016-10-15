@@ -466,6 +466,7 @@
 - (UIButton *)createBtnWithTitle:(NSString *)title image:(NSString *)imageName
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.enabled = NO;
     btn.titleLabel.font = [UIFont systemFontOfSize:12];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:HMColor(153, 153, 153) forState:UIControlStateNormal];

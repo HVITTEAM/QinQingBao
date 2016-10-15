@@ -20,8 +20,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH)];
+    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     self.webView.delegate = self;
+    self.webView.scalesPageToFit = YES;
     self.webView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.webView];
     
