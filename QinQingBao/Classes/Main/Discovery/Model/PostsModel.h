@@ -47,4 +47,7 @@
 @property (copy, nonatomic) NSArray *attachmentpicture_bigthumb;
 /**返回小图图片*/
 @property (copy, nonatomic) NSArray *attachmentpicture_smallthumb;
+
+/**帖子是自己的*/
+@property (copy, nonatomic) NSString *is_myposts;
 @end

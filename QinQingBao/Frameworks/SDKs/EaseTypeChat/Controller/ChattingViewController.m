@@ -322,11 +322,6 @@
     self.menuIndexPath = nil;
 }
 
-
-
-
-
-
 - (UITableViewCell *)messageViewController:(UITableView *)tableView cellForMessageModel:(id<IMessageModel>)messageModel {
     if (messageModel.bodyType == eMessageBodyType_Text) {
         NSString *cell = [CustomMessageCell cellIdentifierWithModel:messageModel];

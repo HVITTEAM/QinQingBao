@@ -368,7 +368,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [HUD removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求失败" view:self.view];
+        [NoticeHelper AlertShow:@"服务器访问失败" view:nil];
     }];
 }
 
@@ -411,6 +411,7 @@
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"服务器访问失败" view:nil];
                                      [HUD removeFromSuperview];
                                  }];
 }

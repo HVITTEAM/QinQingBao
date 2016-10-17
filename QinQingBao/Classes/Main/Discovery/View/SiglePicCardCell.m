@@ -117,7 +117,21 @@
 
     // 自己发的帖子不显示关注按钮
     if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.itemdata.authorid])
-        self.attentionBtn.hidden = YES;
+    {
+        itemdata.is_myposts = @"1";
+        [self.attentionBtn setTitle:@"删除" forState:UIControlStateNormal];
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"C69666"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"C69666"] forState:UIControlStateNormal];
+    }
+    else if ([itemdata.is_home_friend integerValue] != 0) {  //设置是否关注
+        [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"B3B3B3"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"B3B3B3"] forState:UIControlStateNormal];
+    }else{
+        [self.attentionBtn setTitle:@"+关注" forState:UIControlStateNormal];
+        self.attentionBtn.layer.borderColor = [UIColor colorWithRGB:@"f7931e"].CGColor;
+        [self.attentionBtn setTitleColor:[UIColor colorWithRGB:@"f7931e"] forState:UIControlStateNormal];
+    }
     
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
 

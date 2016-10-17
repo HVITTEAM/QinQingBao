@@ -107,6 +107,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>使用照相机</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>app在筛选据您最近的商家的时候需要使用您的定位信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>

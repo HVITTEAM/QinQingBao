@@ -29,6 +29,9 @@
     
     // 当前第几页
     NSInteger currentPageIdx;
+    
+    PostsModel *selectedDeleteModel;
+
 }
 @end
 
@@ -457,6 +460,10 @@
 {
     if ([SharedAppUtil checkLoginStates])
     {
+        if ([model.is_myposts integerValue] == 1)//点击的是自己的帖子
+        {
+            return [self deleteAction:model];
+        }
         NSString *type = @"add";
         if ([model.is_home_friend integerValue] != 0) {
             type = @"del";
@@ -496,5 +503,52 @@
         }];
     }
 }
+
+
+/**
+ *  删除帖子
+ */
+#pragma mark - 导航栏事件
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSDictionary *params = @{@"tid":selectedDeleteModel.tid,
+                                 @"client":@"ios",
+                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            [HUD removeFromSuperview];
+            id codeNum = [dict objectForKey:@"code"];
+            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            }
+            else
+            {
+                [self getData];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [HUD removeFromSuperview];
+            [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        }];
+    }
+}
+/**
+ *  删除帖子
+ */
+- (void)deleteAction:(PostsModel *)model
+{
+    if ([model.is_myposts integerValue] == 1)
+    {
+        selectedDeleteModel = model;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+        [alertView show];
+    }
+}
+
 
 @end

@@ -167,20 +167,24 @@
  */
 -(void)fetchNumberFromServices
 {
-    NSDictionary *params =  @{
-                               @"mobile" : self.phoneNum
-                              };
-    [CommonRemoteHelper RemoteWithUrl:URL_getsafenum parameters:params type:CommonRemoteTypeGet success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] == 0) {
-            [NoticeHelper AlertShow:@"验证码发送成功，注意查收" view:self];
-        }else{
-            [NoticeHelper AlertShow:@"获取验证码失败！" view:self];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"获取验证码失败" view:self];
-    }];
+//    NSDictionary *params =  @{
+//                               @"mobile" : self.phoneNum
+//                              };
+//    [CommonRemoteHelper RemoteWithUrl:URL_getsafenum parameters:params type:CommonRemoteTypeGet success:^(NSDictionary *dict, id responseObject) {
+//        
+//        if ([dict[@"code"] integerValue] == 0) {
+//            [NoticeHelper AlertShow:@"验证码发送成功，注意查收" view:self];
+//        }else{
+//            [NoticeHelper AlertShow:@"获取验证码失败！" view:self];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [NoticeHelper AlertShow:@"获取验证码失败" view:self];
+//    }];
 
+    [[MTSMSHelper sharedInstance] getCheckcode:self.phoneNum];
+    [MTSMSHelper sharedInstance].sureSendSMS = ^{
+        [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:nil];
+    };
 }
 
 
