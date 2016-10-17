@@ -11,7 +11,7 @@
 #import "CXComposeViewController.h"
 #import "MTTextView.h"
 
-@interface CXComposeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate>
+@interface CXComposeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextViewDelegate,UIAlertViewDelegate>
 
 {
     MTTextView *titleField;
@@ -182,9 +182,25 @@
     contentView.attributedText = attributedString;
 }
 
+#pragma mrak UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag > 100)
+    {
+        if(buttonIndex==1)
+            [self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
+        else if(buttonIndex==2)
+            [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+        
+    }
+}
+
 -(void)getPic
 {
-    [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+//    [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    UIAlertView *alertPic = [[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
+    alertPic.tag = 101;
+    [alertPic show];
 }
 
 #pragma 拍照模块
