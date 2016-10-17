@@ -121,6 +121,11 @@
     self.timeLb.text = [postsModel.dateline substringWithRange:NSMakeRange(5, 11)];
     self.nameLb.text = postsModel.author;
     self.headTagLb.text = postsModel.grouptitle;
+    
+    // 自己发的帖子不显示关注按钮
+    if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.postsModel.authorid])
+        self.attentionBtn.hidden = YES;
+    
     //设置是否关注
     if ([postsModel.is_home_friend integerValue] != 0) {
         [self.attentionBtn setTitle:@"已关注" forState:UIControlStateNormal];

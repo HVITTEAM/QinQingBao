@@ -124,16 +124,16 @@
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
                                              return;
-                                             //                                             return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-2"];
+//                                            return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-1"];
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
                                              return;
-                                             //                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+//                                             return [self.view showNonedataTooltip];
                                          }
                                          
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
+//                                         [alertView show];
                                      }
                                      else
                                      {
@@ -153,7 +153,6 @@
                                          
                                          [self.tableView reloadData];
                                      }
-                                     
                                      
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
@@ -187,7 +186,7 @@
                                      {
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
-                                             return [self.tableView initWithPlaceString:PlaceholderStr_Attention imgPath:@"placeholder-2"];
+                                             return [self.tableView initWithPlaceString:PlaceholderStr_Attention imgPath:@"placeholder-1"];
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {

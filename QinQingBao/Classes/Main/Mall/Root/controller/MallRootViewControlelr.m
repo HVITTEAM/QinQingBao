@@ -140,6 +140,8 @@ static CGFloat IMAGEVIEW_HEIGHT;
 {
     [super viewWillDisappear:animated];
     
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
     [self stopCountDown];
 }
 

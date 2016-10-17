@@ -115,6 +115,10 @@
 {
     _itemdata = itemdata;
 
+    // 自己发的帖子不显示关注按钮
+    if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.itemdata.authorid])
+        self.attentionBtn.hidden = YES;
+    
     [self.portraitView sd_setImageWithURL:[NSURL URLWithString:self.itemdata.avatar] placeholderImage:[UIImage imageNamed:@"pc_user"]];
 
     // 设置是否加V
@@ -210,7 +214,6 @@
     
     [self.timeLb sizeToFit];
     self.timeLb.frame = CGRectMake(CGRectGetMinX(self.nameLb.frame), CGRectGetMaxY(self.nameLb.frame) + 7, CGRectGetWidth(self.timeLb.frame), CGRectGetHeight(self.timeLb.frame));
-    
     
     
     if (self.headTagLb.text.length == 0)

@@ -215,12 +215,15 @@
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
                                          NSLog(@"BBS登录失败！");
-                                         [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
+                                         if([codeNum integerValue] == 18001)
+                                             [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
+                                         else
+                                             [NoticeHelper AlertShow:[dict objectForKey:@"errorMsg"] view:nil];
                                      }
                                      else
                                      {
                                          NSLog(@"BBS登录成功！");
-
+                                         
                                          NSDictionary *datas = [dict objectForKey:@"datas"];
                                          
                                          BBSUserModel *bbsmodel = [[BBSUserModel alloc] init];
@@ -380,8 +383,8 @@
                                               NSLog(@"发生错误！%@",error);
                                               [HUD removeFromSuperview];
                                           }];
-
-       
+             
+             
          }
          else
          {

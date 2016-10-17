@@ -657,10 +657,8 @@
         }else{
             self.tapLoginOutButton = NO;
         }
-        
         return;
     }
-    
     
     if(buttonIndex == 0)
     {

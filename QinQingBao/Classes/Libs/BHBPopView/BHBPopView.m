@@ -119,7 +119,7 @@
     if (view == nil) {
         view = (UIView *)[[UIApplication sharedApplication] delegate];
     }
-
+    
 }
 
 + (void)hideFromView:(UIView *)view{
@@ -137,7 +137,7 @@
 
 + (void)hideWithView:(UIView *)view{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [view fadeOutWithTime:0.35];
+        [view fadeOutWithTime:0.35];
     });
 }
 

@@ -37,13 +37,7 @@ static const CGFloat criticalY = -50.f;
     
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
     {
-//        self.loginBtn.layer.borderColor = [[UIColor whiteColor] CGColor];
-//        self.loginBtn.layer.borderWidth = .5f;
-//        self.loginBtn.layer.cornerRadius = 5;
-//        self.loginBtn.layer.masksToBounds = YES;
-        
         [self.loginBtn setTitle:@" 未登录 " forState:UIControlStateNormal];
-        
         self.professionLab.text = @"";
     }
 }
