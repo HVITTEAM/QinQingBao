@@ -160,29 +160,54 @@
 {
     if ([SharedAppUtil checkLoginStates])
     {
-        [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/liver_curing_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"肝脏养护"] andSelectBlock:^(BHBItem *item) {
-            // 弹出发微博控制器
-            CXComposeViewController *compose = [[CXComposeViewController alloc] init];
-            if ([item.title isEqualToString:@"健康资讯"])
-            {
-                compose.fid = 39;
-            }
-            else if ([item.title isEqualToString:@"心脑血管"])
-            {
-                compose.fid = 40;
-            }
-            else if ([item.title isEqualToString:@"易疲劳"])
-            {
-                compose.fid = 41;
-            }
-            else if ([item.title isEqualToString:@"肝脏养护"])
-            {
-                compose.fid = 42;
-            }
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
-            [self presentViewController:nav animated:YES completion:nil];
-        }];
-    }
+        if ([[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id  isEqual: @"1"])
+        {
+            [BHBPopView showToView:self.view andImages:@[@"images.bundle/healthNews_icon",@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/liver_curing_icon"] andTitles:@[@"健康资讯",@"心脑血管",@"易疲劳",@"肝脏养护"] andSelectBlock:^(BHBItem *item) {
+                // 弹出发微博控制器
+                CXComposeViewController *compose = [[CXComposeViewController alloc] init];
+                if ([item.title isEqualToString:@"健康资讯"])
+                {
+                    compose.fid = 39;
+                }
+                else if ([item.title isEqualToString:@"心脑血管"])
+                {
+                    compose.fid = 40;
+                }
+                else if ([item.title isEqualToString:@"易疲劳"])
+                {
+                    compose.fid = 41;
+                }
+                else if ([item.title isEqualToString:@"肝脏养护"])
+                {
+                    compose.fid = 42;
+                }
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
+                [self presentViewController:nav animated:YES completion:nil];
+            }];
+        }
+        else
+        {
+            [BHBPopView showToView:self.view andImages:@[@"images.bundle/heart_brain_icon",@"images.bundle/fatigue_icon",@"images.bundle/liver_curing_icon"] andTitles:@[@"心脑血管",@"易疲劳",@"肝脏养护"] andSelectBlock:^(BHBItem *item) {
+                // 弹出发微博控制器
+                CXComposeViewController *compose = [[CXComposeViewController alloc] init];
+                if ([item.title isEqualToString:@"心脑血管"])
+                {
+                    compose.fid = 40;
+                }
+                else if ([item.title isEqualToString:@"易疲劳"])
+                {
+                    compose.fid = 41;
+                }
+                else if ([item.title isEqualToString:@"肝脏养护"])
+                {
+                    compose.fid = 42;
+                }
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:compose];
+                [self presentViewController:nav animated:YES completion:nil];
+            }];
+
+        }
+           }
 }
 
 #pragma mark - NSNotification Center

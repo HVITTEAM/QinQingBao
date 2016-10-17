@@ -13,6 +13,8 @@
 #import "UIView+BHBAnimation.h"
 #import "BHBGroup.h"
 
+static const NSInteger rowcount = 3;
+
 @interface BHBCenterView ()
 
 @property (nonatomic,strong) NSMutableArray * visableBtnArray;
@@ -82,8 +84,8 @@
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
         [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:14];
-        CGFloat x = (i % 4) * self.frame.size.width / 4.0;
-        CGFloat y = (i / 4) * self.frame.size.height / 2.0;
+        CGFloat x = (i % rowcount) * self.frame.size.width / rowcount;
+        CGFloat y = (i / rowcount) * self.frame.size.height / 2.0;
         if (isMore) {
             x += [UIScreen mainScreen].bounds.size.width;
             [self.moreBtns addObject:btn];
@@ -91,7 +93,7 @@
         else {
             [self.homeBtns addObject:btn];
         }
-        CGFloat width = self.frame.size.width / 4.0;
+        CGFloat width = self.frame.size.width / rowcount;
         CGFloat height = self.frame.size.height / 2;
         [btn addTarget:self action:@selector(didClickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [btn addTarget:self action:@selector(didTouchBtn:) forControlEvents:UIControlEventTouchDown];
