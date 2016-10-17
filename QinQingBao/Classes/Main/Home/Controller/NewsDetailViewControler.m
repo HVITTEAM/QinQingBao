@@ -62,7 +62,7 @@
 
 -(void)initView
 {
-   self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share.png"] style:UIBarButtonItemStylePlain target:self action:@selector(share)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share.png"] style:UIBarButtonItemStylePlain target:self action:@selector(share)];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -102,7 +102,7 @@
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
     {
-       return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
     }
     if (textfield.text.length < 1)
         return [NoticeHelper AlertShow:@"评论内容不能为空" view:nil];
@@ -203,16 +203,16 @@
                                           title:self.articleItem.title
                                            type:SSDKContentTypeAuto];
         
-        UIImage *sinaImg = [UIImage imageNamed:str];
-        // 定制新浪微博的分享内容
-        [shareParams SSDKSetupSinaWeiboShareParamsByText:self.articleItem.abstract title:self.articleItem.title image:sinaImg url:[NSURL URLWithString:url] latitude:0 longitude:0 objectID:nil type:SSDKContentTypeAuto];
         // 定制微信好友的分享内容
         [shareParams SSDKSetupWeChatParamsByText:self.articleItem.abstract title:self.articleItem.title url:[NSURL URLWithString:url] thumbImage:nil image:[UIImage imageNamed:str] musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];// 微信好友子平台
         
         //2、分享（可以弹出我们的分享菜单和编辑界面）
         [ShareSDK showShareActionSheet:nil //要显示菜单的视图, iPad版中此参数作为弹出菜单的参照视图，只有传这个才可以弹出我们的分享菜单，可以传分享的按钮对象或者自己创建小的view 对象，iPhone可以传nil不会影响
-                                 items:nil
-                           shareParams:shareParams
+                                 items:@[
+                                         @(SSDKPlatformTypeQQ),
+                                         @(SSDKPlatformSubTypeWechatSession),
+                                         @(SSDKPlatformSubTypeWechatTimeline),
+                                         ]                           shareParams:shareParams
                    onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
                        
                        switch (state) {

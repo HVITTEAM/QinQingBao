@@ -334,7 +334,7 @@
                             // 不要使用微信总平台进行初始化
                             //@(SSDKPlatformTypeWechat),
                             // 使用微信子平台进行初始化，即可
-//                            @(SSDKPlatformTypeSinaWeibo),
+                            @(SSDKPlatformTypeSinaWeibo),
                             @(SSDKPlatformTypeQQ),
                             @(SSDKPlatformSubTypeWechatSession),
                             @(SSDKPlatformSubTypeWechatTimeline),
