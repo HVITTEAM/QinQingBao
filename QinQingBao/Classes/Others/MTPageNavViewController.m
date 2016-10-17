@@ -9,6 +9,8 @@
 static const CGFloat kHeightOfTopScrollView = 44.0f;
 static const CGFloat kFontSizeOfTabButton = 15.0f;
 
+#define kTotalMargin (MTScreenW / 320 * 120)
+
 #import "MTPageNavViewController.h"
 
 @interface MTPageNavViewController ()<UIScrollViewDelegate>
@@ -43,7 +45,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     self.buttonArr = [[NSMutableArray alloc] init];
     
     //创建顶部可滑动的scrollView
-    self.headScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW - 120, kHeightOfTopScrollView)];
+    self.headScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW - kTotalMargin, kHeightOfTopScrollView)];
     self.navigationItem.titleView = self.headScrollView;
     
     //创建主滚动视图
@@ -75,7 +77,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
-        [button setFrame:CGRectMake(((MTScreenW - 120)/self.viewArr.count) *i,0,(MTScreenW - 120)/self.viewArr.count, kHeightOfTopScrollView - 5)];
+        [button setFrame:CGRectMake(((MTScreenW - kTotalMargin)/self.viewArr.count) *i,0,(MTScreenW - kTotalMargin)/self.viewArr.count, kHeightOfTopScrollView - 5)];
         [button setTitle:vc.title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];

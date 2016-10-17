@@ -33,6 +33,8 @@
     [self getAllPriletterList];
     
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
+    
+    [self.tableView initWithPlaceString:@"暂无消息" imgPath:@"placeholder-3"];
 }
 
 -(void)initTableView
@@ -103,8 +105,8 @@
         id codeNum = [dict objectForKey:@"code"];
         if([codeNum integerValue] > 0)
         {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"Msg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"Msg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+//            [alertView show];
         }
         else
         {
@@ -118,9 +120,11 @@
             if (ar.count > 0) {
                 [self.dataProvider addObjectsFromArray:ar];
                 self.pageNum ++;
-    
-                
                 [self.tableView reloadData];
+            }
+            
+            if(self.dataProvider > 0){
+                [self.tableView removePlace];
             }
         }
         

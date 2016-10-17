@@ -215,6 +215,7 @@
                                      if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
                                      {
                                          NSLog(@"BBS登录失败！");
+                                         [MTNotificationCenter postNotificationName:MTCompleteInfo object:nil];
                                      }
                                      else
                                      {

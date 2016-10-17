@@ -27,10 +27,10 @@ static const CGFloat criticalY = -50.f;
     [self.userIcon addGestureRecognizer:singleTap];
 
     //加v
-    markView = [[UIImageView alloc] initWithFrame:CGRectMake(self.userIcon.width - 20, self.userIcon.height - 20, 16, 16)];
+    markView = [[UIImageView alloc] init];
     markView.image = [UIImage imageNamed:@"v.png"];
     markView.hidden = YES;
-    [self.userIcon addSubview:markView];
+    [self addSubview:markView];
 
     self.professionLab.layer.cornerRadius = 4;
     self.professionLab.layer.masksToBounds = YES;
@@ -46,6 +46,14 @@ static const CGFloat criticalY = -50.f;
         
         self.professionLab.text = @"";
     }
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.userIcon.layer.cornerRadius = self.userIcon.width / 2;
+    self.userIcon.layer.masksToBounds = YES;
+    markView.frame = CGRectMake(CGRectGetMaxX(self.userIcon.frame) - 20, CGRectGetMaxY(self.userIcon.frame) - 20, 16, 16);
 }
 
 -(void)initWithName:(NSString *)name professional:(NSString *)professional isfriend:(NSString *)isfriend  is_mine:(NSString *)is_mine

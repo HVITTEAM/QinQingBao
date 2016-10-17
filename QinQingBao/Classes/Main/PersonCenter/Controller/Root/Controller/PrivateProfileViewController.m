@@ -610,7 +610,9 @@
                                              NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",URL_Icon,iconUrl]];
                                              
                                              [headView.userIcon sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                 headView.userIcon.image = [image circleImage];
+                                                 if (image) {
+                                                     headView.userIcon.image = [image circleImage];
+                                                 }
                                              }];
                                              
                                              [headView initWithName:infoVO.member_truename.length > 0 ? infoVO.member_truename : @"请完善资料" professional:personalInfo.grouptitle isfriend:personalInfo.is_home_friend is_mine:@"1"];

@@ -18,6 +18,8 @@
 
 @property (assign, nonatomic) NSInteger pageNum;     //分页数
 
+@property (assign, nonatomic) BOOL isFirstLoad;
+
 @end
 
 @implementation SearchPostsViewController
@@ -32,9 +34,12 @@
     [super viewDidLoad];
     
     self.pageNum = 1;
+    self.isFirstLoad = YES;
     
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = HMColor(245, 245, 245);
+    [self.tableView initWithPlaceString:@"暂无数据" imgPath:@"placeholder-1"];
     
     self.navigationItem.title = @"搜索结果";
 }
@@ -111,6 +116,10 @@
  **/
 - (void)loadFlaglist
 {
+    if (self.isFirstLoad) {
+        [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        self.isFirstLoad = NO;
+    }
     NSMutableDictionary *params = [@{
                                      @"flag":@4,
                                      @"p": @(self.pageNum),
@@ -121,11 +130,11 @@
     params[@"subjectname"] = self.keyWords;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         [self.tableView.footer endRefreshing];
         
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
             return;
         }
         
@@ -135,9 +144,14 @@
             self.pageNum++;
             
             [self.tableView reloadData];
+            
+            if(self.dataProvider > 0){
+                [self.tableView removePlace];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
         [self.tableView.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];

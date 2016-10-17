@@ -316,10 +316,24 @@
     return cell.height;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (self.type  == BBSType_1){
+        return section == 0?5:0.01;
+    }
+    return 0.01;
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (self.type  == BBSType_1)
-        return 5;
+    if (self.type  == BBSType_1){
+        if (section == 1) {
+            return 5;
+        }else {
+            return 10;
+        }
+    }
+    
     return 0;
 }
 
