@@ -63,7 +63,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ReportListCell *cell = [ReportListCell createCellWithTableView:tableView];
-    InterveneModel *item = self.dataProvider[indexPath.section];
+    InterveneModel *item = self.dataProvider[indexPath.row];
     cell.item = item;
     return cell;
 }
@@ -119,8 +119,7 @@
         }
         else  if ([dict[@"code"] integerValue] != 0)
         {
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            return;
+            return [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
         }
         
         NSArray *datas = [InterveneModel objectArrayWithKeyValuesArray:dict[@"datas"]];
@@ -136,17 +135,12 @@
         {
             [self.tableView removePlace];
         }
-        else if(self.dataProvider.count == 0)
-        {
-            [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
-        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-    
 }
 
 @end

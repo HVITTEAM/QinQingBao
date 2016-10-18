@@ -25,6 +25,10 @@
 #import "MarketViewController.h"
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+{
+    PostsModel *selectedDeleteModel;
+    NSIndexPath *selectedDeleteindexPath;
+}
 
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -240,11 +244,12 @@
         };
         cardCell.indexpath = indexPath;
         cardCell.attentionBlock = ^(PostsModel *model){
+            selectedDeleteindexPath = indexPath;
             [weakSelf attentionAction:model];
         };
         cell = cardCell;
     }
-
+    
     return cell;
 }
 
@@ -302,16 +307,16 @@
                              };
     
     [CommonRemoteHelper RemoteWithUrl:URL_Circle parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-    
+        
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"出错" view:nil];
             return;
         }
-
+        
         self.healthCommunityDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:1];
         [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
-//        [self.tableView reloadData];
+        //        [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -324,11 +329,11 @@
 - (void)loadFlaglist
 {
     NSMutableDictionary *params = [@{
-                             @"flag":@2,
-                             @"p": @(self.pageNum),
-                             @"page":@(10),
-                             @"client":@"ios"
-                             }mutableCopy];
+                                     @"flag":@2,
+                                     @"p": @(self.pageNum),
+                                     @"page":@(10),
+                                     @"client":@"ios"
+                                     }mutableCopy];
     params[@"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -385,6 +390,11 @@
     if (![SharedAppUtil checkLoginStates]) {
         return;
     }
+    if ([model.is_myposts integerValue] == 1)//点击的是自己的帖子
+    {
+        return [self deleteAction:model];
+    }
+    
     
     NSString *type = @"add";
     if ([model.is_home_friend integerValue] != 0) {
@@ -425,7 +435,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-
+    
 }
 
 /**
@@ -434,7 +444,7 @@
 -(void)getAdvertisementpic
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-
+        
         if([dict[@"code"] integerValue] != 0){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alertView show];
@@ -442,7 +452,7 @@
         }
         
         self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
-    
+        
         NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
         for (int i = 0; i < self.advDatas.count; i++) {
             HomePicModel *model = self.advDatas[i];
@@ -451,10 +461,57 @@
         }
         LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
         loopView.imageUrls = imageUrls;
-
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
     }];
+}
+
+/**
+ *  删除帖子
+ */
+#pragma mark - 导航栏事件
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSDictionary *params = @{@"tid":selectedDeleteModel.tid,
+                                 @"client":@"ios",
+                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            [HUD removeFromSuperview];
+            id codeNum = [dict objectForKey:@"code"];
+            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            }
+            else
+            {
+                [self.postsDatas removeObjectAtIndex:selectedDeleteindexPath.row - 1];
+                [self.tableView deleteRowsAtIndexPaths:@[selectedDeleteindexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [HUD removeFromSuperview];
+            [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        }];
+    }
+}
+
+/**
+ *  删除帖子
+ */
+- (void)deleteAction:(PostsModel *)model
+{
+    if ([model.is_myposts integerValue] == 1)
+    {
+        selectedDeleteModel = model;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - 事件方法
