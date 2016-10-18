@@ -437,27 +437,58 @@
         
         [self.tableView.footer endRefreshing];
         
-        if ([dict[@"code"] integerValue] != 0) {
-            if (![type isEqual:@2]) {//置顶数据
-                [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            }
-            return;
-        }
-    
-        NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        if (datas.count > 0) {
+        
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)
+        {
+            
             if ([type isEqual:@1]) {//热门数据
-                [self.hotPosts addObjectsFromArray:datas];
-                self.hotPageNum++;
+                
+                if([codeNum integerValue] == 17001 && self.hotPosts.count == 0)
+                {
+                    return [NoticeHelper AlertShow:@"当前板块没有数据" view:nil];
+                }
+                else if([codeNum integerValue] == 17001 && self.hotPosts.count > 0)
+                {
+                    return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                }
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+                
             }else if ([type isEqual:@2]){ //置顶数据
-                [self.zdPosts addObjectsFromArray:datas];
+                return;
+                
             }else{
                 //全部数据
-                [self.allPosts addObjectsFromArray:datas];
-                self.allPageNum++;
+                if([codeNum integerValue] == 17001 && self.allPosts.count == 0)
+                {
+                    return [NoticeHelper AlertShow:@"当前板块没有数据" view:nil];
+                }
+                else if([codeNum integerValue] == 17001 && self.allPosts.count > 0)
+                {
+                    return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+                }
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
             }
-            
-            [self.tableView reloadData];
+        }
+        else
+        {
+            NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            if (datas.count > 0) {
+                if ([type isEqual:@1]) {//热门数据
+                    [self.hotPosts addObjectsFromArray:datas];
+                    self.hotPageNum++;
+                }else if ([type isEqual:@2]){ //置顶数据
+                    [self.zdPosts addObjectsFromArray:datas];
+                }else{
+                    //全部数据
+                    [self.allPosts addObjectsFromArray:datas];
+                    self.allPageNum++;
+                }
+                
+                [self.tableView reloadData];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

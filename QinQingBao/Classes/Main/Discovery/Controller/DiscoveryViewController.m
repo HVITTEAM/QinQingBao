@@ -335,19 +335,31 @@
         
         [self.tableView.footer endRefreshing];
         
-        if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            return;
+        id codeNum = [dict objectForKey:@"code"];
+        if([codeNum integerValue] > 0)
+        {
+            if([codeNum integerValue] == 17001 && self.postsDatas.count == 0)
+            {
+                return;
+            }
+            else if([codeNum integerValue] == 17001 && self.postsDatas.count > 0)
+            {
+                return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
+            }
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
         }
-        
-        NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        if (datas.count > 0) {
-            [self.postsDatas addObjectsFromArray:datas];
-            self.pageNum++;
-            
-//            [self.tableView reloadData];
-            NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:2];
-            [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
+        else
+        {
+            NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+            if (datas.count > 0) {
+                [self.postsDatas addObjectsFromArray:datas];
+                self.pageNum++;
+                
+                //            [self.tableView reloadData];
+                NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:2];
+                [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
