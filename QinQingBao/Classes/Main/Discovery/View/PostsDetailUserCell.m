@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tagLb;
 
 @property (weak, nonatomic) IBOutlet UIButton *attentionBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *vIconView;
 
 @end
 
@@ -37,10 +38,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    self.portraitView.layer.cornerRadius = self.portraitView.width / 2;
-    self.portraitView.layer.masksToBounds = YES;
-    self.portraitView.userInteractionEnabled=YES;
+
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage)];
     [self.portraitView addGestureRecognizer:singleTap];
     
@@ -56,6 +54,15 @@
     self.tagLb.text = nil;
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.portraitView.layer.cornerRadius = self.portraitView.width / 2;
+    self.portraitView.layer.masksToBounds = YES;
+    self.portraitView.userInteractionEnabled=YES;
+}
+
 - (void)setPostsDetailData:(DetailPostsModel *)postsDetailData
 {
     _postsDetailData = postsDetailData;
@@ -63,6 +70,8 @@
     if (!postsDetailData) {
         return;
     }
+    
+    self.vIconView.hidden = postsDetailData.grouptitle.length>0 ? NO : YES;
     
     // 不能关注自己
     if ([SharedAppUtil defaultCommonUtil].bbsVO && [[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id isEqualToString:self.postsDetailData.authorid])
