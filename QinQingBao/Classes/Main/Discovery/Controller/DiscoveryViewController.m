@@ -82,7 +82,7 @@
     [self.view addSubview:tbv];
     self.tableView = tbv;
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
-    self.tableView.separatorColor = [UIColor colorWithRGB:@"dcdcdc"];
+    self.tableView.separatorColor = [UIColor colorWithRGB:@"ebebeb"];
     
     __weak typeof(self) weakSelf = self;
     //轮播图

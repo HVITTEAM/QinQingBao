@@ -144,7 +144,7 @@
     titleLb.textAlignment = NSTextAlignmentCenter;
     titleLb.textColor = [UIColor darkTextColor];
     titleLb.font = [UIFont systemFontOfSize:17];
-    titleLb.text = @"标题";
+    titleLb.text = self.circleModel.name;
     UIView *lv = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, 0.5)];
     lv.backgroundColor = HMColor(230, 230, 230);
     [self.navBar addSubview:lv];
