@@ -77,7 +77,7 @@
 
 -(void)initView
 {
-    self.title = @"健康计划";
+    self.title = @"干预方案";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.rowHeight = UITableViewAutomaticDimension;

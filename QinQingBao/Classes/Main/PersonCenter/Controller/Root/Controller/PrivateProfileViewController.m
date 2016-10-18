@@ -52,7 +52,7 @@
     PostsModel *selectedDeleteModel;
     
     NSIndexPath *selectedDeleteindexPath;
-
+    
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -294,7 +294,7 @@
         rightBtn1.hidden = NO;
         rightBtn0.hidden = NO;
     }
-
+    
     self.navBar.y = scrollView.contentOffset.y;
     self.navBar.alpha = alpha;
     
@@ -656,8 +656,7 @@
         {
             NSString *msgNum = [dict objectForKey:@"allnew"];
             NSLog(@"有%@条未读私信",msgNum);
-            if ([msgNum integerValue] >0)
-                [rightBtn0 initWithBadgeValue:msgNum];
+            [rightBtn0 initWithBadgeValue:msgNum];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
@@ -696,7 +695,7 @@
             [NoticeHelper AlertShow:@"请求出错了" view:nil];
         }];
     }
-   }
+}
 /**
  *  删除帖子
  */
@@ -708,6 +707,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
         [alertView show];
     }
-   
+    
 }
 @end

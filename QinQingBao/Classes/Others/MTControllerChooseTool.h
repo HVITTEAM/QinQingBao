@@ -16,25 +16,6 @@
  *  选择根控制器
  */
 + (void)chooseRootViewController;
-
-/**
- *  设置根控制器
- */
-+ (void)setRootViewController;
-
-/**
- *  设置登录控制器
- */
-+ (void)setLoginViewController;
-
-/**
- *  设置注销控制器
- */
-+ (void)setPrivateProfileViewController;
-
-/**
- *  登录之后更新控制器
- */
-+ (void)setMainViewcontroller;
+;
 
 @end

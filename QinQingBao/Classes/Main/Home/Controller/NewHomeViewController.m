@@ -40,7 +40,7 @@
     [super viewDidLoad];
     
     [self initNavigation];
-
+    
     [self initRootController];
 }
 
@@ -168,8 +168,7 @@
         {
             NSString *msgNum = [dict objectForKey:@"allnew"];
             NSLog(@"有%@条未读私信",msgNum);
-            if ([msgNum integerValue] >0)
-                [rightBtn initWithBadgeValue:msgNum];
+            [rightBtn initWithBadgeValue:msgNum];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];

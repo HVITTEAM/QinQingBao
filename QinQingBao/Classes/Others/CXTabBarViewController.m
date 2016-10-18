@@ -8,10 +8,8 @@
 
 #import "CXTabBarViewController.h"
 
-#import "HealthMonitorViewController.h"
 #import "NewHomeViewController.h"
 
-#import "CXHomeViewController.h"
 
 #import "PrivateProfileViewController.h"
 #import "RootViewController.h"

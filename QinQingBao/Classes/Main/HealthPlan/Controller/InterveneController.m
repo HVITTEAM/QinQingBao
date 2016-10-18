@@ -472,10 +472,7 @@
                                          
                                          [NoticeHelper AlertShow:@"添加失败!" view:self.view];
                                      }];
-        
     }
 }
-
-
 
 @end

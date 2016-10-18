@@ -25,7 +25,7 @@
 {
     [super awakeFromNib];
     
-    self.headImg.layer.cornerRadius = self.headImg.width/2;
+    self.headImg.layer.cornerRadius = 24;
     self.headImg.layer.masksToBounds = YES;
     
     self.groupTitleLab.backgroundColor = [UIColor colorWithRGB:@"70a426"];

@@ -267,8 +267,6 @@
     [SharedAppUtil defaultCommonUtil].userVO = uservo;
     [ArchiverCacheHelper saveObjectToLoacl:uservo key:User_Archiver_Key filePath:User_Archiver_Path];
     
-    [MTControllerChooseTool setMainViewcontroller];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     //设置推送标签和别名
     NSMutableSet *tags = [NSMutableSet set];
