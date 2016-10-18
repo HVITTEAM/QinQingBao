@@ -31,7 +31,7 @@
     NSInteger currentPageIdx;
     
     PostsModel *selectedDeleteModel;
-
+    
 }
 @end
 
@@ -126,17 +126,17 @@
                                      {
                                          if([codeNum integerValue] == 17001 && postsArr.count == 0)
                                          {
-                                             return;
-//                                            return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-1"];
+                                             //                                             return [self.tableView initWithPlaceString:PlaceholderStr_Posts imgPath:@"placeholder-1"];
+                                             return ;
                                          }
                                          else if([codeNum integerValue] == 17001 && postsArr.count > 0)
                                          {
                                              return;
-//                                             return [self.view showNonedataTooltip];
+                                             //                                             return [self.view showNonedataTooltip];
                                          }
                                          
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                                         [alertView show];
+                                         //                                         [alertView show];
                                      }
                                      else
                                      {
@@ -166,7 +166,7 @@
 }
 
 /**
- *  获取关注人帖子数据 
+ *  获取关注人帖子数据
  */
 -(void)getFollowlist
 {
@@ -229,7 +229,19 @@
  */
 -(void)getRecommendlist
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_recommendlist parameters: @{@"recommend" : self.type == BBSType_4 ? @"2" : @"3"}
+    NSMutableDictionary *params = [@{
+                                     @"recommend" : self.type == BBSType_4 ? @"2" : @"3"
+                                     }mutableCopy];
+    
+    if (self.type == BBSType_1) {
+        //        params[@"p_expert"] = @"1";
+        //        params[@"page_expert"] = @"1000";
+    }else{
+        params[@"p_health"] = @"1";
+        params[@"page_health"] = @"1000";
+    }
+
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_recommendlist parameters: params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
                                      [self.tableView.footer endRefreshing];
@@ -312,8 +324,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   if(indexPath.section == 3)
-       return (MTScreenW+30)/4;
+    if(indexPath.section == 3)
+        return (MTScreenW+30)/4;
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
 }

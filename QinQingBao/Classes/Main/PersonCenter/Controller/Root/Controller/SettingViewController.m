@@ -87,6 +87,7 @@
 -(void)reloginHanlder
 {
     [self setupFooter];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

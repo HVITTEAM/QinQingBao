@@ -25,6 +25,11 @@
 #define kRightBtnTag 1201
 
 @interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+{
+    PostsModel *selectedDeleteModel;
+    NSIndexPath *selectedDeleteindexPath;
+
+}
 
 @property (strong, nonatomic) UITableView *tableView;
 /**标签栏*/
@@ -144,7 +149,7 @@
     titleLb.textAlignment = NSTextAlignmentCenter;
     titleLb.textColor = [UIColor darkTextColor];
     titleLb.font = [UIFont systemFontOfSize:17];
-    titleLb.text = @"标题";
+    titleLb.text = self.circleModel.name;
     UIView *lv = [[UIView alloc] initWithFrame:CGRectMake(0, 64, MTScreenW, 0.5)];
     lv.backgroundColor = HMColor(230, 230, 230);
     [self.navBar addSubview:lv];
@@ -247,6 +252,7 @@
         };
         cardCell.indexpath = indexPath;
         cardCell.attentionBlock = ^(PostsModel *model){
+            selectedDeleteindexPath = indexPath;
             [weakSelf attentionAction:model];
         };
         cell = cardCell;
@@ -518,6 +524,11 @@
     if (![SharedAppUtil checkLoginStates]) {
         return;
     }
+    if ([model.is_myposts integerValue] == 1)//点击的是自己的帖子
+    {
+        return [self deleteAction:model];
+    }
+
     
     NSString *type = @"add";
     if ([model.is_home_friend integerValue] != 0) {
@@ -647,6 +658,57 @@
     [tabView addSubview:self.line];
     
     return tabView;
+}
+
+/**
+ *  删除帖子
+ */
+#pragma mark - 导航栏事件
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSDictionary *params = @{@"tid":selectedDeleteModel.tid,
+                                 @"client":@"ios",
+                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
+        
+        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            [HUD removeFromSuperview];
+            id codeNum = [dict objectForKey:@"code"];
+            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+            }
+            else
+            {
+                if (self.isAllData) {
+                    [self.allPosts removeObjectAtIndex:selectedDeleteindexPath.row];
+
+                }else{
+                    [self.hotPosts removeObjectAtIndex:selectedDeleteindexPath.row];
+                }
+                [self.tableView deleteRowsAtIndexPaths:@[selectedDeleteindexPath] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [HUD removeFromSuperview];
+            [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        }];
+    }
+}
+/**
+ *  删除帖子
+ */
+- (void)deleteAction:(PostsModel *)model
+{
+    if ([model.is_myposts integerValue] == 1)
+    {
+        selectedDeleteModel = model;
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+        [alertView show];
+    }
 }
 
 @end
