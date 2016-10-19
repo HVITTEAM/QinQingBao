@@ -12,7 +12,6 @@
 
 #import "NewHomeViewController.h"
 
-#import "ProfileViewController.h"
 #import "RootViewController.h"
 #import "LoginViewController.h"
 #import "MallRootViewControlelr.h"

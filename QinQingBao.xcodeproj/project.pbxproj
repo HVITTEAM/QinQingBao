@@ -426,7 +426,6 @@
 		01A820661D82A773002E30E3 /* HMCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A8205E1D82A773002E30E3 /* HMCommonViewController.m */; };
 		01A820671D82A773002E30E3 /* PrivateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A820601D82A773002E30E3 /* PrivateProfileViewController.m */; };
 		01A820681D82A773002E30E3 /* PrivateProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A820611D82A773002E30E3 /* PrivateProfileViewController.xib */; };
-		01A820691D82A773002E30E3 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A820631D82A773002E30E3 /* ProfileViewController.m */; };
 		01A8206A1D82A773002E30E3 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A820651D82A773002E30E3 /* SettingViewController.m */; };
 		01A8206E1D82A822002E30E3 /* LoginInHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A8206C1D82A822002E30E3 /* LoginInHeadView.m */; };
 		01A8206F1D82A822002E30E3 /* LoginInHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A8206D1D82A822002E30E3 /* LoginInHeadView.xib */; };
@@ -2068,8 +2067,6 @@
 		01A8205F1D82A773002E30E3 /* PrivateProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateProfileViewController.h; sourceTree = "<group>"; };
 		01A820601D82A773002E30E3 /* PrivateProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateProfileViewController.m; sourceTree = "<group>"; };
 		01A820611D82A773002E30E3 /* PrivateProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateProfileViewController.xib; sourceTree = "<group>"; };
-		01A820621D82A773002E30E3 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		01A820631D82A773002E30E3 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		01A820641D82A773002E30E3 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		01A820651D82A773002E30E3 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		01A8206B1D82A822002E30E3 /* LoginInHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInHeadView.h; sourceTree = "<group>"; };
@@ -5109,8 +5106,6 @@
 				01A8205F1D82A773002E30E3 /* PrivateProfileViewController.h */,
 				01A820601D82A773002E30E3 /* PrivateProfileViewController.m */,
 				01A820611D82A773002E30E3 /* PrivateProfileViewController.xib */,
-				01A820621D82A773002E30E3 /* ProfileViewController.h */,
-				01A820631D82A773002E30E3 /* ProfileViewController.m */,
 				01A820641D82A773002E30E3 /* SettingViewController.h */,
 				01A820651D82A773002E30E3 /* SettingViewController.m */,
 				0174AD7C1D84F6DB001D0697 /* PublicProfileViewController.h */,
@@ -8849,7 +8844,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -9441,7 +9436,6 @@
 				010EC9E21C438D8900D36417 /* MTHeardView.m in Sources */,
 				01FD4C961CAE4B43008F09CF /* MWGridViewController.m in Sources */,
 				0122DB9B1DB5ED7000EC04A6 /* HealthPlaceHolderView.m in Sources */,
-				01A820691D82A773002E30E3 /* ProfileViewController.m in Sources */,
 				01E6D4BC1BE1EA0200824F51 /* CouponsModel.m in Sources */,
 				0177DA801D5D6303008D5C95 /* QuestionOneBtnController.m in Sources */,
 				01E573621CBF7E78005F045D /* ChooseShopTableViewController.m in Sources */,
@@ -10286,6 +10280,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 42PUMHHWSN;
@@ -10340,6 +10335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 42PUMHHWSN;

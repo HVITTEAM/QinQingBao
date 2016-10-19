@@ -16,6 +16,5 @@
  *  选择根控制器
  */
 + (void)chooseRootViewController;
-;
 
 @end
