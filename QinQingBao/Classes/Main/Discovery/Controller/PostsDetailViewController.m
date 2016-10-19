@@ -351,7 +351,7 @@
     
     [body appendFormat:@"<div class=\"time\"><span style=\"display: inline-block;line-height: 20px;height: 20px;\">%@</span><div style=\"height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;padding-top: 5px;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img width=\"16\" height=\"10\" src=\"%@\">&nbsp;%@</div><div style=\"float: right;height: 20px;padding-left: 3px;padding-right: 3px;display: inline-block;background: #fbf8f5;border: 1px solid F0EAE5;border-radius: 4px;padding-top: 2px;\"><img width=\"12\" height=\"12\" src=\"%@\"> &nbsp;%@</div><div style=\"clear: both;\"></div></div>",self.detailData.dateline,[[NSBundle mainBundle] URLForResource:@"yd_icon.png" withExtension:nil],self.detailData.views,[[NSBundle mainBundle] URLForResource:@"qz_icon.png" withExtension:nil],self.detailData.forum_name];
     
-    [body appendFormat:@"<div class=\"message\">%@</div>",self.detailData.message];
+    [body appendFormat:@"<div id=\"myid\" class=\"message\">%@</div>",self.detailData.message];
 
     // 遍历img
     for (DetailImgModel *detailImgModel in self.detailData.img) {

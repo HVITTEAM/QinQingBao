@@ -12,7 +12,6 @@
 
 
 #import "PrivateProfileViewController.h"
-#import "RootViewController.h"
 #import "LoginViewController.h"
 #import "MallRootViewControlelr.h"
 
