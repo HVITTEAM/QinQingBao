@@ -240,6 +240,8 @@
  */
 -(void)commitHandle:(UIButton *)sender
 {
+    if(![SharedAppUtil checkLoginStates])
+        return;
     if (self.customInfo.name.length <= 0)
         return [NoticeHelper AlertShow:@"请填写姓名" view:self.view];
     

@@ -241,7 +241,8 @@
         
     }else if (indexPath.section == 1 && indexPath.row == 2){
         AddressController *textView = [[AddressController alloc] init];
-        [textView setItemInfoWith:[NSString stringWithFormat:@"浙江省%@",infoVO.totalname] regionStr:@"西湖区" regionCode:infoVO.member_areaid areaInfo:infoVO.member_areainfo];
+        
+        [textView setItemInfoWith:[NSString stringWithFormat:@"浙江省%@",infoVO.totalname ? infoVO.totalname:@""] regionStr:@"" regionCode:infoVO.member_areaid areaInfo:infoVO.member_areainfo];
         textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             [dict setObject:@"ios" forKey:@"client"];

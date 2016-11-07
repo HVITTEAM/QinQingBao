@@ -8,7 +8,6 @@
 
 #import "MapViewController.h"
 #import "CLLocation+MTLocation.h"
-#import "WGS84TOGCJ02.h"
 
 @interface MapViewController ()
 {

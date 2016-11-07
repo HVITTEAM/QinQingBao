@@ -89,7 +89,6 @@
        InfoValue1Cell *infoValue1Cell = [InfoValue1Cell createCellWithTableView:tableView];
         
         if (indexPath.row == 3) {
-            
             [infoValue1Cell setTitle:@"地址" value:[NSString stringWithFormat:@"%@%@",self.interveneModel.totalname,self.interveneModel.waddress]];
         }else if (indexPath.row == 9){
             [infoValue1Cell setTitle:@"既往病史" value:self.interveneModel.wc_sickhistory];

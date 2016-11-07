@@ -19,6 +19,10 @@
 #import "SiglePicCardCell.h"
 #import "ClasslistModel.h"
 
+#import "ScrollMenuTableCell.h"
+#import "TopCell.h"
+
+
 @interface PostsTableViewController ()
 {
     NSMutableArray *postsArr;
@@ -240,7 +244,7 @@
         params[@"p_health"] = @"1";
         params[@"page_health"] = @"1000";
     }
-
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Get_recommendlist parameters: params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [self.tableView.header endRefreshing];
@@ -287,7 +291,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.type  == BBSType_1)
-        return 5;
+        return 6;
     return 1;
 }
 
@@ -310,6 +314,9 @@
                 return 1;
                 break;
             case 4:
+                return 2;
+                break;
+            case 5:
                 return postsArr.count;
                 break;
             default:
@@ -324,7 +331,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 3)
+    if(indexPath.section == 0)
+        return 60;
+    if(indexPath.section == 4 && indexPath.row == 0)
+        return 44;
+    if(indexPath.section == 4)
         return (MTScreenW+30)/4;
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
@@ -341,7 +352,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     if (self.type  == BBSType_1){
-        if (section == 1) {
+        if (section == 2) {
             return 5;
         }else {
             return 10;
@@ -364,8 +375,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    
-    if (self.type == BBSType_4 || self.type == BBSType_1)
+    if (indexPath.section == 0) {
+        TopCell *topCell = [TopCell topCell];
+        cell = topCell;
+    }
+    else if (self.type == BBSType_4 || self.type == BBSType_1)
     {
         if (indexPath.section < 3)
         {
@@ -382,30 +396,60 @@
             
             cell = picCell;
         }
-        else if (indexPath.section == 3)
+        else if (indexPath.section == 4)
         {
-            QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
-            if (questiondata)
-                quecell.dataProvider = questiondata;
-            quecell.portraitClick = ^(ClasslistModel *itemData){
-                
-                // 问卷调查
-                NSArray *exam_infoArray = itemData.exam_info;
-                if (exam_infoArray.count == 1) {
-                    SexViewController *vc = [[SexViewController alloc] init];
-                    ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
-                    vc.exam_id = examInfoModel.e_id;
-                    vc.e_title = itemData.c_title;
-                    vc.calculatype = examInfoModel.e_calculatype;
-                    [self.parentVC.navigationController pushViewController:vc animated:YES];
-                }else if(exam_infoArray.count> 1){
-                    AllQuestionController *vc = [[AllQuestionController alloc] init];
-                    vc.c_id = itemData.c_id;
-                    [self.parentVC.navigationController pushViewController:vc animated:YES];
+            UITableViewCell *commoncell = nil;
+            if (indexPath.row == 0)
+            {
+                static NSString *cellId = @"titleCellId";
+                commoncell = [tableView dequeueReusableCellWithIdentifier:cellId];
+                if (!commoncell) {
+                    commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+                    commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+                    commoncell.layoutMargins = UIEdgeInsetsZero;
                 }
-            };
-            
-            cell = quecell;
+                commoncell.textLabel.text = @"健康话题";
+                cell = commoncell;
+            }
+            else
+            {
+                ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
+                menuCell.row = 1;
+                menuCell.col = 4;
+                menuCell.colSpace = 30;
+                
+                menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
+                menuCell.shouldShowIndicator = NO;
+                menuCell.datas = @[@{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"xnxg_icon"},
+                                   @{KScrollMenuTitle:@"精英压力",KScrollMenuImg:@"jyyl_icon"},
+                                   @{KScrollMenuTitle:@"肝脏排毒",KScrollMenuImg:@"gzpd_icon"},
+                                   @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
+                                   ];
+                
+                //            QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
+                //            if (questiondata)
+                //                quecell.dataProvider = questiondata;
+                //            quecell.portraitClick = ^(ClasslistModel *itemData){
+                //
+                //                // 问卷调查
+                //                NSArray *exam_infoArray = itemData.exam_info;
+                //                if (exam_infoArray.count == 1) {
+                //                    SexViewController *vc = [[SexViewController alloc] init];
+                //                    ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
+                //                    vc.exam_id = examInfoModel.e_id;
+                //                    vc.e_title = itemData.c_title;
+                //                    vc.calculatype = examInfoModel.e_calculatype;
+                //                    [self.parentVC.navigationController pushViewController:vc animated:YES];
+                //                }else if(exam_infoArray.count> 1){
+                //                    AllQuestionController *vc = [[AllQuestionController alloc] init];
+                //                    vc.c_id = itemData.c_id;
+                //                    [self.parentVC.navigationController pushViewController:vc animated:YES];
+                //                }
+                //            };
+                
+                cell = menuCell;
+            }
         }
         else
         {

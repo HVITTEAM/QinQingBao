@@ -13,6 +13,8 @@
 #import "SearchViewController.h"
 #import "ReportListViewController.h"
 
+#import "ClasslistViewController.h"
+#import "HealthPlanController.h"
 
 @interface NewHomeViewController ()
 {
@@ -21,9 +23,8 @@
 }
 
 @property (nonatomic, strong) PostsTableViewController *vc1;
-@property (nonatomic, strong) PostsTableViewController *vc2;
-@property (nonatomic, strong) PostsTableViewController *vc3;
-@property (nonatomic, strong) PostsTableViewController *vc4;
+@property (nonatomic, strong) ClasslistViewController *vc2;
+@property (nonatomic, strong) HealthPlanController *vc3;
 @end
 
 @implementation NewHomeViewController
@@ -40,7 +41,7 @@
     [super viewDidLoad];
     
     [self initNavigation];
-
+    
     [self initRootController];
 }
 
@@ -52,24 +53,17 @@
     self.vc1 = [[PostsTableViewController alloc] init];
     self.vc1.type = BBSType_1;
     self.vc1.parentVC = self;
-    self.vc1.title = @"推荐";
+    self.vc1.title = @"资讯";
     
-    self.vc2 = [[PostsTableViewController alloc] init];
-    self.vc2.type = BBSType_2;
+    self.vc2 = [[ClasslistViewController alloc] init];
     self.vc2.parentVC = self;
-    self.vc2.title = @"关注";
+    self.vc2.title = @"评估";
     
-    self.vc3 = [[PostsTableViewController alloc] init];
-    self.vc3.type = BBSType_3;
+    self.vc3 = [[HealthPlanController alloc] init];
     self.vc3.parentVC = self;
-    self.vc3.title = @"说说";
-    
-    self.vc4 = [[PostsTableViewController alloc] init];
-    self.vc4.type = BBSType_4;
-    self.vc4.parentVC = self;
-    self.vc4.title = @"资讯";
-    
-    self.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,self.vc4,nil];
+    self.vc3.title = @"报告";
+   
+    self.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,nil];
 }
 
 /**
@@ -168,8 +162,7 @@
         {
             NSString *msgNum = [dict objectForKey:@"allnew"];
             NSLog(@"有%@条未读私信",msgNum);
-            if ([msgNum integerValue] >0)
-                [rightBtn initWithBadgeValue:msgNum];
+            [rightBtn initWithBadgeValue:msgNum];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];

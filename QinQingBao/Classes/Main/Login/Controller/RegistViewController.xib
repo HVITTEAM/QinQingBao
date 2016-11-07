@@ -177,7 +177,7 @@
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="《存心健康服务条款》">
+                                    <fragment content="《寸欣健康服务条款》">
                                         <attributes>
                                             <color key="NSColor" red="0.4823529411764706" green="0.74117647058823533" blue="0.19215686274509805" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="13" name="STHeitiSC-Light"/>

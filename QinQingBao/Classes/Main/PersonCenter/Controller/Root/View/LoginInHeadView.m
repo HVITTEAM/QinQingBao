@@ -40,6 +40,7 @@ static const CGFloat criticalY = -50.f;
         [self.loginBtn setTitle:@" 未登录 " forState:UIControlStateNormal];
         self.professionLab.text = @"";
     }
+    
 }
 
 - (void)layoutSubviews
@@ -47,6 +48,8 @@ static const CGFloat criticalY = -50.f;
     [super layoutSubviews];
     self.userIcon.layer.cornerRadius = self.userIcon.width / 2;
     self.userIcon.layer.masksToBounds = YES;
+    self.userIcon.layer.borderColor = HMColor(148, 191, 54).CGColor;
+    self.userIcon.layer.borderWidth = 3.0f;
     markView.frame = CGRectMake(CGRectGetMaxX(self.userIcon.frame) - 20, CGRectGetMaxY(self.userIcon.frame) - 20, 16, 16);
 }
 

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface EstimateViewController : UITableViewController
+@property (nonatomic, strong) UIViewController *parentVC;
 
 @end

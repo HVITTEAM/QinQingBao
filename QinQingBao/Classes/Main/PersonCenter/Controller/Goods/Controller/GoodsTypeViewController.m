@@ -30,6 +30,12 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

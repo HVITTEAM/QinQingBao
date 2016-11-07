@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HealthPlanController : UITableViewController
+@property (nonatomic, strong) UIViewController *parentVC;
 
 @end

@@ -167,7 +167,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
     self.tableView.tableFooterView = footView;
 }
 
-
 - (UITableView *)tableView
 {
     if (!_tableView) {

@@ -11,7 +11,6 @@
 #define HMNewfeatureImageCount 3
 
 #import "MTNewfeatureViewController.h"
-#import "HomeViewController.h"
 
 @interface MTNewfeatureViewController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIPageControl *pageControl;
@@ -203,7 +202,7 @@
 //        [SharedAppUtil defaultCommonUtil].userVO = vo;
 //        [MTControllerChooseTool setRootViewController];
 //    }
-    [MTControllerChooseTool setRootViewController];
+//    [MTControllerChooseTool setRootViewController];
 }
 
 #pragma mark - UIScrollViewDelegate

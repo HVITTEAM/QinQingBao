@@ -325,5 +325,4 @@ static NSString *discountCountDownCellId = @"discountCountDownCell";
     }];
 }
 
-
 @end
