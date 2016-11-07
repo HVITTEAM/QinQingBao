@@ -117,9 +117,19 @@ NSString * const kButtonTitles = @"buttonTitles";
                 }
                 
             }else if(status == 22){
-                //派送开始
+                //报告解读
+                str = @"已上传报告";
+                [btnTitles addObject:@"查看物流"];
+                [btnTitles addObject:@"检测报告"];
+                [btnTitles addObject:@"干预方案"];
+                if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
+                    [btnTitles addObject:@"评价"];
+                }
                 
             }else if (status == 23 ){
+                //派送开始
+
+            }else if (status == 24){
                 str = @"已配送报告";
                 [btnTitles addObject:@"查看物流"];
                 [btnTitles addObject:@"检测报告"];
