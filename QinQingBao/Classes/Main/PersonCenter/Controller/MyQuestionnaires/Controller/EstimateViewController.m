@@ -33,6 +33,12 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -95,6 +101,10 @@
  */
 -(void)getDatasFormServices
 {
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-1"];
+
+    
     MBProgressHUD *hud = nil;
     if (self.p == 1) {
         hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

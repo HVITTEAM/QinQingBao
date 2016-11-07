@@ -181,6 +181,7 @@
 		015BFDAD1D3483FD00EB4A09 /* CXRulerScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BFDA61D3483FD00EB4A09 /* CXRulerScrollView.m */; };
 		015BFDB31D34841000EB4A09 /* CXPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015BFDB11D34841000EB4A09 /* CXPickerViewController.m */; };
 		015BFDB41D34841000EB4A09 /* CXPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015BFDB21D34841000EB4A09 /* CXPickerViewController.xib */; };
+		015EC75F1DBDF15600ECBBA7 /* areaList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 015EC75E1DBDF15600ECBBA7 /* areaList.plist */; };
 		015F11BB1C8046070058C97B /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */; };
 		015F11BC1C8046070058C97B /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */; };
 		015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */; };
@@ -422,6 +423,8 @@
 		01C82BF51CC4B189004D7A16 /* ParagraphTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C82BF31CC4B189004D7A16 /* ParagraphTextCell.xib */; };
 		01C82BF91CC4BD4F004D7A16 /* ImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C82BF71CC4BD4F004D7A16 /* ImageCell.m */; };
 		01C82BFA1CC4BD4F004D7A16 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C82BF81CC4BD4F004D7A16 /* ImageCell.xib */; };
+		01CBC7081DCB1E6E008FC3D9 /* TopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CBC7061DCB1E6E008FC3D9 /* TopCell.m */; };
+		01CBC7091DCB1E6E008FC3D9 /* TopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CBC7071DCB1E6E008FC3D9 /* TopCell.xib */; };
 		01CEAB011C3E48360015480F /* UIView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CEAB001C3E48360015480F /* UIView+Placeholder.m */; };
 		01CF97A11C7A988800206FCD /* DeviceInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A01C7A988800206FCD /* DeviceInfoModel.m */; };
 		01CF97A71C7A98E400206FCD /* DevicesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CF97A41C7A98E400206FCD /* DevicesDetailViewController.m */; };
@@ -1564,6 +1567,7 @@
 		015BFDB01D34841000EB4A09 /* CXPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXPickerViewController.h; sourceTree = "<group>"; };
 		015BFDB11D34841000EB4A09 /* CXPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXPickerViewController.m; sourceTree = "<group>"; };
 		015BFDB21D34841000EB4A09 /* CXPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CXPickerViewController.xib; sourceTree = "<group>"; };
+		015EC75E1DBDF15600ECBBA7 /* areaList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areaList.plist; sourceTree = "<group>"; };
 		015F11B81C8046070058C97B /* RecipeCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCollectionHeaderView.h; sourceTree = "<group>"; };
 		015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeCollectionHeaderView.m; sourceTree = "<group>"; };
 		015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionHeaderView.xib; sourceTree = "<group>"; };
@@ -1977,6 +1981,9 @@
 		01C82BF61CC4BD4F004D7A16 /* ImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCell.h; sourceTree = "<group>"; };
 		01C82BF71CC4BD4F004D7A16 /* ImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCell.m; sourceTree = "<group>"; };
 		01C82BF81CC4BD4F004D7A16 /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
+		01CBC7051DCB1E6E008FC3D9 /* TopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCell.h; sourceTree = "<group>"; };
+		01CBC7061DCB1E6E008FC3D9 /* TopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCell.m; sourceTree = "<group>"; };
+		01CBC7071DCB1E6E008FC3D9 /* TopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TopCell.xib; sourceTree = "<group>"; };
 		01CEAAFF1C3E48360015480F /* UIView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Placeholder.h"; sourceTree = "<group>"; };
 		01CEAB001C3E48360015480F /* UIView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Placeholder.m"; sourceTree = "<group>"; };
 		01CF979F1C7A988800206FCD /* DeviceInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfoModel.h; sourceTree = "<group>"; };
@@ -4891,6 +4898,13 @@
 			path = City;
 			sourceTree = "<group>";
 		};
+		01E306111DCAD1A900A1A788 /* HealthArchive */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HealthArchive;
+			sourceTree = "<group>";
+		};
 		01E4A9521C3FF15600AAAF73 /* Classification */ = {
 			isa = PBXGroup;
 			children = (
@@ -7266,6 +7280,9 @@
 			children = (
 				01F03A081C607EB800966A6E /* PositionCell.xib */,
 				01ECDF981B7C347800665D87 /* SQCollectionCell.xib */,
+				01CBC7051DCB1E6E008FC3D9 /* TopCell.h */,
+				01CBC7061DCB1E6E008FC3D9 /* TopCell.m */,
+				01CBC7071DCB1E6E008FC3D9 /* TopCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -7611,6 +7628,7 @@
 		01F227D81B7B3E1400ED4AFB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				015EC75E1DBDF15600ECBBA7 /* areaList.plist */,
 				01254BB61DB759670011C27A /* Images.xcassets */,
 				01ED862E1CDC821400FAD750 /* HYQiHei-50J.ttf */,
 				019E81601C3BA72E00616AD9 /* agreement.html */,
@@ -7687,6 +7705,7 @@
 		01F2280B1B7B410200ED4AFB /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				01E306111DCAD1A900A1A788 /* HealthArchive */,
 				01F6DB9E1D8E406000300679 /* Discovery */,
 				0100425F1D616F4700C87F13 /* HealthPlan */,
 				015BFD981D34816700EB4A09 /* Questionnaires */,
@@ -8790,6 +8809,7 @@
 				01ECDA6D1C8EB31F0018160F /* messageSendFail@2x.png in Resources */,
 				01EBD3C21C853F70009236FA /* RefundStateCell.xib in Resources */,
 				01FEE2CB1B9C2551007C4641 /* BusinessInfoCell.xib in Resources */,
+				015EC75F1DBDF15600ECBBA7 /* areaList.plist in Resources */,
 				01E6D4F41BE1F49B00824F51 /* LICENSE.txt in Resources */,
 				017F0D121C58B83F00643C15 /* HotGoodsCell.xib in Resources */,
 				D239DE781D332FD5005C994C /* ServiceInfoEmailCell.xib in Resources */,
@@ -8874,6 +8894,7 @@
 				010B734D1C181827007A496B /* icon_listheader_animation_2@2x.png in Resources */,
 				01ECDA221C8EB31F0018160F /* VoiceSearchFeedback013@2x.png in Resources */,
 				01FF8F511CDAD2100089BBC4 /* HomeHeadView.xib in Resources */,
+				01CBC7091DCB1E6E008FC3D9 /* TopCell.xib in Resources */,
 				D21AC0891D18EB0500CDBFDB /* MarketOrderCell.xib in Resources */,
 				01ECDA6C1C8EB31F0018160F /* Contents.json in Resources */,
 			);
@@ -9602,6 +9623,7 @@
 				01E4A9991C41083900AAAF73 /* MTCouponsViewController.m in Sources */,
 				010B73421C17F2AE007A496B /* ServiceTimeCell.m in Sources */,
 				01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */,
+				01CBC7081DCB1E6E008FC3D9 /* TopCell.m in Sources */,
 				01FD4CA61CAE4B43008F09CF /* PSTGridLayoutInfo.m in Sources */,
 				0181B1AE1CDC95F900A1435E /* ProfileConsumeCell.m in Sources */,
 				01E6D4921BE1E78C00824F51 /* CouponsViewController.m in Sources */,

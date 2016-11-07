@@ -64,7 +64,7 @@
         [section0 addObject:createItem(_customInfo.name,@"姓名",@"必填,请填写姓名")];
         [section0 addObject:createItem(_customInfo.tel,@"电话",@"必填,请填写电话")];
         
-        NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname,_customInfo.areainfo];
+        NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
         [section0 addObject:createItem(address,@"地址",@"必填,请填写地址")];
         [section0 addObject:createItem(_customInfo.email,@"邮箱",@"必填,例sample@hvit.com.cn")];
         
@@ -82,7 +82,6 @@
         [section3 addObject:createItem(_customInfo.medicine,@"服药情况",@"选填")];
         
         self.datas = @[section0,section1,section2,section3];
-
     }
     return _datas;
 }

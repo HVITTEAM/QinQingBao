@@ -561,6 +561,8 @@
 
 -(void)dealloc
 {
+    selectedItem = nil;
+    
     _tableView = nil;
     _tableView.dataSource=nil;
     _tableView.delegate=nil;

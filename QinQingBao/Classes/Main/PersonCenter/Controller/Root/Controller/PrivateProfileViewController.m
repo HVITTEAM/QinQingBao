@@ -95,7 +95,7 @@
     if (self.headView)
         self.headView.frame = CGRectMake(0, -headHeight, MTScreenW, headHeight);
     
-    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -110,7 +110,6 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
 }
 
 // 登录超时
@@ -127,7 +126,6 @@
     [postsArr removeAllObjects];
     [self.tableView reloadData];
 }
-
 
 -(void)refleshDataByLogin
 {

@@ -171,7 +171,7 @@
     
     UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
         
-            selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name];
+        selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name ? selectedCityItem.area_name:@"",selectedRegionItem.area_name?selectedRegionItem.area_name:@""];
             [self setupGroups];
     }];
     

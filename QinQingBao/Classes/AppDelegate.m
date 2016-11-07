@@ -21,6 +21,7 @@
 #import "NewsDetailViewControler.h"
 #import "EventInfoController.h"
 #import "CXTabBarViewController.h"
+#import "EaseSDKHelper.h"
 
 //微信SDK头文件
 #import "WXApi.h"
@@ -60,8 +61,8 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // 1.创建窗口
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;

@@ -194,6 +194,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Forgot_New parameters: @{@"mobile" : self.tel.rightText.text,
                                                                    @"code" : self.code.rightText.text,
                                                                    @"newpassword" : [SecurityUtil encryptMD5String:str2],
+                                                                   @"sys" : @2,
                                                                    @"confirmpassword" : [SecurityUtil encryptMD5String:str1]}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
@@ -229,7 +230,6 @@
                                                                   @"password" : [SecurityUtil encryptMD5String:pwd],
                                                                   @"client" : @"ios",
                                                                   @"sys" : @"2"}
-
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];

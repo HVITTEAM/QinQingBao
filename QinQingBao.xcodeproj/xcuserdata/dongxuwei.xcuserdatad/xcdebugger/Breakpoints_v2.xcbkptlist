@@ -52,12 +52,12 @@
                   moduleName = "QinQingBao"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dongxuwei/Desktop/workSpace/QQB%202/QinQingBao/Classes/Main/PersonCenter/Controller/FamilyInfo/Controller/EmergencyContactViewController.m"
-                  timestampString = "498552472.8307"
+                  timestampString = "500173367.448489"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "178"
                   endingLineNumber = "178"
-                  offsetFromSymbolStart = "1855">
+                  offsetFromSymbolStart = "1920">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -67,12 +67,12 @@
                   moduleName = "QinQingBao"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dongxuwei/Desktop/workSpace/QQB%202/QinQingBao/Classes/Main/PersonCenter/Controller/FamilyInfo/Controller/EmergencyContactViewController.m"
-                  timestampString = "498552472.833585"
+                  timestampString = "500173367.450542"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "180"
                   endingLineNumber = "180"
-                  offsetFromSymbolStart = "79">
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -132,12 +132,12 @@
                   moduleName = "QinQingBao"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dongxuwei/Desktop/workSpace/QQB%202/QinQingBao/Classes/Main/PersonCenter/Controller/FamilyInfo/Controller/EmergencyContactViewController.m"
-                  timestampString = "498552472.846617"
+                  timestampString = "500173367.462144"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "85"
                   endingLineNumber = "85"
-                  offsetFromSymbolStart = "205">
+                  offsetFromSymbolStart = "232">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -147,12 +147,12 @@
                   moduleName = "QinQingBao"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/dongxuwei/Desktop/workSpace/QQB%202/QinQingBao/Classes/Main/PersonCenter/Controller/FamilyInfo/Controller/EmergencyContactViewController.m"
-                  timestampString = "498552472.848892"
+                  timestampString = "500173367.464262"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "85"
                   endingLineNumber = "85"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>

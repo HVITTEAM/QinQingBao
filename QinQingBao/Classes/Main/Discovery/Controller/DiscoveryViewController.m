@@ -75,7 +75,6 @@
     searhField.leftView = leftView;
     searhField.delegate = self;
     self.navigationItem.titleView = searhField;
-    
     //UITableView
     UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     tbv.delegate = self;

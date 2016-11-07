@@ -35,6 +35,12 @@
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,32 +55,6 @@
     [self getDataProvider];
 }
 
--(void)downimg
-{
-    currentPageIdx ++;
-    UInt64 start = [[NSDate date] timeIntervalSince1970]*1000;
-    NSURL *iconUrl = [NSURL URLWithString:@"http://app.hvit.com.cn/one/image/14_05075737633549572_1280.jpg"];
-    
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    
-    [manager downloadImageWithURL:iconUrl options:SDWebImageCacheMemoryOnly progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-        
-        UInt64 finish = [[NSDate date] timeIntervalSince1970]*1000;
-        NSLog(@"单次耗时%llu", finish - start);
-        
-        totla = totla + (finish - start);
-        CGFloat cvg  = totla/currentPageIdx;
-        
-        NSLog(@"总值%.0f,次数%ld,平均值%.0f",totla,(long)currentPageIdx,cvg);
-        
-        [[SDImageCache sharedImageCache] cleanDisk];
-        [[SDImageCache sharedImageCache] clearDisk];
-        [[SDImageCache sharedImageCache] clearMemory];
-        [self downimg];
-    }];
-}
-
 -(void)initView
 {
     self.title = @"干预方案";
@@ -83,7 +63,6 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.view.backgroundColor = HMGlobalBg;
 }
-
 
 #pragma mark 集成刷新控件
 
@@ -110,6 +89,8 @@
  */
 -(void)getDataProvider
 {
+    if (![SharedAppUtil defaultCommonUtil].userVO)
+        return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-1"];
     MBProgressHUD *HUD;
     if (currentPageIdx == 1)
         HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

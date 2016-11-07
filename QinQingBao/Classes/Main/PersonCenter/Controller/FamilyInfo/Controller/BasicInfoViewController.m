@@ -36,8 +36,6 @@
 @property (nonatomic,retain) HMCommonArrowItem *itemAddress;
 
 
-
-
 @end
 
 @implementation BasicInfoViewController

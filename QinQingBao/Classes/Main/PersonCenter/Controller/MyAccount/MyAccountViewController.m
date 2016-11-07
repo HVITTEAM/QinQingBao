@@ -21,10 +21,16 @@
     self = [super init];
     if (self){
         self.hidesBottomBarWhenPushed = YES;
+        self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     return self;
 }
 
+- (void)loadView
+{
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {

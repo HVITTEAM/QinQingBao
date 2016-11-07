@@ -239,7 +239,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"运动养生" withValue:self.dataItem.advice_report];
+            [paragraphTextCell setTitle:@"运动养生" withValue:self.dataItem.wp_advice_sport];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 4)
