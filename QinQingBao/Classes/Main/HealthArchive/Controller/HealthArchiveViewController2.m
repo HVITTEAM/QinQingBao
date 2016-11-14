@@ -70,14 +70,17 @@
         [section0 addObject:createItem(@"",@"抽烟习惯",@"请选择")];
         [section0 addObject:createItem(@"",@"喝酒习惯",@"请选择")];
         [section0 addObject:createItem(@"",@"饮食习惯",@"请选择")];
-        [section0 addObject:createItem(@"",@"睡觉习惯",@"")];
-        [section0 addObject:createItem(@"",@"休息时间",@"请选择")];
-        [section0 addObject:createItem(@"",@"起床时间",@"请选择")];
-        [section0 addObject:createItem(@"",@"运动习惯",@"请选择")];
-        [section0 addObject:createItem(@"",@"不良习惯",@"请选择")];
-        [section0 addObject:createItem(@"",@"备注",@"请填写")];
         
-        self.datas = @[section0];
+        NSMutableArray *section1 = [[NSMutableArray alloc] init];
+        [section1 addObject:createItem(@"",@"睡觉习惯",@"")];
+        [section1 addObject:createItem(@"",@"休息时间",@"请选择")];
+        [section1 addObject:createItem(@"",@"起床时间",@"请选择")];
+        
+        NSMutableArray *section2 = [[NSMutableArray alloc] init];
+        [section2 addObject:createItem(@"",@"运动习惯",@"请选择")];
+        [section2 addObject:createItem(@"",@"不良习惯",@"请选择")];
+        
+        self.datas = @[section0,section1,section2];
     }
     return _datas;
 }

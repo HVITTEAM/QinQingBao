@@ -83,18 +83,13 @@
         [section1 addObject:createItem(@"",@"总胆固醇(mg/dl)",@"请填写")];
         
         NSMutableArray *section2 = [[NSMutableArray alloc] init];
+        [section2 addObject:createItem(@"",@"目前职业",@"请填写")];
+        [section2 addObject:createItem(@"",@"工作生活状态",@"请填写")];
         [section2 addObject:createItem(@"",@"电子邮箱",@"请填写")];
         [section2 addObject:createItem(@"",@"联系地址",@"请填写")];
+
         
-        
-        NSMutableArray *section3 = [[NSMutableArray alloc] init];
-        [section3 addObject:createItem(@"",@"目前职业",@"请填写")];
-        [section3 addObject:createItem(@"",@"工作生活状态",@"请填写")];
-        [section3 addObject:createItem(@"",@"所属单位",@"请填写")];
-        
-        [section3 addObject:createItem(@"",@"备注",@"请填写")];
-        
-        self.datas = @[section0,section1,section2,section3];
+        self.datas = @[section0,section1,section2];
     }
     return _datas;
 }
@@ -136,6 +131,7 @@
         
     }else
     {
+
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
         textCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -145,6 +141,9 @@
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
             weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
         };
+        if ((2 == indexPath.section && 1 == indexPath.row )|| (2 == indexPath.section && 3 == indexPath.row))
+            textCell.field.enabled = NO;
+
         return textCell;
         
     }
@@ -178,7 +177,7 @@
     self.currentIdx = indexPath;
     __weak typeof(self)weakSelf = self;
     
-    if (2 == indexPath.section && 1 == indexPath.row) {
+    if (2 == indexPath.section && 3 == indexPath.row) {
         AddressController *textView = [[AddressController alloc] init];
         if (weakSelf.customInfo.totalname.length > 0 && weakSelf.customInfo.dvcode.length > 0)
         {
@@ -221,7 +220,7 @@
         };
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (3 == indexPath.section && 1 == indexPath.row){
+    }else if (2 == indexPath.section && 1 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"体力劳动为主",@"脑力劳动为主",@"体力/脑力劳动基本均衡", nil] show];
     }
 }

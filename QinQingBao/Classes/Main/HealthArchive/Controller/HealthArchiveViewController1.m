@@ -67,14 +67,13 @@
         };
         
         NSMutableArray *section0 = [[NSMutableArray alloc] init];
-        [section0 addObject:createItem(@"",@"当前身体情况",@"")];
-        [section0 addObject:createItem(@"",@"个人健康方面的重大事件",@"请填写")];
-        [section0 addObject:createItem(@"",@"在服用的药物及营养素",@"请填写")];
         [section0 addObject:createItem(@"",@"是否患有糖尿病",@"")];
         [section0 addObject:createItem(@"",@"其它既往病史",@"请填写")];
         [section0 addObject:createItem(@"",@"父母亲是否有心血管病史",@"")];
         [section0 addObject:createItem(@"",@"其它家族病史",@"请填写")];
-        [section0 addObject:createItem(@"",@"备注",@"请填写")];
+        [section0 addObject:createItem(@"",@"当前身体情况",@"")];
+        [section0 addObject:createItem(@"",@"个人健康方面的重大事件",@"请填写")];
+        [section0 addObject:createItem(@"",@"在服用的药物及营养素",@"请填写")];
 
         self.datas = @[section0];
     }
@@ -99,7 +98,7 @@
     NSMutableArray *sections = self.datas[indexPath.section];
     NSMutableDictionary *rowItem = sections[indexPath.row];
     
-    if (indexPath.row == 3 || indexPath.row == 5)
+    if (indexPath.row == 0 || indexPath.row == 2)
     {
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         UISwitch *switchBtn = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 60, 23)];
@@ -151,7 +150,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 3 || indexPath.row == 5) {
+    if (indexPath.row == 0 || indexPath.row == 2) {
         return 50;
     }
     return 114;

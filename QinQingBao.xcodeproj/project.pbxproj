@@ -144,6 +144,7 @@
 		013257A51DD94849006DF8FC /* HealthArchiveViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 013257A41DD94849006DF8FC /* HealthArchiveViewController3.m */; };
 		013257AB1DD95F52006DF8FC /* ReportCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 013257A91DD95F52006DF8FC /* ReportCollectionViewCell.m */; };
 		013257AC1DD95F52006DF8FC /* ReportCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013257AA1DD95F52006DF8FC /* ReportCollectionViewCell.xib */; };
+		013257AF1DD99EFE006DF8FC /* ArchiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 013257AE1DD99EFE006DF8FC /* ArchiveData.m */; };
 		01328F9A1C4C88270014D283 /* StoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F991C4C88270014D283 /* StoreModel.m */; };
 		01328F9F1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01328F9D1C4CCD5E0014D283 /* GoodsMiddleBottomCell.m */; };
 		01328FA01C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328F9E1C4CCD5E0014D283 /* GoodsMiddleBottomCell.xib */; };
@@ -1539,6 +1540,8 @@
 		013257A81DD95F52006DF8FC /* ReportCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportCollectionViewCell.h; sourceTree = "<group>"; };
 		013257A91DD95F52006DF8FC /* ReportCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportCollectionViewCell.m; sourceTree = "<group>"; };
 		013257AA1DD95F52006DF8FC /* ReportCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReportCollectionViewCell.xib; sourceTree = "<group>"; };
+		013257AD1DD99EFE006DF8FC /* ArchiveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveData.h; sourceTree = "<group>"; };
+		013257AE1DD99EFE006DF8FC /* ArchiveData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveData.m; sourceTree = "<group>"; };
 		01328F981C4C88270014D283 /* StoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoreModel.h; sourceTree = "<group>"; };
 		01328F991C4C88270014D283 /* StoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoreModel.m; sourceTree = "<group>"; };
 		01328F9C1C4CCD5E0014D283 /* GoodsMiddleBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsMiddleBottomCell.h; sourceTree = "<group>"; };
@@ -4868,6 +4871,8 @@
 		01AB2EB41DD59B18006EAFA2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				013257AD1DD99EFE006DF8FC /* ArchiveData.h */,
+				013257AE1DD99EFE006DF8FC /* ArchiveData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9669,6 +9674,7 @@
 				01ECDADA1C8EB31F0018160F /* BusinessDataCenter.m in Sources */,
 				D23BCD971D5C4FCF0091D440 /* ExamCell.m in Sources */,
 				01ECDAEA1C8EB31F0018160F /* EMSDImageCache.m in Sources */,
+				013257AF1DD99EFE006DF8FC /* ArchiveData.m in Sources */,
 				01E81CF31C7FFA1A006F4693 /* GoodsSpecCollectionView.m in Sources */,
 				01E6D48B1BE1E74C00824F51 /* AccountViewController.m in Sources */,
 				01D9DEBF1B7DC7C00087F80E /* SharedAppUtil.m in Sources */,
