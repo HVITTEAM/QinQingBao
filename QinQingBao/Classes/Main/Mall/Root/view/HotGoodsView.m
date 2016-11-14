@@ -10,6 +10,7 @@
 
 @implementation HotGoodsView
 
+
 - (void)drawRect:(CGRect)rect
 {
     [self initView];

@@ -12,7 +12,6 @@
 
 +(void)saveNSMutableArrayToLoacl:(NSMutableArray *)saveObj key:(NSString *)key filePath:(NSString *)filePath
 {
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     
