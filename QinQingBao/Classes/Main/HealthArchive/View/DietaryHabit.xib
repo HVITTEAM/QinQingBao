@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DietaryHabit">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFk-b0-RAf">
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QhM-Ms-CUn">
+                            <color key="backgroundColor" red="0.1764705882" green="0.75294117650000003" blue="0.70588235290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="U0j-RC-ncl"/>
+                                <constraint firstAttribute="width" constant="110" id="vWx-c5-ZN1"/>
+                            </constraints>
+                            <state key="normal" title="取消">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJ0-Sz-bcD">
+                            <color key="backgroundColor" red="0.99215686270000003" green="0.48627450979999998" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="F5R-SH-4SK"/>
+                                <constraint firstAttribute="width" constant="110" id="xM9-oW-IDT"/>
+                            </constraints>
+                            <state key="normal" title="确认">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="220" id="09e-8z-tNa"/>
+                        <constraint firstAttribute="width" constant="320" id="Av7-5c-hoa"/>
+                        <constraint firstAttribute="bottom" secondItem="QhM-Ms-CUn" secondAttribute="bottom" constant="13" id="NeO-5G-2YQ"/>
+                        <constraint firstItem="QhM-Ms-CUn" firstAttribute="leading" secondItem="UFk-b0-RAf" secondAttribute="leading" constant="18" id="POP-un-LfZ"/>
+                        <constraint firstAttribute="trailing" secondItem="QJ0-Sz-bcD" secondAttribute="trailing" constant="18" id="eJw-pI-eps"/>
+                        <constraint firstAttribute="bottom" secondItem="QJ0-Sz-bcD" secondAttribute="bottom" constant="13" id="eqe-Wk-CoQ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.4777801890432099" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="UFk-b0-RAf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8Xn-uV-IEt"/>
+                <constraint firstItem="UFk-b0-RAf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ejc-ag-ps0"/>
+            </constraints>
+            <connections>
+                <outlet property="cancelBtn" destination="QhM-Ms-CUn" id="gAV-A2-xNl"/>
+                <outlet property="contentBoxView" destination="UFk-b0-RAf" id="gMb-Fi-xo0"/>
+                <outlet property="sureBtn" destination="QJ0-Sz-bcD" id="liJ-FW-3fg"/>
+            </connections>
+            <point key="canvasLocation" x="-136" y="-22"/>
+        </view>
+    </objects>
+</document>

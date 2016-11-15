@@ -10,8 +10,11 @@
 
 #import "CommonPlanCell.h"
 #import "CommonPlanModel.h"
+#import "HealthReportCell.h"
 
 #import "InterveneController.h"
+
+#import "HealthArchiveViewController.h"
 
 @interface HealthPlanController ()
 {
@@ -150,11 +153,11 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 145;
+    return 260;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -167,21 +170,40 @@
     if(commonPlanCell == nil)
         commonPlanCell = [CommonPlanCell commonPlanCell];
     
+    HealthReportCell *healthReportCell = [tableView dequeueReusableCellWithIdentifier:@"MTHealthReportCell"];
+    
+    if(healthReportCell == nil)
+        healthReportCell = [HealthReportCell healthReportCell];
+    healthReportCell.clickType = ^(NSInteger type){
+        switch (type) {
+            case 1:
+                //报告
+                break;
+            case 2:
+                //干预方案
+                break;
+            default:
+                break;
+        }
+    };
     
     if (self.tableView.header.state != MJRefreshStateRefreshing)
     {
         commonPlanCell.item = dataProvider[indexPath.section];
     }
     
-    return commonPlanCell;
+    return healthReportCell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CommonPlanModel *model = dataProvider[indexPath.section];
-    InterveneController *view = [[InterveneController alloc] init];
-    view.wid = model.wid;
-    [self.navigationController pushViewController:view animated:YES];
+//    CommonPlanModel *model = dataProvider[indexPath.section];
+//    InterveneController *view = [[InterveneController alloc] init];
+//    view.wid = model.wid;
+//    [self.navigationController pushViewController:view animated:YES];
+    
+    HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
+    [self.parentVC.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)showPlaceholderview
