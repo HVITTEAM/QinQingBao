@@ -183,7 +183,6 @@
         {
             [textView setItemInfoWith:weakSelf.customInfo.totalname regionStr:@"西湖区" regionCode:weakSelf.customInfo.dvcode areaInfo:weakSelf.customInfo.areainfo];
         }
-        
         textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
             weakSelf.customInfo.dvcode = selectedRegionmodel.dvcode;
             weakSelf.customInfo.areainfo = areaInfo;
