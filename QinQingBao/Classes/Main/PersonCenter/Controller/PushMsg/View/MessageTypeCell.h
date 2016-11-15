@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *subtitleLab;
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 @property (strong, nonatomic) IBOutlet UIView *badgeView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *badgeToBottomCons;
 
 @end

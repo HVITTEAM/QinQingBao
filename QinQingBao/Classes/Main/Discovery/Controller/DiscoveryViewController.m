@@ -23,6 +23,8 @@
 #import "PublicProfileViewController.h"
 #import "SearchViewController.h"
 #import "MarketViewController.h"
+#import "MapViewController.h"
+
 
 @interface DiscoveryViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -36,10 +38,6 @@
 
 @property (strong, nonatomic) NSArray *advDatas;     //轮播图数据
 
-@property (strong, nonatomic) NSMutableArray *postsDatas;     //热门帖子数据
-
-@property (assign, nonatomic) NSInteger pageNum;     //分页数
-
 @end
 
 @implementation DiscoveryViewController
@@ -47,15 +45,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.pageNum = 1;
-    
     [self setupUI];
     
     [self loadCirclelist];
     
     [self getAdvertisementpic];
-    
-    [self loadFlaglist];
 }
 
 - (void)setupUI
@@ -75,6 +69,7 @@
     searhField.leftView = leftView;
     searhField.delegate = self;
     self.navigationItem.titleView = searhField;
+    
     //UITableView
     UITableView *tbv = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH) style:UITableViewStyleGrouped];
     tbv.delegate = self;
@@ -84,7 +79,6 @@
     tbv.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:tbv];
     self.tableView = tbv;
-    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     self.tableView.separatorColor = [UIColor colorWithRGB:@"ebebeb"];
     
     __weak typeof(self) weakSelf = self;
@@ -106,15 +100,6 @@
     return _healthCommunityDatas;
 }
 
-- (NSMutableArray *)postsDatas
-{
-    if (!_postsDatas) {
-        _postsDatas = [[NSMutableArray alloc] init];
-    }
-    
-    return _postsDatas;
-}
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -123,9 +108,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 2) {
-        return self.postsDatas.count + 1;
-    }
     return 2;
 }
 
@@ -134,29 +116,43 @@
     __weak typeof(self) weakSelf = self;
     
     UITableViewCell *cell = nil;
-    if (indexPath.row == 0){
+    if (indexPath.row == 0){   //标题
         static NSString *cellId = @"titleCellId";
-        cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.font = [UIFont systemFontOfSize:16];
-            cell.layoutMargins = UIEdgeInsetsZero;
+        UITableViewCell * titleCell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!titleCell) {
+            titleCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            titleCell.textLabel.font = [UIFont systemFontOfSize:16];
+            titleCell.layoutMargins = UIEdgeInsetsZero;
         }
         
         switch (indexPath.section) {
             case 0:
-                cell.textLabel.text = @"健康检测";
+                titleCell.textLabel.text = @"健康检测";
                 break;
             case 1:
-                cell.textLabel.text = @"健康圈";
+                titleCell.textLabel.text = @"服务网点";
                 break;
             default:
-                cell.textLabel.text = @"热门帖子";
+                titleCell.textLabel.text = @"健康圈";
                 break;
         }
+        cell = titleCell;
         
-    }else if (indexPath.row == 1 && indexPath.section != 2){
+    }else if (indexPath.section == 1 && indexPath.row == 1){  //地图cell
+        static NSString *mapCellId = @"mapCell";
+        UITableViewCell *mapCell = [tableView dequeueReusableCellWithIdentifier:mapCellId];
+        if (!mapCell) {
+            mapCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mapCellId];
+            mapCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            mapCell.layoutMargins = UIEdgeInsetsZero;
+            UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 90)];
+            img.image = [UIImage imageNamed:@"logo"];
+            [mapCell.contentView addSubview:img];
+        }
+        
+        cell = mapCell;
+    }else{
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
         menuCell.row = 1;
         menuCell.col = 4;
@@ -225,30 +221,9 @@
                 communityVC.circleModel = model;
                 [weakSelf.navigationController pushViewController:communityVC animated:YES];
             };
-            
         }
-        
         cell = menuCell;
-    }else{
-        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        PostsModel *model = self.postsDatas[indexPath.row - 1];
-        [cardCell setPostsModel:model];
-        
-        // 头像点击 进入个人信息界面
-        cardCell.portraitClick = ^(PostsModel *item)
-        {
-            PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
-            view.uid = item.authorid;
-            [self.navigationController pushViewController:view animated:YES];
-        };
-        cardCell.indexpath = indexPath;
-        cardCell.attentionBlock = ^(PostsModel *model){
-            selectedDeleteindexPath = indexPath;
-            [weakSelf attentionAction:model];
-        };
-        cell = cardCell;
     }
-    
     return cell;
 }
 
@@ -259,15 +234,15 @@
         return 40;
     }else if (indexPath.section == 0){
         return 90;
-    }else if (indexPath.section == 1) {
+    }else if (indexPath.section == 1){
+        return 90;
+    }else {
         if (self.healthCommunityDatas.count > 4) {
             return 110;
         }else{
             return 90;
         }
     }
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -282,17 +257,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak typeof(self) weakSelf = self;
-    if (indexPath.section == 2 && indexPath.row != 0) {
-        PostsDetailViewController *detailVC = [[PostsDetailViewController alloc] init];
-        PostsModel *postsModel = self.postsDatas[indexPath.row - 1];
-        detailVC.itemdata = postsModel;
-        detailVC.deletePostsSuccessBlock = ^{
-            [weakSelf.postsDatas removeObject:postsModel];
-            [weakSelf.tableView reloadData];
-        };
-        [self.navigationController pushViewController:detailVC animated:YES];
-    }
+    MapViewController *map = [[MapViewController alloc] init];
+//    map.address = [NSString stringWithFormat:@"%@%@",_itemInfo.totalname,_itemInfo.orgaddress];;
+//    map.latitude = _itemInfo.orglat;
+//    map.longitude = _itemInfo.orglon;
+    [self presentViewController:map animated:YES completion:nil];
 }
 
 #pragma mark - 网络相关
@@ -313,128 +282,11 @@
         }
         
         self.healthCommunityDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:1];
-        [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
-        //        [self.tableView reloadData];
-        
+        [self.tableView reloadData];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
-}
-
-/**
- * 获取热门帖子数据  标识位【推荐贴：1；热门帖：2；说说：3  根据帖子标题查询帖子列表：4】
- **/
-- (void)loadFlaglist
-{
-    NSMutableDictionary *params = [@{
-                                     @"flag":@2,
-                                     @"p": @(self.pageNum),
-                                     @"page":@(10),
-                                     @"client":@"ios"
-                                     }mutableCopy];
-    params[@"key"] = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key;
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_flaglist parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        [self.tableView.footer endRefreshing];
-        
-        id codeNum = [dict objectForKey:@"code"];
-        if([codeNum integerValue] > 0)
-        {
-            if([codeNum integerValue] == 17001 && self.postsDatas.count == 0)
-            {
-                return;
-            }
-            else if([codeNum integerValue] == 17001 && self.postsDatas.count > 0)
-            {
-                return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
-            }
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-        }
-        else
-        {
-            NSArray *datas = [PostsModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-            if (datas.count > 0) {
-                [self.postsDatas addObjectsFromArray:datas];
-                self.pageNum++;
-                
-                //            [self.tableView reloadData];
-                NSIndexSet *idxSet = [NSIndexSet indexSetWithIndex:2];
-                [self.tableView reloadSections:idxSet withRowAnimation:UITableViewRowAnimationNone];
-            }
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.tableView.footer endRefreshing];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
-    }];
-}
-
-/**
- *  加载更多数据
- */
-- (void)loadMoreDatas
-{
-    [self loadFlaglist];
-}
-
-/**
- *  加关注与取消关注，add是加关注，del是取消关注
- */
-- (void)attentionAction:(PostsModel *)model
-{
-    //判断是否登录
-    if (![SharedAppUtil checkLoginStates]) {
-        return;
-    }
-    if ([model.is_myposts integerValue] == 1)//点击的是自己的帖子
-    {
-        return [self deleteAction:model];
-    }
-    
-    
-    NSString *type = @"add";
-    if ([model.is_home_friend integerValue] != 0) {
-        type = @"del";
-    }
-    
-    NSDictionary *params = @{
-                             @"action":type,
-                             @"uid": [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
-                             @"rel":model.authorid,
-                             @"client":@"ios",
-                             @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key
-                             };
-    
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_attention_do parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        [HUD removeFromSuperview];
-        id codeNum = [dict objectForKey:@"code"];
-        if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
-        {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-        }
-        else
-        {
-            if ([type isEqualToString:@"add"]) {
-                model.is_home_friend = @"1";
-            }else{
-                model.is_home_friend = @"0";
-            }
-            
-            NSString *str = [[dict objectForKey:@"datas"] objectForKey:@"message"];
-            [NoticeHelper AlertShow:str view:nil];
-            [self.tableView reloadData];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
-    }];
-    
 }
 
 /**
@@ -464,53 +316,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
     }];
-}
-
-/**
- *  删除帖子
- */
-#pragma mark - 导航栏事件
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        NSDictionary *params = @{@"tid":selectedDeleteModel.tid,
-                                 @"client":@"ios",
-                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
-        
-        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-            [HUD removeFromSuperview];
-            id codeNum = [dict objectForKey:@"code"];
-            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
-            }
-            else
-            {
-                [self.postsDatas removeObjectAtIndex:selectedDeleteindexPath.row - 1];
-                [self.tableView deleteRowsAtIndexPaths:@[selectedDeleteindexPath] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [HUD removeFromSuperview];
-            [NoticeHelper AlertShow:@"请求出错了" view:nil];
-        }];
-    }
-}
-
-/**
- *  删除帖子
- */
-- (void)deleteAction:(PostsModel *)model
-{
-    if ([model.is_myposts integerValue] == 1)
-    {
-        selectedDeleteModel = model;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
-        [alertView show];
-    }
 }
 
 #pragma mark - 事件方法

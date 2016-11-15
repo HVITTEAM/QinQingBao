@@ -1131,6 +1131,17 @@
 		D257C4B31D65BAC9002D18F5 /* MarketClasslistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D257C4B11D65BAC9002D18F5 /* MarketClasslistCell.m */; };
 		D257C4B41D65BAC9002D18F5 /* MarketClasslistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D257C4B21D65BAC9002D18F5 /* MarketClasslistCell.xib */; };
 		D257C4B71D65BB8C002D18F5 /* CustomInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D257C4B61D65BB8C002D18F5 /* CustomInfoController.m */; };
+		D25FAB3C1DD94EF500293E44 /* QuestionResultController3.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB3B1DD94EF500293E44 /* QuestionResultController3.m */; };
+		D25FAB471DD95EE300293E44 /* PayResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB441DD95EE300293E44 /* PayResultViewController.m */; };
+		D25FAB721DD9615900293E44 /* ServiceHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB671DD9615900293E44 /* ServiceHomeViewController.m */; };
+		D25FAB731DD9615900293E44 /* ArchivesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB6B1DD9615900293E44 /* ArchivesCell.m */; };
+		D25FAB741DD9615900293E44 /* ArchivesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25FAB6C1DD9615900293E44 /* ArchivesCell.xib */; };
+		D25FAB751DD9615900293E44 /* QuestionResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB6E1DD9615900293E44 /* QuestionResultCell.m */; };
+		D25FAB761DD9615900293E44 /* RelativesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB701DD9615900293E44 /* RelativesCell.m */; };
+		D25FAB771DD9615900293E44 /* RelativesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25FAB711DD9615900293E44 /* RelativesCell.xib */; };
+		D25FAB7B1DD9624500293E44 /* ArchivesPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB791DD9624500293E44 /* ArchivesPersonCell.m */; };
+		D25FAB7C1DD9624500293E44 /* ArchivesPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D25FAB7A1DD9624500293E44 /* ArchivesPersonCell.xib */; };
+		D25FAB7F1DD9668300293E44 /* InterventionPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = D25FAB7E1DD9668300293E44 /* InterventionPlanController.m */; };
 		D271751C1D5862E4007B9D78 /* ClasslistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751B1D5862E4007B9D78 /* ClasslistModel.m */; };
 		D27175201D5865BA007B9D78 /* ClasslistModelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D271751E1D5865BA007B9D78 /* ClasslistModelCell.m */; };
 		D27175211D5865BA007B9D78 /* ClasslistModelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D271751F1D5865BA007B9D78 /* ClasslistModelCell.xib */; };
@@ -3187,6 +3198,25 @@
 		D257C4B21D65BAC9002D18F5 /* MarketClasslistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketClasslistCell.xib; sourceTree = "<group>"; };
 		D257C4B51D65BB8C002D18F5 /* CustomInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomInfoController.h; sourceTree = "<group>"; };
 		D257C4B61D65BB8C002D18F5 /* CustomInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoController.m; sourceTree = "<group>"; };
+		D25FAB3A1DD94EF500293E44 /* QuestionResultController3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionResultController3.h; sourceTree = "<group>"; };
+		D25FAB3B1DD94EF500293E44 /* QuestionResultController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionResultController3.m; sourceTree = "<group>"; };
+		D25FAB431DD95EE300293E44 /* PayResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayResultViewController.h; sourceTree = "<group>"; };
+		D25FAB441DD95EE300293E44 /* PayResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayResultViewController.m; sourceTree = "<group>"; };
+		D25FAB661DD9615900293E44 /* ServiceHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceHomeViewController.h; sourceTree = "<group>"; };
+		D25FAB671DD9615900293E44 /* ServiceHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceHomeViewController.m; sourceTree = "<group>"; };
+		D25FAB6A1DD9615900293E44 /* ArchivesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchivesCell.h; sourceTree = "<group>"; };
+		D25FAB6B1DD9615900293E44 /* ArchivesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchivesCell.m; sourceTree = "<group>"; };
+		D25FAB6C1DD9615900293E44 /* ArchivesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArchivesCell.xib; sourceTree = "<group>"; };
+		D25FAB6D1DD9615900293E44 /* QuestionResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionResultCell.h; sourceTree = "<group>"; };
+		D25FAB6E1DD9615900293E44 /* QuestionResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionResultCell.m; sourceTree = "<group>"; };
+		D25FAB6F1DD9615900293E44 /* RelativesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelativesCell.h; sourceTree = "<group>"; };
+		D25FAB701DD9615900293E44 /* RelativesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelativesCell.m; sourceTree = "<group>"; };
+		D25FAB711DD9615900293E44 /* RelativesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelativesCell.xib; sourceTree = "<group>"; };
+		D25FAB781DD9624500293E44 /* ArchivesPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchivesPersonCell.h; sourceTree = "<group>"; };
+		D25FAB791DD9624500293E44 /* ArchivesPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchivesPersonCell.m; sourceTree = "<group>"; };
+		D25FAB7A1DD9624500293E44 /* ArchivesPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArchivesPersonCell.xib; sourceTree = "<group>"; };
+		D25FAB7D1DD9668300293E44 /* InterventionPlanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionPlanController.h; sourceTree = "<group>"; };
+		D25FAB7E1DD9668300293E44 /* InterventionPlanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionPlanController.m; sourceTree = "<group>"; };
 		D271751A1D5862E4007B9D78 /* ClasslistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistModel.h; sourceTree = "<group>"; };
 		D271751B1D5862E4007B9D78 /* ClasslistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClasslistModel.m; sourceTree = "<group>"; };
 		D271751D1D5865BA007B9D78 /* ClasslistModelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClasslistModelCell.h; sourceTree = "<group>"; };
@@ -4503,6 +4533,8 @@
 				01702B811D18CD6600058764 /* MarketViewController.m */,
 				01F1B9131D1A1BC400057B15 /* MarketDeatilViewController.h */,
 				01F1B9141D1A1BC400057B15 /* MarketDeatilViewController.m */,
+				D25FAB431DD95EE300293E44 /* PayResultViewController.h */,
+				D25FAB441DD95EE300293E44 /* PayResultViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4647,6 +4679,8 @@
 		0177DA681D5D6302008D5C95 /* ResultController */ = {
 			isa = PBXGroup;
 			children = (
+				D25FAB3A1DD94EF500293E44 /* QuestionResultController3.h */,
+				D25FAB3B1DD94EF500293E44 /* QuestionResultController3.m */,
 				0177DA691D5D6302008D5C95 /* QuestionResultController.h */,
 				0177DA6A1D5D6302008D5C95 /* QuestionResultController.m */,
 				0177DA6B1D5D6302008D5C95 /* QuestionResultController.xib */,
@@ -4901,6 +4935,9 @@
 		01E306111DCAD1A900A1A788 /* HealthArchive */ = {
 			isa = PBXGroup;
 			children = (
+				D25FAB651DD9615900293E44 /* Controller */,
+				D25FAB681DD9615900293E44 /* Model */,
+				D25FAB691DD9615900293E44 /* View */,
 			);
 			path = HealthArchive;
 			sourceTree = "<group>";
@@ -8352,6 +8389,42 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D25FAB651DD9615900293E44 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D25FAB661DD9615900293E44 /* ServiceHomeViewController.h */,
+				D25FAB671DD9615900293E44 /* ServiceHomeViewController.m */,
+				D25FAB7D1DD9668300293E44 /* InterventionPlanController.h */,
+				D25FAB7E1DD9668300293E44 /* InterventionPlanController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D25FAB681DD9615900293E44 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D25FAB691DD9615900293E44 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D25FAB6A1DD9615900293E44 /* ArchivesCell.h */,
+				D25FAB6B1DD9615900293E44 /* ArchivesCell.m */,
+				D25FAB6C1DD9615900293E44 /* ArchivesCell.xib */,
+				D25FAB6D1DD9615900293E44 /* QuestionResultCell.h */,
+				D25FAB6E1DD9615900293E44 /* QuestionResultCell.m */,
+				D25FAB6F1DD9615900293E44 /* RelativesCell.h */,
+				D25FAB701DD9615900293E44 /* RelativesCell.m */,
+				D25FAB711DD9615900293E44 /* RelativesCell.xib */,
+				D25FAB781DD9624500293E44 /* ArchivesPersonCell.h */,
+				D25FAB791DD9624500293E44 /* ArchivesPersonCell.m */,
+				D25FAB7A1DD9624500293E44 /* ArchivesPersonCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -8404,7 +8477,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8416,7 +8489,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -8521,9 +8594,11 @@
 				01ECDA0B1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAA71C8EB31F0018160F /* chatBar_more_camera@2x.png in Resources */,
 				01ECD9FC1C8EB31F0018160F /* Contents.json in Resources */,
+				D25FAB771DD9615900293E44 /* RelativesCell.xib in Resources */,
 				016066CF1CF6ACCE005A3164 /* MJRefresh.bundle in Resources */,
 				01F6DBBA1D8E406000300679 /* ScrollMenuCell.xib in Resources */,
 				01ECDA211C8EB31F0018160F /* VoiceSearchFeedback013.png in Resources */,
+				D25FAB741DD9615900293E44 /* ArchivesCell.xib in Resources */,
 				01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */,
 				01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */,
 				01ECDA521C8EB31F0018160F /* chatBar_more_faceSelected@2x.png in Resources */,
@@ -8885,6 +8960,7 @@
 				01ECDA1E1C8EB31F0018160F /* VoiceSearchFeedback012.png in Resources */,
 				01ECDA081C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA3B1C8EB31F0018160F /* call_out_h.png in Resources */,
+				D25FAB7C1DD9624500293E44 /* ArchivesPersonCell.xib in Resources */,
 				01ECDAA91C8EB31F0018160F /* chatBar_more_cameraSelected.png in Resources */,
 				01F0D0291B8DB96B00EF3238 /* BankCardCell.xib in Resources */,
 				01601D971CE0900200B3712E /* OrderHeadCell.xib in Resources */,
@@ -9002,6 +9078,7 @@
 				013F237F1C5C6379006711FE /* DeliverViewController.m in Sources */,
 				01A820461D82A4C8002E30E3 /* MyAccountViewController.m in Sources */,
 				01E9A74A1C74624500000805 /* HeadProcessView.m in Sources */,
+				D25FAB731DD9615900293E44 /* ArchivesCell.m in Sources */,
 				01E4A9841C40ACB500AAAF73 /* OrderGoodsCell.m in Sources */,
 				0162EA8C1D869DB500A5EF1C /* BHBItem.m in Sources */,
 				01601D5E1CE08DE500B3712E /* SettlementSlideViewController.m in Sources */,
@@ -9154,6 +9231,7 @@
 				01328F9A1C4C88270014D283 /* StoreModel.m in Sources */,
 				016144E31D93DC090088FCD3 /* QuestionCell.m in Sources */,
 				01CF97AD1C7AEAD500206FCD /* MTAddressPickController.m in Sources */,
+				D25FAB721DD9615900293E44 /* ServiceHomeViewController.m in Sources */,
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
 				0162EA471D86849900A5EF1C /* YCXMenuItem.m in Sources */,
 				01F33D851BB2342D00787620 /* UserInforModel.m in Sources */,
@@ -9233,6 +9311,7 @@
 				01ECDADE1C8EB31F0018160F /* EMAudioRecorderUtil.m in Sources */,
 				01ECDB181C8EB31F0018160F /* EaseBubbleView+Location.m in Sources */,
 				D2A9771E1DB0B24700A0438D /* ReportDetailViewController.m in Sources */,
+				D25FAB761DD9615900293E44 /* RelativesCell.m in Sources */,
 				0177DA841D5D6303008D5C95 /* QuestionTwoBtnController.m in Sources */,
 				01BAF1CA1D64527E000D2E45 /* CommonPlanCell.m in Sources */,
 				0177DA7E1D5D6303008D5C95 /* DiseaseBtnController.m in Sources */,
@@ -9267,6 +9346,7 @@
 				01ECDAFC1C8EB31F0018160F /* EaseConversationModel.m in Sources */,
 				01ECDB171C8EB31F0018160F /* EaseBubbleView+Image.m in Sources */,
 				01EF37241C59B2560029C1C5 /* HealthHouseViewController.m in Sources */,
+				D25FAB7F1DD9668300293E44 /* InterventionPlanController.m in Sources */,
 				D257C4AB1D65BA05002D18F5 /* MarketCustomInfo.m in Sources */,
 				01F015C91C5EFD3000930B0E /* HotGoodsViewController.m in Sources */,
 				01E89AEE1C758FFD00CFD40D /* HealthyinfoTotal.m in Sources */,
@@ -9417,6 +9497,7 @@
 				01E4A99C1C41224100AAAF73 /* GoodsClassModelTotal.m in Sources */,
 				01254BB51DB74E3B0011C27A /* MyAnnotation.m in Sources */,
 				013F3F2E1BFC752800FF39E5 /* NJKWebViewProgress.m in Sources */,
+				D25FAB7B1DD9624500293E44 /* ArchivesPersonCell.m in Sources */,
 				01EB6BF11C28D88C008BD878 /* AboutusViewController.m in Sources */,
 				D287E2951D2A3DBA006CE52C /* ReportInfoCell.m in Sources */,
 				01F227DB1B7B3E1400ED4AFB /* main.m in Sources */,
@@ -9433,6 +9514,7 @@
 				01332B8A1C1E5E240061CB79 /* AllServiceViewController.m in Sources */,
 				01328FA41C4CD1AE0014D283 /* GoodsMiddleTopCell.m in Sources */,
 				010EC9DD1C438D8900D36417 /* MTCommodityModel.m in Sources */,
+				D25FAB751DD9615900293E44 /* QuestionResultCell.m in Sources */,
 				D216AB511D07FC4F00E85008 /* PushMsgModel.m in Sources */,
 				01E6D4F51BE1F49B00824F51 /* README.md in Sources */,
 				01BAF1C11D645120000D2E45 /* HealthPlanController.m in Sources */,
@@ -9479,6 +9561,7 @@
 				01C0D1FC1C468A9800FF1CD3 /* CommonGoodsTotal.m in Sources */,
 				01F6DBBD1D8E406000300679 /* ScrollMenuView.m in Sources */,
 				01CF97B31C7C335F00206FCD /* EditInfoTableViewController.m in Sources */,
+				D25FAB3C1DD94EF500293E44 /* QuestionResultController3.m in Sources */,
 				01BAF1B81D61AA52000D2E45 /* RecommendGoodsCell.m in Sources */,
 				01E89AF81C7595D900CFD40D /* RelationModel.m in Sources */,
 				01F85AB71C575A0600E463F4 /* HotGoodsView.m in Sources */,
@@ -9630,6 +9713,7 @@
 				01024CC31BD0A75D00E8CAEC /* openssl_wrapper.m in Sources */,
 				01FD4CA21CAE4B43008F09CF /* PSTCollectionViewFlowLayout.m in Sources */,
 				01ED1FD81C41FE37002FD93C /* AddressTableViewController.m in Sources */,
+				D25FAB471DD95EE300293E44 /* PayResultViewController.m in Sources */,
 				01F0D0231B8DB5D000EF3238 /* CouponsCell.m in Sources */,
 				01F015D71C5F427B00930B0E /* SpecialViewController.m in Sources */,
 				011076FD1C3E8C42001E5C51 /* GoodsHeadViewController.m in Sources */,
@@ -9776,10 +9860,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9831,10 +9914,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

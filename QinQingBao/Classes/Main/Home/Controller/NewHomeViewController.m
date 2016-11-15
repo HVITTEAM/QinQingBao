@@ -13,7 +13,7 @@
 #import "SearchViewController.h"
 #import "ReportListViewController.h"
 
-#import "ClasslistViewController.h"
+#import "ServiceHomeViewController.h"
 #import "HealthPlanController.h"
 
 @interface NewHomeViewController ()
@@ -23,7 +23,7 @@
 }
 
 @property (nonatomic, strong) PostsTableViewController *vc1;
-@property (nonatomic, strong) ClasslistViewController *vc2;
+@property (nonatomic, strong) ServiceHomeViewController *vc2;
 @property (nonatomic, strong) HealthPlanController *vc3;
 @end
 
@@ -55,9 +55,9 @@
     self.vc1.parentVC = self;
     self.vc1.title = @"资讯";
     
-    self.vc2 = [[ClasslistViewController alloc] init];
+    self.vc2 = [[ServiceHomeViewController alloc] init];
     self.vc2.parentVC = self;
-    self.vc2.title = @"评估";
+    self.vc2.title = @"服务";
     
     self.vc3 = [[HealthPlanController alloc] init];
     self.vc3.parentVC = self;
