@@ -8,6 +8,7 @@
 
 #import "HealthArchiveViewController3.h"
 #import "HeadProcessView.h"
+#import "ReportCollectionViewCell.h"
 
 @interface HealthArchiveViewController3 ()<UICollectionViewDataSource,UICollectionViewDelegate,UIAlertViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -27,7 +28,21 @@
     [self setupFooter];
     
     _dataProvider = [[NSMutableArray alloc] init];
-    takePhotoimg = [UIImage imageNamed:@"placeholderImage.png"];
+    
+    if (self.isAddArchive) {
+        //加载缓存的图片
+        for (int i = 0; i < self.archiveData.reportPhotos.count; i++) {
+            NSString *path = self.archiveData.reportPhotos[i];
+            UIImage *img = [[UIImage alloc] initWithContentsOfFile:path];
+            if (img) {
+                [_dataProvider addObject:img];
+            }else{
+                [self.archiveData.reportPhotos removeObjectAtIndex:i];
+            }
+        }
+    }
+    
+    takePhotoimg = [UIImage imageNamed:@"uploadimg.png"];
     [_dataProvider addObject:takePhotoimg];
 }
 
@@ -114,12 +129,30 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //重用cell
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTReportCollectionViewCell" forIndexPath:indexPath];
+    ReportCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTReportCollectionViewCell" forIndexPath:indexPath];
     
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:100];
     imageView.image = self.dataProvider[indexPath.section*3 + indexPath.row];
     imageView.userInteractionEnabled = YES;
+    cell.idxPath = indexPath;
+    UIButton *delBtn = (UIButton *)[cell viewWithTag:90];
+    delBtn.hidden = NO;
+    if ((self.dataProvider.count - 1) == (indexPath.section*3 + indexPath.row)) {
+        delBtn.hidden = YES;
+    }
+    __weak typeof(self) weakSelf = self;
+    cell.deleteImageBlock = ^(NSIndexPath *idx){
+        [weakSelf.dataProvider removeObjectAtIndex:(idx.section * 3 + idx.row)];
+        if (self.isAddArchive) {
+            NSString *imagePath = weakSelf.archiveData.reportPhotos[idx.section * 3 + idx.row];
+            [ArchiveData deletePicFromDocumentWithPicPath:imagePath];
+            [weakSelf.archiveData.reportPhotos removeObjectAtIndex:idx.section * 3 + idx.row];
+            [weakSelf.archiveData saveArchiveDataToFile];
+        }
+
+        [weakSelf.colectView reloadData];
+    };
     return cell;
 }
 
@@ -213,17 +246,28 @@
     //用[NSDate date]可以获取系统当前时间
     NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
     //输出格式为：2010-10-27 10:22:13
-    NSLog(@"%@",currentDateStr);
+    NSString *picName = [NSString stringWithFormat:@"%@.jpg",currentDateStr];
     NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        
+        //保存图片
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
+        if (self.isAddArchive) {
+            NSString *filePath = [ArchiveData savePictoDocument:imageData picName:picName];
+            [self.archiveData.reportPhotos addObject:filePath];
+            [self.archiveData saveArchiveDataToFile];
+        }
+        image = [[UIImage alloc] initWithData:imageData];
+        
         [_dataProvider addObject:image];
         
         [_dataProvider exchangeObjectAtIndex:_dataProvider.count -1 withObjectAtIndex:_dataProvider.count -2];
         [self.colectView reloadData];
+    
         //关闭相册界面
         [picker dismissViewControllerAnimated:NO completion:nil];
     }
@@ -262,5 +306,83 @@
     }
 }
 
+#pragma mark - 网络相关
+/**
+ *  上传归档数据
+ */
+- (void)uploadArchiveData
+{
+    if ([SharedAppUtil defaultCommonUtil].userVO.key.length <= 0) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                    }mutableCopy];
+    
+    params[@"truename"] = self.archiveData.truename;
+    params[@"sex"] = self.archiveData.sex;
+    params[@"birthday"] = self.archiveData.birthday;
+    params[@"height"] = self.archiveData.height;
+    params[@"weight"] = self.archiveData.weight;
+    params[@"waistline"] = self.archiveData.waistline;
+    params[@"systolicpressure"] = self.archiveData.systolicpressure;
+    params[@"cholesterol"] = self.archiveData.cholesterol;
+    params[@"mobile"] = self.archiveData.mobile;
+    params[@"email"] = self.archiveData.email;
+    params[@"address"] = self.archiveData.address;
+    params[@"occupation"] = self.archiveData.occupation;
+    params[@"livingcondition"] = self.archiveData.livingcondition;
+    params[@"units"] = self.archiveData.units;
+    params[@"bremark"] = self.archiveData.bremark;
+    
+    params[@"physicalcondition"] = self.archiveData.physicalcondition;
+    params[@"events"] = self.archiveData.events;
+    params[@"takingdrugs"] = self.archiveData.takingdrugs;
+    params[@"diabetes"] = self.archiveData.diabetes;
+    params[@"medicalhistory"] = self.archiveData.medicalhistory;
+    params[@"hereditarycardiovascular"] = self.archiveData.hereditarycardiovascular;
+    params[@"geneticdisease"] = self.archiveData.geneticdisease;
+    params[@"dremark"] = self.archiveData.dremark;
+    
+    params[@"smoke"] = self.archiveData.smoke;
+    params[@"drink"] = self.archiveData.drink;
+    
+    NSError *error;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.diet options:0 error:&error];
+    params[@"diet"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    params[@"sleeptime"] = self.archiveData.sleeptime;
+    params[@"getuptime"] = self.archiveData.getuptime;
+    params[@"sports"] = self.archiveData.sports;
+    params[@"badhabits"] = self.archiveData.badhabits;
+    params[@"hremark"] = self.archiveData.hremark;
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Add_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if([dict[@"code"] integerValue] != 0){
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+        
+        [NoticeHelper AlertShow:@"成功" view:nil];
+        if (self.isAddArchive) {
+            [self.archiveData deleteArchiveData];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错" view:nil];
+    }];
+}
+
+#pragma mark - 事件方法
+- (void)next:(UIButton *)sender
+{
+    [self uploadArchiveData];
+}
 
 @end

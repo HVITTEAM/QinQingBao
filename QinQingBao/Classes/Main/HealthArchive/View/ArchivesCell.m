@@ -8,6 +8,7 @@
 
 #import "ArchivesCell.h"
 #import "RelativesCell.h"
+#import "ArchiveDataListModel.h"
 #define kScaleOfScreen (MTScreenW / 320)
 
 @interface ArchivesCell ()<UICollectionViewDelegateFlowLayout,UICollectionViewDataSource>
@@ -124,8 +125,9 @@
         cell.showBorderLine = NO;
         
     }else{
-        cell.titleLb.text = @"张三李四";
-        [cell.imgView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"placeholder-0"]];
+        ArchiveDataListModel * model = self.relativesArr[indexPath.item];
+        cell.titleLb.text = model.truename;
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"placeholder-0"]];
         cell.titleLb.textColor = [UIColor colorWithRGB:@"666666"];
         
         //设置描边

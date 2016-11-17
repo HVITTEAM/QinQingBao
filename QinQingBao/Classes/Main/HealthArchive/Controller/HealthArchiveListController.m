@@ -56,7 +56,7 @@
     btn.layer.cornerRadius = 4.0f;
     btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     btn.layer.borderWidth = 0.5f;
-    [btn addTarget:self action:@selector(scan:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(scan) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:btn];
     
     UIButton *btn0 = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(btn.frame) + 20, 20, MTScreenW/2 - 30, 40)];
@@ -64,7 +64,7 @@
     btn0.backgroundColor = HMColor(140, 185, 50);
     btn0.layer.cornerRadius = 4.0f;
     btn0.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn0 addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
+    [btn0 addTarget:self action:@selector(add) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:btn0];
     
     self.tableView.tableFooterView = bottomView;
@@ -128,6 +128,7 @@
 -(void)add
 {
     HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
+    vc.addArchive = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

@@ -8,7 +8,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowCodeViewController">
             <connections>
+                <outlet property="codeLab" destination="x87-Wt-bIw" id="jde-hp-BYw"/>
+                <outlet property="iconImg" destination="5Jf-Dk-dj7" id="Lx4-qD-ke3"/>
                 <outlet property="imageView" destination="jRV-5G-T45" id="wYI-AJ-Nsr"/>
+                <outlet property="nameLab" destination="Kna-Dz-xD4" id="ODY-uE-76a"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

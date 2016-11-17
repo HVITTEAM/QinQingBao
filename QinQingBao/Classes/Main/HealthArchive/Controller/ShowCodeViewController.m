@@ -10,10 +10,23 @@
 
 @interface ShowCodeViewController ()
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UIImageView *iconImg;
+@property (strong, nonatomic) IBOutlet UILabel *nameLab;
+@property (strong, nonatomic) IBOutlet UILabel *codeLab;
 
 @end
 
 @implementation ShowCodeViewController
+
+-(void)setArchiveData:(ArchiveData *)archiveData
+{
+    _archiveData = archiveData;
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",archiveData.portraitPic]];
+    [self.iconImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user.png"]];
+    self.nameLab.text = archiveData.truename;
+    self.codeLab.text = [NSString stringWithFormat:@"档案号：%@",archiveData.fmno];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,7 +37,7 @@
     // 2.恢复默认
     [filter setDefaults];
     // 3.给过滤器添加数据
-    NSString *dataString = @"http://www.520it.com";
+    NSString *dataString = self.archiveData.fmno;
     NSData *data = [dataString dataUsingEncoding:NSUTF8StringEncoding];
     // 4.通过KVO设置滤镜inputMessage数据
     [filter setValue:data forKeyPath:@"inputMessage"];

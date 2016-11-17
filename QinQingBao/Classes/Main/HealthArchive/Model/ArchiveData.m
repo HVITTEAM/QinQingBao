@@ -43,6 +43,8 @@
     [aCoder encodeObject:_sports forKey:@"_sports"];
     [aCoder encodeObject:_badhabits forKey:@"_badhabits"];
     [aCoder encodeObject:_hremark forKey:@"_hremark"];
+    [aCoder encodeObject:_reportPhotos forKey:@"_reportPhotos"];
+    [aCoder encodeObject:_portraitPic forKey:@"_portraitPic"];
 }
 
 //解码
@@ -81,6 +83,9 @@
         _sports = [aDecoder decodeObjectForKey:@"_sports"];
         _badhabits = [aDecoder decodeObjectForKey:@"_badhabits"];
         _hremark = [aDecoder decodeObjectForKey:@"_hremark"];
+        _reportPhotos = [aDecoder decodeObjectForKey:@"_reportPhotos"];
+        _portraitPic = [aDecoder decodeObjectForKey:@"_portraitPic"];
+        
     }
     return self;
 }
@@ -119,7 +124,327 @@
     vo.sports = [self.sports copyWithZone:zone];
     vo.badhabits = [self.badhabits copyWithZone:zone];
     vo.hremark = [self.hremark copyWithZone:zone];
-    
+    vo.reportPhotos = [self.reportPhotos copy];
+    vo.portraitPic = [self.portraitPic copy];
     return vo;
 }
+
+- (NSMutableArray *)reportPhotos
+{
+    if (!_reportPhotos) {
+        _reportPhotos = [[NSMutableArray alloc] init];
+    }
+    
+    return _reportPhotos;
+}
+
+- (void)saveArchiveDataToFile
+{
+    NSString *filePath = [ArchiveData getArchiveFilePath];
+    [NSKeyedArchiver archiveRootObject:self toFile:filePath];
+}
+
+- (void)deleteArchiveData
+{
+    NSString *directoryPath = [ArchiveData getArchiveDirectory];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:directoryPath error:NULL];
+}
+
++ (ArchiveData *)getArchiveDataFromFile
+{
+    NSString *filePath = [ArchiveData getArchiveFilePath];
+    ArchiveData *data = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    return data;
+}
+
++ (NSString *)getArchiveFilePath
+{
+    NSString *fileDirectory = [ArchiveData getArchiveDirectory];
+    return [NSString stringWithFormat:@"%@/%@_archive",fileDirectory,[SharedAppUtil defaultCommonUtil].userVO.member_id];
+}
+
++ (NSString *)getArchiveDirectory
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    NSString *fileDirectory = [documentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"archive/%@",[SharedAppUtil defaultCommonUtil].userVO.member_id]];
+    
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    BOOL isDir;
+    
+    if ([manager fileExistsAtPath:fileDirectory isDirectory:&isDir]) {
+        if (!isDir) {
+            [manager removeItemAtPath:fileDirectory error:NULL];
+            [manager createDirectoryAtPath:fileDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
+        }
+    }else{
+        [manager createDirectoryAtPath:fileDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+    
+    return fileDirectory;
+}
+
++ (NSString *)savePictoDocument:(NSData *)imageData picName:(NSString *)picName
+{
+    NSString *fileDirectory = [ArchiveData getArchiveDirectory];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",fileDirectory,picName];
+//    NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
+    [imageData writeToFile:filePath atomically:YES];
+    return filePath;
+}
+
++ (void)deletePicFromDocumentWithPicPath:(NSString *)picPath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:picPath error:NULL];
+}
+
+//性别 0:保密 1:男 2:女
++ (NSInteger)sexToNumber:(NSString *)sexStr
+{
+    if ([sexStr isEqualToString:@"男"]) {
+        return 1;
+    }else if ([sexStr isEqualToString:@"女"]){
+        return 2;
+    }else{
+        return 0;
+    }
+}
+
++ (NSString *)numberToSex:(NSInteger)sexCode
+{
+    NSString *sex = nil;
+    switch (sexCode) {
+        case 1:
+            sex = @"男";
+            break;
+        case 2:
+            sex = @"女";
+            break;
+        default:
+            sex = @"保密";
+            break;
+    }
+    return sex;
+}
+
+//生活状态 1.体力劳动为主； 2.脑力劳动为主；3.体力/脑力劳动记得均衡
++ (NSInteger)livingconditionToNumber:(NSString *)livingconditionStr
+{
+    if ([livingconditionStr isEqualToString:@"体力劳动为主"]) {
+        return 1;
+    }else if ([livingconditionStr isEqualToString:@"脑力劳动为主"]){
+        return 2;
+    }else{
+        return 3;
+    }
+}
+
++ (NSString *)numberToLivingcondition:(NSInteger)livingconditionCode
+{
+    NSString *livingcondition = nil;
+    switch (livingconditionCode) {
+        case 1:
+            livingcondition = @"体力劳动为主";
+            break;
+        case 2:
+            livingcondition = @"脑力劳动为主";
+            break;
+        default:
+            livingcondition = @"体力/脑力劳动基本均衡";
+            break;
+    }
+    return livingcondition;
+}
+
+
+//吸烟 1.无；2.偶尔；3.0.5包；4.1包；5.大于2包
++ (NSInteger)smokeToNumber:(NSString *)smokeStr
+{
+    if ([smokeStr isEqualToString:@"无"]) {
+        return 1;
+    }else if ([smokeStr isEqualToString:@"偶尔"]){
+        return 2;
+    }else if ([smokeStr isEqualToString:@"半包"]){
+        return 3;
+    }else if ([smokeStr isEqualToString:@"一包"]){
+        return 4;
+    }else{
+        return 5;
+    }
+}
+
++ (NSString *)numberToSmoke:(NSInteger)smokeCode
+{
+    NSString *smoke = nil;
+    switch (smokeCode) {
+        case 1:
+            smoke = @"无";
+            break;
+        case 2:
+            smoke = @"偶尔";
+            break;
+        case 3:
+            smoke = @"半包";
+            break;
+        case 4:
+            smoke = @"一包";
+            break;
+        default:
+            smoke = @"一包以上";
+            break;
+    }
+    return smoke;
+}
+
+//喝酒 1.无；2.偶尔；3.经常
++ (NSInteger)drinkToNumber:(NSString *)drinkStr
+{
+    if ([drinkStr isEqualToString:@"无"]) {
+        return 1;
+    }else if ([drinkStr isEqualToString:@"偶尔"]){
+        return 2;
+    }else{
+        return 3;
+    }
+}
+
++ (NSString *)numberToDrink:(NSInteger)drinkCode
+{
+    NSString *drink = nil;
+    switch (drinkCode) {
+        case 1:
+            drink = @"无";
+            break;
+        case 2:
+            drink = @"偶尔";
+            break;
+        default:
+            drink = @"经常";
+            break;
+    }
+    return drink;
+}
+
+/**饮食习惯 1.荤素均衡、2.清淡、3.素食、4.重口味、5.嗜甜、6.嗜咖啡、7.爱喝茶、8.爱喝碳酸饮料***/
++ (NSInteger)dietToNumber:(NSString *)dietStr
+{
+    if ([dietStr isEqualToString:@"荤素均衡"]) {
+        return 1;
+    }else if ([dietStr isEqualToString:@"清淡"]){
+        return 2;
+    }else if ([dietStr isEqualToString:@"素食"]){
+        return 3;
+    }else if ([dietStr isEqualToString:@"重口味"]){
+        return 4;
+    }else if ([dietStr isEqualToString:@"嗜甜"]){
+        return 5;
+    }else if ([dietStr isEqualToString:@"嗜咖啡"]){
+        return 6;
+    }else if ([dietStr isEqualToString:@"爱喝茶"]){
+        return 7;
+    }else{
+        //碳酸饮料
+        return 8;
+    }
+}
+
++ (NSString *)numberToDiet:(NSInteger)dietCode
+{
+    NSString *diet = nil;
+    switch (dietCode) {
+        case 1:
+            diet = @"荤素均衡";
+            break;
+        case 2:
+            diet = @"清淡";
+            break;
+        case 3:
+            diet = @"素食";
+            break;
+        case 4:
+            diet = @"重口味";
+            break;
+        case 5:
+            diet = @"嗜甜";
+            break;
+        case 6:
+            diet = @"嗜咖啡";
+            break;
+        case 7:
+            diet = @"爱喝茶";
+            break;
+        default:
+            diet = @"碳酸饮料";
+            break;
+    }
+    return diet;
+}
+
+/**运动 1.无、2.偶尔、3.经常***/
++ (NSInteger)sportsToNumber:(NSString *)sportsStr
+{
+    if ([sportsStr isEqualToString:@"无"]) {
+        return 1;
+    }else if ([sportsStr isEqualToString:@"偶尔"]){
+        return 2;
+    }else{
+        return 3;
+    }
+}
+
++ (NSString *)numberToSports:(NSInteger)sportsCode
+{
+    NSString *sports = nil;
+    switch (sportsCode) {
+        case 1:
+            sports = @"无";
+            break;
+        case 2:
+            sports = @"偶尔";
+            break;
+        default:
+            sports = @"经常";
+            break;
+    }
+    return sports;
+}
+
+/**不良习惯 1.无、2.久坐、3.经常熬夜、4.长看手机***/
++ (NSInteger)badhabitsToNumber:(NSString *)badhabitsStr
+{
+    if ([badhabitsStr isEqualToString:@"无"]) {
+        return 1;
+    }else if ([badhabitsStr isEqualToString:@"久坐"]){
+        return 2;
+    }else if ([badhabitsStr isEqualToString:@"经常熬夜"]){
+        return 3;
+    }else{
+        //常看手机
+        return 4;
+    }
+}
+
++ (NSString *)numberToBadhabits:(NSInteger)badhabitsCode
+{
+    NSString *badhabits = nil;
+    switch (badhabitsCode) {
+        case 1:
+            badhabits = @"无";
+            break;
+        case 2:
+            badhabits = @"久坐";
+            break;
+        case 3:
+            badhabits = @"经常熬夜";
+            break;
+        default:
+            badhabits = @"常看手机";
+            break;
+    }
+    return badhabits;
+}
+
 @end

@@ -20,6 +20,9 @@
 
 #import "ScanCodesViewController.h"
 
+#import "HealthArchiveViewController.h"
+#import "ArchiveDataListModel.h"
+
 @interface ServiceHomeViewController ()
 
 @property (strong,nonatomic)NSMutableArray *dataProvider;
@@ -48,6 +51,8 @@
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 108, 0);
+    
+    [self loadArchiveDataList];
 }
 
 #pragma mark - Table view data source
@@ -94,22 +99,21 @@
             ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
             scanCodeVC.hidesBottomBarWhenPushed = YES;
             scanCodeVC.getcodeClick = ^(NSString *code){
-                //                    self.itemimei.rightText.text = code;
                 [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
             };
             [self.parentVC.navigationController pushViewController:scanCodeVC animated:YES];
         };
         
         archivesCell.addNewArchivesBlock = ^{
-            //            [weakSelf.dataProvider addObject:@"1"];
-            //            [weakSelf.tableView reloadData];
-            
-            HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
-            [self.parentVC.navigationController pushViewController:vc animated:YES];
-            
+            HealthArchiveViewController *addHealthArchiveVC = [[HealthArchiveViewController alloc] init];
+            addHealthArchiveVC.addArchive = YES;
+            [self.parentVC.navigationController pushViewController:addHealthArchiveVC animated:YES];
         };
         archivesCell.tapArchiveBlock = ^(NSUInteger idx){
-            [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"点击了第%d个",(int)idx] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+            HealthArchiveViewController *healthArchiveVC = [[HealthArchiveViewController alloc] init];
+            healthArchiveVC.selectedListModel = weakSelf.dataProvider[idx];
+            healthArchiveVC.addArchive = NO;
+            [self.parentVC.navigationController pushViewController:healthArchiveVC animated:YES];
         };
         
         archivesCell.relativesArr = self.dataProvider;
@@ -221,6 +225,37 @@
     //
     //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
     //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+}
+
+- (void)loadArchiveDataList
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates])
+        return;
+    
+    NSDictionary *params = @{
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"page":@"100",
+                             @"p":@"1"
+                             };
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+       
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"errorMsg" view:self.view];
+        }
+        
+        NSArray *arr = [ArchiveDataListModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        self.dataProvider = [[NSMutableArray alloc] initWithArray:arr];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+
 }
 
 @end

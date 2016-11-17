@@ -10,4 +10,8 @@
 
 @interface ReportCollectionViewCell : UICollectionViewCell
 
+@property (strong, nonatomic) NSIndexPath *idxPath;
+
+@property (copy)void(^deleteImageBlock)(NSIndexPath *idx);
+
 @end

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ArchiveData.h"
 
 @interface ShowCodeViewController : UIViewController
+@property (strong, nonatomic) ArchiveData * archiveData;
 
 @end
