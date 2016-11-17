@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DietaryHabit : UIView
+
 +(DietaryHabit *)showTargetViewToView:(UIView *)targetView;
+
+@property (copy) void(^selectItemBlock)(NSArray *selectedItems);
+
 @end

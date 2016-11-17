@@ -47,8 +47,8 @@
     
     self.navigationItem.title = @"健康档案";
     
-    if (!_customInfo) {
-        _customInfo = [[MarketCustomInfo alloc] init];
+    if (!_archiveData) {
+        _archiveData = [[ArchiveData alloc] init];
     }
     
     [self setupFooter];
@@ -67,18 +67,28 @@
         };
         
         NSMutableArray *section0 = [[NSMutableArray alloc] init];
-        [section0 addObject:createItem(@"",@"抽烟习惯",@"请选择")];
-        [section0 addObject:createItem(@"",@"喝酒习惯",@"请选择")];
-        [section0 addObject:createItem(@"",@"饮食习惯",@"请选择")];
+        [section0 addObject:createItem([ArchiveData numberToSmoke:[self.archiveData.smoke integerValue]],@"抽烟习惯",@"请选择")];
+        [section0 addObject:createItem([ArchiveData numberToDrink:[self.archiveData.drink integerValue]],@"喝酒习惯",@"请选择")];
+        
+        NSMutableString *diet = [[NSMutableString alloc] init];
+        [self.archiveData.diet enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+           NSString *dietStr =  [ArchiveData numberToDiet:[obj integerValue]];
+           [diet appendFormat:@"%@,",dietStr];
+        }];
+        
+        if (diet.length > 0) {
+            [diet substringToIndex:diet.length-1];
+        }
+        [section0 addObject:createItem(diet,@"饮食习惯",@"请选择")];
         
         NSMutableArray *section1 = [[NSMutableArray alloc] init];
         [section1 addObject:createItem(@"",@"睡觉习惯",@"")];
-        [section1 addObject:createItem(@"",@"休息时间",@"请选择")];
-        [section1 addObject:createItem(@"",@"起床时间",@"请选择")];
+        [section1 addObject:createItem(self.archiveData.sleeptime,@"休息时间",@"请选择")];
+        [section1 addObject:createItem(self.archiveData.getuptime,@"起床时间",@"请选择")];
         
         NSMutableArray *section2 = [[NSMutableArray alloc] init];
-        [section2 addObject:createItem(@"",@"运动习惯",@"请选择")];
-        [section2 addObject:createItem(@"",@"不良习惯",@"请选择")];
+        [section2 addObject:createItem([ArchiveData numberToSports:[self.archiveData.sports integerValue]],@"运动习惯",@"请选择")];
+        [section2 addObject:createItem([ArchiveData numberToBadhabits:[self.archiveData.badhabits integerValue]],@"不良习惯",@"请选择")];
         
         self.datas = @[section0,section1,section2];
     }
@@ -163,23 +173,36 @@
 {
     [self.tableView endEditing:YES];
     
+    __weak typeof(self) weakSelf = self;
+    
     self.currentIdx = indexPath;
     
-    if (0 == indexPath.row) {
+    if ( 0 == indexPath.section && 0 == indexPath.row) {
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"半包",@"一包",@"一包以上", nil] show];
-    }else if (1 == indexPath.row){
+    }else if (0 == indexPath.section && 1 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"经常", nil] show];
-    }else if (2 == indexPath.row){
+    }else if (0 == indexPath.section && 2 == indexPath.row){
         
-        DietaryHabit *verificationView = [DietaryHabit showTargetViewToView:[UIApplication sharedApplication].keyWindow];
+        DietaryHabit *dietaryHabitView = [DietaryHabit showTargetViewToView:[UIApplication sharedApplication].keyWindow];
+        dietaryHabitView.selectItemBlock = ^(NSArray *selectedItems){
+            
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSString *dietStr = [NSString stringWithFormat:@"%d",(int)[ArchiveData dietToNumber:(NSString *)obj]];
+                [tempArray addObject:dietStr];
+            }];
+            weakSelf.archiveData.diet = tempArray;
+            weakSelf.datas[0][2][kContent] = [selectedItems componentsJoinedByString:@","];
+            [weakSelf.tableView reloadData];
+        };
         
-    }else if (4 == indexPath.row){
+    }else if (1 == indexPath.section && 1 == indexPath.row){
         [self showDatePickerView];
-    }else if (5 == indexPath.row){
+    }else if (1 == indexPath.section && 2 == indexPath.row){
         [self showDatePickerView];
-    }else if (6 == indexPath.row){
+    }else if (2 == indexPath.section && 0 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"经常", nil] show];
-    }else if (7 == indexPath.row){
+    }else if (2 == indexPath.section && 1 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"久坐",@"经常熬夜",@"常看手机", nil] show];
     }
 }
@@ -194,7 +217,7 @@
     NSMutableArray *sections = self.datas[self.currentIdx.section];
     NSMutableDictionary *item = sections[self.currentIdx.row];
     
-    if (0 == self.currentIdx.row) {
+    if (0 == self.currentIdx.section && 0 == self.currentIdx.row) {
         if (1 == buttonIndex) {
             item[kContent] = @"无";
         }else if (2 == buttonIndex){
@@ -206,7 +229,7 @@
         }else if (5 == buttonIndex){
             item[kContent] = @"一包以上";
         }
-    }else if(1 == self.currentIdx.row){
+    }else if(0 == self.currentIdx.section && 1 == self.currentIdx.row){
         if (1 == buttonIndex) {
             item[kContent] = @"无";
         }else if (2 == buttonIndex){
@@ -214,7 +237,7 @@
         }else if (3 == buttonIndex){
             item[kContent] = @"经常";
         }
-    }else if(6 == self.currentIdx.row){
+    }else if(2 == self.currentIdx.section && 0 == self.currentIdx.row){
         if (1 == buttonIndex) {
             item[kContent] = @"无";
         }else if (2 == buttonIndex){
@@ -222,7 +245,7 @@
         }else if (3 == buttonIndex){
             item[kContent] = @"经常";
         }
-    }else if(7 == self.currentIdx.row){
+    }else if(2 == self.currentIdx.section && 1 == self.currentIdx.row){
         if (1 == buttonIndex) {
             item[kContent] = @"无";
         }else if (2 == buttonIndex){
@@ -274,26 +297,30 @@
     
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-    NSDate *currentDate = [NSDate date];
-    NSString *dateStr = @"1900-01-01 00:00:00";
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-    formatter.timeZone = timeZone;
-    formatter.locale = locale;
-    NSDate *minDate = [formatter dateFromString:dateStr];
+//    NSDate *currentDate = [NSDate date];
+   
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+//    formatter.timeZone = timeZone;
+//    formatter.locale = locale;
+//    NSDate *minDate = [formatter dateFromString:dateStr];
     
-    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
-    formatter1.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-    formatter1.timeZone = timeZone;
-    formatter1.locale = locale;
+//    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
+//    formatter1.dateFormat = @"yyyy-MM-dd";
+//    formatter1.timeZone = timeZone;
+//    formatter1.locale = locale;
     
-    NSString *birthdayStr = self.datas[self.currentIdx.section][self.currentIdx.row][kContent];
-    NSDate * birthdayDate = [formatter1 dateFromString:birthdayStr];
+//    NSString *birthdayStr = self.datas[self.currentIdx.section][self.currentIdx.row][kContent];
+//    NSDate * birthdayDate = [formatter1 dateFromString:birthdayStr];
     
+    self.datePicker.timeZone = timeZone;
+    self.datePicker.locale = locale;
+//    self.datePicker.minimumDate = minDate;
+//    self.datePicker.maximumDate = currentDate;
     self.datePicker.datePickerMode = UIDatePickerModeTime;
-    if (birthdayDate) {
-        self.datePicker.date = birthdayDate;
-    }
+//    if (birthdayDate) {
+//        self.datePicker.date = birthdayDate;
+//    }
     
     [self.dateSelectView addSubview:self.datePicker];
     
@@ -322,7 +349,7 @@
 }
 
 /**
- *  隐藏生日选择视图
+ *  隐藏时间选择视图
  */
 -(void)datePickerViewHide:(id )sender
 {
@@ -330,13 +357,20 @@
 }
 
 /**
- *  确定选择生日
+ *  选择时间
  */
 -(void)selectBirthday:(UIBarButtonItem *)sender
 {
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"hh:mm";
+    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+    formatter.timeZone = timeZone;
+    formatter.locale = locale;
     NSString *birthday = [formatter stringFromDate:self.datePicker.date];
+    
+    NSLog(@"%@",self.datePicker.date);
+    NSLog(@"%@",birthday);
     
     NSMutableArray *sections = self.datas[self.currentIdx.section];
     NSMutableDictionary *item = sections[self.currentIdx.row];
@@ -345,92 +379,34 @@
     
     [self datePickerViewHide:nil];
 }
+
 #pragma mark - 事件方法
 /**
  *  点击确定按钮后调用
  */
 -(void)next:(UIButton *)sender
 {
-    HealthArchiveViewController3 *vc = [[HealthArchiveViewController3 alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
     [self.view endEditing:YES];
     
-    NSMutableArray *section0 = self.datas[0];
-    NSString *name = section0[0][kContent];
-    if (name.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请输入姓名" view:nil];
+    self.archiveData.smoke = [NSString stringWithFormat:@"%d",(int)[ArchiveData smokeToNumber:self.datas[0][0][kContent]]];
+    self.archiveData.drink = [NSString stringWithFormat:@"%d",(int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]]];
+    
+    self.archiveData.sleeptime = self.datas[1][1][kContent];
+    self.archiveData.getuptime = self.datas[1][2][kContent];
+    
+    self.archiveData.sports = [NSString stringWithFormat:@"%d",(int)[ArchiveData sportsToNumber:self.datas[2][0][kContent]]];
+    self.archiveData.badhabits = [NSString stringWithFormat:@"%d",(int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]]];
+    
+    HealthArchiveViewController3 *vc = [[HealthArchiveViewController3 alloc] init];
+    vc.archiveData = self.archiveData;
+    //新增时候才保存临时的数据在本地
+    if (self.isAddArchive) {
+        [self.archiveData saveArchiveDataToFile];
+        vc.addArchive = YES;
+    }else{
+        vc.addArchive = NO;
     }
-    
-    NSString *tel = section0[1][kContent];
-    if (tel.length == 0)
-    {
-        return [NoticeHelper AlertShow:@"请输入手机号" view:nil];
-    }
-    
-    
-    if (![self validatePhoneNumOrEmail:tel type:1]) {
-        return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
-    }
-    
-    NSString *address = section0[2][kContent];
-    if (address.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
-    }
-    
-    NSString  *email = section0[3][kContent];
-    if (email.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
-    }
-    if (![self validatePhoneNumOrEmail:email type:2]) {
-        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
-    }
-    
-    self.customInfo.name = name;
-    self.customInfo.tel = tel;
-    self.customInfo.email = email;
-    
-    self.customInfo.sex = self.datas[1][0][kContent];
-    self.customInfo.birthday = self.datas[1][1][kContent];
-    self.customInfo.height = self.datas[1][2][kContent];
-    self.customInfo.weight = self.datas[1][3][kContent];
-    
-    self.customInfo.womanSpecial = self.datas[2][0][kContent];
-    
-    self.customInfo.caseHistory = self.datas[3][0][kContent];
-    self.customInfo.medicine = self.datas[3][1][kContent];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    //    if (self.customInfoCallBack)
-    //    {
-    //        self.customInfoCallBack(self.customInfo);
-    //    }
-}
-
-#pragma mark - 工具方法
-/**
- *  验证手机或邮箱是否合法
- *
- *  @param phoneNumOrEmail 手机号码或邮箱
- *  @param type            1:表示验证手机号码,2:表示验证邮箱
- *
- *  @return  yes:表示通过验证,no表示未通过
- */
--(BOOL)validatePhoneNumOrEmail:(NSString *)phoneNumOrEmail type:(NSInteger)type
-{
-    //默认为验证手机号
-    NSString *regular = @"^1[3578]\\d{9}$";
-    if (type == 2) {
-        //验证邮箱
-        regular = @"^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
-    }
-    
-    NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regular];
-    BOOL result =[prediccate evaluateWithObject:phoneNumOrEmail];
-    return result;
-    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

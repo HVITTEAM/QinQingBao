@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ArchiveData.h"
 
 @interface HealthArchiveViewController3 : UIViewController
+
 @property (nonatomic, retain) NSMutableArray *dataProvider;
+
+@property(strong, nonatomic) ArchiveData * archiveData;
+
+@property (assign, nonatomic, getter=isAddArchive) BOOL addArchive;
 
 @end

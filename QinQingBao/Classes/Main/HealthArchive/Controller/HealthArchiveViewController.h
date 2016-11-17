@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MarketCustomInfo.h"
+#import "ArchiveData.h"
+#import "ArchiveDataListModel.h"
 
 @interface HealthArchiveViewController : UITableViewController
 
-@property(strong,nonatomic)MarketCustomInfo *customInfo;
+@property (strong, nonatomic) ArchiveData * archiveData;
+
+@property (strong, nonatomic) ArchiveDataListModel *selectedListModel;
+
+@property (assign, nonatomic, getter=isAddArchive) BOOL addArchive;
+
 @end

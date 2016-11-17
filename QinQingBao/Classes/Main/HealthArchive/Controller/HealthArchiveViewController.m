@@ -16,12 +16,14 @@
 #import "TextTwoCell.h"
 #import "CommonRulerViewController.h"
 #import "HeadProcessView.h"
+#import "RSKImageCropper.h"
+#import "ArchiveData1.h"
 
 #define kContent @"cellContent"
 #define kTitle @"cellTitle"
 #define kPlaceHolder @"cellPlaceHolder"
 
-@interface HealthArchiveViewController ()
+@interface HealthArchiveViewController ()<RSKImageCropViewControllerDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (strong,nonatomic)NSArray *datas;     //UITableView数据源
 
@@ -30,6 +32,8 @@
 @property (strong,nonatomic)UIDatePicker *datePicker;
 
 @property (strong,nonatomic)NSIndexPath *currentIdx;
+
+@property (strong, nonatomic) UIImage *portraitImage;
 
 @end
 
@@ -47,8 +51,17 @@
     
     self.navigationItem.title = @"健康档案";
     
-    if (!_customInfo) {
-        _customInfo = [[MarketCustomInfo alloc] init];
+    if (self.isAddArchive) {
+        //获取当前用户的缓存的档案数据,新增时候
+        self.archiveData = [ArchiveData getArchiveDataFromFile];
+        self.portraitImage = [[UIImage alloc] initWithContentsOfFile:self.archiveData.portraitPic];
+    }else{
+        //查看时候
+        [self loadArchivePersonInfo];
+    }
+
+    if (!_archiveData) {
+        _archiveData = [[ArchiveData alloc] init];
     }
     
     [self setupFooter];
@@ -68,25 +81,29 @@
         
         NSMutableArray *section0 = [[NSMutableArray alloc] init];
         [section0 addObject:createItem(@"",@"头像",@"")];
-        [section0 addObject:createItem(@"",@"姓名",@"必填项")];
+        [section0 addObject:createItem(self.archiveData.truename,@"姓名",@"必填项")];
+        if (!self.isAddArchive) {
+            [section0 addObject:createItem(nil,@"档案二维码",nil)];
+        }
         
-        NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
-        [section0 addObject:createItem(address,@"联系电话",@"必填项")];
-        [section0 addObject:createItem(@"",@"性别",@"请选择")];
-        [section0 addObject:createItem(@"",@"出生日期",@"请填写")];
+//        NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
+
+        [section0 addObject:createItem(self.archiveData.mobile,@"联系电话",@"必填项")];
+        [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"请选择")];
+        [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
         
         NSMutableArray *section1 = [[NSMutableArray alloc] init];
-        [section1 addObject:createItem(@"",@"身高",@"请填写")];
-        [section1 addObject:createItem(@"",@"体重",@"请填写")];
-        [section1 addObject:createItem(@"",@"腰围",@"请填写")];
-        [section1 addObject:createItem(@"",@"收缩压(mmhg)",@"请填写")];
-        [section1 addObject:createItem(@"",@"总胆固醇(mg/dl)",@"请填写")];
+        [section1 addObject:createItem(self.archiveData.height,@"身高",@"请填写")];
+        [section1 addObject:createItem(self.archiveData.weight,@"体重",@"请填写")];
+        [section1 addObject:createItem(self.archiveData.waistline,@"腰围",@"请填写")];
+        [section1 addObject:createItem(self.archiveData.systolicpressure,@"收缩压(mmhg)",@"请填写")];
+        [section1 addObject:createItem(self.archiveData.cholesterol,@"总胆固醇(mg/dl)",@"请填写")];
         
         NSMutableArray *section2 = [[NSMutableArray alloc] init];
-        [section2 addObject:createItem(@"",@"目前职业",@"请填写")];
-        [section2 addObject:createItem(@"",@"工作生活状态",@"请填写")];
-        [section2 addObject:createItem(@"",@"电子邮箱",@"请填写")];
-        [section2 addObject:createItem(@"",@"联系地址",@"请填写")];
+        [section2 addObject:createItem(self.archiveData.occupation,@"目前职业",@"请填写")];
+        [section2 addObject:createItem([ArchiveData numberToLivingcondition:[self.archiveData.livingcondition integerValue]],@"工作生活状态",@"请填写")];
+        [section2 addObject:createItem(self.archiveData.email,@"电子邮箱",@"请填写")];
+        [section2 addObject:createItem(self.archiveData.address,@"联系地址",@"请填写")];
 
         
         self.datas = @[section0,section1,section2];
@@ -112,26 +129,35 @@
     NSMutableArray *sections = self.datas[indexPath.section];
     NSMutableDictionary *rowItem = sections[indexPath.row];
     
-    if (indexPath.section == 3 && indexPath.row == 3)
-    {
-        TextTwoCell *textTwoCel = [TextTwoCell createCellWithTableView:tableView];
+    if (indexPath.section == 0 && (indexPath.row == 0 || (indexPath.row == 2 && !self.isAddArchive))){
+        static NSString *portraitCellId = @"portraitCell";
+        UITableViewCell *portraitCell = [tableView dequeueReusableCellWithIdentifier:portraitCellId];
+        if (portraitCell == nil) {
+            portraitCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:portraitCellId];
+            portraitCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.layer.masksToBounds = YES;
+            portraitCell.accessoryView = imageView;
+            
+            portraitCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+        }
+    
+        portraitCell.textLabel.text = rowItem[kTitle];
+        UIImageView *imageView = (UIImageView *)portraitCell.accessoryView;
         
-        textTwoCel.titleLb.text = rowItem[kTitle];
-        textTwoCel.titleLb.font = [UIFont boldSystemFontOfSize:14];
-
-        textTwoCel.contentTextView.text = rowItem[kContent];
-        textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];
+        if (indexPath.row == 2) {
+            imageView.width = 30;
+            imageView.image = [UIImage imageNamed:@"placeholderImage"];
+            
+        }else{
+            imageView.width = 50;
+            imageView.image = self.portraitImage?:[UIImage imageNamed:@"placeholderImage"];
+        }
+        imageView.height = imageView.width;
+        imageView.layer.cornerRadius = imageView.height/2;
+        return portraitCell;
         
-        textTwoCel.idx = indexPath;
-        textTwoCel.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
-            weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
-        };
-        
-        return textTwoCel;
-        
-    }else
-    {
-
+    }else{
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
         textCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -141,13 +167,22 @@
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
             weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
         };
-        if ((2 == indexPath.section && 1 == indexPath.row )|| (2 == indexPath.section && 3 == indexPath.row))
-            textCell.field.enabled = NO;
-
-        return textCell;
         
+        //是否禁用文本框
+        textCell.field.enabled = YES;
+        BOOL enable = indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 3 || indexPath.row == 4);
+        if (!self.isAddArchive) {   //查看时候
+            enable = indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5);
+        }
+        
+        enable = enable || indexPath.section == 1;
+        enable = enable || (indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 3));
+        if (enable) {
+            textCell.field.enabled = NO;
+        }
+        
+        return textCell;
     }
-    return nil;
 }
 
 #pragma mark - UITableViewDelegate
@@ -164,8 +199,8 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 3 && indexPath.row == 3) {
-        return 114;
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 70;
     }
     return 50;
 }
@@ -177,26 +212,27 @@
     self.currentIdx = indexPath;
     __weak typeof(self)weakSelf = self;
     
-    if (2 == indexPath.section && 3 == indexPath.row) {
-        AddressController *textView = [[AddressController alloc] init];
-        if (weakSelf.customInfo.totalname.length > 0 && weakSelf.customInfo.dvcode.length > 0)
-        {
-            [textView setItemInfoWith:weakSelf.customInfo.totalname regionStr:@"西湖区" regionCode:weakSelf.customInfo.dvcode areaInfo:weakSelf.customInfo.areainfo];
-        }
-        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
-            weakSelf.customInfo.dvcode = selectedRegionmodel.dvcode;
-            weakSelf.customInfo.areainfo = areaInfo;
-            weakSelf.customInfo.totalname = addressStr;
-            self.datas[0][2][kContent] = [NSString stringWithFormat:@"%@%@",addressStr,areaInfo];
-            [weakSelf.tableView reloadData];
-        };
-        [weakSelf.navigationController pushViewController:textView animated:YES];
-    }else if (0 == indexPath.section && 3 == indexPath.row){
-        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
-    }else if (0 == indexPath.section && 4 == indexPath.row){
-        [self showDatePickerView];
+    if (indexPath.section == 0 && indexPath.row == 2 && !self.isAddArchive){  //查看时候多一个二维码
+        [[[UIAlertView alloc] initWithTitle:@"二维码二维码二维码二维码" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
         
-    }else if (1 == indexPath.section){
+    }else if (indexPath.section == 0 && indexPath.row == 0) {
+        UIAlertView *alertPic = [[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
+        alertPic.tag = 101;
+        [alertPic show];
+    }else if (indexPath.section == 0 && indexPath.row == 3){
+        if (self.isAddArchive) {  //新增时候是性别选择
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
+        }
+    }else if (indexPath.section == 0 && indexPath.row == 4){
+        if (self.isAddArchive) {  //新增时候是显示生日选择
+            [self showDatePickerView];
+        }else{  //查看时候是性别选择
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
+        }
+        
+    }else if (indexPath.section == 0 && indexPath.row == 5){
+        [self showDatePickerView];
+    }else if (indexPath.section == 1){
         CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
         if (0 == indexPath.row) {
             [vc initWithTitle:@"身高" startValue:100 currentValue:170 count:150 unit:@"cm"];
@@ -219,7 +255,21 @@
         };
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (2 == indexPath.section && 1 == indexPath.row){
+    }else if (indexPath.section == 2 && indexPath.row == 3) {
+        AddressController *textView = [[AddressController alloc] init];
+        //        if (weakSelf.customInfo.totalname.length > 0 && weakSelf.customInfo.dvcode.length > 0)
+        //        {
+        //            [textView setItemInfoWith:weakSelf.customInfo.totalname regionStr:@"西湖区" regionCode:weakSelf.customInfo.dvcode areaInfo:weakSelf.customInfo.areainfo];
+        //        }
+        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
+            //            weakSelf.customInfo.dvcode = selectedRegionmodel.dvcode;
+            //            weakSelf.customInfo.areainfo = areaInfo;
+            //            weakSelf.customInfo.totalname = addressStr;
+            weakSelf.datas[2][3][kContent] = [NSString stringWithFormat:@"%@%@",addressStr,areaInfo];
+            [weakSelf.tableView reloadData];
+        };
+        [weakSelf.navigationController pushViewController:textView animated:YES];
+    }else if (indexPath.section == 2 && indexPath.row == 1){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"体力劳动为主",@"脑力劳动为主",@"体力/脑力劳动基本均衡", nil] show];
     }
 }
@@ -227,6 +277,15 @@
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if (alertView.tag > 100)
+    {
+        if(buttonIndex==1)
+            [self getMediaFromSource:UIImagePickerControllerSourceTypeCamera];
+        else if(buttonIndex==2)
+            [self getMediaFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+        return;
+    }
+    
     if (0 == buttonIndex) {
         return;
     }
@@ -253,6 +312,70 @@
     }
     
     [self.tableView reloadData];
+}
+
+#pragma mark -- 拍照选择模块
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
+        imageCropVC.title = @"裁剪照片";
+        imageCropVC.delegate = self;
+        [self.navigationController pushViewController:imageCropVC animated:YES];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:NO completion:nil];
+    }
+}
+
+-(void) imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+
+    [picker dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType
+{
+    NSArray *mediatypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+    if([UIImagePickerController isSourceTypeAvailable:sourceType] &&[mediatypes count]>0)
+    {
+        NSArray *mediatypes = [UIImagePickerController availableMediaTypesForSourceType:sourceType];
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.mediaTypes = mediatypes;
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        picker.sourceType = sourceType;
+        NSString *requiredmediatype = (NSString *)kUTTypeImage;
+        NSArray *arrmediatypes = [NSArray arrayWithObject:requiredmediatype];
+        [picker setMediaTypes:arrmediatypes];
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"错误信息!" message:@"当前设备不支持拍摄功能" delegate:nil cancelButtonTitle:@"确认" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
+{
+    NSData *data = UIImageJPEGRepresentation(croppedImage, 0.5);
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    self.portraitImage = [[UIImage alloc] initWithData:data];
+    [self.tableView reloadData];
+    self.archiveData.portraitPic = [ArchiveData savePictoDocument:data picName:@"archive_portrait.jpg"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 设置footer View
@@ -370,42 +493,39 @@
     
     [self datePickerViewHide:nil];
 }
+
 #pragma mark - 事件方法
 /**
  *  点击确定按钮后调用
  */
 -(void)next:(UIButton *)sender
 {
-    HealthArchiveViewController1 *vc = [[HealthArchiveViewController1 alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-    
     [self.view endEditing:YES];
     
-    NSMutableArray *section0 = self.datas[0];
-    NSString *name = section0[0][kContent];
+    NSString *name = self.datas[0][1][kContent];
     if (name.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入姓名" view:nil];
     }
     
-    NSString *tel = section0[1][kContent];
+    NSString *tel;
+    if (self.isAddArchive) {
+        tel = self.datas[0][2][kContent];
+    }else{
+        tel = self.datas[0][3][kContent];
+    }
+    
     if (tel.length == 0)
     {
         return [NoticeHelper AlertShow:@"请输入手机号" view:nil];
     }
     
-    
     if (![self validatePhoneNumOrEmail:tel type:1]) {
         return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
     }
     
-    NSString *address = section0[2][kContent];
-    if (address.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
-    }
     
-    NSString  *email = section0[3][kContent];
+    NSString  *email = self.datas[2][2][kContent];
     if (email.length == 0) {
         return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
     }
@@ -413,26 +533,49 @@
         return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
     }
     
-    self.customInfo.name = name;
-    self.customInfo.tel = tel;
-    self.customInfo.email = email;
+    NSString *address = self.datas[2][3][kContent];
+    if (address.length == 0) {
+        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
+    }
+
+    NSString *sex;
+    NSString *birthday;
+    if (self.isAddArchive) {
+        sex = self.datas[0][3][kContent];
+        birthday = self.datas[0][4][kContent];
+    }else{
+        sex = self.datas[0][4][kContent];
+        birthday = self.datas[0][5][kContent];
+    }
     
-    self.customInfo.sex = self.datas[1][0][kContent];
-    self.customInfo.birthday = self.datas[1][1][kContent];
-    self.customInfo.height = self.datas[1][2][kContent];
-    self.customInfo.weight = self.datas[1][3][kContent];
+    self.archiveData.truename = name;
+    self.archiveData.mobile = tel;
+    self.archiveData.sex = [NSString stringWithFormat:@"%d",(int)[ArchiveData sexToNumber:sex]];
+    self.archiveData.birthday = birthday;
     
-    self.customInfo.womanSpecial = self.datas[2][0][kContent];
+    self.archiveData.height = self.datas[1][0][kContent];
+    self.archiveData.weight = self.datas[1][1][kContent];
+    self.archiveData.waistline = self.datas[1][2][kContent];
+    self.archiveData.systolicpressure = self.datas[1][3][kContent];
+    self.archiveData.cholesterol = self.datas[1][4][kContent];
     
-    self.customInfo.caseHistory = self.datas[3][0][kContent];
-    self.customInfo.medicine = self.datas[3][1][kContent];
+    self.archiveData.occupation = self.datas[2][0][kContent];
+    self.archiveData.livingcondition = [NSString stringWithFormat:@"%d",(int)[ArchiveData livingconditionToNumber:self.datas[2][1][kContent]]];
+    self.archiveData.email = email;
+    self.archiveData.address = address;
     
-    [self.navigationController popViewControllerAnimated:YES];
     
-    //    if (self.customInfoCallBack)
-    //    {
-    //        self.customInfoCallBack(self.customInfo);
-    //    }
+    HealthArchiveViewController1 *vc = [[HealthArchiveViewController1 alloc] init];
+    vc.archiveData = self.archiveData;
+    //新增时候才保存临时的数据在本地
+    if (self.isAddArchive) {
+        [self.archiveData saveArchiveDataToFile];
+        vc.addArchive = YES;
+    }else{
+        vc.addArchive = NO;
+    }
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 工具方法
@@ -456,6 +599,74 @@
     NSPredicate *prediccate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regular];
     BOOL result =[prediccate evaluateWithObject:phoneNumOrEmail];
     return result;
+    
+}
+
+#pragma mark - 网络相关
+- (void)loadArchivePersonInfo
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates])
+        return;
+    
+    NSDictionary *params = @{
+                             @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"fmno":self.selectedListModel.fmno
+                             };
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"errorMsg" view:self.view];
+        }
+        
+        NSLog(@"%@",dict);
+        
+        
+        ArchiveData1 *archive = [ArchiveData1 objectWithKeyValues:dict[@"datas"]];
+        
+        self.archiveData.truename = archive.basics.truename;
+        self.archiveData.sex = archive.basics.sex;
+        self.archiveData.birthday = archive.basics.birthday;
+        self.archiveData.height = archive.basics.height;
+        self.archiveData.weight = archive.basics.weight;
+        self.archiveData.waistline = archive.basics.waistline;
+        self.archiveData.systolicpressure = archive.basics.systolicpressure;
+        self.archiveData.cholesterol = archive.basics.cholesterol;
+        self.archiveData.mobile = archive.basics.mobile;
+        self.archiveData.email = archive.basics.email;
+        self.archiveData.address = archive.basics.address;
+        self.archiveData.occupation = archive.basics.occupation;
+        self.archiveData.livingcondition = archive.basics.livingcondition;
+        self.archiveData.units = archive.basics.units;
+        self.archiveData.bremark = archive.basics.bremark;
+        
+        self.archiveData.physicalcondition = archive.diseasehistory.physicalcondition;
+        self.archiveData.events = archive.diseasehistory.events;
+        self.archiveData.takingdrugs = archive.diseasehistory.takingdrugs;
+        self.archiveData.diabetes = archive.diseasehistory.diabetes;
+        self.archiveData.medicalhistory = archive.diseasehistory.medicalhistory;
+        self.archiveData.hereditarycardiovascular = archive.diseasehistory.hereditarycardiovascular;
+        self.archiveData.geneticdisease = archive.diseasehistory.geneticdisease;
+        self.archiveData.dremark = archive.diseasehistory.dremark;
+        
+        self.archiveData.smoke = archive.habits.smoke;
+        self.archiveData.drink = archive.habits.drink;
+//        self.archiveData.diet = archive.habits.diet;
+        self.archiveData.sleeptime = archive.habits.sleeptime;
+        self.archiveData.getuptime = archive.habits.getuptime;
+        self.archiveData.sports = archive.habits.sports;
+        self.archiveData.badhabits = archive.habits.badhabits;
+        self.archiveData.hremark = archive.habits.hremark;
+        
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
     
 }
 

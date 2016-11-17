@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MarketCustomInfo.h"
+//#import "MarketCustomInfo.h"
+#import "ArchiveData.h"
 
 @interface HealthArchiveViewController2 : UITableViewController
 
-@property(strong,nonatomic)MarketCustomInfo *customInfo;
+//@property(strong,nonatomic)MarketCustomInfo *customInfo;
+@property(strong, nonatomic) ArchiveData * archiveData;
+
+@property (assign, nonatomic, getter=isAddArchive) BOOL addArchive;
+
 @end

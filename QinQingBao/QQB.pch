@@ -284,13 +284,13 @@
 #define ShopTel1 @"400-151-2626"
 
 
-//#define URL_Local @"http://test.hvit.com.cn/ylserver"
+#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
-//#define URL_Local_New @"http://test.hvit.com.cn"
+#define URL_Local_New @"http://test.hvit.com.cn"
 
-#define URL_Local @"http://cxjk.hvit.com.cn"
-
-#define URL_Local_New @"http://cxjk.hvit.com.cn"
+//#define URL_Local @"http://cxjk.hvit.com.cn"
+//
+//#define URL_Local_New @"http://cxjk.hvit.com.cn"
 
 /***充值支付宝回调url*/
 #define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]
@@ -851,6 +851,16 @@
 
 /***服务 - 获取上传报告信息（获取所有个人报告）*/
 #define URL_Get_member_reports [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=work_report&op=get_member_reports",URL_Local]
+
+/***个人档案 - 新增档案*/
+#define URL_Add_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=add_fm&access_token=token",URL_Local_New]
+
+/***个人档案 - 获取档案列表*/
+#define URL_Get_bingding_list [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_list&access_token=token",URL_Local_New]
+
+/***个人档案 - 根据档案NO查看档案*/
+#define URL_Get_bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_fm&access_token=token",URL_Local_New]
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

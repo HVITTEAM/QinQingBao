@@ -57,7 +57,7 @@
 /**喝酒 1.无；2.偶尔；3.经常；***/
 @property (nonatomic, copy) NSString *drink;
 /**饮食习惯 1.荤素均衡、2.清淡、3.素食、4.重口味、5.嗜甜、6.嗜咖啡、7.爱喝茶、8.爱喝碳酸饮料***/
-@property (nonatomic, copy) NSString *diet;
+@property (nonatomic, copy) NSArray *diet;
 /**睡觉时间***/
 @property (nonatomic, copy) NSString *sleeptime;
 /**起床时间***/
@@ -69,5 +69,37 @@
 /**备注***/
 @property (nonatomic, copy) NSString *hremark;
 
+/**报告图片路径***/
+@property (nonatomic, copy) NSMutableArray *reportPhotos;
+
+/**头像路径***/
+@property (nonatomic, copy) NSString *portraitPic;
+
+- (void)saveArchiveDataToFile;
+- (void)deleteArchiveData;
++ (ArchiveData *)getArchiveDataFromFile;
++ (NSString *)savePictoDocument:(NSData *)imageData picName:(NSString *)picName;
++ (void)deletePicFromDocumentWithPicPath:(NSString *)picPath;
+
++ (NSInteger)sexToNumber:(NSString *)sexStr;
++ (NSString *)numberToSex:(NSInteger)sexCode;
+
++ (NSInteger)livingconditionToNumber:(NSString *)livingconditionStr;
++ (NSString *)numberToLivingcondition:(NSInteger)livingconditionCode;
+
++ (NSInteger)smokeToNumber:(NSString *)smokeStr;
++ (NSString *)numberToSmoke:(NSInteger)smokeCode;
+
++ (NSInteger)drinkToNumber:(NSString *)drinkStr;
++ (NSString *)numberToDrink:(NSInteger)drinkCode;
+
++ (NSInteger)dietToNumber:(NSString *)dietStr;
++ (NSString *)numberToDiet:(NSInteger)dietCode;
+
++ (NSInteger)sportsToNumber:(NSString *)sportsStr;
++ (NSString *)numberToSports:(NSInteger)sportsCode;
+
++ (NSInteger)badhabitsToNumber:(NSString *)badhabitsStr;
++ (NSString *)numberToBadhabits:(NSInteger)badhabitsCode;
 
 @end

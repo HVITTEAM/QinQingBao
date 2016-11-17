@@ -1201,6 +1201,11 @@
 		D2D9E9BA1D90C52B005D893D /* PostsDetailDZCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9E9B81D90C52B005D893D /* PostsDetailDZCell.m */; };
 		D2D9E9BB1D90C52B005D893D /* PostsDetailDZCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2D9E9B91D90C52B005D893D /* PostsDetailDZCell.xib */; };
 		D2D9E9BF1D90D020005D893D /* PostsCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2D9E9BD1D90D020005D893D /* PostsCommentCell.m */; };
+		D2E3C6B91DDC4FBA00EF0CAB /* ArchiveDataListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E3C6B81DDC4FBA00EF0CAB /* ArchiveDataListModel.m */; };
+		D2E3C6BD1DDC588600EF0CAB /* ACBasicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E3C6BC1DDC588600EF0CAB /* ACBasicsModel.m */; };
+		D2E3C6C01DDC589E00EF0CAB /* ACDiseasehistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E3C6BF1DDC589E00EF0CAB /* ACDiseasehistoryModel.m */; };
+		D2E3C6C31DDC58B500EF0CAB /* ACHabitsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E3C6C21DDC58B500EF0CAB /* ACHabitsModel.m */; };
+		D2E3C6C61DDC5CA900EF0CAB /* ArchiveData1.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E3C6C51DDC5CA900EF0CAB /* ArchiveData1.m */; };
 		D2E6506C1D98AF0900532554 /* CommentContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E6506B1D98AF0900532554 /* CommentContentModel.m */; };
 		D2E6506F1D98B6C900532554 /* SubCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E6506E1D98B6C900532554 /* SubCommentView.m */; };
 		D2EE9ED01CEEA1AB00252633 /* SMSVerificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2EE9ECF1CEEA1AB00252633 /* SMSVerificationView.m */; };
@@ -3339,6 +3344,16 @@
 		D2D9E9B91D90C52B005D893D /* PostsDetailDZCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostsDetailDZCell.xib; sourceTree = "<group>"; };
 		D2D9E9BC1D90D020005D893D /* PostsCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostsCommentCell.h; sourceTree = "<group>"; };
 		D2D9E9BD1D90D020005D893D /* PostsCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostsCommentCell.m; sourceTree = "<group>"; };
+		D2E3C6B71DDC4FBA00EF0CAB /* ArchiveDataListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveDataListModel.h; sourceTree = "<group>"; };
+		D2E3C6B81DDC4FBA00EF0CAB /* ArchiveDataListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveDataListModel.m; sourceTree = "<group>"; };
+		D2E3C6BB1DDC588600EF0CAB /* ACBasicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACBasicsModel.h; sourceTree = "<group>"; };
+		D2E3C6BC1DDC588600EF0CAB /* ACBasicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACBasicsModel.m; sourceTree = "<group>"; };
+		D2E3C6BE1DDC589E00EF0CAB /* ACDiseasehistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACDiseasehistoryModel.h; sourceTree = "<group>"; };
+		D2E3C6BF1DDC589E00EF0CAB /* ACDiseasehistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACDiseasehistoryModel.m; sourceTree = "<group>"; };
+		D2E3C6C11DDC58B500EF0CAB /* ACHabitsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACHabitsModel.h; sourceTree = "<group>"; };
+		D2E3C6C21DDC58B500EF0CAB /* ACHabitsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACHabitsModel.m; sourceTree = "<group>"; };
+		D2E3C6C41DDC5CA900EF0CAB /* ArchiveData1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchiveData1.h; sourceTree = "<group>"; };
+		D2E3C6C51DDC5CA900EF0CAB /* ArchiveData1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchiveData1.m; sourceTree = "<group>"; };
 		D2E6506A1D98AF0900532554 /* CommentContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentContentModel.h; sourceTree = "<group>"; };
 		D2E6506B1D98AF0900532554 /* CommentContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentContentModel.m; sourceTree = "<group>"; };
 		D2E6506D1D98B6C900532554 /* SubCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCommentView.h; sourceTree = "<group>"; };
@@ -4911,6 +4926,16 @@
 			children = (
 				013257AD1DD99EFE006DF8FC /* ArchiveData.h */,
 				013257AE1DD99EFE006DF8FC /* ArchiveData.m */,
+				D2E3C6B71DDC4FBA00EF0CAB /* ArchiveDataListModel.h */,
+				D2E3C6B81DDC4FBA00EF0CAB /* ArchiveDataListModel.m */,
+				D2E3C6BB1DDC588600EF0CAB /* ACBasicsModel.h */,
+				D2E3C6BC1DDC588600EF0CAB /* ACBasicsModel.m */,
+				D2E3C6BE1DDC589E00EF0CAB /* ACDiseasehistoryModel.h */,
+				D2E3C6BF1DDC589E00EF0CAB /* ACDiseasehistoryModel.m */,
+				D2E3C6C11DDC58B500EF0CAB /* ACHabitsModel.h */,
+				D2E3C6C21DDC58B500EF0CAB /* ACHabitsModel.m */,
+				D2E3C6C41DDC5CA900EF0CAB /* ArchiveData1.h */,
+				D2E3C6C51DDC5CA900EF0CAB /* ArchiveData1.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8633,7 +8658,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8645,7 +8670,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -9377,6 +9402,7 @@
 				013257AB1DD95F52006DF8FC /* ReportCollectionViewCell.m in Sources */,
 				D287E28F1D2A33FC006CE52C /* CustomInfoCell.m in Sources */,
 				0174AD7E1D84F6DB001D0697 /* PublicProfileViewController.m in Sources */,
+				D2E3C6C01DDC589E00EF0CAB /* ACDiseasehistoryModel.m in Sources */,
 				010EC9E41C438D8900D36417 /* MTShoppingCartEndView.m in Sources */,
 				0100426A1D61A24C00C87F13 /* PlanParagraphTextCell.m in Sources */,
 				01ED1FEB1C41FF7A002FD93C /* GoodsInfoModel.m in Sources */,
@@ -9645,6 +9671,7 @@
 				012AAD211CA4D00900CEE121 /* OrderManCell.m in Sources */,
 				017738E01D65B3E800F6DC99 /* InterveneModel.m in Sources */,
 				016066C61CF6ACCE005A3164 /* MJRefreshAutoGifFooter.m in Sources */,
+				D2E3C6C31DDC58B500EF0CAB /* ACHabitsModel.m in Sources */,
 				01E6D4911BE1E78C00824F51 /* BankCardViewController.m in Sources */,
 				01E4A99F1C41225500AAAF73 /* GoodsClassModel.m in Sources */,
 				01ECDFBD1B7C402100665D87 /* HMCommonGroup.m in Sources */,
@@ -9872,11 +9899,13 @@
 				01E9A73F1C74613500000805 /* FamilyInfoViewController.m in Sources */,
 				01ECDB0B1C8EB31F0018160F /* EaseEmotionManager.m in Sources */,
 				0126ED8C1B8C6D4200EC85C1 /* ServiceCell.m in Sources */,
+				D2E3C6BD1DDC588600EF0CAB /* ACBasicsModel.m in Sources */,
 				01EAB4391BE8441A00D380A8 /* EvaluationItemCell.m in Sources */,
 				D2D9E9BF1D90D020005D893D /* PostsCommentCell.m in Sources */,
 				01702B821D18CD6600058764 /* MarketViewController.m in Sources */,
 				01ECDAFA1C8EB31F0018160F /* UIImageView+HeadImage.m in Sources */,
 				01601D551CE08DE500B3712E /* OrderDetailController.m in Sources */,
+				D2E3C6C61DDC5CA900EF0CAB /* ArchiveData1.m in Sources */,
 				010042661D616FC500C87F13 /* InterveneController.m in Sources */,
 				0128A8BE1B9EC7D3002B14E2 /* OrderSubmitCell.m in Sources */,
 				0126ED7A1B8C57A700EC85C1 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -9894,6 +9923,7 @@
 				016066FD1CF6AD8C005A3164 /* NSData+ImageContentType.m in Sources */,
 				01ECDB151C8EB31F0018160F /* EaseMessageTimeCell.m in Sources */,
 				01ECDB011C8EB31F0018160F /* NSObject+EaseMob.m in Sources */,
+				D2E3C6B91DDC4FBA00EF0CAB /* ArchiveDataListModel.m in Sources */,
 				01E4A9991C41083900AAAF73 /* MTCouponsViewController.m in Sources */,
 				010B73421C17F2AE007A496B /* ServiceTimeCell.m in Sources */,
 				01CF97A81C7A98E400206FCD /* DevicesInforViewController.m in Sources */,
@@ -10050,11 +10080,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10106,11 +10135,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = QinQingBao/QinQingBao.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
