@@ -10,6 +10,7 @@
 #import "HealthArchiveViewController.h"
 
 #import "HealthArchiveViewController1.h"
+#import "ShowCodeViewController.h"
 
 #import "AddressController.h"
 #import "TextCell.h"
@@ -69,6 +70,7 @@
         NSMutableArray *section0 = [[NSMutableArray alloc] init];
         [section0 addObject:createItem(@"",@"头像",@"")];
         [section0 addObject:createItem(@"",@"姓名",@"必填项")];
+        [section0 addObject:createItem(@"",@"档案二维码",@"")];
         
         NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
         [section0 addObject:createItem(address,@"联系电话",@"必填项")];
@@ -87,11 +89,12 @@
         [section2 addObject:createItem(@"",@"工作生活状态",@"请填写")];
         [section2 addObject:createItem(@"",@"电子邮箱",@"请填写")];
         [section2 addObject:createItem(@"",@"联系地址",@"请填写")];
-
+        
         
         self.datas = @[section0,section1,section2];
     }
     return _datas;
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -118,7 +121,7 @@
         
         textTwoCel.titleLb.text = rowItem[kTitle];
         textTwoCel.titleLb.font = [UIFont boldSystemFontOfSize:14];
-
+        
         textTwoCel.contentTextView.text = rowItem[kContent];
         textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];
         
@@ -131,7 +134,7 @@
         
     }else
     {
-
+        
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
         textCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -141,9 +144,13 @@
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
             weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
         };
-        if ((2 == indexPath.section && 1 == indexPath.row )|| (2 == indexPath.section && 3 == indexPath.row))
+        
+        if ((0 == indexPath.section && 2 == indexPath.row))
+            textCell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qrcode"]];
+        
+        if ((2 == indexPath.section && 1 == indexPath.row )|| (2 == indexPath.section && 3 == indexPath.row)|| (0 == indexPath.section && 2 == indexPath.row))
             textCell.field.enabled = NO;
-
+        
         return textCell;
         
     }
@@ -191,11 +198,12 @@
             [weakSelf.tableView reloadData];
         };
         [weakSelf.navigationController pushViewController:textView animated:YES];
-    }else if (0 == indexPath.section && 3 == indexPath.row){
-        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
     }else if (0 == indexPath.section && 4 == indexPath.row){
+        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
+    }else if (0 == indexPath.section && 5 == indexPath.row){
         [self showDatePickerView];
-        
+    }else if (0 == indexPath.section && 2 == indexPath.row){
+        [self showcode];
     }else if (1 == indexPath.section){
         CommonRulerViewController *vc = [[CommonRulerViewController alloc] init];
         if (0 == indexPath.row) {
@@ -274,6 +282,15 @@
     [bottomView addSubview:btn];
     
     self.tableView.tableFooterView = bottomView;
+}
+
+/**
+ *  生成二维码
+ */
+-(void)showcode
+{
+    ShowCodeViewController *vc = [[ShowCodeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 生日选择视图相关

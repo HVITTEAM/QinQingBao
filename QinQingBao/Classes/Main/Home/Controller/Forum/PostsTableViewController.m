@@ -20,8 +20,8 @@
 #import "ClasslistModel.h"
 
 #import "ScrollMenuTableCell.h"
-#import "TopCell.h"
-
+#import "HomePicModel.h"
+#import "LoopImageView.h"
 
 @interface PostsTableViewController ()
 {
@@ -35,8 +35,8 @@
     NSInteger currentPageIdx;
     
     PostsModel *selectedDeleteModel;
-    
 }
+@property (strong, nonatomic) NSArray *advDatas;     //轮播图数据
 @end
 
 @implementation PostsTableViewController
@@ -60,25 +60,54 @@
 -(void)getData
 {
     [self.tableView removePlace];
-    if (self.type == BBSType_1)
-    {
-        [self getDataProvider];
-        [self getRecommendlist];
-        [self getUserPosts];
-    }
-    if (self.type == BBSType_2)
-    {
-        [self getFollowlist];
-    }
-    else if (self.type == BBSType_4)
-    {
-        [self getRecommendlist];
-    }
-    else
-    {
-        [self getUserPosts];
-    }
+    
+    //获取问卷数据
+    [self getDataProvider];
+    [self getRecommendlist];
+    [self getUserPosts];
+    
+    //获取轮播图片
+    [self getAdvertisementpic];
+    
+    __weak typeof(self) weakSelf = self;
+    //轮播图
+    LoopImageView *loopView = [[LoopImageView alloc] init];
+    loopView.bounds = CGRectMake(0, 0, MTScreenW, (int)(MTScreenW / 3));
+    loopView.tapLoopImageCallBack= ^(NSInteger idx){
+//        [weakSelf onClickImage:idx];
+    };
+    self.tableView.tableHeaderView = loopView;
 }
+
+/**
+ * 获取轮播图片
+ **/
+-(void)getAdvertisementpic
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        if([dict[@"code"] integerValue] != 0){
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            return ;
+        }
+        
+        self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
+        
+        NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.advDatas.count; i++) {
+            HomePicModel *model = self.advDatas[i];
+            NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
+            [imageUrls addObject:urlStr];
+        }
+        LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
+        loopView.imageUrls = imageUrls;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
+    }];
+}
+
 
 /**
  *  集成刷新控件
@@ -107,7 +136,7 @@
     NSDictionary *paramDict = [[NSDictionary alloc] init];
     if ([SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key)
     {
-        paramDict = @{@"flag" : [NSString stringWithFormat:@"%ld",(long)self.type],
+        paramDict = @{@"flag" : @"1",
                       @"client" : @"ios",
                       @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
                       @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
@@ -115,7 +144,7 @@
     }
     else
     {
-        paramDict = @{@"flag" : [NSString stringWithFormat:@"%ld",(long)self.type],
+        paramDict = @{@"flag" : @"1",
                       @"client" : @"ios",
                       @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
                       @"page" : @"10"};
@@ -139,7 +168,7 @@
                                              //                                             return [self.view showNonedataTooltip];
                                          }
                                          
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         //                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          //                                         [alertView show];
                                      }
                                      else
@@ -234,16 +263,16 @@
 -(void)getRecommendlist
 {
     NSMutableDictionary *params = [@{
-                                     @"recommend" : self.type == BBSType_4 ? @"2" : @"3"
+                                     @"recommend" :  @"3"
                                      }mutableCopy];
     
-    if (self.type == BBSType_1) {
-        //        params[@"p_expert"] = @"1";
-        //        params[@"page_expert"] = @"1000";
-    }else{
-        params[@"p_health"] = @"1";
-        params[@"page_health"] = @"1000";
-    }
+    //    if (self.type == BBSType_1) {
+    //        //        params[@"p_expert"] = @"1";
+    //        //        params[@"page_expert"] = @"1000";
+    //    }else{
+    //        params[@"p_health"] = @"1";
+    //        params[@"page_health"] = @"1000";
+    //    }
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_recommendlist parameters: params
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -290,52 +319,42 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (self.type  == BBSType_1)
-        return 6;
-    return 1;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.type  == BBSType_1)
+    
+    switch (section)
     {
-        switch (section)
-        {
-            case 0:
-                return 1;
-                break;
-            case 1:
-                return 1;
-                break;
-            case 2:
-                return 1;
-                break;
-            case 3:
-                return 1;
-                break;
-            case 4:
-                return 2;
-                break;
-            case 5:
-                return postsArr.count;
-                break;
-            default:
-                return  postsArr.count;
-        }
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 1;
+            break;
+        case 3:
+            return 1;
+            break;
+        case 4:
+            return postsArr.count;
+            break;
+        default:
+            return  postsArr.count;
     }
-    else  if (self.type  == BBSType_4)
-        return recommendlist.count;
-    else
-        return postsArr.count;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == 0)
-        return 60;
-    if(indexPath.section == 4 && indexPath.row == 0)
+    //    if(indexPath.section == 0)
+    //        return 60;
+    if(indexPath.section == 0 && indexPath.row == 0)
         return 44;
-    if(indexPath.section == 4)
+    if(indexPath.section == 0)
         return (MTScreenW+30)/4;
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
@@ -343,23 +362,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (self.type  == BBSType_1){
-        return section == 0?5:0.01;
-    }
-    return 0.01;
+    return section == 0?5:0.01;
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (self.type  == BBSType_1){
-        if (section == 2) {
-            return 5;
-        }else {
-            return 10;
-        }
+    if (section == 2) {
+        return 5;
+    }else {
+        return 10;
     }
-    
-    return 0;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -375,16 +388,46 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.section == 0) {
-        TopCell *topCell = [TopCell topCell];
-        cell = topCell;
+    if (indexPath.section == 0)
+    {
+        UITableViewCell *commoncell = nil;
+        if (indexPath.row == 0)
+        {
+            static NSString *cellId = @"titleCellId";
+            commoncell = [tableView dequeueReusableCellWithIdentifier:cellId];
+            if (!commoncell) {
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+                commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
+                commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+                commoncell.layoutMargins = UIEdgeInsetsZero;
+            }
+            commoncell.textLabel.text = @"健康话题";
+            cell = commoncell;
+        }
+        else
+        {
+            ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
+            menuCell.row = 1;
+            menuCell.col = 4;
+            menuCell.colSpace = 30;
+            
+            menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
+            menuCell.shouldShowIndicator = NO;
+            menuCell.datas = @[@{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"xnxg_icon"},
+                               @{KScrollMenuTitle:@"精英压力",KScrollMenuImg:@"jyyl_icon"},
+                               @{KScrollMenuTitle:@"肝脏排毒",KScrollMenuImg:@"gzpd_icon"},
+                               @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
+                               ];
+            cell = menuCell;
+        }
+        
     }
-    else if (self.type == BBSType_4 || self.type == BBSType_1)
+    else
     {
         if (indexPath.section < 3)
         {
             SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
-            [picCell setItemdata:self.type == BBSType_4  ? recommendlist[indexPath.row] :recommendlist[indexPath.section]];
+            [picCell setItemdata:recommendlist[indexPath.section]];
             // 头像点击 进入个人信息界面
             picCell.portraitClick = ^(PostsModel *item)
             {
@@ -396,61 +439,6 @@
             
             cell = picCell;
         }
-        else if (indexPath.section == 4)
-        {
-            UITableViewCell *commoncell = nil;
-            if (indexPath.row == 0)
-            {
-                static NSString *cellId = @"titleCellId";
-                commoncell = [tableView dequeueReusableCellWithIdentifier:cellId];
-                if (!commoncell) {
-                    commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-                    commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    commoncell.textLabel.font = [UIFont systemFontOfSize:16];
-                    commoncell.layoutMargins = UIEdgeInsetsZero;
-                }
-                commoncell.textLabel.text = @"健康话题";
-                cell = commoncell;
-            }
-            else
-            {
-                ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
-                menuCell.row = 1;
-                menuCell.col = 4;
-                menuCell.colSpace = 30;
-                
-                menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
-                menuCell.shouldShowIndicator = NO;
-                menuCell.datas = @[@{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"xnxg_icon"},
-                                   @{KScrollMenuTitle:@"精英压力",KScrollMenuImg:@"jyyl_icon"},
-                                   @{KScrollMenuTitle:@"肝脏排毒",KScrollMenuImg:@"gzpd_icon"},
-                                   @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
-                                   ];
-                
-                //            QuestionCell *quecell = [QuestionCell createCellWithTableView:tableView];
-                //            if (questiondata)
-                //                quecell.dataProvider = questiondata;
-                //            quecell.portraitClick = ^(ClasslistModel *itemData){
-                //
-                //                // 问卷调查
-                //                NSArray *exam_infoArray = itemData.exam_info;
-                //                if (exam_infoArray.count == 1) {
-                //                    SexViewController *vc = [[SexViewController alloc] init];
-                //                    ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
-                //                    vc.exam_id = examInfoModel.e_id;
-                //                    vc.e_title = itemData.c_title;
-                //                    vc.calculatype = examInfoModel.e_calculatype;
-                //                    [self.parentVC.navigationController pushViewController:vc animated:YES];
-                //                }else if(exam_infoArray.count> 1){
-                //                    AllQuestionController *vc = [[AllQuestionController alloc] init];
-                //                    vc.c_id = itemData.c_id;
-                //                    [self.parentVC.navigationController pushViewController:vc animated:YES];
-                //                }
-                //            };
-                
-                cell = menuCell;
-            }
-        }
         else
         {
             CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
@@ -458,13 +446,6 @@
                 [cardCell1 setPostsModel:postsArr[indexPath.row]];
             cell = cardCell1;
         }
-    }
-    else
-    {
-        CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-        if (postsArr.count > 0)
-            [cardCell setPostsModel:postsArr[indexPath.row]];
-        cell = cardCell;
     }
     
     if ([cell isKindOfClass:[CardCell class]])
@@ -490,16 +471,16 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    if ((self.type == BBSType_1 && indexPath.section < 3) )
+    if ((indexPath.section < 3) )
     {
         if(!recommendlist || recommendlist.count==0)return;
         [view setItemdata:recommendlist[indexPath.section]];
     }
-    else  if ( self.type == BBSType_4)
-    {
-        if(!recommendlist || recommendlist.count==0)return;
-        [view setItemdata:recommendlist[indexPath.row]];
-    }
+    //    else  if ( self.type == BBSType_4)
+    //    {
+    //        if(!recommendlist || recommendlist.count==0)return;
+    //        [view setItemdata:recommendlist[indexPath.row]];
+    //    }
     else
     {
         if(!postsArr || postsArr.count==0)return;

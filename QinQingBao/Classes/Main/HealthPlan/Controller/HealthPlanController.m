@@ -14,8 +14,6 @@
 
 #import "InterveneController.h"
 
-#import "HealthArchiveViewController.h"
-
 @interface HealthPlanController ()
 {
     NSMutableArray *dataProvider;
@@ -157,7 +155,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 260;
+    return 200;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -201,10 +199,7 @@
 //    InterveneController *view = [[InterveneController alloc] init];
 //    view.wid = model.wid;
 //    [self.navigationController pushViewController:view animated:YES];
-    
-    HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
-    [self.parentVC.navigationController pushViewController:vc animated:YES];
-}
+ }
 
 -(void)showPlaceholderview
 {

@@ -12,7 +12,6 @@
 @property (strong, nonatomic) IBOutlet UIView *bgview;
 @property (strong, nonatomic) IBOutlet UILabel *nameLab;
 @property (strong, nonatomic) IBOutlet UIImageView *topIcon;
-@property (strong, nonatomic) IBOutlet UIImageView *bottomIcon;
 @property (strong, nonatomic) IBOutlet UILabel *timeLab;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIScrollView *pageView;

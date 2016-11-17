@@ -16,6 +16,9 @@
 
 #import "QuestionResultController3.h"
 #import "PayResultViewController.h"
+#import "HealthArchiveViewController.h"
+
+#import "ScanCodesViewController.h"
 
 @interface ServiceHomeViewController ()
 
@@ -88,12 +91,22 @@
     }else if (indexPath.section == 0 && indexPath.row == 1){ //档案cell
         ArchivesCell *archivesCell = [ArchivesCell createCellWithTableView:tableView];
         archivesCell.scanBlock = ^{
-            [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+            ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
+            scanCodeVC.hidesBottomBarWhenPushed = YES;
+            scanCodeVC.getcodeClick = ^(NSString *code){
+                //                    self.itemimei.rightText.text = code;
+                [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+            };
+            [self.parentVC.navigationController pushViewController:scanCodeVC animated:YES];
         };
         
         archivesCell.addNewArchivesBlock = ^{
-            [weakSelf.dataProvider addObject:@"1"];
-            [weakSelf.tableView reloadData];
+            //            [weakSelf.dataProvider addObject:@"1"];
+            //            [weakSelf.tableView reloadData];
+            
+            HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
+            [self.parentVC.navigationController pushViewController:vc animated:YES];
+            
         };
         archivesCell.tapArchiveBlock = ^(NSUInteger idx){
             [[[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"点击了第%d个",(int)idx] message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
@@ -151,7 +164,7 @@
         
         NSString *promptStr = @"as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂蝶恋蜂狂as砥";
         CGFloat h = [promptStr boundingRectWithSize:CGSizeMake(MTScreenW - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
-    
+        
         promptCell.textLabel.text = promptStr;
         promptCell.height= h;
         
@@ -197,7 +210,7 @@
     }else if (indexPath.section == 1 && indexPath.row == 1){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         [self.parentVC.navigationController pushViewController:reportListVC animated:YES];
-    
+        
     }else{
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];

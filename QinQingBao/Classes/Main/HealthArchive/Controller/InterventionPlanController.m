@@ -9,6 +9,9 @@
 #import "InterventionPlanController.h"
 #import "ArchivesPersonCell.h"
 #import "InterveneController.h"
+#import "InterveneModel.h"
+
+#import "ReportInterventionModel.h"
 
 @interface InterventionPlanController ()
 
@@ -44,6 +47,7 @@
     self.tableView.footer= [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     [self.tableView initWithPlaceString:@"暂无相关数据" imgPath:@"placeholder-1"];
     
+    [self getInterventionPlanList];
 }
 
 - (NSArray *)dataProvider
@@ -59,7 +63,7 @@
 #pragma mark TableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-
+    
     return self.dataProvider.count;
 }
 
@@ -96,9 +100,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    InterveneController *interveneVC = [[InterveneController alloc] init];
-//    view.wid = model.wid;
-//    [self.navigationController pushViewController:interveneVC animated:YES];
+    //    InterveneController *interveneVC = [[InterveneController alloc] init];
+    //    view.wid = model.wid;
+    //    [self.navigationController pushViewController:interveneVC animated:YES];
 }
 
 #pragma mark - 服务器相关
@@ -116,20 +120,44 @@
     if (![SharedAppUtil checkLoginStates])
         return;
     
-    NSMutableDictionary *params = nil;
-    MBProgressHUD *hud = nil;
+    NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"client":@"ios"
+                                     }mutableCopy];
+    
     if (self.isfirst) {
         self.isfirst = NO;
-        hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     
-    [CommonRemoteHelper RemoteWithUrl:@"www.baidu.com" parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        [hud removeFromSuperview];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_work_read parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
-
+        
+        if ([dict[@"code"] integerValue] == 17001 && self.dataProvider.count > 0)
+        {
+            return [self.tableView showNonedataTooltip];
+        }
+        else  if ([dict[@"code"] integerValue] != 0)
+        {
+            return [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
+        }
+        
+        NSArray *datas = [ReportInterventionModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        if (datas.count > 0)
+        {
+            [self.dataProvider addObjectsFromArray:datas];
+            self.p++;
+            //设置数据
+            [self.tableView reloadData];
+        }
+        
+        if (self.dataProvider.count > 0)
+        {
+            [self.tableView removePlace];
+        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [hud removeFromSuperview];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];

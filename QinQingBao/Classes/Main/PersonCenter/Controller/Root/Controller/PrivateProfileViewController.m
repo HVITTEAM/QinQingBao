@@ -19,6 +19,7 @@
 #import "MyAccountViewController.h"
 #import "PersonalDataViewController.h"
 #import "SettingViewController.h"
+#import "HealthArchiveListController.h"
 
 #import "MsgAndPushViewController.h"
 
@@ -28,6 +29,7 @@
 
 #import "BBSPersonalModel.h"
 #import "MyRelationViewController.h"
+#import "MyPostsViewController.h"
 
 #define headHeight MTScreenH*0.3
 
@@ -52,7 +54,6 @@
     PostsModel *selectedDeleteModel;
     
     NSIndexPath *selectedDeleteindexPath;
-    
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -323,23 +324,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (2 == section)
-        return postsArr.count + 1;
-    return 1;
+    //    if (2 == section)
+    //        return 6;
+    return 6;
 }
 
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1)
-        return  80;
-    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return cell.height;
+    //    if (indexPath.section == 1)
+    //        return  80;
+    //    else
+    return 50;
+    //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    //    return cell.height;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -357,7 +360,7 @@
     
     UITableViewCell *cell;
     
-    if (indexPath.section == 0)
+    if (indexPath.section == 2)
     {
         ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
         [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
@@ -403,36 +406,45 @@
         
         cell = collectTypeCell;
     }
-    else if (indexPath.section == 2)
+    else if (indexPath.section == 0)
     {
-        if (indexPath.row == 0)
-        {
-            UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
-            if (commoncell == nil)
-                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
-            commoncell.textLabel.text = [NSString stringWithFormat:@"我的帖子  %ld",(long)[personalInfo.count_article integerValue]];
-            commoncell.textLabel.font = [UIFont systemFontOfSize:15];
-            commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
-            cell = commoncell;
+        UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
+        if (commoncell == nil)
+            commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
+        commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+        commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
+        commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = commoncell;
+        
+        switch (indexPath.row) {
+            case 0:
+                commoncell.textLabel.text = @"我的账户";
+                commoncell.imageView.image = [UIImage imageNamed:@"type1.png"];
+                break;
+            case 1:
+                commoncell.textLabel.text = @"我的商品";
+                commoncell.imageView.image = [UIImage imageNamed:@"type3.png"];
+                break;
+            case 2:
+                commoncell.textLabel.text = @"我的服务";
+                commoncell.imageView.image = [UIImage imageNamed:@"type4.png"];
+                break;
+            case 3:
+                commoncell.textLabel.text = @"我的评估";
+                commoncell.imageView.image = [UIImage imageNamed:@"type2.png"];
+                break;
+            case 4:
+                commoncell.textLabel.text = @"健康档案";
+                commoncell.imageView.image = [UIImage imageNamed:@"type5.png"];
+                break;
+            case 5:
+                commoncell.textLabel.text = @"我的帖子";
+                commoncell.imageView.image = [UIImage imageNamed:@"type1.png"];
+                break;
+            default:
+                break;
         }
-        else
-        {
-            CardCell *cardCell = [CardCell createCellWithTableView:tableView];
-            if (postsArr.count != 0)
-            {
-                [cardCell setPostsModel:postsArr[indexPath.row - 1]];
-            }
-            cardCell.attentionBlock = ^(PostsModel *model){
-                [self deleteAction:model];
-                selectedDeleteindexPath = indexPath;
-            };
-            // 头像点击 进入个人信息界面
-            cardCell.portraitClick = ^(PostsModel *item)
-            {
-                
-            };
-            cell = cardCell;
-        }
+
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -452,17 +464,20 @@
         case 0:
             class = [MyAccountViewController class];
             break;
-        case 1:
+        case 3:
             class = [EstimateViewController class];
             break;
-        case 2:
+        case 1:
             class = [GoodsTypeViewController class];
             break;
-        case 3:
+        case 2:
             class = [OrderTableViewController class];
             break;
         case 4:
-            class = [HealthPlanController class];
+            class = [HealthArchiveListController class];
+            break;
+        case 5:
+            class = [MyPostsViewController class];
             break;
         default:
             break;
@@ -473,12 +488,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2 && indexPath.row > 0)
-    {
-        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-        [view setItemdata:postsArr[indexPath.row-1]];
-        [self.navigationController pushViewController:view animated:YES];
-    }
+    [self typeClickHandler:indexPath.row];
+    
+//    if (indexPath.section == 2 && indexPath.row > 0)
+//    {
+//        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+//        [view setItemdata:postsArr[indexPath.row-1]];
+//        [self.navigationController pushViewController:view animated:YES];
+//    }
 }
 
 #pragma mark -- 与后台数据交互模块

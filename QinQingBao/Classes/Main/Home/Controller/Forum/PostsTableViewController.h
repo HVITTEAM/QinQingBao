@@ -10,6 +10,5 @@
 
 @interface PostsTableViewController : UITableViewController
 @property (nonatomic, strong) UIViewController *parentVC;
-@property (nonatomic, assign) BBSType type;
 
 @end

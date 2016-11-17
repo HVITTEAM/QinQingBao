@@ -79,11 +79,11 @@
 -(UIView *)getPageView
 {
     UIView *view = [[UIView alloc] init];
-    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
+    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
     icon.image  = [UIImage imageNamed:@"pc_user.png"];
     [view addSubview:icon];
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 5, 120, 20)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 8, 120, 20)];
     lab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:13];
     lab.text = @"蛋白质分析报告";
     [view addSubview:lab];
@@ -94,13 +94,13 @@
     timelab.font = [UIFont fontWithName:@"Helvetica" size:13];
     
     CGSize size = [timelab.text sizeWithAttributes:@{NSFontAttributeName:timelab.font}];
-    timelab.frame = CGRectMake(MTScreenW - 20 - size.width, 5, size.width, 23);
+    timelab.frame = CGRectMake(MTScreenW - 20 - size.width, 7, size.width, 23);
     [view addSubview:timelab];
     
     NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://tupian.enterdesk.com/2015/xll/02/26/4/rili9.jpg"]];
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
-    imageView.frame = CGRectMake(0, 30, MTScreenW - 10, 140);
+    imageView.frame = CGRectMake(0, 40, MTScreenW - 10, 140);
     imageView.backgroundColor = [UIColor whiteColor];
     [view addSubview:imageView];
     return view;

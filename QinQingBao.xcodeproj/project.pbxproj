@@ -68,6 +68,9 @@
 		011076FD1C3E8C42001E5C51 /* GoodsHeadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011076FC1C3E8C42001E5C51 /* GoodsHeadViewController.m */; };
 		011077001C3E8CD1001E5C51 /* GoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011076FF1C3E8CD1001E5C51 /* GoodsInfoViewController.m */; };
 		011077031C3EA896001E5C51 /* SWYPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011077021C3EA896001E5C51 /* SWYPhotoBrowserViewController.m */; };
+		011BAF2E1DDC06E7003440A6 /* MyPostsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BAF2D1DDC06E7003440A6 /* MyPostsViewController.m */; };
+		011BAF331DDC5D5C003440A6 /* ShowCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011BAF311DDC5D5C003440A6 /* ShowCodeViewController.m */; };
+		011BAF341DDC5D5C003440A6 /* ShowCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011BAF321DDC5D5C003440A6 /* ShowCodeViewController.xib */; };
 		011E8E031DD00DFE00700BB3 /* HealthReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 011E8E011DD00DFE00700BB3 /* HealthReportCell.m */; };
 		011E8E041DD00DFE00700BB3 /* HealthReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011E8E021DD00DFE00700BB3 /* HealthReportCell.xib */; };
 		011E8E091DD0603100700BB3 /* HealthArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011E8E081DD0603100700BB3 /* HealthArchiveViewController.m */; };
@@ -86,6 +89,7 @@
 		01254BB51DB74E3B0011C27A /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01254BB31DB74E3B0011C27A /* MyAnnotation.m */; };
 		01254BB71DB759670011C27A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01254BB61DB759670011C27A /* Images.xcassets */; };
 		01254BBA1DB761480011C27A /* ArticleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 01254BB91DB761480011C27A /* ArticleModel.m */; };
+		012595641DDAF3F900240795 /* ReportInterventionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012595631DDAF3F900240795 /* ReportInterventionModel.m */; };
 		01266B871C47C92F00992D2F /* MallEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01266B851C47C92F00992D2F /* MallEvaCell.m */; };
 		01266B881C47C92F00992D2F /* MallEvaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01266B861C47C92F00992D2F /* MallEvaCell.xib */; };
 		01266B8F1C48B0A800992D2F /* CommonOrderGoodsEvaCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01266B8D1C48B0A800992D2F /* CommonOrderGoodsEvaCell.m */; };
@@ -139,6 +143,7 @@
 		012AAD261CA4D01C00CEE121 /* OrderTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012AAD241CA4D01C00CEE121 /* OrderTimeCell.xib */; };
 		012CA4C61D83D58A005FC78A /* MTPageNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012CA4C51D83D58A005FC78A /* MTPageNavViewController.m */; };
 		012CA4C91D83D66A005FC78A /* MsgAndPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012CA4C81D83D66A005FC78A /* MsgAndPushViewController.m */; };
+		012DEF391DDBF1EB006A4932 /* HealthArchiveListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012DEF381DDBF1EB006A4932 /* HealthArchiveListController.m */; };
 		012E56DF1D911C7B004347A4 /* MyRelationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 012E56DE1D911C7B004347A4 /* MyRelationViewController.m */; };
 		012E56E41D911DF1004347A4 /* BBSRelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012E56E31D911DF1004347A4 /* BBSRelationModel.m */; };
 		013257A51DD94849006DF8FC /* HealthArchiveViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 013257A41DD94849006DF8FC /* HealthArchiveViewController3.m */; };
@@ -1405,6 +1410,11 @@
 		011076FF1C3E8CD1001E5C51 /* GoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoViewController.m; sourceTree = "<group>"; };
 		011077011C3EA896001E5C51 /* SWYPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWYPhotoBrowserViewController.h; sourceTree = "<group>"; };
 		011077021C3EA896001E5C51 /* SWYPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWYPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		011BAF2C1DDC06E7003440A6 /* MyPostsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPostsViewController.h; sourceTree = "<group>"; };
+		011BAF2D1DDC06E7003440A6 /* MyPostsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPostsViewController.m; sourceTree = "<group>"; };
+		011BAF301DDC5D5C003440A6 /* ShowCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCodeViewController.h; sourceTree = "<group>"; };
+		011BAF311DDC5D5C003440A6 /* ShowCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowCodeViewController.m; sourceTree = "<group>"; };
+		011BAF321DDC5D5C003440A6 /* ShowCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowCodeViewController.xib; sourceTree = "<group>"; };
 		011E8E001DD00DFE00700BB3 /* HealthReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthReportCell.h; sourceTree = "<group>"; };
 		011E8E011DD00DFE00700BB3 /* HealthReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthReportCell.m; sourceTree = "<group>"; };
 		011E8E021DD00DFE00700BB3 /* HealthReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HealthReportCell.xib; sourceTree = "<group>"; };
@@ -1439,6 +1449,8 @@
 		01254BB61DB759670011C27A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01254BB81DB761480011C27A /* ArticleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleModel.h; sourceTree = "<group>"; };
 		01254BB91DB761480011C27A /* ArticleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleModel.m; sourceTree = "<group>"; };
+		012595621DDAF3F900240795 /* ReportInterventionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportInterventionModel.h; sourceTree = "<group>"; };
+		012595631DDAF3F900240795 /* ReportInterventionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportInterventionModel.m; sourceTree = "<group>"; };
 		01266B841C47C92F00992D2F /* MallEvaCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallEvaCell.h; sourceTree = "<group>"; };
 		01266B851C47C92F00992D2F /* MallEvaCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallEvaCell.m; sourceTree = "<group>"; };
 		01266B861C47C92F00992D2F /* MallEvaCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MallEvaCell.xib; sourceTree = "<group>"; };
@@ -1542,6 +1554,8 @@
 		012CA4C51D83D58A005FC78A /* MTPageNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTPageNavViewController.m; sourceTree = "<group>"; };
 		012CA4C71D83D66A005FC78A /* MsgAndPushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MsgAndPushViewController.h; sourceTree = "<group>"; };
 		012CA4C81D83D66A005FC78A /* MsgAndPushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MsgAndPushViewController.m; sourceTree = "<group>"; };
+		012DEF371DDBF1EB006A4932 /* HealthArchiveListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthArchiveListController.h; sourceTree = "<group>"; };
+		012DEF381DDBF1EB006A4932 /* HealthArchiveListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthArchiveListController.m; sourceTree = "<group>"; };
 		012E56DD1D911C7B004347A4 /* MyRelationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRelationViewController.h; sourceTree = "<group>"; };
 		012E56DE1D911C7B004347A4 /* MyRelationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRelationViewController.m; sourceTree = "<group>"; };
 		012E56E21D911DF1004347A4 /* BBSRelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSRelationModel.h; sourceTree = "<group>"; };
@@ -3778,6 +3792,11 @@
 				011E8E081DD0603100700BB3 /* HealthArchiveViewController.m */,
 				013257A31DD94849006DF8FC /* HealthArchiveViewController3.h */,
 				013257A41DD94849006DF8FC /* HealthArchiveViewController3.m */,
+				012DEF371DDBF1EB006A4932 /* HealthArchiveListController.h */,
+				012DEF381DDBF1EB006A4932 /* HealthArchiveListController.m */,
+				011BAF301DDC5D5C003440A6 /* ShowCodeViewController.h */,
+				011BAF311DDC5D5C003440A6 /* ShowCodeViewController.m */,
+				011BAF321DDC5D5C003440A6 /* ShowCodeViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4902,6 +4921,8 @@
 				0174AD7D1D84F6DB001D0697 /* PublicProfileViewController.m */,
 				012E56DD1D911C7B004347A4 /* MyRelationViewController.h */,
 				012E56DE1D911C7B004347A4 /* MyRelationViewController.m */,
+				011BAF2C1DDC06E7003440A6 /* MyPostsViewController.h */,
+				011BAF2D1DDC06E7003440A6 /* MyPostsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4911,6 +4932,8 @@
 			children = (
 				013257AD1DD99EFE006DF8FC /* ArchiveData.h */,
 				013257AE1DD99EFE006DF8FC /* ArchiveData.m */,
+				012595621DDAF3F900240795 /* ReportInterventionModel.h */,
+				012595631DDAF3F900240795 /* ReportInterventionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8853,6 +8876,7 @@
 				01ECDAB31C8EB31F0018160F /* chatBar_more_photo@2x.png in Resources */,
 				010B734C1C181827007A496B /* icon_listheader_animation_1@2x.png in Resources */,
 				01ECDAA81C8EB31F0018160F /* Contents.json in Resources */,
+				011BAF341DDC5D5C003440A6 /* ShowCodeViewController.xib in Resources */,
 				01ECDA281C8EB31F0018160F /* VoiceSearchFeedback015@2x.png in Resources */,
 				01C82BFA1CC4BD4F004D7A16 /* ImageCell.xib in Resources */,
 				01EBD3D41C854027009236FA /* RefundViewController.xib in Resources */,
@@ -9416,6 +9440,7 @@
 				D2F744AD1B7D7E7F006AC23D /* RegistViewController.m in Sources */,
 				0162EA471D86849900A5EF1C /* YCXMenuItem.m in Sources */,
 				01F33D851BB2342D00787620 /* UserInforModel.m in Sources */,
+				012DEF391DDBF1EB006A4932 /* HealthArchiveListController.m in Sources */,
 				010EC9E31C438D8900D36417 /* MTShoppingCarCell.m in Sources */,
 				013FE9E51D813CF70079AFDE /* PostsTableViewController.m in Sources */,
 				01F0A19A1D01615400F6E154 /* FristMsgModel.m in Sources */,
@@ -9455,6 +9480,7 @@
 				01A6B1391D48A3B900DF340C /* ButtonCell.m in Sources */,
 				013FE9E01D8138CA0079AFDE /* NewHomeViewController.m in Sources */,
 				01E89B031C76B45A00CFD40D /* BindingResultViewController.m in Sources */,
+				011BAF331DDC5D5C003440A6 /* ShowCodeViewController.m in Sources */,
 				016066FE1CF6AD8C005A3164 /* SDImageCache.m in Sources */,
 				016EDF091D9D03AB0054949F /* SDWaitingView.m in Sources */,
 				01EB6BED1C28D85A008BD878 /* AboutViewController.m in Sources */,
@@ -9544,6 +9570,7 @@
 				0126ECFB1B8C4E8100EC85C1 /* MASViewConstraint.m in Sources */,
 				01F85AB41C575A0600E463F4 /* MallRootViewControlelr.m in Sources */,
 				0162EA921D869DB500A5EF1C /* UIImage+BHBEffects.m in Sources */,
+				012595641DDAF3F900240795 /* ReportInterventionModel.m in Sources */,
 				0180A2B41BA7E9C400D26866 /* NoticeHelper.m in Sources */,
 				01DDF2D51C156E0900958332 /* CitiesTotal.m in Sources */,
 				01A8206E1D82A822002E30E3 /* LoginInHeadView.m in Sources */,
@@ -9812,6 +9839,7 @@
 				01ECDAF31C8EB31F0018160F /* UIButton+EMWebCache.m in Sources */,
 				01FD55B01B9EB505000F96BB /* OrderSubmitController.m in Sources */,
 				D246D56D1D0179E10003D166 /* NewsCell.m in Sources */,
+				011BAF2E1DDC06E7003440A6 /* MyPostsViewController.m in Sources */,
 				01E4A9461C3FA97A00AAAF73 /* PriceDetailCell.m in Sources */,
 				01ECDAFD1C8EB31F0018160F /* EaseMessageModel.m in Sources */,
 				01EBD3C11C853F70009236FA /* RefundStateCell.m in Sources */,

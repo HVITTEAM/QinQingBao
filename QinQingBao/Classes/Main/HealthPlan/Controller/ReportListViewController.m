@@ -10,6 +10,7 @@
 #import "ReportListCell.h"
 #import "ReportDetailViewController.h"
 #import "InterveneModel.h"
+#import "ReportInterventionModel.h"
 
 @interface ReportListViewController ()
 
@@ -98,18 +99,18 @@
         return;
     
     NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-                                     @"p": @(self.p),
-                                     @"page":@(10),
+//                                     @"p": @(self.p),
+//                                     @"page":@(10),
                                      @"client":@"ios"
                                      }mutableCopy];
-    params[@"wid"] = self.wid;
+//    params[@"wid"] = self.wid;
 
     if (self.isfirst) {
         self.isfirst = NO;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_member_reports parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_work_read parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
         
@@ -122,7 +123,7 @@
             return [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
         }
         
-        NSArray *datas = [InterveneModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        NSArray *datas = [ReportInterventionModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         if (datas.count > 0)
         {
             [self.dataProvider addObjectsFromArray:datas];

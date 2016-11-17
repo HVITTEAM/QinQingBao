@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShowCodeViewController">
+            <connections>
+                <outlet property="imageView" destination="jRV-5G-T45" id="wYI-AJ-Nsr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jRV-5G-T45">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="PhJ-nB-DMc"/>
+                        <constraint firstAttribute="height" constant="200" id="eLW-Dz-4Dx"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫一扫上面的二维码，可以添加绑定" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5Q-wJ-Taa">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pc_user" translatesAutoresizingMaskIntoConstraints="NO" id="5Jf-Dk-dj7">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="F57-6g-Fny"/>
+                        <constraint firstAttribute="width" constant="42" id="zrY-Fk-bDo"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kna-Dz-xD4">
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="档案号:20120012010" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x87-Wt-bIw">
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Kna-Dz-xD4" firstAttribute="top" secondItem="5Jf-Dk-dj7" secondAttribute="top" id="EAj-Gn-fKz"/>
+                <constraint firstItem="jRV-5G-T45" firstAttribute="leading" secondItem="5Jf-Dk-dj7" secondAttribute="trailing" constant="-17" id="GLJ-hD-pMk"/>
+                <constraint firstItem="x87-Wt-bIw" firstAttribute="leading" secondItem="5Jf-Dk-dj7" secondAttribute="trailing" constant="8" id="MrO-GU-lNz"/>
+                <constraint firstItem="R5Q-wJ-Taa" firstAttribute="top" secondItem="jRV-5G-T45" secondAttribute="bottom" constant="15" id="Rzk-u0-6t4"/>
+                <constraint firstItem="R5Q-wJ-Taa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="T7s-G4-lzZ"/>
+                <constraint firstItem="jRV-5G-T45" firstAttribute="top" secondItem="5Jf-Dk-dj7" secondAttribute="bottom" constant="16" id="gtO-HX-nO3"/>
+                <constraint firstItem="Kna-Dz-xD4" firstAttribute="leading" secondItem="5Jf-Dk-dj7" secondAttribute="trailing" constant="8" id="gzI-7N-gE0"/>
+                <constraint firstItem="x87-Wt-bIw" firstAttribute="baseline" secondItem="5Jf-Dk-dj7" secondAttribute="baseline" id="kQD-7j-osE"/>
+                <constraint firstItem="jRV-5G-T45" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wgC-No-HUG"/>
+                <constraint firstItem="jRV-5G-T45" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="woW-J7-VYj"/>
+            </constraints>
+            <point key="canvasLocation" x="25.5" y="51.5"/>
+        </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XwJ-8i-IQ8">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="pc_user" width="128" height="128"/>
+    </resources>
+</document>

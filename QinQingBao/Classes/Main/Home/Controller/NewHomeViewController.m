@@ -51,7 +51,6 @@
 -(void)initRootController
 {
     self.vc1 = [[PostsTableViewController alloc] init];
-    self.vc1.type = BBSType_1;
     self.vc1.parentVC = self;
     self.vc1.title = @"资讯";
     
