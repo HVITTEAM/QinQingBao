@@ -65,6 +65,7 @@
     
     self.title = @"我的帖子";
     self.tableView.backgroundColor = HMGlobalBg;
+    self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 
@@ -170,7 +171,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return postsArr && postsArr.count > 0 ? 1 : 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -393,7 +394,6 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
         [alertView show];
     }
-    
 }
 
 #pragma mark - 发帖

@@ -9,9 +9,6 @@
 #import "PrivateProfileViewController.h"
 #import "LoginInHeadView.h"
 
-#import "ProfileTopCell.h"
-#import "CollectTypeCell.h"
-
 #import "HealthPlanController.h"
 #import "OrderTableViewController.h"
 #import "GoodsTypeViewController.h"
@@ -23,10 +20,6 @@
 
 #import "MsgAndPushViewController.h"
 
-#import "PostsDetailViewController.h"
-#import "PostsModel.h"
-#import "CardCell.h"
-
 #import "BBSPersonalModel.h"
 #import "MyRelationViewController.h"
 #import "MyPostsViewController.h"
@@ -36,24 +29,14 @@
 
 @interface PrivateProfileViewController ()<UIScrollViewDelegate,HeadRefleshDelegate>
 {
-    UILabel *titleLabel;
-    
     BBSPersonalModel *personalInfo;
     
     UserInforModel *infoVO;
+    //头像
     NSString *iconUrl;
-    
-    NSMutableArray *postsArr;
-    
-    // 当前第几页
-    NSInteger currentPageIdx;
     
     UIButton *rightBtn0;
     UIButton *rightBtn1;
-    
-    PostsModel *selectedDeleteModel;
-    
-    NSIndexPath *selectedDeleteindexPath;
 }
 
 @property(nonatomic,strong)LoginInHeadView *headView;
@@ -69,8 +52,6 @@
     [super viewDidLoad];
     
     [self initHeadView];
-    
-    [self setupRefresh];
     
     [self refleshData];
     
@@ -124,14 +105,12 @@
     
     [headView initWithName:@"请登录" professional:@"" isfriend:@"" is_mine:@"1"];
     
-    [postsArr removeAllObjects];
     [self.tableView reloadData];
 }
 
 -(void)refleshDataByLogin
 {
     personalInfo = nil;
-    [postsArr removeAllObjects];
     [self.tableView reloadData];
     
     [self refleshData];
@@ -142,11 +121,7 @@
  */
 -(void)refleshData
 {
-    currentPageIdx = 1;
-    
     personalInfo = nil;
-    [postsArr removeAllObjects];
-    [self getUserPosts];
     
     [self getUserFannum];
     
@@ -246,19 +221,6 @@
     }
 }
 
-#pragma mark 集成刷新控件
-
-/**
- *  集成刷新控件
- */
-- (void)setupRefresh
-{
-    currentPageIdx = 1;
-    postsArr = [[NSMutableArray alloc] init];
-    self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(getUserPosts)];
-}
-
-
 #pragma mark UIScrollViewDelegate
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -329,20 +291,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    if (2 == section)
-    //        return 6;
     return 6;
 }
 
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if (indexPath.section == 1)
-    //        return  80;
-    //    else
+ 
     return 50;
-    //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-    //    return cell.height;
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -360,53 +317,7 @@
     
     UITableViewCell *cell;
     
-    if (indexPath.section == 2)
-    {
-        ProfileTopCell *consumeCell = [ProfileTopCell creatProfileConsumeCellWithTableView:tableView];
-        [consumeCell setZan:[personalInfo.all_recommends integerValue] fansnum:[personalInfo.count_fans integerValue] attentionnum:[personalInfo.count_attention integerValue]];
-        consumeCell.tapConsumeCellBtnCallback = ^(ProfileTopCell *consumeCell,NSUInteger idx){
-            
-            //判断是否登录
-            if (![SharedAppUtil checkLoginStates])
-                return;
-            
-            if (idx == 100)
-            {
-                //                [NoticeHelper AlertShow:@"尚未开通,敬请期待！" view:nil];
-            }
-            else if (idx == 200)
-            {
-                MyRelationViewController *view = [[MyRelationViewController alloc] init];
-                view.type = 1;
-                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
-                [self.navigationController pushViewController:view animated:YES];
-            }
-            else
-            {
-                MyRelationViewController *view = [[MyRelationViewController alloc] init];
-                view.type = 2;
-                view.uid = [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id;
-                [self.navigationController pushViewController:view animated:YES];
-            }
-        };
-        cell = consumeCell;
-        
-    }
-    else if (indexPath.section == 1)
-    {
-        CollectTypeCell *collectTypeCell = [tableView dequeueReusableCellWithIdentifier:@"MTCollectTypeCell"];
-        
-        if(collectTypeCell == nil)
-            collectTypeCell = [CollectTypeCell collectTypeCell];
-        
-        collectTypeCell.cellClick = ^(NSInteger cellTag){
-            NSLog(@"%ld",(long)cellTag);
-            [self typeClickHandler:cellTag];
-        };
-        
-        cell = collectTypeCell;
-    }
-    else if (indexPath.section == 0)
+     if (indexPath.section == 0)
     {
         UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
         if (commoncell == nil)
@@ -455,8 +366,9 @@
 
 -(void)typeClickHandler:(NSInteger)type
 {
-    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates])
+        return;
     
     Class class;
     
@@ -489,13 +401,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self typeClickHandler:indexPath.row];
-    
-//    if (indexPath.section == 2 && indexPath.row > 0)
-//    {
-//        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-//        [view setItemdata:postsArr[indexPath.row-1]];
-//        [self.navigationController pushViewController:view animated:YES];
-//    }
 }
 
 #pragma mark -- 与后台数据交互模块
@@ -529,76 +434,6 @@
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
-                                 }];
-}
-
-/**
- *  获取发帖数据
- */
--(void)getUserPosts
-{
-    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-    {
-        personalInfo = nil;
-        [postsArr removeAllObjects];
-        [self.tableView reloadData];
-        [self endrefleshData];
-        return  [self.tableView.footer endRefreshing];
-    }
-    else if ([SharedAppUtil defaultCommonUtil].bbsVO == nil)
-    {
-        [self endrefleshData];
-        return  [self.tableView.footer endRefreshing];
-    }
-    NSDictionary *paramDict = [[NSDictionary alloc] init];
-    
-    paramDict = @{@"uid" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Member_id,
-                  @"client" : @"ios",
-                  @"key" : [SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key,
-                  @"p" : [NSString stringWithFormat:@"%li",(long)currentPageIdx],
-                  @"page" : @"10"};
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_personallist parameters: paramDict
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     [self endrefleshData];
-                                     [self.tableView.footer endRefreshing];
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum integerValue] > 0)
-                                     {
-                                         if([codeNum integerValue] == 17001 && postsArr.count == 0)
-                                         {
-                                             return;
-                                         }
-                                         else if([codeNum integerValue] == 17001 && postsArr.count > 0)
-                                         {
-                                             return [NoticeHelper AlertShow:@"没有更多数据了" view:nil];
-                                         }
-                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                         [alertView show];
-                                     }
-                                     else
-                                     {
-                                         NSArray *arr =[PostsModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
-                                         
-                                         if (arr.count == 0 && currentPageIdx == 1)
-                                         {
-                                             CX_Log(@"没有新的发帖数据");
-                                         }
-                                         else if (arr.count == 0 && currentPageIdx > 1)
-                                         {
-                                             //[self.view showNonedataTooltip];
-                                         }else
-                                         {
-                                             currentPageIdx ++;
-                                             [postsArr addObjectsFromArray:[arr copy]];
-                                             
-                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
-                                         }
-                                     }
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [self.tableView.footer endRefreshing];
-                                     [self endrefleshData];
                                  }];
 }
 
@@ -678,50 +513,4 @@
     }];
 }
 
-/**
- *  删除帖子
- */
-#pragma mark - 导航栏事件
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1)
-    {
-        NSDictionary *params = @{@"tid":selectedDeleteModel.tid,
-                                 @"client":@"ios",
-                                 @"key":[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key};
-        
-        MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [CommonRemoteHelper RemoteWithUrl:URL_Get_delete_thread parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-            [HUD removeFromSuperview];
-            id codeNum = [dict objectForKey:@"code"];
-            if([codeNum integerValue] > 0)//如果返回的是NSString 说明有错误
-            {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alertView show];
-            }
-            else
-            {
-                [postsArr removeObjectAtIndex:selectedDeleteindexPath.row - 1];
-                [self.tableView deleteRowsAtIndexPaths:@[selectedDeleteindexPath] withRowAnimation:UITableViewRowAnimationNone];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [HUD removeFromSuperview];
-            [NoticeHelper AlertShow:@"请求出错了" view:nil];
-        }];
-    }
-}
-/**
- *  删除帖子
- */
-- (void)deleteAction:(PostsModel *)model
-{
-    if ([model.is_myposts integerValue] == 1)
-    {
-        selectedDeleteModel = model;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
-        [alertView show];
-    }
-    
-}
 @end

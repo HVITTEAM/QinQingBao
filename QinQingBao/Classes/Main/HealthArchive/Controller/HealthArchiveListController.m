@@ -11,6 +11,7 @@
 #import "ScanCodesViewController.h"
 #import "HealthArchiveViewController.h"
 @interface HealthArchiveListController ()
+@property (strong,nonatomic)NSMutableArray *dataProvider;
 
 @end
 
@@ -36,11 +37,14 @@
 {
     [super viewDidLoad];
     
+    [self loadArchiveDataList];
+    
     [self setupFooter];
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.title  = @"健康档案";
 }
+
 
 #pragma mark - 设置footer View
 
@@ -70,10 +74,34 @@
     self.tableView.tableFooterView = bottomView;
 }
 
+- (void)loadArchiveDataList
+{
+    NSDictionary *params = @{ @"client":@"ios",
+                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                             @"page":@"100",
+                             @"p":@"1"};
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"errorMsg" view:self.view];
+        }
+        
+        NSArray *arr = [ArchiveDataListModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        self.dataProvider = [[NSMutableArray alloc] initWithArray:arr];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.dataProvider.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -83,9 +111,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ArchivesPersonCell *cell = [ArchivesPersonCell createCellWithTableView:tableView];
-    cell.titleLb.text = @"王大爷";
-    cell.subTitleLb.text = @"2016-11-16";
+    
+    ArchiveDataListModel *item = self.dataProvider[indexPath.section];
+
+    cell.titleLb.text = item.truename;
+    cell.subTitleLb.text = item.mobile;
     cell.badgeIcon.hidden = YES;
+    
+    NSURL *iconUrl = [NSURL URLWithString:item.avatar];
+    [cell.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"pc_user"]];
     
     return cell;
 }
@@ -108,20 +142,21 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    InterveneController *interveneVC = [[InterveneController alloc] init];
-    //    view.wid = model.wid;
-    //    [self.navigationController pushViewController:interveneVC animated:YES];
+    HealthArchiveViewController *healthArchiveVC = [[HealthArchiveViewController alloc] init];
+    healthArchiveVC.selectedListModel = self.dataProvider[indexPath.section];
+    healthArchiveVC.addArchive = NO;
+    [self.navigationController pushViewController:healthArchiveVC animated:YES];
 }
 
 #pragma mark button method
 
 -(void)scan
 {
-    ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
-    scanCodeVC.getcodeClick = ^(NSString *code){
-        [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
-    };
-    [self.navigationController pushViewController:scanCodeVC animated:YES];
+//    ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
+//    scanCodeVC.getcodeClick = ^(NSString *code){
+        [self addArchiveWhitCode:@"20161118151"];
+//    };
+//    [self.navigationController pushViewController:scanCodeVC animated:YES];
 
 }
 
@@ -130,5 +165,30 @@
     HealthArchiveViewController *vc = [[HealthArchiveViewController alloc] init];
     vc.addArchive = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+/**
+ 通过扫描二维码添加档案
+ */
+-(void)addArchiveWhitCode:(NSString *)code
+{
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                              @"fmno":code};
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        
+        [self loadArchiveDataList];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+
 }
 @end

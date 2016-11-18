@@ -43,13 +43,10 @@
     [[[EaseMob sharedInstance].chatManager loadAllConversationsFromDatabaseWithAppend2Chat:NO] mutableCopy];
     
     [self removeEmptyConversationsFromDB];
-    //[self tableViewDidTriggerHeaderRefresh];
-    
+    [self tableViewDidTriggerHeaderRefresh];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    
 }
 
 
@@ -190,12 +187,6 @@
     }
     return latestMessageTime;
 }
-
-
-
-
-
-
 
 //商家信息
 -(void)getBusinessData:(NSString *)member_name {

@@ -42,6 +42,12 @@
     return self;
 }
 
+-(void)loadView
+{
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

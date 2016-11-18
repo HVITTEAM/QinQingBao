@@ -859,6 +859,9 @@
 /***个人档案 - 新增档案*/
 #define URL_Add_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=add_fm&access_token=token",URL_Local_New]
 
+/***个人档案 - 根据档案NO进行档案绑定*/
+#define URL_Bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=bingding&access_token=token",URL_Local_New]
+
 /***个人档案 - 获取档案列表*/
 #define URL_Get_bingding_list [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_list&access_token=token",URL_Local_New]
 

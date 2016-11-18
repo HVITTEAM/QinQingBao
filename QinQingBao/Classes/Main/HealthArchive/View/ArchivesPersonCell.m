@@ -33,7 +33,7 @@
 {
     [super layoutSubviews];
     
-    self.imgView.layer.cornerRadius = self.imgView.width/2;
+    self.imgView.layer.cornerRadius = 45/2;
     self.imgView.layer.masksToBounds = YES;
 }
 

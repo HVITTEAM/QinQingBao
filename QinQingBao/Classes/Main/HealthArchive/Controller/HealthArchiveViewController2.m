@@ -297,30 +297,11 @@
     
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-//    NSDate *currentDate = [NSDate date];
-   
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
-//    formatter.timeZone = timeZone;
-//    formatter.locale = locale;
-//    NSDate *minDate = [formatter dateFromString:dateStr];
-    
-//    NSDateFormatter *formatter1 = [[NSDateFormatter alloc] init];
-//    formatter1.dateFormat = @"yyyy-MM-dd";
-//    formatter1.timeZone = timeZone;
-//    formatter1.locale = locale;
-    
-//    NSString *birthdayStr = self.datas[self.currentIdx.section][self.currentIdx.row][kContent];
-//    NSDate * birthdayDate = [formatter1 dateFromString:birthdayStr];
+
     
     self.datePicker.timeZone = timeZone;
     self.datePicker.locale = locale;
-//    self.datePicker.minimumDate = minDate;
-//    self.datePicker.maximumDate = currentDate;
     self.datePicker.datePickerMode = UIDatePickerModeTime;
-//    if (birthdayDate) {
-//        self.datePicker.date = birthdayDate;
-//    }
     
     [self.dateSelectView addSubview:self.datePicker];
     
@@ -364,17 +345,22 @@
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+    formatter.dateFormat = @"hh:mm";
     formatter.timeZone = timeZone;
     formatter.locale = locale;
+    formatter.dateStyle = kCFDateFormatterShortStyle;
+    formatter.timeStyle = kCFDateFormatterShortStyle;
+    
     NSString *birthday = [formatter stringFromDate:self.datePicker.date];
     
+    NSString *ftstr = [birthday componentsSeparatedByString:@" "][1];
+    
     NSLog(@"%@",self.datePicker.date);
-    NSLog(@"%@",birthday);
+    NSLog(@"%@",ftstr);
     
     NSMutableArray *sections = self.datas[self.currentIdx.section];
     NSMutableDictionary *item = sections[self.currentIdx.row];
-    item[kContent] = birthday;
+    item[kContent] = ftstr;
     [self.tableView reloadData];
     
     [self datePickerViewHide:nil];

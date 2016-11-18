@@ -75,45 +75,47 @@
 -(NSArray *)datas
 {
     if (!_datas) {
-        NSMutableDictionary *(^createItem)(NSString *content,NSString *title,NSString *placeHolder) = ^NSMutableDictionary *(NSString *content,NSString *title,NSString *placeHolder){
-            
-            NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
-            [item setValue:content forKey:kContent];
-            [item setValue:title forKey:kTitle];
-            [item setValue:placeHolder forKey:kPlaceHolder];
-            return item;
-        };
-        
-        NSMutableArray *section0 = [[NSMutableArray alloc] init];
-        [section0 addObject:createItem(@"",@"头像",@"")];
-        [section0 addObject:createItem(self.archiveData.truename,@"姓名",@"必填项")];
-        if (!self.isAddArchive) {
-            [section0 addObject:createItem(nil,@"档案二维码",nil)];
-        }
-        
-//        NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
-
-        [section0 addObject:createItem(self.archiveData.mobile,@"联系电话",@"必填项")];
-        [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"请选择")];
-        [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
-        
-        NSMutableArray *section1 = [[NSMutableArray alloc] init];
-        [section1 addObject:createItem(self.archiveData.height,@"身高",@"请填写")];
-        [section1 addObject:createItem(self.archiveData.weight,@"体重",@"请填写")];
-        [section1 addObject:createItem(self.archiveData.waistline,@"腰围",@"请填写")];
-        [section1 addObject:createItem(self.archiveData.systolicpressure,@"收缩压(mmhg)",@"请填写")];
-        [section1 addObject:createItem(self.archiveData.cholesterol,@"总胆固醇(mg/dl)",@"请填写")];
-        
-        NSMutableArray *section2 = [[NSMutableArray alloc] init];
-        [section2 addObject:createItem(self.archiveData.occupation,@"目前职业",@"请填写")];
-        [section2 addObject:createItem([ArchiveData numberToLivingcondition:[self.archiveData.livingcondition integerValue]],@"工作生活状态",@"请填写")];
-        [section2 addObject:createItem(self.archiveData.email,@"电子邮箱",@"请填写")];
-        [section2 addObject:createItem(self.archiveData.address,@"联系地址",@"请填写")];
-
-        
-        self.datas = @[section0,section1,section2];
+        _datas = [self setDatasArray];
     }
     return _datas;
+}
+
+- (NSArray *)setDatasArray
+{
+    NSMutableDictionary *(^createItem)(NSString *content,NSString *title,NSString *placeHolder) = ^NSMutableDictionary *(NSString *content,NSString *title,NSString *placeHolder){
+        
+        NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
+        [item setValue:content forKey:kContent];
+        [item setValue:title forKey:kTitle];
+        [item setValue:placeHolder forKey:kPlaceHolder];
+        return item;
+    };
+    
+    NSMutableArray *section0 = [[NSMutableArray alloc] init];
+    [section0 addObject:createItem(@"",@"头像",@"")];
+    [section0 addObject:createItem(self.archiveData.truename,@"姓名",@"必填项")];
+    if (!self.isAddArchive) {
+        [section0 addObject:createItem(nil,@"档案二维码",nil)];
+    }
+    
+    [section0 addObject:createItem(self.archiveData.mobile,@"联系电话",@"必填项")];
+    [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"请选择")];
+    [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
+    
+    NSMutableArray *section1 = [[NSMutableArray alloc] init];
+    [section1 addObject:createItem(self.archiveData.height,@"身高",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.weight,@"体重",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.waistline,@"腰围",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.systolicpressure,@"收缩压(mmhg)",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.cholesterol,@"总胆固醇(mg/dl)",@"请填写")];
+    
+    NSMutableArray *section2 = [[NSMutableArray alloc] init];
+    [section2 addObject:createItem(self.archiveData.occupation,@"目前职业",@"请填写")];
+    [section2 addObject:createItem([ArchiveData numberToLivingcondition:[self.archiveData.livingcondition integerValue]],@"工作生活状态",@"请填写")];
+    [section2 addObject:createItem(self.archiveData.email,@"电子邮箱",@"请填写")];
+    [section2 addObject:createItem(self.archiveData.address,@"联系地址",@"请填写")];
+    
+    return @[section0,section1,section2];
 }
 
 #pragma mark - UITableViewDataSource
@@ -156,10 +158,10 @@
             
         }else{
             imageView.width = 50;
+            imageView.layer.cornerRadius = imageView.height/2;
             imageView.image = self.portraitImage?:[UIImage imageNamed:@"placeholderImage"];
         }
         imageView.height = imageView.width;
-        imageView.layer.cornerRadius = imageView.height/2;
         return portraitCell;
         
     }else{
@@ -673,6 +675,7 @@
         self.archiveData.badhabits = archive.habits.badhabits;
         self.archiveData.hremark = archive.habits.hremark;
         
+        self.datas = [self setDatasArray];
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

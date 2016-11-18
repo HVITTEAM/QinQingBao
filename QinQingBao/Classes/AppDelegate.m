@@ -92,13 +92,16 @@
     
     [JPUSHService setupWithOption:launchOptions appKey:@"acfe90ae99f621a1ea5b0e04" channel:@"" apsForProduction:YES];
     
-    //    [Bugtags startWithAppKey:@"0024657878877c9f392509bc6482a667" invocationEvent:BTGInvocationEventBubble];
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"hvit#familyprotect" apnsCertName:@"istore_dev"];
+    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [self setShareSDK];
     
     // 获取appStore版本号  最后一串数字就是当前app在AppStore上面的唯一id
     NSString *url = [[NSString alloc] initWithFormat:@"http://itunes.apple.com/lookup?id=%@",APPID];
     [self Postpath:url];
+    
+    
     
     return YES;
 }
@@ -258,7 +261,8 @@
  */
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    
+    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
+
 }
 
 /**
@@ -271,6 +275,15 @@
     //消除BadgeNumber
     [JPUSHService setBadge:0];
     application.applicationIconBadgeNumber = 0;
+    
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
+
+}
+
+// 申请处理时间
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
 
 /**

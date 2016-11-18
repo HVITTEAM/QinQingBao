@@ -91,12 +91,7 @@
     [rightBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
-    UIButton *reportBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 17)];
-    [reportBtn addTarget:self action:@selector(reportListView) forControlEvents:UIControlEventTouchUpInside];
-    [reportBtn setBackgroundImage:[UIImage imageNamed:@"reportList_icon"] forState:UIControlStateNormal];
-    [reportBtn setBackgroundImage:[UIImage imageNamed:@"reportList_icon"] forState:UIControlStateHighlighted];
-    UIBarButtonItem *reportItem = [[UIBarButtonItem alloc] initWithCustomView:reportBtn];
-    self.navigationItem.rightBarButtonItems = @[rightButton,reportItem];
+    self.navigationItem.rightBarButtonItems = @[rightButton];
 }
 
 /**

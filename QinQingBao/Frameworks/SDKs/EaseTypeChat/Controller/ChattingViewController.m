@@ -17,6 +17,8 @@
 #import "EaseRecordView.h"
 #import "BusinessDataCenter.h"
 
+
+#import "EaseHandler.h"
 @interface ChattingViewController ()<EaseMessageViewControllerDelegate,EaseMessageViewControllerDataSource,UIAlertViewDelegate>
 {
     UIMenuItem *_copyMenuItem;
@@ -51,14 +53,12 @@
     return self;
 }
 
-
-
-
 #pragma mark --- rightBarButtonItem
 -(void)createRightBarButtonItem {
     UIBarButtonItem *clear = [[UIBarButtonItem alloc]initWithTitle:@"清空" style:UIBarButtonItemStyleDone target:self action:@selector(deleteAllMessages:)];
     self.navigationItem.rightBarButtonItem = clear;
 }
+
 
 - (void)deleteAllMessages:(id)sender
 {
@@ -126,6 +126,13 @@
 #pragma mark --- 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"寸欣健康顾问";
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+    //注册并登录当前用户
+    EaseHandler *handler = [[EaseHandler alloc] init];
+    [handler registerAndLoginEase:[NSString stringWithFormat:@"qqb%@",[SharedAppUtil defaultCommonUtil].userVO.member_id]];
+    
     self.delegate = self;
     self.dataSource = self;
     self.showRefreshHeader = YES;
@@ -154,7 +161,7 @@
     [EaseBaseMessageCell appearance].avatarCornerRadius = 20;
     
     //[EaseChatBarMoreView appearance].moreViewBackgroundColor = [UIColor colorWithRed:240 green:242 blue:247 alpha:1];
-    [[EaseChatBarMoreView appearance] setMoreViewBackgroundColor:[UIColor colorWithRed:240/255.0 green:242/255.0 blue:247/255.0 alpha:1.0]];
+    [[EaseChatBarMoreView appearance] setMoreViewBackgroundColor:[UIColor whiteColor]];
     //消息处理
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteAllMessages:) name:KNOTIFICATIONNAME_DELETEALLMESSAGE object:nil];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitGroup) name:@"ExitGroup" object:nil];
@@ -434,32 +441,4 @@
                                      [self.view endEditing:YES];
                                  }];
 }
-////商家信息
-//-(void)getBusinessData {
-//    NSString *businessPath = [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid",URL_Local];
-//    //NSString *businessPath = @"http://172.16.13.53/ylserver/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid&member_id=4008";
-//    NSLog(@"%@",self.servicrItemMdodel.member_id);
-//    [CommonRemoteHelper RemoteWithUrl:businessPath parameters:@{@"member_id" : self.servicrItemMdodel.member_id}
-//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-//                                     id codeNum = [dict objectForKey:@"code"];
-//                                     if ([codeNum isKindOfClass:[NSString class]]) {
-//                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-//                                         [alertView show];
-//                                         [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-//                                     }else {
-//                                         NSDictionary *di = [dict objectForKey:@"datas"];
-//                                         if ([di count] != 0) {
-//                                             self.businessInfoModel = [BusinessInfoModel businessInfo:dict];
-//                                         }else {
-//                                             [NoticeHelper AlertShow:@"商家资料为空!" view:self.view];
-//                                             NSLog(@"【商家信息】%@",self.businessInfoModel);
-//                                         }
-//                                     }
-//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                     NSLog(@"发生错误！%@",error);
-//                                     [self.view endEditing:YES];
-//                                 }];
-//}
-
-
 @end
