@@ -33,4 +33,6 @@
 
 @property (nonatomic, strong) ACHabitsModel *habits;
 
+@property (nonatomic, strong) NSArray *medical_report;
+
 @end

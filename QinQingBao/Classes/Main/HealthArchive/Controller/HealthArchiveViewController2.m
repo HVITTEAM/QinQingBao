@@ -374,7 +374,12 @@
 {
     [self.view endEditing:YES];
     
-    self.archiveData.smoke = [NSString stringWithFormat:@"%d",(int)[ArchiveData smokeToNumber:self.datas[0][0][kContent]]];
+    NSString *smoke = self.datas[0][0][kContent];
+    if (smoke.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择抽烟习惯" view:nil];
+    }
+    
+    self.archiveData.smoke = [NSString stringWithFormat:@"%d",(int)[ArchiveData smokeToNumber:smoke]];
     self.archiveData.drink = [NSString stringWithFormat:@"%d",(int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]]];
     
     self.archiveData.sleeptime = self.datas[1][1][kContent];

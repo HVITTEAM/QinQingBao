@@ -42,4 +42,6 @@
 
 @property (nonatomic, copy) NSString *bremark;
 
+@property (nonatomic, copy) NSString *avatar;
+
 @end
