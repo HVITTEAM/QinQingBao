@@ -152,11 +152,11 @@
 
 -(void)scan
 {
-//    ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
-//    scanCodeVC.getcodeClick = ^(NSString *code){
-        [self addArchiveWhitCode:@"20161118151"];
-//    };
-//    [self.navigationController pushViewController:scanCodeVC animated:YES];
+    ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
+    scanCodeVC.getcodeClick = ^(NSString *code){
+        [self addArchiveWhitCode:code];
+    };
+    [self.navigationController pushViewController:scanCodeVC animated:YES];
 
 }
 
