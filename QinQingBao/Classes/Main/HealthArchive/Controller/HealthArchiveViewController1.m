@@ -67,9 +67,12 @@
         };
         
         NSMutableArray *section0 = [[NSMutableArray alloc] init];
-        [section0 addObject:createItem(self.archiveData.diabetes,@"是否患有糖尿病",@"")];
+        //设置默认值
+        NSString *diabetes = self.archiveData.diabetes.length!=0?self.archiveData.diabetes:@"0";
+        NSString *hereditarycardiovascular = self.archiveData.hereditarycardiovascular.length!=0?self.archiveData.hereditarycardiovascular:@"0";
+        [section0 addObject:createItem(diabetes,@"是否患有糖尿病",@"")];
         [section0 addObject:createItem(self.archiveData.medicalhistory,@"其它既往病史",@"请填写")];
-        [section0 addObject:createItem(self.archiveData.hereditarycardiovascular,@"父母亲是否有心血管病史",@"")];
+        [section0 addObject:createItem(hereditarycardiovascular,@"父母亲是否有心血管病史",@"")];
         [section0 addObject:createItem(self.archiveData.geneticdisease,@"其它家族病史",@"请填写")];
         [section0 addObject:createItem(self.archiveData.physicalcondition,@"当前身体情况",@"请填写")];
         [section0 addObject:createItem(self.archiveData.events,@"个人健康方面的重大事件",@"请填写")];
@@ -189,7 +192,8 @@
 -(void)next:(UIButton *)sender
 {
     [self.view endEditing:YES];
-    
+
+    //糖尿病,心血管病史必填,默认是0
     self.archiveData.diabetes = self.datas[0][0][kContent];
     self.archiveData.medicalhistory = self.datas[0][1][kContent];
     self.archiveData.hereditarycardiovascular = self.datas[0][2][kContent];

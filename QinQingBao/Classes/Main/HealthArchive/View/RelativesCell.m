@@ -22,6 +22,7 @@
     
     self.imgView.layer.borderColor = [UIColor colorWithRGB:@"f7931e"].CGColor;
     self.imgView.layer.borderWidth = 0.0f;
+    self.imgView.layer.masksToBounds = YES;
 }
 
 - (void)updateConstraints

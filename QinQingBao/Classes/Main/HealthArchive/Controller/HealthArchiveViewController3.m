@@ -40,6 +40,9 @@
                 [self.archiveData.reportPhotos removeObjectAtIndex:i];
             }
         }
+    }else{
+        //加载服务器上的图片地址
+        [_dataProvider addObjectsFromArray:self.archiveData.medical_report];
     }
     
     takePhotoimg = [UIImage imageNamed:@"uploadimg.png"];
@@ -128,12 +131,27 @@
 //每个UICollectionView展示的内容
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     //重用cell
     ReportCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTReportCollectionViewCell" forIndexPath:indexPath];
     
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:100];
-    imageView.image = self.dataProvider[indexPath.section*3 + indexPath.row];
+    
+    NSInteger index = indexPath.section*3 + indexPath.row;
+    id pic = self.dataProvider[index];
+    if ([pic isKindOfClass:[UIImage class]]) {
+        imageView.image = pic;
+    }else{
+        
+        [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:pic?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image) {
+                [weakSelf.dataProvider replaceObjectAtIndex:index withObject:image];
+            }
+        }];
+    }
+    
+    //删除图片
     imageView.userInteractionEnabled = YES;
     cell.idxPath = indexPath;
     UIButton *delBtn = (UIButton *)[cell viewWithTag:90];
@@ -141,16 +159,17 @@
     if ((self.dataProvider.count - 1) == (indexPath.section*3 + indexPath.row)) {
         delBtn.hidden = YES;
     }
-    __weak typeof(self) weakSelf = self;
+    
     cell.deleteImageBlock = ^(NSIndexPath *idx){
         [weakSelf.dataProvider removeObjectAtIndex:(idx.section * 3 + idx.row)];
-        if (self.isAddArchive) {
+        if (weakSelf.isAddArchive) {
+            //删除缓存的图片
             NSString *imagePath = weakSelf.archiveData.reportPhotos[idx.section * 3 + idx.row];
             [ArchiveData deletePicFromDocumentWithPicPath:imagePath];
             [weakSelf.archiveData.reportPhotos removeObjectAtIndex:idx.section * 3 + idx.row];
             [weakSelf.archiveData saveArchiveDataToFile];
         }
-
+        
         [weakSelf.colectView reloadData];
     };
     return cell;
@@ -316,6 +335,10 @@
         return;
     }
     
+    if (!self.isAddArchive) { //修改
+        return;
+    }
+    
     NSMutableDictionary *params = [@{
                                      @"client":@"ios",
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key
@@ -332,6 +355,7 @@
     params[@"mobile"] = self.archiveData.mobile;
     params[@"email"] = self.archiveData.email;
     params[@"address"] = self.archiveData.address;
+    params[@"area_id"] = self.archiveData.area_id;
     params[@"occupation"] = self.archiveData.occupation;
     params[@"livingcondition"] = self.archiveData.livingcondition;
     params[@"units"] = self.archiveData.units;
@@ -346,20 +370,55 @@
     params[@"geneticdisease"] = self.archiveData.geneticdisease;
     params[@"dremark"] = self.archiveData.dremark;
     
+    
     params[@"smoke"] = self.archiveData.smoke;
     params[@"drink"] = self.archiveData.drink;
-    
-    NSError *error;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.diet options:0 error:&error];
-    params[@"diet"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if (self.archiveData.diet) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.diet options:0 error:&error];
+        params[@"diet"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
     params[@"sleeptime"] = self.archiveData.sleeptime;
     params[@"getuptime"] = self.archiveData.getuptime;
     params[@"sports"] = self.archiveData.sports;
     params[@"badhabits"] = self.archiveData.badhabits;
     params[@"hremark"] = self.archiveData.hremark;
+    params[@"sys"] = @"2";
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    //医诊图片
+    NSMutableArray *tempArrays = [[NSMutableArray alloc] init];
+    NSMutableDictionary *tempDict = nil;
+    for (int i = 0; i < self.dataProvider.count - 1; i++) {
+        if ([self.dataProvider[i] isKindOfClass:[NSString class]]) {
+            return;
+        }
+        tempDict = [[NSMutableDictionary alloc] init];
+        tempDict[@"name"] = [NSString stringWithFormat:@"medical_report_%d",i+1];
+        tempDict[@"fileName"] = [NSString stringWithFormat:@"medical_report_%@_%d.jpg",currentDateStr,i];
+        tempDict[@"mimeType"] = @"image/jpeg";
+        UIImage *tempImage = self.dataProvider[i];
+        NSData *data = UIImageJPEGRepresentation(tempImage, 0.3f);
+        tempDict[@"fileData"] = data;
+        [tempArrays addObject:tempDict];
+    }
+    //头像数据
+    if (self.archiveData.avatarImage) {
+        tempDict = [[NSMutableDictionary alloc] init];
+        tempDict[@"name"] = @"avatar";
+        tempDict[@"fileName"] = [NSString stringWithFormat:@"basic_avatar_%@.jpg",currentDateStr];
+        tempDict[@"mimeType"] = @"image/jpeg";
+        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.3f);
+        tempDict[@"fileData"] = data;
+        [tempArrays addObject:tempDict];
+    }
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Add_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    
+    [CommonRemoteHelper UploadPicWithUrl:URL_Add_fm parameters:params images:tempArrays success:^(NSDictionary *dict, id responseObject) {
+        
         [hud removeFromSuperview];
         
         if([dict[@"code"] integerValue] != 0){
@@ -371,7 +430,6 @@
         if (self.isAddArchive) {
             [self.archiveData deleteArchiveData];
         }
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];

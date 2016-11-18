@@ -72,11 +72,25 @@
 /**备注***/
 @property (nonatomic, copy) NSString *hremark;
 
-/**报告图片路径***/
+/**报告图片路径,新建时候的本地缓存路径***/
 @property (nonatomic, copy) NSMutableArray *reportPhotos;
 
-/**头像路径***/
+/**头像路径,新建时候的本地缓存路径***/
 @property (nonatomic, copy) NSString *portraitPic;
+
+/**头像路径,查看时候使用,服务器上的头像图片***/
+@property (nonatomic, copy) NSString *avatar;
+
+/**报告图片路径,查看时候使用,服务器上***/
+@property (nonatomic, copy) NSArray *medical_report;
+
+/**头像***/
+@property (nonatomic, copy) UIImage *avatarImage;
+
+@property (nonatomic, copy) NSString *area_id;
+
+
+
 
 - (void)saveArchiveDataToFile;
 - (void)deleteArchiveData;
