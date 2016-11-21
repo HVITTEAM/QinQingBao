@@ -862,6 +862,9 @@
 /***个人档案 - 根据档案NO进行档案绑定*/
 #define URL_Bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=bingding&access_token=token",URL_Local_New]
 
+/***个人档案 - 根据档案NO进行档案解除绑定*/
+#define URL_Un_bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=un_bingding&access_token=token",URL_Local_New]
+
 /***个人档案 - 获取档案列表*/
 #define URL_Get_bingding_list [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_list&access_token=token",URL_Local_New]
 

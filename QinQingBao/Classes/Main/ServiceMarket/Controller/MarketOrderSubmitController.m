@@ -180,26 +180,26 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 45;
-    }
+//    if (section == 0) {
+//        return 45;
+//    }
     return 10;
 }
 
 -(UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if (section == 0) {
-        __weak typeof (self) weakSelf = self;
-      ExtendFooterView *v = [[ExtendFooterView alloc] initWithTitle:@"查看详情" extendTitle:@"收起详情" imageName:@"arrowdown" extend:self.isExtend section:section];
-        v.extendFooterViewTapCallBack = ^(NSInteger section, BOOL extend){
-            weakSelf.isExtend = extend;
-            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            [self setBottomViewPosition];
-        };
-        return v;
-    }
-    
+//    if (section == 0) {
+//        __weak typeof (self) weakSelf = self;
+//      ExtendFooterView *v = [[ExtendFooterView alloc] initWithTitle:@"查看详情" extendTitle:@"收起详情" imageName:@"arrowdown" extend:self.isExtend section:section];
+//        v.extendFooterViewTapCallBack = ^(NSInteger section, BOOL extend){
+//            weakSelf.isExtend = extend;
+//            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            
+//            [self setBottomViewPosition];
+//        };
+//        return v;
+//    }
+//    
     return nil;
 }
 
@@ -248,11 +248,11 @@
     if (self.customInfo.tel.length <= 0)
         return [NoticeHelper AlertShow:@"请填写地址" view:self.view];
     
-    if (self.customInfo.email.length <= 0)
-        return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
-    
-    if (self.customInfo.areainfo.length <= 0)
-        return [NoticeHelper AlertShow:@"请填写有效地址" view:self.view];
+//    if (self.customInfo.email.length <= 0)
+//        return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
+//    
+//    if (self.customInfo.areainfo.length <= 0)
+//        return [NoticeHelper AlertShow:@"请填写有效地址" view:self.view];
     
     NSDate *cDate = [NSDate date];
     NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
