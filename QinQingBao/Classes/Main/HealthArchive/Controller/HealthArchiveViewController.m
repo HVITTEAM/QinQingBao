@@ -707,14 +707,12 @@
         
         self.archiveData.smoke = archive.habits.smoke;
         self.archiveData.drink = archive.habits.drink;
-#warning 这个还没搞
-//        NSLog(@"%@",dict);
-//        
-//        NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
-//        
-//      NSArray *a = [NSJSONSerialization objectArrayWithJSONData:jsonData];
-//        self.archiveData.diet = archive.habits.diet;
-        
+
+        NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
+        id temArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
+        if (temArr && [temArr isKindOfClass:[NSArray class]]) {
+            self.archiveData.diet = temArr;
+        }
         self.archiveData.sleeptime = archive.habits.sleeptime;
         self.archiveData.getuptime = archive.habits.getuptime;
         self.archiveData.sports = archive.habits.sports;
