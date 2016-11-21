@@ -188,8 +188,9 @@
             
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                NSString *dietStr = [NSString stringWithFormat:@"%d",(int)[ArchiveData dietToNumber:(NSString *)obj]];
-                [tempArray addObject:dietStr];
+//                NSString *dietStr = [NSString stringWithFormat:@"%d",];
+                NSInteger code = [ArchiveData dietToNumber:(NSString *)obj];
+                [tempArray addObject:@(code)];
             }];
             weakSelf.archiveData.diet = tempArray;
             weakSelf.datas[0][2][kContent] = [selectedItems componentsJoinedByString:@","];
