@@ -143,19 +143,19 @@
             case 0:
                 typeCell.headImg.image = [UIImage imageNamed:@"zxzx.png"];
                 typeCell.titleLab.text = @"健康评估";
-                typeCell.subtitleLab.text = @"健康评估";
+                typeCell.subtitleLab.text = @"在线评估您的身体健康状况";
                 typeCell.badgeView.hidden = YES;
                 break;
             case 1:
                 typeCell.headImg.image = [UIImage imageNamed:@"jkpg.png"];
                 typeCell.titleLab.text = @"检测报告";
-                typeCell.subtitleLab.text = @"检测报告";
+                typeCell.subtitleLab.text = @"在线查看检测报告和报告解读";
                 typeCell.badgeView.hidden = !newWP;
                 break;
             case 2:
                 typeCell.headImg.image = [UIImage imageNamed:@"gyfa.png"];
                 typeCell.titleLab.text = @"干预方案";
-                typeCell.subtitleLab.text = @"干预方案";
+                typeCell.subtitleLab.text = @"为您量身定制健康干预方案";
                 typeCell.badgeView.hidden = !newWI;
                 break;
                 
@@ -196,7 +196,7 @@
     }else if (indexPath.section == 0 && indexPath.row == 1){
         return [ArchivesCell cellHeight];
     }else if(indexPath.section == 1){
-        return 70;
+        return 80;
     }else{
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height + 30;
