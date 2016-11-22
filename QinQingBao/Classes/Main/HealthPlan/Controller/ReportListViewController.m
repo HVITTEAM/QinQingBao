@@ -7,16 +7,15 @@
 //
 
 #import "ReportListViewController.h"
-#import "ReportListCell.h"
+#import "ArchivesPersonCell.h"
 #import "ReportDetailViewController.h"
-#import "InterveneModel.h"
 #import "ReportInterventionModel.h"
+
+#import "PersonReportListViewController.h"
 
 @interface ReportListViewController ()
 
 @property (strong, nonatomic) NSMutableArray *dataProvider;
-
-@property (assign, nonatomic) NSInteger p;   //分页号
 
 @property (assign, nonatomic) BOOL isfirst;   //是否第一次加载网络数据
 
@@ -37,7 +36,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"检测报告";
-    self.p = 1;
     self.isfirst = YES;
     
     self.tableView.backgroundColor = [UIColor colorWithRGB:@"f5f5f5"];
@@ -56,31 +54,58 @@
 }
 
 #pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    return self.dataProvider.count;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataProvider.count;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ReportListCell *cell = [ReportListCell createCellWithTableView:tableView];
-    InterveneModel *item = self.dataProvider[indexPath.row];
-    cell.item = item;
+    ArchivesPersonCell *cell = [ArchivesPersonCell createCellWithTableView:tableView];
+    ReportInterventionModel *item = self.dataProvider[indexPath.section];
+    cell.titleLb.text = [item.basics objectForKey:@"truename"];
+    cell.subTitleLb.text = item.wi_read_time;
+    cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
+#pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 85;
+    return 70;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
-    InterveneModel *item = self.dataProvider[indexPath.row];
-    VC.urlstr = item.advice_report;
+    //    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
+    //    InterveneModel *item = self.dataProvider[indexPath.row];
+    //    VC.urlstr = item.advice_report;
+    //    [self.navigationController pushViewController:VC animated:YES];
+    
+    PersonReportListViewController *VC =[[PersonReportListViewController alloc] init];
+    ReportInterventionModel *item = self.dataProvider[indexPath.section];
+    VC.fmno = item.fmno;
+    VC.title = [item.basics objectForKey:@"truename"];
     [self.navigationController pushViewController:VC animated:YES];
+    
 }
 
 #pragma mark - 网络相关
@@ -99,12 +124,8 @@
         return;
     
     NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-//                                     @"p": @(self.p),
-//                                     @"page":@(10),
                                      @"client":@"ios"
                                      }mutableCopy];
-//    params[@"wid"] = self.wid;
-
     if (self.isfirst) {
         self.isfirst = NO;
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -127,7 +148,6 @@
         if (datas.count > 0)
         {
             [self.dataProvider addObjectsFromArray:datas];
-            self.p++;
             //设置数据
             [self.tableView reloadData];
         }

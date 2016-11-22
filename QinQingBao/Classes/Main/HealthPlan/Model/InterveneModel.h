@@ -33,6 +33,12 @@
 @property (nonatomic, copy) NSString *item_url_big;
 @property (nonatomic, copy) NSString *wname;
 
+@property (nonatomic, copy) NSString *wp_advice_sleeping;
+@property (nonatomic, copy) NSString *wp_advice_health;
+@property (nonatomic, copy) NSString *wp_advice_envir;
+@property (nonatomic, copy) NSString *wp_advice_mental;
+
+
 @property (nonatomic, copy) NSString *wtelnum;
 @property (nonatomic, copy) NSString *waddress;
 @property (nonatomic, copy) NSString *totalname;

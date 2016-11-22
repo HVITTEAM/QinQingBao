@@ -119,7 +119,7 @@
     
     if (self.relativesArr.count == 0 || indexPath.row == self.relativesArr.count) {
         cell.titleLb.text = @"新增";
-        cell.imgView.image = [UIImage imageNamed:@"placeholder-3"];
+        cell.imgView.image = [UIImage imageNamed:@"add.png"];
         cell.titleLb.textColor = [UIColor colorWithRGB:@"999999"];
         //不显示描边
         cell.showBorderLine = NO;
@@ -127,7 +127,7 @@
     }else{
         ArchiveDataListModel * model = self.relativesArr[indexPath.item];
         cell.titleLb.text = model.truename;
-        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"placeholder-0"]];
+        [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"pc_user.png"]];
         cell.titleLb.textColor = [UIColor colorWithRGB:@"666666"];
         
         //设置描边

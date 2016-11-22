@@ -17,8 +17,6 @@
 
 @property (strong, nonatomic) NSMutableArray *dataProvider;
 
-@property (assign, nonatomic) NSInteger p;   //分页号
-
 @property (assign, nonatomic) BOOL isfirst;   //是否第一次加载网络数据
 
 @end
@@ -36,7 +34,6 @@
 {
     [super viewDidLoad];
     
-    self.p = 1;
     self.isfirst = YES;
     
     self.navigationItem.title = @"干预方案";
@@ -75,9 +72,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ArchivesPersonCell *cell = [ArchivesPersonCell createCellWithTableView:tableView];
-    cell.titleLb.text = @"王大爷";
-    cell.subTitleLb.text = @"2016-11-16";
-    cell.badgeIcon.hidden = NO;
+    ReportInterventionModel *item = self.dataProvider[indexPath.section];
+    cell.titleLb.text = [item.basics objectForKey:@"truename"];
+    cell.subTitleLb.text = item.wi_read_time;
+    cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
     
     return cell;
 }
@@ -100,9 +98,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    InterveneController *interveneVC = [[InterveneController alloc] init];
-    //    view.wid = model.wid;
-    //    [self.navigationController pushViewController:interveneVC animated:YES];
+    InterveneController *interveneVC = [[InterveneController alloc] init];
+    ReportInterventionModel *item = self.dataProvider[indexPath.section];
+    interveneVC.fmno = item.fmno;
+    [self.navigationController pushViewController:interveneVC animated:YES];
 }
 
 #pragma mark - 服务器相关
@@ -139,14 +138,13 @@
         }
         else  if ([dict[@"code"] integerValue] != 0)
         {
-            return [self.tableView initWithPlaceString:@"您当前没有检测报告" imgPath:@"placeholder-1"];
+            return [self.tableView initWithPlaceString:@"您当前没有干预方案" imgPath:@"placeholder-1"];
         }
         
         NSArray *datas = [ReportInterventionModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         if (datas.count > 0)
         {
             [self.dataProvider addObjectsFromArray:datas];
-            self.p++;
             //设置数据
             [self.tableView reloadData];
         }

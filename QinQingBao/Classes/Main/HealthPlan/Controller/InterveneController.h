@@ -14,4 +14,7 @@
 //工单id
 @property (nonatomic, copy) NSString *wid;
 
+//档案id
+@property (nonatomic, copy) NSString *fmno;
+
 @end

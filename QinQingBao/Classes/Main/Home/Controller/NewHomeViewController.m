@@ -62,7 +62,7 @@
     self.vc3.parentVC = self;
     self.vc3.title = @"报告";
    
-    self.viewArr = [NSMutableArray arrayWithObjects:self.vc1,self.vc2,self.vc3,nil];
+    self.viewArr = [NSMutableArray arrayWithObjects:self.vc2,self.vc1,nil];
 }
 
 /**

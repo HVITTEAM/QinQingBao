@@ -12,9 +12,9 @@
 
 @property (nonatomic, copy) NSString *fmno;
 @property (nonatomic, retain) NSArray *wp_read;
-@property (nonatomic, copy) NSString *wi_read;
+@property (nonatomic, retain) NSArray *wi_read;
 @property (nonatomic, copy) NSString *wp_read_time;
 @property (nonatomic, copy) NSString *wi_read_time;
 @property (nonatomic, copy) NSString *fm_bid;
-@property (nonatomic, copy) NSString *basics;
+@property (nonatomic, retain) NSDictionary *basics;
 @end

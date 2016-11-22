@@ -106,7 +106,7 @@
                                      NSArray *arr = @[];;
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
-                                        
+                                         
                                      }
                                      else
                                      {
@@ -195,11 +195,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    CommonPlanModel *model = dataProvider[indexPath.section];
-//    InterveneController *view = [[InterveneController alloc] init];
-//    view.wid = model.wid;
-//    [self.navigationController pushViewController:view animated:YES];
- }
+    //    CommonPlanModel *model = dataProvider[indexPath.section];
+    //    InterveneController *view = [[InterveneController alloc] init];
+    //    view.wid = model.wid;
+    //    [self.navigationController pushViewController:view animated:YES];
+}
 
 -(void)showPlaceholderview
 {

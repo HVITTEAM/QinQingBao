@@ -34,8 +34,6 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *healthCommunityDatas;    //健康圈数据
-
 @property (strong, nonatomic) NSArray *advDatas;     //轮播图数据
 
 @end
@@ -46,8 +44,6 @@
     [super viewDidLoad];
     
     [self setupUI];
-    
-    [self loadCirclelist];
     
     [self getAdvertisementpic];
 }
@@ -89,15 +85,6 @@
         [weakSelf onClickImage:idx];
     };
     tbv.tableHeaderView = loopView;
-}
-
-- (NSArray *)healthCommunityDatas
-{
-    if (!_healthCommunityDatas) {
-        _healthCommunityDatas = [[NSArray alloc] init];
-    }
-    
-    return _healthCommunityDatas;
 }
 
 #pragma mark - UITableViewDataSource
@@ -147,7 +134,7 @@
             mapCell.selectionStyle = UITableViewCellSelectionStyleNone;
             mapCell.layoutMargins = UIEdgeInsetsZero;
             UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 90)];
-            img.image = [UIImage imageNamed:@"logo"];
+            img.image = [UIImage imageNamed:@"采集网点.png"];
             [mapCell.contentView addSubview:img];
         }
         
@@ -196,30 +183,41 @@
                 [weakSelf.navigationController pushViewController:marketListVC animated:YES];
             };
         }else{
-            //健康圈
-            if (self.healthCommunityDatas.count > 4) {
-                menuCell.shouldShowIndicator = YES;
-                menuCell.margin = UIEdgeInsetsMake(10, 10, 0, 10);
-            }else{
-                menuCell.shouldShowIndicator = NO;
-                menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
-            }
+            
+            menuCell.shouldShowIndicator = NO;
+            menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
             
             NSMutableArray *ar = [[NSMutableArray alloc] init];
-            for (int i = 0; i < self.healthCommunityDatas.count; i++) {
-                CircleModel *model = self.healthCommunityDatas[i];
+            for (int i = 0; i < 4; i++)
+            {
                 NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-                dict[KScrollMenuTitle] = model.name;
-                dict[KScrollMenuImg] = model.avatar;
+                switch (i) {
+                    case 0:
+                        dict[KScrollMenuTitle] = @"专项运动";
+                        dict[KScrollMenuImg] = @"d1.png";
+                        break;
+                    case 1:
+                        dict[KScrollMenuTitle] = @"饮食调养";
+                        dict[KScrollMenuImg] = @"d2.png";
+                        break;
+                    case 2:
+                        dict[KScrollMenuTitle] =  @"心理干预";
+                        dict[KScrollMenuImg] = @"d3.png";
+                        break;
+                    case 3:
+                        dict[KScrollMenuTitle] =  @"自然疗法";
+                        dict[KScrollMenuImg] = @"d4.png";
+                        break;
+                    default:
+                        break;
+                }
+                
                 [ar addObject:dict];
             }
             
             menuCell.datas = ar;
             menuCell.selectMenuItemCallBack = ^(NSInteger idx){
-                CircleModel *model = weakSelf.healthCommunityDatas[idx];
-                CommunityViewController *communityVC = [[CommunityViewController alloc] init];
-                communityVC.circleModel = model;
-                [weakSelf.navigationController pushViewController:communityVC animated:YES];
+                [NoticeHelper AlertShow:@"暂未开通" view:nil];
             };
         }
         cell = menuCell;
@@ -237,11 +235,7 @@
     }else if (indexPath.section == 1){
         return 90;
     }else {
-        if (self.healthCommunityDatas.count > 4) {
-            return 110;
-        }else{
-            return 90;
-        }
+        return 90;
     }
 }
 
@@ -258,36 +252,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MapViewController *map = [[MapViewController alloc] init];
-//    map.address = [NSString stringWithFormat:@"%@%@",_itemInfo.totalname,_itemInfo.orgaddress];;
-//    map.latitude = _itemInfo.orglat;
-//    map.longitude = _itemInfo.orglon;
+    //    map.address = [NSString stringWithFormat:@"%@%@",_itemInfo.totalname,_itemInfo.orgaddress];;
+    //    map.latitude = _itemInfo.orglat;
+    //    map.longitude = _itemInfo.orglon;
     [self presentViewController:map animated:YES completion:nil];
 }
 
 #pragma mark - 网络相关
-/**
- * 获取健康圈数据
- **/
-- (void)loadCirclelist
-{
-    NSDictionary *params = @{
-                             @"circleid":@"38"
-                             };
-    
-    [CommonRemoteHelper RemoteWithUrl:URL_Circle parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:@"出错" view:nil];
-            return;
-        }
-        
-        self.healthCommunityDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
-        [self.tableView reloadData];
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    }];
-}
 
 /**
  * 获取轮播图片

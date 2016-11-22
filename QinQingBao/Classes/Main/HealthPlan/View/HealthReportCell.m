@@ -80,7 +80,7 @@
 {
     UIView *view = [[UIView alloc] init];
     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
-    icon.image  = [UIImage imageNamed:@"pc_user.png"];
+    icon.image  = [UIImage imageNamed:@"report.png"];
     [view addSubview:icon];
     
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 8, 120, 20)];

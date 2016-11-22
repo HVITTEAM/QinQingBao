@@ -394,32 +394,32 @@
         return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
     }
     
-    NSString *address = section0[2][kContent];
-    if (address.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
-    }
-    
-    NSString  *email = section0[3][kContent];
-    if (email.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
-    }
-    if (![self validatePhoneNumOrEmail:email type:2]) {
-        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
-    }
+//    NSString *address = section0[2][kContent];
+//    if (address.length == 0) {
+//        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
+//    }
+//    
+//    NSString  *email = section0[3][kContent];
+//    if (email.length == 0) {
+//        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
+//    }
+//    if (![self validatePhoneNumOrEmail:email type:2]) {
+//        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
+//    }
     
     self.customInfo.name = name;
     self.customInfo.tel = tel;
-    self.customInfo.email = email;
+//    self.customInfo.email = email;
     
-    self.customInfo.sex = self.datas[1][0][kContent];
-    self.customInfo.birthday = self.datas[1][1][kContent];
-    self.customInfo.height = self.datas[1][2][kContent];
-    self.customInfo.weight = self.datas[1][3][kContent];
-    
-    self.customInfo.womanSpecial = self.datas[2][0][kContent];
-    
-    self.customInfo.caseHistory = self.datas[3][0][kContent];
-    self.customInfo.medicine = self.datas[3][1][kContent];
+//    self.customInfo.sex = self.datas[1][0][kContent];
+//    self.customInfo.birthday = self.datas[1][1][kContent];
+//    self.customInfo.height = self.datas[1][2][kContent];
+//    self.customInfo.weight = self.datas[1][3][kContent];
+//    
+//    self.customInfo.womanSpecial = self.datas[2][0][kContent];
+//    
+//    self.customInfo.caseHistory = self.datas[3][0][kContent];
+//    self.customInfo.medicine = self.datas[3][1][kContent];
     
     [self.navigationController popViewControllerAnimated:YES];
     

@@ -194,6 +194,8 @@
 		015F11BB1C8046070058C97B /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11B91C8046070058C97B /* RecipeCollectionHeaderView.m */; };
 		015F11BC1C8046070058C97B /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */; };
 		015F11C01C804E5B0058C97B /* MTUICollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */; };
+		015FA64B1DE2EB6800ED14E1 /* PersonReportListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA64A1DE2EB6800ED14E1 /* PersonReportListViewController.m */; };
+		015FA64F1DE2F92800ED14E1 /* PersonReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 015FA64E1DE2F92800ED14E1 /* PersonReportModel.m */; };
 		01601D501CE08DE500B3712E /* CancelOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01601D301CE08DE500B3712E /* CancelOrderController.m */; };
 		01601D511CE08DE500B3712E /* CancelOrderController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01601D311CE08DE500B3712E /* CancelOrderController.xib */; };
 		01601D521CE08DE500B3712E /* EvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01601D331CE08DE500B3712E /* EvaluationController.m */; };
@@ -1643,6 +1645,10 @@
 		015F11BA1C8046070058C97B /* RecipeCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionHeaderView.xib; sourceTree = "<group>"; };
 		015F11BE1C804E5B0058C97B /* MTUICollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUICollectionViewFlowLayout.h; sourceTree = "<group>"; };
 		015F11BF1C804E5B0058C97B /* MTUICollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTUICollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		015FA6491DE2EB6800ED14E1 /* PersonReportListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonReportListViewController.h; sourceTree = "<group>"; };
+		015FA64A1DE2EB6800ED14E1 /* PersonReportListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonReportListViewController.m; sourceTree = "<group>"; };
+		015FA64D1DE2F92800ED14E1 /* PersonReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonReportModel.h; sourceTree = "<group>"; };
+		015FA64E1DE2F92800ED14E1 /* PersonReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonReportModel.m; sourceTree = "<group>"; };
 		01601D2F1CE08DE500B3712E /* CancelOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CancelOrderController.h; sourceTree = "<group>"; };
 		01601D301CE08DE500B3712E /* CancelOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CancelOrderController.m; sourceTree = "<group>"; };
 		01601D311CE08DE500B3712E /* CancelOrderController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CancelOrderController.xib; sourceTree = "<group>"; };
@@ -3466,6 +3472,8 @@
 				D2A977141DB06A1600A0438D /* ReportListViewController.m */,
 				D2A9771C1DB0B24700A0438D /* ReportDetailViewController.h */,
 				D2A9771D1DB0B24700A0438D /* ReportDetailViewController.m */,
+				015FA6491DE2EB6800ED14E1 /* PersonReportListViewController.h */,
+				015FA64A1DE2EB6800ED14E1 /* PersonReportListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3477,6 +3485,8 @@
 				01BAF1CD1D6453F9000D2E45 /* CommonPlanModel.m */,
 				017738DE1D65B3E800F6DC99 /* InterveneModel.h */,
 				017738DF1D65B3E800F6DC99 /* InterveneModel.m */,
+				015FA64D1DE2F92800ED14E1 /* PersonReportModel.h */,
+				015FA64E1DE2F92800ED14E1 /* PersonReportModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -9306,6 +9316,7 @@
 				01ECDB121C8EB31F0018160F /* EaseUserCell.m in Sources */,
 				013F237F1C5C6379006711FE /* DeliverViewController.m in Sources */,
 				01A820461D82A4C8002E30E3 /* MyAccountViewController.m in Sources */,
+				015FA64F1DE2F92800ED14E1 /* PersonReportModel.m in Sources */,
 				01E9A74A1C74624500000805 /* HeadProcessView.m in Sources */,
 				01E4A9841C40ACB500AAAF73 /* OrderGoodsCell.m in Sources */,
 				0162EA8C1D869DB500A5EF1C /* BHBItem.m in Sources */,
@@ -9675,6 +9686,7 @@
 				01E6906F1BCCB32D00A17543 /* NSString+MD5.m in Sources */,
 				01601D961CE0900200B3712E /* OrderHeadCell.m in Sources */,
 				01F33D901BB2873F00787620 /* Networking.m in Sources */,
+				015FA64B1DE2EB6800ED14E1 /* PersonReportListViewController.m in Sources */,
 				01F015D51C5F427B00930B0E /* GoodsDescriptionViewController.m in Sources */,
 				01601D761CE08FA900B3712E /* WorkPicModel.m in Sources */,
 				01F016081C5F430700930B0E /* SpecialModel.m in Sources */,

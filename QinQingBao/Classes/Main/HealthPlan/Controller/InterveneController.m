@@ -78,7 +78,11 @@
     
     [self initView];
     
-    [self getDataProvider];
+    if ( self.wid && self.wid.length > 0)
+        [self getDataProvider];
+    else
+        [self getDataProvider1];
+
 }
 
 -(void)initView
@@ -97,7 +101,7 @@
 
 
 /**
- *  获取数据源
+ *  获取数据源（从工单获取干预方案）
  */
 -(void)getDataProvider
 {
@@ -132,6 +136,46 @@
 }
 
 
+/**
+ *  获取数据源（从档案获取干预方案）
+ */
+-(void)getDataProvider1
+{
+    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_work_intervention parameters:@{@"fmno" : self.fmno,
+                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                       @"client":@"ios"
+                                                                       }
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         if ([codeNum isEqualToString:@"17001"])
+                                         {
+                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
+                                         }
+                                         else
+                                         {
+                                             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                             [alertView show];
+                                         }
+                                     }
+                                     else
+                                     {
+                                         self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+                                         
+                                         goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
+                                     }
+                                     [self.tableView reloadData];
+                                     [HUD removeFromSuperview];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+                                     [HUD removeFromSuperview];
+                                 }];
+}
+
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,7 +204,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 2 : section == 1 ? 7 : goodsInfoArr.count + 1;
+    return section == 0 ? 2 : section == 1 ? 9 : goodsInfoArr.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -223,7 +267,7 @@
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
-            [paragraphTextCell setTitle:@"目标管理" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
+            [paragraphTextCell setTitle:@"干预目标" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 2)
@@ -231,7 +275,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"膳食调养" withValue:self.dataItem.wp_advice_diet];
+            [paragraphTextCell setTitle:@"饮食调理建议" withValue:self.dataItem.wp_advice_diet];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 3)
@@ -239,7 +283,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"运动养生" withValue:self.dataItem.wp_advice_sport];
+            [paragraphTextCell setTitle:@"运动增健建议" withValue:self.dataItem.wp_advice_sport];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 4)
@@ -247,7 +291,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"自然疗法" withValue:self.dataItem.wp_naturopathy];
+            [paragraphTextCell setTitle:@"睡眠改善建议" withValue:self.dataItem.wp_advice_sleeping];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 5)
@@ -255,7 +299,7 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"营养素干预" withValue:self.dataItem.wp_nutrient_plan];
+            [paragraphTextCell setTitle:@"心理调适减压" withValue:self.dataItem.wp_advice_mental];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 6)
@@ -263,7 +307,23 @@
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
-            [paragraphTextCell setTitle:@"其他" withValue:self.dataItem.wp_advice_others];
+            [paragraphTextCell setTitle:@"环境起居建议" withValue:self.dataItem.wp_advice_envir];
+            cell = paragraphTextCell;
+        }
+        else if (indexPath.row == 7)
+        {
+            if(paragraphTextCell == nil)
+                paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
+            
+            [paragraphTextCell setTitle:@"营养素补充建议" withValue:self.dataItem.wp_nutrient_plan];
+            cell = paragraphTextCell;
+        }
+        else if (indexPath.row == 8)
+        {
+            if(paragraphTextCell == nil)
+                paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
+            
+            [paragraphTextCell setTitle:@"精准健康管理建议" withValue:self.dataItem.wp_advice_health];
             cell = paragraphTextCell;
         }
     }

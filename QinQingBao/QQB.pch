@@ -856,6 +856,9 @@
 /***绑定亲属 - 亲属列表 -- 报告，干预方案查看入口*/
 #define URL_Get_work_read [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=work_report&op=get_work_read",URL_Local]
 
+/***查看干预方案 - 根据档案编号查看最新一条干预方案*/
+#define URL_Get_work_intervention [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=work_report&op=get_work_intervention",URL_Local]
+
 /***个人档案 - 新增档案*/
 #define URL_Add_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=add_fm&access_token=token",URL_Local_New]
 
@@ -870,6 +873,9 @@
 
 /***个人档案 - 根据档案NO查看档案*/
 #define URL_Get_bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_fm&access_token=token",URL_Local_New]
+
+/***查看检测报告 - 根据档案编号查看检测报告列表*/
+#define URL_Get_workreport_groupitem [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=work_report&op=get_workreport_groupitem&access_token=token",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

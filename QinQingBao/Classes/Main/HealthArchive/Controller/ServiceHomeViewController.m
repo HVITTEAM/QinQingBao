@@ -22,8 +22,13 @@
 
 #import "HealthArchiveViewController.h"
 #import "ArchiveDataListModel.h"
+#import "ReportInterventionModel.h"
 
 @interface ServiceHomeViewController ()
+{
+    Boolean newWP;
+    Boolean newWI;
+}
 
 @property (strong,nonatomic)NSMutableArray *dataProvider;
 
@@ -53,6 +58,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 108, 0);
     
     [self loadArchiveDataList];
+    
+    [self getInterventionPlanList];
 }
 
 #pragma mark - Table view data source
@@ -87,9 +94,12 @@
         if (indexPath.section == 0) {
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
             titleCell.textLabel.text = @"健康档案";
+            titleCell.imageView.image = [UIImage imageNamed:@"person.png"];
+
         }else{
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"fbb03b"];
             titleCell.textLabel.text = @"重点提示";
+            titleCell.imageView.image = [UIImage imageNamed:@"warning.png"];
         }
         
         cell = titleCell;
@@ -131,22 +141,22 @@
         }
         switch (indexPath.row) {
             case 0:
-                typeCell.headImg.image = [UIImage imageNamed:@"eventinfo.png"];
+                typeCell.headImg.image = [UIImage imageNamed:@"zxzx.png"];
                 typeCell.titleLab.text = @"健康评估";
                 typeCell.subtitleLab.text = @"健康评估";
-                typeCell.badgeView.hidden = NO;
+                typeCell.badgeView.hidden = YES;
                 break;
             case 1:
-                typeCell.headImg.image = [UIImage imageNamed:@"healthTips.png"];
+                typeCell.headImg.image = [UIImage imageNamed:@"jkpg.png"];
                 typeCell.titleLab.text = @"检测报告";
                 typeCell.subtitleLab.text = @"检测报告";
-                typeCell.badgeView.hidden = YES;
+                typeCell.badgeView.hidden = !newWP;
                 break;
             case 2:
-                typeCell.headImg.image = [UIImage imageNamed:@"pushMsg.png"];
+                typeCell.headImg.image = [UIImage imageNamed:@"gyfa.png"];
                 typeCell.titleLab.text = @"干预方案";
                 typeCell.subtitleLab.text = @"干预方案";
-                typeCell.badgeView.hidden = YES;
+                typeCell.badgeView.hidden = !newWI;
                 break;
                 
             default:
@@ -193,12 +203,22 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 5;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 10;
+    return 5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     return [[UIView alloc] init];
 }
@@ -219,12 +239,6 @@
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
-    
-    //    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-    //
-    //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
 }
 
 - (void)loadArchiveDataList
@@ -257,5 +271,50 @@
     }];
 
 }
+
+/**
+ *  加载干预方案和检测报告未读状态
+ */
+- (void)getInterventionPlanList
+{
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates])
+        return;
+    
+    NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"client":@"ios"
+                                     }mutableCopy];
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_work_read parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        if ([dict[@"code"] integerValue] > 0)
+        {
+            return ;
+        }
+        
+        NSArray *datas = [ReportInterventionModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        if (datas.count > 0)
+        {
+            for (ReportInterventionModel *item in datas)
+            {
+                //检测报告有未读
+                if (item.wp_read.count>0)
+                {
+                    newWP = YES;
+                    [self.tableView reloadData];
+                }
+                //干预方案有未读
+                if (item.wi_read.count>0)
+                {
+                    newWI = YES;
+                    [self.tableView reloadData];
+                }
+            }
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+}
+
 
 @end

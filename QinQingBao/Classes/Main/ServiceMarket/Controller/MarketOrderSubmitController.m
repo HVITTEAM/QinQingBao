@@ -265,9 +265,9 @@
                                      @"wtime" : time,
                                      @"wname" : self.customInfo.name,
                                      @"wprice" : self.dataItem.promotion_price ? self.dataItem.promotion_price : self.dataItem.price_mem,
-                                     @"dvcode" : self.customInfo.dvcode,
+//                                     @"dvcode" : self.customInfo.dvcode,
                                      @"wtelnum" : self.customInfo.tel,
-                                     @"waddress" : self.customInfo.areainfo,
+//                                     @"waddress" : self.customInfo.areainfo,
                                      @"client" : @"ios",
                                      @"key" : [SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"wlevel" : @"1",
@@ -279,14 +279,14 @@
                                      @"w_status" : @"5",
                                      }mutableCopy];
     
-    [params setValue:self.customInfo.email forKey: @"wemail"];
-    [params setValue:@([MarketCustomInfo sexToNumber:self.customInfo.sex]) forKey: @"wc_sex"];
-    [params setValue:self.customInfo.birthday forKey: @"wc_birthday"];
-    [params setValue:self.customInfo.height forKey: @"wc_height"];
-    [params setValue:self.customInfo.weight forKey: @"wc_weight"];
-    [params setValue:@([MarketCustomInfo womanSpecialToNumber:self.customInfo.womanSpecial]) forKey: @"wc_monthday"];
-    [params setValue:self.customInfo.caseHistory forKey: @"wc_sickhistory"];
-    [params setValue:self.customInfo.medicine forKey: @"wc_medication"];
+//    [params setValue:self.customInfo.email forKey: @"wemail"];
+//    [params setValue:@([MarketCustomInfo sexToNumber:self.customInfo.sex]) forKey: @"wc_sex"];
+//    [params setValue:self.customInfo.birthday forKey: @"wc_birthday"];
+//    [params setValue:self.customInfo.height forKey: @"wc_height"];
+//    [params setValue:self.customInfo.weight forKey: @"wc_weight"];
+//    [params setValue:@([MarketCustomInfo womanSpecialToNumber:self.customInfo.womanSpecial]) forKey: @"wc_monthday"];
+//    [params setValue:self.customInfo.caseHistory forKey: @"wc_sickhistory"];
+//    [params setValue:self.customInfo.medicine forKey: @"wc_medication"];
     
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Create_order parameters: params
