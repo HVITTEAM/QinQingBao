@@ -13,7 +13,7 @@
 #import "ReportDetailViewController.h"
 @interface PersonReportListViewController ()
 {
-    NSArray *dataProvider;
+    NSMutableArray *dataProvider;
 }
 
 @end
@@ -51,7 +51,7 @@
                                                                                 @"client":@"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      [HUD removeFromSuperview];
-
+                                     
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
@@ -64,7 +64,11 @@
                                      }
                                      else
                                      {
-                                         dataProvider = [PersonReportModel objectArrayWithKeyValuesArray:[dict objectForKey:@"datas"]];
+                                         for (NSArray *item in [dict objectForKey:@"datas"])
+                                         {
+                                             NSArray *arr = [PersonReportModel objectArrayWithKeyValuesArray:item];
+                                             [dataProvider addObject:arr];
+                                         }
                                          [self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -104,21 +108,17 @@
         commonPlanCell = [CommonPlanCell commonPlanCell];
     
     HealthReportCell *healthReportCell = [tableView dequeueReusableCellWithIdentifier:@"MTHealthReportCell"];
-    //    PersonReportModel *item = dataProvider[indexPath.section];
-    
     if(healthReportCell == nil)
         healthReportCell = [HealthReportCell healthReportCell];
-    healthReportCell.clickType = ^(NSInteger type){
-        switch (type) {
-            case 1:
-                //报告
-                break;
-            case 2:
-                //干预方案
-                break;
-            default:
-                break;
-        }
+    
+    healthReportCell.dataProvider = dataProvider[indexPath.section];
+    
+    healthReportCell.clickType = ^(PersonReportModel *item){
+        ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
+        VC.title = item.iname;
+        VC.urlstr = item.examreport_url;
+        VC.speakStr = item.entry_voice;
+        [self.navigationController pushViewController:VC animated:YES];
     };
     
     return healthReportCell;
@@ -126,10 +126,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
-    PersonReportModel *item = dataProvider[indexPath.section];
-    VC.urlstr = item.wp_final_report;
-    [self.navigationController pushViewController:VC animated:YES];
+    
 }
 
 @end

@@ -17,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *resultLb;
 
+@property (strong, nonatomic) IBOutlet UILabel *archivelab;
+
 @property (strong, nonatomic) IBOutlet UIImageView *levelImg;
 
 @end
@@ -39,10 +41,13 @@
     self.nameLb.text = nil;
     self.timeLb.text = nil;
     self.resultLb.text = nil;
+    self.archivelab.text = nil;
+
 }
 
 -(void)setItem:(ReportListModel *)item
 {
+    self.archivelab.text = item.truename;
     self.nameLb.text = item.r_etitle;
     self.timeLb.text = item.r_createtime;
     self.timeLb.adjustsFontSizeToFitWidth = YES;

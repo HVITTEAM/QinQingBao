@@ -170,21 +170,21 @@
     
     HealthReportCell *healthReportCell = [tableView dequeueReusableCellWithIdentifier:@"MTHealthReportCell"];
     
-    if(healthReportCell == nil)
-        healthReportCell = [HealthReportCell healthReportCell];
-    healthReportCell.clickType = ^(NSInteger type){
-        switch (type) {
-            case 1:
-                //报告
-                break;
-            case 2:
-                //干预方案
-                break;
-            default:
-                break;
-        }
-    };
-    
+//    if(healthReportCell == nil)
+//        healthReportCell = [HealthReportCell healthReportCell];
+//    healthReportCell.clickType = ^(NSInteger type){
+//        switch (type) {
+//            case 1:
+//                //报告
+//                break;
+//            case 2:
+//                //干预方案
+//                break;
+//            default:
+//                break;
+//        }
+//    };
+//    
     if (self.tableView.header.state != MJRefreshStateRefreshing)
     {
         commonPlanCell.item = dataProvider[indexPath.section];

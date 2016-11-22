@@ -106,7 +106,7 @@
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
             titleCell.textLabel.text = @"健康档案";
             titleCell.imageView.image = [UIImage imageNamed:@"person.png"];
-
+            
         }else{
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"fbb03b"];
             titleCell.textLabel.text = @"重点提示";
@@ -120,15 +120,21 @@
             ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
             scanCodeVC.hidesBottomBarWhenPushed = YES;
             scanCodeVC.getcodeClick = ^(NSString *code){
-                [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                if ([SharedAppUtil checkLoginStates])
+                {
+                    [self addArchiveWhitCode:code];
+                }
             };
             [self.parentVC.navigationController pushViewController:scanCodeVC animated:YES];
         };
         
         archivesCell.addNewArchivesBlock = ^{
-            HealthArchiveViewController *addHealthArchiveVC = [[HealthArchiveViewController alloc] init];
-            addHealthArchiveVC.addArchive = YES;
-            [self.parentVC.navigationController pushViewController:addHealthArchiveVC animated:YES];
+            if ([SharedAppUtil checkLoginStates])
+            {
+                HealthArchiveViewController *addHealthArchiveVC = [[HealthArchiveViewController alloc] init];
+                addHealthArchiveVC.addArchive = YES;
+                [self.parentVC.navigationController pushViewController:addHealthArchiveVC animated:YES];
+            }
         };
         archivesCell.tapArchiveBlock = ^(NSUInteger idx){
             HealthArchiveViewController *healthArchiveVC = [[HealthArchiveViewController alloc] init];
@@ -154,19 +160,19 @@
             case 0:
                 typeCell.headImg.image = [UIImage imageNamed:@"zxzx.png"];
                 typeCell.titleLab.text = @"健康评估";
-                typeCell.subtitleLab.text = @"健康评估";
+                typeCell.subtitleLab.text = @"在线评估您的身体健康状况";
                 typeCell.badgeView.hidden = YES;
                 break;
             case 1:
                 typeCell.headImg.image = [UIImage imageNamed:@"jkpg.png"];
                 typeCell.titleLab.text = @"检测报告";
-                typeCell.subtitleLab.text = @"检测报告";
+                typeCell.subtitleLab.text = @"在线查看检测报告和报告解读";
                 typeCell.badgeView.hidden = !newWP;
                 break;
             case 2:
                 typeCell.headImg.image = [UIImage imageNamed:@"gyfa.png"];
                 typeCell.titleLab.text = @"干预方案";
-                typeCell.subtitleLab.text = @"干预方案";
+                typeCell.subtitleLab.text = @"为您量身定制健康干预方案";
                 typeCell.badgeView.hidden = !newWI;
                 break;
                 
@@ -207,7 +213,7 @@
     }else if (indexPath.section == 0 && indexPath.row == 1){
         return [ArchivesCell cellHeight];
     }else if(indexPath.section == 1){
-        return 70;
+        return 80;
     }else{
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.height + 30;
@@ -241,21 +247,21 @@
     }else if (indexPath.section == 1 && indexPath.row == 0) {
         ClasslistViewController *questionResultVC = [[ClasslistViewController alloc] init];
         [self.parentVC.navigationController pushViewController:questionResultVC animated:YES];
-    
+        
     }else if (indexPath.section == 1 && indexPath.row == 1){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         [self.parentVC.navigationController pushViewController:reportListVC animated:YES];
-
+        
     }else{
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
-
-//    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
-//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-//    
-//    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
-//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+    
+    //    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
+    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+    //
+    //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
+    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
     
 }
 
@@ -274,7 +280,7 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [self.tableView.header endRefreshing];
-       
+        
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"errorMsg" view:self.view];
         }
@@ -287,7 +293,7 @@
         [self.tableView.header endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-
+    
 }
 
 /**
@@ -335,6 +341,31 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
+}
+
+/**
+ 通过扫描二维码添加档案
+ */
+-(void)addArchiveWhitCode:(NSString *)code
+{
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                              @"fmno":code};
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        
+        [self loadArchiveDataList];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+    
 }
 
 

@@ -30,6 +30,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+-(void)setDataProvider:(NSArray *)dataProvider
+{
+    _dataProvider = dataProvider;
     [self initPageView];
 }
 
@@ -46,23 +51,24 @@
     self.pageView.showsHorizontalScrollIndicator = NO;
     
     // 初始化 pagecontrol
-    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor orangeColor]];
+    [self.pageControl setCurrentPageIndicatorTintColor:[UIColor colorWithRGB:@"94bf36"]];
     [self.pageControl setPageIndicatorTintColor:[UIColor grayColor]];
-    self.pageControl.numberOfPages = 5;
+    self.pageControl.numberOfPages = _dataProvider.count;
     self.pageControl.currentPage = 0;
     
     // 创建图片 imageview
-    for (int i = 0; i <5; i++)
+    for (int i = 0; i <_dataProvider.count; i++)
     {
-        UIView *view = [self getPageView];
+        UIView *view = [self getPageViewwithItem:_dataProvider[i]];
         view.frame = CGRectMake((MTScreenW - 10) * i, 0, (MTScreenW - 10), kPageheight);
         view.userInteractionEnabled=YES;
+        view.tag = i;
         UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onClickImage:)];
         [view addGestureRecognizer:singleTap];
         [self.pageView addSubview:view];
     }
     
-    [self.pageView setContentSize:CGSizeMake((MTScreenW - 10) * 5, kPageheight)];
+    [self.pageView setContentSize:CGSizeMake((MTScreenW - 10) * _dataProvider.count, kPageheight)];
     [self.pageView setContentOffset:CGPointMake(0, 0)];
     [self.pageView scrollRectToVisible:CGRectMake(0 , 0 ,MTScreenW, kPageheight) animated:NO];
 }
@@ -76,7 +82,7 @@
     self.pageControl.currentPage = page;
 }
 
--(UIView *)getPageView
+-(UIView *)getPageViewwithItem:(PersonReportModel *)item
 {
     UIView *view = [[UIView alloc] init];
     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
@@ -85,11 +91,11 @@
     
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 8, 120, 20)];
     lab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:13];
-    lab.text = @"蛋白质分析报告";
+    lab.text = item.iname;
     [view addSubview:lab];
     
     UILabel *timelab = [[UILabel alloc] init];
-    timelab.text = @"2016年10月1日";
+    timelab.text = item.wp_create_time;
     timelab.textColor = [UIColor colorWithRGB:@"999999"];
     timelab.font = [UIFont fontWithName:@"Helvetica" size:13];
     
@@ -97,7 +103,7 @@
     timelab.frame = CGRectMake(MTScreenW - 20 - size.width, 7, size.width, 23);
     [view addSubview:timelab];
     
-    NSURL *iconUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://tupian.enterdesk.com/2015/xll/02/26/4/rili9.jpg"]];
+    NSURL *iconUrl = [NSURL URLWithString:item.examreport_url];
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     imageView.frame = CGRectMake(0, 40, MTScreenW - 10, 140);
@@ -111,13 +117,13 @@
 -(void)onClickImage:(UITapGestureRecognizer *)sender
 {
    if(self.clickType)
-       self.clickType(1);
+       self.clickType(_dataProvider[sender.view.tag]);
 }
 
 -(void)onClicklab:(UITapGestureRecognizer *)sender
 {
     if(self.clickType)
-        self.clickType(2);
+        self.clickType(_dataProvider[sender.view.tag]);
 
 }
 

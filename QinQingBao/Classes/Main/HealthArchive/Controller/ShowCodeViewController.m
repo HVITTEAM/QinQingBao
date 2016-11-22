@@ -22,15 +22,16 @@
 {
     _archiveData = archiveData;
 
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",archiveData.portraitPic]];
-    [self.iconImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user.png"]];
-    self.nameLab.text = archiveData.truename;
-    self.codeLab.text = [NSString stringWithFormat:@"档案号：%@",archiveData.fmno];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_archiveData.portraitPic]];
+    [self.iconImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user.png"]];
+    self.nameLab.text = _archiveData.truename;
+    self.codeLab.text = [NSString stringWithFormat:@"档案号：%@",_archiveData.fmno];
+
     self.title = @"我的二维码";
     // 1.创建过滤器
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];

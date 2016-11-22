@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersonReportModel.h"
 
 @interface HealthReportCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UIView *bgview;
@@ -19,9 +20,10 @@
 + (HealthReportCell*) healthReportCell;
 
 
+@property (nonatomic, retain) NSArray *dataProvider;
 /**
  type 1 报告 2 干预方案
  */
-@property (nonatomic, copy) void (^clickType)(NSInteger type);
+@property (nonatomic, copy) void (^clickType)(PersonReportModel *item);
 
 @end

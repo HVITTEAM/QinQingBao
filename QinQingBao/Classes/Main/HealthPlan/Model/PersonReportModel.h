@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PersonReportModel : NSObject
-@property(nonatomic,copy)NSString *wid;
+@property(nonatomic,copy)NSString *wr_id;
 
 @property(nonatomic,copy)NSString *risk_level;
 
@@ -17,11 +17,13 @@
 
 @property(nonatomic,copy)NSString *wp_status;
 
-@property(nonatomic,copy)NSString *wp_final_report;
+@property(nonatomic,copy)NSString *iname;
 
 @property(nonatomic,copy)NSString *wp_create_time;
 
+@property(nonatomic,copy)NSString *wp_final_report;
+
 @property(nonatomic,copy)NSString *iteminfo_id;
 
-@property(nonatomic,copy)NSArray *examreport_url;
+@property(nonatomic,copy)NSString *examreport_url;
 @end

@@ -22,4 +22,7 @@
 
 @property(copy,nonatomic)NSString *r_danger;
 
+@property(copy,nonatomic)NSString *truename;
+
+
 @end
