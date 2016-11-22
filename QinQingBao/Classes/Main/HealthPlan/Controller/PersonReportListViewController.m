@@ -57,7 +57,7 @@
                                      {
                                          if ([codeNum integerValue] == 17001)
                                          {
-                                             return [self.tableView initWithPlaceString:@"暂无相关报告" imgPath:@"placeholder-2"];
+                                             return [self.tableView initWithPlaceString:@"暂无相关报告" imgPath:@"placeholder-3"];
                                          }
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
                                          [alertView show];

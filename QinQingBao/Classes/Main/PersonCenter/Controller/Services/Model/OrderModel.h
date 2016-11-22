@@ -133,9 +133,9 @@ extern NSString * const kButtonTitles;
 @property (nonatomic, retain) NSString *mark_type;          //为 1 代表超生理疗 为 2 代表服务市场
 @property (nonatomic, retain) NSString *mark_sell_type;     //1 特惠 2 热销
 
-
-
-
+@property (nonatomic, retain) NSString *wr_id;
+@property (nonatomic, retain) NSString *wi_id;
+@property (nonatomic, retain) NSString *wi_status;
 
 /**
  *  根据订单状态,支付状态计算对应状态的描述及相应的按钮

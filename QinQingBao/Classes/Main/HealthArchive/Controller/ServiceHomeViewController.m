@@ -230,15 +230,22 @@
     }else if (indexPath.section == 1 && indexPath.row == 0) {
         ClasslistViewController *questionResultVC = [[ClasslistViewController alloc] init];
         [self.parentVC.navigationController pushViewController:questionResultVC animated:YES];
-        
+    
     }else if (indexPath.section == 1 && indexPath.row == 1){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         [self.parentVC.navigationController pushViewController:reportListVC animated:YES];
-        
+
     }else{
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
+
+//    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
+//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+//    
+//    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
+//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+    
 }
 
 - (void)loadArchiveDataList

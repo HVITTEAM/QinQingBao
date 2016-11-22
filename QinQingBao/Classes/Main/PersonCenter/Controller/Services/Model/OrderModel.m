@@ -110,8 +110,6 @@ NSString * const kButtonTitles = @"buttonTitles";
             }else if (status == 21){
                 str = @"已上传报告";
                 [btnTitles addObject:@"查看物流"];
-                [btnTitles addObject:@"检测报告"];
-                [btnTitles addObject:@"干预方案"];
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
                 }
@@ -120,8 +118,6 @@ NSString * const kButtonTitles = @"buttonTitles";
                 //报告解读
                 str = @"已上传报告";
                 [btnTitles addObject:@"查看物流"];
-                [btnTitles addObject:@"检测报告"];
-                [btnTitles addObject:@"干预方案"];
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
                 }
@@ -132,14 +128,20 @@ NSString * const kButtonTitles = @"buttonTitles";
             }else if (status == 24){
                 str = @"已配送报告";
                 [btnTitles addObject:@"查看物流"];
-                [btnTitles addObject:@"检测报告"];
-                [btnTitles addObject:@"干预方案"];
                 if([self.wgrade floatValue] <= 0 && self.dis_con==nil){
                     [btnTitles addObject:@"评价"];
                 }
             }else if (status == 25){
                 //派送结束
                 
+            }
+            
+            if (self.wr_id != nil) {
+                [btnTitles addObject:@"检测报告"];
+            }
+            
+            if (self.wi_id != nil) {
+                [btnTitles addObject:@"干预方案"];
             }
             
         }else if (payStatus == 2 || payStatus == 3) {
@@ -188,8 +190,16 @@ NSString * const kButtonTitles = @"buttonTitles";
                 //tid 43是超声理疗 44是服务市场 47其他
                 if (![self.tid isEqualToString:@"43"]) {
                     [btnTitles addObject:@"查看物流"];
-                    [btnTitles addObject:@"检测报告"];
-                    [btnTitles addObject:@"干预方案"];
+                    
+                    if (self.wr_id != nil) {
+                        [btnTitles addObject:@"检测报告"];
+                    }
+                    
+                    if (self.wi_id != nil) {
+                        [btnTitles addObject:@"干预方案"];
+                    }
+//                    [btnTitles addObject:@"检测报告"];
+//                    [btnTitles addObject:@"干预方案"];
                 }
             }
             

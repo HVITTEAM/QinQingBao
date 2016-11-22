@@ -45,8 +45,11 @@
         [_dataProvider addObjectsFromArray:self.archiveData.medical_report];
     }
     
-    takePhotoimg = [UIImage imageNamed:@"uploadimg.png"];
-    [_dataProvider addObject:takePhotoimg];
+    //新增或者档案创建者才能修改
+    if (self.isAddArchive || self.isCreator) {
+        takePhotoimg = [UIImage imageNamed:@"uploadimg.png"];
+        [_dataProvider addObject:takePhotoimg];
+    }
 }
 
 -(void)initView
@@ -160,6 +163,11 @@
         delBtn.hidden = YES;
     }
     
+    //不是档案创建者不允许修改
+    if (!self.isAddArchive && !self.isCreator) {
+        delBtn.hidden = YES;
+    }
+    
     cell.deleteImageBlock = ^(NSIndexPath *idx){
         [weakSelf.dataProvider removeObjectAtIndex:(idx.section * 3 + idx.row)];
         if (weakSelf.isAddArchive) {
@@ -210,6 +218,13 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //不是档案创建者不允许修改
+    if (!self.isAddArchive && !self.isCreator) {
+        SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:self.dataProvider currentIndex:0];
+        [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+        return;
+    }
+    
     if (self.dataProvider.count < 7 && (indexPath.section * 3 + indexPath.row == self.dataProvider.count - 1))
     {
         UIAlertView *alertPic = [[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
@@ -431,6 +446,8 @@
             [self.archiveData deleteArchiveData];
         }
         
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错" view:nil];
@@ -440,6 +457,11 @@
 #pragma mark - 事件方法
 - (void)next:(UIButton *)sender
 {
+    //不是新增,也不是档案创建者
+    if (!self.isAddArchive && !self.isCreator) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
     [self uploadArchiveData];
 }
 

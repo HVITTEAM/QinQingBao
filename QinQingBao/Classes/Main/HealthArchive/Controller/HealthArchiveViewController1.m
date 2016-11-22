@@ -115,6 +115,11 @@
         textCell.field.placeholder = rowItem[kPlaceHolder];
         textCell.field.enabled = NO;
         
+        //不是档案创建者不允许修改
+        if (!self.isAddArchive && !self.isCreator) {
+            switchBtn.enabled = NO;
+        }
+        
         switchBtn.on = [rowItem[kContent] boolValue];
         
         return textCell;
@@ -137,6 +142,11 @@
         textTwoCel.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
             weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
         };
+        
+        //不是档案创建者不允许修改
+        if (!self.isAddArchive && !self.isCreator) {
+            textTwoCel.contentTextView.editable = NO;
+        }
         
         return textTwoCel;
         
@@ -204,6 +214,7 @@
     
     HealthArchiveViewController2 *vc = [[HealthArchiveViewController2 alloc] init];
     vc.archiveData = self.archiveData;
+    vc.isCreator = self.isCreator;
     //新增时候才保存临时的数据在本地
     if (self.isAddArchive) {
         [self.archiveData saveArchiveDataToFile];

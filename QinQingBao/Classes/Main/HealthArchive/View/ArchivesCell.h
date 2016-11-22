@@ -13,8 +13,11 @@
 ///档案人员数据
 @property (strong, nonatomic) NSMutableArray *relativesArr;
 
-///是否显示图片的描边,用来显示选中状态
-@property (assign, nonatomic) BOOL showBorderLine;
+/////是否显示图片的描边,用来显示选中状态
+//@property (assign, nonatomic) BOOL showBorderLine;
+
+///默认是-1,不选中任何人
+@property (assign, nonatomic) NSInteger selectedIdx;
 
 ///新增一个档案
 @property (copy)void(^addNewArchivesBlock)(void);

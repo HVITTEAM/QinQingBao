@@ -22,6 +22,12 @@
 #import "ScrollMenuTableCell.h"
 #import "HomePicModel.h"
 #import "LoopImageView.h"
+#import "CircleModel.h"
+#import "CommunityViewController.h"
+
+#import "ShopDetailViewController.h"
+#import "MarketDeatilViewController.h"
+#import "AdvertisementController.h"
 
 @interface PostsTableViewController ()
 {
@@ -37,6 +43,9 @@
     PostsModel *selectedDeleteModel;
 }
 @property (strong, nonatomic) NSArray *advDatas;     //轮播图数据
+
+@property (strong, nonatomic) NSArray *healthDatas;    //健康话题数据
+
 @end
 
 @implementation PostsTableViewController
@@ -47,6 +56,8 @@
     
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 105, 0);
     
     [self setupRefresh];
@@ -65,6 +76,7 @@
     [self getDataProvider];
     [self getRecommendlist];
     [self getUserPosts];
+    [self loadHealthDatas];
     
     //获取轮播图片
     [self getAdvertisementpic];
@@ -74,7 +86,7 @@
     LoopImageView *loopView = [[LoopImageView alloc] init];
     loopView.bounds = CGRectMake(0, 0, MTScreenW, (int)(MTScreenW / 3));
     loopView.tapLoopImageCallBack= ^(NSInteger idx){
-//        [weakSelf onClickImage:idx];
+        [weakSelf onClickAdvertisementImage:idx];
     };
     self.tableView.tableHeaderView = loopView;
 }
@@ -354,8 +366,13 @@
     //        return 60;
     if(indexPath.section == 0 && indexPath.row == 0)
         return 44;
-    if(indexPath.section == 0)
-        return (MTScreenW+30)/4;
+    if(indexPath.section == 0){
+        if (self.healthDatas.count <= 4) {
+            return 90;
+        }
+        return 110;
+    }
+    
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
 }
@@ -387,6 +404,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    __weak typeof(self) weakSelf = self;
     UITableViewCell *cell;
     if (indexPath.section == 0)
     {
@@ -410,17 +428,33 @@
             menuCell.row = 1;
             menuCell.col = 4;
             menuCell.colSpace = 30;
+            if (self.healthDatas.count > 4) {
+                menuCell.shouldShowIndicator = YES;
+                menuCell.margin = UIEdgeInsetsMake(10, 10, 0, 10);
+            }else{
+                menuCell.shouldShowIndicator = NO;
+                menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
+            }
             
-            menuCell.margin = UIEdgeInsetsMake(10, 10, 10, 10);
-            menuCell.shouldShowIndicator = NO;
-            menuCell.datas = @[@{KScrollMenuTitle:@"心脑血管",KScrollMenuImg:@"xnxg_icon"},
-                               @{KScrollMenuTitle:@"精英压力",KScrollMenuImg:@"jyyl_icon"},
-                               @{KScrollMenuTitle:@"肝脏排毒",KScrollMenuImg:@"gzpd_icon"},
-                               @{KScrollMenuTitle:@"其他",KScrollMenuImg:@"qt_icon"}
-                               ];
+            NSMutableArray *ar = [[NSMutableArray alloc] init];
+            for (int i = 0; i < self.healthDatas.count; i++) {
+                CircleModel *model = self.healthDatas[i];
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                dict[KScrollMenuTitle] = model.name;
+                dict[KScrollMenuImg] = model.avatar;
+                [ar addObject:dict];
+            }
+            
+            menuCell.datas = ar;
+            menuCell.selectMenuItemCallBack = ^(NSInteger idx){
+                CircleModel *model = weakSelf.healthDatas[idx];
+                CommunityViewController *communityVC = [[CommunityViewController alloc] init];
+                communityVC.circleModel = model;
+                [weakSelf.parentVC.navigationController pushViewController:communityVC animated:YES];
+            };
+            
             cell = menuCell;
         }
-        
     }
     else
     {
@@ -584,6 +618,72 @@
         selectedDeleteModel = model;
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除该帖子，删除后将无法恢复" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
         [alertView show];
+    }
+}
+
+
+/**
+ * 获取健康圈数据
+ **/
+- (void)loadHealthDatas
+{
+    NSDictionary *params = @{
+                             @"circleid":@"38"
+                             };
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Circle parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:@"出错" view:nil];
+            return;
+        }
+        
+        self.healthDatas = [CircleModel objectArrayWithKeyValuesArray:dict[@"datas"]];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+/**
+ *  轮播广告点击事件
+ */
+-(void)onClickAdvertisementImage:(NSInteger)idx
+{
+    HomePicModel *item = self.advDatas[idx];
+    if (item.bc_article_url.length == 0)
+        return;
+    
+    // 43 超声理疗 44 精准健康监测分析 45疾病易感性基因检测
+    
+    if ([item.bc_type_app_id isEqualToString:@"43"])
+    {
+        ShopDetailViewController *view = [[ShopDetailViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:view animated:YES];
+        
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"44"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:view animated:YES];
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"45"])
+    {
+        MarketDeatilViewController *view = [[MarketDeatilViewController alloc] init];
+        view.iid = item.bc_item_id;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:view animated:YES];
+    }
+    else
+    {
+        AdvertisementController *adver = [[AdvertisementController alloc] init];
+        adver.item = item;
+        [self.parentVC.navigationController pushViewController:adver animated:YES];
     }
 }
 

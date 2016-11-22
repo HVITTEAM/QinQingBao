@@ -18,4 +18,6 @@
 
 @property (assign, nonatomic, getter=isAddArchive) BOOL addArchive;
 
+@property (assign, nonatomic) BOOL isCreator;    //当前登录用户是否是档案创建者,查看时候才有用
+
 @end

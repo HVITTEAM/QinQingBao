@@ -12,6 +12,9 @@
 
 @property (nonatomic, copy) NSString *fmno;
 
+/**档案创建者***/
+@property (nonatomic, copy) NSString *creatememberid;
+
 /**姓名***/
 @property (nonatomic, copy) NSString *truename;
 /**性别 0:保密 1:男 2:女***/
@@ -71,6 +74,7 @@
 @property (nonatomic, copy) NSString *badhabits;
 /**备注***/
 @property (nonatomic, copy) NSString *hremark;
+
 
 /**报告图片路径,新建时候的本地缓存路径***/
 @property (nonatomic, copy) NSMutableArray *reportPhotos;
