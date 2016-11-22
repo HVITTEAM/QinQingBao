@@ -871,6 +871,9 @@
 /***个人档案 - 根据档案NO查看档案*/
 #define URL_Get_bingding_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=filemanagement&op=get_bingding_fm&access_token=token",URL_Local_New]
 
+/***工单 - 指定受检人*/
+#define URL_Add_workinfo_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=workinfo&op=add_workinfo_fm&access_token=token",URL_Local_New]
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \

@@ -43,6 +43,7 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"ArchivesCell" owner:nil options:nil] lastObject];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectedIdx = -1;
     }
     
     return cell;
@@ -131,7 +132,11 @@
         cell.titleLb.textColor = [UIColor colorWithRGB:@"666666"];
         
         //设置描边
-        cell.showBorderLine = self.showBorderLine;
+        if (indexPath.row == self.selectedIdx) {
+            cell.showBorderLine = YES;
+        }else{
+            cell.showBorderLine = NO;
+        }
     }
 
     return cell;

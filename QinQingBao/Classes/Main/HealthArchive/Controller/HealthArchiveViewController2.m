@@ -177,6 +177,11 @@
     
     self.currentIdx = indexPath;
     
+    //不是档案创建者不允许修改
+    if (!self.isAddArchive && !self.isCreator) {
+        return;
+    }
+    
     if ( 0 == indexPath.section && 0 == indexPath.row) {
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"半包",@"一包",@"一包以上", nil] show];
     }else if (0 == indexPath.section && 1 == indexPath.row){
@@ -391,6 +396,7 @@
     
     HealthArchiveViewController3 *vc = [[HealthArchiveViewController3 alloc] init];
     vc.archiveData = self.archiveData;
+    vc.isCreator = self.isCreator;
     //新增时候才保存临时的数据在本地
     if (self.isAddArchive) {
         [self.archiveData saveArchiveDataToFile];

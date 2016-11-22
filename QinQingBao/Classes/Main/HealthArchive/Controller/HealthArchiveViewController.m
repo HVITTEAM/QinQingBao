@@ -36,6 +36,8 @@
 
 @property (strong, nonatomic) UIImage *portraitImage;
 
+@property (assign, nonatomic) BOOL isCreator;    //当前登录用户是否是档案创建者,查看时候才有用
+
 @end
 
 @implementation HealthArchiveViewController
@@ -51,13 +53,15 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"健康档案";
+    
+    self.isCreator = YES;  //默认当前用户是档案创建者
 
     if (self.isAddArchive) {
         //获取当前用户的缓存的档案数据,新增时候
         self.archiveData = [ArchiveData getArchiveDataFromFile];
         self.portraitImage = [[UIImage alloc] initWithContentsOfFile:self.archiveData.portraitPic];
     }else{
-        //查看时候
+        //查看时候(如果是创建档案的用户还可以修改,其他人只能看)
         [self loadArchivePersonInfo];
     }
 
@@ -187,14 +191,20 @@
         
         //是否禁用文本框
         textCell.field.enabled = YES;
-        BOOL enable = indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 3 || indexPath.row == 4);
+        BOOL disable = indexPath.section == 0 && (indexPath.row == 3 || indexPath.row == 4);
         if (!self.isAddArchive) {   //查看时候
-            enable = indexPath.section == 0 && (indexPath.row == 0 || indexPath.row == 4 || indexPath.row == 5);
+            disable = indexPath.section == 0 && (indexPath.row == 4 || indexPath.row == 5);
         }
         
-        enable = enable || indexPath.section == 1;
-        enable = enable || (indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 3));
-        if (enable) {
+        disable = disable || indexPath.section == 1;
+        disable = disable || (indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 3));
+        
+        //如果是查看,并且不是档案创建者,所有内容都不允许编辑
+        if (!self.isAddArchive && !self.isCreator) {
+            disable = YES;
+        }
+        
+        if (disable) {   //如果需要禁用
             textCell.field.enabled = NO;
         }
         
@@ -228,6 +238,18 @@
     
     self.currentIdx = indexPath;
     __weak typeof(self)weakSelf = self;
+    
+    //如果不是档案创建者,只能查看,不能编辑
+    if (!self.isAddArchive && !self.isCreator) {
+        if (indexPath.section == 0 && indexPath.row == 2) {  //查看二维码
+            ShowCodeViewController *vc = [[ShowCodeViewController alloc] init];
+            vc.archiveData = self.archiveData;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        return;
+    }
+
+    //以下是新增或者是档案创建者查看(查看时候可修改)的状态
     
     if (indexPath.section == 0 && indexPath.row == 2 && !self.isAddArchive){  //查看时候多一个二维码
        
@@ -618,6 +640,7 @@
 
     HealthArchiveViewController1 *vc = [[HealthArchiveViewController1 alloc] init];
     vc.archiveData = self.archiveData;
+    vc.isCreator = self.isCreator;
     //新增时候才保存临时的数据在本地
     if (self.isAddArchive) {
         [self.archiveData saveArchiveDataToFile];
@@ -676,6 +699,7 @@
         ArchiveData1 *archive = [ArchiveData1 objectWithKeyValues:dict[@"datas"]];
         
         self.archiveData.fmno = self.selectedListModel.fmno;
+        self.archiveData.creatememberid = archive.creatememberid;
         
         self.archiveData.truename = archive.basics.truename;
         self.archiveData.sex = archive.basics.sex;
@@ -721,6 +745,9 @@
         self.archiveData.medical_report = archive.medical_report;
         
         self.datas = [self setDatasArray];
+        NSString *currentUserId = [SharedAppUtil defaultCommonUtil].userVO.member_id;
+        self.isCreator = [self.archiveData.creatememberid isEqualToString:currentUserId];
+
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
