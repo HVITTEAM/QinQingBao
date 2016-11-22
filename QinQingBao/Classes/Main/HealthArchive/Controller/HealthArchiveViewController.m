@@ -732,11 +732,15 @@
         self.archiveData.smoke = archive.habits.smoke;
         self.archiveData.drink = archive.habits.drink;
 
-        NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
-        id temArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
-        if (temArr && [temArr isKindOfClass:[NSArray class]]) {
-            self.archiveData.diet = temArr;
+        if (archive.habits.diet.length > 0 )
+        {
+            NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
+            id temArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
+            if (temArr && [temArr isKindOfClass:[NSArray class]]) {
+                self.archiveData.diet = temArr;
+            }
         }
+       
         self.archiveData.sleeptime = archive.habits.sleeptime;
         self.archiveData.getuptime = archive.habits.getuptime;
         self.archiveData.sports = archive.habits.sports;

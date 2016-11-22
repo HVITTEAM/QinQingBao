@@ -95,7 +95,7 @@
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
             titleCell.textLabel.text = @"健康档案";
             titleCell.imageView.image = [UIImage imageNamed:@"person.png"];
-
+            
         }else{
             titleCell.textLabel.textColor = [UIColor colorWithRGB:@"fbb03b"];
             titleCell.textLabel.text = @"重点提示";
@@ -109,15 +109,21 @@
             ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
             scanCodeVC.hidesBottomBarWhenPushed = YES;
             scanCodeVC.getcodeClick = ^(NSString *code){
-                [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                if ([SharedAppUtil checkLoginStates])
+                {
+                    [self addArchiveWhitCode:code];
+                }
             };
             [self.parentVC.navigationController pushViewController:scanCodeVC animated:YES];
         };
         
         archivesCell.addNewArchivesBlock = ^{
-            HealthArchiveViewController *addHealthArchiveVC = [[HealthArchiveViewController alloc] init];
-            addHealthArchiveVC.addArchive = YES;
-            [self.parentVC.navigationController pushViewController:addHealthArchiveVC animated:YES];
+            if ([SharedAppUtil checkLoginStates])
+            {
+                HealthArchiveViewController *addHealthArchiveVC = [[HealthArchiveViewController alloc] init];
+                addHealthArchiveVC.addArchive = YES;
+                [self.parentVC.navigationController pushViewController:addHealthArchiveVC animated:YES];
+            }
         };
         archivesCell.tapArchiveBlock = ^(NSUInteger idx){
             HealthArchiveViewController *healthArchiveVC = [[HealthArchiveViewController alloc] init];
@@ -230,21 +236,21 @@
     }else if (indexPath.section == 1 && indexPath.row == 0) {
         ClasslistViewController *questionResultVC = [[ClasslistViewController alloc] init];
         [self.parentVC.navigationController pushViewController:questionResultVC animated:YES];
-    
+        
     }else if (indexPath.section == 1 && indexPath.row == 1){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         [self.parentVC.navigationController pushViewController:reportListVC animated:YES];
-
+        
     }else{
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
-
-//    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
-//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-//    
-//    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
-//    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+    
+    //    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
+    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
+    //
+    //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
+    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
     
 }
 
@@ -263,7 +269,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [hud removeFromSuperview];
-       
+        
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"errorMsg" view:self.view];
         }
@@ -276,7 +282,7 @@
         [hud removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-
+    
 }
 
 /**
@@ -321,6 +327,31 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
+}
+
+/**
+ 通过扫描二维码添加档案
+ */
+-(void)addArchiveWhitCode:(NSString *)code
+{
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                              @"fmno":code};
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        
+        [self loadArchiveDataList];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+    
 }
 
 
