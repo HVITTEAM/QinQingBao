@@ -57,6 +57,17 @@
     
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 108, 0);
     
+    __weak typeof(self) weakSelf = self;
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf getServicesData];
+    }];
+    
+//    [self getServicesData];
+    [self.tableView.header beginRefreshing];
+}
+
+- (void)getServicesData
+{
     [self loadArchiveDataList];
     
     [self getInterventionPlanList];
@@ -260,9 +271,9 @@
                              @"page":@"100",
                              @"p":@"1"
                              };
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        [hud removeFromSuperview];
+        [self.tableView.header endRefreshing];
        
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:@"errorMsg" view:self.view];
@@ -273,7 +284,7 @@
         [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [hud removeFromSuperview];
+        [self.tableView.header endRefreshing];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
 
@@ -285,8 +296,11 @@
 - (void)getInterventionPlanList
 {
     //判断是否登录
-    if (![SharedAppUtil checkLoginStates])
+    if (![SharedAppUtil checkLoginStates]){
+        [self.tableView.header endRefreshing];
         return;
+    }
+    
     
     NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"client":@"ios"

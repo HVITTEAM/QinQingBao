@@ -10,4 +10,6 @@
 
 @interface PayResultViewController : UITableViewController
 
+@property (copy, nonatomic) NSString *wid;      //工单id
+
 @end

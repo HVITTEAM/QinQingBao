@@ -334,12 +334,8 @@
 		0177DA7D1D5D6303008D5C95 /* ClasslistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA5A1D5D6302008D5C95 /* ClasslistViewController.m */; };
 		0177DA7E1D5D6303008D5C95 /* DiseaseBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA5C1D5D6302008D5C95 /* DiseaseBtnController.m */; };
 		0177DA7F1D5D6303008D5C95 /* LifeHealthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA5E1D5D6302008D5C95 /* LifeHealthViewController.m */; };
-		0177DA801D5D6303008D5C95 /* QuestionOneBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA601D5D6302008D5C95 /* QuestionOneBtnController.m */; };
-		0177DA811D5D6303008D5C95 /* QuestionOneBtnController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177DA611D5D6302008D5C95 /* QuestionOneBtnController.xib */; };
 		0177DA821D5D6303008D5C95 /* QuestionThreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA631D5D6302008D5C95 /* QuestionThreeController.m */; };
 		0177DA831D5D6303008D5C95 /* QuestionThreeController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177DA641D5D6302008D5C95 /* QuestionThreeController.xib */; };
-		0177DA841D5D6303008D5C95 /* QuestionTwoBtnController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA661D5D6302008D5C95 /* QuestionTwoBtnController.m */; };
-		0177DA851D5D6303008D5C95 /* QuestionTwoBtnController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177DA671D5D6302008D5C95 /* QuestionTwoBtnController.xib */; };
 		0177DA861D5D6303008D5C95 /* QuestionResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA6A1D5D6302008D5C95 /* QuestionResultController.m */; };
 		0177DA871D5D6303008D5C95 /* QuestionResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0177DA6B1D5D6302008D5C95 /* QuestionResultController.xib */; };
 		0177DA881D5D6303008D5C95 /* QuestionResultController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 0177DA6D1D5D6302008D5C95 /* QuestionResultController2.m */; };
@@ -1188,6 +1184,7 @@
 		D279055C1DDAA31200378F77 /* RelativesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D27905591DDAA31200378F77 /* RelativesCell.xib */; };
 		D279055F1DDAA35800378F77 /* QuestionResultController3.m in Sources */ = {isa = PBXBuildFile; fileRef = D279055E1DDAA35800378F77 /* QuestionResultController3.m */; };
 		D27905621DDAA37100378F77 /* PayResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27905611DDAA37100378F77 /* PayResultViewController.m */; };
+		D27A969C1DE41D2E006ABDFC /* CardiovascularBtnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D27A969B1DE41D2E006ABDFC /* CardiovascularBtnViewController.m */; };
 		D287E28F1D2A33FC006CE52C /* CustomInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */; };
 		D287E2901D2A33FC006CE52C /* CustomInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */; };
 		D287E2951D2A3DBA006CE52C /* ReportInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D287E2931D2A3DBA006CE52C /* ReportInfoCell.m */; };
@@ -1895,15 +1892,9 @@
 		0177DA5C1D5D6302008D5C95 /* DiseaseBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiseaseBtnController.m; sourceTree = "<group>"; };
 		0177DA5D1D5D6302008D5C95 /* LifeHealthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LifeHealthViewController.h; sourceTree = "<group>"; };
 		0177DA5E1D5D6302008D5C95 /* LifeHealthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LifeHealthViewController.m; sourceTree = "<group>"; };
-		0177DA5F1D5D6302008D5C95 /* QuestionOneBtnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionOneBtnController.h; sourceTree = "<group>"; };
-		0177DA601D5D6302008D5C95 /* QuestionOneBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionOneBtnController.m; sourceTree = "<group>"; };
-		0177DA611D5D6302008D5C95 /* QuestionOneBtnController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionOneBtnController.xib; sourceTree = "<group>"; };
 		0177DA621D5D6302008D5C95 /* QuestionThreeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionThreeController.h; sourceTree = "<group>"; };
 		0177DA631D5D6302008D5C95 /* QuestionThreeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionThreeController.m; sourceTree = "<group>"; };
 		0177DA641D5D6302008D5C95 /* QuestionThreeController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionThreeController.xib; sourceTree = "<group>"; };
-		0177DA651D5D6302008D5C95 /* QuestionTwoBtnController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTwoBtnController.h; sourceTree = "<group>"; };
-		0177DA661D5D6302008D5C95 /* QuestionTwoBtnController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTwoBtnController.m; sourceTree = "<group>"; };
-		0177DA671D5D6302008D5C95 /* QuestionTwoBtnController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionTwoBtnController.xib; sourceTree = "<group>"; };
 		0177DA691D5D6302008D5C95 /* QuestionResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionResultController.h; sourceTree = "<group>"; };
 		0177DA6A1D5D6302008D5C95 /* QuestionResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionResultController.m; sourceTree = "<group>"; };
 		0177DA6B1D5D6302008D5C95 /* QuestionResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuestionResultController.xib; sourceTree = "<group>"; };
@@ -3330,6 +3321,8 @@
 		D279055E1DDAA35800378F77 /* QuestionResultController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionResultController3.m; sourceTree = "<group>"; };
 		D27905601DDAA37100378F77 /* PayResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayResultViewController.h; sourceTree = "<group>"; };
 		D27905611DDAA37100378F77 /* PayResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayResultViewController.m; sourceTree = "<group>"; };
+		D27A969A1DE41D2E006ABDFC /* CardiovascularBtnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardiovascularBtnViewController.h; sourceTree = "<group>"; };
+		D27A969B1DE41D2E006ABDFC /* CardiovascularBtnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardiovascularBtnViewController.m; sourceTree = "<group>"; };
 		D287E28C1D2A33FC006CE52C /* CustomInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomInfoCell.h; sourceTree = "<group>"; };
 		D287E28D1D2A33FC006CE52C /* CustomInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomInfoCell.m; sourceTree = "<group>"; };
 		D287E28E1D2A33FC006CE52C /* CustomInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoCell.xib; sourceTree = "<group>"; };
@@ -4797,15 +4790,11 @@
 				0177DA5C1D5D6302008D5C95 /* DiseaseBtnController.m */,
 				0177DA5D1D5D6302008D5C95 /* LifeHealthViewController.h */,
 				0177DA5E1D5D6302008D5C95 /* LifeHealthViewController.m */,
-				0177DA5F1D5D6302008D5C95 /* QuestionOneBtnController.h */,
-				0177DA601D5D6302008D5C95 /* QuestionOneBtnController.m */,
-				0177DA611D5D6302008D5C95 /* QuestionOneBtnController.xib */,
+				D27A969A1DE41D2E006ABDFC /* CardiovascularBtnViewController.h */,
+				D27A969B1DE41D2E006ABDFC /* CardiovascularBtnViewController.m */,
 				0177DA621D5D6302008D5C95 /* QuestionThreeController.h */,
 				0177DA631D5D6302008D5C95 /* QuestionThreeController.m */,
 				0177DA641D5D6302008D5C95 /* QuestionThreeController.xib */,
-				0177DA651D5D6302008D5C95 /* QuestionTwoBtnController.h */,
-				0177DA661D5D6302008D5C95 /* QuestionTwoBtnController.m */,
-				0177DA671D5D6302008D5C95 /* QuestionTwoBtnController.xib */,
 				0177DA6F1D5D6302008D5C95 /* SexViewController.h */,
 				0177DA701D5D6302008D5C95 /* SexViewController.m */,
 				0177DA711D5D6302008D5C95 /* SexViewController.xib */,
@@ -8691,7 +8680,7 @@
 				TargetAttributes = {
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 42PUMHHWSN;
+						DevelopmentTeam = G688QXM6YK;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -9112,7 +9101,6 @@
 				01E5736F1CC07A35005F045D /* MassageServiceCell.xib in Resources */,
 				01ECDA991C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA121C8EB31F0018160F /* VoiceSearchFeedback008.png in Resources */,
-				0177DA851D5D6303008D5C95 /* QuestionTwoBtnController.xib in Resources */,
 				D2EE9ED21CEEA25200252633 /* SMSVerificationView.xib in Resources */,
 				01ECDA321C8EB31F0018160F /* Contents.json in Resources */,
 				01F015D41C5F427B00930B0E /* DiscountViewController.xib in Resources */,
@@ -9163,7 +9151,6 @@
 				01AB2EE11DD59CA5006EAFA2 /* cb_green_off@2x.png in Resources */,
 				01ECDA401C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA541C8EB31F0018160F /* chatBar_textBg.png in Resources */,
-				0177DA811D5D6303008D5C95 /* QuestionOneBtnController.xib in Resources */,
 				01FF8F871CDB2DDE0089BBC4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */,
 				01ECDAA21C8EB31F0018160F /* chatBar_colorMore_videoSelected@2x.png in Resources */,
@@ -9294,7 +9281,6 @@
 				010EC9E21C438D8900D36417 /* MTHeardView.m in Sources */,
 				01FD4C961CAE4B43008F09CF /* MWGridViewController.m in Sources */,
 				01E6D4BC1BE1EA0200824F51 /* CouponsModel.m in Sources */,
-				0177DA801D5D6303008D5C95 /* QuestionOneBtnController.m in Sources */,
 				01E573621CBF7E78005F045D /* ChooseShopTableViewController.m in Sources */,
 				01C0D20B1C468CF500FF1CD3 /* ExtendOrderGoodsModel.m in Sources */,
 				016066C11CF6ACCE005A3164 /* MJRefreshAutoFooter.m in Sources */,
@@ -9555,7 +9541,6 @@
 				01ECDADE1C8EB31F0018160F /* EMAudioRecorderUtil.m in Sources */,
 				01ECDB181C8EB31F0018160F /* EaseBubbleView+Location.m in Sources */,
 				D2A9771E1DB0B24700A0438D /* ReportDetailViewController.m in Sources */,
-				0177DA841D5D6303008D5C95 /* QuestionTwoBtnController.m in Sources */,
 				01BAF1CA1D64527E000D2E45 /* CommonPlanCell.m in Sources */,
 				0177DA7E1D5D6303008D5C95 /* DiseaseBtnController.m in Sources */,
 				0162EA8A1D869DB500A5EF1C /* BHBCustomBtn.m in Sources */,
@@ -9925,6 +9910,7 @@
 				0126ECF61B8C4E8100EC85C1 /* MASCompositeConstraint.m in Sources */,
 				016066D31CF6ACCE005A3164 /* UIView+MJExtension.m in Sources */,
 				01237A5B1CFC319D0070C905 /* MJType.m in Sources */,
+				D27A969C1DE41D2E006ABDFC /* CardiovascularBtnViewController.m in Sources */,
 				017179151BEC45140070A503 /* OrderServiceDetailCell.m in Sources */,
 				01ECDAE21C8EB31F0018160F /* EMCDDeviceManager+Remind.m in Sources */,
 				01F015F01C5F42CD00930B0E /* SpecialCell.m in Sources */,
@@ -10123,7 +10109,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10178,7 +10164,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = 42PUMHHWSN;
+				DEVELOPMENT_TEAM = G688QXM6YK;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

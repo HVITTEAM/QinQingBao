@@ -738,6 +738,8 @@
 /***获取 所有分类*/
 #define URL_Get_classlist [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=questionsys&op=get_classlist",URL_Local]
 
+/***问卷答案 - 归档*/
+#define URL_Add_qsreport_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=questionsys&op=add_qsreport_fm&access_token=token",URL_Local_New]
 
 //------------------健康计划-------------------
 
@@ -876,8 +878,10 @@
 
 /***查看检测报告 - 根据档案编号查看检测报告列表*/
 #define URL_Get_workreport_groupitem [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=work_report&op=get_workreport_groupitem&access_token=token",URL_Local_New]
+
 /***工单 - 指定受检人*/
 #define URL_Add_workinfo_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=workinfo&op=add_workinfo_fm&access_token=token",URL_Local_New]
+
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

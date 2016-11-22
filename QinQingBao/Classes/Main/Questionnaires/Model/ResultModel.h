@@ -19,4 +19,6 @@
 @property (nonatomic, copy) NSString *r_createtime;
 @property (nonatomic, copy) NSString *r_dangercoefficient;
 
+@property (nonatomic, copy) NSArray *r_ids;
+
 @end

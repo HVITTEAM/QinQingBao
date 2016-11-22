@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ResultModel.h"
 
 @interface QuestionResultController3 : UITableViewController
+
+@property (strong, nonatomic) ResultModel *qResultModel;
 
 @end

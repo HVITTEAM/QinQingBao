@@ -186,25 +186,18 @@
                                      @"client":@"ios",
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key
                                      }mutableCopy];
-//    params[@"fmno"] = @"";
-//    params[@"wid"] = @"";
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:@"" parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        [hud removeFromSuperview];
-        
-        if([dict[@"code"] integerValue] != 0){
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
-            return;
-        }
-        
-        [NoticeHelper AlertShow:@"成功" view:nil];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"确认归档失败" view:nil];
-    }];
+    params[@"fmno"] = self.selectedArchiveData.fmno;
+    params[@"r_id"] = self.qResultModel.r_ids;
+
+    for (NSString *rid in self.qResultModel.r_ids) {
+        params[@"r_id"] = rid;
+        [CommonRemoteHelper RemoteWithUrl:URL_Add_qsreport_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+    }
+
 }
 
 /**

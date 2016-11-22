@@ -18,7 +18,7 @@
 
 @property (strong, nonatomic) ArchiveDataListModel *selectedArchiveData;
 
-@property (assign, nonatomic) NSInteger selectedIdx;
+@property (assign, nonatomic) NSInteger selectedIdx;    //这个默认是-1,表示未选中指定人
 
 @end
 
@@ -209,7 +209,7 @@
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key
                                      }mutableCopy];
     params[@"fmno"] = self.selectedArchiveData.fmno;
-    params[@"wid"] = @"";
+    params[@"wid"] = self.wid;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Add_workinfo_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -217,15 +217,25 @@
         [hud removeFromSuperview];
         
         if([dict[@"code"] integerValue] != 0){
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            [NoticeHelper AlertShow:[NSString stringWithFormat:@"%@,%@",dict[@"errorMsg"],@"可稍后去个人中心指定"] view:nil];
             return;
         }
         
-        [NoticeHelper AlertShow:@"成功" view:nil];
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        UIViewController *vc;
+        if (viewControllers.count >= 5) {
+            vc = viewControllers[viewControllers.count - 4];
+        }else if (viewControllers.count >= 2){
+            vc = viewControllers[1];
+        }else{
+            vc = viewControllers[0];
+        }
+        
+        [self.navigationController popToViewController:vc animated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"指定受检人失败" view:nil];
+        [NoticeHelper AlertShow:@"请检查网络或稍后去个人中心指定" view:nil];
     }];
 }
 

@@ -158,12 +158,13 @@
         
         if (indexPath.row == 2) {
             imageView.width = 30;
+            imageView.layer.masksToBounds = NO;
             imageView.image = [UIImage imageNamed:@"qrcode"];
             
         }else{
             imageView.width = 50;
-
-            imageView.layer.cornerRadius = imageView.height/2;
+            imageView.layer.cornerRadius = 50/2;
+            imageView.layer.masksToBounds = YES;
             imageView.image = self.portraitImage?:[UIImage imageNamed:@"placeholderImage"];
 
             if (self.isAddArchive) {

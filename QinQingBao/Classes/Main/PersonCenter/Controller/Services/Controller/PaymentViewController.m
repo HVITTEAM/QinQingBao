@@ -14,6 +14,7 @@
 #import "BalanceModel.h"
 #import "MassageModel.h"
 #import "SMSVerificationView.h"
+#import "PayResultViewController.h"
 
 typedef NS_ENUM(NSInteger, PaymentType) {
     PaymentTypeAlipay = 1,
@@ -412,10 +413,14 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                              self.doneHandlerClick();
                                          }
                                          
-                                         if (self.viewControllerOfback)
-                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-                                         else
-                                             [self.navigationController popViewControllerAnimated:YES];
+                                         PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
+                                         payResultVC.wid = self.wid;
+                                         [self.navigationController pushViewController:payResultVC animated:YES];
+                                         
+//                                         if (self.viewControllerOfback)
+//                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
+//                                         else
+//                                             [self.navigationController popViewControllerAnimated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];

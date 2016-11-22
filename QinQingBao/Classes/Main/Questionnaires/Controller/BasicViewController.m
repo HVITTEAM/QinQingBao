@@ -9,6 +9,7 @@
 #import "BasicViewController.h"
 #import "CommonRulerViewController.h"
 #import "WaistHipRatioViewController.h"
+#import "CardiovascularBtnViewController.h"
 
 @interface BasicViewController ()<UITextFieldDelegate>
 {
@@ -236,12 +237,20 @@
         [self.answerProvider addObject:dict3];
     }
     
-    WaistHipRatioViewController *vc = [[WaistHipRatioViewController alloc] init];
+//    WaistHipRatioViewController *vc = [[WaistHipRatioViewController alloc] init];
+//    vc.dataProvider = self.dataProvider;
+//    vc.answerProvider = self.answerProvider;
+//    vc.exam_id = self.exam_id;
+//    vc.e_title = self.e_title;
+//    vc.calculatype = self.calculatype;
+    
+    CardiovascularBtnViewController *vc = [[CardiovascularBtnViewController alloc] init];
     vc.dataProvider = self.dataProvider;
-    vc.answerProvider = self.answerProvider;
+    vc.eq_id = 3;
     vc.exam_id = self.exam_id;
     vc.e_title = self.e_title;
     vc.calculatype = self.calculatype;
+    vc.answerProvider = self.answerProvider;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

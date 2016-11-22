@@ -73,21 +73,27 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ClasslistModel *model = self.dataProvider[indexPath.row];
-    NSArray *exam_infoArray = model.exam_info;
+//    ClasslistModel *model = self.dataProvider[indexPath.row];
+//    NSArray *exam_infoArray = model.exam_info;
+//    
+//    if ([model.c_id isEqualToString:@"3"]) {
+//        SexViewController *vc = [[SexViewController alloc] init];
+//        ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
+//        vc.exam_id = examInfoModel.e_id;
+//        vc.e_title = model.c_title;
+//        vc.calculatype = examInfoModel.e_calculatype;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }else if([model.c_id isEqualToString:@"2"]){
+//        AllQuestionController *vc = [[AllQuestionController alloc] init];
+//        vc.c_id = model.c_id;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
     
-    if (exam_infoArray.count == 1) {
-        SexViewController *vc = [[SexViewController alloc] init];
-        ClasslistExamInfoModel *examInfoModel = exam_infoArray[0];
-        vc.exam_id = examInfoModel.e_id;
-        vc.e_title = model.c_title;
-        vc.calculatype = examInfoModel.e_calculatype;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if(exam_infoArray.count> 1){
-        AllQuestionController *vc = [[AllQuestionController alloc] init];
-        vc.c_id = model.c_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    ClasslistModel *model = self.dataProvider[indexPath.row];
+    AllQuestionController *vc = [[AllQuestionController alloc] init];
+    vc.c_id = model.c_id;
+    vc.classlistModel = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /**

@@ -10,6 +10,7 @@
 #import "ExamCell.h"
 #import "ExamModel.h"
 #import "LifeHealthViewController.h"
+#import "SexViewController.h"
 
 @interface AllQuestionController ()
 {
@@ -43,7 +44,7 @@
     self.tableView.estimatedRowHeight = 70;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.view.backgroundColor = HMGlobalBg;
-    self.title = @"生命健康系统功能评估";
+    self.title = self.classlistModel.c_title;
 }
 
 #pragma mark 集成刷新控件
@@ -100,7 +101,7 @@
                                      }
                                      else if (arr.count == 0 && currentPageIdx > 1)
                                      {
-                                         NSLog(@"没有更多的数据了");
+//                                         NSLog(@"没有更多的数据了");
                                          currentPageIdx --;
                                          [self.view showNonedataTooltip];
                                      }
@@ -110,7 +111,7 @@
                                      [self.tableView.header endRefreshing];
                                      [HUD removeFromSuperview];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
+//                                     NSLog(@"发生错误！%@",error);
                                      [NoticeHelper AlertShow:@"获取失败!" view:self.view];
                                      [self.tableView.footer endRefreshing];
                                      [self.tableView.header endRefreshing];
@@ -149,6 +150,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (indexPath.section == 1 && [self.classlistModel.c_id isEqualToString:@"1"]) {
+        SexViewController *vc = [[SexViewController alloc] init];
+        ExamModel *item = dataProvider[indexPath.section];
+        vc.exam_id = item.e_id;
+        vc.e_title = item.e_title;
+        vc.calculatype = item.e_calculatype;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
     LifeHealthViewController *vc = [[LifeHealthViewController alloc] init];
     ExamModel *item = dataProvider[indexPath.section];
     vc.eq_id = 1;

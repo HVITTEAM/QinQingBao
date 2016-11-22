@@ -10,6 +10,7 @@
 #import "RadianView.h"
 #import "ResultModel.h"
 #import "ReportListModel.h"
+#import "QuestionResultController3.h"
 
 #define LINESPACE 4
 
@@ -79,7 +80,7 @@
     NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *resultStr = [encodingString stringByReplacingOccurrencesOfString:@"%0A%20%20" withString:@""];
     [self submit_exam:resultStr];
-
+    NSLog(@"%@",resultStr);
 }
 
 /**
@@ -108,14 +109,18 @@
                                      else
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
-                                         self.circleView.percentValue = [model.r_result.hmd_diseaseprobability floatValue];
-                                         self.circleView.dangerText = model.r_dangercoefficient;
-                                         self.titleLab.text = model.r_hmtitle;
-                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
+//                                         self.circleView.percentValue = [model.r_result.hmd_diseaseprobability floatValue];
+//                                         self.circleView.dangerText = model.r_dangercoefficient;
+//                                         self.titleLab.text = model.r_hmtitle;
+//                                         self.circleView.midStr = model.r_result.hmd_diseaseprobability;
+//                                         
+//                                         self.lab1.text = model.r_result.hmd_advise_diet;
+//                                         self.lab2.text = model.r_result.hmd_advise_sports;
+//                                         self.lab3.text = model.r_result.hmd_advise_other;
                                          
-                                         self.lab1.text = model.r_result.hmd_advise_diet;
-                                         self.lab2.text = model.r_result.hmd_advise_sports;
-                                         self.lab3.text = model.r_result.hmd_advise_other;
+                                        QuestionResultController3 *questionResultVC = [[QuestionResultController3 alloc] init];
+                                         questionResultVC.qResultModel = model;
+                                        [self.navigationController pushViewController:questionResultVC animated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
