@@ -50,12 +50,10 @@
     return self;
 }
 
-- (void)setItem
+- (void)setItem:(ResultModel *)item
 {
-    self.resultLb.text = @"中度风险";
-    
-    NSString *detailContent = @"适当放宽萨拉丁杰弗里斯甲氨蝶呤放假啊三菱电机法拉盛绝对拉风骄傲了束带结发拉丝机砥砺风节阿里斯顿解放啦时间到了放假啊视力视力大姐夫老实交代风流教师独领风骚大家风范拉丝机砥砺风节啊是";
-    
+    self.resultLb.text = item.r_dangercoefficient;
+    NSString *detailContent = item.r_result.hmd_advise;
     if (detailContent) {
         
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];

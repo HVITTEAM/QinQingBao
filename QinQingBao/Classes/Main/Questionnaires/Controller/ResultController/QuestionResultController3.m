@@ -63,7 +63,7 @@
     
     if (indexPath.section == 0) {
         QuestionResultCell *resultCell = [QuestionResultCell createCellWithTableView:tableView];
-        [resultCell setItem];
+        [resultCell setItem:self.qResultModel];
         return resultCell;
         
     }else if(indexPath.section == 1 && indexPath.row == 0){
@@ -165,7 +165,7 @@
  */
 - (void)ignoreAction:(UIButton *)sender
 {
-    [NoticeHelper AlertShow:@"你已经忽略了" view:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /**
@@ -197,6 +197,8 @@
             
         }];
     }
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
 }
 

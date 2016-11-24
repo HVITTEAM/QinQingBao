@@ -32,6 +32,8 @@
 
 @property (strong,nonatomic)NSIndexPath *currentIdx;
 
+@property (strong,nonatomic)NSDateFormatter *dtFormatter;
+
 @end
 
 @implementation HealthArchiveViewController2
@@ -70,21 +72,26 @@
         [section0 addObject:createItem([ArchiveData numberToSmoke:[self.archiveData.smoke integerValue]],@"抽烟习惯",@"请选择")];
         [section0 addObject:createItem([ArchiveData numberToDrink:[self.archiveData.drink integerValue]],@"喝酒习惯",@"请选择")];
         
-        NSMutableString *diet = [[NSMutableString alloc] init];
+        __block NSString *diet = [[NSString alloc] init];
         [self.archiveData.diet enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
            NSString *dietStr =  [ArchiveData numberToDiet:[obj integerValue]];
-           [diet appendFormat:@"%@,",dietStr];
+           diet = [diet stringByAppendingFormat:@"%@,",dietStr];
         }];
-        
         if (diet.length > 0) {
-            [diet substringToIndex:diet.length-1];
+            diet = [diet substringToIndex:diet.length-1];
         }
         [section0 addObject:createItem(diet,@"饮食习惯",@"请选择")];
         
         NSMutableArray *section1 = [[NSMutableArray alloc] init];
         [section1 addObject:createItem(@"",@"睡觉习惯",@"")];
-        [section1 addObject:createItem(self.archiveData.sleeptime,@"休息时间",@"请选择")];
-        [section1 addObject:createItem(self.archiveData.getuptime,@"起床时间",@"请选择")];
+        
+        NSDate *dt = [self dateFromDateString:self.archiveData.sleeptime];
+        NSString *timeStr = [self shortStringFromDate:dt];
+        [section1 addObject:createItem(timeStr,@"休息时间",@"请选择")];
+        
+        dt = [self dateFromDateString:self.archiveData.getuptime];
+        timeStr = [self shortStringFromDate:dt];
+        [section1 addObject:createItem(timeStr,@"起床时间",@"请选择")];
         
         NSMutableArray *section2 = [[NSMutableArray alloc] init];
         [section2 addObject:createItem([ArchiveData numberToSports:[self.archiveData.sports integerValue]],@"运动习惯",@"请选择")];
@@ -93,6 +100,20 @@
         self.datas = @[section0,section1,section2];
     }
     return _datas;
+}
+
+- (NSDateFormatter *)dtFormatter
+{
+    if (!_dtFormatter) {
+        NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
+        _dtFormatter = [[NSDateFormatter alloc] init];
+        _dtFormatter.timeZone = timeZone;
+        _dtFormatter.locale = locale;
+        _dtFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    }
+    
+    return _dtFormatter;
 }
 
 #pragma mark - UITableViewDataSource
@@ -193,7 +214,6 @@
             
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];
             [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                NSString *dietStr = [NSString stringWithFormat:@"%d",];
                 NSInteger code = [ArchiveData dietToNumber:(NSString *)obj];
                 [tempArray addObject:@(code)];
             }];
@@ -348,28 +368,42 @@
  */
 -(void)selectBirthday:(UIBarButtonItem *)sender
 {
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"hh:mm";
-    formatter.timeZone = timeZone;
-    formatter.locale = locale;
-    formatter.dateStyle = kCFDateFormatterShortStyle;
-    formatter.timeStyle = kCFDateFormatterShortStyle;
-    
-    NSString *birthday = [formatter stringFromDate:self.datePicker.date];
-    
-    NSString *ftstr = [birthday componentsSeparatedByString:@" "][1];
-    
-    NSLog(@"%@",self.datePicker.date);
-    NSLog(@"%@",ftstr);
-    
+    NSString *ftstr = [self shortStringFromDate:self.datePicker.date];
     NSMutableArray *sections = self.datas[self.currentIdx.section];
     NSMutableDictionary *item = sections[self.currentIdx.row];
     item[kContent] = ftstr;
+    
+    NSString *timeStr = [self longStringFromDate:self.datePicker.date];
+    if (self.currentIdx.section == 1 && self.currentIdx.row == 1) {
+        self.archiveData.sleeptime = timeStr;
+    }else{
+        self.archiveData.getuptime = timeStr;
+    }
+    
     [self.tableView reloadData];
     
     [self datePickerViewHide:nil];
+}
+
+- (NSDate *)dateFromDateString:(NSString *)dateStr
+{
+    self.dtFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [self.dtFormatter dateFromString:dateStr];
+    return date;
+}
+
+- (NSString *)longStringFromDate:(NSDate *)date
+{
+    self.dtFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSString *dateStr = [self.dtFormatter stringFromDate:date];
+    return dateStr;
+}
+
+- (NSString *)shortStringFromDate:(NSDate *)date
+{
+    self.dtFormatter.dateFormat = @"a hh:mm";
+    NSString *dateStr = [self.dtFormatter stringFromDate:date];
+    return dateStr;
 }
 
 #pragma mark - 事件方法
@@ -387,9 +421,6 @@
     
     self.archiveData.smoke = [NSString stringWithFormat:@"%d",(int)[ArchiveData smokeToNumber:smoke]];
     self.archiveData.drink = [NSString stringWithFormat:@"%d",(int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]]];
-    
-    self.archiveData.sleeptime = self.datas[1][1][kContent];
-    self.archiveData.getuptime = self.datas[1][2][kContent];
     
     self.archiveData.sports = [NSString stringWithFormat:@"%d",(int)[ArchiveData sportsToNumber:self.datas[2][0][kContent]]];
     self.archiveData.badhabits = [NSString stringWithFormat:@"%d",(int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]]];

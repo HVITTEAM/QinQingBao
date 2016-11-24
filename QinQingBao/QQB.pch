@@ -889,6 +889,8 @@
 /***获取客服号*/
 #define URL_GetServiceNo [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=customer_service&op=getServiceNo&access_token=token",URL_Local_New]
 
+/***个人档案 - 修改档案*/
+#define URL_Edit_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=edit_fm",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

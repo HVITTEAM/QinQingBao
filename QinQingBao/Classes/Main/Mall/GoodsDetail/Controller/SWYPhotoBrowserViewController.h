@@ -11,6 +11,16 @@
 @interface SWYPhotoBrowserViewController : UIViewController
 
 /**
+ * 是否显示顶部工具栏
+ */
+@property (assign, nonatomic) BOOL showTopBar;
+
+/**
+ * deletedIdx是被删除图片在图片浏览器内部图片数组中的索引.
+ */
+@property (copy)void(^delImageForIndex)(NSInteger deletedIdx);
+
+/**
  * 根据图片名字
  */
 -(instancetype)initPhotoBrowserWithImageNames:(NSArray *)imageNames currentIndex:(NSInteger)currentIndex;

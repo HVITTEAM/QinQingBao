@@ -165,16 +165,18 @@
             imageView.width = 50;
             imageView.layer.cornerRadius = 50/2;
             imageView.layer.masksToBounds = YES;
-            imageView.image = self.portraitImage?:[UIImage imageNamed:@"placeholderImage"];
 
-            if (self.isAddArchive) {
-                imageView.image = self.portraitImage?:[UIImage imageNamed:@"placeholderImage"];
+            if (self.portraitImage) {
+                imageView.image = self.portraitImage;
             }else{
-                [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.archiveData.avatar?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    weakSelf.portraitImage = image;
-                }];
+                if (self.isAddArchive) {
+                    imageView.image = [UIImage imageNamed:@"placeholderImage"];
+                }else{
+                    [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.archiveData.avatar?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                        weakSelf.portraitImage = image;
+                    }];
+                }
             }
-            
         }
         imageView.height = imageView.width;
         return portraitCell;

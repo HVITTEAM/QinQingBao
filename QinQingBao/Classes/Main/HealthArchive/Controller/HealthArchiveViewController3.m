@@ -16,6 +16,9 @@
 }
 
 @property (nonatomic, retain) UICollectionView *colectView;
+
+@property (strong, nonatomic) NSMutableArray *delImages;
+
 @end
 
 @implementation HealthArchiveViewController3
@@ -28,6 +31,7 @@
     [self setupFooter];
     
     _dataProvider = [[NSMutableArray alloc] init];
+    _delImages = [[NSMutableArray alloc] init];
     
     if (self.isAddArchive) {
         //加载缓存的图片
@@ -47,6 +51,7 @@
     
     //新增或者档案创建者才能修改
     if (self.isAddArchive || self.isCreator) {
+        //增加新增图片按钮
         takePhotoimg = [UIImage imageNamed:@"uploadimg.png"];
         [_dataProvider addObject:takePhotoimg];
     }
@@ -134,7 +139,7 @@
 //每个UICollectionView展示的内容
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    __weak typeof(self) weakSelf = self;
+//    __weak typeof(self) weakSelf = self;
     //重用cell
     ReportCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTReportCollectionViewCell" forIndexPath:indexPath];
     
@@ -146,40 +151,13 @@
     if ([pic isKindOfClass:[UIImage class]]) {
         imageView.image = pic;
     }else{
-        
         [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:pic?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (image) {
-                [weakSelf.dataProvider replaceObjectAtIndex:index withObject:image];
-            }
+//            if (image) {
+//                [weakSelf.dataProvider replaceObjectAtIndex:index withObject:image];
+//            }
         }];
     }
-    
-    //删除图片
-    imageView.userInteractionEnabled = YES;
-    cell.idxPath = indexPath;
-    UIButton *delBtn = (UIButton *)[cell viewWithTag:90];
-    delBtn.hidden = NO;
-    if ((self.dataProvider.count - 1) == (indexPath.section*3 + indexPath.row)) {
-        delBtn.hidden = YES;
-    }
-    
-    //不是档案创建者不允许修改
-    if (!self.isAddArchive && !self.isCreator) {
-        delBtn.hidden = YES;
-    }
-    
-    cell.deleteImageBlock = ^(NSIndexPath *idx){
-        [weakSelf.dataProvider removeObjectAtIndex:(idx.section * 3 + idx.row)];
-        if (weakSelf.isAddArchive) {
-            //删除缓存的图片
-            NSString *imagePath = weakSelf.archiveData.reportPhotos[idx.section * 3 + idx.row];
-            [ArchiveData deletePicFromDocumentWithPicPath:imagePath];
-            [weakSelf.archiveData.reportPhotos removeObjectAtIndex:idx.section * 3 + idx.row];
-            [weakSelf.archiveData saveArchiveDataToFile];
-        }
-        
-        [weakSelf.colectView reloadData];
-    };
+
     return cell;
 }
 
@@ -218,22 +196,51 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //不是档案创建者不允许修改
-    if (!self.isAddArchive && !self.isCreator) {
-        SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:self.dataProvider currentIndex:0];
-        [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
-        return;
-    }
+    __weak typeof(self) weakSelf = self;
+    NSInteger index = indexPath.section*3 + indexPath.row;
     
-    if (self.dataProvider.count < 7 && (indexPath.section * 3 + indexPath.row == self.dataProvider.count - 1))
+    //只有新增或档案创建者才能修改
+    if ((self.isAddArchive || self.isCreator) && self.dataProvider.count < 7 && (indexPath.section * 3 + indexPath.row == self.dataProvider.count - 1))
     {
         UIAlertView *alertPic = [[UIAlertView alloc] initWithTitle:@"请选择图片来源" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从手机相册选择", nil];
         [alertPic show];
     }
     else
     {
-        CX_Log(@"showpic");
-        SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:self.dataProvider currentIndex:0];
+//        CX_Log(@"showpic");
+//        SWYPhotoBrowserViewController *photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:self.dataProvider currentIndex:index];
+//        photoBrowser.showTopBar = YES;
+//        [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
+        
+        id img = self.dataProvider[index];
+        SWYPhotoBrowserViewController *photoBrowser = nil;
+        if ([img isKindOfClass:[UIImage class]]) {
+            photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImages:@[img] currentIndex:0];
+        }else{
+            photoBrowser = [[SWYPhotoBrowserViewController alloc] initPhotoBrowserWithImageURls:@[img] currentIndex:0 placeholderImageNmae:nil];
+        }
+        
+        photoBrowser.delImageForIndex = ^(NSInteger idxOfDel){
+            //这里不能用idxOfDel,因为idxOfDel是被删除图片在图片浏览器内部图片数组中的索引.这里与self.dataProvider中图片位置是对不上的.只有传到图片浏览器中的图片数组与self.dataProvider一致时才能对上.
+            [weakSelf.dataProvider removeObjectAtIndex:index];
+            if (weakSelf.isAddArchive) {
+                //删除缓存的图片
+                NSString *imagePath = weakSelf.archiveData.reportPhotos[index];
+                [ArchiveData deletePicFromDocumentWithPicPath:imagePath];
+                [weakSelf.archiveData.reportPhotos removeObjectAtIndex:index];
+                [weakSelf.archiveData saveArchiveDataToFile];
+            }
+            [weakSelf.delImages addObject:@(index)];
+            [weakSelf.colectView reloadData];
+        };
+        
+        //只有新增或档案创建者才能修改
+        if (!self.isAddArchive && !self.isCreator) {
+            photoBrowser.showTopBar = NO;
+        }else{
+            photoBrowser.showTopBar = YES;
+        }
+    
         [self.navigationController presentViewController:photoBrowser animated:YES completion:nil];
     }
 }
@@ -350,10 +357,6 @@
         return;
     }
     
-    if (!self.isAddArchive) { //修改
-        return;
-    }
-    
     NSMutableDictionary *params = [@{
                                      @"client":@"ios",
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key
@@ -408,7 +411,7 @@
     NSMutableDictionary *tempDict = nil;
     for (int i = 0; i < self.dataProvider.count - 1; i++) {
         if ([self.dataProvider[i] isKindOfClass:[NSString class]]) {
-            return;
+            continue;
         }
         tempDict = [[NSMutableDictionary alloc] init];
         tempDict[@"name"] = [NSString stringWithFormat:@"medical_report_%d",i+1];
@@ -454,15 +457,113 @@
     }];
 }
 
+/**
+ *  修改传归档数据后重新上传
+ */
+- (void)editArchiveData
+{
+    if ([SharedAppUtil defaultCommonUtil].userVO.key.length <= 0) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"fmno":self.archiveData.fmno
+                                     }mutableCopy];
+    
+    params[@"truename"] = self.archiveData.truename;
+    params[@"sex"] = self.archiveData.sex;
+    params[@"birthday"] = self.archiveData.birthday;
+    params[@"height"] = self.archiveData.height;
+    params[@"weight"] = self.archiveData.weight;
+    params[@"waistline"] = self.archiveData.waistline;
+    params[@"systolicpressure"] = self.archiveData.systolicpressure;
+    params[@"cholesterol"] = self.archiveData.cholesterol;
+    params[@"mobile"] = self.archiveData.mobile;
+    params[@"email"] = self.archiveData.email;
+    params[@"address"] = self.archiveData.address;
+    params[@"area_id"] = self.archiveData.area_id;
+    params[@"occupation"] = self.archiveData.occupation;
+    params[@"livingcondition"] = self.archiveData.livingcondition;
+    params[@"units"] = self.archiveData.units;
+    params[@"bremark"] = self.archiveData.bremark;
+    
+    params[@"physicalcondition"] = self.archiveData.physicalcondition;
+    params[@"events"] = self.archiveData.events;
+    params[@"takingdrugs"] = self.archiveData.takingdrugs;
+    params[@"diabetes"] = self.archiveData.diabetes;
+    params[@"medicalhistory"] = self.archiveData.medicalhistory;
+    params[@"hereditarycardiovascular"] = self.archiveData.hereditarycardiovascular;
+    params[@"geneticdisease"] = self.archiveData.geneticdisease;
+    params[@"dremark"] = self.archiveData.dremark;
+    
+    
+    params[@"smoke"] = self.archiveData.smoke;
+    params[@"drink"] = self.archiveData.drink;
+    if (self.archiveData.diet) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.diet options:0 error:&error];
+        params[@"diet"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+    params[@"sleeptime"] = self.archiveData.sleeptime;
+    params[@"getuptime"] = self.archiveData.getuptime;
+    params[@"sports"] = self.archiveData.sports;
+    params[@"badhabits"] = self.archiveData.badhabits;
+    params[@"hremark"] = self.archiveData.hremark;
+    params[@"sys"] = @"2";
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *currentDateStr = [dateFormatter stringFromDate:[NSDate date]];
+    //医诊图片
+    NSMutableArray *tempArrays = [[NSMutableArray alloc] init];
+    NSMutableDictionary *tempDict = nil;
+    //头像数据
+    if (self.archiveData.avatarImage) {
+        tempDict = [[NSMutableDictionary alloc] init];
+        tempDict[@"name"] = @"avatar";
+        tempDict[@"fileName"] = [NSString stringWithFormat:@"basic_avatar_%@.jpg",currentDateStr];
+        tempDict[@"mimeType"] = @"image/jpeg";
+        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.3f);
+        tempDict[@"fileData"] = data;
+        [tempArrays addObject:tempDict];
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    
+    [CommonRemoteHelper UploadPicWithUrl:URL_Edit_fm parameters:params images:tempArrays success:^(NSDictionary *dict, id responseObject) {
+        
+        [hud removeFromSuperview];
+        
+        if([dict[@"code"] integerValue] != 0){
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
+            return;
+        }
+        
+        [NoticeHelper AlertShow:@"成功" view:nil];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错" view:nil];
+    }];
+}
+
 #pragma mark - 事件方法
 - (void)next:(UIButton *)sender
 {
     //不是新增,也不是档案创建者
     if (!self.isAddArchive && !self.isCreator) {
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }else if (self.isAddArchive){
+        [self uploadArchiveData];
+    }else{
+        [self editArchiveData];
     }
     
-    [self uploadArchiveData];
+    
 }
 
 @end

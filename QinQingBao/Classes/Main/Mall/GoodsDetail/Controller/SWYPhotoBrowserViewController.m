@@ -25,13 +25,18 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 @property(nonatomic,strong)UIImageView *currentImageView;      //中间scrollView上的imageView
 @property(nonatomic,strong)UIImageView *rightImageView;        //右侧scrollView上的imageView
 
-@property(nonatomic,strong)NSArray *imageNames;      //图片名字数组
-@property(nonatomic,strong)NSArray *images;          //图片image对象数组
-@property(nonatomic,strong)NSArray *imageURls;       //图片URL字符串数组
+@property(nonatomic,strong)NSMutableArray *imageNames;      //图片名字数组
+@property(nonatomic,strong)NSMutableArray *images;          //图片image对象数组
+@property(nonatomic,strong)NSMutableArray *imageURls;       //图片URL字符串数组
 @property(nonatomic,copy)NSString *placeholderImageName;                 //临时图片
 
 @property(nonatomic,assign)NSInteger currentIndex;   //当前显示哪张
 @property(nonatomic,assign)BOOL isDoubleTapBigger;      //双击时是放大还是还原图片大小
+
+@property(nonatomic,strong) UIView *navBar;
+@property(nonatomic,strong) UIButton *delBtn;
+@property(nonatomic,strong) UIButton *backBtn;
+@property(nonatomic,strong) UILabel *titleLb;
 
 @end
 
@@ -41,7 +46,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _imageNames = imageNames;
+        _imageNames = [[NSMutableArray alloc] initWithArray:imageNames];
         _currentIndex = currentIndex;
     }
     return self;
@@ -51,7 +56,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _images = images;
+        _images = [[NSMutableArray alloc] initWithArray:images];
         _currentIndex = currentIndex;
     }
     return self;
@@ -61,7 +66,7 @@ typedef NS_ENUM(NSInteger, movingDirection) {
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        _imageURls = imageURLs;
+        _imageURls = [[NSMutableArray alloc] initWithArray:imageURLs];
         _currentIndex = currentIndex;
         _placeholderImageName = placeholderImageName;
         
@@ -75,6 +80,10 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     // Do any additional setup after loading the view.
     [self initScrollView];
     [self initGestureRecognizer];
+    
+    if (self.showTopBar) {
+        [self initNavBar];
+    }
 }
 
 -(void)viewDidLayoutSubviews
@@ -97,6 +106,13 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     self.bkScrollView.contentSize = CGSizeMake(3*bkWidth, bkHeight);
     
     [self changeImageWithMovingDirection:movingDirectionNone];
+    
+    if (self.showTopBar) {
+        self.navBar.frame = CGRectMake(0, 0, bkWidth, 64);
+        self.backBtn.frame = CGRectMake(15, 27, 30, 30);
+        self.delBtn.frame = CGRectMake(bkWidth - 65, 27, 50, 30);
+        self.titleLb.frame = CGRectMake(70, 27, bkWidth - 140, 30);
+    }
 }
 
 #pragma mark 视图的初始化方法、setter和getter方法
@@ -144,6 +160,42 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     if (self.images.count == 1||self.imageNames.count == 1 ||self.imageURls.count ==1) {
         self.bkScrollView.scrollEnabled = NO;
     }
+}
+
+/**
+ *  初始化顶部工具栏,只有showTopBar为yes时才显示
+ */
+- (void)initNavBar
+{
+    UIView *navBar = [[UIView alloc] init];
+    [self.view addSubview:navBar];
+    navBar.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6f];
+    self.navBar = navBar;
+    
+    UIButton *backBtn = [[UIButton alloc] init];
+    [backBtn setTitle:@"<" forState:UIControlStateNormal];
+    backBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    self.backBtn = backBtn;
+    
+    UIButton *delBtn = [[UIButton alloc] init];
+    [delBtn setTitle:@"删除" forState:UIControlStateNormal];
+    delBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [delBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [delBtn addTarget:self action:@selector(delAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:delBtn];
+    self.delBtn = delBtn;
+    
+    UILabel *titleLb = [[UILabel alloc] init];
+    titleLb.textColor = [UIColor whiteColor];
+    titleLb.textAlignment = NSTextAlignmentCenter;
+    titleLb.font = [UIFont systemFontOfSize:16];
+    [self.view addSubview:titleLb];
+    self.titleLb = titleLb;
+    
+    [self setNavTitle];
 }
 
 /**
@@ -220,7 +272,56 @@ typedef NS_ENUM(NSInteger, movingDirection) {
         [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)delAction
+{
+    BOOL shouldExit = NO;
+    
+    if (self.imageNames) {
+        [self.imageNames removeObjectAtIndex:self.currentIndex];
+        shouldExit = self.imageNames.count == 0;
+    }else if (self.images){
+        [self.images removeObjectAtIndex:self.currentIndex];
+        shouldExit = self.images.count == 0;
+    }else if (self.imageURls){
+        [self.imageURls removeObjectAtIndex:self.currentIndex];
+        shouldExit = self.imageURls.count == 0;
+    }
+
+    if (self.delImageForIndex) {
+        self.delImageForIndex(self.currentIndex);
+    }
+    
+    if (shouldExit) {
+        [self back];
+        return;
+    }
+    
+    NSLog(@"删除%d",(int)self.currentIndex);
+    
+    self.currentIndex--;
+    if (self.currentIndex < 0) {
+        self.currentIndex = 0;
+    }
+//    [self.bkScrollView setContentOffset:CGPointMake(ScreenW * (self.currentIndex-1), 0) animated:NO];
+    [self changeImageWithMovingDirection:movingDirectionNone];
+}
+
 #pragma mark 私有方法
+
+- (void)setNavTitle
+{
+    if (self.showTopBar) {
+        int imgCount = 1;
+        if (self.imageNames) {
+            imgCount = (int)self.imageNames.count;
+        }else if (self.images){
+            imgCount = (int)self.images.count;
+        }else if (self.imageURls){
+            imgCount = (int)self.imageURls.count;
+        }
+        self.titleLb.text = [NSString stringWithFormat:@"%d/%d",(int)(self.currentIndex + 1),imgCount];
+    }
+}
 
 /**
  *  根据滚动方向重新设置图片
@@ -279,6 +380,9 @@ typedef NS_ENUM(NSInteger, movingDirection) {
     
     //设置currentImageView的大小位置
     [self setimageViewFrame];
+    
+    //设置当前是第几张
+    [self setNavTitle];
 }
 
 /**

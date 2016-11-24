@@ -32,6 +32,7 @@
 #import "ServiceInfoEmailCell.h"
 #import "InterveneController.h"
 #import "ReportListViewController.h"
+#import "PayResultViewController.h"
 
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
@@ -428,12 +429,17 @@
         OrderModel *model = self.orderInfor;
         InterveneController *view = [[InterveneController alloc] init];
         view.wid = model.wid;
+        view.wid = model.fmno;
         [self.navigationController pushViewController:view animated:YES];
     }else if ([sender.titleLabel.text isEqualToString:@"检测报告"]){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         OrderModel *model = self.orderInfor;
         reportListVC.wid = model.wid;
         [self.navigationController pushViewController:reportListVC animated:YES];
+    }else if ([sender.titleLabel.text isEqualToString:@"受检人"]){
+        PayResultViewController *rVC = [[PayResultViewController alloc] init];
+        rVC.wid = self.orderInfor.wid;
+        [self.navigationController pushViewController:rVC animated:YES];
     }
 
 }
