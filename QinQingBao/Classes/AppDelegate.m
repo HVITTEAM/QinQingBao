@@ -97,6 +97,10 @@
     
     [self setShareSDK];
     
+    [SharedAppUtil defaultCommonUtil].serviceCount = @"qqb4151";
+    
+    [self getServiceCount];
+    
     // 获取appStore版本号  最后一串数字就是当前app在AppStore上面的唯一id
     NSString *url = [[NSString alloc] initWithFormat:@"http://itunes.apple.com/lookup?id=%@",APPID];
     [self Postpath:url];
@@ -262,7 +266,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [[EaseMob sharedInstance] applicationDidEnterBackground:application];
-
+    
 }
 
 /**
@@ -277,7 +281,7 @@
     application.applicationIconBadgeNumber = 0;
     
     [[EaseMob sharedInstance] applicationWillEnterForeground:application];
-
+    
 }
 
 // 申请处理时间
@@ -499,6 +503,19 @@
     if (tips.length) {
         [[[UIAlertView alloc] initWithTitle:@"寸欣健康" message:@"正在使用蜂窝移动网络，继续使用可能产生流量费用" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
     }
+}
+
+//获取客服号码
+-(void)getServiceCount
+{
+    [CommonRemoteHelper RemoteWithUrl:URL_GetServiceNo parameters: nil
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     [SharedAppUtil defaultCommonUtil].serviceCount = [dict1 objectForKey:@"no"];
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 }];
 }
 
 @end

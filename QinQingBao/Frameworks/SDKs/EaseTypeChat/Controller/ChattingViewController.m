@@ -120,14 +120,11 @@
     }
 }
 
-
-
-
 #pragma mark --- 初始化
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"寸欣健康顾问";
+    self.title = @"寸欣客服";
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     //注册并登录当前用户
     EaseHandler *handler = [[EaseHandler alloc] init];
@@ -200,11 +197,6 @@
     businessInfo.member_name = self.conversation.chatter;
     businessDataCenter.businessDataDic[self.conversation.chatter] = businessInfo;
 }
-
-
-
-
-
 
 #pragma mark --- EaseMessageViewControllerDataSource
 - (id<IMessageModel>)messageViewController:(EaseMessageViewController *)viewController modelForMessage:(EMMessage *)message {

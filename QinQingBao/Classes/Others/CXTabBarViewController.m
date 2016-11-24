@@ -155,8 +155,9 @@
 {
     if (![SharedAppUtil checkLoginStates])
         return;
-    ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter:@"qqb4151" conversationType:eConversationTypeChat];
+    ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter:[SharedAppUtil defaultCommonUtil].serviceCount conversationType:eConversationTypeChat];
     vx.hidesBottomBarWhenPushed = YES;
+    [self.lastSelectedViewContoller.navigationController setNavigationBarHidden:NO];
     [self.lastSelectedViewContoller.navigationController pushViewController:vx animated:YES];
 }
 

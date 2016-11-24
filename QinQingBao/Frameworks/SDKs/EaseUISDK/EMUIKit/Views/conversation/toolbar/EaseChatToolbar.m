@@ -137,7 +137,7 @@
     _inputTextView.scrollEnabled = YES;
     _inputTextView.returnKeyType = UIReturnKeySend;
     _inputTextView.enablesReturnKeyAutomatically = YES; // UITextView内部判断send按钮是否可以用
-    _inputTextView.placeHolder = NSLocalizedString(@"请输入信消息", @"input a new message");
+    _inputTextView.placeHolder = NSLocalizedString(@"请输入新消息", @"input a new message");
     _inputTextView.delegate = self;
     _inputTextView.backgroundColor = [UIColor clearColor];
     _inputTextView.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
@@ -146,32 +146,32 @@
     _previousTextViewContentHeight = [self _getTextViewContentH:_inputTextView];
     [_toolbarView addSubview:_inputTextView];
     
-//    //转变输入样式
-//    UIButton *styleChangeButton = [[UIButton alloc] init];
-//    styleChangeButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-//    [styleChangeButton setImage:[UIImage imageNamed:@"chatBar_record"] forState:UIControlStateNormal];
-//    [styleChangeButton setImage:[UIImage imageNamed:@"chatBar_keyboard"] forState:UIControlStateSelected];
-//    [styleChangeButton addTarget:self action:@selector(styleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    EaseChatToolbarItem *styleItem = [[EaseChatToolbarItem alloc] initWithButton:styleChangeButton withView:nil];
-//    [self setInputViewLeftItems:@[styleItem]];
-//    
-//    //录制
-//    self.recordButton = [[UIButton alloc] initWithFrame:self.inputTextView.frame];
-//    self.recordButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
-//    [self.recordButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//    [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
-//    [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordSelectedBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateHighlighted];
-//    [self.recordButton setTitle:kTouchToRecord forState:UIControlStateNormal];
-//    [self.recordButton setTitle:kTouchToFinish forState:UIControlStateHighlighted];
-//    self.recordButton.hidden = YES;
-//    [self.recordButton addTarget:self action:@selector(recordButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-//    [self.recordButton addTarget:self action:@selector(recordButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
-//    [self.recordButton addTarget:self action:@selector(recordButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
-//    [self.recordButton addTarget:self action:@selector(recordDragOutside) forControlEvents:UIControlEventTouchDragExit];
-//    [self.recordButton addTarget:self action:@selector(recordDragInside) forControlEvents:UIControlEventTouchDragEnter];
-//    self.recordButton.hidden = YES;
-//    [self.toolbarView addSubview:self.recordButton];
+    //转变输入样式
+    UIButton *styleChangeButton = [[UIButton alloc] init];
+    styleChangeButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [styleChangeButton setImage:[UIImage imageNamed:@"chatBar_record"] forState:UIControlStateNormal];
+    [styleChangeButton setImage:[UIImage imageNamed:@"chatBar_keyboard"] forState:UIControlStateSelected];
+    [styleChangeButton addTarget:self action:@selector(styleButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    EaseChatToolbarItem *styleItem = [[EaseChatToolbarItem alloc] initWithButton:styleChangeButton withView:nil];
+    [self setInputViewLeftItems:@[styleItem]];
+    
+    //录制
+    self.recordButton = [[UIButton alloc] initWithFrame:self.inputTextView.frame];
+    self.recordButton.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [self.recordButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
+    [self.recordButton setBackgroundImage:[[UIImage imageNamed:@"chatBar_recordSelectedBg"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateHighlighted];
+    [self.recordButton setTitle:kTouchToRecord forState:UIControlStateNormal];
+    [self.recordButton setTitle:kTouchToFinish forState:UIControlStateHighlighted];
+    self.recordButton.hidden = YES;
+    [self.recordButton addTarget:self action:@selector(recordButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+    [self.recordButton addTarget:self action:@selector(recordButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
+    [self.recordButton addTarget:self action:@selector(recordButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+    [self.recordButton addTarget:self action:@selector(recordDragOutside) forControlEvents:UIControlEventTouchDragExit];
+    [self.recordButton addTarget:self action:@selector(recordDragInside) forControlEvents:UIControlEventTouchDragEnter];
+    self.recordButton.hidden = YES;
+    [self.toolbarView addSubview:self.recordButton];
     
     //表情     EaseUIResource.bundle/
     self.faceButton = [[UIButton alloc] init];
