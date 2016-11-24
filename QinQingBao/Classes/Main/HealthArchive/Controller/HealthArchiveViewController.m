@@ -172,8 +172,9 @@
                 if (self.isAddArchive) {
                     imageView.image = [UIImage imageNamed:@"placeholderImage"];
                 }else{
-                    [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.archiveData.avatar?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                        weakSelf.portraitImage = image;
+                
+                    [imageView sd_setImageWithURL:[[NSURL alloc] initWithString:self.archiveData.avatar?:@""] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        
                     }];
                 }
             }

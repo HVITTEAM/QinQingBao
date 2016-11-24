@@ -885,6 +885,14 @@
 /***个人档案 - 修改档案*/
 #define URL_Edit_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=edit_fm",URL_Local_New]
 
+/***个人档案 - 增加医疗报告*/
+#define URL_Add_medical_report_item [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=add_medical_report_item",URL_Local_New]
+
+/***个人档案 - 删除医疗报告*/
+#define URL_Del_medical_report_item [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=del_medical_report_item",URL_Local_New]
+
+
+
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
