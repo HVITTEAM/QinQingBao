@@ -28,6 +28,9 @@
 {
     Boolean newWP;
     Boolean newWI;
+    
+    // 重点提醒
+    NSString *importMsgStr;
 }
 
 @property (strong,nonatomic)NSMutableArray *dataProvider;
@@ -71,6 +74,8 @@
     [self loadArchiveDataList];
     
     [self getInterventionPlanList];
+    
+    [self getImportMsg];
 }
 
 #pragma mark - Table view data source
@@ -193,10 +198,10 @@
             promptCell.layoutMargins = UIEdgeInsetsZero;
         }
         
-        NSString *promptStr = @"as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂as砥砺风节爱上了点金乏术绝对拉风静安寺劳动纠纷拉丝机东方丽景奥丝蓝黛发撒蝶恋蜂狂蝶恋蜂狂as砥";
-        CGFloat h = [promptStr boundingRectWithSize:CGSizeMake(MTScreenW - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+        CGFloat h = [importMsgStr boundingRectWithSize:CGSizeMake(MTScreenW - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
         
-        promptCell.textLabel.text = promptStr;
+        promptCell.textLabel.text = importMsgStr;
+        promptCell.textLabel.font = [UIFont systemFontOfSize:12];
         promptCell.height= h;
         
         cell = promptCell;
@@ -365,7 +370,32 @@
         [hud removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
-    
+}
+
+-(void)getImportMsg
+{
+    importMsgStr = @"暂无与您健康相关的提醒需要您关注";
+
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key};
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_sysfmmsg_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        else
+        {
+            NSArray *arr = dict[@"datas"];
+            if (arr.count > 0)
+            {
+                importMsgStr = [arr[0] objectForKey:@"msg_content"];
+            }
+        }
+        
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
 }
 
 

@@ -70,6 +70,7 @@
 
 #define kAppVersion @"v 2.0.0.1"
 
+
 /** 自定义Log，日志开关 0-关闭 1-开启 */
 #define __LOGDEBUG__ (1)
 
@@ -881,6 +882,12 @@
 
 /***工单 - 指定受检人*/
 #define URL_Add_workinfo_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=workinfo&op=add_workinfo_fm&access_token=token",URL_Local_New]
+
+/***查看重点提醒*/
+#define URL_Get_sysfmmsg_list [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=systemmsginfo&op=get_sysfmmsg_list&access_token=token",URL_Local_New]
+
+/***获取客服号*/
+#define URL_GetServiceNo [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=customer_service&op=getServiceNo&access_token=token",URL_Local_New]
 
 /***个人档案 - 修改档案*/
 #define URL_Edit_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=edit_fm",URL_Local_New]

@@ -31,8 +31,8 @@
     // UIAppearance Proxy Defaults
     EaseRecordView *recordView = [self appearance];
     recordView.voiceMessageAnimationImages = @[@"VoiceSearchFeedback001",@"VoiceSearchFeedback002",@"VoiceSearchFeedback003",@"VoiceSearchFeedback004",@"VoiceSearchFeedback005",@"VoiceSearchFeedback006",@"VoiceSearchFeedback007",@"VoiceSearchFeedback008",@"VoiceSearchFeedback009",@"VoiceSearchFeedback010",@"VoiceSearchFeedback011",@"VoiceSearchFeedback012",@"VoiceSearchFeedback013",@"VoiceSearchFeedback014",@"VoiceSearchFeedback015",@"VoiceSearchFeedback016",@"VoiceSearchFeedback017",@"VoiceSearchFeedback018",@"VoiceSearchFeedback019",@"VoiceSearchFeedback020"];
-    recordView.upCancelText = NSLocalizedString(@"message.toolBar.record.upCancel", @"Fingers up slide, cancel sending");
-    recordView.loosenCancelText = NSLocalizedString(@"message.toolBar.record.loosenCancel", @"loosen the fingers, to cancel sending");
+    recordView.upCancelText = NSLocalizedString(@"上滑取消", @"Fingers up slide, cancel sending");
+    recordView.loosenCancelText = NSLocalizedString(@"松开取消", @"loosen the fingers, to cancel sending");
 }
 
 - (id)initWithFrame:(CGRect)frame

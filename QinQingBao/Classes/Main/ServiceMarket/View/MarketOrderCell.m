@@ -47,7 +47,7 @@
 {
     if (![SharedAppUtil checkLoginStates])
         return;
-    ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter:@"qqb4151" conversationType:eConversationTypeChat];
+    ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter: [SharedAppUtil defaultCommonUtil].serviceCount conversationType:eConversationTypeChat];
     vx.hidesBottomBarWhenPushed = YES;
     UITabBarController *nav = (UITabBarController *)self.window.rootViewController;
     [nav.viewControllers[0].navigationController pushViewController:vx animated:YES];

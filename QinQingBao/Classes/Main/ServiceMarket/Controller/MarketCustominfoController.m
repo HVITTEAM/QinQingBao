@@ -65,8 +65,8 @@
         [section0 addObject:createItem(_customInfo.tel,@"电话",@"必填,请填写电话")];
         
         NSString *address = [NSString stringWithFormat:@"%@%@",_customInfo.totalname ? _customInfo.totalname:@"",_customInfo.areainfo ? _customInfo.areainfo:@""];
-//        [section0 addObject:createItem(address,@"地址",@"必填,请填写地址")];
-//        [section0 addObject:createItem(_customInfo.email,@"邮箱",@"必填,例sample@hvit.com.cn")];
+        [section0 addObject:createItem(address,@"地址",@"必填,请填写地址")];
+        [section0 addObject:createItem(_customInfo.email,@"邮箱",@"必填,例sample@hvit.com.cn")];
         
         NSMutableArray *section1 = [[NSMutableArray alloc] init];
         [section1 addObject:createItem(_customInfo.sex,@"性别",@"选填")];
@@ -394,22 +394,22 @@
         return [NoticeHelper AlertShow:@"输入手机号码格式不正确" view:nil];
     }
     
-//    NSString *address = section0[2][kContent];
-//    if (address.length == 0) {
-//        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
-//    }
-//    
-//    NSString  *email = section0[3][kContent];
-//    if (email.length == 0) {
-//        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
-//    }
-//    if (![self validatePhoneNumOrEmail:email type:2]) {
-//        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
-//    }
+    NSString *address = section0[2][kContent];
+    if (address.length == 0) {
+        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
+    }
+    
+    NSString  *email = section0[3][kContent];
+    if (email.length == 0) {
+        return [NoticeHelper AlertShow:@"请输入电子邮箱" view:nil];
+    }
+    if (![self validatePhoneNumOrEmail:email type:2]) {
+        return [NoticeHelper AlertShow:@"输入邮箱格式不正确" view:nil];
+    }
     
     self.customInfo.name = name;
     self.customInfo.tel = tel;
-//    self.customInfo.email = email;
+    self.customInfo.email = email;
     
 //    self.customInfo.sex = self.datas[1][0][kContent];
 //    self.customInfo.birthday = self.datas[1][1][kContent];

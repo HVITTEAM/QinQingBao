@@ -85,7 +85,7 @@
             ScanCodesViewController *scanCodeVC = [[ScanCodesViewController alloc] init];
             scanCodeVC.hidesBottomBarWhenPushed = YES;
             scanCodeVC.getcodeClick = ^(NSString *code){
-                [[[UIAlertView alloc] initWithTitle:@"扫码" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+                [self addArchiveWhitCode:code];
             };
             [weakSelf.navigationController pushViewController:scanCodeVC animated:YES];
         };
@@ -233,6 +233,31 @@
         [hud removeFromSuperview];
         [NoticeHelper AlertShow:@"请求出错了" view:nil];
     }];
+}
+
+/**
+ 通过扫描二维码添加档案
+ */
+-(void)addArchiveWhitCode:(NSString *)code
+{
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                              @"fmno":code};
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+        }
+        
+        [self loadArchiveDataList];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+    }];
+    
 }
 
 @end

@@ -19,12 +19,14 @@
 // 检查本地登录状态
 +(BOOL)checkLoginStates;
 
-
 @property (nonatomic, retain) UserModel *userVO;
 
 @property (nonatomic, retain) BBSUserModel *bbsVO;
 
 @property (nonatomic, retain) CityModel *cityVO;
+
+// 客服账号
+@property (nonatomic, retain) NSString *serviceCount;
 
 @property (nonatomic, retain) UITabBarController *tabBar;
 
