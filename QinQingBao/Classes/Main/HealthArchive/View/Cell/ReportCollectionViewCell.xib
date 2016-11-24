@@ -22,26 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
-                    <button opaque="NO" tag="90" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Paf-Za-Mc5">
-                        <rect key="frame" x="30" y="-5" width="25" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="25" id="1pQ-lS-gEx"/>
-                            <constraint firstAttribute="width" constant="25" id="pKp-8Y-CUb"/>
-                        </constraints>
-                        <state key="normal" backgroundImage="deleteimg"/>
-                        <connections>
-                            <action selector="deleteImage:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Q1Y-FH-BXa"/>
-                        </connections>
-                    </button>
                 </subviews>
             </view>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="Paf-Za-Mc5" secondAttribute="trailing" constant="-5" id="80d-LG-VKF"/>
-                <constraint firstItem="Paf-Za-Mc5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="-5" id="pg6-w3-gI9"/>
-            </constraints>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="deleteimg" width="12" height="12"/>
-    </resources>
 </document>

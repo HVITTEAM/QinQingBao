@@ -84,6 +84,8 @@
     [_cb2 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb2];
@@ -94,6 +96,8 @@
     [_cb3 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb3];
@@ -104,6 +108,8 @@
     [_cb4 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb4];
@@ -113,6 +119,8 @@
     [_cb5 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb5];
@@ -122,6 +130,8 @@
     [_cb6 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb6];
@@ -132,6 +142,8 @@
     [_cb7 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb7];
@@ -142,6 +154,8 @@
     [_cb8 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb8];

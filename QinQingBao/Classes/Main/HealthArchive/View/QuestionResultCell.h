@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ResultModel.h"
 
 @interface QuestionResultCell : UITableViewCell
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
-- (void)setItem;
+- (void)setItem:(ResultModel *)item;
 
 @end

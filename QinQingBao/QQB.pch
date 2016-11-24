@@ -882,6 +882,8 @@
 /***工单 - 指定受检人*/
 #define URL_Add_workinfo_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?act=workinfo&op=add_workinfo_fm&access_token=token",URL_Local_New]
 
+/***个人档案 - 修改档案*/
+#define URL_Edit_fm [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=edit_fm",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

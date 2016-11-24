@@ -136,14 +136,6 @@ NSString * const kButtonTitles = @"buttonTitles";
                 
             }
             
-            if (self.wr_id != nil) {
-                [btnTitles addObject:@"检测报告"];
-            }
-            
-            if (self.wi_id != nil) {
-                [btnTitles addObject:@"干预方案"];
-            }
-            
         }else if (payStatus == 2 || payStatus == 3) {
             str = @"退款中";
         }else if (payStatus == 4) {
@@ -190,16 +182,7 @@ NSString * const kButtonTitles = @"buttonTitles";
                 //tid 43是超声理疗 44是服务市场 47其他
                 if (![self.tid isEqualToString:@"43"]) {
                     [btnTitles addObject:@"查看物流"];
-                    
-                    if (self.wr_id != nil) {
-                        [btnTitles addObject:@"检测报告"];
-                    }
-                    
-                    if (self.wi_id != nil) {
-                        [btnTitles addObject:@"干预方案"];
-                    }
-//                    [btnTitles addObject:@"检测报告"];
-//                    [btnTitles addObject:@"干预方案"];
+        
                 }
             }
             
@@ -223,6 +206,19 @@ NSString * const kButtonTitles = @"buttonTitles";
         str = @"投诉中";
     }else if (status >= 110 && status <= 129){
         str = @"退货中";
+    }
+    
+    //后台修改,下面几个按钮只需按是否为空来判断就行
+    if (payStatus == 1 && self.fmno.length <= 0) {
+        [btnTitles addObject:@"受检人"];
+    }
+    
+    if (self.wr_id != nil) {
+        [btnTitles addObject:@"检测报告"];
+    }
+    
+    if (self.wi_id != nil) {
+        [btnTitles addObject:@"干预方案"];
     }
     
     //设置返回数据

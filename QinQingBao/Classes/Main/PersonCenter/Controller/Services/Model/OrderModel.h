@@ -137,6 +137,11 @@ extern NSString * const kButtonTitles;
 @property (nonatomic, retain) NSString *wi_id;
 @property (nonatomic, retain) NSString *wi_status;
 
+@property (nonatomic, retain) NSString *fmno;
+@property (nonatomic, retain) NSString *fm_truename;
+@property (nonatomic, retain) NSString *fm_mobile;
+
+
 /**
  *  根据订单状态,支付状态计算对应状态的描述及相应的按钮
  *

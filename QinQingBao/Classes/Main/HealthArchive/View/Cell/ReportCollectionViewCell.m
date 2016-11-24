@@ -13,16 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteImage:)];
-    recognizer.numberOfTapsRequired = 2;
-}
-
-- (IBAction)deleteImage:(id)sender
-{
-    if (self.deleteImageBlock) {
-        self.deleteImageBlock(self.idxPath);
-    }
 }
 
 @end

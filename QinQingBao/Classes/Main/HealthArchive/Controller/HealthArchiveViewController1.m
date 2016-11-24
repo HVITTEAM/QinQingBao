@@ -228,6 +228,7 @@
 - (void)switchValueChange:(UISwitch *)sender
 {
     self.datas[0][sender.tag][kContent] = sender.on?@"1":@"0";
+    NSLog(@"%@",self.datas[0][sender.tag][kContent]);
 }
 
 @end
