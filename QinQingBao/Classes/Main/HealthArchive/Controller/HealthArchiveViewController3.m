@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain) UICollectionView *colectView;
 
-@property (strong, nonatomic) NSMutableArray *delImages;
+//@property (strong, nonatomic) NSMutableArray *delImages;
 
 @end
 
@@ -31,7 +31,7 @@
     [self setupFooter];
     
     _dataProvider = [[NSMutableArray alloc] init];
-    _delImages = [[NSMutableArray alloc] init];
+//    _delImages = [[NSMutableArray alloc] init];
     
     if (self.isAddArchive) {
         //加载缓存的图片
@@ -222,16 +222,20 @@
         
         photoBrowser.delImageForIndex = ^(NSInteger idxOfDel){
             //这里不能用idxOfDel,因为idxOfDel是被删除图片在图片浏览器内部图片数组中的索引.这里与self.dataProvider中图片位置是对不上的.只有传到图片浏览器中的图片数组与self.dataProvider一致时才能对上.
-            [weakSelf.dataProvider removeObjectAtIndex:index];
+            
             if (weakSelf.isAddArchive) {
+                [weakSelf.dataProvider removeObjectAtIndex:index];
                 //删除缓存的图片
                 NSString *imagePath = weakSelf.archiveData.reportPhotos[index];
                 [ArchiveData deletePicFromDocumentWithPicPath:imagePath];
                 [weakSelf.archiveData.reportPhotos removeObjectAtIndex:index];
                 [weakSelf.archiveData saveArchiveDataToFile];
+                [weakSelf.colectView reloadData];
+            }else{
+                [self delMedicalReportPicWithOrderNum:index];
             }
-            [weakSelf.delImages addObject:@(index)];
-            [weakSelf.colectView reloadData];
+//            [weakSelf.delImages addObject:@(index)];
+            
         };
         
         //只有新增或档案创建者才能修改
@@ -301,13 +305,19 @@
             NSString *filePath = [ArchiveData savePictoDocument:imageData picName:picName];
             [self.archiveData.reportPhotos addObject:filePath];
             [self.archiveData saveArchiveDataToFile];
+            
+            image = [[UIImage alloc] initWithData:imageData];
+            
+            [_dataProvider addObject:image];
+            
+            [_dataProvider exchangeObjectAtIndex:_dataProvider.count -1 withObjectAtIndex:_dataProvider.count -2];
+            [self.colectView reloadData];
+            
+        }else if (self.isCreator) {
+            //修改档案时,用户选择一张就上传一张
+            [self addMedicalReportPicWithOrderNum:self.dataProvider.count - 1 imgData:imageData];
         }
-        image = [[UIImage alloc] initWithData:imageData];
-        
-        [_dataProvider addObject:image];
-        
-        [_dataProvider exchangeObjectAtIndex:_dataProvider.count -1 withObjectAtIndex:_dataProvider.count -2];
-        [self.colectView reloadData];
+
     
         //关闭相册界面
         [picker dismissViewControllerAnimated:NO completion:nil];
@@ -359,7 +369,8 @@
     
     NSMutableDictionary *params = [@{
                                      @"client":@"ios",
-                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"sys":@"2"
                                     }mutableCopy];
     
     params[@"truename"] = self.archiveData.truename;
@@ -401,7 +412,7 @@
     params[@"sports"] = self.archiveData.sports;
     params[@"badhabits"] = self.archiveData.badhabits;
     params[@"hremark"] = self.archiveData.hremark;
-    params[@"sys"] = @"2";
+    
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
@@ -469,6 +480,7 @@
     NSMutableDictionary *params = [@{
                                      @"client":@"ios",
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"sys": @"2",
                                      @"fmno":self.archiveData.fmno
                                      }mutableCopy];
     
@@ -511,7 +523,7 @@
     params[@"sports"] = self.archiveData.sports;
     params[@"badhabits"] = self.archiveData.badhabits;
     params[@"hremark"] = self.archiveData.hremark;
-    params[@"sys"] = @"2";
+    
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
@@ -551,6 +563,86 @@
     }];
 }
 
+
+/**
+ *  新增医疗报告图片
+ *  orderNum : 新增图片在dataProvider数组中的序号
+ */
+- (void)addMedicalReportPicWithOrderNum:(NSInteger)orderNum imgData:(NSData *)imageData
+{
+    if (imageData.length <= 0) {
+        [NoticeHelper AlertShow:@"缺少图片" view:nil];
+        return;
+    }
+    
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"sys":@"2"
+                                     }mutableCopy];
+    params[@"fmno"] = self.archiveData.fmno;
+    //新增的医诊图片
+    NSMutableArray *tempArrays = [[NSMutableArray alloc] init];
+    NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
+    tempDict[@"name"] = @"new_medical_report";
+    tempDict[@"fileName"] = @"medical_report_new.jpg";
+    tempDict[@"mimeType"] = @"image/jpeg";
+    tempDict[@"fileData"] = imageData;
+    [tempArrays addObject:tempDict];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    [CommonRemoteHelper UploadPicWithUrl:URL_Add_medical_report_item parameters:params images:tempArrays success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        if([dict[@"code"] integerValue] != 0){
+            [NoticeHelper AlertShow:[NSString stringWithFormat:@"上传失败第%d,%@",(int)orderNum + 1,dict[@"errorMsg"]] view:nil];
+            return;
+        }
+        
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
+        
+        [self.dataProvider addObject:image];
+        
+        [self.dataProvider exchangeObjectAtIndex:_dataProvider.count -1 withObjectAtIndex:_dataProvider.count -2];
+        [self.colectView reloadData];
+        [NoticeHelper AlertShow:[NSString stringWithFormat:@"成功第%d",(int)orderNum + 1] view:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:[NSString stringWithFormat:@"上传失败第%d",(int)orderNum + 1] view:nil];
+    }];
+}
+
+/**
+ *  删除医疗报告图片
+ *  orderNum : 在dataProvider数组中的序号
+ */
+- (void)delMedicalReportPicWithOrderNum:(NSInteger)orderNum
+{
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                     @"sys":@"2"
+                                     }mutableCopy];
+    params[@"fmno"] = self.archiveData.fmno;
+    params[@"del_medical_report"] = @(orderNum + 1);
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    [CommonRemoteHelper RemoteWithUrl:URL_Del_medical_report_item parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        [hud removeFromSuperview];
+        
+        if ([dict[@"code"] integerValue] != 0) {
+            [NoticeHelper AlertShow:[NSString stringWithFormat:@"删除图片失败%@",dict[@"errorMsg"]] view:nil];
+        }
+    
+        [self.dataProvider removeObjectAtIndex:orderNum];
+        
+        [self.colectView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [hud removeFromSuperview];
+        [NoticeHelper AlertShow:@"删除图片失败" view:nil];
+    }];
+}
+
 #pragma mark - 事件方法
 - (void)next:(UIButton *)sender
 {
@@ -562,8 +654,6 @@
     }else{
         [self editArchiveData];
     }
-    
-    
 }
 
 @end
