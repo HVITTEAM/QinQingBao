@@ -82,6 +82,7 @@
     
     PrivateProfileViewController *profile = [[PrivateProfileViewController alloc] init];
     [self addOneChlildVc:profile title:@"我的" imageName:@"third_normal.png" selectedImageName:@"third_selected.png"];
+
 }
 
 /**

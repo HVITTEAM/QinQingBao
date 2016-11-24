@@ -96,7 +96,8 @@
  **/
 -(void)getAdvertisementpic
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:nil type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{@"bc_uses_type" : @"",
+                                                                        @"bc_type" : @"1"} type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         
         if([dict[@"code"] integerValue] != 0){
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];

@@ -34,6 +34,11 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     [self initView];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 #pragma mark page控制器
 /**
  * 初始化视图
@@ -73,8 +78,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     {
         
         UIViewController *vc = (UIViewController *)self.viewArr[i];
-        
-        
+
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
         [button setFrame:CGRectMake(((MTScreenW - kTotalMargin)/self.viewArr.count) *i,0,(MTScreenW - kTotalMargin)/self.viewArr.count, kHeightOfTopScrollView - 5)];
@@ -124,7 +128,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         [UIView animateWithDuration:0.25 animations:^{
             [self.shadowImageView setFrame:CGRectMake(sender.frame.origin.x, 0, sender.width, kHeightOfTopScrollView)];
         } completion:^(BOOL finished) {
-            [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW,-64) animated:YES];
+            [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW,0) animated:YES];
             self.isUseButtonClick = YES;
         }];
     }

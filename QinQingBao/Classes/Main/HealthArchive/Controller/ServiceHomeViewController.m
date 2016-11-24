@@ -65,7 +65,6 @@
         [weakSelf getServicesData];
     }];
     
-//    [self getServicesData];
     [self.tableView.header beginRefreshing];
 }
 
