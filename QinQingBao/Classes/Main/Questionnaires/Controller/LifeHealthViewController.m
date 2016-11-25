@@ -379,7 +379,9 @@
                                      {
                                          ResultModel *model = [ResultModel objectWithKeyValues:dict1];
                                          QuestionResultController3 *questionResultVC = [[QuestionResultController3 alloc] init];
-                                         questionResultVC.qResultModel = model;
+                                         questionResultVC.r_ids = model.r_ids;
+                                         questionResultVC.r_dangercoefficient = model.r_dangercoefficient;
+                                         questionResultVC.hmd_advise = model.r_result.hmd_advise;
                                          [self.navigationController pushViewController:questionResultVC animated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

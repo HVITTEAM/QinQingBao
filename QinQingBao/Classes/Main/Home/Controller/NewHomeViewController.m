@@ -14,7 +14,6 @@
 #import "ReportListViewController.h"
 
 #import "ServiceHomeViewController.h"
-#import "HealthPlanController.h"
 
 @interface NewHomeViewController ()
 {
@@ -24,7 +23,6 @@
 
 @property (nonatomic, strong) PostsTableViewController *vc1;
 @property (nonatomic, strong) ServiceHomeViewController *vc2;
-@property (nonatomic, strong) HealthPlanController *vc3;
 @end
 
 @implementation NewHomeViewController
@@ -58,10 +56,6 @@
     self.vc2.parentVC = self;
     self.vc2.title = @"服务";
     
-    self.vc3 = [[HealthPlanController alloc] init];
-    self.vc3.parentVC = self;
-    self.vc3.title = @"报告";
-   
     self.viewArr = [NSMutableArray arrayWithObjects:self.vc2,self.vc1,nil];
 }
 
@@ -72,11 +66,7 @@
 {
     self.view.backgroundColor = [UIColor whiteColor];
     
-    //去除导航栏下方的横线
-    //    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]]
-    //                       forBarPosition:UIBarPositionAny
-    //                           barMetrics:UIBarMetricsDefault];
-    //    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forBarMetrics:UIBarMetricsDefault];
     
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 19)];
     [leftBtn addTarget:self action:@selector(searchView) forControlEvents:UIControlEventTouchUpInside];

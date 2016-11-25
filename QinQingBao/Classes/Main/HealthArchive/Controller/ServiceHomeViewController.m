@@ -51,6 +51,8 @@
 {
     [super viewDidLoad];
     
+    importMsgStr = @"暂无与您健康相关的提醒需要您关注";
+
     self.dataProvider = [[NSMutableArray alloc] init];
     
     self.tableView.backgroundColor = HMGlobalBg;
@@ -65,7 +67,6 @@
         [weakSelf getServicesData];
     }];
     
-//    [self getServicesData];
     [self.tableView.header beginRefreshing];
 }
 
@@ -247,6 +248,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![SharedAppUtil checkLoginStates])
+        return;
     if (indexPath.section == 0 || indexPath.section == 2) {
         return;
     }else if (indexPath.section == 1 && indexPath.row == 0) {
@@ -261,13 +264,6 @@
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
-    
-    //    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-    //
-    //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-    
 }
 
 - (void)loadArchiveDataList
@@ -286,7 +282,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [self.tableView.header endRefreshing];
         
-        if ([dict[@"code"] integerValue] != 0) {
+        if ([dict[@"code"] integerValue] != 0 && [dict[@"code"] integerValue] != 17001) {
             [NoticeHelper AlertShow:@"errorMsg" view:self.view];
         }
         
@@ -382,11 +378,13 @@
         return;
     }
 
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return;
     NSDictionary *params = @{ @"client":@"ios",
                               @"key":[SharedAppUtil defaultCommonUtil].userVO.key};
     [CommonRemoteHelper RemoteWithUrl:URL_Get_sysfmmsg_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         else
         {

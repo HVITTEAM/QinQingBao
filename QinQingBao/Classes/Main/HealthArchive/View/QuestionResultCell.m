@@ -50,10 +50,10 @@
     return self;
 }
 
-- (void)setItem:(ResultModel *)item
+- (void)setTextWithDangercoefficient:(NSString *)dangercoefficient advise:(NSString *)advise
 {
-    self.resultLb.text = item.r_dangercoefficient;
-    NSString *detailContent = item.r_result.hmd_advise;
+    self.resultLb.text = dangercoefficient;
+    NSString *detailContent = advise;
     if (detailContent) {
         
         NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];

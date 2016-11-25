@@ -129,6 +129,7 @@
         ArchiveDataListModel * model = self.relativesArr[indexPath.item];
         cell.titleLb.text = model.truename;
         [cell.imgView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"pc_user.png"]];
+        
         cell.titleLb.textColor = [UIColor colorWithRGB:@"666666"];
         
         //设置描边

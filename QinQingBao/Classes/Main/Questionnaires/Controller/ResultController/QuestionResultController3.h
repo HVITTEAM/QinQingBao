@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ResultModel.h"
 
 @interface QuestionResultController3 : UITableViewController
 
-@property (strong, nonatomic) ResultModel *qResultModel;
+//@property (strong, nonatomic) ResultModel *qResultModel;
+
+@property (nonatomic, copy) NSString *r_dangercoefficient;
+
+@property (nonatomic, copy) NSString *hmd_advise;
+
+@property (nonatomic, copy) NSArray *r_ids;
+
+// 依次来判断是否归档了
+@property (nonatomic, copy) NSString *truename;
 
 @end

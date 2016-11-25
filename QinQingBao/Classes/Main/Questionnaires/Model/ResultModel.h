@@ -21,4 +21,7 @@
 
 @property (nonatomic, copy) NSArray *r_ids;
 
+@property (nonatomic, copy) NSArray *r_fids;
+
+
 @end

@@ -640,10 +640,10 @@
         
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:[NSString stringWithFormat:@"删除图片失败%@",dict[@"errorMsg"]] view:nil];
-            return;
         }
     
         [self.dataProvider removeObjectAtIndex:orderNum];
+        
         [self.colectView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

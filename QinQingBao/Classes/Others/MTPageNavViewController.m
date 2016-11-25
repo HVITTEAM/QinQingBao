@@ -34,6 +34,11 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     [self initView];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 #pragma mark page控制器
 /**
  * 初始化视图
@@ -45,7 +50,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     self.buttonArr = [[NSMutableArray alloc] init];
     
     //创建顶部可滑动的scrollView
-    self.headScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW - kTotalMargin, kHeightOfTopScrollView)];
+    self.headScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 140, kHeightOfTopScrollView)];
     self.navigationItem.titleView = self.headScrollView;
     
     //创建主滚动视图
@@ -73,11 +78,10 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
     {
         
         UIViewController *vc = (UIViewController *)self.viewArr[i];
-        
-        
+
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.tag = i + 100;
-        [button setFrame:CGRectMake(((MTScreenW - kTotalMargin)/self.viewArr.count) *i,0,(MTScreenW - kTotalMargin)/self.viewArr.count, kHeightOfTopScrollView - 5)];
+        [button setFrame:CGRectMake((140/self.viewArr.count) *i,0,140/self.viewArr.count, kHeightOfTopScrollView - 5)];
         [button setTitle:vc.title forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:kFontSizeOfTabButton];
         [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
@@ -124,7 +128,7 @@ static const CGFloat kFontSizeOfTabButton = 15.0f;
         [UIView animateWithDuration:0.25 animations:^{
             [self.shadowImageView setFrame:CGRectMake(sender.frame.origin.x, 0, sender.width, kHeightOfTopScrollView)];
         } completion:^(BOOL finished) {
-            [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW,-64) animated:YES];
+            [self.rootScrollView setContentOffset:CGPointMake((self.selectedIndex - 100)*MTScreenW,0) animated:YES];
             self.isUseButtonClick = YES;
         }];
     }

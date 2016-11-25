@@ -12,6 +12,10 @@
 #import "QuestionResultController.h"
 #import "QuestionResultController2.h"
 
+#import "QuestionResultController3.h"
+
+#import "ResultModel.h"
+
 @interface EstimateViewController ()
 
 @property(strong,nonatomic)NSMutableArray *dataProvider;
@@ -50,6 +54,12 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.dataProvider = [[NSMutableArray alloc] init];
+    //下拉刷新
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.p = 1;
+        [self.dataProvider removeAllObjects];
+        [self getDatasFormServices];
+    }];
     self.tableView.footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     
     [self getDatasFormServices];
@@ -79,20 +89,35 @@
 {
     ReportListModel *reportListModel = self.dataProvider[indexPath.row];
     
-    //如果reid = 1 就是疾病风险
-    if ([reportListModel.r_eid isEqualToString:@"1"])
-    {
-        QuestionResultController *vc = [[QuestionResultController alloc] init];
-        vc.reportListModel = reportListModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else
-    {
-        QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
-        vc.reportListModel = reportListModel;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
+    NSDictionary *params = @{ @"client":@"ios",
+                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                              @"rid":reportListModel.r_id
+                              };
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_report_detail parameters:params
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                     }
+                                     else
+                                     {
+                                         ResultModel *model = [ResultModel objectWithKeyValues:dict1];
+                                         QuestionResultController3 *questionResultVC = [[QuestionResultController3 alloc] init];
+                                         questionResultVC.r_ids = @[model.r_id];
+                                         questionResultVC.r_dangercoefficient = model.r_dangercoefficient;
+                                         questionResultVC.hmd_advise = model.r_result.hmd_advise;
+                                         questionResultVC.truename = reportListModel.truename;
+                                         [self.navigationController pushViewController:questionResultVC animated:YES];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                 }];
 }
 
 #pragma mark - 网络相关
@@ -103,7 +128,7 @@
 {
     if (![SharedAppUtil defaultCommonUtil].userVO)
         return [self.tableView initWithPlaceString:PlaceholderStr_Login imgPath:@"placeholder-1"];
-
+    
     
     MBProgressHUD *hud = nil;
     if (self.p == 1) {
@@ -121,7 +146,8 @@
         
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
-        
+        [self.tableView.header endRefreshing];
+
         if([dict[@"code"] integerValue] == 17001 && self.dataProvider.count == 0){
             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
             return;

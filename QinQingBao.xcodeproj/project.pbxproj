@@ -72,6 +72,12 @@
 		011E8E041DD00DFE00700BB3 /* HealthReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011E8E021DD00DFE00700BB3 /* HealthReportCell.xib */; };
 		011E8E091DD0603100700BB3 /* HealthArchiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 011E8E081DD0603100700BB3 /* HealthArchiveViewController.m */; };
 		011E8E0C1DD06B8B00700BB3 /* HealthArchiveViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 011E8E0B1DD06B8B00700BB3 /* HealthArchiveViewController1.m */; };
+		011F0B2E1DE7E9B4006E16E2 /* 图片.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B291DE7E9B4006E16E2 /* 图片.png */; };
+		011F0B2F1DE7E9B4006E16E2 /* 拍照.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2A1DE7E9B4006E16E2 /* 拍照.png */; };
+		011F0B301DE7E9B4006E16E2 /* 添加.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2B1DE7E9B4006E16E2 /* 添加.png */; };
+		011F0B311DE7E9B4006E16E2 /* 表情.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2C1DE7E9B4006E16E2 /* 表情.png */; };
+		011F0B321DE7E9B4006E16E2 /* 语音.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2D1DE7E9B4006E16E2 /* 语音.png */; };
+		011F0B351DE7ED74006E16E2 /* 输入.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B341DE7ED74006E16E2 /* 输入.png */; };
 		0120FC2F1DD2BA70005561B2 /* china.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0120FC2E1DD2BA70005561B2 /* china.plist */; };
 		01237A581CFC319D0070C905 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 01237A4A1CFC319D0070C905 /* MJConst.m */; };
 		01237A591CFC319D0070C905 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01237A4D1CFC319D0070C905 /* MJFoundation.m */; };
@@ -1421,6 +1427,12 @@
 		011E8E081DD0603100700BB3 /* HealthArchiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthArchiveViewController.m; sourceTree = "<group>"; };
 		011E8E0A1DD06B8B00700BB3 /* HealthArchiveViewController1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthArchiveViewController1.h; sourceTree = "<group>"; };
 		011E8E0B1DD06B8B00700BB3 /* HealthArchiveViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthArchiveViewController1.m; sourceTree = "<group>"; };
+		011F0B291DE7E9B4006E16E2 /* 图片.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "图片.png"; sourceTree = "<group>"; };
+		011F0B2A1DE7E9B4006E16E2 /* 拍照.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "拍照.png"; sourceTree = "<group>"; };
+		011F0B2B1DE7E9B4006E16E2 /* 添加.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "添加.png"; sourceTree = "<group>"; };
+		011F0B2C1DE7E9B4006E16E2 /* 表情.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "表情.png"; sourceTree = "<group>"; };
+		011F0B2D1DE7E9B4006E16E2 /* 语音.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语音.png"; sourceTree = "<group>"; };
+		011F0B341DE7ED74006E16E2 /* 输入.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "输入.png"; sourceTree = "<group>"; };
 		0120FC2E1DD2BA70005561B2 /* china.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china.plist; sourceTree = "<group>"; };
 		01237A491CFC319D0070C905 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
 		01237A4A1CFC319D0070C905 /* MJConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJConst.m; sourceTree = "<group>"; };
@@ -3819,6 +3831,19 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		011F0B281DE7E9B4006E16E2 /* chaticon */ = {
+			isa = PBXGroup;
+			children = (
+				011F0B341DE7ED74006E16E2 /* 输入.png */,
+				011F0B291DE7E9B4006E16E2 /* 图片.png */,
+				011F0B2A1DE7E9B4006E16E2 /* 拍照.png */,
+				011F0B2B1DE7E9B4006E16E2 /* 添加.png */,
+				011F0B2C1DE7E9B4006E16E2 /* 表情.png */,
+				011F0B2D1DE7E9B4006E16E2 /* 语音.png */,
+			);
+			path = chaticon;
+			sourceTree = "<group>";
+		};
 		01237A481CFC319D0070C905 /* MJExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -4142,6 +4167,7 @@
 		013F3F261BFC6E0A00FF39E5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				011F0B281DE7E9B4006E16E2 /* chaticon */,
 				01636B461D10FBA600BED8CD /* chatshop.png */,
 				01E89B0A1C76FE0000CFD40D /* infoimg.png */,
 				01E89AFE1C75BE8300CFD40D /* scan@2x.png */,
@@ -8802,6 +8828,7 @@
 				016066CF1CF6ACCE005A3164 /* MJRefresh.bundle in Resources */,
 				01F6DBBA1D8E406000300679 /* ScrollMenuCell.xib in Resources */,
 				01ECDA211C8EB31F0018160F /* VoiceSearchFeedback013.png in Resources */,
+				011F0B301DE7E9B4006E16E2 /* 添加.png in Resources */,
 				01AB2EE41DD59CA5006EAFA2 /* cb_mono_off.png in Resources */,
 				01E4BE5C1BA031E000BF41EF /* ServiceDetailCell.xib in Resources */,
 				01BA2D601B9EC70C00A2C7BD /* ServiceHeadView.xib in Resources */,
@@ -8850,6 +8877,7 @@
 				01AB2EDC1DD59CA5006EAFA2 /* cb_glossy_off.png in Resources */,
 				01F015ED1C5F42CD00930B0E /* DiscountCountDownCell.xib in Resources */,
 				01ECDAAA1C8EB31F0018160F /* chatBar_more_cameraSelected@2x.png in Resources */,
+				011F0B311DE7E9B4006E16E2 /* 表情.png in Resources */,
 				01ECDAAC1C8EB31F0018160F /* chatBar_more_location.png in Resources */,
 				01E89B041C76B45A00CFD40D /* BindingResultViewController.xib in Resources */,
 				01ECDABA1C8EB31F0018160F /* messageToolbarBg@2x.png in Resources */,
@@ -8953,6 +8981,7 @@
 				01601D511CE08DE500B3712E /* CancelOrderController.xib in Resources */,
 				01ECDA0A1C8EB31F0018160F /* VoiceSearchFeedback005@2x.png in Resources */,
 				01ECDA771C8EB31F0018160F /* chatBar_keyboardSelected.png in Resources */,
+				011F0B2F1DE7E9B4006E16E2 /* 拍照.png in Resources */,
 				01ECD9F81C8EB31F0018160F /* chatListCellHead@2x.png in Resources */,
 				01ECDA451C8EB31F0018160F /* Contents.json in Resources */,
 				01C82BEB1CC48EA6004D7A16 /* BuyRightnowView.xib in Resources */,
@@ -9030,6 +9059,7 @@
 				01ECDABD1C8EB31F0018160F /* chat_receiver_audio_playing001@2x.png in Resources */,
 				01ECDA711C8EB31F0018160F /* chatBar_faceSelected.png in Resources */,
 				D2A9771B1DB06B8400A0438D /* ReportListCell.xib in Resources */,
+				011F0B2E1DE7E9B4006E16E2 /* 图片.png in Resources */,
 				01ECDA4E1C8EB31F0018160F /* chatBar_more_face.png in Resources */,
 				01ECDA4B1C8EB31F0018160F /* chatBar_more_cardSelected.png in Resources */,
 				017179161BEC45140070A503 /* OrderServiceDetailCell.xib in Resources */,
@@ -9150,6 +9180,7 @@
 				0100C5511BFEE6AA005128EA /* area.plist in Resources */,
 				01AB2EE11DD59CA5006EAFA2 /* cb_green_off@2x.png in Resources */,
 				01ECDA401C8EB31F0018160F /* Contents.json in Resources */,
+				011F0B351DE7ED74006E16E2 /* 输入.png in Resources */,
 				01ECDA541C8EB31F0018160F /* chatBar_textBg.png in Resources */,
 				01FF8F871CDB2DDE0089BBC4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D211A6D21CED536A002C90FD /* OrderRefundViewController.xib in Resources */,
@@ -9185,6 +9216,7 @@
 				01ECDA831C8EB31F0018160F /* chatBar_recordBg.png in Resources */,
 				01ECDA421C8EB31F0018160F /* call_silence_h@2x.png in Resources */,
 				01ECDA1E1C8EB31F0018160F /* VoiceSearchFeedback012.png in Resources */,
+				011F0B321DE7E9B4006E16E2 /* 语音.png in Resources */,
 				01ECDA081C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDA3B1C8EB31F0018160F /* call_out_h.png in Resources */,
 				01ECDAA91C8EB31F0018160F /* chatBar_more_cameraSelected.png in Resources */,

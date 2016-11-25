@@ -84,7 +84,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_bingding_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [hud removeFromSuperview];
         
-        if ([dict[@"code"] integerValue] != 0) {
+        if ([dict[@"code"] integerValue] != 0 && [dict[@"code"] integerValue] != 17001) {
             [NoticeHelper AlertShow:@"errorMsg" view:self.view];
         }
         
