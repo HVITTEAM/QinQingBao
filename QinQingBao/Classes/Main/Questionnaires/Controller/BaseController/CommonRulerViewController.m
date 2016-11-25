@@ -105,11 +105,11 @@
 
 -(void)initButton
 {
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 119.5, MTScreenW, 0.5)];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, MTScreenH - 59.5, MTScreenW, 0.5)];
     line.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:line];
     
-    UIButton *nextBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, MTScreenH - 120, MTScreenW, 60)];
+    UIButton *nextBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, MTScreenH - 60, MTScreenW, 60)];
     [nextBtn setTitle:@"确定" forState:UIControlStateNormal];
     [nextBtn.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:20]];
 //    [nextBtn setBackgroundImage:[UIImage imageWithColor:[UIColor orangeColor]] forState:UIControlStateNormal];
