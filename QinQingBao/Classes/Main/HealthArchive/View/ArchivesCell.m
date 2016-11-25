@@ -120,7 +120,7 @@
     
     if (self.relativesArr.count == 0 || indexPath.row == self.relativesArr.count) {
         cell.titleLb.text = @"新增";
-        cell.imgView.image = [UIImage imageNamed:@"add.png"];
+        [cell.imgView sd_setImageWithURL:nil placeholderImage:[UIImage imageNamed:@"add.png"]];
         cell.titleLb.textColor = [UIColor colorWithRGB:@"999999"];
         //不显示描边
         cell.showBorderLine = NO;
