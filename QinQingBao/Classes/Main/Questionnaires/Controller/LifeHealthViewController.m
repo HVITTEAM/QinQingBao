@@ -11,6 +11,8 @@
 #import "QuestionModel_1.h"
 #import "OptionModel.h"
 #import "QuestionResultController2.h"
+#import "ResultModel.h"
+#import "QuestionResultController3.h"
 
 @interface LifeHealthViewController ()
 
@@ -297,12 +299,13 @@
         nextQuestionBtnVC.answerProvider = self.answerProvider;
         [self.navigationController pushViewController:nextQuestionBtnVC animated:YES];
     }else if (nextQuestionId == self.dataProvider.count + 1){
-        QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
-        vc.answerProvider = self.answerProvider;
-        vc.exam_id = self.exam_id;
-        vc.e_title = self.e_title;
-        vc.calculatype = self.calculatype;
-        [self.navigationController pushViewController:vc animated:YES];
+//        QuestionResultController2 *vc = [[QuestionResultController2 alloc] init];
+//        vc.answerProvider = self.answerProvider;
+//        vc.exam_id = self.exam_id;
+//        vc.e_title = self.e_title;
+//        vc.calculatype = self.calculatype;
+//        [self.navigationController pushViewController:vc animated:YES];
+        [self getResult];
     }
 }
 
@@ -332,5 +335,67 @@
                                      NSLog(@"发生错误！%@",error);
                                  }];
 }
+
+-(void)getResult
+{
+    NSMutableDictionary *resultdict = [[NSMutableDictionary alloc] init];
+    [resultdict setObject:self.exam_id forKey:@"exam_id"];
+    [resultdict setObject:self.e_title forKey:@"r_etitle"];
+    [resultdict setObject:self.answerProvider forKey:@"qitem"];
+    
+    NSLog(@"%@",resultdict);
+    NSString *dictstr = [self dictionaryToJson:[resultdict copy]];
+    //去掉换行符
+    NSString * encodingString = [dictstr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *resultStr = [encodingString stringByReplacingOccurrencesOfString:@"%0A%20%20" withString:@""];
+    [self submit_exam:resultStr];
+    NSLog(@"%@",resultStr);
+}
+
+/**
+ *  获取数据源
+ */
+-(void)submit_exam:(NSString *)resultStr
+{
+    NSMutableDictionary *paramDict = [[NSMutableDictionary alloc] initWithDictionary:@{@"result" : resultStr,
+                                                                                       @"client" : @"ios",
+                                                                                       @"calculatype":self.calculatype
+                                                                                       }];
+    if ( [SharedAppUtil defaultCommonUtil].userVO.key)
+    {
+        [paramDict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
+    }
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:paramDict
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     NSDictionary *dict1 = [dict objectForKey:@"datas"];
+                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+                                     {
+                                         
+                                     }
+                                     else
+                                     {
+                                         ResultModel *model = [ResultModel objectWithKeyValues:dict1];
+                                         QuestionResultController3 *questionResultVC = [[QuestionResultController3 alloc] init];
+                                         questionResultVC.qResultModel = model;
+                                         [self.navigationController pushViewController:questionResultVC animated:YES];
+                                     }
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                 }];
+}
+
+//词典转换为字符串
+- (NSString*)dictionaryToJson:(NSDictionary *)dic
+{
+    NSError *parseError = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 
 @end

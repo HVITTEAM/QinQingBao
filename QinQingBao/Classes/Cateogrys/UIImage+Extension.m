@@ -59,13 +59,13 @@
     CGFloat finalW = self.size.width *finalScale;
     CGFloat finalH = self.size.height *finalScale;
     CGRect finalRect;
-    if (finalW > finalH) {
+    if (scaleW < scaleH) {
         finalRect = CGRectMake((size.width - finalW)/2, 0, finalW, finalH);
     }else{
         finalRect = CGRectMake(0, (size.height - finalH)/2, finalW, finalH);
     }
     
-    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0f);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     [self drawInRect:finalRect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
