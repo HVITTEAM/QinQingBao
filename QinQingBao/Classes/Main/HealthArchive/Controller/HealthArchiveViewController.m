@@ -59,7 +59,8 @@
     if (self.isAddArchive) {
         //获取当前用户的缓存的档案数据,新增时候
         self.archiveData = [ArchiveData getArchiveDataFromFile];
-        self.portraitImage = [[UIImage alloc] initWithContentsOfFile:self.archiveData.portraitPic];
+        NSData *data = [[NSData alloc] initWithContentsOfFile:self.archiveData.portraitPic];
+        self.portraitImage = [[UIImage alloc] initWithData:data scale:1.0f];
     }else{
         //查看时候(如果是创建档案的用户还可以修改,其他人只能看)
         [self loadArchivePersonInfo];
@@ -413,7 +414,8 @@
 
 - (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
 {
-    NSData *data = UIImageJPEGRepresentation(croppedImage, 0.5);
+    UIImage *thubImage = [croppedImage scaleImageToSize:CGSizeMake(300, 300)];
+    NSData *data = UIImageJPEGRepresentation(thubImage, 0.8f);
     self.navigationController.navigationBarHidden = NO;
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.portraitImage = [[UIImage alloc] initWithData:data];

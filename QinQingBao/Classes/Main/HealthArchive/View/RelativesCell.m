@@ -23,12 +23,15 @@
     self.imgView.layer.borderColor = [UIColor colorWithRGB:@"f7931e"].CGColor;
     self.imgView.layer.borderWidth = 0.0f;
     self.imgView.layer.masksToBounds = YES;
+    
+    self.iconWidthCon.constant = MTScreenW / 320 * 40;
+    [self updateConstraintsIfNeeded];
+    [self layoutIfNeeded];
 }
 
 - (void)updateConstraints
 {
-    self.iconWidthCon.constant = MTScreenW / 320 * 40;
-    
+//    self.iconWidthCon.constant = MTScreenW / 320 * 40;
     [super updateConstraints];
 }
 

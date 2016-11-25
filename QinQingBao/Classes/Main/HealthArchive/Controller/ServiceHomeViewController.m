@@ -371,6 +371,12 @@
 -(void)getImportMsg
 {
     importMsgStr = @"暂无与您健康相关的提醒需要您关注";
+    
+    //判断是否登录
+    if (![SharedAppUtil checkLoginStates]){
+        [self.tableView.header endRefreshing];
+        return;
+    }
 
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         return;
