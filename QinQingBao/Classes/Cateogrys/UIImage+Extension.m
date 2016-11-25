@@ -65,7 +65,7 @@
         finalRect = CGRectMake(0, (size.height - finalH)/2, finalW, finalH);
     }
     
-    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0f);
     [self drawInRect:finalRect];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

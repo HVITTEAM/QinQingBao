@@ -37,7 +37,8 @@
         //加载缓存的图片
         for (int i = 0; i < self.archiveData.reportPhotos.count; i++) {
             NSString *path = self.archiveData.reportPhotos[i];
-            UIImage *img = [[UIImage alloc] initWithContentsOfFile:path];
+            NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+            UIImage *img = [[UIImage alloc] initWithData:data scale:1.0f];
             if (img) {
                 [_dataProvider addObject:img];
             }else{
@@ -299,8 +300,16 @@
         //先把图片转成NSData
         UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
         
+        if (image.size.width > 1024 || image.size.height > 1024) {
+            CGFloat bigSide = MAX(image.size.width, image.size.height);
+            CGFloat scaleFactor = bigSide / 1024;
+            CGSize targetSize = CGSizeMake(image.size.width / scaleFactor, image.size.height / scaleFactor);
+            
+            image = [image scaleImageToSize:targetSize];
+            NSLog(@"%@",NSStringFromCGSize(image.size));
+        }
         //保存图片
-        NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
+        NSData *imageData = UIImageJPEGRepresentation(image, 0.8f);
         if (self.isAddArchive) {
             NSString *filePath = [ArchiveData savePictoDocument:imageData picName:picName];
             [self.archiveData.reportPhotos addObject:filePath];
@@ -429,7 +438,7 @@
         tempDict[@"fileName"] = [NSString stringWithFormat:@"medical_report_%@_%d.jpg",currentDateStr,i];
         tempDict[@"mimeType"] = @"image/jpeg";
         UIImage *tempImage = self.dataProvider[i];
-        NSData *data = UIImageJPEGRepresentation(tempImage, 0.3f);
+        NSData *data = UIImageJPEGRepresentation(tempImage, 0.8f);
         tempDict[@"fileData"] = data;
         [tempArrays addObject:tempDict];
     }
@@ -439,7 +448,7 @@
         tempDict[@"name"] = @"avatar";
         tempDict[@"fileName"] = [NSString stringWithFormat:@"basic_avatar_%@.jpg",currentDateStr];
         tempDict[@"mimeType"] = @"image/jpeg";
-        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.3f);
+        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.8f);
         tempDict[@"fileData"] = data;
         [tempArrays addObject:tempDict];
     }
@@ -537,7 +546,7 @@
         tempDict[@"name"] = @"avatar";
         tempDict[@"fileName"] = [NSString stringWithFormat:@"basic_avatar_%@.jpg",currentDateStr];
         tempDict[@"mimeType"] = @"image/jpeg";
-        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.3f);
+        NSData *data = UIImageJPEGRepresentation(self.archiveData.avatarImage, 0.8f);
         tempDict[@"fileData"] = data;
         [tempArrays addObject:tempDict];
     }
