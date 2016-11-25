@@ -275,9 +275,7 @@
  */
 -(void)getRecommendlist
 {
-    NSMutableDictionary *params = [@{
-                                     @"recommend" :  @"3"
-                                     }mutableCopy];
+    NSMutableDictionary *params = [@{ @"recommend" :  @"3"}mutableCopy];
     
     //    if (self.type == BBSType_1) {
     //        //        params[@"p_expert"] = @"1";
@@ -344,7 +342,7 @@
             return 2;
             break;
         case 1:
-            return 2;
+            return recommendlist.count;
             break;
         case 2:
             return postsArr.count + 1;
@@ -453,7 +451,7 @@
     else  if (indexPath.section == 1 )
     {
         CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
-        if (postsArr.count > 0)
+        if (recommendlist && recommendlist.count > 0)
             [cardCell1 setPostsModel:recommendlist[indexPath.row]];
         cell = cardCell1;
     }

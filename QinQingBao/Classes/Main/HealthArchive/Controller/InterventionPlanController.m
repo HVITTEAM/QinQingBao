@@ -75,6 +75,8 @@
     ReportInterventionModel *item = self.dataProvider[indexPath.section];
     cell.titleLb.text = [item.basics objectForKey:@"truename"];
     cell.subTitleLb.text = item.wi_read_time;
+    NSURL *iconUrl = [NSURL URLWithString:[item.basics objectForKey:@"avatar"]];
+    [cell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
     
     return cell;

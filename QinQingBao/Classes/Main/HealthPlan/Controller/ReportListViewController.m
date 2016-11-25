@@ -73,6 +73,9 @@
     cell.titleLb.text = [item.basics objectForKey:@"truename"];
     cell.subTitleLb.text = item.wi_read_time;
     cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
+    NSURL *iconUrl = [NSURL URLWithString:[item.basics objectForKey:@"avatar"]];
+    [cell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    
     return cell;
 }
 
