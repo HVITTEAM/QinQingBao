@@ -50,6 +50,7 @@
     
     UILabel *lab = [[UILabel alloc] init];
     lab.text  = @"健康咨询";
+    lab.textColor = [UIColor colorWithRGB:@"999999"];
     lab.font = [UIFont systemFontOfSize:10];
     [self addSubview:lab];
     self.lab = lab;

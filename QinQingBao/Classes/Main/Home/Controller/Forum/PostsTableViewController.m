@@ -98,27 +98,27 @@
 {
     [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{@"bc_uses_type" : @"",
                                                                         @"bc_type" : @"1"} type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if([dict[@"code"] integerValue] != 0){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-            return ;
-        }
-        
-        self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
-        
-        NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
-        for (int i = 0; i < self.advDatas.count; i++) {
-            HomePicModel *model = self.advDatas[i];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
-            [imageUrls addObject:urlStr];
-        }
-        LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
-        loopView.imageUrls = imageUrls;
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
-    }];
+                                                                            
+                                                                            if([dict[@"code"] integerValue] != 0){
+                                                                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                                                                //            [alertView show];
+                                                                                return ;
+                                                                            }
+                                                                            
+                                                                            self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
+                                                                            
+                                                                            NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
+                                                                            for (int i = 0; i < self.advDatas.count; i++) {
+                                                                                HomePicModel *model = self.advDatas[i];
+                                                                                NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
+                                                                                [imageUrls addObject:urlStr];
+                                                                            }
+                                                                            LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
+                                                                            loopView.imageUrls = imageUrls;
+                                                                            
+                                                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                            [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
+                                                                        }];
 }
 
 
@@ -332,7 +332,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -344,16 +344,10 @@
             return 2;
             break;
         case 1:
-            return 1;
+            return 2;
             break;
         case 2:
-            return 1;
-            break;
-        case 3:
-            return 1;
-            break;
-        case 4:
-            return postsArr.count;
+            return postsArr.count + 1;
             break;
         default:
             return  postsArr.count;
@@ -365,7 +359,7 @@
 {
     //    if(indexPath.section == 0)
     //        return 60;
-    if(indexPath.section == 0 && indexPath.row == 0)
+    if((indexPath.section == 0 && indexPath.row == 0)||(indexPath.section == 2 && indexPath.row == 0) )
         return 44;
     if(indexPath.section == 0){
         if (self.healthDatas.count <= 4) {
@@ -381,7 +375,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return section == 0?5:0.01;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -457,28 +450,34 @@
             cell = menuCell;
         }
     }
+    else  if (indexPath.section == 1 )
+    {
+        CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
+        if (postsArr.count > 0)
+            [cardCell1 setPostsModel:recommendlist[indexPath.row]];
+        cell = cardCell1;
+    }
     else
     {
-        if (indexPath.section < 3)
+        UITableViewCell *commoncell = nil;
+        if (indexPath.row == 0)
         {
-            SiglePicCardCell *picCell = [SiglePicCardCell createCellWithTableView:tableView];
-            [picCell setItemdata:recommendlist[indexPath.section]];
-            // 头像点击 进入个人信息界面
-            picCell.portraitClick = ^(PostsModel *item)
-            {
-                PublicProfileViewController *view = [[PublicProfileViewController alloc] init];
-                view.hidesBottomBarWhenPushed = YES;
-                view.uid = item.authorid;
-                [self.parentVC.navigationController pushViewController:view animated:YES];
-            };
-            
-            cell = picCell;
+            static NSString *cellId = @"titleCellId";
+            commoncell = [tableView dequeueReusableCellWithIdentifier:cellId];
+            if (!commoncell) {
+                commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+                commoncell.selectionStyle = UITableViewCellSelectionStyleNone;
+                commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+                commoncell.layoutMargins = UIEdgeInsetsZero;
+            }
+            commoncell.textLabel.text = @"热门推荐";
+            cell = commoncell;
         }
         else
         {
             CardCell *cardCell1 = [CardCell createCellWithTableView:tableView];
             if (postsArr.count > 0)
-                [cardCell1 setPostsModel:postsArr[indexPath.row]];
+                [cardCell1 setPostsModel:postsArr[indexPath.row - 1]];
             cell = cardCell1;
         }
     }
@@ -506,20 +505,15 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
-    if ((indexPath.section < 3) )
+    if ((indexPath.section == 1) )
     {
-        if(!recommendlist || recommendlist.count==0)return;
-        [view setItemdata:recommendlist[indexPath.section]];
+        if(!recommendlist || recommendlist.count == 0)return;
+        [view setItemdata:recommendlist[indexPath.row]];
     }
-    //    else  if ( self.type == BBSType_4)
-    //    {
-    //        if(!recommendlist || recommendlist.count==0)return;
-    //        [view setItemdata:recommendlist[indexPath.row]];
-    //    }
     else
     {
         if(!postsArr || postsArr.count==0)return;
-        [view setItemdata:postsArr[indexPath.row]];
+        [view setItemdata:postsArr[indexPath.row - 1]];
     }
     [self.parentVC.navigationController pushViewController:view animated:YES];
 }
@@ -687,6 +681,4 @@
         [self.parentVC.navigationController pushViewController:adver animated:YES];
     }
 }
-
-
 @end

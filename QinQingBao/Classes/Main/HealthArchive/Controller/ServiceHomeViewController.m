@@ -51,6 +51,8 @@
 {
     [super viewDidLoad];
     
+    importMsgStr = @"暂无与您健康相关的提醒需要您关注";
+
     self.dataProvider = [[NSMutableArray alloc] init];
     
     self.tableView.backgroundColor = HMGlobalBg;
@@ -246,6 +248,8 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (![SharedAppUtil checkLoginStates])
+        return;
     if (indexPath.section == 0 || indexPath.section == 2) {
         return;
     }else if (indexPath.section == 1 && indexPath.row == 0) {
@@ -260,13 +264,6 @@
         InterventionPlanController *interventionVC = [[InterventionPlanController alloc] init];
         [self.parentVC.navigationController pushViewController:interventionVC animated:YES];
     }
-    
-    //    PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-    //
-    //    QuestionResultController3 *payResultVC = [[QuestionResultController3 alloc] init];
-    //    [self.parentVC.navigationController pushViewController:payResultVC animated:YES];
-    
 }
 
 - (void)loadArchiveDataList
@@ -375,11 +372,13 @@
 {
     importMsgStr = @"暂无与您健康相关的提醒需要您关注";
 
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return;
     NSDictionary *params = @{ @"client":@"ios",
                               @"key":[SharedAppUtil defaultCommonUtil].userVO.key};
     [CommonRemoteHelper RemoteWithUrl:URL_Get_sysfmmsg_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         else
         {

@@ -56,7 +56,6 @@
     self.vc2.parentVC = self;
     self.vc2.title = @"服务";
     
-    
     self.viewArr = [NSMutableArray arrayWithObjects:self.vc2,self.vc1,nil];
 }
 
