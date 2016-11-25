@@ -13,6 +13,6 @@
 
 + (instancetype)createCellWithTableView:(UITableView *)tableView;
 
-- (void)setItem:(ResultModel *)item;
+- (void)setTextWithDangercoefficient:(NSString *)dangercoefficient advise:(NSString *)advise;
 
 @end

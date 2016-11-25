@@ -49,7 +49,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return self.truename && self.truename.length > 0 ? 1 : 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -63,7 +63,9 @@
     
     if (indexPath.section == 0) {
         QuestionResultCell *resultCell = [QuestionResultCell createCellWithTableView:tableView];
-        [resultCell setItem:self.qResultModel];
+        
+        [resultCell setTextWithDangercoefficient:self.r_dangercoefficient advise:self.hmd_advise];
+        
         return resultCell;
         
     }else if(indexPath.section == 1 && indexPath.row == 0){
@@ -114,7 +116,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-       return [self tableView:tableView cellForRowAtIndexPath:indexPath].height;
+        return [self tableView:tableView cellForRowAtIndexPath:indexPath].height;
     }else if (indexPath.section == 1 && indexPath.row == 0){
         return 40;
         
@@ -157,7 +159,7 @@
     [btn2 addTarget:self action:@selector(ignoreAction:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:btn2];
     
-    return footerView;
+    return self.truename && self.truename.length > 0 ? nil : footerView;
 }
 
 /**
@@ -187,19 +189,20 @@
                                      @"key":[SharedAppUtil defaultCommonUtil].userVO.key
                                      }mutableCopy];
     params[@"fmno"] = self.selectedArchiveData.fmno;
-    params[@"r_id"] = self.qResultModel.r_ids;
-
-    for (NSString *rid in self.qResultModel.r_ids) {
+    
+    for (NSString *rid in self.r_ids) {
         params[@"r_id"] = rid;
         [CommonRemoteHelper RemoteWithUrl:URL_Add_qsreport_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-            
+            NSLog(@"%@",dict);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
     }
+    if (!self.truename)
+        [self.navigationController popViewControllerAnimated:YES];
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-
 }
 
 /**
