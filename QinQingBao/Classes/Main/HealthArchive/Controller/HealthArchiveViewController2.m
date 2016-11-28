@@ -210,6 +210,11 @@
     }else if (0 == indexPath.section && 2 == indexPath.row){
         
         DietaryHabit *dietaryHabitView = [DietaryHabit showTargetViewToView:[UIApplication sharedApplication].keyWindow];
+        
+        NSString *diet = self.datas[0][2][kContent];
+        NSArray *diets = [diet componentsSeparatedByString:@","];
+        dietaryHabitView.valueArray = diets;
+        
         dietaryHabitView.selectItemBlock = ^(NSArray *selectedItems){
             
             NSMutableArray *tempArray = [[NSMutableArray alloc] init];

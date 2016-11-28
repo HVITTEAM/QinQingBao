@@ -365,10 +365,10 @@
     {
         [paramDict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
     }
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Submit_exam parameters:paramDict
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
+                                     [hud removeFromSuperview];
                                      id codeNum = [dict objectForKey:@"code"];
                                      NSDictionary *dict1 = [dict objectForKey:@"datas"];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
@@ -385,7 +385,8 @@
                                          [self.navigationController pushViewController:questionResultVC animated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
+//                                     NSLog(@"发生错误！%@",error);
+                                     [hud removeFromSuperview];
                                  }];
 }
 

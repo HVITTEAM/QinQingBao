@@ -34,6 +34,10 @@
 
 @property (nonatomic, copy) NSString *address;
 
+@property (nonatomic, copy) NSString *totalname;
+
+@property (nonatomic, copy) NSString *area_id;
+
 @property (nonatomic, copy) NSString *occupation;
 
 @property (nonatomic, copy) NSString *livingcondition;

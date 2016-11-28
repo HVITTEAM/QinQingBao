@@ -118,9 +118,10 @@
         self.cityArr = self.provinceArr[0][@"cities"];
         
         self.areaArr = self.cityArr[0][@"regions"];
-        selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
+//        selectedProvinceItem = [[AreaModel alloc] initWithName:@"浙江" areaid:@"11" dvcode:@"330000"];
+        selectedProvinceItem = [[AreaModel alloc] initWithName:[[self.provinceArr objectAtIndex:0] objectForKey:@"name"] areaid:@"11" dvcode:[[self.provinceArr objectAtIndex:0] objectForKey:@"dvcode"]];
         selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.cityArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
-        selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
+        selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:[[self.areaArr objectAtIndex:0] objectForKey:@"areaid"] dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
     }
     
 # pragma  mark 设置数据源

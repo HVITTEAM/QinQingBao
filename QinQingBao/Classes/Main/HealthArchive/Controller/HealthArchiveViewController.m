@@ -118,7 +118,9 @@
     [section2 addObject:createItem(self.archiveData.occupation,@"目前职业",@"请填写")];
     [section2 addObject:createItem([ArchiveData numberToLivingcondition:[self.archiveData.livingcondition integerValue]],@"工作生活状态",@"请填写")];
     [section2 addObject:createItem(self.archiveData.email,@"电子邮箱",@"请填写")];
-    [section2 addObject:createItem(self.archiveData.address,@"联系地址",@"请填写")];
+    
+    NSString *address = [NSString stringWithFormat:@"%@%@",self.archiveData.totalname?:@"",self.archiveData.address?:@""];
+    [section2 addObject:createItem(address,@"联系地址",@"请填写")];
     
     return @[section0,section1,section2];
 }
@@ -304,13 +306,16 @@
         
     }else if (indexPath.section == 2 && indexPath.row == 3) {
         AddressController *textView = [[AddressController alloc] init];
-        //        if (weakSelf.customInfo.totalname.length > 0 && weakSelf.customInfo.dvcode.length > 0)
-        //        {
-        //            [textView setItemInfoWith:weakSelf.customInfo.totalname regionStr:@"西湖区" regionCode:weakSelf.customInfo.dvcode areaInfo:weakSelf.customInfo.areainfo];
-        //        }
+        if (self.archiveData.totalname.length > 0 && self.archiveData.area_id.length > 0)
+        {
+           [textView setItemInfoWith:self.archiveData.totalname regionStr:@"" regionCode:self.archiveData.area_id areaInfo:self.archiveData.address];
+        }
         textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
             weakSelf.archiveData.area_id = selectedRegionmodel.dvcode;
-            weakSelf.datas[2][3][kContent] = [NSString stringWithFormat:@"%@",areaInfo];
+            weakSelf.archiveData.address = areaInfo;
+            weakSelf.archiveData.totalname = addressStr;
+            
+            weakSelf.datas[2][3][kContent] = [NSString stringWithFormat:@"%@%@",addressStr,areaInfo];
             [weakSelf.tableView reloadData];
         };
         [weakSelf.navigationController pushViewController:textView animated:YES];
@@ -595,29 +600,29 @@
         return [NoticeHelper AlertShow:@"请选择生日" view:nil];
     }
     
-    if (height.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择身高" view:nil];
-    }
+//    if (height.length == 0) {
+//        return [NoticeHelper AlertShow:@"请选择身高" view:nil];
+//    }
+//    
+//    if (weight.length == 0) {
+//        return [NoticeHelper AlertShow:@"请选择体重" view:nil];
+//    }
+//    
+//    if (waistline.length == 0) {
+//        return [NoticeHelper AlertShow:@"请选择腰围" view:nil];
+//    }
+//    
+//    if (systolicpressure.length == 0) {
+//        return [NoticeHelper AlertShow:@"请选择收缩压" view:nil];
+//    }
+//    
+//    if (cholesterol.length == 0) {
+//        return [NoticeHelper AlertShow:@"请选择胆固醇" view:nil];
+//    }
     
-    if (weight.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择体重" view:nil];
-    }
-    
-    if (waistline.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择腰围" view:nil];
-    }
-    
-    if (systolicpressure.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择收缩压" view:nil];
-    }
-    
-    if (cholesterol.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择胆固醇" view:nil];
-    }
-    
-    if (address.length == 0) {
-        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
-    }
+//    if (address.length == 0) {
+//        return [NoticeHelper AlertShow:@"请输入地址" view:nil];
+//    }
     
     //邮箱非必填
     if (email.length != 0) {
@@ -641,9 +646,8 @@
     self.archiveData.occupation = self.datas[2][0][kContent];
     self.archiveData.livingcondition = [NSString stringWithFormat:@"%d",(int)[ArchiveData livingconditionToNumber:self.datas[2][1][kContent]]];
     self.archiveData.email = email;
-    self.archiveData.address = address;
+//    self.archiveData.address = address;
     
-
     HealthArchiveViewController1 *vc = [[HealthArchiveViewController1 alloc] init];
     vc.archiveData = self.archiveData;
     vc.isCreator = self.isCreator;
@@ -718,6 +722,8 @@
         self.archiveData.mobile = archive.basics.mobile;
         self.archiveData.email = archive.basics.email;
         self.archiveData.address = archive.basics.address;
+        self.archiveData.totalname = archive.basics.totalname;
+        self.archiveData.area_id = archive.basics.area_id;
         self.archiveData.occupation = archive.basics.occupation;
         self.archiveData.livingcondition = archive.basics.livingcondition;
         self.archiveData.units = archive.basics.units;

@@ -9,6 +9,8 @@
 #define kScanFactor 0.6
 #define kOffsetToCenter 50
 
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "ScanCodesViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
@@ -33,9 +35,10 @@
 {
     [super viewDidLoad];
     
-    [self initOverlayerView];
-    
-    [self initSession];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.title = @"二维码/条码";
+
+    [self authorizationCheck];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -47,7 +50,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterbackground:) name:UIApplicationWillResignActiveNotification object:nil];
     
     [self startScanAnimation];
-    [self.session startRunning];
+    [self startScanning];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -56,10 +59,55 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
     [self stopScanAnimation];
-    [self.session stopRunning];
+    [self stopScanning];
+}
+
+- (void)authorizationCheck
+{
+    AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    switch (status) {
+        case AVAuthorizationStatusNotDetermined:
+        {
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (granted) {
+                        [self initOverlayerView];
+                        [self initSession];
+                        [self startScanning];
+                        [self startScanAnimation];
+                    }else{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }
+                });
+                
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized:
+        {
+            [self initOverlayerView];
+            [self initSession];
+            [self startScanning];
+            [self startScanAnimation];
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+        {
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"无法访问相机,您可以去设置-隐私-相机中允许应用访问相机" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *action = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            [alertVC addAction:action];
+            [self presentViewController:alertVC animated:YES completion:nil];
+            
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark -- 初始化视图及参数 --
@@ -128,7 +176,6 @@
     backBtn.layer.masksToBounds = YES;
     [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     //    [self.view addSubview:backBtn];
-    self.title = @"二维码/条码";
 }
 
 /**
@@ -191,7 +238,7 @@
     if (metadataObjects.count>0) {
         
         [self stopScanAnimation];
-        [self.session stopRunning];
+        [self stopScanning];
         
         AVMetadataMachineReadableCodeObject * metadataObject = [metadataObjects objectAtIndex :0];
         //输出扫描字符串
@@ -215,7 +262,7 @@
     else
     {
         [self startScanAnimation];
-        [self.session startRunning];
+        [self startScanning];
     }
 }
 
@@ -226,7 +273,7 @@
 -(void)appWillEnterForeground:(NSNotification *)notification
 {
     [self startScanAnimation];
-    [self.session startRunning];
+    [self startScanning];
 }
 
 /**
@@ -235,7 +282,7 @@
 -(void)appWillEnterbackground:(NSNotification *)notification
 {
     [self stopScanAnimation];
-    [self.session stopRunning];
+    [self stopScanning];
 }
 
 -(void)back
@@ -249,6 +296,12 @@
  */
 -(void)startScanAnimation
 {
+    if (!self.scanLine) {
+        return;
+    }
+    
+    [self stopScanAnimation];
+    
     self.scanLine.hidden = NO;
     CGRect lineRect = self.scanLine.frame;
     lineRect.origin.y = CGRectGetMaxY(self.scannerRect) - 4;
@@ -265,9 +318,42 @@
  */
 -(void)stopScanAnimation
 {
+    if (!self.scanLine) {
+        return;
+    }
+    
     [self.scanLine.layer removeAllAnimations];
     self.scanLine.hidden = YES;
     self.scanLine.frame = CGRectMake(self.scannerRect.origin.x, self.scannerRect.origin.y, self.scannerRect.size.width, 4);
 }
+
+/**
+ *  开始扫描
+ */
+- (void)startScanning
+{
+    if (!self.session) {
+        return;
+    }
+    
+    if (!self.session.isRunning){
+        [self.session startRunning];
+    }
+}
+
+/**
+ *  结束扫描动画
+ */
+- (void)stopScanning
+{
+    if (!self.session) {
+        return;
+    }
+    
+    if (self.session.isRunning) {
+        [self.session stopRunning];
+    }
+}
+
 
 @end

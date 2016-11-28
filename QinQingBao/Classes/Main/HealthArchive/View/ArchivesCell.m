@@ -55,8 +55,6 @@
 
     UINib *nib = [UINib nibWithNibName:@"RelativesCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"relativesCell"];
-    
-    self.placeholdLb.text = @"暂无健康档案资料,\n\n可新建或绑定亲友健康档案";
 }
 
 - (void)updateConstraints

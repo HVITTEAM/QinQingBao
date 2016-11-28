@@ -10,7 +10,7 @@
 
 @interface RelativesCell ()
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthCon;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthCon;
 
 @end
 
@@ -24,22 +24,24 @@
     self.imgView.layer.borderWidth = 0.0f;
     self.imgView.layer.masksToBounds = YES;
     
-    self.iconWidthCon.constant = MTScreenW / 320 * 40;
+//    self.iconWidthCon.constant = MTScreenW / 320 * 40;
     [self updateConstraintsIfNeeded];
     [self layoutIfNeeded];
 }
 
-- (void)updateConstraints
-{
+//- (void)updateConstraints
+//{
 //    self.iconWidthCon.constant = MTScreenW / 320 * 40;
-    [super updateConstraints];
-}
+//    [super updateConstraints];
+//}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.imgView.layer.cornerRadius = self.imgView.bounds.size.width / 2;
+//    self.imgView.layer.cornerRadius = self.imgView.bounds.size.width / 2;
+    
+    self.imgView.layer.cornerRadius = (MTScreenW / 320 * 40) / 2;
 }
 
 - (void)setShowBorderLine:(BOOL)showBorderLine

@@ -198,7 +198,7 @@
             
         }];
     }
-    if (!self.truename)
+    if (self.truename.length <= 0)
         [self.navigationController popViewControllerAnimated:YES];
     else
         [self.navigationController popToRootViewControllerAnimated:YES];
