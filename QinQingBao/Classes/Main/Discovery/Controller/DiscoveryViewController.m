@@ -50,6 +50,8 @@
 
 - (void)setupUI
 {
+    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     //导航栏
     [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
     UITextField *searhField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, MTScreenW - 20, 30)];
@@ -90,7 +92,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -109,7 +111,8 @@
         if (!titleCell) {
             titleCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            titleCell.textLabel.font = [UIFont systemFontOfSize:16];
+            titleCell.textLabel.font = [UIFont systemFontOfSize:14];
+            titleCell.textLabel.textColor = [UIColor colorWithRGB:@"999999"];
             titleCell.layoutMargins = UIEdgeInsetsZero;
         }
         
@@ -120,8 +123,11 @@
             case 1:
                 titleCell.textLabel.text = @"服务网点";
                 break;
-            default:
+            case 2:
                 titleCell.textLabel.text = @"健康圈";
+                break;
+            case 3:
+                titleCell.textLabel.text = @"健康推荐";
                 break;
         }
         cell = titleCell;
@@ -139,6 +145,18 @@
         }
         
         cell = mapCell;
+    }else if (indexPath.section == 3 && indexPath.row == 1){  //健康推荐cell
+        static NSString *cellId = @"commonCellId";
+        UITableViewCell * commonCell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (!commonCell) {
+            commonCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            commonCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            commonCell.textLabel.font = [UIFont systemFontOfSize:14];
+            commonCell.layoutMargins = UIEdgeInsetsZero;
+            commonCell.textLabel.text = @"即将上线，敬请期待!";
+        }
+        cell = commonCell;
+
     }else{
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
         menuCell.row = 1;

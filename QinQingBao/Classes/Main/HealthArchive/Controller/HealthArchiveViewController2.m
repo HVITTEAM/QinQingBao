@@ -46,13 +46,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.navigationItem.title = @"健康档案";
     
     if (!_archiveData) {
         _archiveData = [[ArchiveData alloc] init];
     }
-    
     [self setupFooter];
 }
 
@@ -228,11 +227,10 @@
             weakSelf.datas[0][2][kContent] = [selectedItems componentsJoinedByString:@","];
             [weakSelf.tableView reloadData];
         };
-        
     }else if (1 == indexPath.section && 1 == indexPath.row){
-        [self showDatePickerView];
+        [self showDatePickerView:[self dateFromDateString:self.archiveData.sleeptime]];
     }else if (1 == indexPath.section && 2 == indexPath.row){
-        [self showDatePickerView];
+        [self showDatePickerView:[self dateFromDateString:self.archiveData.getuptime]];
     }else if (2 == indexPath.section && 0 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"经常", nil] show];
     }else if (2 == indexPath.section && 1 == indexPath.row){
@@ -246,7 +244,6 @@
     if (0 == buttonIndex) {
         return;
     }
-    
     NSMutableArray *sections = self.datas[self.currentIdx.section];
     NSMutableDictionary *item = sections[self.currentIdx.row];
     
@@ -289,8 +286,6 @@
             item[kContent] = @"常看手机";
         }
     }
-    
-    
     [self.tableView reloadData];
 }
 
@@ -315,11 +310,11 @@
     self.tableView.tableFooterView = bottomView;
 }
 
-#pragma mark - 生日选择视图相关
+#pragma mark - 日期选择视图相关
 /**
- *  显示生日选择视图
+ *  日期选择视图
  */
--(void)showDatePickerView
+-(void)showDatePickerView:(NSDate*)selectedDate
 {
     self.dateSelectView = [[UIControl alloc] initWithFrame:self.view.frame];
     self.dateSelectView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
@@ -330,13 +325,15 @@
     
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh"];
-
     
     self.datePicker.timeZone = timeZone;
     self.datePicker.locale = locale;
     self.datePicker.datePickerMode = UIDatePickerModeTime;
     
     [self.dateSelectView addSubview:self.datePicker];
+    
+    if (selectedDate)
+        self.datePicker.date = selectedDate;
     
     UIToolbar *tb = [[UIToolbar alloc] initWithFrame:CGRectMake(0, MTScreenH - 224, MTScreenW, 44)];
     tb.backgroundColor = [UIColor whiteColor];

@@ -47,6 +47,13 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self getServicesData];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
