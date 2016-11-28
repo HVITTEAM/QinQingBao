@@ -75,6 +75,8 @@
     [_cb1 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
             [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
         }
     }];
     [self.contentBoxView addSubview:_cb1];
@@ -159,6 +161,46 @@
         }
     }];
     [self.contentBoxView addSubview:_cb8];
+}
+
+- (void)setValueArray:(NSArray *)valueArray
+{
+    for (NSString *value in valueArray) {
+        
+        if ([value isEqualToString:@"荤素均衡"]) {
+            _cb1.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"清淡"]) {
+            _cb2.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"素食"]) {
+            _cb3.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"碳酸饮料"]) {
+            _cb4.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"嗜甜"]) {
+            _cb5.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"重口味"]) {
+            _cb6.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"爱喝茶"]) {
+            _cb7.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"嗜咖啡"]) {
+            _cb8.checked = YES;
+        }
+    }
+    
+    [self.selectedItems addObjectsFromArray:valueArray];
 }
 
 /**

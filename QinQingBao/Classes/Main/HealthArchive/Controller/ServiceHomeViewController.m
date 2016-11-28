@@ -200,17 +200,20 @@
         if (!promptCell) {
             promptCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:promptCellId];
             promptCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            promptCell.textLabel.font = [UIFont systemFontOfSize:14];
-            promptCell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
-            promptCell.textLabel.numberOfLines = 0;
-            promptCell.layoutMargins = UIEdgeInsetsZero;
+            UILabel *lb = [[UILabel alloc] init];
+            lb.font = [UIFont systemFontOfSize:12];
+            lb.textColor = [UIColor colorWithRGB:@"666666"];
+            lb.numberOfLines = 0;
+            lb.tag = 201;
+            [promptCell.contentView addSubview:lb];
         }
         
-        CGFloat h = [importMsgStr boundingRectWithSize:CGSizeMake(MTScreenW - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14]} context:nil].size.height;
+        CGFloat h = [importMsgStr boundingRectWithSize:CGSizeMake(MTScreenW - 40, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size.height;
         
-        promptCell.textLabel.text = importMsgStr;
-        promptCell.textLabel.font = [UIFont systemFontOfSize:12];
-        promptCell.height= h;
+        UILabel *lb = [promptCell.contentView viewWithTag:201];
+        lb.frame = CGRectMake(20, 10, MTScreenW - 40, h);
+        lb.text = importMsgStr;
+        promptCell.height= h + 20;
         
         cell = promptCell;
     }
@@ -228,8 +231,11 @@
     }else if(indexPath.section == 1){
         return 80;
     }else{
+        
+        CGFloat minH = MTScreenH - (40 * 2 + [ArchivesCell cellHeight] + 3 * 80 + 64 + 44  + 25 + 10);
+        
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.height + 30;
+        return cell.height > minH?cell.height:minH;
     }
 }
 

@@ -34,7 +34,7 @@
 /**手机号***/
 @property (nonatomic, copy) NSString *mobile;
 @property (nonatomic, copy) NSString *email;
-@property (nonatomic, copy) NSString *address;
+
 /**目前职业***/
 @property (nonatomic, copy) NSString *occupation;
 /**生活状态 1.体力劳动为主； 2.脑力劳动为主；3.体力/脑力劳动记得均衡***/
@@ -92,6 +92,10 @@
 @property (nonatomic, copy) UIImage *avatarImage;
 
 @property (nonatomic, copy) NSString *area_id;
+
+@property (nonatomic, copy) NSString *totalname;
+
+@property (nonatomic, copy) NSString *address;
 
 
 

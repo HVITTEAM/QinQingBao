@@ -27,7 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_archiveData.portraitPic]];
+    self.iconImg.layer.cornerRadius = 42/2;
+    self.iconImg.layer.masksToBounds = YES;
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",_archiveData.avatar]];
     [self.iconImg sd_setImageWithURL:url placeholderImage:[UIImage imageWithName:@"pc_user.png"]];
     self.nameLab.text = _archiveData.truename;
     self.codeLab.text = [NSString stringWithFormat:@"档案号：%@",_archiveData.fmno];

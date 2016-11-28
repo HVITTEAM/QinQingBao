@@ -603,7 +603,7 @@
     [CommonRemoteHelper UploadPicWithUrl:URL_Add_medical_report_item parameters:params images:tempArrays success:^(NSDictionary *dict, id responseObject) {
         [hud removeFromSuperview];
         if([dict[@"code"] integerValue] != 0){
-            [NoticeHelper AlertShow:[NSString stringWithFormat:@"上传失败第%d,%@",(int)orderNum + 1,dict[@"errorMsg"]] view:nil];
+            [NoticeHelper AlertShow:[NSString stringWithFormat:@"%@",dict[@"errorMsg"]] view:nil];
             return;
         }
         
@@ -613,11 +613,11 @@
         
         [self.dataProvider exchangeObjectAtIndex:_dataProvider.count -1 withObjectAtIndex:_dataProvider.count -2];
         [self.colectView reloadData];
-        [NoticeHelper AlertShow:[NSString stringWithFormat:@"成功第%d",(int)orderNum + 1] view:nil];
+//        [NoticeHelper AlertShow:[NSString stringWithFormat:@"成功第%d",(int)orderNum + 1] view:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:[NSString stringWithFormat:@"上传失败第%d",(int)orderNum + 1] view:nil];
+        [NoticeHelper AlertShow:[NSString stringWithFormat:@"上传失败,请检查网络"] view:nil];
     }];
 }
 
@@ -639,7 +639,7 @@
         [hud removeFromSuperview];
         
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:[NSString stringWithFormat:@"删除图片失败%@",dict[@"errorMsg"]] view:nil];
+            [NoticeHelper AlertShow:[NSString stringWithFormat:@"%@",dict[@"errorMsg"]] view:nil];
         }
     
         [self.dataProvider removeObjectAtIndex:orderNum];
@@ -648,7 +648,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"删除图片失败" view:nil];
+        [NoticeHelper AlertShow:@"删除图片失败,请检查网络" view:nil];
     }];
 }
 

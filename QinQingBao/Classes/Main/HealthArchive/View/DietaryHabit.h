@@ -14,4 +14,6 @@
 
 @property (copy) void(^selectItemBlock)(NSArray *selectedItems);
 
+@property (strong, nonatomic) NSArray *valueArray;
+
 @end
