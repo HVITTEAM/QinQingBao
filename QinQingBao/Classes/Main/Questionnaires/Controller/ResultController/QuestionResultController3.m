@@ -198,11 +198,17 @@
             
         }];
     }
-    if (self.truename.length <= 0)
-        [self.navigationController popViewControllerAnimated:YES];
-    else
-        [self.navigationController popToRootViewControllerAnimated:YES];
     
+    NSArray *vcs = self.navigationController.viewControllers;
+    if (self.truename.length <= 0){
+        if (vcs.count > 5) {
+            [self.navigationController popToViewController:vcs[1] animated:YES];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 /**

@@ -201,6 +201,7 @@
     }
     
     [self.selectedItems addObjectsFromArray:valueArray];
+    [self.selectedItems removeObject:@""];
 }
 
 /**

@@ -723,11 +723,11 @@
         self.archiveData.truename = archive.basics.truename;
         self.archiveData.sex = archive.basics.sex;
         self.archiveData.birthday = archive.basics.birthday;
-        self.archiveData.height = archive.basics.height;
-        self.archiveData.weight = archive.basics.weight;
-        self.archiveData.waistline = archive.basics.waistline;
-        self.archiveData.systolicpressure = archive.basics.systolicpressure;
-        self.archiveData.cholesterol = archive.basics.cholesterol;
+        self.archiveData.height = [archive.basics.height isEqualToString:@"0"]?nil:archive.basics.height;
+        self.archiveData.weight = [archive.basics.weight isEqualToString:@"0"]?nil:archive.basics.weight;
+        self.archiveData.waistline = [archive.basics.waistline isEqualToString:@"0"]?nil:archive.basics.waistline;
+        self.archiveData.systolicpressure = [archive.basics.systolicpressure isEqualToString:@"0"]?nil:archive.basics.systolicpressure;
+        self.archiveData.cholesterol = [archive.basics.cholesterol isEqualToString:@"0"]?nil:archive.basics.cholesterol;
         self.archiveData.mobile = archive.basics.mobile;
         self.archiveData.email = archive.basics.email;
         self.archiveData.address = archive.basics.address;
