@@ -50,6 +50,7 @@ typedef NS_ENUM(NSInteger, BlackListOperation) {
     self = [super init];
     if (self){
         self.hidesBottomBarWhenPushed = YES;
+        self.extendedLayoutIncludesOpaqueBars = YES;
     }
     return self;
 }
@@ -202,8 +203,6 @@ typedef NS_ENUM(NSInteger, BlackListOperation) {
 
 -(void)initView
 {
-    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share.png"] style:UIBarButtonItemStylePlain target:self action:@selector(share)];
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = self.otherName;

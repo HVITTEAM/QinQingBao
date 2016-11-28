@@ -171,6 +171,9 @@
     EaseEmotionManager *manager = [[EaseEmotionManager alloc] initWithType:EMEmotionDefault emotionRow:3 emotionCol:7 emotions:[EaseEmoji allEmoji]];
     [self.faceView setEmotionManagers:@[manager]];
     
+//    EMMessage *msg = [[EMMessage alloc] init];
+//    EMChatManager.getInstance().sendMessage(message,null);
+//    [[EaseMob sharedInstance].chatManager sendMessage:<#(EMMessage *)#> progress:(id<IEMChatProgressDelegate>) error:(EMError *__autoreleasing *)];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

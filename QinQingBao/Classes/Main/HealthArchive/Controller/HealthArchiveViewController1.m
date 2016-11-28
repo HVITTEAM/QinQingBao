@@ -111,7 +111,7 @@
 
         textCell.accessoryView = switchBtn;
         textCell.textLabel.text = rowItem[kTitle];
-        textCell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+        textCell.textLabel.font = [UIFont systemFontOfSize:16];
         textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         textCell.field.placeholder = rowItem[kPlaceHolder];
         textCell.field.enabled = NO;
@@ -129,7 +129,7 @@
     {
         TextTwoCell *textTwoCel = [TextTwoCell createCellWithTableView:tableView];
         textTwoCel.titleLb.text = rowItem[kTitle];
-        textTwoCel.textLabel.font = [UIFont boldSystemFontOfSize:16];
+        textTwoCel.textLabel.font = [UIFont systemFontOfSize:16];
         textTwoCel.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         textTwoCel.contentTextView.text = rowItem[kContent];
         textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];

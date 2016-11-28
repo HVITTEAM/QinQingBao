@@ -36,7 +36,7 @@
 
 @property (strong, nonatomic) UIImage *portraitImage;
 
-@property (assign, nonatomic) BOOL isCreator;    //当前登录用户是否是档案创建者,查看时候才有用
+@property (assign, nonatomic) BOOL isCreator;//当前登录用户是否是档案创建者,查看时候才有用
 
 @end
 
@@ -108,9 +108,9 @@
     [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
     
     NSMutableArray *section1 = [[NSMutableArray alloc] init];
-    [section1 addObject:createItem(self.archiveData.height,@"身高",@"请填写")];
-    [section1 addObject:createItem(self.archiveData.weight,@"体重",@"请填写")];
-    [section1 addObject:createItem(self.archiveData.waistline,@"腰围",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.height,@"身高(cm)",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.weight,@"体重(kg)",@"请填写")];
+    [section1 addObject:createItem(self.archiveData.waistline,@"腰围(cm)",@"请填写")];
     [section1 addObject:createItem(self.archiveData.systolicpressure,@"收缩压(mmhg)",@"请填写")];
     [section1 addObject:createItem(self.archiveData.cholesterol,@"总胆固醇(mg/dl)",@"请填写")];
     
@@ -150,10 +150,8 @@
             UIImageView *imageView = [[UIImageView alloc] init];
             imageView.layer.masksToBounds = YES;
             portraitCell.accessoryView = imageView;
-            
-            portraitCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+            portraitCell.textLabel.font = [UIFont systemFontOfSize:16];
         }
-    
         portraitCell.textLabel.text = rowItem[kTitle];
         UIImageView *imageView = (UIImageView *)portraitCell.accessoryView;
         
@@ -186,11 +184,11 @@
     }else{
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
-        textCell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+        textCell.textLabel.font = [UIFont systemFontOfSize:16];
         textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         textCell.field.text = rowItem[kContent];
         textCell.field.placeholder = rowItem[kPlaceHolder];
-        textCell.field.font = [UIFont boldSystemFontOfSize:14];
+        textCell.field.font = [UIFont systemFontOfSize:14];
         textCell.field.textColor = [UIColor colorWithRGB:@"999999"];
         textCell.idx = indexPath;
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){

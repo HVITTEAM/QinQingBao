@@ -52,7 +52,7 @@
     [super viewDidLoad];
     
     importMsgStr = @"暂无与您健康相关的提醒需要您关注";
-
+    
     self.dataProvider = [[NSMutableArray alloc] init];
     
     self.tableView.backgroundColor = HMGlobalBg;
@@ -72,6 +72,13 @@
 
 - (void)getServicesData
 {
+    //判断是否登录
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+    {
+        [self.tableView.header endRefreshing];
+        return;
+    }
+    
     [self loadArchiveDataList];
     
     [self getInterventionPlanList];
@@ -270,10 +277,6 @@
 
 - (void)loadArchiveDataList
 {
-    //判断是否登录
-    if (![SharedAppUtil checkLoginStates])
-        return;
-    
     NSDictionary *params = @{
                              @"client":@"ios",
                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
@@ -304,13 +307,6 @@
  */
 - (void)getInterventionPlanList
 {
-    //判断是否登录
-    if (![SharedAppUtil checkLoginStates]){
-        [self.tableView.header endRefreshing];
-        return;
-    }
-    
-    
     NSMutableDictionary *params = [@{@"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                      @"client":@"ios"
                                      }mutableCopy];
@@ -379,14 +375,14 @@
         [self.tableView.header endRefreshing];
         return;
     }
-
+    
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
         return;
     NSDictionary *params = @{ @"client":@"ios",
                               @"key":[SharedAppUtil defaultCommonUtil].userVO.key};
     [CommonRemoteHelper RemoteWithUrl:URL_Get_sysfmmsg_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         if ([dict[@"code"] integerValue] != 0) {
-//            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
+            //            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         else
         {

@@ -605,7 +605,6 @@ static CGFloat IMAGEVIEW_HEIGHT;
 }
 
 #pragma mark 到计时相关方法
-#pragma mark 到计时相关方法
 /**
  *  开始到计时
  */

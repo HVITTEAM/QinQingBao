@@ -7,7 +7,7 @@
 //
 
 static float cellHeight = 75;
-static float cellWidth = 60;
+static float cellWidth = 80;
 
 #import "GoodsTypeCell.h"
 #import "ConfModelTotal.h"
@@ -76,6 +76,7 @@ static float cellWidth = 60;
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MTCommonCollecttionCell" forIndexPath:indexPath];
     //赋值
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1];
+    imageView.width = imageView.height = 44;
     UILabel *label = (UILabel *)[cell viewWithTag:2];
     label.textColor = [UIColor colorWithRGB:@"666666"];
     NSInteger index = indexPath.section *4 + indexPath.row;

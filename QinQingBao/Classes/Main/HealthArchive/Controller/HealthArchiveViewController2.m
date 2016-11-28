@@ -138,7 +138,7 @@
     {
         TextTwoCell *textTwoCel = [TextTwoCell createCellWithTableView:tableView];
         textTwoCel.titleLb.text = rowItem[kTitle];
-        textTwoCel.textLabel.font = [UIFont boldSystemFontOfSize:16];
+        textTwoCel.textLabel.font = [UIFont systemFontOfSize:16];
         textTwoCel.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         
         textTwoCel.contentTextView.text = rowItem[kContent];
@@ -157,7 +157,7 @@
         if (indexPath.row == 4 || indexPath.row == 5)
             textCell.textLabel.font = [UIFont systemFontOfSize:13];
         else
-            textCell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+            textCell.textLabel.font = [UIFont systemFontOfSize:16];
         
         textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         textCell.field.text = rowItem[kContent];

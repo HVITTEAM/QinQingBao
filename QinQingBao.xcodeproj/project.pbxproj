@@ -933,7 +933,6 @@
 		01ECDB2E1C8EB5E80018160F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01ECDB2D1C8EB5E80018160F /* libsqlite3.tbd */; };
 		01ECDB301C8EB5FD0018160F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01ECDB2F1C8EB5FC0018160F /* libiconv.tbd */; };
 		01ECDB321C8EB6070018160F /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01ECDB311C8EB6070018160F /* libresolv.tbd */; };
-		01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01ECDF981B7C347800665D87 /* SQCollectionCell.xib */; };
 		01ECDFBA1B7C402100665D87 /* HMCommonArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFAB1B7C402100665D87 /* HMCommonArrowItem.m */; };
 		01ECDFBB1B7C402100665D87 /* HMCommonButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFAD1B7C402100665D87 /* HMCommonButtonItem.m */; };
 		01ECDFBC1B7C402100665D87 /* HMCommonCenterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 01ECDFAF1B7C402100665D87 /* HMCommonCenterItem.m */; };
@@ -2866,7 +2865,6 @@
 		01ECDB2D1C8EB5E80018160F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		01ECDB2F1C8EB5FC0018160F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		01ECDB311C8EB6070018160F /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		01ECDF981B7C347800665D87 /* SQCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SQCollectionCell.xib; sourceTree = "<group>"; };
 		01ECDFAA1B7C402100665D87 /* HMCommonArrowItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonArrowItem.h; sourceTree = "<group>"; };
 		01ECDFAB1B7C402100665D87 /* HMCommonArrowItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMCommonArrowItem.m; sourceTree = "<group>"; };
 		01ECDFAC1B7C402100665D87 /* HMCommonButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMCommonButtonItem.h; sourceTree = "<group>"; };
@@ -7580,7 +7578,6 @@
 			isa = PBXGroup;
 			children = (
 				01F03A081C607EB800966A6E /* PositionCell.xib */,
-				01ECDF981B7C347800665D87 /* SQCollectionCell.xib */,
 				01CBC7051DCB1E6E008FC3D9 /* TopCell.h */,
 				01CBC7061DCB1E6E008FC3D9 /* TopCell.m */,
 				01CBC7071DCB1E6E008FC3D9 /* TopCell.xib */,
@@ -8863,7 +8860,6 @@
 				01F49D201C478D700079F45F /* CommonGoodsCellBottom.xib in Resources */,
 				01ECDA811C8EB31F0018160F /* chatBar_record@2x.png in Resources */,
 				01ECDA2E1C8EB31F0018160F /* VoiceSearchFeedback017@2x.png in Resources */,
-				01ECDF9B1B7C347800665D87 /* SQCollectionCell.xib in Resources */,
 				0177DA7C1D5D6303008D5C95 /* BasicViewController.xib in Resources */,
 				01ECDAD21C8EB31F0018160F /* Contents.json in Resources */,
 				01AB2EE71DD59CA5006EAFA2 /* cb_mono_on@2x.png in Resources */,
