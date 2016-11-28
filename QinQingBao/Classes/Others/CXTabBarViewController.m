@@ -43,6 +43,9 @@
     // 创建中间的tabbar
     [self addCustomTabBar];
     
+    [self.tabBar setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]]];
+    [self.tabBar setShadowImage:[UIImage imageWithColor:[UIColor clearColor]]];
+    
     //注册寸欣账户登录信息超时监听
     [MTNotificationCenter addObserver:self selector:@selector(loginTimeoutHanlder:) name:MTLoginTimeout object:nil];
     

@@ -92,7 +92,7 @@
     ClasslistModel *model = self.dataProvider[indexPath.row];
     AllQuestionController *vc = [[AllQuestionController alloc] init];
     vc.c_id = model.c_id;
-    vc.classlistModel = model;
+//    vc.classlistModel = model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

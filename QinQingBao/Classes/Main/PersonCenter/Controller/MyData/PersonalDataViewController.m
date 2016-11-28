@@ -59,14 +59,8 @@
         dataProvider = [[NSMutableArray alloc] initWithObjects:
                         @[
                           @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : @""},
-                          @{@"title" : @"修改昵称",@"placeholder" : @"请输入昵称",@"text" : @"昵称", @"value" : @"正在获取"},
-                          @{@"title" : @"",@"placeholder" : @"请输入性别",@"text" : @"性别", @"value" : @"正在获取"},
-                          @{@"title" : @"",@"placeholder" : @"请输入出生日期",@"text" : @"出生日期", @"value" : @"正在获取"}
-                          ],
-                        @[
+                          @{@"title" : @"修改昵称",@"placeholder" : @"请输入真实姓名",@"text" : @"姓名", @"value" : @"正在获取"},
                           @{@"title" : @"",@"placeholder" : @"请输入电话",@"text" : @"电话", @"value" : @"正在获取"},
-                          @{@"title" : @"修改邮箱",@"placeholder" : @"请输入Email",@"text" : @"Email", @"value" : @"正在获取"},
-                          @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : @"正在获取"}
                           ],
                         @[
                           @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : @""},
@@ -125,15 +119,12 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    //    return [[SharedAppUtil defaultCommonUtil].userVO.logintype integerValue] > 0 ? 1 : 2;
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0)
-        return 4;
-    else if (section == 1)
         return 3;
     else
         return 2;
@@ -190,7 +181,7 @@
         if (contentcell == nil) {
             contentcell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:contentCellId];
         }
-        if (indexPath.section == 2) {
+        if (indexPath.section == 1) {
             contentcell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }else{
             contentcell.accessoryType = UITableViewCellAccessoryNone;
@@ -228,58 +219,15 @@
     }else if (indexPath.section == 0 && indexPath.row == 1){
         [self changeFieldWithIndexPath:indexPath];
         NSLog(@"姓名");
-        
     }else if (indexPath.section == 0 && indexPath.row == 2){
-        UIAlertView *alertSex = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil];
-        alertSex.tag = 99;
-        [alertSex show];
-        
-    }else if (indexPath.section == 0 && indexPath.row == 3){
-        [self setDatePicker];
-        
-    }else if (indexPath.section == 1 && indexPath.row == 0){
         
         NSLog(@"电话");
-        
-    }else if (indexPath.section == 1 && indexPath.row == 1){
-        [self changeFieldWithIndexPath:indexPath];
-        NSLog(@"email");
-        
-    }else if (indexPath.section == 1 && indexPath.row == 2){
-        AddressController *textView = [[AddressController alloc] init];
-        
-        [textView setItemInfoWith:[NSString stringWithFormat:@"浙江省%@",infoVO.totalname ? infoVO.totalname:@""] regionStr:@"" regionCode:infoVO.member_areaid areaInfo:infoVO.member_areainfo];
-        textView.changeDataBlock = ^(AreaModel *selectedRegionmodel, NSString *addressStr,NSString *areaInfo){
-            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-            [dict setObject:@"ios" forKey:@"client"];
-            if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
-                [dict setObject:infoVO.member_sex forKey:@"member_sex"];
-            if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
-                [dict setObject:infoVO.member_truename forKey:@"member_truename"];
-            if (infoVO.member_birthday != nil)
-                [dict setObject:infoVO.member_birthday forKey:@"member_birthday"];
-            if (infoVO.member_email != nil)
-                [dict setObject:infoVO.member_email forKey:@"member_email"];
-            if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-                [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-            if (areaInfo != nil)
-                [dict setObject:areaInfo forKey:@"member_areainfo"];
-            if (selectedRegionmodel.dvcode != nil)
-                [dict setObject:selectedRegionmodel.dvcode forKey:@"member_areaid"];
-            
-            [self updataUserInfor:dict];
-            
-        };
-        textView.title = @"居住地址";
-        [self.navigationController pushViewController:textView animated:YES];
-        
-        
-    }else if (indexPath.section == 2 && indexPath.row == 0){
+    }else if (indexPath.section == 1 && indexPath.row == 0){
         AuthenticateViewController *authenticateVC = [[AuthenticateViewController alloc] init];
         authenticateVC.infoVO = infoVO;
         [self.navigationController pushViewController:authenticateVC animated:YES];
         
-    }else if (indexPath.section == 2 && indexPath.row == 1){
+    }else if (indexPath.section == 1 && indexPath.row == 1){
         ChangePwdViewController *updateView = [[ChangePwdViewController alloc]init];
         [self.navigationController pushViewController:updateView animated:YES];
     }
@@ -307,7 +255,6 @@
             [self shootPiicturePrVideo];
         else if(buttonIndex==2)
             [self selectExistingPictureOrVideo];
-        
     }
     else
     {
@@ -450,8 +397,6 @@
  */
 -(void)setDataProvider
 {
-    NSString *sexStr = [infoVO.member_sex  isEqual: @"1"] ? @"男" : [infoVO.member_sex  isEqual: @"2"] ? @"女" : @"保密";
-    
     NSString *expert_status = nil;
     if (self.personalInfo.expert_status.length <= 0 || [self.personalInfo.expert_status isEqualToString:@"0"]) {
         expert_status = @"未申请";
@@ -466,14 +411,8 @@
     dataProvider = [[NSMutableArray alloc] initWithObjects:
                     @[
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"头像", @"value" : infoVO.member_avatar.length > 0 ? @"" : @"未上传"},
-                      @{@"title" : @"修改昵称",@"placeholder" : @"请输入昵称",@"text" : @"昵称", @"value" :  infoVO.member_truename.length > 0 ? infoVO.member_truename : @"未填写"},
-                      @{@"title" : @"",@"placeholder" : @"请输入性别",@"text" : @"性别", @"value" : infoVO.member_sex.length > 0 ? sexStr : @"未填写"},
-                      @{@"title" : @"",@"placeholder" : @"请输入出生日期",@"text" : @"出生日期", @"value" : infoVO.member_birthday.length > 0 ? infoVO.member_birthday : @"未填写"}
-                      ],
-                    @[
-                      @{@"title" : @"",@"placeholder" : @"请输入电话",@"text" : @"电话", @"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
-                      @{@"title" : @"修改邮箱",@"placeholder" : @"请输入Email",@"text" : @"Email", @"value" : infoVO.member_email.length > 0 ? infoVO.member_email : @"未填写"},
-                      @{@"title" : @"修改地址",@"placeholder" : @"请输入地址",@"text" : @"地址", @"value" : infoVO.totalname.length > 0 ? [NSString stringWithFormat:@"%@%@",infoVO.totalname,infoVO.member_areainfo] : @"未填写"}
+                      @{@"title" : @"修改姓名",@"placeholder" : @"请输入真实姓名",@"text" : @"姓名", @"value" :  infoVO.member_truename.length > 0 ? infoVO.member_truename : @"未填写"},
+                       @{@"title" : @"",@"placeholder" : @"请输入电话",@"text" : @"电话", @"value" : infoVO.member_mobile.length > 0 ? infoVO.member_mobile : @"未填写"},
                       ],
                     @[
                       @{@"title" : @"",@"placeholder" : @"",@"text" : @"申请专家认证", @"value" : expert_status},
@@ -564,68 +503,6 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                  }];
-}
-
-
-#pragma mark --- DatePicker
--(void)setDatePicker
-{
-    UIAlertController* alertVc=[UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n\n"
-                                                                   message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
-    self.datePicker = [[UIDatePicker alloc]init];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-    NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
-    self.datePicker.locale = locale;
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *currentDate = [NSDate date];
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setYear:0];
-    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-    [comps setYear:-90];
-    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-    
-    [self.datePicker setMaximumDate:maxDate];
-    [self.datePicker setMinimumDate:minDate];
-    
-    if (infoVO &&  infoVO.member_birthday &&![infoVO.member_birthday isEqualToString:@"0000-00-00"])
-    {
-        NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-        [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-        [inputFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate* inputDate = [inputFormatter dateFromString:infoVO.member_birthday];
-        [self.datePicker setDate:inputDate animated:YES];
-    }
-    
-    UIAlertAction* ok=[UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction *action) {
-        NSDate* date=[self.datePicker date];
-        NSDateFormatter* formatter=[[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        NSString * curentDatest = [formatter stringFromDate:date];
-        
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:curentDatest forKey:@"member_birthday"];
-        [dict setObject:@"ios" forKey:@"client"];
-        if (infoVO.member_sex != nil && [infoVO.member_sex floatValue] > 0)
-            [dict setObject:infoVO.member_sex forKey:@"member_sex"];
-        if (infoVO.member_truename != nil)
-            [dict setObject:infoVO.member_truename forKey:@"member_truename"];
-        if (infoVO.member_areainfo != nil)
-            [dict setObject:infoVO.member_areainfo forKey:@"member_areainfo"];
-        if (infoVO.member_areaid != nil)
-            [dict setObject:infoVO.member_areaid forKey:@"member_areaid"];
-        if (infoVO.member_email != nil)
-            [dict setObject:infoVO.member_email forKey:@"member_email"];
-        if ([SharedAppUtil defaultCommonUtil].userVO.key != nil)
-            [dict setObject:[SharedAppUtil defaultCommonUtil].userVO.key forKey:@"key"];
-        
-        [self updataUserInfor:dict];
-    }];
-    UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
-    [alertVc.view addSubview:self.datePicker];
-    [alertVc addAction:ok];
-    [alertVc addAction:no];
-    [self presentViewController:alertVc animated:YES completion:nil];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

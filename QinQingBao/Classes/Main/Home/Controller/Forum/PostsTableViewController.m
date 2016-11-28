@@ -96,12 +96,11 @@
  **/
 -(void)getAdvertisementpic
 {
-    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{@"bc_uses_type" : @"",
+    [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{@"bc_uses_type" : @"1",
                                                                         @"bc_type" : @"1"} type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                                                             
                                                                             if([dict[@"code"] integerValue] != 0){
-                                                                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                                                                                //            [alertView show];
+                                                                                
                                                                                 return ;
                                                                             }
                                                                             
@@ -412,6 +411,9 @@
                 commoncell.layoutMargins = UIEdgeInsetsZero;
             }
             commoncell.textLabel.text = @"健康话题";
+            commoncell.textLabel.font = [UIFont systemFontOfSize:14];
+            commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
+            
             cell = commoncell;
         }
         else
@@ -469,6 +471,8 @@
                 commoncell.layoutMargins = UIEdgeInsetsZero;
             }
             commoncell.textLabel.text = @"热门推荐";
+            commoncell.textLabel.font = [UIFont systemFontOfSize:14];
+            commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
             cell = commoncell;
         }
         else

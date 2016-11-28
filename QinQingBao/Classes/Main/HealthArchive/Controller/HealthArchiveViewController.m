@@ -104,7 +104,7 @@
     }
     
     [section0 addObject:createItem(self.archiveData.mobile,@"联系电话",@"必填项")];
-    [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"请选择")];
+    [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"男")];
     [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
     
     NSMutableArray *section1 = [[NSMutableArray alloc] init];
@@ -186,9 +186,12 @@
     }else{
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
-        textCell.textLabel.font = [UIFont boldSystemFontOfSize:14];
+        textCell.textLabel.font = [UIFont boldSystemFontOfSize:16];
+        textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
         textCell.field.text = rowItem[kContent];
         textCell.field.placeholder = rowItem[kPlaceHolder];
+        textCell.field.font = [UIFont boldSystemFontOfSize:14];
+        textCell.field.textColor = [UIColor colorWithRGB:@"999999"];
         textCell.idx = indexPath;
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){
             weakSelf.datas[idx.section][idx.row][kContent] = contentStr;
@@ -453,7 +456,7 @@
     self.dateSelectView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
     [self.dateSelectView addTarget:self action:@selector(datePickerViewHide:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, MTScreenH - 180, MTScreenW, 180)];
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, MTScreenH - 240, MTScreenW, 180)];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT+0800"];
@@ -482,10 +485,20 @@
     if (birthdayDate) {
         self.datePicker.date = birthdayDate;
     }
+    else
+    {
+        NSString *currentdateStr = @"1976-01-01 00:00:00";
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd hh:mm:ss";
+        formatter.timeZone = timeZone;
+        formatter.locale = locale;
+        NSDate *currentDate = [formatter dateFromString:currentdateStr];
+        self.datePicker.date = currentDate;
+    }
     
     [self.dateSelectView addSubview:self.datePicker];
     
-    UIToolbar *tb = [[UIToolbar alloc] initWithFrame:CGRectMake(0, MTScreenH - 224, MTScreenW, 44)];
+    UIToolbar *tb = [[UIToolbar alloc] initWithFrame:CGRectMake(0, MTScreenH - 284, MTScreenW, 44)];
     tb.backgroundColor = [UIColor whiteColor];
     tb.translucent = NO;
     

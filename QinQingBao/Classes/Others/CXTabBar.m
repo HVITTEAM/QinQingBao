@@ -37,13 +37,17 @@
  */
 - (void)setupPlusButton
 {
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 0.5)];
+    line.backgroundColor = [UIColor colorWithRGB:@"dddddd"];
+    [self addSubview:line];
+    
     UIButton *plusButton = [[UIButton alloc] init];
     // 设置背景
     [plusButton setBackgroundImage:[UIImage imageWithName:@"jkzx.png"] forState:UIControlStateNormal];
     [plusButton setBackgroundImage:[UIImage imageWithName:@"jkzx.png"] forState:UIControlStateHighlighted];
     // 设置图标
-//    [plusButton setImage:[UIImage imageWithName:@"tabbar_compose_icon_add"] forState:UIControlStateNormal];
-//    [plusButton setImage:[UIImage imageWithName:@"tabbar_compose_icon_add_highlighted"] forState:UIControlStateHighlighted];
+    //    [plusButton setImage:[UIImage imageWithName:@"tabbar_compose_icon_add"] forState:UIControlStateNormal];
+    //    [plusButton setImage:[UIImage imageWithName:@"tabbar_compose_icon_add_highlighted"] forState:UIControlStateHighlighted];
     [plusButton addTarget:self action:@selector(plusClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:plusButton];
     self.plusButton = plusButton;
@@ -54,6 +58,7 @@
     lab.font = [UIFont systemFontOfSize:10];
     [self addSubview:lab];
     self.lab = lab;
+    
 }
 
 - (void)plusClick
@@ -80,13 +85,13 @@
  */
 - (void)setupPlusButtonFrame
 {
-//    self.plusButton.size = self.plusButton.currentBackgroundImage.size;
+    //    self.plusButton.size = self.plusButton.currentBackgroundImage.size;
     self.plusButton.size = CGSizeMake(45, 45);
-
-    self.plusButton.center = CGPointMake(self.width * 0.5, self.height * 0.5 - 15);
+    
+    self.plusButton.center = CGPointMake(self.width * 0.5, self.height * 0.5 - 17);
     
     [self.lab sizeToFit];
-    self.lab.center = CGPointMake(self.width * 0.5, CGRectGetMaxY(self.plusButton.frame)+10);}
+    self.lab.center = CGPointMake(self.width * 0.5, CGRectGetMaxY(self.plusButton.frame) + 10);}
 
 /**
  *  设置所有tabbarButton的frame

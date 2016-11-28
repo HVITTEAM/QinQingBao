@@ -102,11 +102,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CommonPlanCell *commonPlanCell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonPlanCell"];
-    
-    if(commonPlanCell == nil)
-        commonPlanCell = [CommonPlanCell commonPlanCell];
-    
     HealthReportCell *healthReportCell = [tableView dequeueReusableCellWithIdentifier:@"MTHealthReportCell"];
     if(healthReportCell == nil)
         healthReportCell = [HealthReportCell healthReportCell];
@@ -117,7 +112,16 @@
         ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
         VC.title = item.iname;
         VC.urlstr = item.examreport_url;
-        VC.speakStr = item.entry_voice;
+        
+        NSMutableString *str = [[NSMutableString alloc] init];
+        if (item.entry_voice &&  item.entry_voice.count > 0)
+        {
+            for (NSDictionary *dict in item.entry_voice)
+            {
+                [str appendString:[dict objectForKey:@"ycjd_voice"]];
+            }
+        }
+        VC.speakStr = str;
         [self.navigationController pushViewController:VC animated:YES];
     };
     

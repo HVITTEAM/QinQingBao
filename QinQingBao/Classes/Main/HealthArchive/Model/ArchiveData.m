@@ -224,7 +224,7 @@
             sex = @"女";
             break;
         default:
-            sex = @"保密";
+            sex = @"男";
             break;
     }
     return sex;

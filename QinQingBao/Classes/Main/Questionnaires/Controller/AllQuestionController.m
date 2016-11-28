@@ -44,7 +44,6 @@
     self.tableView.estimatedRowHeight = 70;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.view.backgroundColor = HMGlobalBg;
-    self.title = self.classlistModel.c_title;
 }
 
 #pragma mark 集成刷新控件
@@ -151,7 +150,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (indexPath.section == 1 && [self.classlistModel.c_id isEqualToString:@"1"]) {
+    if (indexPath.section == 1)
+    {
         SexViewController *vc = [[SexViewController alloc] init];
         ExamModel *item = dataProvider[indexPath.section];
         vc.exam_id = item.e_id;

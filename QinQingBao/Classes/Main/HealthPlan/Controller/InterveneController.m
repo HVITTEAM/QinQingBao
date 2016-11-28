@@ -89,6 +89,7 @@
 {
     self.title = @"干预方案";
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
     //一开始不显示
     showEndView = NO;
     

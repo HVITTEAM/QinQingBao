@@ -56,7 +56,15 @@
     UINib *nib = [UINib nibWithNibName:@"RelativesCell" bundle:nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"relativesCell"];
     
-    self.placeholdLb.text = @"暂无健康档案资料,\n\n可新建或绑定亲友健康档案";
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 5;// 字体的行间距
+    
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                 NSParagraphStyleAttributeName:paragraphStyle};
+    self.placeholdLb.attributedText = [[NSAttributedString alloc] initWithString:@"暂无健康档案资料,\n可新建或绑定亲友健康档案" attributes:attributes];
+    
+//    self.placeholdLb.text = @"暂无健康档案资料,\n可新建或绑定亲友健康档案";
 }
 
 - (void)updateConstraints

@@ -93,7 +93,7 @@
     icon.image  = [UIImage imageNamed:@"report.png"];
     [view addSubview:icon];
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 8, 200, 20)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 12, 200, 20)];
     lab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:13];
     lab.text = item.iname;
     [lab sizeToFit];

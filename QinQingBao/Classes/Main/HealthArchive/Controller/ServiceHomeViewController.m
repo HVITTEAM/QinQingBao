@@ -10,7 +10,7 @@
 #import "ArchivesCell.h"
 #import "MessageTypeCell.h"
 
-#import "ClasslistViewController.h"
+#import "AllQuestionController.h"
 #import "InterventionPlanController.h"
 #import "ReportListViewController.h"
 
@@ -253,8 +253,10 @@
     if (indexPath.section == 0 || indexPath.section == 2) {
         return;
     }else if (indexPath.section == 1 && indexPath.row == 0) {
-        ClasslistViewController *questionResultVC = [[ClasslistViewController alloc] init];
-        [self.parentVC.navigationController pushViewController:questionResultVC animated:YES];
+        AllQuestionController *vc = [[AllQuestionController alloc] init];
+        vc.c_id = @"1";
+        vc.title = @"健康评估";
+        [self.parentVC.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section == 1 && indexPath.row == 1){
         ReportListViewController *reportListVC = [[ReportListViewController alloc] init];

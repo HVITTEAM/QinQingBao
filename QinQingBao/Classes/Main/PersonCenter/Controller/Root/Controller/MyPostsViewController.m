@@ -157,6 +157,8 @@
     [postsArr removeAllObjects];
     
     [self getUserPosts];
+    
+    [self getUserFannum];
 }
 
 /**
@@ -164,7 +166,6 @@
  */
 -(void)endrefleshData
 {
-    //    [self.headView setStates:RefreshViewStateNormal];
 }
 
 #pragma mark - Table view data source
@@ -182,8 +183,8 @@
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (0 == indexPath.section)
-        return 60;
+    if (0 == indexPath.row)
+        return 44;
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.height;
 }
@@ -202,13 +203,12 @@
     
     UITableViewCell *cell;
     
-    
     if (indexPath.row == 0)
     {
         UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
         if (commoncell == nil)
             commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
-        commoncell.textLabel.text = [NSString stringWithFormat:@"%ld 帖子",(long)[personalInfo.count_article integerValue]];
+        commoncell.textLabel.text = [NSString stringWithFormat:@"我的帖子 %ld",(long)[personalInfo.count_article integerValue]];
         commoncell.textLabel.font = [UIFont systemFontOfSize:15];
         commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
         cell = commoncell;
@@ -225,7 +225,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1 && indexPath.row > 0)
+    if ( indexPath.row > 0)
     {
         PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
         [view setItemdata:postsArr[indexPath.row -1]];
@@ -339,7 +339,7 @@
                                              currentPageIdx ++;
                                              [postsArr addObjectsFromArray:[arr copy]];
                                              
-                                             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                                             [self.tableView reloadData];
                                          }
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -70,7 +70,7 @@
 -(void)initSpeachView
 {
     // 1.创建按钮
-    speakBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 100, MTScreenH - 100, 64, 64)];
+    speakBtn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 100, MTScreenH - 160, 64, 64)];
     
     [speakBtn setBackgroundImage:[UIImage resizedImage:@"voice1"] forState:UIControlStateNormal];
     [speakBtn addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];

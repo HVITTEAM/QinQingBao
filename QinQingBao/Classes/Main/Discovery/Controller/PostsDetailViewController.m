@@ -71,7 +71,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.extendedLayoutIncludesOpaqueBars = YES;
+
     self.pageNum = 1;
     
     self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, MTScreenH - kReplyBarHeight) style:UITableViewStylePlain];

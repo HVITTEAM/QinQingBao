@@ -13,7 +13,7 @@
 
 @property(nonatomic,copy)NSString *risk_level;
 
-@property(nonatomic,copy)NSString *entry_voice;
+@property(nonatomic,copy)NSArray *entry_voice;
 
 @property(nonatomic,copy)NSString *wp_status;
 
