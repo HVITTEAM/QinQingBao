@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 #import "ScanCodesViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "InputArchiveCodeController.h"
 
 @interface ScanCodesViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 {
@@ -39,6 +40,8 @@
     self.title = @"二维码/条码";
 
     [self authorizationCheck];
+    
+    self.extendedLayoutIncludesOpaqueBars = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -176,6 +179,19 @@
     backBtn.layer.masksToBounds = YES;
     [backBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     //    [self.view addSubview:backBtn];
+    
+    UIButton *btn = [[UIButton alloc] init];
+    btn.backgroundColor = [UIColor whiteColor];
+    [btn setTitle:@"手动输入档案号" forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [btn setTitleColor:[UIColor colorWithRGB:@"333333"] forState:UIControlStateNormal];
+    [btn sizeToFit];
+    btn.layer.cornerRadius = 8.0f;
+    btn.frame = CGRectMake((self.view.width - btn.width)/2, self.view.height - 60, btn.width + 20, 40);
+    [self.view addSubview:btn];
+    
+    [btn addTarget:self action:@selector(inputArchiveCode:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 /**
@@ -288,6 +304,12 @@
 -(void)back
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)inputArchiveCode:(UIButton *)sender
+{
+    InputArchiveCodeController *inputArchiveCodeVC = [[InputArchiveCodeController alloc] init];
+    [self.navigationController pushViewController:inputArchiveCodeVC animated:YES];
 }
 
 #pragma mark -- 内部方法 --

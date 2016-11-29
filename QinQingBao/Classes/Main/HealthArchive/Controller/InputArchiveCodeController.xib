@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InputArchiveCodeController">
+            <connections>
+                <outlet property="cancelBtn" destination="0O6-mf-D36" id="oUs-RW-2pI"/>
+                <outlet property="confirmBtn" destination="IJQ-If-hgU" id="fR7-0a-qXd"/>
+                <outlet property="inputField" destination="vvO-LN-HrV" id="gw8-JQ-vSF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJQ-If-hgU">
+                    <rect key="frame" x="207.5" y="154" width="147.5" height="40"/>
+                    <color key="backgroundColor" red="0.58039215686274503" green="0.74901960784313726" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="62Y-ug-hWT"/>
+                    </constraints>
+                    <state key="normal" title="确定">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="confirmAction:" destination="-1" eventType="touchUpInside" id="QrX-d7-ISf"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入亲友档案号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vvO-LN-HrV">
+                    <rect key="frame" x="20" y="84" width="335" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="hQ1-PC-bmw"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0O6-mf-D36">
+                    <rect key="frame" x="20" y="154" width="147.5" height="40"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="bVu-Ib-cZT"/>
+                    </constraints>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="mhP-qN-d3W"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="0O6-mf-D36" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="5Ua-pS-g4i"/>
+                <constraint firstItem="0O6-mf-D36" firstAttribute="top" secondItem="vvO-LN-HrV" secondAttribute="bottom" constant="20" id="654-Cx-mUE"/>
+                <constraint firstItem="IJQ-If-hgU" firstAttribute="width" secondItem="0O6-mf-D36" secondAttribute="width" id="OYX-OG-Zmk"/>
+                <constraint firstAttribute="trailing" secondItem="vvO-LN-HrV" secondAttribute="trailing" constant="20" id="PX5-Do-bVV"/>
+                <constraint firstItem="vvO-LN-HrV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="W2J-xH-Hnj"/>
+                <constraint firstItem="IJQ-If-hgU" firstAttribute="centerY" secondItem="0O6-mf-D36" secondAttribute="centerY" id="a77-Dt-19n"/>
+                <constraint firstItem="IJQ-If-hgU" firstAttribute="leading" secondItem="0O6-mf-D36" secondAttribute="trailing" constant="40" id="nia-qd-IyV"/>
+                <constraint firstItem="vvO-LN-HrV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="84" id="xQc-eS-FfR"/>
+                <constraint firstAttribute="trailing" secondItem="IJQ-If-hgU" secondAttribute="trailing" constant="20" id="yzN-n9-MoL"/>
+            </constraints>
+            <point key="canvasLocation" x="32" y="40"/>
+        </view>
+    </objects>
+</document>
