@@ -78,6 +78,8 @@
 		011F0B311DE7E9B4006E16E2 /* 表情.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2C1DE7E9B4006E16E2 /* 表情.png */; };
 		011F0B321DE7E9B4006E16E2 /* 语音.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2D1DE7E9B4006E16E2 /* 语音.png */; };
 		011F0B351DE7ED74006E16E2 /* 输入.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B341DE7ED74006E16E2 /* 输入.png */; };
+		01209B7E1DED1959000ACD62 /* cb_simple_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */; };
+		01209B7F1DED1959000ACD62 /* cb_simple_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */; };
 		0120FC2F1DD2BA70005561B2 /* china.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0120FC2E1DD2BA70005561B2 /* china.plist */; };
 		01237A581CFC319D0070C905 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 01237A4A1CFC319D0070C905 /* MJConst.m */; };
 		01237A591CFC319D0070C905 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 01237A4D1CFC319D0070C905 /* MJFoundation.m */; };
@@ -1432,6 +1434,8 @@
 		011F0B2C1DE7E9B4006E16E2 /* 表情.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "表情.png"; sourceTree = "<group>"; };
 		011F0B2D1DE7E9B4006E16E2 /* 语音.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语音.png"; sourceTree = "<group>"; };
 		011F0B341DE7ED74006E16E2 /* 输入.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "输入.png"; sourceTree = "<group>"; };
+		01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_off@2x.png"; sourceTree = "<group>"; };
+		01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_on@2x.png"; sourceTree = "<group>"; };
 		0120FC2E1DD2BA70005561B2 /* china.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china.plist; sourceTree = "<group>"; };
 		01237A491CFC319D0070C905 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
 		01237A4A1CFC319D0070C905 /* MJConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJConst.m; sourceTree = "<group>"; };
@@ -5023,6 +5027,8 @@
 		01AB2EB91DD59CA5006EAFA2 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */,
+				01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */,
 				01AB2EBA1DD59CA5006EAFA2 /* cb_box_off.png */,
 				01AB2EBB1DD59CA5006EAFA2 /* cb_box_off@2x.png */,
 				01AB2EBC1DD59CA5006EAFA2 /* cb_box_on.png */,
@@ -8881,6 +8887,7 @@
 				01ECDA381C8EB31F0018160F /* call_out.png in Resources */,
 				01EA206A1C2A705100B546A9 /* OrderResultViewController.xib in Resources */,
 				01EF372A1C59B8CD0029C1C5 /* HouseTypeCell.xib in Resources */,
+				01209B7F1DED1959000ACD62 /* cb_simple_on@2x.png in Resources */,
 				D23B0C811DAB61180032AFE2 /* AuthenticateResultController.xib in Resources */,
 				01ECDA821C8EB31F0018160F /* Contents.json in Resources */,
 				0177DA831D5D6303008D5C95 /* QuestionThreeController.xib in Resources */,
@@ -9176,6 +9183,7 @@
 				0100C5511BFEE6AA005128EA /* area.plist in Resources */,
 				01AB2EE11DD59CA5006EAFA2 /* cb_green_off@2x.png in Resources */,
 				01ECDA401C8EB31F0018160F /* Contents.json in Resources */,
+				01209B7E1DED1959000ACD62 /* cb_simple_off@2x.png in Resources */,
 				011F0B351DE7ED74006E16E2 /* 输入.png in Resources */,
 				01ECDA541C8EB31F0018160F /* chatBar_textBg.png in Resources */,
 				01FF8F871CDB2DDE0089BBC4 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,

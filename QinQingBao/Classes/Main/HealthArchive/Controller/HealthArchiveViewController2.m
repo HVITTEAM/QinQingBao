@@ -137,8 +137,8 @@
     {
         TextTwoCell *textTwoCel = [TextTwoCell createCellWithTableView:tableView];
         textTwoCel.titleLb.text = rowItem[kTitle];
-        textTwoCel.textLabel.font = [UIFont systemFontOfSize:16];
-        textTwoCel.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
+        textTwoCel.titleLb.font = [UIFont systemFontOfSize:16];
+        textTwoCel.titleLb.textColor = [UIColor colorWithRGB:@"333333"];
         
         textTwoCel.contentTextView.text = rowItem[kContent];
         textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];
@@ -158,7 +158,7 @@
         else
             textCell.textLabel.font = [UIFont systemFontOfSize:16];
         
-        textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
+        textCell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         textCell.field.text = rowItem[kContent];
         textCell.field.enabled = NO;
         textCell.field.placeholder = rowItem[kPlaceHolder];

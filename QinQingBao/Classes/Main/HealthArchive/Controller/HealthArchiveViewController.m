@@ -153,6 +153,7 @@
             imageView.layer.masksToBounds = YES;
             portraitCell.accessoryView = imageView;
             portraitCell.textLabel.font = [UIFont systemFontOfSize:16];
+            portraitCell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         }
         portraitCell.textLabel.text = rowItem[kTitle];
         UIImageView *imageView = (UIImageView *)portraitCell.accessoryView;
@@ -187,7 +188,7 @@
         TextCell *textCell = [TextCell createCellWithTableView:tableView];
         textCell.textLabel.text = rowItem[kTitle];
         textCell.textLabel.font = [UIFont systemFontOfSize:16];
-        textCell.textLabel.textColor = [UIColor colorWithRGB:@"33333"];
+        textCell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         textCell.field.text = rowItem[kContent];
         textCell.field.placeholder = rowItem[kPlaceHolder];
         textCell.field.font = [UIFont systemFontOfSize:14];

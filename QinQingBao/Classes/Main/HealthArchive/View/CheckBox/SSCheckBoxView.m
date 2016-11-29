@@ -210,6 +210,9 @@ static const CGFloat kHeight = 36.0f;
         case kSSCheckBoxViewStyleMono:
             imageName = @"cb_mono_";
             break;
+        case kSSCheckBoxViewStyleSimple:
+            imageName = @"cb_simple_";
+            break;
         default:
             return nil;
     }

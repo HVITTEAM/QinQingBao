@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="114"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="320" height="113.5"/>
+                <frame key="frameInset" width="320" height="113"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JEl-Wf-MBW">
@@ -33,7 +33,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="JEl-Wf-MBW" secondAttribute="trailing" constant="20" id="9eK-xo-cSe"/>
                     <constraint firstAttribute="bottom" secondItem="JEl-Wf-MBW" secondAttribute="bottom" constant="10" id="HEV-lS-JPH"/>
-                    <constraint firstItem="2ZM-7H-XzV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="PIQ-Fy-v0S"/>
+                    <constraint firstItem="2ZM-7H-XzV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="PIQ-Fy-v0S"/>
                     <constraint firstItem="2ZM-7H-XzV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="SPU-nq-59s"/>
                     <constraint firstItem="JEl-Wf-MBW" firstAttribute="top" secondItem="2ZM-7H-XzV" secondAttribute="bottom" constant="10" id="Y2P-yX-JNg"/>
                     <constraint firstItem="aBw-oX-YxV" firstAttribute="leading" secondItem="JEl-Wf-MBW" secondAttribute="leading" constant="3" id="Ytj-Tk-VHx"/>

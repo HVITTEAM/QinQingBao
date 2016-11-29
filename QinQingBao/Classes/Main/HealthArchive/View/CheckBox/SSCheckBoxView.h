@@ -33,6 +33,7 @@ typedef enum SSCheckBoxViewStyle_ {
     kSSCheckBoxViewStyleGlossy,
     kSSCheckBoxViewStyleGreen,
     kSSCheckBoxViewStyleMono,
+    kSSCheckBoxViewStyleSimple,
 
     kSSCheckBoxViewStylesCount
 } SSCheckBoxViewStyle;

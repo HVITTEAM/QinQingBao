@@ -182,6 +182,8 @@
     rect.size.width = self.view.frame.size.width;
     [EaseChatToolbar appearance].frame = rect;
     [self getDataProvider];
+    [self getBusinessData];
+
 }
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -210,7 +212,7 @@
             NSString *url = [NSString stringWithFormat:@"%@%@",URL_Icon,_iconURL];
             model.avatarURLPath = url;
         }else {
-            model.avatarImage = [UIImage imageNamed:@"chatListCellHead"];
+            model.avatarImage = [UIImage imageNamed:@"pc_user.png"];
         }
         if (self.userinforModel.member_truename != nil) {
             model.nickname = _userinforModel.member_truename;
@@ -222,24 +224,15 @@
             NSString *url = [NSString stringWithFormat:@"%@%@",URL_Icon,self.businessInfoModel.member_avatar];
             model.avatarURLPath = url;
         }else {
-            model.avatarImage = [UIImage imageNamed:@"chatListCellHead"];
+            model.avatarImage = [UIImage imageNamed:@"pc_user.png"];
         }
-        if (![self.businessInfoModel.orgname isEqualToString:@""]) {
-            model.nickname = self.businessInfoModel.orgname;
-        }else {
-            model.nickname = @"未知商家";
-        }
-
+           model.nickname = self.businessInfoModel.member_truename;
     }
     if ([self.conversation.chatter isEqualToString:@"admin"]) {
         model.nickname = @"消息中心";
     }
         return model;
 }
-
-
-
-
 
 //长按
 - (BOOL)messageViewController:(EaseMessageViewController *)viewController
@@ -428,12 +421,35 @@
                                          }
                                          else
                                              [NoticeHelper AlertShow:@"个人资料为空!" view:self.view];
-                                         //[self setDataProvider];
-                                         //[self.tableView reloadData];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
                                  }];
 }
+
+//商家信息
+-(void)getBusinessData {
+    NSString *businessPath = [NSString stringWithFormat:@"%@/shop/mobile/?access_token=token&act=org&op=get_chat_bymemberid",URL_Local];
+    [CommonRemoteHelper RemoteWithUrl:businessPath parameters:@{@"member_id" : [[SharedAppUtil defaultCommonUtil].serviceCount componentsSeparatedByString:@"qqb"][1]}
+                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     id codeNum = [dict objectForKey:@"code"];
+                                     if ([codeNum isKindOfClass:[NSString class]]) {
+                                        
+                                     }else {
+                                         NSDictionary *di = [dict objectForKey:@"datas"];
+                                         if ([di count] != 0) {
+                                             self.businessInfoModel = [BusinessInfoModel businessInfo:dict];
+                                         }else {
+                                             [NoticeHelper AlertShow:@"商家资料为空!" view:self.view];
+                                             NSLog(@"【商家信息】%@",self.businessInfoModel);
+                                         }
+                                     }
+                                     [self.tableView reloadData];
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"发生错误！%@",error);
+                                     [self.view endEditing:YES];
+                                 }];
+}
+
 @end
