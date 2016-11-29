@@ -187,7 +187,7 @@
     [btn setTitleColor:[UIColor colorWithRGB:@"333333"] forState:UIControlStateNormal];
     [btn sizeToFit];
     btn.layer.cornerRadius = 8.0f;
-    btn.frame = CGRectMake((self.view.width - btn.width)/2, self.view.height - 60, btn.width + 20, 40);
+    btn.frame = CGRectMake((self.view.width - btn.width)/2, self.view.height - 70, btn.width + 20, 35);
     [self.view addSubview:btn];
     
     [btn addTarget:self action:@selector(inputArchiveCode:) forControlEvents:UIControlEventTouchUpInside];

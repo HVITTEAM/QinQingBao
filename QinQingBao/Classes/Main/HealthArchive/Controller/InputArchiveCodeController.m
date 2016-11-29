@@ -24,6 +24,7 @@
     self.edgesForExtendedLayout = UIRectEdgeAll;
     self.extendedLayoutIncludesOpaqueBars = YES;
     
+    self.navigationItem.title = @"绑定";
 }
 
 - (IBAction)cancelAction:(id)sender
