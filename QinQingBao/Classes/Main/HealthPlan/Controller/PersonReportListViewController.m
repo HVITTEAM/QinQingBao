@@ -107,11 +107,13 @@
         healthReportCell = [HealthReportCell healthReportCell];
     
     healthReportCell.dataProvider = dataProvider[indexPath.section];
-    
+    __weak typeof(self) weakSelf = self;
     healthReportCell.clickType = ^(PersonReportModel *item){
         ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
         VC.title = item.iname;
         VC.urlstr = item.examreport_url;
+        VC.wr_id = item.wr_id;
+        VC.fmno = weakSelf.fmno;
         
         NSMutableString *str = [[NSMutableString alloc] init];
         if (item.entry_voice &&  item.entry_voice.count > 0)
@@ -122,7 +124,7 @@
             }
         }
         VC.speakStr = str;
-        [self.navigationController pushViewController:VC animated:YES];
+        [weakSelf.navigationController pushViewController:VC animated:YES];
     };
     
     return healthReportCell;

@@ -14,4 +14,8 @@
 
 @property (nonatomic, copy) NSString *speakStr;
 
+@property (nonatomic, copy) NSString *wr_id;     //报告id
+
+@property (nonatomic, copy) NSString *fmno;      //档案编号
+
 @end

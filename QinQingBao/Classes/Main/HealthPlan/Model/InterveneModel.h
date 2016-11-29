@@ -54,5 +54,7 @@
 @property (nonatomic, copy) NSString *create_time;
 @property (nonatomic, copy) NSString *advice_report;
 
+@property (nonatomic, copy) NSString *wi_id;
+
 
 @end

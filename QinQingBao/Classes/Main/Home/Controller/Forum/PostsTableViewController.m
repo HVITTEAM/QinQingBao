@@ -275,7 +275,10 @@
  */
 -(void)getRecommendlist
 {
-    NSMutableDictionary *params = [@{ @"recommend" :  @"3"}mutableCopy];
+    NSMutableDictionary *params = [@{ @"recommend" :  @"2"}mutableCopy];
+    
+    params[@"p_health"] = @"1";
+    params[@"page_health"] = @"2";
     
     //    if (self.type == BBSType_1) {
     //        //        params[@"p_expert"] = @"1";
