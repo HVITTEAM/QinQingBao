@@ -898,7 +898,8 @@
 /***个人档案 - 删除医疗报告*/
 #define URL_Del_medical_report_item [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=del_medical_report_item",URL_Local_New]
 
-
+/***报告 - 状态变更 未读改为已读*/
+#define URL_Readed [NSString stringWithFormat:@"%@/ylserver/shop/mobile/?access_token=token&act=filemanagement&op=readed",URL_Local_New]
 
 
 #define UIColorFromRGB(rgbValue, alp)	[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \

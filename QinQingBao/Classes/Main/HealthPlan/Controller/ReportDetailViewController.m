@@ -44,6 +44,8 @@
     [self.webView loadRequest:request];
     
     [self initSpeachView];
+    
+    [self uploadReadStatusWithReportId:self.wr_id fmno:self.fmno];
 }
 
 -(void)setUrlstr:(NSString *)urlstr
@@ -151,5 +153,26 @@
     [timer invalidate];
     [speakBtn setBackgroundImage:[UIImage resizedImage:@"voice1"] forState:UIControlStateNormal];
 }
+
+/**
+ *  检测报告状态变更 未读改为已读  read为0:解读报告操作 1:干预方案操作
+ */
+- (void)uploadReadStatusWithReportId:(NSString *)reportId fmno:(NSString *)fmno
+{
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                     }mutableCopy];
+    params[@"fmno"] = fmno;
+    params[@"report_id"] = reportId;
+    params[@"read"] = @"0";
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Readed parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
 
 @end

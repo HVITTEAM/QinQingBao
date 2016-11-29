@@ -82,7 +82,6 @@
         [self getDataProvider];
     else
         [self getDataProvider1];
-
 }
 
 -(void)initView
@@ -126,6 +125,9 @@
                                          self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          
                                          goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
+                                         
+                                         //干预方案状态更改
+                                         [self uploadReadStatusWithReportId:self.dataItem.wi_id fmno:self.fmno];
                                      }
                                      [self.tableView reloadData];
                                      [HUD removeFromSuperview];
@@ -167,6 +169,8 @@
                                          self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
                                          
                                          goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
+                                         //干预方案状态更改
+                                         [self uploadReadStatusWithReportId:self.dataItem.wi_id fmno:self.fmno];
                                      }
                                      [self.tableView reloadData];
                                      [HUD removeFromSuperview];
@@ -534,6 +538,26 @@
                                          [NoticeHelper AlertShow:@"添加失败!" view:self.view];
                                      }];
     }
+}
+
+/**
+ *  干预方案状态变更 未读改为已读  read为0:解读报告操作 1:干预方案操作
+ */
+- (void)uploadReadStatusWithReportId:(NSString *)reportId fmno:(NSString *)fmno
+{
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                     }mutableCopy];
+    params[@"fmno"] = fmno;
+    params[@"report_id"] = reportId;
+    params[@"read"] = @"1";
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Readed parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 @end
