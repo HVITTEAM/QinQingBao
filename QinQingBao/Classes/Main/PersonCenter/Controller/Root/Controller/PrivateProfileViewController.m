@@ -360,6 +360,8 @@
                 commoncell.imageView.image = [UIImage imageNamed:@"type1.png"];
                 break;
             default:
+                commoncell.textLabel.text = @"我的帖子";
+                commoncell.imageView.image = [UIImage imageNamed:@"type1.png"];
                 break;
         }
         
@@ -422,6 +424,7 @@
                                                                            @"client" : @"ios",
                                                                            @"key" :[SharedAppUtil defaultCommonUtil].bbsVO.BBS_Key}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+                                     [self endrefleshData];
                                      id codeNum = [dict objectForKey:@"code"];
                                      if([codeNum integerValue] > 0)
                                      {
@@ -440,6 +443,7 @@
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
+                                     [self endrefleshData];
                                  }];
 }
 
@@ -455,6 +459,7 @@
                                                                      @"client" : @"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      id codeNum = [dict objectForKey:@"code"];
+                                     [self endrefleshData];
                                      if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
                                      {
                                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -486,6 +491,7 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      NSLog(@"发生错误！%@",error);
                                      [self.view endEditing:YES];
+                                     [self endrefleshData];
                                  }];
 }
 

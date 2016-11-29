@@ -67,7 +67,6 @@ void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector)
 - (void)aop_viewDidLoad
 {
     [self aop_viewDidLoad];
-    
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem = item;
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];

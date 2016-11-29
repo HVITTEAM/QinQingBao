@@ -139,7 +139,8 @@
         textTwoCel.titleLb.text = rowItem[kTitle];
         textTwoCel.titleLb.font = [UIFont systemFontOfSize:16];
         textTwoCel.titleLb.textColor = [UIColor colorWithRGB:@"333333"];
-        
+        textTwoCel.contentTextView.textColor = [UIColor colorWithRGB:@"999999"];
+
         textTwoCel.contentTextView.text = rowItem[kContent];
         textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];
         
@@ -161,6 +162,8 @@
         textCell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         textCell.field.text = rowItem[kContent];
         textCell.field.enabled = NO;
+        textCell.field.textColor = [UIColor colorWithRGB:@"999999"];
+
         textCell.field.placeholder = rowItem[kPlaceHolder];
         textCell.idx = indexPath;
         textCell.contentChangeCallBack = ^(NSIndexPath *idx,NSString *contentStr){

@@ -115,7 +115,8 @@
         textCell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
         textCell.field.placeholder = rowItem[kPlaceHolder];
         textCell.field.enabled = NO;
-        
+        textCell.field.textColor = [UIColor colorWithRGB:@"999999"];
+
         //不是档案创建者不允许修改
         if (!self.isAddArchive && !self.isCreator) {
             switchBtn.enabled = NO;
@@ -132,6 +133,8 @@
         textTwoCel.titleLb.font = [UIFont systemFontOfSize:16];
         textTwoCel.titleLb.textColor = [UIColor colorWithRGB:@"333333"];
         textTwoCel.contentTextView.text = rowItem[kContent];
+        textTwoCel.contentTextView.textColor = [UIColor colorWithRGB:@"999999"];
+
         textTwoCel.placeHolderLb.text = rowItem[kPlaceHolder];
         if (textTwoCel.contentTextView.text.length > 0) {
             textTwoCel.placeHolderLb.hidden = YES;
