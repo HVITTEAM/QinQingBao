@@ -228,9 +228,15 @@
             [weakSelf.tableView reloadData];
         };
     }else if (1 == indexPath.section && 1 == indexPath.row){
-        [self showDatePickerView:[self dateFromDateString:self.archiveData.sleeptime]];
+        if (self.archiveData.sleeptime)
+            [self showDatePickerView:[self dateFromDateString:self.archiveData.sleeptime]];
+        else
+            [self showDatePickerView:[self dateFromDateString:@"2016-11-28 22:30:00"]];
     }else if (1 == indexPath.section && 2 == indexPath.row){
-        [self showDatePickerView:[self dateFromDateString:self.archiveData.getuptime]];
+        if (self.archiveData.getuptime)
+            [self showDatePickerView:[self dateFromDateString:self.archiveData.getuptime]];
+        else
+            [self showDatePickerView:[self dateFromDateString:@"2016-11-28 07:30:00"]];
     }else if (2 == indexPath.section && 0 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"经常", nil] show];
     }else if (2 == indexPath.section && 1 == indexPath.row){

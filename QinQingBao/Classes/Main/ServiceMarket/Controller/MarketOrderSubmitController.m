@@ -16,6 +16,7 @@
 #import "CustomInfoCell.h"
 #import "ExtendFooterView.h"
 #import "MarketCustomInfo.h"
+#import "ChattingViewController.h"
 
 @interface MarketOrderSubmitController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -158,6 +159,12 @@
         //店铺信息
         MarketOrderCell *marketOrderCell = [MarketOrderCell createCellWithTableView:tableView];
         [marketOrderCell setItem:self.dataItem];
+        marketOrderCell.chatClick = ^(UIButton *btn){
+            ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter: [SharedAppUtil defaultCommonUtil].serviceCount conversationType:eConversationTypeChat];
+            [self.navigationController pushViewController:vx animated:YES];
+
+        };
+        
         cell = marketOrderCell;
     }else{
         //下单须知

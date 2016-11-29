@@ -48,7 +48,7 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.backgroundColor = MTNavgationBackgroundColor;
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
@@ -124,8 +124,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"寸欣客服";
+    self.title = @"健康咨询";
     self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
+
     //注册并登录当前用户
     EaseHandler *handler = [[EaseHandler alloc] init];
     [handler registerAndLoginEase:[NSString stringWithFormat:@"qqb%@",[SharedAppUtil defaultCommonUtil].userVO.member_id]];

@@ -463,7 +463,8 @@
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:nil];
             return;
         }
-        
+        [MTNotificationCenter postNotificationName:MTRefleshData object:nil userInfo:nil];
+
         [NoticeHelper AlertShow:@"成功" view:nil];
         if (self.isAddArchive) {
             [self.archiveData deleteArchiveData];
@@ -563,7 +564,8 @@
         }
         
         [NoticeHelper AlertShow:@"成功" view:nil];
-        
+        [MTNotificationCenter postNotificationName:MTRefleshData object:nil userInfo:nil];
+
         [self.navigationController popToRootViewControllerAnimated:YES];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

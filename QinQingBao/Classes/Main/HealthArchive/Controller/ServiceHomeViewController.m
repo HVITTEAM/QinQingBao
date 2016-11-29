@@ -47,13 +47,6 @@
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self getServicesData];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -63,7 +56,7 @@
     self.dataProvider = [[NSMutableArray alloc] init];
     
     self.tableView.backgroundColor = HMGlobalBg;
-    self.tableView.separatorColor = [UIColor colorWithRGB:@"dcdcdc"];
+    self.tableView.separatorColor = [UIColor colorWithRGB:@"ebebeb"];
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     
@@ -75,6 +68,16 @@
     }];
     
     [self.tableView.header beginRefreshing];
+    
+    [MTNotificationCenter addObserver:self selector:@selector(refleshData:) name:MTRefleshData object:nil];
+}
+
+/**
+ * 重新登录成功处理事件
+ */
+-(void)refleshData:(NSNotification *)notification
+{
+    [self getServicesData];
 }
 
 - (void)getServicesData

@@ -166,6 +166,9 @@
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             [self deleteArchiveWhitCode:item.fmno];
         }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alertController dismissViewControllerAnimated:YES completion:nil];
+        }]];
         
         [self presentViewController:alertController animated:YES completion:nil];
     }
@@ -220,7 +223,7 @@
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
-        
+        [MTNotificationCenter postNotificationName:MTRefleshData object:nil userInfo:nil];
         [self loadArchiveDataList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -245,7 +248,7 @@
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
-        
+        [MTNotificationCenter postNotificationName:MTRefleshData object:nil userInfo:nil];
         [self loadArchiveDataList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

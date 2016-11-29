@@ -235,6 +235,9 @@
 // 超时
 #define MTLoginTimeout @"MTLoginTimeout"
 
+// 刷新数据
+#define MTRefleshData @"MTRefleshData"
+
 // 注销
 #define MTLoginout @"MTLoginout"
 

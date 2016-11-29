@@ -9,6 +9,9 @@
 #import "DietaryHabit.h"
 #import "SSCheckBoxView.h"
 
+#define KCellHight 25
+#define KMargin 5
+
 @interface DietaryHabit()
 {
     
@@ -71,7 +74,18 @@
     
     __weak typeof(self) weakSelf = self;
     
-    _cb1 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, 10,100, 30) style:5 checked:NO];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 30)];
+    lab.text = @"请选择（可多选）";
+    lab.font = [UIFont systemFontOfSize:16];
+    lab.textColor  = [UIColor colorWithRGB:@"94bF36"];
+    [self.contentBoxView addSubview:lab];
+    
+    UIView *line0 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lab.frame), 320, 0.5)];
+    line0.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
+    [self.contentBoxView addSubview:line0];
+
+    
+    _cb1 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, 50,100, KCellHight) style:5 checked:NO];
     [_cb1 setText:@"荤素均衡"];
     [_cb1 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -86,7 +100,7 @@
     line.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line];
     
-    _cb2 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb1.frame) + 10,100, 30) style:5 checked:NO];
+    _cb2 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb1.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb2 setText:@"清淡"];
     [_cb2 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -100,7 +114,7 @@
     line1.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line1];
     
-    _cb3 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb2.frame) + 10,100, 30) style:5 checked:NO];
+    _cb3 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb2.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb3 setText:@"素食"];
     [_cb3 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -114,7 +128,7 @@
     line2.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line2];
     
-    _cb4 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb3.frame) + 10,100, 30) style:5 checked:NO];
+    _cb4 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb3.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb4 setText:@"碳酸饮料"];
     [_cb4 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -128,7 +142,7 @@
     line3.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line3];
     
-    _cb5 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb4.frame) + 10,100, 30) style:5 checked:NO];
+    _cb5 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb4.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb5 setText:@"嗜甜"];
     [_cb5 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -142,7 +156,7 @@
     line4.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line4];
     
-    _cb6 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb5.frame) + 10,100, 30) style:5 checked:NO];
+    _cb6 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb5.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb6 setText:@"重口味"];
     [_cb6 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -156,7 +170,7 @@
     line5.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line5];
     
-    _cb7 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb6.frame) + 10,100, 30) style:5 checked:NO];
+    _cb7 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb6.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb7 setText:@"爱喝茶"];
     [_cb7 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {
@@ -170,7 +184,7 @@
     line6.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line6];
     
-    _cb8 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb7.frame) + 10,100, 30) style:5 checked:NO];
+    _cb8 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb7.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb8 setText:@"嗜咖啡"];
     [_cb8 setStateChangedBlock:^(SSCheckBoxView *cbv) {
         if (cbv.checked) {

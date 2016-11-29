@@ -59,7 +59,8 @@
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 105, 0);
-    
+    self.tableView.separatorColor = [UIColor colorWithRGB:@"ebebeb"];
+
     [self setupRefresh];
     
     [self getData];

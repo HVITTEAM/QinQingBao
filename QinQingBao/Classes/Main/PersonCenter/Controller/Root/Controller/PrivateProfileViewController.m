@@ -286,20 +286,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return section == 0 ? 4 : 2;
 }
 
 #pragma mark UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
     return 50;
-
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -317,16 +315,18 @@
     
     UITableViewCell *cell;
     
-     if (indexPath.section == 0)
+    UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
+    if (commoncell == nil)
+        commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
+    commoncell.textLabel.font = [UIFont systemFontOfSize:16];
+    commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
+    commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell = commoncell;
+    
+    if (indexPath.section == 0)
     {
-        UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"ConmmonCell"];
-        if (commoncell == nil)
-            commoncell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ConmmonCell"];
-        commoncell.textLabel.font = [UIFont systemFontOfSize:16];
-        commoncell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
-        commoncell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell = commoncell;
-        
         switch (indexPath.row) {
             case 0:
                 commoncell.textLabel.text = @"我的账户";
@@ -344,20 +344,26 @@
                 commoncell.textLabel.text = @"我的评估";
                 commoncell.imageView.image = [UIImage imageNamed:@"type2.png"];
                 break;
-            case 4:
+            default:
+                break;
+        }
+        
+    }else  if (indexPath.section == 1)
+    {
+        switch (indexPath.row) {
+            case 0:
                 commoncell.textLabel.text = @"健康档案";
                 commoncell.imageView.image = [UIImage imageNamed:@"type5.png"];
                 break;
-            case 5:
+            case 1:
                 commoncell.textLabel.text = @"我的帖子";
                 commoncell.imageView.image = [UIImage imageNamed:@"type1.png"];
                 break;
             default:
                 break;
         }
-
+        
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -400,7 +406,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self typeClickHandler:indexPath.row];
+    [self typeClickHandler: (indexPath.section *4) + indexPath.row];
 }
 
 #pragma mark -- 与后台数据交互模块

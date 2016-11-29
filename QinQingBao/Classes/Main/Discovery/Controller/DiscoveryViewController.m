@@ -112,7 +112,7 @@
             titleCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
             titleCell.textLabel.font = [UIFont systemFontOfSize:14];
-            titleCell.textLabel.textColor = [UIColor colorWithRGB:@"999999"];
+            titleCell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
             titleCell.layoutMargins = UIEdgeInsetsZero;
         }
         
@@ -153,7 +153,9 @@
             commonCell.selectionStyle = UITableViewCellSelectionStyleNone;
             commonCell.textLabel.font = [UIFont systemFontOfSize:14];
             commonCell.layoutMargins = UIEdgeInsetsZero;
-            commonCell.textLabel.text = @"即将上线，敬请期待!";
+            commonCell.textLabel.text = @"暂无推荐信息!";
+            commonCell.textLabel.textColor = [UIColor colorWithRGB:@"999999"];
+
         }
         cell = commonCell;
 

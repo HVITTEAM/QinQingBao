@@ -19,6 +19,9 @@
 
 +(instancetype)createCellWithTableView:(UITableView *)tableView;
 
+@property (nonatomic, copy) void (^chatClick)(UIButton *btn);
+
+
 -(void)setItem:(MassageModel *)dataItem;
 
 @end
