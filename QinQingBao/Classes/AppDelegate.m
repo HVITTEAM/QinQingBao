@@ -188,17 +188,12 @@
     //12 文章详情 34 通知界面
     switch ([type integerValue])
     {
-        case 1:
+        case 1: case 2:
         {
             [self showArticle:msg_artid];
         }
             break;
-        case 2:
-        {
-            [self showArticle:msg_artid];
-        }
-            break;
-        case 3:
+        case 3: case 5: case 6:
         {
             EventInfoController *vc = [[EventInfoController alloc] init];
             vc.type = MessageTypePushMsg;
@@ -217,21 +212,9 @@
             UINavigationController *nav = tab.selectedViewController;
             [nav pushViewController:vc animated:YES];
         }
-        case 5:
-        {
-            EventInfoController *vc = [[EventInfoController alloc] init];
-            vc.type = MessageTypePushMsg;
-            vc.title = @"通知消息";
-            UITabBarController *tab = (UITabBarController *)self.window.rootViewController;
-            UINavigationController *nav = tab.selectedViewController;
-            [nav pushViewController:vc animated:YES];
-        }
-            break;
-            break;
         default:
             break;
     }
-    
 }
 
 /**
