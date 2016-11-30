@@ -224,7 +224,7 @@
             sex = @"女";
             break;
         default:
-            sex = @"男";
+            sex = @"保密";
             break;
     }
     return sex;
@@ -237,8 +237,10 @@
         return 1;
     }else if ([livingconditionStr isEqualToString:@"脑力劳动为主"]){
         return 2;
-    }else{
+    }else if ([livingconditionStr isEqualToString:@"体力/脑力劳动基本均衡"]){
         return 3;
+    }else{
+        return -1;
     }
 }
 
@@ -252,8 +254,11 @@
         case 2:
             livingcondition = @"脑力劳动为主";
             break;
-        default:
+        case 3:
             livingcondition = @"体力/脑力劳动基本均衡";
+            break;
+        default:
+            livingcondition = nil;
             break;
     }
     return livingcondition;
@@ -271,8 +276,10 @@
         return 3;
     }else if ([smokeStr isEqualToString:@"一包"]){
         return 4;
-    }else{
+    }else if ([smokeStr isEqualToString:@"一包以上"]){
         return 5;
+    }else{
+        return -1;
     }
 }
 
@@ -292,8 +299,11 @@
         case 4:
             smoke = @"一包";
             break;
-        default:
+        case 5:
             smoke = @"一包以上";
+            break;
+        default:
+            smoke = nil;
             break;
     }
     return smoke;
@@ -306,8 +316,10 @@
         return 1;
     }else if ([drinkStr isEqualToString:@"偶尔"]){
         return 2;
-    }else{
+    }else if ([drinkStr isEqualToString:@"经常"]){
         return 3;
+    }else{
+        return -1;
     }
 }
 
@@ -321,8 +333,11 @@
         case 2:
             drink = @"偶尔";
             break;
-        default:
+        case 3:
             drink = @"经常";
+            break;
+        default:
+            drink = nil;
             break;
     }
     return drink;
@@ -345,9 +360,10 @@
         return 6;
     }else if ([dietStr isEqualToString:@"爱喝茶"]){
         return 7;
-    }else{
-        //碳酸饮料
+    }else if ([dietStr isEqualToString:@"碳酸饮料"]){
         return 8;
+    }else{
+        return -1;
     }
 }
 
@@ -376,8 +392,11 @@
         case 7:
             diet = @"爱喝茶";
             break;
-        default:
+        case 8:
             diet = @"碳酸饮料";
+            break;
+        default:
+            diet = nil;
             break;
     }
     return diet;
@@ -390,8 +409,11 @@
         return 1;
     }else if ([sportsStr isEqualToString:@"偶尔"]){
         return 2;
-    }else{
+    }else if ([sportsStr isEqualToString:@"经常"]){
         return 3;
+    }
+    else{
+        return -1;
     }
 }
 
@@ -405,8 +427,11 @@
         case 2:
             sports = @"偶尔";
             break;
-        default:
+        case 3:
             sports = @"经常";
+            break;
+        default:
+            sports = nil;
             break;
     }
     return sports;
@@ -421,9 +446,10 @@
         return 2;
     }else if ([badhabitsStr isEqualToString:@"经常熬夜"]){
         return 3;
-    }else{
-        //常看手机
+    }else if ([badhabitsStr isEqualToString:@"常看手机"]){
         return 4;
+    }else{
+        return -1;
     }
 }
 
@@ -440,8 +466,11 @@
         case 3:
             badhabits = @"经常熬夜";
             break;
-        default:
+        case 4:
             badhabits = @"常看手机";
+            break;
+        default:
+            badhabits = nil;
             break;
     }
     return badhabits;

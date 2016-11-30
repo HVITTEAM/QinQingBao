@@ -425,15 +425,17 @@
     [self.view endEditing:YES];
     
     NSString *smoke = self.datas[0][0][kContent];
-    if (smoke.length == 0) {
-        return [NoticeHelper AlertShow:@"请选择抽烟习惯" view:nil];
-    }
+    int smokeCode = (int)[ArchiveData smokeToNumber:smoke];
+    self.archiveData.smoke = smokeCode==-1?nil:[NSString stringWithFormat:@"%d",smokeCode];
     
-    self.archiveData.smoke = [NSString stringWithFormat:@"%d",(int)[ArchiveData smokeToNumber:smoke]];
-    self.archiveData.drink = [NSString stringWithFormat:@"%d",(int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]]];
+    int drinkCode = (int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]];
+    self.archiveData.drink = drinkCode==-1?nil:[NSString stringWithFormat:@"%d",drinkCode];
     
-    self.archiveData.sports = [NSString stringWithFormat:@"%d",(int)[ArchiveData sportsToNumber:self.datas[2][0][kContent]]];
-    self.archiveData.badhabits = [NSString stringWithFormat:@"%d",(int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]]];
+    int sportsCode = (int)[ArchiveData sportsToNumber:self.datas[2][0][kContent]];
+    self.archiveData.sports = sportsCode==-1?nil:[NSString stringWithFormat:@"%d",sportsCode];
+    
+    int badhabitsCode = (int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]];
+    self.archiveData.badhabits = badhabitsCode==-1?nil:[NSString stringWithFormat:@"%d",badhabitsCode];
     
     HealthArchiveViewController3 *vc = [[HealthArchiveViewController3 alloc] init];
     vc.archiveData = self.archiveData;
