@@ -104,7 +104,7 @@
     }
     
     [section0 addObject:createItem(self.archiveData.mobile,@"联系电话",@"必填项")];
-    [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"男")];
+    [section0 addObject:createItem([ArchiveData numberToSex:[self.archiveData.sex integerValue]],@"性别",@"请选择")];
     [section0 addObject:createItem(self.archiveData.birthday,@"出生日期",@"请填写")];
     
     NSMutableArray *section1 = [[NSMutableArray alloc] init];
@@ -272,13 +272,13 @@
         [alertPic show];
     }else if (indexPath.section == 0 && indexPath.row == 3){
         if (self.isAddArchive) {  //新增时候是性别选择
-            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女", nil] show];
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
         }
     }else if (indexPath.section == 0 && indexPath.row == 4){
         if (self.isAddArchive) {  //新增时候是显示生日选择
             [self showDatePickerView];
         }else{  //查看时候是性别选择
-            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女", nil] show];
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
         }
         
     }else if (indexPath.section == 0 && indexPath.row == 5){
@@ -350,6 +350,8 @@
             item[kContent] = @"男";
         }else if (2 == buttonIndex){
             item[kContent] = @"女";
+        }else if (3 == buttonIndex){
+            item[kContent] = @"保密";
         }
     }else{
         if (1 == buttonIndex) {
@@ -654,7 +656,8 @@
     self.archiveData.cholesterol = cholesterol;
     
     self.archiveData.occupation = self.datas[2][0][kContent];
-    self.archiveData.livingcondition = [NSString stringWithFormat:@"%d",(int)[ArchiveData livingconditionToNumber:self.datas[2][1][kContent]]];
+    int livingCode = (int)[ArchiveData livingconditionToNumber:self.datas[2][1][kContent]];
+    self.archiveData.livingcondition = livingCode==-1?nil:[NSString stringWithFormat:@"%d",livingCode];
     self.archiveData.email = email;
 //    self.archiveData.address = address;
     
