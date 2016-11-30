@@ -46,7 +46,8 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_workreport_groupitem parameters:@{@"fmno" : self.fmno,
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_workreport_groupitem parameters:@{@"wid" : self.wid,
+                                                                                @"fmno" : self.fmno,
                                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                                 @"client":@"ios"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -111,7 +112,7 @@
     healthReportCell.clickType = ^(PersonReportModel *item){
         ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
         VC.title = item.iname;
-        VC.urlstr = item.examreport_url;
+        VC.urlstr = item.wp_final_report;
         VC.wr_id = item.wr_id;
         VC.fmno = weakSelf.fmno;
         

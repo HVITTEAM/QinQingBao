@@ -10,9 +10,9 @@
 #import "InterveneModel.h"
 
 @interface PlanReportTitleCell ()
-@property (strong, nonatomic) IBOutlet UILabel *titleLab;
-@property (strong, nonatomic) IBOutlet UILabel *timeLab;
-@property (strong, nonatomic) IBOutlet UILabel *contentLab;
+//@property (strong, nonatomic) IBOutlet UILabel *titleLab;
+//@property (strong, nonatomic) IBOutlet UILabel *timeLab;
+//@property (strong, nonatomic) IBOutlet UILabel *contentLab;
 @property (strong, nonatomic) IBOutlet UILabel *tipLab;
 
 @end
@@ -31,18 +31,18 @@
 {
     _item = item;
     
-    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *date =[dateFormat dateFromString:item.create_time];
-    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];
-    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
-    self.timeLab.text = [dateFormat1 stringFromDate:date];
+//    NSDateFormatter* dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *date =[dateFormat dateFromString:item.create_time];
+//    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];
+//    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
+//    self.timeLab.text = [dateFormat1 stringFromDate:date];
+//    
+//    self.contentLab.text = item.wp_general_analysis;
+//    CGSize size = [self.contentLab sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
+//    self.contentLab.height = size.height;
     
-    self.contentLab.text = item.wp_general_analysis;
-    CGSize size = [self.contentLab sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
-    self.contentLab.height = size.height;
-    
-    self.height = CGRectGetMaxY(self.contentLab.frame) + 50;
+    self.height = 50;
 }
 
 

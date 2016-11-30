@@ -74,11 +74,11 @@
     cell.subTitleLb.text = item.wi_read_time;
     cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
     NSString *str = [item.basics objectForKey:@"avatar"];
-
-    if (str && str != [NSNull null] && str.length == 0)
+    
+    if (![str isKindOfClass:[NSNull class]] && str && str.length != 0)
     {
         NSURL *iconUrl = [NSURL URLWithString:[item.basics objectForKey:@"avatar"]];
-        [cell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        [cell.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     }
     
     return cell;
@@ -103,11 +103,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
-    //    InterveneModel *item = self.dataProvider[indexPath.row];
-    //    VC.urlstr = item.advice_report;
-    //    [self.navigationController pushViewController:VC animated:YES];
-    
     PersonReportListViewController *VC =[[PersonReportListViewController alloc] init];
     ReportInterventionModel *item = self.dataProvider[indexPath.section];
     VC.fmno = item.fmno;

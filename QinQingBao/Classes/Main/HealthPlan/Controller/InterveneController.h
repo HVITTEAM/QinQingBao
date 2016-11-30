@@ -17,4 +17,7 @@
 //档案id
 @property (nonatomic, copy) NSString *fmno;
 
+//姓名
+@property (nonatomic, copy) NSString *truename;
+
 @end

@@ -86,6 +86,8 @@
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
     {
         [self.tableView.header endRefreshing];
+        [self.dataProvider removeAllObjects];
+        [self.tableView reloadData];
         return;
     }
     

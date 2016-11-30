@@ -78,10 +78,10 @@
     
     NSString *str = [item.basics objectForKey:@"avatar"];
 
-    if (str && str != [NSNull null] && str.length == 0)
+    if (![str isKindOfClass:[NSNull class]] && str && str.length != 0)
     {
         NSURL *iconUrl = [NSURL URLWithString:[item.basics objectForKey:@"avatar"]];
-        [cell.imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+        [cell.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
     }
     
     cell.badgeIcon.hidden = item.wi_read == nil ? YES : NO;
@@ -110,6 +110,7 @@
     InterveneController *interveneVC = [[InterveneController alloc] init];
     ReportInterventionModel *item = self.dataProvider[indexPath.section];
     interveneVC.fmno = item.fmno;
+    interveneVC.truename = [item.basics objectForKey:@"truename"];
     [self.navigationController pushViewController:interveneVC animated:YES];
 }
 

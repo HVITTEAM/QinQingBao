@@ -24,6 +24,9 @@
 #import "MTShoppingCarController.h"
 #import "CustomInfoController.h"
 
+#import "HealthArchiveViewController.h"
+#import "ArchiveDataListModel.h"
+
 @interface InterveneController ()<InterveneEndViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong) InterveneEndView *endView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -78,10 +81,10 @@
     
     [self initView];
     
-    if ( self.wid && self.wid.length > 0)
+//    if ( self.wid && self.wid.length > 0)
+//        [self getDataProvider];
+//    else
         [self getDataProvider];
-    else
-        [self getDataProvider1];
 }
 
 -(void)initView
@@ -100,55 +103,56 @@
 }
 
 
-/**
- *  获取数据源（从工单获取干预方案）
- */
--(void)getDataProvider
-{
-    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : self.wid,
-                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                       @"client":@"ios"
-                                                                       }
-                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-                                     
-                                     id codeNum = [dict objectForKey:@"code"];
-                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-                                     {
-                                         if ([codeNum isEqualToString:@"17001"])
-                                         {
-                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
-                                         }
-                                     }
-                                     else
-                                     {
-                                         self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
-                                         
-                                         goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
-                                         
-                                         //干预方案状态更改
-                                         [self uploadReadStatusWithReportId:self.dataItem.wi_id fmno:self.fmno];
-                                     }
-                                     [self.tableView reloadData];
-                                     [HUD removeFromSuperview];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     NSLog(@"发生错误！%@",error);
-                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-                                     [HUD removeFromSuperview];
-                                 }];
-}
+///**
+// *  获取数据源（从工单获取干预方案）
+// */
+//-(void)getDataProvider
+//{
+//    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : self.wid,
+//                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+//                                                                       @"client":@"ios"
+//                                                                       }
+//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+//                                     
+//                                     id codeNum = [dict objectForKey:@"code"];
+//                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
+//                                     {
+//                                         if ([codeNum isEqualToString:@"17001"])
+//                                         {
+//                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
+//                                         }
+//                                     }
+//                                     else
+//                                     {
+//                                         self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
+//                                         
+//                                         goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
+//                                         
+//                                         //干预方案状态更改
+//                                         [self uploadReadStatusWithReportId:self.dataItem.wi_id fmno:self.fmno];
+//                                     }
+//                                     [self.tableView reloadData];
+//                                     [HUD removeFromSuperview];
+//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                     NSLog(@"发生错误！%@",error);
+//                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
+//                                     [HUD removeFromSuperview];
+//                                 }];
+//}
 
 
 /**
  *  获取数据源（从档案获取干预方案）
  */
--(void)getDataProvider1
+-(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_work_intervention parameters:@{@"fmno" : self.fmno,
-                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                       @"client":@"ios"
-                                                                       }
+                                                                             @"wid" : self.wid,
+                                                                             @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
+                                                                             @"client":@"ios"
+                                                                             }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -185,7 +189,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0)
+    if (indexPath.section == 0 && indexPath.row == 1)
+    {
+        return 44;
+    }
+    else if (indexPath.section == 0 && indexPath.row == 0)
     {
         return 140;
     }
@@ -249,10 +257,11 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"CommonCell"];
         }
-        cell.textLabel.text = @"基本信息";
+        cell.imageView.image = [UIImage imageNamed:@"person.png"];
+        cell.textLabel.text = self.truename;
         cell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.dataItem.wname;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.text = [MTDateHelper getDaySince1970:self.dataItem.wp_create_time dateformat:@"yyyy-MM-dd"];
         cell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -261,21 +270,12 @@
     {
         if (indexPath.row == 0)
         {
-            if(planReportTitleCell == nil)
-                planReportTitleCell = [PlanReportTitleCell planReportTitleCell];
-            
-            planReportTitleCell.item = self.dataItem;
-            
-            cell = planReportTitleCell;
-        }
-        else if (indexPath.row == 1)
-        {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             [paragraphTextCell setTitle:@"干预目标" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 2)
+        else if (indexPath.row == 1)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -283,7 +283,7 @@
             [paragraphTextCell setTitle:@"饮食调理建议" withValue:self.dataItem.wp_advice_diet];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 3)
+        else if (indexPath.row == 2)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -291,7 +291,7 @@
             [paragraphTextCell setTitle:@"运动增健建议" withValue:self.dataItem.wp_advice_sport];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 4)
+        else if (indexPath.row == 3)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -299,7 +299,7 @@
             [paragraphTextCell setTitle:@"睡眠改善建议" withValue:self.dataItem.wp_advice_sleeping];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 5)
+        else if (indexPath.row == 4)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -307,7 +307,7 @@
             [paragraphTextCell setTitle:@"心理调适减压" withValue:self.dataItem.wp_advice_mental];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 6)
+        else if (indexPath.row == 5)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -315,7 +315,7 @@
             [paragraphTextCell setTitle:@"环境起居建议" withValue:self.dataItem.wp_advice_envir];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 7)
+        else if (indexPath.row == 6)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
@@ -323,13 +323,22 @@
             [paragraphTextCell setTitle:@"营养素补充建议" withValue:self.dataItem.wp_nutrient_plan];
             cell = paragraphTextCell;
         }
-        else if (indexPath.row == 8)
+        else if (indexPath.row == 7)
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
             
             [paragraphTextCell setTitle:@"精准健康管理建议" withValue:self.dataItem.wp_advice_health];
             cell = paragraphTextCell;
+        }
+        else
+        {
+            if(planReportTitleCell == nil)
+                planReportTitleCell = [PlanReportTitleCell planReportTitleCell];
+            
+            planReportTitleCell.item = self.dataItem;
+            
+            cell = planReportTitleCell;
         }
     }
     else if (indexPath.section == 2)
@@ -374,9 +383,12 @@
 {
     if (indexPath.section == 0 && indexPath.row == 1)
     {
-        CustomInfoController *customInfoVC = [[CustomInfoController alloc] init];
-        customInfoVC.interveneModel = self.dataItem;
-        [self.navigationController pushViewController:customInfoVC animated:YES];
+        HealthArchiveViewController *healthArchiveVC = [[HealthArchiveViewController alloc] init];
+        ArchiveDataListModel *model = [[ArchiveDataListModel alloc] init];
+        model.fmno = self.fmno;
+        healthArchiveVC.selectedListModel = model;
+        healthArchiveVC.addArchive = NO;
+        [self.navigationController pushViewController:healthArchiveVC animated:YES];
     }
     else if (indexPath.section == 2 && indexPath.row >0)
     {

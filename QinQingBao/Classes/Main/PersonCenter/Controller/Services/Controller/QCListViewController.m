@@ -21,6 +21,8 @@
 #import "InterveneController.h"
 #import "ReportListViewController.h"
 #import "PayResultViewController.h"
+#import "PersonReportListViewController.h"
+
 
 @interface QCListViewController ()<UIActionSheetDelegate>
 {
@@ -347,17 +349,20 @@
         OrderModel *model = dataProvider[indexPath.section];
         InterveneController *view = [[InterveneController alloc] init];
         view.wid = model.wid;
-        view.wid = model.fmno;
+        view.truename = model.fm_truename;
+        view.fmno = model.fmno;
         [self.nav pushViewController:view animated:YES];
     }else if ([btn.titleLabel.text isEqualToString:@"检测报告"]){
         OrderModel *model = dataProvider[indexPath.section];
-        ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
+        PersonReportListViewController *reportListVC = [[PersonReportListViewController alloc] init];
         reportListVC.wid = model.wid;
+        reportListVC.fmno = model.fmno;
         [self.nav pushViewController:reportListVC animated:YES];
     }else if ([btn.titleLabel.text isEqualToString:@"受检人"]){
         OrderModel *model = dataProvider[indexPath.section];
         PayResultViewController *rVC = [[PayResultViewController alloc] init];
         rVC.wid = model.wid;
+        
         [self.nav pushViewController:rVC animated:YES];
     }
 }

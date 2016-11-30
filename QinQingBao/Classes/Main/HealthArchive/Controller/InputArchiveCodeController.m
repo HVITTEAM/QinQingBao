@@ -59,6 +59,7 @@
         if ([dict[@"code"] integerValue] != 0) {
             return [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
+        [MTNotificationCenter postNotificationName:MTRefleshData object:nil];
         
         NSArray *vcs = self.navigationController.viewControllers;
         UIViewController *vc = vcs[vcs.count - 3];

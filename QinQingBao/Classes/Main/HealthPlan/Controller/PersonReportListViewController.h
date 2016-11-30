@@ -10,4 +10,6 @@
 
 @interface PersonReportListViewController : UITableViewController
 @property (nonatomic, copy) NSString *fmno;
+@property (nonatomic, copy) NSString *wid;
+
 @end

@@ -34,6 +34,8 @@
 #import "ReportListViewController.h"
 #import "PayResultViewController.h"
 
+#import "PersonReportListViewController.h"
+
 #define kBottomViewHeight 50
 #define kNavBarHeight 64
 
@@ -424,17 +426,18 @@
         OrderModel *model = self.orderInfor;
         deliverVC.wid = model.wid;
         [self.navigationController pushViewController:deliverVC animated:YES];
-        
     }else if ([sender.titleLabel.text isEqualToString:@"干预方案"]){
         OrderModel *model = self.orderInfor;
         InterveneController *view = [[InterveneController alloc] init];
         view.wid = model.wid;
-        view.wid = model.fmno;
+        view.truename = model.fm_truename;
+        view.fmno = model.fmno;
         [self.navigationController pushViewController:view animated:YES];
     }else if ([sender.titleLabel.text isEqualToString:@"检测报告"]){
-        ReportListViewController *reportListVC = [[ReportListViewController alloc] init];
         OrderModel *model = self.orderInfor;
+        PersonReportListViewController *reportListVC = [[PersonReportListViewController alloc] init];
         reportListVC.wid = model.wid;
+        reportListVC.fmno = model.fmno;
         [self.navigationController pushViewController:reportListVC animated:YES];
     }else if ([sender.titleLabel.text isEqualToString:@"受检人"]){
         PayResultViewController *rVC = [[PayResultViewController alloc] init];
