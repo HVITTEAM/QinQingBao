@@ -264,6 +264,11 @@
     pickView.dataSource = self;
     pickView.delegate = self;
     
+//     self.provinceArr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"china.plist" ofType:nil]];
+//    self.cityArr = self.provinceArr[0][@"cities"];
+//    self.areaArr = self.cityArr[0][@"regions"];
+
+    
     self.provinceArr = @[@"浙江省"];
     self.cityArr = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"areaList.plist" ofType:nil]];
     self.areaArr = self.cityArr[0][@"regions"];

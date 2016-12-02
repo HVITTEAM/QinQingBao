@@ -46,7 +46,7 @@
 -(void)getDataProvider
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [CommonRemoteHelper RemoteWithUrl:URL_Get_workreport_groupitem parameters:@{@"wid" : self.wid,
+    [CommonRemoteHelper RemoteWithUrl:URL_Get_workreport_groupitem parameters:@{@"wid" : self.wid && self.wid.length >0 ? self.wid : @"",
                                                                                 @"fmno" : self.fmno,
                                                                                 @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                                 @"client":@"ios"}
@@ -116,15 +116,20 @@
         VC.wr_id = item.wr_id;
         VC.fmno = weakSelf.fmno;
         
-        NSMutableString *str = [[NSMutableString alloc] init];
-        if (item.entry_voice &&  item.entry_voice.count > 0)
+        if (item.entry_voice && item.entry_voice.count > 0)
         {
-            for (NSDictionary *dict in item.entry_voice)
+            NSMutableString *str = [[NSMutableString alloc] init];
+            if (item.entry_voice &&  item.entry_voice.count > 0)
             {
-                [str appendString:[dict objectForKey:@"ycjd_voice"]];
+                for (NSDictionary *dict in item.entry_voice)
+                {
+                    [str appendString:[dict objectForKey:@"ycjd_voice"]];
+                }
             }
+            VC.speakStr = str;
         }
-        VC.speakStr = str;
+        else
+            VC.speakStr = @"";
         [weakSelf.navigationController pushViewController:VC animated:YES];
     };
     

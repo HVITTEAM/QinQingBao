@@ -253,10 +253,13 @@
         return [NoticeHelper AlertShow:@"请填写姓名" view:self.view];
     
     if (self.customInfo.tel.length <= 0)
-        return [NoticeHelper AlertShow:@"请填写地址" view:self.view];
+        return [NoticeHelper AlertShow:@"请填写联系电话" view:self.view];
     
     if (self.customInfo.email.length <= 0)
         return [NoticeHelper AlertShow:@"请填写电子邮箱" view:self.view];
+    
+    if (self.customInfo.dvcode.length <= 0)
+        return [NoticeHelper AlertShow:@"请选择城市" view:self.view];
     
     if (self.customInfo.areainfo.length <= 0)
         return [NoticeHelper AlertShow:@"请填写有效地址" view:self.view];
@@ -332,7 +335,7 @@
 }
 
 /**
- *  获取用户数据数据
+ *  获取用户数据
  */
 -(void)getUserInfor
 {

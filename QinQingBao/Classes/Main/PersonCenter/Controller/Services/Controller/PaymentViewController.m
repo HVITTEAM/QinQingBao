@@ -366,11 +366,7 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                     if (self.doneHandlerClick) {
                         self.doneHandlerClick();
                     }
-                    //支付成功
-                    if (self.viewControllerOfback)
-                        [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-                    else
-                        [self.navigationController popViewControllerAnimated:YES];
+                    [self payResultHandel];
                 }
             }
         }
@@ -415,12 +411,8 @@ typedef NS_ENUM(NSInteger, PaymentType) {
                                          
                                          PayResultViewController *payResultVC = [[PayResultViewController alloc] init];
                                          payResultVC.wid = self.wid;
+                                         payResultVC.navigationItem.hidesBackButton = YES;
                                          [self.navigationController pushViewController:payResultVC animated:YES];
-                                         
-//                                         if (self.viewControllerOfback)
-//                                             [self.navigationController popToViewController:self.viewControllerOfback animated:YES];
-//                                         else
-//                                             [self.navigationController popViewControllerAnimated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"支付结果验证出错了...." view:self.view];

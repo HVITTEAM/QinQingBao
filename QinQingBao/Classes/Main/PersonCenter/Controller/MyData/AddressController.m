@@ -9,10 +9,6 @@
 #import "AddressController.h"
 #import "HMCommonTextfieldItem.h"
 
-#import "AreaModelTotal.h"
-
-#import "CitiesTotal.h"
-
 @interface AddressController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIActionSheetDelegate>
 {
     HMCommonArrowItem *textItem0;
@@ -30,7 +26,7 @@
     NSInteger selectedProvinceIndex;
     NSInteger selectedCityIndex;
     NSInteger selectedRegionIndex;
-
+    
 }
 
 //省 数组
@@ -57,8 +53,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self initNavigation];
-    
     [self setupGroups];
 }
 
@@ -73,7 +67,7 @@
     
     [self initTableviewSkin];
     
-    [self initDatePickView];
+    [self initDataPickView];
     
     self.view.backgroundColor = HMGlobalBg;
 }
@@ -83,27 +77,6 @@
     selectedCityStr = cityStr;
     areaInfoStr = areaInfo;
     selectedRegionItem = [[AreaModel alloc] initWithName:regionStr areaid:@"" dvcode:regionCode];
-    
-    // 遍历查找选中的城市区划
-    for (NSDictionary *provinceItem in self.provinceArr)
-    {
-        NSArray *carr = [provinceItem valueForKey:@"cities"];
-        for (NSDictionary *cityItem in carr)
-        {
-            NSArray *rarr = [cityItem valueForKey:@"regions"];
-            for (NSDictionary *regionItem in rarr)
-            {
-                if ([[regionItem valueForKey:@"dvcode"] isEqualToString:regionCode])
-                {
-                    selectedProvinceIndex = [self.provinceArr indexOfObject:provinceItem];
-                    selectedCityIndex = [carr indexOfObject:cityItem];
-                    selectedRegionIndex = [rarr indexOfObject:regionItem];
-                    break;
-                }
-            }
-        }
-        
-    }
 }
 
 /**
@@ -119,7 +92,7 @@
 }
 
 /**
- *  初始化导航栏
+ *  导航栏设置
  */
 -(void)initNavigation
 {
@@ -129,12 +102,14 @@
 /**
  *   创建、并初始化2个NSArray对象，分别作为2列的数据
  */
--(void)initDatePickView
+-(void)initDataPickView
 {
     pickView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 10, MTScreenW - 30, 200)];
     pickView.dataSource = self;
     pickView.delegate = self;
     
+    if (selectedRegionItem)
+        return;
     selectedProvinceItem = [[AreaModel alloc] initWithName:[[self.provinceArr objectAtIndex:0] objectForKey:@"name"] areaid:@"" dvcode:[[self.provinceArr objectAtIndex:0] objectForKey:@"dvcode"]];
     selectedCityItem = [[AreaModel alloc] initWithName:[[self.cityArr objectAtIndex:0] objectForKey:@"name"] areaid:@"" dvcode:[[self.cityArr objectAtIndex:0] objectForKey:@"dvcode"]];
     selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:0] objectForKey:@"name"] areaid:@"" dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
@@ -153,36 +128,31 @@
 
 - (void)setupGroup
 {
-    // 1.创建组
     HMCommonGroup *group0 = [HMCommonGroup group];
     [self.groups addObject:group0];
     
-    // 1.设置组的所有行数据
-    textItem0 = [HMCommonArrowItem itemWithTitle:@"所在区域" icon:nil];
-    textItem0.subtitle = selectedCityStr;
     __weak __typeof(self)weakSelf = self;
     
+    textItem0 = [HMCommonArrowItem itemWithTitle:@"所在区域" icon:nil];
+    textItem0.subtitle = selectedCityStr;
     textItem0.operation = ^{
-        [weakSelf setDatePickerCity];
+        [weakSelf showDataPicker];
     };
     group0.items = @[textItem0];
     
-    // 3.创建组
     HMCommonGroup *group1 = [HMCommonGroup group];
     [self.groups addObject:group1];
-    // 3.设置组的所有行数据
     textItem1 = [HMCommonTextfieldItem itemWithTitle:@"详细地址" icon:nil];
     textItem1.placeholder = @"请输入详细地址";
     textItem1.textValue = areaInfoStr;
     group1.items = @[textItem1];
     
-    //刷新表格
     [self.tableView reloadData];
 }
 
 #pragma mark --- DatePicker
 
--(void)setDatePickerCity
+-(void)showDataPicker
 {
     UIAlertController* alertVc=[UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n\n\n\n\n"
                                                                    message:nil preferredStyle:(UIAlertControllerStyleActionSheet)];
@@ -191,6 +161,7 @@
         
         selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name ? selectedCityItem.area_name:@"",selectedRegionItem.area_name?selectedRegionItem.area_name:@""];
         [self setupGroups];
+        [self initNavigation];
     }];
     
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
@@ -199,11 +170,37 @@
     [alertVc addAction:no];
     [self presentViewController:alertVc animated:YES completion:nil];
     
-//    [self pickerView:pickView didSelectRow:2 inComponent:0];
-//    
-//    [self pickerView:pickView didSelectRow:selectedCityIndex inComponent:1];
-//
-//    [self pickerView:pickView didSelectRow:selectedRegionIndex inComponent:2];
+    
+    if (selectedRegionItem) {
+        // 遍历查找选中的城市区划 并选中
+        for (NSDictionary *provinceItem in self.provinceArr)
+        {
+            NSArray *carr  = [provinceItem valueForKey:@"cities"];
+            for (NSDictionary *cityItem in carr)
+            {
+                NSArray *aarr = [cityItem valueForKey:@"regions"];
+                for (NSDictionary *regionItem in aarr)
+                {
+                    if ([[regionItem valueForKey:@"dvcode"] isEqualToString:selectedRegionItem.dvcode])
+                    {
+                        self.cityArr = carr;
+                        self.areaArr = aarr;
+                        selectedProvinceIndex = [self.provinceArr indexOfObject:provinceItem];
+                        selectedCityIndex = [self.cityArr indexOfObject:cityItem];
+                        selectedRegionIndex = [self.areaArr indexOfObject:regionItem];
+                        
+                        selectedProvinceItem = [[AreaModel alloc] initWithName:[provinceItem objectForKey:@"name"] areaid:@"" dvcode:[provinceItem objectForKey:@"dvcode"]];
+                        selectedCityItem = [[AreaModel alloc] initWithName:[cityItem objectForKey:@"name"] areaid:@"" dvcode:[cityItem objectForKey:@"dvcode"]];
+                        selectedRegionItem = [[AreaModel alloc] initWithName:[regionItem objectForKey:@"name"] areaid:@"" dvcode:[regionItem objectForKey:@"dvcode"]];
+                        break;
+                    }
+                }
+            }
+        }
+        [pickView selectRow:selectedProvinceIndex inComponent:0 animated:YES];
+        [pickView selectRow:selectedCityIndex inComponent:1 animated:YES];
+        [pickView selectRow:selectedRegionIndex inComponent:2 animated:YES];
+    }
 }
 
 /**

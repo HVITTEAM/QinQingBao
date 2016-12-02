@@ -382,6 +382,7 @@
                                          questionResultVC.r_ids = model.r_ids;
                                          questionResultVC.r_dangercoefficient = model.r_dangercoefficient;
                                          questionResultVC.hmd_advise = model.r_result.hmd_advise;
+                                         questionResultVC.navigationItem.hidesBackButton = YES;
                                          [self.navigationController pushViewController:questionResultVC animated:YES];
                                      }
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

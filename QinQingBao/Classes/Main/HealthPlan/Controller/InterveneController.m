@@ -81,10 +81,7 @@
     
     [self initView];
     
-//    if ( self.wid && self.wid.length > 0)
-//        [self getDataProvider];
-//    else
-        [self getDataProvider];
+    [self getDataProvider];
 }
 
 -(void)initView
@@ -102,46 +99,6 @@
     [self.view addSubview:self.endView];
 }
 
-
-///**
-// *  获取数据源（从工单获取干预方案）
-// */
-//-(void)getDataProvider
-//{
-//    MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [CommonRemoteHelper RemoteWithUrl:URL_get_work_report parameters:@{@"wid" : self.wid,
-//                                                                       @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-//                                                                       @"client":@"ios"
-//                                                                       }
-//                                 type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-//                                     
-//                                     id codeNum = [dict objectForKey:@"code"];
-//                                     if([codeNum isKindOfClass:[NSString class]])//如果返回的是NSString 说明有错误
-//                                     {
-//                                         if ([codeNum isEqualToString:@"17001"])
-//                                         {
-//                                             [self.view initWithPlaceString:@"暂无数据" imgPath:nil];
-//                                         }
-//                                     }
-//                                     else
-//                                     {
-//                                         self.dataItem = [InterveneModel objectWithKeyValues:[dict objectForKey:@"datas"]];
-//                                         
-//                                         goodsInfoArr = [GoodsInfoModel objectArrayWithKeyValuesArray:self.dataItem.goodsinfos];
-//                                         
-//                                         //干预方案状态更改
-//                                         [self uploadReadStatusWithReportId:self.dataItem.wi_id fmno:self.fmno];
-//                                     }
-//                                     [self.tableView reloadData];
-//                                     [HUD removeFromSuperview];
-//                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                     NSLog(@"发生错误！%@",error);
-//                                     [NoticeHelper AlertShow:@"获取失败!" view:self.view];
-//                                     [HUD removeFromSuperview];
-//                                 }];
-//}
-
-
 /**
  *  获取数据源（从档案获取干预方案）
  */
@@ -149,7 +106,7 @@
 {
     MBProgressHUD *HUD = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Get_work_intervention parameters:@{@"fmno" : self.fmno,
-                                                                             @"wid" : self.wid,
+                                                                             @"wid" : self.wid && self.wid.length >0 ? self.wid : @"" ,
                                                                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
                                                                              @"client":@"ios"
                                                                              }

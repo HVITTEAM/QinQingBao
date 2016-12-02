@@ -17,7 +17,6 @@
 #import "EaseRecordView.h"
 #import "BusinessDataCenter.h"
 
-
 #import "EaseHandler.h"
 @interface ChattingViewController ()<EaseMessageViewControllerDelegate,EaseMessageViewControllerDataSource,UIAlertViewDelegate>
 {
@@ -124,9 +123,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"健康咨询";
-    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
-
+    UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0 , 100, 44)];
+    titleLabel.backgroundColor = [UIColor clearColor];  //设置Label背景透明
+    titleLabel.font = [UIFont boldSystemFontOfSize:16];  //设置文本字体与大小
+    titleLabel.textColor = [UIColor blackColor];  //设置文本颜色
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"健康咨询";
+    self.navigationItem.titleView = titleLabel;
+    
     //注册并登录当前用户
     EaseHandler *handler = [[EaseHandler alloc] init];
     [handler registerAndLoginEase:[NSString stringWithFormat:@"qqb%@",[SharedAppUtil defaultCommonUtil].userVO.member_id]];
@@ -172,10 +176,16 @@
     EaseEmotionManager *manager = [[EaseEmotionManager alloc] initWithType:EMEmotionDefault emotionRow:3 emotionCol:7 emotions:[EaseEmoji allEmoji]];
     [self.faceView setEmotionManagers:@[manager]];
     
-//    EMMessage *msg = [[EMMessage alloc] init];
-//    EMChatManager.getInstance().sendMessage(message,null);
-//    [[EaseMob sharedInstance].chatManager sendMessage:<#(EMMessage *)#> progress:(id<IEMChatProgressDelegate>) error:(EMError *__autoreleasing *)];
+    
+//    EMChatText *txt = [[EMChatText alloc] initWithText:@"服务工单"];
+//    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithChatObject:txt];
+//    // 6001，环信id，消息接收方。
+//    EMMessage *message = [[EMMessage alloc] initWithReceiver:[SharedAppUtil defaultCommonUtil].serviceCount bodies:@[body]];
+//    message.ext = @{@"sid":@"1107"};
+//    
+//    [[EaseMob sharedInstance].chatManager sendMessage:message progress:nil error:nil];
 }
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.view.frame = [UIScreen mainScreen].bounds;
