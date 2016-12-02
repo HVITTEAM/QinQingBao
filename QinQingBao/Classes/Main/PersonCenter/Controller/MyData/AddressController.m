@@ -292,7 +292,7 @@
         }
         case 2:
         {
-            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:@"" dvcode:[[self.areaArr objectAtIndex:0] objectForKey:@"dvcode"]];
+            selectedRegionItem = [[AreaModel alloc] initWithName:[[self.areaArr objectAtIndex:row] objectForKey:@"name"] areaid:@"" dvcode:[[self.areaArr objectAtIndex:row] objectForKey:@"dvcode"]];
             break;
         }
         default:
