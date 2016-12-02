@@ -209,7 +209,7 @@
     }else if ([sexStr isEqualToString:@"女"]){
         return 2;
     }else{
-        return 0;
+        return 1;
     }
 }
 
@@ -224,7 +224,7 @@
             sex = @"女";
             break;
         default:
-            sex = @"保密";
+            sex = @"男";
             break;
     }
     return sex;
