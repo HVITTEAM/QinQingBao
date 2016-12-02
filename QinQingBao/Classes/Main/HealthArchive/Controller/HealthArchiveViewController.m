@@ -272,13 +272,13 @@
         [alertPic show];
     }else if (indexPath.section == 0 && indexPath.row == 3){
         if (self.isAddArchive) {  //新增时候是性别选择
-            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女", nil] show];
         }
     }else if (indexPath.section == 0 && indexPath.row == 4){
         if (self.isAddArchive) {  //新增时候是显示生日选择
             [self showDatePickerView];
         }else{  //查看时候是性别选择
-            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女",@"保密", nil] show];
+            [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"男",@"女", nil] show];
         }
         
     }else if (indexPath.section == 0 && indexPath.row == 5){
@@ -348,10 +348,8 @@
     if (0 == self.currentIdx.section) {
         if (1 == buttonIndex) {
             item[kContent] = @"男";
-        }else if (2 == buttonIndex){
+        }else {
             item[kContent] = @"女";
-        }else if (3 == buttonIndex){
-            item[kContent] = @"保密";
         }
     }else{
         if (1 == buttonIndex) {
