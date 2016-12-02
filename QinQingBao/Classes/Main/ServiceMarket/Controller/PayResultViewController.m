@@ -104,7 +104,6 @@
         }
         titleCell.textLabel.text = @"我的亲友";
         return titleCell;
-        
     }else{
         ArchivesCell *archivesCell = [ArchivesCell createCellWithTableView:tableView];
         archivesCell.scanBlock = ^{
@@ -187,7 +186,8 @@
  */
 - (void)ignoreAction:(UIButton *)sender
 {
-    [NoticeHelper AlertShow:@"你已经忽略了" view:nil];
+    [self.navigationController popToViewController:
+     self.navigationController.viewControllers[self.navigationController.viewControllers.count-4] animated:YES];
 }
 
 /**
@@ -287,7 +287,6 @@
         if ([dict[@"code"] integerValue] != 0) {
             [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
-        
         [self loadArchiveDataList];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

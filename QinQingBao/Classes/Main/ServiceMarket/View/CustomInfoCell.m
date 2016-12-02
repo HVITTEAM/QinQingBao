@@ -101,7 +101,7 @@
         return;
     }
     
-    self.height = CGRectGetMaxY(self.phoneNumLb.frame) + 13;
+    self.height = CGRectGetMaxY(self.addressLb.frame) + 13;
 }
 
 

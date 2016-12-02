@@ -20,5 +20,7 @@
 @property (nonatomic, copy) NSString *bc_item_id;
 @property (nonatomic, copy) NSString *bc_type_app_id;
 
+@property (nonatomic, copy) NSString *discuz_id;
+
 
 @end

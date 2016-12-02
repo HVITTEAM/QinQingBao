@@ -50,8 +50,10 @@
 
 -(void)setUrlstr:(NSString *)urlstr
 {
-    _urlstr = urlstr;
-    
+    if (urlstr && urlstr.length > 0)
+        _urlstr = urlstr;
+    else
+        _urlstr = @"";
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -88,7 +90,7 @@
     // 实例化发声的对象
      utterance = [AVSpeechUtterance speechUtteranceWithString:_speakStr];
     utterance.voice = voice;
-    utterance.rate = 0.5;
+    utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
 }
 
 -(void)play:(UIButton *)btn

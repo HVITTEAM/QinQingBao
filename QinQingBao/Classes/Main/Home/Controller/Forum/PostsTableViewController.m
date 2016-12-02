@@ -658,7 +658,16 @@
     
     // 43 超声理疗 44 精准健康监测分析 45疾病易感性基因检测
     
-    if ([item.bc_type_app_id isEqualToString:@"43"])
+    if (item.discuz_id && item.discuz_id.length > 0)
+    {
+        PostsDetailViewController *view = [[PostsDetailViewController alloc] init];
+        PostsModel *model = [[PostsModel alloc] init];
+        model.tid = item.discuz_id;
+        view.itemdata = model;
+        view.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:view animated:YES];
+    }
+    else if ([item.bc_type_app_id isEqualToString:@"43"])
     {
         ShopDetailViewController *view = [[ShopDetailViewController alloc] init];
         view.iid = item.bc_item_id;

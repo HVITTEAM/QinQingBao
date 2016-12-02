@@ -289,7 +289,7 @@
             cell.textLabel.textColor = HMColor(153, 153, 153);
             cell.textLabel.font = [UIFont systemFontOfSize:14];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"评论数 %@",self.itemdata.replies];
+        cell.textLabel.text = [NSString stringWithFormat:@"评论数 %@",self.itemdata.replies && self.itemdata.replies.length > 0 ? self.itemdata.replies: @"0"];
         return cell;
     }
     else{

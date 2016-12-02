@@ -1632,7 +1632,7 @@
 
 - (void)sendTextMessage:(NSString *)text
 {
-    [self sendTextMessage:text withExt:nil];
+    [self sendTextMessage:text withExt: @{@"sid":@"1107"}];
 }
 
 - (void)sendTextMessage:(NSString *)text withExt:(NSDictionary*)ext

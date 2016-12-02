@@ -184,6 +184,8 @@
     if (![notification.name  isEqual: MTLoginTimeout]) {
         [login initHeadView];
     }
+    
+    [MTNotificationCenter postNotificationName:MTRefleshData object:nil];
 }
 
 /**
@@ -194,6 +196,7 @@
     UINavigationController *navlogin = [SharedAppUtil defaultCommonUtil].tabBar.viewControllers[3];
     PrivateProfileViewController *login = navlogin.viewControllers[0];
     [login initHeadView];
+    [MTNotificationCenter postNotificationName:MTRefleshData object:nil];
 }
 
 /**

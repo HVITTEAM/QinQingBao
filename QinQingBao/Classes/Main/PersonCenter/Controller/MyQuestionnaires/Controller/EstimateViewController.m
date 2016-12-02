@@ -75,7 +75,9 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     EstimateListCell *cell = [EstimateListCell createCellWithTableView:tableView];
-    cell.item = self.dataProvider[indexPath.row];
+    if (self.dataProvider && self.dataProvider.count >0) {
+        cell.item = self.dataProvider[indexPath.row];
+    }
     return cell;
 }
 

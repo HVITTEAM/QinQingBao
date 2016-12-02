@@ -92,7 +92,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
     
     [self loadSpecialDatas];
     
-    [self loadGroupbuyData];
+//    [self loadGroupbuyData];
     
     [self initTableViewSkin];
     
@@ -458,14 +458,14 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == 3)
+    if (section == 1)
         return 0.5;
     return 5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -477,23 +477,23 @@ static CGFloat IMAGEVIEW_HEIGHT;
 {
     if (indexPath.section == 0)
         return  175;
-    if (indexPath.section == 2) {
-        return MTViewH * 0.15;
-    }else if (indexPath.section == 1){
-        //计算钜惠专区 Cell 高度
-        //商品价格和名字的总高度
-        CGFloat textHeight = 70;
-        //顶部图标所在位置的高度
-        CGFloat topHeight = 44;
-        //商品的间隔
-        CGFloat goodsSpace = 10;
-        
-        CGFloat bottomSpace = 00;
-        
-        CGFloat cellHeight = floor((MTScreenW - 2 * goodsSpace)/2.5) + textHeight + topHeight + bottomSpace;
-        
-        return cellHeight;
-    }
+//    if (indexPath.section == 2) {
+//        return MTViewH * 0.15;
+//    }else if (indexPath.section == 1){
+//        //计算钜惠专区 Cell 高度
+//        //商品价格和名字的总高度
+//        CGFloat textHeight = 70;
+//        //顶部图标所在位置的高度
+//        CGFloat topHeight = 44;
+//        //商品的间隔
+//        CGFloat goodsSpace = 10;
+//        
+//        CGFloat bottomSpace = 00;
+//        
+//        CGFloat cellHeight = floor((MTScreenW - 2 * goodsSpace)/2.5) + textHeight + topHeight + bottomSpace;
+//        
+//        return cellHeight;
+//    }
     return 44;
 }
 
@@ -509,24 +509,24 @@ static CGFloat IMAGEVIEW_HEIGHT;
             goodsTypeCell = [GoodsTypeCell goodsTypeCell];
         cell = goodsTypeCell;
     }
-    else if (indexPath.section == 2) {
-        SpecialCell *specialCell = [[SpecialCell alloc] initSpecialCellWithTableView:tableView indexpath:indexPath];
-        specialCell.intermediateImageUrl = self.specialList.url;
-        specialCell.specialArray = self.specialList.data;
-        specialCell.delegate = self;
-        
-        cell = specialCell;
-        
-    }
-    else if (indexPath.section == 1)
-    {
-        //钜惠专区 Cell
-        DiscountCell *disCell = [[DiscountCell alloc] initDiscountCellWithTableView:tableView indexpath:indexPath];
-        disCell.delegate = self;
-        disCell.intermediateImageUrl = self.groupbuyTotal.url;
-        disCell.goodsDatas = self.groupbuyTotal.data;
-        cell = disCell;
-    }
+//    else if (indexPath.section == 2) {
+//        SpecialCell *specialCell = [[SpecialCell alloc] initSpecialCellWithTableView:tableView indexpath:indexPath];
+//        specialCell.intermediateImageUrl = self.specialList.url;
+//        specialCell.specialArray = self.specialList.data;
+//        specialCell.delegate = self;
+//        
+//        cell = specialCell;
+//        
+//    }
+//    else if (indexPath.section == 1)
+//    {
+//        //钜惠专区 Cell
+//        DiscountCell *disCell = [[DiscountCell alloc] initDiscountCellWithTableView:tableView indexpath:indexPath];
+//        disCell.delegate = self;
+//        disCell.intermediateImageUrl = self.groupbuyTotal.url;
+//        disCell.goodsDatas = self.groupbuyTotal.data;
+//        cell = disCell;
+//    }
     else
     {
         UITableViewCell *commoncell = [tableView dequeueReusableCellWithIdentifier:@"MTCommonCell"];
@@ -548,7 +548,7 @@ static CGFloat IMAGEVIEW_HEIGHT;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 3)
+    if (indexPath.section == 1)
     {
         HotGoodsViewController *vc = [[HotGoodsViewController alloc] init];
         vc.dataProvider = commendGoodsArr;
