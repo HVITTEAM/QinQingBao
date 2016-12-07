@@ -80,6 +80,8 @@
 		011F0B351DE7ED74006E16E2 /* 输入.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B341DE7ED74006E16E2 /* 输入.png */; };
 		012098CD1DF799E200017159 /* MTVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012098CC1DF799E200017159 /* MTVersionModel.m */; };
 		012098D01DF79A3E00017159 /* MTVersionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 012098CF1DF79A3E00017159 /* MTVersionHelper.m */; };
+		012099331DF7FFB700017159 /* BadHabit.m in Sources */ = {isa = PBXBuildFile; fileRef = 012099311DF7FFB700017159 /* BadHabit.m */; };
+		012099341DF7FFB700017159 /* BadHabit.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012099321DF7FFB700017159 /* BadHabit.xib */; };
 		01209B7E1DED1959000ACD62 /* cb_simple_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */; };
 		01209B7F1DED1959000ACD62 /* cb_simple_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */; };
 		0120FC2F1DD2BA70005561B2 /* china.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0120FC2E1DD2BA70005561B2 /* china.plist */; };
@@ -1442,6 +1444,9 @@
 		012098CC1DF799E200017159 /* MTVersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTVersionModel.m; sourceTree = "<group>"; };
 		012098CE1DF79A3E00017159 /* MTVersionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTVersionHelper.h; sourceTree = "<group>"; };
 		012098CF1DF79A3E00017159 /* MTVersionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTVersionHelper.m; sourceTree = "<group>"; };
+		012099301DF7FFB700017159 /* BadHabit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadHabit.h; sourceTree = "<group>"; };
+		012099311DF7FFB700017159 /* BadHabit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadHabit.m; sourceTree = "<group>"; };
+		012099321DF7FFB700017159 /* BadHabit.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BadHabit.xib; sourceTree = "<group>"; };
 		01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_off@2x.png"; sourceTree = "<group>"; };
 		01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_on@2x.png"; sourceTree = "<group>"; };
 		0120FC2E1DD2BA70005561B2 /* china.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china.plist; sourceTree = "<group>"; };
@@ -5018,6 +5023,9 @@
 		01AB2EB51DD59B18006EAFA2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				012099301DF7FFB700017159 /* BadHabit.h */,
+				012099311DF7FFB700017159 /* BadHabit.m */,
+				012099321DF7FFB700017159 /* BadHabit.xib */,
 				013257A71DD95F13006DF8FC /* Cell */,
 				01AB2EB81DD59C5F006EAFA2 /* CheckBox */,
 				01AB2EEA1DD59E86006EAFA2 /* DietaryHabit.h */,
@@ -9019,6 +9027,7 @@
 				0160D15F1DAB8B77002B6B83 /* temp.html in Resources */,
 				01ECDA691C8EB31F0018160F /* faceDelete@2x.png in Resources */,
 				01F015D61C5F427B00930B0E /* GoodsDescriptionViewController.xib in Resources */,
+				012099341DF7FFB700017159 /* BadHabit.xib in Resources */,
 				01AB2EDD1DD59CA5006EAFA2 /* cb_glossy_off@2x.png in Resources */,
 				01AB2EEE1DD59E99006EAFA2 /* DietaryHabit.xib in Resources */,
 				013257AC1DD95F52006DF8FC /* ReportCollectionViewCell.xib in Resources */,
@@ -9889,6 +9898,7 @@
 				0162EA931D869DB500A5EF1C /* UIImageView+BHBSetImage.m in Sources */,
 				016066CB1CF6ACCE005A3164 /* MJRefreshBackStateFooter.m in Sources */,
 				0126ED7E1B8C57A700EC85C1 /* AFURLConnectionOperation.m in Sources */,
+				012099331DF7FFB700017159 /* BadHabit.m in Sources */,
 				D279055A1DDAA31200378F77 /* QuestionResultCell.m in Sources */,
 				010EC9E11C438D8900D36417 /* MTChangeCountView.m in Sources */,
 				01F2283B1B7B465800ED4AFB /* UIImage+Extension.m in Sources */,

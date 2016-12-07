@@ -21,6 +21,8 @@
 #define kPlaceHolder @"cellPlaceHolder"
 
 #import "DietaryHabit.h"
+#import "BadHabit.h"
+
 
 @interface HealthArchiveViewController2 ()
 
@@ -243,7 +245,25 @@
     }else if (2 == indexPath.section && 0 == indexPath.row){
         [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"偶尔",@"经常", nil] show];
     }else if (2 == indexPath.section && 1 == indexPath.row){
-        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"久坐",@"经常熬夜",@"常看手机", nil] show];
+        BadHabit *badHabitView = [BadHabit showTargetViewToView:[UIApplication sharedApplication].keyWindow];
+        
+//        NSString *diet = self.datas[0][2][kContent];
+//        NSArray *diets = [diet componentsSeparatedByString:@","];
+//        dietaryHabitView.valueArray = diets;
+//        
+//        dietaryHabitView.selectItemBlock = ^(NSArray *selectedItems){
+//            
+//            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+//            [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                NSInteger code = [ArchiveData dietToNumber:(NSString *)obj];
+//                [tempArray addObject:@(code)];
+//            }];
+//            weakSelf.archiveData.diet = tempArray;
+//            weakSelf.datas[0][2][kContent] = [selectedItems componentsJoinedByString:@","];
+//            [weakSelf.tableView reloadData];
+//        };
+
+//        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"久坐",@"经常熬夜",@"常看手机", nil] show];
     }
 }
 
