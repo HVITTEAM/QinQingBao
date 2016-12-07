@@ -78,6 +78,8 @@
 		011F0B311DE7E9B4006E16E2 /* 表情.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2C1DE7E9B4006E16E2 /* 表情.png */; };
 		011F0B321DE7E9B4006E16E2 /* 语音.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B2D1DE7E9B4006E16E2 /* 语音.png */; };
 		011F0B351DE7ED74006E16E2 /* 输入.png in Resources */ = {isa = PBXBuildFile; fileRef = 011F0B341DE7ED74006E16E2 /* 输入.png */; };
+		012098CD1DF799E200017159 /* MTVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 012098CC1DF799E200017159 /* MTVersionModel.m */; };
+		012098D01DF79A3E00017159 /* MTVersionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 012098CF1DF79A3E00017159 /* MTVersionHelper.m */; };
 		01209B7E1DED1959000ACD62 /* cb_simple_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */; };
 		01209B7F1DED1959000ACD62 /* cb_simple_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */; };
 		0120FC2F1DD2BA70005561B2 /* china.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0120FC2E1DD2BA70005561B2 /* china.plist */; };
@@ -1436,6 +1438,10 @@
 		011F0B2C1DE7E9B4006E16E2 /* 表情.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "表情.png"; sourceTree = "<group>"; };
 		011F0B2D1DE7E9B4006E16E2 /* 语音.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "语音.png"; sourceTree = "<group>"; };
 		011F0B341DE7ED74006E16E2 /* 输入.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "输入.png"; sourceTree = "<group>"; };
+		012098CB1DF799E200017159 /* MTVersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTVersionModel.h; sourceTree = "<group>"; };
+		012098CC1DF799E200017159 /* MTVersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTVersionModel.m; sourceTree = "<group>"; };
+		012098CE1DF79A3E00017159 /* MTVersionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTVersionHelper.h; sourceTree = "<group>"; };
+		012098CF1DF79A3E00017159 /* MTVersionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTVersionHelper.m; sourceTree = "<group>"; };
 		01209B7C1DED1959000ACD62 /* cb_simple_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_off@2x.png"; sourceTree = "<group>"; };
 		01209B7D1DED1959000ACD62 /* cb_simple_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_simple_on@2x.png"; sourceTree = "<group>"; };
 		0120FC2E1DD2BA70005561B2 /* china.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = china.plist; sourceTree = "<group>"; };
@@ -3852,6 +3858,17 @@
 				011F0B2D1DE7E9B4006E16E2 /* 语音.png */,
 			);
 			path = chaticon;
+			sourceTree = "<group>";
+		};
+		012098C91DF799C500017159 /* MTNewVersion */ = {
+			isa = PBXGroup;
+			children = (
+				012098CB1DF799E200017159 /* MTVersionModel.h */,
+				012098CC1DF799E200017159 /* MTVersionModel.m */,
+				012098CE1DF79A3E00017159 /* MTVersionHelper.h */,
+				012098CF1DF79A3E00017159 /* MTVersionHelper.m */,
+			);
+			path = MTNewVersion;
 			sourceTree = "<group>";
 		};
 		01237A481CFC319D0070C905 /* MJExtension */ = {
@@ -7727,6 +7744,7 @@
 		01EFD0BD1B7D84A700A720E7 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				012098C91DF799C500017159 /* MTNewVersion */,
 				01254BAA1DB74DE30011C27A /* CCLocationManager.h */,
 				01254BAB1DB74DE30011C27A /* CCLocationManager.m */,
 				01254BAC1DB74DE30011C27A /* CLLocation+MTLocation.h */,
@@ -9648,6 +9666,7 @@
 				01F87F831C58691600419FA2 /* RecommendGoodsTotal.m in Sources */,
 				012AAD251CA4D01C00CEE121 /* OrderTimeCell.m in Sources */,
 				016066CE1CF6ACCE005A3164 /* MJRefreshStateHeader.m in Sources */,
+				012098CD1DF799E200017159 /* MTVersionModel.m in Sources */,
 				016067061CF6AD8C005A3164 /* UIImage+GIF.m in Sources */,
 				01EBD3B41C853EF7009236FA /* RefundListTotal.m in Sources */,
 				01EBD3D31C854027009236FA /* RefundViewController.m in Sources */,
@@ -9730,6 +9749,7 @@
 				01F07A861D92803900E75B0B /* PrivateLetterViewController.m in Sources */,
 				D257C4AC1D65BA05002D18F5 /* TypeinfoModel.m in Sources */,
 				01FD4CA51CAE4B43008F09CF /* PSTCollectionViewUpdateItem.m in Sources */,
+				012098D01DF79A3E00017159 /* MTVersionHelper.m in Sources */,
 				01EB266F1C92A06900773023 /* DeviceModel.m in Sources */,
 				01ECDB0C1C8EB31F0018160F /* EaseConversationListViewController.m in Sources */,
 				01F85AB51C575A0600E463F4 /* MTProgressWebViewController.m in Sources */,

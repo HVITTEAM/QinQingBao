@@ -106,7 +106,6 @@
                 LoginViewController *login = [[LoginViewController alloc] init];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
                 [self presentViewController:nav animated:YES completion:nil];
-                login.backHiden = NO;
             }
             else if ([str isEqualToString:@"6"]) {
                 ClassificationViewController *class = [[ClassificationViewController alloc] init];

@@ -167,7 +167,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         [self.tableView.footer endRefreshing];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
 

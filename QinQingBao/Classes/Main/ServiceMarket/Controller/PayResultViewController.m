@@ -268,7 +268,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
 
@@ -291,7 +291,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
     
 }

@@ -315,7 +315,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.tableView.header endRefreshing];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
     
 }
@@ -356,7 +356,7 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
 
@@ -380,7 +380,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
 
@@ -389,13 +389,9 @@
     importMsgStr = @"暂无与您健康相关的提醒需要您关注";
     
     //判断是否登录
-    if (![SharedAppUtil checkLoginStates]){
-        [self.tableView.header endRefreshing];
-        return;
-    }
     
     if ([SharedAppUtil defaultCommonUtil].userVO == nil)
-        return;
+        return  [self.tableView.header endRefreshing];
     NSDictionary *params = @{ @"client":@"ios",
                               @"key":[SharedAppUtil defaultCommonUtil].userVO.key};
     [CommonRemoteHelper RemoteWithUrl:URL_Get_sysfmmsg_list parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
@@ -410,13 +406,11 @@
                 importMsgStr = [arr[0] objectForKey:@"msg_content"];
             }
         }
-        
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
-
 
 @end

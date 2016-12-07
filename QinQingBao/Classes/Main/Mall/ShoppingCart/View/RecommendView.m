@@ -8,7 +8,7 @@
 
 #import "RecommendView.h"
 
-static float cellHeight = 250;
+//static float cellHeight = 250;
 //static float cellWidth = 110;
 @implementation RecommendView
 

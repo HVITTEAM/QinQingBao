@@ -155,10 +155,10 @@
             commonCell.layoutMargins = UIEdgeInsetsZero;
             commonCell.textLabel.text = @"暂无推荐信息!";
             commonCell.textLabel.textColor = [UIColor colorWithRGB:@"999999"];
-
+            
         }
         cell = commonCell;
-
+        
     }else{
         ScrollMenuTableCell * menuCell = [ScrollMenuTableCell createCellWithTableView:tableView];
         menuCell.row = 1;
@@ -271,11 +271,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MapViewController *map = [[MapViewController alloc] init];
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        MapViewController *map = [[MapViewController alloc] init];
+        [self presentViewController:map animated:YES completion:nil];
+    }
     //    map.address = [NSString stringWithFormat:@"%@%@",_itemInfo.totalname,_itemInfo.orgaddress];;
     //    map.latitude = _itemInfo.orglat;
     //    map.longitude = _itemInfo.orglon;
-    [self presentViewController:map animated:YES completion:nil];
 }
 
 #pragma mark - 网络相关
@@ -288,27 +290,27 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Advertisementpic parameters:@{@"bc_uses_type" : @"1",
                                                                         @"bc_type" : @"0"}
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
-        
-        if([dict[@"code"] integerValue] != 0){
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alertView show];
-            return ;
-        }
-        
-        self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
-        
-        NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
-        for (int i = 0; i < self.advDatas.count; i++) {
-            HomePicModel *model = self.advDatas[i];
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
-            [imageUrls addObject:urlStr];
-        }
-        LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
-        loopView.imageUrls = imageUrls;
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
-    }];
+                                     
+                                     if([dict[@"code"] integerValue] != 0){
+                                         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[dict objectForKey:@"errorMsg"] delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                                         [alertView show];
+                                         return ;
+                                     }
+                                     
+                                     self.advDatas = [HomePicModel objectArrayWithKeyValuesArray:dict[@"datas"][@"data"]];
+                                     
+                                     NSMutableArray *imageUrls = [[NSMutableArray alloc] init];
+                                     for (int i = 0; i < self.advDatas.count; i++) {
+                                         HomePicModel *model = self.advDatas[i];
+                                         NSString *urlStr = [NSString stringWithFormat:@"%@%@",URL_AdvanceImg,model.bc_value];
+                                         [imageUrls addObject:urlStr];
+                                     }
+                                     LoopImageView *loopView = (LoopImageView *)self.tableView.tableHeaderView;
+                                     loopView.imageUrls = imageUrls;
+                                     
+                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
+                                 }];
 }
 
 #pragma mark - 事件方法

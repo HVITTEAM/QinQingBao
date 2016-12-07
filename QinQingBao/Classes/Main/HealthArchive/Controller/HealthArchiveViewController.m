@@ -714,7 +714,7 @@
         [hud removeFromSuperview];
         
         if ([dict[@"code"] integerValue] != 0) {
-            [NoticeHelper AlertShow:@"errorMsg" view:self.view];
+            [NoticeHelper AlertShow:dict[@"errorMsg"] view:self.view];
         }
         
         ArchiveData1 *archive = [ArchiveData1 objectWithKeyValues:dict[@"datas"]];
@@ -779,7 +779,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [hud removeFromSuperview];
-        [NoticeHelper AlertShow:@"请求出错了" view:nil];
+        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
     
 }

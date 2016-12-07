@@ -28,6 +28,8 @@
 @property (strong, nonatomic)  SSCheckBoxView *cb6;
 @property (strong, nonatomic)  SSCheckBoxView *cb7;
 @property (strong, nonatomic)  SSCheckBoxView *cb8;
+@property (strong, nonatomic)  SSCheckBoxView *cb9;
+
 
 @property (strong, nonatomic) NSMutableArray *selectedItems;
 
@@ -83,7 +85,6 @@
     UIView *line0 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lab.frame), 320, 0.5)];
     line0.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
     [self.contentBoxView addSubview:line0];
-
     
     _cb1 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, 50,100, KCellHight) style:5 checked:NO];
     [_cb1 setText:@"荤素均衡"];
@@ -194,6 +195,21 @@
         }
     }];
     [self.contentBoxView addSubview:_cb8];
+    UIView *line7 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_cb8.frame), 320, 0.5)];
+    line7.backgroundColor = [UIColor colorWithRGB:@"EBEBEB"];
+    [self.contentBoxView addSubview:line7];
+    
+    _cb9 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb8.frame) + KMargin,100, KCellHight) style:5 checked:NO];
+    [_cb9 setText:@"偏肉食"];
+    [_cb9 setStateChangedBlock:^(SSCheckBoxView *cbv) {
+        if (cbv.checked) {
+            [weakSelf.selectedItems addObject:cbv.textLabel.text];
+        }else{
+            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
+        }
+    }];
+    [self.contentBoxView addSubview:_cb9];
+
 }
 
 - (void)setValueArray:(NSArray *)valueArray
@@ -230,6 +246,10 @@
         
         if ([value isEqualToString:@"嗜咖啡"]) {
             _cb8.checked = YES;
+        }
+        
+        if ([value isEqualToString:@"偏肉食"]) {
+            _cb9.checked = YES;
         }
     }
     

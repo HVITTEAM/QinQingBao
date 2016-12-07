@@ -10,8 +10,6 @@
 
 @interface LoginViewController : UIViewController
 
-//是否显示返回按钮
-@property (nonatomic, assign) BOOL backHiden;
 - (IBAction)qqlogin:(id)sender;
 
 @end

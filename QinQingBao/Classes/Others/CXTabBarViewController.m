@@ -157,8 +157,8 @@
 #pragma mark - CXTabBarDelegate
 - (void)tabBarDidClickedPlusButton:(CXTabBar *)tabBar
 {
-    if (![SharedAppUtil checkLoginStates])
-        return;
+    if ([SharedAppUtil defaultCommonUtil].userVO == nil)
+        return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil];
     ChattingViewController *vx = [[ChattingViewController alloc] initWithConversationChatter:[SharedAppUtil defaultCommonUtil].serviceCount conversationType:eConversationTypeChat];
     vx.hidesBottomBarWhenPushed = YES;
     [self.lastSelectedViewContoller.navigationController setNavigationBarHidden:NO];
@@ -207,7 +207,6 @@
     LoginViewController *login = [[LoginViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:nav animated:YES completion:nil];
-    login.backHiden = NO;
 }
 
 /**

@@ -362,6 +362,8 @@
         return 7;
     }else if ([dietStr isEqualToString:@"碳酸饮料"]){
         return 8;
+    }else if ([dietStr isEqualToString:@"偏肉食"]){
+        return 9;
     }else{
         return -1;
     }
@@ -394,6 +396,9 @@
             break;
         case 8:
             diet = @"碳酸饮料";
+            break;
+        case 9:
+            diet = @"偏肉食";
             break;
         default:
             diet = nil;

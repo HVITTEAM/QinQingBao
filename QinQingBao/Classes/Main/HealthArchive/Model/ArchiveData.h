@@ -62,7 +62,7 @@
 @property (nonatomic, copy) NSString *smoke;
 /**喝酒 1.无；2.偶尔；3.经常；***/
 @property (nonatomic, copy) NSString *drink;
-/**饮食习惯 1.荤素均衡、2.清淡、3.素食、4.重口味、5.嗜甜、6.嗜咖啡、7.爱喝茶、8.爱喝碳酸饮料***/
+/**饮食习惯 1.荤素均衡、2.清淡、3.素食、4.重口味、5.嗜甜、6.嗜咖啡、7.爱喝茶、8.爱喝碳酸饮料、9.偏肉食***/
 @property (nonatomic, copy) NSArray *diet;
 /**睡觉时间***/
 @property (nonatomic, copy) NSString *sleeptime;
