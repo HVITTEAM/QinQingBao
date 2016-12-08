@@ -71,7 +71,7 @@
 /**运动 1.无、2.偶尔、3.经常***/
 @property (nonatomic, copy) NSString *sports;
 /**不良习惯 1.无、2.久坐、3.经常熬夜、4.长看手机***/
-@property (nonatomic, copy) NSString *badhabits;
+@property (nonatomic, copy) NSArray *badhabits;
 /**备注***/
 @property (nonatomic, copy) NSString *hremark;
 
