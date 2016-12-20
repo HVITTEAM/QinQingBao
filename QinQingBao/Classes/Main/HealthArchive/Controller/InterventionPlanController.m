@@ -44,6 +44,12 @@
     self.tableView.footer= [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
     [self.tableView initWithPlaceString:@"暂无相关数据" imgPath:@"placeholder-1"];
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     [self getInterventionPlanList];
 }
 
@@ -154,6 +160,7 @@
         NSArray *datas = [ReportInterventionModel objectArrayWithKeyValuesArray:dict[@"datas"]];
         if (datas.count > 0)
         {
+            [self.dataProvider removeAllObjects];
             [self.dataProvider addObjectsFromArray:datas];
             //设置数据
             [self.tableView reloadData];

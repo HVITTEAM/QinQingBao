@@ -521,7 +521,7 @@
             [rightBtn0 initWithBadgeValue:msgNum];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        [NoticeHelper AlertShow:MTServiceError view:nil];
+        //        [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
 }
 

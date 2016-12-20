@@ -20,6 +20,8 @@
 @property (nonatomic, copy) NSString *wp_general_analysis;
 @property (nonatomic, copy) NSString *wp_short_goal;
 @property (nonatomic, copy) NSString *wp_long_goal;
+@property (nonatomic, copy) NSString *wp_advice_goal;
+
 @property (nonatomic, copy) NSString *wp_naturopathy;
 @property (nonatomic, copy) NSString *wp_nutrient_plan;
 @property (nonatomic, copy) NSString *wp_nutrient_goods;
@@ -39,9 +41,12 @@
 @property (nonatomic, copy) NSString *wp_advice_mental;
 
 
+
+
 @property (nonatomic, copy) NSString *wtelnum;
 @property (nonatomic, copy) NSString *waddress;
 @property (nonatomic, copy) NSString *totalname;
+@property (nonatomic, copy) NSString *disease_risk;
 
 @property (nonatomic, strong) NSArray *goodsinfos;
 

@@ -9,8 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface InputArchiveCodeController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
-@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
-@property (weak, nonatomic) IBOutlet UITextField *inputField;
 
 @end

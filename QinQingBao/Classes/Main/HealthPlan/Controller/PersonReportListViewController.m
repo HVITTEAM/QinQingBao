@@ -112,7 +112,7 @@
     healthReportCell.clickType = ^(PersonReportModel *item){
         ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
         VC.title = item.iname;
-        VC.urlstr = item.wp_final_report;
+        VC.urlArr = item.wp_advice_report;
         VC.wr_id = item.wr_id;
         VC.fmno = weakSelf.fmno;
         

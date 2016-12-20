@@ -217,9 +217,9 @@ NSString * const kButtonTitles = @"buttonTitles";
         [btnTitles addObject:@"检测报告"];
     }
     
-    if (self.wi_id != nil) {
-        [btnTitles addObject:@"干预方案"];
-    }
+//    if (self.wi_id != nil) {
+//        [btnTitles addObject:@"干预方案"];
+//    }
     
     //设置返回数据
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];

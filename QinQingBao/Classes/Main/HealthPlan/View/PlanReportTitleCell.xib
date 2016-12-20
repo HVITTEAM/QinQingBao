@@ -18,18 +18,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示:建议您按照上述健康调整建议执行3-6个月后，再次进行心血管专项检测，为下一步预防心血管疾病的发生提供科学参考" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je8-Cp-SQt">
-                        <rect key="frame" x="10" y="13" width="300" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="精准健康管理建议:建议您按照上述健康调整建议执行3-6个月后，再次进行心血管专项检测，为下一步预防心血管疾病的发生提供科学参考。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="je8-Cp-SQt">
+                        <rect key="frame" x="20" y="4" width="280" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.77647058823529413" green="0.58823529411764708" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="je8-Cp-SQt" secondAttribute="trailing" constant="10" id="18T-sY-euX"/>
+                    <constraint firstAttribute="trailing" secondItem="je8-Cp-SQt" secondAttribute="trailing" constant="20" id="18T-sY-euX"/>
                     <constraint firstItem="je8-Cp-SQt" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="2A9-OE-pUJ"/>
                     <constraint firstItem="je8-Cp-SQt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n4m-WW-CBr"/>
-                    <constraint firstItem="je8-Cp-SQt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="pW6-tp-y6O"/>
+                    <constraint firstItem="je8-Cp-SQt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="pW6-tp-y6O"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

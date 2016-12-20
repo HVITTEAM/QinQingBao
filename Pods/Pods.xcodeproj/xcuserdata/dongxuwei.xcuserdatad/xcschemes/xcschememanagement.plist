@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-QinQingBao.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>720DC254F1F6D8FD41BD9F9FD6F843AF</key>
+		<key>405AAA6C64BD8713C7D981E3016AEE52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72C0FA849E76543858E9E0919099B7FD</key>
+		<key>4A9C6FA4BF12C62481FE9461DB627937</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A722D03618F3480E0BBAF0E6C08B0E19</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
+		<key>4AD85CB3746343513E230FE1374BB8F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

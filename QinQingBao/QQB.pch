@@ -50,7 +50,6 @@
 #import "TSActionSheet.h"
 #import "SWYPhotoBrowserViewController.h"
 #import "UIViewController+KNSemiModal.h"
-
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #import "UITextField+Validate.h"
 
@@ -68,7 +67,7 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 #define kSellerAccount @"ofc.er@hvit.com.cn"
 
-#define kAppVersion @"v 2.1.0.1"
+#define kAppVersion @"v 2.2.0.0"
 
 #define MTServiceError @"服务器暂时无法连接，请重试"
 
@@ -290,13 +289,13 @@
 #define ShopTel1 @"400-151-2626"
 
 
-//#define URL_Local @"http://test.hvit.com.cn/ylserver"
+#define URL_Local @"http://test.hvit.com.cn/ylserver"
 
-//#define URL_Local_New @"http://test.hvit.com.cn"
+#define URL_Local_New @"http://test.hvit.com.cn"
 
-#define URL_Local @"http://cxjk.hvit.com.cn"
+//#define URL_Local @"http://cxjk.hvit.com.cn"
 
-#define URL_Local_New @"http://cxjk.hvit.com.cn"
+//#define URL_Local_New @"http://cxjk.hvit.com.cn"
 
 /***充值支付宝回调url*/
 #define URL_AliPay_Blance [NSString stringWithFormat:@"%@/shop/mobile/api/payment/blance_alipay/call_back_url.php",URL_Local]
@@ -558,7 +557,6 @@
 #define URL_refund_return_list [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_refund_return_list_view",URL_Local]
 /***退货退款记录查看url*/
 #define URL_refund_return [NSString stringWithFormat:@"%@/shop/mobile/index.php?access_token=token&act=member_refund&op=api_refund_return_view",URL_Local]
-
 
 //---------------------症状自查---------------------
 

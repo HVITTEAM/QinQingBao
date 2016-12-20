@@ -37,12 +37,12 @@
 //    NSDateFormatter* dateFormat1 = [[NSDateFormatter alloc] init];
 //    [dateFormat1 setDateFormat:@"yyyy-MM-dd"];
 //    self.timeLab.text = [dateFormat1 stringFromDate:date];
-//    
-//    self.contentLab.text = item.wp_general_analysis;
-//    CGSize size = [self.contentLab sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
-//    self.contentLab.height = size.height;
+
+    self.tipLab.text = [NSString stringWithFormat:@"精准健康管理建议:%@",item.wp_advice_health];
+    CGSize size = [self.tipLab sizeThatFits:CGSizeMake(MTScreenW - 40, MAXFLOAT)];
+    self.tipLab.height = size.height;
     
-    self.height = 50;
+    self.height = CGRectGetMaxY(self.tipLab.frame) + 5;
 }
 
 

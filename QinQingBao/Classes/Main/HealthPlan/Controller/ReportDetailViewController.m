@@ -8,8 +8,9 @@
 
 #import "ReportDetailViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "WebCell.h"
 
-@interface ReportDetailViewController ()<UIWebViewDelegate,AVSpeechSynthesizerDelegate>
+@interface ReportDetailViewController ()<AVSpeechSynthesizerDelegate,UIWebViewDelegate>
 {
     UIButton *speakBtn;
     
@@ -19,10 +20,18 @@
     
     AVSpeechSynthesizer *synthesizer;
     AVSpeechUtterance *utterance;
+    
 }
 
-@property (strong, nonatomic) UIWebView *webView;
+@property (strong, atomic) NSMutableArray *pdfFilePaths;
 
+@property (assign, atomic) NSInteger numberOfDownloadFile;
+
+@property (strong, nonatomic) NSString *finalPDFPath;
+
+@property (strong, nonatomic) NSOperationQueue *queue;
+
+@property (strong, nonatomic) UIWebView *webView;
 @end
 
 @implementation ReportDetailViewController
@@ -30,45 +39,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    self.webView.delegate = self;
-    self.webView.scalesPageToFit = YES;
-    self.webView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.webView];
-    
-    NSURL *url = [[NSURL alloc] initWithString:self.urlstr];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request.timeoutInterval = 60;
-    
-    [self.webView loadRequest:request];
+    [self initWebView];
     
     [self initSpeachView];
     
     [self uploadReadStatusWithReportId:self.wr_id fmno:self.fmno];
-}
-
--(void)setUrlstr:(NSString *)urlstr
-{
-    if (urlstr && urlstr.length > 0)
-        _urlstr = urlstr;
-    else
-        _urlstr = @"";
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 -(void)initSpeachView
@@ -88,7 +63,7 @@
     synthesizer = [[AVSpeechSynthesizer alloc] init];
     synthesizer.delegate = self;
     // 实例化发声的对象
-     utterance = [AVSpeechUtterance speechUtteranceWithString:_speakStr];
+    utterance = [AVSpeechUtterance speechUtteranceWithString:_speakStr];
     utterance.voice = voice;
     utterance.rate = AVSpeechUtteranceDefaultSpeechRate;
 }
@@ -107,7 +82,7 @@
             [synthesizer continueSpeaking];
         else
         {
-           
+            
             [synthesizer speakUtterance:utterance];
         }
         
@@ -176,5 +151,173 @@
     }];
 }
 
+- (void)initWebView
+{
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    webView.delegate = self;
+    webView.scalesPageToFit = YES;
+    [self.view addSubview:webView];
+    self.webView = webView;
+    
+    self.numberOfDownloadFile = 0;
+    
+    self.queue = [[NSOperationQueue alloc] init];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    for (int i = 0; i < self.urlArr.count; i++) {
+        NSURL *url = [[NSURL alloc] initWithString:self.urlArr[i]];
+        NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url];
+        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if ([responseObject isKindOfClass:[NSData class]]) {
+                [self handleResultWith:(NSData *)responseObject idx:i];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [NoticeHelper AlertShow:@"文件不存在请重试" view:nil];
+            [self.queue cancelAllOperations];
+            [self removeTempPDFsWithPaths:self.pdfFilePaths];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        
+        [self.queue addOperation:op];
+    }
+}
+
+- (void)setUrlArr:(NSArray *)urlArr
+{
+    _urlArr = urlArr;
+    
+    self.pdfFilePaths = [[NSMutableArray alloc] init];
+    for (int i = 0; i < _urlArr.count; i++) {
+        [self.pdfFilePaths addObject:[NSNull null]];
+    }
+}
+
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    
+}
+
+#pragma mark - 私有方法
+/**
+ *  每个PDF文件下载成功后的处理
+ */
+- (void)handleResultWith:(NSData *)pdfData idx:(int)i
+{
+    @synchronized (self) {
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentPath = [paths firstObject];
+        NSString *pdfPath = [NSString stringWithFormat:@"%@/%d.pdf",documentPath,i];
+        
+        NSLog(@"%@",documentPath);
+        
+        bool result = [pdfData writeToFile:pdfPath atomically:YES];
+        
+        if (result) {
+            self.numberOfDownloadFile++;
+            [self.pdfFilePaths replaceObjectAtIndex:i withObject:pdfPath];
+        }
+        
+        //全部下载完成
+        if (self.numberOfDownloadFile == self.urlArr.count) {
+            //合并pdf
+            self.finalPDFPath = [self joinPDF:self.pdfFilePaths];
+            
+            //删除临时的pdf
+            [self removeTempPDFsWithPaths:self.pdfFilePaths];
+            
+            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL fileURLWithPath:self.finalPDFPath]];
+            [self.webView loadRequest:request];
+        }
+    }
+}
+
+/**
+ *  合并PDF文件
+ */
+- (NSString *)joinPDF:(NSArray *)listOfPaths
+{
+    
+    NSString *fileName = [NSString stringWithFormat:@"finalPDF.pdf"];
+    NSString *pdfPathOutput = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:fileName];
+    
+    CFURLRef pdfURLOutput = (  CFURLRef)CFBridgingRetain([NSURL fileURLWithPath:pdfPathOutput]);
+    NSInteger numberOfPages = 0;
+    CGContextRef writeContext = CGPDFContextCreateWithURL(pdfURLOutput, NULL, NULL);
+    
+    for (NSString *source in listOfPaths) {
+        
+        CFURLRef pdfURL = (  CFURLRef)CFBridgingRetain([[NSURL alloc] initFileURLWithPath:source]);
+        CGPDFDocumentRef pdfRef = CGPDFDocumentCreateWithURL((CFURLRef) pdfURL);
+        numberOfPages = CGPDFDocumentGetNumberOfPages(pdfRef);
+        
+        CGPDFPageRef page;
+        CGRect mediaBox;
+        
+        for (int i=1; i<=numberOfPages; i++) {
+            
+            page = CGPDFDocumentGetPage(pdfRef, i);
+            mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
+            CGContextBeginPage(writeContext, &mediaBox);
+            CGContextDrawPDFPage(writeContext, page);
+            CGContextEndPage(writeContext);
+        }
+        
+        CGPDFDocumentRelease(pdfRef);
+        CFRelease(pdfURL);
+    }
+    
+    CFRelease(pdfURLOutput);
+    
+    CGPDFContextClose(writeContext);
+    CGContextRelease(writeContext);
+    
+    return pdfPathOutput;
+}
+
+/**
+ *  删除临时PDF文件
+ */
+- (void)removeTempPDFsWithPaths:(NSArray *)paths
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    for (id filePath in paths) {
+        if (![filePath isKindOfClass:[NSString class]]) {
+            continue;
+        }
+        
+        if ([manager fileExistsAtPath:filePath]) {
+            [manager removeItemAtPath:filePath error:NULL];
+        }
+    }
+}
+
+- (void)dealloc
+{
+    //删除pdf
+    [self removeTempPDFsWithPaths:self.pdfFilePaths];
+    if (self.finalPDFPath.length > 0) {
+        [self removeTempPDFsWithPaths:@[self.finalPDFPath]];
+    }
+}
 
 @end

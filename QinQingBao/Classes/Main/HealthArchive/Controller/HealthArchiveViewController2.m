@@ -64,7 +64,7 @@
             
             NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
             [item setValue:content forKey:kContent];
-            [item setValue:title forKey:kTitle];
+            [item setValue:title forKey:kTitle];                             
             [item setValue:placeHolder forKey:kPlaceHolder];
             return item;
         };
@@ -449,6 +449,9 @@
     
     NSString *smoke = self.datas[0][0][kContent];
     int smokeCode = (int)[ArchiveData smokeToNumber:smoke];
+    if (smokeCode < 0) {
+        return [NoticeHelper AlertShow:@"请选择抽烟习惯" view:nil];
+    }
     self.archiveData.smoke = smokeCode==-1?nil:[NSString stringWithFormat:@"%d",smokeCode];
     
     int drinkCode = (int)[ArchiveData drinkToNumber:self.datas[0][1][kContent]];

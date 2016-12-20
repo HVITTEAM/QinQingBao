@@ -82,6 +82,8 @@
     [self initView];
     
     [self getDataProvider];
+    
+
 }
 
 -(void)initView
@@ -108,8 +110,7 @@
     [CommonRemoteHelper RemoteWithUrl:URL_Get_work_intervention parameters:@{@"fmno" : self.fmno,
                                                                              @"wid" : self.wid && self.wid.length >0 ? self.wid : @"" ,
                                                                              @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-                                                                             @"client":@"ios"
-                                                                             }
+                                                                             @"client":@"ios" }
                                  type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
                                      
                                      id codeNum = [dict objectForKey:@"code"];
@@ -154,6 +155,11 @@
     {
         return 140;
     }
+    else if (indexPath.section == 0 && indexPath.row == 2)
+    {
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.height - 10;
+    }
     else if (indexPath.section == 1)
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -174,7 +180,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 2 : section == 1 ? 9 : goodsInfoArr.count + 1;
+    if (self.dataItem && self.dataItem.disease_risk && self.dataItem.disease_risk.length > 0) {
+        return section == 0 ? 3 : section == 1 ? 8 : goodsInfoArr.count + 1;
+    }
+    return section == 0 ? 2 : section == 1 ? 8 : goodsInfoArr.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -204,8 +213,8 @@
         if (!imgcell)
             imgcell = [[[NSBundle mainBundle] loadNibNamed:@"ImageCell" owner:nil options:nil] lastObject];
         
-        NSURL *iconUrl = [NSURL URLWithString:self.dataItem.item_url_big];
-        [imgcell.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderDetail"]];
+        // NSURL *iconUrl = [NSURL URLWithString:self.dataItem.item_url_big];
+        // [imgcell.imgView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderDetail"]];
         
         cell = imgcell;
     }
@@ -217,11 +226,20 @@
         cell.imageView.image = [UIImage imageNamed:@"person.png"];
         cell.textLabel.text = self.truename;
         cell.textLabel.textColor = [UIColor colorWithRGB:@"333333"];
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         cell.detailTextLabel.text = [MTDateHelper getDaySince1970:self.dataItem.wp_create_time dateformat:@"yyyy-MM-dd"];
         cell.textLabel.textColor = [UIColor colorWithRGB:@"666666"];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else  if (indexPath.section == 0 && indexPath.row == 2)
+    {
+        if(paragraphTextCell == nil)
+            paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
+        paragraphTextCell.textLab.font = [UIFont systemFontOfSize:12];
+        paragraphTextCell.textLab.textColor = [UIColor colorWithRGB:@"c69666"];
+        [paragraphTextCell setTitle:@"" withValue:self.dataItem.disease_risk];
+        cell = paragraphTextCell;
     }
     else if (indexPath.section == 1)
     {
@@ -229,7 +247,7 @@
         {
             if(paragraphTextCell == nil)
                 paragraphTextCell = [PlanParagraphTextCell planParagraphTextCell];
-            [paragraphTextCell setTitle:@"干预目标" withValue:[NSString stringWithFormat:@"近期目标：%@\n\n远期目标：%@",self.dataItem.wp_short_goal ? self.dataItem.wp_short_goal : @"无" ,self.dataItem.wp_long_goal ? self.dataItem.wp_long_goal : @"无"]];
+            [paragraphTextCell setTitle:@"干预目标" withValue:self.dataItem.wp_advice_goal];
             cell = paragraphTextCell;
         }
         else if (indexPath.row == 1)

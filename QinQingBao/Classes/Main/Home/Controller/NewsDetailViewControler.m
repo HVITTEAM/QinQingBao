@@ -91,6 +91,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self addComment];
+
     return YES;
 }
 

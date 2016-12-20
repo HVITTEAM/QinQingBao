@@ -18,4 +18,6 @@
 
 @property (nonatomic, copy) NSString *fmno;      //档案编号
 
+@property (nonatomic, strong) NSArray *urlArr;
+
 @end

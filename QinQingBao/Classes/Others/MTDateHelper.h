@@ -12,14 +12,6 @@
 
 
 /**
- *  显示提示信息（默认1.33秒消失）
- *
- *  @param msg  提示信息文字
- *  @param view 在哪个view上显示
- */
-+(void)AlertShow:(NSString *)msg view:(UIView *)view;
-
-/**
  * 获取和当前时间的时间差
  */
 + (NSString *)intervalSinceNow: (NSString *) theDate;
@@ -37,9 +29,12 @@
 +(NSString *)getDaySince1970:(NSString *)timeStr dateformat:(NSString *)dateformat;
 
 /**
- * 根据运行时特性获取当前网络类型
- * 0 - 无网络 ; 1 - 2G ; 2 - 3G ; 3 - 4G ; 5 - WIFI
+ 获取农历的工具方法，可根据需求添加农历节日和二十四节气
+ @param wCurYear 年
+ @param wCurMonth 月
+ @param wCurDay 日
+ @return 返回农历日子
  */
-+(int)getApplicationNettype;
++ (NSString *)LunarForSolarYear:(int)wCurYear Month:(int)wCurMonth Day:(int)wCurDay;
 
 @end

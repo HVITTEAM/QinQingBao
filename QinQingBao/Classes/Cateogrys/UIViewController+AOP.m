@@ -75,5 +75,15 @@ void swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelector)
 }
 
 
-
+//+ (void)load {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        [self methodSwizzlingWithOriginalSelector:@selector(reloadData) bySwizzledSelector:@selector(sure_reloadData)];
+//    });
+//}
+//
+//- (void)sure_reloadData {
+//    [self checkEmpty];
+//    [self sure_reloadData];
+//}
 @end

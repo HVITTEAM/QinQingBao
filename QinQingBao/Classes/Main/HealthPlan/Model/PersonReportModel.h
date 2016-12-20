@@ -15,6 +15,8 @@
 
 @property(nonatomic,copy)NSArray *entry_voice;
 
+@property(nonatomic,copy)NSArray *wp_advice_report;
+
 @property(nonatomic,copy)NSString *wp_status;
 
 @property(nonatomic,copy)NSString *iname;

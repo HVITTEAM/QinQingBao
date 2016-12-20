@@ -610,25 +610,25 @@
         return [NoticeHelper AlertShow:@"请选择生日" view:nil];
     }
     
-//    if (height.length == 0) {
-//        return [NoticeHelper AlertShow:@"请选择身高" view:nil];
-//    }
-//    
-//    if (weight.length == 0) {
-//        return [NoticeHelper AlertShow:@"请选择体重" view:nil];
-//    }
-//    
-//    if (waistline.length == 0) {
-//        return [NoticeHelper AlertShow:@"请选择腰围" view:nil];
-//    }
-//    
-//    if (systolicpressure.length == 0) {
-//        return [NoticeHelper AlertShow:@"请选择收缩压" view:nil];
-//    }
-//    
-//    if (cholesterol.length == 0) {
-//        return [NoticeHelper AlertShow:@"请选择胆固醇" view:nil];
-//    }
+    if (height.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择身高" view:nil];
+    }
+    
+    if (weight.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择体重" view:nil];
+    }
+    
+    if (waistline.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择腰围" view:nil];
+    }
+    
+    if (systolicpressure.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择收缩压" view:nil];
+    }
+    
+    if (cholesterol.length == 0) {
+        return [NoticeHelper AlertShow:@"请选择胆固醇" view:nil];
+    }
     
 //    if (address.length == 0) {
 //        return [NoticeHelper AlertShow:@"请输入地址" view:nil];

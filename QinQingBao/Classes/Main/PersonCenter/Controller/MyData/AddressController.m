@@ -69,6 +69,8 @@
     
     [self initDataPickView];
     
+    [self initNavigation];
+    
     self.view.backgroundColor = HMGlobalBg;
 }
 
@@ -77,6 +79,34 @@
     selectedCityStr = cityStr;
     areaInfoStr = areaInfo;
     selectedRegionItem = [[AreaModel alloc] initWithName:regionStr areaid:@"" dvcode:regionCode];
+    
+    if (selectedRegionItem) {
+        // 遍历查找选中的城市区划 并选中
+        for (NSDictionary *provinceItem in self.provinceArr)
+        {
+            NSArray *carr  = [provinceItem valueForKey:@"cities"];
+            for (NSDictionary *cityItem in carr)
+            {
+                NSArray *aarr = [cityItem valueForKey:@"regions"];
+                for (NSDictionary *regionItem in aarr)
+                {
+                    if ([[regionItem valueForKey:@"dvcode"] isEqualToString:selectedRegionItem.dvcode])
+                    {
+                        self.cityArr = carr;
+                        self.areaArr = aarr;
+                        selectedProvinceIndex = [self.provinceArr indexOfObject:provinceItem];
+                        selectedCityIndex = [self.cityArr indexOfObject:cityItem];
+                        selectedRegionIndex = [self.areaArr indexOfObject:regionItem];
+                        
+                        selectedProvinceItem = [[AreaModel alloc] initWithName:[provinceItem objectForKey:@"name"] areaid:@"" dvcode:[provinceItem objectForKey:@"dvcode"]];
+                        selectedCityItem = [[AreaModel alloc] initWithName:[cityItem objectForKey:@"name"] areaid:@"" dvcode:[cityItem objectForKey:@"dvcode"]];
+                        selectedRegionItem = [[AreaModel alloc] initWithName:[regionItem objectForKey:@"name"] areaid:@"" dvcode:[regionItem objectForKey:@"dvcode"]];
+                        break;
+                    }
+                }
+            }
+        }
+    }
 }
 
 /**
@@ -161,8 +191,11 @@
         
         selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name ? selectedCityItem.area_name:@"",selectedRegionItem.area_name?selectedRegionItem.area_name:@""];
         [self setupGroups];
-        [self initNavigation];
     }];
+    
+    [pickView selectRow:selectedProvinceIndex inComponent:0 animated:YES];
+    [pickView selectRow:selectedCityIndex inComponent:1 animated:YES];
+    [pickView selectRow:selectedRegionIndex inComponent:2 animated:YES];
     
     UIAlertAction* no=[UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleDefault) handler:nil];
     [alertVc.view addSubview:pickView];
@@ -170,37 +203,6 @@
     [alertVc addAction:no];
     [self presentViewController:alertVc animated:YES completion:nil];
     
-    
-    if (selectedRegionItem) {
-        // 遍历查找选中的城市区划 并选中
-        for (NSDictionary *provinceItem in self.provinceArr)
-        {
-            NSArray *carr  = [provinceItem valueForKey:@"cities"];
-            for (NSDictionary *cityItem in carr)
-            {
-                NSArray *aarr = [cityItem valueForKey:@"regions"];
-                for (NSDictionary *regionItem in aarr)
-                {
-                    if ([[regionItem valueForKey:@"dvcode"] isEqualToString:selectedRegionItem.dvcode])
-                    {
-                        self.cityArr = carr;
-                        self.areaArr = aarr;
-                        selectedProvinceIndex = [self.provinceArr indexOfObject:provinceItem];
-                        selectedCityIndex = [self.cityArr indexOfObject:cityItem];
-                        selectedRegionIndex = [self.areaArr indexOfObject:regionItem];
-                        
-                        selectedProvinceItem = [[AreaModel alloc] initWithName:[provinceItem objectForKey:@"name"] areaid:@"" dvcode:[provinceItem objectForKey:@"dvcode"]];
-                        selectedCityItem = [[AreaModel alloc] initWithName:[cityItem objectForKey:@"name"] areaid:@"" dvcode:[cityItem objectForKey:@"dvcode"]];
-                        selectedRegionItem = [[AreaModel alloc] initWithName:[regionItem objectForKey:@"name"] areaid:@"" dvcode:[regionItem objectForKey:@"dvcode"]];
-                        break;
-                    }
-                }
-            }
-        }
-        [pickView selectRow:selectedProvinceIndex inComponent:0 animated:YES];
-        [pickView selectRow:selectedCityIndex inComponent:1 animated:YES];
-        [pickView selectRow:selectedRegionIndex inComponent:2 animated:YES];
-    }
 }
 
 /**
@@ -208,6 +210,9 @@
  */
 -(void)doneClickHandler
 {
+    if (textItem1.rightText.text.length == 0) {
+        return [NoticeHelper AlertShow:@"请填写详细地址" view:self.view];
+    }
     selectedCityStr  = [NSString stringWithFormat:@"%@%@%@",selectedProvinceItem.area_name,selectedCityItem.area_name,selectedRegionItem.area_name];
     if (self.changeDataBlock)
         self.changeDataBlock(selectedRegionItem,selectedCityStr,textItem1.rightText.text);

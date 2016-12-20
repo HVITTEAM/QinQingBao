@@ -182,7 +182,7 @@
     
     UIButton *btn = [[UIButton alloc] init];
     btn.backgroundColor = [UIColor whiteColor];
-    [btn setTitle:@"手动输入档案号" forState:UIControlStateNormal];
+    [btn setTitle:@"短信动态码绑定" forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:14];
     [btn setTitleColor:[UIColor colorWithRGB:@"333333"] forState:UIControlStateNormal];
     [btn sizeToFit];

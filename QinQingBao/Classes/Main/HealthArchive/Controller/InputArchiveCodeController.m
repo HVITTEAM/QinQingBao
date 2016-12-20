@@ -8,7 +8,22 @@
 
 #import "InputArchiveCodeController.h"
 
+
 @interface InputArchiveCodeController ()
+{
+    float timesec;
+    
+    NSString *btnTitle;
+    
+    NSTimer *timer;
+}
+@property (strong, nonatomic) IBOutlet UITextField *telTextfield;
+@property (strong, nonatomic) IBOutlet UITextField *codeTextfield;
+@property (strong, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (strong, nonatomic) IBOutlet UIButton *codeBtn;
+
+- (IBAction)getCodeHandler:(id)sender;
+- (IBAction)okHandler:(id)sender;
 
 @end
 
@@ -18,7 +33,6 @@
 {
     [super viewDidLoad];
     
-    self.cancelBtn.layer.cornerRadius = 7;
     self.confirmBtn.layer.cornerRadius = 7;
     
     self.edgesForExtendedLayout = UIRectEdgeAll;
@@ -27,31 +41,73 @@
     self.navigationItem.title = @"绑定";
 }
 
-- (IBAction)cancelAction:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
+
+/**
+ *  获取验证码
+ */
+- (IBAction)getCodeHandler:(id)sender {
+    if (self.telTextfield.text.length != 11)
+        return [NoticeHelper AlertShow:@"请输入正确的手机号！" view:self.view];
+    [self.view endEditing:YES];
+    [[MTSMSHelper sharedInstance] getCheckcode:self.telTextfield.text];
+    [MTSMSHelper sharedInstance].sureSendSMS = ^{
+        [NoticeHelper AlertShow:@"验证码发送成功,请查收！" view:self.view];
+        [self countdownHandler];
+    };
+
 }
 
-- (IBAction)confirmAction:(id)sender
-{
-    NSString *code = self.inputField.text;
+- (IBAction)okHandler:(id)sender {
+    NSString *code = self.codeTextfield.text;
     
     if (code.length <= 0) {
-       return [NoticeHelper AlertShow:@"请输入亲友档案号" view:nil];
+        return [NoticeHelper AlertShow:@"请输入验证码" view:nil];
     }
     
     [self addArchiveWhitCode:code];
 }
 
 
+#pragma mark 倒计时模块
+
 /**
- * 通过输入档案编号添加档案
+ *  倒计时
+ */
+-(void)countdownHandler
+{
+    timesec = 60.0f;
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+}
+
+-(void)timerFireMethod:(NSTimer *)theTimer
+{
+    if (timesec == 1) {
+        [theTimer invalidate];
+        timesec = 60;
+        [self.codeBtn setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [self.codeBtn setTitleColor:HMColor(69, 134, 229) forState:UIControlStateNormal];
+        [self.codeBtn setEnabled:YES];
+    }else
+    {
+        timesec--;
+        NSString *title = [NSString stringWithFormat:@"%.f秒后重发",timesec];
+        [self.codeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+        [self.codeBtn setEnabled:NO];
+        [self.codeBtn setTitle:title forState:UIControlStateNormal];
+    }
+}
+
+
+/**
+ * 通过输入手机号码添加档案
  */
 -(void)addArchiveWhitCode:(NSString *)code
 {
     NSDictionary *params = @{ @"client":@"ios",
                               @"key":[SharedAppUtil defaultCommonUtil].userVO.key,
-                              @"fmno":code};
+                              @"code":code,
+                              @"mobile":self.telTextfield.text};
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [CommonRemoteHelper RemoteWithUrl:URL_Bingding_fm parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [hud removeFromSuperview];
