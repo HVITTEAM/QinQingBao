@@ -755,19 +755,22 @@
         self.archiveData.smoke = archive.habits.smoke;
         self.archiveData.drink = archive.habits.drink;
 
-        if (archive.habits.diet.length > 0 )
-        {
-            NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
-            id temArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
-            if (temArr && [temArr isKindOfClass:[NSArray class]]) {
-                self.archiveData.diet = temArr;
-            }
-        }
+//        if (archive.habits.diet.length > 0 )
+//        {
+//            NSData *jsonData = [archive.habits.diet dataUsingEncoding:NSUTF8StringEncoding];
+//            id temArr = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
+//            if (temArr && [temArr isKindOfClass:[NSArray class]]) {
+//                self.archiveData.diet = temArr;
+//            }
+//        }
+        self.archiveData.diet = [self arrayFromJson:archive.habits.diet];
        
         self.archiveData.sleeptime = archive.habits.sleeptime;
         self.archiveData.getuptime = archive.habits.getuptime;
         self.archiveData.sports = archive.habits.sports;
-        self.archiveData.badhabits = archive.habits.badhabits;
+        
+        self.archiveData.badhabits = [self arrayFromJson:archive.habits.badhabits];
+//        self.archiveData.badhabits = archive.habits.badhabits;
         self.archiveData.hremark = archive.habits.hremark;
         self.archiveData.medical_report = archive.medical_report;
         
@@ -782,6 +785,19 @@
         [NoticeHelper AlertShow:MTServiceError view:nil];
     }];
     
+}
+
+- (NSArray *)arrayFromJson:(NSString *)josnString
+{
+    NSArray *array = nil;
+    if (josnString.length > 0){
+        NSData *jsonData = [josnString dataUsingEncoding:NSUTF8StringEncoding];
+        id temObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:NULL];
+        if (temObj && [temObj isKindOfClass:[NSArray class]]) {
+            array = temObj;
+        }
+    }
+    return array;
 }
 
 @end

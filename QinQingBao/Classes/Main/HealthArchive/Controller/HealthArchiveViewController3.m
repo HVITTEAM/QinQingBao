@@ -419,7 +419,13 @@
     params[@"sleeptime"] = self.archiveData.sleeptime;
     params[@"getuptime"] = self.archiveData.getuptime;
     params[@"sports"] = self.archiveData.sports;
-    params[@"badhabits"] = self.archiveData.badhabits;
+    
+    if (self.archiveData.badhabits) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.badhabits options:0 error:&error];
+        params[@"badhabits"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+//    params[@"badhabits"] = self.archiveData.badhabits;
     params[@"hremark"] = self.archiveData.hremark;
     
 
@@ -531,7 +537,13 @@
     params[@"sleeptime"] = self.archiveData.sleeptime;
     params[@"getuptime"] = self.archiveData.getuptime;
     params[@"sports"] = self.archiveData.sports;
-    params[@"badhabits"] = self.archiveData.badhabits;
+    
+    if (self.archiveData.badhabits) {
+        NSError *error;
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.archiveData.badhabits options:0 error:&error];
+        params[@"badhabits"] = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    }
+//    params[@"badhabits"] = self.archiveData.badhabits;
     params[@"hremark"] = self.archiveData.hremark;
     
     

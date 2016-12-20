@@ -96,7 +96,16 @@
         
         NSMutableArray *section2 = [[NSMutableArray alloc] init];
         [section2 addObject:createItem([ArchiveData numberToSports:[self.archiveData.sports integerValue]],@"运动习惯",@"请选择")];
-        [section2 addObject:createItem([ArchiveData numberToBadhabits:[self.archiveData.badhabits integerValue]],@"不良习惯",@"请选择")];
+        
+        __block NSString *badhabits = [[NSString alloc] init];
+        [self.archiveData.badhabits enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *badhabitsStr =  [ArchiveData numberToBadhabits:[obj integerValue]];
+            badhabits = [badhabits stringByAppendingFormat:@"%@,",badhabitsStr];
+        }];
+        if (badhabits.length > 0) {
+            badhabits = [badhabits substringToIndex:badhabits.length-1];
+        }
+        [section2 addObject:createItem(badhabits,@"不良习惯",@"请选择")];
         
         self.datas = @[section0,section1,section2];
     }
@@ -247,23 +256,21 @@
     }else if (2 == indexPath.section && 1 == indexPath.row){
         BadHabit *badHabitView = [BadHabit showTargetViewToView:[UIApplication sharedApplication].keyWindow];
         
-//        NSString *diet = self.datas[0][2][kContent];
-//        NSArray *diets = [diet componentsSeparatedByString:@","];
-//        dietaryHabitView.valueArray = diets;
-//        
-//        dietaryHabitView.selectItemBlock = ^(NSArray *selectedItems){
-//            
-//            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-//            [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                NSInteger code = [ArchiveData dietToNumber:(NSString *)obj];
-//                [tempArray addObject:@(code)];
-//            }];
-//            weakSelf.archiveData.diet = tempArray;
-//            weakSelf.datas[0][2][kContent] = [selectedItems componentsJoinedByString:@","];
-//            [weakSelf.tableView reloadData];
-//        };
-
-//        [[[UIAlertView alloc] initWithTitle:nil message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"无",@"久坐",@"经常熬夜",@"常看手机", nil] show];
+        NSString *badHabit = self.datas[2][1][kContent];
+        NSArray *badHabits = [badHabit componentsSeparatedByString:@","];
+        badHabitView.valueArray = badHabits;
+        
+        badHabitView.selectItemBlock = ^(NSArray *selectedItems){
+            
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+            [selectedItems enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSInteger code = [ArchiveData badhabitsToNumber:(NSString *)obj];
+                [tempArray addObject:@(code)];
+            }];
+            weakSelf.archiveData.badhabits = tempArray;
+            weakSelf.datas[2][1][kContent] = [selectedItems componentsJoinedByString:@","];
+            [weakSelf.tableView reloadData];
+        };
     }
 }
 
@@ -460,8 +467,8 @@
     int sportsCode = (int)[ArchiveData sportsToNumber:self.datas[2][0][kContent]];
     self.archiveData.sports = sportsCode==-1?nil:[NSString stringWithFormat:@"%d",sportsCode];
     
-    int badhabitsCode = (int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]];
-    self.archiveData.badhabits = badhabitsCode==-1?nil:[NSString stringWithFormat:@"%d",badhabitsCode];
+//    int badhabitsCode = (int)[ArchiveData badhabitsToNumber:self.datas[2][1][kContent]];
+//    self.archiveData.badhabits = badhabitsCode==-1?nil:[NSString stringWithFormat:@"%d",badhabitsCode];
     
     HealthArchiveViewController3 *vc = [[HealthArchiveViewController3 alloc] init];
     vc.archiveData = self.archiveData;

@@ -83,11 +83,7 @@
     _cb1 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, 50,100, KCellHight) style:5 checked:NO];
     [_cb1 setText:@"无"];
     [_cb1 setStateChangedBlock:^(SSCheckBoxView *cbv) {
-        if (cbv.checked) {
-            [weakSelf.selectedItems addObject:cbv.textLabel.text];
-        }else{
-            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
-        }
+        [weakSelf selectStatusChangeWithCurrentItem:cbv];
     }];
     [self.contentBoxView addSubview:_cb1];
     
@@ -98,11 +94,7 @@
     _cb2 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb1.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb2 setText:@"久坐"];
     [_cb2 setStateChangedBlock:^(SSCheckBoxView *cbv) {
-        if (cbv.checked) {
-            [weakSelf.selectedItems addObject:cbv.textLabel.text];
-        }else{
-            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
-        }
+        [weakSelf selectStatusChangeWithCurrentItem:cbv];
     }];
     [self.contentBoxView addSubview:_cb2];
     UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_cb2.frame), 320, 0.5)];
@@ -112,11 +104,7 @@
     _cb3 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb2.frame) + KMargin,100, KCellHight) style:5 checked:NO];
     [_cb3 setText:@"经常熬夜"];
     [_cb3 setStateChangedBlock:^(SSCheckBoxView *cbv) {
-        if (cbv.checked) {
-            [weakSelf.selectedItems addObject:cbv.textLabel.text];
-        }else{
-            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
-        }
+        [weakSelf selectStatusChangeWithCurrentItem:cbv];
     }];
     [self.contentBoxView addSubview:_cb3];
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_cb3.frame), 320, 0.5)];
@@ -124,13 +112,9 @@
     [self.contentBoxView addSubview:line2];
     
     _cb4 = [[SSCheckBoxView alloc] initWithFrame:CGRectMake(10, CGRectGetMaxY(_cb3.frame) + KMargin,100, KCellHight) style:5 checked:NO];
-    [_cb4 setText:@"查看手机"];
+    [_cb4 setText:@"常看手机"];
     [_cb4 setStateChangedBlock:^(SSCheckBoxView *cbv) {
-        if (cbv.checked) {
-            [weakSelf.selectedItems addObject:cbv.textLabel.text];
-        }else{
-            [weakSelf.selectedItems removeObject:cbv.textLabel.text];
-        }
+        [weakSelf selectStatusChangeWithCurrentItem:cbv];
     }];
     [self.contentBoxView addSubview:_cb4];
 }
@@ -159,6 +143,8 @@
     
     [self.selectedItems addObjectsFromArray:valueArray];
     [self.selectedItems removeObject:@""];
+    [self.selectedItems removeObject:@"(null)"];
+    
 }
 
 /**
@@ -198,6 +184,26 @@
     [self hideSMSVerificationView];
 }
 
+- (void)selectStatusChangeWithCurrentItem:(SSCheckBoxView *)cbv
+{
+    if (cbv == _cb1 && _cb1.checked) {
+        _cb2.checked = NO;
+        _cb3.checked = NO;
+        _cb4.checked = NO;
+        [self.selectedItems removeObject:_cb2.textLabel.text];
+        [self.selectedItems removeObject:_cb3.textLabel.text];
+        [self.selectedItems removeObject:_cb4.textLabel.text];
 
+    }else if(_cb2.checked || _cb3.checked || _cb4.checked){
+        _cb1.checked = NO;
+        [self.selectedItems removeObject:_cb1.textLabel.text];
+    }
+    
+    if (cbv.checked) {
+        [self.selectedItems addObject:cbv.textLabel.text];
+    }else{
+        [self.selectedItems removeObject:cbv.textLabel.text];
+    }
+}
 
 @end
