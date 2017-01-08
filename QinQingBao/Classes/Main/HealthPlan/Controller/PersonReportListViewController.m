@@ -11,6 +11,10 @@
 #import "PersonReportModel.h"
 #import "HealthReportCell.h"
 #import "ReportDetailViewController.h"
+#import "VariousGenesViewController.h"
+#import "ReportDetailViewController2.h"
+#import "Gene_DetectionViewController.h"
+
 @interface PersonReportListViewController ()
 {
     NSMutableArray *dataProvider;
@@ -110,29 +114,30 @@
     healthReportCell.dataProvider = dataProvider[indexPath.section];
     __weak typeof(self) weakSelf = self;
     healthReportCell.clickType = ^(PersonReportModel *item){
-        ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
-        VC.title = item.iname;
-        VC.urlArr = item.wp_advice_report;
-        VC.wr_id = item.wr_id;
-        VC.fmno = weakSelf.fmno;
         
-        if (item.entry_voice && item.entry_voice.count > 0)
+        //非基因类
+        if (item.entry_content.none_gene_detection && item.entry_content.none_gene_detection != nil &&
+            (item.entry_content.none_gene_detection.normal.count >0 || item.entry_content.none_gene_detection.non_normal.count >0))
         {
-            NSMutableString *str = [[NSMutableString alloc] init];
-            if (item.entry_voice &&  item.entry_voice.count > 0)
-            {
-                for (NSDictionary *dict in item.entry_voice)
-                {
-                    [str appendString:[dict objectForKey:@"ycjd_voice"]];
-                }
-            }
-            VC.speakStr = str;
+            ReportDetailViewController2 *VC =[[ReportDetailViewController2 alloc] init];
+            VC.modelData = item;
+            [weakSelf.navigationController pushViewController:VC animated:YES];
         }
-        else
-            VC.speakStr = @"";
-        [weakSelf.navigationController pushViewController:VC animated:YES];
+        //（等位基因）
+        else if (item.entry_content.gene_detection && item.entry_content.gene_detection != nil)
+        {
+            Gene_DetectionViewController *VC =[[Gene_DetectionViewController alloc] init];
+            VC.modelData = item;
+            [weakSelf.navigationController pushViewController:VC animated:YES];
+        }
+        //非等位基因
+        else if (item.entry_content.various_genes && item.entry_content.various_genes != nil)
+        {
+            VariousGenesViewController *VC =[[VariousGenesViewController alloc] init];
+            VC.modelData = item;
+            [weakSelf.navigationController pushViewController:VC animated:YES];
+        }
     };
-    
     return healthReportCell;
 }
 

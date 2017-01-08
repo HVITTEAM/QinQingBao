@@ -149,8 +149,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (indexPath.section == 1)
+    ExamModel *item = dataProvider[indexPath.section];
+
+    if ([item.e_id integerValue] == 43)
     {
         SexViewController *vc = [[SexViewController alloc] init];
         ExamModel *item = dataProvider[indexPath.section];
@@ -160,9 +161,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
-    
     LifeHealthViewController *vc = [[LifeHealthViewController alloc] init];
-    ExamModel *item = dataProvider[indexPath.section];
     vc.eq_id = 1;
     vc.exam_id = item.e_id;
     vc.e_title = item.e_title;

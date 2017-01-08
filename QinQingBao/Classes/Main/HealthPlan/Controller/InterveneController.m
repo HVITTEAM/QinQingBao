@@ -32,7 +32,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) InterveneModel *dataItem;
 
-
 @end
 
 @implementation InterveneController

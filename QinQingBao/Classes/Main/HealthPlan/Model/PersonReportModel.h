@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ReportDetailModel.h"
 
 @interface PersonReportModel : NSObject
 @property(nonatomic,copy)NSString *wr_id;
@@ -28,4 +29,10 @@
 @property(nonatomic,copy)NSString *iteminfo_id;
 
 @property(nonatomic,copy)NSString *examreport_url;
+
+//结论说明
+@property(nonatomic,copy)NSString *check_conclusion;
+
+//结论说明
+@property(nonatomic,strong)ReportDetailModel *entry_content;
 @end

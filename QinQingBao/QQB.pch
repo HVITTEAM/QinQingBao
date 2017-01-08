@@ -67,7 +67,7 @@
 #define AppKey        @"c68b4a6740244f76b013e3f526cfaf24"
 #define kSellerAccount @"ofc.er@hvit.com.cn"
 
-#define kAppVersion @"v 2.2.0.0"
+#define kAppVersion @"v 2.1.0.0"
 
 #define MTServiceError @"服务器暂时无法连接，请重试"
 

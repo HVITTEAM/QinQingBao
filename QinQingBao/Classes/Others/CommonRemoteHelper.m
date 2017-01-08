@@ -79,6 +79,9 @@
                                           }
                                           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                               NSLog(@"出错了......");
+                                              if(error.code == NSURLErrorCancelled)  {
+                                                 return [MTNotificationCenter postNotificationName:MTNeedLogin object:nil userInfo:nil];
+                                              }
                                               failure(operation,error);
                                           }];
     }

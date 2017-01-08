@@ -153,10 +153,9 @@
 
 - (void)initWebView
 {
-    
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, self.view.height - 64)];
     webView.delegate = self;
     webView.scalesPageToFit = YES;
     [self.view addSubview:webView];

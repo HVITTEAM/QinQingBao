@@ -200,7 +200,6 @@
                 typeCell.subtitleLab.text = @"为您量身定制健康干预方案";
                 typeCell.badgeView.hidden = !newWI;
                 break;
-                
             default:
                 break;
         }
