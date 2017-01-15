@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="179"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="179.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inH-Wo-ok2">
@@ -40,14 +40,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cU9-CX-MuV">
-                                <rect key="frame" x="0.0" y="34" width="300" height="0.5"/>
+                                <rect key="frame" x="0.0" y="34" width="300" height="1"/>
                                 <color key="backgroundColor" red="0.89711458333333338" green="0.89711458333333338" blue="0.89711458333333338" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="fKc-nZ-TXh"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="基因型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUD-P7-AEI">
-                                <rect key="frame" x="118" y="42" width="64.5" height="21"/>
+                                <rect key="frame" x="118" y="42" width="65" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PZe-3b-yj3"/>
                                 </constraints>
@@ -56,9 +56,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jgz-F7-c8o">
-                                <rect key="frame" x="10" y="71" width="290" height="91"/>
+                                <rect key="frame" x="10" y="63" width="290" height="107"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -71,10 +70,10 @@
                             <constraint firstItem="jgz-F7-c8o" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" constant="10" id="Ffd-ep-Gys"/>
                             <constraint firstItem="LEk-YQ-3ok" firstAttribute="top" secondItem="inH-Wo-ok2" secondAttribute="top" constant="6" id="JNz-Q4-0j7"/>
                             <constraint firstAttribute="trailing" secondItem="jgz-F7-c8o" secondAttribute="trailing" id="Jek-au-dyq"/>
-                            <constraint firstItem="jgz-F7-c8o" firstAttribute="top" secondItem="eUD-P7-AEI" secondAttribute="bottom" constant="8" id="Qya-qX-2Lu"/>
+                            <constraint firstItem="jgz-F7-c8o" firstAttribute="top" secondItem="eUD-P7-AEI" secondAttribute="bottom" id="Qya-qX-2Lu"/>
                             <constraint firstItem="cU9-CX-MuV" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" id="SdN-P4-mpg"/>
                             <constraint firstItem="uVV-33-ZmV" firstAttribute="top" secondItem="inH-Wo-ok2" secondAttribute="top" constant="6" id="TPN-wy-gMo"/>
-                            <constraint firstAttribute="bottom" secondItem="jgz-F7-c8o" secondAttribute="bottom" constant="8" id="Trh-3L-tWb"/>
+                            <constraint firstAttribute="bottom" secondItem="jgz-F7-c8o" secondAttribute="bottom" id="Trh-3L-tWb"/>
                             <constraint firstItem="LEk-YQ-3ok" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" constant="15" id="dSa-Wx-dbT"/>
                             <constraint firstItem="eUD-P7-AEI" firstAttribute="top" secondItem="cU9-CX-MuV" secondAttribute="bottom" constant="7.5" id="lNh-wy-SGm"/>
                             <constraint firstItem="cU9-CX-MuV" firstAttribute="top" secondItem="uVV-33-ZmV" secondAttribute="bottom" constant="7" id="p4e-8x-oya"/>

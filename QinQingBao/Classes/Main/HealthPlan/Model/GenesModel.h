@@ -14,7 +14,7 @@
 @property(nonatomic,copy)NSArray *ea_score_start;
 
 /**基因检查数组 */
-@property(nonatomic,copy)NSString *ea_gene_content;
+@property(nonatomic,copy)NSArray *ea_gene_content;
 
 /**1表示非基因检测数组【取值ea_score_start】，2和3表示基因检查数组【取值ea_gene_content】 */
 @property(nonatomic,copy)NSString *entry_target_type;
@@ -41,4 +41,11 @@
 
 /**指标ID */
 @property(nonatomic,copy)NSString *ycjd_entry_id;
+
+/**指标正反向   0是正向，1是反向 */
+@property(nonatomic,copy)NSString *flag_score;
+
+@property(nonatomic,copy)NSString *unit;
+
+
 @end

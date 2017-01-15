@@ -11,5 +11,5 @@
 @interface PersonReportListViewController : UITableViewController
 @property (nonatomic, copy) NSString *fmno;
 @property (nonatomic, copy) NSString *wid;
-
+@property (nonatomic, copy) NSArray *wp_read;
 @end

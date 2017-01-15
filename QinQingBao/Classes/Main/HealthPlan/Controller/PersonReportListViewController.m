@@ -111,30 +111,37 @@
     if(healthReportCell == nil)
         healthReportCell = [HealthReportCell healthReportCell];
     
+    healthReportCell.wp_read = self.wp_read;
+
     healthReportCell.dataProvider = dataProvider[indexPath.section];
     __weak typeof(self) weakSelf = self;
     healthReportCell.clickType = ^(PersonReportModel *item){
-        
         //非基因类
         if (item.entry_content.none_gene_detection && item.entry_content.none_gene_detection != nil &&
             (item.entry_content.none_gene_detection.normal.count >0 || item.entry_content.none_gene_detection.non_normal.count >0))
         {
             ReportDetailViewController2 *VC =[[ReportDetailViewController2 alloc] init];
             VC.modelData = item;
+            VC.wr_id = item.wr_id;
+            VC.fmno = self.fmno;
             [weakSelf.navigationController pushViewController:VC animated:YES];
         }
-        //（等位基因）
-        else if (item.entry_content.gene_detection && item.entry_content.gene_detection != nil)
-        {
-            Gene_DetectionViewController *VC =[[Gene_DetectionViewController alloc] init];
-            VC.modelData = item;
-            [weakSelf.navigationController pushViewController:VC animated:YES];
-        }
-        //非等位基因
-        else if (item.entry_content.various_genes && item.entry_content.various_genes != nil)
+        //（非等位基因）-
+        else if (item.entry_content.gene_detection && item.entry_content.gene_detection.count > 0)
         {
             VariousGenesViewController *VC =[[VariousGenesViewController alloc] init];
             VC.modelData = item;
+            VC.fmno = self.fmno;
+            VC.wr_id = item.wr_id;
+            [weakSelf.navigationController pushViewController:VC animated:YES];
+        }
+        //等位基因
+        else if (item.entry_content.various_genes && item.entry_content.various_genes.count > 0)
+        {
+            Gene_DetectionViewController *VC =[[Gene_DetectionViewController alloc] init];
+            VC.modelData = item;
+            VC.wr_id = item.wr_id;
+            VC.fmno = self.fmno;
             [weakSelf.navigationController pushViewController:VC animated:YES];
         }
     };

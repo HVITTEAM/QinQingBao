@@ -344,14 +344,31 @@
                 {
                     newWP = YES;
                     [self.tableView reloadData];
+                    break;
                 }
+                else
+                {
+                    newWP = NO;
+                    [self.tableView reloadData];
+                }
+            }
+            
+            for (ReportInterventionModel *item in datas)
+            {
                 //干预方案有未读
                 if (item.wi_read.count>0)
                 {
                     newWI = YES;
                     [self.tableView reloadData];
+                    break;
+                }
+                else
+                {
+                    newWI = NO;
+                    [self.tableView reloadData];
                 }
             }
+
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

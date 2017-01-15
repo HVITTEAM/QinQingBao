@@ -214,7 +214,7 @@ NSString * const kButtonTitles = @"buttonTitles";
     }
     
     if (self.wr_id != nil) {
-        [btnTitles addObject:@"检测报告"];
+//        [btnTitles addObject:@"检测报告"];
     }
     
 //    if (self.wi_id != nil) {

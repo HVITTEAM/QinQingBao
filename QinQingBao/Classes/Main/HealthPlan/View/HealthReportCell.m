@@ -88,10 +88,19 @@
 
 -(UIView *)getPageViewwithItem:(PersonReportModel *)item
 {
+    
     UIView *view = [[UIView alloc] init];
     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 25, 25)];
     icon.image  = [UIImage imageNamed:@"report.png"];
     [view addSubview:icon];
+    
+    
+    for (NSString *str in self.wp_read)
+    {
+        if ([item.wr_id integerValue] == [str integerValue]) {
+            [icon initWithBadgeValue:@"1"];
+        }
+    }
     
     UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 12, 200, 20)];
     lab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:13];
@@ -110,7 +119,7 @@
     
     NSURL *iconUrl = [NSURL URLWithString:item.examreport_url];
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"placeholderImage"]];
+    [imageView sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageWithName:@"advplaceholderImage"]];
     imageView.frame = CGRectMake(0, 40, MTScreenW - 10, 140);
     imageView.backgroundColor = [UIColor whiteColor];
     [view addSubview:imageView];

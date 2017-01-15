@@ -40,8 +40,9 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRGB:@"f5f5f5"];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.footer= [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDatas)];
-    
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getReportListData];
+    }];
     [self getReportListData];
 }
 
@@ -72,7 +73,7 @@
     ReportInterventionModel *item = self.dataProvider[indexPath.section];
     cell.titleLb.text = [item.basics objectForKey:@"truename"];
     cell.subTitleLb.text = item.wp_read_time;
-    cell.badgeIcon.hidden = item.wp_read == nil ? YES : NO;
+    cell.badgeIcon.hidden = item.wp_read != nil && item.wp_read.count >0? NO : YES;
     NSString *str = [item.basics objectForKey:@"avatar"];
     
     if (![str isKindOfClass:[NSNull class]] && str && str.length != 0)
@@ -106,15 +107,10 @@
     PersonReportListViewController *VC =[[PersonReportListViewController alloc] init];
     ReportInterventionModel *item = self.dataProvider[indexPath.section];
     VC.fmno = item.fmno;
+    VC.wp_read = item.wp_read;
     VC.title = [item.basics objectForKey:@"truename"];
     [self.navigationController pushViewController:VC animated:YES];
     
-}
-
-#pragma mark - 网络相关
-- (void)loadMoreDatas
-{
-    [self getReportListData];
 }
 
 /**
@@ -122,6 +118,7 @@
  */
 - (void)getReportListData
 {
+    [self.dataProvider removeAllObjects];
     //判断是否登录
     if (![SharedAppUtil checkLoginStates])
         return;
@@ -136,7 +133,7 @@
     
     [CommonRemoteHelper RemoteWithUrl:URL_Get_work_read parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self.tableView.footer endRefreshing];
+        [self.tableView.header endRefreshing];
         
         if ([dict[@"code"] integerValue] == 17001 && self.dataProvider.count > 0)
         {

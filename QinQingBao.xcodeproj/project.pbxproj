@@ -194,6 +194,8 @@
 		01438E7D1BDDD80A00F92681 /* AllServiceTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01438E7C1BDDD80A00F92681 /* AllServiceTypeController.m */; };
 		01482ADC1E07CCF700220618 /* PrivateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01482ADB1E07CCF700220618 /* PrivateProfileViewController.m */; };
 		0151E0F91DB20F56007761E3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0151E0F81DB20F56007761E3 /* Reachability.m */; };
+		01532DCA1E247D8A004500F8 /* VariousGenesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01532DC81E247D8A004500F8 /* VariousGenesCell.m */; };
+		01532DCB1E247D8A004500F8 /* VariousGenesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01532DC91E247D8A004500F8 /* VariousGenesCell.xib */; };
 		015657B81DAA373C00506882 /* qz_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 015657B71DAA373C00506882 /* qz_icon.png */; };
 		0157E2391BE87B0E004C0908 /* EvaluationHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */; };
 		0157E23B1BE87B1E004C0908 /* EvaluationHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0157E23A1BE87B1E004C0908 /* EvaluationHeadView.xib */; };
@@ -1670,6 +1672,9 @@
 		01482ADB1E07CCF700220618 /* PrivateProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateProfileViewController.m; sourceTree = "<group>"; };
 		0151E0F71DB20F56007761E3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		0151E0F81DB20F56007761E3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		01532DC71E247D8A004500F8 /* VariousGenesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariousGenesCell.h; sourceTree = "<group>"; };
+		01532DC81E247D8A004500F8 /* VariousGenesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariousGenesCell.m; sourceTree = "<group>"; };
+		01532DC91E247D8A004500F8 /* VariousGenesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VariousGenesCell.xib; sourceTree = "<group>"; };
 		015657B71DAA373C00506882 /* qz_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qz_icon.png; sourceTree = "<group>"; };
 		0157E2371BE87B0E004C0908 /* EvaluationHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationHeadView.h; sourceTree = "<group>"; };
 		0157E2381BE87B0E004C0908 /* EvaluationHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationHeadView.m; sourceTree = "<group>"; };
@@ -4689,6 +4694,9 @@
 				0129A10E1E220C890035D870 /* GeneDetectionCell.h */,
 				0129A10F1E220C890035D870 /* GeneDetectionCell.m */,
 				0129A1101E220C890035D870 /* GeneDetectionCell.xib */,
+				01532DC71E247D8A004500F8 /* VariousGenesCell.h */,
+				01532DC81E247D8A004500F8 /* VariousGenesCell.m */,
+				01532DC91E247D8A004500F8 /* VariousGenesCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8820,6 +8828,7 @@
 					01F227D41B7B3E1400ED4AFB = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 42PUMHHWSN;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -8967,6 +8976,7 @@
 				01ECDA0F1C8EB31F0018160F /* VoiceSearchFeedback007.png in Resources */,
 				01ECDAB21C8EB31F0018160F /* chatBar_more_photo.png in Resources */,
 				01ECDA731C8EB31F0018160F /* Contents.json in Resources */,
+				01532DCB1E247D8A004500F8 /* VariousGenesCell.xib in Resources */,
 				01ECDA1C1C8EB31F0018160F /* VoiceSearchFeedback011@2x.png in Resources */,
 				01ECDA7F1C8EB31F0018160F /* Contents.json in Resources */,
 				01ECDAA31C8EB31F0018160F /* Contents.json in Resources */,
@@ -9873,6 +9883,7 @@
 				01FEE2CA1B9C2551007C4641 /* BusinessInfoCell.m in Sources */,
 				01E9A7421C74613500000805 /* HabitViewController.m in Sources */,
 				01FD4C941CAE4B43008F09CF /* MWCaptionView.m in Sources */,
+				01532DCA1E247D8A004500F8 /* VariousGenesCell.m in Sources */,
 				01C0D2021C468BB200FF1CD3 /* CmmonOrderListTotal.m in Sources */,
 				D2A8C4171D9BBBDC00944ED6 /* PrivateLetterCell.m in Sources */,
 				01F015D31C5F427B00930B0E /* DiscountViewController.m in Sources */,
@@ -10309,7 +10320,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b5ac803-d410-4993-8c86-fcb255857838";
+				PROVISIONING_PROFILE_SPECIFIER = QinQingBao;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -10365,7 +10377,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MT.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "1b5ac803-d410-4993-8c86-fcb255857838";
+				PROVISIONING_PROFILE_SPECIFIER = QinQingBao;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;

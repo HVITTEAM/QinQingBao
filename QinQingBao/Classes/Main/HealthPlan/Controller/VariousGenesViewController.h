@@ -11,4 +11,8 @@
 
 @interface VariousGenesViewController : UITableViewController
 @property (nonatomic, strong) PersonReportModel *modelData;
+
+@property (nonatomic, copy) NSString *fmno;
+@property (nonatomic, copy) NSString *wr_id;     //报告id
+
 @end

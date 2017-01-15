@@ -20,8 +20,6 @@
     [super viewDidLoad];
     
     [self initTableView];
-    
-    self.title  = @"异常指标解读";
 }
 
 -(void)setDataProvider:(NSArray<GenesModel *> *)dataProvider
@@ -67,14 +65,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TargetDetailCell *targetDetailCell = [tableView dequeueReusableCellWithIdentifier:@"TargetDetailCell"];
+    TargetDetailCell *targetDetailCell = [tableView dequeueReusableCellWithIdentifier:@"MTTargetDetailCell"];
     if(targetDetailCell == nil)
         targetDetailCell = [TargetDetailCell targetDetailCell];
     
     GenesModel *item = self.dataProvider[indexPath.section];
     targetDetailCell.dataItem = item;
-
-    targetDetailCell.paragraphValue = item.ycjd_detail;
     return targetDetailCell;
 }
 

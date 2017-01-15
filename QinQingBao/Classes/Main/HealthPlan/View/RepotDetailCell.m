@@ -1,6 +1,6 @@
 //
 //  RepotDetailCell.m
-//  QinQingBao
+//  QinQingBao/Users/dongxuwei/Desktop/workSpace/QQB/QinQingBao/Classes/Main/HealthPlan/View/RepotDetailCell.m
 //
 //  Created by 董徐维 on 2017/1/5.
 //  Copyright © 2017年 董徐维. All rights reserved.
@@ -64,7 +64,10 @@
     
     self.titleLab.text = self.dataItem.ycjd_name;
     
-    self.subtitleLab.text = self.dataItem.entry_name_en;
+    if (self.dataItem.unit && ![self.dataItem.unit isEqualToString:@"null"])
+        self.subtitleLab.text = [NSString stringWithFormat:@"%@  (%@)",self.dataItem.entry_name_en,self.dataItem.unit];
+    else
+        self.subtitleLab.text = self.dataItem.entry_name_en;
     
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 70, 12, 40, 20)];
     [btn setTitle:self.dataItem.ycjd_level forState:UIControlStateNormal];
@@ -86,9 +89,20 @@
     _paragraphValue = paragraphValue;
     
     self.txtView.text = _paragraphValue;
-    CGSize size = [self.txtView sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
+    
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineSpacing = 7;
+    
+    NSDictionary *attrDict = @{ NSParagraphStyleAttributeName:paragraph,
+                                NSForegroundColorAttributeName:[UIColor colorWithRGB:@"666666"],
+                                NSFontAttributeName:[UIFont systemFontOfSize:14] };
+    
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"说明:%@",_paragraphValue] attributes:attrDict];
+    self.txtView.attributedText = attrString;
+    
+    CGSize size = [self.txtView sizeThatFits:CGSizeMake(MTScreenW - 30, MAXFLOAT)];
     self.txtView.height = size.height;
-    self.height = CGRectGetMaxY(self.txtView.frame) + 5;
+    self.height = CGRectGetMaxY(self.txtView.frame) + 8;
 }
 
 - (void)setFrame:(CGRect)frame

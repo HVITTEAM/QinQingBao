@@ -17,10 +17,14 @@
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIScrollView *pageView;
 @property (strong, nonatomic) IBOutlet UILabel *planLab;
+
 + (HealthReportCell*) healthReportCell;
 
 
-@property (nonatomic, retain) NSArray *dataProvider;
+@property (nonatomic, copy) NSArray *dataProvider;
+
+@property (nonatomic, copy) NSArray *wp_read;
+
 /**
  type 1 报告 2 干预方案
  */

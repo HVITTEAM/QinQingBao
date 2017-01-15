@@ -8,7 +8,7 @@
 
 #import "ReportDetailViewController2.h"
 #import "RepotDetailCell.h"
-
+#import "ReportDetailViewController.h"
 #import "UnusualReportViewController.h"
 
 @interface ReportDetailViewController2 ()
@@ -22,14 +22,19 @@
     [super viewDidLoad];
     
     [self initTableView];
+    
+    [self uploadReadStatusWithReportId:self.wr_id fmno:self.fmno];
 }
 
 -(void)initTableView
 {
+    self.title = self.modelData.iname;
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"report.png"] style:UIBarButtonItemStyleDone target:self action:@selector(showWebView)];
 }
 
 #pragma mark - Table view data source
@@ -80,7 +85,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     RepotDetailCell *repotDetailCell = [tableView dequeueReusableCellWithIdentifier:@"RepotDetailCell"];
     repotDetailCell = [RepotDetailCell repotDetailCell];
     
@@ -105,6 +109,7 @@
             [btn setTitle:@"详情" forState:UIControlStateNormal];
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [btn setTitleColor:[UIColor colorWithRGB:@"3fdde4"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(non_normalDetailClick) forControlEvents:UIControlEventTouchUpInside];
             [repotDetailCell addSubview:btn];
         }
         else if(self.modelData.entry_content.none_gene_detection.non_normal.count > 0)
@@ -113,7 +118,7 @@
             [repotDetailCell setDataItem:item];
         }
     }
-    else if(indexPath.section == 2 && indexPath.row == 0)
+    else if(indexPath.section == 2)
     {
         if (indexPath.row == 0)
         {
@@ -126,6 +131,7 @@
             [btn setTitle:@"详情" forState:UIControlStateNormal];
             btn.titleLabel.font = [UIFont systemFontOfSize:13];
             [btn setTitleColor:[UIColor colorWithRGB:@"3fdde4"] forState:UIControlStateNormal];
+            [btn addTarget:self action:@selector(normalDetailClick) forControlEvents:UIControlEventTouchUpInside];
             [repotDetailCell addSubview:btn];
         }
         else if(self.modelData.entry_content.none_gene_detection.normal.count > 0)
@@ -157,15 +163,72 @@
     return repotDetailCell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark Click
+-(void)non_normalDetailClick
 {
-    if (indexPath.section == 1)
-    {
-        UnusualReportViewController *vc = [[UnusualReportViewController alloc] init];
-        vc.dataProvider = self.modelData.entry_content.none_gene_detection.non_normal;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-   
+    if (self.modelData.entry_content.none_gene_detection.non_normal.count < 1)
+        return;
+    UnusualReportViewController *vc = [[UnusualReportViewController alloc] init];
+    vc.dataProvider = self.modelData.entry_content.none_gene_detection.non_normal;
+    vc.title = @"异常指标解读";
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
+
+-(void)normalDetailClick
+{
+    if (self.modelData.entry_content.none_gene_detection.normal.count < 1)
+        return;
+    UnusualReportViewController *vc = [[UnusualReportViewController alloc] init];
+    vc.dataProvider = self.modelData.entry_content.none_gene_detection.normal;
+    vc.title = @"正常指标解读";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)showWebView
+{
+    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
+    VC.title = self.modelData.iname;
+    VC.urlArr = self.modelData.wp_advice_report;
+    VC.wr_id = self.modelData.wr_id;
+    VC.fmno = self.fmno;
+    
+    if (self.modelData.entry_voice && self.modelData.entry_voice.count > 0)
+    {
+        NSMutableString *str = [[NSMutableString alloc] init];
+        if (self.modelData.entry_voice &&  self.modelData.entry_voice.count > 0)
+        {
+            for (NSDictionary *dict in self.modelData.entry_voice)
+            {
+                [str appendString:[dict objectForKey:@"ycjd_voice"]];
+            }
+        }
+        VC.speakStr = str;
+    }
+    else
+        VC.speakStr = @"";
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+/**
+ *  检测报告状态变更 未读改为已读  read为0:解读报告操作 1:干预方案操作
+ */
+- (void)uploadReadStatusWithReportId:(NSString *)reportId fmno:(NSString *)fmno
+{
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                     }mutableCopy];
+    params[@"fmno"] = fmno;
+    params[@"report_id"] = reportId;
+    params[@"read"] = @"0";
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Readed parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
 
 @end

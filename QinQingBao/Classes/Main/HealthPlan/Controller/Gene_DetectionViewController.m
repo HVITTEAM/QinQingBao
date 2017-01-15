@@ -9,6 +9,7 @@
 #import "Gene_DetectionViewController.h"
 #import "RepotDetailCell.h"
 #import "GeneDetectionCell.h"
+#import "ReportDetailViewController.h"
 
 @interface Gene_DetectionViewController ()
 
@@ -21,14 +22,19 @@
     [super viewDidLoad];
     
     [self initTableView];
+    
+    [self uploadReadStatusWithReportId:self.wr_id fmno:self.fmno];
 }
 
 -(void)initTableView
 {
+    self.title = _modelData.iname;
     self.tableView.backgroundColor = HMGlobalBg;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"report.png"] style:UIBarButtonItemStyleDone target:self action:@selector(showWebView)];
 }
 
 #pragma mark - Table view data source
@@ -41,7 +47,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return _modelData.entry_content.gene_detection.count + 1;
+    return _modelData.entry_content.various_genes.count + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -62,7 +68,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    GeneDetectionCell *geneDetectionCell = [tableView dequeueReusableCellWithIdentifier:@"TargetDetailCell"];
+    GeneDetectionCell *geneDetectionCell = [tableView dequeueReusableCellWithIdentifier:@"GeneDetectionCell"];
     if(geneDetectionCell == nil)
         geneDetectionCell = [GeneDetectionCell geneDetectionCell];
     
@@ -82,7 +88,7 @@
     }
     else
     {
-        GenesModel *item = _modelData.entry_content.gene_detection[indexPath.section - 1];
+        GenesModel *item = _modelData.entry_content.various_genes[indexPath.section - 1];
         geneDetectionCell.dataItem = item;
         geneDetectionCell.paragraphValue = item.ycjd_detail;
         cell = geneDetectionCell;
@@ -105,4 +111,52 @@
     return cell;
     
 }
+
+
+-(void)showWebView
+{
+    ReportDetailViewController *VC =[[ReportDetailViewController alloc] init];
+    VC.title = self.modelData.iname;
+    VC.urlArr = self.modelData.wp_advice_report;
+    VC.wr_id = self.modelData.wr_id;
+    VC.fmno = self.fmno;
+    
+    if (self.modelData.entry_voice && self.modelData.entry_voice.count > 0)
+    {
+        NSMutableString *str = [[NSMutableString alloc] init];
+        if (self.modelData.entry_voice &&  self.modelData.entry_voice.count > 0)
+        {
+            for (NSDictionary *dict in self.modelData.entry_voice)
+            {
+                [str appendString:[dict objectForKey:@"ycjd_voice"]];
+            }
+        }
+        VC.speakStr = str;
+    }
+    else
+        VC.speakStr = @"";
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
+
+/**
+ *  检测报告状态变更 未读改为已读  read为0:解读报告操作 1:干预方案操作
+ */
+- (void)uploadReadStatusWithReportId:(NSString *)reportId fmno:(NSString *)fmno
+{
+    NSMutableDictionary *params = [@{
+                                     @"client":@"ios",
+                                     @"key":[SharedAppUtil defaultCommonUtil].userVO.key
+                                     }mutableCopy];
+    params[@"fmno"] = fmno;
+    params[@"report_id"] = reportId;
+    params[@"read"] = @"0";
+    
+    [CommonRemoteHelper RemoteWithUrl:URL_Readed parameters:params type:CommonRemoteTypePost success:^(NSDictionary *dict, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
 @end
