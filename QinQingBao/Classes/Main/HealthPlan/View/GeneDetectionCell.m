@@ -76,7 +76,7 @@
     
     CGSize size = [self.textview sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
     self.textview.height = size.height;
-    self.height = CGRectGetMaxY(self.textview.frame) + 8;
+    self.height = CGRectGetMaxY(self.textview.frame) + 30;
 }
 
 - (void)awakeFromNib {

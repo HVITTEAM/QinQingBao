@@ -9,6 +9,9 @@
 #import "RepotDetailCell.h"
 
 @interface RepotDetailCell()
+@property (weak, nonatomic) IBOutlet UIButton *desbtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *scorelab;
 
 @property (strong, nonatomic) UILabel *titleLab;
 
@@ -69,19 +72,14 @@
     else
         self.subtitleLab.text = self.dataItem.entry_name_en;
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(MTScreenW - 70, 12, 40, 20)];
-    [btn setTitle:self.dataItem.ycjd_level forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:10];
-    [btn setBackgroundImage:[self imageWithStr:self.dataItem.ycjd_level] forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self addSubview:btn];
-    
-    UILabel *numLab =  [[UILabel alloc] initWithFrame:CGRectMake(MTScreenW - 180, 5, 100, 33)];
-    numLab.font = [UIFont systemFontOfSize:21];
-    numLab.textAlignment = NSTextAlignmentRight;
-    numLab.textColor = [UIColor blackColor];
-    numLab.text = self.dataItem.ycjd_score;
-    [self addSubview:numLab];
+    [_desbtn setTitle:self.dataItem.ycjd_level forState:UIControlStateNormal];
+    _desbtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    [_desbtn setBackgroundImage:[self imageWithStr:self.dataItem.ycjd_level] forState:UIControlStateNormal];
+    [_desbtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+    _scorelab.font = [UIFont systemFontOfSize:21];
+    _scorelab.textColor = [UIColor blackColor];
+    _scorelab.text = self.dataItem.ycjd_score;
 }
 
 -(void)setParagraphValue:(NSString *)paragraphValue

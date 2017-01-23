@@ -47,7 +47,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="基因型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUD-P7-AEI">
-                                <rect key="frame" x="118" y="42" width="65" height="21"/>
+                                <rect key="frame" x="118" y="59" width="65" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="PZe-3b-yj3"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jgz-F7-c8o">
-                                <rect key="frame" x="10" y="63" width="290" height="107"/>
+                                <rect key="frame" x="10" y="96" width="290" height="54"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -70,12 +70,12 @@
                             <constraint firstItem="jgz-F7-c8o" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" constant="10" id="Ffd-ep-Gys"/>
                             <constraint firstItem="LEk-YQ-3ok" firstAttribute="top" secondItem="inH-Wo-ok2" secondAttribute="top" constant="6" id="JNz-Q4-0j7"/>
                             <constraint firstAttribute="trailing" secondItem="jgz-F7-c8o" secondAttribute="trailing" id="Jek-au-dyq"/>
-                            <constraint firstItem="jgz-F7-c8o" firstAttribute="top" secondItem="eUD-P7-AEI" secondAttribute="bottom" id="Qya-qX-2Lu"/>
+                            <constraint firstItem="jgz-F7-c8o" firstAttribute="top" secondItem="eUD-P7-AEI" secondAttribute="bottom" constant="16" id="Qya-qX-2Lu"/>
                             <constraint firstItem="cU9-CX-MuV" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" id="SdN-P4-mpg"/>
                             <constraint firstItem="uVV-33-ZmV" firstAttribute="top" secondItem="inH-Wo-ok2" secondAttribute="top" constant="6" id="TPN-wy-gMo"/>
-                            <constraint firstAttribute="bottom" secondItem="jgz-F7-c8o" secondAttribute="bottom" id="Trh-3L-tWb"/>
+                            <constraint firstAttribute="bottom" secondItem="jgz-F7-c8o" secondAttribute="bottom" constant="20" id="Trh-3L-tWb"/>
                             <constraint firstItem="LEk-YQ-3ok" firstAttribute="leading" secondItem="inH-Wo-ok2" secondAttribute="leading" constant="15" id="dSa-Wx-dbT"/>
-                            <constraint firstItem="eUD-P7-AEI" firstAttribute="top" secondItem="cU9-CX-MuV" secondAttribute="bottom" constant="7.5" id="lNh-wy-SGm"/>
+                            <constraint firstItem="eUD-P7-AEI" firstAttribute="top" secondItem="cU9-CX-MuV" secondAttribute="bottom" constant="24" id="lNh-wy-SGm"/>
                             <constraint firstItem="cU9-CX-MuV" firstAttribute="top" secondItem="uVV-33-ZmV" secondAttribute="bottom" constant="7" id="p4e-8x-oya"/>
                         </constraints>
                     </view>

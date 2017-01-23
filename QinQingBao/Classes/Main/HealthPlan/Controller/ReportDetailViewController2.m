@@ -30,18 +30,28 @@
 {
     self.title = self.modelData.iname;
     self.tableView.backgroundColor = HMGlobalBg;
-    self.tableView.tableFooterView = [UIView new];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"report.png"] style:UIBarButtonItemStyleDone target:self action:@selector(showWebView)];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MTScreenW, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"温馨提醒:详细指标解读,请从右上角入口浏览PDF完整版";
+    label.textColor = [UIColor colorWithRGB:@"C69666"];
+    label.font = [UIFont systemFontOfSize:10];
+    self.tableView.tableFooterView = label;
 }
 
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 1)
+    if((!self.modelData.check_conclusion || self.modelData.check_conclusion.length == 0 )&& indexPath.section == 0)
+    {
+        return 0;
+    }
+    else if (indexPath.section == 0 && indexPath.row == 1)
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
         return  cell.height;

@@ -34,6 +34,7 @@
 -(void)setDataProvider:(NSArray *)dataProvider
 {
     _dataProvider = dataProvider;
+    [self.pageView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self initPageView];
 }
 
@@ -60,6 +61,7 @@
     self.pageControl.numberOfPages = _dataProvider.count;
     self.pageControl.currentPage = 0;
     
+
     // 创建图片 imageview
     for (int i = 0; i <_dataProvider.count; i++)
     {
@@ -102,10 +104,11 @@
         }
     }
     
-    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 12, 200, 20)];
+    UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(icon.frame) + 8, 12, MTScreenW *0.6, 20)];
     lab.font =  [UIFont fontWithName:@"Helvetica-Bold" size:13];
     lab.text = item.iname;
     [lab sizeToFit];
+    lab.width =  MTScreenW *0.6;
     [view addSubview:lab];
     
     UILabel *timelab = [[UILabel alloc] init];
@@ -138,7 +141,6 @@
 {
     if(self.clickType)
         self.clickType(_dataProvider[sender.view.tag]);
-    
 }
 
 @end

@@ -34,7 +34,6 @@
     self.content.layer.borderColor = [UIColor colorWithRGB:@"dbdbdb"].CGColor;
     self.content.layer.borderWidth = 0.5f;
     self.content.layer.cornerRadius = 6;
-    
 }
 
 
@@ -48,7 +47,7 @@
     
     self.numlab.text = [NSString stringWithFormat:@"检测结果 %@",self.dataItem.ycjd_score];
     
-//    self.unitLab.text = [NSString stringWithFormat:@"%@",self.dataItem.unit];
+    //self.unitLab.text = [NSString stringWithFormat:@"%@",self.dataItem.unit];
 
     //self.rangeLab.text = [NSString stringWithFormat:@"参考范围 %@",self.dataItem.entry_standardscore];
     
@@ -70,7 +69,7 @@
     
     CGSize size = [self.descTxtview sizeThatFits:CGSizeMake(MTScreenW - 20, MAXFLOAT)];
     self.descTxtview.height = size.height;
-    self.height = CGRectGetMaxY(self.descTxtview.frame) + 8;
+    self.height = CGRectGetMaxY(self.descTxtview.frame) + 25;
 
 }
 
@@ -78,7 +77,7 @@
     [super setSelected:selected animated:animated];
 }
 
-/**
+/**w
  初始化指标图
  
  @param value 当前指标
@@ -86,6 +85,7 @@
  */
 -(void)initTargetWithValue:(CGFloat)value totalValue:(CGFloat)totalValue
 {
+    [self.targetView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 20, MTScreenW - 40, 6)];
     [self.targetView addSubview:lineView];
     
@@ -122,15 +122,25 @@
     [btn setBackgroundImage:[self imageWithStr:self.dataItem.ycjd_level] forState:UIControlStateNormal];
     [self.targetView addSubview:btn];
     
+    if (CGRectGetMaxX(btn.frame) > CGRectGetMaxX(lineView.frame))
+        btn.x -= CGRectGetMaxX(btn.frame) - CGRectGetMaxX(lineView.frame)-8;
+    
+    if (CGRectGetMinX(btn.frame) < CGRectGetMinX(lineView.frame))
+        btn.x += CGRectGetMinX(lineView.frame) - CGRectGetMinX(btn.frame) -8;
+    
     //刻度值label
     for (NSString *value in self.dataItem.ea_gene_content)
     {
         CGFloat xValue = xPositionUnit *[self.dataItem.ea_gene_content indexOfObject:value];
-        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(xValue - 8, CGRectGetMaxY(lineView.frame)+3, 30, 20)];
+        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(xValue, CGRectGetMaxY(lineView.frame)+3, 30, 20)];
         lab.text = value;
         lab.textColor = [UIColor colorWithRGB:@"999999"];
         lab.font = [UIFont systemFontOfSize:10];
         [lab sizeToFit];
+        
+        if (CGRectGetMaxX(lab.frame) > CGRectGetMaxX(lineView.frame))
+            lab.x -= CGRectGetMaxX(lab.frame) - CGRectGetMaxX(lineView.frame);
+
         [self.targetView addSubview:lab];
     }
 }
@@ -149,7 +159,7 @@
     else if ([str isEqualToString:@"高危"]) {
         return [UIImage imageNamed:@"value-4"];
     }
-    else if ([str isEqualToString:@"极高危"]) {
+    else if ([str isEqualToString:@"风险"] || [str isEqualToString:@"缺失"]) {
         return [UIImage imageNamed:@"value-5"];
     }
     else
@@ -163,7 +173,7 @@
  */
 -(CGFloat)findPositionWithValue:(NSString*)value
 {
-    for (int i = 0; i < self.dataItem.ea_gene_content.count - 1;  i ++ )
+    for (int i = 0; i < self.dataItem.ea_gene_content.count;  i ++ )
     {
         if ([value isEqualToString:self.dataItem.ea_gene_content[i]] )
         {

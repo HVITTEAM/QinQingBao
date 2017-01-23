@@ -1148,7 +1148,6 @@
 		01FF8F8D1CDB2DDE0089BBC4 /* ShareSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 01FF8F801CDB2DDE0089BBC4 /* ShareSDK.bundle */; };
 		01FF8F8E1CDB2DDE0089BBC4 /* ShareSDKConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF8F811CDB2DDE0089BBC4 /* ShareSDKConnector.framework */; };
 		01FF8F911CDB2E310089BBC4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF8F901CDB2E310089BBC4 /* libstdc++.tbd */; };
-		01FF8F931CDB2E4A0089BBC4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FF8F921CDB2E4A0089BBC4 /* JavaScriptCore.framework */; };
 		5F12CD6FE3E1C975C1272C49 /* libPods-QinQingBao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF7AC280A607A7975863F69D /* libPods-QinQingBao.a */; };
 		D208E85A1D48A335007B7AD4 /* EstimateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E8591D48A335007B7AD4 /* EstimateViewController.m */; };
 		D208E85E1D48A389007B7AD4 /* EstimateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D208E85C1D48A389007B7AD4 /* EstimateListCell.m */; };
@@ -3283,7 +3282,6 @@
 		01FF8F801CDB2DDE0089BBC4 /* ShareSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDK.bundle; sourceTree = "<group>"; };
 		01FF8F811CDB2DDE0089BBC4 /* ShareSDKConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConnector.framework; sourceTree = "<group>"; };
 		01FF8F901CDB2E310089BBC4 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
-		01FF8F921CDB2E4A0089BBC4 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		431EA3470168BBAFE5B79013 /* Pods-QinQingBao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QinQingBao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QinQingBao/Pods-QinQingBao.debug.xcconfig"; sourceTree = "<group>"; };
 		51C70D1B17489A49F9ACDFEF /* Pods-QinQingBao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QinQingBao.release.xcconfig"; path = "Pods/Target Support Files/Pods-QinQingBao/Pods-QinQingBao.release.xcconfig"; sourceTree = "<group>"; };
 		CF7AC280A607A7975863F69D /* libPods-QinQingBao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QinQingBao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3469,7 +3467,6 @@
 				016F24711C4DDF2900FF1BF5 /* ImageIO.framework in Frameworks */,
 				01ECDB2E1C8EB5E80018160F /* libsqlite3.tbd in Frameworks */,
 				019D634A1DA8E9DD00CE6622 /* libssl.a in Frameworks */,
-				01FF8F931CDB2E4A0089BBC4 /* JavaScriptCore.framework in Frameworks */,
 				01FF8F911CDB2E310089BBC4 /* libstdc++.tbd in Frameworks */,
 				010414331BB126B9006EC41B /* libz.tbd in Frameworks */,
 				010414351BB126CE006EC41B /* libicucore.tbd in Frameworks */,
@@ -5267,7 +5264,6 @@
 		01D9DEA91B7DBF840087F80E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				01FF8F921CDB2E4A0089BBC4 /* JavaScriptCore.framework */,
 				01FF8F901CDB2E310089BBC4 /* libstdc++.tbd */,
 				01FF8F5F1CDB2DDE0089BBC4 /* ShareSDK */,
 				01ECD7741C8EB31E0018160F /* SDKs */,
@@ -10298,6 +10294,7 @@
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/Optional",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/PlatformSDK/QQSDK",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/QinQingBao/Frameworks/JSPatch",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;
@@ -10355,6 +10352,7 @@
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/Optional",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/PlatformSDK/QQSDK",
 					"$(PROJECT_DIR)/QinQingBao/Frameworks/ShareSDK/Support/Required",
+					"$(PROJECT_DIR)/QinQingBao/Frameworks/JSPatch",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = QinQingBao/QQB.pch;

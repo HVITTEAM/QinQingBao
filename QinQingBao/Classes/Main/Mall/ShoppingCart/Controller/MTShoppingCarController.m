@@ -59,6 +59,7 @@
 {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor colorWithRGB:@"e2e2e2"];
     self.title = @"购物车";
     [self.view addSubview:self.tableView];

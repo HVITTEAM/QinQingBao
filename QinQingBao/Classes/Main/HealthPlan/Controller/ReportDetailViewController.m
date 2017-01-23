@@ -53,7 +53,10 @@
     
     [speakBtn setBackgroundImage:[UIImage resizedImage:@"voice1"] forState:UIControlStateNormal];
     [speakBtn addTarget:self action:@selector(play:) forControlEvents:UIControlEventTouchUpInside];
-    
+
+    speakBtn.hidden  =  !(_speakStr && _speakStr.length > 0);
+  
+        
     [self.view addSubview:speakBtn];
     
     // 创建嗓音，指定嗓音不存在则返回nil

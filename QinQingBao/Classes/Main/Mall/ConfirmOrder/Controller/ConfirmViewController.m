@@ -70,6 +70,7 @@ static CGFloat ENDVIEW_HEIGHT = 50;
     
     [self loadNotificationCell];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = HMGlobalBg;
     _endView = [[ConfirmOrderEndView alloc]initWithFrame:CGRectMake(0, MTScreenH - ENDVIEW_HEIGHT, MTScreenW,ENDVIEW_HEIGHT)];
     _endView.delegate = self;
