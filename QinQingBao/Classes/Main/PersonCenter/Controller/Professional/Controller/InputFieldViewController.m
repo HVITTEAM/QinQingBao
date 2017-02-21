@@ -26,7 +26,7 @@
     [self initNavigation];
     
     [self setupGroups];
-}
+  }
 
 /**
  *  设置tableView属性

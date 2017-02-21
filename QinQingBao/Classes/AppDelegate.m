@@ -16,8 +16,6 @@
 #import <SMS_SDK/SMSSDK.h>
 #import "CCLocationManager.h"
 
-#import <Bugtags/Bugtags.h>
-
 #import "NewsDetailViewControler.h"
 #import "EventInfoController.h"
 #import "CXTabBarViewController.h"
@@ -102,6 +100,8 @@
     
     [self getServiceCount];
     
+    [MTVersionHelper checkNewVersion];
+
     return YES;
 }
 

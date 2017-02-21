@@ -338,7 +338,6 @@
 		016EDF071D9D03AB0054949F /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF011D9D03AB0054949F /* SDBrowserImageView.m */; };
 		016EDF081D9D03AB0054949F /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF031D9D03AB0054949F /* SDPhotoBrowser.m */; };
 		016EDF091D9D03AB0054949F /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 016EDF061D9D03AB0054949F /* SDWaitingView.m */; };
-		016F246A1C4DDEDB00FF1BF5 /* Bugtags.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */; };
 		016F246B1C4DDEDB00FF1BF5 /* Bugtags.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */; };
 		016F246D1C4DDF0C00FF1BF5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F246C1C4DDF0C00FF1BF5 /* AVFoundation.framework */; };
 		016F246F1C4DDF2200FF1BF5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 016F246E1C4DDF2200FF1BF5 /* CoreLocation.framework */; };
@@ -1926,7 +1925,6 @@
 		016EDF041D9D03AB0054949F /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
 		016EDF051D9D03AB0054949F /* SDWaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWaitingView.h; sourceTree = "<group>"; };
 		016EDF061D9D03AB0054949F /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
-		016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Bugtags.bundle; sourceTree = "<group>"; };
 		016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugtags.framework; sourceTree = "<group>"; };
 		016F246C1C4DDF0C00FF1BF5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		016F246E1C4DDF2200FF1BF5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -5272,7 +5270,6 @@
 				016F24701C4DDF2900FF1BF5 /* ImageIO.framework */,
 				016F246E1C4DDF2200FF1BF5 /* CoreLocation.framework */,
 				016F246C1C4DDF0C00FF1BF5 /* AVFoundation.framework */,
-				016F24681C4DDEDB00FF1BF5 /* Bugtags.bundle */,
 				016F24691C4DDEDB00FF1BF5 /* Bugtags.framework */,
 				01024BF51BD0A2D900E8CAEC /* Foundation.framework */,
 				01024BF31BD0A2CF00E8CAEC /* UIKit.framework */,
@@ -9334,7 +9331,6 @@
 				01ECDAB81C8EB31F0018160F /* Contents.json in Resources */,
 				01AB2EDF1DD59CA5006EAFA2 /* cb_glossy_on@2x.png in Resources */,
 				0177DA7A1D5D6302008D5C95 /* CommonRulerViewController.xib in Resources */,
-				016F246A1C4DDEDB00FF1BF5 /* Bugtags.bundle in Resources */,
 				01F0D0241B8DB5D000EF3238 /* CouponsCell.xib in Resources */,
 				01ECDA831C8EB31F0018160F /* chatBar_recordBg.png in Resources */,
 				01ECDA421C8EB31F0018160F /* call_silence_h@2x.png in Resources */,

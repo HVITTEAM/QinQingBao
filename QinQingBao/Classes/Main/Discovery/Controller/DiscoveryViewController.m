@@ -311,6 +311,7 @@
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [NoticeHelper AlertShow:@"轮播图获取失败!" view:self.view];
                                  }];
+    
 }
 
 #pragma mark - 事件方法
