@@ -393,6 +393,7 @@
     params[@"mobile"] = self.archiveData.mobile;
     params[@"email"] = self.archiveData.email;
     params[@"address"] = self.archiveData.address;
+    params[@"server_organization"] = self.archiveData.server_organization;
     params[@"area_id"] = self.archiveData.area_id;
     params[@"occupation"] = self.archiveData.occupation;
     params[@"livingcondition"] = self.archiveData.livingcondition;
@@ -511,6 +512,7 @@
     params[@"mobile"] = self.archiveData.mobile;
     params[@"email"] = self.archiveData.email;
     params[@"address"] = self.archiveData.address;
+    params[@"server_organization"] = self.archiveData.server_organization;
     params[@"area_id"] = self.archiveData.area_id;
     params[@"occupation"] = self.archiveData.occupation;
     params[@"livingcondition"] = self.archiveData.livingcondition;

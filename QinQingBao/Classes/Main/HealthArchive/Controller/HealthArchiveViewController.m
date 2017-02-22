@@ -122,6 +122,8 @@
     NSString *address = [NSString stringWithFormat:@"%@%@",self.archiveData.totalname?:@"",self.archiveData.address?:@""];
     [section2 addObject:createItem(address,@"联系地址",@"请填写")];
     
+    [section2 addObject:createItem(self.archiveData.server_organization,@"服务机构",@"请填写")];
+    
     return @[section0,section1,section2];
 }
 
@@ -586,7 +588,8 @@
     
     NSString *address = self.datas[2][3][kContent];
     NSString  *email = self.datas[2][2][kContent];
-    
+    NSString *server_organization = self.datas[2][4][kContent];
+
     //验证值
     if (name.length == 0)
     {
@@ -657,6 +660,8 @@
     int livingCode = (int)[ArchiveData livingconditionToNumber:self.datas[2][1][kContent]];
     self.archiveData.livingcondition = livingCode==-1?nil:[NSString stringWithFormat:@"%d",livingCode];
     self.archiveData.email = email;
+    self.archiveData.server_organization = server_organization;
+
 //    self.archiveData.address = address;
     
     HealthArchiveViewController1 *vc = [[HealthArchiveViewController1 alloc] init];
@@ -733,6 +738,7 @@
         self.archiveData.mobile = archive.basics.mobile;
         self.archiveData.email = archive.basics.email;
         self.archiveData.address = archive.basics.address;
+        self.archiveData.server_organization = archive.basics.server_organization;
         self.archiveData.totalname = archive.basics.totalname;
         self.archiveData.area_id = archive.basics.area_id;
         self.archiveData.occupation = archive.basics.occupation;
